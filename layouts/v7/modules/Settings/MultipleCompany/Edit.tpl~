@@ -1,0 +1,155 @@
+{*<!--
+/*********************************************************************************
+  ** The contents of this file are subject to the vtiger CRM Public License Version 1.0
+   * ("License"); You may not use this file except in compliance with the License
+   * The Original Code is:  vtiger CRM Open Source
+   * The Initial Developer of the Original Code is vtiger.
+   * Portions created by vtiger are Copyright (C) vtiger.
+   * All Rights Reserved.
+  *
+ ********************************************************************************/
+-->*}
+<script language="JAVASCRIPT" type="text/javascript" src="include/js/smoothscroll.js"></script>
+<script language="JavaScript" type="text/javascript" src="include/js/menu.js"></script>
+<form action="index.php?parent=Settings&module=MultipleCompany&action=Save" method="post" id="EditView" name="EditView" enctype="multipart/form-data" >
+        <input type="hidden" name="return_module" value="Settings">
+ 	<input type="hidden" name="parent" value="Settings">
+    	<input type="hidden" name="return_action" value="OrganizationConfig">
+	<table border=0 cellspacing=0 cellpadding=10 width=90% >
+				<tr>
+				<td>
+				
+					<table border=0 cellspacing=0 cellpadding=5 width=100%
+					<tr>
+						<td class="big"><h3>{vtranslate('LBL_COMPANY_DETAILS', $QUALIFIED_MODULE)} </h3>
+						{$ERRORFLAG}<br>
+						</td>
+						<td class="small" align=right>
+							<input title="{vtranslate('LBL_SAVE_BUTTON_LABEL', $QUALIFIED_MODULE)}" accessKey="{vtranslate('LBL_SAVE_BUTTON_KEY', $QUALIFIED_MODULE)}" class="crmButton small save" type="submit" name="button" value="{vtranslate('LBL_SAVE_BUTTON_LABEL', $QUALIFIED_MODULE)}">
+							<input title="{vtranslate('LBL_CANCEL_BUTTON_LABEL', $QUALIFIED_MODULE)}" accessKey="{vtranslate('LBL_CANCEL_BUTTON_KEY', $QUALIFIED_MODULE)}" class="crmButton small cancel" onclick="window.history.back()" type="button" name="button" value="{vtranslate('LBL_CANCEL_BUTTON_LABEL', $QUALIFIED_MODULE)}">
+						</td>
+					</tr>
+					</table>
+					
+					<table border=0 cellspacing=0 cellpadding=0 width=100% class="listRow table-bordered">
+                                            <tr class="blockHeader">
+						<td class="small" valign=top ><table width="100%"  border="0" cellspacing="0" cellpadding="5">
+<!--Codes added for multiple company-->						
+<tr class="table-bordered">
+                            <td width="20%" class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_TITLE', $QUALIFIED_MODULE)}</strong><span class="redColor">*</span></td>
+                            <td width="80%" class="small cellText">
+				<input type="text" name="organization_title" id="organization_title" class="detailedViewTextBox small" value="{$ORGANIZATIONTITLE}" data-validation-engine="validate[required]">
+			    </strong></td>
+                          </tr><!--Codes added end here-->
+                          <tr class="table-bordered">
+                            <td width="20%" class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_NAME', $QUALIFIED_MODULE)}</strong><span class="redColor">*</span></td>
+                            <td width="80%" class="small cellText">
+				<input type="text" name="organizationname" id="organizationname" class="detailedViewTextBox small" value="{$ORGANIZATIONNAME}" data-validation-engine="validate[required]">
+			    </strong></td>
+                          </tr>
+                          <tr valign="top" class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_LOGO', $QUALIFIED_MODULE)}</strong></td>
+			    {if $ORGANIZATIONLOGONAME neq ''}	
+                            <td class="small cellText" style="background-image: url(test/logo/{$ORGANIZATIONLOGONAME}); background-position: left; background-repeat: no-repeat; background-size: 250px 70px;" width="48" height="48" border="0" >
+			    {else}
+                            <td class="small cellText" style="background-image: url(include/images/noimage.gif); background-position: left; background-repeat: no-repeat;" width="48" height="48" border="0" >
+			     {/if}	
+				<br><br><br><br>
+                                {vtranslate('LBL_SELECT_LOGO', $QUALIFIED_MODULE)} 
+				<INPUT TYPE="HIDDEN" NAME="MAX_FILE_SIZE" VALUE="800000">
+		                <INPUT TYPE="HIDDEN" NAME="PREV_FILE" VALUE="{$ORGANIZATIONLOGONAME}">	 
+                                <input type="file" name="binFile" class="small" value="{$ORGANIZATIONLOGONAME}" onchange="validateFilename(this);" data-validation-engine="validate[funcCall[Vtiger_Base_Validator_Js.invokeValidation]]">[{$ORGANIZATIONLOGONAME}]
+                                <br><font color="red">*Use JPEG, PNG, JPG, PJPEG and X-PNG file only</font><br>(Size must be 240x60px or below)
+                                <input type="hidden" name="binFile_hidden" value="{$ORGANIZATIONLOGONAME}" />
+			      </td>
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_ADDRESS', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText"><input type="text" name="address" class="detailedViewTextBox small" value="{$ORGANIZATIONADDRESS}"></td>
+                          </tr>
+                          <tr class="table-bordered"> 
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_CITY', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText"><input type="text" name="city" class="detailedViewTextBox small" value="{$ORGANIZATIONCITY}"></td>
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_STATE', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText"><input type="text" name="state" class="detailedViewTextBox small" value="{$ORGANIZATIONSTATE}"></td>
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_CODE', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText"><input type="text" name="code" class="detailedViewTextBox small" value="{$ORGANIZATIONCODE}"></td>
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_COUNTRY', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText"><input type="text" name="country" class="detailedViewTextBox small" value="{$ORGANIZATIONCOUNTRY}"></td>
+
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_PHONE', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText"><input type="text" name="phone" class="detailedViewTextBox small" value="{$ORGANIZATIONPHONE}"></td>
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_FAX', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText"><input type="text" name="fax" class="detailedViewTextBox small" value="{$ORGANIZATIONFAX}"></td>
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_WEBSITE', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText"><input type="text" name="website" class="detailedViewTextBox small" value="{$ORGANIZATIONWEBSITE}"></td>
+                          </tr>
+                        </table>
+						
+						</td>
+					  </tr>
+					</table>
+					<table border=0 cellspacing=0 cellpadding=5 width=100% >
+					<tr>
+					  <td class="small" nowrap align=right><a href="#top">{vtranslate('LBL_SCROLL', $QUALIFIED_MODULE)}</a></td>
+					</tr>
+					</table>
+				</td>
+				</tr>
+				</table>
+			
+			
+			
+			</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+<!-- Added By Jitu on 15 Sep 2014 -->
+<input type="hidden" name="organization_id" id="organization_id" value="{$ORGANIZATIONID}" />
+	</form>		
+{literal}
+<script>
+function verify_data(form,company_name)
+{
+	if (form.organization_name.value == "" )
+	{
+		{/literal}
+                alert(company_name +"{vtranslate('CANNOT_BE_NONE', $QUALIFIED_MODULE)}");
+                form.organization_name.focus();
+                return false;
+                {literal}
+	}
+	else if (form.organization_name.value.replace(/^\s+/g, '').replace(/\s+$/g, '').length==0)
+	{
+	{/literal}
+                alert(company_name +"{vtranslate('CANNOT_BE_EMPTY', $QUALIFIED_MODULE)}");
+                form.organization_name.focus();
+                return false;
+                {literal}
+	}
+	else if (! upload_filter("binFile","jpg|jpeg|JPG|JPEG"))
+        {
+                form.binFile.focus();
+                return false;
+        }
+	else
+	{
+		return true;
+	}
+}
+</script>
+{/literal}

@@ -1,0 +1,165 @@
+<!-- ===================================================================
+Modified By: Zulhisyam, Soft Solvers Technologies (M) Sdn Bhd (www.softsolvers.com)
+Modified Date: 11 / 06 / 2014
+Change Reason: Multiple Terms An Conditions , New file created
+=================================================================== -->
+
+<script language="JAVASCRIPT" type="text/javascript" src="../include/js/smoothscroll.js"></script>
+<script>
+function ifselected()
+{ldelim}
+  
+      
+      var sel =document.massdelete.selected_id.length;
+      var returnval=false;
+      
+     for(i=0; i < sel; i++)
+     {ldelim}
+     
+      if(document.massdelete.selected_id[i].checked == true)
+        {ldelim}
+            returnval=true;
+            break;
+        {rdelim}
+        
+      {rdelim}
+    	
+{rdelim}
+
+
+function massDelete()
+{ldelim}
+        
+        x = document.massdelete.selected_id.length;
+        idstring = "";
+
+        if ( x == undefined)
+        {ldelim}
+
+                if (document.massdelete.selected_id.checked)
+               {ldelim}
+                        document.massdelete.idlist.value=document.massdelete.selected_id.value+';';
+                          
+                        
+			xx=1;
+                {rdelim}
+                else
+                {ldelim}
+                        alert("{vtranslate('SELECT_ATLEAST_ONE', $QUALIFIED_MODULE)}");
+                        return false;
+                {rdelim}
+        {rdelim}
+        else
+        {ldelim}
+                xx = 0;
+                for(i = 0; i < x ; i++)
+                {ldelim}
+                        if(document.massdelete.selected_id[i].checked)
+                        {ldelim}
+                                idstring = document.massdelete.selected_id[i].value +";"+idstring
+                        xx++
+                        {rdelim}
+                {rdelim}
+                if (xx != 0)
+                {ldelim}
+                        document.massdelete.idlist.value=idstring;
+                {rdelim}
+               else
+                {ldelim}
+                        alert("{vtranslate('SELECT_ATLEAST_ONE', $QUALIFIED_MODULE)}");
+                        return false;
+                {rdelim}
+       {rdelim}
+		if(confirm("{vtranslate('DELETE_CONFIRMATION', $QUALIFIED_MODULE)}"+xx+"{vtranslate('RECORDS', $QUALIFIED_MODULE)}"))
+		{ldelim}
+                        document.massdelete.action="index.php?parent=Settings&module=MultipleTnC&action=Delete";
+		{rdelim}
+		else
+		{ldelim}
+			return false;
+		{rdelim}
+
+{rdelim}
+</script>
+<br>
+<table align="center" border="0" cellpanding="0" cellspacing="0" width="98%">
+    <tbody>
+        <tr>
+            <td class="showPanelBg" style="padding: 10px;" valign="top" width="100%">
+                        <form name="massdelete" method="POST" onsubmit="VtigerJS_DialogBox.block();">
+                            <input name="idlist" type="hidden">
+                            <input name="view" type="hidden">
+                                <table border=0 cellspacing=0 cellpadding=10 width=90%>
+                                    <tr>
+                                        <td>
+                                            <table width="100%">
+                                                <tr>
+                                                    <td class="big">
+                                                        <h3>
+                                                            {vtranslate('LBL_TANDC_TEXT', $QUALIFIED_MODULE)}
+                                                        </h3>
+							<hr>
+                                                    </td>
+                                                    <td class="small" align="right">
+                                                        &nbsp;
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                                        <table border=0 cellspacing=0 cellpadding=5 width=100% class="listTableTopButtons table-condensed">
+                                                            <tr>
+                                                                <td class="small">
+                                                                    <input type="submit" value="{vtranslate('LBL_DELETE', $QUALIFIED_MODULE)}" onclick="return massDelete();" class="crmButton delete small">
+                                                                </td>
+                                                                <td class="small" align="right" id="new_template">
+                                                                    <div id="myProfile">
+                                                                        <input class="crmButton create small" type="button" value="{vtranslate('LBL_NEW_TERMS', $QUALIFIED_MODULE)}" name="profile" class="classBtn" onclick="location.href='index.php?parent=Settings&module=MultipleTnC&view=Edit&block=4&fieldid=21'">
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                                <table border="0" cellspacing="0" cellpadding="5" width="100%" class="listTable table table-bordered">
+                                                                    <tr>
+                                                                        <td width="5%" class="colHeader small {$WIDTHTYPE}">{vtranslate('LBL_LIST_SELECT', $QUALIFIED_MODULE)}</td>
+                                                                        <td width="18%" class="colHeader small {$WIDTHTYPE}">{vtranslate('LBL_INVENTORY_TYPE', $QUALIFIED_MODULE)}</td>
+                                                                        <td width="20%" class="colHeader small {$WIDTHTYPE}">{vtranslate('LBL_TERMS_TITLE', $QUALIFIED_MODULE)}</td>
+                                                                        <td width="52%" class="colHeader small {$WIDTHTYPE}">{vtranslate('LBL_TERMS', $QUALIFIED_MODULE)}</td>
+                                                                        <!--<td width="20%" class="colHeader small">{vtranslate('LBL_TEMPLATE_TOOLS', $QUALIFIED_MODULE)}</td>-->
+                                                                    </tr>
+                                                                        {foreach name=termdetail1 item=termdetail from=$DETAILS}
+                                                                        <tr>
+                                                                           <td class="listTableRow small" valign="top">
+                                                                                <input type="checkbox" name="selected_id" value="{$termdetail.id}" onclick="ifselected(); " class="small">
+                                                                            </td>
+                                                                            <td class="listTableRow small" valign="top">
+                                                                                {$termdetail.type}
+                                                                            </td>
+                                                                            <td class="listTableRow small" valign="top">
+                                                                                <a href="index.php?parent=Settings&amp;module=MultipleTnC&amp;view=Detail&amp;block=4&amp;fieldid=21&amp;id={$termdetail.id}"><b>{$termdetail.title}</b></a>
+                                                                                
+                                                                            </td>
+                                                                            <td class="listTableRow small" valign="top">
+                                                                                {$termdetail.tandc}&nbsp;
+                                                                            </td>
+                                                                            <!--<td class="listTableRow small" valign=top>
+                                                                            <a href="index.php?module=Settings&action=detailviewemailtemplate&parenttab=Settings&templateid={$template.templateid}">{vtranslate('LNK_SAMPLE_EMAIL', $QUALIFIED_MODULE)}</a>
+                                                                            </td>-->
+                                                                        </tr>
+                                                                        {/foreach}
+                                                                </table>
+                                                                <table border="0" cellspacing="0" cellpadding="5" width="100%">
+                                                                    <tr>
+                                                                        <td class="small" nowrap align="right">
+                                                                            <a href="#top">{vtranslate('LBL_SCROLL', $QUALIFIED_MODULE)}</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                        </td>
+                                    </tr>
+                                    </form>
+                                </table>
+            </td>
+            <td valign="top"><img src="{'showPanelTopRight.gif'|@vtiger_imageurl:$THEME}">
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,36 @@
+#ignoring all log files
+*.log
+
+
+#ignoring all cache files
+cache*
+
+#ignoring logs folder
+logs/**
+
+#ignoring storage
+storage/**
+
+
+#ignore local config
+config.inc.php
+
+#ignore phpstorm ide files
+.idea/**
+
+#ignore user access files
+user_privileges/**
+
+#ignore Smarty Temp Templates
+Smarty/templates_c/**
+
+#ignore New Version Cache
+test/templates_c/**
+
+
+#Adhoc Reports
+AdhocReports/exportPolicy/**
+
+#apilog
+apilogs.txt
+

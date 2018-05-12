@@ -1,0 +1,158 @@
+{*<!--
+/* ===================================================================
+Modified By: Zulhisyam, Soft Solvers Technologies (M) Sdn Bhd (www.softsolvers.com)
+Modified Date: 12 / 06 / 2014
+Change Reason: Multiple Company Details Feature, New file created
+=================================================================== */
+
+/*********************************************************************************
+  ** The contents of this file are subject to the vtiger CRM Public License Version 1.0
+   * ("License"); You may not use this file except in compliance with the License
+   * The Original Code is:  vtiger CRM Open Source
+   * The Initial Developer of the Original Code is vtiger.
+   * Portions created by vtiger are Copyright (C) vtiger.
+   * All Rights Reserved.
+  *
+ ********************************************************************************/
+-->*}
+
+<script language="JAVASCRIPT" type="text/javascript" src="../include/js/smoothscroll.js"></script>
+<script>
+function ifselected()
+{ldelim}
+  
+      
+      var sel =document.massdelete.selected_id.length;
+      var returnval=false;
+      
+     for(i=0; i < sel; i++)
+     {ldelim}
+     
+      if(document.massdelete.selected_id[i].checked == true)
+        {ldelim}
+            returnval=true;
+            break;
+        {rdelim}
+        
+      {rdelim}
+    	
+{rdelim}
+
+
+function massDelete()
+{ldelim}
+        
+        x = document.massdelete.selected_id.length;
+        idstring = "";
+
+        if ( x == undefined)
+        {ldelim}
+
+                if (document.massdelete.selected_id.checked)
+               {ldelim}
+			document.massdelete.idlist.value=document.massdelete.selected_id.value+';';
+                        xx=1;
+                {rdelim}
+                else
+                {ldelim}
+                        alert("{vtranslate('SELECT_ATLEAST_ONE', $QUALIFIED_MODULE)}");
+                        return false;
+                {rdelim}
+        {rdelim}
+        else
+        {ldelim}
+                xx = 0;
+                for(i = 0; i < x ; i++)
+                {ldelim}
+                        if(document.massdelete.selected_id[i].checked)
+                        {ldelim}
+                                idstring = document.massdelete.selected_id[i].value +";"+idstring
+                        xx++
+                        {rdelim}
+                {rdelim}
+                if (xx != 0)
+                {ldelim}
+                        document.massdelete.idlist.value=idstring;
+                {rdelim}
+               else
+                {ldelim}
+                        alert("{vtranslate('SELECT_ATLEAST_ONE', $QUALIFIED_MODULE)}");
+                        return false;
+                {rdelim}
+       {rdelim}
+		if(confirm("{vtranslate('DELETE_CONFIRMATION', $QUALIFIED_MODULE)}"+xx+"{vtranslate('RECORDS', $QUALIFIED_MODULE)}"))
+		{ldelim}
+                        document.massdelete.action="index.php?parent=Settings&module=MultipleCompany&action=Delete";
+		{rdelim}
+		else
+		{ldelim}
+			return false;
+		{rdelim}
+
+{rdelim}
+</script>
+<!-- DISPLAY -->
+	
+				<table border=0 cellspacing=0 cellpadding=10 width=90% >
+				<form  name="massdelete" method="POST">
+	    			<input name="idlist" type="hidden">
+    				<tr>
+				<td>
+				
+					<table border=0 cellspacing=0 cellpadding=5 width=100% >
+					<tr>
+						<td class="big"><h3>{vtranslate('LBL_COMPANY_DETAILS', $QUALIFIED_MODULE)}</h3></td>
+						<td class="small" align=right>&nbsp;
+						</td>
+					</tr>
+					</table>
+					
+					<table border=0 cellspacing=0 cellpadding=5 width=100% class="listTableTopButtons table-bordered">
+					<tr>
+						<td class=small><input type="submit" value="{vtranslate('LBL_DELETE', $QUALIFIED_MODULE)}" onclick="return massDelete();" class="crmButton delete small"></td>
+						<td class=small align=right id="new_template"><div id = "myProfile"><input class="crmButton create small" type="button" value="{vtranslate('LBL_NEW_COMPANY', $QUALIFIED_MODULE)}" name="profile"  class="classBtn" onclick="location.href='index.php?parent=Settings&module=MultipleCompany&view=Edit&block=3&fieldid=14'"></div></td>
+					</tr>
+					</table>
+					<table border="0" cellspacing="0" cellpadding="5" width="100%" class="listTable table-bordered table">
+					<tr>
+						<td width="5%" class="colHeader small">#</td>
+						<td width="5%" class="colHeader small">{vtranslate('LBL_LIST_SELECT', $QUALIFIED_MODULE)}</td>
+						<td width="30%" class="colHeader small">{vtranslate('LBL_ORGANIZATION_TITLE', $QUALIFIED_MODULE)}</td>
+						<td width="30%" class="colHeader small">{vtranslate('LBL_ORGANIZATION_NAME', $QUALIFIED_MODULE)}</td>
+						<td width="60%" class="colHeader small">{vtranslate('LBL_ORGANIZATION_WEBSITE', $QUALIFIED_MODULE)}</td>
+					        <!--<td width="20%" class="colHeader small">{$UMOD.LBL_TEMPLATE_TOOLS}</td>-->
+					</tr>
+					{foreach name=companydetail1 item=companydetail from=$DETAILS}
+					<tr>
+						<td class="listTableRow small" valign=top>{$viewer.foreach.companydetail1.iteration}</td>
+						{if $companydetail.organization_id neq 1}
+						<td class="listTableRow small" valign=top><input type="checkbox" name="selected_id" value="{$companydetail.organization_id}" onClick="ifselected(); " class=small></td>
+						{else}
+						<td>&nbsp;</td>
+						{/if}
+						<td class="listTableRow small" valign=top>
+							<a href="index.php?parent=Settings&amp;module=MultipleCompany&amp;view=Detail&amp;block=3&amp;fieldid=14&amp;organizationid={$companydetail.organization_id}" ><b>{$companydetail.organization_title}</b></a>
+						</td>
+						<td class="listTableRow small" valign=top>
+							{$companydetail.organization_name}
+						</td>
+						<td class="listTableRow small" valign=top>{$companydetail.organization_website}&nbsp;</td>
+					        <!--<td class="listTableRow small" valign=top>
+							<a href="index.php?module=Settings&action=detailviewemailtemplate&parenttab=Settings&templateid={$template.templateid}">{$UMOD.LNK_SAMPLE_EMAIL}</a>
+						</td>-->
+					</tr>
+					{/foreach}	
+					</table>
+				</td>
+				</tr>
+				</table>
+			
+			
+			
+			</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</form>
+	</table>

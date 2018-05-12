@@ -1,0 +1,125 @@
+<?php
+/*+**********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.1
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is:  vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ ************************************************************************************/
+
+class Settings_MultipleCompany_Detail_View extends Settings_Vtiger_Index_View {
+
+	public function process(Vtiger_Request $request) {
+		$qualifiedModuleName = $request->getModule(false);
+		$iId = $request->get('organizationid');
+		$moduleModel = Settings_MultipleCompany_Detail_Model::getInstanceId($iId);
+		
+		$viewer = $this->getViewer($request);
+                
+                $db = PearDatabase::getInstance();
+                
+                $sql="select * from vtiger_organizationdetails WHERE organization_id='$iId'";
+                $result = $db->pquery($sql, array());
+		
+                $organization_name = $db->query_result($result,0,'organizationname');
+                $organization_title = $db->query_result($result,0,'organization_title');
+                $organization_address= $db->query_result($result,0,'address');
+                $organization_city = $db->query_result($result,0,'city');
+                $organization_state = $db->query_result($result,0,'state');
+                $organization_code = $db->query_result($result,0,'code');
+                $organization_country = $db->query_result($result,0,'country');
+                $organization_phone = $db->query_result($result,0,'phone');
+                $organization_fax = $db->query_result($result,0,'fax');
+                $organization_website = $db->query_result($result,0,'website');
+		$organization_VatID = $db->query_result($result,0,'vatid');
+                //Handle for allowed organation logo/logoname likes UTF-8 Character
+                $organization_logo = decode_html($db->query_result($result,0,'logo'));
+                $organization_logoname = decode_html($db->query_result($result,0,'logoname'));
+                $viewer->assign("ORGANIZATIONID",$iId);
+                
+                if (isset($organization_title))
+                        $viewer->assign("ORGANIZATIONTITLE",$organization_title);
+                if (isset($organization_name))
+                        $viewer->assign("ORGANIZATIONNAME",$organization_name);
+                if (isset($organization_address))
+                        $viewer->assign("ORGANIZATIONADDRESS",$organization_address);
+                if (isset($organization_city))
+                        $viewer->assign("ORGANIZATIONCITY",$organization_city);
+                if (isset($organization_state))
+                        $viewer->assign("ORGANIZATIONSTATE",$organization_state);
+                if (isset($organization_code))
+                        $viewer->assign("ORGANIZATIONCODE",$organization_code);
+                if (isset($organization_country))
+                    $viewer->assign("ORGANIZATIONCOUNTRY",$organization_country);
+                if (isset($organization_phone))
+                        $viewer->assign("ORGANIZATIONPHONE",$organization_phone);
+                if (isset($organization_fax))
+                        $viewer->assign("ORGANIZATIONFAX",$organization_fax);
+                if (isset($organization_website))
+                        $viewer->assign("ORGANIZATIONWEBSITE",$organization_website);
+		if (isset($organization_VatID))
+                        $viewer->assign("ORGANIZATIONVATID",$organization_VatID);
+                if (isset($organization_logo))
+                        $viewer->assign("ORGANIZATIONLOGO",$organization_logo);
+
+                $path = "test/logo";
+                $dir_handle = @opendir($path) or die("Unable to open directory $path");
+
+                while ($file = readdir($dir_handle))
+                {
+                        $filetyp =str_replace(".",'',strtolower(substr($file, -4)));
+                   if($organization_logoname==$file)
+                   {    
+                        if ($filetyp == 'jpeg' OR $filetyp == 'jpg' OR $filetyp == 'png')
+                        {
+                                if($file!="." && $file!="..")
+                                {
+
+                                     $organization_logopath= $path;
+                                     $logo_name=$file;
+                                }
+
+                        }
+                   }	
+                }
+		
+                if (isset($organization_logoname)){
+                        $viewer->assign("ORGANIZATIONLOGOPATH",$path);
+                }
+		if (isset($path)) {
+			$viewer->assign("ORGANIZATIONLOGONAME",$organization_logoname);
+		}
+                closedir($dir_handle);
+                
+                $viewer->assign('MODULE_MODEL', $moduleModel);
+		$viewer->assign('ERROR_MESSAGE', $request->get('error'));
+		$viewer->assign('QUALIFIED_MODULE', $qualifiedModuleName);
+		$viewer->assign('CURRENT_USER_MODEL', Users_Record_Model::getCurrentUserModel());
+		$viewer->view('Detail.tpl', $qualifiedModuleName);
+	}
+	
+	function getPageTitle(Vtiger_Request $request) {
+		$qualifiedModuleName = $request->getModule(false);
+		return vtranslate('LBL_COMPANY_DETAILS',$qualifiedModuleName);
+	}
+	
+		/**
+	 * Function to get the list of Script models to be included
+	 * @param Vtiger_Request $request
+	 * @return <Array> - List of Vtiger_JsScript_Model instances
+	 */
+	function getHeaderScripts(Vtiger_Request $request) {
+		$headerScriptInstances = parent::getHeaderScripts($request);
+		$moduleName = $request->getModule();
+
+		$jsFileNames = array(
+			"modules.Settings.$moduleName.resources.CompanyDetails"
+		);
+
+		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
+		$headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
+		return $headerScriptInstances;
+	}
+    
+}

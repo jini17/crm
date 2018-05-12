@@ -1,0 +1,41 @@
+<?php
+/* ===================================================================
+Modified By: Jitendra, Soft Solvers Technologies (M) Sdn Bhd (www.softsolvers.com)
+Modified Date: 17 / 09 / 2014
+Change Reason: Multiple Terms An Conditions , New file created
+=================================================================== */
+
+/*+********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is:  vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ ********************************************************************************/
+
+class Settings_MultipleTnC_Delete_Action extends Vtiger_Delete_Action {
+
+	public function checkPermission(Vtiger_Request $request) {
+		$currentUser = Users_Record_Model::getCurrentUserModel();
+		if(!$currentUser->isAdminUser()) {
+			throw new AppException('LBL_PERMISSION_DENIED');
+		}
+	}
+
+	public function process(Vtiger_Request $request) {
+		$id_array = explode(';',$request->get('idlist'));
+		$moduleModel = Settings_MultipleTnC_Detail_Model::getInstanceId($recordId);	
+		$db = PearDatabase::getInstance();
+		foreach($id_array as $key => $recordId) {
+			if(!empty($recordId)) {
+				$sql = "DELETE FROM vtiger_inventory_tandc WHERE id =?";
+				$db->pquery($sql, array($recordId));
+				$db->pquery("DELETE FROM secondcrm_tnc_assigncompany WHERE tncid = ?", array($recordId));
+			}
+		}
+		$reloadUrl = "index.php?module=MultipleTnC&parent=Settings&view=List";
+		header('Location: ' . $reloadUrl);
+	}
+}
+?>

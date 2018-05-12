@@ -1,0 +1,152 @@
+{*<!--
+/* ===================================================================
+Modified By: Jitendra, Soft Solvers Technologies (M) Sdn Bhd (www.softsolvers.com)
+Modified Date: 16 / 09 / 2014
+Change Reason: Multiple Term Details Feature, File modified
+=================================================================== */
+
+/*********************************************************************************
+** The contents of this file are subject to the vtiger CRM Public License Version 1.0
+* ("License"); You may not use this file except in compliance with the License
+* The Original Code is:  vtiger CRM Open Source
+* The Initial Developer of the Original Code is vtiger.
+* Portions created by vtiger are Copyright (C) vtiger.
+* All Rights Reserved.
+*
+********************************************************************************/
+-->*}
+<br>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="98%">
+    <tbody>
+        <tr>
+            <td valign="top"><img src="{'showPanelTopLeft.gif'|@vtiger_imageurl:$THEME}"></td>
+            <td class="showPanelBg" style="padding: 10px;" valign="top" width="100%">
+                <br>
+                <form action="index.php" method="post" id="massEmailForm" name="index">
+                  <input type="hidden" name="module" value="MultipleTnC">
+		  <input type="hidden" name="action" value="Save">
+		  <input type="hidden" name="parent" value="Settings">
+		  <input type="hidden" name="record" value="{$TERMID}">
+		  <input type="hidden" name="mode" value="{$MODE}">	
+		
+		  <div align=center>	
+                        <!-- DISPLAY -->
+                        <table border=0 cellspacing=0 cellpadding=5 width=100% class="settingsSelUITopLine table-bordered table">
+                            <tr>
+                                <td width=50 rowspan=2 valign=top><img src="{'company.gif'|@vtiger_imageurl:$THEME}" width="48" height="48" border=0 ></td>
+                                    {if $TERMID neq ''}
+                                    <td class=heading2 valign=bottom><b><a href="index.php?module=Vtiger&parent=Settings&view=Index">{vtranslate('LBL_SETTINGS', $QUALIFIED_MODULE)}</a> > {vtranslate('LBL_EDIT', $QUALIFIED_MODULE)} {vtranslate('INVENTORYTERMSANDCONDITIONS', $QUALIFIED_MODULE)} </b></td>
+                                            {else}
+                                    <td class=heading2 valign=bottom><b><a href="index.php?module=Vtiger&parent=Settings&view=Index">{vtranslate('LBL_SETTINGS', $QUALIFIED_MODULE)}</a> > {vtranslate('LBL_ADD_NEW', $QUALIFIED_MODULE)} {vtranslate('INVENTORYTERMSANDCONDITIONS', $QUALIFIED_MODULE)} </b></td>
+                                            {/if}
+                            </tr>
+                            <tr>
+                                <td valign=top class="small">{vtranslate('LBL_INVEN_TANDC_DESC', $QUALIFIED_MODULE)}</td>
+                            </tr>
+                        </table>
+
+                        <br>
+                        <table border=0 cellspacing=0 cellpadding=10 width=100% >
+                            <tr>
+                                <td>
+
+                                    <table border=0 cellspacing=0 cellpadding=5 width=100% class="tableHeading table-bordered">
+                                        <tr>
+                                            <td class="big"><strong>{vtranslate('LBL_TERMS', $QUALIFIED_MODULE)} </strong>
+                                                {$ERRORFLAG}<br>
+                                            </td>
+                                            <td class="small" align=right>
+                                                <input title="{vtranslate('LBL_SAVE_BUTTON_LABEL', $QUALIFIED_MODULE)}" accessKey="{vtranslate('LBL_SAVE_BUTTON_KEY', $QUALIFIED_MODULE)}" class="crmButton small save" type="submit" name="button" value="{vtranslate('LBL_SAVE_BUTTON_LABEL', $QUALIFIED_MODULE)}" onclick="return verify_data(form, '{vtranslate('LBL_TERMS_TITLE', $QUALIFIED_MODULE)}', '{vtranslate('LBL_TERMS', $QUALIFIED_MODULE)}');" >
+                                                <input title="{vtranslate('LBL_CANCEL_BUTTON_LABEL', $QUALIFIED_MODULE)}" accessKey="{vtranslate('LBL_CANCEL_BUTTON_KEY', $QUALIFIED_MODULE)}" class="crmButton small cancel" onclick="window.history.back()" type="button" name="button" value="{vtranslate('LBL_CANCEL_BUTTON_LABEL', $QUALIFIED_MODULE)}">
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <table border=0 cellspacing=0 cellpadding=0 width=100% class="listRow table-bordered">
+					<tr>
+                        <td class="{$WIDTHTYPE}">
+                            <label class="small cellLabel"><font color="red">*</font><b>{vtranslate('LBL_SELECT_COMPANY', $QUALIFIED_MODULE)}</b></label>
+                        </td>
+                        <td class="fieldValue {$WIDTHTYPE}" style="border-left: none">
+				<span class="span6">
+						{assign var="GROUP_MEMBERS" value=$RECORD_MODEL->getMembers()}
+						<select id="memberList" class="row-fluid members" multiple="true" name="members[]" data-placeholder="{vtranslate('LBL_ADD_USERS_ROLES', $QUALIFIED_MODULE)}" data-validation-engine="validate[required]">
+							{foreach from=$MEMBER_GROUPS key=GROUP_LABEL item=ALL_GROUP_MEMBERS}
+								<optgroup label="{$GROUP_LABEL}">
+								{foreach from=$ALL_GROUP_MEMBERS item=MEMBER}
+									{if $MEMBER->getName() neq $RECORD_MODEL->getName()}
+										<option value="{$MEMBER->getId()}"  data-member-type="{$GROUP_LABEL}" {if isset($GROUP_MEMBERS[$GROUP_LABEL][$MEMBER->getId()])}selected="true"{/if}>{$MEMBER->getName()}</option>
+									{/if}
+								{/foreach}
+								</optgroup>
+							{/foreach}
+						</select>
+					</span>
+			</td>
+			</tr>	
+                                        <tr>
+                                            <td class="small" valign=top ><table width="100%"  border="0" cellspacing="0" cellpadding="5">
+                                                   
+                                                        <tr>
+                                                            <td width="20%" class="small cellLabel"><font color="red">*</font><strong>{vtranslate('LBL_TERMS_TITLE', $QUALIFIED_MODULE)}</strong></td>
+                                                            <td width="80%" class="small cellText"><input type="text" name="term_title" class="detailedViewTextBox small" value="{$TERMTITLE}"></td>                          
+                                                        </tr>						
+                                                        <tr>
+                                                            <td width="20%" class="small cellLabel"><font color="red">*</font><strong>{vtranslate('LBL_TERMS', $QUALIFIED_MODULE)}</strong></td>
+                                                            <td width="80%" class="small cellText"><textarea class=small id="description" name="inventory_tandc" style="width:95%; height:200px;text-align:left;">{$TERMTANDC}</textarea></td>                          
+                                                        </tr>
+
+
+                                                </table>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table border=0 cellspacing=0 cellpadding=5 width=100% >
+                                        <tr>
+                                            <td class="small" nowrap align=right><a href="#top">{vtranslate('LBL_SCROLL', $QUALIFIED_MODULE)}</a></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>	
+                {include file='JSResourcesTandc.tpl'|@vtemplate_path}
+            </td>
+            <td valign="top"><img src="{'showPanelTopRight.gif'|@vtiger_imageurl:$THEME}"></td>
+        </tr>
+    </tbody>
+</table>
+
+{literal}
+    <script>
+        function verify_data(form, term_title, inventory_tandc)
+        {
+            
+            //alert(form.inventory_tandc.value);
+            if (form.term_title.value == "")
+            {
+    {/literal}
+                alert(term_title + "{vtranslate('CANNOT_BE_NONE', $QUALIFIED_MODULE)}");
+                form.term_title.focus();
+                return false;
+    {literal}
+            }
+
+            CKEDITOR.instances.form.inventory_tandc.setData( form.inventory_tandc.value );
+            if (form.inventory_tandc.value == "")
+            {
+    {/literal}
+                alert(inventory_tandc + "{vtranslate('CANNOT_BE_NONE', $QUALIFIED_MODULE)}");
+                form.inventory_tandc.focus();
+                return false;
+    {literal}
+            }
+            else
+            {
+                return true;
+            }
+        }
+    </script>
+{/literal}
