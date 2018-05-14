@@ -43,7 +43,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 
 
 		$allowedipres = $this->AllowedIp($usip,$username);
-		//$allowedipres = true;
+		$allowedipres = true;
 
 		if ($user->doLogin($password) && $allowedipres==true) {
 			session_regenerate_id(true); // to overcome session id reuse.
