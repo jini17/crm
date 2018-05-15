@@ -12,7 +12,6 @@ require_once 'include/Webservices/GetUpdates.php';
 require_once 'modules/WSAPP/Utils.php';
 
 function wsapp_get ($key, $module, $token, $user) {
-  
     $name = wsapp_getApplicationName($key);
     if ($name) {
         $handlerDetails = wsapp_getHandler($name);

@@ -124,10 +124,10 @@ class WSAPP_VtigerConnector extends WSAPP_BaseConnector {
 	public function pull(WSAPP_SyncStateModel $syncStateModel) {
 		$syncTrackerId = $syncStateModel->getSyncTrackerId();
 		$prevSyncToken = $syncStateModel->getSyncToken();
-	
+
 		$recordModels = array();
 		$records = wsapp_get($syncTrackerId, $syncStateModel->getType(), $prevSyncToken, $this->getSynchronizeController()->user);
-	
+
 		$createdRecords = $records['created'];
 		$updatedRecords = $records['updated'];
 		$deletedRecords = $records['deleted'];
@@ -139,7 +139,7 @@ class WSAPP_VtigerConnector extends WSAPP_BaseConnector {
 			$recordModels[] = $model->setMode(WSAPP_SyncRecordModel::WSAPP_CREATE_MODE)->setType($this->getSynchronizeController()->getSourceType());
 			}
 		}
-	
+
 		if(is_array($updatedRecords)) {
 			foreach ($updatedRecords as $record) {
 				$model = $this->getRecordModelFromData($record);
@@ -166,11 +166,11 @@ class WSAPP_VtigerConnector extends WSAPP_BaseConnector {
 		return $recordModels;
 	}
 
-	public function push($recordList, $syncStateModel) { 
+	public function push($recordList, $syncStateModel) {
 		$pushResult = wsapp_put($syncStateModel->getSyncTrackerId(), $this->convertToPushSyncTrackerFormat($recordList), $this->getSynchronizeController()->user);
 		$pushResponseRecordList = array();
 		$clientID2ServerIDMap = $pushResult['client2serverIdMap'];
- 	
+
 		foreach ($pushResult as $mode => $records) {
 			if ($mode == 'created') {
 				$recordMode = WSAPP_SyncRecordModel::WSAPP_CREATE_MODE;

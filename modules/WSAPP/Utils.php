@@ -14,7 +14,6 @@ require_once 'include/utils/utils.php';
 function wsapp_getHandler($appType){
     $db = PearDatabase::getInstance();
     $result = $db->pquery("SELECT * FROM vtiger_wsapp_handlerdetails WHERE type=?",array($appType));
-    
 
     $handlerResult = array();
 
