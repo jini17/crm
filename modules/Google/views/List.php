@@ -115,7 +115,7 @@ class Google_List_View extends Vtiger_PopupAjax_View {
 		$syncDirection = Google_Utils_Helper::getSyncDirectionForUser($user);
 		$records = array();
 		if(Google_Utils_Helper::checkSyncEnabled('Contacts', $user)) {
-			$records = $controller->synchronize(true,$syncDirection[0],$syncDirection[1]);
+			$records = $controller->synchronize(true,$syncDirection[0],$syncDirection[1],"GoogleContacts");
 		}
 		$syncRecords = $this->getSyncRecordsCount($records);
 		$syncRecords['vtiger']['more'] = $controller->targetConnector->moreRecordsExits();
@@ -139,7 +139,7 @@ class Google_List_View extends Vtiger_PopupAjax_View {
 		$syncDirection = Google_Utils_Helper::getSyncDirectionForUser($user,'Calendar');
 		$records = array();
 		if(Google_Utils_Helper::checkSyncEnabled('Calendar', $user)) {
-			$records = $controller->synchronize(true,$syncDirection[0],$syncDirection[1]);
+			$records = $controller->synchronize(true,$syncDirection[0],$syncDirection[1],"GoogleCalendar");
 		}
 		$syncRecords = $this->getSyncRecordsCount($records);
 		$syncRecords['vtiger']['more'] = $controller->targetConnector->moreRecordsExits();
