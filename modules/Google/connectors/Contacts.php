@@ -240,7 +240,7 @@ Class Google_Contacts_Connector extends WSAPP_TargetConnector {
 			$contact = $this->getSynchronizeController()->getSourceRecordModel($entity);
 
 			$contact = $this->performBasicTransformations($googleRecord, $contact);
-			$contact = $this->performBasicTransformationsToSourceRecords($contact, $googleRecord);
+			$contact = $this->performBasicTransformationsToSourceRecords("Google",$contact, $googleRecord);
 			$contacts[] = $contact;
 		}
 		return $contacts;

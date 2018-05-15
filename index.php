@@ -26,6 +26,24 @@ error_reporting(1);
 		    }*/
 //Overrides GetRelatedList : used to get related query
 //TODO : Eliminate below hacking solution
+
+
+/*error_reporting(1);
+		ini_set('display_erros',1);
+		 
+		  register_shutdown_function('handleErrors');       
+		    function handleErrors() { 
+			 
+		       $last_error = error_get_last(); 
+		     	
+		       if (!is_null($last_error)) { // if there has been an error at some point 
+		     
+			  // do something with the error 
+			  print_r($last_error); 
+		     
+		       } 
+		     
+		    }*/
 include_once 'config.php';
 include_once 'include/Webservices/Relation.php';
 

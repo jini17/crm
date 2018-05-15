@@ -14,6 +14,7 @@ class Settings_Vtiger_Extension_View extends Settings_Vtiger_Index_View {
 		$moduleName = $request->get('extensionModule');
 
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
+	
 		if (empty($moduleModel)) {
 			throw new AppException(vtranslate('LBL_HANDLER_NOT_FOUND'));
 		}

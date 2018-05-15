@@ -9,10 +9,17 @@
  * ***********************************************************************************/
 
 Class Google_Config_Connector {
+<<<<<<< HEAD
 	static $clientId = '1111';
 	static $clientSecret = '2222';
 	static $clientSecretFile = 'dwwwwwwww';
 	static $accessKey = '';
+=======
+	static $clientId = '949973452984-u9snksbvv6gcnhp5oebhlkpoh39p85rt.apps.googleusercontent.com';
+	static $clientSecret = 'ABChDJmzI17a92XUL3P7xXYM';
+
+
+>>>>>>> 065ea26... Office Integration complete set of changes
 
 	static function getRedirectUrl() {
 		global $site_URL;
