@@ -28,7 +28,7 @@ error_reporting(1);
 //TODO : Eliminate below hacking solution
 
 
-/*error_reporting(1);
+error_reporting(1);
 		ini_set('display_erros',1);
 		 
 		  register_shutdown_function('handleErrors');       
@@ -43,7 +43,7 @@ error_reporting(1);
 		     
 		       } 
 		     
-		    }*/
+		    }
 include_once 'config.php';
 include_once 'include/Webservices/Relation.php';
 
