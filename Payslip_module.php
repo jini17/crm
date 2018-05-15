@@ -1,8 +1,8 @@
 <?php
 
 /** Create New Vtlib script for module Creation
- * created : 22 Feb 2018
- * Author  : Jitendra Gupta <jitendraknp2004@gmail.com>
+ * created : 14 May 2018
+ * Author  : Nirbhay Shah
  */
 error_reporting(1);
 ini_set('display_erros',1);
@@ -28,10 +28,10 @@ include_once 'include/Webservices/Utils.php';
 
 $Vtiger_Utils_Log = true;
 
-$MODULENAME = 'Working Hours'; //Give your module name
-$PARENT 	= 'Support';  //Give Parent name
-$ENTITYNAME = 'subject'; //Give Duplicate check field name
-$ENTITYLABEL= 'Subject';
+$MODULENAME = 'WorkExperience'; //Give your module name
+$PARENT 	= 'SUPPORT';  //Give Parent name
+$ENTITYNAME = 'work_experience_no'; //Give Duplicate check field name
+$ENTITYLABEL= 'Work Experience Number';
 
 $module = Vtiger_Module::getInstance($MODULENAME);
 
@@ -54,17 +54,59 @@ $block->label = 'LBL_'. strtoupper($module->name) . '_INFORMATION';
 $module->addBlock($block);
 
 $blockcf = new Vtiger_Block();
-$blockcf->label = 'LBL_CUSTOM_INFORMATION';
+$blockcf->label = 'Work Experience Information';
 $module->addBlock($blockcf);
 
 $field1  = new Vtiger_Field();
-$field1->name = $ENTITYNAME;
-$field1->label= $ENTITYLABEL;
-$field1->uitype= 2;
+$field1->name = 'company_name';
+$field1->label= 'Company Name';
+$field1->uitype= 1;
 $field1->column = $field1->name;
 $field1->columntype = 'VARCHAR(255)';
-$field1->typeofdata = 'V~M';
+$field1->typeofdata = 'V~O';
 $block->addField($field1);
+
+
+$field2  = new Vtiger_Field();
+$field2->name = $ENTITYNAME;
+$field2->label= $ENTITYLABEL;
+$field2->uitype= 2;
+$field2->column = $field1->name;
+$field2->columntype = 'VARCHAR(255)';
+$field2->typeofdata = 'V~M';
+$block->addField($field2);
+
+
+$field3  = new Vtiger_Field();
+$field3->name = 'office_phone';
+$field3->label= 'Office Phone';
+$field3->uitype= 1;
+$field3->column = $field1->name;
+$field3->columntype = 'INT(15)';
+$field3->typeofdata = 'I~O';
+$block->addField($field3);
+
+
+$field4  = new Vtiger_Field();
+$field4->name = 'mobile';
+$field4->label= 'Mobile';
+$field4->uitype= 1;
+$field4->column = $field1->name;
+$field4->columntype = 'INT(15)';
+$field4->typeofdata = 'I~O';
+$block->addField($field4);
+
+/** Create required fields and add to the block */
+$field8 = new Vtiger_Field();
+$field8->name = 'relationship';
+$field8->label = 'Relationship';
+$field8->table = $module->basetable;
+$field8->column = 'relationship';
+$field8->columntype = 'VARCHAR(100)';
+$field8->uitype = 15;
+$field8->typeofdata = 'V~O';
+$field8->setPicklistValues( Array ('Father', 'Mother','Brother','Sister','Others') );
+$block->addField($field8); /** Creates the field and adds to block */
 
 $module->setEntityIdentifier($field1); //make primary key for module
 

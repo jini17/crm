@@ -106,7 +106,7 @@ $field8->columntype = 'VARCHAR(100)';
 $field8->uitype = 15;
 $field8->typeofdata = 'V~O';
 $field8->setPicklistValues( Array ('Father', 'Mother','Brother','Sister','Others') );
-$blockPayments->addField($field8); /** Creates the field and adds to block */
+$block->addField($field8); /** Creates the field and adds to block */
 
 $module->setEntityIdentifier($field1); //make primary key for module
 
