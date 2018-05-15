@@ -7,7 +7,7 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  ************************************************************************************/
-/*
+	
 error_reporting(1);
 		ini_set('display_erros',1);
 
@@ -23,9 +23,11 @@ error_reporting(1);
 
 		       }
 
-		    }*/
+		    }
 //Overrides GetRelatedList : used to get related query
 //TODO : Eliminate below hacking solution
+
+
 include_once 'config.php';
 include_once 'include/Webservices/Relation.php';
 

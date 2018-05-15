@@ -1,0 +1,17 @@
+<?xml version='1.0'?>
+<module>
+	<exporttime>2018-03-30 10:08:29</exporttime>
+	<name>Office365</name>
+	<label>Office365</label>
+	<parent></parent>
+	<type>extension</type>
+	<version>1.0</version>
+	<dependencies>
+		<vtiger_version>6.0.0rc</vtiger_version>
+		<vtiger_max_version>7.*</vtiger_max_version>
+	</dependencies>
+	<tables>
+	</tables>
+	<crons>
+	</crons>
+</module>

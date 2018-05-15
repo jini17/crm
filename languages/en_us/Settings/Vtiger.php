@@ -386,6 +386,7 @@ $languageStrings = array(
     'LBL_FORECAST_SETTINGS' => 'Forecast Settings',
     'LBL_SEARCH_FOR_SETTINGS' => 'Search settings',
     'LBL_GOOGLE' => 'Google',
+    'LBL_OUTLOOK' => 'Outlook',
     'LBL_QUICKBOOKS' => 'QuickBooks',
     'LBL_XERO' => 'Xero',
     'LBL_TALLY' => 'Tally',
