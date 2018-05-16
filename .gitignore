@@ -34,3 +34,6 @@ AdhocReports/exportPolicy/**
 #apilog
 apilogs.txt
 
+
+#ignore test files
+test/**

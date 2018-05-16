@@ -28,8 +28,8 @@ include_once 'include/Webservices/Utils.php';
 
 $Vtiger_Utils_Log = true;
 
-$MODULENAME = 'Emergency Contact'; //Give your module name
-$PARENT 	= 'Support';  //Give Parent name
+$MODULENAME = 'EmergencyContact'; //Give your module name
+$PARENT 	= 'SUPPORT';  //Give Parent name
 $ENTITYNAME = 'contact_name'; //Give Duplicate check field name
 $ENTITYLABEL= 'Contact Name';
 
