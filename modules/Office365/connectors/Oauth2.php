@@ -236,10 +236,8 @@ class Office365_Oauth2_Connector {
    public function authorize() {
     
         if($this->hasStoredToken()) {
-
-            $token = $this->retreiveToken();
-
-            $this->setToken($token);
+             $token = $this->retreiveToken();
+             $this->setToken($token);
 
             if($this->isTokenExpired()) $this->refreshToken();
             return $this;
