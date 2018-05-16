@@ -8,11 +8,10 @@
 
 
 require_once("include/database/PearDatabase.php");
-//echo "Here am i";
-//global $adb;
+global $adb;
 //$adb->setDebug(true);
 
- $query = "SELECT email FROM vtiger_leaddetails INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leaddetails.leadid WHERE leadid = ? AND deleted = 0";
+ $query = "SELECT email FROM vtiger_contactdetails INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_contactdetails.contactid WHERE contactid = ? AND deleted = 0";
 $result = $adb->pquery($query,array($_REQUEST['record']));
 
 $emailid = $adb->query_result($result, 0 , 'email');
@@ -20,8 +19,6 @@ $emailid = $adb->query_result($result, 0 , 'email');
 $resultbearer = $adb->pquery("SELECT bearer FROM ss_contactenrichment WHERE active = 1",array());
 $bearer = $adb->query_result($resultbearer, 0 , 'bearer');
 
-
-//echo "Nirbhay"$emailid;die;
 
 
 $ch = curl_init();
@@ -41,18 +38,18 @@ if (curl_errno($ch)) {
     echo 'Error:' . curl_error($ch);
 
 }
-$result = json_decode($result);
+$res = json_decode($result,true);
 curl_close ($ch);
-
 
 /*
  * Creating Update data
  */
 
-$linkedin = $result->linkedin;
+$linkedin = $res['linkedin'];
+//echo "<pre>"; print_r($linkedin); die;
 
-$result = $adb->pquery("UPDATE vtiger_leadscf SET linkedin_id = ?",array($linkedin));
+$result = $adb->pquery("UPDATE vtiger_contactscf SET linkedin_id = ?",array($linkedin));
 
-
+return true;
 
 ?>
