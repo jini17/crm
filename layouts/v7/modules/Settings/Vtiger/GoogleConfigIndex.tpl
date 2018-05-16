@@ -31,9 +31,9 @@
 			<div  id="contents">
 				<div class="container-fluid" id="GoogleConfigDetails">
 				
-							<div class="pull-right">
-								<button class="btn editButton" id="editButton" data-url='{$MODEL->getEditViewUrl()}' type="button" title="{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}"><strong>{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}</strong></button>
-							</div>
+					<div class="pull-right">
+						<button class="btn editButton" id="editButton" data-url='{$MODEL->getEditViewUrl()}' type="button" title="{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}"><strong>{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}</strong></button>
+					</div>
 					
 					<div class="contents">
 						<table class="table table-bordered table-condensed themeTableColor">
@@ -108,10 +108,9 @@
 										</th>
 									</tr>
 								</thead>
-								<tbody>
-									{assign var=FIELD_DATA value=$MODEL->getViewableData2()}
-									{foreach key=FIELD_NAME item=FIELD_DETAILS from=$MODEL->getEditableFields2()}
-										<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted marginRight10px pull-right">{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE)}</label></td>
+								<tbody>{$ADVANCED_FIELD_VALUES|print_r}
+									{foreach key=FIELD_NAME item=FIELD_DETAILS from=$ADVANCED_FIELD_VALUES}
+										<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted marginRight10px pull-right">$</label></td>
 											<td style="border-left: none;" class="{$WIDTHTYPE}">
 												<span>{$FIELD_DATA[$FIELD_NAME]}</span>
 											</td></tr>

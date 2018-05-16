@@ -24,8 +24,8 @@ class Documents_DownloadFile_Action extends Vtiger_Action_Controller {
 		$documentRecordModel = Vtiger_Record_Model::getInstanceById($request->get('record'), $moduleName);
 		//Download the file
 		$response = $documentRecordModel->downloadFile();
-		
-		if($response=='Failure'){ 
+	
+		/*if($response=='Failure'){ 
 		   $res = new Vtiger_Response();
 		   $res->setResult('JS_FILE_NOT_FOUND');
 		   $res->emit();
@@ -33,10 +33,11 @@ class Documents_DownloadFile_Action extends Vtiger_Action_Controller {
 		   $res = new Vtiger_Response();
 		   $res->setResult('JS_FILE_FOUND');
 		   $res->emit();
-		}
+		}*/
 		if($request->get('ajax')==11){
 			//Update the Download Count
 			$documentRecordModel->updateDownloadCount();
+		
 		}
 	}
 }

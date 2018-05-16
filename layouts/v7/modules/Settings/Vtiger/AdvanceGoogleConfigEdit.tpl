@@ -14,33 +14,25 @@
 	<div class="contents">
 		<form id="AdvanceGoogleConfigForm" enctype="multipart/form-data" class="form-horizontal" data-detail-url="{$MODEL->getIndexViewUrl()}" method="POST">
 			
-					<div class="pull-right">
-						<button class="btn btn-success saveButton" type="submit" title="{vtranslate('LBL_SAVE', $QUALIFIED_MODULE)}"><strong>{vtranslate('LBL_SAVE', $QUALIFIED_MODULE)}</strong></button>
-						<a type="reset" class="cancelLink" title="{vtranslate('LBL_CANCEL', $QUALIFIED_MODULE)}">{vtranslate('LBL_CANCEL', $QUALIFIED_MODULE)}</a>
-					</div>
-				
-			{assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
-			{assign var=FIELD_VALIDATION  value=['clientSecretFile' => ['name'=>'clientSecretFile'],
-												'accessKey' => ['name' => 'accessKey']]}
+			<div class="pull-right">
+				<button class="btn btn-success saveButton" type="submit" title="{vtranslate('LBL_SAVE', $QUALIFIED_MODULE)}"><strong>{vtranslate('LBL_SAVE', $QUALIFIED_MODULE)}</strong></button>
+				<a type="reset" class="cancelLink" title="{vtranslate('LBL_CANCEL', $QUALIFIED_MODULE)}">{vtranslate('LBL_CANCEL', $QUALIFIED_MODULE)}</a>
+			</div>			
+			
 			<table class="table table-bordered table-condensed themeTableColor">
 				<thead>
 					<tr class="blockHeader"><th colspan="2" class="{$WIDTHTYPE}">{vtranslate('LBL_GOOGLE_CONFIG_FILE', $QUALIFIED_MODULE)}</th></tr>
 				</thead>
-				<tbody>
-					{assign var=FIELD_DATA value=$MODEL->getViewableData2()} 
-					{foreach key=FIELD_NAME item=FIELD_DETAILS from=$MODEL->getEditableFields2()}
-					{if $FIELD_DETAILS['fieldType'] eq 'file'}
-						<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted pull-right marginRight10px">{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE)}</label></td>
+				<tbody>				
+						<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted pull-right marginRight10px">Client Secret File</label></td>
 							<td style="border-left: none;" class="row-fluid {$WIDTHTYPE}">
-								<input type="file" name="{$FIELD_NAME}" data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" {if $FIELD_VALIDATION[$FIELD_NAME]} data-validator={Zend_Json::encode([$FIELD_VALIDATION[$FIELD_NAME]])} {/if} value="{$FIELD_DATA[$FIELD_NAME]}" />
+								<input type="file" name="clientSecretFile" value="" />
 							</td></tr>
-					{else}
-						<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted pull-right marginRight10px">{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE)}</label></td>
+
+						<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted pull-right marginRight10px">Access Key</label></td>
 							<td style="border-left: none;" class="row-fluid {$WIDTHTYPE}">
-								<input type="text" name="{$FIELD_NAME}" data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" {if $FIELD_VALIDATION[$FIELD_NAME]} data-validator={Zend_Json::encode([$FIELD_VALIDATION[$FIELD_NAME]])} {/if} value="{$FIELD_DATA[$FIELD_NAME]}" />
+								<input type="text" name="{$FIELD_NAME}" value="" />
 							</td></tr>
-					{/if}
-					{/foreach}
 				</tbody>
 			</table>
 		</form>

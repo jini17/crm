@@ -36,6 +36,17 @@ abstract class Settings_Vtiger_Record_Model extends Vtiger_Base_Model {
 
 		return $links;
 	}
+
+	//Function Added By Mabruk For Googe Drive Settings on 16/05/2018
+	public function getGoogleCredentials() {
+		
+		global $adb;
+		$result = $adb->pquery("SELECT * FROM google_drive_credentials",array());
+		$client_secret_file = $adb->query_result($result,0,"json_file");
+		$access_key = $adb->query_result($result,0,"access_key");
+		$result = array('client_secret_file' => $client_secret_file, 'access_key' =>$access_key);
+		return $result;
+	}
 	
 	public function getDisplayValue($key) {
 		return $this->get($key);

@@ -83,16 +83,16 @@ class Documents_Record_Model extends Vtiger_Record_Model {
 				}
 				$fileSize = filesize($filePath.$savedFile);
 				$fileSize = $fileSize + ($fileSize % 1024);
-
+	
 				if (fopen($filePath.$savedFile, "r")) {
 					$fileContent = fread(fopen($filePath.$savedFile, "r"), $fileSize);
 
 					header("Content-type: ".$fileDetails['type']);
 					header("Pragma: public");
 					header("Cache-Control: private");
-					header("Content-Disposition: attachment; filename=\"$fileName\"");
+					header('Content-Disposition: attachment; filename="' . $fileName . '"');
 					header("Content-Description: PHP Generated Data");
-                    header("Content-Encoding: none");
+                    			header("Content-Encoding: none");
 				}
 			}
 			//Edit By Mabruk for Google Drive Integration 28/03/2018
@@ -105,7 +105,7 @@ class Documents_Record_Model extends Vtiger_Record_Model {
 				}catch(Exception $e){
 					return 'Failure';
 				}
-				$headers = $response->getHeaders();
+				$headers = $response->getHeaders(); //print_r($headers);die;
 
 				foreach ($headers as $name => $values) {
 				  header($name . ': ' . implode(', ', $values));
@@ -115,7 +115,7 @@ class Documents_Record_Model extends Vtiger_Record_Model {
 			}
 		}
 			//Edit Done
-		return $fileContent;
+		echo $fileContent;
 	}
 
 	function updateFileStatus() {
