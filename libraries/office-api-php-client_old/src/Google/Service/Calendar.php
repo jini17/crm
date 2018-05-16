@@ -346,8 +346,10 @@ class Google_Service_Calendar_CalendarList_Resource extends Google_Service_Resou
    */
   public function get($calendarId, $optParams = array())
   {
+
     $params = array('calendarId' => $calendarId);
     $params = array_merge($params, $optParams);
+    echo "<pre>"; print_r($params); die;
     return $this->call('get', array($params), "Google_Service_Calendar_CalendarListEntry");
   }
 

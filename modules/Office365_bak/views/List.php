@@ -12,7 +12,12 @@ class Office365_List_View extends Vtiger_PopupAjax_View {
 
 	protected $noRecords = false;
 
-	function process(Vtiger_Request $request) {	
+	public function __construct() {
+		$this->exposeMethod('Contacts');
+		$this->exposeMethod('Calendar');
+	}
+
+	function process(Vtiger_Request $request) {
 		switch ($request->get('operation')) {
 			case "sync" : $this->renderSyncUI($request);
 				break;
