@@ -98,7 +98,7 @@ Class Google_Calendar_Connector extends WSAPP_TargetConnector {
             $calendar = $this->getSynchronizeController()->getSourceRecordModel($entity);
 
             $calendar = $this->performBasicTransformations($googleRecord, $calendar);
-            $calendar = $this->performBasicTransformationsToSourceRecords("GoogleCalendar",$calendar, $googleRecord,null);
+            $calendar = $this->performBasicTransformationsToSourceRecords($calendar, $googleRecord);
             $calendarArray[] = $calendar;
         }
 
@@ -154,7 +154,6 @@ Class Google_Calendar_Connector extends WSAPP_TargetConnector {
         }
         
         $calendarId = Google_Utils_Helper::getSelectedCalendarForUser($user);
-
         if(!isset($this->calendars)) {
             $this->calendars = $this->pullCalendars(true);
         }
@@ -412,7 +411,6 @@ Class Google_Calendar_Connector extends WSAPP_TargetConnector {
             }
             return $calendars;
         }
-
         foreach($allCalendarsItems as $calendarItem) {
             $calendars[] = array(
                 'id' => $calendarItem->getId(),

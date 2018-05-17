@@ -19,7 +19,7 @@ Class OutlookHandler extends SyncHandler {
         $this->key = $appkey;
     }
 
-    public function get($module,$token,$user){ 
+    public function get($module,$token,$user){
         $this->syncModule = $module;
         $this->user = $user;
         $result = $this->syncServer->get($this->key,$module,$token,$user);

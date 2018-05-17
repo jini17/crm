@@ -58,25 +58,15 @@ abstract class WSAPP_BaseConnector {
 	 *
 	 */
 	public function performBasicTransformations(WSAPP_SyncRecordModel $sourceRecord,WSAPP_SyncRecordModel $targetRecord){
-
-		$targetRecord->setType($sourceRecord->getType())	
+		$targetRecord->setType($sourceRecord->getType())
 				     ->setMode($sourceRecord->getMode())
 					 ->setSyncIdentificationKey($sourceRecord->getSyncIdentificationKey());
 		return $targetRecord;
 	}
 
-	public function performBasicTransformationsToSourceRecords($modulename,WSAPP_SyncRecordModel $sourceRecord, WSAPP_SyncRecordModel $targetRecord,$count){
-
-		if($modulename=='Office365Contacts'){
-		$sourceRecord->setId($targetRecord->getId($count))
-					->setModifiedTime($targetRecord->getModifiedTime($count));
-				
-			
-		}else{
-			$sourceRecord->setId($targetRecord->getId())
+	public function performBasicTransformationsToSourceRecords(WSAPP_SyncRecordModel $sourceRecord, WSAPP_SyncRecordModel $targetRecord){
+		$sourceRecord->setId($targetRecord->getId())
 					->setModifiedTime($targetRecord->getModifiedTime());
-
-		}
 		return $sourceRecord;
 	}
 
