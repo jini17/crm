@@ -1055,7 +1055,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 	public function getCurrencyList() {
 		$db = PearDatabase::getInstance();
 				// Not a good approach to get all the fields if not required(May leads to Performance issue)
-		$result = $db->pquery('SELECT id, currency_name FROM vtiger_currency_info WHERE currency_status = ? AND deleted=0', array('Active'));
+		$result = $db->pquery('SELECT id, currency_name FROM vtiger_currency_info WHERE currency_status = ? AND deleted=0 ORDER By sequence', array('Active'));
 		for($i=0; $i<$db->num_rows($result); $i++) {
 			$currencyId = $db->query_result($result, $i, 'id');
 			$currencyName = $db->query_result($result, $i, 'currency_name');

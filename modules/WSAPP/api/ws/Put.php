@@ -22,7 +22,7 @@ function wsapp_put ($key, $element, $user) {
             // for Record Source
             $appNameParts = explode("_",$name);
             Vtiger_Cache::set('WSAPP', 'appName', strtoupper($appNameParts[0]));
-            
+
             return $handler->put($element,$user);
         }
         return array();

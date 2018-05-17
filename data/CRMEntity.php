@@ -27,7 +27,7 @@ require_once('include/utils/utils.php');
 require_once('include/utils/UserInfoUtil.php');
 require_once("include/Zend/Json.php");
 require_once 'include/RelatedListView.php';
-require_once 'testAPI/vendor/autoload.php';
+
 
 class CRMEntity {
 
@@ -158,6 +158,7 @@ class CRMEntity {
 	//Parameter $fileLocationType added By Mabruk for Google Drive Integration 27/03/2018 
 	
 	function uploadAndSaveFile($id, $module, $file_details, $attachmentType='Attachment',$fileLocationType=null) {
+		require_once 'testAPI/vendor/autoload.php';
 		global $log;
 		$log->debug("Entering into uploadAndSaveFile($id,$module,$file_details) method.");
 
@@ -1499,7 +1500,7 @@ class CRMEntity {
 
 	/* Function to set the Sequence string and sequence number starting value */
 
-	function setModuleSeqNumber($mode, $module, $req_str = '', $req_no = '') {
+	/*function setModuleSeqNumber($mode, $module, $req_str = '', $req_no = '') {
 		global $adb;
 		//when we configure the invoice number in Settings this will be used
 		if ($mode == "configure" && $req_no != '') {
@@ -1535,31 +1536,128 @@ class CRMEntity {
 			$adb->pquery("UPDATE vtiger_modentity_num SET cur_id=? where cur_id=? and active=1 AND semodule=?", array($req_no, $curid, $module));
 			return decode_html($prev_inv_no);
 		}
-	}
+	}*/
 
 	// END
 
+	/* Function to set the Sequence string and sequence number starting value */
+	//add param $sourceCompany in the function by Jitu on 22 Sep 2014
+	function setModuleSeqNumber($mode, $module,$req_str = '', $req_no = '',$sourceCompany=1) {
+		global $adb;
+		//added Payments module in array by jitu@SERREQ2369
+		$inventory	= array('Quotes','SalesOrder', 'Invoice', 'PurchaseOrder','Payments');
+		
+		//Modified by jitu@secondcrm.com on 19082015 for set default company in case of created record by focus obj.
+		if(!empty($sourceCompany)) {
+			$isBusiness = Settings_CompanyNumbering_CustomRecordNumberingModule_Model::getSupportMultipleCompany();
+		} else {
+			$isBusiness = 0;
+		}
+		//End here
+		
+		//Added By Jitu on 15-10-2014 
+		if($isBusiness==0) {
+			$sourceCompany = 1; //Default Company
+		} else if(in_array($module,$inventory)){
+			
+			$sourceCompany = $sourceCompany;
+		} else {
+			$sourceCompany = 1; //Default Company
+		}		
+	
+		//when we configure the invoice number in Settings this will be used
+		if ($mode == "configure" && $req_no != '') {
+			$check = $adb->pquery("select cur_id,semodule from vtiger_modentity_num where semodule=? and organization_id = ?", array($module, $sourceCompany));
+			
+			if ($adb->num_rows($check) == 0) {
+				$numid = $adb->getUniqueId("vtiger_modentity_num");
+				$active = $adb->pquery("select num_id from vtiger_modentity_num where semodule=? and active=1 and organization_id = ?", array($module,$sourceCompany));
+				//$adb->pquery("UPDATE vtiger_modentity_num SET active=0 where num_id=? and organization_id = ?", array($adb->query_result($active, 0, 'num_id'),$sourceCompany));
+				$adb->pquery("INSERT into vtiger_modentity_num values(?,?,?,?,?,?,?)", array($numid,$module,$req_str,$req_no,$req_no,1,$sourceCompany));
+				return true;
+			} else if ($adb->num_rows($check) > 0) {
+				$num_check = $adb->query_result($check, 0, 'cur_id');
+			//Change on Siti req on 23072015  for same sequence in different prefix	
+				$saved_prefix = $adb->query_result($check, 0, 'prefix');
+				$check_module = $adb->query_result($check, 0, 'semodule');
+				if ($req_no < $num_check && $req_str==$saved_prefix) {
+					return false;
+				} else {
+					//$adb->pquery("UPDATE vtiger_modentity_num SET active=0 where active=1 and semodule=? and organization_id = ?", array($module,$sourceCompany));
+					$adb->pquery("UPDATE vtiger_modentity_num SET cur_id=?,prefix=?, active = 1 where semodule=? and organization_id = ?", array($req_no, $req_str, $module,$sourceCompany));
+					return true;
+				}
+			}
+		} else if ($mode == "increment") {
+			//when we save new invoice we will increment the invoice id and write
+			$check = $adb->pquery("select cur_id,prefix from vtiger_modentity_num where semodule=? and active = 1 and organization_id = ?", array($module,$sourceCompany));
+			$prefix = $adb->query_result($check, 0, 'prefix');
+			$curid = $adb->query_result($check, 0, 'cur_id');
+			$prev_inv_no = $prefix . $curid;
+			$strip = strlen($curid) - strlen($curid + 1);
+			if ($strip < 0)
+				$strip = 0;
+			$temp = str_repeat("0", $strip);
+			$req_no.= $temp . ($curid + 1);
+			$adb->pquery("UPDATE vtiger_modentity_num SET cur_id=? where cur_id=? and active=1 AND semodule=? and organization_id = ?", array($req_no, $curid, $module,$sourceCompany));
+			return decode_html($prev_inv_no);
+		}
+	}
+
+	// END
 	/* Function to check if module sequence numbering is configured for the given module or not */
-	function isModuleSequenceConfigured($module) {
+	/*function isModuleSequenceConfigured($module) {
 		$adb = PearDatabase::getInstance();
 		$result = $adb->pquery('SELECT 1 FROM vtiger_modentity_num WHERE semodule = ? AND active = 1', array($module));
 		if ($result && $adb->num_rows($result) > 0) {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
+	/* Function to check if module sequence numbering is configured for the given module or not */
+	function isModuleSequenceConfigured($module,$company) {
+		$adb = PearDatabase::getInstance();
+		//added Payments module in array by jitu@SERREQ2369
+		if($company != 1 && in_array($module,array('Quotes','SalesOrder','PurchaseOrder','Invoice','Payments'))) {
+			$result = $adb->pquery('SELECT 1 FROM vtiger_modentity_num WHERE semodule = ? AND active = 1 AND organization_id = ?', array($module,$company));
+		}
+		if ($result && $adb->num_rows($result) > 0) {
+			return true;
+		}
+		return false;
+	}
+	
 	/* Function to get the next module sequence number for a given module */
 
-	function getModuleSeqInfo($module) {
+	/*function getModuleSeqInfo($module) {
 		global $adb;
 		$check = $adb->pquery("select cur_id,prefix from vtiger_modentity_num where semodule=? and active = 1", array($module));
 		$prefix = $adb->query_result($check, 0, 'prefix');
 		$curid = $adb->query_result($check, 0, 'cur_id');
 		return array($prefix, $curid);
-	}
+	}*/
+
 
 	// END
+	/* Function to get the next module sequence number for a given module */
+	//Edit by jitu@secondcrm.com for Multiple Company Numbering
+	function getModuleSeqInfo($module,$sourceCompany=1) {
+		global $adb;
+		//edit jitu multiple company for Multiple Company Numbering
+		$check = $adb->pquery("select cur_id,prefix from vtiger_modentity_num where semodule=? and organization_id=? and active = 1", array($module,$sourceCompany));
+		$prefix = $adb->query_result($check, 0, 'prefix');
+		$curid = $adb->query_result($check, 0, 'cur_id');
+		
+		if(empty($prefix) && empty($curid)){
+			$check1 = $adb->pquery("select cur_id,prefix from vtiger_modentity_num where semodule=? and organization_id=1 and active = 1", array($module));
+			$prefix = $adb->query_result($check1, 0, 'prefix');
+			$curid = $adb->query_result($check1, 0, 'cur_id');
+		
+		}
+		return array($prefix, $curid);
+	}
+
 
 	/* Function to check if the mod number already exits */
 	function checkModuleSeqNumber($table, $column, $no) {
@@ -1578,7 +1676,7 @@ class CRMEntity {
 
 	// END
 
-	function updateMissingSeqNumber($module) {
+	/*function updateMissingSeqNumber($module) {
 		global $log, $adb;
 		$log->debug("Entered updateMissingSeqNumber function");
 
@@ -1627,7 +1725,64 @@ class CRMEntity {
 			}
 		}
 		return $returninfo;
+	}*/
+
+	/**Updated By Jitu on 22 Sep 2014 for missing sequence number
+	* Pass the argument in function $sourceCompany with default value 1
+	* $modseqinfo = $this->getModuleSeqInfo($module,$sourceCompany);
+	* $adb->pquery("UPDATE vtiger_modentity_num set cur_id=? where semodule=? and active=1 AND organization_id = ?", Array($cur_id, $module,$sourceCompany));	
+	*/
+	function updateMissingSeqNumber($module,$sourceCompany=1) {		
+        global $log, $adb;
+		$log->debug("Entered updateMissingSeqNumber function");
+
+		vtlib_setup_modulevars($module, $this);
+
+		//if (!$this->isModuleSequenceConfigured($module,$sourceCompany))
+		//	return;
+
+		$tabid = getTabid($module);
+		$fieldinfo = $adb->pquery("SELECT * FROM vtiger_field WHERE tabid = ? AND uitype = 4", Array($tabid));
+
+		$returninfo = Array();
+
+		if ($fieldinfo && $adb->num_rows($fieldinfo)) {
+			// TODO: We assume the following for module sequencing field
+			// 1. There will be only field per module
+			// 2. This field is linked to module base table column
+			$fld_table = $adb->query_result($fieldinfo, 0, 'tablename');
+			$fld_column = $adb->query_result($fieldinfo, 0, 'columnname');
+
+			if ($fld_table == $this->table_name) {
+				$records = $adb->query("SELECT $this->table_index AS recordid FROM $this->table_name " .
+						"WHERE $fld_column = '' OR $fld_column is NULL");
+
+				if ($records && $adb->num_rows($records)) {
+					$returninfo['totalrecords'] = $adb->num_rows($records);
+					$returninfo['updatedrecords'] = 0;
+
+					$modseqinfo = $this->getModuleSeqInfo($module,$sourceCompany); //Updated By Jitu
+					$prefix = $modseqinfo[0];
+					$cur_id = $modseqinfo[1];
+
+					$old_cur_id = $cur_id;
+					while ($recordinfo = $adb->fetch_array($records)) {
+						$value = "$prefix" . "$cur_id";
+						$adb->pquery("UPDATE $fld_table SET $fld_column = ? WHERE $this->table_index = ?", Array($value, $recordinfo['recordid']));
+						$cur_id += 1;
+						$returninfo['updatedrecords'] = $returninfo['updatedrecords'] + 1;
+					}
+					if ($old_cur_id != $cur_id) {
+						$adb->pquery("UPDATE vtiger_modentity_num set cur_id=? where semodule=? and active=1 AND organization_id = ?", Array($cur_id, $module,$sourceCompany));
+					}
+				}
+			} else {
+				$log->fatal("Updating Missing Sequence Number FAILED! REASON: Field table and module table mismatching.");
+			}
+		}
+		return $returninfo;
 	}
+
 
 	/* Generic function to get attachments in the related list of a given module */
 
