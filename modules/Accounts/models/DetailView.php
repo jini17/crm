@@ -93,21 +93,6 @@ class Accounts_DetailView_Model extends Vtiger_DetailView_Model {
 			$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($basicLink);
 		}
 
-
-        /**
-         ** Added by Danial Enrich Contact 09/04/2018
-         **/
-
-        $basicActionLinkEnrich = array(
-            'linktype' => 'DETAILVIEWBASIC',
-            'linklabel' => 'LBL_ENRICH_CONTACT',
-            'linkurl' => 'javascript:Vtiger_Detail_Js.triggerTransferOwnership("'.$recordModel->getEnrichUrl().'",this);',
-            'linkicon' => ''
-        );
-
-        $linkModelList['DETAILVIEWBASIC'][] = Vtiger_Link_Model::getInstanceFromValues($basicActionLinkEnrich);
-
-
-        return $linkModelList;
+		return $linkModelList;
 	}
 }

@@ -55,16 +55,4 @@ class Contacts_Record_Model extends Vtiger_Record_Model {
 		);
 	}
 
-
-    /**
-     * Function returns the url for to enrich the lead
-     * Added By Danial for Lead Enrichment 09/04/2018
-     */
-
-    function getEnrichUrl() {
-
-
-        return 'index.php?module='.$this->getModuleName().'&action=EnrichContact&record='.$this->getId();
-    }
-
 }
