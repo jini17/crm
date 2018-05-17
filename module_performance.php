@@ -1,10 +1,36 @@
 <?php
+
+error_reporting(1);
+		ini_set('display_erros',1);
+		 
+		  register_shutdown_function('handleErrors');       
+		    function handleErrors() { 
+			 
+		       $last_error = error_get_last(); 
+		     	
+		       if (!is_null($last_error)) { // if there has been an error at some point 
+		     
+			  // do something with the error 
+			  print_r($last_error); 
+		     
+		       } 
+		     
+		    }
+
+
 include_once('vtlib/Vtiger/Menu.php');
 include_once('vtlib/Vtiger/Module.php');
+include_once('vtlib/Vtiger/Package.php');
+include_once 'includes/main/WebUI.php';
+include_once 'include/Webservices/Utils.php';
 // Turn on debugging level
 $Vtiger_Utils_Log = true;
 
 $MODULENAME = 'Performance';
+
+
+global $adb;
+$adb->setDebug(true);
 
 // Create module instance and save it first
 $moduleInstance = Vtiger_Module::getInstance($MODULENAME);
@@ -13,7 +39,7 @@ $moduleInstance = Vtiger_Module::getInstance($MODULENAME);
 } else {*/
         $moduleInstance = new Vtiger_Module();
         $moduleInstance->name = $MODULENAME;
-        $moduleInstance->parent= 'SUPPORT';
+        $moduleInstance->parent= 'Support';
         $moduleInstance->save();
 
 	// Webservice Setup
@@ -44,48 +70,48 @@ $moduleInstance = Vtiger_Module::getInstance($MODULENAME);
 // $blockBillingInformation
 	/** Create required fields and add to the block */
 	$field1 = new Vtiger_Field();
-	$field1->name = 'Yearly Review';
+	$field1->name = 'yearly_review';
 	$field1->label = 'Yearly Review';
 	$field1->table = $moduleInstance->basetable;
-	$field1->column = 'year_rev';
+	$field1->column = 'yearly_review';
 	$field1->columntype = 'text';
 	$field1->uitype = 21;
-	$field1->typeofdata = 'V~M';
+	$field1->typeofdata = 'V~O';
 	$blockBillingInformation->addField($field1); /** Creates the field and adds to block */
 
 	// Set at-least one field to identifier of module record
-	$moduleInstance->setEntityIdentifier($field1);
+	//$moduleInstance->setEntityIdentifier($field1);
 
 	$field2 = new Vtiger_Field();
-	$field2->name = 'Quarterly Review';
+	$field2->name = 'quarterly_review';
 	$field2->label = 'Quarterly Review';
 	$field2->table = $moduleInstance->basetable;
-	$field2->column = 'quart_rev';
+	$field2->column = 'quarterly_review';
 	$field2->columntype = 'text';
 	$field2->uitype = 21;
-	$field2->typeofdata = 'V~M'; // varchar~Mandatory
+	$field2->typeofdata = 'V~O'; // varchar~Mandatory
 	$blockBillingInformation->addField($field2); /** table and column are automatically set */
 
 	$field3 = new Vtiger_Field();
-	$field3->name   =  'Upgrading Review';
+	$field3->name   =  'upgrading_review';
 	$field3->label  = 'Upgrading Review';
 	$field3->table  =  $moduleInstance->basetable;
-	$field3->column = 'upgrade_rev';
+	$field3->column = 'upgrading_review';
 	$field3->columntype = 'text';
 	$field3->uitype	= 21;
-	$field3->typeofdata = 'V~M'; // varchar~Mandatory
+	$field3->typeofdata = 'V~O'; // varchar~Mandatory
 	$blockBillingInformation->addField($field3); /** table, column, label, set to default values */
 	
 	/** Common fields that should be in every module,
 	 	linked to vtiger CRM core table
 	*/
 	$field4 = new Vtiger_Field();
-	$field4->name = 'Merit Review';
+	$field4->name = 'merit_review';
 	$field4->label = 'Merit Review';
 	$field4->table = $moduleInstance->basetable;
-	$field4->column = 'merit_rev';
+	$field4->column = 'merit_review';
 	$field4->uitype = 21;
-	$field4->typeofdata = 'V~M';
+	$field4->typeofdata = 'V~O';
 	$blockBillingInformation->addField($field4);
 	/*********************END FOR PERFORMANCE REVIEW REPORT BLOCK***********************/
 
@@ -122,49 +148,49 @@ $moduleInstance = Vtiger_Module::getInstance($MODULENAME);
 //$blockRemarksInformation
 	/** Create required fields and add to the block */
 	$field7 = new Vtiger_Field();
-	$field7->name = 'Work Competency';
+	$field7->name = 'work_competency';
 	$field7->label = 'Work Competency';
-	$field7->table = $module->basetable;
-	$field7->column = 'Work_Competency';
+	$field7->table = $moduleInstance->basetable;
+	$field7->column = 'work_competency';
 	$field7->columntype = 'VARCHAR(255)';
 	$field7->uitype = 15;
-	$field7->typeofdata = 'V~M';
+	$field7->typeofdata = 'V~O';
 	$field7->setPicklistValues( Array ('1', '2','3','3','4','5','6','7','8','9','10') );
 	$blockRemarksInformation->addField($field7); /** Creates the field and adds to block */
 
 	/** Create required fields and add to the block */
 	$field8 = new Vtiger_Field();
-	$field8->name = 'Communication';
+	$field8->name = 'communication';
 	$field8->label = 'Communication';
-	$field8->table = $module->basetable;
+	$field8->table = $moduleInstance->basetable;
 	$field8->column = 'communication';
 	$field8->columntype = 'VARCHAR(255)';
 	$field8->uitype = 15;
-	$field8->typeofdata = 'V~M';
+	$field8->typeofdata = 'V~O';
 	$field8->setPicklistValues( Array ('1', '2','3','3','4','5','6','7','8','9','10') );
 	$blockRemarksInformation->addField($field8); /** Creates the field and adds to block */
 
 	/** Create required fields and add to the block */
 	$field9 = new Vtiger_Field();
-	$field9->name = 'duedate';
+	$field9->name = 'responsibility';
 	$field9->label = 'Responsibility';
-	$field9->table = $module->basetable;
+	$field9->table = $moduleInstance->basetable;
 	$field9->column = 'responsibility';
 	$field9->columntype = 'VARCHAR(255)';
 	$field9->uitype = 15;
-	$field9->typeofdata = 'V~M';
+	$field9->typeofdata = 'V~O';
 	$field9->setPicklistValues( Array ('1', '2','3','3','4','5','6','7','8','9','10') );
 	$blockRemarksInformation->addField($field9); /** Creates the field and adds to block */
 
 	/** Create required fields and add to the block */
 	$field10 = new Vtiger_Field();
-	$field10->name = 'Attitude';
+	$field10->name = 'attitude';
 	$field10->label = 'Attitude';
-	$field10->table = $module->basetable;
+	$field10->table = $moduleInstance->basetable;
 	$field10->column = 'attitude';
 	$field10->columntype = 'VARCHAR(255)';
 	$field10->uitype = 15;
-	$field10->typeofdata = 'V~M';
+	$field10->typeofdata = 'V~O';
 	$field10->setPicklistValues( Array ('1', '2','3','3','4','5','6','7','8','9','10') );
 	$blockRemarksInformation->addField($field10); /** Creates the field and adds to block */
 
@@ -172,11 +198,11 @@ $moduleInstance = Vtiger_Module::getInstance($MODULENAME);
 	$field11 = new Vtiger_Field();
 	$field11->name = 'teamwork';
 	$field11->label = 'Team Work';
-	$field11->table = $module->basetable;
+	$field11->table = $moduleInstance->basetable;
 	$field11->column = 'teamwork';
 	$field11->columntype = 'VARCHAR(255)';
 	$field11->uitype = 15;
-	$field11->typeofdata = 'V~M';
+	$field11->typeofdata = 'V~O';
 	$field10->setPicklistValues( Array ('1', '2','3','3','4','5','6','7','8','9','10') );
 	$blockRemarksInformation->addField($field11); /** Creates the field and adds to block */
 /********************************************END FOR SECOND BLOCK************************************/
@@ -190,15 +216,17 @@ $moduleInstance = Vtiger_Module::getInstance($MODULENAME);
 			$field4->table = 'vtiger_crmentity';
 			$field4->column = 'smownerid';
 			$field4->uitype = 53;
-			$field4->typeofdata = 'V~M';
+			$field4->typeofdata = 'V~O';
 			$blockperformancerating->addField($field4);
+
+			
 
     /** Create required fields and add to the block */
 	$field13 = new Vtiger_Field();
-	$field13->name = 'employeeRemarks';
+	$field13->name = 'employee_remarks';
 	$field13->label = 'Employee Remarks:';
-	$field13->table = $module->basetable;
-	$field13->column = 'employeeRemarks';
+	$field13->table = $moduleInstance->basetable;
+	$field13->column = 'employee_remarks';
 	$field13->columntype = 'text';
 	$field13->uitype =  	21;
 	$field13->typeofdata = 'V~O';
@@ -206,10 +234,10 @@ $moduleInstance = Vtiger_Module::getInstance($MODULENAME);
 
         	/** Create required fields and add to the block */
 	$field14 = new Vtiger_Field();
-	$field14->name = 'SuperiorRemarks';
+	$field14->name = 'superior_remarks';
 	$field14->label = 'Superior Remarks:';
-	$field14->table = $module->basetable;
-	$field14->column = 'SuperiorRemarks';
+	$field14->table = $moduleInstance->basetable;
+	$field14->column = 'superior_remarks';
 	$field14->columntype = 'text';
 	$field14->uitype = 21;
 	$field14->typeofdata = 'V~O';
@@ -218,13 +246,13 @@ $moduleInstance = Vtiger_Module::getInstance($MODULENAME);
 
         /** Create required fields and add to the block */
 	$field15 = new Vtiger_Field();
-	$field15->name = 'dateReviewed';
+	$field15->name = 'date_reviewed';
 	$field15->label = 'Date Reviewed :';
-	$field15->table = $module->basetable;
-	$field15->column = 'dateReviewed';
-	$field15->columntype = 'VARCHAR(255)';
-	$field15->uitype = 21;
-	$field15->typeofdata = 'V~O';
+	$field15->table = $moduleInstance->basetable;
+	$field15->column = 'date_reviewed';
+	$field15->columntype = 'DATE';
+	$field15->uitype = 5;
+	$field15->typeofdata = 'D~O';
 	$blockperformancerating->addField($field15); /** Creates the field and adds to block */
 
 		
@@ -379,10 +407,23 @@ $moduleInstance = Vtiger_Module::getInstance($MODULENAME);
 	// Add fields to the filter created
 	$filter1->addField($field1)->addField($field2, 1)->addField($field3, 2);
 	
-	// Create one more filter
-	$filter2 = new Vtiger_Filter();
-	$filter2->name = 'All2';
-	$moduleInstance->addFilter($filter2);
+	$moduleInstance->setDefaultSharing();
+
+	// Enable and Disable available tools
+	$moduleInstance->enableTools(Array('Import', 'Export', 'Merge'));
+
+	// Initialize Webservice support
+	$moduleInstance->initWebservice();
+
+	// Create files
+	createFiles($moduleInstance, $field1);
+
+	// Link to menu
+	Settings_MenuEditor_Module_Model::addModuleToApp($moduleInstance->name, $moduleInstance->parent);
+
+	echo "Module is created";
+
+
 
 	/*// Add fields to the filter
 	$filter2->addField($field1);
@@ -391,19 +432,46 @@ $moduleInstance = Vtiger_Module::getInstance($MODULENAME);
 	$filter2->addRule($field1, 'CONTAINS', 'Test');
 */
 	/** Enable and Disable available tools */
-	$moduleInstance->enableTools(Array('Import', 'Export'));
-	$moduleInstance->disableTools('Merge');
-
+	
 	/*//Dependent Module
 	$accList = Vtiger_Module::getInstance('SUPPORT');
 	$accList->setRelatedList(Vtiger_Module::getInstance('Bills'), 'Bills',Array('ADD'),'get_dependents_list');
 	*/
 	//$moduleInstance->addLink('DETAILVIEWBASIC', 'LBL_SURVEY_REPORT', 'index.php?module=Survey&view=result&record=$RECORD$');
 
-	$moduleInstance->setDefaultSharing();
+	
 	//mkdir('modules/'.$MODULENAME);
 	//chmod('modules/'.$MODULENAME,0777);
         echo "OK\n";
 	//$moduleInstance=null;
+
+	function createFiles(Vtiger_Module $module, Vtiger_Field $entityField) {
+
+		$targetpath = 'modules/' . $module->name;
+
+		if (!is_file($targetpath)) {
+			mkdir($targetpath);
+			mkdir($targetpath . '/language');
+
+			$templatepath = 'vtlib/ModuleDir/6.0.0';
+
+			$moduleFileContents = file_get_contents($templatepath . '/ModuleName.php');
+			$replacevars = array(
+				'ModuleName'   => $module->name,
+				'<modulename>' => strtolower($module->name),
+				'<entityfieldlabel>' => $entityField->label,
+				'<entitycolumn>' => $entityField->column,
+				'<entityfieldname>' => $entityField->name,
+			);
+
+			foreach ($replacevars as $key => $value) {
+				$moduleFileContents = str_replace($key, $value, $moduleFileContents);
+			}
+			file_put_contents($targetpath.'/'.$module->name.'.php', $moduleFileContents);
+		}
+	}
+
+
+
 //}
 ?>

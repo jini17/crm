@@ -32,6 +32,20 @@ class Settings_Currency_Module_Model extends Settings_Vtiger_Module_Model{
     public static function tranformCurrency($oldCurrencyId, $newCurrencyId) {
         return transferCurrency($oldCurrencyId,$newCurrencyId);
     }
+
+    /****   ADDED FOR SEQUENCE OF CURRENCY LIST By Farhan  ******/
+    public function updateSequence($sequencesList) {
+        $db = PearDatabase::getInstance();
+
+        $updateQuery = "UPDATE vtiger_currency_info SET sequence = CASE";
+
+        foreach ($sequencesList as $sequence => $recordId) {
+            $updateQuery .= " WHEN id = $recordId THEN $sequence ";
+        }
+        $updateQuery .= " END";
+        $db->pquery($updateQuery, array());
+    }
+    /****  END  *****/
     
     public static function delete($recordId) {
         $db = PearDatabase::getInstance();

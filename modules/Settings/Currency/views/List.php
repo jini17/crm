@@ -10,6 +10,34 @@
 
 class Settings_Currency_List_View extends Settings_Vtiger_List_View {
 
+
+	/******* added for list the currency order by  sequence *********/
+	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {	
+		$moduleName = $request->getModule();
+		$qualifiedModuleName = $request->getModule(false);
+
+		$listViewModel = Settings_Vtiger_ListView_Model::getInstance($qualifiedModuleName);
+		$listViewModel->set('orderby', 'sequence');		 
+
+		$pagingModel = new Vtiger_Paging_Model();
+
+		if(!$this->listViewHeaders){
+			$this->listViewHeaders = $listViewModel->getListViewHeaders();
+		}
+		if(!$this->listViewEntries){
+			$this->listViewEntries = $listViewModel->getListViewEntries($pagingModel);
+		}
+
+		$viewer->assign('MODULE', $moduleName);
+		$viewer->assign('QUALIFIED_MODULE', $qualifiedModuleName);
+		$viewer->assign('MODULE_MODEL', $listViewModel->getModule());
+		$viewer->assign('PAGING_MODEL', $pagingModel);
+		$viewer->assign('LISTVIEW_HEADERS', $this->listViewHeaders);
+		$viewer->assign('LISTVIEW_ENTRIES', $this->listViewEntries);
+		$viewer->assign('CURRENT_USER_MODEL', Users_Record_Model::getCurrentUserModel());
+	}
+	/**** end  ****/
+
 	function getHeaderScripts(Vtiger_Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 

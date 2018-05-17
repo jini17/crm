@@ -127,9 +127,10 @@ include_once 'include/Webservices/Utils.php';
 	$field6->label= 'Area of Study ';
 	$field6->table = $module->basetable;
 	$field6->column = 'area_of_study';
-	$field6->uitype = 16;
+	$field6->uitype = 15;
 	$field6->typeofdata = 'V~M';
 	$field6->iscustom	= 0;
+	$field6->setPicklistValues( Array ('Chemistry', 'Physics') );
 	$blockEducation->addField($field6);
 
 	/** Create required fields and add to the block */

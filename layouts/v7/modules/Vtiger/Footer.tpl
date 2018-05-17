@@ -8,10 +8,9 @@
 ************************************************************************************}
 
 <footer class="app-footer">
-	<p>
-		Powered by vtiger CRM - {$VTIGER_VERSION}&nbsp;&nbsp;© 2004 - {date('Y')}&nbsp;&nbsp;
-		<a href="//www.vtiger.com" target="_blank">Vtiger</a>&nbsp;|&nbsp;
-		<a href="https://www.vtiger.com/privacy-policy" target="_blank">Privacy Policy</a>
+	<p>Agiliux Version 6.0 © {date('Y')} 
+		<a href="http://www.secondcrm.com/" target="_blank">Soft Solvers Solutions.</a>
+ 		All rights reserved
 	</p>
 </footer>
 </div>
