@@ -3,11 +3,11 @@
  * Created by PhpStorm.
  * User: root
  * Date: 5/18/18
- * Time: 12:21 PM
+ * Time: 6:14 PM
  */
 
 
-class Settings_Vtiger_LeaveTypeListView_View extends Settings_Vtiger_Index_View {
+class Settings_Vtiger_BenefitTypeListView_View extends Settings_Vtiger_Index_View {
 
     public function process(Vtiger_Request $request) {
         $qualifiedName = $request->getModule(false);
