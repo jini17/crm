@@ -111,16 +111,7 @@ $adb->setDebug(true);
 	$field7->typeofdata = 'V~O'; // varchar~Mandatory
 	$block->addField($field7); /** table, column, label, set to default values */
 
-	$field8 = new Vtiger_Field();
-	$field8->name   =  'claim_status';
-	$field8->label  = 'Claim Status';
-	$field8->table  =  $module->basetable;
-	$field8->column = 'claim_status';
-	$field8->columntype = 'VARCHAR(50)';
-	$field8->uitype	= 56;
-	$field8->typeofdata = 'V~O'; // varchar~Mandatory
-	$block->addField($field8); /** table, column, label, set to default values */
-	
+
 	$field9 = new Vtiger_Field();
 	$field9->name   =  'claim_description';
 	$field9->label  = 'Description';

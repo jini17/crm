@@ -7,8 +7,13 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-Vtiger.Class("Users_Project_Js",{},{
+Vtiger.Class("Users_Project_Js", {
 		
+	//register click event for Add New Education button
+	addProject : function(url) { 
+	     this.editProject(url);
+	    
+	},	
 	editProject : function(url, currentTrElement) {
 		var aDeferred = jQuery.Deferred();
 		var thisInstance = this;
@@ -137,44 +142,13 @@ textAreaLimitChar : function(){
 			  	}
 			});
 	},
-
-
-
-
-/*
- * Function to register all actions in the project List
- */
-registerActions : function() {
-	var thisInstance = this;
-	var container = jQuery('#UserProjectContainer');
-	//register click event for Add New project button
-	container.find('.addProject').click(function(e) {
-		var addProjectButton = jQuery(e.currentTarget);
-		var createProjectUrl = addProjectButton.data('url');
-		thisInstance.editProject(createProjectUrl);
-	});
-		
-	//register event for edit project icon
-	container.on('click', '.editProject', function(e) {
-		var editProjectButton = jQuery(e.currentTarget);
-		var currentTrElement = editProjectButton.closest('tr');
-		thisInstance.editProject(editProjectButton.data('url'), currentTrElement);
-	});
+},{
+	//constructor
+	init : function() {
+		Users_Education_Js.eduInstance = this;
+	},
 	
-	//register event for delete project icon
-	container.on('click', '.deleteProject', function(e) { ;
-		var deleteProjectButton = jQuery(e.currentTarget);
-		var currentTrElement = deleteProjectButton.closest('tr');
-		thisInstance.deleteProject(deleteProjectButton.data('url'), currentTrElement);
-	});	
-},
-
 registerEvents: function() {
 	this.registerActions();
 	}
 });
-
-jQuery(document).ready(function(e){ 
-	var projectinstance = new Users_Project_Js();
-	projectinstance.registerEvents();
-})

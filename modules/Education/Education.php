@@ -38,45 +38,45 @@ class Education extends Vtiger_CRMEntity {
 	var $list_fields = Array (
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Institution Name' => Array('education', 'Institution_name'),
+		'Institution Name' => Array('education', 'institution_name'),
 		'Assigned To' => Array('crmentity','smownerid')
 	);
 	var $list_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'Institution Name' => 'Institution_name',
+		'Institution Name' => 'institution_name',
 		'Assigned To' => 'assigned_user_id',
 	);
 
 	// Make the field link to detail view
-	var $list_link_field = 'Institution_name';
+	var $list_link_field = 'institution_name';
 
 	// For Popup listview and UI type support
 	var $search_fields = Array(
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Institution Name' => Array('education', 'Institution_name'),
+		'Institution Name' => Array('education', 'institution_name'),
 		'Assigned To' => Array('vtiger_crmentity','assigned_user_id'),
 	);
 	var $search_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'Institution Name' => 'Institution_name',
+		'Institution Name' => 'institution_name',
 		'Assigned To' => 'assigned_user_id',
 	);
 
 	// For Popup window record selection
-	var $popup_fields = Array ('Institution_name');
+	var $popup_fields = Array ('institution_name');
 
 	// For Alphabetical search
-	var $def_basicsearch_col = 'Institution_name';
+	var $def_basicsearch_col = 'institution_name';
 
 	// Column value to use on detail view record text display
-	var $def_detailview_recname = 'Institution_name';
+	var $def_detailview_recname = 'institution_name';
 
 	// Used when enabling/disabling the mandatory fields for the module.
 	// Refers to vtiger_field.fieldname values.
-	var $mandatory_fields = Array('Institution_name','assigned_user_id');
+	var $mandatory_fields = Array('institution_name','assigned_user_id');
 
-	var $default_order_by = 'Institution_name';
+	var $default_order_by = 'institution_name';
 	var $default_sort_order='ASC';
 
 	/**

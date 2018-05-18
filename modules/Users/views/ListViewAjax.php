@@ -279,7 +279,8 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$jsFileNames = array(
 			'modules.Vtiger.resources.List',
 			'modules.Users.resources.Leave',
-			'modules.Users.resources.UsersEducation',
+			'modules.Users.resources.Education',
+			'modules.Users.resources.WorkExp',
 		);
 
 		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);

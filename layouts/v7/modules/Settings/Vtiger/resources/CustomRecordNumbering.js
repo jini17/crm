@@ -82,6 +82,7 @@ Vtiger.Class('Settings_Vtiger_CustomRecordNumbering_Js', {}, {
 			'mode' : "saveModuleCustomNumberingData",
 			'sourceModule' : sourceModule,
 			'prefix' : currentPrefix,
+			'company' : 1,
 			'sequenceNumber' : sequenceNumber
 		}
         
@@ -108,6 +109,7 @@ Vtiger.Class('Settings_Vtiger_CustomRecordNumbering_Js', {}, {
             var sourceModuleLabel = editViewForm.find('option[value="'+sourceModule+'"]').text();
 			
 			params = {
+			     'company':1,
 				'module' : app.getModuleName(),
 				'parent' : app.getParentModuleName(),
 				'action' : "CustomRecordNumberingAjax",

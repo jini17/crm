@@ -9,15 +9,13 @@
  ********************************************************************************/
 -->*}
 {strip}
-
-<script src="layouts/v7/modules/Users/resources/Education.js"></script>
 <div id="UserEducationContainer">
 	<div class="contents row-fluid">
 		{assign var=CREATE_EDUCATION_URL value=$EDUCATION_RECORD_MODEL->getCreateEducationUrl()}
 		{assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}	
 		<div class="marginBottom10px">
-			<a id="menubar_quickCreate_Education" class="quickCreateModule" data-name="Education" data-url="index.php?module=Education&view=QuickCreateAjax" href="javascript:void(0)">Add Education</a>
-			<!--<button type="button" class="addEducation btn addButton" data-url="{$CREATE_EDUCATION_URL}&userId={$USERID}" id="clickme"><i class="icon-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_EDUCATION', $MODULE)}</strong></button>-->
+			<!--<a id="menubar_quickCreate_Education" class="quickCreateModule" data-name="Education" data-url="index.php?module=Education&view=QuickCreateAjax" href="javascript:void(0)">Add Education</a>-->
+			<button type="button" class="btn" onclick="Users_Education_Js.addEducation('{$CREATE_EDUCATION_URL}&userId={$USERID}');"><i class="icon-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_EDUCATION', $MODULE)}</strong></button>
 		</div>
 		<div class="listViewContentDiv" id="listViewContents">
 			<div class="contents-topscroll noprint">
