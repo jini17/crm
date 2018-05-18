@@ -1,0 +1,346 @@
+login-box {
+    background-color: #fff;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    border-radius: 4px;
+    text-align: left;
+    padding: 30px;
+    width: 450px;
+    height: 347px;
+    border: 1px solid #ddd;
+}
+
+div#listViewContents.listViewContentDiv{
+	padding: 20px;
+}
+#modulePickListValuesContainer .layoutContent .selectedCell, #modulePickListValuesContainer .layoutContent .selectedListItem {
+    background: #ccc;
+    white-space: nowrap;
+}
+.row-fluid.layoutContent.col-md-12{
+margin-top: 20px;
+}
+.custom-mod .selectedCell {
+    color: #333;
+}
+.padding1per {
+    padding: 0.5%;
+}
+[class^="icon-"], [class*=" icon-"] {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    vertical-align: text-top;
+    background-image: url(../img/glyphicons-halflings.png);
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+}
+.icon-info-sign {
+    background-position: -120px -96px;
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media screen and (min-device-width: 320px) and (max-device-width: 768px){
+    .span2.textAlRight {text-align: left;}
+}
+
+.textAlRight {
+    text-align: right ;
+}
+.table-bordered {
+    border: 1px solid #d3d3d3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background: #DFDFDF;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    color: #555;
+    cursor: default;
+    background-color: #dfdfdf;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+.alignMiddle {
+    vertical-align: middle;
+}
+@media screen and (min-device-width: 320px) and (max-device-width: 1510px){
+#uploadclogo{
+    width: 100%;
+}
+#uploadclogoalert{
+   width: 100%; 
+}
+}
+#uploadclogoalert{
+    margin-bottom: 15px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+@media screen and  (max-device-width: 1050px){
+#customlogalert{
+    font-size: 11px;
+}
+#edit-company-details-alert{
+	font-size: 9px;
+}
+
+}
+@media screen and (max-device-width: 1024px) {
+#customlogalert{
+    font-size: 11px;
+}
+#edit-company-details-alert{
+	font-size: 8.5px;
+}
+}
+
+@media screen and (max-device-width: 375px){
+#customlogalert {
+    font-size: 8px;
+}
+#edit-company-details-alert {
+    font-size: 6.3px;
+}
+}
+@media screen and (max-device-width: 320px){
+
+#customlogalert {
+    font-size: 7px;
+}
+}
+.ModalFooterContainer{
+    margin-top: 50px;
+}
+.form-horizontal .control-label {
+    float: left;
+    width: 140px;
+    padding-top: 5px;
+    text-align: right;
+}
+.control-group{
+	margin-bottom: 15px;
+}
+
+ .fieldValue.col-md-10>input, div.col-md-10>select.select2.inputElement,.controls.col-md-10 > select,.controls.col-md-10 > input,.controls.col-md-10 > textarea,.controls.col-md-10 > .select2-container.select2.col-md-10>a
+{	padding: 6px 8px !important;
+	width: 100%;
+}
+div.control-group{
+    font-size: 12px;
+}
+
+.small{
+	font-family: 'OpenSans-Regular', sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-kerning: normal;
+}
+.control-label{
+	text-align: right;
+        color: #333 !important;
+            opacity: 1.0 !important;
+}
+.row-fluid.widget_header{
+	margin-left: 10px;
+}
+@media screen and (max-device-width: 990px) {
+	.control-label{
+	text-align: left !important;
+}
+.col-md-2.x-label{
+ text-align: left !important;
+}
+}
+.contentArea{
+	padding:20px 30px;
+}
+select#companylist.row-fluid.company{
+	width: 100%;
+}
+
+#companylist>option{
+	padding: 10px;
+}
+#s2id_companylist{
+	width: 100%;
+}
+.col-md-2.x-label{
+ text-align: right;
+}
+
+div.companyLogo>img{
+    display: block;
+    max-width: 100%; 
+    height: auto;
+}
+
+.btnwhite {
+    border-radius: 0px;
+    font-weight: 100;
+    cursor: pointer;
+    background-color: #ffffff;
+    text-align: center;
+    border: 1px solid #cecece;
+}
+td.listViewRecordActions > div.table-actions{
+    text-align: center;
+    display: block;
+}
+.blockHeader th {
+    text-align: left !important;
+    color: #FFFFFF;
+}
+.listViewTopMenuDiv{
+    margin-left: 10px;
+}
+.dataTables_filter input{
+    height: 30px;
+    border-radius: 1px;
+    box-shadow: none;
+    border: 1px solid #cccccc;
+}
+.col-lg-5.fromSender > select {
+    width: 100%;
+    height: 30px;
+}
+
+.table{
+    padding:15px !important;
+}
+.select2-container .select2-choice{
+    font-size: 12px !important;
+}
+input[type=text] , input[type=search]{
+    padding: 6px 8px !important;
+}
+.labelmiddle{
+  vertical-align:middle !important;  
+}
+.marginRight10px {
+    margin-right: 12px !important;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    line-height: 1.4;
+    vertical-align: middle !important;
+    border-top: 1px solid #ddd;
+}
+
+#loginpagelogo img {
+    max-width: 100%;
+    height: 70px;
+}
+.login-area{
+    margin-top: 0 !important;
+}
+.login-area{
+    max-height: 445px;
+}
+.loginpagecontainer{
+    max-height: 445px;
+    height: 100%;
+}
+   
+#loginDiv{
+    height: 440px;
+    padding: 50px;
+}
+.module-title{
+    font-family: 'OpenSans-Regular', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    font-kerning: normal !important;
+    margin: 11px 0 !important;
+    float: left !important;
+    line-height: 18px !important;
+}
+div.gridtable {
+    border: 1px solid #DDDDDD;
+    padding: 10px;
+
+    }    
+label,.fieldLabel{
+    color: #000 !important;
+    font-weight: 700 !important;
+}   
+.blockHeader, .blockHeader label{
+    color: #fff !important;
+}
+.muted{
+    color: #000 !important;
+}
+#plan_filter input{
+    border: 0;
+    height: 30px;
+    width: 70%;
+    margin: 1px 0 1px 5px;
+    padding: 6px 8px !important;
+    border: 1px solid #DDDDDD;
+}
+#plan_filter label{
+    width: 456px;
+}
+#plan_filter{
+    padding: 0px 15px !important;
+}
+#userplantablesmall td{
+    padding: 8px 10px;}
+.coloredlink {
+    color: #15c !important;
+}
+button ,.btn {
+    font-weight:700 !important;
+}
+.newButton , .editButton,.btn-default , .resetButton , .addButton {
+    padding: 6px 12px;
+    margin: 4px 2px;
+    border-radius: 2px;
+    border: 1px solid #ddd;
+    color: #666;
+    background: #fff;
+    font-weight: 700;
+}
+.btn-primary{
+    padding: 6px 12px;
+    margin: 4px 2px;
+    border-radius: 2px;
+    font-weight: 700;
+}
+.btn-danger{
+     padding: 6px 12px;
+    margin: 4px 2px;
+}
+button:hover{
+        box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+#detailView{
+    height: 100% !important;
+}
+#fieldsize1 , #fieldsize2{
+    
+     color:#000 !important;
+  background-color:#fff !important;
+  -moz-appearance: none !important;
+  font-size: 14px !important;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 37px; // Increase height as required
+    margin-bottom: 30px;
+    padding: 0 20px !important; // Now only left & right padding
+}
+.table-bordered-white {
+    border: 1px solid #d3d3d3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background: #fff;
+}
+.glabel{
+    background: #DFDFDF;
+}

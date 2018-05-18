@@ -82,6 +82,7 @@ $languageStrings = array(
 	'LBL_TOOLS_HEADER' => 'TOOLS',
 	'LBL_SUPPORT' => 'SUPPORT',
 	'LBL_INVENTORY' => 'INVENTORY',
+	'LBL_FOUNDATION' => 'General',
 	'LBL_ANALYTICS' => 'ANALYTICS',
 	'LBL_CONTACT' => 'CONTACT MANAGEMENT',
 	'LBL_HOME' => 'Home',
@@ -1403,6 +1404,7 @@ $languageStrings = array(
 	'LBL_VIEW_UPDATES_IN_DETAIL' => 'Read More ...',
 	'LBL_DEFAULT_DASHBOARD_TOOLTIP'=>'Make this dashboard as default by reordering it as the first tab!',
 	'LBL_ALLOWED_IP'=>'IP Restriction',
+	'LBL_ADMIN'=>'Admin/Finance',
 );
 
 $jsLanguageStrings = array(
