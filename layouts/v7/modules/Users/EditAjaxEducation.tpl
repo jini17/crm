@@ -29,12 +29,14 @@
 		<div class="modal-body">
 			<!--start-->
 			<div class="row-fluid">
-                <div class="form-group">
-                	<div class="col-md-12">
-						<label class="control-label fieldLabel col-md-6">
-							<span class="redColor">*</span>&nbsp;{vtranslate('LBL_INSTITUTION_NAME', $QUALIFIED_MODULE)}
-						</label>
-						<div class="controls fieldValue col-md-6">
+                <div class="form-group" style="margin-bottom: 0px !important;">
+                	<div class="col-md-12" style="margin-bottom: 15px;">
+                		<div class="col-md-4">
+							<label class="control-label fieldLabel" style="text-align: right;float: right;">
+								<span class="redColor">*</span>&nbsp;{vtranslate('LBL_INSTITUTION_NAME', $QUALIFIED_MODULE)}
+							</label>
+						</div>
+						<div class="controls fieldValue col-md-8">
 							<select class="select2 inputElement" onchange="updateSelectBox('institution_name','institution_nametxt');" name="institution_name" id="institution_name" data-rule-required = "true">
 							{foreach key=INSTITUTION_ID item=INSTITUTION_MODEL from=$INSTITUTION_LIST name=institutionIterator}
 							<option value="{$INSTITUTION_MODEL.institution_id}" {if $EDUCATION_DETAIL.institution_id eq $INSTITUTION_MODEL.institution_id} selected {/if}>
@@ -45,38 +47,50 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-12">
-						<label class="control-label fieldLabel col-md-6"></label>
-						<div class="controls fieldValue col-md-6" align="right">
+					
+					<div class="col-md-12" style="margin-bottom: 15px;">
+						<div class="col-md-4">
+								<label class="control-label fieldLabel" style="text-align: right;float: right;"></label>
+						</div>
+
+						<div class="controls fieldValue col-md-8" align="right">
 							<span class="hide" id="institution_nametxt">
-								<input style="width:290px;" type="text" name="institutiontxt" id="institutiontxt" data-rule-required = "true" />
+								<input style="width:100%;" type="text" name="institutiontxt" id="institutiontxt" data-rule-required = "true" />
 							</span>
 						</div>
 					</div>
 				</div>
 		<!--end-->
-			<div class="form-group">
-				<label class="control-label"><span class="redColor">*</span>&nbsp;{vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)}</label>
-				<div class="controls date">
-					<input id="start_date" type="text" class="dateField" type="text" value="{$EDUCATION_DETAIL.start_date}" data-rule-required = "true" name="start_date" data-date-format="dd-mm-yyyy">	
-					<span class="add-on">&nbsp;<i class="icon-calendar"></i></span>		
+			<div class="form-group" style="margin-bottom: 0px !important;">
+				<div class="col-md-12" style="margin-bottom: 15px;">
+					<div class="col-md-4">
+						<label class="control-label" style="text-align: right;float: right;"><span class="redColor">*</span>&nbsp;{vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)}</label>
+					</div>
+					<div class="controls date col-md-8">
+						<input style="width: 100%;" id="start_date" type="text" class="dateField" type="text" value="{$EDUCATION_DETAIL.start_date}" data-rule-required = "true" name="start_date" data-date-format="dd-mm-yyyy">	
+						<span class="add-on">&nbsp;<i class="icon-calendar"></i></span>		
+					</div>
 				</div>
 			</div>
-			<div class="form-group">
-				<label class="control-label">&nbsp;{vtranslate('LBL_CURRENTLY_STUDYING', $QUALIFIED_MODULE)}</label>
-				<div class="controls">
-				   <input type="checkbox" class="currentstudying" name="chkstudying" id="chkstudying" {if $EDUCATION_DETAIL.is_studying eq 1} checked {/if}>
+			<div class="form-group" style="margin-bottom: 0px !important;">
+				<div class="col-md-12" style="margin-bottom: 15px;">
+					<div class="col-md-4">
+						<label class="control-label" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_CURRENTLY_STUDYING', $QUALIFIED_MODULE)}</label>
+					</div>
+					<div class="controls col-md-8">
+				  		<input type="checkbox" class="currentstudying" name="chkstudying" id="chkstudying" {if $EDUCATION_DETAIL.is_studying eq 1} checked {/if}>
+					</div>
 				</div>
 			</div>	
-			<div class="form-group {if $EDUCATION_DETAIL.is_studying eq 1} hide{/if}" id="enddate_div">
-				<label class="control-label">&nbsp;{vtranslate('LBL_END_DATE', $QUALIFIED_MODULE)}</label>
+			<div class="form-group {if $EDUCATION_DETAIL.is_studying eq 1} hide{/if}" id="enddate_div" style="margin-bottom: 0px !important;">
+				<label class="control-label" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_END_DATE', $QUALIFIED_MODULE)}</label>
 				<div class="controls row-fluid date">
 					<input id="end_date" type="text" class="dateField" type="text" value="{if $EDUCATION_DETAIL.end_date neq '00-00-0000'}{$EDUCATION_DETAIL.end_date}{/if}" data-rule-required = "true"  name="end_date" data-date-format="dd-mm-yyyy" >	
 					<span class="add-on">&nbsp;<i class="icon-calendar"></i></span>	
 				</div>
 			</div>
-			<div class="form-group">
-				<label class="control-label"><span class="redColor">*</span>&nbsp;{vtranslate('LBL_EDUCATION_LEVEL', $QUALIFIED_MODULE)}</label>
+			<div class="form-group" style="margin-bottom: 0px !important;">
+				<label class="control-label" style="text-align: right;float: right;"><span class="redColor">*</span>&nbsp;{vtranslate('LBL_EDUCATION_LEVEL', $QUALIFIED_MODULE)}</label>
 				<div class="controls fieldValue col-xs-6">
 					<select class="select2 inputElement" name="education_level" id="education_level" data-rule-required = "true">
 						<option {if $EDUCATION_DETAIL.education_level eq {vtranslate('LBL_ASSOCIATE_DEGREE', $QUALIFIED_MODULE)}} selected {/if} value="{vtranslate('LBL_ASSOCIATE_DEGREE', $QUALIFIED_MODULE)}">{vtranslate('LBL_ASSOCIATE_DEGREE', $QUALIFIED_MODULE)}</option>
@@ -91,8 +105,8 @@
 					</select>	
 				</div>
 			</div>		 	
-			<div class="form-group">
-				<label class="control-label"><span class="redColor">*</span>&nbsp;{vtranslate('LBL_AREA_OF_STUDY', $QUALIFIED_MODULE)}</label>
+			<div class="form-group" style="margin-bottom: 0px !important;">
+				<label class="control-label" style="text-align: right;float: right;"><span class="redColor">*</span>&nbsp;{vtranslate('LBL_AREA_OF_STUDY', $QUALIFIED_MODULE)}</label>
 				<div class="controls fieldValue col-xs-6">
 					<select class="select2 inputElement" onchange="updateSelectBox('areaofstudy','areaofstudytxt');" name="areaofstudy" id ="areaofstudy" data-rule-required = "true">	
 						{foreach key=MAJOR_ID item=MAJOR_MODEL from=$MAJOR_LIST name=majorIterator}
@@ -103,21 +117,21 @@
 						<option value="0">{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> 
 					</select>	
 				</div>
-				<label class="control-label"></label>
+				<label class="control-label" style="text-align: right;float: right;"></label>
 				<div class="controls">
 				<span class="hide" id="areaofstudytxt"><input type="text" name="majortxt" id="majortxt" data-rule-required = "true"/></span>
 				</div>
 			</div>
-			<div class="form-group">
-				<label class="control-label">&nbsp;{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)}</label>		
+			<div class="form-group" style="margin-bottom: 0px !important;">
+				<label class="control-label" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)}</label>		
 				<div class="controls">
 					<textarea style="width:300px!important" name="description" id="description" class="span11" maxlength="300" data-rule-required = "true" >{$EDUCATION_DETAIL.description}</textarea>	
 				</div>
-				<label class="control-label">&nbsp;</label>
+				<label class="control-label" style="text-align: right;float: right;">&nbsp;</label>
 				<div class="controls" id="charNum" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
 			</div>
-			<div class="form-group">
-				<label class="control-label">&nbsp;{vtranslate('LBL_WANT_TO_MAKE_PUBLIC', $QUALIFIED_MODULE)}</label>
+			<div class="form-group" style="margin-bottom: 0px !important;">
+				<label class="control-label" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_WANT_TO_MAKE_PUBLIC', $QUALIFIED_MODULE)}</label>
 				<div class="controls">
 					<input type="checkbox" {(''==$EDU_ID)?'checked':''} name="chkviewable" id="chkviewable" {if $EDUCATION_DETAIL.isview eq 1} checked {/if}>
 				</div>
