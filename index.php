@@ -9,7 +9,7 @@
  ************************************************************************************/
 
 
-
+/*
 error_reporting(1);
 		ini_set('display_erros',1);
 
@@ -25,7 +25,7 @@ error_reporting(1);
 
 		       }
 
-		    }
+		    }*/
 //Overrides GetRelatedList : used to get related query
 //TODO : Eliminate below hacking solution
 
