@@ -114,9 +114,16 @@ include_once 'include/Webservices/Utils.php';
 	$field7->table  =  $module->basetable;
 	$field7->column = 'job_grade';
 	$field7->columntype = 'VARCHAR(50)';
+<<<<<<< HEAD
 	$field7->uitype	= 2;
 	$field7->typeofdata = 'V~O'; // varchar~Mandatory
 	$block->addField($field7); /** table, column, label, set to default values */
+=======
+	$field7->uitype	= 10;
+	$field7->typeofdata = 'V~O'; // varchar~Mandatory
+	$block->addField($field7); /** table, column, label, set to default values */
+	$field7->setRelatedModules(Array('Grade'));
+>>>>>>> Development
 
 	$field8 = new Vtiger_Field();
 	$field8->name   =  'starting_sal';

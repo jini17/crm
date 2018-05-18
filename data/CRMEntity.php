@@ -27,7 +27,7 @@ require_once('include/utils/utils.php');
 require_once('include/utils/UserInfoUtil.php');
 require_once("include/Zend/Json.php");
 require_once 'include/RelatedListView.php';
-require_once 'testAPI/vendor/autoload.php';
+
 
 class CRMEntity {
 
@@ -158,6 +158,7 @@ class CRMEntity {
 	//Parameter $fileLocationType added By Mabruk for Google Drive Integration 27/03/2018 
 	
 	function uploadAndSaveFile($id, $module, $file_details, $attachmentType='Attachment',$fileLocationType=null) {
+		require_once 'testAPI/vendor/autoload.php';
 		global $log;
 		$log->debug("Entering into uploadAndSaveFile($id,$module,$file_details) method.");
 

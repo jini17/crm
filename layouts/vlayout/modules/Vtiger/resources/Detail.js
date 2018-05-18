@@ -101,6 +101,7 @@ jQuery.Class("Vtiger_Detail_Js",{
     },
 	
 	triggerTransferOwnership : function(massActionUrl){
+
 		var thisInstance = this;
 		thisInstance.getRelatedModulesContainer = false;
 		var actionParams = {
@@ -135,7 +136,11 @@ jQuery.Class("Vtiger_Detail_Js",{
 			}
 		);
 	},
-	
+
+
+
+
+
 	transferOwnershipSave : function (form){
 		var thisInstance = this;
 		var transferOwner = jQuery('#transferOwnerId').val();
