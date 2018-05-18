@@ -316,4 +316,14 @@ class Leads_Record_Model extends Vtiger_Record_Model {
         return false;
     }
 
+    /**
+     * @return string
+     * Added By Nirbhay to get the Enrich API details
+     */
+    function getEnrichUrl() {
+
+
+        return 'index.php?module='.$this->getModuleName().'&action=EnrichLead&record='.$this->getId();
+    }
+
 }

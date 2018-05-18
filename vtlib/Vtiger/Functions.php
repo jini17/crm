@@ -24,7 +24,7 @@ class Vtiger_Functions {
 	//Two Functions added: getClient() and createFolderInGoogleDrive()
 
 	static function getClient() {
-	require_once 'libraries/testAPI/vendor/autoload.php';
+	require_once 'testAPI/vendor/autoload.php';
 
 	 $client = new Google_Client();
 	 $client->setApplicationName('TEST');
