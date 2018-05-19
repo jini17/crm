@@ -72,8 +72,7 @@ Vtiger.Class("Users_Education_Js", {
 					var params = {
                             submitHandler : function(form){
                                 var form = jQuery('#editEducation');   
-//                                var form = jQuery(form);
-                                thisInstance.saveEducationDetails(form, currentTrElement);
+                                thisInstance.saveEducationDetails(form);
                             }
                         };
                          form.vtValidate(params)
@@ -90,42 +89,60 @@ Vtiger.Class("Users_Education_Js", {
 					'record' : userid,		
 					'mode'   : 'getUserEducation',
 				}
-				AppConnector.request(params).then(
-					function(data) {
-						$('#education').html(data);
+				app.request.post({'data':params}).then(
+					function(err, data) {
+						jQuery('#education').html(data);
 					},
 					
 					function(error,err){
 						aDeferred.reject();
 					}
 				);
-	},	
-     saveEducationDetails : function(){
+	},
+	
+	deleteEducation : function(deleteRecordActionUrl) { 
+		var message = app.vtranslate('JS_DELETE_EDUCATION_CONFIRMATION');
+		var thisInstance = this;
+		var userid = jQuery('#recordId').val();
+		app.helper.showConfirmationBox({'message' : message}).then(function(e) {
+		
+          	app.request.post({url:deleteRecordActionUrl}).then(
+          	     function(data){
+				      app.helper.showSuccessNotification({'message': 'Record deleted successfully'});
+				     //delete the Education details in the list
+				     thisInstance.updateEducationGrid(userid);
+			     }
+		     );
+	     });
+     },
+
+     saveEducationDetails : function(form){
+          var aDeferred = jQuery.Deferred();
+          app.helper.hideModal();
+          var thisInstance = this;
+          var userid = jQuery('#current_user_id').val();
+          app.helper.showProgress();
           var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
           var chkboxstudying = $('#chkstudying').is(':checked')?'1':'0';
-          var aparams = form.serializeFormData();
-               aparams.module = 'Education';
-               aparams.action = 'Save';
-               aparams.isview = chkboxval;
-               aparams.is_studying = chkboxstudying;		
-               AppConnector.request(aparams).then(
-               function(data) { 
+          var formData = form.serializeFormData();
+          var params = {
+				'module': 'Users',
+				'action': "SaveSubModuleAjax",
+				'mode'  : 'saveEducation',
+				'form' : formData,
+				'isview' : chkboxval,
+				'is_studying':chkboxstudying
+			};	
+				
+         app.request.post({'data': params}).then(function (err, data) {     
+              app.helper.hideProgress();
                //show notification after Education details saved
-               params = {
-                    text: data['result'],
-                    type: 'success'
-               };	
-               Vtiger_Helper_Js.showPnotify(params);
-               app.helper.hideProgress();
-
-               app.hideModalWindow();
-
+                app.helper.showSuccessNotification({'message': data});
                //Adding or update the Education details in the list
                thisInstance.updateEducationGrid(userid);
-
-
              }
           );
+           return aDeferred.promise();
      },	
 	
 },{

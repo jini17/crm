@@ -489,4 +489,11 @@ $jsLanguageStrings = array(
 	'JS_ENTERED_CURRENT_USERNAME_MSG' => 'You entered the current username. Please enter new username.',
 	'JS_NEW_ACCESS_KEY_REQUESTED' => 'New Access key requested',
 	'JS_CHANGE_ACCESS_KEY_CONFIRMATION' => 'You have requested for a new Access key.&lt;br&gt;&lt;br&gt;With the new Access key provision, you have to replace the old access key with the new one in all installed extensions.&lt;br&gt;&lt;br&gt;Do you want to continue?',
+	'JS_DELETE_PROJECT_CONFIRMATION'=>'Do you confirm to delete project',
+	'JS_DELETE_EDUCATION_CONFIRMATION'=>'Do you confirm to delete education',
+	'JS_DELETE_WORKEXP_CONFIRMATION' =>'Do you confirm to delete experience',
+	'JS_DELETE_LANG_CONFIRMATION' => 'Do you confirm to delete language',
+	'JS_DELETE_SKILL_CONFIRMATION' => 'Do you confirm to delete Skill',	
+	'JS_NO_MATCH_FOUND' => 'No match found. ',
+	'JS_ADD_NEW' => ' Add New',
 );

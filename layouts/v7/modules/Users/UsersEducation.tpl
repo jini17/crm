@@ -25,7 +25,7 @@
 			</div>
 			<div class="listViewEntriesDiv contents-bottomscroll">
 				<div class="bottomscroll-div">
-					<table class="table table-bordered listViewEntriesTable">
+					<table class="table">
 						<thead>
 							<tr>
 								<th nowrap><strong>{vtranslate('LBL_INSTITUTION_NAME', $MODULE)}</strong></td>
@@ -39,10 +39,10 @@
 						<tbody>
 							{foreach item=USER_EDUCATION from=$USER_EDUCATION_LIST}
 								<tr>
-									<td class="listTableRow small" valign=top>{$USER_EDUCATION['institution']}</td>
+									<td class="listTableRow small" valign=top>{$USER_EDUCATION['institution_name']}</td>
 									<td class="listTableRow small" valign=top>{$USER_EDUCATION['start_date']} {vtranslate('LBL_TO', $MODULE)} {if $USER_EDUCATION['is_studying'] eq '1'}{vtranslate('LBL_TILL_NOW', $MODULE)}{else}{$USER_EDUCATION['end_date']}{/if}</td>
 									<td class="listTableRow small" valign=top>{$USER_EDUCATION['education_level']}</td>
-									<td class="listTableRow small" valign=top>{$USER_EDUCATION['major']}</td>
+									<td class="listTableRow small" valign=top>{$USER_EDUCATION['area_of_study']}</td>
 									<td class="listTableRow small" valign=top>{$USER_EDUCATION['description']}</td>
 									<td class="listTableRow small" valign=top>
 										{('0'==$USER_EDUCATION['isview'])?{vtranslate('LBL_NO', $MODULE)}:{vtranslate('LBL_YES', $MODULE)}}
@@ -50,7 +50,7 @@
 									<td width="5%" class="listTableRow small" valign=top>
 										<div class="pull-right actions">
 											<span class="actionImages">
-												<a class="editEducation" data-url="{$CREATE_EDUCATION_URL}&record={$USER_EDUCATION['edu_id']}&userId={$USERID}"><i class="icon-pencil alignBottom" title="{vtranslate('LBL_EDIT', $MODULE)}"></i></a>&nbsp;&nbsp;<a class="deleteEducation cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=deleteEducation&record={$USER_EDUCATION['edu_id']}"><i class="icon-trash alignMiddle" title="Delete"></i></a>
+												<a class="editEducation" onclick="Users_Education_Js.editEducation('index.php{$CREATE_EDUCATION_URL}&record={$USER_EDUCATION['educationid']}&userId={$USERID}');"><i class="fa fa-edit alignBottom" title="{vtranslate('LBL_EDIT', $MODULE)}"></i></a>&nbsp;&nbsp;<a class="cursorPointer" onclick="Users_Education_Js.deleteEducation('index.php?module=Education&action=Delete&record={$USER_EDUCATION['educationid']}');"><i class="fa fa-trash alignMiddle" title="Delete"></i></a>
 											</span>
 										</div>
 									</td>

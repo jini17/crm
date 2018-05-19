@@ -41,10 +41,11 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$EducationModuleModel = Users_EduModule_Model::getInstance();
 
 		$eduUserModel	= Users_EduRecord_Model::getInstance();
+		$eduList = $eduUserModel->getUserEducationList($recordId);
 		$viewer->assign('EDUCATION_RECORD_MODEL',$EducationModuleModel);
 		$viewer->assign('USERID',$recordId);
 		$viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
-		$viewer->assign('USER_EDUCATION_LIST',$eduUserModel->getUserEducationList($recordId));
+		$viewer->assign('USER_EDUCATION_LIST',$eduList);
 
 		echo $viewer->view('UsersEducation.tpl',$moduleName,true);
 	}
