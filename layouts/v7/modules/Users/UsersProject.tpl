@@ -9,13 +9,12 @@
  ********************************************************************************/
 -->*}
 {strip}
-<script src="layouts/vlayout/modules/Users/resources/Project.js?v=6.1.0" type="text/javascript"></script>
 <div id="UserProjectContainer">
 	<div class="contents row-fluid">
 		{assign var=CREATE_PROJECT_URL value=$PROJECT_RECORD_MODEL->getCreateProjectUrl()}
 		{assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}	
 		<div class="marginBottom10px">
-			<button type="button" class="addProject btn addButton" data-url="{$CREATE_PROJECT_URL}&userId={$USERID}"><i class="icon-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_PROJECT', $MODULE)}</strong></button>
+			<button type="button" class="btn" onclick="Users_Project_Js.addProject('{$CREATE_PROJECT_URL}&userId={$USERID}');"><i class="icon-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_PROJECT', $MODULE)}</strong></button>
 		</div>
 		<div class="listViewContentDiv" id="listViewContents">
 			<div class="contents-topscroll noprint">

@@ -1,4 +1,28 @@
 <?php
+<<<<<<< HEAD
+include_once('vtlib/Vtiger/Menu.php');
+include_once('vtlib/Vtiger/Module.php');
+// Turn on debugging level
+$Vtiger_Utils_Log = true;
+
+$MODULENAME = 'Leave';
+
+// Create module instance and save it first
+$moduleInstance = Vtiger_Module::getInstance($MODULENAME);
+/*if ($moduleInstance || file_exists('modules/'.$MODULENAME)) {
+        echo $MODULENAME." Module already present - choose a different name.";
+} else {*/
+        $moduleInstance = new Vtiger_Module();
+        $moduleInstance->name = $MODULENAME;
+        $moduleInstance->parent= 'Sales';
+        $moduleInstance->save();
+
+	// Webservice Setup
+	$moduleInstance->initWebservice();
+	
+	// Schema Setup
+    $moduleInstance->initTables();
+=======
 
 /** Create New Vtlib script for module Creation
   * created : 22 Feb 2018
@@ -49,35 +73,61 @@ global $adb;
     $module->save();
 
     $module->initTables();
+>>>>>>> Development
 
 	// Add the basic module block
 	$leaveInformation = new Vtiger_Block();
 	$leaveInformation->label = 'Leave Information';
+<<<<<<< HEAD
+	$moduleInstance->addBlock($leaveInformation);
+	
+	$approvalInformation = new Vtiger_Block();
+	$approvalInformation->label = 'Approval Information';
+	$moduleInstance->addBlock($approvalInformation);
+
+	
+=======
 	$module->addBlock($leaveInformation);
 	
 	$approvalInformation = new Vtiger_Block();
 	$approvalInformation->label = 'Approval Information';
 	$module->addBlock($approvalInformation);
 
+>>>>>>> Development
 	/** Create required fields and add to the block */
 	$field1 = new Vtiger_Field();
 	$field1->name = 'leaveno';
 	$field1->label = 'Leave No';
+<<<<<<< HEAD
+	$field1->table = $moduleInstance->basetable;
+	$field1->column = 'leaveno';
+	$field1->columntype = 'VARCHAR(255)';
+	$field1->uitype = 2;
+=======
 	$field1->table = $module->basetable;
 	$field1->column = 'leaveno';
 	$field1->columntype = 'VARCHAR(255)';
 	$field1->uitype = 4;
+>>>>>>> Development
 	$field1->typeofdata = 'V~M';
 	$leaveInformation->addField($field1); /** Creates the field and adds to block */
 
 	// Set at-least one field to identifier of module record
+<<<<<<< HEAD
+	$moduleInstance->setEntityIdentifier($field1);
+=======
 	$module->setEntityIdentifier($field1);
+>>>>>>> Development
 
 	/** Create required fields and add to the block */
 	$field2 = new Vtiger_Field();
 	$field2->name = 'leavetype';
 	$field2->label = 'Leave Type';
+<<<<<<< HEAD
+	$field2->table = $moduleInstance->basetable;
+=======
 	$field2->table = $module->basetable;
+>>>>>>> Development
 	$field2->column = 'leavetype';
 	$field2->columntype = 'VARCHAR(255)';
 	$field2->uitype = 2;
@@ -88,7 +138,11 @@ global $adb;
 	$field3 = new Vtiger_Field();
 	$field3->name = 'fromdate';
 	$field3->label = 'From Date';
+<<<<<<< HEAD
+	$field3->table = $moduleInstance->basetable;
+=======
 	$field3->table = $module->basetable;
+>>>>>>> Development
 	$field3->column = 'fromdate';
 	$field3->columntype = 'DATE';
 	$field3->uitype = 5;
@@ -99,7 +153,11 @@ global $adb;
 	$field4 = new Vtiger_Field();
 	$field4->name = 'todate';
 	$field4->label = 'To Date';
+<<<<<<< HEAD
+	$field4->table = $moduleInstance->basetable;
+=======
 	$field4->table = $module->basetable;
+>>>>>>> Development
 	$field4->column = 'todate';
 	$field4->columntype = 'DATE';
 	$field4->uitype = 5;
@@ -107,10 +165,17 @@ global $adb;
 	$leaveInformation->addField($field4); /** Creates the field and adds to block */
 
 	/** Create required fields and add to the block */
+<<<<<<< HEAD
+	$field5 = new Vtiger_Field();
+	$field5->name = 'assignedto';
+	$field5->label = 'Assigned To';
+	$field5->table = $moduleInstance->basetable;
+=======
 /*	$field5 = new Vtiger_Field();
 	$field5->name = 'assignedto';
 	$field5->label = 'Assigned To';
 	$field5->table = $module->basetable;
+>>>>>>> Development
 	$field5->column = 'assignedto';
 	$field5->columntype = 'VARCHAR(50)';
 	$field5->uitype = 15;
@@ -122,7 +187,11 @@ global $adb;
 	$field6 = new Vtiger_Field();
 	$field6->name = 'dutiestakenoverby';
 	$field6->label = 'Duties Taken Over By';
+<<<<<<< HEAD
+	$field6->table = $moduleInstance->basetable;
+=======
 	$field6->table = $module->basetable;
+>>>>>>> Development
 	$field6->column = 'dutiestakenoverby';
 	$field6->columntype = 'VARCHAR(50)';
 	$field6->uitype = 15;
@@ -134,7 +203,11 @@ global $adb;
 	$field7 = new Vtiger_Field();
 	$field7->name = 'starthalfday';
 	$field7->label = 'Start Half Day';
+<<<<<<< HEAD
+	$field7->table = $moduleInstance->basetable;
+=======
 	$field7->table = $module->basetable;
+>>>>>>> Development
 	$field7->column = 'starthalfday';
 	$field7->columntype = 'VARCHAR(3)';
 	$field7->uitype = 56;
@@ -145,7 +218,11 @@ global $adb;
 	$field8 = new Vtiger_Field();
 	$field8->name = 'endhalfday';
 	$field8->label = 'End Half Day';
+<<<<<<< HEAD
+	$field8->table = $moduleInstance->basetable;
+=======
 	$field8->table = $module->basetable;
+>>>>>>> Development
 	$field8->column = 'endhalfday';
 	$field8->columntype = 'VARCHAR(3)';
 	$field8->uitype = 56;
@@ -156,7 +233,11 @@ global $adb;
 	$field9 = new Vtiger_Field();
 	$field9->name = 'reasonofleave';
 	$field9->label = 'Reason of Leave';
+<<<<<<< HEAD
+	$field9->table = $moduleInstance->basetable;
+=======
 	$field9->table = $module->basetable;
+>>>>>>> Development
 	$field9->column = 'reasonofleave';
 	$field9->columntype = 'TEXT';
 	$field9->uitype = 21;
@@ -166,10 +247,17 @@ global $adb;
 
 	/** Create required fields and add to the block */
 	$field10 = new Vtiger_Field();
+<<<<<<< HEAD
+	$field10->name = 'status';
+	$field10->label = 'Status';
+	$field10->table = $moduleInstance->basetable;
+	$field10->column = 'status';
+=======
 	$field10->name = 'leave_status';
 	$field10->label = 'Status';
 	$field10->table = $module->basetable;
 	$field10->column = 'leave_status';
+>>>>>>> Development
 	$field10->columntype = 'VARCHAR(50)';
 	$field10->uitype = 15;
 	$field10->typeofdata = 'V~O'; 
@@ -180,7 +268,11 @@ global $adb;
 	$field11 = new Vtiger_Field();
 	$field11->name = 'totalleavetaken';
 	$field11->label = 'Total Leave Taken';
+<<<<<<< HEAD
+	$field11->table = $moduleInstance->basetable;
+=======
 	$field11->table = $module->basetable;
+>>>>>>> Development
 	$field11->column = 'totalleavetaken';
 	$field11->columntype = 'VARCHAR(100)';
 	$field11->uitype = 1;
@@ -191,7 +283,11 @@ global $adb;
 	$field12 = new Vtiger_Field();
 	$field12->name = 'approvedate';
 	$field12->label = 'Approve Date';
+<<<<<<< HEAD
+	$field12->table = $moduleInstance->basetable;
+=======
 	$field12->table = $module->basetable;
+>>>>>>> Development
 	$field12->column = 'approvedate';
 	$field12->columntype = 'DATE';
 	$field12->uitype = 5;
@@ -202,7 +298,11 @@ global $adb;
 	$field13 = new Vtiger_Field();
 	$field13->name = 'reasonforrejection';
 	$field13->label = 'Reason For Rejection';
+<<<<<<< HEAD
+	$field13->table = $moduleInstance->basetable;
+=======
 	$field13->table = $module->basetable;
+>>>>>>> Development
 	$field13->column = 'reasonforrejection';
 	$field13->columntype = 'VARCHAR(100)';
 	$field13->uitype = 1;
@@ -213,7 +313,11 @@ global $adb;
 	$field14 = new Vtiger_Field();
 	$field14->name = 'approveby';
 	$field14->label = 'Approve By';
+<<<<<<< HEAD
+	$field14->table = $moduleInstance->basetable;
+=======
 	$field14->table = $module->basetable;
+>>>>>>> Development
 	$field14->column = 'approveby';
 	$field14->columntype = 'VARCHAR(50)';
 	$field14->uitype = 15;
@@ -221,6 +325,8 @@ global $adb;
 	$field14->setPicklistValues( Array ('Users', 'Groups'));
 	$approvalInformation->addField($field14); /** Creates the field and adds to block */
 
+<<<<<<< HEAD
+=======
 	/**
 		ADD YOUR FIELDS HERE
 	*/
@@ -256,11 +362,41 @@ global $adb;
 	$field41->displaytype= 2;
 	$leaveInformation->addField($field41);
 
+>>>>>>> Development
 
 	// Create default custom filter (mandatory)
 	$filter1 = new Vtiger_Filter();
 	$filter1->name = 'All';
 	$filter1->isdefault = true;
+<<<<<<< HEAD
+	$moduleInstance->addFilter($filter1);
+	// Add fields to the filter created
+	$filter1->addField($field1)->addField($field2, 1)->addField($field3, 2);
+	
+	// Create one more filter
+	$filter2 = new Vtiger_Filter();
+	$filter2->name = 'All2';
+	$moduleInstance->addFilter($filter2);
+
+	// Add fields to the filter
+	$filter2->addField($field1);
+	$filter2->addField($field2, 1);
+	// Add rule to the filter field
+	$filter2->addRule($field1, 'CONTAINS', 'Test');
+
+	/** Enable and Disable available tools */
+	$moduleInstance->enableTools(Array('Import', 'Export'));
+	$moduleInstance->disableTools('Merge');
+	
+	//$moduleInstance->addLink('DETAILVIEWBASIC', 'LBL_SURVEY_REPORT', 'index.php?module=Survey&view=result&record=$RECORD$');
+
+	$moduleInstance->setDefaultSharing();
+	//mkdir('modules/'.$MODULENAME);
+	//chmod('modules/'.$MODULENAME,0777);
+        echo "OK\n";
+	//$moduleInstance=null;
+//}
+=======
 	$module->addFilter($filter1);
 	// Add fields to the filter created
 	$filter1->addField($field1)->addField($field2, 1)->addField($field3, 2);
@@ -310,4 +446,5 @@ global $adb;
 	}
 
 	
+>>>>>>> Development
 ?>
