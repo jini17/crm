@@ -162,7 +162,7 @@ LIMIT 3";
 		$query = "SELECT vtiger_education.* FROM vtiger_education
 			INNER JOIN vtiger_crmentity
 			ON vtiger_crmentity.crmid = vtiger_education.educationid
-			WHERE vtiger_crmentity.smownerid = ? AND vtiger_crmentity.deleted=0 AND vtiger_crmentity.deleted=0";
+			WHERE vtiger_crmentity.smownerid = ? AND vtiger_crmentity.deleted=0";
 
 		$result = $db->pquery($query,array($userId));
 		$eduList=array();	
@@ -193,9 +193,9 @@ LIMIT 3";
 		$eduId  	= $request['record'];
 		$insId  	= decode_html(trim($request['institution_name']));
 		$studying  	= $request['is_studying'];	
-		$startdate  	= date('Y-m-d',strtotime(decode_html($request['start_date'])));
+		
 		if($studying =='0'){
-			$endDate	= date('Y-m-d',strtotime(decode_html($request['end_date'])));
+			$endDate	= date('Y-m-d',strtotime($request['project_year'].'-'.decode_html($request['project_month'].'-01')));
 		} else{
 			$endDate	='';
 		}	
@@ -250,18 +250,5 @@ LIMIT 3";
 	
 		$response = $education->save('Education');
 		return $return;
-	}
-
-	//Delete Education
-	public function deleteEducationPermanently($eduId){	
-		$db  		= PearDatabase::getInstance();
-		$params 	= array();
-		if(!empty($eduId)) {
-			$params = array($eduId);
-			$result = $db->pquery("UPDATE secondcrm_education SET deleted = 1 WHERE edu_id=?",array($params));
-			return 1;
-		} else {
-			return 0;
-		}
 	}
  }  

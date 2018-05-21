@@ -14,73 +14,37 @@ Vtiger.Class("Users_Project_Js", {
 	     this.editProject(url);
 	    
 	},	
-	editProject : function(url, currentTrElement) {
-		var aDeferred = jQuery.Deferred();
+	editProject : function(url, currentTrElement) { 
+	 var aDeferred = jQuery.Deferred();
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
 		
-		var progressIndicatorElement = jQuery.progressIndicator({
-			'position' : 'html',
-			'blockInfo' : {
-				'enabled' : true
-			}
-		});
-		
-		AppConnector.request(url).then(
-			function(data) {
-				var callBackFunction = function(data) {
-					//cache should be empty when modal opened 
-					thisInstance.duplicateCheckCache = {};
-					thisInstance.textAreaLimitChar();
-					var form = jQuery('#editProject');
-					
-					form.validationEngine('attach', {
-						onValidationComplete: function(form, status){ 
-							if (status == true) {  
-							var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
-							var aparams = form.serializeFormData();
-							aparams.module = app.getModuleName();
-							aparams.action = 'SaveSubModuleAjax';
-							aparams.mode = 'saveProject';
-							aparams.isview = chkboxval;	
-							AppConnector.request(aparams).then(
-
-							function(data) { 
-							//show notification after Project details saved
-								params = {
-									text: data['result'],
-									type:'success'	
-								};
-							Vtiger_Helper_Js.showPnotify(params);
-							progressIndicatorElement.progressIndicator({'mode':'hide'});
-							app.hideModalWindow();
-							//Adding or update the Project details in the list
-							thisInstance.updateProjectGrid(userid);
-							}
-						);
-					}
-				}           
-			});
-			
-			form.submit(function(e) {
-				e.preventDefault();
-			})
-		}
-		progressIndicatorElement.progressIndicator({'mode':'hide'});
-		app.showModalWindow(data,function(data){
-			if(typeof callBackFunction == 'function'){
-				callBackFunction(data);
-			}
-		}, {'width':'500px'});
+		app.helper.showProgress();
+		app.request.post({url:url}).then(
+		function(err,data) { 
+     		  if(err == null){
+     		   app.helper.hideProgress();
+                   app.helper.showModal(data);
+     			var form = jQuery('#editProject');
+     				 thisInstance.textAreaLimitChar();
+     				 
+     				   form.submit(function(e) { 
+                            e.preventDefault();
+                         })
+					var params = {
+                            submitHandler : function(form){
+                                var form = jQuery('#editProject');   
+                                thisInstance.saveProjectsDetails(form);
+                            }
+                        };
+                         form.vtValidate(params)
+          		} else {
+                        aDeferred.reject(err);
+                    }
+	     	});
+	     return aDeferred.promise();	
 	},
-		function(error) {
-		//TODO : Handle error
-			aDeferred.reject(error);
-		}
-	);
-	return aDeferred.promise();
-},
-	
+  
 updateProjectGrid : function(userid) { 
 		var params = {
 			'module' : app.getModuleName(),
@@ -88,8 +52,8 @@ updateProjectGrid : function(userid) {
 			'record' : userid,		
 			'mode'   : 'getUserProject',
 		}
-		AppConnector.request(params).then(
-		function(data) {
+		app.request.post({'data':params}).then(
+		function(err, data) {
 			$('#project').html(data);
 		},
 	
@@ -99,34 +63,21 @@ updateProjectGrid : function(userid) {
 	);
 },
 
-deleteProject : function(deleteRecordActionUrl) { 
-		var message = app.vtranslate('JS_DELETE_PROJECT_CONFIRMATION');
-		var thisInstance = this;
-		var userid = jQuery('#recordId').val();
-		Vtiger_Helper_Js.showConfirmationBox({'message' : message}).then(function(data) {
-		AppConnector.request(deleteRecordActionUrl).then(
-		function(data){
-				var response = data['result'];
-				var result   = data['success'];
-				if(result == true) {
-					params = {
-						text: response.msg,
-						type:'success'	
-					};
-				} else {
-						params = {
-						text: response.msg,
-						type:'error'	
-					};
-				}
-				
-				Vtiger_Helper_Js.showPnotify(params);
-				//delete the Project details in the list
-				thisInstance.updateProjectGrid(userid);
-			}
-		);
-	});
-},	
+     deleteProject : function(deleteRecordActionUrl) { 
+          var message = app.vtranslate('JS_DELETE_PROJECT_CONFIRMATION');
+		     var thisInstance = this;
+		     var userid = jQuery('#recordId').val();
+		     app.helper.showConfirmationBox({'message' : message}).then(function(e) {
+		
+               	app.request.post({url:deleteRecordActionUrl}).then(
+               	     function(data){
+				           app.helper.showSuccessNotification({'message': 'Record deleted successfully'});
+				          //delete the Education details in the list
+				          thisInstance.updateProjectGrid(userid);
+			          }
+		          );
+	          });
+     },
 
 textAreaLimitChar : function(){ 
 			$('#description').keyup(function () {
@@ -142,13 +93,37 @@ textAreaLimitChar : function(){
 			  	}
 			});
 	},
+
+saveProjectsDetails : function(form){
+          var aDeferred = jQuery.Deferred();
+          app.helper.hideModal();
+          var thisInstance = this;
+          var userid = jQuery('#current_user_id').val();
+          app.helper.showProgress();
+          var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
+          var formData = form.serializeFormData();
+          var params = {
+				'module': 'Users',
+				'action': "SaveSubModuleAjax",
+				'mode'  : 'saveProject',
+				'form' : formData,
+				'isview' : chkboxval
+			};	
+				
+               app.request.post({'data': params}).then(function (err, data) {     
+                    app.helper.hideProgress();
+                    //show notification after Education details saved
+                    app.helper.showSuccessNotification({'message': data});
+                    //Adding or update the Project details in the list
+                    thisInstance.updateProjectGrid(userid);
+             }
+          );
+           return aDeferred.promise();
+     },		
+	
 },{
 	//constructor
 	init : function() {
 		Users_Education_Js.eduInstance = this;
 	},
-	
-registerEvents: function() {
-	this.registerActions();
-	}
 });
