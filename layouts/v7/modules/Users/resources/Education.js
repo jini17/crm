@@ -43,7 +43,7 @@ Vtiger.Class("Users_Education_Js", {
                     app.helper.showModal(data);
                     var form = jQuery('#editEducation');
                         thisInstance.textAreaLimitChar();	
-                         console.log(form);
+                      
                         	// for textarea limit
                         app.helper.showVerticalScroll(jQuery('#scrollContainer'), {setHeight:'80%'});
                         $("#institution_name").select2({formatNoMatches: function() {

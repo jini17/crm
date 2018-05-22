@@ -81,170 +81,114 @@ class Users_ProjectRecord_Model extends Users_Record_Model {
 		$db  = PearDatabase::getInstance();
 		$params = array($userid);
 		$designation = array();	
-		$designation1 = array();	
-		$designation2 = array();	
-		$result1 = $db->pquery("SELECT CONCAT('W#','',tblSCUW.uw_id) AS designation_id, 'W' AS 'relation_type',
-						CONCAT(tblSCD.designation,' at ',tblSCC.company_title,', ', 							tblSCC.company_location) AS designation
-					FROM secondcrm_userworkexp tblSCUW
-						LEFT JOIN secondcrm_designation tblSCD 
-							ON tblSCD.designation_id = tblSCUW.designation_id
-						LEFT JOIN secondcrm_company tblSCC 
-							ON tblSCC.company_id = tblSCUW.company_id
-						LEFT JOIN secondcrm_location tblSCL 
-							on tblSCL.location_id = tblSCUW.location_id
-					WHERE tblSCUW.user_id=?",$params);
-
-		$result2 = $db->pquery("SELECT CONCAT('E#','',tblSCE.Edu_id) AS designation_id,'E' AS 'relation_type',
-						CONCAT(tblSCI.institution,', ',tblSCSA.major) 
-						AS designation FROM secondcrm_education tblSCE
-						LEFT JOIN secondcrm_institution tblSCI 
-							ON tblSCI.institution_id = tblSCE.institution_id
-						LEFT JOIN secondcrm_studyarea tblSCSA
-							ON tblSCSA.major_id = tblSCE.major_id
-					WHERE tblSCE.user_id=?",$params);	 
+		$result1 = $db->pquery("SELECT * FROM secondcrm_designation", array());
 		
 		if($db->num_rows($result1) > 0) {
 			for($i=0;$i<$db->num_rows($result1);$i++) {
-			  	$designation1[$i]['designation_id'] = $db->query_result($result1, $i, 'designation_id');
-				$designation1[$i]['designation'] = $db->query_result($result1, $i, 'designation');
-				$designation1[$i]['relation_type'] = $db->query_result($result1, $i, 'relation_type');	
+			  	$designation[$i]['designation_id'] = $db->query_result($result1, $i, 'designation_id');
+				$designation[$i]['designation'] = $db->query_result($result1, $i, 'designation');
 			}
 		}
-		if($db->num_rows($result2) > 0) {
-			for($j=0;$j<$db->num_rows($result2);$j++) {
-			  	$designation2[$j]['designation_id'] = $db->query_result($result2, $j, 'designation_id');
-				$designation2[$j]['designation'] = $db->query_result($result2, $j, 'designation');
-				$designation2[$j]['relation_type'] = $db->query_result($result2, $j, 'relation_type');	
-			}
-		}
-		$designation = array_merge($designation1,$designation2);
 		return $designation;	
 	}
 	
 	public function getProjectDetail($project_id) {
 		$db  = PearDatabase::getInstance();
-		$sql = "SELECT tblSCP.project_id, tblSCP.title,
-				CONCAT(tblSCP.relation_type,'#',tblSCP.relation_id) AS 'designation', 
-				tblSCP.project_month,tblSCP.project_year,tblSCP.project_url, 
-				tblSCP.description,tblSCP.isview 
-			FROM secondcrm_project tblSCP 
-			WHERE tblSCP.deleted = 0 AND tblSCP.project_id=?"; 
+		// /$db->setDebug(true);
 		$params = array($project_id);
-		$result = $db->pquery($sql,$params);
-			
+		$result = $db->pquery("SELECT employeeprojectsid,project_title,occupation, project_url, project_description, ispublic , date_FORMAT(project_start_date,'%m') as project_month, date_FORMAT(project_start_date,'%Y') as project_year
+					FROM vtiger_employeeprojects
+					INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_employeeprojects.employeeprojectsid
+					WHERE vtiger_crmentity.deleted = 0 AND vtiger_employeeprojects.employeeprojectsid=?", $params);
+
+		
 		$projectDetail 			= array();
-		$projectDetail['title'] 	= $db->query_result($result, 0, 'title');      
-		$projectDetail['designation'] 	= $db->query_result($result, 0, 'designation');
+		$projectDetail['title'] 		= $db->query_result($result, 0, 'project_title');  
+		$projectDetail['employeeprojectsid'] 		= $db->query_result($result, 0, 'employeeprojectsid');          
+		$projectDetail['designation'] 	= $db->query_result($result, 0, 'occupation');
 		$projectDetail['project_month'] = $db->query_result($result, 0, 'project_month');
 		$projectDetail['project_year'] 	= $db->query_result($result, 0, 'project_year');
 		$projectDetail['project_url'] 	= $db->query_result($result,0, 'project_url');
-		$projectDetail['description'] 	= $db->query_result($result, 0, 'description');
-		$projectDetail['isview'] 	= $db->query_result($result, 0, 'isview');
+		$projectDetail['description'] 	= $db->query_result($result, 0, 'project_description');
+		$projectDetail['isview'] 		= $db->query_result($result, 0, 'ispublic');
 		
 		return $projectDetail;		
 	}
 	
 	public function getUserProjectList($userId) {
 		$db  = PearDatabase::getInstance();
+		//$db->setDebug(true);
 		$params = array($userId);
-		$result1 = $db->pquery("SELECT tblSCP.project_id, tblSCP.title, 
-						CONCAT('E#','',tblSCE.Edu_id) AS designatoin_id,
-						CONCAT(tblSCI.institution,', ',tblSCSA.major) AS designation, 
-						tblSCP.project_month,tblSCP.project_year,tblSCP.project_url, 
-						tblSCP.description,tblSCP.isview,tblSCP.relation_type 
-				FROM secondcrm_project tblSCP 
-				LEFT JOIN secondcrm_education tblSCE ON tblSCE.edu_id = tblSCP.relation_id
-				LEFT JOIN secondcrm_institution tblSCI ON tblSCI.institution_id = tblSCE.institution_id
-				LEFT JOIN secondcrm_studyarea tblSCSA ON tblSCSA.major_id = tblSCE.major_id
-				WHERE tblSCP.deleted = 0  AND tblSCP.user_id = ? AND tblSCP.relation_type='E'",$params);
-			
-		$result2 = $db->pquery("SELECT tblSCP.project_id, tblSCP.title, 
-						CONCAT('W#','',tblSCUW.uw_id) AS designatoin_id, 
-						CONCAT(tblSCD.designation,' at ',tblSCC.company_title,', ', 							tblSCL.location) AS designation,
-						tblSCP.project_month,tblSCP.project_year,tblSCP.project_url, 
-						tblSCP.description,tblSCP.isview,tblSCP.relation_type 
-				FROM secondcrm_project tblSCP 
-				LEFT JOIN secondcrm_userworkexp tblSCUW ON tblSCUW.uw_id = tblSCP.relation_id
-				LEFT JOIN secondcrm_designation tblSCD 
-							ON tblSCD.designation_id = tblSCUW.designation_id
-						LEFT JOIN secondcrm_company tblSCC 
-							ON tblSCC.company_id = tblSCUW.company_id
-						LEFT JOIN secondcrm_location tblSCL 
-							on tblSCL.location_id = tblSCUW.location_id
-			WHERE tblSCP.deleted = 0  AND tblSCP.user_id = ? AND tblSCP.relation_type='W'",$params);
-		$$userWEProjectList = array();	
-		$userEduProjectList = array();
-		$userProjectList = array();
-		if($db->num_rows($result1) > 0) {
-			for($i=0;$i<$db->num_rows($result1);$i++) {
-			  	$userEduProjectList[$i]['project_id']    = $db->query_result($result1, $i, 'project_id');			$userEduProjectList[$i]['title']	      = $db->query_result($result1, $i, 'title');
-				$userEduProjectList[$i]['designation']   = $db->query_result($result1, $i, 'designation');
-				$userEduProjectList[$i]['project_month'] = $db->query_result($result1, $i, 'project_month');		$userEduProjectList[$i]['project_year']  = $db->query_result($result1, $i, 'project_year');
-				$userEduProjectList[$i]['project_url']   = $db->query_result($result1, $i, 'project_url');
-				$userEduProjectList[$i]['description']   = $db->query_result($result1, $i, 'description');
-				$userEduProjectList[$i]['isview'] 	      = $db->query_result($result1, $i, 'isview');
-				$userEduProjectList[$i]['relation_type'] 	      = $db->query_result($result1, $i, 'relation_type');
-			}
-		}
+		$result2 = $db->pquery("SELECT employeeprojectsid,project_title,occupation, project_url, project_description,ispublic , date_FORMAT(project_start_date,'%M-%Y') as project_start_date FROM vtiger_employeeprojects
+					 INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_employeeprojects.employeeprojectsid
+					WHERE vtiger_crmentity.deleted = 0  AND vtiger_crmentity.smownerid = ?", $params);
 		$userWEProjectList = array();
 		if($db->num_rows($result2) > 0) {
 			for($j=0;$j<$db->num_rows($result2);$j++) {
-			  	$userWEProjectList[$j]['project_id'] = $db->query_result($result2, $j, 'project_id');			$userWEProjectList[$j]['title'] = $db->query_result($result2, $j, 'title');
-				$userWEProjectList[$j]['designation'] = $db->query_result($result2, $j, 'designation');
-				$userWEProjectList[$j]['project_month'] = $db->query_result($result2, $j, 'project_month');
-				$userWEProjectList[$j]['project_year'] = $db->query_result($result2, $j, 'project_year');
+			  	$userWEProjectList[$j]['employeeprojectsid'] = $db->query_result($result2, $j, 'employeeprojectsid');			
+			  	$userWEProjectList[$j]['title'] = $db->query_result($result2, $j, 'project_title');
+				$userWEProjectList[$j]['designation'] = $db->query_result($result2, $j, 'occupation');
+				$userWEProjectList[$j]['project_start_date'] = $db->query_result($result2, $j, 'project_start_date');
 				$userWEProjectList[$j]['project_url'] = $db->query_result($result2, $j, 'project_url');
-				$userWEProjectList[$j]['description'] = $db->query_result($result2, $j, 'description');
-				$userWEProjectList[$j]['isview'] = $db->query_result($result2, $j, 'isview');
-				$userWEProjectList[$j]['relation_type'] = $db->query_result($result2, $j, 'relation_type');	
+				$userWEProjectList[$j]['description'] = $db->query_result($result2, $j, 'project_description');
+				$userWEProjectList[$j]['isview'] = $db->query_result($result2, $j, 'ispublic');
 			}
 		}
-			$userProjectList = array_merge($userEduProjectList,$userWEProjectList);
-
-		return $userProjectList;		
+			
+		return $userWEProjectList;		
 	}
 	
 	public function saveProjectDetail($request)
 	{
+		include_once("modules/EmployeeProjects/EmployeeProjects.php");
+
 		$db  = PearDatabase::getInstance();
-		$params 	= array();
-		$userid  	= $request['current_user_id'];
+		//$db->setDebug(true);
+		$params 		= array();
+		$userid  		= $request['current_user_id'];
 		$projectId  	= $request['record'];
-		$title  	= decode_html($request['title']);
-		$designationarray  = explode('#',decode_html($request['designation']));
-		$relation_id 	= $designationarray[1];
-		$relation_type 	= $designationarray[0];		
+		$title  		= decode_html($request['title']);
+		$desId  		= decode_html(trim($request['designation']));
+		$destxt 		= decode_html($request['designation_titletxt']);
+		
 		$project_month 	= decode_html($request['project_month']);
 		$project_year	= decode_html($request['project_year']);
 		$project_url  	= decode_html($request['project_url']);
 		$description  	= decode_html($request['description']);
-		$isview  	= decode_html($request['isview']);		
+		$isview  		= decode_html($request['isview']);		
+		$start_date 	= $project_year.'-'.$project_month.'-'.'-01';
+		if($desId ==0 && !empty($destxt)) {
+           	 //check the desgination exist or not
+	           	 $resultcheck  = $db->pquery("SELECT designation_id FROM secondcrm_designation WHERE designation = ?",array($destxt));
+			    if($db->num_rows($resultcheck) == 0){
+			        $resultIns = $db->pquery("INSERT INTO secondcrm_designation(designation) VALUES(?)",array($destxt));
+			    }
+			     $desId = $destxt;    
+                
+        }
 	
+        	$project = new EmployeeProjects();
+			$project->column_fields['project_title'] 		= $title;	
+			$project->column_fields['occupation'] 			= $desId;	
+			$project->column_fields['project_start_date'] 	= $start_date;	
+			$project->column_fields['project_url'] 			= $project_url;	
+			$project->column_fields['ispublic'] 			= $isview;	
+			$project->column_fields['project_description'] 	= $description;
+			$project->column_fields['assigned_user_id'] 	= $userid;
+			
 		if(!empty($projectId)) {
-			$params = array($title,$relation_id, $relation_type, $project_month,$project_year,$project_url,$description,$isview,$projectId);
-			$result = $db->pquery("UPDATE secondcrm_project SET title = ?, relation_id=?,relation_type=?, project_month=?,project_year=?, project_url = ?, description = ?, isview=? WHERE project_id=?",array($params));
-			$return = 1;	
-
+			//update Education
+			$project->mode = 'edit';
+			$project->id = $projectId;
+			$return = 1;
+			$db->pquery("UPDATE vtiger_employeeprojects SET project_title=?, project_start_date=?, occupation=?, project_url=?, ispublic=?,project_description=? WHERE employeeprojectsid=?", array($title, $start_date, $desId, $project_url,
+				$isview, $description, $projectId));
 		} else {
-			$params = array($userid, $title,$relation_id, $relation_type, $project_month, $project_year,$project_url,$description,$isview);
-			$result = $db->pquery("INSERT INTO secondcrm_project SET user_id = ?, title = ?, relation_id=?,relation_type=?,project_month=?,project_year=?, project_url = ?, description = ?, isview=?", array($params));
+			$project->mode = '';
 			$return = 0;
 		}	
-		 
+	
+		$response = $project->save('EmployeeProjects');
 		return $return;
 	}
-
-	//Deleted Project 
-	public function deleteProjectPermanently($projectId){	
-		$db  = PearDatabase::getInstance();
-		$params 	= array();
-		if(!empty($projectId)) {
-			$params = array($projectId);
-			$result = $db->pquery("UPDATE secondcrm_project SET deleted = 1 WHERE project_id=?",array($params));
-			return 1;
-		} else {
-			return 0;
-		}
-	}
-
  }  

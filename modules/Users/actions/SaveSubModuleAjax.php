@@ -44,8 +44,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveProject(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
-		
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
 		$response = new Vtiger_Response();
 		try{
 		    $return = Users_ProjectRecord_Model::saveProjectDetail($request);
