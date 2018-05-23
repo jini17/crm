@@ -186,7 +186,7 @@ Vtiger.Class("Settings_Vtiger_LeaveType_Js",{},{
                 var form = jQuery('#AddRule').serializeArray();
 
 
-                if(jQuery("#EditClaimTypeContainer").length >0){
+                if(jQuery("#EditLeaveTypeContainer").length >0){
                     mode = 'UpdateLeaveType'
                 }else{
                     mode = 'AddLeaveType';

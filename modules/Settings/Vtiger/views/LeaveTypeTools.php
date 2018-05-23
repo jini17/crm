@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
+ * Created by NirBhay RaJu ShAh PhpStorm.
  * User: root
  * Date: 4/20/18
  * Time: 6:21 PM
@@ -48,19 +48,23 @@ class Settings_Vtiger_LeaveTypeTools_View extends Settings_Vtiger_Index_View {
             return false;
         }
 
-        $query = "SELECT * FROM `vtiger_leavetype` WHERE claimtypeid = ?";
+        $query = "SELECT * FROM `vtiger_leavetype` WHERE leavetypeid = ?";
         $result = $adb->pquery($query,array($values[0]));
         $count = $adb->num_rows($result);
         //echo "Nirbhay".$count;die;
-        $claim_type = array();
+        $leave_type = array();
 
         if($count>0){
 
-            $claim_type['claim_type'] = $adb->query_result($result, 0,'claim_type');
-            $claim_type['claim_code'] = $adb->query_result($result, 0,'claim_code');
-            $claim_type['claim_status'] = $adb->query_result($result, 0,'claim_status');
-            $claim_type['claim_description'] = $adb->query_result($result, 0,'claim_description');
-            $claim_type['claim_type_id'] = $adb->query_result($result, 0,'claimtypeid');
+            $leave_type['leave_type_title'] = $adb->query_result($result, 0,'title');
+            $leave_type['leave_type_leavecode'] = $adb->query_result($result, 0,'leavecode');
+            $leave_type['leave_type_description'] = $adb->query_result($result, 0,'description');
+            $leave_type['leave_type_midyearallocation'] = $adb->query_result($result, 0,'midyearallocation');
+            $leave_type['leave_type_leavefrequency'] = $adb->query_result($result, 0,'leavefrequency');
+            $leave_type['leave_type_status'] = $adb->query_result($result, 0,'leavetype_status');
+            $leave_type['leave_type_carryforward'] = $adb->query_result($result, 0,'carryforward');
+            $leave_type['leave_type_halfdayallowed'] = $adb->query_result($result, 0,'halfdayallowed');
+            $leave_type['leave_type_id'] = $adb->query_result($result, 0,'leavetypeid');
 
 
         }
@@ -70,7 +74,7 @@ class Settings_Vtiger_LeaveTypeTools_View extends Settings_Vtiger_Index_View {
 
 
         $viewer = $this->getViewer($request);
-        $viewer->assign("VALUES",$claim_type);
+        $viewer->assign("VALUES",$leave_type);
         $viewer->view('EditLeaveType.tpl', $qualifiedModuleName);
     }
 
@@ -99,23 +103,46 @@ class Settings_Vtiger_LeaveTypeTools_View extends Settings_Vtiger_Index_View {
     public function AddLeaveType($request){
         global $adb;
         $insertArray = $request->get('form');
+        $leavetype = array();
 
-        $claimtypeid = $adb->getUniqueID('vtiger_crmentity');
+
+        for($i=0;$i<count($insertArray);$i++) {
+            $name = $insertArray[$i]['name'];
+            $leavetype[$name] = $insertArray[$i]['value'];
+
+        }
+
+        if(!isset($leavetype['status'])){
+            $leavetype['status']= 'off';
+        }
+
+        if(!isset($leavetype['LeaveType_HalfdayAllowed'])){
+            $leavetype['LeaveType_HalfdayAllowed']= 'off';
+        }
+
+        if(!isset($leavetype['LeaveType_CarryForward'])){
+            $leavetype['LeaveType_CarryForward']= 'off';
+        }
+
+
+
+        $leavetypeid = $adb->getUniqueID('vtiger_crmentity');
 
         $crmentityinsertquery = "INSERT INTO vtiger_crmentity (crmid, smcreatorid, smownerid, modifiedby, setype, description, createdtime, modifiedtime, viewedtime, status, version, presence, deleted, smgroupid, source, label) VALUES(?,?,?,?,?,?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,?,?,?,?,?,?,?)";
 
-        $params = array($claimtypeid,1,1,1,"Leave Type",'','',1,1,0,'','','');
+        $params = array($leavetypeid,1,1,1,"Leave Type",'','',1,1,0,'','','');
 
         $crmentityinsertresult = $adb->pquery($crmentityinsertquery,array($params));
 
         if($crmentityinsertresult){
-            $query = "INSERT INTO `vtiger_leavetype` (`claimtypeid`, `claim_type`, `claim_code`,`claim_status`,`claim_description`) VALUES (?,?,?,?,?)";
-            $result = $adb->pquery($query,array($claimtypeid,$insertArray[1]['value'],$insertArray[2]['value'],$insertArray[3]['value'],$insertArray[4]['value']));
+            $query = "INSERT INTO `vtiger_leavetype` (`leavetypeid`, `title`, `leavecode`,`leaveType_status`,`description`,`midyearallocation`,`halfdayallowed`,`carryforward`,`leavefrequency`) VALUES (?,?,?,?,?,?,?,?,?)";
+            $result = $adb->pquery($query,array($leavetypeid,$leavetype['LeaveTypeTitle'],$leavetype['LeaveTypeCode'],$leavetype['status'],$leavetype['LeaveType_Desc
+'],$leavetype['LeaveType_MidYearAllcoation'],$leavetype['LeaveType_HalfdayAllowed'],$leavetype['LeaveType_CarryForward'],$leavetype['LeaveType_LeaveFrequency']));
 
         }
         if($result){
-            $query = "INSERT INTO vtiger_leavetypecf (claimtypeid) VALUES (?)";
-            $claimtypetables_result = $adb->pquery($query,array($claimtypeid));
+            $query = "INSERT INTO vtiger_leavetypecf (leavetypeid) VALUES (?)";
+            $claimtypetables_result = $adb->pquery($query,array($leavetypeid));
         }
 
 
@@ -131,30 +158,34 @@ class Settings_Vtiger_LeaveTypeTools_View extends Settings_Vtiger_Index_View {
 
     public function UpdateLeaveType($request){
         global $adb;
-        //echo "<pre>"; print_r($request); die;
-        //$adb->setDebug(true);
+
         $insertArray = $request->get('form');
+       // echo "<pre>"; print_r($insertArray); die;
+        $leavetype = array();
 
-        $claims = array();
-
-        //echo "Nirbhay";
 
 
         for($i=0;$i<count($insertArray);$i++) {
-            //echo "NNN";
-            $test = $insertArray[$i]['name'];
-            $claims[$test] = $insertArray[$i]['value'];
+            $name = $insertArray[$i]['name'];
+            $leavetype[$name] = $insertArray[$i]['value'];
 
         }
-        // echo "Nirbhay111";
-        if(!isset($claims['status'])){
-            $claims['status']= 'off';
+
+        if(!isset($leavetype['status'])){
+            $leavetype['status']= 'off';
         }
 
-        // echo "NirbhayNiorbhay<pre>"; print_r($claims); die;
+        if(!isset($leavetype['LeaveType_HalfdayAllowed'])){
+            $leavetype['LeaveType_HalfdayAllowed']= 'off';
+        }
 
-        $query = "UPDATE `vtiger_claimtype` SET `claim_type`=?, `claim_code`=?, `claim_status`=?, `claim_description`=? WHERE claimtypeid=?";
-        $result = $adb->pquery($query,array($claims['ClaimTypeTitle'],$claims['ClaimCode'],$claims['status'],$claims['ClaimType_Desc'],$claims['ClaimTypeId']));
+        if(!isset($leavetype['LeaveType_CarryForward'])){
+            $leavetype['LeaveType_CarryForward']= 'off';
+        }
+
+        $query = "UPDATE `vtiger_leavetype` SET `title`=?, `leavecode`=?, `leaveType_status`=?, `description`=?, `midyearallocation`=?, halfdayallowed=?,`carryforward`=?, `leavefrequency`=? WHERE leavetypeid=?";
+        $result = $adb->pquery($query,array($leavetype['LeaveTypeTitle'],$leavetype['LeaveTypeCode'],$leavetype['status'],$leavetype['LeaveType_Desc
+'],$leavetype['LeaveType_MidYearAllcoation'],$leavetype['LeaveType_HalfdayAllowed'],$leavetype['LeaveType_CarryForward'],$leavetype['LeaveType_LeaveFrequency'],$leavetype['leave_type_id']));
 
 
 
