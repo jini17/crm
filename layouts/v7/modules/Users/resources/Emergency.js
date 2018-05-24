@@ -7,114 +7,111 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-Vtiger.Class("Users_Emergency_Js",{},{
-		
-	editEmergency : function(url, currentTrElement) {
-		var aDeferred = jQuery.Deferred();
+Vtiger.Class("Users_Emergency_Js", {
+
+	//register click event for Add New emergencycontact button
+	addEmergency : function(url) { 
+	     this.editEmergency(url);
+	    
+	},
+	
+	editEmergency : function(url) { 
+	    var aDeferred = jQuery.Deferred();
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
 		
-		var progressIndicatorElement = jQuery.progressIndicator({
-			'position' : 'html',
-			'blockInfo' : {
-				'enabled' : true
-			}
-		});
-		
-		AppConnector.request(url).then(
-			function(data) {
-				var callBackFunction = function(data) {
-					//cache should be empty when modal opened 
-					thisInstance.duplicateCheckCache = {};
-					var form = jQuery('#editEmergency');
-					
-					form.validationEngine('attach', {
-						onValidationComplete: function(form, status){ 
-							if (status == true) {  
-							var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
-							var aparams = form.serializeFormData();
-							aparams.module = app.getModuleName();
-							aparams.action = 'SaveSubModuleAjax';
-							aparams.mode = 'saveEmergencyContact';
-							aparams.isview = chkboxval;	
-							AppConnector.request(aparams).then(
+		app.helper.showProgress();
+		app.request.post({url:url}).then(
+		function(err,data) { 
+		      app.helper.hideProgress();
+              
+                if(err == null){
+                    app.helper.showModal(data);
+                    var form = jQuery('#editEmergency');
+     
+                      
+                        	// for textarea limit
+                        app.helper.showVerticalScroll(jQuery('#scrollContainer'), {setHeight:'80%'});
+                       
+				
 
-							function(data) { 
-							//show notification after Contact details saved
-								params = {
-									text: data['result'],
-									type:'success'	
-								};
-								Vtiger_Helper_Js.showPnotify(params);
-								progressIndicatorElement.progressIndicator({'mode':'hide'});
-								app.hideModalWindow();	
-								//Update the Contact details in the list
-								thisInstance.updateDetailViewContact(userid);
-							}
-						);
-					}
-				}           
-			});
-			
-			form.submit(function(e) {
-				e.preventDefault();
-			})
-		}
-		progressIndicatorElement.progressIndicator({'mode':'hide'});
-		app.showModalWindow(data,function(data){
-			if(typeof callBackFunction == 'function'){
-				callBackFunction(data);
-			}
-		}, {'width':'500px'});
+                         form.submit(function(e) { 
+                            e.preventDefault();
+                         })
+                           // console.log(form);
+					var params = {
+                            submitHandler : function(form){
+                                var form = jQuery('#editEmergency');   
+                                thisInstance.saveEmergencyDetails(form);
+                            }
+                        };
+                         form.vtValidate(params)
+          		} else {
+                        aDeferred.reject(err);
+                    }
+	     	});
+	     return aDeferred.promise();	
 	},
-		function(error) {
-		//TODO : Handle error
-			aDeferred.reject(error);
-		}
-	);
-	return aDeferred.promise();
-},
+     updateEmergencyGrid : function(userid) { 
+			var params = {
+					'module' : app.getModuleName(),
+					'view'   : 'ListViewAjax',
+					'record' : userid,		
+					'mode'   : 'getUserEmergency',
+				}
+				app.request.post({'data':params}).then(
+					function(err, data) {
+						jQuery('#UserEmergencyContainer').html(data);
+					},
+					
+					function(error,err){
+						aDeferred.reject();
+					}
+				);
+	},
 	
-updateDetailViewContact : function(userid) { 
-		var params = {
-			'module' : app.getModuleName(),
-			'view'   : 'ListViewAjax',
-			'record' : userid,		
-			'mode'   : 'getUserEmergency',
-		}
-		AppConnector.request(params).then(
-		function(data) {
-			$('#emergency').html(data);
-		},
+
+
+     saveEmergencyDetails : function(form){
+          var aDeferred = jQuery.Deferred();
+          app.helper.hideModal();
+          var thisInstance = this;
+          var userid = jQuery('#current_user_id').val();
+          app.helper.showProgress();
+          var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
+          //var chkboxstudying = $('#chkstudying').is(':checked')?'1':'0';
+          var formData = form.serializeFormData();
+          //console.log(formData);
+          var params = {
+				'module': 'Users',
+				'action': "SaveSubModuleAjax",
+				'mode'  : 'saveEmergencyContact',
+				'form' : formData,
+				'isview' : chkboxval,
+				
+			};	
+				
+         app.request.post({'data': params}).then(function (err, data) {     
+              app.helper.hideProgress();
+               //show notification after Education details saved
+                app.helper.showSuccessNotification({'message': data});
+               //Adding or update the Education details in the list
+               thisInstance.updateEmergencyGrid(userid);
+             }
+          );
+           return aDeferred.promise();
+     },	
 	
-		function(error,err){
-			aDeferred.reject();
-		}
-	);
-},
+},{
+	//constructor
+	init : function() {
+		Users_Emergency_Js.emeInstance = this;
+	},
+	
 
-/*
- * Function to register all actions in the project List
- */
-registerActions : function() {
-	var thisInstance = this;
-	var container = jQuery('#UserEmergencyContainer');
-
-		
-	//register event for edit Emergency icon
-	container.on('click', '.editEmergency', function(e) { 
-		var editEmergencyButton = jQuery(e.currentTarget);
-		var currentTrElement = editEmergencyButton.closest('tr');
-		thisInstance.editEmergency(editEmergencyButton.data('url'), currentTrElement);
-	});
-},
-
-registerEvents: function() {
-	this.registerActions();
+	
+	registerEvents: function(emeInstance) {
+		emeInstance.registerActions();
 	}
-});
 
-jQuery(document).ready(function(e){ 
-	var emergencyinstance = new Users_Emergency_Js();
-	emergencyinstance.registerEvents();
-})
+});

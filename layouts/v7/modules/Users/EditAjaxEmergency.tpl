@@ -10,16 +10,18 @@
 ********************************************************************************/
 -->*}
 {strip}
-<style>
-	.select2{
-		width:300px;
-	}
-</style>
-<div class="educationModalContainer">
-	<div class="modal-header contentsBackground">
+ <div class="educationModalContainer modal-dialog modal-xs modelContainer">
+ 	{if $EDU_ID neq ''}
+ 	 	{assign var="HEADER_TITLE" value={vtranslate('LBL_EDIT_EDUCATION', $QUALIFIED_MODULE)}}
+	{else} 
+		 {assign var="HEADER_TITLE" value={vtranslate('LBL_ADD_NEW_EDUCATION', $QUALIFIED_MODULE)}}
+	{/if}
+ 	{include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
+ 	
+	<div class="modal-content">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		 <h3>{vtranslate('LBL_USER_EMERGENCY', $QUALIFIED_MODULE)}</h3>
-	</div>
+		
+
 	<form id="editEmergency" name="editEmergency" class="form-horizontal" method="POST">
 		<input type="hidden" name="record" value="{$EDU_ID}" />
 		<input type="hidden" value="Users" name="module">
@@ -33,7 +35,7 @@
 					<span class="redColor">*</span>&nbsp;{vtranslate('LBL_CONTACT_NAME', $MODULE)}
 				</label>
 				<div class="controls">
-					<input id="contact_name" class="input-large nameField" type="text"  value="{$EMERGENCY_DETAIL['contact_name']}" name="contact_name"  data-validation-engine="validate[required]">
+					<input id="contact_name" class="input-large nameField" type="text"  value="{$EMERGENCY_DETAIL['contact_name']}" name="contact_name"  data-validation-engine="validate[required]" data-rule-required = "true">
 				</div>
 				<label class="control-label"></label>
 			</div>
@@ -43,7 +45,7 @@
 					<span class="redColor">*</span>&nbsp;{vtranslate('LBL_HOME_PH', $MODULE)}
 				</label>
 				<div class="controls">
-					<input id="home_phone" class="input-large nameField" type="text"  value="{$EMERGENCY_DETAIL['home_phone']}" name="home_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($HOMEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]">
+					<input id="home_phone" class="input-large nameField" type="text"  value="{$EMERGENCY_DETAIL['home_phone']}" name="home_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($HOMEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
 				</div>
 			</div>
 			<div class="control-group">
@@ -51,7 +53,7 @@
 					<span class="redColor">*</span>&nbsp;{vtranslate('LBL_OFFICE_PH', $MODULE)}
 				</label>
 				<div class="controls">
-					<input id="office_phone" class="input-large nameField" type="text" value="{$EMERGENCY_DETAIL['office_phone']}" name="office_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($OFFICEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]">
+					<input id="office_phone" class="input-large nameField" type="text" value="{$EMERGENCY_DETAIL['office_phone']}" name="office_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($OFFICEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
 				</div>
 			</div>
 			<div class="control-group">
@@ -59,7 +61,7 @@
 					<span class="redColor">*</span>&nbsp;{vtranslate('LBL_MOBILE', $MODULE)}
 				</label>
 				<div class="controls">
-					<input id="mobile" class="input-large nameField" type="text"  value="{$EMERGENCY_DETAIL['mobile']}" name="mobile" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($MOBILEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]">
+					<input id="mobile" class="input-large nameField" type="text"  value="{$EMERGENCY_DETAIL['mobile']}" name="mobile" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($MOBILEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
 				</div>
 			</div>		 	
 			<div class="control-group">
@@ -67,7 +69,7 @@
 					<span class="redColor">*</span>&nbsp;{vtranslate('LBL_RELATIONSHIP', $MODULE)}
 				</label>
 				<div class="controls">
-					<select class="select2" name="relationship" id ="relationship">	
+					<select class="select2" name="relationship" id ="relationship" data-rule-required = "true">	
 						<option value="{vtranslate('LBL_FATHER', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL.relationship eq {vtranslate('LBL_FATHER', $QUALIFIED_MODULE)}} selected {/if}>
 						{vtranslate('LBL_FATHER', $QUALIFIED_MODULE)}</option>
 
@@ -101,5 +103,8 @@
 			<input class="btn btn-success" type="submit" value="Save" name="saverecord" accesskey="LBL_SAVE_BUTTON_KEY" title="Save">
 		</div>    	 	
 	</form>
+
+	
+	</div>
 </div>
 {/strip}

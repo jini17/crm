@@ -102,11 +102,12 @@ class Users_EmergencyRecord_Model extends Users_Record_Model {
           	 //check the contact exist or not
            	 $resultcheck  = $db->pquery("SELECT * FROM secondcrm_emergencycontact WHERE user_id=?",array($userid));
 		 if($db->num_rows($resultcheck) == 0){
-			$resultIns = $db->pquery("INSERT INTO secondcrm_emergencycontact(user_id,contact_name,isview,home_phone,office_phone,mobile,relationship) VALUES(?,?,?,?,?,?,?)",array($userid,$contact_name,$isview,$home_phone,$office_phone,$mobile,$relationship));
+			$resultIns = $db->pquery("INSERT INTO secondcrm_emergencycontact(user_id,contact_name,home_phone,office_phone,mobile,relationship) VALUES(?,?,?,?,?,?)",array($userid,$contact_name,$home_phone,$office_phone,$mobile,$relationship));
 			return 0;
 		 } else {
-		        $resultIns = $db->pquery("UPDATE secondcrm_emergencycontact SET contact_name =?,isview=?,home_phone=?,office_phone=?,mobile=?,relationship=? WHERE user_id=?",array($contact_name,$isview,$home_phone,$office_phone,$mobile,$relationship,$userid));
+		        $resultIns = $db->pquery("UPDATE secondcrm_emergencycontact SET contact_name =?,home_phone=?,office_phone=?,mobile=?,relationship=? WHERE user_id=?",array($contact_name,$home_phone,$office_phone,$mobile,$relationship,$userid));
 			return 1;
 		 }    
         }
  }  
+

@@ -209,7 +209,11 @@ Reports_Edit_Js("Reports_Edit1_Js",{},{
 	 */
 	registerSelect2ElementForSecondaryModulesSelection : function() {
 		var secondaryModulesContainer = this.getSecondaryModuleContainer();
-		vtUtils.showSelect2ElementView(secondaryModulesContainer,{maximumSelectionSize: 2});
+		if(jQuery('#primary_module').val()=='Users'){
+		     vtUtils.showSelect2ElementView(secondaryModulesContainer,{maximumSelectionSize: 10});
+		} else{
+		     vtUtils.showSelect2ElementView(secondaryModulesContainer,{maximumSelectionSize: 2});
+		}
 	},
 	
 	/**
