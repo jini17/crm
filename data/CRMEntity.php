@@ -2245,8 +2245,12 @@ class CRMEntity {
 				}
 			}
 		}
-
-		$query = "from $moduletable inner join vtiger_crmentity on vtiger_crmentity.crmid=$moduletable.$moduleindex";
+		if($module=='Users') {
+			$query = "from $moduletable as {$moduletabl}Employee  inner join vtiger_crmentity on vtiger_crmentity.smownerid={$moduletabl}Employee.id";
+		} else {
+			$query = "from $moduletable inner join vtiger_crmentity on vtiger_crmentity.crmid=$moduletable.$moduleindex";	
+		}
+		
 
 		// Add the pre-joined custom table query
 		$query .= " "."$cfquery";

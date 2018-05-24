@@ -153,14 +153,7 @@ class Users_WorkExpRecord_Model extends Users_Record_Model {
 	public function getUserWorkExpList($userId) {
 			
 		$db  = PearDatabase::getInstance();
-		$sql = "SELECT tblSCW.uw_id, tblSCW.company_id,tblSCC.company_title, 
-				tblSCD.designation,
-				tblSCL.location,
-				DATE_FORMAT(tblSCW.start_date,'%b-%Y') AS start_date, DATE_FORMAT(tblSCW.end_date,'%b-%Y') AS end_date, tblSCW.description, tblSCW.IsView AS isview
-                                FROM secondcrm_userworkexp tblSCW 
-				LEFT JOIN secondcrm_company tblSCC ON tblSCC.company_id	= tblSCW.company_id
-                                LEFT JOIN secondcrm_designation tblSCD ON tblSCD.designation_id = tblSCW.designation_id
-				LEFT JOIN secondcrm_location tblSCL ON tblSCL.location_id = tblSCW.location_id
+		$sql = "SELECT * from vtiger_workexperience
 			WHERE tblSCW.user_id=? AND tblSCW.deleted=0"; 
 		$params = array($userId);
 		$result = $db->pquery($sql,$params);
