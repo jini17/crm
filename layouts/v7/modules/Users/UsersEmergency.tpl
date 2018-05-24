@@ -1,4 +1,3 @@
-<script src="layouts/vlayout/modules/Users/resources/Emergency.js?v=6.1.0" type="text/javascript"></script>
 {strip}
 {assign var=EDIT_EMERGENCY_URL value=$EMERGENCY_RECORD_MODEL->getEditEmergencyUrl()}
 <div id="UserEmergencyContainer">
