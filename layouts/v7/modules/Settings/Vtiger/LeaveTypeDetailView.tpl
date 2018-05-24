@@ -37,10 +37,10 @@
                                 Select
                             </td>
                             <td>
-                                Claim Type Title
+                                Leave Type Title
                             </td>
                             <td>
-                                Claim Code
+                                Leave Type Code
                             </td>
                             <td>
                                 Status

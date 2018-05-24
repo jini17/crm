@@ -14,33 +14,30 @@ class Settings_Vtiger_LeaveTypeListView_View extends Settings_Vtiger_Index_View 
         $viewer = $this->getViewer($request);
         global $adb;
         //$adb->setDebug(true);
-        $query = "SELECT * FROM vtiger_leavetype INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_claimtype.claimtypeid WHERE deleted = 0";
+        $query = "SELECT * FROM vtiger_leavetype INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leavetype.leavetypeid WHERE deleted = 0";
         $result = $adb->pquery($query,array());
         $count = $adb->num_rows($result);
-        //echo "<pre>"; print_r($count); die;
+
         $values = array();
         $users = array();
         $type = array();
 
         for($i=0;$i<$count;$i++){
-            $values[$i]['checkbox'] = $adb->query_result($result, $i,'claimtypeid');
-            $values[$i]['claim_type'] = $adb->query_result($result, $i,'claim_type');
-            $values[$i]['claim_code'] = $adb->query_result($result, $i,'claim_code');
-            $values[$i]['claim_status'] = $adb->query_result($result, $i,'claim_status');
-            if($values[$i]['claim_status'] == 'on'){
-                $values[$i]['claim_status'] = 'Active';
+            $values[$i]['checkbox'] = $adb->query_result($result, $i,'leavetypeid');
+            $values[$i]['leavetype_type'] = $adb->query_result($result, $i,'title');
+            $values[$i]['leavetype_code'] = $adb->query_result($result, $i,'leavecode');
+            $values[$i]['leavetype_status'] = $adb->query_result($result, $i,'leavetype_status');
+            if($values[$i]['leavetype_status'] == 'on'){
+                $values[$i]['leavetype_status'] = 'Active';
             }else{
-                $values[$i]['claim_status'] = 'Inactive';
+                $values[$i]['leavetype_status'] = 'Inactive';
             }
 
         }
 
 
-        //echo "<pre>"; print_r($values); die;
 
         $viewer->assign('VALUES', $values);
-        //$viewer->assign('USERS', $users);
-        //$viewer->assign('TYPE', $type);
 
         $viewer->view('LeaveTypeDetailView.tpl', $qualifiedName);
     }
