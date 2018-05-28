@@ -17,7 +17,7 @@ class Settings_LoginHistory_ListView_Model extends Settings_Vtiger_ListView_Mode
         $module = $this->getModule();
 		$userNameSql = getSqlForNameInDisplayFormat(array('first_name'=>'vtiger_users.first_name', 'last_name' => 'vtiger_users.last_name'), 'Users');
 		
-		$query = "SELECT login_id, $userNameSql AS user_name, user_ip, logout_time, login_time, vtiger_loginhistory.status FROM $module->baseTable 
+		$query = "SELECT login_id, $userNameSql AS user_name, user_ip, logout_time, login_time, vtiger_loginhistory.status, session_id FROM $module->baseTable 
 				INNER JOIN vtiger_users ON vtiger_users.user_name = $module->baseTable.user_name";
 		
 		$search_key = $this->get('search_key');

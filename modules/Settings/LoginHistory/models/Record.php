@@ -58,6 +58,11 @@ class Settings_LoginHistory_Record_Model extends Settings_Vtiger_Record_Model {
 			} else {
 				$fieldValue = '---';
 			}
+		} else if($fieldName =='session_id') {
+			if($fieldValue !='') {
+				//$javasc="window.open('index.php?module=LoginHistory&parent=Settings&view=ShowUpdates&session=".$fieldValue."','','width=600,height=400');";
+				$fieldValue = "<a class='showUpdates' data-sessionid=$fieldValue>View</a>";
+			}			
 		}
 		return $fieldValue;
 	}
