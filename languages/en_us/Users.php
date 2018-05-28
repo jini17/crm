@@ -472,6 +472,7 @@ $languageStrings = array(
 'LBL_LEAVE_APPROVAL'=>'Leave Pending Approval',
 'LBL_LEAVE_APPROVED'=>'Click for leave approval',
 'LBL_HALF_DAY'=>'Half Day?',
+'LBL_SESSION_EXPIRED'=>'Session Expired, try again !!',
 //End of Contacts
 );
 
