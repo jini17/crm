@@ -93,7 +93,30 @@ class Vtiger_WebUI extends Vtiger_EntryPoint {
 
 	function process (Vtiger_Request $request) {
 		Vtiger_Session::init();
-		
+		global $site_URL;
+
+			//added by jitu@secondcrm for session inactivity handling		
+			$loginpageinfo  = Users_Record_Model::loginPageDetails();
+			
+			$timein			= Vtiger_Session::get('timein');	
+			$maxstay 		= $loginpageinfo['sessionout']*60;
+
+			if($maxstay =='' || $maxstay==0){
+				$maxstay = 15*60;
+			}	
+
+			$stayduration = $loginpageinfo['sessionout'];		
+			$session_life = time() - $timein;		
+				
+			if($session_life > $maxstay && $timein!='') {  		
+			     Vtiger_Session::destroy();	
+			     header("location:".$site_URL."index.php?module=Users&parent=Settings&view=Login&error=7"); 
+			     exit;		
+	  		}		
+			Vtiger_Session::set('timein', time());		
+			//end here		
+	
+
 		// Better place this here as session get initiated
 		//skipping the csrf checking for the forgot(reset) password 
 		if($request->get('mode') != 'reset' && $request->get('action') != 'Login' && $request->get('mode') != 'fromMig')

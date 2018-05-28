@@ -1,19 +1,17 @@
 {strip}
-<style>
-.select2
-{
-	width:300px;
-}
-</style>
-<div id="formcontainer">
-	<div class="modal-header contentsBackground">
+ <div class="educationModalContainer modal-dialog modal-xs modelContainer">
+ 	{if $LANG_ID neq ''}
+ 	 	{assign var="HEADER_TITLE" value={vtranslate('LBL_EDIT_LANGUAGE', $QUALIFIED_MODULE)}}
+	{else} 
+		 {assign var="HEADER_TITLE" value={vtranslate('LBL_ADD_LANGUAGE', $QUALIFIED_MODULE)}}
+	{/if}
+ 	{include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
+ 	
+	<div class="modal-content">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		{if $LANG_ID neq ''}
-		 <h3>{vtranslate('LBL_EDIT_LANGUAGE', $MODULE)}</h3>
-		{else} 
-		 <h3>{vtranslate('LBL_ADD_LANGAUGE', $MODULE)}</h3>
-		{/if}
-	</div>
+		
+
+	
 	<form id="editLanguage" name="editLanguage" class="form-horizontal" method="POST">			
 		<input type="hidden" value="Users" name="module">
 		<input type="hidden" name="record" value="{$LANG_ID}" />	
@@ -21,10 +19,12 @@
 		<input type="hidden" value="saveLanguage" name="mode">
 		<input id="current_user_id" name="current_user_id" type="hidden" value="{$USERID}">	
 		<div class="modal-body">	
+
 			<div class="control-group">
 				<label class="control-label"><span class="redColor">*</span>{vtranslate('LBL_SELECT_LANGUAGE', $MODULE)}</label>
 				<div class="controls">
-					<select  class="select2" {if $LANGUAGE_DETAIL.language_id neq ''} disabled {/if}  onchange="updateSelectBox('language','languagebox');" name="language" id="language">		{foreach key=LANG_ID item=LANG_MODEL from=$LANGUAGE_LIST}
+					<select  class="select2" {if $LANGUAGE_DETAIL.language_id neq ''} disabled {/if}  onchange="updateSelectBox('language','languagebox');" name="language" id="language">	
+						{foreach key=LANG_ID item=LANG_MODEL from=$LANGUAGE_LIST name=institutionIterator}
 							<option value="{$LANG_MODEL.language_id}" {if $LANGUAGE_DETAIL.language_id eq $LANG_MODEL.language_id} selected {/if}>{$LANG_MODEL.language}</option>
 						{/foreach}
 							<option value="0">{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> 	
@@ -67,8 +67,13 @@
 			</div>
 			<input class="btn btn-success" type="submit" value="Save" name="saverecord" accesskey="LBL_SAVE_BUTTON_KEY" title="Save">
 		</div>    	  		
-	</form>			
-</div>	
+	</form>		
+
+
+
+
+	</div>
+</div>
 {literal}
 <script>
 

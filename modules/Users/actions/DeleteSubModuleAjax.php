@@ -1,16 +1,16 @@
 <?php
-class Users_DeleteSubModuleAjax_Action extends Vtiger_Delete_Action {
+class Users_DeleteSubModuleAjax_Action extends Vtiger_BasicAjax_Action {
 	
 	function __construct() {
 		parent::__construct();
 		$this->exposeMethod('deleteSubModule');
 		/*$this->exposeMethod('deleteEducation');
 		$this->exposeMethod('deleteProject');
-		$this->exposeMethod('deleteWorkExp');
+		$this->exposeMethod('deleteWorkExp');*/
 		$this->exposeMethod('deleteLanguage');	
 		$this->exposeMethod('deleteSkill');
 		$this->exposeMethod('deleteLeave');	
-		$this->exposeMethod('cancelLeave');	*/
+		$this->exposeMethod('cancelLeave');	
 	}
 
 	public function process(Vtiger_Request $request) {
