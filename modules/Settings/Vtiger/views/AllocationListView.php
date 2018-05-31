@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: root
  * Date: 5/18/18
- * Time: 6:27 PM
+ * Time: 6:14 PM
  */
 
 
@@ -13,35 +13,62 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
         $qualifiedName = $request->getModule(false);
         $viewer = $this->getViewer($request);
         global $adb;
+        //$adb->setDebug(true);
+        $query = "SELECT * FROM Allocation_list";
+        $resultalloc = $adb->pquery($query,array());
+        $count = $adb->num_rows($resultalloc);
 
-        $query = "SELECT * FROM allowed_ip ";
-        $result = $adb->pquery($query,array());
-        $count = $adb->num_rows($result);
         $values = array();
         $users = array();
         $type = array();
 
         for($i=0;$i<$count;$i++){
-            $values[$i]['checkbox'] = $adb->query_result($result, $i,'ip');
-            $values[$i]['ip'] = $adb->query_result($result, $i,'ip');
-            $values[$i]['user_name'] = $adb->query_result($result, $i,'user_name');
-            $values[$i]['type'] = $adb->query_result($result, $i,'type');
+            $values[$i]['checkbox'] = $adb->query_result($resultalloc, $i,'allocation_id');
+            $values[$i]['allocationtitle'] = $adb->query_result($resultalloc, $i,'allocation_title');
+            $leavetype_id = $adb->query_result($resultalloc, $i,'leavetype_id');
 
+
+            /**** Getting the name of the leave type ******************/
+            $query = "SELECT * FROM vtiger_leavetype WHERE leavetypeid = ?";
+            $result = $adb->pquery($query,array($leavetype_id));
+            $values[$i]['leavetype'] = $adb->query_result($result,0,'title');
+
+            /**** Getting the name of the claim type ******************/
+            $claimtype_id = $adb->query_result($resultalloc, $i,'claimtype_id');
+            $query = "SELECT * FROM vtiger_claimtype WHERE claimtypeid = ?";
+            $result = $adb->pquery($query,array($claimtype_id));
+            $values[$i]['claimtype'] = $adb->query_result($result,0,'claim_type');
+
+            /**** Getting the name of the grade ******************/
+            $grade_id = $adb->query_result($resultalloc, $i,'grade_id');
+            $query = "SELECT * FROM vtiger_grade WHERE gradeid = ?";
+            $result = $adb->pquery($query,array($grade_id));
+            $values[$i]['grade'] = $adb->query_result($result,0,'grade');
+
+
+
+           // $benifittype_id = $adb->query_result($result, $i,'benefittype_id');
+            $status = $adb->query_result($resultalloc, $i,'status');
+           // echo "<br>Status : ".$status;
+            if($status=='on'){
+                $values[$i]['status'] = 'Active';
+            }
+            else{
+                $values[$i]['status'] = 'Inactive';
+            }
 
         }
 
-        //echo "<pre>"; print_r($values); die;
+       //echo "<pre>"; print_r($values); die;
 
         $viewer->assign('VALUES', $values);
-        //$viewer->assign('USERS', $users);
-        //$viewer->assign('TYPE', $type);
 
-       // $viewer->view('AllowedIp.tpl', $qualifiedName);
+        $viewer->view('AllocationDetailView.tpl', $qualifiedName);
     }
 
     function getPageTitle(Vtiger_Request $request) {
         $qualifiedModuleName = $request->getModule(false);
-        return vtranslate('LBL_ALLOWED_IP',$qualifiedModuleName);
+        return vtranslate('LBL_ALLOCATION_TYPE',$qualifiedModuleName);
     }
 
     /**
@@ -52,9 +79,9 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
     function getHeaderScripts(Vtiger_Request $request) {
         $headerScriptInstances = parent::getHeaderScripts($request);
         $moduleName = $request->getModule();
-
+        //echo "<pre>"; print_r($moduleName); die;
         $jsFileNames = array(
-            "modules.Settings.$moduleName.resources.AllowedIp",
+            "modules.Settings.$moduleName.resources.Allocation",
             '~/libraries/jquery/colorbox/jquery.colorbox-min.js',
         );
 
