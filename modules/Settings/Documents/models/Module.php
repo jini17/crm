@@ -13,7 +13,7 @@ class Settings_Documents_Module_Model extends Settings_Vtiger_Module_Model {
 
 	var $baseTable = 'vtiger_notes';
 	var $baseIndex = 'notesid';
-	var $listFields = array('note_no' => 'Document Serial No','title'=>'Title', 'filename' => 'File Name', 'filedownloadcount'=>'Download Count', 'filesize'=>'Size of File');
+	var $listFields = array('note_no' => 'Document Serial No','title'=>'Title', 'filename' => 'File Name', 'filesize'=>'Size of File');
 	var $nameFields = array('note_no');
 	var $name = 'Documents';
 
