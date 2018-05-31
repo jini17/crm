@@ -24,6 +24,7 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
 
         for($i=0;$i<$count;$i++){
             $values[$i]['checkbox'] = $adb->query_result($resultalloc, $i,'allocation_id');
+            $values[$i]['allocationtitle'] = $adb->query_result($resultalloc, $i,'allocation_title');
             $leavetype_id = $adb->query_result($resultalloc, $i,'leavetype_id');
 
 
@@ -47,8 +48,14 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
 
 
            // $benifittype_id = $adb->query_result($result, $i,'benefittype_id');
-
-            $values[$i]['status'] = $adb->query_result($result, $i,'status');
+            $status = $adb->query_result($resultalloc, $i,'status');
+           // echo "<br>Status : ".$status;
+            if($status=='on'){
+                $values[$i]['status'] = 'Active';
+            }
+            else{
+                $values[$i]['status'] = 'Inactive';
+            }
 
         }
 
@@ -72,7 +79,7 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
     function getHeaderScripts(Vtiger_Request $request) {
         $headerScriptInstances = parent::getHeaderScripts($request);
         $moduleName = $request->getModule();
-
+        //echo "<pre>"; print_r($moduleName); die;
         $jsFileNames = array(
             "modules.Settings.$moduleName.resources.Allocation",
             '~/libraries/jquery/colorbox/jquery.colorbox-min.js',

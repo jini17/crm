@@ -86,9 +86,8 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
 
     public function EditAllocationForm($request){
-        //echo "<pre>"; print_r($request); die;
         global $adb;
-        $adb->setDebug(true);
+      //  $adb->setDebug(true);
         $qualifiedModuleName = $request->getModule(false);
         $values = explode(',', $request->get('values'));
 
@@ -96,42 +95,86 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             return false;
         }
 
-        $query = "SELECT * FROM `vtiger_Allocation` WHERE Allocationid = ?";
+        $query = "SELECT * FROM `Allocation_list` WHERE allocation_id = ?";
         $result = $adb->pquery($query,array($values[0]));
         $count = $adb->num_rows($result);
         //echo "Nirbhay".$count;die;
-        $leave_type = array();
+        $allocation = array();
 
         if($count>0){
 
-            $leave_type['leave_type_title'] = $adb->query_result($result, 0,'title');
-            $leave_type['leave_type_leavecode'] = $adb->query_result($result, 0,'leavecode');
-            $leave_type['leave_type_description'] = $adb->query_result($result, 0,'description');
-            $leave_type['leave_type_midyearallocation'] = $adb->query_result($result, 0,'midyearallocation');
-            $leave_type['leave_type_leavefrequency'] = $adb->query_result($result, 0,'leavefrequency');
-            $leave_type['leave_type_status'] = $adb->query_result($result, 0,'Allocation_status');
-            $leave_type['leave_type_carryforward'] = $adb->query_result($result, 0,'carryforward');
-            $leave_type['leave_type_halfdayallowed'] = $adb->query_result($result, 0,'halfdayallowed');
-            $leave_type['leave_type_id'] = $adb->query_result($result, 0,'Allocationid');
+            $allocation['allocation_id'] = $adb->query_result($result, 0,'allocation_id');
+            $allocation['leavetype_id'] = $adb->query_result($result, 0,'leavetype_id');
+            $allocation['grade_id'] = $adb->query_result($result, 0,'grade_id');
+            $allocation['benifittype_id'] = $adb->query_result($result, 0,'benifittype_id');
+            $allocation['claimtype_id'] = $adb->query_result($result, 0,'claimtype_id');
+            $allocation['status'] = $adb->query_result($result, 0,'status');
+            $allocation['allocation_code'] = $adb->query_result($result, 0,'allocation_code');
+            $allocation['allocation_desc'] = $adb->query_result($result, 0,'allocation_desc');
+            $allocation['age_leave'] = $adb->query_result($result, 0,'age_leave');
+            $allocation['age_claim'] = $adb->query_result($result, 0,'age_claim');
+            $allocation['numberofleavesless'] = $adb->query_result($result, 0,'numberofleavesless');
+            $allocation['numberofleavesmore'] = $adb->query_result($result, 0,'numberofleavesmore');
+            $allocation['claimamountless'] = $adb->query_result($result, 0,'claimamountless');
+            $allocation['claimamountmore'] = $adb->query_result($result, 0,'claimamountmore');
+            $allocation['allocationtitle'] = $adb->query_result($result, 0,'allocation_title');
 
 
         }
 
+
+        $query = "SELECT * FROM vtiger_grade INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_grade.gradeid WHERE deleted = 0";
+        $result = $adb->pquery($query,array());
+        $count = $adb->num_rows($result);
+
+        for($i=0;$i<$count;$i++){
+            $grade[$i]['id'] = $adb->query_result($result,$i, 'gradeid');
+            $grade[$i]['grade'] = $adb->query_result($result,$i, 'grade');
+        }
+
+
+
+        $query = "SELECT * FROM vtiger_leavetype INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leavetype.leavetypeid WHERE deleted = 0";
+        $result = $adb->pquery($query,array());
+        $count = $adb->num_rows($result);
+
+        for($i=0;$i<$count;$i++){
+            $leavetype[$i]['id'] = $adb->query_result($result,$i, 'leavetypeid');
+            $leavetype[$i]['title'] = $adb->query_result($result,$i, 'title');
+        }
+
+
+
+        $query = "SELECT * FROM vtiger_claimtype INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_claimtype.claimtypeid WHERE deleted = 0";
+        $result = $adb->pquery($query,array());
+        $count = $adb->num_rows($result);
+
+        for($i=0;$i<$count;$i++){
+            $claimtype[$i]['id'] = $adb->query_result($result,$i, 'claimtypeid');
+            $claimtype[$i]['claimtype'] = $adb->query_result($result,$i, 'claim_type');
+        }
+
+
+
+
         $qualifiedModuleName = $request->getModule(false);
 
-
+      //  echo "<pre>"; print_r($allocation); die;
 
         $viewer = $this->getViewer($request);
-        $viewer->assign("VALUES",$leave_type);
-        $viewer->view('EditAllocation.tpl', $qualifiedModuleName);
+        $viewer->assign("LEAVETYPE",$leavetype);
+        $viewer->assign("CLAIMTYPE",$claimtype);
+        $viewer->assign("GRADE",$grade);
+        $viewer->assign("VALUES",$allocation);
+        $viewer->view('AllocationEditView.tpl', $qualifiedModuleName);
     }
 
     public function DeleteAllocation($request){
         global $adb;
-        $adb->setDebug(true);
+        //$adb->setDebug(true);
         $SeperatedValues = explode(',', $request->get('values'));
         $stringVal ='';
-        $query = "UPDATE vtiger_crmentity SET deleted = 1 WHERE crmid IN ( ";
+        $query = "DELETE FROM Allocation_list WHERE Allocation_list.allocation_id IN ( ";
 
         for($i=0;$i<count($SeperatedValues);$i++){
             if($i!=(count($SeperatedValues)-1))
@@ -144,16 +187,17 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         $result = $adb->pquery($query,array());
 
         $responses = [true];
-
+        //die;
         $responses->emit;
     }
 
     public function AddAllocation($request){
+        //echo "Here";die;
         global $adb;
+        //$adb->setDebug(true);
         $insertArray = $request->get('form');
         $Allocation = array();
-
-
+       // echo "<pre>"; print_r($insertArray); die;
         for($i=0;$i<count($insertArray);$i++) {
             $name = $insertArray[$i]['name'];
             $Allocation[$name] = $insertArray[$i]['value'];
@@ -171,25 +215,17 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         $Allocationid = $adb->getUniqueID('Allocation_list');
 
 
-        $crmentityinsertquery = "INSERT INTO vtiger_crmentity (crmid, smcreatorid, smownerid, modifiedby, setype, description, createdtime, modifiedtime, viewedtime, status, version, presence, deleted, smgroupid, source, label) VALUES(?,?,?,?,?,?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,?,?,?,?,?,?,?)";
 
-        $params = array($Allocationid,1,1,1,"Leave Type",'','',1,1,0,'','','');
 
-        $crmentityinsertresult = $adb->pquery($crmentityinsertquery,array($params));
-
-        if($crmentityinsertresult){
-            $query = "INSERT INTO `vtiger_Allocation` (`Allocationid`, `title`, `leavecode`,`Allocation_status`,`description`,`midyearallocation`,`halfdayallowed`,`carryforward`,`leavefrequency`) VALUES (?,?,?,?,?,?,?,?,?)";
+            $query = "INSERT INTO `Allocation_list` (`allocation_id`,`allocation_title`,`allocation_code`, `status`,`allocation_desc`, `grade_id`,`leavetype_id`,`age_leave`,`numberofleavesless`,`numberofleavesmore`,`claimtype_id`,`age_claim`,`claimamountless`,`claimamountmore`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $result = $adb->pquery($query,array($Allocationid,$Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'],$Allocation['Allocation_Desc
-'],$Allocation['Allocation_MidYearAllcoation'],$Allocation['Allocation_HalfdayAllowed'],$Allocation['Allocation_CarryForward'],$Allocation['Allocation_LeaveFrequency']));
+'],$Allocation['Allocation_grade'],$Allocation['Allocation_leavetype'],$Allocation['ageleave'],$Allocation['numberofleavesless'],$Allocation['numberofleavesmore'],$Allocation['Allocation_claimtype'],$Allocation['ageclaim'],$Allocation['amountclaimless'],$Allocation['amountclaimmore']));
 
-        }
+
+
+       // die;
+
         if($result){
-            $query = "INSERT INTO vtiger_Allocationcf (Allocationid) VALUES (?)";
-            $claimtypetables_result = $adb->pquery($query,array($Allocationid));
-        }
-
-
-        if($claimtypetables_result){
             $response = "success";
         }else{
             $response = "failed";
@@ -201,7 +237,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
     public function UpdateAllocation($request){
         global $adb;
-
+        $adb->setDebug(true);
         $insertArray = $request->get('form');
         // echo "<pre>"; print_r($insertArray); die;
         $Allocation = array();
@@ -218,17 +254,10 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             $Allocation['status']= 'off';
         }
 
-        if(!isset($Allocation['Allocation_HalfdayAllowed'])){
-            $Allocation['Allocation_HalfdayAllowed']= 'off';
-        }
 
-        if(!isset($Allocation['Allocation_CarryForward'])){
-            $Allocation['Allocation_CarryForward']= 'off';
-        }
-
-        $query = "UPDATE `vtiger_Allocation` SET `title`=?, `leavecode`=?, `Allocation_status`=?, `description`=?, `midyearallocation`=?, halfdayallowed=?,`carryforward`=?, `leavefrequency`=? WHERE Allocationid=?";
+        $query = "UPDATE `Allocation_list` SET `allocation_title`=? ,`allocation_code`=? , `status`=? ,`allocation_desc`=? , `grade_id`=? ,`leavetype_id`=? ,`age_leave`=? ,`numberofleavesless`=? ,`numberofleavesmore`=? ,`claimtype_id`=? ,`age_claim`=? ,`claimamountless` =? ,`claimamountmore`=? WHERE allocation_id = ?";
         $result = $adb->pquery($query,array($Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'],$Allocation['Allocation_Desc
-'],$Allocation['Allocation_MidYearAllcoation'],$Allocation['Allocation_HalfdayAllowed'],$Allocation['Allocation_CarryForward'],$Allocation['Allocation_LeaveFrequency'],$Allocation['leave_type_id']));
+'],$Allocation['Allocation_grade'],$Allocation['Allocation_leavetype'],$Allocation['ageleave'],$Allocation['numberofleavesless'],$Allocation['numberofleavesmore'],$Allocation['Allocation_claimtype'],$Allocation['ageclaim'],$Allocation['amountclaimless'],$Allocation['amountclaimmore'],$Allocation['allocation_id']));
 
 
 

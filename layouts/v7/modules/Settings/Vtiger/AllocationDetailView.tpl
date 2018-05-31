@@ -37,13 +37,16 @@
                                 Select
                             </td>
                             <td>
-                                Grade
+                                Allocation Title
                             </td>
                             <td>
-                                Leave Type
+                                 Leave Type
                             </td>
                             <td>
                                 Claim Type
+                            </td>
+                            <td>
+                                Grade
                             </td>
 
                             <td>

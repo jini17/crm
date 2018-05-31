@@ -146,7 +146,7 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
         var aDeferred = jQuery.Deferred();
         jQuery("#addItem").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
         jQuery("#addItem").click(function () {
-            console.log("add item");
+            //console.log("add item");
             app.helper.showProgress();
             var params = {
                 'module' : app.getModuleName(),
@@ -183,7 +183,8 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
         jQuery(document).ready(function () {
             jQuery(document).off('click',"#saveButtonRule"); /**Unbinded to avoid infinite loop on every register***/
             jQuery(document).on('click', "#saveButtonRule", function () {
-                var form = jQuery('#AddRule').serializeArray();
+              //  alert("Here");
+                var form = jQuery('#AddAllocation').serializeArray();
 
 
                 if(jQuery("#EditAllocationContainer").length >0){
