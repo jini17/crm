@@ -62,7 +62,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveWorkExp(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
 		
 		$response = new Vtiger_Response();
 		try{
@@ -80,7 +81,9 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveLanguage(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
+		
 		$response = new Vtiger_Response();
 		try{
 		    $return = Users_SkillsRecord_Model::saveSoftSkillDetail($request);
@@ -101,7 +104,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveEmergencyContact(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
 		
 		$response = new Vtiger_Response();
 		try{
@@ -118,7 +122,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveSkill(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
 		
 		$response = new Vtiger_Response();
 		try{

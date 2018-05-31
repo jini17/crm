@@ -444,6 +444,8 @@ class ReportRun extends CRMEntity {
 		if ($outputformat == "HTML" || $outputformat == "PDF" || $outputformat == "PRINT") {
 			if($this->primarymodule == 'ModComments') {
 				$columnslist['vtiger_modcomments:related_to:ModComments_Related_To_Id:related_to:V'] = "vtiger_modcomments.related_to AS '".$this->primarymodule."_LBL_ACTION'";
+			} else if($this->primarymodule == 'Users') {
+				$columnslist['vtiger_users:id:LBL_ACTION:id:I'] = "vtiger_users.id AS '".$this->primarymodule."_LBL_ACTION'";
 			} else {
 				$columnslist['vtiger_crmentity:crmid:LBL_ACTION:crmid:I'] = 'vtiger_crmentity.crmid AS "' . $this->primarymodule . '_LBL_ACTION"';
 			}
@@ -2878,7 +2880,7 @@ class ReportRun extends CRMEntity {
 		} else {
 			if ($module != '') {
 				$focus = CRMEntity::getInstance($module);
-				$query = $focus->generateReportsQuery($module, $this->queryPlanner) .
+				echo $query = $focus->generateReportsQuery($module, $this->queryPlanner) .
 						$this->getRelatedModulesQuery($module, $this->secondarymodule) .
 						getNonAdminAccessControlQuery($this->primarymodule, $current_user) .
 						" WHERE vtiger_crmentity.deleted=0";
