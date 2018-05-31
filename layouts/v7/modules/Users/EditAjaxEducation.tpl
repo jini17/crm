@@ -79,11 +79,11 @@
 							<label class="control-label" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_CURRENTLY_STUDYING', $QUALIFIED_MODULE)}</label>
 						</div>
 						<div class="controls col-md-8">
-					  		<input type="checkbox" class="currentstudying" name="chkstudying" id="chkstudying" {if $EDUCATION_DETAIL.is_studying eq 1} checked {/if}>
+					  		<input type="checkbox" class="currentstudying" name="chkstudying" id="chkstudying" {if $EDUCATION_DETAIL.currently_studying eq 1} checked {/if}>
 						</div>
 					</div>
 				</div>	
-				<div class="form-group {if $EDUCATION_DETAIL.is_studying eq 1} hide{/if}" id="enddate_div" style="margin-bottom: 0px !important;">
+				<div class="form-group {if $EDUCATION_DETAIL.currently_studying eq 1} hide{/if}" id="enddate_div" style="margin-bottom: 0px !important;">
 					<div class="col-md-12" style="margin-bottom: 15px;">
 						<div class="col-md-4">
 							<label class="control-label" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_END_DATE', $QUALIFIED_MODULE)}</label>
