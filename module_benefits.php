@@ -1,4 +1,4 @@
-<?php
+u<?php
 <<<<<<< HEAD
 include_once('vtlib/Vtiger/Menu.php');
 include_once('vtlib/Vtiger/Module.php');

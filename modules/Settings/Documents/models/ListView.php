@@ -17,7 +17,7 @@ class Settings_Documents_ListView_Model extends Settings_Vtiger_ListView_Model {
         $query = "SELECT * FROM vtiger_notes INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_notes.notesid 
         			INNER JOIN vtiger_notescf ON vtiger_notescf.notesid=vtiger_notes.notesid WHERE vtiger_crmentity.deleted=0 
         				AND vtiger_notescf.doc_type='HR'";
-        $query .=' AND vtiger_crmentity.smownerid = '.$currentUser->getId();
+      //  $query .=' AND vtiger_crmentity.smownerid = '.$currentUser->getId();
         return $query;
     }
 }

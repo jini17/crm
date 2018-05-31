@@ -426,6 +426,8 @@ $languageStrings = array(
 	'LBL_ASSIGN_COMPANY' => 'Assign Company', //edited by siti@secondcrm on 25feb2015
 	'LBL_EMPLOYEMENT_DETAILS'=>'Employment Details',
 	'LBL_HR_DOCUMENTS'=>'HR Documents',
+	'LBL_EMPLOYEMENT'=>'Employment',
+	'EmployeeContract'=>'Employement Detail',
 
 
 );
