@@ -115,8 +115,8 @@ class Users_EduRecord_Model extends Users_Record_Model {
 		$educationDetail['institution_name'] = $db->query_result($result, 0, 'institution_name');      
 		$educationDetail['educationid'] = $db->query_result($result, 0, 'educationid');
 		$educationDetail['currently_studying'] = $db->query_result($result, 0, 'currently_studying');	
-		$educationDetail['start_date'] = $db->query_result($result, 0, 'start_date');
-		$educationDetail['end_date'] = $db->query_result($result, 0, 'end_date');
+		$educationDetail['start_date'] = date('d-m-Y',strtotime($db->query_result($result, 0, 'start_date')));
+		$educationDetail['end_date'] = date('d-m-Y',strtotime($db->query_result($result, 0, 'end_date')));
 		$educationDetail['education_level'] = $db->query_result($result, 0, 'education_level');
 		$educationDetail['area_of_study'] = $db->query_result($result,0, 'area_of_study');
 		$educationDetail['description'] = $db->query_result($result, 0, 'description');
