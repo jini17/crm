@@ -81,7 +81,18 @@
 											{assign var=LISTVIEW_HEADERNAME value=$LISTVIEW_HEADER->get('name')}
 											{assign var=LAST_COLUMN value=$LISTVIEW_HEADER@last}
 											<td class="listViewEntryValue textOverflowEllipsis {$WIDTHTYPE}" width="{$WIDTH}%" nowrap>
-												{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}
+												 {if $LISTVIEW_HEADERNAME eq 'filename'}
+												 {assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($LISTVIEW_ENTRY->getId())}
+								                <a name="downloadfile" target="_blank" href="{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}">
+								                	{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}</a>
+								             	{else if $LISTVIEW_HEADERNAME eq 'letter_of_appointment'} 
+									             	{assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($LISTVIEW_ENTRY->getId())}
+									             		<a name="downloadfile" target="_blank" href="{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}">{$LISTVIEW_HEADERNAME}
+									                	{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}</a>
+								             	{else}
+								             		{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}   
+								           		 {/if}	
+
 												{if $LAST_COLUMN && $LISTVIEW_ENTRY->getRecordLinks()}
 													</td>
 												{/if}

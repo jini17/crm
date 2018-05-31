@@ -9,13 +9,49 @@
  ************************************************************************************/
 
 
-	class Timesheet_Listview_View extends Vtiger_List_View {
+	class Timesheet_Listview_View extends Vtiger_Index_View {
 
-		function process (Vtiger_Request $request) {
-			$viewer = $this->getViewer ($request);
+		public function preProcess(Vtiger_Request $request, $display = true) {
+			$viewer = $this->getViewer($request);
 			$moduleName = $request->getModule();
-			$viewer->view('Timesheet.tpl', $moduleName);
-		}	
+			$viewer->assign('MODULE_NAME', $moduleName);
+			$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
+			$viewer->assign('IS_CREATE_PERMITTED', $moduleModel->isPermitted('CreateView'));
+			$viewer->assign('IS_MODULE_EDITABLE', $moduleModel->isPermitted('EditView'));
+			$viewer->assign('IS_MODULE_DELETABLE', $moduleModel->isPermitted('Delete'));
+
+			parent::preProcess($request, false);
+			if($display) {
+				$this->preProcessDisplay($request);
+			}
+		}
+
+		protected function preProcessTplName(Vtiger_Request $request) {
+			return 'ListviewPreProcess.tpl';
+		}
+
+		public function process(Vtiger_Request $request) {
+			$mode = $request->getMode();
+			
+			$viewer = $this->getViewer($request);
+			$currentUserModel = Users_Record_Model::getCurrentUserModel();
+			
+			$viewer->assign('CURRENT_USER', $currentUserModel);
+			$viewer->assign('IS_CREATE_PERMITTED', isPermitted('Timesheet', 'CreateView'));
+
+			$viewer->view('Timesheet.tpl', $request->getModule());
+		}
+
+		public function getHeaderScripts(Vtiger_Request $request) {
+		$headerScriptInstances = parent::getHeaderScripts($request);
+		$jsFileNames = array(
+		 	"modules.Timesheet.resources.Listview"
+		);
+
+		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
+		$headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
+		return $headerScriptInstances;
+	}
 
 	}	
 ?>

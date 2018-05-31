@@ -424,6 +424,9 @@ $languageStrings = array(
 	'istooltip'=>'Tooltip',	//added by jitu@secondcrm.com for showhide tooltip	
 	//End here	
 	'LBL_ASSIGN_COMPANY' => 'Assign Company', //edited by siti@secondcrm on 25feb2015
+	'LBL_EMPLOYEMENT_DETAILS'=>'Employment Details',
+	'LBL_HR_DOCUMENTS'=>'HR Documents',
+
 
 );
 
