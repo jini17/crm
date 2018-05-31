@@ -114,7 +114,7 @@ class Users_EduRecord_Model extends Users_Record_Model {
 		$educationDetail = array();
 		$educationDetail['institution_name'] = $db->query_result($result, 0, 'institution_name');      
 		$educationDetail['educationid'] = $db->query_result($result, 0, 'educationid');
-		$educationDetail['is_studying'] = $db->query_result($result, 0, 'is_studying');	
+		$educationDetail['currently_studying'] = $db->query_result($result, 0, 'currently_studying');	
 		$educationDetail['start_date'] = $db->query_result($result, 0, 'start_date');
 		$educationDetail['end_date'] = $db->query_result($result, 0, 'end_date');
 		$educationDetail['education_level'] = $db->query_result($result, 0, 'education_level');
@@ -172,13 +172,13 @@ LIMIT 3";
 			$eduList[$i]['educationid'] = $db->query_result($result, $i, 'educationid');
 			$eduList[$i]['start_date'] = date('M-Y',strtotime($db->query_result($result, $i, 'start_date')));
 			$eduList[$i]['end_date'] =  date('M-Y',strtotime($db->query_result($result, $i, 'end_date')));
-			$eduList[$i]['is_studying'] = $db->query_result($result, $i, 'is_studying');
+			$eduList[$i]['is_studying'] = $db->query_result($result, $i, 'currently_studying');
 			$eduList[$i]['education_level'] = $db->query_result($result, $i, 'education_level');
 			$eduList[$i]['area_of_study'] = $db->query_result($result, $i, 'area_of_study');
 			$eduList[$i]['description'] = $db->query_result($result, $i, 'description');
 			$eduList[$i]['public'] = $db->query_result($result, $i, 'public');
 		}
-	
+
 		return $eduList;
 
 	}		
@@ -192,10 +192,11 @@ LIMIT 3";
 		$userid  	= $request['current_user_id'];
 		$eduId  	= $request['record'];
 		$insId  	= decode_html(trim($request['institution_name']));
+		$startdate  = date('Y-m-d',strtotime($request['start_date']));
 		$studying  	= $request['is_studying'];	
 		
-		if($studying =='0'){
-			$endDate	= date('Y-m-d',strtotime($request['project_year'].'-'.decode_html($request['project_month'].'-01')));
+		if($studying ==0){
+			$endDate	= date('Y-m-d',strtotime($request['end_date']));
 		} else{
 			$endDate	='';
 		}	

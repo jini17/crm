@@ -156,7 +156,7 @@ class Users_ProjectRecord_Model extends Users_Record_Model {
 		$project_url  	= decode_html($request['project_url']);
 		$description  	= decode_html($request['description']);
 		$isview  		= decode_html($request['isview']);		
-		$start_date 	= $project_year.'-'.$project_month.'-'.'-01';
+		$start_date 	= $project_year.'-'.$project_month.'-'.'01';
 		if($desId ==0 && !empty($destxt)) {
            	 //check the desgination exist or not
 	           	 $resultcheck  = $db->pquery("SELECT designation_id FROM secondcrm_designation WHERE designation = ?",array($destxt));

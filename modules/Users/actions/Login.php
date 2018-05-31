@@ -19,7 +19,8 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 	} 
 
 	function process(Vtiger_Request $request) {
-		global $short_url;	
+		global $short_url, $adb;
+		$adb->setDebug(true);	
 		$username = $request->get('username');
 		$password = $request->getRaw('password');
 		//echo $username;
@@ -34,10 +35,12 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 			header ('Location: index.php?module=Users&parent=Settings&view=Login&error=5');
 			exit;
 		}
-
-		if($_SERVER['HTTP_HOST']==$short_url || $_SERVER['HTTP_HOST']=='localhost') {
+		
+		if($_SERVER['HTTP_HOST']==$short_url || $_SERVER['HTTP_HOST']=='localhost' 
+				|| stripos($_SERVER['HTTP_HOST'],'192.168.2.') !==false) { 
 			$usip=$_SERVER['REMOTE_ADDR'];	//add one more param IP address by jitu@28Dec2016
 		} else {
+		
 			$usip=$_SERVER['HTTP_X_FORWARDED_FOR'];	//add one more param IP address by jitu@28Dec2016	
 		}
 

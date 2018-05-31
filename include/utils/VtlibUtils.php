@@ -102,7 +102,16 @@ function vtlib_isModuleActive($module) {
 	}
 
 	if(!isset($__cache_module_activeinfo[$module])) {
-		include 'tabdata.php';
+
+		//added by jitu@PlanPermission
+		$planid = $_SESSION['plan'];
+		$tab_seq_array = getModulePlanPermission($planid);
+		$tab_info_array = getModulePermission($planid);
+		if(count($tab_seq_array)==0){
+			include('tabdata.php');
+		}
+		//end here
+		
 		$tabId = $tab_info_array[$module];
 		$presence = $tab_seq_array[$tabId];
 		$__cache_module_activeinfo[$module] = $presence;
