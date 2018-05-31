@@ -19,48 +19,62 @@
 		<input type="hidden" value="saveLanguage" name="mode">
 		<input id="current_user_id" name="current_user_id" type="hidden" value="{$USERID}">	
 		<div class="modal-body">	
+			<div class="row-fluid">
+				<div class="form-group" style="margin-bottom: 0px !important;">
+					<div class="col-md-12" style="margin-bottom: 15px;">
+                		<div class="col-md-4">
+                			<label class="control-label fieldLabel" style="text-align: right;float: right;">
+                				<span class="redColor">*</span>{vtranslate('LBL_SELECT_LANGUAGE', $MODULE)}
+                			</label>
+                		</div>
+	                	<div class="controls fieldValue col-md-8">
+	                		<select  class="select2" {if $LANGUAGE_DETAIL.language_id neq ''} disabled {/if}  onchange="updateSelectBox('language','languagebox');" name="language" id="language">	
+								{foreach key=LANG_ID item=LANG_MODEL from=$LANGUAGE_LIST name=institutionIterator}
+									<option value="{$LANG_MODEL.language_id}" {if $LANGUAGE_DETAIL.language_id eq $LANG_MODEL.language_id} selected {/if}>{$LANG_MODEL.language}</option>
+								{/foreach}
+								<option value="0">{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> 	
+							</select>			
+						</div>
+					</div>
+					<div class="col-md-12" style="margin-bottom: 15px;">
+						<div class="col-md-4">
+							<label class="control-label fieldLabel" style="text-align: right;float: right;"></label>
+						</div>
 
-			<div class="control-group">
-				<label class="control-label"><span class="redColor">*</span>{vtranslate('LBL_SELECT_LANGUAGE', $MODULE)}</label>
-				<div class="controls">
-					<select  class="select2" {if $LANGUAGE_DETAIL.language_id neq ''} disabled {/if}  onchange="updateSelectBox('language','languagebox');" name="language" id="language">	
-						{foreach key=LANG_ID item=LANG_MODEL from=$LANGUAGE_LIST name=institutionIterator}
-							<option value="{$LANG_MODEL.language_id}" {if $LANGUAGE_DETAIL.language_id eq $LANG_MODEL.language_id} selected {/if}>{$LANG_MODEL.language}</option>
-						{/foreach}
-							<option value="0">{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> 	
-					</select>
+						<div class="controls fieldValue col-md-8" align="right">
+							{if $LANGUAGE_LIST|@count gt 0}
+								<span class="hide" id="languagebox">
+									<input style="width:100%;" type="text" name="langtxt" id="langtxt" data-rule-required = "true" />
+								</span>
+							{else}
+								<input style="width:190px;" data-rule-required = "true" type="text" name="langtxt" id="langtxt" />
+							{/if}		
+						</div>
+					</div>
+				</div>			
+			<div class="form-group" style="margin-bottom: 0px !important;">
+				<div class="col-md-12" style="margin-bottom: 15px;">
+					<div class="col-md-4">
+						<label class="control-label">{vtranslate('LBL_EXPERTISE_LEVEL', $MODULE)}</label>
+					</div>	
+					<div class="controls fieldValue col-md-8">
+						<select  class="select2" name="proficiency" id="proficiency"> 					
+							<option value="{vtranslate('LBL_PROFICIENCY', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_PROFICIENCY', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_PROFICIENCY', $QUALIFIED_MODULE)}...</option>
+							<option value="{vtranslate('LBL_ELEMENTRY', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_ELEMENTRY', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_ELEMENTRY', $QUALIFIED_MODULE)}</option>
+							<option value="{vtranslate('LBL_LIMITED_WORKING', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_LIMITED_WORKING', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_LIMITED_WORKING', $QUALIFIED_MODULE)}</option>
+							<option value="{vtranslate('LBL_PROFESSIONAL_WORKING', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_PROFESSIONAL_WORKING', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_PROFESSIONAL_WORKING', $QUALIFIED_MODULE)}</option>
+							<option value="{vtranslate('LBL_FULL_PROFESSIONAL', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_FULL_PROFESSIONAL', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_FULL_PROFESSIONAL', $QUALIFIED_MODULE)}</option>
+							<option value="{vtranslate('LBL_NATIVE_BILINGUAL', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_NATIVE_BILINGUAL', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_NATIVE_BILINGUAL', $QUALIFIED_MODULE)}</option>
+						</select>
+					</div>
+					<div class="controls">
+						<span class="hide" id="languagebox">
+							<input style="width:290px;" type="text" name="skilltxt" id="skilltxt" />
+						</span>
+					</div>	
 				</div>
-				<div class="controls">
-					{if $LANGUAGE_LIST|@count gt 0}
-					<span class="hide" id="languagebox">
-						<input style="width:190px;" data-validation-engine="validate[required]" type="text" name="langtxt" id="langtxt" />
-					</span>
-					
-					{else}
-						<input style="width:190px;" data-validation-engine="validate[required]" type="text" name="langtxt" id="langtxt" />
-					</span>
-					{/if}
-				</div>	
 			</div>
-			<div class="control-group">
-				<label class="control-label">{vtranslate('LBL_EXPERTISE_LEVEL', $MODULE)}</label>	
-				<div class="controls">
-					<select  class="select2" name="proficiency" id="proficiency"> 					
-						<option value="{vtranslate('LBL_PROFICIENCY', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_PROFICIENCY', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_PROFICIENCY', $QUALIFIED_MODULE)}...</option>
-						<option value="{vtranslate('LBL_ELEMENTRY', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_ELEMENTRY', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_ELEMENTRY', $QUALIFIED_MODULE)}</option>
-						<option value="{vtranslate('LBL_LIMITED_WORKING', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_LIMITED_WORKING', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_LIMITED_WORKING', $QUALIFIED_MODULE)}</option>
-						<option value="{vtranslate('LBL_PROFESSIONAL_WORKING', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_PROFESSIONAL_WORKING', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_PROFESSIONAL_WORKING', $QUALIFIED_MODULE)}</option>
-						<option value="{vtranslate('LBL_FULL_PROFESSIONAL', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_FULL_PROFESSIONAL', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_FULL_PROFESSIONAL', $QUALIFIED_MODULE)}</option>
-						<option value="{vtranslate('LBL_NATIVE_BILINGUAL', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_NATIVE_BILINGUAL', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_NATIVE_BILINGUAL', $QUALIFIED_MODULE)}</option>
-					</select>
-				</div>
-				<div class="controls">
-					<span class="hide" id="languagebox">
-						<input style="width:290px;" type="text" name="skilltxt" id="skilltxt" />
-					</span>
-				</div>	
-			</div>
-		</div>
+		</div>	
 		<div class="modal-footer">
 			<div class="pull-right cancelLinkContainer" style="margin-top:0px;">
 				<input class="cancelLink" type="button" value="Cancel" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel" style="margin:0;background:none;border:none;" aria-hidden="true" data-dismiss="modal">
