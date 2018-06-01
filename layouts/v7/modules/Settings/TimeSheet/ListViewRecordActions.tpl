@@ -20,10 +20,5 @@
 				<i class="fa fa-trash" title="{vtranslate($RECORD_LINK->getLabel(), $QUALIFIED_MODULE)}" ></i>
 			</a>
 		{/if}
-		{if $RECORD_LINK->getIcon() eq 'icon-eye'}
-			<a {if stripos($RECORD_LINK_URL, 'javascript:')===0} onclick="{$RECORD_LINK_URL|substr:strlen("javascript:")}" {else} href='{$RECORD_LINK_URL}' {/if}>
-				<i class="fa fa-eye" title="{vtranslate($RECORD_LINK->getLabel(), $QUALIFIED_MODULE)}" ></i>
-			</a>
-		{/if}
 	{/foreach}
 </div>
