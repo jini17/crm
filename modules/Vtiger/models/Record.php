@@ -141,7 +141,7 @@ class Vtiger_Record_Model extends Vtiger_Base_Model {
 	public function getDetailViewUrl() {
 		$module = $this->getModule();
 		//added by jitu@Custom Module List view columns
-		if($this->getModuleName() =='EmployeeContract' || $this->getModuleName()=='Documents'){
+		if($this->getModuleName() =='EmployeeContract' || $this->getModuleName()=='PassportVisa' || $this->getModuleName()=='Performance'){
 			return 'index.php?module='.$this->getModuleName().'&parent=Settings&view=List';
 		}
 		//end here 
