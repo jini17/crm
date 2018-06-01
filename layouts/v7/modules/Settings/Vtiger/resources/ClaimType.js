@@ -245,7 +245,3 @@ jQuery(document).ready(function(e){
     tacInstance.registerEvents();
 
 })
-
-
-
-

@@ -624,6 +624,7 @@ class Vtiger_Functions {
 	}
 
 	static function initStorageFileDirectory($fileLocationType) {
+		require_once 'testAPI/vendor/autoload.php';
 		$filepath = 'storage/';
 
 		$year  = date('Y');
