@@ -111,6 +111,7 @@ class Documents_Record_Model extends Vtiger_Record_Model {
 				  header($name . ': ' . implode(', ', $values));
 				}
 				header('Content-Disposition: attachment; filename="' . $fileName . '"');
+				header('Content-Type: application/vnd.officedocuments');
 				$fileContent = $response->getBody();
 			}
 		}
