@@ -1,299 +1,178 @@
-u<?php
-<<<<<<< HEAD
-include_once('vtlib/Vtiger/Menu.php');
-include_once('vtlib/Vtiger/Module.php');
-// Turn on debugging level
-$Vtiger_Utils_Log = true;
-
-$MODULENAME = 'Benefits';
-
-// Create module instance and save it first
-$moduleInstance = Vtiger_Module::getInstance($MODULENAME);
-/*if ($moduleInstance || file_exists('modules/'.$MODULENAME)) {
-        echo $MODULENAME." Module already present - choose a different name.";
-} else {*/
-        $moduleInstance = new Vtiger_Module();
-        $moduleInstance->name = $MODULENAME;
-        $moduleInstance->parent= 'Sales';
-        $moduleInstance->save();
-
-	// Webservice Setup
-	$moduleInstance->initWebservice();
-	
-	// Schema Setup
-    $moduleInstance->initTables();
-=======
+<?php
 
 /** Create New Vtlib script for module Creation
-  * created : 22 Feb 2018
-  * Author  : Jitendra Gupta <jitendraknp2004@gmail.com>
-  */
+ * created : 22 Feb 2018
+ * Author  : Jitendra Gupta <jitendraknp2004@gmail.com>
+ */
 error_reporting(1);
-		ini_set('display_erros',1);
-		 
-		  register_shutdown_function('handleErrors');       
-		    function handleErrors() { 
-			 
-		       $last_error = error_get_last(); 
-		     	
-		       if (!is_null($last_error)) { // if there has been an error at some point 
-		     
-			  // do something with the error 
-			  print_r($last_error); 
-		     
-		       } 
-		     
-		    }
+ini_set('display_erros',1);
+
+register_shutdown_function('handleErrors');
+function handleErrors() {
+
+    $last_error = error_get_last();
+
+    if (!is_null($last_error)) { // if there has been an error at some point
+
+        // do something with the error
+        print_r($last_error);
+
+    }
+
+}
 include_once('vtlib/Vtiger/Menu.php');
 include_once('vtlib/Vtiger/Module.php');
 include_once('vtlib/Vtiger/Package.php');
 include_once 'includes/main/WebUI.php';
 include_once 'include/Webservices/Utils.php';
 global $adb;
-//$adb->setDebug(true);
-	$Vtiger_Utils_Log = true;
+$adb->setDebug(true);
+$Vtiger_Utils_Log = true;
 
-	$MODULENAME = 'Benefits'; //Give your module name
-	$PARENT 	= 'Sales';  //Give Parent name
-	$ENTITYNAME = 'benefitstitle'; //Give Duplicate check field name
-	$ENTITYLABEL= 'Title';
+$MODULENAME = 'BenefitType'; //Give your module name
+$PARENT 	= 'Sales';  //Give Parent name
+$ENTITYNAME = 'benefit_type'; //Give Duplicate check field name
+$ENTITYLABEL= 'BenefitType';
 
-	$module = Vtiger_Module::getInstance($MODULENAME);
-	
-	if($module || file_exists('modules/'.$MODULENAME)) {
-        	echo $MODULENAME." Module already present - choose a different name.";
-        exit;
-    }   
-		
-	// Create module instance and save it first
-	
-	$module = new Vtiger_Module();
-    $module->name = $MODULENAME;
-    $module->parent= $PARENT;
-    $module->save();
+$module = Vtiger_Module::getInstance($MODULENAME);
 
-    $module->initTables();
->>>>>>> Development
+if($module || file_exists('modules/'.$MODULENAME)) {
+    echo $MODULENAME." Module already present - choose a different name.";
+    exit;
+}
 
-	// Add the basic module block
-	$benefitsInformation = new Vtiger_Block();
-	$benefitsInformation->label = 'Benefits Information';
-<<<<<<< HEAD
-	$moduleInstance->addBlock($benefitsInformation);
-	
-	$description = new Vtiger_Block();
-	$description->label = 'Description';
-	$moduleInstance->addBlock($description);
+// Create module instance and save it first
 
-	
-	/** Create required fields and add to the block */
-	$field1 = new Vtiger_Field();
-	$field1->name = 'benefits';
-	$field1->label = 'Benefits';
-	$field1->table = $moduleInstance->basetable;
-	$field1->column = 'benefits';
-	$field1->columntype = 'VARCHAR(255)';
-	$field1->uitype = 2;
-=======
-	$module->addBlock($benefitsInformation);
-	
-	$description = new Vtiger_Block();
-	$description->label = 'Description';
-	$module->addBlock($description);
+$module = new Vtiger_Module();
+$module->name = $MODULENAME;
+//$module->parent= $PARENT;
+$module->save();
 
+$module->initTables();
 
-	/** Create required fields and add to the block */
-	$field1 = new Vtiger_Field();
-	$field1->name = 'benefitsno';
-	$field1->label = 'Benefits No';
-	$field1->table = $module->basetable;
-	$field1->column = 'benefitsno';
-	$field1->columntype = 'VARCHAR(255)';
-	$field1->uitype = 4;
->>>>>>> Development
-	$field1->typeofdata = 'V~M';
-	$benefitsInformation->addField($field1); /** Creates the field and adds to block */
+$block = new Vtiger_Block();
+$block->label = 'LBL_'. strtoupper($module->name) . '_INFORMATION';
+$module->addBlock($block);
 
-	// Set at-least one field to identifier of module record
-<<<<<<< HEAD
-	$moduleInstance->setEntityIdentifier($field1);
+$field1  = new Vtiger_Field();
+$field1->name = $ENTITYNAME;
+$field1->label= $ENTITYLABEL;
+$field1->uitype= 2;
+$field1->column = $field1->name;
+$field1->columntype = 'VARCHAR(255)';
+$field1->typeofdata = 'V~M';
+$block->addField($field1);
 
-	/** Create required fields and add to the block */
-	$field2 = new Vtiger_Field();
-	$field2->name = 'status';
-	$field2->label = 'Status';
-	$field2->table = $moduleInstance->basetable;
-	$field2->column = 'status';
-	$field2->columntype = 'VARCHAR(3)';
-	$field2->uitype = 56;
-	$field2->typeofdata = 'C~M'; // varchar~Mandatory	
-=======
-	$module->setEntityIdentifier($field1);
-	
-	/** Create required fields and add to the block */
-	$field2 = new Vtiger_Field();
-	$field2->name = 'benefits';
-	$field2->label = 'Benefits';
-	$field2->table = $module->basetable;
-	$field2->column = 'benefits';
-	$field2->columntype = 'VARCHAR(255)';
-	$field2->uitype = 2;
-	$field2->typeofdata = 'V~M';
->>>>>>> Development
-	$benefitsInformation->addField($field2); /** Creates the field and adds to block */
+$module->setEntityIdentifier($field1); //make primary key for module
 
-	/** Create required fields and add to the block */
-	$field3 = new Vtiger_Field();
-<<<<<<< HEAD
-	$field3->name = 'description';
-	$field3->label = 'Description';
-	$field3->table = $moduleInstance->basetable;
-	$field3->column = 'description';
-	$field3->columntype = 'TEXT';
-	$field3->uitype = 21;
-	$field3->typeofdata = 'V~O'; // varchar~Mandatory	
-	$description->addField($field3); /** Creates the field and adds to block */
-=======
-	$field3->name = 'benefits_status';
-	$field3->label = 'Status';
-	$field3->table = $module->basetable;
-	$field3->column = 'benefits_status';
-	$field3->columntype = 'VARCHAR(3)';
-	$field3->uitype = 56;
-	$field3->typeofdata = 'C~M'; // varchar~Mandatory	
-	$benefitsInformation->addField($field3); /** Creates the field and adds to block */
+$field5 = new Vtiger_Field();
+$field5->name = 'Description';
+$field5->label = 'benefit_desc';
+$field5->table = $module->basetable;
+$field5->column = 'benefit_desc';
+$field5->columntype = 'TEXT';
+$field5->uitype = 19;
+$field5->displaytype = 1;
+$field5->typeofdata = 'V~O'; // varchar~Mandatory
+$block->addField($field5); /** table and column are automatically set */
 
-	/** Create required fields and add to the block */
-	$field4 = new Vtiger_Field();
-	$field4->name = 'description';
-	$field4->label = 'Description';
-	$field4->table = $module->basetable;
-	$field4->column = 'description';
-	$field4->columntype = 'TEXT';
-	$field4->uitype = 21;
-	$field4->typeofdata = 'V~O'; // varchar~Mandatory	
-	$description->addField($field4); /** Creates the field and adds to block */
+$field9 = new Vtiger_Field();
+$field9->name   =  'status';
+$field9->label  = 'Status';
+$field9->table  =  $module->basetable;
+$field9->column = 'status';
+$field9->columntype = 'VARCHAR(50)';
+$field9->uitype	= 2;
+$field9->typeofdata = 'V~O'; // varchar~Mandatory
+$block->addField($field9); /** table, column, label, set to default values */
+
+/**
+ADD YOUR FIELDS HERE
+ */
 
 
-	/**
-		ADD YOUR FIELDS HERE
-	*/
+/** Common fields that should be in every module, linked to vtiger CRM core table */
+$field2 = new Vtiger_Field();
+$field2->name = 'assigned_user_id';
+$field2->label = 'Assigned To';
+$field2->table = 'vtiger_crmentity';
+$field2->column = 'smownerid';
+$field2->uitype = 53;
+$field2->typeofdata = 'V~M';
+$block->addField($field2);
+
+$field3 = new Vtiger_Field();
+$field3->name = 'createdtime';
+$field3->label= 'Created Time';
+$field3->table = 'vtiger_crmentity';
+$field3->column = 'createdtime';
+$field3->uitype = 70;
+$field3->typeofdata = 'T~O';
+$field3->displaytype= 2;
+$block->addField($field3);
+
+$field4 = new Vtiger_Field();
+$field4->name = 'modifiedtime';
+$field4->label= 'Modified Time';
+$field4->table = 'vtiger_crmentity';
+$field4->column = 'modifiedtime';
+$field4->uitype = 70;
+$field4->typeofdata = 'T~O';
+$field4->displaytype= 2;
+$block->addField($field4);
 
 
-	/** Common fields that should be in every module, linked to vtiger CRM core table */
-	$field5 = new Vtiger_Field();
-	$field5->name = 'assigned_user_id';
-	$field5->label = 'Assigned To';
-	$field5->table = 'vtiger_crmentity';
-	$field5->column = 'smownerid';
-	$field5->uitype = 53;
-	$field5->typeofdata = 'V~M';
-	$benefitsInformation->addField($field5);
+// Create default custom filter (mandatory)
+$filter1 = new Vtiger_Filter();
+$filter1->name = 'All';
+$filter1->isdefault = true;
+$module->addFilter($filter1);
+// Add fields to the filter created
+$filter1->addField($field1)->addField($field2, 1)->addField($field3, 2);
 
-	$field6 = new Vtiger_Field();
-	$field6->name = 'createdtime';
-	$field6->label= 'Created Time';
-	$field6->table = 'vtiger_crmentity';
-	$field6->column = 'createdtime';
-	$field6->uitype = 70;
-	$field6->typeofdata = 'T~O';
-	$field6->displaytype= 2;
-	$benefitsInformation->addField($field6);
+// Set sharing access of this module
+$module->setDefaultSharing();
 
-	$field7 = new Vtiger_Field();
-	$field7->name = 'modifiedtime';
-	$field7->label= 'Modified Time';
-	$field7->table = 'vtiger_crmentity';
-	$field7->column = 'modifiedtime';
-	$field7->uitype = 70;
-	$field7->typeofdata = 'T~O';
-	$field7->displaytype= 2;
-	$benefitsInformation->addField($field7);
->>>>>>> Development
+// Enable and Disable available tools
+$module->enableTools(Array('Import', 'Export', 'Merge'));
+
+// Initialize Webservice support
+$module->initWebservice();
+
+// Create files
+createFiles($module, $field1);
+
+// Link to menu
+Settings_MenuEditor_Module_Model::addModuleToApp($module->name, $module->parent);
+
+echo "Module is created";
 
 
-	// Create default custom filter (mandatory)
-	$filter1 = new Vtiger_Filter();
-	$filter1->name = 'All';
-	$filter1->isdefault = true;
-<<<<<<< HEAD
-	$moduleInstance->addFilter($filter1);
-	// Add fields to the filter created
-	$filter1->addField($field1)->addField($field2, 1)->addField($field3, 2);
-	
-	// Create one more filter
-	$filter2 = new Vtiger_Filter();
-	$filter2->name = 'All2';
-	$moduleInstance->addFilter($filter2);
+function createFiles(Vtiger_Module $module, Vtiger_Field $entityField) {
 
-	// Add fields to the filter
-	$filter2->addField($field1);
-	$filter2->addField($field2, 1);
-	// Add rule to the filter field
-	$filter2->addRule($field1, 'CONTAINS', 'Test');
+    $targetpath = 'modules/' . $module->name;
 
-	/** Enable and Disable available tools */
-	$moduleInstance->enableTools(Array('Import', 'Export'));
-	$moduleInstance->disableTools('Merge');
-	
-	//$moduleInstance->addLink('DETAILVIEWBASIC', 'LBL_SURVEY_REPORT', 'index.php?module=Survey&view=result&record=$RECORD$');
+    if (!is_file($targetpath)) {
+        mkdir($targetpath);
+        mkdir($targetpath . '/language');
 
-	$moduleInstance->setDefaultSharing();
-	//mkdir('modules/'.$MODULENAME);
-	//chmod('modules/'.$MODULENAME,0777);
-        echo "OK\n";
-	//$moduleInstance=null;
-//}
+        $templatepath = 'vtlib/ModuleDir/6.0.0';
+
+        $moduleFileContents = file_get_contents($templatepath . '/ModuleName.php');
+        $replacevars = array(
+            'ModuleName'   => $module->name,
+            '<modulename>' => strtolower($module->name),
+            '<entityfieldlabel>' => $entityField->label,
+            '<entitycolumn>' => $entityField->column,
+            '<entityfieldname>' => $entityField->name,
+        );
+
+        foreach ($replacevars as $key => $value) {
+            $moduleFileContents = str_replace($key, $value, $moduleFileContents);
+        }
+        file_put_contents($targetpath.'/'.$module->name.'.php', $moduleFileContents);
+    }
+}
+
+
 ?>
-=======
-	$module->addFilter($filter1);
-	// Add fields to the filter created
-	$filter1->addField($field1)->addField($field2, 1)->addField($field3, 2);
-
-	// Set sharing access of this module
-	$module->setDefaultSharing();
-
-	// Enable and Disable available tools
-	$module->enableTools(Array('Import', 'Export', 'Merge'));
-
-	// Initialize Webservice support
-	$module->initWebservice();
-
-	// Create files
-	createFiles($module, $field1);
-
-	// Link to menu
-	Settings_MenuEditor_Module_Model::addModuleToApp($module->name, $module->parent);
-
-	echo "Module is created";
-
-
-	function createFiles(Vtiger_Module $module, Vtiger_Field $entityField) {
-
-		$targetpath = 'modules/' . $module->name;
-
-		if (!is_file($targetpath)) {
-			mkdir($targetpath);
-			mkdir($targetpath . '/language');
-
-			$templatepath = 'vtlib/ModuleDir/6.0.0';
-
-			$moduleFileContents = file_get_contents($templatepath . '/ModuleName.php');
-			$replacevars = array(
-				'ModuleName'   => $module->name,
-				'<modulename>' => strtolower($module->name),
-				'<entityfieldlabel>' => $entityField->label,
-				'<entitycolumn>' => $entityField->column,
-				'<entityfieldname>' => $entityField->name,
-			);
-
-			foreach ($replacevars as $key => $value) {
-				$moduleFileContents = str_replace($key, $value, $moduleFileContents);
-			}
-			file_put_contents($targetpath.'/'.$module->name.'.php', $moduleFileContents);
-		}
-	}
-
-	
-?>
->>>>>>> Development
