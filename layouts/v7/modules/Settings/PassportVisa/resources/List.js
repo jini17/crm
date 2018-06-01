@@ -9,8 +9,7 @@
 
 Settings_Vtiger_List_Js('Settings_PassportVisa_List_Js',{
     triggerDelete : function(url) {
-        var instance = app.controller();
-        alert(url);
+        var instance = app.controller();     
         instance.deleteEmployeeContract(url);
     },
 },{

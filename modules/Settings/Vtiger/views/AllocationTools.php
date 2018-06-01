@@ -237,7 +237,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
     public function UpdateAllocation($request){
         global $adb;
-        $adb->setDebug(true);
+       // $adb->setDebug(true);
         $insertArray = $request->get('form');
         // echo "<pre>"; print_r($insertArray); die;
         $Allocation = array();

@@ -425,10 +425,18 @@ $languageStrings = array(
 	//End here	
 	'LBL_ASSIGN_COMPANY' => 'Assign Company', //edited by siti@secondcrm on 25feb2015
 	'LBL_EMPLOYEMENT_DETAILS'=>'Employment Details',
+	'LBL_PASSPORTVISA'=>'Passport Visa',
+	'LBL_PERFORMANCE'=>'Performance',
+	'LBL_GRADE'=>'Grade',
+	'LBL_TIMESHEET'=>'TimeSheet',
 	'LBL_HR_DOCUMENTS'=>'HR Documents',
 	'LBL_EMPLOYEMENT'=>'Employment',
 	'EmployeeContract'=>'Employement Detail',
-
+	'PassportVisa'=>'Passport Visa',
+	'Performance'=>'Performance Review',
+	'Grade'=>'Grade List',
+	'TimeSheet'=>'Time-Sheet',
+	'LBL_DOWNLOAD'=>'Download',
 
 );
 

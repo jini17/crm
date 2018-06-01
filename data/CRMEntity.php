@@ -903,9 +903,11 @@ class CRMEntity {
 			} else {
 				$resultrow = $adb->query_result_rowdata($result);
 				if (!$allowDeleted) {
-					if (!empty($resultrow['deleted'])) {
+					 /******   MODIFIED for restore data for custom module ***/				
+					if(!($resultrow['deleted']==0 || $resultrow['deleted']==1)){
 						throw new Exception($app_strings['LBL_RECORD_DELETE'], 1);
 					}
+	                /******  end    ***/
 				}
 				if(!empty($resultrow['label'])){
 					$this->column_fields['label'] = $resultrow['label'];
