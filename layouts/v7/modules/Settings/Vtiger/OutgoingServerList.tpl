@@ -61,7 +61,7 @@
                             <input type="checkbox" name="selected_id" value="{$VALUE.id}" class="smallchkd">
                         </td>
                         <td>
-                            <button class="addFromAddress btn span3 marginLeftZero newButton" id="addFromAddress" value="{$VALUE.id}">Show</button><br><br>
+                            <button class="showFromAddress btn span3 marginLeftZero newButton" id="showFromAddress" value="{$VALUE.id}">Show</button><br><br>
                         </td>
                         <td>
                             {$VALUE.server}

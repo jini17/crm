@@ -24,15 +24,22 @@
 					<tr class="blockHeader"><th colspan="2" class="{$WIDTHTYPE}">{vtranslate('LBL_GOOGLE_CONFIG_FILE', $QUALIFIED_MODULE)}</th></tr>
 				</thead>
 				<tbody>				
-						<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted pull-right marginRight10px">Client Secret File</label></td>
-							<td style="border-left: none;" class="row-fluid {$WIDTHTYPE}">
-								<input type="file" name="clientSecretFile" value="" />
-							</td></tr>
-
-						<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted pull-right marginRight10px">Access Key</label></td>
-							<td style="border-left: none;" class="row-fluid {$WIDTHTYPE}">
-								<input type="text" name="{$FIELD_NAME}" value="" />
-							</td></tr>
+					{foreach key=FIELD_NAME item=FIELD_VALUE from=$ADVANCED_FIELD_VALUES}
+						{if $FIELD_NAME eq 'Client Secret File'}
+							<tr><td width="30%"><label class="muted marginRight10px pull-right">{$FIELD_NAME}</label></td>
+								<td style="border-left: none;" class="{$WIDTHTYPE}">
+									<input type="file" name="clientsecret" id="clientsecret">
+									<input type="button" value="Request for Access Key Link" id="requestlink">
+							    </td>
+							</tr>
+						{else}
+							<tr><td><label class="muted marginRight10px pull-right">{$FIELD_NAME}</label></td>
+								<td style="border-left: none;">
+									<input type="text" value="{$FIELD_VALUE}" name="accesskey" id="accesskey" style="width:50%">
+							    </td>
+							</tr>
+						{/if}
+					{/foreach}
 				</tbody>
 			</table>
 		</form>

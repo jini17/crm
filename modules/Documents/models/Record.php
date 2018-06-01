@@ -92,7 +92,7 @@ class Documents_Record_Model extends Vtiger_Record_Model {
 					header("Cache-Control: private");
 					header('Content-Disposition: attachment; filename="' . $fileName . '"');
 					header("Content-Description: PHP Generated Data");
-                    			header("Content-Encoding: none");
+                    header("Content-Encoding: none");
 				}
 			}
 			//Edit By Mabruk for Google Drive Integration 28/03/2018

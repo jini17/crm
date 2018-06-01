@@ -5,7 +5,7 @@
  * The Initial Developer of the Original Code is vtiger.
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
- * Created by Nirbhay on 17-04-2018
+ * Created by Nirbhay, Also Mabruk :_( on 17-04-2018
  *************************************************************************************/
 
 Vtiger.Class("Settings_Vtiger_GoogleConfig_Js",{},{
@@ -13,21 +13,34 @@ Vtiger.Class("Settings_Vtiger_GoogleConfig_Js",{},{
 	/*
 	 * Function to save the Configuration Editor content
 	 */
-	saveConfigEditor : function(form) {
-		var aDeferred = jQuery.Deferred();
-		
-		var data = form.serializeFormData();
+	saveConfigEditor : function(form, configtype="") {
+		var aDeferred = jQuery.Deferred();		
+		var data = form.serializeFormData(); 
 		var updatedFields = {};
+		var accesskey = "";
+
 		jQuery.each(data, function(key, value) {
+			if (key == "accesskey")
+				accesskey = value;
 			updatedFields[key] = value;
 		})
-		
-		var params = {
-			'module' : app.getModuleName(),
-			'parent' : app.getParentModuleName(),
-			'action' : 'GoogleConfigSaveAjax',
-			'updatedFields' : JSON.stringify(updatedFields)
-		}
+
+		if (configtype == "advanceConfig")
+			var params = {
+				'module' : app.getModuleName(),
+				'parent' : app.getParentModuleName(),
+				'action' : 'AdvanceGoogleConfigEdit',
+				'mode' : 'updateAccessKey',
+				'accesskey' : accesskey
+			}
+		else
+			var params = {
+				'module' : app.getModuleName(),
+				'parent' : app.getParentModuleName(),
+				'action' : 'GoogleConfigSaveAjax',
+				'updatedFields' : JSON.stringify(updatedFields)
+			}
+
 		AppConnector.request(params).then(
 			function(data) {
 				aDeferred.resolve(data);
@@ -36,6 +49,7 @@ Vtiger.Class("Settings_Vtiger_GoogleConfig_Js",{},{
 				aDeferred.reject();
 			}
 		);
+
 		return aDeferred.promise();
 	},
 	
@@ -55,11 +69,14 @@ Vtiger.Class("Settings_Vtiger_GoogleConfig_Js",{},{
 		return aDeferred.promise();
 	},	
 
-
-	registerEditViewEvents: function () {
+	/*
+	 * Function to load the events for Edit View
+	 */
+	registerEditViewEvents : function () {
 		var thisInstance = this;
 		var form = jQuery('#GoogleConfigForm');
-		var detailUrl = form.data('detailUrl');
+		var detailUrl = form.data('detailUrl');		
+
 		//register validation 
 		var params = {
 			submitHandler: function (form) {
@@ -98,17 +115,54 @@ Vtiger.Class("Settings_Vtiger_GoogleConfig_Js",{},{
 			);
 		})
 		vtUtils.enableTooltips();
+
+		//When page is refreshed/reloaded, it will redirect to the Index View
+		history.pushState({}, null, 'index.php?module=Vtiger&parent=Settings&view=GoogleConfigIndex&block=12&fieldid=40');
 	},	
 
-	registerEditViewEvents2: function () {
+	/*
+	 * function to register the events in Advance Google Config Edit View
+	 */
+	registerAdvanceEditViewEvents : function () {
 		var thisInstance = this;
 		var form = jQuery('#AdvanceGoogleConfigForm');
 		var detailUrl = form.data('detailUrl');
-		//register validation 
+		var requestBtn = jQuery('#requestlink');
+		var inputFile = jQuery('#clientsecret');		
+
+		//Request Button is disabled when the form loads
+		requestBtn.prop('disabled',true);
+
+		//Functions with conditions for enabling the request button
+		inputFile.change(function(){
+			if(inputFile.val())
+				requestBtn.prop('disabled',false);
+			else
+				requestBtn.prop('disabled',true);
+		});
+
+		//Code for Uploading Client Secret File using Ajax 
+		requestBtn.on('click', function() {
+		    var file_data = jQuery('#clientsecret').prop('files')[0];   
+		    var form_data = new FormData();                  
+		    form_data.append('file', file_data);                            
+		    jQuery.ajax({
+		        url: 'index.php?module=Vtiger&parent=Settings&action=AdvanceGoogleConfigEdit&mode=uploadFileGenerateLink', 
+		        cache: false,
+		        contentType: false,
+		        processData: false,
+		        data: form_data,                         
+		        type: 'post',
+		        success: function(php_script_response){
+		            alert(php_script_response); 
+		        }
+		    });
+		});
+
 		var params = {
 			submitHandler: function (form) {
 				var form = jQuery(form);
-				thisInstance.saveConfigEditor(form).then(
+				thisInstance.saveConfigEditor(form,'advanceConfig').then(
 					function (data) {
 						if (data) {
 							var message = app.vtranslate('JS_GOOGLE_DETAILS_SAVED');
@@ -138,11 +192,13 @@ Vtiger.Class("Settings_Vtiger_GoogleConfig_Js",{},{
 					app.helper.hideProgress();
 					jQuery('#body').html(data);			
 					thisInstance.registerDetailViewEvents();
-					// thisInstance.loadNewEmailpage();
 				}
 			);
 		})
 		vtUtils.enableTooltips();
+
+		//When page is refreshed/reloaded, it will redirect to the Index View	
+		history.pushState({}, null, 'index.php?module=Vtiger&parent=Settings&view=GoogleConfigIndex&block=12&fieldid=40');
 	},	
 
 	
@@ -152,9 +208,9 @@ Vtiger.Class("Settings_Vtiger_GoogleConfig_Js",{},{
 	registerDetailViewEvents : function() {
 		var thisInstance = this;
 		var container = jQuery('#GoogleConfigDetails');
-		var container2 = jQuery('#AdvanceGoogleConfigDetails');
+		var advanceConfigContainer = jQuery('#AdvanceGoogleConfigDetails');
 		var editButton = container.find('.editButton');	
-		var editButton2 = container2.find('.editButton');	
+		var advanceConfigEditButton = advanceConfigContainer.find('.editButton');	
 		jQuery(".group4").colorbox({rel:'group4'});		
 			
 		
@@ -178,9 +234,9 @@ Vtiger.Class("Settings_Vtiger_GoogleConfig_Js",{},{
 			);
 		});
 
-		//Register click event for edit button
-		editButton2.click(function() {
-			var url = editButton2.data('url');
+		//Register click event for advance google config edit button
+		advanceConfigEditButton.click(function() {
+			var url = advanceConfigEditButton.data('url');
 			var progressIndicatorElement = jQuery.progressIndicator({
 				'position' : 'html',
 				'blockInfo' : {
@@ -190,15 +246,14 @@ Vtiger.Class("Settings_Vtiger_GoogleConfig_Js",{},{
 			thisInstance.loadContents(url).then(
 				function(data) {
 					progressIndicatorElement.progressIndicator({'mode':'hide'});
-					jQuery('#contents2').html(data);
-					thisInstance.registerEditViewEvents2();
+					jQuery('#AdvanceConfigContents').html(data);
+					thisInstance.registerAdvanceEditViewEvents();
 				}, function(error, err) {
 					progressIndicatorElement.progressIndicator({'mode':'hide'});
 				}
 			);
 		});
-	},
-		
+	},		
 	
 	registerEvents: function() { 
 		if(jQuery('#GoogleConfigDetails').length > 0) {

@@ -66,7 +66,8 @@
 										<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted marginRight10px pull-right">{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE)}</label></td>
 											<td style="border-left: none;" class="{$WIDTHTYPE}">
 												<span>{$FIELD_DATA[$FIELD_NAME]}</span>
-											</td></tr>
+											</td>
+										</tr>
 									{/foreach}
 								</tbody>
 						</table>
@@ -76,11 +77,11 @@
 		</div>
 
 		<div class="tab-pane" id="AdvanceConfig">
-			<div  id="contents2">
+			<div  id="AdvanceConfigContents">
 				<div class="container-fluid" id="AdvanceGoogleConfigDetails">
 				
 							<div class="pull-right">
-								<button class="btn editButton" data-url='{$MODEL->getAdvanceEditViewUrl()}' type="button" title="{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}" id="editButton2"><strong>{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}</strong></button>
+								<button class="btn editButton" data-url='{$MODEL->getAdvanceEditViewUrl()}' type="button" title="{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}"><strong>{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}</strong></button>
 							</div>
 						
 					<div class="contents">
@@ -108,12 +109,14 @@
 										</th>
 									</tr>
 								</thead>
-								<tbody>{$ADVANCED_FIELD_VALUES|print_r}
-									{foreach key=FIELD_NAME item=FIELD_DETAILS from=$ADVANCED_FIELD_VALUES}
-										<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted marginRight10px pull-right">$</label></td>
+								<tbody>
+									{foreach key=FIELD_NAME item=FIELD_VALUE from=$ADVANCED_FIELD_VALUES}
+										{if $FIELD_NAME eq 'Access Key'}
+										<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted marginRight10px pull-right">{$FIELD_NAME}</label></td>
 											<td style="border-left: none;" class="{$WIDTHTYPE}">
-												<span>{$FIELD_DATA[$FIELD_NAME]}</span>
+												<span>{$FIELD_VALUE}</span>
 											</td></tr>
+										{/if}										
 									{/foreach}
 								</tbody>
 						</table>

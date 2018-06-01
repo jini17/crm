@@ -12,19 +12,15 @@ class Settings_Vtiger_AddOutGoingServer_View extends Settings_Vtiger_Index_View 
         parent::__construct();
         $this->exposeMethod('LoadRules');
         $this->exposeMethod('AddServer');
-        $this->exposeMethod('LoadFromAddress');
+        $this->exposeMethod('FromAddressFunction');
     }
 
     public function process(Vtiger_Request $request) {
-        // echo "<pre>"; print_r("hERE"); die;
         $mode = $request->get('mode');
         if(!empty($mode)) {
             $this->invokeExposedMethod($mode, $request);
             return;
         }
-
-
-
     }
 
     /**
@@ -39,20 +35,42 @@ class Settings_Vtiger_AddOutGoingServer_View extends Settings_Vtiger_Index_View 
     }
 
     /**
-     * Function to Load From Email Address List
+     * Function Responsible for FromAddress Functions
      */
 
-    public function LoadFromAddress($request){
+    public function FromAddressFunction($request){
         global $adb;
         // $adb->setDebug(true);
         $viewer = $this->getViewer($request);
-        $qualifiedName = $request->getModule(false);
+        $qualifiedName = $request->getModule(false);        
 
+        if ($request->get('task') == 'add'){
+            $insertArray = $request->get('form');
+            $data = array();
+
+            foreach ($insertArray as $key => $value) {
+                $data[$value['name']] = $value['value'];
+            }
+
+            $result = $adb->pquery("INSERT INTO vtiger_multiplefromaddress (name, email, serverid) VALUES (?,?,?)",array($data['name'], $data['email'],$request->get('serverid')));
+        }
+
+        else if ($request->get('task') == 'delete'){
+            $seperatedValues = explode(',', $request->get('checkedData'));
+            $checkedData ='';
+            for ($i = 0; $i < count($seperatedValues); $i++) {
+                if( $i != (count($seperatedValues) - 1))
+                    $checkedData .= "'" . $seperatedValues[$i] . "',";
+                else
+                    $checkedData .= "'" . $seperatedValues[$i] . "'";
+            }
+            $result = $adb->pquery("DELETE FROM vtiger_multiplefromaddress WHERE id IN ($checkedData)",array());
+        }
+        
         $result = $adb->pquery("SELECT * FROM vtiger_multiplefromaddress WHERE serverid = ?",array($request->get('serverid')));
-
         $count = $adb->num_rows($result);
         $data = array();
-        for($i=0;$i<$count;$i++){
+        for ($i = 0; $i < $count; $i++){
 
             $data[$i]['id'] = $adb->query_result($result,$i,'id');
             $data[$i]['name'] = $adb->query_result($result,$i,'name');
@@ -60,11 +78,14 @@ class Settings_Vtiger_AddOutGoingServer_View extends Settings_Vtiger_Index_View 
 
         }
 
-
         $viewer->assign('DATA',$data);
 
-        $viewer->view('FromAddressList.tpl',$qualifiedName);
+        if ($request->get('task') == 'add' || $request->get('task') == 'delete')
+            $viewer->view('fromEmailAddressList.tpl',$qualifiedName);
+        else
+            $viewer->view('FromAddressList.tpl',$qualifiedName);
     }
+    
 
     /**
      * @param $request
@@ -75,14 +96,20 @@ class Settings_Vtiger_AddOutGoingServer_View extends Settings_Vtiger_Index_View 
         //echo "<pre>"; print_r($request); die;
         $insertArray = $request->get('form');
 
-        if($insertArray[5]['value'] == 'on'){
+        $data = array();
+
+        foreach ($insertArray as $key => $value) {
+            $data[$value['name']] = $value['value'];
+        }
+
+        if($data['requireAuthentication'] == 'on'){
             $requireAuthentication = true;
         }
         else{
             $requireAuthentication = false;
         }
 
-        if($insertArray[6]['value'] == 'on'){
+        if($data['isDefault'] == 'on'){
             $isdefault = true;
         }
         else{
@@ -93,10 +120,8 @@ class Settings_Vtiger_AddOutGoingServer_View extends Settings_Vtiger_Index_View 
             $result3 = $adb->pquery("UPDATE vtiger_systems SET isdefault = 0 WHERE isdefault = 1",array());
         }
 
-        $query = "INSERT INTO `vtiger_systems` (`server`,`server_username`, `server_password`, `smtp_auth`, `isdefault`) VALUES (?, ?, ?, ?, ?)";
-        $result = $adb->pquery($query,array($insertArray[2]['value'],$insertArray[3]['value'],$insertArray[4]['value'], $requireAuthentication, $isdefault));
-
-
+        $query = "INSERT INTO vtiger_systems (server,server_username, server_password, smtp_auth, isdefault) VALUES (?, ?, ?, ?, ?)";
+        $result = $adb->pquery($query,array($data['Host'], $data['Username'], $data['Password'], $requireAuthentication, $isdefault));
 
         if($result){
             $response = "success";

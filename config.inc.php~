@@ -44,11 +44,11 @@ $HELPDESK_SUPPORT_EMAIL_REPLY_ID = $HELPDESK_SUPPORT_EMAIL_ID;
       db_name
 */
 
-$dbconfig['db_server'] = '13.229.249.148';
+$dbconfig['db_server'] = '192.168.2.66';
 $dbconfig['db_port'] = ':3306';
-$dbconfig['db_username'] = 'development';
-$dbconfig['db_password'] = 'Dev123$%^)';
-$dbconfig['db_name'] = 'agiliux';
+$dbconfig['db_username'] = 'root';
+$dbconfig['db_password'] = 'Root123$';
+$dbconfig['db_name'] = 'ss_foundation';
 $dbconfig['db_type'] = 'mysqli';
 $dbconfig['db_status'] = 'true';
 
@@ -79,13 +79,13 @@ $dbconfigoption['ssl'] = false;
 
 $host_name = $dbconfig['db_hostname'];
 
-$site_URL = 'http://localhost/agiliux_dev/';
+$site_URL = 'http://192.168.2.98/agiliux/';
 
 // url for customer portal (Example: http://vtiger.com/portal)
 $PORTAL_URL = $site_URL.'/customerportal';
 // root directory path
-$root_directory = '/var/www/html/agiliux_dev/';
-$short_url = 'localhost';
+$root_directory = '/var/www/html/agiliux/';
+$short_url = '192.168.2.98';
 
 // cache direcory path
 $cache_dir = 'cache/';

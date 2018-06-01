@@ -1,5 +1,5 @@
 /**
- * Created by Mabruk Khan and Nirbhay Shah
+ * Created by Mabruk Khan and Nirbhay Khan
  */
 
 /*+***********************************************************************************
@@ -22,7 +22,6 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
         var aDeferred = jQuery.Deferred();
         AppConnector.requestPjax(url).then(
             function(data){
-                //var blocksList = jQuery(".contents.tabbable.clearfix");
                 aDeferred.resolve(data);
             },
             function(error, err){
@@ -79,7 +78,7 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
                         jQuery(".settingsPageDiv.content-area.clearfix").html(data);
 
                         thisInstance.registerEvents();
-                        app.helper.showSuccessNotification({"message":"Deleted Result Successfully"});
+                        app.helper.showSuccessNotification({"message":"Deleted Successfully"});
                     });
                     aDeferred.resolve();
                 },
@@ -95,14 +94,12 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
      * Added By Mabruk and Nirbhay to add Outgoing Servers
      */
     registerAddButton: function(){
-        //alert("Same name na aee aee, waka waka aee aee");
         var thisInstance = this;
         var aDeferred = jQuery.Deferred();
 
         jQuery("#addItem").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
         jQuery("#addItem").click(function () {
 
-            // console.log("add item");
             app.helper.showProgress();
             var params = {
                 'module' : app.getModuleName(),
@@ -112,7 +109,6 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
             }
             AppConnector.requestPjax(params).then(
                 function(data) {
-                    //console.log("Inside pjax");
                     app.helper.hideProgress();
                     app.helper.showModal(data);
                     thisInstance.saveRule();
@@ -138,33 +134,90 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
      * Added By Mabruk and Nirbhay to get From Mail list
      */
     registerFromMailButton: function(){
-        //alert("Same name na aee aee, waka waka aee aee");
         var thisInstance = this;
-        var aDeferred = jQuery.Deferred();
+        var aDeferred = jQuery.Deferred(); 
 
-        jQuery(".addFromAddress").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
-        jQuery(".addFromAddress").click(function () {
-            // console.log("add item");
+        jQuery(".showFromAddress").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery(".showFromAddress").click(function () {
             app.helper.showProgress();
+            var serverId = jQuery(this).val();
             var params = {
                 'module' : app.getModuleName(),
                 'parent' : app.getParentModuleName(),
                 'view' : 'AddOutgoingServer',
-                'mode' : 'LoadFromAddress',
-                'serverid' : jQuery(this).val()
+                'mode' : 'FromAddressFunction',
+                'serverid' : serverId
             }
             AppConnector.requestPjax(params).then(
                 function(data) {
-                    //console.log("Inside pjax");
                     app.helper.hideProgress();
                     app.helper.showModal(data);
-                    //thisInstance.saveRule();
-
+                    thisInstance.fromMailAddressFeatures(serverId);
+                    thisInstance.registerDeleteButton()
                 });
-
         });
         return aDeferred.promise();
     },
+
+    /**
+     * Added By Mabruk to Show/hide Add From Email form, delete and reload From Email list
+     */
+    fromMailAddressFeatures: function(serverId){
+        var thisInstance = this;
+        var aDeferred = jQuery.Deferred();
+        var form = jQuery('.addFromAddressForm');
+        form.hide();
+
+        jQuery(".addFromAddress").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery(".addFromAddress").click(function () {            
+            
+            form.show();
+            jQuery(".saveFromAddress").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+            jQuery('.saveFromAddress').click( function() { 
+                var formData = form.serializeArray();  
+                var params = {
+                    'module' : app.getModuleName(),
+                    'parent' : app.getParentModuleName(),
+                    'view' : 'AddOutgoingServer',
+                    'mode' : 'FromAddressFunction',
+                    'task' : 'add',
+                    'form' : formData,
+                    'serverid' : serverId
+                }
+                AppConnector.requestPjax(params).then(
+                    function(data) { 
+                        form.hide();
+                        jQuery('.listFromAddress').html(data);                    
+                });
+            });
+
+            jQuery('.cancelForm').click( function() { 
+                form.hide();
+            });
+        });
+
+        jQuery(".deleteFromEmail").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery(".deleteFromEmail").click(function () {             
+            var checkedData = thisInstance.getAllCheckedValues();  
+            var params = {
+                'module' : app.getModuleName(),
+                'parent' : app.getParentModuleName(),
+                'view' : 'AddOutgoingServer',
+                'mode' : 'FromAddressFunction',
+                'task' : 'delete',
+                'checkedData' : checkedData,
+                'serverid' : serverId
+            }
+            AppConnector.requestPjax(params).then(
+                function(data) { 
+                    form.hide();
+                    app.helper.showSuccessNotification({"message":"Deleted Successfully"});
+                    jQuery('.listFromAddress').html(data);             
+            });
+        });
+
+        return aDeferred.promise();
+    },    
 
     /**
      * Function to save a particular rule
@@ -191,7 +244,6 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
                     function(err, data) {
                         app.helper.hideProgress();
                         if(data=='success'){
-                            //console.log(data);
                             var url = "?parent=Settings&module=Vtiger&view=OutgoingServerDetail&block=8&fieldid=15";
                             thisInstance.loadContents(url).then(function(data){
                                 console.log(data);
@@ -222,13 +274,11 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
         this.registerDeleteButton();
         this.registerAddButton();
         this.registerFromMailButton();
-
     }
 
 });
 
 jQuery(document).ready(function(e){
-    //alert("Aku aku");
     var tacInstance = new Settings_Vtiger_OutgoingServer_Js();
     tacInstance.registerEvents();
 })

@@ -23,7 +23,7 @@ class Settings_Vtiger_AdvanceGoogleConfigEdit_View extends Settings_Vtiger_Index
 		$viewer->view('AdvanceGoogleConfigEdit.tpl', $qualifiedName);
 	}
 	
-	
+		
 	function getPageTitle(Vtiger_Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		return vtranslate('LBL_GOOGLE_CONFIG',$qualifiedModuleName);
