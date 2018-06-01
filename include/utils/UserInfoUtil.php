@@ -2121,8 +2121,15 @@ function getPermittedModuleNames()
 	global $current_user;
 	$permittedModules=Array();
 	require('user_privileges/user_privileges_'.$current_user->id.'.php');
-	include('tabdata.php');
 
+	//added by jitu@planpermission
+	$planid = $_SESSION['plan'];
+	$tab_seq_array = getModulePlanPermission($planid);
+
+	if(count($tab_seq_array)==0){
+		include('tabdata.php');
+	}
+	//end here
 	if($is_admin == false && $profileGlobalPermission[1] == 1 && $profileGlobalPermission[2] == 1)
 	{
 		foreach($tab_seq_array as $tabid=>$seq_value)
@@ -2151,6 +2158,53 @@ function getPermittedModuleNames()
 	return $permittedModules;
 }
 
+/**
+ * Function to get the permitted module id Array with presence as 0
+ * @global Users $current_user
+ * @return Array Array of accessible tabids.
+ * added by jitu@plan-permission
+ */
+
+function getModulePlanPermission($plan){
+
+	global $adb;
+	$result = $adb->pquery("SELECT tabid, visible FROM vtiger_tab INNER JOIN secondcrm_planpermission ON secondcrm_planpermission.module=vtiger_tab.name WHERE planid=?", array($plan));
+	$numrow = $adb->num_rows($result);
+	$tab_seq_array = array();
+	if($numrow>0) {
+		for($i=0;$i<$numrow;$i++){
+			$tabid = $adb->query_result($result, $i, 'tabid');
+			$visible = $adb->query_result($result, $i, 'visible');
+			$visible=$visible==1?0:1;	
+			$tab_seq_array[$tabid] = $visible;
+		}	
+	}
+	return $tab_seq_array;
+}
+
+/**
+ * Function to get the permitted module id Array with presence as 0
+ * @global Users $current_user
+ * @return Array Array of accessible tabids.
+ * added by jitu@plan-permission
+ */
+
+function getModulePermission($plan){
+
+	global $adb;
+	$result = $adb->pquery("SELECT tabid, name FROM vtiger_tab INNER JOIN secondcrm_planpermission ON secondcrm_planpermission.module=vtiger_tab.name WHERE planid=?", array($plan));
+	$numrow = $adb->num_rows($result);
+	$tab_info_array = array();
+	if($numrow>0) {
+		for($i=0;$i<$numrow;$i++){
+			$tabid = $adb->query_result($result, $i, 'tabid');
+			$name = $adb->query_result($result, $i, 'name');	
+			$tab_info_array[$name] = $tabid;
+		}	
+	}
+	return $tab_info_array;
+}
+
 
 /**
  * Function to get the permitted module id Array with presence as 0
@@ -2158,10 +2212,17 @@ function getPermittedModuleNames()
  * @return Array Array of accessible tabids.
  */
 function getPermittedModuleIdList() {
-	global $current_user;
+	global $current_user, $adb;
 	$permittedModules=Array();
 	require('user_privileges/user_privileges_'.$current_user->id.'.php');
-	include('tabdata.php');
+	
+	//added by jitu@plan-permission
+	$planid = $_SESSION['plan'];
+	$tab_seq_array = getModulePlanPermission($planid);
+
+	if(count($tab_seq_array)==0){
+		include('tabdata.php');
+	} //end here 
 
 	if($is_admin == false && $profileGlobalPermission[1] == 1 &&
 			$profileGlobalPermission[2] == 1) {

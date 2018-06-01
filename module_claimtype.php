@@ -25,7 +25,8 @@ include_once('vtlib/Vtiger/Module.php');
 include_once('vtlib/Vtiger/Package.php');
 include_once 'includes/main/WebUI.php';
 include_once 'include/Webservices/Utils.php';
-
+global $adb;
+$adb->setDebug(true);
 	$Vtiger_Utils_Log = true;
 
 	$MODULENAME = 'ClaimType'; //Give your module name
@@ -77,7 +78,7 @@ include_once 'include/Webservices/Utils.php';
 	$field5->uitype = 4;
 	$field5->displaytype = 1;
 	$field5->typeofdata = 'V~M'; // varchar~Mandatory
-	$module->addField($field5); /** table and column are automatically set */
+	$block->addField($field5); /** table and column are automatically set */
 
 	$field51 = new Vtiger_Field();
 	$field51->name = 'claim_code';
@@ -88,7 +89,7 @@ include_once 'include/Webservices/Utils.php';
 	$field51->uitype = 1;
 	$field51->displaytype = 1;
 	$field51->typeofdata = 'V~M'; // varchar~Mandatory
-	$module->addField($field51); /** table and column are automatically set */
+	$block->addField($field51); /** table and column are automatically set */
 
 	$field6 = new Vtiger_Field();
 	$field6->name   =  'color_code';
@@ -98,7 +99,7 @@ include_once 'include/Webservices/Utils.php';
 	$field6->columntype = 'VARCHAR(50)';
 	$field6->uitype	= 2;
 	$field6->typeofdata = 'V~M'; // varchar~Mandatory
-	$module->addField($field6); /** table, column, label, set to default values */
+	$block->addField($field6); /** table, column, label, set to default values */
 	
 	$field7 = new Vtiger_Field();
 	$field7->name   =  'claim_status';
@@ -108,17 +109,18 @@ include_once 'include/Webservices/Utils.php';
 	$field7->columntype = 'VARCHAR(50)';
 	$field7->uitype	= 56;
 	$field7->typeofdata = 'V~O'; // varchar~Mandatory
-	$module->addField($field7); /** table, column, label, set to default values */
+	$block->addField($field7); /** table, column, label, set to default values */
 
-	$field8 = new Vtiger_Field();
-	$field8->name   =  'claim_status';
-	$field8->label  = 'Claim Status';
-	$field8->table  =  $module->basetable;
-	$field8->column = 'claim_status';
-	$field8->columntype = 'VARCHAR(50)';
-	$field8->uitype	= 56;
-	$field8->typeofdata = 'V~O'; // varchar~Mandatory
-	$module->addField($field8); /** table, column, label, set to default values */
+
+	$field9 = new Vtiger_Field();
+	$field9->name   =  'claim_description';
+	$field9->label  = 'Description';
+	$field9->table  =  $module->basetable;
+	$field9->column = 'claim_description';
+	$field9->columntype = 'TEXT';
+	$field9->uitype	= 19;
+	$field9->typeofdata = 'V~O'; // varchar~Mandatory
+	$blockcf->addField($field9); /** table, column, label, set to default values */
 
 	/**
 		ADD YOUR FIELDS HERE

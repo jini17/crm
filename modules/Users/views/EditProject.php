@@ -21,7 +21,7 @@ class Users_EditProject_View extends Vtiger_Index_View {
 		if(!empty($project_id)) {	
 			$projectdetailmodel = $userRecordModel->getProjectDetail($project_id); 
 		}
-		$Projectmonth = array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
+		$Projectmonth = array('01'=>'Jan','02'=>'Feb','03'=>'Mar','04'=>'Apr','05'=>'May','06'=>'Jun','07'=>'Jul','08'=>'Aug','09'=>'Sep','10'=>'Oct','11'=>'Nov','12'=>'Dec');
 		$viewer->assign('MODULE', $moduleName);
 		$viewer->assign('QUALIFIED_MODULE', $moduleName);
 		$viewer->assign('USERID', $userId);

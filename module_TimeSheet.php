@@ -73,7 +73,7 @@ global $adb;
 	/** Create required fields and add to the block */
 	$field5 = new Vtiger_Field();
 	$field5->name = 'date';
-	$field5->label = 'Date';
+	$field5->label = 'Day';
 	$field5->table = $module->basetable;
 	$field5->column = 'date';
 	$field5->columntype = 'DATE';
@@ -96,7 +96,7 @@ global $adb;
 	/** Create required fields and add to the block */
 	$field7 = new Vtiger_Field();
 	$field7->name = 'timestart';
-	$field7->label = 'Time Start';
+	$field7->label = 'In Time';
 	$field7->table = $module->basetable;
 	$field7->column = 'timestart';
 	$field7->columntype = 'VARCHAR(50)';
@@ -107,7 +107,7 @@ global $adb;
 	/** Create required fields and add to the block */
 	$field8 = new Vtiger_Field();
 	$field8->name = 'timeend';
-	$field8->label = 'Time End';
+	$field8->label = 'Out Time';
 	$field8->table = $module->basetable;
 	$field8->column = 'timeend';
 	$field8->columntype = 'VARCHAR(50)';
@@ -117,14 +117,14 @@ global $adb;
 
 	/** Create required fields and add to the block */
 	$field9 = new Vtiger_Field();
-	$field9->name = 'total';
-	$field9->label = 'Total';
+	$field9->name = 'worked';
+	$field9->label = 'Worked';
 	$field9->table = $module->basetable;
-	$field9->column = 'total';
+	$field9->column = 'worked';
 	$field9->columntype = 'DECIMAL(62,2)';
-	$field9->uitype = 71;
+	$field9->uitype = 2;
 	$field9->displaytype = 1;
-	$field9->typeofdata = 'NN~M'; // varchar~Mandatory	
+	$field9->typeofdata = 'NN~O'; // varchar~Mandatory	
 	$timesheetInformation->addField($field9); /** Creates the field and adds to block */
 
 	/** Create required fields and add to the block */
@@ -135,10 +135,46 @@ global $adb;
 	$field10->column = 'relatedto';
 	$field10->columntype = 'VARCHAR(100)';
 	$field10->uitype = 10;
-	$field10->typeofdata = 'V~M';
+	$field10->typeofdata = 'V~O';
 	$timesheetInformation->addField($field10); /** Creates the field and adds to block */
-	$field10->setRelatedModules(Array('Users'));
+	$field10->setRelatedModules(Array('Contacts', 'Accounts','Leads', 'HelpDesk'));
 
+	/** Create required fields and add to the block */
+	$field11 = new Vtiger_Field();
+	$field11->name = 'total';
+	$field11->label = 'Total';
+	$field11->table = $module->basetable;
+	$field11->column = 'total';
+	$field11->columntype = 'DECIMAL(62,2)';
+	$field11->uitype = 2;
+	$field11->displaytype = 1;
+	$field11->typeofdata = 'NN~O'; // varchar~Mandatory	
+	$timesheetInformation->addField($field11); /** Creates the field and adds to block */
+
+	/** Create required fields and add to the block */
+	$field12 = new Vtiger_Field();
+	$field12->name = 'lock';
+	$field12->label = 'Lock';
+	$field12->table = $module->basetable;
+	$field12->column = 'lock';
+	$field12->columntype = 'varchar(1)';
+	$field12->uitype = 56;
+	$field12->displaytype = 1;
+	$field12->typeofdata = 'NN~O'; // varchar~Mandatory	
+	$timesheetInformation->addField($field12); /** Creates the field and adds to block */
+
+	/** Create required fields and add to the block */
+	$field13 = new Vtiger_Field();
+	$field13->name = 'tstype';
+	$field13->label = 'Type';
+	$field13->table = $module->basetable;
+	$field13->column = 'tstype';
+	$field13->columntype = 'varchar(50)';
+	$field13->uitype = 15;
+	$field13->displaytype = 1;
+	$field13->typeofdata = 'V~M'; // varchar~Mandatory	
+	$timesheetInformation->addField($field13); /** Creates the field and adds to block */
+	$field13->setPicklistValues( Array ('Regular', 'Billable','Non-Billable', 'Overtime','Sick'));
 	/**
 		ADD YOUR FIELDS HERE
 	*/
@@ -181,7 +217,7 @@ global $adb;
 	$filter1->isdefault = true;
 	$module->addFilter($filter1);
 	// Add fields to the filter created
-	$filter1->addField($field1)->addField($field2, 1)->addField($field3, 2);
+	$filter1->addField($field1)->addField($field5, 1)->addField($field6, 2)->addField($field7, 3);
 
 	// Set sharing access of this module
 	$module->setDefaultSharing();

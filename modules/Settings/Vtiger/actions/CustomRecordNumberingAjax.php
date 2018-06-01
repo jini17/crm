@@ -58,12 +58,13 @@ class Settings_Vtiger_CustomRecordNumberingAjax_Action extends Settings_Vtiger_I
 	public function saveModuleCustomNumberingData(Vtiger_Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		$sourceModule = $request->get('sourceModule');
-
+		$company      = $request->get('company');
+		
 		$moduleModel = Settings_Vtiger_CustomRecordNumberingModule_Model::getInstance($sourceModule);
 		$moduleModel->set('prefix', $request->get('prefix'));
 		$moduleModel->set('sequenceNumber', $request->get('sequenceNumber'));
 
-		$result = $moduleModel->setModuleSequence();
+		$result = $moduleModel->setModuleSequence($company);
 
 		$response = new Vtiger_Response();
 		if ($result['success']) {

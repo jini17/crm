@@ -20,6 +20,17 @@ class Vtiger_List_View extends Vtiger_Index_View {
 		parent::__construct();
 	}
 
+	function checkPermission(Vtiger_Request $request) {
+		
+		$moduleName = $request->getModule();
+		
+		$recordPermission = Users_Privileges_Model::isPermitted($moduleName, 'DetailView');
+		if(!$recordPermission) {
+			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
+		}
+		return true;
+	}
+
 	function preProcess(Vtiger_Request $request, $display=true) {
 		parent::preProcess($request, false);
 

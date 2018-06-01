@@ -41,10 +41,11 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$EducationModuleModel = Users_EduModule_Model::getInstance();
 
 		$eduUserModel	= Users_EduRecord_Model::getInstance();
+		$eduList = $eduUserModel->getUserEducationList($recordId);
 		$viewer->assign('EDUCATION_RECORD_MODEL',$EducationModuleModel);
 		$viewer->assign('USERID',$recordId);
 		$viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
-		$viewer->assign('USER_EDUCATION_LIST',$eduUserModel->getUserEducationList($recordId));
+		$viewer->assign('USER_EDUCATION_LIST',$eduList);
 
 		echo $viewer->view('UsersEducation.tpl',$moduleName,true);
 	}
@@ -76,10 +77,11 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$ProjectModuleModel	= Users_ProjectModule_Model::getInstance();
 
 		$projectUserModel	= Users_ProjectRecord_Model::getInstance();
+		$projectList = $projectUserModel->getUserProjectList($recordId);
 		$viewer->assign('PROJECT_RECORD_MODEL',$ProjectModuleModel);
 		$viewer->assign('USERID',$recordId);
 		$viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
-		$viewer->assign('USER_PROJECT_LIST',$projectUserModel->getUserProjectList($recordId));
+		$viewer->assign('USER_PROJECT_LIST',$projectList);
 
 		echo $viewer->view('UsersProject.tpl',$moduleName,true);
 	}
@@ -279,7 +281,9 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$jsFileNames = array(
 			'modules.Vtiger.resources.List',
 			'modules.Users.resources.Leave',
-			'modules.Users.resources.UsersEducation',
+			'modules.Users.resources.Education',
+			'modules.Users.resources.WorkExp',
+			'modules.Users.resources.EmployeeProjects',
 		);
 
 		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);

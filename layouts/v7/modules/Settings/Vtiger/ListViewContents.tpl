@@ -75,13 +75,26 @@
 										{if method_exists($LISTVIEW_ENTRY,'getDetailViewUrl')}data-recordurl="{$LISTVIEW_ENTRY->getDetailViewUrl()}"{/if}
 										{if method_exists($LISTVIEW_ENTRY,'getRowInfo')}data-info="{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::Encode($LISTVIEW_ENTRY->getRowInfo()))}"{/if}>
 										<td width="10%">
+											{if $CURRENT_USER_MODEL->get('is_admin') eq 'on'}
 											{include file="ListViewRecordActions.tpl"|vtemplate_path:$QUALIFIED_MODULE}
+											{/if}
 										</td>
 										{foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
 											{assign var=LISTVIEW_HEADERNAME value=$LISTVIEW_HEADER->get('name')}
 											{assign var=LAST_COLUMN value=$LISTVIEW_HEADER@last}
 											<td class="listViewEntryValue textOverflowEllipsis {$WIDTHTYPE}" width="{$WIDTH}%" nowrap>
-												{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}
+												 {if $LISTVIEW_HEADERNAME eq 'filename'}
+												 {assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($LISTVIEW_ENTRY->getId())}
+								                <a name="downloadfile" target="_blank" href="{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}">
+								                	{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}</a>
+								             	{else if $LISTVIEW_HEADERNAME eq 'letter_of_appointment'} 
+									             	{assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($LISTVIEW_ENTRY->getId())}
+									             		<a name="downloadfile" target="_blank" href="{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}">{$LISTVIEW_HEADERNAME}
+									                	{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}</a>
+								             	{else}
+								             		{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}   
+								           		 {/if}	
+
 												{if $LAST_COLUMN && $LISTVIEW_ENTRY->getRecordLinks()}
 													</td>
 												{/if}

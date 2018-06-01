@@ -11,6 +11,12 @@
 -->*}
 {strip}
     <div class="table-actions">      
+         <!--added for icon sequence for currency list    -->  
+        <!-- start -->   
+                 <span>
+                    <img src="{vimage_path('drag.png')}" class="alignTop" title="{vtranslate('LBL_DRAG',$QUALIFIED_MODULE)}" />
+                </span>
+        <!-- end   -->
             {foreach item=RECORD_LINK from=$LISTVIEW_ENTRY->getRecordLinks()}
                 <span>
                 {assign var="RECORD_LINK_URL" value=$RECORD_LINK->getUrl()}

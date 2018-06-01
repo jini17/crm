@@ -105,25 +105,27 @@ class Users_EduRecord_Model extends Users_Record_Model {
 
 	public function getEducationDetail($edu_id) {
 		$db  = PearDatabase::getInstance();
-		$sql = "SELECT tblSCE.edu_id, tblSCE.institution_id,tblSCI.institution, 
-				DATE_FORMAT(tblSCE.start_date,'%d-%m-%Y') AS start_date, is_studying,
-				DATE_FORMAT(tblSCE.end_date,'%d-%m-%Y') AS end_date, tblSCE.education_level, tblSCE.major_id,tblSCSA.major, 				tblSCE.description, tblSCE.isview FROM secondcrm_education tblSCE 
-				LEFT JOIN secondcrm_institution tblSCI ON tblSCI.institution_id	= tblSCE.institution_id
-				LEFT JOIN secondcrm_studyarea tblSCSA ON tblSCSA.major_id = tblSCE.major_id
-			WHERE tblSCE.deleted = 0 AND tblSCE.edu_id=?"; 
+		$sql = "SELECT vtiger_education.* FROM vtiger_education 
+				INNER JOIN vtiger_crmentity	ON vtiger_crmentity.crmid = vtiger_education.educationid
+				WHERE vtiger_crmentity.deleted=0 AND vtiger_education.educationid=?"; 
 		$params = array($edu_id);
 		$result = $db->pquery($sql,$params);
 			
 		$educationDetail = array();
-		$educationDetail['institution_id'] = $db->query_result($result, 0, 'institution_id');      
-		$educationDetail['edu_id'] = $db->query_result($result, 0, 'edu_id');
-		$educationDetail['is_studying'] = $db->query_result($result, 0, 'is_studying');	
-		$educationDetail['start_date'] = $db->query_result($result, 0, 'start_date');
-		$educationDetail['end_date'] = $db->query_result($result, 0, 'end_date');
+		$educationDetail['institution_name'] = $db->query_result($result, 0, 'institution_name');      
+		$educationDetail['educationid'] = $db->query_result($result, 0, 'educationid');
+		$educationDetail['currently_studying'] = $db->query_result($result, 0, 'currently_studying');	
+		$educationDetail['start_date'] = date('d-m-Y',strtotime($db->query_result($result, 0, 'start_date')));
+		$enddate = $db->query_result($result, 0, 'end_date');
+
+		if($enddate =='0000-00-00') {
+			$enddate = date('d-m-Y');
+		}
+		$educationDetail['end_date'] = date('d-m-Y',strtotime($enddate));
 		$educationDetail['education_level'] = $db->query_result($result, 0, 'education_level');
-		$educationDetail['major_id'] = $db->query_result($result,0, 'major_id');
+		$educationDetail['area_of_study'] = $db->query_result($result,0, 'area_of_study');
 		$educationDetail['description'] = $db->query_result($result, 0, 'description');
-		$educationDetail['isview'] = $db->query_result($result, 0, 'isview');
+		$educationDetail['public'] = $db->query_result($result, 0, 'public');
 		
 		return $educationDetail;		
 	}
@@ -159,45 +161,47 @@ LIMIT 3";
 	}
 	
 	public function getUserEducationList($userId) {
-		$db  = PearDatabase::getInstance();
-		$sql = "SELECT tblSCE.edu_id, tblSCE.institution_id,tblSCI.institution, 
-				DATE_FORMAT(tblSCE.start_date,'%b-%Y') AS start_date, is_studying,
-				DATE_FORMAT(tblSCE.end_date,'%b-%Y') AS end_date, tblSCE.education_level, tblSCE.major_id,tblSCSA.major, 				tblSCE.description, tblSCE.isview FROM secondcrm_education tblSCE 
-				LEFT JOIN secondcrm_institution tblSCI ON tblSCI.institution_id	= tblSCE.institution_id
-				LEFT JOIN secondcrm_studyarea tblSCSA ON tblSCSA.major_id = tblSCE.major_id
-			WHERE tblSCE.user_id = ? AND tblSCE.deleted = 0"; 
-		$params = array($userId);
-		$result = $db->pquery($sql,$params);
-			
-		$userEducationList = array();
-		if($db->num_rows($result) > 0) {
-			for($i=0;$i<$db->num_rows($result);$i++) {
-			  	$userEducationList[$i]['institution_id'] = $db->query_result($result, $i, 'institution_id');		$userEducationList[$i]['institution'] = $db->query_result($result, $i, 'institution');
-				$userEducationList[$i]['edu_id'] = $db->query_result($result, $i, 'edu_id');
-				$userEducationList[$i]['start_date'] = $db->query_result($result, $i, 'start_date');
-				$userEducationList[$i]['is_studying'] = $db->query_result($result, $i, 'is_studying');
-				$userEducationList[$i]['end_date'] = $db->query_result($result, $i, 'end_date');
-				$userEducationList[$i]['education_level'] = $db->query_result($result, $i, 'education_level');
-				$userEducationList[$i]['major_id'] = $db->query_result($result, $i, 'major_id');
-				$userEducationList[$i]['major'] = $db->query_result($result, $i, 'major');
-				$userEducationList[$i]['description'] = $db->query_result($result, $i, 'description');
-				$userEducationList[$i]['isview'] = $db->query_result($result, $i, 'isview');
-			}
+
+		$db = PearDatabase::getInstance();
+		
+		$query = "SELECT vtiger_education.* FROM vtiger_education
+			INNER JOIN vtiger_crmentity
+			ON vtiger_crmentity.crmid = vtiger_education.educationid
+			WHERE vtiger_crmentity.smownerid = ? AND vtiger_crmentity.deleted=0";
+
+		$result = $db->pquery($query,array($userId));
+		$eduList=array();	
+	
+		for($i=0;$db->num_rows($result)>$i;$i++){
+			$eduList[$i]['institution_name'] = $db->query_result($result, $i, 'institution_name');
+			$eduList[$i]['educationid'] = $db->query_result($result, $i, 'educationid');
+			$eduList[$i]['start_date'] = date('M-Y',strtotime($db->query_result($result, $i, 'start_date')));
+			$eduList[$i]['end_date'] =  date('M-Y',strtotime($db->query_result($result, $i, 'end_date')));
+			$eduList[$i]['is_studying'] = $db->query_result($result, $i, 'currently_studying');
+			$eduList[$i]['education_level'] = $db->query_result($result, $i, 'education_level');
+			$eduList[$i]['area_of_study'] = $db->query_result($result, $i, 'area_of_study');
+			$eduList[$i]['description'] = $db->query_result($result, $i, 'description');
+			$eduList[$i]['public'] = $db->query_result($result, $i, 'public');
 		}
-		return $userEducationList;		
-	}
+
+		return $eduList;
+
+	}		
 	
 	public function saveEducationDetail($request)
 	{
+		include_once('modules/Education/Education.php');
 		$db  = PearDatabase::getInstance();
+		//$db->setDebug(true);
 		$params 	= array();
 		$userid  	= $request['current_user_id'];
 		$eduId  	= $request['record'];
-		$insId  	= decode_html($request['institution_name']);
+		$insId  	= decode_html(trim($request['institution_name']));
+		$startdate  = date('Y-m-d',strtotime($request['start_date']));
 		$studying  	= $request['is_studying'];	
-		$startdate  	= date('Y-m-d',strtotime(decode_html($request['start_date'])));
-		if($studying =='0'){
-			$endDate	= date('Y-m-d',strtotime(decode_html($request['end_date'])));
+		
+		if($studying ==0){
+			$endDate	= date('Y-m-d',strtotime($request['end_date']));
 		} else{
 			$endDate	='';
 		}	
@@ -207,57 +211,50 @@ LIMIT 3";
 		$description  	= decode_html($request['description']);
 		$isview  	= decode_html($request['isview']);	
 		
-		$insTxt 	= decode_html($request['institutiontxt']);
+		$insTxt 	= decode_html(trim($request['institutiontxt']));
 
 		if($insId ==0 && !empty($insTxt)) {
            	 //check the institute exist or not
-           	 $resultcheck  = $db->pquery("SELECT institution_id FROM secondcrm_institution WHERE institution = ?",array($insTxt));
-		    if($db->num_rows($resultcheck) == 0){
-		        $resultIns = $db->pquery("INSERT INTO secondcrm_institution(institution) VALUES(?)",array($insTxt));
-		        $resultinID =  $db->pquery("SELECT LAST_INSERT_ID() AS 'institution_id'");
-		        $insId = $db->query_result($resultinID, 0, 'institution_id');
-		    } else {
-		        $insId = $db->query_result($resultcheck, 0, 'institution_id');
-		    }    
+	           	 $resultcheck  = $db->pquery("SELECT institution_id FROM secondcrm_institution WHERE institution = ?",array($insTxt));
+			    if($db->num_rows($resultcheck) == 0){
+			        $resultIns = $db->pquery("INSERT INTO secondcrm_institution(institution) VALUES(?)",array($insTxt));
+			    }
+			     $insId = $insTxt;    
                 
-        	}
+        }
 	
         	if($majorId == 0 && !empty($majorTxt)) {
            	 //check the area of study exist or not
             	$resultmajorcheck  = $db->pquery("SELECT major_id FROM secondcrm_studyarea WHERE major = ?",array($majorTxt));
 	    		if($db->num_rows($resultmajorcheck) == 0){
-				$resultmajor = $db->pquery("INSERT INTO secondcrm_studyarea(major) VALUES(?)",array($majorTxt));
-				$resultmajorID =  $db->pquery("SELECT LAST_INSERT_ID() AS 'major_id'");
-				$majorId = $db->query_result($resultmajorID, 0, 'major_id');
-		    	} else {
-		       		$majorId = $db->query_result($resultmajorcheck, 0, 'major_id');
-		    	}    
+					$resultmajor = $db->pquery("INSERT INTO secondcrm_studyarea(major) VALUES(?)",array($majorTxt));
+				}
+				$majorId = $majorTxt; 
         	}
-		
-		if(!empty($eduId)) {
-			$params = array($insId,$startdate,$endDate,$education_level,$majorId,$description,$isview,$studying, $eduId);	
-			$result = $db->pquery("UPDATE secondcrm_education SET institution_id = ?,start_date=?,end_date=?, education_level = ?, major_id=?, description = ?, isview=?,is_studying=? WHERE edu_id=?",array($params));
-			$return = 1;	
 
+			$education = new Education();
+			$education->column_fields['institution_name'] 	= $insId;	
+			$education->column_fields['start_date'] 		= $startdate;	
+			$education->column_fields['currently_studying'] = $studying;	
+			$education->column_fields['end_date'] 			= $endDate;	
+			$education->column_fields['education_level'] 	= $education_level;	
+			$education->column_fields['area_of_study'] 		= $majorId;	
+			$education->column_fields['description'] 		= $description;
+			$education->column_fields['public'] 			= $isview;
+			$education->column_fields['assigned_user_id'] 	= $userid;
+			
+		if(!empty($eduId)) {
+			//update Education
+			$education->mode = 'edit';
+			$education->id = $eduId;
+			$return = 1;
+			$db->pquery("UPDATE vtiger_education SET institution_name=?, start_date=?, currently_studying=?, end_date=?, education_level=?,area_of_study=?, description=?,public=? WHERE educationid=?", array($insId, $startdate, $studying, $endDate,$education_level, $majorId, $description, $isview, $eduId));
 		} else {
-			$params = array($userid, $insId,$startdate,$endDate,$education_level,$majorId,$description,$isview,$studying);
-			$result = $db->pquery("INSERT INTO secondcrm_education SET user_id = ?, institution_id = ?,start_date=?,end_date=?, education_level = ?, major_id=?, description = ?, isview=?, is_studying=? ", array($params));
+			$education->mode = '';
 			$return = 0;
 		}	
-		 
+	
+		$response = $education->save('Education');
 		return $return;
-	}
-
-	//Delete Education
-	public function deleteEducationPermanently($eduId){	
-		$db  		= PearDatabase::getInstance();
-		$params 	= array();
-		if(!empty($eduId)) {
-			$params = array($eduId);
-			$result = $db->pquery("UPDATE secondcrm_education SET deleted = 1 WHERE edu_id=?",array($params));
-			return 1;
-		} else {
-			return 0;
-		}
 	}
  }  

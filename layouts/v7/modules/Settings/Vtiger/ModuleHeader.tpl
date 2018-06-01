@@ -166,6 +166,7 @@
 							{foreach item=LISTVIEW_BASICACTION from=$LISTVIEW_LINKS['LISTVIEWBASIC']}
 								{if $MODULE eq 'Users'} {assign var=LANGMODULE value=$MODULE} {/if}
 								<li>
+									{if $USER_MODEL->isAdminUser()}
 									<button class="btn btn-default addButton module-buttons"
 										id="{$MODULE}_listView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($LISTVIEW_BASICACTION->getLabel())}" 
 										{if $MODULE eq 'Workflows'}
@@ -187,6 +188,7 @@
 											{vtranslate($LISTVIEW_BASICACTION->getLabel(), $QUALIFIED_MODULE)}
 										{/if}
 									</button>
+									{/if}
 								</li>
 							{/foreach}
 						{/if}

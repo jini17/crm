@@ -12,16 +12,16 @@
  * TODO need to organize into classes based on functional grouping.
  */
 
-
-
 class Vtiger_Functions {
 
 	const LINK_TO_ANCHOR_TEXT_SYMBOL = '#';
 
 	//Added By Mabruk for Google Drive Integration 27-03-2018
 	//Two Functions added: getClient() and createFolderInGoogleDrive()
+
 	static function getClient() {
-	 require_once 'testAPI/vendor/autoload.php';
+	require_once 'testAPI/vendor/autoload.php';
+
 	 $client = new Google_Client();
 	 $client->setApplicationName('TEST');
 	 $client->setScopes(Google_Service_Drive::DRIVE);
