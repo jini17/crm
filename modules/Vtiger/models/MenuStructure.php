@@ -157,7 +157,7 @@ class Vtiger_MenuStructure_Model extends Vtiger_Base_Model {
 
 
 	private function getEmptyMoreMenuList(){
-		return array('CONTACT'=>array(), 'MARKETING_AND_SALES'=>array(),'SUPPORT'=>array(),'INVENTORY'=>array(),'TOOLS'=>array(),'ANALYTICS'=>array());
+		return array('CONTACT'=>array(), 'MARKETING_AND_SALES'=>array(),'SUPPORT'=>array(),'INVENTORY'=>array(),'TOOLS'=>array(),'ANALYTICS'=>array(),'ADMIN'=>array());
 	}
 
 	public static function getIgnoredModules() {
@@ -220,7 +220,8 @@ class Vtiger_MenuStructure_Model extends Vtiger_Base_Model {
 							'INVENTORY'				=> 'INVENTORY',
 							'SUPPORT'				=> 'SUPPORT',
 							'PROJECT'				=> 'PROJECT',
-							'TOOLS'					=> 'TOOLS'
+							'TOOLS'					=> 'TOOLS',
+							'ADMIN'					=>'ADMIN'
 						  );
 		return $oldToNewAppMap;
 	}
@@ -230,17 +231,39 @@ class Vtiger_MenuStructure_Model extends Vtiger_Base_Model {
 	 * @return <array>
 	 */
 	public static function getAppMenuList(){
-		return array('MARKETING','SALES','INVENTORY','SUPPORT','PROJECT','TOOLS');
+		$db = PearDatabase::getInstance();
+		$result = $db->pquery("SELECT UPPER(parenttab_label) as parenttab FROM vtiger_parenttab WHERE visible=0 ORDER BY sequence ASC",array());
+		$noOfRows = $db->num_rows($result);
+
+		
+		for($i=0; $i<$noOfRows; ++$i) {
+			$row = $db->query_result_rowdata($result, $i);
+				$parentlist[] = $row['parenttab'];
+			
+		}	
+		return $parentlist;//array('MARKETING','SALES','INVENTORY','SUPPORT','PROJECT','TOOLS');
 	}
 
 	public static function getAppIcons() {
-		$appImageIcons = array(	'MARKETING' => 'fa-users',
+		$db = PearDatabase::getInstance();
+		$result = $db->pquery("SELECT UPPER(parenttab_label) as parenttab, icon FROM vtiger_parenttab WHERE visible=0 ORDER BY sequence ASC",array());
+		$noOfRows = $db->num_rows($result);
+
+		
+		for($i=0; $i<$noOfRows; ++$i) {
+			$row = $db->query_result_rowdata($result, $i);
+				$appImageIcons[$row['parenttab']] = $row['icon'];
+			
+		}	
+		return $appImageIcons;//array('MARKETING','SALES','INVENTORY','SUPPORT','PROJECT','TOOLS');
+
+		/*$appImageIcons = array(	'MARKETING' => 'fa-users',
 								'SALES'		=> 'fa-dot-circle-o',
 								'SUPPORT'	=> 'fa-life-ring',
 								'INVENTORY'	=> 'vicon-inventory',
 								'PROJECT'	=> 'fa-briefcase',
 								'TOOLS'		=> 'fa-wrench'
 							);
-		return $appImageIcons;
+		return $appImageIcons;*/
 	}
 }

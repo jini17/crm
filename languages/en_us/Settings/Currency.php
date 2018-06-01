@@ -157,4 +157,5 @@ $languageStrings = array(
 $jsLanguageStrings = array(
 	'JS_CURRENCY_DETAILS_SAVED' => 'Currency Details Saved',
 	'JS_CURRENCY_DELETED_SUEESSFULLY' => 'Currency Deleted Successfully',
+	'JS_CURRENCY_SEQUENCE_UPDATED'=>'Currency Sequence updated succesfully',
 );

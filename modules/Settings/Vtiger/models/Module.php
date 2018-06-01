@@ -104,8 +104,8 @@ class Settings_Vtiger_Module_Model extends Vtiger_Base_Model {
 	 * Function to get the instance of Settings module model
 	 * @return Settings_Vtiger_Module_Model instance
 	 */
-	public static function getInstance($name='Settings:Vtiger') { 
-		$modelClassName = Vtiger_Loader::getComponentClassName('Model', 'Module', $name);  
+	public static function getInstance($name='Settings:Vtiger') {
+		$modelClassName = Vtiger_Loader::getComponentClassName('Model', 'Module', $name);
 		return new $modelClassName();
 	}
 
@@ -202,16 +202,17 @@ class Settings_Vtiger_Module_Model extends Vtiger_Base_Model {
 	static function getSettingsMenuListForNonAdmin() {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$myTagSettingsUrl = $currentUser->getMyTagSettingsListUrl();
-
+		$employmentdetails = Users_Record_Model::getTabDetails(15);
 		$settingsMenuList = array('LBL_MY_PREFERENCES'	=> array('My Preferences'	=> '',
 																 'Calendar Settings'=> '',
 																 'LBL_MY_TAGS'		=> $myTagSettingsUrl),
 									'LBL_EXTENSIONS'	=> array('LBL_GOOGLE'		=> 'index.php?module=Contacts&parent=Settings&view=Extension&extensionModule=Google&extensionView=Index&mode=settings')
 								);
+		$array = array_merge($settingsMenuList, $employmentdetails);
 		if(!vtlib_isModuleActive('Google')) {
-			unset($settingsMenuList['LBL_EXTENSIONS']['LBL_GOOGLE']);
+			unset($array['LBL_EXTENSIONS']['LBL_GOOGLE']);
 		}
 
-		return $settingsMenuList;
+		return $array;
 	}
 }

@@ -1,9 +1,11 @@
-<script src="layouts/vlayout/modules/Users/resources/Emergency.js?v=6.1.0" type="text/javascript"></script>
 {strip}
 {assign var=EDIT_EMERGENCY_URL value=$EMERGENCY_RECORD_MODEL->getEditEmergencyUrl()}
 <div id="UserEmergencyContainer">
 	<div class="pull-right">
-		<button type="button" class="editEmergency btn" data-url="{$EDIT_EMERGENCY_URL}&userId={$USERID}"><strong>{vtranslate('LBL_EDIT_CONTACT', $MODULE)}</strong></button>	
+	
+
+		<button type="button" class="btn" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}');"><i class="icon-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_EDIT_CONTACT', $MODULE)}</strong></button>
+
 	</div><br /><br />
 	<table class="table table-bordered equalSplit detailview-table">
 		<thead>

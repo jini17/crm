@@ -30,7 +30,7 @@ class VtigerModuleOperation extends WebserviceEntityOperation {
 		$crmObject = new VtigerCRMObject($elementType, false);
 		
 		$element = DataTransform::sanitizeForInsert($element,$this->meta);
-   ;
+		
 		$error = $crmObject->create($element);
 		if(!$error){
 			throw new WebServiceException(WebServiceErrorCode::$DATABASEQUERYERROR,
@@ -73,7 +73,6 @@ class VtigerModuleOperation extends WebserviceEntityOperation {
 	}
 	
     public function relatedIds($id, $relatedModule, $relatedLabel, $relatedHandler=null) {
-
 		$ids = vtws_getIdComponents($id);
         $sourceModule = $this->webserviceObject->getEntityName();		
         global $currentModule;

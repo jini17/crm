@@ -87,7 +87,7 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 		}
 
 		$modulesList = $reportModel->getModulesList();
-
+		$modulesList['Users'] = 'Users';
 		if (!empty($record)) {
 			$viewer->assign('MODE', 'edit');
 		} else {
@@ -110,6 +110,7 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 			}
 			$relatedModules[$primaryModule] = $translatedRelatedModules;
 		}
+		$relatedModules['Users'] = array('Education','Timesheet', 'EmergencyContact','Performance','EmployeeContract','EmployeeProjects', 'LangugageSkill','PassportVisa');
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 
 		$viewer->assign('SCHEDULEDREPORTS', $reportModel->getScheduledReport());
@@ -136,6 +137,7 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 	}
 
 	function step2(Vtiger_request $request) {
+
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
@@ -158,7 +160,9 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 		}
 		$primaryModule = $request->get('primary_module');
 		$secondaryModules = $request->get('secondary_modules');
-
+		if($primaryModule=='Users') {
+			$secondaryModules =  array('Education','Timesheet', 'EmergencyContact','Performance','EmployeeContract','EmployeeProjects', 'LangugageSkill','PassportVisa');
+		}
 		$reportModel->setPrimaryModule($primaryModule);
 		if($secondaryModules) {
 			$secondaryModules = implode(':', $secondaryModules);
@@ -228,6 +232,22 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 	}
 
 	function step3(Vtiger_Request $request) {
+		error_reporting(1);
+		ini_set('display_erros',1);
+
+		  register_shutdown_function('handleErrors');
+		    function handleErrors() {
+
+		       $last_error = error_get_last();
+
+		       if (!is_null($last_error)) { // if there has been an error at some point
+
+			  // do something with the error
+			  print_r($last_error);
+
+		       }
+
+		    }
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$record = $request->get('record');

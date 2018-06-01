@@ -25,12 +25,14 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveEducation(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
+		$request['is_studying']= $_REQUEST['is_studying'];
+		
 		$response = new Vtiger_Response();
 		try{
 		    $return = Users_EduRecord_Model::saveEducationDetail($request);
-		    $msg    = $return=='1'? vtranslate("LBL_INSTITUTION_UPDATE_SUCCESS","Users"):vtranslate("LBL_INSTITUTION_ADD_SUCCESS","Users"); 		
-		
+		    $msg    = $return=='1'? vtranslate("LBL_INSTITUTION_UPDATE_SUCCESS","Users"):vtranslate("LBL_INSTITUTION_ADD_SUCCESS","Users"); 	
 		    $response->setResult($msg);
 		}catch(Exception $e){
 		    $response->setError($e->getCode(),$e->getMessage());
@@ -42,8 +44,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveProject(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
-		
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
 		$response = new Vtiger_Response();
 		try{
 		    $return = Users_ProjectRecord_Model::saveProjectDetail($request);
@@ -60,7 +62,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveWorkExp(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
 		
 		$response = new Vtiger_Response();
 		try{
@@ -78,7 +81,9 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveLanguage(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
+		
 		$response = new Vtiger_Response();
 		try{
 		    $return = Users_SkillsRecord_Model::saveSoftSkillDetail($request);
@@ -99,7 +104,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveEmergencyContact(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
 		
 		$response = new Vtiger_Response();
 		try{
@@ -116,7 +122,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveSkill(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
 		
 		$response = new Vtiger_Response();
 		try{
@@ -214,11 +221,12 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 				$leave = vtws_create('Leave', $data,$current_usersaving);
 				$msg    = $leave != null ? vtranslate("LBL_CREATE_SUCCESS","Users"):vtranslate("LBL_CREATE_FAILED","Users");
 
-		    		$response->setResult($msg);
+		    	$response->setResult($msg);
 			
 			} catch (WebServiceException $ex) {
 				echo $ex->getMessage();
 			}
+
 		$response->emit();
 
 		}else{ 

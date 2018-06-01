@@ -70,22 +70,21 @@ class Settings_Vtiger_CustomRecordNumberingModule_Model extends Vtiger_Module_Mo
 	 * Function to set Module sequence
 	 * @return <Array> result of success
 	 */
-	public function setModuleSequence() {
+	public function setModuleSequence($sourceCompany) {
 		$moduleName = $this->getName();
 		$prefix = $this->get('prefix');
 		$sequenceNumber = $this->get('sequenceNumber');
-
-		$status = $this->getFocus()->setModuleSeqNumber('configure', $moduleName, $prefix, $sequenceNumber);
-
+		$status = $this->getFocus()->setModuleSeqNumber('configure', $moduleName, $prefix, $sequenceNumber,$sourceCompany);
 		$success = array('success' => $status);
 		if (!$status) {
 			$db = PearDatabase::getInstance();
-			$result = $db->pquery("SELECT cur_id FROM vtiger_modentity_num WHERE semodule = ? AND prefix = ?", array($moduleName, $prefix));
+			$result = $db->pquery("SELECT cur_id FROM vtiger_modentity_num WHERE semodule = ? AND prefix = ? AND organization_id = ?", array($moduleName, $prefix,$sourceCompany));
 			$success['sequenceNumber'] = $db->query_result($result, 0, 'cur_id');
 		}
 
 		return $success;
 	}
+
 
 	/**
 	 * Function to update record sequences which are under this module

@@ -9,13 +9,12 @@
  ********************************************************************************/
 -->*}
 {strip}
-<script src="layouts/vlayout/modules/Users/resources/Project.js?v=6.1.0" type="text/javascript"></script>
 <div id="UserProjectContainer">
 	<div class="contents row-fluid">
 		{assign var=CREATE_PROJECT_URL value=$PROJECT_RECORD_MODEL->getCreateProjectUrl()}
 		{assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}	
 		<div class="marginBottom10px">
-			<button type="button" class="addProject btn addButton" data-url="{$CREATE_PROJECT_URL}&userId={$USERID}"><i class="icon-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_PROJECT', $MODULE)}</strong></button>
+			<button type="button" class="btn" onclick="Users_Project_Js.addProject('{$CREATE_PROJECT_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_PROJECT', $MODULE)}</strong></button>
 		</div>
 		<div class="listViewContentDiv" id="listViewContents">
 			<div class="contents-topscroll noprint">
@@ -42,13 +41,16 @@
 									<td class="listTableRow small" valign=top>{$USER_PROJECT['title']}</td>
 									<td class="listTableRow small" valign=top>{$USER_PROJECT['description']}</td>
 									<td class="listTableRow small" valign=top>{if $USER_PROJECT['relation_type'] eq 'E'}Student at {/if}{$USER_PROJECT['designation']}</td>
-									<td class="listTableRow small" valign=top>{$USER_PROJECT['project_month']}-{$USER_PROJECT['project_year']}</td>
+									<td class="listTableRow small" valign=top>{$USER_PROJECT['project_start_date']}</td>
 									<td class="listTableRow small" valign=top>{$USER_PROJECT['project_url']}</td>
 									<td class="listTableRow small" valign=top>{('0'==$USER_PROJECT['isview'])?{vtranslate('LBL_NO', $MODULE)}:{vtranslate('LBL_YES', $MODULE)}}</td>
 									<td class="listTableRow small" valign=top>
 										<div class="pull-right actions">
 											<span class="actionImages">
-												<a class="editProject cursorPointer" data-url="{$CREATE_PROJECT_URL}&record={$USER_PROJECT['project_id']}&userId={$USERID}"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="icon-pencil alignBottom"></i></a>&nbsp;<a class="deleteProject cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=deleteProject&record={$USER_PROJECT['project_id']}"><i title="{vtranslate('LBL_DELETE', $MODULE)}" class="icon-trash alignBottom"></i></a>
+												<a class="editProject" onclick="Users_Project_Js.editProject('index.php{$CREATE_PROJECT_URL}&record={$USER_PROJECT['employeeprojectsid']}&userId={$USERID}');"><i class="fa fa-edit alignBottom" title="{vtranslate('LBL_EDIT', $MODULE)}"></i></a>
+												&nbsp;&nbsp;
+												<a class="cursorPointer" onclick="Users_Project_Js.deleteProject('index.php?module=EmployeeProjects&action=Delete&record={$USER_PROJECT['employeeprojectsid']}');">
+												<i title="{vtranslate('LBL_DELETE', $MODULE)}" class="fa fa-trash"></i></a>
 											</span>		
 										</div>
 									</td>

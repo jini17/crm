@@ -115,7 +115,7 @@ class Documents_Record_Model extends Vtiger_Record_Model {
 			}
 		}
 			//Edit Done
-		return $fileContent;
+		echo $fileContent;
 	}
 
 	function updateFileStatus() {

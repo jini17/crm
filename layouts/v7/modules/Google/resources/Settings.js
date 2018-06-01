@@ -344,7 +344,6 @@ Vtiger.Class("Google_Settings_Js", {
     },
     
     registerEvents : function() {
-
         var thisInstance = this;
         this.registerAuthorizeButton();
         app.event.on(Google_Settings_Js.postSettingsLoad,function(){

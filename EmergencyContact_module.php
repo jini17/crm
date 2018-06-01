@@ -60,10 +60,10 @@ $module->addBlock($blockcf);
 $field1  = new Vtiger_Field();
 $field1->name = 'home_phone';
 $field1->label= 'Home Phone';
-$field1->uitype= 1;
-$field1->column = $field1->name;
-$field1->columntype = 'INT(15)';
-$field1->typeofdata = 'I~O';
+$field1->uitype= 11;
+$field1->column = $field2->name;
+$field1->columntype = 'VARCHAR(15)';
+$field1->typeofdata = 'V~O';
 $block->addField($field1);
 
 
@@ -71,29 +71,29 @@ $field2  = new Vtiger_Field();
 $field2->name = $ENTITYNAME;
 $field2->label= $ENTITYLABEL;
 $field2->uitype= 2;
-$field2->column = $field1->name;
+$field2->column = $field2->name;
 $field2->columntype = 'VARCHAR(255)';
 $field2->typeofdata = 'V~M';
 $block->addField($field2);
-
+$module->setEntityIdentifier($field2); //make primary key for module
 
 $field3  = new Vtiger_Field();
 $field3->name = 'office_phone';
 $field3->label= 'Office Phone';
-$field3->uitype= 1;
-$field3->column = $field1->name;
-$field3->columntype = 'INT(15)';
-$field3->typeofdata = 'I~O';
+$field3->uitype= 11;
+$field3->column = $field3->name;
+$field3->columntype = 'VARCHAR(15)';
+$field3->typeofdata = 'V~O';
 $block->addField($field3);
 
 
 $field4  = new Vtiger_Field();
 $field4->name = 'mobile';
 $field4->label= 'Mobile';
-$field4->uitype= 1;
-$field4->column = $field1->name;
-$field4->columntype = 'INT(15)';
-$field4->typeofdata = 'I~O';
+$field4->uitype= 11;
+$field4->column = $field4->name;
+$field4->columntype = 'VARCHAR(15)';
+$field4->typeofdata = 'V~O';
 $block->addField($field4);
 
 /** Create required fields and add to the block */
@@ -108,12 +108,10 @@ $field8->typeofdata = 'V~O';
 $field8->setPicklistValues( Array ('Father', 'Mother','Brother','Sister','Others') );
 $block->addField($field8); /** Creates the field and adds to block */
 
-$module->setEntityIdentifier($field1); //make primary key for module
 
 /**
 ADD YOUR FIELDS HERE
  */
-
 
 /** Common fields that should be in every module, linked to vtiger CRM core table */
 $field2 = new Vtiger_Field();

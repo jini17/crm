@@ -182,10 +182,11 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 		//Delete Language
 	public function deleteLanguagePermanently($langId){	
 		$db  		= PearDatabase::getInstance();
+		$db->setDebug(true);
 		$params 	= array();
 		if(!empty($langId)) {
 			$params = array($langId);
-			$result = $db->pquery("UPDATE secondcrm_softskill SET deleted = 1 WHERE ss_id=?",array($params));
+			$result = $db->pquery("DELETE FROM  secondcrm_softskill WHERE ss_id=?",array($params));
 			return 1;
 		} else {
 			return 0;
@@ -193,7 +194,7 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 		
 	}
 
-	public function getALLSKills($userId) {
+	public function getALLSkills($userId) {
 		$db  = PearDatabase::getInstance();
 		$sql = "SELECT * FROM secondcrm_skillmaster WHERE skill_id NOT IN (SELECT skill_id FROM secondcrm_skills WHERE user_id = ?)"; 
 		$params = array($userId);
@@ -257,7 +258,8 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
                 
 		} else {
 			$params = array($skill_id, $userid);
-			$result = $db->pquery("INSERT INTO secondcrm_skills SET skill_id = ?, user_id = ?", array($params));		$return = 0;
+			$result = $db->pquery("INSERT INTO secondcrm_skills SET skill_id = ?, user_id = ?", array($params));	
+			$return = 0;
 		}
 		return $return;	
 	}
@@ -267,7 +269,7 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 		$params 	= array();
 		if(!empty($skillId)) {
 			$params = array($skillId);
-			$result = $db->pquery("delete FROM secondcrm_skills WHERE skill_id=?",array($params));
+			$result = $db->pquery("DELETE FROM secondcrm_skills WHERE skill_id=?",array($params));
 			return 1;
 		} else {
 			return 0;
