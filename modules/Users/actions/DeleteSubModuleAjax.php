@@ -5,8 +5,8 @@ class Users_DeleteSubModuleAjax_Action extends Vtiger_BasicAjax_Action {
 		parent::__construct();
 		$this->exposeMethod('deleteSubModule');
 		/*$this->exposeMethod('deleteEducation');
-		$this->exposeMethod('deleteProject');
-		$this->exposeMethod('deleteWorkExp');*/
+		$this->exposeMethod('deleteProject');*/
+		$this->exposeMethod('deleteWorkExp');
 		$this->exposeMethod('deleteLanguage');	
 		$this->exposeMethod('deleteSkill');
 		$this->exposeMethod('deleteLeave');	

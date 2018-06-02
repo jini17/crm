@@ -64,6 +64,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 		$module = $request->getModule();
 		$request= $_REQUEST['form'];
 		$request['isview']= $_REQUEST['isview'];
+		$request['isworking']= $_REQUEST['isworking'];
+		
 		
 		$response = new Vtiger_Response();
 		try{
