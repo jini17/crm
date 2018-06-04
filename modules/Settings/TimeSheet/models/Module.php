@@ -9,16 +9,16 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-class Settings_Performance_Module_Model extends Settings_Vtiger_Module_Model {
+class Settings_TimeSheet_Module_Model extends Settings_Vtiger_Module_Model {
 
-	var $baseTable = 'vtiger_performance';
-	var $baseIndex = 'performanceid';
-	var $listFields = array('yearly_review' => 'Yearly Review','quarterly_review'=>'Quarterly Review', 'responsibility' => 'Responsibility', 'employee_remarks'=>'Employee Remarks', 'superior_remarks'=>'	Superior Remarks');
-	var $nameFields = array('yearly_review');
-	var $name = 'Performance';
+	var $baseTable = 'vtiger_timesheet';
+	var $baseIndex = 'timesheetid';
+	var $listFields = array('tsno' => 'TimeSheet No','date'=>'Date', 'description' => 'Description', 'timestart'=>'Time Start', 'timeend'=>'Time End', 'tstype '=>'Type');
+	var $nameFields = array('tsno');
+	var $name = 'TimeSheet';
 
 	public function getCreateRecordUrl() {
-		return "index.php?module=Performance&parent=Settings&view=Edit";
+		return "index.php?module=TimeSheet&parent=Settings&view=Edit";
 	}
 
 }

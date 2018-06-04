@@ -161,6 +161,7 @@ Class Vtiger_Edit_View extends Vtiger_Index_View {
 		}
 		$viewer->assign('MAX_UPLOAD_LIMIT_MB', Vtiger_Util_Helper::getMaxUploadSize());
 		$viewer->assign('MAX_UPLOAD_LIMIT_BYTES', Vtiger_Util_Helper::getMaxUploadSizeInBytes());
+		$viewer->assign('parentmodule', $request->get('parent'));
 		if($request->get('displayMode')=='overlay'){
 			$viewer->assign('SCRIPTS',$this->getOverlayHeaderScripts($request));
 			$viewer->view('OverlayEditView.tpl', $moduleName);

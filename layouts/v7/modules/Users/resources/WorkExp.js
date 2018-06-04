@@ -59,7 +59,7 @@ Vtiger.Class("Users_WorkExp_Js", {
                             submitHandler : function(form){
                                 var form = jQuery('#editWorkExp');   
 //                                var form = jQuery(form);
-                                thisInstance.saveEducationDetails(form, currentTrElement);
+                                thisInstance.saveWorkExpDetails(form);
                             }
                         };
                          form.vtValidate(params)
@@ -77,8 +77,8 @@ Vtiger.Class("Users_WorkExp_Js", {
 					'record' : userid,		
 					'mode'   : 'getUserWorkexp',
 				}
-				AppConnector.request(params).then(
-					function(data) {
+				app.request.post({'data':params}).then(
+					function(err, data) {
 						$('#workexp').html(data);
 					},
 					
@@ -92,29 +92,16 @@ Vtiger.Class("Users_WorkExp_Js", {
 		var message = app.vtranslate('JS_DELETE_WORKEXP_CONFIRMATION');
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
-		Vtiger_Helper_Js.showConfirmationBox({'message' : message}).then(function(data) {
-		AppConnector.request(deleteRecordActionUrl).then(
-		function(data){
-				var response = data['result'];
-				var result   = data['success'];
-				if(result == true) {
-					params = {
-						text: response.msg,
-						type:'success'	
-					};
-				} else {
-						params = {
-						text: response.msg,
-						type:'error'	
-					};
-				}
-				
-				Vtiger_Helper_Js.showPnotify(params);
-				//delete the Education details in the list
-				thisInstance.updateWorkExpGrid(userid);
-				}
-			);
-		});
+		app.helper.showConfirmationBox({'message' : message}).then(function(e) {
+		
+          	app.request.post({url:deleteRecordActionUrl}).then(
+          	     function(data){
+				      app.helper.showSuccessNotification({'message': 'Record deleted successfully'});
+				     //delete the Education details in the list
+				     thisInstance.updateWorkExpGrid(userid);
+			     }
+		     );
+	     });
      },
      textAreaLimitChar : function(){ 
 			$('#description').keyup(function () {
@@ -129,8 +116,35 @@ Vtiger.Class("Users_WorkExp_Js", {
 					
 			  	}
 			});
-	}	
-	
+	},	
+     saveWorkExpDetails : function(form){
+          var aDeferred = jQuery.Deferred();
+          app.helper.hideModal();
+          var thisInstance = this;
+          var userid = jQuery('#current_user_id').val();
+          app.helper.showProgress();
+          var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
+          var chkcurrently = $('#chkcurrently').is(':checked')?'1':'0';
+          var formData = form.serializeFormData();
+          var params = {
+				'module': 'Users',
+				'action': "SaveSubModuleAjax",
+				'mode'  : 'saveWorkExp',
+				'form' : formData,
+				'isview' : chkboxval,
+				'isworking':chkcurrently
+			};	
+				
+         app.request.post({'data': params}).then(function (err, data) {     
+              app.helper.hideProgress();
+               //show notification after WorkExp details saved
+                app.helper.showSuccessNotification({'message': data});
+               //Adding or update the WorkExp details in the list
+               thisInstance.updateWorkExpGrid(userid);
+             }
+          );
+           return aDeferred.promise();
+     },		
 },{
 	//constructor
 	init : function() {

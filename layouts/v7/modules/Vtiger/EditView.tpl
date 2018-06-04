@@ -40,6 +40,7 @@
 								<input type="hidden" name="parent" value="{$SPLITTED_MODULE[0]}" />
 							{else}
 								<input type="hidden" name="module" value="{$MODULE}" />
+								<input type="hidden" name="parentmodule" value="{$parentmodule}" />
 							{/if}
 							<input type="hidden" name="action" value="Save" />
 							<input type="hidden" name="record" value="{$RECORD_ID}" />
