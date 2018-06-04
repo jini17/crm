@@ -37,10 +37,10 @@
                                 Select
                             </td>
                             <td>
-                                Claim Type Title
+                                Benefit Title
                             </td>
                             <td>
-                                Claim Code
+                                Benefit Code
                             </td>
                             <td>
                                 Status

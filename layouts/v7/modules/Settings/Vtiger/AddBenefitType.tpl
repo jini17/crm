@@ -17,17 +17,25 @@
                 <div class="modal-body" id="scrollContainer" name="test">
                     <div class="container float-left">
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Claim Type Title :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Benefit Type Title :</label></div>
                             <div class="col-lg-4 col-md-4">
-                                <input type="text" placeholder="Travel Claims" id="ClaimTypeTitle" name="ClaimTypeTitle">
+                                <input type="text" placeholder="Medical Benefit" id="BenefitTypeTitle" name="BenefitTypeTitle">
                             </div>
                         </div>
                     </div>
                     <div class="container float-left">
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Claim Code :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Benefit Type :</label></div>
                             <div class="col-lg-4 col-md-4">
-                                <input type="text" placeholder="C01" id="ClaimCode" name="ClaimCode">
+                                <input type="text" placeholder="Medical" id="BenefitType" name="BenefitType">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container float-left">
+                        <div class="contents row form-group">
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Benefit Code :</label></div>
+                            <div class="col-lg-4 col-md-4">
+                                <input type="text" placeholder="B01" id="BenefitCode" name="BenefitCode">
                             </div>
                         </div>
                     </div>
@@ -48,7 +56,7 @@
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Description :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
-                                <input type="textarea" id="ClaimType_Desc" name="ClaimType_Desc">
+                                <textarea id="BenefitType_Desc" name="BenefitType_Desc" /> </textarea>
                             </div>
                         </div>
                     </div>

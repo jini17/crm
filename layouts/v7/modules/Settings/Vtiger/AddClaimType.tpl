@@ -10,8 +10,7 @@
 {* modules/Settings/UserPlan/views/UserPlanAjax.php *}
 
 {strip}
-
-    <div class="taxModalContainer modal-dialog modal-xs" id="AddClaimTypeContainer">
+    <div class="taxModalContainer modal-dialog modal-xs" id="AddClaimTypeContainer" xmlns="http://www.w3.org/1999/html">
         <div class="modal-content">
             <form id="AddRule" class="form-horizontal" method="POST">
                 <div class="modal-body" id="scrollContainer" name="test">
@@ -48,7 +47,7 @@
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Description :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
-                                <input type="textarea" id="ClaimType_Desc" name="ClaimType_Desc">
+                                <textarea id="ClaimType_Desc" name="ClaimType_Desc" /> </textarea>
                             </div>
                         </div>
                     </div>
