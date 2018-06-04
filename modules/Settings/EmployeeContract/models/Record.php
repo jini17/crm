@@ -39,6 +39,13 @@ class Settings_EmployeeContract_Record_Model extends Settings_Vtiger_Record_Mode
 				'linklabel' => 'LBL_DELETE',
 				'linkurl' => "javascript:Settings_EmployeeContract_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
 				'linkicon' => 'icon-trash'
+			),
+
+			array(
+				'linktype' => 'LISTVIEWRECORD',
+				'linklabel' => 'LBL_VIEW',
+				'linkurl' => "javascript:Settings_EmployeeContract_List_Js.triggerDetailView(event)",
+				'linkicon' => 'icon-eye'
 			)
 		);
 		foreach ($recordLinks as $recordLink) {
@@ -51,7 +58,7 @@ class Settings_EmployeeContract_Record_Model extends Settings_Vtiger_Record_Mode
     public function getDeleteActionUrl() {
         return 'index.php?module=EmployeeContract&parent=Settings&action=DeleteAjax&mode=remove&record='.$this->getId();
     }
-    
+
     public function getRowInfo() {
         return $this->getData();
     }

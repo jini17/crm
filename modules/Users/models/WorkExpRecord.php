@@ -153,7 +153,14 @@ class Users_WorkExpRecord_Model extends Users_Record_Model {
 	public function getUserWorkExpList($userId) {
 			
 		$db  = PearDatabase::getInstance();
-		$sql = "SELECT * from vtiger_workexperience
+		$sql = "SELECT tblSCW.uw_id, tblSCW.company_id,tblSCC.company_title, 
+				tblSCD.designation,
+				tblSCL.location,
+				DATE_FORMAT(tblSCW.start_date,'%b-%Y') AS start_date, DATE_FORMAT(tblSCW.end_date,'%b-%Y') AS end_date, tblSCW.description, tblSCW.IsView AS isview
+                                FROM secondcrm_userworkexp tblSCW 
+				LEFT JOIN secondcrm_company tblSCC ON tblSCC.company_id	= tblSCW.company_id
+                                LEFT JOIN secondcrm_designation tblSCD ON tblSCD.designation_id = tblSCW.designation_id
+				LEFT JOIN secondcrm_location tblSCL ON tblSCL.location_id = tblSCW.location_id
 			WHERE tblSCW.user_id=? AND tblSCW.deleted=0"; 
 		$params = array($userId);
 		$result = $db->pquery($sql,$params);
@@ -174,18 +181,20 @@ class Users_WorkExpRecord_Model extends Users_Record_Model {
 		return $userWorkExpList;		
 	}
 	
+	
 	public function saveworkexpDetail($request)
 	{
 		$db  = PearDatabase::getInstance();
+		//$db->setDebug(true);
 		$params 	= array();
 		$userid  	= $request['current_user_id'];
 		$uwId  		= $request['record'];
 		$comId  	= decode_html($request['company_title']);
 		$desId  	= decode_html($request['designation']);
-		$isworking  	= $request['isworking'];
+		$isworking  = $request['isworking'];
 		$locId  	= decode_html($request['location']);
 		$startDate 	= date('Y-m-d',strtotime(decode_html($request['start_date'])));
-		if($isworking =='0'){
+		if($isworking ==0){
 			$endDate	= date('Y-m-d',strtotime(decode_html($request['end_date'])));
 		} else{
 			$endDate	='';
@@ -193,8 +202,8 @@ class Users_WorkExpRecord_Model extends Users_Record_Model {
 		$jobDesc  	= decode_html($request['description']);
 		$isview  	= decode_html($request['isview']);		
 		$comTxt 	= decode_html($request['companytxt']);
-		$desigTxt 	= decode_html($request['designationtxt']);
-		$locTxt 	= decode_html($request['locationtxt']);
+		$desigTxt 	= decode_html($request['designtxt']);
+		$locTxt 	= decode_html($request['locatxt']);
 		if($uwId==0 && !empty($comTxt)) {
 			$resultcom = $db->pquery("INSERT INTO secondcrm_company(company_title) VALUES(?)",array	($comTxt));		$resultcomID =  $db->pquery("SELECT LAST_INSERT_ID() AS 'company_id'");
 			$comId = $db->query_result($resultcomID, 0, 'company_id');	
@@ -220,7 +229,6 @@ class Users_WorkExpRecord_Model extends Users_Record_Model {
 			$result = $db->pquery("INSERT INTO secondcrm_userworkexp SET user_id = ?, company_id = ?,designation_id=?,location_id=?, start_date = ?, end_date=?,description = ?, isview=?, currentlyworking=?", array($params));
 			$return = 0;
 		}	
-		 
 		return $return;
 	}
 	

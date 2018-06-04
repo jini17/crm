@@ -12,6 +12,11 @@ Settings_Vtiger_List_Js('Settings_EmployeeContract_List_Js',{
         var instance = app.controller();
         instance.deleteEmployeeContract(url);
     },
+
+	 triggerDetailView : function(url) {
+		var instance = app.controller();
+		instance.viewDetailView(url);
+	    },
 },{
    
     /**
@@ -35,6 +40,23 @@ Settings_Vtiger_List_Js('Settings_EmployeeContract_List_Js',{
                 }   
             });
         })
+    },
+
+  viewDetailView : function(url) {
+ 	var params = this.getDefaultParams();
+		params['parent'] = "Settings";
+		params['module'] = "EmployeeContract";
+		params['navigation'] = "true";
+		params['record'] = "721";
+		params['view'] = "RecordQuickPreview";
+		 app.request.post({'data' : params}).then(function(error, data){
+                  if(error === null) {
+					app.helper.showModal(data);
+			}
+});
+
+
+     	
     },
     
     registerEvents : function() {

@@ -242,6 +242,8 @@ Vtiger.Class("Settings_Vtiger_ClaimType_Js",{},{
 
 jQuery(document).ready(function(e){
     var tacInstance = new Settings_Vtiger_ClaimType_Js();
+    var vtigerinst = new Vtiger_Index_Js();
+    vtigerinst.registerEvents();
     tacInstance.registerEvents();
 
 })

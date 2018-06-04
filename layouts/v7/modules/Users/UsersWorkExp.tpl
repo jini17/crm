@@ -44,10 +44,11 @@
 									<td class="listTableRow small" valign=top><span class="startdatelable">{$USER_WORKEXP['start_date']} {vtranslate('LBL_TO', $MODULE)} {if $USER_WORKEXP['end_date'] eq ''}{vtranslate('LBL_TILL_NOW', $MODULE)}{else}{$USER_WORKEXP['end_date']}{/if}</span></td>
 									<td class="listTableRow small" valign=top><span class="descriptionlable">{$USER_WORKEXP['description']}</span></td>
 									<td class="listTableRow small" valign=top><span class="isviewlabel">{('0'==$USER_WORKEXP['isview'])?{vtranslate('LBL_NO', $MODULE)}:{vtranslate('LBL_YES', $MODULE)}}</span></td>
-									<td class="listTableRow small" valign=top>
+
+									<td width="5%" class="listTableRow small" valign=top>
 										<div class="pull-right actions">
 											<span class="actionImages">
-												<a class="editWorkExp" data-url="{$CREATE_WORKEXP_URL}&record={$USER_WORKEXP['uw_id']}&userId={$USERID}"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="icon-pencil alignBottom"></i></a>&nbsp;&nbsp;<a class="deleteWorkExp cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=deleteWorkExp&record={$USER_WORKEXP['uw_id']}"><i class="icon-trash alignMiddle" title="Delete"></i></a>
+												<a class="editWorkExp" onclick="Users_WorkExp_Js.editWorkExp('index.php{$CREATE_WORKEXP_URL}&record={$USER_WORKEXP['uw_id']}&userId={$USERID}');"><i class="fa fa-edit alignBottom" title="{vtranslate('LBL_EDIT', $MODULE)}"></i></a>&nbsp;&nbsp;<a class="cursorPointer" onclick="Users_WorkExp_Js.deleteWorkExp('index.php?module=Users&action=DeleteSubModuleAjax&mode=deleteWorkExp&record={$USER_WORKEXP['uw_id']}');"><i class="fa fa-trash alignMiddle" title="Delete"></i></a>
 											</span>
 										</div>
 									</td>
