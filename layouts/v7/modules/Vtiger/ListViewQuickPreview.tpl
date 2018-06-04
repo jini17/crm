@@ -46,7 +46,7 @@
 
             </div>
             <div class = "quickPreviewSummary">
-                <table class="summary-table no-border" style="width:100%;">
+                <table class="summary-table no-border" >
                     <tbody>
                         {foreach item=FIELD_MODEL key=FIELD_NAME from=$SUMMARY_RECORD_STRUCTURE['SUMMARY_FIELDS']}
                             {if $FIELD_MODEL->get('name') neq 'modifiedtime' && $FIELD_MODEL->get('name') neq 'createdtime'}
