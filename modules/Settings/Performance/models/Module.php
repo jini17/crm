@@ -13,7 +13,7 @@ class Settings_Performance_Module_Model extends Settings_Vtiger_Module_Model {
 
 	var $baseTable = 'vtiger_performance';
 	var $baseIndex = 'performanceid';
-	var $listFields = array('yearly_review' => 'Yearly Review','quarterly_review'=>'Quarterly Review', 'responsibility' => 'Responsibility', 'employee_remarks'=>'Employee Remarks', 'superior_remarks'=>'	Superior Remarks');
+	var $listFields = array('yearly_review' => 'Yearly Review','quarterly_review'=>'Quarterly Review', 'responsibility' => 'Responsibility', 'employee_remarks'=>'Employee Remarks', 'superior_remarks'=>'	Superior Remarks','smownerid'=>'Assigned User');
 	var $nameFields = array('yearly_review');
 	var $name = 'Performance';
 

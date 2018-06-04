@@ -13,7 +13,7 @@ class Settings_PassportVisa_Module_Model extends Settings_Vtiger_Module_Model {
 
 	var $baseTable = 'vtiger_passportvisa';
 	var $baseIndex = 'passportvisaid';
-	var $listFields = array('ppvisatitle' => 'Passport Title','passport_no'=>'Passport No','pp_status'=>'Passport Status', 'visa_type'=>'Visa Type');
+	var $listFields = array('ppvisatitle' => 'Passport Title','passport_no'=>'Passport No','pp_status'=>'Passport Status', 'visa_type'=>'Visa Type','smownerid'=>'Assigned User');
 	var $nameFields = array('ppvisatitle');
 	var $name = 'PassportVisa';
 
