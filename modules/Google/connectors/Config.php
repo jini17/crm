@@ -14,8 +14,6 @@ Class Google_Config_Connector {
 	static $clientSecret = 'ABChDJmzI17a92XUL3P7xXYM';
 
 
-
-
 	static function getRedirectUrl() {
 		global $site_URL;
 		return $site_URL.'index.php?module=Google&view=Authenticate&service=Google';

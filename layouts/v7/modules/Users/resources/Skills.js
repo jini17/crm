@@ -87,7 +87,8 @@ Vtiger.Class("Users_Skills_Js", {
           	     function(err, data){  
 				      app.helper.showSuccessNotification({'message': 'Record deleted successfully'});
 				     //delete the Education details in the list
-				     thisInstance.updateLanguageGrid(userid);
+				      thisInstance.updateLanguageGrid(userid);
+                          thisInstance.updateSkillCloud(userid);
 			     }
 		     );
 	     });
@@ -117,7 +118,8 @@ Vtiger.Class("Users_Skills_Js", {
                //show notification after Education details saved
                 app.helper.showSuccessNotification({'message': data});
                //Adding or update the Education details in the list
-               thisInstance.updateLanguageGrid(userid);
+
+               thisInstance.updateSkillCloud(userid);
              }
           );
            return aDeferred.promise();
@@ -188,6 +190,7 @@ editSkill : function(url) {
                //show notification after Education details saved
                 app.helper.showSuccessNotification({'message': data});
                //Adding or update the Education details in the list
+               thisInstance.updateLanguageGrid(userid);
                thisInstance.updateSkillCloud(userid);
              }
           );
@@ -210,7 +213,7 @@ editSkill : function(url) {
           	     function(err, data){  
 				      app.helper.showSuccessNotification({'message': 'Record deleted successfully'});
 				     //delete the Education details in the list
-				     thisInstance.updateSkillCloud(userid);
+				      thisInstance.updateSkillCloud(userid);
 			     }
 		     );
 	     });

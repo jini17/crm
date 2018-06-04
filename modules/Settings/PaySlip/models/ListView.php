@@ -9,21 +9,20 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-class Settings_EmployeeContract_ListView_Model extends Settings_Vtiger_ListView_Model {
+class Settings_PaySlip_ListView_Model extends Settings_Vtiger_ListView_Model {
     
     public function getBasicListQuery() {
         $currentUser = Users_Record_Model::getCurrentUserModel();
-
-        if(!$currentUser->isAdminUser()){
+         if(!$currentUser->isAdminUser()){
         	$where = "AND vtiger_crmentity.smownerid = ".$currentUser->getId();	
-        }	
+        }
         $userNameSql = getSqlForNameInDisplayFormat(array('first_name'=>
 							'vtiger_users.first_name', 'last_name' => 'vtiger_users.last_name'), 'Users');
-
-
-       $query = "SELECT *,$userNameSql as smownerid, vtiger_employeecontract.department FROM vtiger_employeecontract INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_employeecontract.employeecontractid 
-        INNER JOIN vtiger_users ON vtiger_users.id=vtiger_crmentity.smownerid
+        
+        $query = "SELECT *,  $userNameSql as smownerid FROM vtiger_payslip INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_payslip.payslipid 
+		INNER JOIN vtiger_users ON vtiger_users.id=vtiger_crmentity.smownerid
         WHERE vtiger_crmentity.deleted=0 $where";
+
         return $query;
     }
 }

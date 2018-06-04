@@ -9,16 +9,16 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-class Settings_Performance_Module_Model extends Settings_Vtiger_Module_Model {
+class Settings_PaySlip_Module_Model extends Settings_Vtiger_Module_Model {
 
-	var $baseTable = 'vtiger_performance';
-	var $baseIndex = 'performanceid';
-	var $listFields = array('yearly_review' => 'Yearly Review','quarterly_review'=>'Quarterly Review', 'responsibility' => 'Responsibility', 'employee_remarks'=>'Employee Remarks', 'superior_remarks'=>'	Superior Remarks','smownerid'=>'Assigned User');
-	var $nameFields = array('yearly_review');
-	var $name = 'Performance';
+	var $baseTable = 'vtiger_payslip';
+	var $baseIndex = 'palyslipid';
+	var $listFields = array('payslipno' => 'PaySlip No', 'emp_name' => 'Employee Name','basic_sal'=>'Basic Salary','total_deduction'=>'Total Deduction', 'gross_pay'=>'Gross Pay','net_pay'=>'Net Pay');
+	var $nameFields = array('payslipno');
+	var $name = 'PaySlip';
 
 	public function getCreateRecordUrl() {
-		return "index.php?module=Performance&parent=Settings&view=Edit";
+		return "index.php?module=PaySlip&parent=Settings&view=Edit";
 	}
 
 }

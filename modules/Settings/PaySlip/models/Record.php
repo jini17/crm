@@ -9,14 +9,14 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-class Settings_EmployeeContract_Record_Model extends Settings_Vtiger_Record_Model {
+class Settings_PaySlip_Record_Model extends Settings_Vtiger_Record_Model {
  
     public function getId() {
-        return $this->get('employeecontractid');
+        return $this->get('payslipid');
     }
     
     public function getName() {
-        return $this->get('employeecontractno');
+        return $this->get('emp_name');
     }
     
     
@@ -31,20 +31,20 @@ class Settings_EmployeeContract_Record_Model extends Settings_Vtiger_Record_Mode
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_EDIT',
-				'linkurl' => 'index.php?module=EmployeeContract&parent=Settings&view=Edit&record='.$this->getId(),
+				'linkurl' => 'index.php?module=PaySlip&parent=Settings&view=Edit&record='.$this->getId(),
 				'linkicon' => 'icon-pencil'
 			),
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_DELETE',
-				'linkurl' => "javascript:Settings_EmployeeContract_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
+				'linkurl' => "javascript:Settings_PaySlip_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
 				'linkicon' => 'icon-trash'
 			),
-
+			
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_VIEW',
-				'linkurl' => "javascript:Settings_EmployeeContract_List_Js.triggerDetailView(".$this->getId().")",
+				'linkurl' => "javascript:Settings_PaySlip_List_Js.triggerDetailView(".$this->getId().")",
 				'linkicon' => 'icon-eye'
 			)
 		);
@@ -56,9 +56,9 @@ class Settings_EmployeeContract_Record_Model extends Settings_Vtiger_Record_Mode
 	}
     
     public function getDeleteActionUrl() {
-        return 'index.php?module=EmployeeContract&parent=Settings&action=DeleteAjax&mode=remove&record='.$this->getId();
+        return 'index.php?module=PaySlip&parent=Settings&action=DeleteAjax&mode=remove&record='.$this->getId();
     }
-
+    
     public function getRowInfo() {
         return $this->getData();
     }

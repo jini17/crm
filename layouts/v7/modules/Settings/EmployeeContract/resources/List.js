@@ -45,13 +45,16 @@ Settings_Vtiger_List_Js('Settings_EmployeeContract_List_Js',{
   viewDetailView : function(url) {
  	var params = this.getDefaultParams();
 		params['parent'] = "Settings";
-		params['module'] = "EmployeeContract";
-		params['navigation'] = "true";
-		params['record'] = "721";
+		params['module'] = "EmployeeContract";	
+		params['record'] = url;
 		params['view'] = "RecordQuickPreview";
+	
+		app.helper.showProgress();
 		 app.request.post({'data' : params}).then(function(error, data){
+     		app.helper.hideProgress();
+				
                   if(error === null) {
-					app.helper.showModal(data);
+				app.helper.showModal(data);
 			}
 });
 
