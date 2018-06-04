@@ -13,9 +13,16 @@ class Settings_PassportVisa_ListView_Model extends Settings_Vtiger_ListView_Mode
     
     public function getBasicListQuery() {
         $currentUser = Users_Record_Model::getCurrentUserModel();
+         if(!$currentUser->isAdminUser()){
+        	$where = "AND vtiger_crmentity.smownerid = ".$currentUser->getId();	
+        }
+        $userNameSql = getSqlForNameInDisplayFormat(array('first_name'=>
+							'vtiger_users.first_name', 'last_name' => 'vtiger_users.last_name'), 'Users');
         
-        $query = "SELECT * FROM vtiger_passportvisa INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_passportvisa.passportvisaid WHERE vtiger_crmentity.deleted=0";
-        $query .=' AND vtiger_crmentity.smownerid = '.$currentUser->getId();
+        $query = "SELECT *,  $userNameSql as smownerid FROM vtiger_passportvisa INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_passportvisa.passportvisaid 
+		INNER JOIN vtiger_users ON vtiger_users.id=vtiger_crmentity.smownerid
+        WHERE vtiger_crmentity.deleted=0 $where";
+
         return $query;
     }
 }

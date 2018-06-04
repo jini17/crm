@@ -13,7 +13,7 @@ class Settings_Grade_Module_Model extends Settings_Vtiger_Module_Model {
 
 	var $baseTable = 'vtiger_grade';
 	var $baseIndex = 'gradeid';
-	var $listFields = array('grade' => 'Grade','grade_status'=>'Grade Status', 'grade_desc' => 'Description');
+	var $listFields = array('grade' => 'Grade','grade_status'=>'Grade Status', 'grade_desc' => 'Description','smownerid'=>'Assigned User');
 	var $nameFields = array('grade');
 	var $name = 'Grade';
 
