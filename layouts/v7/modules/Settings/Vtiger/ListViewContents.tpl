@@ -88,11 +88,11 @@ border:1px solid #ddd;margin-top:10px;padding-top:0px ! important;position: rela
 											<td class="listViewEntryValue textOverflowEllipsis {$WIDTHTYPE}" width="{$WIDTH}%" nowrap>
 												 {if $LISTVIEW_HEADERNAME eq 'filename'}
 												 {assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($LISTVIEW_ENTRY->getId())}
-								                <a name="downloadfile" target="_blank" href="{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}">
+								                <a name="downloadfile" target="_blank" href="#" onclick="window.location.href='{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}'">
 								                	{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}</a>
 								             	{else if $LISTVIEW_HEADERNAME eq 'letter_of_appointment'} 
 									             	{assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($LISTVIEW_ENTRY->getId())}
-									             		<a target="_blank" href="{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}">{vtranslate('LBL_DOWNLOAD', $QUALIFIED_MODULE)}</a>
+									             		<a target="_blank" href="#" onclick="window.location.href='{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}'">{vtranslate('LBL_DOWNLOAD', $QUALIFIED_MODULE)}</a>
 								             	{else}
 								             		{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}   
 								           		 {/if}	

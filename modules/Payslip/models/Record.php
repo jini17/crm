@@ -28,7 +28,7 @@ class Payslip_Record_Model extends Inventory_Record_Model {
 		$controller->Output($fileName.'.pdf', 'D');
 	}
 
-	public function getPayslipRelatedHead($paymentId) {
+	public function getPaymentRelatedHead($paymentId) {
 		$db = PearDatabase::getInstance();
 
 		$query = "SELECT vtiger_account.accountname, vtiger_contactdetails.firstname, 					vtiger_contactdetails.lastname 
@@ -101,7 +101,7 @@ class Payslip_Record_Model extends Inventory_Record_Model {
 	}
 
 
-	public function getPayslipShipBillAddress($paymentId) {
+	public function getPaymentShipBillAddress($paymentId) {
 		$db = PearDatabase::getInstance();
 		$result = $db->pquery("SELECT tblVTC.setype,tblVTP.relatedto FROM vtiger_payments tblVTP INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTP.relatedto WHERE tblVTP.paymentsid = ? AND tblVTC.deleted=0", array($paymentId));		
 		$row  = $db->query_result_rowdata($result, 0);		

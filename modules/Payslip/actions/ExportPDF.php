@@ -7,8 +7,7 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  *************************************************************************************/
-error_reporting(E_ALL & ~E_NOTICE);
 vimport('~~/modules/Payslip/PayslipPDFController.php');
 class Payslip_ExportPDF_Action extends Inventory_ExportPDF_Action {
 }
-
+?>

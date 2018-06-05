@@ -51,7 +51,7 @@ class Settings_PaySlip_Record_Model extends Settings_Vtiger_Record_Model {
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_PDF',
-				'linkurl' => "index.php?module=Payslip&action=ExportPDF&record=".$this->getId(),
+				'linkurl' => "javascript:Settings_Payslip_List_Js.triggerDownload('index.php?module=Payslip&action=ExportPDF&record=".$this->getId()."')",
 				'linkicon' => 'fa fa-file-pdf-o'
 			)
 		);
