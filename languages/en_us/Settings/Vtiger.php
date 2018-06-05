@@ -451,6 +451,7 @@ $languageStrings = array(
 	'LBL_BENEFIT_TYPES_LIST'=>'Benefit Type List',
 
 	'LBL_PDF'=>'PDF',
+	'LBL_HOLIDAY'=>'Holiday',
 );
 
 $jsLanguageStrings = array(

@@ -17,6 +17,10 @@ Settings_Vtiger_List_Js('Settings_Payslip_List_Js',{
 		var instance = app.controller();
 		instance.viewDetailView(url);
 	    },
+	triggerDownload : function(url){
+	     var instance = app.controller();
+		instance.DownloadPDF(url);
+	},    
 },{
    
     /**
@@ -61,6 +65,11 @@ Settings_Vtiger_List_Js('Settings_Payslip_List_Js',{
 
 
      	
+    },
+    
+    DownloadPDF : function(url){
+          window.location.href=url;
+          //history.pushState({}, null, window.history.back(-1));
     },
     
     registerEvents : function() {

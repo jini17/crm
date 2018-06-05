@@ -20,8 +20,4 @@ class Payslip_Module_Model extends Vtiger_Module_Model {
 		return false;
 	}
 
-	//Added by jitu@20082015 for add multiple Currency
-	static function getAllCurrencies() {
-		return getAllCurrencies();
-	}
 }

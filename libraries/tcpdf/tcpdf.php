@@ -455,7 +455,7 @@ if (!class_exists('TCPDF', false)) {
 		* @var flag set when processing footer
 		* @access protected
 		*/
-		protected $InFooter = false;
+		public $InFooter = false;
 
 		/**
 		* @var zoom display mode

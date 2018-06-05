@@ -961,5 +961,17 @@ class Inventory_Record_Model extends Vtiger_Record_Model {
 		}
 		return $relatedProducts;
 	}
+	public function fetchPaymentPdfSettings($module) {
 
-}
+		$db = PearDatabase::getInstance();
+		$query = "SELECT * FROM secondcrm_pdfsettings WHERE module =?";
+		$params = array($module);
+		$result = $db->pquery($query, $params);
+		$pdfsettings = array();
+		while ( $row = $db->fetchByAssoc($result))
+		{
+			$pdfsettings = $row;			
+		}
+		return $pdfsettings;
+	}
+}	

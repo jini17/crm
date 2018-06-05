@@ -10,11 +10,11 @@
 
 include_once 'include/InventoryPDFController.php';
 include_once 'vtlib/Vtiger/PDF/TCPDF.php';
-include_once dirname(__FILE__). '/PaymentsPDFHeaderViewer.php';
-include_once dirname(__FILE__). '/PaymentsViewer.php';
+include_once dirname(__FILE__). '/PayslipPDFHeaderViewer.php';
+include_once dirname(__FILE__). '/PayslipViewer.php';
 
 
-class Vtiger_PaymentsPDFController extends Vtiger_InventoryPDFController 
+class Vtiger_PayslipPDFController extends Vtiger_InventoryPDFController 
 { 
 	var $pdfmodule = array();
 	
@@ -38,7 +38,7 @@ class Vtiger_PaymentsPDFController extends Vtiger_InventoryPDFController
 	############################################ Header Section ############################################ 
 
 	function getHeaderViewer() {
-		$headerViewer = new PaymentsPDFHeaderViewer();
+		$headerViewer = new PayslipPDFHeaderViewer();
 		$headerViewer->setModel($this->buildHeaderModel());
 		return $headerViewer;
 	}
@@ -94,7 +94,7 @@ class Vtiger_PaymentsPDFController extends Vtiger_InventoryPDFController
 
 	function buildHeaderModelColumnCenter() {
 		$id 		= $_REQUEST['record'];		
-		$paymenthead 	= Payments_Record_Model::getPaymentRelatedHead($id);
+		/*$paymenthead 	= Payslip_Record_Model::getPaymentRelatedHead($id);
 	
 		$customerName 	= $paymenthead['AccountName'];
 		$contactName 	= $paymenthead['ContactName'];
@@ -106,7 +106,7 @@ class Vtiger_PaymentsPDFController extends Vtiger_InventoryPDFController
 
 		$modelColumnCenter[$contactNameLabel]		= $contactName;
 		$modelColumnCenter[$customerNameLabel] 		= $customerName;
-		
+		*/
 		return $modelColumnCenter;
 	}
 
@@ -125,13 +125,13 @@ class Vtiger_PaymentsPDFController extends Vtiger_InventoryPDFController
 		
 		
 		$id 		= $_REQUEST['record'];
-		$paymentdetails = Payments_Record_Model::paymentDetail($id);
+		$paymentdetails = Payslip_Record_Model::paymentDetail($id);
 		$currencySymbol = $this->buildCurrencySymbol();
 		
 		$currencySymbol = $this->buildCurrencySymbol();
 		$phonelable 	= getTranslatedString('LBL_PHONE', $this->moduleName);
 		$issueByLabel 	= getTranslatedString('Issued By', $this->moduleName);
-		$paymentAddress = Payments_Record_Model::getPaymentShipBillAddress($id);
+		$paymentAddress = Payslip_Record_Model::getPaymentShipBillAddress($id);
 		
 		$issueDateLabel = getTranslatedString('Issued Date', $this->moduleName);
 		$validDateLabel = getTranslatedString('Due Date', $this->moduleName);
@@ -173,7 +173,7 @@ class Vtiger_PaymentsPDFController extends Vtiger_InventoryPDFController
 	############################################## Content Section ############################################
 
 	function getContentViewer() {
-			$contentViewer = new PaymentsViewer();
+			$contentViewer = new PayslipViewer();
 			$contentViewer->setContentModels($this->buildContentModels());
 			$contentViewer->setWatermarkModel(array_merge($this->buildHeaderModelColumnRight(),array("title"=>$this->buildHeaderModelTitle())));
 
@@ -185,7 +185,7 @@ class Vtiger_PaymentsPDFController extends Vtiger_InventoryPDFController
 		$contentModels = array();
 		$id = $_REQUEST['record'];
 		//retreiving the vtiger_invoice info
-		$paymentdetails = Payments_Record_Model::paymentDetail($id);
+		$paymentdetails = Payslip_Record_Model::paymentDetail($id);
 		
 		$contentModels = array();
 			
@@ -217,7 +217,8 @@ class Vtiger_PaymentsPDFController extends Vtiger_InventoryPDFController
 			}
 			$contentModels['headerinfo'] = $this->buildHeaderModelColumnLeft();
 			$contentModels['pdfsettings'] = $this->pdfmodule;
-			$contentModels[getTranslatedString('Description',$this->moduleName)] = $paymentdetails['remarks'];		$contentModels['TermsCondition'.'#'.$this->focusColumnValue('terms_conditions')] = Vtiger_Util_Helper::getTnCDescription(from_html($this->focusColumnValue('terms_conditions'))); //Added by jitu on 22-01-2015 
+			$contentModels[getTranslatedString('Description',$this->moduleName)] = $paymentdetails['remarks'];
+			//$contentModels['TermsCondition'.'#'.$this->focusColumnValue('terms_conditions')] = Vtiger_Util_Helper::getTnCDescription(from_html($this->focusColumnValue('terms_conditions'))); //Added by jitu on 22-01-2015 
 	
 		
 		return $contentModels;

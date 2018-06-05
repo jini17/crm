@@ -7,8 +7,6 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  ************************************************************************************/
-
-
 /*
 error_reporting(1);
 		ini_set('display_erros',1);
