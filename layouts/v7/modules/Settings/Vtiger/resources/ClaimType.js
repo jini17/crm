@@ -125,6 +125,7 @@ Vtiger.Class("Settings_Vtiger_ClaimType_Js",{},{
                     app.helper.hideProgress();
                     app.helper.showModal(data);
                     thisInstance.saveRule();
+                    history.pushState({}, null, window.history.back());
 
 
                     // var thisInstance1 = this;
@@ -160,6 +161,7 @@ Vtiger.Class("Settings_Vtiger_ClaimType_Js",{},{
                     app.helper.hideProgress();
                     app.helper.showModal(data);
                     thisInstance.saveRule();
+                    history.pushState({}, null, window.history.back());
 
 
                     // var thisInstance1 = this;

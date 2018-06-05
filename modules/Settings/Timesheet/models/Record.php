@@ -39,7 +39,8 @@ class Settings_TimeSheet_Record_Model extends Settings_Vtiger_Record_Model {
 				'linklabel' => 'LBL_DELETE',
 				'linkurl' => "javascript:Settings_TimeSheet_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
 				'linkicon' => 'icon-trash'
-			)
+			),
+			
 		);
 		foreach ($recordLinks as $recordLink) {
 			$links[] = Vtiger_Link_Model::getInstanceFromValues($recordLink);

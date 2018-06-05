@@ -167,6 +167,8 @@ class Vtiger_Field_Model extends Vtiger_Field {
 				$fieldDataType = 'salutation';
             } else if($uiType == '55' && stripos($this->getName(), 'roundrobin_userid') !== false) {
                 $fieldDataType = 'multiowner';
+            } else if($uiType == '3993') {		//Modified Line
+				 $fieldDataType = 'companyDetails';	//Modified Line
 			} else {
 				$webserviceField = $this->getWebserviceFieldObject();
 				$fieldDataType = $webserviceField->getFieldDataType();
@@ -174,6 +176,14 @@ class Vtiger_Field_Model extends Vtiger_Field {
 			$this->fieldDataType = $fieldDataType;
 		}
 		return $this->fieldDataType;
+	}
+	/**
+	* Function added by Jitu@secondcrm.com on Sep 19, 2014 for new UI Type 3993
+	* This function will retrieve terms details 
+	*/
+	public function getCompanyDetails($id) {
+		$aCompanyTitle = Vtiger_Util_Helper::getCompanyTitle($id);
+		return $aCompanyTitle;
 	}
 
 	/**

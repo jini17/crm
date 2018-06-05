@@ -9,10 +9,11 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-class Settings_PaySlip_ListView_Model extends Settings_Vtiger_ListView_Model {
+class Settings_Payslip_ListView_Model extends Settings_Vtiger_ListView_Model {
     
     public function getBasicListQuery() {
         $currentUser = Users_Record_Model::getCurrentUserModel();
+        
          if(!$currentUser->isAdminUser()){
         	$where = "AND vtiger_crmentity.smownerid = ".$currentUser->getId();	
         }
