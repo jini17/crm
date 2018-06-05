@@ -444,9 +444,20 @@ jQuery.Class("Vtiger_Popup_Js",{
 		    var recordName = row.attr('data-name');
 			var recordInfo = row.data('info');
 			var referenceModule = jQuery('#popupPageContainer').find('#module').val();
-		    var response ={};
+			var response ={};
+			//added by jitu@fetch User Profile. 
+			if(app.getModuleName()=='Payslip' && referenceModule=='Users'){
+			     dataUrl = "index.php?module=Users&action=RelatedDetail&record="+id;
+			     app.request.post({"url":dataUrl}).then(
+			     function(err,data){
+			          jQuery("#EditView").find('input[name="ic_passport"]').val(data.ppvisatitle);  
+		               jQuery("#EditView").find('input[name="title"]').val(data.department);    
+			     }); 
+			 
+			} //end here 
+		    
 		    response[id] = {'name' : recordName,'info' : recordInfo, 'module' : referenceModule};
-            thisInstance.done(response,thisInstance.getEventName());
+              thisInstance.done(response,thisInstance.getEventName());
             e.preventDefault();
 		}
 	},

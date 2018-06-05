@@ -556,6 +556,13 @@ class Vtiger_Deprecated {
 				$res = $adb->query("SELECT salesorder_no FROM vtiger_salesorder WHERE salesorderid = $recordId");
 				$moduleSeqNo = $adb->query_result($res, 0, 'salesorder_no');
 				break;
+
+			##Added by Jitu@secondcrm.com	
+			case "Payslip":
+				$res = $adb->query("SELECT payslipno FROM vtiger_payslip WHERE payslipid = $recordId");
+				$moduleSeqNo = $adb->query_result($res, 0, 'payslipno');
+				break;
+			##End	
 		}
 		return $moduleSeqNo;
 	}

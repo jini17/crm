@@ -7,16 +7,8 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  *************************************************************************************/
-$languageStrings = array(
-	// Basic Strings
-	'PassportVisa'=>'Passport Visa',
-	'LBL_ADD_RECORD' => 'Add Passport Visa Detail',
-	'SINGLE_PassportVisa' => 'Passport Visa',
-	'LBL_Passport_Immigration Information' =>'Passport Information',
-	'LBL_Visa_INFORMATION'=>'Visa Information',
-	'Title'=>'Passport No',	
-);
+error_reporting(E_ALL & ~E_NOTICE);
+vimport('~~/modules/Payslip/PayslipPDFController.php');
+class Payslip_ExportPDF_Action extends Inventory_ExportPDF_Action {
+}
 
-$jsLanguageStrings = array(
-	
-);

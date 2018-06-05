@@ -9,7 +9,7 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-class Settings_Payslip_List_View extends Settings_Vtiger_List_View {
+class Settings_Holiday_List_View extends Settings_Vtiger_List_View {
 
 	function checkPermission(Vtiger_Request $request) {
 		$layout = Vtiger_Viewer::getDefaultLayoutName();
