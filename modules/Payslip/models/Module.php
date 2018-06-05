@@ -7,16 +7,21 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  *************************************************************************************/
-$languageStrings = array(
-	// Basic Strings
-	'PassportVisa'=>'Passport Visa',
-	'LBL_ADD_RECORD' => 'Add Passport Visa Detail',
-	'SINGLE_PassportVisa' => 'Passport Visa',
-	'LBL_Passport_Immigration Information' =>'Passport Information',
-	'LBL_Visa_INFORMATION'=>'Visa Information',
-	'Title'=>'Passport No',	
-);
+/**
+ * LeaveType Module Model Class
+ */
+class Payslip_Module_Model extends Vtiger_Module_Model {
 
-$jsLanguageStrings = array(
-	
-);
+	/**
+	 * Function to check whether the module is summary view supported
+	 * @return <Boolean> - true/false
+	 */
+	public function isSummaryViewSupported() {
+		return false;
+	}
+
+	//Added by jitu@20082015 for add multiple Currency
+	static function getAllCurrencies() {
+		return getAllCurrencies();
+	}
+}

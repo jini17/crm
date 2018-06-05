@@ -9,17 +9,16 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-class Settings_Payslip_Module_Model extends Settings_Vtiger_Module_Model {
+class Settings_Holiday_Module_Model extends Settings_Vtiger_Module_Model {
 
-	var $baseTable = 'vtiger_payslip';
-	var $baseIndex = 'palyslipid';
-	var $listFields = array('payslipno' => 'PaySlip No', 'emp_name' => 'Employee Name','basic_sal'=>'Basic Salary','total_deduction'=>'Total Deduction', 'gross_pay'=>'Gross Pay','net_pay'=>'Net Pay');
-	var $nameFields = array('payslipno');
-	var $name = 'Payslip';
+	var $baseTable = 'vtiger_holiday';
+	var $baseIndex = 'holidayid';
+	var $listFields = array('holiday_id'=>'Holiday Id','holiday_name' => 'Holiday Name','start_date'=>'Start Date','end_date'=>'End Date', 'location'=>'Location');
+	var $nameFields = array('holiday_name');
+	var $name = 'Holiday';
 
 	public function getCreateRecordUrl() {
-		return "index.php?module=Payslip&parent=Settings&view=Edit";
+		return "index.php?module=Holiday&parent=Settings&view=Edit";
 	}
 
 }
-?>

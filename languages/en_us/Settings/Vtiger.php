@@ -449,6 +449,8 @@ $languageStrings = array(
 	'LBL_CLAIM_TYPES'=>'Claim Type',
 	'LBL_BENEFIT_TYPES'=>'Benefit Type',
 	'LBL_BENEFIT_TYPES_LIST'=>'Benefit Type List',
+
+	'LBL_PDF'=>'PDF',
 );
 
 $jsLanguageStrings = array(

@@ -9,14 +9,14 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-class Settings_PaySlip_Record_Model extends Settings_Vtiger_Record_Model {
+class Settings_Holiday_Record_Model extends Settings_Vtiger_Record_Model {
  
     public function getId() {
-        return $this->get('payslipid');
+        return $this->get('holidayid');
     }
     
     public function getName() {
-        return $this->get('emp_name');
+        return $this->get('holiday_name');
     }
     
     
@@ -31,28 +31,21 @@ class Settings_PaySlip_Record_Model extends Settings_Vtiger_Record_Model {
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_EDIT',
-				'linkurl' => 'index.php?module=Payslip&parent=Settings&view=Edit&record='.$this->getId(),
-				'linkicon' => 'fa fa-edit'
+				'linkurl' => 'index.php?module=Holiday&parent=Settings&view=Edit&record='.$this->getId(),
+				'linkicon' => 'icon-pencil'
 			),
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_DELETE',
-				'linkurl' => "javascript:Settings_Payslip_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
-				'linkicon' => 'fa fa-trash'
+				'linkurl' => "javascript:Settings_Holiday_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
+				'linkicon' => 'icon-trash'
 			),
 			
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_VIEW',
-				'linkurl' => "javascript:Settings_Payslip_List_Js.triggerDetailView(".$this->getId().")",
-				'linkicon' => 'fa fa-eye'
-			),
-
-			array(
-				'linktype' => 'LISTVIEWRECORD',
-				'linklabel' => 'LBL_PDF',
-				'linkurl' => "index.php?module=Payslip&action=ExportPDF&record=".$this->getId(),
-				'linkicon' => 'fa fa-file-pdf-o'
+				'linkurl' => "javascript:Settings_Holiday_List_Js.triggerDetailView(".$this->getId().")",
+				'linkicon' => 'icon-eye'
 			)
 		);
 		foreach ($recordLinks as $recordLink) {
@@ -63,7 +56,7 @@ class Settings_PaySlip_Record_Model extends Settings_Vtiger_Record_Model {
 	}
     
     public function getDeleteActionUrl() {
-        return 'index.php?module=Payslip&parent=Settings&action=DeleteAjax&mode=remove&record='.$this->getId();
+        return 'index.php?module=Holiday&parent=Settings&action=DeleteAjax&mode=remove&record='.$this->getId();
     }
     
     public function getRowInfo() {

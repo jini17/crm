@@ -391,4 +391,20 @@ class Users_Module_Model extends Vtiger_Module_Model {
 		}
 		return $importableFieldModels;
 	}
+
+	public function getRelatedDetails($user_id){
+		$adb = PearDatabase::getInstance();
+		$result = $adb->pquery("SELECT vtiger_passportvisa.ppvisatitle,vtiger_users.title FROM vtiger_passportvisa
+			INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_passportvisa.passportvisaid AND vtiger_passportvisa.pp_status='Active'
+			INNER JOIN vtiger_users ON vtiger_users.id=vtiger_crmentity.smownerid
+			WHERE vtiger_crmentity.deleted=0 AND vtiger_crmentity.smownerid=?",array($user_id));
+		$numrows = $adb->num_rows($result);
+		$array = array();
+		for($i=0;$i<$numrows;$i++){
+			$array['ppvisatitle']= $adb->query_result($result,$i,'ppvisatitle');
+			$array['title']= $adb->query_result($result,$i,'title');
+		}
+		return $array;
+
+	}
 }
