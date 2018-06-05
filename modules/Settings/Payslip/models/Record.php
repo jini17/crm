@@ -9,14 +9,14 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-class Settings_Grade_Record_Model extends Settings_Vtiger_Record_Model {
+class Settings_PaySlip_Record_Model extends Settings_Vtiger_Record_Model {
  
     public function getId() {
-        return $this->get('gradeid');
+        return $this->get('payslipid');
     }
     
     public function getName() {
-        return $this->get('grade');
+        return $this->get('emp_name');
     }
     
     
@@ -31,19 +31,20 @@ class Settings_Grade_Record_Model extends Settings_Vtiger_Record_Model {
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_EDIT',
-				'linkurl' => 'index.php?module=Grade&parent=Settings&view=Edit&record='.$this->getId(),
+				'linkurl' => 'index.php?module=Payslip&parent=Settings&view=Edit&record='.$this->getId(),
 				'linkicon' => 'icon-pencil'
 			),
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_DELETE',
-				'linkurl' => "javascript:Settings_Grade_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
+				'linkurl' => "javascript:Settings_Payslip_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
 				'linkicon' => 'icon-trash'
 			),
+			
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_VIEW',
-				'linkurl' => "javascript:Settings_Grade_List_Js.triggerDetailView(".$this->getId().")",
+				'linkurl' => "javascript:Settings_Payslip_List_Js.triggerDetailView(".$this->getId().")",
 				'linkicon' => 'icon-eye'
 			)
 		);
@@ -55,7 +56,7 @@ class Settings_Grade_Record_Model extends Settings_Vtiger_Record_Model {
 	}
     
     public function getDeleteActionUrl() {
-        return 'index.php?module=Grade&parent=Settings&action=DeleteAjax&mode=remove&record='.$this->getId();
+        return 'index.php?module=Payslip&parent=Settings&action=DeleteAjax&mode=remove&record='.$this->getId();
     }
     
     public function getRowInfo() {

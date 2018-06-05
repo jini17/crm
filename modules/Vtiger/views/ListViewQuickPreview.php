@@ -31,6 +31,7 @@ class Vtiger_ListViewQuickPreview_View extends Vtiger_Index_View {
 
 		$recordModel = $this->record->getRecord();
 		$recordStrucure = Vtiger_RecordStructure_Model::getInstanceFromRecordModel($recordModel, Vtiger_RecordStructure_Model::RECORD_STRUCTURE_MODE_SUMMARY);
+
 		$moduleModel = $recordModel->getModule();
 
 		$viewer->assign('RECORD', $recordModel);
@@ -38,6 +39,7 @@ class Vtiger_ListViewQuickPreview_View extends Vtiger_Index_View {
 		$viewer->assign('BLOCK_LIST', $moduleModel->getBlocks());
 		$viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
 		$viewer->assign('MODULE_NAME', $moduleName);
+	
 		$viewer->assign('SUMMARY_RECORD_STRUCTURE', $recordStrucure->getStructure());
 		$viewer->assign('$SOCIAL_ENABLED', false);
 		$appName = $request->get('app');
@@ -72,6 +74,7 @@ class Vtiger_ListViewQuickPreview_View extends Vtiger_Index_View {
 		}
 		$viewer->assign('PAGING_MODEL', $pagingModel);
 		$viewer->assign('RECENT_ACTIVITIES', $recentActivities);
+
 		$viewer->view('ListViewQuickPreview.tpl', $moduleName);
 	}
 

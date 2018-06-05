@@ -12,6 +12,7 @@ Settings_Vtiger_List_Js('Settings_TimeSheet_List_Js',{
         var instance = app.controller();
         instance.deleteEmployeeContract(url);
     },
+
 },{
    
     /**
@@ -36,6 +37,8 @@ Settings_Vtiger_List_Js('Settings_TimeSheet_List_Js',{
             });
         })
     },
+
+	
     
     registerEvents : function() {
         var self = this;
