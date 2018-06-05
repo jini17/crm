@@ -31,20 +31,20 @@ class Settings_PaySlip_Record_Model extends Settings_Vtiger_Record_Model {
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_EDIT',
-				'linkurl' => 'index.php?module=PaySlip&parent=Settings&view=Edit&record='.$this->getId(),
+				'linkurl' => 'index.php?module=Payslip&parent=Settings&view=Edit&record='.$this->getId(),
 				'linkicon' => 'icon-pencil'
 			),
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_DELETE',
-				'linkurl' => "javascript:Settings_PaySlip_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
+				'linkurl' => "javascript:Settings_Payslip_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
 				'linkicon' => 'icon-trash'
 			),
 			
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_VIEW',
-				'linkurl' => "javascript:Settings_PaySlip_List_Js.triggerDetailView(".$this->getId().")",
+				'linkurl' => "javascript:Settings_Payslip_List_Js.triggerDetailView(".$this->getId().")",
 				'linkicon' => 'icon-eye'
 			)
 		);
@@ -56,7 +56,7 @@ class Settings_PaySlip_Record_Model extends Settings_Vtiger_Record_Model {
 	}
     
     public function getDeleteActionUrl() {
-        return 'index.php?module=PaySlip&parent=Settings&action=DeleteAjax&mode=remove&record='.$this->getId();
+        return 'index.php?module=Payslip&parent=Settings&action=DeleteAjax&mode=remove&record='.$this->getId();
     }
     
     public function getRowInfo() {

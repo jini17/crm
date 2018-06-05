@@ -57,7 +57,7 @@ Settings_Vtiger_List_Js('Settings_EmployeeContract_List_Js',{
 				app.helper.showModal(data);
 			}
 });
-
+	
 
      	
     },
