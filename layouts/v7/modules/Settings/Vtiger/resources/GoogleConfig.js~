@@ -211,8 +211,7 @@ Vtiger.Class("Settings_Vtiger_GoogleConfig_Js",{},{
 		var advanceConfigContainer = jQuery('#AdvanceGoogleConfigDetails');
 		var editButton = container.find('.editButton');	
 		var advanceConfigEditButton = advanceConfigContainer.find('.editButton');	
-		jQuery(".group4").colorbox({rel:'group4'});
-		jQuery(".group5").colorbox({rel:'group5'});		
+		jQuery(".group4").colorbox({rel:'group4'});		
 			
 		
 		//Register click event for edit button
