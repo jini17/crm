@@ -7,12 +7,7 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  ************************************************************************************/
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> 7206a9eabb5b00f2569e95a931be81cfa3583160
 /*
 error_reporting(1);
 		ini_set('display_erros',1);
