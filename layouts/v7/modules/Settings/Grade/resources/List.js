@@ -12,6 +12,12 @@ Settings_Vtiger_List_Js('Settings_Grade_List_Js',{
         var instance = app.controller();
         instance.deleteEmployeeContract(url);
     },
+
+    
+    triggerDetailView : function(url) {
+        var instance = app.controller();
+        instance.viewDetailView(url);
+        },
 },{
    
     /**
@@ -35,6 +41,26 @@ Settings_Vtiger_List_Js('Settings_Grade_List_Js',{
                 }   
             });
         })
+    },
+
+    viewDetailView : function(url) {
+    var params = this.getDefaultParams();
+        params['parent'] = "Settings";
+        params['module'] = "Grade";  
+        params['record'] = url;
+        params['view'] = "RecordQuickPreview";
+    
+        app.helper.showProgress();
+         app.request.post({'data' : params}).then(function(error, data){
+            app.helper.hideProgress();
+                
+                  if(error === null) {
+                app.helper.showModal(data);
+            }
+});
+    
+
+        
     },
     
     registerEvents : function() {

@@ -6,6 +6,9 @@
  * Time: 6:21 PM
  */
 
+include("modules/BenefitType/BenefitType.php");
+
+
 class Settings_Vtiger_BenefitTypeTools_View extends Settings_Vtiger_Index_View {
 
     function __construct() {
@@ -33,14 +36,13 @@ class Settings_Vtiger_BenefitTypeTools_View extends Settings_Vtiger_Index_View {
         $qualifiedModuleName = $request->getModule(false);
 
         $viewer = $this->getViewer($request);
-        $viewer->view('AddLeaveType.tpl', $qualifiedModuleName);
+        $viewer->view('AddBenefitType.tpl', $qualifiedModuleName);
     }
 
 
     public function EditBenefitTypeForm($request){
-        //echo "<pre>"; print_r($request); die;
-        global $adb;
-        $adb->setDebug(true);
+         global $adb;
+       // $adb->setDebug(true);
         $qualifiedModuleName = $request->getModule(false);
         $values = explode(',', $request->get('values'));
 
@@ -48,19 +50,19 @@ class Settings_Vtiger_BenefitTypeTools_View extends Settings_Vtiger_Index_View {
             return false;
         }
 
-        $query = "SELECT * FROM `vtiger_benefittype` WHERE claimtypeid = ?";
+        $query = "SELECT * FROM `vtiger_benefittype` WHERE benefittypeid = ?";
         $result = $adb->pquery($query,array($values[0]));
         $count = $adb->num_rows($result);
-        //echo "Nirbhay".$count;die;
-        $claim_type = array();
+        $benefit_type = array();
 
         if($count>0){
 
-            $claim_type['claim_type'] = $adb->query_result($result, 0,'claim_type');
-            $claim_type['claim_code'] = $adb->query_result($result, 0,'claim_code');
-            $claim_type['claim_status'] = $adb->query_result($result, 0,'claim_status');
-            $claim_type['claim_description'] = $adb->query_result($result, 0,'claim_description');
-            $claim_type['claim_type_id'] = $adb->query_result($result, 0,'claimtypeid');
+            $benefit_type['benefit_type'] = $adb->query_result($result, 0,'benefit_type');
+            $benefit_type['benefit_code'] = $adb->query_result($result, 0,'benefit_code');
+            $benefit_type['status'] = $adb->query_result($result, 0,'status');
+            $benefit_type['benefit_desc'] = $adb->query_result($result, 0,'benefit_desc');
+            $benefit_type['title'] = $adb->query_result($result, 0,'title');
+            $benefit_type['benefittypeid'] = $adb->query_result($result, 0,'benefittypeid');
 
 
         }
@@ -70,7 +72,7 @@ class Settings_Vtiger_BenefitTypeTools_View extends Settings_Vtiger_Index_View {
 
 
         $viewer = $this->getViewer($request);
-        $viewer->assign("VALUES",$claim_type);
+        $viewer->assign("VALUES",$benefit_type);
         $viewer->view('EditBenefitType.tpl', $qualifiedModuleName);
     }
 
@@ -98,28 +100,42 @@ class Settings_Vtiger_BenefitTypeTools_View extends Settings_Vtiger_Index_View {
 
     public function AddBenefitType($request){
         global $adb;
+       // $adb->setDebug(true);
         $insertArray = $request->get('form');
+        //echo "<pre>"; print_r($insertArray); die;
 
-        $claimtypeid = $adb->getUniqueID('vtiger_crmentity');
+        $benefittype = array();
+
+        for($i=0;$i<count($insertArray);$i++) {
+            $name = $insertArray[$i]['name'];
+            $benefittype[$name] = $insertArray[$i]['value'];
+
+        }
+
+        if(!isset($leavetype['status'])){
+            $leavetype['status']= 'off';
+        }
+
+        $benefittypeid = $adb->getUniqueID('vtiger_crmentity');
 
         $crmentityinsertquery = "INSERT INTO vtiger_crmentity (crmid, smcreatorid, smownerid, modifiedby, setype, description, createdtime, modifiedtime, viewedtime, status, version, presence, deleted, smgroupid, source, label) VALUES(?,?,?,?,?,?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,?,?,?,?,?,?,?)";
 
-        $params = array($claimtypeid,1,1,1,"Leave Type",'','',1,1,0,'','','');
+        $params = array($benefittypeid,1,1,1,"Benefit Type",'','',1,1,0,'','','');
 
         $crmentityinsertresult = $adb->pquery($crmentityinsertquery,array($params));
 
         if($crmentityinsertresult){
-            $query = "INSERT INTO `vtiger_benefittype` (`claimtypeid`, `claim_type`, `claim_code`,`claim_status`,`claim_description`) VALUES (?,?,?,?,?)";
-            $result = $adb->pquery($query,array($claimtypeid,$insertArray[1]['value'],$insertArray[2]['value'],$insertArray[3]['value'],$insertArray[4]['value']));
+            $query = "INSERT INTO `vtiger_benefittype` (`benefittypeid`, `benefit_type`, `benefit_desc`,`status`,`title`,`benefit_code`) VALUES (?,?,?,?,?,?)";
+            $result = $adb->pquery($query,array($benefittypeid,$benefittype['BenefitType'],$benefittype['BenefitType_Desc'],$benefittype['status'],$benefittype['BenefitTypeTitle'],$benefittype['BenefitCode']));
 
         }
         if($result){
-            $query = "INSERT INTO vtiger_benefittypecf (claimtypeid) VALUES (?)";
-            $claimtypetables_result = $adb->pquery($query,array($claimtypeid));
+            $query = "INSERT INTO vtiger_benefittypecf (benefittypeid) VALUES (?)";
+            $claimtypetables_result = $adb->pquery($query,array($benefittypeid));
         }
 
-
-        if($claimtypetables_result){
+       // die;
+        if($result){
             $response = "success";
         }else{
             $response = "failed";
@@ -131,31 +147,25 @@ class Settings_Vtiger_BenefitTypeTools_View extends Settings_Vtiger_Index_View {
 
     public function UpdateBenefitType($request){
         global $adb;
-        //echo "<pre>"; print_r($request); die;
         //$adb->setDebug(true);
         $insertArray = $request->get('form');
 
-        $claims = array();
+        $benefittype = array();
 
-        //echo "Nirbhay";
 
 
         for($i=0;$i<count($insertArray);$i++) {
-            //echo "NNN";
             $test = $insertArray[$i]['name'];
-            $claims[$test] = $insertArray[$i]['value'];
+            $benefittype[$test] = $insertArray[$i]['value'];
 
         }
-        // echo "Nirbhay111";
-        if(!isset($claims['status'])){
-            $claims['status']= 'off';
+        if(!isset($benefittype['status'])){
+            $benefittype['status']= 'off';
         }
 
-        // echo "NirbhayNiorbhay<pre>"; print_r($claims); die;
 
-        $query = "UPDATE `vtiger_benefittype` SET `claim_type`=?, `claim_code`=?, `claim_status`=?, `claim_description`=? WHERE claimtypeid=?";
-        $result = $adb->pquery($query,array($claims['ClaimTypeTitle'],$claims['ClaimCode'],$claims['status'],$claims['ClaimType_Desc'],$claims['ClaimTypeId']));
-
+        $query = "UPDATE `vtiger_benefittype` SET `benefit_type`=?, `benefit_desc`=?,`status`=?,`title`=?,`benefit_code`=? WHERE `benefittypeid`=?";
+        $result = $adb->pquery($query,array($benefittype['BenefitType'],$benefittype['BenefitType_Desc'],$benefittype['status'],$benefittype['BenefitTypeTitle'],$benefittype['BenefitCode'],$benefittype['benefittypeid']));
 
 
 

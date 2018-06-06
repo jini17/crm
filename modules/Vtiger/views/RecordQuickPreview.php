@@ -30,15 +30,25 @@ class Vtiger_RecordQuickPreview_View extends Vtiger_Index_View {
 		}
 
 		$recordModel = $this->record->getRecord();
-		$recordStrucure = Vtiger_RecordStructure_Model::getInstanceFromRecordModel($recordModel, Vtiger_RecordStructure_Model::RECORD_STRUCTURE_MODE_SUMMARY);
+		if($request->get('parent') != "Settings") {
+			$recordStrucure = Vtiger_RecordStructure_Model::getInstanceFromRecordModel($recordModel, Vtiger_RecordStructure_Model::RECORD_STRUCTURE_MODE_SUMMARY);
+			$viewer->assign('SUMMARY_RECORD_STRUCTURE', $recordStrucure->getStructure());
+		}
+		else{
+			$recordStrucure =Vtiger_RecordStructure_Model::getInstanceFromRecordModel($recordModel, Vtiger_RecordStructure_Model::RECORD_STRUCTURE_MODE_DETAIL);
+				$viewer->assign('SUMMARY_RECORD_STRUCTURE', array_shift($recordStrucure->getStructure()));
+				$viewer->assign('PARENT_MODULE',$request->get('parent'));
+		}
+
 		$moduleModel = $recordModel->getModule();
 
 		$viewer->assign('RECORD', $recordModel);
 		$viewer->assign('MODULE_MODEL', $moduleModel);
 		$viewer->assign('BLOCK_LIST', $moduleModel->getBlocks());
+
 		$viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
 		$viewer->assign('MODULE_NAME', $moduleName);
-		$viewer->assign('SUMMARY_RECORD_STRUCTURE', $recordStrucure->getStructure());
+	
 		$viewer->assign('$SOCIAL_ENABLED', false);
 		$viewer->assign('LIST_PREVIEW', true);
 		$appName = $request->get('app');
@@ -68,6 +78,7 @@ class Vtiger_RecordQuickPreview_View extends Vtiger_Index_View {
 		} else {
 			$pagingModel->set('nextPageExists', false);
 		}
+
 		$viewer->assign('PAGING_MODEL', $pagingModel);
 		$viewer->assign('RECENT_ACTIVITIES', $recentActivities);
 		$viewer->view('ListViewQuickPreview.tpl', $moduleName);

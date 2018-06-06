@@ -442,7 +442,21 @@ $languageStrings = array(
 	'Grade'=>'Grade List',
 	'TimeSheet'=>'Time-Sheet',
 	'LBL_DOWNLOAD'=>'Download',
+	'LBL_HR_MATTERS'=>'HR Matters',
+	'LBL_PAYSLIP'=>'Payslip',
+	'LBL_LEAVE_TYPE'=>'Leave Type',
+	'LBL_CLAIM_TYPE'=>'Claim Type',
+	'LBL_BENEFIT_TYPE'=>'Benefit Type',
+	'LBL_ALLOCATION'=>'Leave/Claim Allocation',
+	'LBL_EDIT_VALUE'=>'Edit',
+	'LBL_LEAVE_TYPES_LIST'=>'Leave Type List',
+	'LBL_CLAIM_TYPES_LIST'=>'Claim Type List',
+	'LBL_CLAIM_TYPES'=>'Claim Type',
+	'LBL_BENEFIT_TYPES'=>'Benefit Type',
+	'LBL_BENEFIT_TYPES_LIST'=>'Benefit Type List',
 
+	'LBL_PDF'=>'PDF',
+	'LBL_HOLIDAY'=>'Holiday',
 );
 
 $jsLanguageStrings = array(

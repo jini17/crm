@@ -13,7 +13,8 @@ $languageStrings = array(
 	'LBL_ADD_RECORD' => 'Add Passport Visa Detail',
 	'SINGLE_PassportVisa' => 'Passport Visa',
 	'LBL_Passport_Immigration Information' =>'Passport Information',
-	'LBL_Visa_INFORMATION'=>'Visa Information',	
+	'LBL_Visa_INFORMATION'=>'Visa Information',
+	'Title'=>'Passport No',	
 );
 
 $jsLanguageStrings = array(

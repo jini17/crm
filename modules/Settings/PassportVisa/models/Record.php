@@ -39,6 +39,13 @@ class Settings_PassportVisa_Record_Model extends Settings_Vtiger_Record_Model {
 				'linklabel' => 'LBL_DELETE',
 				'linkurl' => "javascript:Settings_PassportVisa_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
 				'linkicon' => 'icon-trash'
+			),
+			
+			array(
+				'linktype' => 'LISTVIEWRECORD',
+				'linklabel' => 'LBL_VIEW',
+				'linkurl' => "javascript:Settings_PassportVisa_List_Js.triggerDetailView(".$this->getId().")",
+				'linkicon' => 'icon-eye'
 			)
 		);
 		foreach ($recordLinks as $recordLink) {

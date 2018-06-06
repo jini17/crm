@@ -14,7 +14,11 @@ class Settings_Vtiger_BenefitTypeListView_View extends Settings_Vtiger_Index_Vie
         $viewer = $this->getViewer($request);
         global $adb;
         //$adb->setDebug(true);
-        $query = "SELECT * FROM vtiger_benefittype INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_claimtype.claimtypeid WHERE deleted = 0";
+
+
+
+
+        $query = "SELECT vtiger_benefittype.* FROM vtiger_benefittype INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_benefittype.benefittypeid WHERE deleted = 0";
         $result = $adb->pquery($query,array());
         $count = $adb->num_rows($result);
         //echo "<pre>"; print_r($count); die;
@@ -23,20 +27,21 @@ class Settings_Vtiger_BenefitTypeListView_View extends Settings_Vtiger_Index_Vie
         $type = array();
 
         for($i=0;$i<$count;$i++){
-            $values[$i]['checkbox'] = $adb->query_result($result, $i,'claimtypeid');
-            $values[$i]['claim_type'] = $adb->query_result($result, $i,'claim_type');
-            $values[$i]['claim_code'] = $adb->query_result($result, $i,'claim_code');
-            $values[$i]['claim_status'] = $adb->query_result($result, $i,'claim_status');
-            if($values[$i]['claim_status'] == 'on'){
-                $values[$i]['claim_status'] = 'Active';
+            $values[$i]['checkbox'] = $adb->query_result($result, $i,'benefittypeid');
+            $values[$i]['benefit_title'] = $adb->query_result($result, $i,'title');
+            $values[$i]['benefit_code'] = $adb->query_result($result, $i,'benefit_code');
+            $values[$i]['benefit_status'] = $adb->query_result($result, $i,'status');
+           // echo $adb->query_result($result, 1,'status');die;
+            if($values[$i]['benefit_status'] == 'on'){
+                $values[$i]['benefit_status'] = 'Active';
             }else{
-                $values[$i]['claim_status'] = 'Inactive';
+                $values[$i]['benefit_status'] = 'Inactive';
             }
 
         }
 
 
-        //echo "<pre>"; print_r($values); die;
+     //  echo "<pre>"; print_r($values); die;
 
         $viewer->assign('VALUES', $values);
         //$viewer->assign('USERS', $users);

@@ -125,6 +125,7 @@ Vtiger.Class("Settings_Vtiger_BenefitType_Js",{},{
                     app.helper.hideProgress();
                     app.helper.showModal(data);
                     thisInstance.saveRule();
+                    history.pushState({}, null, window.history.back());
 
 
                     // var thisInstance1 = this;
@@ -146,7 +147,7 @@ Vtiger.Class("Settings_Vtiger_BenefitType_Js",{},{
         var aDeferred = jQuery.Deferred();
         jQuery("#addItem").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
         jQuery("#addItem").click(function () {
-            console.log("add item");
+
             app.helper.showProgress();
             var params = {
                 'module' : app.getModuleName(),
@@ -160,7 +161,7 @@ Vtiger.Class("Settings_Vtiger_BenefitType_Js",{},{
                     app.helper.hideProgress();
                     app.helper.showModal(data);
                     thisInstance.saveRule();
-
+                    history.pushState({}, null, window.history.back());
 
                     // var thisInstance1 = this;
 
@@ -242,7 +243,13 @@ Vtiger.Class("Settings_Vtiger_BenefitType_Js",{},{
 
 jQuery(document).ready(function(e){
     var tacInstance = new Settings_Vtiger_BenefitType_Js();
+    var vtigerinst = new Vtiger_Index_Js();
+    vtigerinst.registerEvents();
     tacInstance.registerEvents();
+
+    //When page is refreshed/reloaded, it will redirect to the Index View
+
+
 
 })
 

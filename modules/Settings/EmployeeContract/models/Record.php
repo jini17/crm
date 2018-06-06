@@ -44,7 +44,7 @@ class Settings_EmployeeContract_Record_Model extends Settings_Vtiger_Record_Mode
 			array(
 				'linktype' => 'LISTVIEWRECORD',
 				'linklabel' => 'LBL_VIEW',
-				'linkurl' => "javascript:Settings_EmployeeContract_List_Js.triggerDetailView(event)",
+				'linkurl' => "javascript:Settings_EmployeeContract_List_Js.triggerDetailView(".$this->getId().")",
 				'linkicon' => 'icon-eye'
 			)
 		);

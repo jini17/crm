@@ -9,9 +9,14 @@
 
 Settings_Vtiger_List_Js('Settings_PassportVisa_List_Js',{
     triggerDelete : function(url) {
-        var instance = app.controller();     
-        instance.deleteEmployeeContract(url);
+        var instance = app.controller();
+        instance.deletePassportVisa(url);
     },
+
+	 triggerDetailView : function(url) {
+		var instance = app.controller();
+		instance.viewDetailView(url);
+	    },
 },{
    
     /**
@@ -26,7 +31,7 @@ Settings_Vtiger_List_Js('Settings_PassportVisa_List_Js',{
 	},
     
     
-    deleteEmployeeContract : function(url) {
+    deletePassportVisa : function(url) {
         var self = this;
         app.helper.showConfirmationBox({'message' : app.vtranslate('JS_ARE_YOU_SURE_YOU_WANT_TO_DELETE')}).then(function(){
             app.request.post({'url' : url}).then(function(error, data){
@@ -35,6 +40,27 @@ Settings_Vtiger_List_Js('Settings_PassportVisa_List_Js',{
                 }   
             });
         })
+    },
+
+  viewDetailView : function(url) {
+ 	var params = this.getDefaultParams();
+		params['parent'] = "Settings";
+		params['module'] = "PassportVisa";
+		params['Navigation'] ="true";	
+		params['record'] = url;
+		params['view'] = "RecordQuickPreview";
+	
+		app.helper.showProgress();
+		 app.request.post({'data' : params}).then(function(error, data){
+     		app.helper.hideProgress();
+
+                  if(error === null) {
+				app.helper.showModal(data);
+			}
+});
+
+
+     	
     },
     
     registerEvents : function() {
