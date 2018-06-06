@@ -19,7 +19,7 @@
 	{if (!$FIELD_NAME)}
 		{assign var="FIELD_NAME" value=$FIELD_MODEL->getFieldName()}
 	{/if}
-	<div class="input-group inputElement time">	
+	<div class="input-group inputElement time" style="float: left;width: 30%;min-width: 30%;margin-right:15px;">	
 		<input id="{$MODULE}_editView_fieldName_{$FIELD_NAME}_from" type="text" data-format="{$TIME_FORMAT}" class="timepicker-default form-control" value="{$FieldValue[0]}" name="{$FIELD_NAME}_from"
 		{if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if}
 		{if $FIELD_INFO["mandatory"] eq true} data-rule-required="true" {/if}
@@ -30,8 +30,8 @@
 			<i class="fa fa-clock-o"></i>
 		</span>
 	</div>
-	&nbsp;
-	<div class="input-group inputElement time">
+	
+	<div class="input-group inputElement time" style="float: left;width: 30%;min-width: 30%;">
 		<input id="{$MODULE}_editView_fieldName_{$FIELD_NAME}_to" type="text" data-format="{$TIME_FORMAT}" class="timepicker-default form-control" value="{$FieldValue[1]}" name="{$FIELD_NAME}_to"
 		{if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if}
 		{if $FIELD_INFO["mandatory"] eq true} data-rule-required="true" {/if}

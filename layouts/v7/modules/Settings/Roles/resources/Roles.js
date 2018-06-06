@@ -193,7 +193,7 @@ var Settings_Roles_Js = {
 	registerShowNewProfilePrivilegesEvent : function() {
 		jQuery('[name="profile_directly_related_to_role"]').on('change',function(e){
 			var target = jQuery(e.currentTarget);
-			var hanlder = target.data('handler');
+			var hanlder = target.data('handler');			
 			var container = jQuery('[data-content="'+ hanlder + '"]');
  
             vtUtils.hideValidationMessage(jQuery('#profilesList'));            
@@ -270,6 +270,7 @@ var Settings_Roles_Js = {
 	
 	registerExistingProfilesChangeEvent : function() {
 		jQuery('#directProfilePriviligesSelect').on('change',function(e) {
+			
 			var profileId = jQuery(e.currentTarget).val();
 			var params = {
 				module : 'Profiles',
