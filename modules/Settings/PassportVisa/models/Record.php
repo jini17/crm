@@ -25,29 +25,40 @@ class Settings_PassportVisa_Record_Model extends Settings_Vtiger_Record_Model {
 	 * @return <Array> - Associate array of Vtiger_Link_Model instances
 	 */
 	public function getRecordLinks() {
-
+		$currentuser = Users_Record_Model::getCurrentUserModel();
 		$links = array();
-		$recordLinks = array(
-			array(
-				'linktype' => 'LISTVIEWRECORD',
-				'linklabel' => 'LBL_EDIT',
-				'linkurl' => 'index.php?module=PassportVisa&parent=Settings&view=Edit&record='.$this->getId(),
-				'linkicon' => 'icon-pencil'
-			),
-			array(
-				'linktype' => 'LISTVIEWRECORD',
-				'linklabel' => 'LBL_DELETE',
-				'linkurl' => "javascript:Settings_PassportVisa_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
-				'linkicon' => 'icon-trash'
-			),
-			
-			array(
-				'linktype' => 'LISTVIEWRECORD',
-				'linklabel' => 'LBL_VIEW',
-				'linkurl' => "javascript:Settings_PassportVisa_List_Js.triggerDetailView(".$this->getId().")",
-				'linkicon' => 'icon-eye'
-			)
-		);
+		if($currentuser->get('is_admin')=='on'){
+			$recordLinks = array(
+				array(
+					'linktype' => 'LISTVIEWRECORD',
+					'linklabel' => 'LBL_EDIT',
+					'linkurl' => 'index.php?module=PassportVisa&parent=Settings&view=Edit&record='.$this->getId(),
+					'linkicon' => 'icon-pencil'
+				),
+				array(
+					'linktype' => 'LISTVIEWRECORD',
+					'linklabel' => 'LBL_DELETE',
+					'linkurl' => "javascript:Settings_PassportVisa_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
+					'linkicon' => 'icon-trash'
+				),
+				
+				array(
+					'linktype' => 'LISTVIEWRECORD',
+					'linklabel' => 'LBL_VIEW',
+					'linkurl' => "javascript:Settings_PassportVisa_List_Js.triggerDetailView(".$this->getId().")",
+					'linkicon' => 'icon-eye'
+				)
+			);
+		} else {
+			$recordLinks = array(
+				array(
+					'linktype' => 'LISTVIEWRECORD',
+					'linklabel' => 'LBL_VIEW',
+					'linkurl' => "javascript:Settings_PassportVisa_List_Js.triggerDetailView(".$this->getId().")",
+					'linkicon' => 'icon-eye'
+				)
+			);	
+		}	
 		foreach ($recordLinks as $recordLink) {
 			$links[] = Vtiger_Link_Model::getInstanceFromValues($recordLink);
 		}

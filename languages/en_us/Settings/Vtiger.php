@@ -452,6 +452,7 @@ $languageStrings = array(
 
 	'LBL_PDF'=>'PDF',
 	'LBL_HOLIDAY'=>'Holiday',
+	'LBL_WORKINGHOURS'=>'Working Hours',
 );
 
 $jsLanguageStrings = array(

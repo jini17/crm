@@ -25,8 +25,9 @@ class Settings_EmployeeContract_Record_Model extends Settings_Vtiger_Record_Mode
 	 * @return <Array> - Associate array of Vtiger_Link_Model instances
 	 */
 	public function getRecordLinks() {
-
+		$currentuser = Users_Record_Model::getCurrentUserModel();
 		$links = array();
+		if($currentuser->get('is_admin')=='on'){
 		$recordLinks = array(
 			array(
 				'linktype' => 'LISTVIEWRECORD',
@@ -48,6 +49,16 @@ class Settings_EmployeeContract_Record_Model extends Settings_Vtiger_Record_Mode
 				'linkicon' => 'icon-eye'
 			)
 		);
+		} else {
+			$recordLinks = array(
+				array(
+					'linktype' => 'LISTVIEWRECORD',
+					'linklabel' => 'LBL_VIEW',
+					'linkurl' => "javascript:Settings_EmployeeContract_List_Js.triggerDetailView(".$this->getId().")",
+					'linkicon' => 'icon-eye'
+				)
+			);	
+		}	
 		foreach ($recordLinks as $recordLink) {
 			$links[] = Vtiger_Link_Model::getInstanceFromValues($recordLink);
 		}
