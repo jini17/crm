@@ -46,22 +46,24 @@ class Emails_Record_Model extends Vtiger_Record_Model {
 	 * Function sends mail
 	 */
 	public function send($addToQueue = false) {
-		$currentUserModel = Users_Record_Model::getCurrentUserModel();
+	    $currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$rootDirectory = vglobal('root_directory');
 
 		$mailer = Emails_Mailer_Model::getInstance();
 		$mailer->IsHTML(true);
-
+        $serverid = '';
 		//patch for multiple from address
 		if(isset($_REQUEST['selOutgoingServer'])){
 			$fromEmailArray = explode('||',$_REQUEST['selOutgoingServer']);
 			$fromEmail	= $fromEmailArray[1];	
 			$replyTo		= $fromEmail;
 			$userName  	= $fromEmailArray[0];
+			$serverid =  $fromEmailArray[2]; // Added by nirbhay for to get the server id
 		} else {
 			$fromEmail = $this->getFromEmailAddress();
 			$replyTo = $currentUserModel->get('email1');
 			$userName = $currentUserModel->getName();
+
 		}//end here 	
 
 		//$fromEmail = $this->getFromEmailAddress();
@@ -189,14 +191,77 @@ class Emails_Record_Model extends Vtiger_Record_Model {
 					foreach($bccs as $bcc) $mailer->AddBCC($bcc);
 				}
 			}
+
 			// to convert external css to inline css
 			$mailer->Body = Emails_Mailer_Model::convertCssToInline($mailer->Body);	
 			//To convert image url to valid
 			$mailer->Body = Emails_Mailer_Model::makeImageURLValid($mailer->Body);
-			if ($addToQueue) {
+
+            /***
+             * Added By Nirbhay for configuring the server details based on server id
+             * 06062018
+             */
+            global $adb;
+            //$adb->setDebug(true);
+            if($serverid == ''){
+                $query = "SELECT * FROM vtiger_systems WHERE isdefault = 1";
+                $result = $adb->pquery($query,array());
+
+                $serverid = $adb->query_result($result,0,'id');
+                $host = $adb->query_result($result,0,'server');
+                $server_port = $adb->query_result($result,0,'server_port');
+                $username = $adb->query_result($result,0,'server_username');
+                $password = $adb->query_result($result,0,'server_password');
+                $smtp_auth = $adb->query_result($result,0,'smtp_auth');
+
+            }else{
+                $mailer->Username= '';
+                $mailer->Password == '';
+                $mailer->Host = '';
+                $query = "SELECT * FROM vtiger_systems WHERE id = ?";
+                $result = $adb->pquery($query,array($serverid));
+
+                $serverid = $adb->query_result($result,0,'id');
+                $host = $adb->query_result($result,0,'server');
+                $server_port = $adb->query_result($result,0,'server_port');
+                $username = $adb->query_result($result,0,'server_username');
+                $password = $adb->query_result($result,0,'server_password');
+                $smtp_auth = $adb->query_result($result,0,'smtp_auth');
+            }
+
+            if($mailer->SMTPAuth == ''){
+
+                $mailer->SMTPAuth =  $smtp_auth;
+            }
+            if($mailer->Username == ''){
+
+                $mailer->Username =  $username;
+            }
+            if($mailer->Password == ''){
+
+                $mailer->Password =  $password;
+            }
+            if($mailer->Host == ''){
+
+                $mailer->Host =  $host;
+            }
+
+
+
+
+
+
+
+
+            /**
+             * Nirbhay Add End
+             */
+
+           if ($addToQueue) {
 				$status = $mailer->Send(false, $this->get('parent_id'));
 			} else {
-				$status = $mailer->Send(true);
+			   	$status = $mailer->Send(true);
+
 			}
 			if(!$status) {
 				$status = $mailer->getError();
