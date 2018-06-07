@@ -1416,6 +1416,7 @@ Vtiger.Class('Vtiger_Index_Js', {
 	},
 
 	_showQuickPreviewForId: function (recordId, moduleName, appName, isReference) {
+
 		var self = this;
 		var params = {};
 		if (typeof moduleName === 'undefined') {

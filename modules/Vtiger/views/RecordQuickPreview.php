@@ -33,11 +33,12 @@ class Vtiger_RecordQuickPreview_View extends Vtiger_Index_View {
 		if($request->get('parent') != "Settings") {
 			$recordStrucure = Vtiger_RecordStructure_Model::getInstanceFromRecordModel($recordModel, Vtiger_RecordStructure_Model::RECORD_STRUCTURE_MODE_SUMMARY);
 			$viewer->assign('SUMMARY_RECORD_STRUCTURE', $recordStrucure->getStructure());
+			$appName = $request->get('app');
 		}
 		else{
 			$recordStrucure =Vtiger_RecordStructure_Model::getInstanceFromRecordModel($recordModel, Vtiger_RecordStructure_Model::RECORD_STRUCTURE_MODE_DETAIL);
 				$viewer->assign('SUMMARY_RECORD_STRUCTURE', array_shift($recordStrucure->getStructure()));
-				$viewer->assign('PARENT_MODULE',$request->get('parent'));
+				
 		}
 
 		$moduleModel = $recordModel->getModule();
@@ -48,10 +49,10 @@ class Vtiger_RecordQuickPreview_View extends Vtiger_Index_View {
 
 		$viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
 		$viewer->assign('MODULE_NAME', $moduleName);
-	
+		$viewer->assign('PARENT_MODULE',$request->get('parent'));	
 		$viewer->assign('$SOCIAL_ENABLED', false);
 		$viewer->assign('LIST_PREVIEW', true);
-		$appName = $request->get('app');
+		
 		$viewer->assign('SELECTED_MENU_CATEGORY', $appName);
 		$pageNumber = 1;
 		$limit = 5;

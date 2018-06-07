@@ -33,7 +33,8 @@ class Settings_LoginHistory_ShowUpdates_View extends Settings_Vtiger_List_View{
 	 * @param Vtiger_Request $request
 	 */
 	function showActivities($session_id){
-		global $adb; //$adb->setDebug(true);
+		global $adb; 
+		//$adb->setDebug(true);
 		$result = $adb->pquery("SELECT * FROM vtiger_modtracker_basic WHERE session_id = ? AND status IN (0,1,2) ORDER BY changedon DESC",array($session_id));
 		$numOfRows = $adb->num_rows($result);
 		$data = array();

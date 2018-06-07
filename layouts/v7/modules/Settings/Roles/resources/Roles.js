@@ -254,13 +254,14 @@ var Settings_Roles_Js = {
 			if(err === null) {
 				content.find('.profileData').html(data);
 				vtUtils.showSelect2ElementView(jQuery('#directProfilePriviligesSelect'));
-				//Settings_Roles_Js.registerExistingProfilesChangeEvent();
+				
 				Settings_Roles_Js.newPriviliges = true;
 				jQuery('[data-content="existing"]').fadeOut('slow',function(){
 					content.fadeIn('slow',function(){
 					});
 				});
-                Settings_Roles_Js.registerProfileEvents();
+				Settings_Roles_Js.registerExistingProfilesChangeEvent();
+               			 //Settings_Roles_Js.registerProfileEvents();
      
 			}else {
 				app.helper.showErrorNotification({'message' : err.message});
@@ -286,7 +287,7 @@ var Settings_Roles_Js = {
 					jQuery('[data-content="new"]').find('.profileData').html(data);
 					vtUtils.showSelect2ElementView(jQuery('#directProfilePriviligesSelect'));
 					Settings_Roles_Js.registerExistingProfilesChangeEvent();
-                    Settings_Roles_Js.registerProfileEvents();
+                 		   Settings_Roles_Js.registerProfileEvents();
 				}
 			});
 		});
