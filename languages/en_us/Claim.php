@@ -9,8 +9,8 @@
  *************************************************************************************/
 $languageStrings = array(
 	// Basic Strings
-	'LBL_WORKINGHOURS_INFORMATION'=>'Working Hours Information',
-	'LBL_ADD_RECORD' => 'Add Working Hours Detail',
+	'Category'=>'Claim Type',
+	'LBL_ADD_RECORD' => 'Add Claim Detail',
 	'SINGLE_Claim' => 'Claim',
 );
 
