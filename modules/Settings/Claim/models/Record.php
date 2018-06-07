@@ -12,11 +12,11 @@
 class Settings_Claim_Record_Model extends Settings_Vtiger_Record_Model {
  
     public function getId() {
-        return $this->get('employeecontractid');
+        return $this->get('claimid');
     }
     
     public function getName() {
-        return $this->get('employeecontractno');
+        return $this->get('claimno');
     }
     
     
@@ -28,27 +28,27 @@ class Settings_Claim_Record_Model extends Settings_Vtiger_Record_Model {
 		$currentuser = Users_Record_Model::getCurrentUserModel();
 		$links = array();
 		if($currentuser->get('is_admin')=='on'){
-		$recordLinks = array(
-			array(
-				'linktype' => 'LISTVIEWRECORD',
-				'linklabel' => 'LBL_EDIT',
-				'linkurl' => 'index.php?module=Claim&parent=Settings&view=Edit&record='.$this->getId(),
-				'linkicon' => 'icon-pencil'
-			),
-			array(
-				'linktype' => 'LISTVIEWRECORD',
-				'linklabel' => 'LBL_DELETE',
-				'linkurl' => "javascript:Settings_Claim_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
-				'linkicon' => 'icon-trash'
-			),
-
-			array(
-				'linktype' => 'LISTVIEWRECORD',
-				'linklabel' => 'LBL_VIEW',
-				'linkurl' => "javascript:Settings_Claim_List_Js.triggerDetailView(".$this->getId().")",
-				'linkicon' => 'icon-eye'
-			)
-		);
+			$recordLinks = array(
+				array(
+					'linktype' => 'LISTVIEWRECORD',
+					'linklabel' => 'LBL_EDIT',
+					'linkurl' => 'index.php?module=Claim&parent=Settings&view=Edit&record='.$this->getId(),
+					'linkicon' => 'icon-pencil'
+				),
+				array(
+					'linktype' => 'LISTVIEWRECORD',
+					'linklabel' => 'LBL_DELETE',
+					'linkurl' => "javascript:Settings_Claim_List_Js.triggerDelete('".$this->getDeleteActionUrl()."')",
+					'linkicon' => 'icon-trash'
+				),
+				
+				array(
+					'linktype' => 'LISTVIEWRECORD',
+					'linklabel' => 'LBL_VIEW',
+					'linkurl' => "javascript:Settings_Claim_List_Js.triggerDetailView(".$this->getId().")",
+					'linkicon' => 'icon-eye'
+				)
+			);
 		} else {
 			$recordLinks = array(
 				array(
@@ -69,7 +69,7 @@ class Settings_Claim_Record_Model extends Settings_Vtiger_Record_Model {
     public function getDeleteActionUrl() {
         return 'index.php?module=Claim&parent=Settings&action=DeleteAjax&mode=remove&record='.$this->getId();
     }
-
+    
     public function getRowInfo() {
         return $this->getData();
     }
