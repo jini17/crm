@@ -145,7 +145,7 @@ editSkill : function(url) {
               
                 if(err == null){
                     app.helper.showModal(data);
-                    var form = jQuery('#addSkill');
+                    var form = jQuery('#addSkill');   
                         
                         	// for textarea limit
                         app.helper.showVerticalScroll(jQuery('#scrollContainer'), {setHeight:'80%'});

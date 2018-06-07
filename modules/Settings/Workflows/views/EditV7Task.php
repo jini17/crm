@@ -154,19 +154,26 @@ class Settings_Workflows_EditV7Task_View extends Settings_Vtiger_Index_View {
 		$viewer->assign('MODULE', $moduleName);
 		$viewer->assign('QUALIFIED_MODULE', $qualifiedModuleName);
 
+		//modified by jitu@multifrom address in work flow
+		$fromEmailFieldOptions = '<option value="">'. vtranslate('ENTER_FROM_EMAIL_ADDRESS', $qualifiedModuleName) .'</option>';
+
 		$emailFields = $recordStructureInstance->getAllEmailFields();
+	
 		foreach($emailFields as $metaKey => $emailField) {
-			$emailFieldoptions .= '<option value=",$'.$metaKey.'">'.$emailField->get('workflow_columnlabel').'</option>';
-		}
+			$fromEmailFieldOptions .= '<option value="'.$emailField['serverid'].'##'.$emailField['email'].'">'.$emailField['email']."\n".'['.$emailField['server'].']'.'</option>';
+		} //end here
+
 		$usersModuleModel = Vtiger_Module_Model::getInstance('Users');
 
-		if($moduleModel->getField('assigned_user_id')) {
-			$emailFieldoptions .= '<option value=",$(general : (__VtigerMeta__) reports_to_id)"> '.
-									vtranslate($moduleModel->getField('assigned_user_id')->get('label'),'Users').' : (' . vtranslate('Users','Users') . ') '. vtranslate($usersModuleModel->getField('reports_to_id')->get('label'),'Users') .'</option>';
-		}
+		//if($moduleModel->getField('assigned_user_id')) {
+		//	$emailFieldoptions .= '<option value=",$(general : (__VtigerMeta__) reports_to_id)"> '.
+		//							vtranslate($moduleModel->getField('assigned_user_id')->get('label'),'Users').' : (' . vtranslate('Users','Users') . ') '. vtranslate($usersModuleModel->getField('reports_to_id')->get('label'),'Users') .'</option>';
+		//}
 
-		$nameFields = $recordStructureInstance->getNameFields();
-		$fromEmailFieldOptions = '<option value="">'. vtranslate('ENTER_FROM_EMAIL_ADDRESS', $qualifiedModuleName) .'</option>';
+		//$nameFields = $recordStructureInstance->getNameFields();
+		
+
+		/*
 		$fromEmailFieldOptions .= '<option value="$(general : (__VtigerMeta__) supportName)<$(general : (__VtigerMeta__) supportEmailId)>"
 									>'.vtranslate('LBL_HELPDESK_SUPPORT_EMAILID', $qualifiedModuleName).
 									'</option>';
@@ -188,7 +195,9 @@ class Settings_Workflows_EditV7Task_View extends Settings_Vtiger_Index_View {
 			if ($emailField->get('uitype') != '13') {
 				$fromEmailFieldOptions .= '<option value="'.$value.'">'.$emailField->get('workflow_columnlabel').'</option>';
 			}
-		}
+		}*/
+
+		
 
 		$structure = $recordStructureInstance->getStructure();
 		foreach ($structure as $fields) {
@@ -227,3 +236,4 @@ class Settings_Workflows_EditV7Task_View extends Settings_Vtiger_Index_View {
 		$viewer->view('EditTask.tpl', $qualifiedModuleName);
 	}
 }
+

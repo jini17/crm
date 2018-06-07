@@ -11,6 +11,7 @@
 class Vtiger_SaveAjax_Action extends Vtiger_Save_Action {
 
 	public function process(Vtiger_Request $request) {
+	
 		$fieldToBeSaved = $request->get('field');
 		$response = new Vtiger_Response();
 		try {

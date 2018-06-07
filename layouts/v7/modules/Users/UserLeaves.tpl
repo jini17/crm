@@ -1,5 +1,6 @@
 {strip}
 {if $SECTION eq 'M'}
+
 	<table class="table table-bordered listViewEntriesTable">
 		<thead>
 			<tr>
@@ -16,23 +17,24 @@
 			{foreach item=USER_LEAVE from=$MYLEAVES}
 				<tr data-section="M">
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leave_reason']}</label></td>
-					<td class="listTableRow small" valign=top><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['color_code']};width:30px;height:20px;"></label><label style="float:left;" class="instlabel">{$USER_LEAVE['leave_type']}</label></td>		<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['from_date']}</label></td>
+					<td class="listTableRow small" valign=top><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['color_code']};width:30px;height:20px;"></label><label style="float:left;" class="instlabel">{$USER_LEAVE['leave_type']}</label></td>		
+					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['from_date']}</label></td>
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['to_date']}</label></td>
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leavestatus']}</label></td>
 					<td class="listTableRow small" valign=top>
 						<div class="pull-right actions">
 							<span class="actionImages">
-<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );">
-<i class="icon-file alignMiddle" title="Documents"></i>  </a>	
+			<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );">
+			<i class="fa fa-file alignMiddle" title="Documents"></i>  </a>	
 					{if $USER_LEAVE['leavestatus'] eq 'New'} 
-						<a class="editLeave cursorPointer" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="icon-pencil alignBottom"></i></a>&nbsp;&nbsp;
-{/if}
-{if $USER_LEAVE['leavestatus'] eq 'New' OR $USER_LEAVE['leavestatus'] eq 'Apply'}
-<a class="deleteLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=deleteLeave&record={$USER_LEAVE['id']}"><i class="icon-trash alignMiddle" title="Delete"></i></a>
-{/if}
-{if $USER_LEAVE['leavestatus'] eq 'Approved' && $USER_LEAVE['from_date']|strtotime gt $CurrentDate|strtotime}
-dsdsssdsd<a class="cancelLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=CancelLeave&record={$USER_LEAVE['id']}&leavestatus={$USER_LEAVE['leavestatus']}&leave_type={$USER_LEAVE['leavetypeid']}"><i class="icon-trash alignMiddle" title="Cancel"></i></a>
-{/if}
+						<a class="editLeave cursorPointer" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="fa fa-pencil alignBottom"></i></a>&nbsp;&nbsp;
+					{/if}
+					{if $USER_LEAVE['leavestatus'] eq 'New' OR $USER_LEAVE['leavestatus'] eq 'Apply'}
+					<a class="deleteLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=deleteLeave&record={$USER_LEAVE['id']}"><i class="fa fa-trash alignMiddle" title="Delete"></i></a>
+					{/if}
+					{if $USER_LEAVE['leavestatus'] eq 'Approved' && $USER_LEAVE['from_date']|strtotime gt $CurrentDate|strtotime}
+					dsdsssdsd<a class="cancelLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=CancelLeave&record={$USER_LEAVE['id']}&leavestatus={$USER_LEAVE['leavestatus']}&leave_type={$USER_LEAVE['leavetypeid']}"><i class="fa fa-trash alignMiddle" title="Cancel"></i></a>
+					{/if}
 
 							</span>
 						</div>
@@ -44,11 +46,14 @@ dsdsssdsd<a class="cancelLeave cursorPointer" data-url="?module=Users&action=Del
 			{/if}
 		</tbody>			
 	</table>
+
+
+<!--@@@@@@@@@@@@START PAGINATION TOOLS@@@@@@@@@@@@@@@-->
 {elseif $SECTION eq 'T'}
 <div class="listViewActionsDiv row-fluid">
 			<span class="span4 btn-toolbar" style="float:right;margin-left:0.12766%;margin-top:0;margin-bottom:9px;">
 
-				<!--@@@@@@@@@@@@START PAGINATION TOOLS@@@@@@@@@@@@@@@-->
+				
 
 <input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
 <input type="hidden" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" />
@@ -87,17 +92,17 @@ dsdsssdsd<a class="cancelLeave cursorPointer" data-url="?module=Users&action=Del
 									</span>
 								</li>
 							</ul>-->
-						<button class="btn" id="listViewNPageButton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="icon-chevron-right"></span></button>				
+						<button class="btn" id="listViewNPageButton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="fa fa-chevron-right"></span></button>				
 					</span>
 				</span>	
 		</div>	
 </div>
-
-
-
 			</span>
 		</div>
 				<!--@@@@@@@@@@@@END PAGINATION TOOLS@@@@@@@@@@@@@@@-->
+
+
+
 	<table class="table table-bordered listViewEntriesTable">
 		<thead>
 			<tr>
@@ -118,15 +123,16 @@ dsdsssdsd<a class="cancelLeave cursorPointer" data-url="?module=Users&action=Del
 				<tr data-section="T">
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['fullname']}</label></td>
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leave_reason']}</label></td>
-					<td class="listTableRow small" valign=top><label style="background-color:{$USER_LEAVE['color_code']};float:left;margin-right:5px;width:30px;height:20px;"></label><label class="instlabel">{$USER_LEAVE['leave_type']}</label></td>		<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['from_date']}</label></td>
+					<td class="listTableRow small" valign=top><label style="background-color:{$USER_LEAVE['color_code']};float:left;margin-right:5px;width:30px;height:20px;"></label><label class="instlabel">{$USER_LEAVE['leave_type']}</label></td>		
+					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['from_date']}</label></td>
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['to_date']}</label></td>
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leavestatus']}</label></td>
 
 					<td class="listTableRow small" valign=top>
 						<div class="pull-right actions">
 							<span class="actionImages">
-<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="icon-file alignMiddle" title="Documents"></i>  </a>				
-								<a class="editLeave cursorPointer" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true"><i title="{vtranslate('LBL_LEAVE_APPROVAL', $MODULE)}" class="icon-pencil alignBottom"></i></a>&nbsp;&nbsp;
+<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file alignMiddle" title="Documents"></i>  </a>				
+								<a class="editLeave cursorPointer" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true"><i title="{vtranslate('LBL_LEAVE_APPROVAL', $MODULE)}" class="fa fa-pencil alignBottom"></i></a>&nbsp;&nbsp;
 								{if $USER_LEAVE['leavestatus'] neq 'New' && $USER_LEAVE['leavestatus'] neq 'Cancel'}
 								<a class="cancelLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}">Cancel</a>				
 								{/if}
@@ -141,6 +147,12 @@ dsdsssdsd<a class="cancelLeave cursorPointer" data-url="?module=Users&action=Del
 			{/if}
 		</tbody>			
 	</table>
+
+
+
+
+
+
 {else}
 <!-- Added hidden field by jitu for paging --->
 <script src="layouts/vlayout/modules/Vtiger/resources/List.js?v=6.1.0" type="text/javascript"></script>
@@ -148,15 +160,22 @@ dsdsssdsd<a class="cancelLeave cursorPointer" data-url="?module=Users&action=Del
 <!--- End for pagination --->
 <!--start my leaves-->
 <div id="MyLeaveContainer">
-<button type="button" class="addMyLeave btn addButton" data-allow="{$ISCREATE}" data-url="{$CREATE_LEAVE_URL}&userId={$USERID}"><i class="icon-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
+<button type="button" class="btn"
+onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
+
+
 	<div style="float:left;"><strong>{vtranslate('LBL_MY_LEAVE', $MODULE)}</strong></div>
 	<div style="float:left;margin-left:5px;">
-		<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear">
+	 <!--	<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear"> -->
+	 	<form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST">
+		<select name="my_selyear" id="my_selyear" data-section="M"  class="my_selyear"   onclick="Users_Leave_Js.registerChangeYear('index.php?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
+
 			<!--//Added By Jitu Date Combobox-->
 			{for $year=$STARTYEAR to $CURYEAR}
-				<option value="{$year}" {if $year eq $CURYEAR} selected {/if}>{$year}</option>
+				<option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
 			{/for}
 		</select>	
+	</form>
 	</div><br /><br />
 	<div style="clear:both;"></div>
 	
@@ -178,18 +197,18 @@ dsdsssdsd<a class="cancelLeave cursorPointer" data-url="?module=Users&action=Del
 			{foreach item=USER_LEAVE from=$MYLEAVES}
 				<tr data-section="M">
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leave_reason']}</label></td>
-					<td class="listTableRow small" valign=top><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['color_code']};width:30px;height:20px;"></label><label style="float:left;" class="instlabel">{$USER_LEAVE['leave_type']}</label></td>		<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['from_date']}</label></td>
+					<td class="listTableRow small" valign=top><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['colorcode']};width:30px;height:20px;"></label><label style="float:left;" class="instlabel">{$USER_LEAVE['leave_type']}</label></td>		<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['from_date']}</label></td>
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['to_date']}</label></td>
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leavestatus']}</label></td>
 					<td class="listTableRow small" valign=top>
 						<div class="pull-right actions">
 							<span class="actionImages">
-								<a class="docsLeave cursorPointer" onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="icon-file alignMiddle" title="Documents"></i>  </a>	
+								<a class="docsLeave cursorPointer" onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file alignMiddle" title="Documents"></i>  </a>	
 					{if $USER_LEAVE['leavestatus'] eq 'New'} 
-						<a class="editLeave cursorPointer" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="icon-pencil alignBottom"></i></a>&nbsp;&nbsp;
+						<a class="editLeave cursorPointer" onclick="Users_Leave_Js.editLeave('index.php{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false');"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="fa fa-pencil alignBottom"></i></a>&nbsp;&nbsp;
 {/if} <input type="hidden" name="manager" id="manager" value="false" />
 {if $USER_LEAVE['leavestatus'] eq 'New' OR $USER_LEAVE['leavestatus'] eq 'Apply'}
-<a class="deleteLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=deleteLeave&record={$USER_LEAVE['id']}"><i class="icon-trash alignMiddle" title="Delete"></i></a>
+<a class="deleteLeave cursorPointer" onclick="Users_Leave_Js.deleteLeave('index.php?module=Leave&action=Delete&record={$USER_LEAVE['id']}');"><i class="fa fa-trash alignMiddle" title="Delete"></i></a>
 {/if}
 {if $USER_LEAVE['leavestatus'] eq 'Approved' && $USER_LEAVE['from_date']|strtotime gt $CurrentDate|strtotime}
 <a class="cancelLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&leavestatus={$USER_LEAVE['leavestatus']}"><i class="icon-trash alignMiddle" title="Cancel"></i></a>
@@ -210,7 +229,13 @@ dsdsssdsd<a class="cancelLeave cursorPointer" data-url="?module=Users&action=Del
 	</div>	
 </div>
 <!--end my leaves-->
-						<!--START MY TEAM LEAVE-->
+
+
+
+
+
+
+<!--START MY TEAM LEAVE-->
 {if $MANAGER eq 'true'}
 <!--- Code for Pagination Added by jitu@secondcrm.com --->
 
