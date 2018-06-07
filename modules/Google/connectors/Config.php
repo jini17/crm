@@ -10,8 +10,10 @@
 
 Class Google_Config_Connector {
 
+
 	static $clientId = '949973452984-u9snksbvv6gcnhp5oebhlkpoh39p85rt.apps.googleusercontent.com';
 	static $clientSecret = 'ABChDJmzI17a92XUL3P7xXYM';
+
 
 
 	static function getRedirectUrl() {
