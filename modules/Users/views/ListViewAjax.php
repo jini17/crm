@@ -143,7 +143,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		echo $viewer->view('UsersSkills.tpl',$moduleName,true);
 	}
 
-	public function getUserLeave(Vtiger_Request $request) {
+	public function getUserLeave(Vtiger_Request $request) { 
 		$db = PearDatabase::getInstance();
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
@@ -174,16 +174,17 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		//check leave alloted to user or not
 		$isCreate = Users_LeavesRecords_Model::hasAllocateLeave($recordId);
 		
-
+   		
 		//check if he/she is already apply then restrict to user
 
-
+         
 		$viewer->assign('ISCREATE',$isCreate);
 	
 		$manager = Users_LeavesRecords_Model::checkIfManager($recordId);
-		$section  = $request->get('section');
+		$section  = $request->get('section');   
 		
 		$viewer->assign('MODULE',$moduleName);
+		$viewer->assign('CURRENTYEAR',date('Y'));//Added By Jitu Date Combobox 
 		$viewer->assign('CURYEAR',(date('Y')+1));//Added By Jitu Date Combobox
 		$viewer->assign('STARTYEAR',date('Y')-5);//Added By Jitu Date Combobox
 		$viewer->assign('CREATE_LEAVE_URL', Users_LeavesRecords_Model::getCreateLeaveURL());
@@ -193,8 +194,9 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$viewer->assign('SECTION',$section);
 
 		####start Get My leave list##### 
-		
-		$myleaves = Users_LeavesRecords_Model::getMyLeaves($recordId, $currentyear);
+		//$currentyear='2019';
+
+		$myleaves = Users_LeavesRecords_Model::getMyLeaves($recordId, $currentyear); //echo $currentyear;
 		$viewer->assign('CurrentDate', date('Y-m-d'));
 		$viewer->assign('MYLEAVES', $myleaves);
 		####end my leave list###########
