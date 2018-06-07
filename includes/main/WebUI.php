@@ -109,7 +109,7 @@ class Vtiger_WebUI extends Vtiger_EntryPoint {
 			$session_life = time() - $timein;		
 				
 			if($session_life > $maxstay && $timein!='') { 
-				$adb->setDebug(true); 
+				//$adb->setDebug(true); 
 				$moduleModel = Users_Module_Model::getInstance('Users');
 				$moduleModel->saveLogoutHistory();		
 			    Vtiger_Session::destroy();	

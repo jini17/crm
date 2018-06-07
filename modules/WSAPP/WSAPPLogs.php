@@ -75,8 +75,8 @@ class WSAPP_Logs {
 			$query .= ' AND module=?';
 			$params[] = $module;
 		}
-
-		if($extension == 'Google') {
+		//added by jitu@office356 Bug
+		if($extension == 'Google' || $extension='Office365') {
 			$query .= ' AND userid=?';
 			$params[] = $user->getId();
 		}
@@ -113,8 +113,8 @@ class WSAPP_Logs {
 			$query .= ' AND module=?';
 			$params[] = $module;
 		}
-
-		if($extension == 'Google') {
+		//added by jitu@office356 Bug
+		if($extension == 'Google' || $extension='Office365') {
 			$query .= ' AND userid=?';
 			$params[] = $user->getId();
 		}
