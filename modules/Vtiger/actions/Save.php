@@ -59,7 +59,7 @@ class Vtiger_Save_Action extends Vtiger_Action_Controller {
 			if(strlen($appName) > 0){
 				$loadUrl = $loadUrl.$appName;
 			}
-			//header("Location: $loadUrl");
+			header("Location: $loadUrl");
 		} catch (DuplicateException $e) {
 			$requestData = $request->getAll();
 			$moduleName = $request->getModule();

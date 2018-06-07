@@ -246,13 +246,6 @@ class Emails_Record_Model extends Vtiger_Record_Model {
                 $mailer->Host =  $host;
             }
 
-
-
-
-
-
-
-
             /**
              * Nirbhay Add End
              */
