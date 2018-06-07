@@ -58,8 +58,7 @@
                 {/if}
 
             </div>
-
-               <div class = "quickPreviewSummary">
+            <div class = "quickPreviewSummary">
 
                 <table class="summary-table no-border" >
                     <tbody>

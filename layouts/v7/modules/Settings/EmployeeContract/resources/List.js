@@ -53,9 +53,9 @@ Settings_Vtiger_List_Js('Settings_EmployeeContract_List_Js',{
 		 app.request.post({'data' : params}).then(function(error, data){
      		app.helper.hideProgress();
 				
-                  if(error === null) {
-				app.helper.showModal(data);
-			}
+           if(error === null) {
+	     	 app.helper.showModal(data);
+           }
 });
 	
 
