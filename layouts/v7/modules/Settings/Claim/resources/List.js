@@ -7,10 +7,10 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-Settings_Vtiger_List_Js('Settings_EmployeeContract_List_Js',{
+Settings_Vtiger_List_Js('Settings_Claim_List_Js',{
     triggerDelete : function(url) {
         var instance = app.controller();
-        instance.deleteEmployeeContract(url);
+        instance.deleteClaim(url);
     },
 
 	 triggerDetailView : function(url) {
@@ -19,7 +19,7 @@ Settings_Vtiger_List_Js('Settings_EmployeeContract_List_Js',{
 	    },
 },{
    
-    /**
+    /**s
 	 * Function to get Page Jump Params
 	 */
 	getPageJumpParams : function(){
@@ -31,7 +31,7 @@ Settings_Vtiger_List_Js('Settings_EmployeeContract_List_Js',{
 	},
     
     
-    deleteEmployeeContract : function(url) {
+    deleteClaim : function(url) {
         var self = this;
         app.helper.showConfirmationBox({'message' : app.vtranslate('JS_ARE_YOU_SURE_YOU_WANT_TO_DELETE')}).then(function(){
             app.request.post({'url' : url}).then(function(error, data){
@@ -45,7 +45,7 @@ Settings_Vtiger_List_Js('Settings_EmployeeContract_List_Js',{
   viewDetailView : function(url) {
  	var params = this.getDefaultParams();
 		params['parent'] = "Settings";
-		params['module'] = "EmployeeContract";	
+		params['module'] = "Claim";	
 		params['record'] = url;
 		params['view'] = "RecordQuickPreview";
 	
@@ -53,9 +53,9 @@ Settings_Vtiger_List_Js('Settings_EmployeeContract_List_Js',{
 		 app.request.post({'data' : params}).then(function(error, data){
      		app.helper.hideProgress();
 				
-           if(error === null) {
-	     	 app.helper.showModal(data);
-           }
+                  if(error === null) {
+				app.helper.showModal(data);
+			}
 });
 	
 

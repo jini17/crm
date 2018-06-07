@@ -8,7 +8,7 @@
  * All Rights Reserved.
  * ***********************************************************************************/
 
-class Settings_Claim_RelationAjax_Action extends Vtiger_RelationAjax_Action {
+class Settings_EmployeeContract_RelationAjax_Action extends Vtiger_RelationAjax_Action {
 
 	function getParentRecordInfo($request) {
 		$moduleName = $request->get('module');

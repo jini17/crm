@@ -125,12 +125,12 @@
                                     {foreach key=labelval1 item=selOutgoingServer from=$OUTGOINGSERVER}
                                         {if $selOutgoingServer.isdefault eq 1}
                                             {assign var=selectval1 value="selected"}
-                                        {else if $selOutgoingServer.email == $draftEmail}
+                                        {elseif $selOutgoingServer.email == $draftEmail}
                                             {assign var=selectval1 value="selected"}
                                         {else}
                                             {assign var=selectval1 value=""}
                                         {/if}
-                                     <option value="{$selOutgoingServer.name}||{$selOutgoingServer.email}" {$selectval1}>{$selOutgoingServer.email}</option>
+                                     <option value="{$selOutgoingServer.name}||{$selOutgoingServer.email}||{$selOutgoingServer.serverid}" {$selectval1}>{$selOutgoingServer.email}</option>
                                     {/foreach}
                                 </select>
                             </div>
