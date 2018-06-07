@@ -7,8 +7,6 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  ************************************************************************************/
-
-
 /*
 error_reporting(1);
 		ini_set('display_erros',1);
@@ -28,7 +26,8 @@ error_reporting(1);
 		    }*/
 //Overrides GetRelatedList : used to get related query
 //TODO : Eliminate below hacking solution
-
+ini_set('display_errors', '0');     # don't show any errors...
+error_reporting(E_ALL | E_STRICT);  # ...but do log them
 include_once 'config.php';
 include_once 'include/Webservices/Relation.php';
 

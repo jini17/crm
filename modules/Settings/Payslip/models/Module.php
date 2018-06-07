@@ -22,3 +22,4 @@ class Settings_Payslip_Module_Model extends Settings_Vtiger_Module_Model {
 	}
 
 }
+?>

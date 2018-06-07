@@ -7,16 +7,20 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-Settings_Vtiger_List_Js('Settings_PaySlip_List_Js',{
+Settings_Vtiger_List_Js('Settings_Payslip_List_Js',{
     triggerDelete : function(url) {
         var instance = app.controller();
-        instance.deletePaySlip(url);
+        instance.deletePayslip(url);
     },
 
 	 triggerDetailView : function(url) {
 		var instance = app.controller();
 		instance.viewDetailView(url);
 	    },
+	triggerDownload : function(url){
+	     var instance = app.controller();
+		instance.DownloadPDF(url);
+	},    
 },{
    
     /**
@@ -31,7 +35,7 @@ Settings_Vtiger_List_Js('Settings_PaySlip_List_Js',{
 	},
     
     
-    deletePaySlip : function(url) {
+    deletePayslip : function(url) {
         var self = this;
         app.helper.showConfirmationBox({'message' : app.vtranslate('JS_ARE_YOU_SURE_YOU_WANT_TO_DELETE')}).then(function(){
             app.request.post({'url' : url}).then(function(error, data){
@@ -45,7 +49,7 @@ Settings_Vtiger_List_Js('Settings_PaySlip_List_Js',{
   viewDetailView : function(url) {
  	var params = this.getDefaultParams();
 		params['parent'] = "Settings";
-		params['module'] = "PaySlip";
+		params['module'] = "Payslip";
 		params['Navigation'] ="true";	
 		params['record'] = url;
 		params['view'] = "RecordQuickPreview";
@@ -53,7 +57,7 @@ Settings_Vtiger_List_Js('Settings_PaySlip_List_Js',{
 		app.helper.showProgress();
 		 app.request.post({'data' : params}).then(function(error, data){
      		app.helper.hideProgress();
-				
+
                   if(error === null) {
 				app.helper.showModal(data);
 			}
@@ -61,6 +65,11 @@ Settings_Vtiger_List_Js('Settings_PaySlip_List_Js',{
 
 
      	
+    },
+    
+    DownloadPDF : function(url){
+          window.location.href=url;
+          //history.pushState({}, null, window.history.back(-1));
     },
     
     registerEvents : function() {

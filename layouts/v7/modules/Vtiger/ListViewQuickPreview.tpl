@@ -9,7 +9,8 @@
 *
 ********************************************************************************/
 -->*}
-  {if $PARENT_MODULE eq "Settings"}
+  {if $PARENT_MODULE eq "Settings"} 
+
   <div class = "quickPreview" style="margin-left: 50%;">
   {else}
   <div class = "quickPreview" >
@@ -18,11 +19,12 @@
     <input type="hidden" name="sourceModuleName" id="sourceModuleName" value="{$MODULE_NAME}" />
     <input type="hidden" id = "nextRecordId" value ="{$NEXT_RECORD_ID}">
     <input type="hidden" id = "previousRecordId" value ="{$PREVIOUS_RECORD_ID}">
-
-    <div class='quick-preview-modal modal-content'>
+          
+   
+            <div class='quick-preview-modal modal-content' >
             {if $PARENT_MODULE eq "Settings"}
-             <div class='modal-body mCustomScrollbar _mCS_7' style="height:100%;width: 50%;">
-            {else}
+             <div class='modal-body' style="width: 50%;height:100vh;overflow-x:hidden;">
+            {else} 
              <div class='modal-body'>
             {/if}
             <div class = "quickPreviewModuleHeader row">
@@ -96,10 +98,13 @@
                         {/if}
                     </tbody>
                 </table>
-            </div>            
+            </div>
             <div class="engagementsContainer">
 				{include file="ListViewQuickPreviewSectionHeader.tpl"|vtemplate_path:$MODULE_NAME TITLE="{vtranslate('LBL_UPDATES',$MODULE_NAME)}"}
+              
 				{include file="RecentActivities.tpl"|vtemplate_path:$MODULE_NAME}
+   
+
             </div>
 
             <br>            
@@ -111,6 +116,11 @@
             {/if}
               
         </div>
-    </div>
-</div>
+        
+    </div></div></div></div>
+    
 
+
+<script >
+  
+</script>
