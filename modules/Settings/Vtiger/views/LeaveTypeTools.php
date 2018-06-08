@@ -158,9 +158,9 @@ class Settings_Vtiger_LeaveTypeTools_View extends Settings_Vtiger_Index_View {
 
     public function UpdateLeaveType($request){
         global $adb;
-
+        //$adb->setDebug(true);
         $insertArray = $request->get('form');
-       // echo "<pre>"; print_r($insertArray); die;
+        //echo "<pre>"; print_r($insertArray); die;
         $leavetype = array();
 
 
@@ -185,7 +185,7 @@ class Settings_Vtiger_LeaveTypeTools_View extends Settings_Vtiger_Index_View {
 
         $query = "UPDATE `vtiger_leavetype` SET `title`=?, `leavecode`=?, `leaveType_status`=?, `description`=?, `midyearallocation`=?, halfdayallowed=?,`carryforward`=?, `leavefrequency`=? WHERE leavetypeid=?";
         $result = $adb->pquery($query,array($leavetype['LeaveTypeTitle'],$leavetype['LeaveTypeCode'],$leavetype['status'],$leavetype['LeaveType_Desc
-'],$leavetype['LeaveType_MidYearAllcoation'],$leavetype['LeaveType_HalfdayAllowed'],$leavetype['LeaveType_CarryForward'],$leavetype['LeaveType_LeaveFrequency'],$leavetype['leave_type_id']));
+'],$leavetype['LeaveType_MidYearAllcoation'],$leavetype['LeaveType_HalfdayAllowed'],$leavetype['LeaveType_CarryForward'],$leavetype['LeaveType_LeaveFrequency'],$leavetype['LeaveTypeId']));
 
 
 
