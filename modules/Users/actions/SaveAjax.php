@@ -101,9 +101,12 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 	public function userExists(Vtiger_Request $request){
 		$module = $request->getModule();
 		$userName = $request->get('user_name');
+		$roleid = $request->get('roleid');
 		$status = Users_Record_Model::isUserExists($userName);
+		$validate = Users_Record_Model::isValidateUserSubscription($userName, $roleid);
+		$validate = false;
 		$response = new Vtiger_Response();
-		$response->setResult($status);
+		$response->setResult($status, $validate);
 		$response->emit();
 	}
 

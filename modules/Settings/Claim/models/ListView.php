@@ -19,8 +19,10 @@ class Settings_Claim_ListView_Model extends Settings_Vtiger_ListView_Model {
         $userNameSql = getSqlForNameInDisplayFormat(array('first_name'=>
 							'vtiger_users.first_name', 'last_name' => 'vtiger_users.last_name'), 'Users');
         
-        $query = "SELECT *,  $userNameSql as smownerid FROM vtiger_claim INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_claim.claimid 
+        $query = "SELECT vtiger_claim.*,  $userNameSql as smownerid,vtiger_claimtype.claim_type as category  FROM vtiger_claim 
+            INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_claim.claimid 
 		INNER JOIN vtiger_users ON vtiger_users.id=vtiger_crmentity.smownerid
+        INNER JOIN vtiger_claimtype ON vtiger_claimtype.claimtypeid=vtiger_claim.category
         WHERE vtiger_crmentity.deleted=0 $where";
 
         return $query;

@@ -1473,7 +1473,7 @@ $jsLanguageStrings = array(
 	'JS_THIS_FILE_HAS_ALREADY_BEEN_SELECTED' => 'This File has already been selected',
 	'JS_MAX_FILE_UPLOAD_EXCEEDS' => 'max file Upload exceeds',
 	'JS_THIS_DOCUMENT_HAS_ALREADY_BEEN_SELECTED' => 'This Document has already been attached',
-	'JS_LIST_EXIST' => 'List already exists',
+	'JS_USER_LIMIT_EXCEED' => 'User limit exceeded, Please contact to Agiliux Team.',
 
 
 	//Roles
@@ -1604,6 +1604,7 @@ $jsLanguageStrings = array(
 	'JS_USER_DELETED_SUCCESSFULLY' => 'User deleted successfully.',
 
 	'JS_MAX_RECORDS_LIMIT' => 'Maximum Records for Print is :',
+	'JS_USER_EXISTS' => 'User Already Exists',
 	'JS_USER_EXISTS' => 'User Already Exists',
 	'JS_REENTER_PASSWORDS' => 'Renter Passwords',
 	'LBL_SIGN_IN_AS_USER'=>'Logging in as another user will terminate the current session. Are you sure want to continue?',
