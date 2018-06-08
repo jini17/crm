@@ -71,32 +71,8 @@ class Claim_Record_Model extends Vtiger_Record_Model {
 			echo $fileContent;
 	}
 
-	function updateFileStatus() {
-		$db = PearDatabase::getInstance();
-
-		$db->pquery("UPDATE vtiger_notes SET filestatus = 0 WHERE notesid= ?", array($this->get('id')));
-	}
-
-	function updateDownloadCount() {
-		$db = PearDatabase::getInstance();
-		$notesId = $this->get('id');
-
-		$result = $db->pquery("SELECT filedownloadcount FROM vtiger_notes WHERE notesid = ?", array($notesId));
-		$downloadCount = $db->query_result($result, 0, 'filedownloadcount') + 1;
-
-		$db->pquery("UPDATE vtiger_notes SET filedownloadcount = ? WHERE notesid = ?", array($downloadCount, $notesId));
-	}
-
-	function getDownloadCountUpdateUrl() {
-		return "index.php?module=Documents&action=UpdateDownloadCount&record=".$this->getId();
-	}
 	
-	function get($key) {
-		$value = parent::get($key);
-		if ($key === 'notecontent') {
-			return decode_html($value);
-		}
-		return $value;
+	function getDownloadCountUpdateUrl() {
+		return "index.php?module=Claim&action=UpdateDownloadCount&record=".$this->getId();
 	}
-    
 }

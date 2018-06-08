@@ -9,21 +9,10 @@
  * modified by: crm-now, www.crm-now.de
  ********************************************************************************/
 // conditions for customer portal
-if(isset($_REQUEST['service']) && $_REQUEST['service'] == 'customerportal')
-require_once('modules/Payment/pdfcreator.php');
-
-else
-require_once('modules/'.$_REQUEST['module'].'/pdfcreator.php');
-
+require_once('modules/Payslip/pdfcreator.php');
 global $adb,$app_strings,$focus,$current_user;
 // Request from Customer Portal for downloading the file.
-if(isset($_REQUEST['savemode']) && $_REQUEST['savemode'] == 'file')
-{
-	$quote_id = $_REQUEST['record'];
-	$filepath='test/product/';
-	createpdffile ($_REQUEST['record'],'customerportal',$filepath,$quote_id);
 
-}else {
-createpdffile ($_REQUEST[record],'print');
-}
+createpdffile($_REQUEST[record],'print');
+
 ?>

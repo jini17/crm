@@ -50,113 +50,34 @@ class Payslip_Record_Model extends Inventory_Record_Model {
 		return $Records;
 	}
 
-	public function getBillShipAddress($paymentId, $relatedid, $setype) {
-		$db = PearDatabase::getInstance();
-		$account = self::getPaymentRelatedHead($paymentId);
-		$customerName = $account['AccountName'];
-		
-		if($setype =='Accounts') {
-			$query = "SELECT vtiger_account.accountid, vtiger_accountbillads.bill_pobox, 						vtiger_accountbillads.bill_street,vtiger_accountbillads.bill_city,
-					vtiger_accountbillads.bill_code, vtiger_accountbillads.bill_state, 						vtiger_accountbillads.bill_country, vtiger_accountshipads.ship_country,
-					vtiger_accountshipads.ship_city,vtiger_accountshipads.ship_code,
-					vtiger_accountshipads.ship_state, vtiger_accountshipads.ship_pobox,
-					vtiger_accountshipads.ship_street 
-				FROM vtiger_account LEFT JOIN vtiger_accountbillads
-						ON vtiger_accountbillads.accountaddressid = vtiger_account.accountid
-				LEFT JOIN vtiger_accountshipads ON vtiger_accountshipads.accountaddressid = vtiger_account.accountid		WHERE  vtiger_account.accountid=?";	
-		} else {
-			$query  = "SELECT vtiger_contactaddress.contactaddressid, vtiger_contactaddress.mailingpobox as bill_pobox,vtiger_contactaddress.mailingstreet as bill_street,vtiger_contactaddress.mailingcity as bill_city, vtiger_contactaddress.mailingstate as bill_state, vtiger_contactaddress.mailingcountry as bill_country, vtiger_contactaddress.mailingzip as bill_code, vtiger_contactaddress.otherpobox as ship_pobox,vtiger_contactaddress.otherstreet as ship_street,vtiger_contactaddress.othercity as ship_city, vtiger_contactaddress.otherstate as ship_state, vtiger_contactaddress.othercountry as ship_country, vtiger_contactaddress.otherzip as ship_code FROM vtiger_contactdetails LEFT JOIN vtiger_contactaddress ON vtiger_contactaddress.contactaddressid=vtiger_contactdetails.contactid WHERE  vtiger_contactaddress.contactaddressid=?";	
-		}
-			$result = $db->pquery($query,array($relatedid));
-			$Records = array();
-			$noOfRows = $db->num_rows($result);
-			for($i=0; $i<$noOfRows; ++$i) {
-				$row = $db->query_result_rowdata($result, $i);
-				$billpobox = $row['bill_pobox'];
-				$billstreet = $row['bill_street'];
-				$billcity = $row['bill_city'];
-				$billstate = $row['bill_state'];
-				$billcountry = $this->convertCountryLabel($row['bill_country']);
-				$billcode = $row['bill_code'];
-				$shippobox = $row['ship_pobox'];
-				$shipstreet=$row['ship_street'];
-				$shipcity = $row['ship_city'];
-				$shipstate = $row['ship_state'];
-				$shipcountry = $this->convertCountryLabel($row['ship_country']);
-				$shipcode = $row['ship_code'];
-			}
-
-			$billAddress	= $customerName."<br />".$this->joinValues(array($billpobox, $billstreet), ' ');
-			$billAddress .= "<br />".$this->joinValues(array($billcity, $billcode), ',')." ".$billstate;
-			$billAddress .= "<br />".$billcountry;
-			
-			$shipAddress	= $customerName."<br />".$this->joinValues(array($shippobox, $shipstreet), ' ');
-			$shipAddress .= "<br />".$this->joinValues(array($shipcity, $shipcode), ',')." ".$shipstate;
-			$shipAddress .= "<br />".$shipcountry;
-
-			$Records['BillAddress'] = $billAddress; 
-			$Records['ShipAddress'] = $shipAddress;
-		
-		return $Records;
-	}
+	
 
 
 	public function getPaymentShipBillAddress($paymentId) {
 		$db = PearDatabase::getInstance();
-		$result = $db->pquery("SELECT tblVTC.setype,tblVTP.relatedto FROM vtiger_payments tblVTP INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTP.relatedto WHERE tblVTP.paymentsid = ? AND tblVTC.deleted=0", array($paymentId));		
-		$row  = $db->query_result_rowdata($result, 0);		
-		$setype = $row['setype'];
-		$relatedid = $row['relatedto'];
-		
-		$Records = self::getBillShipAddress($paymentId, $relatedid, $setype);
-		
-
-		/*
-		$query = "SELECT vtiger_accountbillads.bill_pobox, vtiger_accountbillads.bill_street, 					vtiger_accountbillads.bill_city, vtiger_accountbillads.bill_state, 					vtiger_accountbillads.bill_country,vtiger_accountshipads.ship_country,
-				vtiger_accountshipads.ship_city,vtiger_accountshipads.ship_code,
-				vtiger_accountshipads.ship_state, vtiger_accountshipads.ship_pobox,
-				vtiger_accountshipads.ship_street, vtiger_payments.paymentsid
-			FROM vtiger_payments	
-			LEFT JOIN vtiger_contactdetails ON  vtiger_contactdetails.contactid = vtiger_payments.relatedto 
-			LEFT JOIN vtiger_accountbillads 
-				ON  vtiger_contactdetails.accountid = vtiger_accountbillads.accountaddressid 
-					OR vtiger_accountbillads.accountaddressid = vtiger_payments.relatedto
-			LEFT JOIN vtiger_accountshipads 
-				ON vtiger_contactdetails.accountid = vtiger_accountshipads.accountaddressid
-					OR vtiger_accountshipads.accountaddressid = vtiger_payments.relatedto
-			WHERE vtiger_payments.paymentsid = ?";
-		
-		$params = array($paymentId);
-		$result = $db->pquery($query, $params);
+		$result = $db->pquery("SELECT * from vtiger_organizationdetails WHERE organization_id=?", array($paymentId));		
+		$row  = $db->query_result_rowdata($result, 0);	
+		$noOfRows = $db->num_rows($result);	
 		$Records = array();
-		$noOfRows = $db->num_rows($result);
 		for($i=0; $i<$noOfRows; ++$i) {
 			$row = $db->query_result_rowdata($result, $i);
-			$billpobox = $row['bill_pobox'];
-			$billstreet = $row['bill_street'];
-			$billcity = $row['bill_city'];
-			$billstate = $row['bill_state'];
-			$billcountry = $row['bill_country'];
-			$billcode = $row['bill_code'];
-			$shippobox = $row['ship_pobox'];
-			$shipstreet=$row['ship_street'];
-			$shipcity = $row['ship_city'];
-			$shipstate = $row['ship_state'];
-			$shipcountry = $row['ship_country'];
-			$shipcode = $row['ship_code'];
+
+			$Records['organization_title']	= $row['organization_title'];
+			$Records['organizationname'] 		= $row['organizationname']; 
+    		$Records['address'] 		= $row['address'];
+    		$Records['city'] 		= $row['city'];
+			$Records['state'] 		= $row['state'];
+			$Records['country'] 		= $row['country'];
+			$Records['code'] 		= $row['code'];
+			$Records['phone'] 		= $row['phone'];
+			$Records['fax'] 		= $row['fax'];
+			$Records['website'] 		= $row['website'];
+			$Records['logoname'] 		= $row['logoname'];
+			$Records['logo_path'] 		= "test/logo/".$Records['logoname'];
+			$Records['registration_no'] 		= $row['vatid'];	
+
 		}
-
-			$billAddress	= $customerName."<br />".$this->joinValues(array($billpobox, $billstreet), ' ');
-			$billAddress .= "<br />".$this->joinValues(array($billcity, $billcode), ',')." ".$billstate;
-			$billAddress .= "<br />".$billcountry;
-			
-			$shipAddress	= $customerName."<br />".$this->joinValues(array($shippobox, $shipstreet), ' ');
-			$shipAddress .= "<br />".$this->joinValues(array($shipcity, $shipcode), ',')." ".$shipstate;
-			$shipAddress .= "<br />".$shipcountry;
-
-			$Records['BillAddress'] = $billAddress; 
-			$Records['ShipAddress'] = $shipAddress;
-		*/
+		
 		return $Records;
 		
 	}
@@ -164,22 +85,46 @@ class Payslip_Record_Model extends Inventory_Record_Model {
 	public function paymentDetail($paymentId) {
 		$db = PearDatabase::getInstance();
 			
-		$query = "SELECT * FROM vtiger_payments INNER JOIN vtiger_paymentscf ON vtiger_paymentscf.paymentsid = vtiger_payments.paymentsid  
-			WHERE vtiger_payments.paymentsid =?";
+		$query = "SELECT * FROM vtiger_payslip INNER JOIN vtiger_payslipcf ON vtiger_payslipcf.payslipid = vtiger_payslip.payslipid  
+			WHERE vtiger_payslip.payslipid =?";
 		$params = array($paymentId);
 		$result = $db->pquery($query, $params);
 		$noOfRows = $db->num_rows($result);
 		$Records = array();
 		for($i=0; $i<$noOfRows; ++$i) {
 			$row = $db->query_result_rowdata($result, $i);
-			$Records['paymentreference']	= $row['paymentref'];
-			$Records['amount'] 		= $row['amount']; 
-    			$Records['paymentfor'] 		= $row['paymentfor'];
-			$Records['refno'] 		= $row['refno'];
-			$Records['mode'] 		= $row['paymentmode'];
-			$Records['bankname'] 		= $row['bankname'];
-			$Records['bankaccountname'] 	= $row['bankaccountname'];
-			$Records['remarks'] 		= $row['remarks'];
+
+			$Records['payslipid']	= $row['payslipid'];
+			$Records['payslipno'] 		= $row['payslipno']; 
+    		$Records['emp_name'] 		= $row['emp_name'];
+    		$Records['ic_passport'] 		= $row['ic_passport'];
+			$Records['socso_no'] 		= $row['socso_no'];
+			$Records['tax_no'] 		= $row['tax_no'];
+			$Records['designation'] 		= $row['designation'];
+			$Records['pay_month'] 		= $row['pay_month'];
+			$Records['pay_year'] 		= $row['pay_year'];
+			$Records['company_details'] 		= $row['company_details'];
+			$Records['basic_sal'] 		= $row['basic_sal'];
+			$Records['transport_allowance'] 		= $row['transport_allowance'];
+			$Records['ph_allowance'] 		= $row['ph_allowance'];
+			$Records['parking_allowance'] 		= $row['parking_allowance'];
+			$Records['ot_meal_allowance'] 		= $row['ot_meal_allowance'];
+			$Records['oth_allowance'] 		= $row['oth_allowance'];
+			$Records['gross_pay'] 		= $row['gross_pay'];
+			$Records['net_pay'] 		= $row['net_pay'];
+			$Records['emp_epf'] 		= $row['emp_epf'];
+			$Records['emp_socso'] 		= $row['emp_socso'];
+			$Records['lhdn'] 		= $row['lhdn'];
+			$Records['zakat'] 		= $row['zakat'];
+			$Records['other_deduction'] 		= $row['other_deduction'];
+			$Records['total_deduction'] 		= $row['total_deduction'];
+			$Records['employer_epf'] 		= $row['employer_epf'];
+			$Records['employer_socso'] 		= $row['employer_socso'];
+			$Records['employer_eis'] 		= $row['employer_eis'];
+			$Records['hrdf'] 		= $row['hrdf'];
+			$Records['total_comp_contribution'] = $row['total_comp_contribution'];
+	
+
 		}
 		return $Records;
 	}
