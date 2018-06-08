@@ -32,12 +32,12 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	//Created by Safuan
 	public function getLeaveType($leaveid){
 	$db = PearDatabase::getInstance();
-	$query = "SELECT leave_title,color_code FROM vtiger_leavetype WHERE leavetypeid = $leaveid";
+	$query = "SELECT title,colorcode FROM vtiger_leavetype WHERE leavetypeid = $leaveid";
 	
 	$result = $db->pquery($query,array());
 	$rowdetail = array();
-	$rowdetail['leavetype'] = $db->query_result($result, $i, 'leave_title');
-	$rowdetail['colorcode'] = $db->query_result($result, $i, 'color_code');
+	$rowdetail['leavetype'] = $db->query_result($result, $i, 'title');
+	$rowdetail['colorcode'] = $db->query_result($result, $i, 'colorcode');
 
 	return $rowdetail;
 
@@ -63,7 +63,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 		$myleave[$i]['leave_reason'] = $db->query_result($result, $i, 'reasonofleave');
 		$myleave[$i]['leave_type'] = $rowdetail['leavetype'];
 		$myleave[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetype');
-		$myleave[$i]['color_code'] = $rowdetail['colorcode'];
+		$myleave[$i]['colorcode'] = $rowdetail['colorcode'];
 		$myleave[$i]['starthalf'] = $rowdetail['starthalf'];
 		$myleave[$i]['endhalf'] = $rowdetail['endhalf'];
 		$myleave[$i]['from_date'] = $db->query_result($result, $i, 'fromdate');
@@ -79,7 +79,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
 	//Created by Safuan for fetching leave types//	
 	//modified by jitu for concate color and balance in dropdown 
-	public function getLeaveTypeList($userid,$leaveid){
+	public function getLeaveTypeList($userid,$leaveid){ 
 	$db = PearDatabase::getInstance();
 	global $current_user;	
 	//Modified by jitu for showing  all except those are onetime if user already applied..
@@ -90,6 +90,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	$sql  = "SELECT MAX(year) as year from secondcrm_user_balance LIMIT 0,1";
 	$res = $db->pquery($sql,array());
 	$year = $db->query_result($res, 0, 'year');
+
 	if($year > date("Y")) {
 		$year = $year;	
 	 } //end here 
@@ -103,30 +104,33 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype WHERE ((tblVTLTT.leave_frequency = 'Onetime' AND tblVTL.leavestatus !='Not Approved' && tblVTL.leavestatus !='Cancel')) AND tblVTCC.smownerid=$userid)";
 	}	
 	
-	$query = "SELECT DISTINCT tblVTLT.leavetypeid,tblSCUB.leave_type, tblVTLT.leave_title, tblVTLT.color_code,tblSCUB.leave_count, tblVTLT.halfday_allow FROM secondcrm_user_balance tblSCUB 
-	INNER JOIN vtiger_leaveallocation tblVTLA ON tblVTLA.leavetype=tblSCUB.leave_type
-	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLA.leaveallocationid
-	INNER JOIN vtiger_leavetype tblVTLT ON tblVTLT.leavetypeid = tblVTLA.leavetype
+	/*$query = "SELECT DISTINCT tblVTLT.leavetypeid,tblSCUB.leave_type, tblVTLT.title, tblVTLT.colorcode,tblSCUB.leave_count, tblVTLT.halfdayallowed FROM secondcrm_user_balance tblSCUB 
+	INNER JOIN allocation_list tblVTLA ON tblVTLA.leavetype_id=tblSCUB.leave_type
+	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLA.allocation_id
+	INNER JOIN vtiger_leavetype tblVTLT ON tblVTLT.leavetypeid = tblVTLA.leavetype_id
 	LEFT JOIN vtiger_leave tblVTL ON tblVTL.leavetype = tblSCUB.leave_type  
-	 WHERE tblVTC.deleted=0 ".$conduser." AND year = '".$year."' ".$condleave. " ORDER BY tblVTLT.leavetypeid ASC";
+	 WHERE tblVTC.deleted=0 ".$conduser." AND year = '".$year."' ".$condleave. " ORDER BY tblVTLT.leavetypeid ASC"; */
+
+	 $query = "SELECT * from vtiger_leavetype";
+
 	$result = $db->pquery($query,array());
 
 	$leavetype=array();	
 	$leavetypeid  = '';
 	if($db->num_rows($result)>0) {	
-		for($i=0;$db->num_rows($result)>$i;$i++){
+		for($i=0;$i<$db->num_rows($result);$i++) {
 			
 			if($leavetypeid != $db->query_result($result, $i, 'leavetypeid')) {
 				$leavetype[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetypeid');
-				$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'leave_title').'@'.$db->query_result($result, $i, 'color_code').'@'.$db->query_result($result, $i, 'leave_count').'@'.$db->query_result($result, $i, 'halfday_allow');
+				$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'title').'@'.$db->query_result($result, $i, 'colorcode').'@'.$db->query_result($result, $i, 'leave_count').'@'.$db->query_result($result, $i, 'halfdayallowed');
 				$leavetypeid = $db->query_result($result, $i, 'leave_type');
 			} 
-		
 		}
 	}
 	return $leavetype;	
 
 	}
+
 
 	//Created by Safuan for fetching leave types//	
 	//modified by jitu for concate color and balance in dropdown 
@@ -212,6 +216,7 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 		}
 	return $myteamleave;
 	}
+
 	//Created by Safuan
 	public function getLeaveDetail($leaveid){
 		$db = PearDatabase::getInstance();
@@ -561,12 +566,21 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 		$hasleave = false;
 		
 		$checkleaveallocresult = $db->pquery("SELECT 1 FROM secondcrm_user_balance tblSCUB LEFT JOIN vtiger_leavetype tblVTLT ON tblVTLT.leavetypeid = tblSCUB.leave_type
-	INNER JOIN vtiger_leaveallocation tblVTLA ON tblVTLA.leavetype=tblVTLT.leavetypeid  
-	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLA.leaveallocationid WHERE user_id =? AND tblVTC.deleted=0",array($user_id));	
+	INNER JOIN allocation_list tblVTLA ON tblVTLA.leavetype_id=tblVTLT.leavetypeid  
+	INNER JOIN vtiger_grade	 tblVTG ON tblVTG.gradeid = tblVTLA.grade_id WHERE user_id =?",array($user_id));	
 		//$checkalreadyapplyresult = $db->pquery("SELECT tblVTL.leavestatus FROM vtiger_leave tblVTL INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTL.leaveid WHERE tblVTC.deleted =0 AND tblVTL.fromdate > CURDATE() AND tblVTL.todate < CURDATE() AND (tblVTL.leavestatus != 'Cancel' OR tblVTL.leavestatus !='Approved' ) AND tblVTC.smcreatorid = ?",array($user_id));	
 		if($db->num_rows($checkleaveallocresult) > 0) {
 			$hasleave = true;
 		}
 		return $hasleave;
 	}
+
+	/*
+  public function saveEducationDetail($request)
+	{
+
+	}
+	*/
+
+
 }

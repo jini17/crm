@@ -43,11 +43,12 @@ require_once('modules/com_vtiger_workflow/VTWorkflowUtils.php');
 require_once 'modules/com_vtiger_workflow/include.inc';
 
 function vtRunTaskJob($adb){
-	$util = new VTWorkflowUtils();
+    $util = new VTWorkflowUtils();
 	$adminUser = $util->adminUser();
 	$tq = new VTTaskQueue($adb);
 	$readyTasks = $tq->getReadyTasks();
 	$tm = new VTTaskManager($adb);
+
 	foreach($readyTasks as $taskDetails){
 		list($taskId, $entityId, $taskContents, $relatedInfo) = $taskDetails;
 		$task = $tm->retrieveTask($taskId);
@@ -55,17 +56,24 @@ function vtRunTaskJob($adb){
 		if(empty($task)){
 			continue;
 		}
+
 		$task->setContents($taskContents);
 		$task->setRelatedInfo($relatedInfo);
 		$entity = VTEntityCache::getCachedEntity($entityId);
+		
 		if(!$entity) {
 			$entity = new VTWorkflowEntity($adminUser, $entityId);
 		}
+        //print_r($entity);
 
 		$task->doTask($entity);
+
+
+
 	}
 }
 $adb = PearDatabase::getInstance();
+//$adb->setDebug(true);
 require_once 'modules/com_vtiger_workflow/WorkFlowScheduler.php';
 $workflowScheduler = new WorkFlowScheduler($adb);
 $workflowScheduler->queueScheduledWorkflowTasks();

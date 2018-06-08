@@ -139,6 +139,7 @@ $adb->setDebug(true);
 	$field7 = new Vtiger_Field();
 	$field7->name = 'taxinvoice';
 	$field7->label = 'Tax Invoice / Receipt No';
+
 	$field7->table = $module->basetable;
 	$field7->column = 'taxinvoice';
 	$field7->columntype = 'VARCHAR(70)';

@@ -247,6 +247,11 @@ $languageStrings = array(
 	'LBL_CONFIG_DESCRIPTION' => 'Edit the Configuration details of vtiger CRM',
 	'LBL_CONFIG_FILE' => 'config.inc.php',
 	'LBL_MB' => 'MB',
+	'LBL_ADVANCE_GOOGLE_CONFIG' => 'Advance Google Configuration',
+	'LBL_GOOGLE_CONFIG_FILE' => 'Goolge Configuration File',
+	'LBL_HOW_CONFIG' => 'How to do the Configuration',
+
+
 
 	//Config Editor Fields
 	'LBL_MINI_CALENDAR_DISPLAY' => 'Mini Calendar Display',
@@ -454,6 +459,7 @@ $languageStrings = array(
 	'LBL_HOLIDAY'=>'Holiday',
 	'LBL_WORKINGHOURS'=>'Working Hours',
 	'LBL_CLAIM'=>'Apply Claim',
+
 );
 
 $jsLanguageStrings = array(

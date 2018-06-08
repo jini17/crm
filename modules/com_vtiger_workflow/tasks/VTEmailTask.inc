@@ -30,7 +30,9 @@ class VTEmailTask extends VTTask{
 		$module = $entity->getModuleName();
 		$taskContents = Zend_Json::decode($this->getContents($entity));
 		$relatedInfo = Zend_Json::decode($this->getRelatedInfo());
-		$from_email	= $taskContents['fromEmail'];
+		$from_email_server	= explode('##',$taskContents['fromEmail']);
+		$from_email = $from_email_server[1];
+		$server = $from_email_server[0];
 		$from_name	= $taskContents['fromName'];
 //		$to_email	= $taskContents['toEmail'];
 		$cc			= $taskContents['ccEmail'];
@@ -127,7 +129,75 @@ class VTEmailTask extends VTTask{
 				$mailerInstance->AddCustomHeader("In-Reply-To", $inReplyToMessageId);
 			}
 
-			$this->addCCAddress($mailerInstance, $cc);
+
+
+            /***
+             * Added By Nirbhay for configuring the server details based on server id
+             * 06062018
+             */
+            global $adb;
+            //$adb->setDebug(true);
+            if($server == ''){
+                $query = "SELECT * FROM vtiger_systems WHERE isdefault = 1";
+                $result = $adb->pquery($query,array());
+
+                $serverid = $adb->query_result($result,0,'id');
+                $host = $adb->query_result($result,0,'server');
+                $server_port = $adb->query_result($result,0,'server_port');
+                $username = $adb->query_result($result,0,'server_username');
+                $password = $adb->query_result($result,0,'server_password');
+                $smtp_auth = $adb->query_result($result,0,'smtp_auth');
+
+            }else{
+                $mailerInstance->Username= '';
+                $mailerInstance->Password == '';
+                $mailerInstance->Host = '';
+                $query = "SELECT * FROM vtiger_systems WHERE id = ?";
+                $result = $adb->pquery($query,array($server));
+
+                $serverid = $adb->query_result($result,0,'id');
+                $host = $adb->query_result($result,0,'server');
+                $server_port = $adb->query_result($result,0,'server_port');
+                $username = $adb->query_result($result,0,'server_username');
+                $password = $adb->query_result($result,0,'server_password');
+                $smtp_auth = $adb->query_result($result,0,'smtp_auth');
+            }
+
+
+            $fromnamequery = "SELECT name FROM `vtiger_multiplefromaddress`  WHERE email = ? AND serverid = ? ";
+            $result = $adb->pquery($fromnamequery,array($from_email,$server));
+
+            $from_name = $adb->query_result($result,0,'name');
+
+
+            if($mailerInstance->SMTPAuth == ''){
+
+                $mailerInstance->SMTPAuth =  $smtp_auth;
+            }
+            if($mailerInstance->Username == ''){
+
+                $mailerInstance->Username =  $username;
+            }
+            if($mailerInstance->Password == ''){
+
+                $mailerInstance->Password =  $password;
+            }
+            if($mailerInstance->Host == ''){
+
+                $mailerInstance->Host =  $host;
+            }
+
+            $mailerInstance->FromName = $from_name;
+
+            /**
+             * Nirbhay Add End
+             */
+
+
+
+
+
+            $this->addCCAddress($mailerInstance, $cc);
 			$this->addCCAddress($mailerInstance, $bcc,true);
 			$mailerInstance->From = $from_email;
 			$mailerInstance->FromName = decode_html($from_name);

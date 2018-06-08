@@ -992,7 +992,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		$aFinalServer[0]['name'] = trim($db->query_result($result1,0,'first_name').' '.$db->query_result($result1,0,'last_name'));
 		$aFinalServer[0]['email'] = $db->query_result($result1,0,'email1');
 		
-		$query1 = 'SELECT id, email, name FROM vtiger_multiplefromaddress ORDER BY email';
+		$query1 = 'SELECT id, email, name, serverid FROM vtiger_multiplefromaddress ORDER BY email';
 		$result1 = $db->pquery($query1, array());
 		$iMaxServer = $db->num_rows($result1);
 		for($iK=0;$iK<$iMaxServer;$iK++)
@@ -1001,6 +1001,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
 			$iId1 = $db->query_result($result1,$iK,'emailid');
 			$aFinalServer[$iOptionIndex]['email'] = $db->query_result($result1,$iK,'email');
 			$aFinalServer[$iOptionIndex]['name'] = $db->query_result($result1,$iK,'name');
+            $aFinalServer[$iOptionIndex]['serverid'] = $db->query_result($result1,$iK,'serverid');
 		}
 		
 		return $aFinalServer;
