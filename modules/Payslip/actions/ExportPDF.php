@@ -8,8 +8,14 @@
  * All Rights Reserved.
  *************************************************************************************/
 vimport('~~/modules/Payslip/PayslipPDFController.php');
-class Payslip_ExportPDF_Action extends Inventory_ExportPDF_Action {
+class Payslip_ExportPDF_Action extends Inventory_ExportPDF_Action
+{
+    public function process(Vtiger_Request $request){
+        require_once ('modules/Payslip/pdfcreator.php');
+        createpdffile ($_REQUEST[record], 'print');
+    }
+
+
 }
-//require_once('modules/Payslip/pdfcreator.php');
-//createpdffile ($_REQUEST[record],'print');
+
 ?>
