@@ -104,7 +104,7 @@ class Settings_Vtiger_ClaimTypeTools_View extends Settings_Vtiger_Index_View {
 
         $crmentityinsertquery = "INSERT INTO vtiger_crmentity (crmid, smcreatorid, smownerid, modifiedby, setype, description, createdtime, modifiedtime, viewedtime, status, version, presence, deleted, smgroupid, source, label) VALUES(?,?,?,?,?,?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,?,?,?,?,?,?,?)";
 
-        $params = array($claimtypeid,1,1,1,"Claim Type",'','',1,1,0,'','','');
+        $params = array($claimtypeid,1,1,1,"ClaimType",'','',1,1,0,'','','');
 
         $crmentityinsertresult = $adb->pquery($crmentityinsertquery,array($params));
 

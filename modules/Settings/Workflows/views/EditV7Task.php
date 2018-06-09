@@ -1,3 +1,4 @@
+
 <?php
 /*+**********************************************************************************
  * The contents of this file are subject to the vtiger CRM Public License Version 1.1
@@ -236,4 +237,5 @@ class Settings_Workflows_EditV7Task_View extends Settings_Vtiger_Index_View {
 		$viewer->view('EditTask.tpl', $qualifiedModuleName);
 	}
 }
+
 

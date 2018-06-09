@@ -7,9 +7,9 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  *************************************************************************************/
-//vimport('~~/modules/Payslip/PayslipPDFController.php');
-//class Payslip_ExportPDF_Action extends Inventory_ExportPDF_Action {
-//}
-require_once('modules/Payslip/pdfcreator.php');
-createpdffile ($_REQUEST[record],'print');
+vimport('~~/modules/Payslip/PayslipPDFController.php');
+class Payslip_ExportPDF_Action extends Inventory_ExportPDF_Action {
+}
+//require_once('modules/Payslip/pdfcreator.php');
+//createpdffile ($_REQUEST[record],'print');
 ?>

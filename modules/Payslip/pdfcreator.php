@@ -73,45 +73,37 @@ function createpdffile ($idnumber,$purpose='', $path='',$current_id='') {
 
 	//retreiving the payment info
 	$focus = new Payslip();
-	$focus->retrieve_entity_info($_REQUEST['record'],"Payment");
+	$focus->retrieve_entity_info($_REQUEST['record'],"Payslip");
 	//$account_name = decode_html(getAccountName($focus->column_fields['account_id']));
-	//CODE ADDED BY IZZATY ON 12-10-2011
-	//$contact_name = decode_html(getContactName($focus->column_fields['contact_id']));
-	//CODE END ADDED ON 12-10-2011
-	$Payment_no = $focus->column_fields['paymentno'];
-
-	//get the payment date set
-	//$date_to_display_array = array (str_replace ("-",".",getDisplayDate(date("d-m-Y"))));
-	$date_created = $focus->column_fields['createdtime']; 
-	//$date_array = explode(" ",$payment_date); 
-	$date_created = getValidDisplayDate($date_created);
-	$date_created = str_replace ("-",".",$date_created);
-	//$date_array = explode(" ",$date_created); 
-	//$date_to_display_array[1] = str_replace ("-",".",$date_array[0]);
-	$date_modified = $focus->column_fields['modifiedtime'];
-	//$date_array = explode(" ",$payment_date); 
-	$date_modified = getValidDisplayDate($date_modified);
-	$date_modified = str_replace ("-",".",$date_modified);
-	//$date_array = explode(" ",$date_modified); 
-	//$date_to_display_array[2] = str_replace ("-",".",$date_array[0]);
-	$date_to_display = $date_to_display_array[$pdf_config_details['dateused']]; 
-
-	//number of lines after headline
-	$space_headline = $pdf_config_details['space_headline'];
-
-	//display logo?
-	$logoradio = $pdf_config_details['logoradio'];
-
-	//display customer sign?
-	$clientid = $pdf_config_details['clientid'];
-	
-	//display summary?
-	$summaryradio = $pdf_config_details['summaryradio'];
-
-	//display footer?
-	$footerradio = $pdf_config_details['footerradio'];
-	//display footer page number?
-	$pageradio = $pdf_config_details['pageradio'];
+	$payslipno = $focus->column_fields['payslipno'];
+	$emp_name=$focus->column_fields['emp_name'];
+	$ic_passport=$focus->column_fields['ic_passport'];
+	$epf_no=$focus->column_fields['epf_no'];
+	$socso_no=$focus->column_fields['socso_no'];
+	$tax_no=$focus->column_fields['tax_no'];
+	$designation=$focus->column_fields['designation'];
+	$pay_month=$focus->column_fields['pay_month'];
+	$pay_year=$focus->column_fields['pay_year'];
+	$company_details=$focus->column_fields['company_details'];
+	$basic_sal=$focus->column_fields['basic_sal'];
+	$transport_allowance=$focus->column_fields['transport_allowance'];
+	$ph_allowance=$focus->column_fields['ph_allowance'];
+	$parking_allowance=$focus->column_fields['parking_allowance'];
+	$ot_meal_allowance=$focus->column_fields['ot_meal_allowance'];
+	$oth_allowance=$focus->column_fields['oth_allowance'];
+	$gross_pay=$focus->column_fields['gross_pay'];
+	$net_pay=$focus->column_fields['net_pay'];
+	$emp_epf=$focus->column_fields['emp_epf'];
+	$emp_socso=$focus->column_fields['emp_socso'];
+	$lhdn=$focus->column_fields['lhdn'];
+	$zakat=$focus->column_fields['zakat'];
+	$other_deduction=$focus->column_fields['other_deduction'];
+	$total_deduction=$focus->column_fields['total_deduction'];
+	$employer_epf=$focus->column_fields['employer_epf'];
+	$employer_socso=$focus->column_fields['employer_socso'];
+	$employer_eis=$focus->column_fields['employer_eis'];
+	$hrdf=$focus->column_fields['hrdf'];
+	$total_comp_contribution=$focus->column_fields['total_comp_contribution'];
 
 	// get owner information
 	$sql="SELECT * FROM vtiger_users,vtiger_crmentity WHERE vtiger_users.id = vtiger_crmentity.smownerid AND vtiger_crmentity.crmid = '".$_REQUEST['record']."'";
@@ -130,30 +122,25 @@ function createpdffile ($idnumber,$purpose='', $path='',$current_id='') {
 	$owner_lastname = $adb->query_result($result,0,'last_name');
 	$owner_firstname = $adb->query_result($result,0,'first_name');
 
-	/* Start of code modified by liana on 18th Mar, 2010 */
-	// condition field for last page
-	//changes by hazman to fix T&C output : display id instead of T&C
-	    //end by hazman
-	/* End of code modified by liana on 18th Mar, 2010 */
+	
 	
 	// description field for first page
 	$description = decode_html($focus->column_fields["description"]);
 	// get company and banking information from settings
 	//QUERY EDITED BY IZZATY ON 18-10-2011
-	$add_query = "select * from vtiger_organizationdetails WHERE organizationid='".$focus->column_fields["cf_756"]."'"; /* Code modified by liana on 18th Mar, 2010 */
-	//$add_query = "select * from vtiger_organizationdetails";
+	$add_query = "select * from vtiger_organizationdetails WHERE organization_id='".$company_details."'"; /* Code modified by liana on 18th Mar, 2010 */
 
-	//CODE ADDED BY IZZATY ON 18-10-2011
-	$log->debug("value for focus cf_756:".$focus->column_fields["cf_756"]);
-	//CODE END ADDED ON 18-10-2011	
+
 
 	$result = $adb->query($add_query);
+	
 	$num_rows = $adb->num_rows($result);
 	//CODE ADDED BY IZZATY ON  18-10-2011
 	$log->debug("Number of rows:".$num_rows);
 	//CODE END ADDED ON 18-10-2011
+	
 	if($num_rows > 0)
-	{ 
+	{
 		$org_name = $adb->query_result($result,0,"organizationname");
 		$org_address = $adb->query_result($result,0,"address");
 		$org_city = $adb->query_result($result,0,"city");
@@ -169,7 +156,7 @@ function createpdffile ($idnumber,$purpose='', $path='',$current_id='') {
 		$logo_name = $adb->query_result($result,0,"logoname");
 		//CODE ADDED BY IZZATY ON 18-10-2011
 		$log->debug("Value for logo name:".$logo_name);
-		//CODE END ADDED ON 18-10-2011
+		/*//CODE END ADDED ON 18-10-2011
 		$bank_name = $adb->query_result($result,0,"bankname");
 		$bank_street = $adb->query_result($result,0,"bankstreet");
 		$bank_city = $adb->query_result($result,0,"bankcity"); 
@@ -178,86 +165,19 @@ function createpdffile ($idnumber,$purpose='', $path='',$current_id='') {
 		$bank_account = $adb->query_result($result,0,"bankaccount");
 		$bank_routing = $adb->query_result($result,0,"bankrouting");
 		$bank_iban = $adb->query_result($result,0,"bankiban");
-		$bank_swift = $adb->query_result($result,0,"bankswift");
+		$bank_swift = $adb->query_result($result,0,"bankswift");*/
 	}
-	/*Add codes by liana*/
-	//QUERY EDITED BY IZZATY ON 19-10-2011
-	$paymentid = $_REQUEST['record'];
-	$my_query="select vtiger_account.accountname,vtiger_accountbillads.*,vtiger_accountshipads.*,vtiger_payment.*,
-vtiger_contactdetails.*, vtiger_contactaddress.* FROM vtiger_payment 
-	LEFT JOIN vtiger_account ON vtiger_account.accountid=vtiger_payment.linkto
-	LEFT JOIN vtiger_contactdetails ON vtiger_contactdetails.contactid=vtiger_payment.linkto
-	LEFT JOIN vtiger_accountbillads ON vtiger_account.accountid=vtiger_accountbillads.accountaddressid
-	LEFT JOIN vtiger_accountshipads ON vtiger_account.accountid=vtiger_accountshipads.accountaddressid 
-	LEFT JOIN vtiger_contactaddress ON
-vtiger_contactdetails.contactid=vtiger_contactaddress.contactaddressid
-	WHERE paymentid=$paymentid";
-	//QUERY END EDITED
-	$my_result=$adb->query($my_query);
-	$num_rows=$adb->num_rows($my_result);
-	if($num_rows > 0)
-	{
-		$payment_ref=$adb->query_result($my_result,0,"paymentreference");
-		$account_name=$adb->query_result($my_result,0,"accountname");
-		//CODE ADDED ON 12-10-2011 BY IZZATY
-		$contact_name=$adb->query_result($my_result,0,"firstname");
-		$contact_lastname=$adb->query_result($my_result,0,"lastname");
-		$relatedto=$adb->query_result($my_result,0,"linkto"); 
-		//CODE END ADDED
-		$amount=$adb->query_result($my_result,0,"amount");
-		$payment_for=$adb->query_result($my_result,0,"paymentfor");
-		$ref_no=$adb->query_result($my_result,0,"referenceno");
-		$bank_name=$adb->query_result($my_result,0,"bankname");
-		$payment_no=$adb->query_result($my_result,0,"paymentno");
-	//CODE ADDED BY IZZATY ON 18-10-2011
-	//$date_to_display_array = array (str_replace ("-",".",getDisplayDate(date("d-m-Y"))));
-	$payment_date = $adb->query_result($my_result,0,"paymentdate"); 
-	//$date_array = explode(" ",$payment_date); 
-	$payment_date = getValidDisplayDate($payment_date);
-	$payment_date = str_replace ("-",".",$payment_date);
-	//CODE END ADDED ON 18-10-2011
-		//$payment_date=$adb->query_result($my_result,0,"paymentdate");
-		$descriptions=$adb->query_result($my_result,0,"description");
-		
-		/*Billing address*/
-		$bill_street=$adb->query_result($my_result,0,"bill_street");
-		$bill_code=$adb->query_result($my_result,0,"bill_code");
-		$bill_city=$adb->query_result($my_result,0,"bill_city");
-		$bill_state=$adb->query_result($my_result,0,"bill_state");
-		$bill_country=$adb->query_result($my_result,0,"bill_country");
-		
-		/*Shipping address*/
-		$ship_street=$adb->query_result($my_result,0,"ship_street");
-		$ship_code=$adb->query_result($my_result,0,"ship_code");
-		$ship_city=$adb->query_result($my_result,0,"ship_city");
-		$ship_state=$adb->query_result($my_result,0,"ship_state");
-		$ship_country=$adb->query_result($my_result,0,"ship_country");
 
-		//CODE ADDED ON 19-10-2011 BY IZZATY
-		/*Mailing address*/
-		$mail_street=$adb->query_result($my_result,0,"mailingstreet");
-		$mail_city=$adb->query_result($my_result,0,"mailingcity");
-		$mail_state=$adb->query_result($my_result,0,"mailingstate");
-		$mail_postal=$adb->query_result($my_result,0,"mailingzip");
-		$mail_country=$adb->query_result($my_result,0,"mailingcountry");
-		/*Other address*/
-		$other_street=$adb->query_result($my_result,0,"otherstreet");
-		$other_city=$adb->query_result($my_result,0,"othercity");
-		$other_state=$adb->query_result($my_result,0,"otherstate");
-		$other_postal=$adb->query_result($my_result,0,"otherzip");
-		$other_country=$adb->query_result($my_result,0,"othercountry");
-		//CODE END ADDED ON 19-10-2011
-
-	}
 	/*End codes here*/
 	// ************************ BEGIN POPULATE DATA ***************************
 	//get the Associated Products for this Sales Order 
 	$focus->id = $focus->column_fields["record_id"];
-	$associated_products = getAssociatedProducts("Payment",$focus);
-	$num_products = count($associated_products);
+	$associated_products = array_shift(getAssociatedProducts("Payslip",$focus));
+
+	
 
 	//This $final_details array will contain the final total, discount, Group Tax, S&H charge, S&H taxes and adjustment
-	$final_details = $associated_products[1]['final_details'];
+	$final_details = $associated_products['final_details'];
 
 	//getting the Net Total
 	$price_subtotal = $final_details["hdnSubTotal"];
@@ -320,6 +240,7 @@ vtiger_contactdetails.contactid=vtiger_contactaddress.contactaddressid
 	$price_shipping_tax = number_format($sh_tax_amount,$decimal_precision,$decimals_separator,$thousands_separator);
 
 	//to calculate the individuel tax amounts included we should get all available taxes and then retrieve the corresponding tax values
+
 	$tax_details = getAllTaxes('available');
 	$numer_of_tax_types = count($tax_details);
 	for($tax_count=0;$tax_count<count($tax_details);$tax_count++)
@@ -328,104 +249,8 @@ vtiger_contactdetails.contactid=vtiger_contactaddress.contactaddressid
 		$taxtype_listings[percentage.$tax_count] = $tax_details[$tax_count]['percentage'];
 		$taxtype_listings[value.$tax_count] = '0';
 	}
+	
 	//This is to get all prodcut details as row basis
-	for($i=1,$j=$i-1;$i<=$num_products;$i++,$j++)
-	{
-		$product_code[$i] = $associated_products[$i]['hdnProductcode'.$i];
-		$product_name[$i] = decode_html($associated_products[$i]['productName'.$i]);
-		$prod_description[$i] = decode_html($associated_products[$i]['productDescription'.$i]);
-		$qty[$i] = $associated_products[$i]['qty'.$i];
-		$qty_formated[$i] = number_format($associated_products[$i]['qty'.$i],$decimal_precision,$decimals_separator,$thousands_separator);
-		$comment[$i] = decode_html($associated_products[$i]['comment'.$i]);
-		$unit_price[$i] = number_format($associated_products[$i]['unitPrice'.$i],$decimal_precision,$decimals_separator,$thousands_separator);
-		$list_price[$i] = number_format($associated_products[$i]['listPrice'.$i],$decimal_precision,$decimals_separator,$thousands_separator);
-		$list_pricet[$i] = $associated_products[$i]['listPrice'.$i];
-		$discount_total[$i] = $associated_products[$i]['discountTotal'.$i];
-		$discount_totalformated[$i] = number_format($associated_products[$i]['discountTotal'.$i],$decimal_precision,$decimals_separator,$thousands_separator);
-		//added by crm-now
-		$usageunit[$i] = $associated_products[$i]['usageunit'.$i];
-		//look whether the entry already exists, if the translated string is available then the translated string other wise original string will be returned
-		$usageunit[$i] = getTranslatedString($usageunit[$i], 'Products');
-		$taxable_total = $qty[$i]*$list_pricet[$i]-$discount_total[$i];
-
-		$producttotal = $taxable_total;
-		$total_taxes = '0.00';
-		
-		
-		if($focus->column_fields["hdnTaxType"] == "individual")
-		{
-			$total_tax_percent = '0.00';
-			//This loop is to get all tax percentage and then calculate the total of all taxes
-			for($tax_count=0;$tax_count<count($associated_products[$i]['taxes']);$tax_count++)
-			{
-				$tax_percent = $associated_products[$i]['taxes'][$tax_count]['percentage'];
-				$total_tax_percent = $total_tax_percent+$tax_percent;
-				$tax_amount = (($taxable_total*$tax_percent)/100);
-				//calculate the tax amount for any available tax percentage
-				$detected_tax = substr(array_search ($total_tax_percent,$taxtype_listings), -1);
-				$taxtype_listings [value.$detected_tax] = $taxtype_listings [value.$detected_tax]+$tax_amount;
-				$total_taxes = $total_taxes+$tax_amount;
-			}
-			$producttotal = $taxable_total+$total_taxes;
-			$product_line[$j][$pdf_strings['Tax']] = " ($total_tax_percent %) ".number_format($total_taxes,$decimal_precision,$decimals_separator,$thousands_separator);
-		    // combine product name, description and comment to one field based on settings
-		}
-
-	    // combine product name, description and comment to one field based on settings
-		if($focus->column_fields["hdnTaxType"] == "individual") $product_selection = $iproddetails;
-		else $product_selection = $gproddetails;
-			switch($product_selection)
-			{
-			    case 1:
-						$product_name_long[$i] = $product_name[$i];
-			    break;
-			    case 2:
-						$product_name_long[$i] = $prod_description[$i];
-			    break;
-			    case 3:
-						$product_name_long[$i] = $product_name[$i]."\n".$prod_description[$i];
-			    break;
-			    case 4:
-						$product_name_long[$i] = $comment[$i];
-			    break;
-			    case 5:
-						$product_name_long[$i] = $product_name[$i]."\n".$comment[$i];
-			    break;
-			    case 6:
-					if ($prod_description[$i]!=''){
-						$product_name_long[$i] = $prod_description[$i]."\n".$comment[$i];
-						}
-					else
-						$product_name_long[$i] = $comment[$i];
-			    break;
-			    case 7:
-					if ($prod_description[$i]!=''){
-						$product_name_long[$i] = $product_name[$i]."\n".$prod_description[$i]."\n".$comment[$i];
-						}
-					else
-						$product_name_long[$i] = $product_name[$i]."\n".$comment[$i];
-			    break;
-			    default:
-					if ($prod_description[$i]!=''){
-						$product_name_long[$i] = $product_name[$i]."\n".$prod_description[$i]."\n".$comment[$i];
-						}
-					else
-						$product_name_long[$i] = $product_name[$i]."\n".$comment[$i];
-			    break;
-			}
-
-		$prod_total[$i] = number_format($producttotal,$decimal_precision,$decimals_separator,$thousands_separator);
-
-		$product_line[$j][$pdf_strings['Position']] = $j+1;
-		$product_line[$j][$pdf_strings['OrderCode']] = $product_code[$i];
-		$product_line[$j][$pdf_strings['Description']] = $product_name_long[$i];
-		$product_line[$j][$pdf_strings['Qty']] = $qty_formated[$i];
-		$product_line[$j][$pdf_strings['Unit']] = $usageunit[$i];
-		$product_line[$j][$pdf_strings['UnitPrice']] = $list_price[$i];
-		$product_line[$j][$pdf_strings['Discount']] = $discount_totalformated[$i];
-		$product_line[$j][$pdf_strings['LineTotal']] = $prod_total[$i];
-
-	}
 
 	//Population of current date
 	$addyear = strtotime("+0 year");
@@ -452,7 +277,7 @@ vtiger_contactdetails.contactid=vtiger_contactaddress.contactaddressid
 			{
 				$this->original_rMargin = $this->rMargin;
 			}
-			include("modules/Payment/pdf_templates/footer.php");
+			include("modules/Payslip/pdf_templates/footer.php");
 		}
 	}
 	$page_num='1';
@@ -495,8 +320,9 @@ vtiger_contactdetails.contactid=vtiger_contactaddress.contactaddressid
 	$new_page_started = false;
 	$pdf->AddPage();
 	$pdf-> setImageScale(1.5);
-	//$pdf->SetY(PDF_MARGIN_HEADER);
-	include("modules/Payment/pdf_templates/header.php");
+
+	include("modules/Payslip/pdf_templates/header.php");
+	display();
 	$pdf->SetFont($default_font, " ", $font_size_body);
 	include("modules/Payment/pdf_templates/body.php");
 	//formating company name for file name

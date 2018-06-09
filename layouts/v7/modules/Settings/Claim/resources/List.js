@@ -19,7 +19,7 @@ Settings_Vtiger_List_Js('Settings_Claim_List_Js',{
 	    },
 },{
    
-    /**s
+    /**
 	 * Function to get Page Jump Params
 	 */
 	getPageJumpParams : function(){

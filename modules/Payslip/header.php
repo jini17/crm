@@ -25,15 +25,7 @@ $pdf-> SetCreator ('CRM System crm-now/PS: www.crm-now.de ');
 //CODES END COMMENTED ON 14-10-2011
 $pdf-> setImageScale(1.5);
 
-// ************** Begin company information *****************
-//company logo
-//function to scal the image to the space availabel is needed
-//CODES COMMENTED BY IZZATY ON 14-10-2011
-//if($logo_name=='' || $logo_name==NULL)
-//{
- //   $logo_name="client_logo.jpg";
-//}
-//CODES END COMMENTED
+
 
 //CODES ADDED BY IZZATY ON 14-10-2011
 require_once('include/logging.php');
@@ -42,22 +34,23 @@ $log =& LoggerManager::getLogger('header');
 global $logo_name;
 //CODES ADDED BY IZZATY ON 14-10-2011
 $log->debug("angel is here:".$logo_name);
-//CODES END ADDED ON 14-10-2011
-//CODES COMMENTED BY IZZATY ON 14-10-2011
-//if ($logoradio =='true') {
-	//if (file_exists('test/logo/'.$logo_name))
-//CODES END ADDED ON 14-10-2011
-	$pdf->Image('test/logo/'.$logo_name, $x='20', $y='15', $w='0', $h='0', $type='', $link='', $align='', $resize=false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false);
-//CODES ADDED BY IZZATY ON 14-10-2011
-	//else {
-	//$pdf->SetXY('130','15');
-	//$pdf->Cell(20,$pdf->getFontSize(),$pdf_strings['MISSING_IMAGE'],0,0);
-	//}
-//}
-//CODES END ADDED ON 14-10-2011
-// ************** End company information *******************
+
+
 
 // ************* Begin Top-Right Header ***************
+
+
+		$pdf = $parent->getPDF();
+		$pdf->SetFont('Helvetica', '', 11);
+		$headerFrame = $parent->getHeaderFrame();
+		$headerColumnWidth = $headerFrame->w/3.0;
+		$pdfsettings = $this->model->get('pdfsettings'); 
+		
+		$modelColumns = $this->model->get('columns');
+		$modelColumn0 = $modelColumns[0];
+		$modelColumn2 = $modelColumns[2];
+		$pdf->setCellPadding(5);
+		$vatlabel = getTranslatedString('VATID');
 //set location
 $xmargin = '150';
 $ymargin = '30';
@@ -74,8 +67,6 @@ $pdf->SetXY('170','27');
 $pdf->Cell(20,$pdf->SetFont('Helvetica','',9),$pdf_strings['Colon'],0,0);
 //$pdf->text($xmargin+25,$ymargin,$paymentNo);
 
-
-
 //so number-content
 //we get the SO # from the entry field, if not set the record id is used
 if (trim($requisition_no) != '') $pdf->text($xmargin+$xdistance,$ymargin,$requisition_no);
@@ -86,7 +77,8 @@ $pdf->SetFont($default_font,'',$font_size_header);
 $pdf->text($xmargin,$ymargin+5,$pdf_strings['DATE']);
 $pdf->SetXY('170','32'); 
 $pdf->Cell(20,$pdf->getFontSize(),$pdf_strings['Colon'],0,0);
-$pdf->text($xmargin+25,$ymargin+5,date(getNewDisplayDate()));
+$pdf->text($xmargin+25,$ymargin+5,$date_issued);
+//$pdf->text($xmargin+25,$ymargin+5,date(getNewDisplayDate()));
 //delivery date
 $pdf->SetFont($default_font,'',$font_size_header);
 //so delivery - label
@@ -176,15 +168,15 @@ $company_phone=decode_html($org_phone);
 $company_fax=decode_html($org_fax);
 $pdf->SetFont($default_font,'B',11);
 $pdf->text($xmargin,$ymargin,$companyText);
-$pdf->SetFont($default_font,'B',8);
+$pdf->SetFont($default_font,'B',9);
 $pdf->text($xmargin,$ymargin+4,$company_org_add_Text);
-$pdf->text($xmargin,$ymargin+7,$company_org_Text);
-$pdf->SetXY('19','43');
+$pdf->text($xmargin,$ymargin+8,$company_org_Text);
+$pdf->SetXY('19','44');
 $pdf->Cell(20,$pdf->getFontSize(),$pdf_strings['Label_tel'],0,0);
-$pdf->text($xmargin+7,$ymargin+10.5,$company_phone);
-$pdf->SetXY('19','46');
+$pdf->text($xmargin+7.5,$ymargin+12,$company_phone);
+$pdf->SetXY('19','48');
 $pdf->Cell(20,$pdf->getFontSize(),$pdf_strings['Label_fax'],0,0);
-$pdf->text($xmargin+7,$ymargin+13.5,$company_fax);
+$pdf->text($xmargin+7.5,$ymargin+16,$company_fax);
 $pdf->SetTextColor(0,0,0);
 $pdf->SetFont($default_font,'B',$font_size_address);
 $billPositions = array($xmargin,$ymargin,"60");

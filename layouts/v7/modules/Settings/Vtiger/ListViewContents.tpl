@@ -39,8 +39,8 @@
 			{/if}
 			<div class="list-content row">
 				<div class="col-sm-12 col-xs-12 ">
-					<div id="table-content"  style="-ms-touch-action:none;overflow: hidden !important;width: 100%;
-border:1px solid #ddd;margin-top:10px;padding-top:0px ! important;position: relative; height: 109px; width: 100%;">
+					<div id="table-content"  style="-ms-touch-action:none;overflow: visible !important;width: 100%;
+border:1px solid #ddd;margin-top:10px;padding-top:0px ! important;position: relative;  min-height:auto;width: 100%;">
 						<table id="listview-table" class="table listview-table">
 							{assign var="NAME_FIELDS" value=$MODULE_MODEL->getNameFields()}
 							{assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
@@ -89,6 +89,9 @@ border:1px solid #ddd;margin-top:10px;padding-top:0px ! important;position: rela
 								                <a name="downloadfile" target="_blank" href="#" onclick="window.location.href='{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}'">
 								                	{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}</a>
 								             	{else if $LISTVIEW_HEADERNAME eq 'letter_of_appointment'} 
+									             	{assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($LISTVIEW_ENTRY->getId())}
+									             		<a target="_blank" href="#" onclick="window.location.href='{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}'">{vtranslate('LBL_DOWNLOAD', $QUALIFIED_MODULE)}</a>
+									            {else if $LISTVIEW_HEADERNAME eq 'attachment'} 
 									             	{assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($LISTVIEW_ENTRY->getId())}
 									             		<a target="_blank" href="#" onclick="window.location.href='{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}'">{vtranslate('LBL_DOWNLOAD', $QUALIFIED_MODULE)}</a>
 								             	{else}

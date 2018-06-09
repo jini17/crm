@@ -125,6 +125,7 @@ class Settings_Workflows_EditTask_View extends Settings_Vtiger_Index_View {
         $userModel = Users_Record_Model::getCurrentUserModel();
         $viewer->assign('dateFormat',$userModel->get('date_format'));
         $viewer->assign('timeFormat', $userModel->get('hour_format'));
+
         $viewer->assign('MODULE', $moduleName);
         $viewer->assign('QUALIFIED_MODULE', $qualifiedModuleName);
 

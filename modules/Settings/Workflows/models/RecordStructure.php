@@ -129,9 +129,11 @@ class Settings_Workflows_RecordStructure_Model extends Vtiger_RecordStructure_Mo
 
 	/**
 	 * Function returns all the email fields for the workflow record structure
-	 * @return type
+	 * @return type @modified by jitu@multi from address in workflow send mail task
 	 */
 	public function getAllEmailFields() {
+
+
 
 		$db = PearDatabase::getInstance();
 		//$db->setDebug(true);
@@ -152,12 +154,11 @@ class Settings_Workflows_RecordStructure_Model extends Vtiger_RecordStructure_Mo
 			$emailfrom[$i]['server'] =$server ;
 			$emailfrom[$i]['email'] =$email ;
 
+
 		}
-
+		
 		return $emailfrom;
-
 	}
-
 	/**
 	 * Function returns all the date time fields for the workflow record structure
 	 * @return type

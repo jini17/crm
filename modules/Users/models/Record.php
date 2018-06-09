@@ -966,6 +966,19 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		// To check username existence in db
 		return $userModuleModel->checkDuplicateUser($userName);
 	}
+
+	/**
+	 * Function to check whether user exists in CRM and in VAS
+	 * @param <string> $userName
+	 * @return <boolean> $status
+	 */
+	public static function isValidateUserSubscription($userName, $roleid) {
+		$userModuleModel = Users_Module_Model::getCleanInstance('Users');
+		$status = false;
+		// To validate User in CP database
+		return $userModuleModel->ValidateUserSubscription($userName, $roleid);
+	}
+
 	/**
 	Added by afiq@secondcrm.com on 6/16/2014 for multiple from address
 	*/

@@ -12,14 +12,18 @@
 	class PayslipPDFHeaderViewer extends Vtiger_PDF_InventoryHeaderViewer {
 
 		function display($parent) {
-		
+	
 		$pdf = $parent->getPDF();
+
 		$pdf->SetFont('Helvetica', '', 11);
 		$headerFrame = $parent->getHeaderFrame();
+
+
 		$headerColumnWidth = $headerFrame->w/3.0;
 		$pdfsettings = $this->model->get('pdfsettings'); 
-		
-		$modelColumns = $this->model->get('columns');
+
+		$modelColumns = $this->model->get('columns');		
+
 		$modelColumn0 = $modelColumns[0];
 		$modelColumn2 = $modelColumns[2];
 		$pdf->setCellPadding(5);
@@ -51,6 +55,7 @@
 						
 					";
 					/*doc type table start*/
+					
 					$html .="
 							<table cellpadding=\"3\" cellspacing=\"2\" border=\"1\">
 								<span style=\"font-size:15pt\"><strong>{$modelColumn0[summary]}</strong></span><br />(890813-X)<br/>
@@ -77,6 +82,7 @@
 				$html .= <<<EOF
 					<br/><br/><table border="1">
 						<tr>
+
 EOF;
 				} else {
 					/* Address **/
@@ -107,14 +113,13 @@ EOF;
 			$html .="</tr></table>";
 			
 
-			$pdf->writeHTML($html, true, false, true, false, '');
+		
 
-			$html = '<!--item list start-->
+			$html .= '<!--item list start-->
 				<table cellpadding="5" border="1">
 					<tr><td colspan="3"><h3>Employee Earnings</h3></td>
 					<td><h3>Current</h3></td></tr>';
 		$html .='</table><br /><br />';
-		
 	
 		$html .= '<!--item list start-->
 				<table cellpadding="5" border="1">
@@ -133,7 +138,7 @@ EOF;
 					<tr><td colspan="3"><h3>Company Contributions</h3></td>
 					<td><h3>Current</h3></td></tr>';
 		$html .='</table><br /><br />';
-		
+
 		$pdf->writeHTML($html, true, false, true, false, '');
 
 		}

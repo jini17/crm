@@ -72,8 +72,11 @@ Class Users_Edit_View extends Users_PreferenceEdit_View {
 	}
 
 	public function postProcess(Vtiger_Request $request) {
+		$viewer = $this->getViewer($request);
 		$this->postProcessSettings($request);
+		$viewer->assign('ERROR', $request->get('error'));
 		parent::postProcess($request);
+
 	}
 	
 	public function getHeaderScripts(Vtiger_Request $request) {
