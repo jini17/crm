@@ -414,7 +414,7 @@ class Users_Module_Model extends Vtiger_Module_Model {
 		Validate user from Subscription table 
 		@author Jitendra Gupta
 	**/
-	public function ValidateUserSubscription($username, $role){
+	public function ValidateUserSubscription($role){
 
 		return false;
 	}

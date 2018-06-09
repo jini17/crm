@@ -39,8 +39,8 @@
 			{/if}
 			<div class="list-content row">
 				<div class="col-sm-12 col-xs-12 ">
-					<div id="table-content"  style="-ms-touch-action:none;overflow: hidden !important;width: 100%;
-border:1px solid #ddd;margin-top:10px;padding-top:0px ! important;position: relative; height: 109px; width: 100%;">
+					<div id="table-content"  style="-ms-touch-action:none;overflow: visible !important;width: 100%;
+border:1px solid #ddd;margin-top:10px;padding-top:0px ! important;position: relative;  min-height:auto;width: 100%;">
 						<table id="listview-table" class="table listview-table">
 							{assign var="NAME_FIELDS" value=$MODULE_MODEL->getNameFields()}
 							{assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}

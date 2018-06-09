@@ -95,14 +95,14 @@ class Users_Save_Action extends Vtiger_Save_Action {
 			$module = $request->getModule();
 			$userName = $request->get('user_name');
 			$userModuleModel = Users_Module_Model::getCleanInstance($module);
-			$status = $userModuleModel->checkDuplicateUser($userName);
+			echo $status = $userModuleModel->checkDuplicateUser($userName);
 			if ($status == true) {
 				throw new AppException(vtranslate('LBL_DUPLICATE_USER_EXISTS', $module));
 			}
 			
 			//validate user from CP database for no of users per plan
 			$roleid = $request->get('roleid');
-			$isvalidateUser = $userModuleModel->ValidateUserSubscription($userName, $roleid);
+			echo $isvalidateUser = $userModuleModel->ValidateUserSubscription($userName, $roleid);
 			if ($isvalidateUser == false) {
 				//header("location:index.php?module=Users&view=Edit&parent=Settings&error=".vtranslate('LBL_USER_LIMIT_EXCEED', $module));
 				//exit;

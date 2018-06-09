@@ -17,10 +17,13 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 	 */
 	registerRecordPreSaveEvent : function(form){
 		var thisInstance = this;
+		var roleId = jQuery('input[name="title"]').val(); 
 		app.event.on(Vtiger_Edit_Js.recordPresaveEvent, function(e, data) {
 			var userName = jQuery('input[name="user_name"]').val();
-			var roleId = jQuery('input[name="roleid"]').val();
 			var newPassword = jQuery('input[name="user_password"]').val();
+		
+			
+			alert(userName+roleId);return false;
 			var confirmPassword = jQuery('input[name="confirm_password"]').val();
 			var record = jQuery('input[name="record"]').val();
             var firstName = jQuery('input[name="first_name"]').val();
@@ -43,30 +46,6 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
                     app.helper.showErrorNotification({message :app.vtranslate('JS_REENTER_PASSWORDS')});
 					e.preventDefault();
 				}
-				
-			 if(!(userName in thisInstance.validateCheckCache)) {
-                    e.preventDefault();
-                    thisInstance.validateUser(roleId).then(
-                        function(data,error){
-                            thisInstance.duplicateCheckCache[userName] = data;
-                            form.submit();
-                        }, 
-                        function(data){
-                            if(data) {
-                                thisInstance.duplicateCheckCache[userName] = data;
-                                app.helper.showErrorNotification({message :app.vtranslate('JS_USER_EXISTS')});
-                            } 
-                        }
-                    );
-                } else {
-                    if(thisInstance.duplicateCheckCache[userName] == true){
-                        app.helper.showErrorNotification({message :app.vtranslate('JS_USER_EXISTS')});
-                        e.preventDefault();
-                    } else {
-                        delete thisInstance.duplicateCheckCache[userName];
-                        return true;
-                    }
-                }	
 
                 if(!(userName in thisInstance.duplicateCheckCache)) {
                     e.preventDefault();
@@ -101,38 +80,17 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 				'module': app.getModuleName(),
 				'action' : "SaveAjax",
 				'mode' : 'userExists',
-				'user_name' : userName,
-				'roleid': roleId
+				'user_name' : userName
 			}
 		app.request.post({data:params}).then(
-			function(err,data) {
-				if(data){
-					aDeferred.resolve(data);
-				}else{
-					aDeferred.reject(data);
+				function(err,data) {
+					if(data){
+						aDeferred.resolve(data);
+					}else{
+						aDeferred.reject(data);
+					}
 				}
-			}
-		);
-		return aDeferred.promise();
-	},
-	
-	validateUser: function(roleid){
-		var aDeferred = jQuery.Deferred();
-		var params = {
-				'module': app.getModuleName(),
-				'action' : "SaveAjax",
-				'mode' : 'validateUser',
-				'roleid': roleId
-			}
-		app.request.post({data:params}).then(
-			function(err,data) {
-				if(data){
-					aDeferred.resolve(data);
-				}else{
-					aDeferred.reject(data);
-				}
-			}
-		);
+			);
 		return aDeferred.promise();
 	},
 	
