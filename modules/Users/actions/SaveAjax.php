@@ -14,6 +14,7 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 	function __construct() {
 		parent::__construct();
 		$this->exposeMethod('userExists');
+		$this->exposeMethod('validateUser');
 		$this->exposeMethod('savePassword');
 		$this->exposeMethod('restoreUser');
 		$this->exposeMethod('transferOwner');
@@ -103,10 +104,17 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		$userName = $request->get('user_name');
 		$roleid = $request->get('roleid');
 		$status = Users_Record_Model::isUserExists($userName);
-		$validate = Users_Record_Model::isValidateUserSubscription($userName, $roleid);
-		$validate = false;
 		$response = new Vtiger_Response();
 		$response->setResult($status, $validate);
+		$response->emit();
+	}
+
+	public function validateUser(Vtiger_Request $request){ alert('ok');
+		$module = $request->getModule();
+		$roleid = $request->get('roleid');
+		$validate = Users_Record_Model::isValidateUserSubscription($userName, $roleid);
+		$response = new Vtiger_Response();
+		$response->setResult($validate);
 		$response->emit();
 	}
 

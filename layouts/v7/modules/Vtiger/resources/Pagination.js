@@ -38,7 +38,6 @@ Vtiger.Class('Vtiger_Pagination_Js', {},{
 		var thisInstance = this;
 		thisInstance.container.on('click','#NextPageButton',function(e){
 			var currentEle = jQuery(e.currentTarget);
-			Settings_LoginHistory_List_Js.showUpdates();
 			app.event.trigger(thisInstance.nextPageButtonClickEventName, currentEle);
 		});
 	},
@@ -47,7 +46,6 @@ Vtiger.Class('Vtiger_Pagination_Js', {},{
 		var thisInstance = this;
 		thisInstance.container.on('click','#PreviousPageButton',function(e){
 			var currentEle = jQuery(e.currentTarget);
-			Settings_LoginHistory_List_Js.showUpdates();
 			app.event.trigger(thisInstance.previousPageButtonClickEventName, currentEle);
 		});
 	},
