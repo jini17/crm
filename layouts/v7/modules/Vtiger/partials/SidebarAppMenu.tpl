@@ -112,7 +112,7 @@
 					</div>
 					<ul class="dropdown-menu app-modules-dropdown dropdown-modules-compact" aria-labelledby="{$APP_NAME}_modules_dropdownMenu" data-height="0.27">
 						<li>
-							<a href="?module=Vtiger&parent=Settings&view=Index">
+							<a href="?module=AgiliuxDashboard&parent=Settings&view=Index">
 								<span class="fa fa-cog module-icon"></span>
 								<span class="module-name textOverflowEllipsis"> {vtranslate('LBL_CRM_SETTINGS','Vtiger')}</span>
 							</a>

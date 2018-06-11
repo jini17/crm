@@ -10,7 +10,7 @@
 Settings_Vtiger_List_Js('Settings_Performance_List_Js',{
     triggerDelete : function(url) {
         var instance = app.controller();
-        alert(url);
+        
         instance.deleteEmployeeContract(url);
     },
 

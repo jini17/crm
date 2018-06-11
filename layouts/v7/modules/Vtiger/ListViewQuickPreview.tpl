@@ -10,8 +10,7 @@
 ********************************************************************************/
 -->*}
   {if $PARENT_MODULE eq "Settings"} 
-
-  <div class = "quickPreview" style="margin-left: 50%;">
+  <div class = "quickPreview" style="margin-left: 50%;overflow: hidden;">
   {else}
   <div class = "quickPreview" >
   {/if}
