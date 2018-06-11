@@ -8,17 +8,15 @@ ob_start();
 
 
 $xmargin = '20';
-$ymargin = '40';
-//$modulename=decode_html("");
+$ymargin = '0';
 $pdf->SetFont($default_font,'',10.5);
-//$pdf->MultiCell(160,$pdf->getFontSize(),$modulename,0,'C',0,0,$xmargin,$ymargin);
 
 /*********************Start Section A**************************/
 # Start Payments table in HTML by Haziq
 $pdf->Ln(13);
 $html = <<<EOD
 
-<p align="right">Soft Solvers Solutions Sdn Bhd<br />(890813-X)<br />C2-3-7, Block C2, CBD Perdana 3, Persiaran Cyberpoint<br />Timur, Cyber 12, 63000 Cyberjaya, Selangor.<br />0386874433</p>
+<p align="right"><b>$organization_title</b><br />$organizationname<br />$address<br />$city , $state, $country, $code<br />$phone<br />Fax : $fax<br />$website</p>
 
 <b align="left">
 $emp_name
@@ -33,6 +31,9 @@ Period($pay_month $pay_year)
         </td>
         <td>
             EPF No : $epf_no
+        </td>
+        <td rowspan="3" align="right">
+        <font color="#008b8b"><b>Net Pay  </font><br /> $net_pay</b>
         </td>
     </tr>
      <tr>
