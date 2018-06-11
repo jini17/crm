@@ -10,27 +10,27 @@
 
 include_once 'modules/Vtiger/CRMEntity.php';
 
-class Performance extends Vtiger_CRMEntity {
-	var $table_name = 'vtiger_performance';
-	var $table_index= 'performanceid';
+class LeaveType extends Vtiger_CRMEntity {
+	var $table_name = 'vtiger_leavetype';
+	var $table_index= 'leavetypeid';
 
 	/**
 	 * Mandatory table for supporting custom fields.
 	 */
-	var $customFieldTable = Array('vtiger_performancecf', 'performanceid');
+	var $customFieldTable = Array('vtiger_leavetypecf', 'leavetypeid');
 
 	/**
 	 * Mandatory for Saving, Include tables related to this module.
 	 */
-	var $tab_name = Array('vtiger_crmentity', 'vtiger_performance', 'vtiger_performancecf');
+	var $tab_name = Array('vtiger_crmentity', 'vtiger_leavetype', 'vtiger_leavetypecf');
 
 	/**
 	 * Mandatory for Saving, Include tablename and tablekey columnname here.
 	 */
 	var $tab_name_index = Array(
 		'vtiger_crmentity' => 'crmid',
-		'vtiger_performance' => 'performanceid',
-		'vtiger_performancecf'=>'performanceid');
+		'vtiger_leavetype' => 'leavetypeid',
+		'vtiger_leavetypecf'=>'leavetypeid');
 
 	/**
 	 * Mandatory for Listing (Related listview)
@@ -38,45 +38,45 @@ class Performance extends Vtiger_CRMEntity {
 	var $list_fields = Array (
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Yearly Review' => Array('performance', 'yearly_review'),
+		'Title' => Array('leavetype', 'title'),
 		'Assigned To' => Array('crmentity','smownerid')
 	);
 	var $list_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'Yearly Review' => 'yearly_review',
+		'Title' => 'title',
 		'Assigned To' => 'assigned_user_id',
 	);
 
 	// Make the field link to detail view
-	var $list_link_field = 'yearly_review';
+	var $list_link_field = 'title';
 
 	// For Popup listview and UI type support
 	var $search_fields = Array(
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Yearly Review' => Array('performance', 'yearly_review'),
+		'Title' => Array('leavetype', 'title'),
 		'Assigned To' => Array('vtiger_crmentity','assigned_user_id'),
 	);
 	var $search_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'Yearly Review' => 'yearly_review',
+		'Title' => 'title',
 		'Assigned To' => 'assigned_user_id',
 	);
 
 	// For Popup window record selection
-	var $popup_fields = Array ('yearly_review');
+	var $popup_fields = Array ('title');
 
 	// For Alphabetical search
-	var $def_basicsearch_col = 'yearly_review';
+	var $def_basicsearch_col = 'title';
 
 	// Column value to use on detail view record text display
-	var $def_detailview_recname = 'yearly_review';
+	var $def_detailview_recname = 'title';
 
 	// Used when enabling/disabling the mandatory fields for the module.
 	// Refers to vtiger_field.fieldname values.
-	var $mandatory_fields = Array('yearly_review','assigned_user_id');
+	var $mandatory_fields = Array('title','assigned_user_id');
 
-	var $default_order_by = 'yearly_review';
+	var $default_order_by = 'title';
 	var $default_sort_order='ASC';
 
 	/**
