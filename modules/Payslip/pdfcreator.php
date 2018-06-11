@@ -12,7 +12,7 @@ Change Reason: Pdf Cinfigurator change, File overwritten
  * All Rights Reserved.
  * modified by: crm-now, www.crm-now.de
  ********************************************************************************/
-function createpdffile ($idnumber,$purpose='', $path='',$current_id='') {
+function createpdffile ($payslipid,$purpose='', $path='',$current_id='') {
 
 	require_once('libraries/tcpdf/tcpdf.php');
 	require_once('libraries/tcpdf/config/tcpdf_config.php');
@@ -36,7 +36,39 @@ function createpdffile ($idnumber,$purpose='', $path='',$current_id='') {
 	$language = "EN";
 	
 
+	global $adb;
+	//$adb->setDebug(true);
+	$query = "SELECT * FROM vtiger_payslip INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_payslip.payslipid INNER JOIN vtiger_users ON vtiger_users.id = vtiger_payslip.emp_name WHERE vtiger_crmentity.deleted = 0 AND payslipid = ?";
+	$result = $adb->pquery($query,array($payslipid));
 
+	$emp_name = $adb->query_result($result,0,'first_name');
+    $designation = $adb->query_result($result,0,'designation');
+    $ic_passport = $adb->query_result($result,0,'ic_passport');
+    $epf_no = $adb->query_result($result,0,'epf_no');
+    $socso_no = $adb->query_result($result,0,'socso_no');
+    $tax_no = $adb->query_result($result,0,'tax_no');
+    $pay_month = $adb->query_result($result,0,'pay_month');
+    $pay_year = $adb->query_result($result,0,'pay_year');
+    $basic_sal = $adb->query_result($result,0,'basic_sal');
+    $transport_allowance = $adb->query_result($result,0,'transport_allowance');
+    $ph_allowance = $adb->query_result($result,0,'ph_allowance');
+    $parking_allowance = $adb->query_result($result,0,'parking_allowance');
+    $ot_meal_allowance = $adb->query_result($result,0,'ot_meal_allowance');
+    $oth_allowance = $adb->query_result($result,0,'oth_allowance');
+    $gross_pay = $adb->query_result($result,0,'gross_pay');
+    $net_pay = $adb->query_result($result,0,'net_pay');
+    $emp_epf = $adb->query_result($result,0,'emp_epf');
+    $emp_socso = $adb->query_result($result,0,'emp_socso');
+    $lhdn = $adb->query_result($result,0,'lhdn');
+    $zakat = $adb->query_result($result,0,'zakat');
+    $other_deduction = $adb->query_result($result,0,'other_deduction');
+    $total_deduction = $adb->query_result($result,0,'total_deduction');
+    $employer_epf = $adb->query_result($result,0,'employer_epf');
+    $employer_socso = $adb->query_result($result,0,'employer_socso');
+    $employer_eis = $adb->query_result($result,0,'employer_eis');
+    $hrdf = $adb->query_result($result,0,'hrdf');
+    $total_comp_contribution = $adb->query_result($result,0,'total_comp_contribution');
+    //echo  $emp_name;die;
 	
 
 
