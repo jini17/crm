@@ -152,7 +152,7 @@ class Settings_Workflows_RecordStructure_Model extends Vtiger_RecordStructure_Mo
 			$emailfrom[$i]['email'] =$email ;
 
 		}
-		
+
 		return $emailfrom;
 	}
 	/**
@@ -163,6 +163,14 @@ class Settings_Workflows_RecordStructure_Model extends Vtiger_RecordStructure_Mo
 		$fieldTypes = array('date','datetime');
 		return $this->getFieldsByType($fieldTypes);
 	}
+
+    /**
+     * Function returns all the email fields for the workflow record structure
+     * @return type
+     */
+    public function getAllEmailValues() {
+        return $this->getFieldsByType('email');
+    }
 
 	/**
 	 * Function returns fields based on type

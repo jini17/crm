@@ -758,7 +758,8 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
       jQuery('#saveTask').on('change', '#fromEmailOption', function (e) {
          var currentElement = jQuery(e.currentTarget);
          var inputElement = currentElement.closest('.row').find('.fields');
-         inputElement.val(currentElement.val());
+          var value = currentElement.val().split('##')
+         inputElement.val(value[1]);
       })
    },
    registerFillTaskFieldsEvent: function () {
