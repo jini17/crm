@@ -384,15 +384,22 @@ function insertIntoRecurringTable(& $recurObj)
 		global $log,$adb;
 		$log->debug("Entering insertIntoInviteeTable(".$module.",".$invitees_array.") method ...");
 		if($this->mode == 'edit'){
-			$sql = "DELETE FROM vtiger_invitees WHERE activityid=?";
-			$adb->pquery($sql, array($this->id));
+			//Edited By Mabruk for Meeting
+			$quesmarks = rtrim(str_repeat('?,',count($invitees_array)),',');
+			$sql = "DELETE FROM vtiger_invitees WHERE activityid=? AND inviteeid NOT IN ($quesmarks)";		
+			$adb->pquery($sql, array($this->id,$invitees_array));
 		}
 		foreach($invitees_array as $inviteeid)
 		{
 			if($inviteeid != '')
-			{
-				$query="INSERT INTO vtiger_invitees VALUES (?,?,?)";
-				$adb->pquery($query, array($this->id, $inviteeid, 'sent'));
+			{	
+				//Edited By Mabruk for Meeting
+				$result = $adb->pquery("SELECT * FROM vtiger_invitees WHERE activityid = ? AND inviteeid = ?", array($this->id, $inviteeid));
+				$rows = $adb->num_rows($result); 
+				if ($adb->num_rows($result) == 0) {
+					$query="INSERT INTO vtiger_invitees VALUES (?,?,?)";				
+					$adb->pquery($query, array($this->id, $inviteeid, 'sent'));			
+				}
 			}
 		}
 		$log->debug("Exiting insertIntoInviteeTable method ...");

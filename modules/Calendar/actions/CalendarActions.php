@@ -12,6 +12,8 @@ class Calendar_CalendarActions_Action extends Vtiger_BasicAjax_Action {
 
 	function __construct() {
 		$this->exposeMethod('fetchAgendaViewEventDetails');
+		$this->exposeMethod('updateMOMContent');
+		$this->exposeMethod('sendAgendaOrMOM');
 	}
 
 	public function process(Vtiger_Request $request) {
@@ -20,6 +22,54 @@ class Calendar_CalendarActions_Action extends Vtiger_BasicAjax_Action {
 			$this->invokeExposedMethod($mode, $request);
 			return;
 		}
+	}
+
+	//Added By Mabruk For Meeting MOM
+	public function updateMOMContent(Vtiger_Request $request) {
+		$result = array();
+		$data = $request->get('content');	
+		$moduleName = $request->getModule();
+       // echo "<pre>"; print_r($data); die;
+		global $adb;		
+		$result = $adb->pquery("UPDATE vtiger_activitycf SET min_meeting = ? WHERE activityid = ?", array($data, $request->get('id')));
+
+		$response = new Vtiger_Response();
+		$response->setResult($data);
+		$response->emit();
+	}
+
+	//Added By Mabruk For Sending Emails
+	public function sendAgendaOrMOM(Vtiger_Request $request) {
+		require_once('modules/Emails/mail.php');
+		require_once('modules/Emails/Emails.php');
+		$emails = $request->get('emails');
+		$body = $request->get('body');
+		$subject = $request->get('subject');
+		$contentType = $request->get('contentType');
+		
+		$subject = $contentType . " for " . $subject;
+		//Email Details using PHPMailer with attachment
+		$vtigerMailer = new PHPMailer();
+		$vtigerMailer->IsSMTP();
+		$vtigerMailer->Host = 'mail.secondcrm.com';
+		$vtigerMailer->Port = '587';
+		$vtigerMailer->SMTPAuth = true;
+		$vtigerMailer->Username = 'mabruk@secondcrm.com';
+		$vtigerMailer->Password = 'quintiq123@';
+		$vtigerMailer->SMTPDebug  = 0;
+		$vtigerMailer->IsHTML(true); 
+		$vtigerMailer->AddAddress($emails);		
+		$vtigerMailer->From='support@agiliux';
+		$vtigerMailer->FromName="Agiliux";
+		$vtigerMailer->Subject = $subject;		
+		$vtigerMailer->Body = $body;
+
+		foreach ($emails as $email) {
+			$vtigerMailer->AddAddress($email);
+		//	echo $email;
+		}
+		//$vtigerMailer->AddAddress("mabruk@secondcrm.com");
+		$vtigerMailer->Send();		
 	}
 
 	public function fetchAgendaViewEventDetails(Vtiger_Request $request) {

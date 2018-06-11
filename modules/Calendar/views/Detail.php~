@@ -22,31 +22,13 @@ class Calendar_Detail_View extends Vtiger_Detail_View {
 	function showMom(Vtiger_Request $request){	
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();		
-		$contactDetails = Calendar_Module_Model::getRelatedContactDetails($recordId);
-		$userDetails = Calendar_Module_Model::getInvitedUserDetails($recordId);
-		$names = array();		
-		$count = 0;
-
-		for ($i = 0; $i < count($contactDetails); $i++) {
-			$names[$count] = $contactDetails[$i]['name'];
-			$count++;
-		}		
-		
-
-		for ($i = 0; $i < count($userDetails); $i++) {
-			$names[$count] = $userDetails[$i]['name'];
-			$count++;
-		}
-
-		$names = array_filter($names);
-		$names = implode(",",$names);
 
 		$viewer = $this->getViewer($request);
-		$viewer->assign('ATTENDEES', $names);
 		$viewer->assign('MEETINGDATA', Calendar_Module_Model::getMeetingData($recordId));
 		$viewer->assign('CONTACTS', Calendar_Module_Model::getRelatedContactDetails($recordId));
 		$viewer->assign('USERS', Calendar_Module_Model::getInvitedUserDetails($recordId));
 		$viewer->view('ShowMOM.tpl', $moduleName);
+
 	}
 
 	function checkPermission(Vtiger_Request $request) {
@@ -254,6 +236,7 @@ class Calendar_Detail_View extends Vtiger_Detail_View {
 
 		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
 		$headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
+print_r($headerScriptInstances);
 		return $headerScriptInstances;
 	}	
 }
