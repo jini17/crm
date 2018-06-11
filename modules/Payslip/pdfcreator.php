@@ -6,11 +6,7 @@ Change Reason: Pdf Cinfigurator change, File overwritten
 =================================================================== */
 
 /*********************************************************************************
-** The contents of this file are subject to the vtiger CRM Public License Version 1.0
- * ("License"); You may not use this file except in compliance with the License
- * The Original Code is: from crm-now  www.crm-now.de
- * All Rights Reserved.
- * modified by: crm-now, www.crm-now.de
+** Created By Nirbhay Shah
  ********************************************************************************/
 function createpdffile ($payslipid,$purpose='', $path='',$current_id='') {
 
@@ -41,7 +37,9 @@ function createpdffile ($payslipid,$purpose='', $path='',$current_id='') {
 	$query = "SELECT * FROM vtiger_payslip INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_payslip.payslipid INNER JOIN vtiger_users ON vtiger_users.id = vtiger_payslip.emp_name WHERE vtiger_crmentity.deleted = 0 AND payslipid = ?";
 	$result = $adb->pquery($query,array($payslipid));
 
-	$emp_name = $adb->query_result($result,0,'first_name');
+    $emp_name = $adb->query_result($result,0,'first_name');
+    $userid = $adb->query_result($result,0,'id');
+    $company_details = $adb->query_result($result,0,'company_details');
     $designation = $adb->query_result($result,0,'designation');
     $ic_passport = $adb->query_result($result,0,'ic_passport');
     $epf_no = $adb->query_result($result,0,'epf_no');
@@ -69,10 +67,43 @@ function createpdffile ($payslipid,$purpose='', $path='',$current_id='') {
     $hrdf = $adb->query_result($result,0,'hrdf');
     $total_comp_contribution = $adb->query_result($result,0,'total_comp_contribution');
     //echo  $emp_name;die;
-	
+
+    /**
+     * Query to add Emp Designation
+     */
 
 
-	// ************************ END POPULATE DATA ***************************
+	$query1 = "SELECT department FROM vtiger_crmentity INNER JOIN vtiger_employeecontract ON vtiger_crmentity.crmid = vtiger_employeecontract.employeecontractid WHERE deleted = 0 AND setype = 'EmployeeContract' AND smownerid = ? ORDER BY createdtime DESC";
+
+	$result1 = $adb->pquery($query1,array($userid));
+
+    $dept = $adb->query_result($result1,0,'department');
+
+
+    /**
+     * Query to add Company Details
+     */
+
+
+    $query2 = "SELECT * FROM vtiger_organizationdetails WHERE organization_id = ?";
+
+    $result2 = $adb->pquery($query2,array($company_details));
+
+    $organization_title = $adb->query_result($result2,0,'organization_title');
+    $organizationname = $adb->query_result($result2,0,'organizationname');
+    $address = $adb->query_result($result2,0,'address');
+    $city = $adb->query_result($result2,0,'city');
+    $state = $adb->query_result($result2,0,'state');
+    $country = $adb->query_result($result2,0,'country');
+    $code = $adb->query_result($result2,0,'code');
+    $phone = $adb->query_result($result2,0,'phone');
+    $fax = $adb->query_result($result2,0,'fax');
+    $website = $adb->query_result($result2,0,'website');
+    $vatid = $adb->query_result($result2,0,'vatid');
+   // $title = $adb->query_result($result2,0,'department');
+
+    //die;
+    // ************************ END POPULATE DATA ***************************
 	//************************BEGIN PDF FORMATING**************************
 	// Extend the TCPDF class to create custom Header and Footer
 	class MYPDF extends TCPDF 
@@ -103,7 +134,7 @@ function createpdffile ($payslipid,$purpose='', $path='',$current_id='') {
 	$pdf->setPrintHeader(0); //header switched off permanently
 
 	//set margins
-	$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+	//$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 	$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 	$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -112,7 +143,7 @@ function createpdffile ($payslipid,$purpose='', $path='',$current_id='') {
 	//CODE ADDED BY IZZATY ON 12-10-2011
 	$pdf-> SetSubject ($contact_name);
 	//CODE END ADDED ON 12-10-2011
-	$pdf-> SetCreator ('CRM System crm-now/PS: www.crm-now.de ');
+	//$pdf-> SetCreator ('CRM System crm-now/PS: www.crm-now.de ');
 	//list product names as keywords
 	//Disable automatic page break
 	$pdf->SetAutoPageBreak(true,PDF_MARGIN_FOOTER);
@@ -127,7 +158,7 @@ function createpdffile ($payslipid,$purpose='', $path='',$current_id='') {
 	$pdf->AddPage();
 	$pdf-> setImageScale(1.5);
 
-	include("modules/Payslip/pdf_templates/header.php");
+	//include("modules/Payslip/pdf_templates/header.php");
 	//display();
 	$pdf->SetFont($default_font, " ", '12');
 	include("modules/Payslip/pdf_templates/body.php");
