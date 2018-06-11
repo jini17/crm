@@ -87,7 +87,7 @@ abstract class WSAPP_SynchronizeController {
             if($moduleName =='Office365Calendar' || $moduleName=='Office365Contacts') {
                 if (($sourceRecord->getMode() == WSAPP_SyncRecordModel::WSAPP_DELETE_MODE || $sourceRecord->getMode() == WSAPP_SyncRecordModel::WSAPP_UPDATE_MODE)
                     && $sourceRecord->get('_id') == "") {
-                    if(array_key_exists("_serverid",$sourceRecords)) $sourceid = explode("x", $sourceRecord->get('_serverid'));
+                    if($sourceRecord->get('_serverid') !="") $sourceid = explode("x", $sourceRecord->get('_serverid'));
                     else $sourceid = explode("x", $sourceRecord->get('id'));
                     $sourceId = $sourceid[1];
                     $res = $adb->pquery("SELECT `officeid` FROM `office365_sync_map` WHERE `vtigerid`=? AND`module`=?", array($sourceId,$moduleName));

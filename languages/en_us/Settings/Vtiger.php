@@ -35,7 +35,7 @@ $languageStrings = array(
 	'LBL_EXTERNAL_SERVER_SETTINGS' => 'External Server Settings',
 	'LBL_OTHER_SETTINGS' => 'Other Settings',
 	'LBL_EXTENSIONS_PLACE' => 'Extensions Place',
-	'LBL_EXTENSIONS' => 'Extensions',
+	'LBL_EXTENSIONS' => 'Integration',
 	'LBL_PBXMANAGER' => 'PBXManager',
         'LBL_INTEGRATION' => 'Integration',
     	'LBL_EXCHANGE_CONNECTOR' => 'Exchange Connector',
@@ -247,6 +247,11 @@ $languageStrings = array(
 	'LBL_CONFIG_DESCRIPTION' => 'Edit the Configuration details of vtiger CRM',
 	'LBL_CONFIG_FILE' => 'config.inc.php',
 	'LBL_MB' => 'MB',
+	'LBL_ADVANCE_GOOGLE_CONFIG' => 'Advance Google Configuration',
+	'LBL_GOOGLE_CONFIG_FILE' => 'Goolge Configuration File',
+	'LBL_HOW_CONFIG' => 'How to do the Configuration',
+
+
 
 	//Config Editor Fields
 	'LBL_MINI_CALENDAR_DISPLAY' => 'Mini Calendar Display',
@@ -386,7 +391,7 @@ $languageStrings = array(
     'LBL_FORECAST_SETTINGS' => 'Forecast Settings',
     'LBL_SEARCH_FOR_SETTINGS' => 'Search settings',
     'LBL_GOOGLE' => 'Google',
-    'LBL_OUTLOOK' => 'Outlook',
+    'LBL_OFFICE365' => 'Office 365',
     'LBL_QUICKBOOKS' => 'QuickBooks',
     'LBL_XERO' => 'Xero',
     'LBL_TALLY' => 'Tally',
@@ -424,6 +429,36 @@ $languageStrings = array(
 	'istooltip'=>'Tooltip',	//added by jitu@secondcrm.com for showhide tooltip	
 	//End here	
 	'LBL_ASSIGN_COMPANY' => 'Assign Company', //edited by siti@secondcrm on 25feb2015
+	'LBL_EMPLOYEMENT_DETAILS'=>'Employment Details',
+	'LBL_PASSPORTVISA'=>'Passport Visa',
+	'LBL_PERFORMANCE'=>'Performance',
+	'LBL_GRADE'=>'Grade',
+	'LBL_TIMESHEET'=>'Timesheet',
+	'LBL_HR_DOCUMENTS'=>'HR Documents',
+	'LBL_EMPLOYEMENT'=>'Employment',
+	'EmployeeContract'=>'Employement Detail',
+	'PassportVisa'=>'Passport Visa',
+	'Performance'=>'Performance Review',
+	'Grade'=>'Grade List',
+	'TimeSheet'=>'Time-Sheet',
+	'LBL_DOWNLOAD'=>'Download',
+	'LBL_HR_MATTERS'=>'HR Matters',
+	'LBL_PAYSLIP'=>'Payslip',
+	'LBL_LEAVE_TYPE'=>'Leave Type',
+	'LBL_CLAIM_TYPE'=>'Claim Type',
+	'LBL_BENEFIT_TYPE'=>'Benefit Type',
+	'LBL_ALLOCATION'=>'Leave/Claim Allocation',
+	'LBL_EDIT_VALUE'=>'Edit',
+	'LBL_LEAVE_TYPES_LIST'=>'Leave Type List',
+	'LBL_CLAIM_TYPES_LIST'=>'Claim Type List',
+	'LBL_CLAIM_TYPES'=>'Claim Type',
+	'LBL_BENEFIT_TYPES'=>'Benefit Type',
+	'LBL_BENEFIT_TYPES_LIST'=>'Benefit Type List',
+
+	'LBL_PDF'=>'PDF',
+	'LBL_HOLIDAY'=>'Holiday',
+	'LBL_WORKINGHOURS'=>'Working Hours',
+	'LBL_CLAIM'=>'Apply Claim',
 
 );
 

@@ -1,7 +1,10 @@
 <?php
 //Added by jitu@secondcrm.com pm 24 oct 2014
 
-class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
+
+///***  edited from  class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {    ***/
+
+class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 	
 	function __construct() {
 		parent::__construct();
@@ -25,12 +28,14 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveEducation(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
+		$request['is_studying']= $_REQUEST['is_studying'];
+		
 		$response = new Vtiger_Response();
 		try{
 		    $return = Users_EduRecord_Model::saveEducationDetail($request);
-		    $msg    = $return=='1'? vtranslate("LBL_INSTITUTION_UPDATE_SUCCESS","Users"):vtranslate("LBL_INSTITUTION_ADD_SUCCESS","Users"); 		
-		
+		    $msg    = $return=='1'? vtranslate("LBL_INSTITUTION_UPDATE_SUCCESS","Users"):vtranslate("LBL_INSTITUTION_ADD_SUCCESS","Users"); 	
 		    $response->setResult($msg);
 		}catch(Exception $e){
 		    $response->setError($e->getCode(),$e->getMessage());
@@ -42,8 +47,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveProject(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
-		
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
 		$response = new Vtiger_Response();
 		try{
 		    $return = Users_ProjectRecord_Model::saveProjectDetail($request);
@@ -60,7 +65,10 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveWorkExp(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
+		$request['isworking']= $_REQUEST['isworking'];
+		
 		
 		$response = new Vtiger_Response();
 		try{
@@ -78,7 +86,9 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveLanguage(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
+		
 		$response = new Vtiger_Response();
 		try{
 		    $return = Users_SkillsRecord_Model::saveSoftSkillDetail($request);
@@ -99,7 +109,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveEmergencyContact(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
 		
 		$response = new Vtiger_Response();
 		try{
@@ -116,7 +127,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	public function saveSkill(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
-		$request= $_REQUEST;	
+		$request= $_REQUEST['form'];
+		$request['isview']= $_REQUEST['isview'];
 		
 		$response = new Vtiger_Response();
 		try{
@@ -135,44 +147,85 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 
 	}
 
-	//Saving leave in-/new/edit/managerapproval//
+/*
 	public function saveLeave(Vtiger_Request $request) {
-	
+		
+		$module = $request->getModule();
+		$request= $_REQUEST['form'];
+		//$request['isview']= $_REQUEST['isview'];
+		//$request['is_studying']= $_REQUEST['is_studying'];
+		
+		$response = new Vtiger_Response();
+		try{
+		    $return = Users_LeavesRecords_Model::saveLeaveDetail($request);
+		    $msg    = $return=='1'? vtranslate("LBL_INSTITUTION_UPDATE_SUCCESS","Users"):vtranslate("LBL_INSTITUTION_ADD_SUCCESS","Users"); 	
+		    $response->setResult($msg);
+		}catch(Exception $e){
+		    $response->setError($e->getCode(),$e->getMessage());
+		}
+		$response->emit();
+
+	}
+*/
+
+
+	//Saving leave in-/new/edit/managerapproval//
+	public function saveLeave(Vtiger_Request $request) { 
+
+	//$request= $_REQUEST['form'];	
 	$module = $request->getModule();
 	$db = PearDatabase::getInstance();
 	include_once 'include/Webservices/Create.php';
 	$user = new Users();
 	global $current_user;
 	
-       	$current_usersaving = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
+    $current_usersaving = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
 	
 	$applicant_id = $request->get('current_user_id');
-	$leaveid= $request->get('record');
+	$leaveid= $request->get('record'); 
 	
 	$wsleaveType    = vtws_getWebserviceEntityId('LeaveType', $request->get('leave_type'));
+	//echo $wsleaveType;die;
 	$wsUser		= vtws_getWebserviceEntityId('Users', $request->get('replaceuser'));
 	$wsCurrentUser	= vtws_getWebserviceEntityId('Users', $current_user->id);	
 	$manager= $request->get('manager');
 	$startdate = date('Y-m-d',strtotime($request->get('start_date')));
 	$enddate = date('Y-m-d',strtotime($request->get('end_date')));
+
 	//Check if leave is already applied during startdate and enddate by loggedIN User
 	
-	if($manager == 'false' || $manager == '' ) {
+	if($manager == 'false' || $manager == '' ) {  
 	
-		if ($leaveid =='') {
+		if ($leaveid =='') { 
 			$resultleave = $db->pquery("SELECT vtiger_leave.leaveid FROM vtiger_leave 
 				INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leave.leaveid 
 				WHERE ((fromdate between ? AND ?) OR (todate between ? AND ?)) AND (vtiger_leave.leavestatus ='Apply' || vtiger_leave.leavestatus ='New' || vtiger_leave.leavestatus ='Approved') AND vtiger_crmentity.smcreatorid = ? AND vtiger_crmentity.deleted=0",
 			array($startdate, $enddate, $startdate, $enddate, $current_user->id));
 		}		
-		else {
+		else { 
 			$resultleave = $db->pquery("SELECT vtiger_leave.leaveid FROM vtiger_leave 
 				INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leave.leaveid 
 				WHERE ((fromdate between ? AND ?) OR (todate between ? AND ?)) AND (vtiger_leave.leavestatus ='Apply' || vtiger_leave.leavestatus ='Approved') AND vtiger_crmentity.smcreatorid = ? AND vtiger_crmentity.deleted=0",
 			array($startdate, $enddate, $startdate, $enddate, $current_user->id));
 		}
+
+	
+		$date1 = strtotime($startdate);
+		$date2 = strtotime($enddate);
+
+		if($date1 > $date2){
+			$response = new Vtiger_Response();
+			$msg    = "date_wrong";
+			$response->setResult($msg);
+			$response->emit();	
+			exit();
+		}
+		else{
+		  // Date 2 is >
+		}
+
 			
-		if($db->num_rows($resultleave) > 0) {
+		if($db->num_rows($resultleave) > 0) { 
 			$response = new Vtiger_Response();
 			$msg    = "JS_USER_ALREADY_APPLIED";
 			$response->setResult($msg);
@@ -182,7 +235,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 	}
 
 
-		//echo "<pre>";print_r($request);
+		
 		//Check If new record.//
 		if(empty($leaveid) || $leaveid==""){
  		$response = new Vtiger_Response();
@@ -214,11 +267,12 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 				$leave = vtws_create('Leave', $data,$current_usersaving);
 				$msg    = $leave != null ? vtranslate("LBL_CREATE_SUCCESS","Users"):vtranslate("LBL_CREATE_FAILED","Users");
 
-		    		$response->setResult($msg);
+		    	$response->setResult($msg);
 			
 			} catch (WebServiceException $ex) {
 				echo $ex->getMessage();
 			}
+
 		$response->emit();
 
 		}else{ 
@@ -246,7 +300,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_SaveAjax_Action {
 							'approveby'=>$approveby,
 							'approvedate'=>$approvedate,
 							);
-							if($request->get('savetype')=='Approved') { 
+							if($request->get('	')=='Approved') { 
 								
 								$startdate = date('Y-m-d',strtotime($request->get('hdnstartdate')));
 								$enddate = date('Y-m-d',strtotime($request->get('hdnenddate')));

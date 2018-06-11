@@ -12,7 +12,9 @@
  * TODO need to organize into classes based on functional grouping.
  */
 
-require_once 'testAPI/vendor/autoload.php';
+
+
+
 
 class Vtiger_Functions {
 
@@ -20,7 +22,10 @@ class Vtiger_Functions {
 
 	//Added By Mabruk for Google Drive Integration 27-03-2018
 	//Two Functions added: getClient() and createFolderInGoogleDrive()
+
 	static function getClient() {
+	require_once 'testAPI/vendor/autoload.php';
+
 	 $client = new Google_Client();
 	 $client->setApplicationName('TEST');
 	 $client->setScopes(Google_Service_Drive::DRIVE);
@@ -619,6 +624,7 @@ class Vtiger_Functions {
 	}
 
 	static function initStorageFileDirectory($fileLocationType) {
+		require_once 'testAPI/vendor/autoload.php';
 		$filepath = 'storage/';
 
 		$year  = date('Y');

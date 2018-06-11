@@ -167,8 +167,40 @@ Settings_Vtiger_List_Js("Settings_LoginHistory_List_Js",{},{
 			thisInstance.pageJumpOnSubmit(currentEle);
 		});
 	},
+
+	//Function Added By Mabruk for Login History Show Updates Features on 25/05/2018
+	showUpdates : function() {
+		jQuery('.showUpdates').click( function() { 
+			var aDeferred = jQuery.Deferred();
+			var sessionId = jQuery(this).data('sessionid');		
+			var params = {
+					'module' : app.getModuleName(),
+					'parent' : app.getParentModuleName(),
+					'view' : 'ShowUpdates',
+					'sessionId' : sessionId
+				}
+
+			AppConnector.requestPjax(params).then( 
+				function(data) {
+					app.helper.showModal(data);
+					jQuery('#close').click( function(){ 
+						app.hideModalWindow();
+					});
+					aDeferred.resolve(data);
+					history.pushState({}, null, window.history.back());
+				},
+				function(error,err) { 
+					aDeferred.reject();
+				}
+			);	
+
+			return aDeferred.promise();
+		});
+	},
+
 	
-	registerEvents : function() {
+	registerEvents : function() { 
+		this.showUpdates();
         this.initializePaginationEvents();
         this.registerFilterChangeEvent();
 

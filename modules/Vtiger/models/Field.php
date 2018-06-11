@@ -167,13 +167,40 @@ class Vtiger_Field_Model extends Vtiger_Field {
 				$fieldDataType = 'salutation';
             } else if($uiType == '55' && stripos($this->getName(), 'roundrobin_userid') !== false) {
                 $fieldDataType = 'multiowner';
-			} else {
+            } else if($uiType == '3993') {		//Modified Line
+				 $fieldDataType = 'companyDetails';	//Modified Line
+			} else if($uiType == '998') {		//Modified Line
+				 $fieldDataType = 'userRole';	//Modified Line
+			} else if($uiType == '999') {		//added by jitu@5jan2017
+				 $fieldDataType = 'range';		//added by jitu@5jan2017	
+			}else {
 				$webserviceField = $this->getWebserviceFieldObject();
 				$fieldDataType = $webserviceField->getFieldDataType();
 			}
 			$this->fieldDataType = $fieldDataType;
 		}
 		return $this->fieldDataType;
+	}
+	/**
+	 * Function returns all the User Roles
+	 * @return
+	 */
+	 public function getAllRoles(){
+		$roleModels = Settings_Roles_Record_Model::getAll();
+		$roles = array();
+		foreach ($roleModels as $roleId=>$roleModel) {
+			$roleName = $roleModel->getName();
+			$roles[$roleName] = $roleId;
+		}
+		return $roles;
+	}
+	/**
+	* Function added by Jitu@secondcrm.com on Sep 19, 2014 for new UI Type 3993
+	* This function will retrieve terms details 
+	*/
+	public function getCompanyDetails($id) {
+		$aCompanyTitle = Vtiger_Util_Helper::getCompanyTitle($id);
+		return $aCompanyTitle;
 	}
 
 	/**
@@ -401,7 +428,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 	 * @return <Boolean>
 	 */
 	public function isAjaxEditable() {
-		$ajaxRestrictedFields = array('4', '72', '61');
+		$ajaxRestrictedFields = array('4', '72', '61', '999');
 		if(!$this->isEditable() || in_array($this->get('uitype'), $ajaxRestrictedFields)) {
 			return false;
 		}

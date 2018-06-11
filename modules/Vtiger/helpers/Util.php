@@ -49,6 +49,47 @@ class Vtiger_Util_Helper {
 		return $files;
 	}
 
+	/** Function added by ZUL@Secondcrm.com on Jun 23, 2014 for new UI Type 3993
+	*  Modified By jitu@secondcrm.com    	
+	*  This function will retrieve company title 
+	*/
+    
+	public static function getCompanyTitle($id){
+		$db = PearDatabase::getInstance();
+		$currentUser = Users_Record_Model::getCurrentUserModel();
+		$userid      = $currentUser->id;
+		$params = array();
+		$Where = '';
+		if(!$currentUser->isAdminUser()) {
+			$Where  = " WHERE tblSCUAC.userid = ?";
+			$params = array($userid); 	
+		}
+
+		$aCompanyTitle = array();
+		$iOptionIndex = 0;
+	
+		$query = "SELECT DISTINCT tblVTOD.organization_id,tblVTOD.`organizationname`, tblVTOD.organization_title 
+			FROM vtiger_organizationdetails tblVTOD
+		   LEFT JOIN secondcrm_users_assigncompany tblSCUAC 
+			ON tblSCUAC.organization_id = tblVTOD.organization_id 
+			".$Where."
+			ORDER BY tblVTOD.organization_title";
+		$result = $db->pquery($query, $params);
+		$iMaxCompany = $db->num_rows($result);
+		for($iK=0;$iK<$iMaxCompany;$iK++)
+		{   
+			if($db->query_result($result, $iK, "organization_id") > 0){
+			$iOptionIndex++;
+			$aCompanyTitle[$iOptionIndex]['organization_id'] = $db->query_result($result,$iK,'organization_id', 'selected');
+			$aCompanyTitle[$iOptionIndex]['organization_title'] = $db->query_result($result,$iK,'organization_title', 'selected');
+			$aCompanyTitle[$iOptionIndex]['organizationname'] = $db->query_result($result,$iK,'organizationname', 'selected');
+			}    
+		}
+
+		return $aCompanyTitle;
+	} //End function getCompanyTitle
+	
+	
 	/**
 	 * Function parses date into readable format
 	 * @param <Date Time> $dateTime

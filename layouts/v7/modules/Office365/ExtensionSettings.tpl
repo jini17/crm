@@ -100,7 +100,7 @@
 			<br>
 			<div class="row">
 				<div class="col-sm-3 col-xs-3">
-					<a id="authorizeButton" class="btn btn-block btn-social btn-lg btn-oofice3565" data-url='index.php?module={$MODULE}&view=List&operation=sync&sourcemodule={$SOURCEMODULE}'>{vtranslate('LBL_SIGN_IN_WITH_OFFICE365', $MODULE)}</a>
+					<a id="authorizeButton" class="btn btn-block btn-social btn-lg btn-google-plus" data-url='index.php?module={$MODULE}&view=List&operation=sync&sourcemodule={$SOURCEMODULE}'>{vtranslate('LBL_SIGN_IN_WITH_OFFICE365', $MODULE)}</a>
 				</div>
 			</div>
 		{else}
@@ -122,7 +122,7 @@
 			{/if}
 			<div class="row">
 				<div class="col-sm-3 col-xs-3">
-					<a id="authorizeButton" class="btn btn-block btn-social btn-lg btn-office365-plus" data-url='index.php?module={$MODULE}&view=List&operation=changeUser&sourcemodule={$SOURCEMODULE}'>{vtranslate('LBL_CHANGE_USER', $MODULE)} </a>
+					<a id="authorizeButton" class="btn btn-block btn-social btn-lg btn-google-plus" data-url='index.php?module={$MODULE}&view=List&operation=changeUser&sourcemodule={$SOURCEMODULE}'>{vtranslate('LBL_CHANGE_USER', $MODULE)} </a>
 				</div>
 			</div>
 		{/if}

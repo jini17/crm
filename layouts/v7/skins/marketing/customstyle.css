@@ -344,3 +344,9 @@ button:hover{
 .glabel{
     background: #DFDFDF;
 }
+.table-border-black {
+    border: 1px solid #ddd;
+}
+.table-border-black > thead > tr > th, .table-border-black > tbody > tr > th, .table-border-black > tfoot > tr > th, .table-border-black > thead > tr > td, .table-border-black > tbody > tr > td, .table-border-black > tfoot > tr > td {
+    border: 1px solid #ddd;
+}

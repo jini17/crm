@@ -31,7 +31,7 @@ include_once 'include/Webservices/Utils.php';
 	$adb->setDebug(true);
 	$MODULENAME = 'Education'; //Give your module name
 	$PARENT 	= 'Support';  //Give Parent name
-	$ENTITYNAME = 'Institution_name'; //Give Duplicate check field name
+	$ENTITYNAME = 'institution_name'; //Give Duplicate check field name
 	$ENTITYLABEL= 'Institution Name';
 
 	$module = Vtiger_Module::getInstance($MODULENAME);

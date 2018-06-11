@@ -19,7 +19,6 @@ Vtiger_ExtensionCommon_Js("Google_Index_Js", {}, {
     
     registerSyncNowButton : function(container) {
         container.on('click', '.syncNow', function(e) {
-            alert();
             var params = {
                 module : 'Google',
                 view : 'Sync'

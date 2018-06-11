@@ -966,6 +966,19 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		// To check username existence in db
 		return $userModuleModel->checkDuplicateUser($userName);
 	}
+
+	/**
+	 * Function to check whether user exists in CRM and in VAS
+	 * @param <string> $userName
+	 * @return <boolean> $status
+	 */
+	public static function isValidateUserSubscription($userName, $roleid) {
+		$userModuleModel = Users_Module_Model::getCleanInstance('Users');
+		$status = false;
+		// To validate User in CP database
+		return $userModuleModel->ValidateUserSubscription($userName, $roleid);
+	}
+
 	/**
 	Added by afiq@secondcrm.com on 6/16/2014 for multiple from address
 	*/
@@ -979,7 +992,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		$aFinalServer[0]['name'] = trim($db->query_result($result1,0,'first_name').' '.$db->query_result($result1,0,'last_name'));
 		$aFinalServer[0]['email'] = $db->query_result($result1,0,'email1');
 		
-		$query1 = 'SELECT id, email, name FROM vtiger_multiplefromaddress ORDER BY email';
+		$query1 = 'SELECT id, email, name, serverid FROM vtiger_multiplefromaddress ORDER BY email';
 		$result1 = $db->pquery($query1, array());
 		$iMaxServer = $db->num_rows($result1);
 		for($iK=0;$iK<$iMaxServer;$iK++)
@@ -988,6 +1001,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
 			$iId1 = $db->query_result($result1,$iK,'emailid');
 			$aFinalServer[$iOptionIndex]['email'] = $db->query_result($result1,$iK,'email');
 			$aFinalServer[$iOptionIndex]['name'] = $db->query_result($result1,$iK,'name');
+            $aFinalServer[$iOptionIndex]['serverid'] = $db->query_result($result1,$iK,'serverid');
 		}
 		
 		return $aFinalServer;
@@ -1068,6 +1082,27 @@ class Users_Record_Model extends Vtiger_Record_Model {
 			$row = $db->query_result_rowdata($result, 0);
 		}
 		return $row;
-	}	
+	}
+
+	//added by jitu@Tab permission to nonadmin user like admin settings
+	public function getTabDetails($blockid){
+
+		$db  = PearDatabase::getInstance();
+		//$db->setDebug(true);
+		$query = "SELECT label FROM vtiger_settings_blocks WHERE blockid=?";
+		$result = $db->pquery($query,array($blockid));
+		$blocklabel = $db->query_result($result,0, 'label');
+
+		$fieldqry = "SELECT name, linkto FROM vtiger_settings_field WHERE blockid=? ORDER BY sequence ASC";
+		$fldresult = $db->pquery($fieldqry,array($blockid));
+		$row = array();
+		if($db->num_rows($fldresult)>0) {
+			for($i=0;$i<$db->num_rows($fldresult);$i++){
+				$row[$blocklabel][$db->query_result($fldresult, $i, 'name')] = $db->query_result($fldresult, $i, 'linkto');	
+			}
+			
+		}
+		return $row;
+	}	//end here 
 
 }

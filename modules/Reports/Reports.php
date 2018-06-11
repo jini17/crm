@@ -286,7 +286,7 @@ class Reports extends CRMEntity{
 				$relatedmodules = $adb->pquery(
 					"SELECT vtiger_tab.name, vtiger_relatedlists.tabid FROM vtiger_tab
 					INNER JOIN vtiger_relatedlists on vtiger_tab.tabid=vtiger_relatedlists.related_tabid
-					WHERE vtiger_tab.isentitytype=1
+					WHERE (vtiger_tab.isentitytype=1 OR vtiger_tab.tabid=29)
 					AND vtiger_tab.name NOT IN(".generateQuestionMarks($restricted_modules).")
 					AND vtiger_tab.presence = 0 AND vtiger_relatedlists.label!='Activity History'
 					UNION

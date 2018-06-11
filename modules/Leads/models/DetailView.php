@@ -8,7 +8,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Leads_DetailView_Model extends Accounts_DetailView_Model {
+class Leads_DetailView_Model extends Vtiger_DetailView_Model {
 	/**
 	 * Function to get the detail view links (links and widgets)
 	 * @param <array> $linkParams - parameters which will be used to calicaulate the params
@@ -20,6 +20,7 @@ class Leads_DetailView_Model extends Accounts_DetailView_Model {
 
 		$moduleModel = $this->getModule();
 		$recordModel = $this->getRecord();
+	//	echo "<pre>"; print_r($moduleModel); die;
 		$emailModuleModel = Vtiger_Module_Model::getInstance('Emails');
 
 		$linkModelList = Vtiger_DetailView_Model::getDetailViewLinks($linkParams);
@@ -92,8 +93,22 @@ class Leads_DetailView_Model extends Accounts_DetailView_Model {
 			);
 			$linkModelList['DETAILVIEWBASIC'][] = Vtiger_Link_Model::getInstanceFromValues($basicActionLink);
 		}
-        
-		return $linkModelList;
+
+        /**
+         ** Added by Danial Enrich Contact 09/04/2018
+         **/
+
+        $basicActionLinkEnrich = array(
+            'linktype' => 'DETAILVIEWBASIC',
+            'linklabel' => 'LBL_ENRICH_CONTACT',
+            'linkurl' => 'javascript:Vtiger_Detail_Js.triggerEnrichAPI("'.$recordModel->getEnrichUrl().'",this);',
+            'linkicon' => ''
+        );
+
+        $linkModelList['DETAILVIEWBASIC'][] = Vtiger_Link_Model::getInstanceFromValues($basicActionLinkEnrich);
+
+
+        return $linkModelList;
 	}
 	
 }

@@ -183,8 +183,10 @@ class Users_Module_Model extends Vtiger_Module_Model {
 		$loginTime = date("Y-m-d H:i:s");
        		$browser = (strlen($browser)) ? $browser : $browser;
 
-		$query = "INSERT INTO vtiger_loginhistory (user_name, user_ip, logout_time, login_time, status, browser) VALUES (?,?,?,?,?,?)";
-		$params = array($username, $userIPAddress, '0000-00-00 00:00:00',  $loginTime, $status, $browser);
+	//Session_id added By Mabruk requested By Jitu
+        $_SESSION['session_id'] = uniqid();   
+        $query = "INSERT INTO vtiger_loginhistory (user_name, user_ip, logout_time, login_time, status, browser, session_id) VALUES (?,?,?,?,?,?,?)";
+        $params = array($username, $userIPAddress, '0000-00-00 00:00:00',  $loginTime, $status, $browser, $_SESSION['session_id']);
 		$adb->pquery($query, $params);
 	}
 
@@ -390,5 +392,30 @@ class Users_Module_Model extends Vtiger_Module_Model {
 			$importableFieldModels[$fieldName] = $this->getField($fieldName);
 		}
 		return $importableFieldModels;
+	}
+
+	public function getRelatedDetails($user_id){
+		$adb = PearDatabase::getInstance();
+		$result = $adb->pquery("SELECT vtiger_passportvisa.ppvisatitle,vtiger_users.title FROM vtiger_passportvisa
+			INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_passportvisa.passportvisaid AND vtiger_passportvisa.pp_status='Active'
+			INNER JOIN vtiger_users ON vtiger_users.id=vtiger_crmentity.smownerid
+			WHERE vtiger_crmentity.deleted=0 AND vtiger_crmentity.smownerid=?",array($user_id));
+		$numrows = $adb->num_rows($result);
+		$array = array();
+		for($i=0;$i<$numrows;$i++){
+			$array['ppvisatitle']= $adb->query_result($result,$i,'ppvisatitle');
+			$array['title']= $adb->query_result($result,$i,'title');
+		}
+		return $array;
+
+	}
+
+	/**
+		Validate user from Subscription table 
+		@author Jitendra Gupta
+	**/
+	public function ValidateUserSubscription($role){
+
+		return false;
 	}
 }

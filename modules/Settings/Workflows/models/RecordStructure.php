@@ -129,12 +129,36 @@ class Settings_Workflows_RecordStructure_Model extends Vtiger_RecordStructure_Mo
 
 	/**
 	 * Function returns all the email fields for the workflow record structure
-	 * @return type
+	 * @return type @modified by jitu@multi from address in workflow send mail task
 	 */
 	public function getAllEmailFields() {
-		return $this->getFieldsByType('email');
-	}
 
+
+
+		$db = PearDatabase::getInstance();
+		//$db->setDebug(true);
+		$result = $db->pquery("SELECT vtiger_multiplefromaddress.name, vtiger_multiplefromaddress.email,vtiger_systems.isdefault,vtiger_systems.server,vtiger_systems.id 
+			FROM vtiger_multiplefromaddress 
+			LEFT JOIN vtiger_systems ON vtiger_multiplefromaddress.serverid=vtiger_systems.id WHERE vtiger_systems.isactive=0", array());
+		$noOfRows = $db->num_rows($result);
+		$emailfrom = array();
+		for($i=0; $i<$noOfRows; ++$i) {
+			$name = $db->query_result($result, $i, 'name');
+			$id = $db->query_result($result, $i, 'id');
+			$email = $db->query_result($result, $i, 'email');
+			$isdefault = $db->query_result($result, $i, 'isdefault');
+			$server = $db->query_result($result, $i, 'server');
+			$emailfrom[$i]['serverid'] = $id ;
+			$emailfrom[$i]['name'] 	= $name ;
+			$emailfrom[$i]['isdefault'] =$isdefault ;
+			$emailfrom[$i]['server'] =$server ;
+			$emailfrom[$i]['email'] =$email ;
+
+
+		}
+		
+		return $emailfrom;
+	}
 	/**
 	 * Function returns all the date time fields for the workflow record structure
 	 * @return type
@@ -143,6 +167,14 @@ class Settings_Workflows_RecordStructure_Model extends Vtiger_RecordStructure_Mo
 		$fieldTypes = array('date','datetime');
 		return $this->getFieldsByType($fieldTypes);
 	}
+
+    /**
+     * Function returns all the email fields for the workflow record structure
+     * @return type
+     */
+    public function getAllEmailValues() {
+        return $this->getFieldsByType('email');
+    }
 
 	/**
 	 * Function returns fields based on type

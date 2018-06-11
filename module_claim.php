@@ -1,5 +1,8 @@
 <?php
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 /** Create New Vtlib script for module Creation
   * created : 22 Feb 2018
   * Author  : Jitendra Gupta <jitendraknp2004@gmail.com>
@@ -26,7 +29,11 @@ include_once('vtlib/Vtiger/Package.php');
 include_once 'includes/main/WebUI.php';
 include_once 'include/Webservices/Utils.php';
 global $adb;
+<<<<<<< HEAD
 //$adb->setDebug(true);
+=======
+$adb->setDebug(true);
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$Vtiger_Utils_Log = true;
 
 	$MODULENAME = 'Claim'; //Give your module name
@@ -73,6 +80,10 @@ global $adb;
 	// Set at-least one field to identifier of module record
 	$module->setEntityIdentifier($field1);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	
 	/** Create required fields and add to the block */
 	$field2 = new Vtiger_Field();
@@ -81,11 +92,18 @@ global $adb;
 	$field2->table = $module->basetable;
 	$field2->column = 'category';
 	$field2->columntype = 'VARCHAR(50)';
+<<<<<<< HEAD
 	$field2->uitype = 15;
 	$field2->typeofdata = 'V~M';
 	$field2->setPicklistValues( Array ('Option 1', 'Option 2'));
 	$expenseInformation->addField($field2); /** Creates the field and adds to block */
 	
+=======
+	$field2->uitype = 10;
+	$field2->typeofdata = 'V~M';
+	$expenseInformation->addField($field2); /** Creates the field and adds to block */
+	$field2->setRelatedModules(Array('ClaimType'));
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 
 	/** Create required fields and add to the block */
 	$field3 = new Vtiger_Field();
@@ -105,7 +123,11 @@ global $adb;
 	$field4->table = $module->basetable;
 	$field4->column = 'description';
 	$field4->columntype = 'TEXT';
+<<<<<<< HEAD
 	$field4->uitype = 21;
+=======
+	$field4->uitype = 19;
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$field4->typeofdata = 'V~O'; // varchar~Mandatory	
 	$description->addField($field4); /** Creates the field and adds to block */
 	
@@ -117,7 +139,11 @@ global $adb;
 	$field5->table = $module->basetable;
 	$field5->column = 'totalamount';
 	$field5->columntype = 'DECIMAL(62,2)';
+<<<<<<< HEAD
 	$field5->uitype = 1;
+=======
+	$field5->uitype = 71;
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$field5->displaytype = 1;
 	$field5->typeofdata = 'NN~M'; // varchar~Mandatory	
 	$expenseInformation->addField($field5); /** Creates the field and adds to block */
@@ -134,11 +160,46 @@ global $adb;
 	$field6->setPicklistValues( Array ('Apply', 'Approved', 'Rejected'));
 	$expenseInformation->addField($field6); /** Creates the field and adds to block */
 
+<<<<<<< HEAD
+=======
+
+
+	/** Create required fields and add to the block */
+	$field7 = new Vtiger_Field();
+	$field7->name = 'taxinvoice';
+	$field7->label = 'Tax Invoice / Receipt No';
+
+	$field7->table = $module->basetable;
+	$field7->column = 'taxinvoice';
+	$field7->columntype = 'VARCHAR(70)';
+	$field7->uitype = 1;
+	$field7->typeofdata = 'V~O';
+	$expenseInformation->addField($field7); 
+	/** Creates the field and adds to block */
+
+	/** Create required fields and add to the block */
+	$field8 = new Vtiger_Field();
+	$field8->name = 'attachment';
+	$field8->label = 'Attachments';
+	$field8->table = $module->basetable;
+	$field8->column = 'attachment';
+	$field8->columntype = 'VARCHAR(200)';
+	$field8->uitype = 28;
+	$field8->typeofdata = 'V~O';
+	$expenseInformation->addField($field8); 
+	/** Creates the field and adds to block */
+
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	/**
 		ADD YOUR FIELDS HERE
 	*/
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	/** Common fields that should be in every module, linked to vtiger CRM core table */
 	$field21 = new Vtiger_Field();
 	$field21->name = 'assigned_user_id';
@@ -174,6 +235,10 @@ global $adb;
 	$filter1 = new Vtiger_Filter();
 	$filter1->name = 'All';
 	$filter1->isdefault = true;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$module->addFilter($filter1);
 	// Add fields to the filter created
 	$filter1->addField($field1)->addField($field2, 1)->addField($field3, 2);
@@ -223,4 +288,8 @@ global $adb;
 	}
 
 	
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 ?>

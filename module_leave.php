@@ -80,9 +80,16 @@ global $adb;
 	$field2->table = $module->basetable;
 	$field2->column = 'leavetype';
 	$field2->columntype = 'VARCHAR(255)';
+<<<<<<< HEAD
 	$field2->uitype = 2;
 	$field2->typeofdata = 'V~M'; // varchar~Mandatory	
 	$leaveInformation->addField($field2); /** Creates the field and adds to block */
+=======
+	$field2->uitype = 10;
+	$field2->typeofdata = 'V~M'; // varchar~Mandatory	
+	$leaveInformation->addField($field2); /** Creates the field and adds to block */
+	$field2->setRelatedModules(Array('LeaveType'));
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 
 	/** Create required fields and add to the block */
 	$field3 = new Vtiger_Field();
@@ -120,6 +127,7 @@ global $adb;
 
 	/** Create required fields and add to the block */
 	$field6 = new Vtiger_Field();
+<<<<<<< HEAD
 	$field6->name = 'dutiestakenoverby';
 	$field6->label = 'Duties Taken Over By';
 	$field6->table = $module->basetable;
@@ -136,6 +144,24 @@ global $adb;
 	$field7->label = 'Start Half Day';
 	$field7->table = $module->basetable;
 	$field7->column = 'starthalfday';
+=======
+	$field6->name = 'replaceuser_id';
+	$field6->label = 'Duties Taken Over By';
+	$field6->table = $module->basetable;
+	$field6->column = 'replaceuser_id';
+	$field6->columntype = 'VARCHAR(50)';
+	$field6->uitype = 10;
+	$field6->typeofdata = 'V~O'; 
+	$leaveInformation->addField($field6); /** Creates the field and adds to block */
+	$field6->setRelatedModules(Array('Users'));
+
+	/** Create required fields and add to the block */
+	$field7 = new Vtiger_Field();
+	$field7->name = 'starthalf';
+	$field7->label = 'Start Half Day';
+	$field7->table = $module->basetable;
+	$field7->column = 'starthalf';
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$field7->columntype = 'VARCHAR(3)';
 	$field7->uitype = 56;
 	$field7->typeofdata = 'C~O'; // varchar~Mandatory 
@@ -143,10 +169,17 @@ global $adb;
 
 	/** Create required fields and add to the block */
 	$field8 = new Vtiger_Field();
+<<<<<<< HEAD
 	$field8->name = 'endhalfday';
 	$field8->label = 'End Half Day';
 	$field8->table = $module->basetable;
 	$field8->column = 'endhalfday';
+=======
+	$field8->name = 'endhalf';
+	$field8->label = 'End Half Day';
+	$field8->table = $module->basetable;
+	$field8->column = 'endhalf';
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$field8->columntype = 'VARCHAR(3)';
 	$field8->uitype = 56;
 	$field8->typeofdata = 'C~O'; // varchar~Mandatory 
@@ -159,17 +192,28 @@ global $adb;
 	$field9->table = $module->basetable;
 	$field9->column = 'reasonofleave';
 	$field9->columntype = 'TEXT';
+<<<<<<< HEAD
 	$field9->uitype = 21;
+=======
+	$field9->uitype = 19;
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$field9->typeofdata = 'V~O'; // varchar~Mandatory 
 	$leaveInformation->addField($field9); /** Creates the field and adds to block */
 
 
 	/** Create required fields and add to the block */
 	$field10 = new Vtiger_Field();
+<<<<<<< HEAD
 	$field10->name = 'leave_status';
 	$field10->label = 'Status';
 	$field10->table = $module->basetable;
 	$field10->column = 'leave_status';
+=======
+	$field10->name = 'leavestatus';
+	$field10->label = 'Status';
+	$field10->table = $module->basetable;
+	$field10->column = 'leavestatus';
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$field10->columntype = 'VARCHAR(50)';
 	$field10->uitype = 15;
 	$field10->typeofdata = 'V~O'; 
@@ -178,10 +222,17 @@ global $adb;
 
 	/** Create required fields and add to the block */
 	$field11 = new Vtiger_Field();
+<<<<<<< HEAD
 	$field11->name = 'totalleavetaken';
 	$field11->label = 'Total Leave Taken';
 	$field11->table = $module->basetable;
 	$field11->column = 'totalleavetaken';
+=======
+	$field11->name = 'total_taken';
+	$field11->label = 'Total Leave Taken';
+	$field11->table = $module->basetable;
+	$field11->column = 'total_taken';
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$field11->columntype = 'VARCHAR(100)';
 	$field11->uitype = 1;
 	$field11->typeofdata = 'V~O'; // varchar~Mandatory	
@@ -200,12 +251,21 @@ global $adb;
 
 	/** Create required fields and add to the block */
 	$field13 = new Vtiger_Field();
+<<<<<<< HEAD
 	$field13->name = 'reasonforrejection';
 	$field13->label = 'Reason For Rejection';
 	$field13->table = $module->basetable;
 	$field13->column = 'reasonforrejection';
 	$field13->columntype = 'VARCHAR(100)';
 	$field13->uitype = 1;
+=======
+	$field13->name = 'reasonnotapprove';
+	$field13->label = 'Reason For Rejection';
+	$field13->table = $module->basetable;
+	$field13->column = 'reasonnotapprove';
+	$field13->columntype = 'VARCHAR(100)';
+	$field13->uitype = 19;
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$field13->typeofdata = 'V~O'; // varchar~Mandatory	
 	$approvalInformation->addField($field13); /** Creates the field and adds to block */
 
@@ -216,10 +276,27 @@ global $adb;
 	$field14->table = $module->basetable;
 	$field14->column = 'approveby';
 	$field14->columntype = 'VARCHAR(50)';
+<<<<<<< HEAD
 	$field14->uitype = 15;
 	$field14->typeofdata = 'V~O'; 
 	$field14->setPicklistValues( Array ('Users', 'Groups'));
 	$approvalInformation->addField($field14); /** Creates the field and adds to block */
+=======
+	$field14->uitype = 10;
+	$field14->typeofdata = 'V~O'; 
+	$approvalInformation->addField($field14); /** Creates the field and adds to block */
+	$field14->setRelatedModules(Array('Users'));
+	/** Create required fields and add to the block */
+	$field15 = new Vtiger_Field();
+	$field15->name = 'attachment';
+	$field15->label = 'Documents (If any)';
+	$field15->table = $module->basetable;
+	$field15->column = 'attachment';
+	$field15->columntype = 'VARCHAR(50)';
+	$field15->uitype = 28;
+	$field15->typeofdata = 'V~O'; 
+	$approvalInformation->addField($field15); /** Creates the field and adds to block */
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 
 	/**
 		ADD YOUR FIELDS HERE

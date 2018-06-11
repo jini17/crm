@@ -50,12 +50,21 @@
 						<ul class="dropdown-menu app-modules-dropdown" aria-labelledby="{$APP_NAME}_modules_dropdownMenu">
 							{foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
 								{assign var='translatedModuleLabel' value=vtranslate($moduleModel->get('label'),$moduleName )}
-								<li>
-									<a href="{$moduleModel->getDefaultUrl()}&app={$APP_NAME}" title="{$translatedModuleLabel}">
-										<span class="module-icon">{$moduleModel->getModuleIcon()}</span>
-										<span class="module-name textOverflowEllipsis"> {$translatedModuleLabel}</span>
-									</a>
-								</li>
+								{if $moduleName eq 'MyProfile'}
+									<li>
+										<a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_PRIVILEGES_MODEL->get('id')}" title="{$translatedModuleLabel}">
+											<span class="module-icon">{$moduleModel->getModuleIcon()}</span>
+											<span class="module-name textOverflowEllipsis"> {$translatedModuleLabel}</span>
+										</a>
+									</li>
+								{else}
+									<li>
+										<a href="{$moduleModel->getDefaultUrl()}&app={$APP_NAME}" title="{$translatedModuleLabel}">
+											<span class="module-icon">{$moduleModel->getModuleIcon()}</span>
+											<span class="module-name textOverflowEllipsis"> {$translatedModuleLabel}</span>
+										</a>
+									</li>
+								{/if}
 							{/foreach}
 						</ul>
 					</div>

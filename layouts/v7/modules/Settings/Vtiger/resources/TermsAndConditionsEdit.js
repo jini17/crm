@@ -123,6 +123,8 @@ Vtiger.Class("Settings_Vtiger_TermsAndConditionsEdit_Js", {}, {
 		});
 		
 		var instance = new Settings_Vtiger_Index_Js();
+        var vtigerinst = new Vtiger_Index_Js();
+        vtigerinst.registerEvents();
 		instance.registerBasicSettingsEvents();
 	}
 

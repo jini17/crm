@@ -9,13 +9,24 @@
 *
 ********************************************************************************/
 -->*}
-<div class = "quickPreview">
+  {if $PARENT_MODULE eq "Settings"} 
+
+  <div class = "quickPreview" style="margin-left: 50%;">
+  {else}
+  <div class = "quickPreview" >
+  {/if}
+
     <input type="hidden" name="sourceModuleName" id="sourceModuleName" value="{$MODULE_NAME}" />
     <input type="hidden" id = "nextRecordId" value ="{$NEXT_RECORD_ID}">
     <input type="hidden" id = "previousRecordId" value ="{$PREVIOUS_RECORD_ID}">
-
-    <div class='quick-preview-modal modal-content'>
-        <div class='modal-body'>
+          
+   
+            <div class='quick-preview-modal modal-content' >
+            {if $PARENT_MODULE eq "Settings"}
+             <div class='modal-body' style="width: 50%;height:100vh;overflow-x:hidden;">
+            {else} 
+             <div class='modal-body'>
+            {/if}
             <div class = "quickPreviewModuleHeader row">
                 <div class = "col-lg-10">
                     <div class="row qp-heading">
@@ -29,9 +40,11 @@
 
             <div class="quickPreviewActions clearfix">
                 <div class="btn-group pull-left">
+                    {if $PARENT_MODULE neq "Settings"}
                     <button class="btn btn-success btn-xs" onclick="window.location.href = '{$RECORD->getFullDetailViewUrl()}&app={$SELECTED_MENU_CATEGORY}'">
                        {vtranslate('LBL_VIEW_DETAILS', $MODULE_NAME)} 
                     </button>
+                    {/if}
                 </div>
                 {if $NAVIGATION}
                     <div class="btn-group pull-right">
@@ -46,8 +59,26 @@
 
             </div>
             <div class = "quickPreviewSummary">
-                <table class="summary-table no-border" style="width:100%;">
+
+                <table class="summary-table no-border" >
                     <tbody>
+                        {if $PARENT_MODULE eq "Settings"}
+                        {foreach item=FIELD_MODEL key=FIELD_NAME from=$SUMMARY_RECORD_STRUCTURE}
+                        {if $FIELD_MODEL->get('name') neq 'modifiedtime' && $FIELD_MODEL->get('name') neq 'createdtime'}
+                                <tr class="summaryViewEntries">
+                                    <td class="fieldLabel col-lg-5" ><label class="muted">{vtranslate($FIELD_MODEL->get('label'),$MODULE_NAME)}</label></td>
+                                    <td class="fieldValue col-lg-7">
+                                        <div class="row">
+                                            <span class="value textOverflowEllipsis" {if $FIELD_MODEL->get('uitype') eq '19' or $FIELD_MODEL->get('uitype') eq '20' or $FIELD_MODEL->get('uitype') eq '21'}style="word-wrap: break-word;"{/if}>
+                                                {include file=$FIELD_MODEL->getUITypeModel()->getDetailViewTemplateName()|@vtemplate_path:$MODULE_NAME FIELD_MODEL=$FIELD_MODEL USER_MODEL=$USER_MODEL MODULE=$MODULE_NAME RECORD=$RECORD}
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {/if}
+                        {/foreach}
+                        {/if}
+                        {if $PARENT_MODULE neq "Settings"}                
                         {foreach item=FIELD_MODEL key=FIELD_NAME from=$SUMMARY_RECORD_STRUCTURE['SUMMARY_FIELDS']}
                             {if $FIELD_MODEL->get('name') neq 'modifiedtime' && $FIELD_MODEL->get('name') neq 'createdtime'}
                                 <tr class="summaryViewEntries">
@@ -61,24 +92,34 @@
                                     </td>
                                 </tr>
                             {/if}
+
                         {/foreach}
+                        {/if}
                     </tbody>
                 </table>
             </div>
-
             <div class="engagementsContainer">
 				{include file="ListViewQuickPreviewSectionHeader.tpl"|vtemplate_path:$MODULE_NAME TITLE="{vtranslate('LBL_UPDATES',$MODULE_NAME)}"}
+              
 				{include file="RecentActivities.tpl"|vtemplate_path:$MODULE_NAME}
+   
+
             </div>
 
-            <br>
+            <br>            
             {if $MODULE_MODEL->isCommentEnabled()}
                 <div class="quickPreviewComments">
                     {include file="ListViewQuickPreviewSectionHeader.tpl"|vtemplate_path:$MODULE_NAME TITLE="{vtranslate('LBL_RECENT_COMMENTS',$MODULE_NAME)}"}
                     {include file="QuickViewCommentsList.tpl"|vtemplate_path:$MODULE_NAME}
                 </div>
             {/if}
+              
         </div>
-    </div>
-</div>
+        
+    </div></div></div></div>
+    
 
+
+<script >
+  
+</script>

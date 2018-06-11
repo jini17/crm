@@ -27,6 +27,8 @@
 					<div class='col-md-6'>
 						{if $MODULE eq 'Tags'}
 							<h4 class="pull-left">{vtranslate('LBL_MY_TAGS', $QUALIFIED_MODULE)}</h4>
+						{else}
+							<h4 class="pull-left">{vtranslate($MODULE, $QUALIFIED_MODULE)}</h4>
 						{/if}
 					</div>
 					<div class="col-md-6">
@@ -37,7 +39,8 @@
 			{/if}
 			<div class="list-content row">
 				<div class="col-sm-12 col-xs-12 ">
-					<div id="table-content" class="table-container" style="padding-top:0px !important;">
+					<div id="table-content"  style="-ms-touch-action:none;overflow: visible !important;width: 100%;
+border:1px solid #ddd;margin-top:10px;padding-top:0px ! important;position: relative;  min-height:auto;width: 100%;">
 						<table id="listview-table" class="table listview-table">
 							{assign var="NAME_FIELDS" value=$MODULE_MODEL->getNameFields()}
 							{assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
@@ -74,14 +77,27 @@
 									<tr class="listViewEntries" data-id="{$LISTVIEW_ENTRY->getId()}"
 										{if method_exists($LISTVIEW_ENTRY,'getDetailViewUrl')}data-recordurl="{$LISTVIEW_ENTRY->getDetailViewUrl()}"{/if}
 										{if method_exists($LISTVIEW_ENTRY,'getRowInfo')}data-info="{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::Encode($LISTVIEW_ENTRY->getRowInfo()))}"{/if}>
-										<td width="10%">
+										<td width="10%" >
 											{include file="ListViewRecordActions.tpl"|vtemplate_path:$QUALIFIED_MODULE}
 										</td>
 										{foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
 											{assign var=LISTVIEW_HEADERNAME value=$LISTVIEW_HEADER->get('name')}
 											{assign var=LAST_COLUMN value=$LISTVIEW_HEADER@last}
 											<td class="listViewEntryValue textOverflowEllipsis {$WIDTHTYPE}" width="{$WIDTH}%" nowrap>
-												{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}
+												 {if $LISTVIEW_HEADERNAME eq 'filename'}
+												 {assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($LISTVIEW_ENTRY->getId())}
+								                <a name="downloadfile" target="_blank" href="#" onclick="window.location.href='{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}'">
+								                	{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}</a>
+								             	{else if $LISTVIEW_HEADERNAME eq 'letter_of_appointment'} 
+									             	{assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($LISTVIEW_ENTRY->getId())}
+									             		<a target="_blank" href="#" onclick="window.location.href='{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}'">{vtranslate('LBL_DOWNLOAD', $QUALIFIED_MODULE)}</a>
+									            {else if $LISTVIEW_HEADERNAME eq 'attachment'} 
+									             	{assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($LISTVIEW_ENTRY->getId())}
+									             		<a target="_blank" href="#" onclick="window.location.href='{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}'">{vtranslate('LBL_DOWNLOAD', $QUALIFIED_MODULE)}</a>
+								             	{else}
+								             		{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}   
+								           		 {/if}	
+
 												{if $LAST_COLUMN && $LISTVIEW_ENTRY->getRecordLinks()}
 													</td>
 												{/if}

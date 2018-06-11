@@ -165,6 +165,8 @@ Vtiger.Class("Settings_UserPlan_Index_Js",{},{
 	//this.registerActions();
 
 	this.loadUserPlan();
+	var vtigerinst = new Vtiger_Index_Js();
+	vtigerinst.registerEvents();
 
     }
 

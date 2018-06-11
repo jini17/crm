@@ -98,4 +98,32 @@ class Claim extends Vtiger_CRMEntity {
 			// TODO Handle actions after this module is updated.
 		}
  	}
+<<<<<<< HEAD
+=======
+ 	function save_module($module) {
+ 		$this->insertIntoAttachment($this->id,$module);
+		
+	}
+
+	function insertIntoAttachment($id,$module)
+	{
+		global $log, $adb;
+		//$adb->setDebug(true);
+		$log->debug("Entering into insertIntoAttachment($id,$module) method.");
+
+		$file_saved = false;
+
+		foreach($_FILES as $fileindex => $files)
+		{
+			if($files['name'] != '' && $files['size'] > 0)
+			{
+				$files['original_name'] = vtlib_purify($_REQUEST[$fileindex.'_hidden']);
+				//echo $this->column_fields['filelocationtype'];die;
+				$file_saved = $this->uploadAndSaveFile($id,$module,$files,'Attachment');
+			}
+		}
+		$log->debug("Exiting from insertIntoAttachment($id,$module) method.");
+	}
+
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 }

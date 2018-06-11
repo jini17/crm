@@ -152,6 +152,7 @@ class Vtiger_Cron {
 	 * Check if task is right state for running.
 	 */
 	function isRunnable() {
+		return true;
 		$runnable = false;
 
 		if (!$this->isDisabled()) {

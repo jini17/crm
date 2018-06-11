@@ -27,7 +27,7 @@ require_once('include/utils/utils.php');
 require_once('include/utils/UserInfoUtil.php');
 require_once("include/Zend/Json.php");
 require_once 'include/RelatedListView.php';
-require_once 'testAPI/vendor/autoload.php';
+
 
 class CRMEntity {
 
@@ -158,6 +158,7 @@ class CRMEntity {
 	//Parameter $fileLocationType added By Mabruk for Google Drive Integration 27/03/2018 
 	
 	function uploadAndSaveFile($id, $module, $file_details, $attachmentType='Attachment',$fileLocationType=null) {
+		require_once 'testAPI/vendor/autoload.php';
 		global $log;
 		$log->debug("Entering into uploadAndSaveFile($id,$module,$file_details) method.");
 
@@ -902,9 +903,11 @@ class CRMEntity {
 			} else {
 				$resultrow = $adb->query_result_rowdata($result);
 				if (!$allowDeleted) {
-					if (!empty($resultrow['deleted'])) {
+					 /******   MODIFIED for restore data for custom module ***/				
+					if(!($resultrow['deleted']==0 || $resultrow['deleted']==1)){
 						throw new Exception($app_strings['LBL_RECORD_DELETE'], 1);
 					}
+	                /******  end    ***/
 				}
 				if(!empty($resultrow['label'])){
 					$this->column_fields['label'] = $resultrow['label'];
@@ -2244,8 +2247,12 @@ class CRMEntity {
 				}
 			}
 		}
-
-		$query = "from $moduletable inner join vtiger_crmentity on vtiger_crmentity.crmid=$moduletable.$moduleindex";
+		if($module=='Users') {
+			$query = "from $moduletable as {$moduletabl}Employee  inner join vtiger_crmentity on vtiger_crmentity.smownerid={$moduletabl}Employee.id";
+		} else {
+			$query = "from $moduletable inner join vtiger_crmentity on vtiger_crmentity.crmid=$moduletable.$moduleindex";	
+		}
+		
 
 		// Add the pre-joined custom table query
 		$query .= " "."$cfquery";

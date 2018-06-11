@@ -7,132 +7,125 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-jQuery.Class("Users_Skills_Js",{},{
-		
-	editLanguage : function(url, currentTrElement) {
+Vtiger.Class("Users_Skills_Js", {
 
-		var aDeferred = jQuery.Deferred();
+	//register click event for Add New Education button
+	addLanguage : function(url) { 
+	     this.editLanguage(url);
+	    
+	},
+	addSkill : function(url) { 
+	     this.editSkill(url);
+	    
+	},
+	
+	editLanguage : function(url) { 
+	    var aDeferred = jQuery.Deferred();
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
 		
-		var progressIndicatorElement = jQuery.progressIndicator({
-			'position' : 'html',
-			'blockInfo' : {
-				'enabled' : true
-			}
-		});
-		
-		AppConnector.request(url).then(
-			function(data) {
-				var callBackFunction = function(data) {
-					//cache should be empty when modal opened 
-					thisInstance.duplicateCheckCache = {};
-					var form = jQuery('#editLanguage');
+		app.helper.showProgress();
+		app.request.post({url:url}).then(
+		function(err,data) { 
+		      app.helper.hideProgress();
+              
+                if(err == null){
+                    app.helper.showModal(data);
+                    var form = jQuery('#editLanguage');
+                      
+                        	// for textarea limit
+                        app.helper.showVerticalScroll(jQuery('#scrollContainer'), {setHeight:'80%'});
+                    
 
-					$("#language").select2({formatNoMatches: function() {
-						var concatselboxNtxtbox = '"language","languagebox"';
-						return "<span>"+app.vtranslate('JS_NO_MATCH_FOUND')+"<a href='#' onclick=updateBox(" +concatselboxNtxtbox+ ")>"+app.vtranslate('JS_ADD_NEW')+"</a></span>";} 
-					});
-
-
-					form.validationEngine('attach', {
-						onValidationComplete: function(form, status){ 
-							if (status == true) {  
-								//	var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
-									var aparams = form.serializeFormData();
-									aparams.module = app.getModuleName();
-									aparams.action = 'SaveSubModuleAjax';
-									aparams.mode = 'saveLanguage';
-								//	aparams.isview = chkboxval;	
-									AppConnector.request(aparams).then(
-										function(data) {
-											//show notification after Education details saved
-											params = {
-													text: data['result'],
-													type: 'success'
-											};	
-											Vtiger_Helper_Js.showPnotify(params);
-											progressIndicatorElement.progressIndicator({'mode':'hide'});
-											app.hideModalWindow();
-										
-											//Adding or update the Education details in the list
-											thisInstance.updateLanguageGrid(userid);
-										}
-									);
-							}
-						}           
-					});
-			
-					form.submit(function(e) {
-						e.preventDefault();
-					})
-				}
-				
-				progressIndicatorElement.progressIndicator({'mode':'hide'});
-				app.showModalWindow(data,function(data){
-					if(typeof callBackFunction == 'function'){
-						callBackFunction(data);
-							
-						}
-				}, {'width':'500px'});
-			},
-			function(error) {
-				//TODO : Handle error
-				aDeferred.reject(error);
-			}
-		);
-		return aDeferred.promise();
+                         form.submit(function(e) { 
+                            e.preventDefault();
+                         })
+					var params = {
+                            submitHandler : function(form){
+                                var form = jQuery('#editLanguage');   
+                                thisInstance.saveLanguageDetails(form);
+                            }
+                        };
+                         form.vtValidate(params)
+          		} else {
+                        aDeferred.reject(err);
+                    }
+	     	});
+	     return aDeferred.promise();	
 	},
-
-	updateLanguageGrid : function(userid) { 
+     updateLanguageGrid : function(userid) { 
 			var params = {
 					'module' : app.getModuleName(),
 					'view'   : 'ListViewAjax',
 					'record' : userid,		
-					'mode'   : 'getUserSkills',
+					'mode'   : 'getUserLanguage',
 					'section':'L',
 				}
-				AppConnector.request(params).then(
-					function(data) { 
-						$('#skills').html(data);
+				app.request.post({'data':params}).then(
+					function(err, data) {
+						jQuery('#skills').html(data);
 					},
 					
 					function(error,err){
 						aDeferred.reject();
 					}
 				);
-	},	
+	},
 	
-	deleteLanguage : function(deleteRecordActionUrl) {
+	deleteLanguage : function(record) { 
 		var message = app.vtranslate('JS_DELETE_LANG_CONFIRMATION');
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
-		Vtiger_Helper_Js.showConfirmationBox({'message' : message}).then(function(data) {
-		AppConnector.request(deleteRecordActionUrl).then(
-		function(data){ 
-				var response = data['result'];
-				var result   = data['success'];
-				if(result == true) {
-					params = {
-						text: response.msg,
-						type:'success'	
-					};
-				} else {
-						params = {
-						text: response.msg,
-						type:'error'	
-					};
-				}
+		app.helper.showConfirmationBox({'message' : message}).then(function(e) {
+		var params = {
+					'module':'Users',
+					'action': 'DeleteSubModuleAjax',
+					'record':record,
+					'mode':'deleteLanguage'
+		};
+          	app.request.post({data:params}).then(
+          	     function(err, data){  
+				      app.helper.showSuccessNotification({'message': 'Record deleted successfully'});
+				     //delete the Education details in the list
+				      thisInstance.updateSkillCloud(userid);
+			     }
+		     );
+	     });
+     },
+
+     saveLanguageDetails : function(form){
+          var aDeferred = jQuery.Deferred();
+          app.helper.hideModal();
+          var thisInstance = this;
+          var userid = jQuery('#current_user_id').val();
+          app.helper.showProgress();
+          var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
+          var formData = form.serializeFormData();
+          console.log(formData);
+          var params = {
+				'module': 'Users',
+				'action': "SaveSubModuleAjax",
+				'mode'  : 'saveLanguage',
+				'form' : formData,
+			
+				//'isview' : chkboxval,
+				//'is_studying':chkboxstudying
+			};	
 				
-				Vtiger_Helper_Js.showPnotify(params);
-				//delete the Language details in the list
-				thisInstance.updateLanguageGrid(userid);
-				}
-			);
-		});
-	},
-	
-	addSkills : function(url, currentTrElement) {
+         app.request.post({'data': params}).then(function (err, data) {  //alert(data);   
+              app.helper.hideProgress();
+               //show notification after Education details saved
+                app.helper.showSuccessNotification({'message': data});
+               //Adding or update the Education details in the list
+
+               thisInstance.updateSkillCloud(userid);
+             }
+          );
+           return aDeferred.promise();
+     },	
+     
+
+editSkill : function(url) { 
 
 		var aDeferred = jQuery.Deferred();
 		var thisInstance = this;
@@ -145,92 +138,84 @@ jQuery.Class("Users_Skills_Js",{},{
 			}
 		});
 		
-		AppConnector.request(url).then(
-			function(data) {
-				var callBackFunction = function(data) {
-					//cache should be empty when modal opened 
-					thisInstance.duplicateCheckCache = {};
-					var form = jQuery('#addSkill');
+		app.helper.showProgress();
+		app.request.post({url:url}).then(
+		function(err,data) { 
+		      app.helper.hideProgress();
+              
+                if(err == null){
+                    app.helper.showModal(data);
+                    var form = jQuery('#addSkill');   
+                        
+                        	// for textarea limit
+                        app.helper.showVerticalScroll(jQuery('#scrollContainer'), {setHeight:'80%'});
+                    
+	
 
-					$("#skill").select2({formatNoMatches: function() {
-						var concatselboxNtxtbox = '"skill","skillbox"';
-						return "<span>"+app.vtranslate('JS_NO_MATCH_FOUND')+"<a href='#' onclick=updateBox(" +concatselboxNtxtbox+ ")>"+app.vtranslate('JS_ADD_NEW')+"</a></span>";} 
-					});
-
-					form.validationEngine('attach', {
-						onValidationComplete: function(form, status){ 
-							if (status == true) {  
-								
-									var aparams = form.serializeFormData();
-									aparams.module = app.getModuleName();
-									aparams.action = 'SaveSubModuleAjax';
-									aparams.mode = 'saveSkill';
-									AppConnector.request(aparams).then(
-										function(data) {
-											//show notification after Education details saved
-											params = {
-													text: data['result'],
-													type: 'success'
-											};	
-											Vtiger_Helper_Js.showPnotify(params);
-											progressIndicatorElement.progressIndicator({'mode':'hide'});
-											app.hideModalWindow();
-											//Adding or update the Skills details in the list
-											thisInstance.updateSkillCloud(userid);
-										}
-									);
-							}
-						}           
-					});
-			
-					form.submit(function(e) {
-						e.preventDefault();
-					})
-				}
-				
-				progressIndicatorElement.progressIndicator({'mode':'hide'});
-				app.showModalWindow(data,function(data){
-					if(typeof callBackFunction == 'function'){
-						callBackFunction(data);
-							
-						}
-				}, {'width':'500px'});
-			},
-			function(error) {
-				//TODO : Handle error
-				aDeferred.reject(error);
-			}
-		);
-		return aDeferred.promise();
+                         form.submit(function(e) { 
+                            e.preventDefault();
+                         })
+					var params = {
+                            submitHandler : function(form){
+                                var form = jQuery('#addSkill');   
+                                thisInstance.saveSkillDetails(form);
+                            }
+                        };
+                         form.vtValidate(params)
+          		} else {
+                        aDeferred.reject(err);
+                    }
+	     	});
+	     return aDeferred.promise();	
 	},
 
-	deleteSkill : function(deleteRecordActionUrl) {
-		var message = app.vtranslate('JS_DELETE_SKILL_CONFIRMATION');
+	     saveSkillDetails : function(form){ 
+          var aDeferred = jQuery.Deferred();
+          app.helper.hideModal();
+          var thisInstance = this;
+          var userid = jQuery('#current_user_id').val();
+          app.helper.showProgress();
+          var formData = form.serializeFormData();
+          console.log(formData);
+          var params = {
+				'module': 'Users',
+				'action': "SaveSubModuleAjax",
+				'mode'  : 'saveSkill',
+				'form' : formData,
+				
+			};	
+				
+         app.request.post({'data': params}).then(function (err, data) {     
+              app.helper.hideProgress();
+               //show notification after Education details saved
+                app.helper.showSuccessNotification({'message': data});
+               //Adding or update the Education details in the list
+                thisInstance.updateSkillCloud(userid);
+             }
+          );
+           return aDeferred.promise();
+     },	
+
+	deleteSkill : function(record) {
+		var message = app.vtranslate('JS_DELETE_LANG_CONFIRMATION');
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
-		Vtiger_Helper_Js.showConfirmationBox({'message' : message}).then(function(data) {
-		AppConnector.request(deleteRecordActionUrl).then(
-		function(data){ 
-				var response = data['result'];
-				var result   = data['success'];
-				if(result == true) {
-					params = {
-						text: response.msg,
-						type:'success'	
-					};
-				} else {
-						params = {
-						text: response.msg,
-						type:'error'	
-					};
-				}
-				
-				Vtiger_Helper_Js.showPnotify(params);
-				//delete the Skill details in the Cloud
-				 thisInstance.updateSkillCloud(userid);
-				}
-			);
-		});
+		app.helper.showConfirmationBox({'message' : message}).then(function(e) {
+		
+          	var params = {
+					'module':'Users',
+					'action': 'DeleteSubModuleAjax',
+					'record':record,
+					'mode':'deleteSkill'
+		};
+          	app.request.post({data:params}).then(
+          	     function(err, data){  
+				      app.helper.showSuccessNotification({'message': 'Record deleted successfully'});
+				     //delete the Education details in the list
+				      thisInstance.updateSkillCloud(userid);
+			     }
+		     );
+	     });
 	},
 	updateSkillCloud : function(userid) { 
 			var params = {
@@ -239,9 +224,11 @@ jQuery.Class("Users_Skills_Js",{},{
 					'record' : userid,		
 					'mode'   : 'getUserSkills',
 					'section':'S',
-				}
-				AppConnector.request(params).then(
-					function(data) { 
+					 	
+					 	}
+
+				app.request.post({data:params}).then(
+          	     function(err, data){  
 						$('#skills').html(data);
 					},
 					
@@ -249,58 +236,21 @@ jQuery.Class("Users_Skills_Js",{},{
 						aDeferred.reject();
 					}
 				);
-	},
-	/*
-	 * Function to register all actions in the Tax List
-	 */
-	registerActions : function() { 
-		var thisInstance = this;
-		var langcontainer = jQuery('#LanguageContainer');
-		var skillcontainer = jQuery('#SkillContainer');
-		
-		//register click event for Add New language button
-		langcontainer.find('.addLanguage').click(function(e) { 
-			var addLangButton = jQuery(e.currentTarget);
-			var createLangUrl = addLangButton.data('url');
-			thisInstance.editLanguage(createLangUrl);
-		});		
+			},
 
-		//register event for edit language icon
-		langcontainer.on('click', '.editLanguage', function(e) { 
-			var editLangButton = jQuery(e.currentTarget);
-			var currentTrElement = editLangButton.closest('tr');
-			thisInstance.editLanguage(editLangButton.data('url'), currentTrElement);
-		});
 
-		//register event for delete language icon
-		langcontainer.on('click', '.deleteLanguage', function(e) { 
-		var deleteLangButton = jQuery(e.currentTarget);
-		var currentTrElement = deleteLangButton.closest('tr');
-		thisInstance.deleteLanguage(deleteLangButton.data('url'), currentTrElement);
-		});	
 
-		//register click event for Add New Skill button
-		skillcontainer.find('.addSkill').click(function(e) {
-			var addSkillsButton = jQuery(e.currentTarget);
-			var createSkillUrl = addSkillsButton.data('url');
-			thisInstance.addSkills(createSkillUrl);
-		});
-		
-		//register event for edit Skill icon
-		skillcontainer.on('click', '.deleteSkill', function(e) {
-			var deleteSkillButton = jQuery(e.currentTarget);
-			var currentTrElement = deleteSkillButton.closest('tr');
-			thisInstance.deleteSkill(deleteSkillButton.data('url'), currentTrElement);
-		});
+	
+},{
+	//constructor
+	init : function() {
+		Users_Skills_Js.skillInstance = this;
 	},
 	
-	registerEvents: function() {
-		this.registerActions();
+
+	
+	registerEvents: function(skillinstance) {
+		skillinstance.registerActions();
 	}
 
 });
-
-jQuery(document).ready(function(e){ 
-	var skillinstance = new Users_Skills_Js();
-	skillinstance.registerEvents();
-})

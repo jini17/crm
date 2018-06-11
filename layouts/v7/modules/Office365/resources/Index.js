@@ -29,7 +29,7 @@ Vtiger_ExtensionCommon_Js("Office365_Index_Js", {}, {
             app.request.post({data: params}).then(function(error, data){
             app.helper.hideProgress();
 
-				
+			
 				var hasMoreVtigerRecords = false;
                 var hasMoreOffice365Records = false;
                 

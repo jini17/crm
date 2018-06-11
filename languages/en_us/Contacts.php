@@ -61,6 +61,8 @@ $languageStrings = array(
 	'Prof.'=>'Prof.',
 	
 	'User List'=>'User List',
+	'LBL_ENRICH_CONTACT'=>'Enrich Contact',
+	
 );
 
 $jsLanguageStrings = array(
