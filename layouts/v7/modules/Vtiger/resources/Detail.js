@@ -573,7 +573,16 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		return params;
 	},
 
-	getTabContainer : function(){
+
+	getTabContainer : function() {
+	    //Added By Nirbhay and Mabruk for Meeting MOM on 08/06/2018
+        if (jQuery(".MOMDetails").length) {
+
+            var calinst = new Calendar_Detail_Js();
+            calinst.loadMeetingContainer();
+
+        }
+
 		return jQuery('div.related-tabs');
 	},
 

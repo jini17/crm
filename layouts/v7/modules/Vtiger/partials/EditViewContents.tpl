@@ -104,8 +104,29 @@
 								<td></td>
 							{/if}
 						</tr>
+						<!-- Added By Jitu Mabruk for Meeting-->
+						{if $BLOCK_LABEL eq 'Participants' && $MODULE eq 'Events'}
+							<tr>
+								<td class="fieldLabel alignMiddle">{vtranslate('LBL_INVITE_USERS', $MODULE)}</td>
+								<td class="fieldValue">
+									<select id="selectedUsers" class="select2 inputElement" multiple name="selectedusers[]">
+										{foreach key=USER_ID item=USER_NAME from=$ACCESSIBLE_USERS}
+											{if $USER_ID eq $CURRENT_USER->getId()}
+												{continue}
+											{/if}
+											<option value="{$USER_ID}" {if in_array($USER_ID,$INVITIES_SELECTED)}selected{/if}>
+												{$USER_NAME}
+											</option>
+										{/foreach}
+									</select>
+								</td>
+								<td></td><td></td>
+							</tr>
+
+						{/if}
 					</table>
 				</div>
+
 			{/if}
 		{/foreach}
 	</div>

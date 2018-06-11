@@ -14,7 +14,7 @@
    <input type="hidden" name="picklistDependency" value='{Vtiger_Util_Helper::toSafeHTML($PICKIST_DEPENDENCY_DATASOURCE)}' />
 {/if}
 {include file='DetailViewBlockView.tpl'|@vtemplate_path:'Vtiger' RECORD_STRUCTURE=$RECORD_STRUCTURE MODULE_NAME=$MODULE_NAME}
-<div class="block block_LBL_INVITE_USER_BLOCK">
+<!--<div class="block block_LBL_INVITE_USER_BLOCK">
     {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
     {assign var="IS_HIDDEN" value=false}
     {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
@@ -43,5 +43,5 @@
             </tbody>
         </table>
     </div>
-</div>
+</div>-->
 {/strip}

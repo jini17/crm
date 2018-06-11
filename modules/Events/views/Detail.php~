@@ -8,8 +8,8 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-Class Events_Edit_View extends Calendar_Edit_View {
-	
+class Events_Detail_View extends Calendar_Detail_View {
+
 	/**
 	 * Function to get the list of Script models to be included
 	 * @param Vtiger_Request $request
@@ -29,5 +29,5 @@ Class Events_Edit_View extends Calendar_Edit_View {
 		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
 		$headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
 		return $headerScriptInstances;
-	}
+	}	
 }
