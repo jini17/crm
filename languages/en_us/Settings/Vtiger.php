@@ -444,7 +444,7 @@ $languageStrings = array(
 	'Grade'=>'Grade List',
 	'TimeSheet'=>'Time-Sheet',
 	'LBL_DOWNLOAD'=>'Download',
-<<<<<<< HEAD
+
 	'LBL_HR_MATTERS'=>'HR Matters',
 	'LBL_PAYSLIP'=>'Payslip',
 	'LBL_LEAVE_TYPE'=>'Leave Type',
@@ -462,8 +462,7 @@ $languageStrings = array(
 	'LBL_HOLIDAY'=>'Holiday',
 	'LBL_WORKINGHOURS'=>'Working Hours',
 	'LBL_CLAIM'=>'Apply Claim',
-=======
->>>>>>> 90325cb... Meeting V1
+
 
 );
 
