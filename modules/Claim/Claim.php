@@ -123,6 +123,4 @@ class Claim extends Vtiger_CRMEntity {
 		}
 		$log->debug("Exiting from insertIntoAttachment($id,$module) method.");
 	}
-
-
 }
