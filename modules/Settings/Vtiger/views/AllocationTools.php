@@ -95,7 +95,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             return false;
         }
 
-        $query = "SELECT * FROM `Allocation_list` WHERE allocation_id = ?";
+        $query = "SELECT * FROM `allocation_list` WHERE allocation_id = ?";
         $result = $adb->pquery($query,array($values[0]));
         $count = $adb->num_rows($result);
         //echo "Nirbhay".$count;die;
@@ -174,7 +174,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         //$adb->setDebug(true);
         $SeperatedValues = explode(',', $request->get('values'));
         $stringVal ='';
-        $query = "DELETE FROM Allocation_list WHERE Allocation_list.allocation_id IN ( ";
+        $query = "DELETE FROM allocation_list WHERE Allocation_list.allocation_id IN ( ";
 
         for($i=0;$i<count($SeperatedValues);$i++){
             if($i!=(count($SeperatedValues)-1))
@@ -194,7 +194,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
     public function AddAllocation($request){
         //echo "Here";die;
         global $adb;
-        //$adb->setDebug(true);
+       //$adb->setDebug(true);
         $insertArray = $request->get('form');
         $Allocation = array();
        // echo "<pre>"; print_r($insertArray); die;
@@ -212,18 +212,18 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
 
 
-        $Allocationid = $adb->getUniqueID('Allocation_list');
+        $Allocationid = $adb->getUniqueID('allocation_list');
 
 
 
 
-            $query = "INSERT INTO `Allocation_list` (`allocation_id`,`allocation_title`,`allocation_code`, `status`,`allocation_desc`, `grade_id`,`leavetype_id`,`age_leave`,`numberofleavesless`,`numberofleavesmore`,`claimtype_id`,`age_claim`,`claimamountless`,`claimamountmore`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $query = "INSERT INTO `allocation_list` (`allocation_id`,`allocation_title`,`allocation_code`, `status`,`allocation_desc`, `grade_id`,`leavetype_id`,`age_leave`,`numberofleavesless`,`numberofleavesmore`,`claimtype_id`,`age_claim`,`claimamountless`,`claimamountmore`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $result = $adb->pquery($query,array($Allocationid,$Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'],$Allocation['Allocation_Desc
 '],$Allocation['Allocation_grade'],$Allocation['Allocation_leavetype'],$Allocation['ageleave'],$Allocation['numberofleavesless'],$Allocation['numberofleavesmore'],$Allocation['Allocation_claimtype'],$Allocation['ageclaim'],$Allocation['amountclaimless'],$Allocation['amountclaimmore']));
 
 
 
-       // die;
+        //die;
 
         if($result){
             $response = "success";
@@ -255,7 +255,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         }
 
 
-        $query = "UPDATE `Allocation_list` SET `allocation_title`=? ,`allocation_code`=? , `status`=? ,`allocation_desc`=? , `grade_id`=? ,`leavetype_id`=? ,`age_leave`=? ,`numberofleavesless`=? ,`numberofleavesmore`=? ,`claimtype_id`=? ,`age_claim`=? ,`claimamountless` =? ,`claimamountmore`=? WHERE allocation_id = ?";
+        $query = "UPDATE `allocation_list` SET `allocation_title`=? ,`allocation_code`=? , `status`=? ,`allocation_desc`=? , `grade_id`=? ,`leavetype_id`=? ,`age_leave`=? ,`numberofleavesless`=? ,`numberofleavesmore`=? ,`claimtype_id`=? ,`age_claim`=? ,`claimamountless` =? ,`claimamountmore`=? WHERE allocation_id = ?";
         $result = $adb->pquery($query,array($Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'],$Allocation['Allocation_Desc
 '],$Allocation['Allocation_grade'],$Allocation['Allocation_leavetype'],$Allocation['ageleave'],$Allocation['numberofleavesless'],$Allocation['numberofleavesmore'],$Allocation['Allocation_claimtype'],$Allocation['ageclaim'],$Allocation['amountclaimless'],$Allocation['amountclaimmore'],$Allocation['allocation_id']));
 

@@ -14,7 +14,7 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
         $viewer = $this->getViewer($request);
         global $adb;
         //$adb->setDebug(true);
-        $query = "SELECT * FROM Allocation_list";
+        $query = "SELECT * FROM allocation_list";
         $resultalloc = $adb->pquery($query,array());
         $count = $adb->num_rows($resultalloc);
 
