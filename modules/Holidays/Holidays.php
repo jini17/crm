@@ -10,27 +10,27 @@
 
 include_once 'modules/Vtiger/CRMEntity.php';
 
-class Leave extends Vtiger_CRMEntity {
-	var $table_name = 'vtiger_leave';
-	var $table_index= 'leaveid';
+class Holidays extends Vtiger_CRMEntity {
+	var $table_name = 'vtiger_holidays';
+	var $table_index= 'holidaysid';
 
 	/**
 	 * Mandatory table for supporting custom fields.
 	 */
-	var $customFieldTable = Array('vtiger_leavecf', 'leaveid');
+	var $customFieldTable = Array('vtiger_holidayscf', 'holidaysid');
 
 	/**
 	 * Mandatory for Saving, Include tables related to this module.
 	 */
-	var $tab_name = Array('vtiger_crmentity', 'vtiger_leave', 'vtiger_leavecf');
+	var $tab_name = Array('vtiger_crmentity', 'vtiger_holidays', 'vtiger_holidayscf');
 
 	/**
 	 * Mandatory for Saving, Include tablename and tablekey columnname here.
 	 */
 	var $tab_name_index = Array(
 		'vtiger_crmentity' => 'crmid',
-		'vtiger_leave' => 'leaveid',
-		'vtiger_leavecf'=>'leaveid');
+		'vtiger_holidays' => 'holidaysid',
+		'vtiger_holidayscf'=>'holidaysid');
 
 	/**
 	 * Mandatory for Listing (Related listview)
@@ -38,45 +38,45 @@ class Leave extends Vtiger_CRMEntity {
 	var $list_fields = Array (
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Leave No' => Array('leave', 'leaveno'),
+		'Holiday Name' => Array('holidays', 'holidayname'),
 		'Assigned To' => Array('crmentity','smownerid')
 	);
 	var $list_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'Leave No' => 'leaveno',
+		'Holiday Name' => 'holidayname',
 		'Assigned To' => 'assigned_user_id',
 	);
 
 	// Make the field link to detail view
-	var $list_link_field = 'leaveno';
+	var $list_link_field = 'holidayname';
 
 	// For Popup listview and UI type support
 	var $search_fields = Array(
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Leave No' => Array('leave', 'leaveno'),
+		'Holiday Name' => Array('holidays', 'holidayname'),
 		'Assigned To' => Array('vtiger_crmentity','assigned_user_id'),
 	);
 	var $search_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'Leave No' => 'leaveno',
+		'Holiday Name' => 'holidayname',
 		'Assigned To' => 'assigned_user_id',
 	);
 
 	// For Popup window record selection
-	var $popup_fields = Array ('leaveno');
+	var $popup_fields = Array ('holidayname');
 
 	// For Alphabetical search
-	var $def_basicsearch_col = 'leaveno';
+	var $def_basicsearch_col = 'holidayname';
 
 	// Column value to use on detail view record text display
-	var $def_detailview_recname = 'leaveno';
+	var $def_detailview_recname = 'holidayname';
 
 	// Used when enabling/disabling the mandatory fields for the module.
 	// Refers to vtiger_field.fieldname values.
-	var $mandatory_fields = Array('leaveno','assigned_user_id');
+	var $mandatory_fields = Array('holidayname','assigned_user_id');
 
-	var $default_order_by = 'leaveno';
+	var $default_order_by = 'holidayname';
 	var $default_sort_order='ASC';
 
 	/**
