@@ -109,7 +109,7 @@
                                 <select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_claimtype" name="Allocation_claimtype">
                                     <option value="">Select One</option>
                                     {foreach item=SPLITVALUE key=k from=$CLAIMTYPE}
-                                        <option value={$CLAIMTYPE[$k]['id']}>{$CLAIMTYPE[$k]['claim_type']}</option>
+                                        <option value={$CLAIMTYPE[$k]['id']}>{$CLAIMTYPE[$k]['claimtype']}</option>
                                     {/foreach}
                                 </select>
                             </div>
