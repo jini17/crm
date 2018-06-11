@@ -98,8 +98,7 @@ class Claim extends Vtiger_CRMEntity {
 			// TODO Handle actions after this module is updated.
 		}
  	}
-<<<<<<< HEAD
-=======
+
  	function save_module($module) {
  		$this->insertIntoAttachment($this->id,$module);
 		
@@ -125,5 +124,5 @@ class Claim extends Vtiger_CRMEntity {
 		$log->debug("Exiting from insertIntoAttachment($id,$module) method.");
 	}
 
->>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
+
 }
