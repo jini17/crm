@@ -11,20 +11,20 @@ $languageStrings = array(
     // Basic Strings
 	'Calendar'=>'Calendar',
 	'SINGLE_Calendar' => 'Task',
-	'SINGLE_Events' => 'Event',
+	'SINGLE_Events' => 'Meeting',
 	'LBL_ADD_TASK' => 'Add Task',
-	'LBL_ADD_EVENT' => 'Add Event',
+	'LBL_ADD_EVENT' => 'Add Meeting',
 	'LBL_RECORDS_LIST' => 'Calendar List',
-	'LBL_EVENTS' => 'Events',
+	'LBL_EVENTS' => 'Meetings',
 	'LBL_TODOS' => 'Task',
 	'LBL_CALENDAR_SETTINGS' => 'Calendar Settings',
 	'LBL_CALENDAR_SHARING' => 'Calendar Sharing',
-	'LBL_DEFAULT_EVENT_DURATION' => 'Default Event Duration',
+	'LBL_DEFAULT_EVENT_DURATION' => 'Default Meeting Duration',
 	'LBL_CALL' => 'Call',
-	'LBL_OTHER_EVENTS' => 'Other Events',
+	'LBL_OTHER_EVENTS' => 'Other Meetings',
 	'LBL_MINUTES' => 'Minutes',
 	'LBL_SELECT_USERS' => 'Select Users',
-	'LBL_EVENT_OR_TASK' => 'Event / Task',
+	'LBL_EVENT_OR_TASK' => 'Meeting / Task',
         'LBL_DEFAULT_STATUS_TYPE' => 'Default Status & Type',
         'LBL_STATUS' => 'Status',
         'LBL_TYPE' => 'Type',
@@ -73,7 +73,7 @@ $languageStrings = array(
 
 	'LBL_CHANGE_OWNER' => 'Change Owner',
 
-	'LBL_EVENT' => 'Event',
+	'LBL_EVENT' => 'Meeting',
 	'LBL_TASK' => 'Task',
 	'LBL_TASKS' => 'Task',
 
@@ -106,9 +106,9 @@ $languageStrings = array(
 	'LBL_FINISH' => 'Finish',
 	'LBL_TOTAL_TASKS_IMPORTED' => 'No. of Tasks Successfully Imported ',
 	'LBL_TOTAL_TASKS_SKIPPED' => 'No. of Tasks Skipped as they were missing one or more required field ',
-	'LBL_TOTAL_EVENTS_IMPORTED' => 'No. of Events Successfully Imported ',
-	'LBL_TOTAL_EVENTS_SKIPPED' => 'No. of Events Skipped as they were missing one or more required field ',
-	'LBL_TOTAL_EVENTS_DUPLICATED' => 'No. of duplicate Events skipped',
+	'LBL_TOTAL_EVENTS_IMPORTED' => 'No. of Meetings Successfully Imported ',
+	'LBL_TOTAL_EVENTS_SKIPPED' => 'No. of Meetings Skipped as they were missing one or more required field ',
+	'LBL_TOTAL_EVENTS_DUPLICATED' => 'No. of duplicate Meetings skipped',
 	'LBL_TOTAL_TASKS_DUPLICATED' => 'No. of duplicate Tasks skipped',
 	
 	'ICAL_FORMAT' => 'iCal Format',
@@ -139,25 +139,25 @@ $languageStrings = array(
     'LBL_CONTACT_LIST' => 'Contact List',
     'LBL_APP_DESCRIPTION' => 'Description',
     'LBL_REGARDS_STRING' => 'Thanks & Regards',
-    'LBL_EVENT_INFORMATION' => 'Event Details',
+    'LBL_EVENT_INFORMATION' => 'Meeting Details',
 	'LBL_UPDATED_INVITATION' => 'Updated Invitation',
 	'LBL_INVITATION' => 'Invitation',
 	
 	//Recurring Events
-	'LBL_EDIT_RECURRING_EVENT' => 'Edit Recurring Event',
-	'LBL_ALL_EVENTS_EDIT_INFO' => 'All events in the series will be changed.</br> Any changes made to other events will be kept.',
-	'LBL_FUTURE_EVENTS_EDIT_INFO' => 'This and all the following events will be changed.</br> Any changes to future events will be lost.',
-	'LBL_ONLY_THIS_EVENT_EDIT_INFO' => 'All other events in the series will remain the same.',
+	'LBL_EDIT_RECURRING_EVENT' => 'Edit Recurring Meeting',
+	'LBL_ALL_EVENTS_EDIT_INFO' => 'All Meetings in the series will be changed.</br> Any changes made to other Meetings will be kept.',
+	'LBL_FUTURE_EVENTS_EDIT_INFO' => 'This and all the following Meetings will be changed.</br> Any changes to future Meetings will be lost.',
+	'LBL_ONLY_THIS_EVENT_EDIT_INFO' => 'All other Meetings in the series will remain the same.',
 	'LBL_EDIT_RECURRING_EVENTS_INFO' => 'Would you like to save the changes for',
 	
-	'LBL_DELETE_RECURRING_EVENT' => 'Delete Recurring Event',
-	'LBL_ALL_EVENTS_DELETE_INFO' => 'All events in the series will be deleted.',
-	'LBL_FUTURE_EVENTS_DELETE_INFO' => 'This and all the following events will be deleted.',
-	'LBL_ONLY_THIS_EVENT_DELETE_INFO' => 'All other events in the series will remain the same.',
-	'LBL_DELETE_RECURRING_EVENTS_INFO' => 'Would you like to delete only this event, all events in the series or this and all future events in the series?',
-	'LBL_ONLY_THIS_EVENT' => 'Only This Event',
-	'LBL_FUTURE_EVENTS' => 'Following Events',
-	'LBL_ALL_EVENTS' => 'All Events',
+	'LBL_DELETE_RECURRING_EVENT' => 'Delete Recurring Meeting',
+	'LBL_ALL_EVENTS_DELETE_INFO' => 'All Meetings in the series will be deleted.',
+	'LBL_FUTURE_EVENTS_DELETE_INFO' => 'This and all the following Meetings will be deleted.',
+	'LBL_ONLY_THIS_EVENT_DELETE_INFO' => 'All other Meetings in the series will remain the same.',
+	'LBL_DELETE_RECURRING_EVENTS_INFO' => 'Would you like to delete only this Meeting, all Meetings in the series or this and all future Meetings in the series?',
+	'LBL_ONLY_THIS_EVENT' => 'Only This Meeting',
+	'LBL_FUTURE_EVENTS' => 'Following Meetings',
+	'LBL_ALL_EVENTS' => 'All Meetings',
 	
 	//Reminder Email
 	'LBL_REMINDER_NOTIFICATION' => 'This is a reminder notification for the Activity',
@@ -182,7 +182,7 @@ $languageStrings = array(
 );
 
 $jsLanguageStrings = array(
-	'LBL_ADD_EVENT_TASK' => 'Add Event/Task',
+	'LBL_ADD_EVENT_TASK' => 'Add Meeting/Task',
 	'JS_TASK_IS_SUCCESSFULLY_ADDED_TO_YOUR_CALENDAR' => 'Task is successfully added to your Calendar',
         'LBL_CANT_SELECT_CONTACT_FROM_LEADS' => 'Cannot select related Contacts for Leads',
         'JS_FUTURE_EVENT_CANNOT_BE_HELD' => 'Cannot Be Held For Future',
@@ -247,8 +247,8 @@ $jsLanguageStrings = array(
 	'JS_EDIT_CALENDAR' => 'Edit Calendar',
     
     //v7
-    'JS_EVENT_UPDATED' => 'Event Updated',
-    'JS_NO_EVENTS_F0R_THE_DAY' => 'No events for the day',
+    'JS_EVENT_UPDATED' => 'Meeting Updated',
+    'JS_NO_EVENTS_F0R_THE_DAY' => 'No Meetings for the day',
     'LBL_AGENDA' => 'Agenda',
     'JS_CALENDAR_VIEW_YOU_ARE_EDITING_NOT_FOUND' => 'Calendar view not found',
     
@@ -256,7 +256,7 @@ $jsLanguageStrings = array(
     'JS_EDIT' => 'Edit',
     'JS_MARK_AS_HELD' => 'Mark as held',
     'JS_CREATE_FOLLOW_UP' => 'Create follow up',
-    'JS_RECURRING_EVENT' => 'Recurring event',
+    'JS_RECURRING_EVENT' => 'Recurring Meeting',
     'JS_DETAILS' => 'More&nbsp;Details',
     'JS_CHECK_START_AND_END_DATE'=>'End Date & Time should be greater than or equal to Start Date & Time',
     'JS_CHECK_START_AND_END_DATE_SHOULD_BE_GREATER'=> 'End Date & Time should be greater than Start Date & Time',

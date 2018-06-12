@@ -62,7 +62,7 @@ Vtiger_List_Js("Settings_Vtiger_List_Js",{
 		});
 	},
     
-	registerEvents : function() {
+	registerEvents : function() { 
 		this.registerRowClickEvent();
 		this.initializePaginationEvents();
 		this.registerEmailFieldClickEvent();

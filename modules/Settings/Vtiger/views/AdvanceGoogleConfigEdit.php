@@ -19,10 +19,11 @@ class Settings_Vtiger_AdvanceGoogleConfigEdit_View extends Settings_Vtiger_Index
 		$viewer->assign('MODEL', $moduleModel);
 		$viewer->assign('QUALIFIED_MODULE', $qualifiedName);
 		$viewer->assign('CURRENT_USER_MODEL', Users_Record_Model::getCurrentUserModel());
+		$viewer->assign('ADVANCED_FIELD_VALUES', Settings_Vtiger_Record_Model::getGoogleCredentials()); // Added By Mabruk for Googe Drive Settings
 		$viewer->view('AdvanceGoogleConfigEdit.tpl', $qualifiedName);
 	}
 	
-		
+	
 	function getPageTitle(Vtiger_Request $request) {
 		$qualifiedModuleName = $request->getModule(false);
 		return vtranslate('LBL_GOOGLE_CONFIG',$qualifiedModuleName);

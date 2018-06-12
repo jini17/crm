@@ -464,6 +464,7 @@ $languageStrings = array(
 	'LBL_CLAIM'=>'Apply Claim',
 
 
+
 );
 
 $jsLanguageStrings = array(

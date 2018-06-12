@@ -187,7 +187,10 @@ Settings_Vtiger_List_Js("Settings_LoginHistory_List_Js",{},{
 						app.hideModalWindow();
 					});
 					aDeferred.resolve(data);
+<<<<<<< HEAD
+=======
 					history.pushState({}, null, window.history.back());
+>>>>>>> 7206a9eabb5b00f2569e95a931be81cfa3583160
 				},
 				function(error,err) { 
 					aDeferred.reject();
