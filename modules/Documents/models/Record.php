@@ -115,7 +115,11 @@ class Documents_Record_Model extends Vtiger_Record_Model {
 			}
 		}
 			//Edit Done
-		echo $fileContent;
+			if($fileContent)	
+				echo $fileContent;
+		    else {
+		    	echo "<script>window.history.back();alert('File Not found');</script>";
+		    }
 	}
 
 	function updateFileStatus() {

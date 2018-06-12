@@ -7,13 +7,8 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  *************************************************************************************/
-$languageStrings = array(
-	// Basic Strings
-	'Category'=>'Claim Type',
-	'LBL_ADD_RECORD' => 'Add Claim Detail',
-	'SINGLE_Claim' => 'Claim',	
-);
 
-$jsLanguageStrings = array(
+Class Claim_Edit_View extends Vtiger_Edit_View {
+
 	
-);
+}		

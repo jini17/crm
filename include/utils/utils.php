@@ -153,7 +153,15 @@ function get_user_array($add_blank=true, $status="Active", $assigned_user="",$pr
 				else
 				{
 					$log->debug("Sharing is Public. All vtiger_users should be listed");
-					$query = "SELECT id, user_name,first_name,last_name from vtiger_users WHERE status=? and (user_name != 'admin' OR is_owner=1)";
+
+					//modified by jitu@Agiliux Filter approved by
+					$where = '';	
+					if($module=='Claim') {
+						$where = " AND id !=(SELECT reports_to_id from vtiger_users WHERE id = $current_user->id)";	
+					} 
+
+					$query = "SELECT id, user_name,first_name,last_name from vtiger_users WHERE status=? and (user_name != 'admin' OR is_owner=1)".$where;
+					//end here 
 					$params = array($status);
 				}
 		}
@@ -202,6 +210,10 @@ function get_group_array($add_blank=true, $status="Active", $assigned_user="",$p
 	if($group_array == null)
 	{
 		require_once('include/database/PearDatabase.php');
+		if($module=='Claim'){
+			return $group_array;
+		}
+
 		$db = PearDatabase::getInstance();
 		$temp_result = Array();
 		// Including deleted vtiger_users for now.

@@ -13,7 +13,7 @@ class Settings_Claim_Module_Model extends Settings_Vtiger_Module_Model {
 
 	var $baseTable = 'vtiger_claim';
 	var $baseIndex = 'claimid';
-	var $listFields = array('claimno' => 'Claim No','category'=>'Claim Type','claim_status'=>'Status', 'attachment'=>'Attachment','transactiondate'=>'Transcation Date'	,'totalamount'=>'Total Amount' );
+	var $listFields = array('claimno' => 'Claim No','category'=>'Claim Type','claim_status'=>'Status', 'attachment'=>'Attachment','transactiondate'=>'Transcation Date'	, 'approved_by'=>'Approved By','totalamount'=>'Total Amount' );
 	var $nameFields = array('claimno');
 	var $name = 'Claim';
 

@@ -19,7 +19,7 @@
 <div class="input-group">
 	<span class="input-group-addon">{$USER_MODEL->get('currency_symbol')}</span>
 	<input id="{$MODULE}_editView_fieldName_{$FIELD_NAME}" type="text" class="inputElement currencyField" name="{$FIELD_NAME}"
-	value="{$FIELD_MODEL->getEditViewDisplayValue($FIELD_MODEL->get('fieldvalue'))}" {if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if}
+	value="{if $MODULE eq 'Claim'}{$FIELD_MODEL->get('fieldvalue')}{else }{$FIELD_MODEL->getEditViewDisplayValue($FIELD_MODEL->get('fieldvalue'))}{/if}" {if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if}
     {if $FIELD_INFO["mandatory"] eq true} data-rule-required = "true" {/if} data-rule-currency='true'
     {if count($FIELD_INFO['validator'])}
         data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
