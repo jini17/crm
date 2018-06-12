@@ -25,9 +25,10 @@
 					<ul class="nav navbar-nav">
 						{if $IS_CREATE_PERMITTED}
 							<li>
+								<!-- Onclick Changed By Mabruk For Meetin Module -->
 								<button id="calendarview_basicaction_addevent" type="button" 
-										class="btn addButton btn-default module-buttons cursorPointer" 
-										onclick='Calendar_Calendar_Js.showCreateEventModal();'>
+										class="btn addButton btn-default module-buttons cursorPointer" 		
+										onclick="window.location.href='index.php?module=Calendar&view=Edit&mode=Events'">
 									<div class="fa fa-plus" aria-hidden="true"></div>&nbsp;&nbsp;
 									{vtranslate('LBL_ADD_EVENT', $MODULE)}
 								</button>

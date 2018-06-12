@@ -26,7 +26,7 @@
 					<tr class="blockHeader"><th colspan="2" class="{$WIDTHTYPE}">{vtranslate('LBL_GOOGLE_CONFIG_FILE', $QUALIFIED_MODULE)}</th></tr>
 				</thead>
 				<tbody>
-					{assign var=FIELD_DATA value=$MODEL->getViewableData()} {$MODEL->getViewableData()|print_r};
+					{assign var=FIELD_DATA value=$MODEL->getViewableData()} 
 					{foreach key=FIELD_NAME item=FIELD_DETAILS from=$MODEL->getEditableFields()}
 						<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted pull-right marginRight10px">{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE)}</label></td>
 							<td style="border-left: none;" class="row-fluid {$WIDTHTYPE}">

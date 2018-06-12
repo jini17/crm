@@ -250,6 +250,8 @@ $languageStrings = array(
 	'LBL_ADVANCE_GOOGLE_CONFIG' => 'Advance Google Configuration',
 	'LBL_GOOGLE_CONFIG_FILE' => 'Goolge Configuration File',
 	'LBL_HOW_CONFIG' => 'How to do the Configuration',
+	'LBL_CLIENTID' => 'Client ID',
+	'LBL_CLIENTSECRET' => 'Client Secret',
 
 
 
@@ -442,6 +444,7 @@ $languageStrings = array(
 	'Grade'=>'Grade List',
 	'TimeSheet'=>'Time-Sheet',
 	'LBL_DOWNLOAD'=>'Download',
+
 	'LBL_HR_MATTERS'=>'HR Matters',
 	'LBL_PAYSLIP'=>'Payslip',
 	'LBL_LEAVE_TYPE'=>'Leave Type',
@@ -459,6 +462,8 @@ $languageStrings = array(
 	'LBL_HOLIDAY'=>'Holiday',
 	'LBL_WORKINGHOURS'=>'Working Hours',
 	'LBL_CLAIM'=>'Apply Claim',
+
+
 
 );
 

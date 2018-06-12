@@ -17,6 +17,7 @@ class Settings_Vtiger_GoogleConfigIndex_View extends Settings_Vtiger_Index_View 
 		$viewer->assign('MODEL', $moduleModel);
 		$viewer->assign('QUALIFIED_MODULE', $qualifiedName);
 		$viewer->assign('CURRENT_USER_MODEL', Users_Record_Model::getCurrentUserModel());
+		$viewer->assign('ADVANCED_FIELD_VALUES', Settings_Vtiger_Record_Model::getGoogleCredentials()); // Added By Mabruk for Googe Drive Settings
 		$viewer->view('GoogleConfigIndex.tpl', $qualifiedName);
 	}
 	

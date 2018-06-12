@@ -1,0 +1,132 @@
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is:  vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ * Created by Mabruk
+ *************************************************************************************/
+
+Vtiger.Class("Calendar_MOM_Js",{},{
+	
+	/*
+     * Function to save the Configuration Editor content
+     */
+    registerSaveButton : function(form) {
+        var aDeferred = jQuery.Deferred();      
+        var data = form.serializeFormData();       
+        var params = {
+                'module' : app.getModuleName(),
+                'parent' : app.getParentModuleName(),
+                'action' : 'CalendarActions',
+                'mode' : 'updateMOMContent',
+                'data' : data
+            }
+
+        AppConnector.request(params).then(
+            function(data) {
+                aDeferred.resolve(data);
+            },
+            function(error,err){
+                aDeferred.reject();
+            }
+        );
+
+        return aDeferred.promise();
+    },
+
+     	/**
+	 * Added By Jitu and Mabruk Function to register event for ckeditor for description field
+	 */
+	registerTextEditorForMOM : function(e){
+        var thisInstance = this;
+
+      /*  jQuery(".tab-item :contains('Agenda/MOM')").click( function(){ alert('dw');
+          
+            jQuery(document).ready( function(){
+               thisInstance.loadMeetingContainer();
+            });
+       });*/
+		
+		var noteContentElement = jQuery("#min_meeting");
+		if(noteContentElement.length > 0){
+			noteContentElement.removeAttr('data-validation-engine').addClass('ckEditorSource');
+			var ckEditorInstance = new Vtiger_CkEditor_Js();
+			ckEditorInstance.loadCkEditor(noteContentElement);
+			noteContentElement.closest('td').css({'width':'1015px'});
+			//noteContentElement.closest('tr').find('td:nth-child(1)').hide();
+			//noteContentElement.closest('tr').find('td:nth-child(3)').hide();
+			//noteContentElement.closest('tr').find('td:nth-child(4)').hide();			
+		}
+
+       // thisInstance.loadMeetingContainer();
+	},
+
+	/**
+	 * Added By Mabruk and Jitu Function to Load edit View of MOM Text Editor
+	 */
+	loadMeetingContainer : function(){
+        var thisInstance = this;
+		jQuery("#clickmeeting").click( function(){
+			jQuery("#clickmeeting").hide();
+            jQuery("#meetingContent").hide();
+			jQuery("#meetingContainer").show();
+		});
+
+        var form = jQuery('#MOM');
+
+        jQuery(".cancelMOM").click(function() {
+            jQuery("#meetingContainer").hide();
+            jQuery("#meetingContent").show();
+            jQuery("#clickmeeting").show();
+        });
+
+        jQuery("#saveMOM").click( function(){
+            var aDeferred = jQuery.Deferred();      
+            var formData = form.serializeFormData();       
+            var params = {
+                'module' : app.getModuleName(),
+                'parent' : app.getParentModuleName(),
+                'action' : 'CalendarActions',
+                'mode'  : 'updateMOMContent',
+                'data' : formData
+            }
+
+            AppConnector.requestPjax(params).then(
+                function(data) { 
+                    jQuery('#meetingContent').html(data.result);
+                    jQuery('#min_meeting').html(data.result);
+                    jQuery("#meetingContainer").hide();
+                    jQuery("#meetingContent").show();
+                    jQuery("#clickmeeting").show();
+                    //history.pushState({}, null, window.history.back());
+                },
+                function(error,err){
+                    aDeferred.reject();
+                }
+            );
+            return aDeferred.promise();
+        });
+
+        form.on('submit', function (e) {
+            e.preventDefault();
+            return false;
+        });	
+        	
+	},
+	
+	
+	
+	registerEvents: function() { 
+		this.loadMeetingContainer();
+		this.registerTextEditorForMOM();
+	}	
+});
+
+jQuery(document).ready(function(e){ alert('MOM');
+	var thisInstance = new Calendar_MOM_Js();
+    //var vtigerinst = new Vtiger_Index_Js();
+    //vtigerinst.registerEvents();
+	thisInstance.registerEvents();
+});	

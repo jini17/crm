@@ -183,10 +183,11 @@ class Users_Module_Model extends Vtiger_Module_Model {
 		$loginTime = date("Y-m-d H:i:s");
        		$browser = (strlen($browser)) ? $browser : $browser;
 
-	//Session_id added By Mabruk requested By Jitu
-        $_SESSION['session_id'] = uniqid();   
-        $query = "INSERT INTO vtiger_loginhistory (user_name, user_ip, logout_time, login_time, status, browser, session_id) VALUES (?,?,?,?,?,?,?)";
-        $params = array($username, $userIPAddress, '0000-00-00 00:00:00',  $loginTime, $status, $browser, $_SESSION['session_id']);
+		//Session_id added By Mabruk requested By Jitu
+		$_SESSION['session_id'] = uniqid();   
+		$query = "INSERT INTO vtiger_loginhistory (user_name, user_ip, logout_time, login_time, status, browser, session_id) VALUES (?,?,?,?,?,?,?)";
+		$params = array($username, $userIPAddress, '0000-00-00 00:00:00',  $loginTime, $status, $browser, $_SESSION['session_id']);
+
 		$adb->pquery($query, $params);
 	}
 

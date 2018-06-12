@@ -597,6 +597,34 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
 		   }
 		 });
 	 },
+     /**
+	 * Added By Jitu and Mabruk Function to register event for ckeditor for description field
+	 */
+	registerTextEditorForMOM : function(){
+		var form = this.getForm();
+		var noteContentElementMOM = form.find('[name="min_meeting"]');
+		var noteContentElementAgenda = form.find('[name="agenda"]');
+		
+		if(noteContentElementMOM.length > 0){
+			noteContentElementMOM.removeAttr('data-validation-engine').addClass('ckEditorSource');
+			var ckEditorInstance = new Vtiger_CkEditor_Js();
+			ckEditorInstance.loadCkEditor(noteContentElementMOM);
+			noteContentElementMOM.closest('td').css({'width':'1015px'});
+			//noteContentElement.closest('tr').find('td:nth-child(1)').hide();
+			//noteContentElement.closest('tr').find('td:nth-child(3)').hide();
+			//noteContentElement.closest('tr').find('td:nth-child(4)').hide();			
+		}
+
+		if(noteContentElementAgenda.length > 0){
+			noteContentElementAgenda.removeAttr('data-validation-engine').addClass('ckEditorSource');
+			var ckEditorInstance = new Vtiger_CkEditor_Js();
+			ckEditorInstance.loadCkEditor(noteContentElementAgenda);
+			noteContentElementAgenda.closest('td').css({'width':'1015px'});
+			//noteContentElement.closest('tr').find('td:nth-child(1)').hide();
+			//noteContentElement.closest('tr').find('td:nth-child(3)').hide();
+			//noteContentElement.closest('tr').find('td:nth-child(4)').hide();			
+		} 
+	},
 
 	registerBasicEvents : function(container) {
 		this._super(container);
@@ -608,5 +636,6 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
 		this.repeatMonthOptionsChangeHandling();
 		this.registerRepeatMonthActions();
 		this.registerRelatedContactSpecificEvents(container);
+		this.registerTextEditorForMOM();
 	}
 });

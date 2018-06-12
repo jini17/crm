@@ -12,10 +12,6 @@
  * TODO need to organize into classes based on functional grouping.
  */
 
-
-
-
-
 class Vtiger_Functions {
 
 	const LINK_TO_ANCHOR_TEXT_SYMBOL = '#';
@@ -45,6 +41,7 @@ class Vtiger_Functions {
 	
 
 	static function createFolderInGoogleDrive($client,$parentId,$foldername){
+		require_once 'testAPI/vendor/autoload.php';
 		$service = new Google_Service_Drive($client);
 		$id= new stdClass();
 		if ($parentId == ''){
@@ -624,7 +621,6 @@ class Vtiger_Functions {
 	}
 
 	static function initStorageFileDirectory($fileLocationType) {
-		require_once 'testAPI/vendor/autoload.php';
 		$filepath = 'storage/';
 
 		$year  = date('Y');
