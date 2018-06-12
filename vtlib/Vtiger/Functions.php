@@ -663,13 +663,13 @@ class Vtiger_Functions {
 		}
 
 		$filepath = $filepath . $year . "/" . $month . "/" . $week . "/";
-
+		//echo $month . "  " . $week;
 		//Edited By Mabruk For Google Drive Integration 27/03/2018
 		$client = self::getClient(); 
 		if ($fileLocationType == 'G'){
 			$parentId = self::createFolderInGoogleDrive($client, '','Storage');
-			$parentId = self::createFolderInGoogleDrive($client, $parentId,$month);
-			$parentId = self::createFolderInGoogleDrive($client, $parentId,$week);
+			$parentId = self::createFolderInGoogleDrive($client, $parentId,$month . " " . $year);
+			$parentId = self::createFolderInGoogleDrive($client, $parentId,$month . "(" . $week . ")");
 			return $parentId;
 		}
 		//End Edit - Mabruk
