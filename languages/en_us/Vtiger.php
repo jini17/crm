@@ -1406,6 +1406,7 @@ $languageStrings = array(
 	'LBL_DEFAULT_DASHBOARD_TOOLTIP'=>'Make this dashboard as default by reordering it as the first tab!',
 	'LBL_ALLOWED_IP'=>'IP Restriction',
 	'LBL_ADMIN'=>'Admin/Finance',
+	'LBL_ALLOCATION_TYPE'=>'Allocation List',
 );
 
 $jsLanguageStrings = array(
