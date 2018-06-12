@@ -668,6 +668,7 @@ class Vtiger_Functions {
 		$client = self::getClient(); 
 		if ($fileLocationType == 'G'){
 			$parentId = self::createFolderInGoogleDrive($client, '','Storage');
+			$parentId = self::createFolderInGoogleDrive($client, $parentId,$year);
 			$parentId = self::createFolderInGoogleDrive($client, $parentId,$month . " " . $year);
 			$parentId = self::createFolderInGoogleDrive($client, $parentId,$month . "(" . $week . ")");
 			return $parentId;
