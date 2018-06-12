@@ -58,7 +58,6 @@ class EmployeeContract_Record_Model extends Vtiger_Record_Model {
 
 				if (fopen($filePath.$savedFile, "r")) {
 					$fileContent = fread(fopen($filePath.$savedFile, "r"), $fileSize);
-
 					header("Content-type: ".$fileDetails['type']);
 					header("Pragma: public");
 					header("Cache-Control: private");
@@ -68,7 +67,11 @@ class EmployeeContract_Record_Model extends Vtiger_Record_Model {
 				}
 
 			//Edit Done
-			echo $fileContent;
+			if($fileContent)	
+				echo $fileContent;
+		    else {
+		    	echo "<script>window.history.back();alert('File Not found');</script>";
+		    }
 	}
 
 	function updateFileStatus() {
