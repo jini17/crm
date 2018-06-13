@@ -46,11 +46,32 @@ class Settings_Vtiger_AddRule_View extends Settings_Vtiger_Index_View {
         $viewer->view('AddRule.tpl', $qualifiedModuleName);
     }
 
+    /**
+     * @param $request
+     */
     public function AddRule($request){
         global $adb;
         $insertArray = $request->get('form');
-        $query = "INSERT INTO `allowed_ip` (`ip`, `type`, `user_name`) VALUES (?, ?, ?)";
-        $result = $adb->pquery($query,array($insertArray[1]['value'],$insertArray[2]['value'],$insertArray[3]['value']));
+        $selectedusers = '';
+        for($i=0;$i<count($insertArray);$i++){
+            if($insertArray[$i]['name']=='selectUser[]') {
+                $selectedusers .= $insertArray[$i]['value'].',';
+            }else{
+                $values[$insertArray[$i]['name']] = $insertArray[$i]['value'];
+            }
+        }
+
+        $selectedusers = substr($selectedusers, 0, -1);;
+
+
+        if(!isset($values['isactive'])){
+            $values['isactive']= 0;
+        }else{
+            $values['isactive']= 1;
+        }
+
+        $query = "INSERT INTO `allowed_ip` (`ip`, `type`, `user_name`,`iprestriction_type`,`isactive`) VALUES (?, ?, ?, ?, ?)";
+        $result = $adb->pquery($query,array($values['ipval'],$values['TypeOfRule'],$selectedusers,$values['iprestriction_type'], $values['isactive']));
 
         if($result){
             $response = "success";
