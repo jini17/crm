@@ -41,14 +41,39 @@
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Select Users :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
-                                <select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="selectUser" name="selectUser">
-                                    <option value="">Select Plan</option>
+                                <select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="selectUser" name="selectUser[]" multiple>
                                     <option value="All Users">All Users</option>
                                     {foreach from=$USERS item=USER}
                                         <option value="{$USER}">{$USER}</option>
                                     {/foreach}
 
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container float-left">
+
+                        <div class="contents row form-group">
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Rrestriction Type</label></div>
+
+                            <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
+                                <input type="radio" name="iprestriction_type" value="allowed" /> Allowed<br>
+                                <input type="radio" name="iprestriction_type" value="notallowed" /> Not Allowed<br>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container float-left">
+
+                        <div class="contents row form-group">
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Is Active</label></div>
+
+                            <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
+                                <input type="checkbox" name="isactive" />
+
                             </div>
                         </div>
                     </div>

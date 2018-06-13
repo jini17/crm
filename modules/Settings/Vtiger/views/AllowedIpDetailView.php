@@ -23,11 +23,18 @@ class Settings_Vtiger_AllowedIpDetailView_View extends Settings_Vtiger_Index_Vie
         for($i=0;$i<$count;$i++){
             $values[$i]['checkbox'] = $adb->query_result($result, $i,'ip');
             $values[$i]['ip'] = $adb->query_result($result, $i,'ip');
-            $values[$i]['user_name'] = $adb->query_result($result, $i,'user_name');
+            $values[$i]['iprestriction_type'] = $adb->query_result($result, $i,'iprestriction_type');
             $values[$i]['type'] = $adb->query_result($result, $i,'type');
-
+            $values[$i]['isactive'] = $adb->query_result($result, $i,'isactive');
+            if($values[$i]['isactive'] == '1'){
+                $values[$i]['isactive'] = 'Active';
+            }else{
+                $values[$i]['isactive'] = 'Inactive';
+            }
 
         }
+
+
 
         //echo "<pre>"; print_r($values); die;
 

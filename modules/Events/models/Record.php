@@ -127,10 +127,10 @@ class Events_Record_Model extends Calendar_Record_Model {
       * @param <String> $status
       */
      public function updateInvitationStatus($activityId,$userId,$status) {
-         $adb = PearDatabase::getInstance();
-         $sql = 'UPDATE vtiger_invitees SET status = ? WHERE activityid = ? AND inviteeid = ?';
-         $adb->pquery($sql,array($status,$activityId,$userId));
-         $this->inviteesDetails = NULL;
+        // $adb = PearDatabase::getInstance();
+        // $sql = 'UPDATE vtiger_invitees SET status = ? WHERE activityid = ? AND inviteeid = ?';
+        // $adb->pquery($sql,array($status,$activityId,$userId));
+        // $this->inviteesDetails = NULL;
      }
 
      public function getInviteUserMailData() {

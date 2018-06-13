@@ -14,7 +14,7 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
         $viewer = $this->getViewer($request);
         global $adb;
         //$adb->setDebug(true);
-        $query = "SELECT * FROM Allocation_list";
+        $query = "SELECT * FROM allocation_list";
         $resultalloc = $adb->pquery($query,array());
         $count = $adb->num_rows($resultalloc);
 
@@ -67,8 +67,8 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
     }
 
     function getPageTitle(Vtiger_Request $request) {
-        $qualifiedModuleName = $request->getModule(false);
-        return vtranslate('LBL_ALLOCATION_TYPE',$qualifiedModuleName);
+       $qualifiedModuleName = $request->getModule(false);
+        return vtranslate('LBL_ALLOCATION_TYPE','Vtiger');
     }
 
     /**

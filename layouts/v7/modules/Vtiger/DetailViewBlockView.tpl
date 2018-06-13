@@ -135,6 +135,22 @@
 								<td class="fieldLabel {$WIDTHTYPE}"></td><td class="{$WIDTHTYPE}"></td>
 							{/if}
 						</tr>
+					<!-- Added By Jitu Mabruk for Meeting--> 	
+					{if $BLOCK_LABEL_KEY eq 'Participants'}
+						 <tr>
+		                    <td class="fieldLabel {$WIDTHTYPE}">
+		                        <span class="muted">{vtranslate('LBL_INVITE_USERS', $MODULE_NAME)}</span>
+		                    </td>
+		                    <td class="fieldValue {$WIDTHTYPE}">
+		                        {foreach key=USER_ID item=USER_NAME from=$ACCESSIBLE_USERS}
+		                            {if in_array($USER_ID,$INVITIES_SELECTED)}
+		                                {$USER_NAME} - {vtranslate($INVITEES_DETAILS[$USER_ID],$MODULE)}
+		                                <br>
+		                            {/if}
+		                        {/foreach}
+		                    </td>
+               			</tr>
+               		{/if}	
 					</tbody>
 				</table>
 			</div>

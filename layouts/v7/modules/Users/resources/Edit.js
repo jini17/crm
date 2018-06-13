@@ -21,10 +21,7 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 		app.event.on(Vtiger_Edit_Js.recordPresaveEvent, function(e, data) {
 			var userName = jQuery('input[name="user_name"]').val();
 			var newPassword = jQuery('input[name="user_password"]').val();
-		
-			
-			alert(userName+roleId);return false;
-			var confirmPassword = jQuery('input[name="confirm_password"]').val();
+		     var confirmPassword = jQuery('input[name="confirm_password"]').val();
 			var record = jQuery('input[name="record"]').val();
             var firstName = jQuery('input[name="first_name"]').val();
             var lastName = jQuery('input[name="last_name"]').val();

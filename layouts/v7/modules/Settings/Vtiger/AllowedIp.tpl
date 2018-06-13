@@ -13,21 +13,21 @@
         <div class=" col-lg-12 col-md-12 col-sm-12">
             <div id="Head">
                 <div class="widget_header row-fluid">
-                    <div class="span8"><h3>{vtranslate('LBL_ALLOWEDIP_CONFIG', $QUALIFIED_MODULE)}</h3></div>
+                    <div class="span8"><h3>IP Restriction</h3></div>
                 </div>
                 <hr>
                 <br>
             </div>
 
             <div class="contents tabbable clearfix">
-                <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">{vtranslate('LBL_DELETE_VALUE',$QUALIFIED_MODULE)}</button>
+                <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">Delete</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="btn span10 marginLeftZero newButton" id="addItem">{vtranslate('LBL_ADD_VALUE',$QUALIFIED_MODULE)}</button><br><br>
+                <button class="btn span10 marginLeftZero newButton" id="addItem">Add</button><br><br>
                 <div class="contents">
                     <table class="table table-bordered table-condensed themeTableColor">
                         <thead>
                             <th class="{$WIDTHTYPE}">
-                                <span class="alignMiddle">{vtranslate('LBL_ALLOWED_IP_SETTING', $QUALIFIED_MODULE)}</span>
+                                <span class="alignMiddle">IP Restriction Settings</span>
                             </th>
                         </thead>
                         <tbody>
@@ -39,10 +39,13 @@
                                     IP
                                 </td>
                                 <td>
-                                    For User
+                                    IP Restriction Type
                                 </td>
                                 <td>
                                     Type Of Restriction
+                                </td>
+                                <td>
+                                    Is Active
                                 </td>
                             </tr>
                             {foreach item=SPLITVALUE from=$VALUES}

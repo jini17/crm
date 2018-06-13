@@ -126,6 +126,7 @@ class Settings_Workflows_EditTask_View extends Settings_Vtiger_Index_View {
         $viewer->assign('dateFormat',$userModel->get('date_format'));
         $viewer->assign('timeFormat', $userModel->get('hour_format'));
 
+
         $viewer->assign('MODULE', $moduleName);
         $viewer->assign('QUALIFIED_MODULE', $qualifiedModuleName);
 
@@ -176,6 +177,7 @@ class Settings_Workflows_EditTask_View extends Settings_Vtiger_Index_View {
 
         $structure = $recordStructureInstance->getStructure();
         foreach ($structure as $fields) {
+
             foreach ($fields as $field) {
                 if ($field->get('workflow_pt_lineitem_field')) {
                     $allFieldoptions .= '<option value="' . $field->get('workflow_columnname') . '">' .

@@ -166,8 +166,13 @@
 										{else if $smarty.request.error eq 7}				
 											<div class="alert alert-error">
 												<p>{vtranslate('LBL_SESSION_EXPIRED',$MODULE)}</p>
-											</div>	
-										{/if}
+											</div>
+                                        {else if $smarty.request.error eq 9}
+											<div class="alert alert-error">
+												<p>{vtranslate('LBL_BLOCKED_IP',$MODULE)}</p>
+											</div>
+
+                                        {/if}
 									{/if}
 									{if isset($smarty.request.fpError)}
 										<div class="alert alert-error">

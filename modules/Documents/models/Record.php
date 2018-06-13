@@ -83,14 +83,14 @@ class Documents_Record_Model extends Vtiger_Record_Model {
 				}
 				$fileSize = filesize($filePath.$savedFile);
 				$fileSize = $fileSize + ($fileSize % 1024);
-
+	
 				if (fopen($filePath.$savedFile, "r")) {
 					$fileContent = fread(fopen($filePath.$savedFile, "r"), $fileSize);
 
 					header("Content-type: ".$fileDetails['type']);
 					header("Pragma: public");
 					header("Cache-Control: private");
-					header("Content-Disposition: attachment; filename=\"$fileName\"");
+					header('Content-Disposition: attachment; filename="' . $fileName . '"');
 					header("Content-Description: PHP Generated Data");
                     header("Content-Encoding: none");
 				}
@@ -105,17 +105,22 @@ class Documents_Record_Model extends Vtiger_Record_Model {
 				}catch(Exception $e){
 					return 'Failure';
 				}
-				$headers = $response->getHeaders();
+				$headers = $response->getHeaders(); //print_r($headers);die;
 
 				foreach ($headers as $name => $values) {
 				  header($name . ': ' . implode(', ', $values));
 				}
 				header('Content-Disposition: attachment; filename="' . $fileName . '"');
+				header('Content-Type: application/vnd.officedocuments');
 				$fileContent = $response->getBody();
 			}
 		}
 			//Edit Done
-		echo $fileContent;
+			if($fileContent)	
+				echo $fileContent;
+		    else {
+		    	echo "<script>window.history.back();alert('File Not found');</script>";
+		    }
 	}
 
 	function updateFileStatus() {

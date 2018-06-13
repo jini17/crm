@@ -956,6 +956,68 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 	}
 
 	/**
+	 * Added By Mabruk Function to get Related Contact Name/Email
+	 */
+	public function getRelatedContactDetails($record){
+		global $adb;
+		$result = $adb->pquery("SELECT CONCAT(firstname,' ',lastname) as name, email FROM vtiger_contactdetails LEFT JOIN vtiger_cntactivityrel ON vtiger_contactdetails.contactid = vtiger_cntactivityrel.contactid RIGHT JOIN contact_invite_details ON vtiger_contactdetails.contactid = contact_invite_details.contactid WHERE vtiger_cntactivityrel.activityid = ? AND contact_invite_details.status = 'Accepted' AND contact_invite_details.activityid = ?", array($record,$record));
+		$numOfRows = $adb->num_rows($result);
+		$contact = array();
+
+		for ($i = 0; $i < $numOfRows; $i++){
+			$contact[$i]['name'] = $adb->query_result($result,$i,'name');
+			$contact[$i]['email'] = $adb->query_result($result,$i,'email');
+		}
+
+		return $contact;
+	}
+
+	/**
+	 * Added By Mabruk Function to get Invited Users Name/Email
+	 */
+	public function getInvitedUserDetails($record){
+		global $adb;
+		$result = $adb->pquery("SELECT CONCAT(first_name,' ',last_name) as name, email1 FROM vtiger_users LEFT JOIN vtiger_invitees ON vtiger_invitees.inviteeid = vtiger_users.id WHERE vtiger_invitees.activityid = ? AND vtiger_invitees.status = 'Accepted' ", array($record));
+		$numOfRows = $adb->num_rows($result);
+		$users = array();
+
+		for ($i = 0; $i < $numOfRows; $i++){
+			$users[$i]['name'] = $adb->query_result($result,$i,'name');
+			$users[$i]['email'] = $adb->query_result($result,$i,'email1');
+		}
+
+		return $users;
+	}
+
+	/**
+	 * Added By Mabruk Function to get MOM/AGENDA DATA 
+	 */
+	public function getMeetingData($record){
+		global $adb;
+		$result = $adb->pquery("SELECT subject, date_start, time_start, time_end, eventstatus FROM vtiger_activity WHERE activityid = ?", array($record));
+		$data = array();
+
+		$data['subject'] = $adb->query_result($result,0,'subject');
+		$data['date'] = date('d-m-Y', strtotime($adb->query_result($result,0,'date_start')));
+		$startTime = $data['startTime'] = $adb->query_result($result,0,'time_start');
+		$endTime = $data['endTime'] = $adb->query_result($result,0,'time_end');
+		$data['status'] = $adb->query_result($result,0,'eventstatus');
+		$data['timeDiff'] = (strtotime($endTime) - strtotime($startTime))/60;
+
+		if ($data['status'] == 'Held') {
+			$result = $adb->pquery("SELECT min_meeting FROM vtiger_activitycf WHERE activityid = ?", array($record));
+			$data['content'] = $adb->query_result($result,0,'min_meeting');
+		}
+
+		else {
+			$result = $adb->pquery("SELECT agenda FROM vtiger_activitycf WHERE activityid = ?", array($record));
+			$data['content'] = $adb->query_result($result,0,'agenda');
+		}
+
+		return $data;
+	}
+
+	/**
 	* Function is used to give links in the All menu bar
 	*/
 	public function getQuickMenuModels() {

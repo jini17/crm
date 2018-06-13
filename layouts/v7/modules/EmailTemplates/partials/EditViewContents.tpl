@@ -28,23 +28,23 @@
                     <tr>
                         <td class="fieldLabel {$WIDTHTYPE} alignMiddle">{vtranslate('LBL_TEMPLATE_TYPE', $MODULE)}&nbsp;<span class="redColor">*</span></td>                        
                         <td class="fieldValue {$WIDTHTYPE}">
-                        <div class="fieldValue">
-                            <select class="select2-container select2 inputElement col-sm-6 selectModule" name="templateType" id="templateType">
-                                {if $RECORD->get('templatetype') eq "pushnotification"}
-                                    <option value="email">Email</option>
-                                    <option value="SMS">SMS</option>
-                                    <option value="pushnotification" selected>Push Notification</option>
-                                {elseif $RECORD->get('templatetype') eq "SMS"}
-                                    <option value="email">Email</option>
-                                    <option value="SMS" selected>SMS</option>
-                                    <option value="pushnotification">Push Notification</option>
-                                {else}
-                                    <option value="email" selected>Email</option>
-                                    <option value="SMS">SMS</option>
-                                    <option value="pushnotification">Push Notification</option>
-                                {/if}
-                            </select>
-                        </div>
+                            <div class="fieldValue">
+                                <select class="select2-container select2 inputElement col-sm-6 selectModule" name="templateType" id="templateType">
+                                    {if $RECORD->get('templatetype') eq "pushnotification"}
+                                        <option value="email">Email</option>
+                                        <option value="SMS">SMS</option>
+                                        <option value="pushnotification" selected>Push Notification</option>
+                                    {elseif $RECORD->get('templatetype') eq "SMS"}
+                                        <option value="email">Email</option>
+                                        <option value="SMS" selected>SMS</option>
+                                        <option value="pushnotification">Push Notification</option>
+                                    {else}
+                                        <option value="email" selected>Email</option>
+                                        <option value="SMS">SMS</option>
+                                        <option value="pushnotification">Push Notification</option>
+                                    {/if}
+                                </select>
+                            </div>
                         </td>                        
                     </tr>  
                     <!--End-->  

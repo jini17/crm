@@ -188,6 +188,7 @@ Settings_Vtiger_List_Js("Settings_LoginHistory_List_Js",{},{
 					});
 					aDeferred.resolve(data);
 					history.pushState({}, null, window.history.back());
+
 				},
 				function(error,err) { 
 					aDeferred.reject();

@@ -10,6 +10,8 @@
 $languageStrings = array(
 
 	// Footer
+	'LBL_MOM' => 'Agenda/MOM',
+	'LBL_MOM_BLOCK' => 'Minutes of Meeting(MOM)',
 	'APPTITLE' => 'Vtiger CRM',
 	'POWEREDBY'=> 'Powered by vtiger CRM',
 	'LBL_READ_LICENSE' => 'Read License',
@@ -76,7 +78,7 @@ $languageStrings = array(
 	'LBL_ADD_MORE_FIELDS' => 'Add more fields',
 	'LBL_ADD_NOTE' => 'Add Document',
 	'LBL_CREATE_NEW' => 'Create New',
-	'LBL_ADD_EVENT' => 'Add Event',
+	'LBL_ADD_EVENT' => 'Add Meeting',
 	'LBL_ADD_TASK' => 'Add Task',
 	'LBL_MARKETING_AND_SALES' => 'MARKETING & SALES',
 	'LBL_TOOLS_HEADER' => 'TOOLS',
@@ -504,7 +506,7 @@ $languageStrings = array(
 	'LBL_COMMENTED' => 'Commented',
 
 	//calender set-reminder
-	'LBL_BEFORE_EVENT' => ' Before Event',
+	'LBL_BEFORE_EVENT' => ' Before Meeting',
 
 	//Dashboard widgets
 	'History' => 'History',
@@ -895,7 +897,7 @@ $languageStrings = array(
 	'LBL_MARK_AS_HELD' => 'Mark As Held',
 	'LBL_MARK_AS_COMPLETED' => 'Mark As Completed',
 	'LBL_SMS_MAX_CHARACTERS_ALLOWED' => 'Maximum 160 characters are allowed for text message',
-	'LBL_HIDE_COMPLETED_EVENTS' => 'Hide Completed Calendar Events',
+	'LBL_HIDE_COMPLETED_EVENTS' => 'Hide Completed Calendar Meetings',
 	'LBL_SETUP_WEBFORMS' => 'Setup Webforms',
 	'LBL_SPECIAL_OPTIONS' => 'Special Options',
 	'LBL_PARENT_OWNER' => 'Parent Record Owner',
@@ -1042,7 +1044,7 @@ $languageStrings = array(
 	'LBL_FAVOURITE' => 'Favourite',
 	'LBL_UNDO_FAVOURITE' => 'Undo Favourite',
 	'LBL_TWITTER_HANDLER_MSG' => 'To see this contact\'s profile summary and history add their Twitter Username or search profiles using the link below.',
-	'LBL_ADD_EVENT_OR_TODO' => 'Add Event/Task',
+	'LBL_ADD_EVENT_OR_TODO' => 'Add Meeting/Task',
 	'LBL_ADD_TICKET_CONTACT' => 'Add Ticket + Contact',
 	'LBL_ADD_CASE_CONTACT' => 'Add Case + Contact',
 	'LBL_ADD_OPPORTUNITY_CONTACT' => 'Add Opportunity + Contact',
@@ -1404,6 +1406,7 @@ $languageStrings = array(
 	'LBL_DEFAULT_DASHBOARD_TOOLTIP'=>'Make this dashboard as default by reordering it as the first tab!',
 	'LBL_ALLOWED_IP'=>'IP Restriction',
 	'LBL_ADMIN'=>'Admin/Finance',
+	'LBL_ALLOCATION_TYPE'=>'Allocation List',
 );
 
 $jsLanguageStrings = array(
@@ -1632,7 +1635,7 @@ $jsLanguageStrings = array(
 	'JS_CALL_NOT_ANSWERED_UPDATE_PERMISSION' => "Call need to be answered before linking record", 
 	'JS_CALL_NOT_ANSWERED' => "Call need to be answered before performing the action",
 	// ends
-	'JS_NO_EDIT_PERMISSION' => 'You don\'t have the permission to edit this event',
+	'JS_NO_EDIT_PERMISSION' => 'You don\'t have the permission to edit this Meeting',
 
 	//Google Synchronization
 	'SYNC_REMOVED_SUCCESSFULLY' => 'Google synchronization removed successfully.',
@@ -1651,11 +1654,11 @@ $jsLanguageStrings = array(
 	'JS_CHANGES_WILL_BE_LOST' => 'Your changes will be lost!',
 	'JS_RECORD_DELETED' => 'Record deleted',
 	'JS_NO_DELETE_PERMISSION' => 'No delete permission',
-	'JS_CONFIRM_MARK_AS_HELD' => 'Are you sure you want to mark Event as Held?',
+	'JS_CONFIRM_MARK_AS_HELD' => 'Are you sure you want to mark Meeting as Held?',
 	'JS_CONFIRM_MARK_AS_COMPLETED' => 'Are you sure you want to mark Task as Completed?',
 	'JS_TODO_MARKED_AS_COMPLETED' => 'Task marked as Completed',
-	'JS_EVENT_MARKED_AS_HELD' => 'Event marked as Held',
-	'JS_FUTURE_EVENT_CANNOT_BE_MARKED_AS_HELD' => 'Future event cannot be marked as Held',
+	'JS_EVENT_MARKED_AS_HELD' => 'Meeting marked as Held',
+	'JS_FUTURE_EVENT_CANNOT_BE_MARKED_AS_HELD' => 'Future Meeting cannot be marked as Held',
 	'JS_PERMISSION_DENIED' => 'Permission denied',
 	'LBL_SMS_MAX_CHARACTERS_ALLOWED' => 'Maximum 160 characters are allowed for text message',
 	'JS_VIEWNAME_ALERT' => 'Maximum 40 characters are allowed for list name',
@@ -1777,7 +1780,7 @@ $jsLanguageStrings = array(
 	'JS_RELATION_ADDED_SUCESSFULLY' => 'Relation Added Successfully',
 	'JS_FAILED_TO_ADD_RELATION' => 'Failed To Add Relation',
 	'JS_SOCIAL_POST_DELETE_CONFIRMATION' => 'Are you sure you want to delete?',
-	'JS_EVENT_OR_TODO_ADDED_SUCCESS_MSG' => 'Event/Task added sucessfully',
+	'JS_EVENT_OR_TODO_ADDED_SUCCESS_MSG' => 'Meeting/Task added sucessfully',
 	'JS_LEAD_ADDED_SUCCESS_MSG' => 'Lead added successfully',
 	'JS_OPPORTUNITY_ADDED_SUCESS_MSG' => 'Opportunity added successfully',
 	'JS_TICKET_ADDED_SUCESS_MSG' => 'Ticket added successfully',
@@ -1795,7 +1798,7 @@ $jsLanguageStrings = array(
 	'JS_PLEASE_ENTER_NUMBER_IN_RANGE' => 'Please enter value in the range',
 	'JS_UPLOAD' => 'Upload',
 	'JS_TODO_ADDED_SUCCESS_MSG' => 'Task added successfully',
-	'JS_EVENT_ADDED_SUCCESS_MSG' => 'Event added successfully',
+	'JS_EVENT_ADDED_SUCCESS_MSG' => 'Meeting added successfully',
 	'JS_ACTIVE' => 'Active',
 	'JS_SNOOZED' => 'Snoozed',
 	'JS_INVALID_URL' => 'Invalid URL',
@@ -1884,7 +1887,7 @@ $jsLanguageStrings = array(
 	'JS_TASK_ADDED' => 'Task added',
 	'JS_MARKED_COMPLETED' => 'Marked as completed',
 	'JS_TASK_PRIORITY_CHANGED' => 'Task priority changed',
-	'JS_NO_PERMISSION_TO_MARK_AS_HELD' => 'You do not have permission to mark this event as held',
+	'JS_NO_PERMISSION_TO_MARK_AS_HELD' => 'You do not have permission to mark this Meeting as held',
 	'JS_TAG_ADDED' => 'Tag added',
 	'JS_TAB_DELETED' => 'deleted',
 	'JS_TAB_RENAMED' => 'Renamed',

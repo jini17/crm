@@ -40,7 +40,9 @@
         <span class="currencyValue">{$FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'))}</span>&nbsp;{$CURRENCY_SYMBOL}
     {/if}
 {else if  $FIELD_MODEL->get('name') eq 'signature'}
+  <!--decode html for texteditor by jitu-->
 	{decode_html($FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'), $RECORD->getId(), $RECORD))}
+  <!--End here-->
 {else}
-    {$FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'), $RECORD->getId(), $RECORD)}
+    {decode_html($FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'), $RECORD->getId(), $RECORD))}
 {/if}
