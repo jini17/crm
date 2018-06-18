@@ -12,6 +12,7 @@ class Settings_Vtiger_AddRule_View extends Settings_Vtiger_Index_View {
         parent::__construct();
         $this->exposeMethod('LoadRules');
         $this->exposeMethod('AddRule');
+        $this->exposeMethod('UpdateRule');
     }
 
     public function process(Vtiger_Request $request) {
@@ -72,6 +73,43 @@ class Settings_Vtiger_AddRule_View extends Settings_Vtiger_Index_View {
 
         $query = "INSERT INTO `allowed_ip` (`ip`, `type`, `user_name`,`iprestriction_type`,`isactive`) VALUES (?, ?, ?, ?, ?)";
         $result = $adb->pquery($query,array($values['ipval'],$values['TypeOfRule'],$selectedusers,$values['iprestriction_type'], $values['isactive']));
+
+        if($result){
+            $response = "success";
+        }else{
+            $response = "failed";
+        }
+
+        echo $response;
+
+    }
+
+    /**
+     * @param $request
+     */
+    public function UpdateRule($request){
+        global $adb;
+        $insertArray = $request->get('form');
+        $selectedusers = '';
+        for($i=0;$i<count($insertArray);$i++){
+            if($insertArray[$i]['name']=='selectUser[]') {
+                $selectedusers .= $insertArray[$i]['value'].',';
+            }else{
+                $values[$insertArray[$i]['name']] = $insertArray[$i]['value'];
+            }
+        }
+
+        $selectedusers = substr($selectedusers, 0, -1);;
+
+
+        if(!isset($values['isactive'])){
+            $values['isactive']= 0;
+        }else{
+            $values['isactive']= 1;
+        }
+
+        $query = "UPDATE `allowed_ip` SET `ip`=?, `type`=?, `user_name`=?,`iprestriction_type`=?,`isactive`=? WHERE ip_id = ?";
+        $result = $adb->pquery($query,array($values['ipval'],$values['TypeOfRule'],$selectedusers,$values['iprestriction_type'], $values['isactive'],$values['ip_id']));
 
         if($result){
             $response = "success";
