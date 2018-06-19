@@ -419,6 +419,7 @@ var Settings_Profiles_Js = {
 			}
 		})
 	},
+	
 	registerAllowModulePermission : function() { 
 		jQuery('#planFilter').on('change',function(e) { 
 			var planid = jQuery(e.currentTarget).val();
@@ -444,6 +445,7 @@ var Settings_Profiles_Js = {
 			});
 		});
 	},
+	
 	registerEvents : function() {
 		Settings_Profiles_Js.initEditView();
 		Settings_Profiles_Js.registerSelectAllModulesEvent();
