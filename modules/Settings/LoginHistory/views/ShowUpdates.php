@@ -22,9 +22,7 @@ class Settings_LoginHistory_ShowUpdates_View extends Settings_Vtiger_List_View{
 
 		$viewer = $this->getViewer($request);
 		$viewer->assign('DATA',$this->showActivities($sessionId));
-		$viewer->view('showUpdates.tpl',$qualifiedName); 
-		
-		//$response = $this->showActivities($sessionId); print_r($response);
+		$viewer->view('showUpdates.tpl',$qualifiedName); 		
 
     }
 
@@ -46,8 +44,8 @@ class Settings_LoginHistory_ShowUpdates_View extends Settings_Vtiger_List_View{
 
 			$whodid = $adb->query_result($result, $i, "whodid");		
 			$crmid = $adb->query_result($result, $i, "crmid");
-
 			$status = $adb->query_result($result, $i, "status");
+
 			if ($status == 0) {
 				$data[$i]['status'] = "Modified";
 				$resultForModification = $adb->pquery("SELECT fieldname,prevalue,postvalue FROM vtiger_modtracker_detail WHERE id = ?", array($id));

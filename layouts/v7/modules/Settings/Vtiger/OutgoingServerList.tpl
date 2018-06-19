@@ -19,9 +19,11 @@
     </div>
 
     <div class="contents tabbable clearfix">
+        <button class="btn span10 marginLeftZero newButton" id="addItem">{vtranslate('LBL_ADD_VALUE',$QUALIFIED_MODULE)}</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn span10 marginLeftZero newButton" id="editItem">Edit</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">{vtranslate('LBL_DELETE_VALUE',$QUALIFIED_MODULE)}</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="btn span10 marginLeftZero newButton" id="addItem">{vtranslate('LBL_ADD_VALUE',$QUALIFIED_MODULE)}</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
         <br><br>
 
         <div class="contents">
@@ -46,7 +48,7 @@
                             From Email
                         </td>
                         <td>
-                            Is active
+                            SMTP Authentication
                         </td>
                         <td>
                             Is Default
@@ -70,12 +72,12 @@
                             {$VALUE.from_email_field}
                         </td>
                         <td>
-                            {$VALUE.isactive}
+                            {$VALUE.smtp_auth}
                         </td>
                         <td>
                             {$VALUE.isdefault}
                         </td>
-                        <td align="center">
+                        <td>
                             <button class="showFromAddress btn span3 marginLeftZero newButton" id="showFromAddress" value="{$VALUE.id}">Show</button><br><br>
                         </td>
                     </tr>

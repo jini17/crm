@@ -13,6 +13,7 @@ class Settings_Vtiger_AddOutGoingServer_View extends Settings_Vtiger_Index_View 
         $this->exposeMethod('LoadRules');
         $this->exposeMethod('AddServer');
         $this->exposeMethod('FromAddressFunction');
+        $this->exposeMethod('editForm');
     }
 
     public function process(Vtiger_Request $request) {
@@ -32,6 +33,28 @@ class Settings_Vtiger_AddOutGoingServer_View extends Settings_Vtiger_Index_View 
 
         $viewer = $this->getViewer($request);
         $viewer->view('AddOutgoingServer.tpl', $qualifiedModuleName);
+    }
+
+    /**
+     * Function to Load Edit Outgoing Server Form
+     */
+
+    public function editForm($request){
+        global $adb;
+        $qualifiedModuleName = $request->getModule(false);
+        $id = $request->get('id');
+        $data = array();
+
+        $result = $adb->pquery("SELECT * FROM vtiger_systems WHERE id = ?",array($id));
+        $data['server'] = $adb->query_result($result,0,"server");
+        $data['server_username'] = $adb->query_result($result,0,"server_username");
+        $data['server_password'] = $adb->query_result($result,0,"server_password");    
+        $data['smtp_auth'] = $adb->query_result($result,0,"smtp_auth");
+        $data['isdefault'] = $adb->query_result($result,0,"isdefault");
+
+        $viewer = $this->getViewer($request);
+        $viewer->assign('DATA',$data); 
+        $viewer->view('EditOutgoingServer.tpl', $qualifiedModuleName);
     }
 
     /**
@@ -120,8 +143,14 @@ class Settings_Vtiger_AddOutGoingServer_View extends Settings_Vtiger_Index_View 
             $result3 = $adb->pquery("UPDATE vtiger_systems SET isdefault = 0 WHERE isdefault = 1",array());
         }
 
-        $query = "INSERT INTO vtiger_systems (server,server_username, server_password, smtp_auth, isdefault) VALUES (?, ?, ?, ?, ?)";
-        $result = $adb->pquery($query,array($data['Host'], $data['Username'], $data['Password'], $requireAuthentication, $isdefault));
+        if ($request->get('type') == 'edit') {
+            $query = "UPDATE vtiger_systems SET server = ?, server_username = ?, server_password = ?, smtp_auth = ?, isdefault = ? WHERE id = ?";
+            $result = $adb->pquery($query,array($data['Host'], $data['Username'], $data['Password'], $requireAuthentication, $isdefault,$request->get('id')));
+        }
+        else {
+            $query = "INSERT INTO vtiger_systems (server,server_username, server_password, smtp_auth, isdefault) VALUES (?, ?, ?, ?, ?)";
+            $result = $adb->pquery($query,array($data['Host'], $data['Username'], $data['Password'], $requireAuthentication, $isdefault));
+        }
 
         if($result){
             $response = "success";
@@ -130,7 +159,6 @@ class Settings_Vtiger_AddOutGoingServer_View extends Settings_Vtiger_Index_View 
         }
 
         echo $response;
-
     }
 
 }
