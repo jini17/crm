@@ -147,7 +147,6 @@ Vtiger.Class("Settings_Vtiger_ClaimType_Js",{},{
         var aDeferred = jQuery.Deferred();
         jQuery("#addItem").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
         jQuery("#addItem").click(function () {
-            console.log("add item");
             app.helper.showProgress();
             var params = {
                 'module' : app.getModuleName(),
@@ -160,6 +159,8 @@ Vtiger.Class("Settings_Vtiger_ClaimType_Js",{},{
                     //console.log("Inside pjax");
                     app.helper.hideProgress();
                     app.helper.showModal(data);
+                    thisInstance.registerCheckBoxes();
+
                     thisInstance.saveRule();
                     history.pushState({}, null, window.history.back());
 
@@ -234,10 +235,56 @@ Vtiger.Class("Settings_Vtiger_ClaimType_Js",{},{
 
         aDeferred.promise();
     },
+
+    /**
+     * Function to save a particular rule
+     */
+
+    registerCheckBoxes: function(){
+        //alert("Here");
+        jQuery("#transactionlimit").show();
+        jQuery("#monthlylimit").show();
+        jQuery("#yearlylimit").show();
+
+        jQuery(document).ready(function () {
+            jQuery("#transactionlimitcheck").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+            jQuery("#transactionlimitcheck").click(function () {
+                var checked = jQuery("input[id=transactionlimitcheck]:checked").length;
+                if(checked==0) {
+                    jQuery("#transactionlimit").show();
+                }else{
+                    jQuery("#transactionlimit").hide();
+                }
+            });
+            jQuery("#monthlylimitcheck").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+            jQuery("#monthlylimitcheck").click(function () {
+                var checked = jQuery("input[id=monthlylimitcheck]:checked").length;
+                if(checked==0) {
+                    jQuery("#monthlylimit").show();
+                }else{
+                    jQuery("#monthlylimit").hide();
+                }
+
+            });
+            jQuery("#yearlylimitcheck").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+            jQuery("#yearlylimitcheck").click(function () {
+                var checked = jQuery("input[id=yearlylimitcheck]:checked").length;
+                if(checked==0) {
+                    jQuery("#yearlylimit").show();
+                }else{
+                    jQuery("#yearlylimit").hide();
+                }
+            });
+        });
+
+
+    },
+
     registerEvents: function() {
         this.registerDeleteButton();
         this.registerAddButton();
         this.registerEditButton();
+
     }
 
 });

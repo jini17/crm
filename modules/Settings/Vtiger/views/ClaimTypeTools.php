@@ -99,6 +99,31 @@ class Settings_Vtiger_ClaimTypeTools_View extends Settings_Vtiger_Index_View {
     public function AddClaimType($request){
         global $adb;
         $insertArray = $request->get('form');
+        echo "<pre>";print_r($insertArray);die;
+        $claims =  array();
+        for($i=0;$i<count($insertArray);$i++) {
+            $test = $insertArray[$i]['name'];
+            $claims[$test] = $insertArray[$i]['value'];
+
+        }
+
+        if(!isset($claims['status'])){
+            $claims['status']= 'off';
+        }
+
+        if(!isset($claims['transactionlimitcheck'])){
+            $claims['transactionlimit']= '-1';
+        }
+
+        if(!isset($claims['monthlylimitcheck'])){
+            $claims['monthlylimit']= '-1';
+        }
+
+        if(!isset($claims['yearlylimitcheck'])){
+            $claims['yearlylimit']= '-1';
+        }
+
+
 
         $claimtypeid = $adb->getUniqueID('vtiger_crmentity');
 
@@ -109,8 +134,8 @@ class Settings_Vtiger_ClaimTypeTools_View extends Settings_Vtiger_Index_View {
         $crmentityinsertresult = $adb->pquery($crmentityinsertquery,array($params));
 
         if($crmentityinsertresult){
-            $query = "INSERT INTO `vtiger_claimtype` (`claimtypeid`, `claim_type`, `claim_code`,`claim_status`,`claim_description`) VALUES (?,?,?,?,?)";
-            $result = $adb->pquery($query,array($claimtypeid,$insertArray[1]['value'],$insertArray[2]['value'],$insertArray[3]['value'],$insertArray[4]['value']));
+            $query = "INSERT INTO `vtiger_claimtype` (`claimtypeid`, `claim_type`, `claim_code`,`claim_status`,`claim_description`,`transactionlimit`,`monthlylimit`,`yearlylimit`) VALUES (?,?,?,?,?)";
+            $result = $adb->pquery($query,array($claimtypeid,$claims['ClaimTypeTitle'],$claims['ClaimCode'],$claims['status'],$claims['ClaimType_Desc'],$claims['ClaimTypeId'],$claims['transactionlimit'], $claims['monthlylimit'], $claims['yearlylimit']));
 
         }
         if($result){
