@@ -9,6 +9,62 @@
 ************************************************************************************}
 
 {strip}
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 22px;
+        }
+
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 12px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #00AA88;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #00AA88;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 25px;
+        }
+
+        .slider.round:before {
+            border-radius: 20%;
+        }
+    </style>
     <div id="body">
         <div class=" col-lg-12 col-md-12 col-sm-12">
             <div id="Head">
@@ -23,6 +79,16 @@
                 <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">Delete</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button class="btn span10 marginLeftZero newButton" id="addItem">Add</button><br><br>
+                <button class="btn span10 marginLeftZero newButton" id="editItem">Edit</button><br><br>
+                <label class="switch">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="defaultvalue" {$DEFAULTVALUE} />
+                    <span class="slider round"></span>
+                </label>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label id="Allowed">The IP's not mentioned in the List will be Allowed</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label id="NotAllowed">The IP's not mentioned in the List will be Not Allowed</label>
+
+                <br><br>
+
                 <div class="contents">
                     <table class="table table-bordered table-condensed themeTableColor">
                         <thead>

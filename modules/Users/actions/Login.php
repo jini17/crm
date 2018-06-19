@@ -20,7 +20,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 
 	function process(Vtiger_Request $request) {
 		global $short_url, $adb;
-		$adb->setDebug(true);	
+		$adb->setDebug(true);
 		$username = $request->get('username');
 		$password = $request->getRaw('password');
 		//echo $username;
@@ -46,6 +46,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 
         $allowedipres = false;
 		$allowedipres = $this->AllowedIp($usip,$username);
+		echo "Nirbhay";
 		//echo $allowedipres;die;
 		//$allowedipres = true;
 
@@ -113,7 +114,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 	 */
 	function AllowedIp($usip, $username){
 	    global $adb;
-        $adb->setDebug(true);
+      //  $adb->setDebug(true);
         /**
          * Absolute IP validations
          */
@@ -163,7 +164,23 @@ class Users_Login_Action extends Vtiger_Action_Controller {
             }
         }
 
-        return true;
+        $querydefault = "SELECT * FROM allowed_ip_default ";
+
+        $resultdefault = $adb->pquery($querydefault,array());
+        $count = $adb->num_rows($resultdefault);
+
+       // echo
+        if($count > 0){
+            $defaultvalue = $adb->query_result($resultdefault,0,'defaultvalue');
+            if($defaultvalue == 'allowed'){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return true;
+        }
+
 
 
     }

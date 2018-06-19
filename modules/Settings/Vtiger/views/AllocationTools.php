@@ -197,11 +197,14 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
        //$adb->setDebug(true);
         $insertArray = $request->get('form');
         $Allocation = array();
+        $selectedgrades = '';
        // echo "<pre>"; print_r($insertArray); die;
         for($i=0;$i<count($insertArray);$i++) {
-            $name = $insertArray[$i]['name'];
-            $Allocation[$name] = $insertArray[$i]['value'];
-
+            if($insertArray[$i]['name']=='selectUser[]') {
+                $selectedgrades .= $insertArray[$i]['value'].',';
+            }else{
+                $Allocation[$insertArray[$i]['name']] = $insertArray[$i]['value'];
+            }
         }
 
         if(!isset($Allocation['status'])){
@@ -219,7 +222,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
             $query = "INSERT INTO `allocation_list` (`allocation_id`,`allocation_title`,`allocation_code`, `status`,`allocation_desc`, `grade_id`,`leavetype_id`,`age_leave`,`numberofleavesless`,`numberofleavesmore`,`claimtype_id`,`age_claim`,`claimamountless`,`claimamountmore`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $result = $adb->pquery($query,array($Allocationid,$Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'],$Allocation['Allocation_Desc
-'],$Allocation['Allocation_grade'],$Allocation['Allocation_leavetype'],$Allocation['ageleave'],$Allocation['numberofleavesless'],$Allocation['numberofleavesmore'],$Allocation['Allocation_claimtype'],$Allocation['ageclaim'],$Allocation['amountclaimless'],$Allocation['amountclaimmore']));
+'],$selectedgrades,$Allocation['Allocation_leavetype'],$Allocation['ageleave'],$Allocation['numberofleavesless'],$Allocation['numberofleavesmore'],$Allocation['Allocation_claimtype'],$Allocation['ageclaim'],$Allocation['amountclaimless'],$Allocation['amountclaimmore']));
 
 
 
