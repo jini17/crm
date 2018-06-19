@@ -44,7 +44,7 @@ $languageStrings = array(
 	'LBL_DESCRIPTION' => 'Description',
     
 	// Other Strings
-	'LBL_USER_DESCRIPTION' => 'Manage users who can access Vtiger CRM',
+	'LBL_USER_DESCRIPTION' => 'Manage users who can access Agiliux CRM',
 	'LBL_ROLES' => 'Roles',
 	'LBL_ROLE_DESCRIPTION' => 'Set up hierarchy of roles and assign to the users',
 
@@ -63,7 +63,7 @@ $languageStrings = array(
 	'LBL_FIELDFORMULAS_DESCRIPTION' => 'Add custom equations to custom fields',
 
 	'VTLIB_LBL_MODULE_MANAGER' => 'Modules',
-	'VTLIB_LBL_MODULE_MANAGER_DESCRIPTION' => 'Manage module behavior inside vtiger CRM',
+	'VTLIB_LBL_MODULE_MANAGER_DESCRIPTION' => 'Manage module behavior inside Agiliux CRM',
 	'LBL_PICKLIST_EDITOR' => 'Picklist Field Values',
 	'LBL_PICKLIST_DESCRIPTION' => 'Customize Picklist values in each module',
 	'LBL_PICKLIST_DEPENDENCY_SETUP' => 'Picklist Dependencies',
@@ -226,14 +226,14 @@ $languageStrings = array(
     'LBL_HOTMAIL' => 'Hotmail',
     'LBL_YAHOO' => 'Yahoo',
     'LBL_OFFICE365' => 'Office365',
-    'LBL_VTIGER' => 'Vtiger',
+    'LBL_VTIGER' => 'Agiliux',
 	'LBL_REQUIRES_AUTHENTICATION' => 'Requires Authentication',
 	'LBL_OUTGOING_SERVER' => 'Outgoing Server',
 	'LBL_OUTGOING_SERVER_DESC' => 'Configure your Outgoing Mail Server details',
-	'LBL_DEFAULT'=>'By default, SMTP account settings for the outgoing server are configured to od1.vtiger.com mail server. To avoid outgoing emails getting filtered out by spam filters on your recipient ISP mail server, we recommend you implement one of the following.',
+	'LBL_DEFAULT'=>'By default, SMTP account settings for the outgoing server are configured to od1.Agiliux.com mail server. To avoid outgoing emails getting filtered out by spam filters on your recipient ISP mail server, we recommend you implement one of the following.',
 	'LBL_OPTIONS1'=>'Send emails from your mail server<br>
 					- Enter the SMTP account details (Server Name, User Name, Password) for the same account as entered in the FROM email address.',
-	'LBL_OPTIONS2'=>"Add vtiger.com server as an authorized sender of emails for your domain <b>(your_company.com)</b> when you are using your <b>From Email (eg : support@your_company.com)</b>.<br>
+	'LBL_OPTIONS2'=>"Add Agiliux.com server as an authorized sender of emails for your domain <b>(your_company.com)</b> when you are using your <b>From Email (eg : support@your_company.com)</b>.<br>
 						-To ensure that your emails are not rejected by recipient's Server as SPAM, 
 						the below mentioned TXT record should be added to your domain's DNS record",
 	'LBL_MAIL_SERVER_SMTP'=>'Mail Server Settings (SMTP)',
@@ -244,7 +244,7 @@ $languageStrings = array(
 	//Configuration Editor
 	'LBL_CONFIG_EDITOR' => 'Configuration Editor',
 	'LBL_GOOGLE_CONFIG' => 'Google Config',
-	'LBL_CONFIG_DESCRIPTION' => 'Edit the Configuration details of vtiger CRM',
+	'LBL_CONFIG_DESCRIPTION' => 'Edit the Configuration details of Agiliux CRM',
 	'LBL_CONFIG_FILE' => 'config.inc.php',
 	'LBL_MB' => 'MB',
 	'LBL_ADVANCE_GOOGLE_CONFIG' => 'Advance Google Configuration',

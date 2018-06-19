@@ -41,7 +41,7 @@ $languageStrings = array(
        "LBL_LICENSE_CODE" => "Your Licensekey",
        "LBL_LICENSE_CODE_SAVE" => "save Licensekey",
        "LBL_LICENSE_ACCEPT" => "License activated!",
-       "LBL_LICENSE_DECLINE" => "Error during activation process!<brPlease check, if your vtigerCRM System could connect to the Internet.",
+       "LBL_LICENSE_DECLINE" => "Error during activation process!<brPlease check, if your AgiliuxCRM System could connect to the Internet.",
        "LBL_FOR" => "for",
 
        "LBL_HEAD_CONNECTION_MANAGER" => "Connection Manager",

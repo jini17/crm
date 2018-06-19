@@ -51,6 +51,10 @@ function meetingInvites($entity) {
 	$vtigerMailer->Subject = 'Meeting Invites';	
 
 	$fieldValues = $entityArray['data'];
+	$today = date('d-m-Y');
+	$meetingDate = date("d-m-Y",strtotime($fieldValues['date_start']));
+	//Boolean Variable send for checking if Today is less than Meeting Date or not
+	$send = $today < $meetingDate || $today == $meetingDate;	
 	$status = '';
 	$emails = array();
 	
@@ -83,7 +87,7 @@ function meetingInvites($entity) {
 		    $content = 'Dear ' . $name .'<br><br>
 		    	You are invited to the following meeting: ' . $fieldValues['subject'] . '<br>' . $accept . '&nbsp;' . $decline;
 
-		    if ($status != 'Accepted' && $status != 'Declined')	{
+		    if ($send && $status != 'Accepted' && $status != 'Declined')	{
 			    $vtigerMailer->ClearAddresses();	
 			    $vtigerMailer->AddAddress($email);	
 			    $vtigerMailer->Body = $content;
@@ -114,7 +118,7 @@ function meetingInvites($entity) {
 		    $content = 'Dear ' . $name .'<br><br>
 		    	You are invited to the following meeting: ' . $fieldValues['subject'] . '<br>' . $accept . '&nbsp;' . $decline;	
 
-		    if ($status != 'Accepted' && $status != 'Declined')	{
+		    if ($send && $status != 'Accepted' && $status != 'Declined')	{
 			    $vtigerMailer->ClearAddresses();	
 			    $vtigerMailer->AddAddress($email);	
 			    $vtigerMailer->Body = $content;

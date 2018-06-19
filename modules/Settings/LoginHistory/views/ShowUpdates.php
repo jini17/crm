@@ -58,7 +58,11 @@ class Settings_LoginHistory_ShowUpdates_View extends Settings_Vtiger_List_View{
 					$fieldname = $adb->query_result($resultForModification, $j, "fieldname"); 
 					$prevalue = $adb->query_result($resultForModification, $j, "prevalue");
 					$postvalue = $adb->query_result($resultForModification, $j, "postvalue");
-					$modificationData[$j]['fieldname'] = $fieldname;
+
+					$resultFieldLabel = $adb->pquery("SELECT fieldlabel FROM vtiger_field LEFT JOIN vtiger_tab ON vtiger_field.tabid = vtiger_tab.tabid WHERE vtiger_tab.name = ? AND vtiger_field.columnname = ?", array($module, $fieldname));
+					$fieldLabel = $adb->query_result($resultFieldLabel, 0, "fieldlabel");
+
+					$modificationData[$j]['fieldname'] = $fieldLabel;
 					$modificationData[$j]['prevalue'] = $prevalue;
 					$modificationData[$j]['postvalue'] = $postvalue;
 				}

@@ -35,10 +35,7 @@
                     <tr>
                         <td>
                             Select
-                        </td>
-                        <td>
-                            Show From Addresses
-                        </td>
+                        </td>                        
                         <td>
                             Host
                         </td>
@@ -54,15 +51,15 @@
                         <td>
                             Is Default
                         </td>
+                        <td>
+                            Show From Addresses
+                        </td>
                     </tr>
                     {foreach item=VALUE from=$DATA}
                     <tr>
                         <td>
                             <input type="checkbox" name="selected_id" value="{$VALUE.id}" class="smallchkd">
-                        </td>
-                        <td>
-                            <button class="showFromAddress btn span3 marginLeftZero newButton" id="showFromAddress" value="{$VALUE.id}">Show</button><br><br>
-                        </td>
+                        </td>                        
                         <td>
                             {$VALUE.server}
                         </td>
@@ -77,6 +74,9 @@
                         </td>
                         <td>
                             {$VALUE.isdefault}
+                        </td>
+                        <td align="center">
+                            <button class="showFromAddress btn span3 marginLeftZero newButton" id="showFromAddress" value="{$VALUE.id}">Show</button><br><br>
                         </td>
                     </tr>
                     {/foreach}
