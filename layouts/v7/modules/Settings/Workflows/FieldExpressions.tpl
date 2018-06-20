@@ -77,7 +77,7 @@
                 <p>{vtranslate('LBL_EXPRESSION_EXAMPLE2',$QUALIFIED_MODULE)}</p>
             </div>
         </div>
-        {include file="ModalFooter.tpl"|vtemplate_path:$MODULE}
+        {include file="ModalFooter.tpl"|@vtemplate_path:$MODULE}
             </div>
         </div>
     <div class="clonedPopUp"></div>
