@@ -64,8 +64,8 @@
                                             <label>Transaction Limit &nbsp;&nbsp;&nbsp;&nbsp;</label>
                                         </td>
                                         <td>
-                                            <input type="checkbox" id="transactionlimitcheck" name="transactionlimitcheck">
-                                            <lable id="transactionnolimit">No Limit</lable>
+                                            <input type="checkbox" id="transactionlimitcheck" name="transactionlimitcheck">&nbsp;&nbsp;
+                                            <lable id="transactionnolimit">No Limit</lable><br>
                                             <input type="textbox" id="transactionlimit" name="transactionlimit">
 
                                         </td>
@@ -75,8 +75,8 @@
                                             <label>Monthly Limit</label>
                                         </td>
                                         <td>
-                                            <input type="checkbox" id="monthlylimitcheck" name="monthlylimitcheck">
-                                            <lable id="monthlynolimit">No Limit</lable>
+                                            <input type="checkbox" id="monthlylimitcheck" name="monthlylimitcheck">&nbsp;&nbsp;
+                                            <lable id="monthlynolimit">No Limit</lable><br>
                                             <input type="textbox" id="monthlylimit" name="monthlylimit">
                                         </td>
                                     </tr>
@@ -85,8 +85,8 @@
                                             <label>Yearly Limit</label>
                                         </td>
                                         <td>
-                                            <input type="checkbox" id="yearlylimitcheck" name="yearlylimitcheck">
-                                            <lable id="yearlynolimit">No Limit</lable>
+                                            <input type="checkbox" id="yearlylimitcheck" name="yearlylimitcheck">&nbsp;&nbsp;
+                                            <lable id="yearlynolimit">No Limit</lable><br>
                                             <input type="textbox" id="yearlylimit" name="yearlylimit">
                                         </td>
                                     </tr>
