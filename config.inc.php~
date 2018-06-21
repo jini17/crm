@@ -88,13 +88,13 @@ $dbconfigoption['ssl'] = false;
 
 $host_name = $dbconfig['db_hostname'];
 
-$site_URL = 'http://192.168.2.98/agiliux/';
+$site_URL = 'http://192.168.2.99/agiliux/';
 
 // url for customer portal (Example: http://vtiger.com/portal)
 $PORTAL_URL = $site_URL.'/customerportal';
 // root directory path
 $root_directory = '/var/www/html/agiliux/';
-$short_url = '192.168.2.98';
+$short_url = '192.168.2.99';
 
 // cache direcory path
 $cache_dir = 'cache/';
