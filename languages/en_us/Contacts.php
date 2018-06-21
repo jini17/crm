@@ -62,6 +62,7 @@ $languageStrings = array(
 	
 	'User List'=>'User List',
 	'LBL_ENRICH_CONTACT'=>'Enrich Contact',
+	
 );
 
 $jsLanguageStrings = array(

@@ -38,7 +38,8 @@ class Vtiger_PayslipPDFController extends Vtiger_InventoryPDFController
 	############################################ Header Section ############################################ 
 
 	function getHeaderViewer() {
-		$headerViewer = new PayslipPDFHeaderViewer();
+
+		$headerViewer = new PayslipPDFHeaderViewer();	
 		$headerViewer->setModel($this->buildHeaderModel());
 		return $headerViewer;
 	}
@@ -62,7 +63,8 @@ class Vtiger_PayslipPDFController extends Vtiger_InventoryPDFController
 		global $adb;
 		// Company information
 		//Added By jitu@secondcrm.com on 1-10-2014
-		 $companyid = $this->focus->column_fields['company_details'];	
+
+		 $companyid = $this->focus->column_fields['company_details'];
 		 $result = $adb->pquery("SELECT * FROM vtiger_organizationdetails WHERE organization_id =?", array($companyid));
 		$num_rows = $adb->num_rows($result);
 		if($num_rows) {
@@ -93,8 +95,9 @@ class Vtiger_PayslipPDFController extends Vtiger_InventoryPDFController
 	}
 
 	function buildHeaderModelColumnCenter() {
-		$id 		= $_REQUEST['record'];		
-		/*$paymenthead 	= Payslip_Record_Model::getPaymentRelatedHead($id);
+		$id 		= $_REQUEST['record'];
+
+		$paymenthead 	= Payslip_Record_Model::getPaymentRelatedHead($id);
 	
 		$customerName 	= $paymenthead['AccountName'];
 		$contactName 	= $paymenthead['ContactName'];
@@ -106,22 +109,13 @@ class Vtiger_PayslipPDFController extends Vtiger_InventoryPDFController
 
 		$modelColumnCenter[$contactNameLabel]		= $contactName;
 		$modelColumnCenter[$customerNameLabel] 		= $customerName;
-		*/
+		
 		return $modelColumnCenter;
 	}
 
 	function buildHeaderModelColumnRight() {
 		
-		if($this->pdfmodule['headerdate'] == 'T') {
-			$issuedate 	= $this->formatDate($this->focusColumnValue('duedate'));
-			
-		} else if($this->pdfmodule['headerdate'] == 'C') {
-			$headerdate 	= explode(' ',$this->focusColumnValue('CreatedTime'));
-			$issuedate  	= $this->formatDate($headerdate[0]);
-		} else {
-			$headerdate 	= explode(' ',$this->focusColumnValue('ModifiedTime'));
-			$issuedate  	= $this->formatDate($headerdate[0]);
-		}		
+		
 		
 		
 		$id 		= $_REQUEST['record'];
@@ -131,41 +125,11 @@ class Vtiger_PayslipPDFController extends Vtiger_InventoryPDFController
 		$currencySymbol = $this->buildCurrencySymbol();
 		$phonelable 	= getTranslatedString('LBL_PHONE', $this->moduleName);
 		$issueByLabel 	= getTranslatedString('Issued By', $this->moduleName);
-		$paymentAddress = Payslip_Record_Model::getPaymentShipBillAddress($id);
-		
-		$issueDateLabel = getTranslatedString('Issued Date', $this->moduleName);
-		$validDateLabel = getTranslatedString('Due Date', $this->moduleName);
-		$billingAddressLabel = getTranslatedString('Billing Address', $this->moduleName);
-		$grandtotallabel	= getTranslatedString("RTOTAL", $this->moduleName);	
-
-
-		$columnRightArray = array();
-		$columnRightArray[$issueDateLabel] = $this->formatDate($this->focusColumnValue('paymentdate'));
-		$columnRightArray[$validDateLabel] = $issuedate;
+		$paymentAddress = Payslip_Record_Model::getPaymentShipBillAddress($paymentdetails['company_details']);
+		$employee_and_company=array_merge($paymentdetails,$paymentAddress);
 	
-		
-		if($this->pdfmodule['showperson_name']==1) {
-			$columnRightArray[$issueByLabel] = $this->resolveReferenceLabel($this->focusColumnValue('assigned_user_id'),'Users');
-		}
-		if($this->pdfmodule['showphone']==1 && $phone !='') {
-			$columnRightArray[$phonelable] = $this->getRelatedPhone($this->focusColumnValue('relatedto'));
-		}
-		
-		$columnRightArray[$grandtotallabel." ($currencySymbol)"]= $this->formatPrice($final_details['grandTotal']);			
-		$columnRightArray[$grandtotallabel." ($currencySymbol)"] = $this->formatPrice($paymentdetails['amount']);
-		
-		$modelColumnRight = array(
-				'dates' => $columnRightArray
-		);
-		
-		if($this->pdfmodule['showshipping']==1) {
-			$shippingAddressLabel = $this->pdfmodule['shippinglabel'];
-			$modelColumnRight = array_merge($modelColumnRight,array($shippingAddressLabel=>$paymentAddress['ShipAddress']));	
 
-		}
-		$modelColumnRight =  array_merge($modelColumnRight,array($billingAddressLabel  =>$paymentAddress['BillAddress']));	
-		
-		return $modelColumnRight;
+		return $employee_and_company;
 	}
 
 	############################################### End Here ##################################################
@@ -188,37 +152,32 @@ class Vtiger_PayslipPDFController extends Vtiger_InventoryPDFController
 		$paymentdetails = Payslip_Record_Model::paymentDetail($id);
 		
 		$contentModels = array();
-			
+		
 			if($this->pdfmodule['paymentref'] ==1) {
-				$contentModels[getTranslatedString('Payment Ref',$this->moduleName)] = $paymentdetails['paymentreference'];	}
+				$contentModels[getTranslatedString('Basic Salary',$this->moduleName)] = $paymentdetails['basic_sal'];	}
 
-			if($this->paympdfmoduleent['paymentammount'] ==1) {
-			$contentModels[getTranslatedString('Amount',$this->moduleName)] = $paymentdetails['amount'];
+			if($this->pdfmodule['paymentammount'] ==1) {
+			$contentModels[getTranslatedString('Gross Pay',$this->moduleName)] = $paymentdetails['gross_pay'];
 			}
 
 			if($this->pdfmodule['paymentfor'] ==1) {
-			$contentModels[getTranslatedString('Payment For',$this->moduleName)] = $paymentdetails['paymentfor'];
+			$contentModels[getTranslatedString("E'R EPF",$this->moduleName)] = $paymentdetails['emp_epf'];
+			$contentModels[getTranslatedString("E'R SOCSO",$this->moduleName)] = $paymentdetails['emp_socso'];
+			$contentModels[getTranslatedString("HRDF",$this->moduleName)] = $paymentdetails['hrdf'];
+			$contentModels[getTranslatedString("E'R EIS",$this->moduleName)] = $paymentdetails['employer_eis'];
+			$contentModels[getTranslatedString("Total Contributions",$this->moduleName)] = $paymentdetails['total_comp_contribution'];
 			}
 
-			if($this->pdfmodule['paymentrefno'] ==1) {
-			$contentModels[getTranslatedString('Ref No(CC No|A/C N0|Cheque No)',$this->moduleName)] = $paymentdetails['refno'];
-			}
 
 			if($this->pdfmodule['paymentmode'] ==1) {
-			$contentModels[getTranslatedString('Mode',$this->moduleName)] = $paymentdetails['mode'];
+			$contentModels[getTranslatedString('',$this->moduleName)] = $paymentdetails['other_deduction'];
+				$contentModels[getTranslatedString('',$this->moduleName)] = $paymentdetails['total_deduction'];
 			}
 
-			if($this->pdfmodule['paymentbankname'] ==1) {
-			$contentModels[getTranslatedString('Bank Name',$this->moduleName)] = $paymentdetails['bankname'];
-			}
-
-			if($this->pdfmodule['paymentbankaccount'] ==1) {
-			$contentModels[getTranslatedString('Bank Account Name',$this->moduleName)] = $paymentdetails['bankaccountname'];
-			}
 			$contentModels['headerinfo'] = $this->buildHeaderModelColumnLeft();
+			
 			$contentModels['pdfsettings'] = $this->pdfmodule;
-			$contentModels[getTranslatedString('Description',$this->moduleName)] = $paymentdetails['remarks'];
-			//$contentModels['TermsCondition'.'#'.$this->focusColumnValue('terms_conditions')] = Vtiger_Util_Helper::getTnCDescription(from_html($this->focusColumnValue('terms_conditions'))); //Added by jitu on 22-01-2015 
+			
 	
 		
 		return $contentModels;

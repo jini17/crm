@@ -114,10 +114,10 @@ jQuery.Class('ExtensionStore_ExtensionStore_Js', {}, {
 		var moduleName = app.getModuleName();
 
 		if ((moduleName == 'Home')) {
-			thisInstance.insertTogglePromotionHtml();
-			thisInstance.getPromotionsFromMarketPlace();
-			thisInstance.registerEventsForTogglePromotion();
-			jQuery('.togglePromotion').trigger('click');
+			//thisInstance.insertTogglePromotionHtml();
+			//thisInstance.getPromotionsFromMarketPlace();
+			//thisInstance.registerEventsForTogglePromotion();
+			//jQuery('.togglePromotion').trigger('click');
 		}
 	}
 });

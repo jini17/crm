@@ -23,7 +23,7 @@ class Settings_EmployeeContract_ListView_Model extends Settings_Vtiger_ListView_
 
        $query = "SELECT *,$userNameSql as smownerid, vtiger_employeecontract.department FROM vtiger_employeecontract INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_employeecontract.employeecontractid 
         INNER JOIN vtiger_users ON vtiger_users.id=vtiger_crmentity.smownerid
-        WHERE vtiger_crmentity.deleted=0 $where";
+        WHERE vtiger_crmentity.deleted=0 $where ORDER BY vtiger_crmentity.createdtime DESC";
         return $query;
     }
 }

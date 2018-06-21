@@ -10,5 +10,6 @@
  ********************************************************************************/
 -->*}
 {strip}
-{$FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'))}
+{assign var=FieldValue value="##"|explode:$FIELD_MODEL->get('fieldvalue')} 
+{$FieldValue[0]} - {$FieldValue[1]}
 {/strip}

@@ -20,6 +20,7 @@
                             <h4 class="editHeader">{vtranslate('LBL_CREATING_NEW', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)}</h4>
                         {/if}
                     </div>
+                    <span>{$ERROR}</span>
                 </div>
             </div>
             <hr>    

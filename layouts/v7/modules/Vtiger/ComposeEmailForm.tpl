@@ -39,7 +39,7 @@
                     <input type="hidden" name="operator" value="{$OPERATOR}" />
                     <input type="hidden" name="search_value" value="{$ALPHABET_VALUE}" />
                     <input type="hidden" name="search_params" value='{ZEND_JSON::encode($SEARCH_PARAMS)}' />
-                    
+
                     <div class="row toEmailField">
                         <div class="col-lg-12">
                             <div class="col-lg-3">
@@ -65,9 +65,9 @@
                                 </span>
                             </div>
                             </div>
-                                    
+
                         </div>
-                    
+
                     <div class="row {if empty($CC)} hide {/if} ccContainer">
                         <div class="col-lg-12">
                             <div class="col-lg-3">
@@ -91,7 +91,7 @@
                             <div class="col-lg-4"></div>
                         </div>
                     </div>
-                    
+
                     <div class="row {if (!empty($CC)) and (!empty($BCC))} hide {/if} ">
                         <div class="col-lg-12">
                             <div class="col-lg-3">
@@ -103,7 +103,7 @@
                             <div class="col-lg-4"></div>
                         </div>
                     </div>
-                    
+
                     <div class="row subjectField">
                         <div class="col-lg-12">
                             <div class="col-lg-3">
@@ -121,7 +121,7 @@
                                 <span class="pull-right">{vtranslate('LBL_FROM_ADDRESS',$MODULE)}&nbsp;<span class="redColor">*</span></span>
                             </div>
                             <div class="col-lg-5">
-                                 <select style="width: 100%;" class="select2" name="selOutgoingServer" id="selOutgoingServer>
+                                 <select style="width: 100%;" class="select2" name="selOutgoingServer" id="selOutgoingServer">
                                     {foreach key=labelval1 item=selOutgoingServer from=$OUTGOINGSERVER}
                                         {if $selOutgoingServer.isdefault eq 1}
                                             {assign var=selectval1 value="selected"}
@@ -130,20 +130,20 @@
                                         {else}
                                             {assign var=selectval1 value=""}
                                         {/if}
-                                     <option value="{$selOutgoingServer.name}||{$selOutgoingServer.email}||{$selOutgoingServer.serverid}" {$selectval1}>{$selOutgoingServer.email}</option>
+                                     <option value="{$selOutgoingServer.name}||{$selOutgoingServer.email}||{$selOutgoingServer.serverid}" {$selectval1}>{$selOutgoingServer.email}[{$selOutgoingServer.servername}]</option>
                                     {/foreach}
                                 </select>
                             </div>
                             <div class="col-lg-4"></div>
                         </div>
-                    </div>       
+                    </div>
                     <div class="row attachment">
                         <div class="col-lg-12">
                             <div class="col-lg-3">
                                 <span class="pull-right">{vtranslate('LBL_ATTACHMENT',$MODULE)}</span>
                             </div>
                             <div class="col-lg-5">
-                                
+
                                 <div class="col-md-7 browse" style="padding: 0;">
                                     <input style="    padding: 5px 0px;" type="file" {if $FILE_ATTACHED}class="removeNoFileChosen"{/if} id="multiFile" name="file[]"/>&nbsp;<br>
                                     <div id="attachments">
@@ -166,9 +166,9 @@
                                 <div class="col-md-5 brownseInCrm">
                                     <button type="button" class="btn btn-small btn-default" id="browseCrm" data-url="{$DOCUMENTS_URL}" title="{vtranslate('LBL_BROWSE_CRM',$MODULE)}">{vtranslate('LBL_BROWSE_CRM',$MODULE)}</button>
                                 </div>
-                                    
-                                
-                                
+
+
+
                             </div>
                             <div class="col-lg-4">
                                 <div class="col-md-12 insertTemplate">
@@ -177,7 +177,7 @@
                             </div>
                         </div>
                     </div>
-                                
+
                     <div class="col-lg-12">
                         <div class="col-lg-3">
                             <span class="pull-right">{vtranslate('LBL_INCLUDE_SIGNATURE',$MODULE)}</span>
@@ -186,19 +186,19 @@
                             <input class="" type="checkbox" name="signature" value="Yes" checked="checked" id="signature">
                         </div>
                     </div>
-                   
+
                     <div class="container-fluid hide" id='emailTemplateWarning'>
                         <div class="alert alert-warning fade in">
                             <a href="#" class="close" data-dismiss="alert">&times;</a>
                             <p>{vtranslate('LBL_EMAILTEMPLATE_WARNING_CONTENT',$MODULE)}</p>
                         </div>
-                    </div>         
+                    </div>
                     <div class="row templateContent">
                         <div class="col-lg-12">
                             <textarea style="width:390px;height:200px;" id="description" name="description">{$DESCRIPTION}</textarea>
                         </div>
                     </div>
-                    
+
                     {if $RELATED_LOAD eq true}
                         <input type="hidden" name="related_load" value={$RELATED_LOAD} />
                     {/if}
@@ -207,7 +207,7 @@
                         {vtranslate('LBL_EMAILTEMPLATE_WARNING_CONTENT',$MODULE)}
                     </div>
                 </div>
-                
+
                 <div class="modal-footer">
                     <div class="pull-right cancelLinkContainer">
                         <a href="#" class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>

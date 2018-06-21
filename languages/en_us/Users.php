@@ -473,6 +473,8 @@ $languageStrings = array(
 'LBL_LEAVE_APPROVED'=>'Click for leave approval',
 'LBL_HALF_DAY'=>'Half Day?',
 'LBL_SESSION_EXPIRED'=>'Session Expired, try again !!',
+'LBL_BLOCKED_IP'=>'Sorry!! Your IP is blocked, Please contact the admin',
+'LBL_USER_LIMIT_EXCEED'=>'User limit exceeded in this plan, please contact to Agiliux Team',
 //End of Contacts
 );
 

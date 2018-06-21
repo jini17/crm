@@ -193,7 +193,7 @@ var Settings_Roles_Js = {
 	registerShowNewProfilePrivilegesEvent : function() {
 		jQuery('[name="profile_directly_related_to_role"]').on('change',function(e){
 			var target = jQuery(e.currentTarget);
-			var hanlder = target.data('handler');
+			var hanlder = target.data('handler');			
 			var container = jQuery('[data-content="'+ hanlder + '"]');
  
             vtUtils.hideValidationMessage(jQuery('#profilesList'));            
@@ -254,13 +254,14 @@ var Settings_Roles_Js = {
 			if(err === null) {
 				content.find('.profileData').html(data);
 				vtUtils.showSelect2ElementView(jQuery('#directProfilePriviligesSelect'));
-				//Settings_Roles_Js.registerExistingProfilesChangeEvent();
+				
 				Settings_Roles_Js.newPriviliges = true;
 				jQuery('[data-content="existing"]').fadeOut('slow',function(){
 					content.fadeIn('slow',function(){
 					});
 				});
-                Settings_Roles_Js.registerProfileEvents();
+				Settings_Roles_Js.registerExistingProfilesChangeEvent();
+               			 //Settings_Roles_Js.registerProfileEvents();
      
 			}else {
 				app.helper.showErrorNotification({'message' : err.message});
@@ -270,6 +271,7 @@ var Settings_Roles_Js = {
 	
 	registerExistingProfilesChangeEvent : function() {
 		jQuery('#directProfilePriviligesSelect').on('change',function(e) {
+			
 			var profileId = jQuery(e.currentTarget).val();
 			var params = {
 				module : 'Profiles',
@@ -285,7 +287,7 @@ var Settings_Roles_Js = {
 					jQuery('[data-content="new"]').find('.profileData').html(data);
 					vtUtils.showSelect2ElementView(jQuery('#directProfilePriviligesSelect'));
 					Settings_Roles_Js.registerExistingProfilesChangeEvent();
-                    Settings_Roles_Js.registerProfileEvents();
+                 		   Settings_Roles_Js.registerProfileEvents();
 				}
 			});
 		});

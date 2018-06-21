@@ -30,6 +30,7 @@ $languageStrings = array(
         'LBL_TYPE' => 'Type',
 	// Blocks
 	'LBL_TASK_INFORMATION' => 'Task Details',
+
    	'LBL_EVENT_INFORMATION'=> 'Meeting Details',
 
 	//Fields

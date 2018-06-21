@@ -224,7 +224,7 @@ function getEntityName($module, $ids_list, $compute=true) {
  */
 
 //Parameter $fileLocationType added By Mabruk for Google Drive Integration 27/03/2018 
-function decideFilePath($fileLocationType) {
+function decideFilePath($fileLocationType='') {
 	return Vtiger_Functions::initStorageFileDirectory($fileLocationType);
 }
 

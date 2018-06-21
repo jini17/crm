@@ -9,6 +9,7 @@
 *
 ********************************************************************************/
 -->*}
+<!--
 {strip}
 <style>
 .select2
@@ -54,6 +55,37 @@ jQuery(document).ready(function(e){
 			{/if}
 		{/if}
 	</div>
+-->
+{*<!--
+/*********************************************************************************
+** The contents of this file are subject to the vtiger CRM Public License Version 1.0
+* ("License"); You may not use this file except in compliance with the License
+* The Original Code is:  vtiger CRM Open Source
+* The Initial Developer of the Original Code is vtiger.
+* Portions created by vtiger are Copyright (C) vtiger.
+* All Rights Reserved.
+*
+********************************************************************************/
+-->*}
+{strip}   
+ <div class="leaveModalContainer modal-dialog modal-xs modelContainer">
+		{if $MANAGER eq 'true'}	
+		<h3>{vtranslate('LBL_LEAVE_APPROVAL', $QUALIFIED_MODULE)}</h3>
+		{else}
+			{if $LEAVEID neq ''}
+			 <h3>{vtranslate('LBL_EDIT_LEAVE', $QUALIFIED_MODULE)}</h3>
+			{else} 
+			 <h3>{vtranslate('LBL_ADD_NEW_LEAVE', $QUALIFIED_MODULE)}</h3>
+			{/if}
+		{/if}
+ 	
+	<div class="modal-content">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		
+
+
+
+
 	<form id="editLeave" name="editLeave" class="form-horizontal" method="POST">
 		<input type="hidden" name="record" value="{$LEAVEID}" />
 
@@ -78,13 +110,17 @@ jQuery(document).ready(function(e){
 				<div class="controls">
 					<select class="select2" name="leave_type" id="leave_type" data-validation-engine="validate[required]">
 						{if $LEAVETYPELIST|count gt 0}
-						{foreach key=LEAVE_ID item=LEAVE_MODEL from=$LEAVETYPELIST name=institutionIterator}			{$LEAVE_MODEL.leavetypeid}
+						{foreach key=LEAVE_ID item=LEAVE_MODEL from=$LEAVETYPELIST name=institutionIterator}		
+							{$LEAVE_MODEL.leavetypeid}
 						<option value="{$LEAVE_MODEL.leavetypeid}" {if $LEAVE_DETAIL.leave_type eq $LEAVE_MODEL.leavetypeid} selected {/if}>
 						{$LEAVE_MODEL.leavetype}</option>
+
 						{/foreach}
+						
 						 {else}
 							<option value=''></option>	
 						{/if}	
+						
 					</select>
 				</div>
 
@@ -200,6 +236,7 @@ jQuery(document).ready(function(e){
 		{/if}
 		</div>    	 	
 	</form>
+</div>
 </div>
 {/strip}
 {literal}

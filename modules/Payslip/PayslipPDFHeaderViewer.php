@@ -12,14 +12,18 @@
 	class PayslipPDFHeaderViewer extends Vtiger_PDF_InventoryHeaderViewer {
 
 		function display($parent) {
-		
+	
 		$pdf = $parent->getPDF();
+
 		$pdf->SetFont('Helvetica', '', 11);
 		$headerFrame = $parent->getHeaderFrame();
+
+
 		$headerColumnWidth = $headerFrame->w/3.0;
 		$pdfsettings = $this->model->get('pdfsettings'); 
-		
-		$modelColumns = $this->model->get('columns');
+
+		$modelColumns = $this->model->get('columns');		
+
 		$modelColumn0 = $modelColumns[0];
 		$modelColumn2 = $modelColumns[2];
 		$pdf->setCellPadding(5);
@@ -42,27 +46,20 @@
 			$pdftitle = $module;		
 			
 			$html = "
-			<table border=\"0\">
+			<table border=\"1\">
 				<tr>
 					<td width=\"250pt\">";
-				if($modelColumn0['logo'] !='') {
-				
-					$html .= "<img align=\"right\" border=\"0\" height=\"$h\" width=\"$w\" src=\"$modelColumn0[logo]\" /><br />";
-				}
-				
-					$html .= "<span style=\"font-size:15pt\">{$modelColumn0[summary]}</span><br />
-						   {$modelColumn0[content]}<br />{$vatlabel} :  {$modelColumn0['vatid']}";			$html .= "</td>
+					$html .= "</td>
 					<td width=\"40pt\"></td>
 					<td width=\"250pt\" >
-						<span align=\"right\" style=\"font-size:20pt;font-weight:bold;\">{$pdftitle}</span><br />
+						
 					";
 					/*doc type table start*/
+					
 					$html .="
-							<table cellpadding=\"3\" cellspacing=\"2\" border=\"0\">
-								<tr bgcolor=\"#D6EEF8\">
-									<td>{$invoicetitlearray[0]}</td>
-									<td>{$invoicetitlearray[1]}</td>
-								</tr>";
+							<table cellpadding=\"3\" cellspacing=\"2\" border=\"1\">
+								<span style=\"font-size:15pt\"><strong>{$modelColumn0[summary]}</strong></span><br />(890813-X)<br/>
+						   {$modelColumn0[content]}<br />";
 					foreach($modelColumn2 as $label => $value) { 
 						if(is_array($value)) {
 							foreach($value as $l=>$v) {
@@ -72,10 +69,7 @@
 									$text = '<strong>'.$l.'</strong>';
 									$textvalue = '<strong>'.$v.'</strong>';
 								} 		
-								$html .= "<tr bgcolor=\"#D6EEF8\">
-											<td style=\"font-size:$style\">{$text}</td> 
-											<td style=\"font-size:$style\">{$textvalue}</td> 
-								 </tr>"; 	
+									
 					 		}
 					$html .= "</table></td>
 				</tr></table><br />";
@@ -86,35 +80,67 @@
 				$html .= str_repeat('<br />',$pdfsettings['emptyline']);
 						
 				$html .= <<<EOF
-					<table border="0">
+					<br/><br/><table border="1">
 						<tr>
+
 EOF;
 				} else {
 					/* Address **/
-					$html .= "<td width=\"250pt\">
-							<span style=\"font-size:15pt\">{$label}</span><br />
-								{$value}
+					$html .= "<td width=\"425pt\">
+							<span style=\"font-size:15pt\"><strong>Jitendra Gupta</strong> (Employee No: 006/0414)</span><br /><br/>
+							<table width=\"400pt\" border=\"1\">
+							<tr>
+							<td><span style=\"font-size:10pt\">Position: SR. System Analyst</span><br/>
+								<span style=\"font-size:10pt\">Dept: Technical</span><br/>
+								<span style=\"font-size:10pt\">IC/Passport: P9477763</span></td>
+
+							<td><span style=\"font-size:10pt\">EPF No: N/A</span><br/>
+								<span style=\"font-size:10pt\">SOCSO No: N/A</span><br/>
+								<span style=\"font-size:10pt\">Income Tax No: SG2333132104</span></td>
+							</tr>
+							</table>
+						</td>
+						<td>
+						<span> Period: <strong>March 2018</strong></span><br/><br/>
+						<table border=\"1\" width=\"100pt\" style=\"border-color:#FF0000;\">
+							<tr>
+							<td><span align=\"right\" style=\"font-size:10pt\" >NET PAY</span><br/><span align=\"right\" style=\"font-size:10pt\">RM 3,600.16</span></td>
+							</tr>
+							</table>
 						</td>";
 				}
 			}			
-			$html .= 
-			"</tr>
-			</table><br />";
-			$modelColumnCenter = $modelColumns[1];
-			foreach($modelColumnCenter as $label => $value) { 
-				if(!empty($value)) {
-					if($label == 'Contact Name') $label = 'Att';
-					$html .= "
-						<table width=\"540pt\">
-							<tr>
-							<td width=\"120pt\"><font color=\"#333\"><strong>{$label}</strong></font></td>
-							<td width=\"475pt\"><font color=\"#333\">: {$value}</font></td>
-							</tr>
-						</table>";
-				}
-			}		
+			$html .="</tr></table>";
+			
 
-			$pdf->writeHTML($html, true, false, true, false, '');
+		
+
+			$html .= '<!--item list start-->
+				<table cellpadding="5" border="1">
+					<tr><td colspan="3"><h3>Employee Earnings</h3></td>
+					<td><h3>Current</h3></td></tr>';
+		$html .='</table><br /><br />';
+	
+		$html .= '<!--item list start-->
+				<table cellpadding="5" border="1">
+					<tr><td colspan="3"><h3>Employee Deductions</h3></td>
+					<td><h3>Current</h3></td></tr>';
+					 $html .= '<tr colspan="'.$totalcols.'">'.$line.'</tr>'; 
+					 
+					 $html .='</table><br /><br />';
+		
+		
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+		
+		$html .= '<!--item list start-->
+				<table cellpadding="5" border="1">
+					<tr><td colspan="3"><h3>Company Contributions</h3></td>
+					<td><h3>Current</h3></td></tr>';
+		$html .='</table><br /><br />';
+
+		$pdf->writeHTML($html, true, false, true, false, '');
+
 		}
 			
 	}

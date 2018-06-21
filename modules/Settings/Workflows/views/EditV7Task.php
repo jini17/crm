@@ -236,3 +236,4 @@ class Settings_Workflows_EditV7Task_View extends Settings_Vtiger_Index_View {
 		$viewer->view('EditTask.tpl', $qualifiedModuleName);
 	}
 }
+

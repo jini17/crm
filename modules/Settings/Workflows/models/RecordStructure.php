@@ -132,6 +132,7 @@ class Settings_Workflows_RecordStructure_Model extends Vtiger_RecordStructure_Mo
 	 * @return type @modified by jitu@multi from address in workflow send mail task
 	 */
 	public function getAllEmailFields() {
+
 		$db = PearDatabase::getInstance();
 		//$db->setDebug(true);
 		$result = $db->pquery("SELECT vtiger_multiplefromaddress.name, vtiger_multiplefromaddress.email,vtiger_systems.isdefault,vtiger_systems.server,vtiger_systems.id 
@@ -152,6 +153,7 @@ class Settings_Workflows_RecordStructure_Model extends Vtiger_RecordStructure_Mo
 			$emailfrom[$i]['email'] =$email ;
 
 		}
+
 
 		return $emailfrom;
 	}
