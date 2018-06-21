@@ -42,10 +42,29 @@ class Vtiger_ComposeEmail_View extends Vtiger_Footer_View {
 		$fieldModule = $request->get('fieldModule');
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 		$userRecordModel = Users_Record_Model::getCurrentUserModel();
-		
+
 		//added by jitu@secondcrm.com on 6/16/2014 for multiple from address
 		$aFinalServer 	= Users_Record_Model::getMultipleAddress();
-		$draftEmailId = $request->get('record');
+
+        /**
+         * Added By Nirbhay
+         */
+
+        for($i=0;$i<count($aFinalServer);$i++){
+
+            if($aFinalServer[$i]['serverid']!=''){
+                $serverid = $aFinalServer[$i]['serverid'];
+                global $adb;
+                //$adb->setDebug(true);
+                $result = $adb->pquery("SELECT * FROM vtiger_systems WHERE id = ?",array($serverid));
+                $aFinalServer[$i]['servername'] = $adb->query_result($result,0,'server');
+            }
+
+        }
+        /**Nirbhay Add Ended*******/
+        //echo "<pre>"; print_r($aFinalServer); die;
+
+        $draftEmailId = $request->get('record');
 		if($draftEmailId != 0){
 		$selectedEmail = Users_Record_Model::getDraftEmailAddress($draftEmailId);
 		}

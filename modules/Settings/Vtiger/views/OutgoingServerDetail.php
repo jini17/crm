@@ -62,18 +62,18 @@ class Settings_Vtiger_OutgoingServerDetail_View extends Settings_Vtiger_Index_Vi
 	    $viewer = $this->getViewer($request);
         $qualifiedName = $request->getModule(false);
 
-        $result = $adb->pquery("SELECT id, server,from_email_field, isactive, isdefault, server_username FROM vtiger_systems",array());
+        $result = $adb->pquery("SELECT * FROM vtiger_systems",array());
 
         $count = $adb->num_rows($result);
         $data = array();
-        for($i=0;$i<$count;$i++){
 
-        $data[$i]['server'] = $adb->query_result($result,$i,'server');
-        $data[$i]['from_email_field'] = $adb->query_result($result,$i,'from_email_field');
-        $data[$i]['isactive'] = $adb->query_result($result,$i,'isactive');
-        $data[$i]['isdefault'] = $adb->query_result($result,$i,'isdefault');
-        $data[$i]['server_username'] = $adb->query_result($result,$i,'server_username');
-        $data[$i]['id'] = $adb->query_result($result,$i,'id');
+        for($i=0;$i<$count;$i++){
+	        $data[$i]['server'] = $adb->query_result($result,$i,'server');
+	        $data[$i]['from_email_field'] = $adb->query_result($result,$i,'from_email_field');
+	        $data[$i]['smtp_auth'] = $adb->query_result($result,$i,'smtp_auth');
+	        $data[$i]['isdefault'] = $adb->query_result($result,$i,'isdefault');
+	        $data[$i]['server_username'] = $adb->query_result($result,$i,'server_username');
+	        $data[$i]['id'] = $adb->query_result($result,$i,'id');
         }
         //die;
 
