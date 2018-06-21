@@ -18,8 +18,6 @@ config.inc.php
 #ignore phpstorm ide files
 .idea/**
 
-#ignore user access files
-user_privileges/**
 
 #ignore Smarty Temp Templates
 Smarty/templates_c/**

@@ -349,13 +349,13 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
                 var form = jQuery('#outgoingServer').serializeArray();
                 if (edit == true)
                     var params = {
-                    'module' : 'Vtiger',
-                    'parent' : 'Settings',
-                    'view'   : 'AddOutgoingServer',
-                    'mode'   : 'AddServer',
-                    'form'   : form,
-                    'type'   : 'edit',
-                    'id'   : id
+                        'module' : 'Vtiger',
+                        'parent' : 'Settings',
+                        'view'   : 'AddOutgoingServer',
+                        'mode'   : 'AddServer',
+                        'form'   : form,
+                        'type'   : 'edit',
+                        'id'   : id
                     };
                 else        
                     var params = {
