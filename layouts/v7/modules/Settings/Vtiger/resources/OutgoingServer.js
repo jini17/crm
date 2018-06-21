@@ -190,7 +190,7 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
                 'module' : app.getModuleName(),
                 'parent' : app.getParentModuleName(),
                 'view' : 'AddOutgoingServer',
-                'mode' : 'FromAddressFunction',
+                'mode' : 'fromAddressFunction',
                 'serverid' : serverId
             }
             AppConnector.requestPjax(params).then(
@@ -210,21 +210,33 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
     fromMailAddressFeatures: function(serverId){
         var thisInstance = this;
         var aDeferred = jQuery.Deferred();
+        var addButton = jQuery("#addFromAddress");
+        var editButton = jQuery("#editFromAddress");
+        var saveButton = jQuery(".saveFromAddress"); 
+        var cancel = jQuery('.cancelForm');
+        var name = jQuery("#name");
+        var email = jQuery("#email");
         var form = jQuery('.addFromAddressForm');
+        
         form.hide();
 
-        jQuery(".addFromAddress").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
-        jQuery(".addFromAddress").click(function () {            
+        //Register Add Button for FromEmailAddress Form    
+        addButton.unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        addButton.click(function () {
             
             form.show();
-            jQuery(".saveFromAddress").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
-            jQuery('.saveFromAddress').click( function() { 
+
+            name.val('');
+            email.val('');
+
+            saveButton.unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+            saveButton.click( function() { 
                 var formData = form.serializeArray();  
                 var params = {
                     'module' : app.getModuleName(),
                     'parent' : app.getParentModuleName(),
                     'view' : 'AddOutgoingServer',
-                    'mode' : 'FromAddressFunction',
+                    'mode' : 'fromAddressFunction',
                     'task' : 'add',
                     'form' : formData,
                     'serverid' : serverId
@@ -236,11 +248,65 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
                 });
             });
 
-            jQuery('.cancelForm').click( function() { 
+            cancel.click( function() { 
                 form.hide();
             });
         });
 
+        //Register Edit Button for FromEmailAddress Form    
+        editButton.unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        editButton.click(function () { 
+            var checkedData = thisInstance.getAllCheckedValues();
+
+            if (checkedData.indexOf(',') > -1 || checkedData == '' || checkedData == null)
+                app.helper.showAlertBox({"message":"Incorrect number of selected records"});
+            else {           
+                form.show();
+
+                var params = {
+                    'module' : app.getModuleName(),
+                    'parent' : app.getParentModuleName(),
+                    'view'   : 'AddOutgoingServer',
+                    'mode'   : 'editFromEmailAddress',
+                    'id' : checkedData
+                }
+
+                AppConnector.request(params).then(
+                        function(data) {                             
+                            var dataName = data.result.name;
+                            var dataEmail = data.result.email;
+                            name.val(dataName);
+                            email.val(dataEmail);                 
+                });
+
+
+                saveButton.unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+                saveButton.click( function() { 
+                    var formData = form.serializeArray();  
+                    var params = {
+                        'module' : app.getModuleName(),
+                        'parent' : app.getParentModuleName(),
+                        'view' : 'AddOutgoingServer',
+                        'mode' : 'fromAddressFunction',
+                        'task' : 'edit',
+                        'id' : checkedData,
+                        'form' : formData,
+                        'serverid' : serverId
+                    }
+                    AppConnector.requestPjax(params).then(
+                        function(data) {                             
+                            form.hide();
+                            jQuery('.listFromAddress').html(data);                    
+                    });
+                });
+
+                cancel.click( function() { 
+                    form.hide();
+                });
+            }
+        });
+
+        //Register Delete Button for FromEmailAddress Form
         jQuery(".deleteFromEmail").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
         jQuery(".deleteFromEmail").click(function () {             
             var checkedData = thisInstance.getAllCheckedValues();
@@ -250,7 +316,7 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
                     'module' : app.getModuleName(),
                     'parent' : app.getParentModuleName(),
                     'view' : 'AddOutgoingServer',
-                    'mode' : 'FromAddressFunction',
+                    'mode' : 'fromAddressFunction',
                     'task' : 'delete',
                     'checkedData' : checkedData,
                     'serverid' : serverId

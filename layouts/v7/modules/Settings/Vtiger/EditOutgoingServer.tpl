@@ -10,7 +10,6 @@
 
 
 {strip}
-
     <div class="modal-dialog modal-xs" id="AddServerContainer">
         <div class="modal-content">
             <form id="outgoingServer" class="form-horizontal" method="POST">
@@ -24,13 +23,10 @@
                                 <option value="Gmail">Gmail</option>
                                 <option value="Office365">Office365</option>
                                 <option value="Others">Others</option>
-
                             </select>
                         </div>
                     </div>
                 </div>
-
-{$DATA|print_r}
                     <div class="container float-left">
                         <div class="contents row form-group">
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Host :</label></div>
@@ -48,7 +44,6 @@
                         </div>
                     </div>
                     <div class="container float-left">
-
                         <div class="contents row form-group">
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Password :</label></div>
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
@@ -56,8 +51,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="container float-left">
 
                         <div class="contents row form-group">
@@ -71,9 +64,7 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="container float-left">
-
                         <div class="contents row form-group">
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Is Default :</label></div>
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
@@ -85,13 +76,11 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="modal-footer ">
                     <center>
                         <button class="btn btn-success" type="button" id="saveButtonRule" name="saveButtonRule"><strong>{vtranslate('LBL_SAVE', $MODULE)}</strong></button>&ensp;
                         <a href="#" class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
-
                     </center>
                 </div>
             </form>
