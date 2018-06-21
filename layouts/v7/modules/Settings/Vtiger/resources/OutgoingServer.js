@@ -271,11 +271,11 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
                 }
 
                 AppConnector.request(params).then(
-                        function(data) {                             
-                            var dataName = data.result.name;
-                            var dataEmail = data.result.email;
-                            name.val(dataName);
-                            email.val(dataEmail);                 
+                    function(data) {                             
+                        var dataName = data.result.name;
+                        var dataEmail = data.result.email;
+                        name.val(dataName);
+                        email.val(dataEmail);                 
                 });
 
 
