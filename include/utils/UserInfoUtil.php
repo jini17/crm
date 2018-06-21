@@ -2168,7 +2168,7 @@ function getPermittedModuleNames()
 function getModulePlanPermission($plan){
 
 	global $adb;
-	$result = $adb->pquery("SELECT tabid, visible FROM vtiger_tab INNER JOIN secondcrm_planpermission ON secondcrm_planpermission.module=vtiger_tab.name WHERE planid=?", array($plan));
+	$result = $adb->pquery("SELECT tabid, visible FROM secondcrm_planpermission WHERE planid=?", array($plan));
 	$numrow = $adb->num_rows($result);
 	$tab_seq_array = array();
 	if($numrow>0) {
@@ -2192,13 +2192,13 @@ function getModulePlanPermission($plan){
 function getModulePermission($plan){
 
 	global $adb;
-	$result = $adb->pquery("SELECT tabid, name FROM vtiger_tab INNER JOIN secondcrm_planpermission ON secondcrm_planpermission.module=vtiger_tab.name WHERE planid=?", array($plan));
+	$result = $adb->pquery("SELECT tabid, module FROM secondcrm_planpermission WHERE planid=?", array($plan));
 	$numrow = $adb->num_rows($result);
 	$tab_info_array = array();
 	if($numrow>0) {
 		for($i=0;$i<$numrow;$i++){
 			$tabid = $adb->query_result($result, $i, 'tabid');
-			$name = $adb->query_result($result, $i, 'name');	
+			$name = $adb->query_result($result, $i, 'module');	
 			$tab_info_array[$name] = $tabid;
 		}	
 	}
