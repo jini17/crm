@@ -140,7 +140,6 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
         jQuery("#editItem").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
         jQuery("#editItem").click(function () {
             var checkedData = thisInstance.getAllCheckedValues();
-            alert(checkedData);
             if (checkedData.indexOf(',') > -1 || checkedData == '' || checkedData == null)
                 app.helper.showAlertBox({"message":"Incorrect number of selected records"});
             else {
