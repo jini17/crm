@@ -437,6 +437,7 @@ $languageStrings = array(
 	'LBL_GRADE'=>'Grade',
 	'LBL_TIMESHEET'=>'Timesheet',
 	'LBL_HR_DOCUMENTS'=>'HR Documents',
+	'Documents'=>'HR Documents',
 	'LBL_EMPLOYEMENT'=>'Employment',
 	'EmployeeContract'=>'Employement Detail',
 	'PassportVisa'=>'Passport Visa',
