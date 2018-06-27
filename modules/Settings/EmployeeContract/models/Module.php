@@ -13,7 +13,7 @@ class Settings_EmployeeContract_Module_Model extends Settings_Vtiger_Module_Mode
 
 	var $baseTable = 'vtiger_employecontract';
 	var $baseIndex = 'employecontractid';
-	var $listFields = array('employeeno' => 'Employee No','designation'=>'Designation', 'department' => 'Department', 'job_location'=>'Job Location', 'department'=>'Department', 'letter_of_appointment'=>'Appointment Letter','smownerid'=>'Assigned User');
+	var $listFields = array('employeeno' => 'Employee No','designation'=>'Designation', 'job_grade'=>'Grade Type', 'department' => 'Department', 'job_location'=>'Job Location', 'department'=>'Department', 'letter_of_appointment'=>'Appointment Letter','smownerid'=>'Assigned User');
 	var $nameFields = array('employeeno');
 	var $name = 'EmployeeContract';
 

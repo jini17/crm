@@ -10,7 +10,8 @@
 ********************************************************************************/
 -->*}
   {if $PARENT_MODULE eq "Settings"} 
-  <div class = "quickPreview" style="margin-left: 50%;overflow: hidden;">
+
+  <div class = "quickPreview" style="margin-left: 30%;overflow: hidden;">
   {else}
   <div class = "quickPreview" >
   {/if}
@@ -22,7 +23,7 @@
    
             <div class='quick-preview-modal modal-content' >
             {if $PARENT_MODULE eq "Settings"}
-             <div class='modal-body' style="width: 50%;height:100vh;overflow-x:hidden;">
+             <div class='modal-body' style="width: 70%;height:100vh;overflow-x:hidden;">
             {else} 
              <div class='modal-body'>
             {/if}
@@ -55,15 +56,30 @@
                         </button>
                     </div>
                 {/if}
-
             </div>
-            <div class = "quickPreviewSummary">
+          
 
-                <table class="summary-table no-border" >
-                    <tbody>
-                        {if $PARENT_MODULE eq "Settings"}
-                        {foreach item=FIELD_MODEL key=FIELD_NAME from=$SUMMARY_RECORD_STRUCTURE}
-                        {if $FIELD_MODEL->get('name') neq 'modifiedtime' && $FIELD_MODEL->get('name') neq 'createdtime'}
+                
+                    {if $PARENT_MODULE eq "Settings"}
+           
+                 <div class = "quickPreviewSummary" > 
+                    <div style="display: table;width: 100%;height: 100%;">
+                 <table class="summary-table no-border" {if $MAX_KEY gt 2}style="width: 50%;float: left;"{/if} >
+                    <tbody>                                         
+                        {for $iteration=0 to $MAX_KEY-1} 
+                        {if $iteration neq 0}
+                        {if ($iteration mod 2) eq 0}
+                    </tbody>
+                </table>
+                 <table class="summary-table no-border" style="width: 50%;" >
+                    <tbody> 
+                        {/if}
+                        {/if}                       
+                          <td> 
+                         </br></br>
+                           <label class="muted" >{vtranslate($SUMMARY_RECORD_KEY[$iteration],$MODULE_NAME)}</label></br></td>                  
+                        {foreach item=FIELD_MODEL key=FIELD_NAME from=$SUMMARY_RECORD_STRUCTURE[{vtranslate($SUMMARY_RECORD_KEY[$iteration])}]}
+                        {if $FIELD_MODEL->get('name') neq 'modifiedtime' && $FIELD_MODEL->get('name') neq 'createdtime'}        
                                 <tr class="summaryViewEntries">
                                     <td class="fieldLabel col-lg-5" ><label class="muted">{vtranslate($FIELD_MODEL->get('label'),$MODULE_NAME)}</label></td>
                                     <td class="fieldValue col-lg-7">
@@ -74,10 +90,19 @@
                                         </div>
                                     </td>
                                 </tr>
+                        
                             {/if}
                         {/foreach}
+                         {/for} 
+                      </tbody></table></div>                        
                         {/if}
-                        {if $PARENT_MODULE neq "Settings"}                
+
+
+
+                        {if $PARENT_MODULE neq "Settings"}
+                        <div class = "quickPreviewSummary">
+                        <table class="summary-table no-border" >
+                            <tbody>  
                         {foreach item=FIELD_MODEL key=FIELD_NAME from=$SUMMARY_RECORD_STRUCTURE['SUMMARY_FIELDS']}
                             {if $FIELD_MODEL->get('name') neq 'modifiedtime' && $FIELD_MODEL->get('name') neq 'createdtime'}
                                 <tr class="summaryViewEntries">
@@ -91,20 +116,16 @@
                                     </td>
                                 </tr>
                             {/if}
-
                         {/foreach}
-                        {/if}
-                    </tbody>
-                </table>
+                     </tbody></table>
+                        {/if}              
+            </div>          
+        
+           
+            <div class="engagementsContainer" {if $PARENT_MODULE eq "Settings"}hidden{/if}>
+				{include file="ListViewQuickPreviewSectionHeader.tpl"|vtemplate_path:$MODULE_NAME TITLE="{vtranslate('LBL_UPDATES',$MODULE_NAME)}"}              
+				{include file="RecentActivities.tpl"|vtemplate_path:$MODULE_NAME} 
             </div>
-            <div class="engagementsContainer">
-				{include file="ListViewQuickPreviewSectionHeader.tpl"|vtemplate_path:$MODULE_NAME TITLE="{vtranslate('LBL_UPDATES',$MODULE_NAME)}"}
-              
-				{include file="RecentActivities.tpl"|vtemplate_path:$MODULE_NAME}
-   
-
-            </div>
-
             <br>            
             {if $MODULE_MODEL->isCommentEnabled()}
                 <div class="quickPreviewComments">
@@ -112,7 +133,15 @@
                     {include file="QuickViewCommentsList.tpl"|vtemplate_path:$MODULE_NAME}
                 </div>
             {/if}
-              
+
+            {if $PARENT_MODULE eq "Settings"}
+           <div class="btn-group pull-left">
+            <button class="btn btn-success btn" id="updatelog">
+                       {vtranslate('Update Log', $MODULE_NAME)} 
+            </button>
+            </div>
+            {/if}
+            
         </div>
         
     </div></div></div></div>
@@ -120,5 +149,8 @@
 
 
 <script >
-  
+  $("#updatelog").click(function(){
+   $('.engagementsContainer').removeAttr("hidden");
+   $('#updatelog').hide();
+  });
 </script>
