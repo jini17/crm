@@ -7,13 +7,121 @@
  * All Rights Reserved.
  *************************************************************************************/
 var Settings_Roles_Js = {
-
 	
-		newPriviliges : false,
+	newPriviliges : false,
+
+		initEditView: function() { 
+
+		function toggleEditViewTableRow(e) { alert("Yezza");
+			var target = jQuery(e.currentTarget);
+			var container = jQuery('[data-togglecontent="'+ target.data('togglehandler') + '"]');
+			var closestTrElement = container.closest('tr');
+			
+			if (target.find('i').hasClass('fa-chevron-down')) {
+				closestTrElement.removeClass('hide');
+				container.slideDown('slow');
+				target.find('.fa-chevron-down').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+			} else {
+				container.slideUp('slow',function(){
+					closestTrElement.addClass('hide');
+				});
+				target.find('.fa-chevron-up').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+			}
+		}
+		
+		function handleChangeOfPermissionRange(e, ui) {
+			var target = jQuery(ui.handle);
+			if (!target.hasClass('mini-slider-control')) {
+				target = target.closest('.mini-slider-control');
+			}
+			var input  = jQuery('[data-range-input="'+target.data('range')+'"]');
+			input.val(ui.value);
+			target.attr('data-value', ui.value);
+		}
+		
+		function handleModuleSelectionState(e) {
+			var target = jQuery(e.currentTarget);
+			var tabid  = target.data('value');
+			
+			var parent = target.closest('tr');
+			if (target.is(':checked')) {
+				jQuery('[data-action-state]', parent).prop('checked', true);
+				jQuery('[data-action-tool="'+tabid+'"]').prop('checked', true);
+				jQuery('[data-handlerfor]', parent).removeAttr('disabled');
+			} else {
+				jQuery('[data-action-state]', parent).prop('checked', false);
+				
+				// Pull-up fields / tools details in disabled state.
+				jQuery('[data-handlerfor]', parent).attr('disabled', 'disabled');
+				jQuery('[data-handlerfor]', parent).find('i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+				jQuery('[data-togglecontent="'+tabid+'-fields"]').hide();
+				jQuery('[data-togglecontent="'+tabid+'-tools"]').hide();
+				jQuery('[data-togglecontent="'+tabid+'-fields"]').closest('tr').addClass('hide');
+			}
+		}
+		
+		function handleActionSelectionState(e) {
+			var target = jQuery(e.currentTarget);
+			var parent = target.closest('tr');
+			var checked = target.prop('checked')? true : false;
+			
+			if (jQuery.inArray(target.data('action-state'), ['CreateView', 'EditView', 'Delete']) != -1) {
+				if (checked) {
+					jQuery('[data-action-state="DetailView"]', parent).prop('checked', true);
+					jQuery('[data-module-state]', parent).prop('checked', true);
+					jQuery('[data-handlerfor]', parent).removeAttr('disabled');
+				}
+			}
+			if (target.data('action-state') == 'DetailView') {
+				if (!checked) {
+					jQuery('[data-action-state]', parent).prop('checked', false);
+					jQuery('[data-module-state]', parent).prop('checked', false).trigger('change');
+				} else {
+					jQuery('[data-module-state]', parent).prop('checked', true);
+					jQuery('[data-handlerfor]', parent).removeAttr('disabled');
+				}
+			}
+		}
+		
+		function selectAllModulesViewAndToolPriviliges(e) {
+			var target = jQuery(e.currentTarget);
+			var checked = target.is(':checked');
+			if(checked) {
+				jQuery('#mainAction4CheckBox').prop('checked', true);
+				jQuery('#mainModulesCheckBox').prop('checked', true);
+				jQuery('.modulesCheckBox').prop('checked', true);
+				jQuery('.action4CheckBox').prop('checked', true);
+				jQuery('[data-handlerfor]').removeAttr('disabled');
+			}
+		}
+		
+		jQuery('[data-module-state]').change(handleModuleSelectionState);
+		jQuery('[data-action-state]').change(handleActionSelectionState);
+		jQuery('#mainAction1CheckBox,#mainAction7CheckBox,#mainAction2CheckBox').change(selectAllModulesViewAndToolPriviliges);
+		
+	
+		jQuery('[data-togglehandler]').click(toggleEditViewTableRow); 
+		jQuery('[data-range]').each(function(index, item) {
+			item = jQuery(item);
+			if(item.data('locked')){ 
+				jQuery('.editViewMiniSlider').css('cursor','pointer');
+			}
+			var value = item.data('value');
+			item.slider({
+				min: 0,
+				max: 2,
+				value: value,
+				disabled: item.data('locked'),
+				slide: handleChangeOfPermissionRange
+			});
+		});	
+		
+		//fix for IE jQuery UI slider
+		jQuery('[data-range]').find('a').css('filter','');
+
+	},
 	
 	initDeleteView: function() {
-
-
 		var form = jQuery('#roleDeleteForm');
 		
 		var params = {
@@ -82,7 +190,6 @@ var Settings_Roles_Js = {
 			jQuery('[name="transfer_record"]', form).val('');
             jQuery('.clearReferenceSelection').addClass('hide');
 		});
-
 	},
 	
 	initTreeView: function() {
@@ -266,60 +373,12 @@ var Settings_Roles_Js = {
 				});
 				Settings_Roles_Js.registerExistingProfilesChangeEvent();
                			 //Settings_Roles_Js.registerProfileEvents();
-     					jQuery('[data-togglehandler]').click(function(e){
-
-								var target = jQuery(e.currentTarget);
-								var container = jQuery('[data-togglecontent="'+ target.data('togglehandler') + '"]');
-								var closestTrElement = container.closest('tr');
-								
-								if (target.find('i').hasClass('fa-chevron-down')) {
-									closestTrElement.removeClass('hide');
-									container.slideDown('slow');
-									target.find('.fa-chevron-down').removeClass('fa-chevron-down').addClass('fa-chevron-up');
-								} else {
-									container.slideUp('slow',function(){
-										closestTrElement.addClass('hide');
-									});
-									target.find('.fa-chevron-up').removeClass('fa-chevron-up').addClass('fa-chevron-down');
-								}
-					     					});
-
-
-
-     					
-
-				     				jQuery('[data-range]').each(function(index, item) {
-										item = jQuery(item);
-										if(item.data('locked')){
-											jQuery('.editViewMiniSlider').css('cursor','pointer');
-										}
-										var value = item.data('value');
-										item.slider({
-											min: 0,
-											max: 2,
-											value: value,
-											disabled: item.data('locked'),
-											slide: function(e,ui){
-													var target = jQuery(ui.handle);
-													if (!target.hasClass('mini-slider-control')) {
-														target = target.closest('.mini-slider-control');
-													}
-													var input  = jQuery('[data-range-input="'+target.data('range')+'"]');
-													input.val(ui.value);
-													target.attr('data-value', ui.value);
-											}
-										});
-									});	
-
-								//fix for IE jQuery UI slider
-								jQuery('[data-range]').find('a').css('filter','');
-					}else {
-						app.helper.showErrorNotification({'message' : err.message});
-					}
+     
+			}else {
+				app.helper.showErrorNotification({'message' : err.message});
+			}
 		});
 	},
-
-   
 	
 	registerExistingProfilesChangeEvent : function() {
 		jQuery('#directProfilePriviligesSelect').on('change',function(e) {
@@ -452,12 +511,13 @@ var Settings_Roles_Js = {
 	},
 	
 	registerEvents : function() {
+		Settings_Roles_Js.initEditView();
         var view = app.view();
         if(view === 'Index') {
-    	
             Settings_Roles_Js.initTreeView();
+           
         } else if(view === 'Edit') {
-            Settings_Roles_Js.registerShowNewProfilePrivilegesEvent();
+        	Settings_Roles_Js.registerShowNewProfilePrivilegesEvent();
             Settings_Roles_Js.onLoadProfilePrivilegesAjax();
             Settings_Roles_Js.registerSubmitEvent();
             Settings_Roles_Js.registerAllowModulePermission();

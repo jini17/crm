@@ -1,6 +1,5 @@
 {strip}
 {if $SECTION eq 'M'}
-
 	<table class="table table-bordered listViewEntriesTable">
 		<thead>
 			<tr>
@@ -19,6 +18,7 @@
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leave_reason']}</label></td>
 					<td class="listTableRow small" valign=top><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['color_code']};width:30px;height:20px;"></label><label style="float:left;" class="instlabel">{$USER_LEAVE['leave_type']}</label></td>		
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['from_date']}</label></td>
+
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['to_date']}</label></td>
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leavestatus']}</label></td>
 					<td class="listTableRow small" valign=top>
@@ -100,9 +100,6 @@
 			</span>
 		</div>
 				<!--@@@@@@@@@@@@END PAGINATION TOOLS@@@@@@@@@@@@@@@-->
-
-
-
 	<table class="table table-bordered listViewEntriesTable">
 		<thead>
 			<tr>
@@ -131,8 +128,10 @@
 					<td class="listTableRow small" valign=top>
 						<div class="pull-right actions">
 							<span class="actionImages">
+
 <a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file alignMiddle" title="Documents"></i>  </a>				
 								<a class="editLeave cursorPointer" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true"><i title="{vtranslate('LBL_LEAVE_APPROVAL', $MODULE)}" class="fa fa-pencil alignBottom"></i></a>&nbsp;&nbsp;
+
 								{if $USER_LEAVE['leavestatus'] neq 'New' && $USER_LEAVE['leavestatus'] neq 'Cancel'}
 								<a class="cancelLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}">Cancel</a>				
 								{/if}
