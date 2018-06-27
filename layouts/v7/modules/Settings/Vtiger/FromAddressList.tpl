@@ -1,8 +1,20 @@
+{*+**********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.1
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is: vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ * Created By Mabruk Rashid Khan on 28/05/2018
+ ************************************************************************************}
+
+{strip}
 <div class="modal-dialog">
     <div class='modal-content'>
         <div class="contents">
-            &ensp;<button class="addFromAddress btn btn-danger span10 marginLeftZero"  id="addFromAddress">{vtranslate('LBL_ADD_VALUE',$QUALIFIED_MODULE)}</button>
-            &ensp;<button class="deleteFromEmail btn btn-danger span10 marginLeftZero"  id="deleteFromEmail">{vtranslate('LBL_DELETE_VALUE',$QUALIFIED_MODULE)}</button>
+            &ensp;<button class="addFromAddress btn span10 marginLeftZero newButton" id="addFromAddress">Add</button>
+            &ensp;<button class="editFromAddress btn span10 marginLeftZero newButton" id="editFromAddress">Edit</button>
+            &ensp;<button class="deleteFromEmail btn btn-danger span10 marginLeftZero"  id="deleteFromEmail">Delete</button>
 
             <form id="addFromAddressForm" class="addFromAddressForm form-horizontal" method="POST">               
                 <div class="container float-left">
@@ -27,43 +39,12 @@
                     <a href="#" id="cancelForm" class="cancelForm" style="color:red;">{vtranslate('LBL_CANCEL', $MODULE)}</a>
                 </center>  
                 <br>  
-            </form>
+            </form>  
 
             <div id="listFromAddress" class="listFromAddress">    
-                <table class="table table-bordered table-condensed themeTableColor">
-                    <thead>
-                        <th>
-                            <span class="alignMiddle">{vtranslate('LBL_FROM_ADDRESS_SETTING', $QUALIFIED_MODULE)}</span>
-                        </th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                Select
-                            </td>
-                            <td>
-                                Name
-                            </td>
-                            <td>
-                                Email Address
-                            </td>                        
-                        </tr>
-                        {foreach item=VALUE from=$DATA}
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="selected_id" value="{$VALUE.id}" class="smallchkd">
-                            </td>
-                            <td>
-                                {$VALUE.name}
-                            </td>
-                            <td>
-                                {$VALUE.email}
-                            </td>                        
-                        </tr>
-                        {/foreach}
-                    </tbody>
-                </table>
+                {include file="modules/Settings/Vtiger/fromEmailAddressList.tpl"}
             </div>
         </div>
     </div>
 </div>
+{/strip}

@@ -10,7 +10,7 @@
 {* modules/Settings/UserPlan/views/UserPlanAjax.php *}
 
 {strip}
-    <div class="taxModalContainer modal-dialog modal-xs" id="AddClaimTypeContainer" xmlns="http://www.w3.org/1999/html">
+    <div class="taxModalContainer modal-dialog modal-lg" id="AddClaimTypeContainer" xmlns="http://www.w3.org/1999/html">
         <div class="modal-content">
             <form id="AddRule" class="form-horizontal" method="POST">
                 <div class="modal-body" id="scrollContainer" name="test">
@@ -33,7 +33,7 @@
                     <div class="container float-left">
 
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Status :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>IsActive :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
                                <input type="checkbox" id="status" name="status">
@@ -48,6 +48,49 @@
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
                                 <textarea id="ClaimType_Desc" name="ClaimType_Desc" /> </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container float-left">
+
+                        <div class="contents row form-group">
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Limits :</label></div>
+
+                            <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label>Transaction Limit &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="transactionlimitcheck" name="transactionlimitcheck">&nbsp;&nbsp;
+                                            <lable id="transactionnolimit">No Limit</lable><br>
+                                            <input type="textbox" id="transactionlimit" name="transactionlimit">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>Monthly Limit</label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="monthlylimitcheck" name="monthlylimitcheck">&nbsp;&nbsp;
+                                            <lable id="monthlynolimit">No Limit</lable><br>
+                                            <input type="textbox" id="monthlylimit" name="monthlylimit">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>Yearly Limit</label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="yearlylimitcheck" name="yearlylimitcheck">&nbsp;&nbsp;
+                                            <lable id="yearlynolimit">No Limit</lable><br>
+                                            <input type="textbox" id="yearlylimit" name="yearlylimit">
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>

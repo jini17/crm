@@ -13,7 +13,7 @@
         <form class="form-horizontal" id="SendEmailFormStep1" method="post" action="index.php">
             <div class="modal-content">
                 {include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE={vtranslate('LBL_SELECT_EMAIL_IDS', $MODULE)}}
-                
+
                 <div class="modal-body">
                     <input type="hidden" name="selected_ids" value={ZEND_JSON::encode($SELECTED_IDS)} />
                     <input type="hidden" name="excluded_ids" value={ZEND_JSON::encode($EXCLUDED_IDS)} />

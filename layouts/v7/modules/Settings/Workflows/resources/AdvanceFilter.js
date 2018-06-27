@@ -72,8 +72,9 @@ Vtiger_AdvanceFilter_Js('Workflows_AdvanceFilter_Js',{},{
         //for none in field name
         if(typeof conditionList == 'undefined') {
             conditionList = {};
-            conditionList['none'] = '';
+            conditionList['none'] = '';	
         }
+
 		var options = '';
 		for(var key in conditionList) {
 			//IE Browser consider the prototype properties also, it should consider has own properties only.
@@ -100,6 +101,7 @@ Vtiger_AdvanceFilter_Js('Workflows_AdvanceFilter_Js',{},{
         conditionSelectElement.empty().html(options).trigger('change');
         // adding validation to comparator field
         conditionSelectElement.addClass('validate[required]');
+	
         return conditionSelectElement;
     },
     
@@ -256,9 +258,11 @@ Vtiger_Field_Js('Workflows_Field_Js',{},{
 	 * return <String or Jquery> it can return either plain html or jquery object
 	 */
     getUi : function() {
+	
         var html = '<input type="text" class="getPopupUi inputElement" name="'+ this.getName() +'"  /><input type="hidden" name="valuetype" value="'+this.get('workflow_valuetype')+'" />';
         html = jQuery(html);
-        html.filter('.getPopupUi').val(app.htmlDecode(this.getValue()));
+       	html.filter('.getPopupUi').val(app.htmlDecode(this.getValue()));
+	
         return this.addValidationToElement(html);
     }
 });
@@ -268,6 +272,8 @@ Workflows_Field_Js('Workflows_Text_Field_Js', {}, {
         var html = '<textarea class="getPopupUi textarea inputElement" name="'+this.getName()+'" value="">'+this.getValue()+'</textarea>'+
         '<input type="hidden" name="valuetype" value="'+this.get('workflow_valuetype')+'" />';
         html = jQuery(html);
+	html.filter('.getPopupUi').val(app.htmlDecode(this.getValue()));
+
         return this.addValidationToElement(html);
     }
 });
@@ -414,6 +420,7 @@ Vtiger_Field_Js('Vtiger_Text_Field_Js',{},{
         var html = '<input type="text" class="getPopupUi text inputElement" name="'+ this.getName() +'" value="'+  this.getValue() + '" />'+
         '<input type="hidden" name="valuetype" value="'+this.get('workflow_valuetype')+'" />';
         var element = jQuery(html);
+
         return this.addValidationToElement(element);
     }
 });
