@@ -329,8 +329,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 						$data = array(
 							'id' => $wsid,
 							'leavetype' => $wsleaveType,
-							'fromdate' => $request->get('start_date'),
-							'todate'  => $request->get('end_date'),
+							'fromdate' => $startdate,
+							'todate'  => $enddate,
 							'replaceuser_id'  => $wsUser,
 							'reasonofleave'  => $request->get('reason'),
 							'leavestatus'  => $request->get('savetype'),

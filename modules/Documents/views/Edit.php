@@ -10,6 +10,14 @@
 
 Class Documents_Edit_View extends Vtiger_Edit_View {
 	
+	public function process(Vtiger_Request $request) {
+		$moduleName = $request->getModule();
+		$viewer = $this->getViewer($request);	
+		
+		$doctype = $request->get('doc_type')=='HR'?1:0;
+		$viewer->assign('HRDOC', $doctype);
+		parent::process($request);
+	}	
 	/**
 	 * Function to get the list of Script models to be included
 	 * @param Vtiger_Request $request
