@@ -2,7 +2,7 @@
 
 
 //This is the sharing access privilege file
-$defaultOrgSharingPermission=array('2'=>2,'4'=>2,'6'=>2,'7'=>2,'9'=>3,'13'=>2,'16'=>3,'20'=>2,'21'=>2,'22'=>2,'23'=>2,'26'=>2,'8'=>2,'14'=>2,'34'=>3,'35'=>2,'36'=>2,'38'=>2,'42'=>2,'43'=>2,'44'=>2,'45'=>2,'47'=>2,'18'=>2,'10'=>2,'51'=>2,'52'=>2,'53'=>2,'54'=>2,'55'=>2,'56'=>2,'57'=>2,'58'=>2,'59'=>2,'60'=>2,'61'=>2,'62'=>2,'63'=>2,);
+$defaultOrgSharingPermission=array('2'=>2,'4'=>2,'6'=>2,'7'=>2,'9'=>3,'13'=>2,'16'=>3,'20'=>2,'21'=>2,'22'=>2,'23'=>2,'26'=>2,'8'=>2,'14'=>2,'34'=>3,'35'=>2,'36'=>2,'38'=>2,'42'=>2,'43'=>2,'44'=>2,'45'=>2,'47'=>2,'18'=>2,'10'=>2,'51'=>2,'52'=>2,'53'=>2,'54'=>2,'55'=>2,'56'=>2,'57'=>2,'58'=>2,'59'=>2,'60'=>2,'61'=>2,'62'=>2,'63'=>2,'65'=>2,'66'=>2,'67'=>2,'68'=>2,'69'=>2,'70'=>2,'71'=>2,'72'=>2,);
 
 $related_module_share=array(2=>array(6,),13=>array(6,),20=>array(6,2,),22=>array(6,2,20,),23=>array(6,22,),);
 
@@ -134,10 +134,6 @@ $EmployeeContract_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
 
 $EmployeeContract_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
 
-$Timesheet_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
-
-$Timesheet_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
-
 $EmergencyContact_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
 
 $EmergencyContact_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
@@ -153,5 +149,37 @@ $Payments_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
 $Bills_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
 
 $Bills_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$LeaveType_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$LeaveType_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$Leave_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$Leave_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$Timesheet_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$Timesheet_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$BenefitType_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$BenefitType_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$Payslip_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$Payslip_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$Holiday_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$Holiday_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$WorkingHours_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$WorkingHours_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$Claim_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+
+$Claim_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
 
 ?>
