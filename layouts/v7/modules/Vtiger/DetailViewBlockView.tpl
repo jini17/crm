@@ -78,6 +78,7 @@
 									{assign var=COUNTER value=$COUNTER+1}
 								{else}
 									{if $FIELD_MODEL->get('uitype') eq "20" or $FIELD_MODEL->get('uitype') eq "19" or $fieldDataType eq 'reminder' or $fieldDataType eq 'recurrence'}
+
 										{if $COUNTER eq '1'}
 											<td class="fieldLabel {$WIDTHTYPE}"></td><td class="{$WIDTHTYPE}"></td></tr><tr>
 											{assign var=COUNTER value=0}
@@ -94,7 +95,17 @@
 											{if $MODULE_NAME eq 'Documents' && $FIELD_MODEL->get('label') eq "File Name" && $RECORD->get('filelocationtype') eq 'E'}
 												{vtranslate("LBL_FILE_URL",{$MODULE_NAME})}
 											{else}
-												{vtranslate({$FIELD_MODEL->get('label')},{$MODULE_NAME})}
+												<!--added by jitu@hide related to if account/leads disabled -->
+												{if $FIELD_MODEL->get('uitype') eq '66'}
+													{if $DISABLEDRELATED eq 1}
+
+													{else}
+														{vtranslate({$FIELD_MODEL->get('label')},{$MODULE_NAME})}
+													{/if}
+												{else}
+													{vtranslate({$FIELD_MODEL->get('label')},{$MODULE_NAME})}
+												{/if}	
+												<!--End here -->
 											{/if}
 											{if ($FIELD_MODEL->get('uitype') eq '72') && ($FIELD_MODEL->getName() eq 'unit_price')}
 												({$BASE_CURRENCY_SYMBOL})
@@ -109,10 +120,22 @@
 										{else}
 											{assign var=FIELD_DISPLAY_VALUE value=Vtiger_Util_Helper::toSafeHTML($FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue')))}
 										{/if}
+										<!--added by jitu@hide related to if account/leads disabled -->
+										{if $FIELD_MODEL->get('uitype') eq '66'}
+											{if $DISABLEDRELATED eq 1}
 
-										<span class="value" data-field-type="{$FIELD_MODEL->getFieldDataType()}" {if $FIELD_MODEL->get('uitype') eq '19' or $FIELD_MODEL->get('uitype') eq '21'} style="white-space:normal;" {/if}>
-											{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getDetailViewTemplateName(),$MODULE_NAME) FIELD_MODEL=$FIELD_MODEL USER_MODEL=$USER_MODEL MODULE=$MODULE_NAME RECORD=$RECORD}
-										</span>
+											{else}
+												<span class="value" data-field-type="{$FIELD_MODEL->getFieldDataType()}" {if $FIELD_MODEL->get('uitype') eq '19' 	or $FIELD_MODEL->get('uitype') eq '21'} style="white-space:normal;" {/if}>
+													{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getDetailViewTemplateName(),$MODULE_NAME) FIELD_MODEL=$FIELD_MODEL USER_MODEL=$USER_MODEL MODULE=$MODULE_NAME RECORD=$RECORD}
+												</span>
+											{/if}
+										{else}
+											<span class="value" data-field-type="{$FIELD_MODEL->getFieldDataType()}" {if $FIELD_MODEL->get('uitype') eq '19' or 	$FIELD_MODEL->get('uitype') eq '21'} style="white-space:normal;" {/if}>
+												{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getDetailViewTemplateName(),$MODULE_NAME) FIELD_MODEL=$FIELD_MODEL USER_MODEL=$USER_MODEL MODULE=$MODULE_NAME RECORD=$RECORD}
+											</span>
+										{/if}		
+										<!--End here -->
+
 										{if $IS_AJAX_ENABLED && $FIELD_MODEL->isEditable() eq 'true' && $FIELD_MODEL->isAjaxEditable() eq 'true'}
 											<span class="hide edit pull-left">
 												{if $fieldDataType eq 'multipicklist'}
@@ -147,6 +170,18 @@
 		                                {$USER_NAME} - {vtranslate($INVITEES_DETAILS[$USER_ID],$MODULE)}
 		                                <br>
 		                            {/if}
+		                        {/foreach}
+		                    </td>
+		               </tr>
+
+               			<tr>
+		                    <td class="fieldLabel {$WIDTHTYPE}">
+		                        <span class="muted">{vtranslate('LBL_EXTERNAL_USERS', $MODULE_NAME)}</span>
+		                    </td>
+		                     <td class="fieldValue {$WIDTHTYPE}">
+		                        {foreach item=EMAIL from=$EXTEMAILS_DETAILS}
+		                            {$EMAIL['emailaddress']} - {vtranslate($EMAIL['status'],$MODULE)}
+		                            <br>	                          
 		                        {/foreach}
 		                    </td>
                			</tr>

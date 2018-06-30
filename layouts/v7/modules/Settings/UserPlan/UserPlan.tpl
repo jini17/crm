@@ -15,7 +15,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="screen" />
 
 <div class="listViewPageDiv" id="plansettingcontainer">
-    <div class="table-responsive col-md-9">
+    <div class="table-responsive col-md-8">
         <table class="table table-condensed sharingAccessDetails marginBottom50px" name="userTable" id="plan">
             <thead>
             <tr class="blockHeader">    
@@ -38,7 +38,7 @@
             </tbody>
         </table>
     </div>
-    <div class="table-responsive col-md-3" style="margin-top:36px;padding: 15px !important;">
+    <div class="table-responsive col-md-4" style="margin-top:36px;padding: 15px !important;">
         <table class="table table-condensed sharingAccessDetails marginBottom50px" name="planTable" id="userplantablesmall">
             <thead>
                 <tr class="blockHeader" >    
@@ -58,8 +58,14 @@
                 <tr>
                     {if $PLAN.plantitle != "Sales+Support"}
                     <td>
-                             {$PLAN.plantitle}
-                        </td>
+                             {if $PLAN.plantitle eq 'Foundation'}
+                                {$PLAN.plantitle}<br />
+                                <a href="index.php?module=Users&parent=Settings&view=Edit" style="color: #333 !important; border: 1px solid #979797;background: linear-gradient(to bottom, white 0%, #dcdcdc 100%);">Create User</a>
+                             {else}
+                                {$PLAN.plantitle}
+                             {/if}   
+
+                    </td>
                     <td id="users_{$PLAN.planid}">{$PLAN.users}</td>
                     <td>{$PLAN.nousers-$PLAN.users}</td>
                     <td>{$PLAN.nousers}</td>

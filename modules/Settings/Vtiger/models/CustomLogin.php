@@ -25,8 +25,8 @@ class Settings_Vtiger_CustomLogin_Model extends Settings_Vtiger_Module_Model {
 			'wcmsg' => 'textarea',
 			'smicon' => 'radio',
 			'smdetail' => 'textarea',
-			'sessionout'=>'select',
-			'istooltip'=>'select'		//added by jitu@softsolvers.com for showhide tooltip
+			'sessionout'=>'select'
+			
 	);
 
 	/**

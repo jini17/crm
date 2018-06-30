@@ -625,7 +625,35 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
 			//noteContentElement.closest('tr').find('td:nth-child(4)').hide();			
 		} 
 	},
-
+     
+     showExternalInputContainer : function(){
+          jQuery(".addemail").on('click', function(e){
+            jQuery(".addemail").addClass('hide');
+            jQuery('.inline-save').removeClass('hide');
+            jQuery('.inputspan').removeClass('hide');
+          });
+          jQuery('.cancel').on('click',function(e){
+          	e.preventDefault();
+          	jQuery(".addemail").removeClass('hide');
+               jQuery('.inline-save').addClass('hide');
+               jQuery('.inputspan').addClass('hide');
+          	
+          });
+         jQuery('.save').on('click',function(e){
+               var email = jQuery("#extemail").val();
+               if(email ==''){
+                    
+               } else {
+                    jQuery('#externalusers').removeClass('hide');
+                    jQuery('#externalusers').append("<option value='"+email+"' selected>"+email+"</option>");
+                    jQuery('#externalusers').trigger('change');
+                    jQuery('#extemail').val('');
+                    jQuery('.inputspan').addClass('hide');
+                    jQuery(".addemail").removeClass('hide');
+                    jQuery('.inline-save').addClass('hide');
+               }
+         }); 	
+     },
 	registerBasicEvents : function(container) {
 		this._super(container);
 		this.registerRecordPreSaveEvent(container);
@@ -637,5 +665,6 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
 		this.registerRepeatMonthActions();
 		this.registerRelatedContactSpecificEvents(container);
 		this.registerTextEditorForMOM();
+		this.showExternalInputContainer();
 	}
 });

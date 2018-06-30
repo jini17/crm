@@ -177,7 +177,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
    		
 		//check if he/she is already apply then restrict to user
 
-         
+
 		$viewer->assign('ISCREATE',$isCreate);
 	
 		$manager = Users_LeavesRecords_Model::checkIfManager($recordId);
@@ -208,7 +208,8 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 
 		$pageLimit = 5;// set number of row for each page here-//Added By Safuan MyTeamLeave Pagination
 
-		####start Get My Team leave list##### 
+		####start Get My Team leave list#####
+
 		$myteamleaves = Users_LeavesRecords_Model::getMyTeamLeave($recordId,$currentyear, $pageNumber, $pageLimit,$selectedmember,$selectedleavetype);
 		$myteam = Users_LeavesRecords_Model::getMyTeamMembers($recordId);
 		$leavetypelist = Users_LeavesRecords_Model::getTotaLeaveTypeList('','');
