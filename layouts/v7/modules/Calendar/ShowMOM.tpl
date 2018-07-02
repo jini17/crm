@@ -26,17 +26,38 @@
 	<tr>
 		<td style="padding-right:20px;" valign="top" width="15%" id="Participants">
 			<h3>Participants</h3>
+
+
 			<h4>Contacts</h4>
 						
 				{foreach from=$CONTACTS item=DATA}
 					&emsp;<input type="checkbox" value={$DATA.email} class="chkbox">&nbsp;{$DATA.name}<br>
 				{/foreach}	
-		    
+		    {if $ACCOUNTS}
+		    	<h4>Accounts</h4>
+		    	{foreach from=$ACCOUNTS item=DATA}
+					&emsp;<input type="checkbox" value={$DATA.email} class="chkbox">&nbsp;{$DATA.name}<br>
+				{/foreach}
+			{/if}
+			
+			{if $LEADS}
+		    	<h4>Leads</h4>
+		    	{foreach from=$LEADS item=DATA}
+					&emsp;<input type="checkbox" value={$DATA.email} class="chkbox">&nbsp;{$DATA.name}<br>
+				{/foreach}
+			{/if}	
+
 			<h4>Users</h4>
 			
 				{foreach from=$USERS item=DATA}
 					&emsp;<input type="checkbox" value={$DATA.email} class="chkbox">&nbsp;{$DATA.name}<br>
 				{/foreach}
+
+			<h4>External Emails</h4>
+			
+				{foreach from=$EXTEMAILS item=DATA}
+					&emsp;<input type="checkbox" value={$DATA.email} class="chkbox">&nbsp;{$DATA.name|regex_replace:'/\..*/':''}<br>
+				{/foreach}	
 		</td>
 		<td width=5%></td>
 		<td>

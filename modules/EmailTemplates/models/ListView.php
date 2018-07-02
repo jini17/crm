@@ -10,8 +10,8 @@
 
 class EmailTemplates_ListView_Model extends Vtiger_ListView_Model {
 
-	private $querySelectColumns = array('templatename, foldername, subject', 'systemtemplate', 'module', 'description');
-	private $listViewColumns = array('templatename', 'subject', 'description', 'module');
+	private $querySelectColumns = array('templatename, foldername, subject', 'systemtemplate', 'module', 'description','templatetype');
+	private $listViewColumns = array('templatename', 'subject', 'description', 'module','templatetype');
 
 	public function addColumnToSelectClause($columName) {
 		if (!is_array($columName))
@@ -68,7 +68,7 @@ class EmailTemplates_ListView_Model extends Vtiger_ListView_Model {
 	 */
 	public function getListViewHeaders() {
 		$fieldObjects = array();
-		$listViewHeaders = array('Template Name' => 'templatename', 'Subject' => 'subject', 'Description' => 'description', 'Module Name' => 'module');
+		$listViewHeaders = array('Template Name' => 'templatename', 'Subject' => 'subject', 'Description' => 'description','Template Type'=>'templatetype', 'Module Name' => 'module');
 		foreach ($listViewHeaders as $key => $fieldName) {
 			$fieldModel = new EmailTemplates_Field_Model();
 			$fieldModel->set('name', $fieldName);

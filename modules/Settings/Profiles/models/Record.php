@@ -779,7 +779,7 @@ class Settings_Profiles_Record_Model extends Settings_Vtiger_Record_Model {
         //$db->setDebug(true);
         $query = 'SELECT 1 FROM secondcrm_planpermission 
         	INNER JOIN secondcrm_plan ON secondcrm_plan.planid=secondcrm_planpermission.planid 
-        	WHERE secondcrm_plan.planid=? AND secondcrm_planpermission.module=?';
+        	WHERE secondcrm_plan.planid=? AND secondcrm_planpermission.module=? AND secondcrm_planpermission.visible=1';
         $params = array($plantitle,$module);
        
         $result = $db->pquery($query, $params);

@@ -197,11 +197,19 @@ Class Calendar_Edit_View extends Vtiger_Edit_View {
 		}
 		$picklistDependencyDatasource = Vtiger_DependencyPicklist::getPicklistDependencyDatasource($moduleName);
 		$accessibleUsers = $currentUser->getAccessibleUsers();
-
+		$externalemails = $recordModel->getExternalPeoples();
 		$viewer->assign('PICKIST_DEPENDENCY_DATASOURCE',Vtiger_Functions::jsonEncode($picklistDependencyDatasource));
 		$viewer->assign('ACCESSIBLE_USERS', $accessibleUsers);
+		$viewer->assign('EXTERNAL_EMAILS', $externalemails);
 		$viewer->assign('INVITIES_SELECTED', $recordModel->getInvities());
 		$viewer->assign('CURRENT_USER', $currentUser);
+
+		//hide related to field if accounts & leads disabled by jitu
+		if($moduleName=='Events' || $moduleName=='Calendar'){
+			if(!vtlib_isModuleActive('Accounts') && !vtlib_isModuleActive('Leads')){
+				$viewer->assign('DISABLEDRELATED', 1);
+			}
+		} //end here 
 
 		// added to set the return values
 		if($request->get('returnview')) {

@@ -73,11 +73,12 @@ jQuery(document).ready(function(e){
 		<h3>{vtranslate('LBL_LEAVE_APPROVAL', $QUALIFIED_MODULE)}</h3>
 		{else}
 			{if $LEAVEID neq ''}
-			 <h3>{vtranslate('LBL_EDIT_LEAVE', $QUALIFIED_MODULE)}</h3>
+			{assign var="HEADER_TITLE" value={vtranslate('LBL_EDIT_LEAVE', $QUALIFIED_MODULE)}}
 			{else} 
-			 <h3>{vtranslate('LBL_ADD_NEW_LEAVE', $QUALIFIED_MODULE)}</h3>
+			{assign var="HEADER_TITLE" value={vtranslate('LBL_ADD_NEW_LEAVE', $QUALIFIED_MODULE)}}
 			{/if}
 		{/if}
+		{include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
  	
 	<div class="modal-content">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

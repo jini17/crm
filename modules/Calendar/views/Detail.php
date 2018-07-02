@@ -20,13 +20,14 @@ class Calendar_Detail_View extends Vtiger_Detail_View {
 	 * @param Vtiger_Request $request
 	 */
 	function showMom(Vtiger_Request $request){	
+	
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();		
 		$contactDetails = Calendar_Module_Model::getRelatedContactDetails($recordId);
 		$userDetails = Calendar_Module_Model::getInvitedUserDetails($recordId);
 		$names = array();		
 		$count = 0;
-
+		$viewer = $this->getViewer($request);
 		for ($i = 0; $i < count($contactDetails); $i++) {
 			$names[$count] = $contactDetails[$i]['name'];
 			$count++;
@@ -38,14 +39,22 @@ class Calendar_Detail_View extends Vtiger_Detail_View {
 			$count++;
 		}
 
+		if(vtlib_isModuleActive('Accounts')){
+			$viewer->assign('ACCOUNTS', Calendar_Module_Model::getRelatedModuleDetails($recordId,'Accounts'));
+		}
+		if(vtlib_isModuleActive('Leads')){
+			$viewer->assign('LEADS', Calendar_Module_Model::getRelatedModuleDetails($recordId,'Leads'));
+		}
+
 		$names = array_filter($names);
 		$names = implode(",",$names);
 
-		$viewer = $this->getViewer($request);
+		
 		$viewer->assign('ATTENDEES', $names);
 		$viewer->assign('MEETINGDATA', Calendar_Module_Model::getMeetingData($recordId));
 		$viewer->assign('CONTACTS', Calendar_Module_Model::getRelatedContactDetails($recordId));
 		$viewer->assign('USERS', Calendar_Module_Model::getInvitedUserDetails($recordId));
+		$viewer->assign('EXTEMAILS', Calendar_Module_Model::getExternalPeoples($recordId));
 		$viewer->view('ShowMOM.tpl', $moduleName);
 	}
 
@@ -208,6 +217,14 @@ class Calendar_Detail_View extends Vtiger_Detail_View {
 			$viewer->assign('ACCESSIBLE_USERS', $accessibleUsers);
 			$viewer->assign('INVITIES_SELECTED', $recordModel->getInvities());
 			$viewer->assign('INVITEES_DETAILS', $recordModel->getInviteesDetails());
+			$viewer->assign('EXTEMAILS_DETAILS', $recordModel->getExternalPeoples());
+
+			//hide related to field if accounts & leads disabled by jitu
+			if($moduleName=='Events' || $moduleName=='Calendar'){
+				if(!vtlib_isModuleActive('Accounts') && !vtlib_isModuleActive('Leads')){
+					$viewer->assign('DISABLEDRELATED', 1);
+				}
+			} //end here 
 		}
 
 		if ($request->get('displayMode') == 'overlay') {

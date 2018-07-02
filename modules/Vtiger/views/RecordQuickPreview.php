@@ -37,7 +37,10 @@ class Vtiger_RecordQuickPreview_View extends Vtiger_Index_View {
 		}
 		else{
 			$recordStrucure =Vtiger_RecordStructure_Model::getInstanceFromRecordModel($recordModel, Vtiger_RecordStructure_Model::RECORD_STRUCTURE_MODE_DETAIL);
-				$viewer->assign('SUMMARY_RECORD_STRUCTURE', array_shift($recordStrucure->getStructure()));
+				$DETAILS_RECORD_STRUCTURE=$recordStrucure->getStructure();
+				$viewer->assign('SUMMARY_RECORD_KEY', array_keys($DETAILS_RECORD_STRUCTURE));
+				$viewer->assign('SUMMARY_RECORD_STRUCTURE', $DETAILS_RECORD_STRUCTURE);
+				$viewer->assign('MAX_KEY', count(array_keys($DETAILS_RECORD_STRUCTURE)));
 				
 		}
 

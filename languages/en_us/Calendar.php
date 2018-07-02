@@ -143,6 +143,7 @@ $languageStrings = array(
 	'LBL_UPDATED_INVITATION' => 'Updated Invitation',
 	'LBL_INVITATION' => 'Invitation',
 	
+	
 	//Recurring Events
 	'LBL_EDIT_RECURRING_EVENT' => 'Edit Recurring Meeting',
 	'LBL_ALL_EVENTS_EDIT_INFO' => 'All Meetings in the series will be changed.</br> Any changes made to other Meetings will be kept.',

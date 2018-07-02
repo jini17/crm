@@ -36,11 +36,12 @@ Vtiger.Class("Users_Leave_Js", {
 		
 		app.helper.showProgress();
 		app.request.post({url:url}).then(
-		function(err,data) { 
+			function(err,data) { 
 		      app.helper.hideProgress();
-              
+         
                 if(err == null){
                     app.helper.showModal(data);
+
                     var form = jQuery('#editLeave');
                         thisInstance.textAreaLimitChar();	
                       
@@ -317,7 +318,7 @@ Vtiger.Class("Users_Leave_Js", {
 },
 
 	registerChangeYear : function(changeYearActionUrl,section) {  
-		
+
 		var thisInstance = this;
 	 	var divcontainer  = section =='T'?'myteamleavelist':'myleavelist';
 
@@ -325,22 +326,24 @@ Vtiger.Class("Users_Leave_Js", {
 
 		var aDeferred = jQuery.Deferred();
 			
-		var progressIndicatorElement = jQuery.progressIndicator({
-			'position' : 'html',
-			'blockInfo' : {
-				'enabled' : true
-			}
-		});
 		
 		app.helper.showProgress();
+		if (section == 'M'){
+		my_selyear=jQuery('.my_selyear').val();
+		changeYearActionUrl=changeYearActionUrl+'&selyear='+my_selyear;
+			}
 		app.request.post({url:changeYearActionUrl}).then(
 		function(err,data) { 
 		      app.helper.hideProgress();
               
                 if(err == null){
-                    app.helper.showModal(data);
-                    var form = jQuery('#my_selyear');   console.log(form);
-                        
+          		
+               $('#' + divcontainer).html(data);
+
+      
+
+                  /* // app.helper.showModal(data);
+                    var form = jQuery('#my_selyear');                        
                         	// for textarea limit
                         app.helper.showVerticalScroll(jQuery('#scrollContainer'), {setHeight:'80%'});
                     
@@ -355,7 +358,7 @@ Vtiger.Class("Users_Leave_Js", {
                                 thisInstance.saveSkillDetails(form);
                             }
                         };
-                         form.vtValidate(params)
+                         form.vtValidate(params);*/
           		} else {
                         aDeferred.reject(err);
                     }
@@ -379,6 +382,14 @@ Vtiger.Class("Users_Leave_Js", {
 
 	
 	},
+ sel_teammember : function(changeYearActionUrl,section){
+ 		var membercombo = jQuery('#sel_teammember');
+ 		var myyearcombo = jQuery("#team_selyear");
+		var leavetypecombo = jQuery("#sel_leavetype");	
+			
+		Users_Leave_Js.registerChangeYear(changeYearActionUrl+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val(),section);
+	},
+
 
 	/*
 	 * Function to register all actions in the Tax List
@@ -576,11 +587,13 @@ Vtiger.Class("Users_Leave_Js", {
 },{
 	//constructor
 	init : function() {
+
 		Users_Leave_Js.eduInstance = this;
 	},
 	
 
-	registerEvents: function(eduinstance) {
+	registerEvents: function(eduInstance) {
+
 		eduinstance.registerActions();
 		//this._super();
 		this.registerActions();

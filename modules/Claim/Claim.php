@@ -150,6 +150,7 @@ class Claim extends Vtiger_CRMEntity {
 				$files['original_name'] = vtlib_purify($_REQUEST[$fileindex.'_hidden']);
 				//echo $this->column_fields['filelocationtype'];die;
 				$file_saved = $this->uploadAndSaveFile($id,$module,$files,'Attachment');
+			   $adb->pquery("UPDATE vtiger_claim SET attachment=? WHERE claimid=?",array($files['name'],$this->id));
 			}
 		}
 		$log->debug("Exiting from insertIntoAttachment($id,$module) method.");
