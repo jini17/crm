@@ -7,33 +7,48 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-Vtiger_Edit_Js("WorkingHours_Edit_Js",{
-   
-},{
+Vtiger_Edit_Js("WorkingHours_Edit_Js",{},{
    
 	
 	/**
 	 * Function which will map the address details of the selected record
 	 */
-	registerEventForCopyDuration : function(addressDetails, result, container) {
-		for(var key in addressDetails) {
-			// While Quick Creat we don't have address fields, we should  add
-            if(container.find('[name="'+key+'"]').length == 0) { 
-                   container.append("<input type='hidden' name='"+key+"'>"); 
-            } 
-			container.find('[name="'+key+'"]').val(result[addressDetails[key]]);
-			container.find('[name="'+key+'"]').trigger('change');
-			container.find('[name="'+addressDetails[key]+'"]').val(result[addressDetails[key]]);
-			container.find('[name="'+addressDetails[key]+'"]').trigger('change');
-		}
+	registerEventForCopyDuration : function() {
+	     var clickall = jQuery("#WorkingHours_editView_fieldName_copy_all");
+	     var form = jQuery("#EditView");
+	     var dayarray = new Array('tuesday', 'wednesday','thursday','friday','saturday','sunday');
+
+           clickall.on('click',function () {
+	           if(clickall.is(':checked')){
+	              var  day_fromobj = form.find('[name="monday_from"]').val();
+                   var day_toobj = form.find('[name="monday_to"]').val();
+                   if(day_fromobj =='' || day_toobj ==''){
+                        var msg = app.vtranslate('JS_PLEASE_SELECT_MONDAY_TIMINGS');
+                         app.helper.showErrorNotification({"message" : msg});
+                         return false;
+                   }
+	              jQuery.each(dayarray, function( index, value ) {
+	               var dayfrom = value+'_from';
+                    var dayto = value+'_to';
+                       form.find('[name="'+dayfrom+'"]').val(day_fromobj);
+                       form.find('[name="'+dayto+'"]').val(day_toobj);
+                });
+             } else {
+               jQuery.each(dayarray, function( index, value ) {
+	               var dayfrom = value+'_from';
+                    var dayto = value+'_to';
+                       form.find('[name="'+dayfrom+'"]').val('');
+                       form.find('[name="'+dayto+'"]').val('');
+                });
+             }
+         }); 
 	},
 	
 	/**
 	 * Function which will register basic events which will be used in quick create as well
 	 *
 	 */
-	registerBasicEvents : function(container) {
-		this._super(container);
-		this.registerEventForCopyDuration(container);
+	registerEvents : function() {
+     	this.registerEventForCopyDuration();
 	}
 });

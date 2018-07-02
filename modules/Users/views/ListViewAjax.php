@@ -20,6 +20,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$this->exposeMethod('getUserEmergency');
 		$this->exposeMethod('getUserLanguage');
 		$this->exposeMethod('getUserLeave');
+		$this->exposeMethod('getUserClaim');
     	}
 
 
@@ -177,10 +178,11 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
    		
 		//check if he/she is already apply then restrict to user
 
-
+         
 		$viewer->assign('ISCREATE',$isCreate);
 	
 		$manager = Users_LeavesRecords_Model::checkIfManager($recordId);
+
 		$section  = $request->get('section');   
 		
 		$viewer->assign('MODULE',$moduleName);
@@ -208,8 +210,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 
 		$pageLimit = 5;// set number of row for each page here-//Added By Safuan MyTeamLeave Pagination
 
-		####start Get My Team leave list#####
-
+		####start Get My Team leave list##### 
 		$myteamleaves = Users_LeavesRecords_Model::getMyTeamLeave($recordId,$currentyear, $pageNumber, $pageLimit,$selectedmember,$selectedleavetype);
 		$myteam = Users_LeavesRecords_Model::getMyTeamMembers($recordId);
 		$leavetypelist = Users_LeavesRecords_Model::getTotaLeaveTypeList('','');
@@ -273,6 +274,152 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		
 		echo $viewer->view('UserLeaves.tpl',$moduleName,true);
 	}
+
+
+	public function getUserClaim(Vtiger_Request $request) { 
+		$db = PearDatabase::getInstance();
+		$moduleName = $request->getModule();
+		$viewer = $this->getViewer($request);
+		$recordId = $request->get('record');
+		$currentyear = date("Y");
+
+    
+		//if year end process run then user can apply leave for next year other wise current year
+		/*$sql  = "SELECT MAX(year) as year from secondcrm_user_balance LIMIT 0,1";
+		$res = $db->pquery($sql,array());
+		$currentyear = $db->query_result($res, 0, 'year');*/
+
+		if($currentyear > date("Y")) {
+			$currentyear = $currentyear;	
+		 } //end here 
+
+		$selectedmember = '';
+		$selectedleavetype = '';
+
+		if(isset($_REQUEST['selyear'])) {
+			$currentyear = $request->get('selyear');
+
+		}	
+		
+		if(isset($_REQUEST['selmember']) && $_REQUEST['selmember'] !='All') {
+			$selectedmember = $request->get('selmember');
+		} 
+		
+		if(isset($_REQUEST['selleavetype']) && $_REQUEST['selleavetype'] !='All') {
+			$selectedleavetype = $request->get('selleavetype');
+		}
+
+		
+		//check leave alloted to user or not
+		$isCreate = Users_ClaimRecords_Model::hasAllocateLeave($recordId);
+		
+   		
+		//check if he/she is already apply then restrict to user
+
+         
+		$viewer->assign('ISCREATE',$isCreate);
+	
+		$manager = Users_ClaimRecords_Model::checkIfManager($recordId);
+		$section  = $request->get('section');   
+		
+		$viewer->assign('MODULE',$moduleName);
+		$viewer->assign('CURRENTYEAR',date('Y'));//Added By Jitu Date Combobox 
+		$viewer->assign('CURYEAR',(date('Y')+1));//Added By Jitu Date Combobox
+		$viewer->assign('STARTYEAR',date('Y')-5);//Added By Jitu Date Combobox
+		$url =  Users_ClaimRecords_Model::getCreateClaimURL();
+
+		$viewer->assign('CREATE_CLAIM_URL', Users_ClaimRecords_Model::getCreateClaimURL());
+		$viewer->assign('USERID',$recordId);
+
+		//echo $url;die;
+
+		$viewer->assign('MANAGER',$manager);
+		$viewer->assign('SECTION',$section);
+
+		####start Get My leave list##### 
+		//$currentyear='2019';
+   
+		$myClaims = Users_ClaimRecords_Model::getMyClaim($recordId,$currentyear); //echo $currentyear;
+	
+		//print_r($myClaims);die;
+		$viewer->assign('CurrentDate', date('Y-m-d'));
+		$viewer->assign('MYCLAIM', $myClaims);
+		####end my leave list###########
+
+		$pageNumber = $request->get('pagenumber');//Added By Safuan MyTeamLeave Pagination
+		if(empty($pageNumber)){
+			$pageNumber = '1';
+		}
+
+		$pageLimit = 5;// set number of row for each page here-//Added By Safuan MyTeamLeave Pagination
+
+		####start Get My Team leave list##### 
+		$myteamclaims = Users_ClaimRecords_Model::getMyTeamClaim($recordId,$currentyear, $pageNumber, $pageLimit,$selectedmember,$selectedleavetype);
+		$myteam = Users_ClaimRecords_Model::getMyTeamMembers($recordId);
+		$claimtypelist = Users_ClaimRecords_Model::getTotaClaimTypeList($userid,$claimid);
+		$viewer->assign('MYTEAM', $myteam);
+		$viewer->assign('CLAIMTYPELIST', $claimtypelist);
+
+		$viewer->assign('MYTEAMCLAIMS', $myteamclaims);
+		####end my Team leave list###########
+
+		### Code for paging added by jitu@secondcrm.com on 28-01-2015####
+
+		$totalCount = count(Users_ClaimRecords_Model::getMyTeamClaim($recordId,$currentyear, '', '',$selectedmember,$selectedleavetype));	//Added By Safuan MyTeamLeave Pagination
+		$pageCount = ceil($totalCount / $pageLimit);
+
+		if($pageNumber < $pageCount){
+			$nextpageexist = 1;		
+		}else{
+			$nextpageexist = 0;		
+		}
+		if($pageNumber > 1){
+			$prevpageexist = 1;		
+		}else{
+			$prevpageexist = 0;
+		}
+
+		$start = ($pageNumber -1)*$pageLimit+1;
+		
+		
+		$end = $pageNumber * $pageLimit;
+		if($end > $totalCount) {
+			$end = $totalCount;
+		}
+		if($totalCount ==0) {
+			$start = 0;
+			$end = 0;
+		}
+		
+		$pagingModel = new Vtiger_Paging_Model();
+		$pagingModel->set('page', $pageNumber);
+		
+		$pagingModel->set('prevPageExists', $prevpageexist);
+		$pagingModel->set('range', array('start'=>$start, 'end'=>$end));
+		$pagingModel->set('nextPageExists', $nextpageexist);
+		$pcount = $pageCount;
+		if($pageCount == 0){
+			$pageCount = 1;
+		}
+
+		$viewer->assign('PAGE_COUNT', $pageCount);
+		$viewer->assign('PCOUNT',$pcount);
+		$viewer->assign('LISTVIEW_COUNT', $totalCount);
+
+		$viewer->assign('PAGE_LIMIT',$pageLimit);
+		$viewer->assign('PAGING_MODEL', $pagingModel);
+
+		$viewer->assign('PAGE_NUMBER',$pageNumber);
+		$viewer->assign('LISTVIEW_ENTRIES_COUNT', '9');
+		### End	of code #################################################
+		
+
+		
+		echo $viewer->view('UserClaim.tpl',$moduleName,true);
+	}
+
+
+
 	/**
 	 * Function to get the list of Script models to be included
 	 * @param Vtiger_Request $request
@@ -284,6 +431,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$jsFileNames = array(
 			'modules.Vtiger.resources.List',
 			'modules.Users.resources.Leave',
+			'modules.Users.resources.Claim',
 			'modules.Users.resources.Education',
 			'modules.Users.resources.WorkExp',
 			'modules.Users.resources.EmployeeProjects',

@@ -32,8 +32,7 @@
 					{if $USER_LEAVE['leavestatus'] eq 'New' OR $USER_LEAVE['leavestatus'] eq 'Apply'}
 					<a class="deleteLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=deleteLeave&record={$USER_LEAVE['id']}"><i class="fa fa-trash alignMiddle" title="Delete"></i></a>
 					{/if}
-					{if $USER_LEAVE['leavestatus'] eq 'Approved' && $USER_LEAVE['from_date']|strtotime gt $CurrentDate|strtotime}
-					dsdsssdsd<a class="cancelLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=CancelLeave&record={$USER_LEAVE['id']}&leavestatus={$USER_LEAVE['leavestatus']}&leave_type={$USER_LEAVE['leavetypeid']}"><i class="fa fa-trash alignMiddle" title="Cancel"></i></a>
+					{if $USER_LEAVE['leavestatus'] eq 'Approved' && $USER_LEAVE['from_date']|strtotime gt $CurrentDate|strtotime}<a class="cancelLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=CancelLeave&record={$USER_LEAVE['id']}&leavestatus={$USER_LEAVE['leavestatus']}&leave_type={$USER_LEAVE['leavetypeid']}"><i class="fa fa-trash alignMiddle" title="Cancel"></i></a>
 					{/if}
 
 							</span>
