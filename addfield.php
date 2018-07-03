@@ -13,7 +13,7 @@ $adb->setDebug(true);
 $module = new Vtiger_Moasdvfasdule();
 $module->name = 'Claim';
 $module = $module->getInstance('Claim');dasfasv xc
-
+dscdscdscdsdas
 // Create Block instance
 $block1 = new Vtiger_Block();dscvfdv dsdsdsdsdsdsdasdasddsds
 $block1->label = 'Expense Information';
