@@ -25,7 +25,7 @@ function meetingInvites($entity) {
 	global $adb, $log,$current_user,$site_URL;
 	//$adb->setDebug(true);
 	$entityArray 		= get_object_vars($entity);
-	echo "<pre>"; print_r($entityArray); die();
+	//echo "<pre>"; print_r($entityArray); die();
 	$idArray 		= explode('x',$entityArray['data']['id']);
 
 
