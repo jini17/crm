@@ -719,6 +719,19 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 			vtigerInstance.showQuickPreviewForId(recordId, module);
 		});
 	},
+	
+	
+	registerTabClick : function(){
+		var self = this;
+		jQuery(".dashboardTab").on('click', function(e){
+		     var element = jQuery(e.currentTarget);
+			var recordId = element.data('id');
+			window.location = 'index.php?module=Home&view=DashBoard&tabid=2';
+			var DashboardInst = new Vtiger_Widget_Js();
+			DashboardInst.refreshWidget();
+		});
+	},
+
 
 	registerEvents : function(){
 		var thisInstance = this;
@@ -743,7 +756,8 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
         this.registerQuickEditTaskEvent();
         this.registerPostQuickCreateSaveEvent();
         this.registerQuickPreviewForTask();
-
+        this.registerTabClick();
+        
 		vtUtils.registerEventForDateFields(jQuery('#taskManagementContainer'));
 
 		app.event.on("post.filter.load",function(e){

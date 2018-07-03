@@ -22,9 +22,7 @@ class Settings_LoginHistory_ShowUpdates_View extends Settings_Vtiger_List_View{
 
 		$viewer = $this->getViewer($request);
 		$viewer->assign('DATA',$this->showActivities($sessionId));
-		$viewer->view('showUpdates.tpl',$qualifiedName); 
-		
-		//$response = $this->showActivities($sessionId); print_r($response);
+		$viewer->view('showUpdates.tpl',$qualifiedName); 		
 
     }
 
@@ -47,8 +45,8 @@ class Settings_LoginHistory_ShowUpdates_View extends Settings_Vtiger_List_View{
 
 			$whodid = $adb->query_result($result, $i, "whodid");		
 			$crmid = $adb->query_result($result, $i, "crmid");
-
 			$status = $adb->query_result($result, $i, "status");
+
 			if ($status == 0) {
 				$data[$i]['status'] = "Modified";
 				$resultForModification = $adb->pquery("SELECT fieldname,prevalue,postvalue FROM vtiger_modtracker_detail WHERE id = ?", array($id));
@@ -59,7 +57,11 @@ class Settings_LoginHistory_ShowUpdates_View extends Settings_Vtiger_List_View{
 					$fieldname = $adb->query_result($resultForModification, $j, "fieldname"); 
 					$prevalue = $adb->query_result($resultForModification, $j, "prevalue");
 					$postvalue = $adb->query_result($resultForModification, $j, "postvalue");
-					$modificationData[$j]['fieldname'] = $fieldname;
+
+					$resultFieldLabel = $adb->pquery("SELECT fieldlabel FROM vtiger_field LEFT JOIN vtiger_tab ON vtiger_field.tabid = vtiger_tab.tabid WHERE vtiger_tab.name = ? AND vtiger_field.columnname = ?", array($module, $fieldname));
+					$fieldLabel = $adb->query_result($resultFieldLabel, 0, "fieldlabel");
+
+					$modificationData[$j]['fieldname'] = $fieldLabel;
 					$modificationData[$j]['prevalue'] = $prevalue;
 					$modificationData[$j]['postvalue'] = $postvalue;
 				}

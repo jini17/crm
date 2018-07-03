@@ -76,7 +76,7 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
             if(error == null) {
                 form.get(0).submit();
             } else {
-                jQuery(form).find('button.saveButton').removeAttr('disabled');
+                jQuery(form).find('buttonsaveButton').removeAttr('disabled');
                 app.helper.showErrorNotification({'message' : app.vtranslate('LBL_EXPRESSION_INVALID')});
             }
         });
@@ -110,16 +110,19 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
 	
 
     getPopUp: function (container) {
+	
       var thisInstance = this;
       if (typeof container == 'undefined') {
          container = thisInstance.getContainer();
       }
       var isPopupShowing = false;
       container.on('click', '.getPopupUi', function (e) {
+
          // Added to prevent multiple clicks event
          if(isPopupShowing) {
              return false;
          }
+
          var fieldValueElement = jQuery(e.currentTarget);
          var fieldValue = fieldValueElement.val();
          var fieldUiHolder = fieldValueElement.closest('.fieldUiHolder');
@@ -134,14 +137,17 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
          clonedPopupUi.find('select').addClass('select2');
          clonedPopupUi.find('.fieldValue').val(fieldValue);
          clonedPopupUi.find('.fieldValue').removeClass('hide');
+
          if (fieldValueElement.hasClass('date')) {
             clonedPopupUi.find('.textType').find('option[value="rawtext"]').attr('data-ui', 'input');
             var dataFormat = fieldValueElement.data('date-format');
+
             if (valueType == 'rawtext') {
                var value = fieldValueElement.val();
             } else {
                value = '';
             }
+
             var clonedDateElement = '<input type="text" style="width: 30%;" class="dateField fieldValue inputElement" value="' + value + '" data-date-format="' + dataFormat + '" data-input="true" >'
             clonedPopupUi.find('.fieldValueContainer div').prepend(clonedDateElement);
          } else if (fieldValueElement.hasClass('time')) {
@@ -202,11 +208,37 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
          data.modal('hide');
       });
    },
-   
+/** add by Hafiz bug fix on popup did not save 20 june 2018**/   
    registerPopUpSaveEvent: function (data, fieldUiHolder) {
+      jQuery('[name="saveButton"]',data).on('click',function(e){
+            var valueType = jQuery('.textType',data).val();
+            
+      fieldUiHolder.find('[name="valuetype"]').val(valueType);
+            var fieldValueElement = fieldUiHolder.find('.getPopupUi');
+            if(valueType != 'rawtext'){
+                fieldValueElement.removeAttr('data-validation-engine');
+                fieldValueElement.removeClass('validate[funcCall[Vtiger_Base_Validator_Js.invokeValidation]]');
+            }else{
+                fieldValueElement.addClass('validate[funcCall[Vtiger_Base_Validator_Js.invokeValidation]]');
+                fieldValueElement.attr('data-validation-engine','validate[funcCall[Vtiger_Base_Validator_Js.invokeValidation]]');
+            }
+      var fieldType = data.find('.fieldValue').filter(':visible').attr('type');
+      var fieldValue = data.find('.fieldValue').filter(':visible').val();
+      //For checkbox field type, handling fieldValue
+      if(fieldType == 'checkbox'){
+        if(data.find('.fieldValue').filter(':visible').is(':checked')) {
+          fieldValue = 'true:boolean';
+        } else {
+          fieldValue = 'false:boolean';
+        }
+      }
+      fieldValueElement.val(fieldValue);
+      data.modal('hide');
+      fieldValueElement.validationEngine('hide');
+    });
       
    },
-   
+  /**End by Hafiz**/ 
    registerSelectOptionEvent: function (data) {
       jQuery('.useField,.useFunction', data).on('change', function (e) {
          var currentElement = jQuery(e.currentTarget);

@@ -34,7 +34,7 @@
                     <div class="container float-left">
 
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Status :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>IsActive :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
                                 <input type="checkbox" id="status" name="status">
@@ -58,7 +58,7 @@
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Grade Allocation :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
-                                <select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_grade" name="Allocation_grade">
+                                <select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_grade" name="Allocation_grade[]" multiple>
                                     <option value="">Select One</option>
                                     {foreach item=SPLITVALUE key=k from=$GRADE}
                                         <option value={$GRADE[$k]['id']}>{$GRADE[$k]['grade']}</option>
@@ -109,7 +109,7 @@
                                 <select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_claimtype" name="Allocation_claimtype">
                                     <option value="">Select One</option>
                                     {foreach item=SPLITVALUE key=k from=$CLAIMTYPE}
-                                        <option value={$CLAIMTYPE[$k]['id']}>{$CLAIMTYPE[$k]['claim_type']}</option>
+                                        <option value={$CLAIMTYPE[$k]['id']}>{$CLAIMTYPE[$k]['claimtype']}</option>
                                     {/foreach}
                                 </select>
                             </div>

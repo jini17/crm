@@ -442,6 +442,26 @@ $languageStrings = array(
 	
 //End Leave Section
 
+
+//Start Claim
+'LBL_CLAIM_NO'=>'Claim No',
+'LBL_CLAIM_TYPE'=>'Claim Type',
+'LBL_STATUS_CLAIM'=>'Claim Status',
+'LBL_TRANSACTION_DATE'=> 'Transaction Date',
+'LBL_AMOUNT'=>'Amount',
+'LBL_MY_CLAIM'=>'My Claims',
+'LBL_APPLY_CLAIM'=>'Apply Claim',
+'LBL_ADD_NEW_CLAIM'=>'Add New Claim',
+'LBL_INVOICE'=>' Invoice No',
+'LBL_CLAIM_STATUS'=>'Claim Status',
+'LBL_APPROVED_BY'=>'Approved By',
+'LBL_EDIT_CLAIM'=>'Edit Claim',
+'LBL_CLAIM_APPROVAL'=>'Approve Claim',
+'LBL_MYTEAM_CLAIM'=>'My Team Claim',
+'LBL_CLAIM_APPROVED'=>'Claim Approved',
+'LBL_CLAIM_NOT_APPROVED'=>'Claim Not Approved',
+//End of section Claim
+
 //Emergency Contacts Label
 'LBL_CONTACT_UPDATE_SUCCESS' => 'Emergency contact updated successfully',
 'LBL_CONTACT_ADD_SUCCESS' => 'Emergency contact added successfully',
@@ -474,6 +494,8 @@ $languageStrings = array(
 'LBL_LEAVE_APPROVED'=>'Click for leave approval',
 'LBL_HALF_DAY'=>'Half Day?',
 'LBL_SESSION_EXPIRED'=>'Session Expired, try again !!',
+'LBL_BLOCKED_IP'=>'Sorry!! Your IP is blocked, Please contact the admin',
+'LBL_USER_LIMIT_EXCEED'=>'User limit exceeded in this plan, please contact to Agiliux Team',
 //End of Contacts
 );
 

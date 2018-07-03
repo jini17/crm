@@ -6,7 +6,8 @@
 * Portions created by vtiger are Copyright (C) vtiger.
 * All Rights Reserved.
 *************************************************************************************}
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 {strip}
 	<input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
 	<input type="hidden" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" />
@@ -33,15 +34,15 @@
 					</div>
 					<div class="col-md-6">
 						{assign var=RECORD_COUNT value=$LISTVIEW_ENTRIES_COUNT}
-						{include file="Pagination.tpl"|vtemplate_path:$MODULE SHOWPAGEJUMP=true}
+						<!--{include file="Pagination.tpl"|vtemplate_path:$MODULE SHOWPAGEJUMP=true}-->
 					</div>
 				</div>
 			{/if}
 			<div class="list-content row">
 				<div class="col-sm-12 col-xs-12 ">
-					<div id="table-content"  style="-ms-touch-action:none;overflow: hidden !important;width: 100%;
-border:1px solid #ddd;margin-top:10px;padding-top:0px ! important;position: relative; height: 109px; width: 100%;">
-						<table id="listview-table" class="table listview-table">
+					<div id="table-content"  style="-ms-touch-action:none;overflow: visible !important;width: 100%;
+border:1px solid #ddd;margin-top:10px;padding-top:0px ! important;position: relative;  min-height:auto;width: 100%;">
+						<table id="listview-table" class="table listview-table" style="padding: 2.3em !important;">
 							{assign var="NAME_FIELDS" value=$MODULE_MODEL->getNameFields()}
 							{assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
 							<thead>
@@ -91,6 +92,9 @@ border:1px solid #ddd;margin-top:10px;padding-top:0px ! important;position: rela
 								             	{else if $LISTVIEW_HEADERNAME eq 'letter_of_appointment'} 
 									             	{assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($LISTVIEW_ENTRY->getId())}
 									             		<a target="_blank" href="#" onclick="window.location.href='{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}'">{vtranslate('LBL_DOWNLOAD', $QUALIFIED_MODULE)}</a>
+									            {else if $LISTVIEW_HEADERNAME eq 'attachment'} 
+									             	{assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($LISTVIEW_ENTRY->getId())}
+									             		<a target="_blank" href="#" onclick="window.location.href='{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}'">{vtranslate('LBL_DOWNLOAD', $QUALIFIED_MODULE)}</a>
 								             	{else}
 								             		{$LISTVIEW_ENTRY->getDisplayValue($LISTVIEW_HEADERNAME)}   
 								           		 {/if}	
@@ -121,3 +125,10 @@ border:1px solid #ddd;margin-top:10px;padding-top:0px ! important;position: rela
 		</div>
 	</div>
 {/strip}
+{if $MODULE eq 'EmployeeContract' OR $MODULE eq 'Documents' OR $MODULE eq 'Claim' OR $MODULE eq 'PassportVisa' OR $MODULE eq 'Performance' OR $MODULE eq 'Payslip' OR $MODULE eq 'WorkingHours' OR $MODULE eq 'Holiday'}
+<script>
+jQuery(document).ready( function () {
+    jQuery('#listview-table').DataTable();    
+});
+</script>
+{/if}

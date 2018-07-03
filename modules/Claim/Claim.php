@@ -98,9 +98,41 @@ class Claim extends Vtiger_CRMEntity {
 			// TODO Handle actions after this module is updated.
 		}
  	}
+
  	function save_module($module) {
+
  		$this->insertIntoAttachment($this->id,$module);
+
+ 		$db = PearDatabase::getInstance();
+ 		$currentUser 	= Users_Record_Model::getCurrentUserModel();
+
+		$claimassign	= $_REQUEST['assigned_user_id'];
+		$claimId		= $_REQUEST['category'];	
+		$claimamount 	= $_REQUEST['totalamount'];	
+
+		$result 		= $db->pquery("SELECT date_joined, job_grade FROM vtiger_employeecontract 
+				INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_employeecontract.employeecontractid
+				WHERE vtiger_crmentity.deleted=0 AND vtiger_crmentity.smownerid=? ORDER BY vtiger_crmentity.createdtime DESC Limit 0, 1", array($claimassign));
+		if($db->num_rows($result)>0){
+			$date_joined = $db->query_result($result, 0, 'date_joined');
+			$job_grade = $db->query_result($result, 0, 'job_grade');
+
+		} 
 		
+		$datediff = time() - strtotime($date_joined);
+		$age = round($datediff / (60 * 60 * 24));
+
+		if($date_joined=='' OR $date_joined==null){
+			$age = 0;
+		} 
+
+		//fetch formula for Claim amount allocation table
+		$resultclaim = $db->pquery("SELECT if(age_claim < $age, claimamountless, claimamountmore) as claim_amount FROM allocation_list WHERE claimtype_id	=? AND status='on' AND grade_id=?", array($claimId, $job_grade));
+		if($db->num_rows($resultclaim)>0){ 
+			$claimamount = $db->query_result($resultclaim, 0, 'claim_amount');
+		} 
+		$db->pquery("UPDATE vtiger_claim SET totalamount=? WHERE claimid=?", array($claimamount, $this->id));
+
 	}
 
 	function insertIntoAttachment($id,$module)
@@ -118,9 +150,9 @@ class Claim extends Vtiger_CRMEntity {
 				$files['original_name'] = vtlib_purify($_REQUEST[$fileindex.'_hidden']);
 				//echo $this->column_fields['filelocationtype'];die;
 				$file_saved = $this->uploadAndSaveFile($id,$module,$files,'Attachment');
+			   $adb->pquery("UPDATE vtiger_claim SET attachment=? WHERE claimid=?",array($files['name'],$this->id));
 			}
 		}
 		$log->debug("Exiting from insertIntoAttachment($id,$module) method.");
 	}
-
 }

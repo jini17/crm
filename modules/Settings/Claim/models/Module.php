@@ -13,12 +13,12 @@ class Settings_Claim_Module_Model extends Settings_Vtiger_Module_Model {
 
 	var $baseTable = 'vtiger_claim';
 	var $baseIndex = 'claimid';
-	var $listFields = array('claimno' => 'Claim No','transactiondate'=>'Transcation Date','claim_status'=>'Status', 'attachment'=>'Attachment'	,'totalamount'=>'Total Amount');
+	var $listFields = array('claimno' => 'Claim No','category'=>'Claim Type','claim_status'=>'Status', 'attachment'=>'Attachment','transactiondate'=>'Transcation Date'	, 'approved_by'=>'Approved By','totalamount'=>'Total Amount' );
 	var $nameFields = array('claimno');
 	var $name = 'Claim';
 
 	public function getCreateRecordUrl() {
-		return "index.php?module=PassportVisa&parent=Settings&view=Edit";
+		return "index.php?module=Claim&parent=Settings&view=Edit";
 	}
 
 }

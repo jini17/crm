@@ -98,19 +98,45 @@ class Settings_Vtiger_ClaimTypeTools_View extends Settings_Vtiger_Index_View {
 
     public function AddClaimType($request){
         global $adb;
+        //$adb->setDebug(true);
         $insertArray = $request->get('form');
+          $claims =  array();
+        for($i=0;$i<count($insertArray);$i++) {
+            //$test = $insertArray[$i]['name'];
+            $claims[$insertArray[$i]['name']] = $insertArray[$i]['value'];
+
+        }
+
+        if(!isset($claims['status'])){
+            $claims['status']= 'off';
+        }
+
+        if(isset($claims['transactionlimitcheck'])){
+            $claims['transactionlimit']= '-1';
+        }
+
+        if(isset($claims['monthlylimitcheck'])){
+            $claims['monthlylimit']= '-1';
+        }
+
+        if(isset($claims['yearlylimitcheck'])){
+            $claims['yearlylimit']= '-1';
+        }
+
+       // echo "<pre>";print_r($claims);
+
 
         $claimtypeid = $adb->getUniqueID('vtiger_crmentity');
 
         $crmentityinsertquery = "INSERT INTO vtiger_crmentity (crmid, smcreatorid, smownerid, modifiedby, setype, description, createdtime, modifiedtime, viewedtime, status, version, presence, deleted, smgroupid, source, label) VALUES(?,?,?,?,?,?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,?,?,?,?,?,?,?)";
 
-        $params = array($claimtypeid,1,1,1,"Claim Type",'','',1,1,0,'','','');
+        $params = array($claimtypeid,1,1,1,"ClaimType",'','',1,1,0,'','','');
 
         $crmentityinsertresult = $adb->pquery($crmentityinsertquery,array($params));
 
         if($crmentityinsertresult){
-            $query = "INSERT INTO `vtiger_claimtype` (`claimtypeid`, `claim_type`, `claim_code`,`claim_status`,`claim_description`) VALUES (?,?,?,?,?)";
-            $result = $adb->pquery($query,array($claimtypeid,$insertArray[1]['value'],$insertArray[2]['value'],$insertArray[3]['value'],$insertArray[4]['value']));
+            $query = "INSERT INTO `vtiger_claimtype` (`claimtypeid`, `claim_type`, `claim_code`,`claim_status`,`claim_description`,`transactionlimit`,`monthlylimit`,`yearlylimit`) VALUES (?,?,?,?,?,?,?,?)";
+            $result = $adb->pquery($query,array($claimtypeid,$claims['ClaimTypeTitle'],$claims['ClaimCode'],$claims['status'],$claims['ClaimType_Desc'],$claims['transactionlimit'], $claims['monthlylimit'], $claims['yearlylimit']));
 
         }
         if($result){
@@ -124,7 +150,7 @@ class Settings_Vtiger_ClaimTypeTools_View extends Settings_Vtiger_Index_View {
         }else{
             $response = "failed";
         }
-
+        //die;
         echo $response;
 
     }

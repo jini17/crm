@@ -19,9 +19,11 @@
     </div>
 
     <div class="contents tabbable clearfix">
+        <button class="btn span10 marginLeftZero newButton" id="addItem">{vtranslate('LBL_ADD_VALUE',$QUALIFIED_MODULE)}</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn span10 marginLeftZero newButton" id="editItem">Edit</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">{vtranslate('LBL_DELETE_VALUE',$QUALIFIED_MODULE)}</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="btn span10 marginLeftZero newButton" id="addItem">{vtranslate('LBL_ADD_VALUE',$QUALIFIED_MODULE)}</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
         <br><br>
 
         <div class="contents">
@@ -35,10 +37,7 @@
                     <tr>
                         <td>
                             Select
-                        </td>
-                        <td>
-                            Show From Addresses
-                        </td>
+                        </td>                        
                         <td>
                             Host
                         </td>
@@ -49,20 +48,20 @@
                             From Email
                         </td>
                         <td>
-                            Is active
+                            SMTP Authentication
                         </td>
                         <td>
                             Is Default
+                        </td>
+                        <td>
+                            Show From Addresses
                         </td>
                     </tr>
                     {foreach item=VALUE from=$DATA}
                     <tr>
                         <td>
                             <input type="checkbox" name="selected_id" value="{$VALUE.id}" class="smallchkd">
-                        </td>
-                        <td>
-                            <button class="addFromAddress btn span3 marginLeftZero newButton" id="addFromAddress" value="{$VALUE.id}">Show</button><br><br>
-                        </td>
+                        </td>                        
                         <td>
                             {$VALUE.server}
                         </td>
@@ -73,10 +72,13 @@
                             {$VALUE.from_email_field}
                         </td>
                         <td>
-                            {$VALUE.isactive}
+                            {$VALUE.smtp_auth}
                         </td>
                         <td>
                             {$VALUE.isdefault}
+                        </td>
+                        <td>
+                            <button class="showFromAddress btn span3 marginLeftZero newButton" id="showFromAddress" value="{$VALUE.id}">Show</button><br><br>
                         </td>
                     </tr>
                     {/foreach}

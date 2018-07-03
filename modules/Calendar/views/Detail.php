@@ -9,6 +9,45 @@
  *************************************************************************************/
 
 class Calendar_Detail_View extends Vtiger_Detail_View {
+	//Added By Mabruk Jitu for Mom tab attachment
+	function __construct() {
+		parent::__construct();
+		$this->exposeMethod('showMom');
+	}
+	
+	/**
+	 * Added By Mabruk for Meeting on 07/06/2018 
+	 * @param Vtiger_Request $request
+	 */
+	function showMom(Vtiger_Request $request){	
+		$recordId = $request->get('record');
+		$moduleName = $request->getModule();		
+		$contactDetails = Calendar_Module_Model::getRelatedContactDetails($recordId);
+		$userDetails = Calendar_Module_Model::getInvitedUserDetails($recordId);
+		$names = array();		
+		$count = 0;
+
+		for ($i = 0; $i < count($contactDetails); $i++) {
+			$names[$count] = $contactDetails[$i]['name'];
+			$count++;
+		}		
+		
+
+		for ($i = 0; $i < count($userDetails); $i++) {
+			$names[$count] = $userDetails[$i]['name'];
+			$count++;
+		}
+
+		$names = array_filter($names);
+		$names = implode(",",$names);
+
+		$viewer = $this->getViewer($request);
+		$viewer->assign('ATTENDEES', $names);
+		$viewer->assign('MEETINGDATA', Calendar_Module_Model::getMeetingData($recordId));
+		$viewer->assign('CONTACTS', Calendar_Module_Model::getRelatedContactDetails($recordId));
+		$viewer->assign('USERS', Calendar_Module_Model::getInvitedUserDetails($recordId));
+		$viewer->view('ShowMOM.tpl', $moduleName);
+	}
 
 	function checkPermission(Vtiger_Request $request) {
 		$moduleName = $request->getModule();
@@ -197,4 +236,24 @@ class Calendar_Detail_View extends Vtiger_Detail_View {
 	function isAjaxEnabled($recordModel) {
 		return false;
 	}
+/**
+	 * Function to get the list of Script models to be included
+	 * @param Vtiger_Request $request
+	 * @return <Array> - List of Vtiger_JsScript_Model instances
+	 */
+	function getHeaderScripts(Vtiger_Request $request) {
+		$headerScriptInstances = parent::getHeaderScripts($request);
+
+		$jsFileNames = array(
+			'modules.Calendar.resources.Detail',
+			"libraries.jquery.ckeditor.ckeditor",
+			"libraries.jquery.ckeditor.adapters.jquery",
+			'modules.Vtiger.resources.CkEditor',
+		);
+
+
+		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
+		$headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
+		return $headerScriptInstances;
+	}	
 }

@@ -1,5 +1,5 @@
 /**
- * Created by Mabruk Khan and Nirbhay Shah
+ * Created by Mabruk Khan and Nirbhay Khan
  */
 
 /*+***********************************************************************************
@@ -22,7 +22,6 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
         var aDeferred = jQuery.Deferred();
         AppConnector.requestPjax(url).then(
             function(data){
-                //var blocksList = jQuery(".contents.tabbable.clearfix");
                 aDeferred.resolve(data);
             },
             function(error, err){
@@ -55,38 +54,38 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
      * Function created by Nirbhay to delete the values
      */
     registerDeleteButton : function() {
-
-
         var thisInstance = this;
         var aDeferred = jQuery.Deferred();
+
         jQuery("#deleteItem").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
         jQuery("#deleteItem").click(function () {
-            app.helper.showProgress();
             var selectedvalues = thisInstance.getAllCheckedValues();
-
-            var params = {
-                'module' : app.getModuleName(),
-                'parent' : app.getParentModuleName(),
-                'action' : 'DeleteOutgoingServers',
-                'values' : selectedvalues
-            }
-
-            AppConnector.request(params).then(
-                function() {
-                    var url = "?parent=Settings&module=Vtiger&view=OutgoingServerDetail&block=8&fieldid=15";
-                    thisInstance.loadContents(url).then(function(data){
-                        app.helper.hideProgress();
-                        jQuery(".settingsPageDiv.content-area.clearfix").html(data);
-
-                        thisInstance.registerEvents();
-                        app.helper.showSuccessNotification({"message":"Deleted Result Successfully"});
-                    });
-                    aDeferred.resolve();
-                },
-                function(error,err){
-                    aDeferred.reject();
+            
+            if (selectedvalues.length > 0) {
+                var params = {
+                    'module' : app.getModuleName(),
+                    'parent' : app.getParentModuleName(),
+                    'action' : 'DeleteOutgoingServers',
+                    'values' : selectedvalues
                 }
-            );
+
+                AppConnector.request(params).then(
+                    function() {
+                        var url = "?parent=Settings&module=Vtiger&view=OutgoingServerDetail&block=8&fieldid=15";
+                        thisInstance.loadContents(url).then(function(data){
+                            jQuery(".settingsPageDiv.content-area.clearfix").html(data);
+                            thisInstance.registerEvents();
+                            app.helper.showSuccessNotification({"message":"Deleted Successfully"});
+                        });
+                        aDeferred.resolve();
+                    },
+                    function(error,err){
+                        aDeferred.reject();
+                    }
+                );
+            }            
+            else 
+                app.helper.showAlertBox({"message":"Select atleast one record"});
             return aDeferred.promise();
         });
     },
@@ -95,14 +94,12 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
      * Added By Mabruk and Nirbhay to add Outgoing Servers
      */
     registerAddButton: function(){
-        //alert("Same name na aee aee, waka waka aee aee");
         var thisInstance = this;
         var aDeferred = jQuery.Deferred();
 
         jQuery("#addItem").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
         jQuery("#addItem").click(function () {
 
-            // console.log("add item");
             app.helper.showProgress();
             var params = {
                 'module' : app.getModuleName(),
@@ -112,7 +109,6 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
             }
             AppConnector.requestPjax(params).then(
                 function(data) {
-                    //console.log("Inside pjax");
                     app.helper.hideProgress();
                     app.helper.showModal(data);
                     thisInstance.saveRule();
@@ -135,42 +131,214 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
     },
 
     /**
-     * Added By Mabruk and Nirbhay to get From Mail list
+     * Added By Mabruk and Nirbhay to edit Outgoing Servers
      */
-    registerFromMailButton: function(){
-        //alert("Same name na aee aee, waka waka aee aee");
+    registerEditButton: function(){
         var thisInstance = this;
         var aDeferred = jQuery.Deferred();
 
-        jQuery(".addFromAddress").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
-        jQuery(".addFromAddress").click(function () {
-            // console.log("add item");
+        jQuery("#editItem").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery("#editItem").click(function () {
+            var checkedData = thisInstance.getAllCheckedValues();
+            if (checkedData.indexOf(',') > -1 || checkedData == '' || checkedData == null)
+                app.helper.showAlertBox({"message":"Incorrect number of selected records"});
+            else {
+                //app.helper.showProgress();
+                var params = {
+                    'module' : app.getModuleName(),
+                    'parent' : app.getParentModuleName(),
+                    'view'   : 'AddOutgoingServer',
+                    'mode'   : 'editForm',
+                    'id' : checkedData
+                }
+                AppConnector.requestPjax(params).then(
+                    function(data) {
+                        //app.helper.hideProgress();
+                        app.helper.showModal(data);
+                        thisInstance.saveRule(true,checkedData);
+                        jQuery('#TypeOfOutgoing').unbind('click');
+                        jQuery("#TypeOfOutgoing").click(function () {
+                            var typeofoutgoing = jQuery('#TypeOfOutgoing :selected').val();
+                            if(typeofoutgoing == 'Gmail'){
+                                jQuery('#host').val('ssl://smtp.gmail.com:465');
+                            }
+                            else if(typeofoutgoing == 'Office365'){
+                                jQuery('#host').val('tls://smtp.office365.com:587');
+                            }else{
+                                jQuery('#host').val('');
+                            }
+                        });
+                    });
+            }
+            return aDeferred.promise();
+        });        
+    },
+
+    /**
+     * Added By Mabruk and Nirbhay to get From Mail list
+     */
+    registerFromMailButton: function(){
+        var thisInstance = this;
+        var aDeferred = jQuery.Deferred(); 
+
+        jQuery(".showFromAddress").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery(".showFromAddress").click(function () {
             app.helper.showProgress();
+            var serverId = jQuery(this).val();
             var params = {
                 'module' : app.getModuleName(),
                 'parent' : app.getParentModuleName(),
                 'view' : 'AddOutgoingServer',
-                'mode' : 'LoadFromAddress',
-                'serverid' : jQuery(this).val()
+                'mode' : 'fromAddressFunction',
+                'serverid' : serverId
             }
             AppConnector.requestPjax(params).then(
                 function(data) {
-                    //console.log("Inside pjax");
                     app.helper.hideProgress();
                     app.helper.showModal(data);
-                    //thisInstance.saveRule();
-
+                    thisInstance.fromMailAddressFeatures(serverId);
+                    thisInstance.registerDeleteButton()
                 });
-
         });
         return aDeferred.promise();
     },
 
     /**
+     * Added By Mabruk to Show/hide Add From Email form, delete and reload From Email list
+     */
+    fromMailAddressFeatures: function(serverId){
+        var thisInstance = this;
+        var aDeferred = jQuery.Deferred();
+        var addButton = jQuery("#addFromAddress");
+        var editButton = jQuery("#editFromAddress");
+        var saveButton = jQuery(".saveFromAddress"); 
+        var cancel = jQuery('.cancelForm');
+        var name = jQuery("#name");
+        var email = jQuery("#email");
+        var form = jQuery('.addFromAddressForm');
+        
+        form.hide();
+
+        //Register Add Button for FromEmailAddress Form    
+        addButton.unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        addButton.click(function () {
+            
+            form.show();
+
+            name.val('');
+            email.val('');
+
+            saveButton.unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+            saveButton.click( function() { 
+                var formData = form.serializeArray();  
+                var params = {
+                    'module' : app.getModuleName(),
+                    'parent' : app.getParentModuleName(),
+                    'view' : 'AddOutgoingServer',
+                    'mode' : 'fromAddressFunction',
+                    'task' : 'add',
+                    'form' : formData,
+                    'serverid' : serverId
+                }
+                AppConnector.requestPjax(params).then(
+                    function(data) { 
+                        form.hide();
+                        jQuery('.listFromAddress').html(data);                    
+                });
+            });
+
+            cancel.click( function() { 
+                form.hide();
+            });
+        });
+
+        //Register Edit Button for FromEmailAddress Form    
+        editButton.unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        editButton.click(function () { 
+            var checkedData = thisInstance.getAllCheckedValues();
+
+            if (checkedData.indexOf(',') > -1 || checkedData == '' || checkedData == null)
+                app.helper.showAlertBox({"message":"Incorrect number of selected records"});
+            else {           
+                form.show();
+
+                var params = {
+                    'module' : app.getModuleName(),
+                    'parent' : app.getParentModuleName(),
+                    'view'   : 'AddOutgoingServer',
+                    'mode'   : 'editFromEmailAddress',
+                    'id' : checkedData
+                }
+
+                AppConnector.request(params).then(
+                    function(data) {                             
+                        var dataName = data.result.name;
+                        var dataEmail = data.result.email;
+                        name.val(dataName);
+                        email.val(dataEmail);                 
+                });
+
+
+                saveButton.unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+                saveButton.click( function() { 
+                    var formData = form.serializeArray();  
+                    var params = {
+                        'module' : app.getModuleName(),
+                        'parent' : app.getParentModuleName(),
+                        'view' : 'AddOutgoingServer',
+                        'mode' : 'fromAddressFunction',
+                        'task' : 'edit',
+                        'id' : checkedData,
+                        'form' : formData,
+                        'serverid' : serverId
+                    }
+                    AppConnector.requestPjax(params).then(
+                        function(data) {                             
+                            form.hide();
+                            jQuery('.listFromAddress').html(data);                    
+                    });
+                });
+
+                cancel.click( function() { 
+                    form.hide();
+                });
+            }
+        });
+
+        //Register Delete Button for FromEmailAddress Form
+        jQuery(".deleteFromEmail").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery(".deleteFromEmail").click(function () {             
+            var checkedData = thisInstance.getAllCheckedValues();
+
+            if (checkedData.length > 0) {  
+                var params = {
+                    'module' : app.getModuleName(),
+                    'parent' : app.getParentModuleName(),
+                    'view' : 'AddOutgoingServer',
+                    'mode' : 'fromAddressFunction',
+                    'task' : 'delete',
+                    'checkedData' : checkedData,
+                    'serverid' : serverId
+                }
+                AppConnector.requestPjax(params).then(
+                    function(data) { 
+                        form.hide();
+                        app.helper.showSuccessNotification({"message":"Deleted Successfully"});
+                        jQuery('.listFromAddress').html(data);             
+                });
+            }
+            else 
+                app.helper.showAlertBox({"message":"Select atleast one record"});
+        });
+
+        return aDeferred.promise();
+    },    
+
+    /**
      * Function to save a particular rule
      */
 
-    saveRule: function(){
+    saveRule: function(edit = false, id = false){
         var aDeferred = jQuery.Deferred();
         var thisInstance = this;
 
@@ -178,20 +346,31 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
             jQuery(document).off('click',"#saveButtonRule"); /**Unbinded to avoid infinite loop on every register***/
             jQuery(document).on('click', "#saveButtonRule", function () {
                 var form = jQuery('#outgoingServer').serializeArray();
-                var params = {
-                    'module' : 'Vtiger',
-                    'parent' : 'Settings',
-                    'view' : 'AddOutgoingServer',
-                    'mode'   : 'AddServer',
-                    'form' : form
-                };
+                if (edit == true)
+                    var params = {
+                        'module' : 'Vtiger',
+                        'parent' : 'Settings',
+                        'view'   : 'AddOutgoingServer',
+                        'mode'   : 'AddServer',
+                        'form'   : form,
+                        'type'   : 'edit',
+                        'id'   : id
+                    };
+                else        
+                    var params = {
+                        'module' : 'Vtiger',
+                        'parent' : 'Settings',
+                        'view' : 'AddOutgoingServer',
+                        'mode'   : 'AddServer',
+                        'form' : form,
+                        'type'   : 'Add'
+                    };
                 app.helper.showProgress();
 
                 app.request.post({'data' : params}).then(
                     function(err, data) {
                         app.helper.hideProgress();
                         if(data=='success'){
-                            //console.log(data);
                             var url = "?parent=Settings&module=Vtiger&view=OutgoingServerDetail&block=8&fieldid=15";
                             thisInstance.loadContents(url).then(function(data){
                                 console.log(data);
@@ -199,7 +378,7 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
                                 jQuery(".settingsPageDiv.content-area.clearfix").html(data);
                                 app.hideModalWindow();
                                 thisInstance.registerEvents();
-                                app.helper.showSuccessNotification({"message":"Successfully Added"});
+                                app.helper.showSuccessNotification({"message":"Action successful"});
                             });
 
                             aDeferred.resolve(data);
@@ -221,14 +400,13 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
     registerEvents: function() {
         this.registerDeleteButton();
         this.registerAddButton();
+        this.registerEditButton();
         this.registerFromMailButton();
-
     }
 
 });
 
 jQuery(document).ready(function(e){
-    //alert("Aku aku");
     var tacInstance = new Settings_Vtiger_OutgoingServer_Js();
     var vtigerinst = new Vtiger_Index_Js();
     vtigerinst.registerEvents();
