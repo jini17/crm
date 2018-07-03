@@ -98,6 +98,8 @@ $languageStrings = array(
     'LBL_INVITE_USERS' => 'Invite Users',
     'LBL_INVITE_PEOPLE' => 'Invite People',
 	'INVITATION'=>' Invitation ',
+	'LBL_INVITE_EXTERNAL_EMAILS'=>'Invite External People',
+	'LBL_EXTERNAL_USERS'=>'External Emails',
 	'Busy' => 'Busy',
 
 );

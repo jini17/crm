@@ -29,7 +29,18 @@ Vtiger.Class('Vtiger_Widget_Js',{
 			var instance = new basicClass(container);
 		}
 		return instance;
-	}
+	},
+	
+     registerRenewSubscription : function(shortname) {
+          var url  = "index.php?module=Users&action=UpdateSubscription&shortname="+shortname;    
+          app.request.post({"url":url}).then(
+	     	function(err,response) {
+	     		if (err == null) {
+	     		    // alert(response);
+	     		}
+	     	});	
+     },	
+	
 },{
 
 	container : false,

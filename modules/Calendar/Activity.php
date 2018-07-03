@@ -175,6 +175,12 @@ class Activity extends CRMEntity {
 
 			$this->insertIntoReminderTable('vtiger_activity_reminder',$module,"");
 
+			//Handling External People  by jitu
+			$extuser_array =  $_REQUEST['externalusers'];
+			//$extuser_array = implode('',$external_users_string);
+			$this->insertIntoExternalUser($module,$extuser_array);
+
+
 		//Handling for invitees
 			$selected_users_string =  $_REQUEST['inviteesid'];
 			$invitees_array = explode(';',$selected_users_string);
@@ -201,6 +207,40 @@ class Activity extends CRMEntity {
 		$minutes = (int)(($time % 3600) / 60);
 		$updateQuery = "UPDATE vtiger_activity SET duration_hours = ?, duration_minutes = ? WHERE activityid = ?";
 		$adb->pquery($updateQuery, array($hours, $minutes, $this->id));
+	}
+
+	
+
+	/** Function to insert values in vtiger_invitees table for the specified module,tablename ,invitees_array
+	  * @param $table_name -- table name:: Type varchar
+	  * @param $module -- module:: Type varchar
+	  * @param $invitees_array Array
+	 */
+	function insertIntoExternalUser($module,$invitees_array)
+	{
+		global $log,$adb;
+		$log->debug("Entering insertIntoExternalUser(".$module.",".$invitees_array.") method ...");
+		if($this->mode == 'edit'){
+			//Edited By Mabruk for Meeting
+			$quesmarks = rtrim(str_repeat('?,',count($invitees_array)),',');
+			$sql = "DELETE FROM external_invitees WHERE activityid=? AND emailaddress NOT IN ($quesmarks)";		
+			$adb->pquery($sql, array($this->id,$invitees_array));
+		}
+		foreach($invitees_array as $inviteeid)
+		{
+			if($inviteeid != '')
+			{	
+				//Edited By Mabruk for Meeting
+				$result = $adb->pquery("SELECT * FROM external_invitees WHERE activityid = ? AND emailaddress = ?", array($this->id, $inviteeid));
+				$rows = $adb->num_rows($result); 
+				if ($adb->num_rows($result) == 0) {
+					$query="INSERT INTO external_invitees VALUES (?,?,?)";				
+					$adb->pquery($query, array($this->id, $inviteeid, 'sent'));			
+				}
+			}
+		}
+		$log->debug("Exiting insertIntoExternalUser method ...");
+
 	}
 
 	/** Function to insert values in vtiger_activity_reminder_popup table for the specified module

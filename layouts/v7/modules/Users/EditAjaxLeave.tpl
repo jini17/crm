@@ -69,8 +69,8 @@ jQuery(document).ready(function(e){
 -->*}
 {strip}   
  <div class="leaveModalContainer modal-dialog modal-xs modelContainer">
-		{if $MANAGER eq 'true'}
-		{assign var="HEADER_TITLE" value={vtranslate('LBL_LEAVE_APPROVAL', $QUALIFIED_MODULE)}}		
+		{if $MANAGER eq 'true'}	
+		<h3>{vtranslate('LBL_LEAVE_APPROVAL', $QUALIFIED_MODULE)}</h3>
 		{else}
 			{if $LEAVEID neq ''}
 			{assign var="HEADER_TITLE" value={vtranslate('LBL_EDIT_LEAVE', $QUALIFIED_MODULE)}}

@@ -25,7 +25,11 @@ function meetingInvites($entity) {
 	global $adb, $log,$current_user,$site_URL;
 	//$adb->setDebug(true);
 	$entityArray 		= get_object_vars($entity);
+<<<<<<< HEAD
 	//echo "<pre>"; print_r($entityArray); die();
+=======
+	echo "<pre>"; print_r($entityArray); die();
+>>>>>>> 554d61d93b09207c918e1f51703eaad3f3306e3c
 	$idArray 		= explode('x',$entityArray['data']['id']);
 
 
@@ -72,7 +76,11 @@ function meetingInvites($entity) {
 			$rows = $adb->num_rows($contactResult);
 
 			if ($rows == 0)
+<<<<<<< HEAD
 				$adb->pquery("INSERT INTO contact_invite_details VALUES (?,?,'Sent')", array($id,$contactid));
+=======
+				$adb->pquery("INSERT INTO contact_invite_details VALUES (?,?,'Sent','Contacts')", array($id,$contactid));
+>>>>>>> 554d61d93b09207c918e1f51703eaad3f3306e3c
 			else 
 				$status = $adb->query_result($contactResult,0,'status');
 

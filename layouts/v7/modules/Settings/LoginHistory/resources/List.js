@@ -69,6 +69,7 @@ Settings_Vtiger_List_Js("Settings_LoginHistory_List_Js",{},{
 					vtUtils.showSelect2ElementView(jQuery('#usersFilter'));
 					thisInstance.registerFilterChangeEvent();
 					thisInstance.updatePagination();
+					thisInstance.showUpdates();   //all pages click on view 
 				}else {
 					app.helper.showErrorNotification({'message':err.message});
 				}

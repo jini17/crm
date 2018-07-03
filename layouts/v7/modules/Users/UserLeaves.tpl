@@ -129,7 +129,7 @@
 							<span class="actionImages">
 
 <a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file alignMiddle" title="Documents"></i>  </a>				
-								<a class="editLeave cursorPointer" onclick="Users_Leave_Js.Popup_LeaveApprove('{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true');"><i title="{vtranslate('LBL_LEAVE_APPROVAL', $MODULE)}" class="fa fa-pencil alignBottom"></i></a>&nbsp;&nbsp;
+								<a class="editLeave cursorPointer" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true"><i title="{vtranslate('LBL_LEAVE_APPROVAL', $MODULE)}" class="fa fa-pencil alignBottom"></i></a>&nbsp;&nbsp;
 
 								{if $USER_LEAVE['leavestatus'] neq 'New' && $USER_LEAVE['leavestatus'] neq 'Cancel'}
 								<a class="cancelLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}">Cancel</a>				
@@ -340,8 +340,8 @@ onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i cl
 					<td class="listTableRow small" valign=top>
 						<div class="pull-right actions">
 							<span class="actionImages">
-<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file alignMiddle" title="Documents"></i>  </a>	
-								<a class="editLeave cursorPointer" onclick="Users_Leave_Js.Popup_LeaveApprove('{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true');"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="fa fa-pencil alignBottom"></i></a>&nbsp;&nbsp;
+<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="icon-file alignMiddle" title="Documents"></i>  </a>	
+								<a class="editLeave cursorPointer" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="icon-pencil alignBottom"></i></a>&nbsp;&nbsp;
 								{if $USER_LEAVE['leavestatus'] neq 'New' && $USER_LEAVE['leavestatus'] neq 'Cancel'}
 								<a class="cancelLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}">Cancel</a>				
 								{/if}

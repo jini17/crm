@@ -973,6 +973,30 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 	}
 
 	/**
+
+	 * Added By Jitu Function to get Related Accounts/Leads Name/Email
+	 */
+	public function getRelatedModuleDetails($record,$module){
+		global $adb;
+		if($module == 'Accounts'){
+			$result = $adb->pquery("SELECT accountname as name, email1 as email FROM vtiger_account LEFT JOIN vtiger_seactivityrel ON vtiger_account.accountid = vtiger_seactivityrel.crmid RIGHT JOIN contact_invite_details ON vtiger_account.accountid = contact_invite_details.contactid WHERE vtiger_seactivityrel.activityid = ? AND contact_invite_details.status = 'Accepted' AND contact_invite_details.activityid = ? AND contact_invite_details.relatedtype='Accounts'", array($record,$record));
+		}else {
+			$result = $adb->pquery("SELECT CONCAT(firstname,' ',lastname) as name, vtiger_leaddetails.email FROM vtiger_leaddetails LEFT JOIN vtiger_crmentityrel ON vtiger_leaddetails.leadid = vtiger_seactivityrel.crmid RIGHT JOIN contact_invite_details ON vtiger_leaddetails.leadid = contact_invite_details.contactid WHERE vtiger_seactivityrel.activityid = ? AND contact_invite_details.status = 'Accepted' AND contact_invite_details.activityid = ? AND contact_invite_details.relatedtype='Leads'", array($record,$record));
+		}	
+		$numOfRows = $adb->num_rows($result);
+		$details = array();
+
+		for ($i = 0; $i < $numOfRows; $i++){
+			$details[$i]['name'] = $adb->query_result($result,$i,'name');
+			$details[$i]['email'] = $adb->query_result($result,$i,'email');
+		}
+
+		return $details;
+
+	}
+
+	/**
+
 	 * Added By Mabruk Function to get Invited Users Name/Email
 	 */
 	public function getInvitedUserDetails($record){
@@ -990,6 +1014,25 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 	}
 
 	/**
+
+	 * Added By Jitu Function to get Invited Users Name/Email
+	 */
+	public function getExternalPeoples($record){
+		global $adb;
+		$result = $adb->pquery("SELECT emailaddress FROM external_invitees WHERE external_invitees.activityid = ? AND external_invitees.status = 'sent' ", array($record));
+		$numOfRows = $adb->num_rows($result);
+		$users = array();
+
+		for ($i = 0; $i < $numOfRows; $i++){
+			$users[$i]['name'] = $adb->query_result($result,$i,'emailaddress');
+			$users[$i]['email'] = $adb->query_result($result,$i,'emailaddress');
+		}
+
+		return $users;
+	}	
+
+	/**
+
 	 * Added By Mabruk Function to get MOM/AGENDA DATA 
 	 */
 	public function getMeetingData($record){

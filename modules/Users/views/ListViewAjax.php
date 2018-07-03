@@ -276,7 +276,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 	}
 
 
-	public function getUserClaim(Vtiger_Request $request) {  
+	public function getUserClaim(Vtiger_Request $request) { 
 		$db = PearDatabase::getInstance();
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);

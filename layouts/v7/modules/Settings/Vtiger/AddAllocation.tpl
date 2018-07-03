@@ -71,34 +71,34 @@
                     <div class="container float-left">
 
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Leave Allocation :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Allocate LeaveType :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
-                                <select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_leavetype" name="Allocation_leavetype">
-                                    <option value="">Select One</option>
-                                    {foreach item=SPLITVALUE key=k from=$LEAVETYPE}
-                                        <option value={$LEAVETYPE[$k]['id']}>{$LEAVETYPE[$k]['title']}</option>
-                                    {/foreach}
-                                </select>
+                                <input type="checkbox" id="AllocateLeave" name="AllocateLeave">
                             </div>
                         </div>
                     </div>
+                    <div id="LeaveTypeAllocation">
+                        <div class="container float-left">
 
+                            <div class="contents row form-group">
 
-                    <div class="container float-left">
-                        <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div>
+                                <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button class="btn" type="button" id="AddLeavetype" name="AddLeavetype"><strong>{vtranslate('LBL_ADDLEAVETYPE', $MODULE)}</strong></button>
 
-                            <a href="#" rel="tooltip" title="Number of days for which employees have been in company"><b>Age</b></a>&nbsp;&nbsp;
-                            <input type="text" placeholder="" id="ageleave" name="ageleave" style="width: 50px;">&nbsp;&nbsp;&nbsp;&nbsp;
-
-                            <a href="#" rel="tooltip" title="Number of leaves if the users age in the company is less than mentioned value"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;
-                            <input type="text" placeholder="" id="numberofleavesless" name="numberofleavesless" style="width: 50px;">&nbsp;&nbsp;&nbsp;&nbsp;
-
-                            <a href="#" rel="tooltip" title="Number of leaves if the users age in the company is more than mentioned value"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;
-                            <input type="text" placeholder="" id="numberofleavesmore" name="numberofleavesmore" style="width: 50px;">
+                                </div>
+                            </div>
                         </div>
+
+
                     </div>
+
+                    <input type="hidden" id="dropdownValue" value='{$LEAVETYPE}'>
+
 
                     <div class="container float-left">
 
@@ -115,25 +115,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="container float-left">
-                        <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div>
-
-                            <a href="#" rel="tooltip" title="Number of days for which employees have been in company"><b>Age</b></a>&nbsp;&nbsp;
-                            <input type="text" placeholder="" id="ageclaim" name="ageclaim" style="width: 50px;">&nbsp;&nbsp;&nbsp;&nbsp;
-
-                            <a href="#" rel="tooltip" title="Claim amount if the users age in the company is less than mentioned value"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;
-                            <input type="text" placeholder="" id="amountclaimless" name="amountclaimless" style="width: 50px;">&nbsp;&nbsp;&nbsp;&nbsp;
-
-                            <a href="#" rel="tooltip" title="Claim Amount if the users age in the company is more than mentioned value"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;
-                            <input type="text" placeholder="" id="amountclaimmore" name="amountclaimmore" style="width: 50px;">
-                        </div>
-                    </div>
-
-
-
-
 
 
                 </div>
