@@ -6,16 +6,16 @@ $Vtiger_Utils_Log = true;
 include_once('vtlib/Vtiger/Menu.php');
 include_once('vtlib/Vtiger/Module.php');
 
-include('config.inc.php');
+include('config.inc.php');dasfav z
 global $adb;
 $adb->setDebug(true);
 
-$module = new Vtiger_Module();
+$module = new Vtiger_Moasdvfasdule();
 $module->name = 'Claim';
-$module = $module->getInstance('Claim');
+$module = $module->getInstance('Claim');dasfasv xc
 
 // Create Block instance
-$block1 = new Vtiger_Block();
+$block1 = new Vtiger_Block();dscvfdv 
 $block1->label = 'Expense Information';
 $block1 = $block1->getInstance($block1->label,$module);
 
