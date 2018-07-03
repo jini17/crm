@@ -15,7 +15,7 @@ $module->name = 'Claim';
 $module = $module->getInstance('Claim');dasfasv xc
 
 // Create Block instance
-$block1 = new Vtiger_Block();dscvfdv 
+$block1 = new Vtiger_Block();dscvfdv dsdsdsdsdsds
 $block1->label = 'Expense Information';
 $block1 = $block1->getInstance($block1->label,$module);
 
