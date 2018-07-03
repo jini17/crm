@@ -41,7 +41,10 @@
 		{if $ISACTIVE eq 0 && $VIEW eq 'PreferenceDetail'}
 		<li class="{if $DEFAULT_TAB neq ''}active{else}relatedListTab{/if}">
 			<a data-toggle="tab" href="#leave"><strong>{vtranslate('LBL_LEAVE', $MODULE_NAME)}</strong></a>
-		</li>	
+		</li>
+		<li class="{if $DEFAULT_TAB neq ''}active{else}relatedListTab{/if}">
+			<a data-toggle="tab" href="#claim"><strong>{vtranslate('LBL_CLAIM', $MODULE_NAME)}</strong></a>
+		</li>		
 		{/if}
 		<!-- End Leave Tab-->
 	</ul>
@@ -56,5 +59,6 @@
 	<div class="tab-pane" id="skills"></div>
 	<div class="tab-pane" id="project"></div>
 	<div class="tab-pane" id="emergency"></div>
-	<div class="tab-pane" id="leave"></div>	<!--Added by jitu@secondcrm.com on 24-12-2014-->
+	<div class="tab-pane" id="leave"></div>
+	<div class="tab-pane" id="claim"></div>		<!--Added by jitu@secondcrm.com on 24-12-2014-->
 {/strip}
