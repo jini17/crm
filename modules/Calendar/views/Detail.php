@@ -20,7 +20,7 @@ class Calendar_Detail_View extends Vtiger_Detail_View {
 	 * @param Vtiger_Request $request
 	 */
 	function showMom(Vtiger_Request $request){	
-	
+
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();		
 		$contactDetails = Calendar_Module_Model::getRelatedContactDetails($recordId);

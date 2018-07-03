@@ -22,7 +22,14 @@ config.inc.php
 =======
 #ignore user access files
 #user_privileges/**
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 >>>>>>> 8d665187f3149b6b205f3cedc5573b695766f8ae
+>>>>>>> f25dc94acceba13f132f3710e985c3874709fe73
+=======
+>>>>>>> 8d665187f3149b6b205f3cedc5573b695766f8ae
+>>>>>>> 554d61d93b09207c918e1f51703eaad3f3306e3c
 
 #ignore Smarty Temp Templates
 Smarty/templates_c/**

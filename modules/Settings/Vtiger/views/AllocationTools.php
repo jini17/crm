@@ -95,6 +95,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         }
 
         $query = "SELECT * FROM `allocation_list` WHERE allocation_id = ?";
+
         $resultallocation = $adb->pquery($query,array($values[0]));
 
         $queryleavetypes = "SELECT * FROM `allocation_list_details` WHERE allocation_id=?";
