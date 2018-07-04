@@ -13,9 +13,9 @@ Settings_Vtiger_List_Js('Settings_Documents_List_Js',{
         instance.deleteDocument(url);
     },
 
-   triggerDetailView : function(url) {
+   triggerDownload : function(url) {
         var instance = app.controller();
-        instance.viewDetailView(url);
+        instance.triggerDownloadDoc(url);
    },
 },{
    
@@ -42,22 +42,11 @@ Settings_Vtiger_List_Js('Settings_Documents_List_Js',{
         })
     },
 
-   viewDetailView : function(url) {
-    var params = this.getDefaultParams();
-        params['parent'] = "Settings";
-        params['module'] = "Documents";  
-        params['record'] = url;
-        params['view'] = "RecordQuickPreview";
-    
-        app.helper.showProgress();
-         app.request.post({'data' : params}).then(function(error, data){
-            app.helper.hideProgress();
-                
-                  if(error === null) {
-                app.helper.showModal(data);
-            }
-});
-    
+   triggerDownloadDoc : function(url) {
+   var self = this;      
+           
+                window.location.href(url); 
+     
 
         
     },

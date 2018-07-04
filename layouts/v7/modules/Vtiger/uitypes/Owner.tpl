@@ -18,13 +18,26 @@
 	{assign var=ASSIGNED_USER_ID value=$FIELD_MODEL->get('name')}
     {assign var=CURRENT_USER_ID value=$USER_MODEL->get('id')}
 	{assign var=FIELD_VALUE value=$FIELD_MODEL->get('fieldvalue')}
-
 	{assign var=ACCESSIBLE_USER_LIST value=$USER_MODEL->getAccessibleUsersForModule($MODULE)}
 	{assign var=ACCESSIBLE_GROUP_LIST value=$USER_MODEL->getAccessibleGroupForModule($MODULE)}
 
 	{if $FIELD_VALUE eq ''}
 		{assign var=FIELD_VALUE value=$CURRENT_USER_ID}
 	{/if}
+	<!-- Modified and add condition by jitu@hide all users in case of events-->
+	{if $MODULE eq 'Events'}
+		<select class="inputElement select2" type="owner" data-fieldtype="owner" data-fieldname="{$ASSIGNED_USER_ID}" data-name="{$ASSIGNED_USER_ID}" name="{$ASSIGNED_USER_ID}" 
+            {if $FIELD_INFO["mandatory"] eq true} data-rule-required="true" {/if}
+            {if count($FIELD_INFO['validator'])} 
+                data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
+            {/if}
+            >
+            <option value="{$FIELD_VALUE}" data-picklistvalue= "{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}" {if $VIEW_SOURCE neq 'MASSEDIT'} selected {/if}
+						{if array_key_exists($FIELD_VALUE, $ACCESSIBLE_USER_LIST)} data-recordaccess=true {else} data-recordaccess=false {/if}
+						data-userId="{$CURRENT_USER_ID}">{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}</option>
+            
+        </select>    
+	{else}
 	<select class="inputElement select2" type="owner" data-fieldtype="owner" data-fieldname="{$ASSIGNED_USER_ID}" data-name="{$ASSIGNED_USER_ID}" name="{$ASSIGNED_USER_ID}" 
             {if $FIELD_INFO["mandatory"] eq true} data-rule-required="true" {/if}
             {if count($FIELD_INFO['validator'])} 
@@ -50,6 +63,8 @@
 			{/foreach}
 		</optgroup>
 	</select>
+	{/if}
+	<!-- End here -->
 {/if}
 {* TODO - UI type 52 needs to be handled *}
 {/strip}

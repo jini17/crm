@@ -7,11 +7,11 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-Vtiger.Class("Users_Leave_Js", {
+Vtiger.Class("Users_Claim_Js", {
 
 	//register click event for Add New Education button
-	addLeave : function(url) { 
-	     this.editLeave(url);
+	addClaim : function(url) { 
+	     this.editClaim(url);
 	    
 	},
 	
@@ -29,22 +29,22 @@ Vtiger.Class("Users_Leave_Js", {
 			  	}
 			});
 	},
-	editLeave : function(url) { 
+	editClaim : function(url) {  
 	    var aDeferred = jQuery.Deferred();
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
 		
 		app.helper.showProgress();
 		app.request.post({url:url}).then(
-			function(err,data) { 
+		function(err,data) {  
 		      app.helper.hideProgress();
-         
-                if(err == null){
+              
+                if(err == null){ 
                     app.helper.showModal(data);
+                    var form = jQuery('#editClaim'); 
 
-                    var form = jQuery('#editLeave');
                         thisInstance.textAreaLimitChar();	
-                      
+                     
                         	// for textarea limit
 					$("#start_date").on("change", function(){ 
 						if($("#hdnhalfday").val()==1) {
@@ -144,16 +144,17 @@ Vtiger.Class("Users_Leave_Js", {
 					});
 					
 					//**
-					if(jQuery('#savetype').val() == 'Approved' || jQuery('#savetype').val() == 'Cancel' || jQuery('#savetype').val() == 'Not Approved'){
+					if(jQuery('#savetype').val() == 'Approved' || jQuery('#savetype').val() == 'Cancel' || jQuery('#savetype').val() == 'Rejected'){
 							
-						 $('#leave_type').select2('disable');
-						 $("#start_date").attr("disabled",true);
+						 $('#category').select2('disable');
+						 $("#transactiondate").attr("disabled",true);
 						 $("#end_date").attr("disabled",true);
-						 $("#replaceuser").select2("disable");
+						 $("#totalamount").select2("disable");
 						 $("#reason").attr("disabled", true);
 						 $("#rejectionreasontxt").attr("disabled", true);			
 						 $("input").attr("disabled",true);	
 					}
+
 
 					if(jQuery('#savetype').val() == 'Apply'){
 						 $('#leave_type').select2('disable');
@@ -163,7 +164,8 @@ Vtiger.Class("Users_Leave_Js", {
 						 $("#reason").attr("disabled", true);
 				
 					}
-					var len = $("#reason").val().length;
+
+					var len = $("#description").val().length;
 					var remainchar = 300 - len;
 			    		$('#charNum_reason').text(remainchar + ' character(s) left');
 					//**
@@ -172,17 +174,23 @@ Vtiger.Class("Users_Leave_Js", {
 					if(jQuery('#notapprove').is(':checked')){
 						$('div#rejectionreason').removeClass('hide');
 					}
+					
 
-                         form.submit(function(e) { 
+	
+                    form.submit(function(e) { 
                             e.preventDefault();
                          })
-					var params = {
+ 
+					var params = { 
                             submitHandler : function(form){
-                                var form = jQuery('#editLeave');   
-                                thisInstance.saveLeaveDetails(form);
+                                var form = jQuery('#editClaim');   
+                                thisInstance.saveClaimDetails(form); 
                             }
                         };
-                         form.vtValidate(params)
+
+                        
+                      
+                         form.vtValidate(params)  //alert("hsssei");
           		} else {
                         aDeferred.reject(err);
                     }
@@ -191,30 +199,27 @@ Vtiger.Class("Users_Leave_Js", {
 	},
 
 
-	 saveLeaveDetails : function(form){  
+	 saveClaimDetails : function(form){  
           var aDeferred = jQuery.Deferred();
           app.helper.hideModal();
           var thisInstance = this;
           var userid = jQuery('#current_user_id').val();
           app.helper.showProgress();
-          var chkboxstarthalf = $('#starthalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
-		  var chkboxendhalf = $('#endhalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
-          var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
-          var chkboxstudying = $('#chkstudying').is(':checked')?'1':'0';
+
         var aparams = form.serializeFormData();
-									aparams.chkboxstarthalf = jQuery('#starthalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
-									aparams.chkboxendhalf = jQuery('#endhalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
-									aparams.module = app.getModuleName();
-									aparams.action = 'SaveSubModuleAjax';
-									aparams.mode = 'saveLeave';
+      
+				aparams.module = app.getModuleName();
+				aparams.action = 'SaveSubModuleAjax';
+				aparams.mode = 'saveClaim';
+		  console.log(aparams);
 				
-       console.log(aparams);
+       
          app.request.post({'data': aparams}).then(function (err, data) {     
               app.helper.hideProgress(); 
                //show notification after Education details saved
                 app.helper.showSuccessNotification({'message': data});
                //Adding or update the Education details in the list
-               thisInstance.updateLeaveGrid(userid);
+               thisInstance.updateClaimGrid(userid);
              }
           );
            return aDeferred.promise();
@@ -249,16 +254,16 @@ Vtiger.Class("Users_Leave_Js", {
 			}
 		);
 	},
-     updateLeaveGrid : function(userid) {  
+     updateClaimGrid : function(userid) {  
 			var params = {
 					'module' : app.getModuleName(),
 					'view'   : 'ListViewAjax',
 					'record' : userid,		
-					'mode'   : 'getUserLeave',
+					'mode'   : 'getUserClaim',
 				}
 				app.request.post({'data':params}).then(
 					function(err, data) {
-						jQuery('#leave').html(data);
+						jQuery('#claim').html(data);
 					},
 					
 					function(error,err){
@@ -269,8 +274,8 @@ Vtiger.Class("Users_Leave_Js", {
 
 
 	
-	deleteLeave : function(deleteRecordActionUrl) { 
-		var message = app.vtranslate('JS_DELETE_EDUCATION_CONFIRMATION');
+	deleteClaim : function(deleteRecordActionUrl) {  
+		var message = app.vtranslate('JS_DELETE_CLAIM_CONFIRMATION');
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
 		app.helper.showConfirmationBox({'message' : message}).then(function(e) {
@@ -279,16 +284,16 @@ Vtiger.Class("Users_Leave_Js", {
           	     function(err,data){
 				      app.helper.showSuccessNotification({'message': 'Record deleted successfully'});
 				     //delete the Education details in the list
-				     thisInstance.updateLeaveGrid(userid);
+				     thisInstance.updateClaimGrid(userid);
 			     }
 		     );
 	     });
      },
 
 
-  	cancelLeave : function(cancelRecordActionUrl,currentTrElement) { 
+  	cancelClaim : function(cancelRecordActionUrl,currentTrElement) { 
 		
-		var message = app.vtranslate('JS_CANCEL_LEAVE_CONFIRMATION');
+		var message = app.vtranslate('JS_CANCEL_CLAIM_CONFIRMATION');
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
 		var section = currentTrElement.data('section');	
@@ -311,7 +316,7 @@ Vtiger.Class("Users_Leave_Js", {
 				
 				Vtiger_Helper_Js.showPnotify(params);
 				//delete the Leave details in the list
-				thisInstance.updateLeaveGrid(userid, section);
+				thisInstance.updateClaimGrid(userid, section);
 			}
 		);
 	});
@@ -320,7 +325,7 @@ Vtiger.Class("Users_Leave_Js", {
 	registerChangeYear : function(changeYearActionUrl,section) {  
 
 		var thisInstance = this;
-	 	var divcontainer  = section =='T'?'myteamleavelist':'myleavelist';
+	 	var divcontainer  = section =='T'?'myteamclaimlist':'myclaimlist';
 
 //////////////////////////////////
 
@@ -366,31 +371,21 @@ Vtiger.Class("Users_Leave_Js", {
 	     return aDeferred.promise();	
 
 
-
-
-
-
-
-
-
 ////////////////////////////////////////////
-
-
-
-
 
 
 	
 	},
- sel_teammember : function(changeYearActionUrl,section){
+
+	 sel_teammember : function(changeYearActionUrl,section){
  		var membercombo = jQuery('#sel_teammember');
  		var myyearcombo = jQuery("#team_selyear");
-		var leavetypecombo = jQuery("#sel_leavetype");	
+		var claimtypecombo = jQuery("#sel_claimtype");	
 			
-		Users_Leave_Js.registerChangeYear(changeYearActionUrl+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val(),section);
+		Users_Claim_Js.registerChangeYear(changeYearActionUrl+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selclaimtype='+claimtypecombo.val(),section);
 	},
 
-	 Popup_LeaveApprove : function(url){
+	 Popup_ClaimApprove : function(url){ 
 
 	 	app.helper.showProgress();
 	 	app.request.post({url:url}).then(
@@ -409,7 +404,6 @@ Vtiger.Class("Users_Leave_Js", {
 		
 
 	},
-
 
 	/*
 	 * Function to register all actions in the Tax List
@@ -607,13 +601,11 @@ Vtiger.Class("Users_Leave_Js", {
 },{
 	//constructor
 	init : function() {
-
-		Users_Leave_Js.eduInstance = this;
+		Users_Claim_Js.eduInstance = this;
 	},
 	
 
-	registerEvents: function(eduInstance) {
-
+	registerEvents: function(eduinstance) {
 		eduinstance.registerActions();
 		//this._super();
 		this.registerActions();

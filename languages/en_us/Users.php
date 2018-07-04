@@ -27,6 +27,7 @@ $languageStrings = array(
 	'LBL_USER_PROJECTS'=>'User Projects',
 	'LBL_SKILL_LANG'=>'Skill Language',
 	'LBL_LEAVE'=>'Leave',
+	'LBL_CLAIM'=>'Claim',
 	'LBL_USER_EMERGENCY'=>'Emergency Contacts',
 	'LBL_ADD_NEW_EDUCATION'=>'Add New Education',
 	'LBL_INSTITUTION_NAME'=>'Institution Name',
@@ -440,6 +441,26 @@ $languageStrings = array(
 	'LBL_EDIT_LEAVE'=>'Edit Leave',		
 	
 //End Leave Section
+
+
+//Start Claim
+'LBL_CLAIM_NO'=>'Claim No',
+'LBL_CLAIM_TYPE'=>'Claim Type',
+'LBL_STATUS_CLAIM'=>'Claim Status',
+'LBL_TRANSACTION_DATE'=> 'Transaction Date',
+'LBL_AMOUNT'=>'Amount',
+'LBL_MY_CLAIM'=>'My Claims',
+'LBL_APPLY_CLAIM'=>'Apply Claim',
+'LBL_ADD_NEW_CLAIM'=>'Add New Claim',
+'LBL_INVOICE'=>' Invoice No',
+'LBL_CLAIM_STATUS'=>'Claim Status',
+'LBL_APPROVED_BY'=>'Approved By',
+'LBL_EDIT_CLAIM'=>'Edit Claim',
+'LBL_CLAIM_APPROVAL'=>'Approve Claim',
+'LBL_MYTEAM_CLAIM'=>'My Team Claim',
+'LBL_CLAIM_APPROVED'=>'Claim Approved',
+'LBL_CLAIM_NOT_APPROVED'=>'Claim Not Approved',
+//End of section Claim
 
 //Emergency Contacts Label
 'LBL_CONTACT_UPDATE_SUCCESS' => 'Emergency contact updated successfully',

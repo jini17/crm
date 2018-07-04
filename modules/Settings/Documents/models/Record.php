@@ -18,6 +18,14 @@ class Settings_Documents_Record_Model extends Settings_Vtiger_Record_Model {
     public function getName() {
         return $this->get('note_no');
     }
+    public function getfile(){
+    	$db = PearDatabase::getInstance();
+    	$query="SELECT `attachmentsid` FROM `vtiger_seattachmentsrel` WHERE `crmid`=?";
+    	$result=$db->pquery($query,array($this->getId()));
+    	$fileid=$db->query_result($result, 'attachmentsid');
+    	return $fileid;
+
+    }
     
     
     /**
@@ -44,7 +52,7 @@ class Settings_Documents_Record_Model extends Settings_Vtiger_Record_Model {
 				array(
 					'linktype' => 'LISTVIEWRECORD',
 					'linklabel' => 'LBL_VIEW',
-					'linkurl' => "javascript:Settings_Documents_List_Js.triggerDetailView(".$this->getId().")",
+					'linkurl' => "javascript:window.location.href='index.php?module=Documents&action=DownloadFile&record=".$this->getId()."&fileid=".$this->getfile()."'",
 					'linkicon' => 'icon-eye'
 				)
 			);
@@ -53,7 +61,7 @@ class Settings_Documents_Record_Model extends Settings_Vtiger_Record_Model {
 				array(
 					'linktype' => 'LISTVIEWRECORD',
 					'linklabel' => 'LBL_VIEW',
-					'linkurl' => "javascript:Settings_Documents_List_Js.triggerDetailView(".$this->getId().")",
+					'linkurl' => "javascript:window.location.href='index.php?module=Documents&action=DownloadFile&record=".$this->getId()."&fileid=".$this->getfile()."'",
 					'linkicon' => 'icon-eye'
 				)
 			);	
@@ -68,6 +76,7 @@ class Settings_Documents_Record_Model extends Settings_Vtiger_Record_Model {
     public function getDeleteActionUrl() {
         return 'index.php?module=Documents&parent=Settings&action=DeleteAjax&mode=remove&record='.$this->getId();
     }
+   
     
     public function getRowInfo() {
         return $this->getData();

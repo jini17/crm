@@ -9,7 +9,7 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-class Users_LeavesRecords_Model extends Vtiger_Record_Model {
+class Users_ClaimRecords_Model extends Vtiger_Record_Model {
     
     public static function getLeavesInstance($id=null) {
         $db = PearDatabase::getInstance();
@@ -25,51 +25,64 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	}
         return $instance;
     }
-    public function getCreateLeaveURL() {
-	return '?module=Users&view=EditLeave';
+
+    public function getCreateClaimURL() {
+	return '?module=Users&view=EditClaim';
     }
 
 	//Created by Safuan
-	public function getLeaveType($leaveid){
+	public function getClaimType($claimtypeid){
 	$db = PearDatabase::getInstance();
-	$query = "SELECT title,colorcode FROM vtiger_leavetype WHERE leavetypeid = $leaveid";
+	$query = "SELECT * FROM vtiger_claimtype WHERE claimtypeid = $claimtypeid";
 	
 	$result = $db->pquery($query,array());
 	$rowdetail = array();
-	$rowdetail['leavetype'] = $db->query_result($result, $i, 'title');
-	$rowdetail['colorcode'] = $db->query_result($result, $i, 'colorcode');
+	$rowdetail['claimtypeid'] = $db->query_result($result, $i, 'claimtypeid');
+	$rowdetail['claim_type'] = $db->query_result($result, $i, 'claim_type');
+	$rowdetail['claim_no'] = $db->query_result($result, $i, 'claim_no');
+	$rowdetail['claim_code'] = $db->query_result($result, $i, 'claim_code');
+	$rowdetail['color_code'] = $db->query_result($result, $i, 'color_code');
+	$rowdetail['claim_status'] = $db->query_result($result, $i, 'claim_status');
+	$rowdetail['claim_description'] = $db->query_result($result, $i, 'claim_description');
+	$rowdetail['transactionlimit'] = $db->query_result($result, $i, 'transactionlimit');
+	$rowdetail['monthlylimit'] = $db->query_result($result, $i, 'monthlylimit');
+		 $rowdetail['yearlylimit'] = $db->query_result($result, $i, 'yearlylimit');
 
 	return $rowdetail;
 
 	}
 
 	//Created by Safuan for fetching current user leaves for current year//	
-	public function getMyLeaves($userid, $year){
+	public function getMyClaim($userid,$year){ 
 	$db = PearDatabase::getInstance();
 	
-	$query = "SELECT leaveid, reasonofleave, leavetype, fromdate, todate, leavestatus, reasonnotapprove, starthalf, endhalf
-			FROM vtiger_leave 
+	$query = "SELECT claimid, claimno, category, transactiondate, vtiger_claim.description, totalamount, claim_status, taxinvoice, attachment,approved_by
+			FROM vtiger_claim 
 			INNER JOIN vtiger_crmentity
-			ON vtiger_crmentity.crmid = vtiger_leave.leaveid
+			ON vtiger_crmentity.crmid = vtiger_claim.claimid
 			WHERE vtiger_crmentity.smownerid = ?
-			AND vtiger_crmentity.deleted=0 AND DATE_FORMAT(fromdate, '%Y') = ? AND vtiger_crmentity.deleted=0";
+			AND vtiger_crmentity.deleted=0 AND DATE_FORMAT(transactiondate, '%Y') = ? AND vtiger_crmentity.deleted=0 ";
 
 	$result = $db->pquery($query,array($userid, $year));
-	$myleave=array();	
-	
-	for($i=0;$db->num_rows($result)>$i;$i++){
-		$rowdetail = self::getLeaveType($db->query_result($result, $i, 'leavetype'));
-		$myleave[$i]['id'] = $db->query_result($result, $i, 'leaveid');
-		$myleave[$i]['leave_reason'] = $db->query_result($result, $i, 'reasonofleave');
-		$myleave[$i]['leave_type'] = $rowdetail['leavetype'];
-		$myleave[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetype');
-		$myleave[$i]['colorcode'] = $rowdetail['colorcode'];
-		$myleave[$i]['starthalf'] = $rowdetail['starthalf'];
-		$myleave[$i]['endhalf'] = $rowdetail['endhalf'];
-		$myleave[$i]['from_date'] = $db->query_result($result, $i, 'fromdate');
-		$myleave[$i]['to_date'] = $db->query_result($result, $i, 'todate'); 
-		$myleave[$i]['leavestatus'] = $db->query_result($result, $i, 'leavestatus'); 
-		$myleave[$i]['reasonnotapprove'] = $db->query_result($result, $i, 'reasonnotapprove'); 
+	$myleave=array();
+
+	for($i=0;$db->num_rows($result)>$i;$i++){ 
+		$rowdetail = self::getClaimType($db->query_result($result, $i, 'category'));
+		$myleave[$i]['claimid'] = $db->query_result($result, $i, 'claimid');
+		$myleave[$i]['claimno'] = $db->query_result($result, $i, 'claimno');
+		$myleave[$i]['category'] = $rowdetail['claim_type'];
+		//$myleave[$i]['category'] = $db->query_result($result, $i, 'category');
+		$myleave[$i]['color_code'] = $rowdetail['color_code'];
+		//$myleave[$i]['starthalf'] = $rowdetail['starthalf'];
+		//$myleave[$i]['endhalf'] = $rowdetail['endhalf'];
+		$myleave[$i]['transactiondate'] = $db->query_result($result, $i, 'transactiondate');
+		$myleave[$i]['description'] = $db->query_result($result, $i, 'description'); 
+		$myleave[$i]['totalamount'] = $db->query_result($result, $i, 'totalamount'); 
+		$myleave[$i]['claim_status'] = $db->query_result($result, $i, 'claim_status'); 
+		$myleave[$i]['taxinvoice'] = $db->query_result($result, $i, 'taxinvoice'); 
+		$myleave[$i]['attachment'] = $db->query_result($result, $i, 'attachment'); 
+		$myleave[$i]['approved_by'] = $db->query_result($result, $i, 'approved_by'); 
+
 	}
 	
 	return $myleave;
@@ -79,7 +92,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
 	//Created by Safuan for fetching leave types//	
 	//modified by jitu for concate color and balance in dropdown 
-	public function getLeaveTypeList($userid,$leaveid){ 
+	public function getClaimTypeList($userid,$claimid){  
 	$db = PearDatabase::getInstance();
 	global $current_user;	
 	//Modified by jitu for showing  all except those are onetime if user already applied..
@@ -101,7 +114,7 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 	}
 	if(!empty($userid) && empty($leaveid)) {
 		$conduser = " AND tblSCUB.user_id= ".$userid." AND tblVTLT.leavetypeid NOT IN (SELECT tblVTL.leavetype FROM vtiger_leave tblVTL INNER JOIN vtiger_crmentity tblVTCC ON tblVTCC.crmid=tblVTL.leaveid AND tblVTCC.deleted=0 
-LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype WHERE ((tblVTLTT.leave_frequency = 'Onetime' AND tblVTL.leavestatus !='Not Approved' && tblVTL.leavestatus !='Cancel')) AND tblVTCC.smownerid=$userid)";
+		LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype WHERE ((tblVTLTT.leave_frequency = 'Onetime' AND tblVTL.leavestatus !='Not Approved' && tblVTL.leavestatus !='Cancel')) AND tblVTCC.smownerid=$userid)";
 	}	
 	
 	/*$query = "SELECT DISTINCT tblVTLT.leavetypeid,tblSCUB.leave_type, tblVTLT.title, tblVTLT.colorcode,tblSCUB.leave_count, tblVTLT.halfdayallowed FROM secondcrm_user_balance tblSCUB 
@@ -111,57 +124,77 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 	LEFT JOIN vtiger_leave tblVTL ON tblVTL.leavetype = tblSCUB.leave_type  
 	 WHERE tblVTC.deleted=0 ".$conduser." AND year = '".$year."' ".$condleave. " ORDER BY tblVTLT.leavetypeid ASC"; */
 
-	 $query = "SELECT * FROM vtiger_leavetype tblVTLT
-	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLT.leavetypeid
-	 WHERE tblVTC.deleted=0";
+	 $query = "SELECT * from vtiger_claimtype";
 
 	$result = $db->pquery($query,array());
 
-	$leavetype=array();	
-	$leavetypeid  = '';
+	$claimtype=array();	
+	$claimtypeid  = '';
 	if($db->num_rows($result)>0) {	
 		for($i=0;$i<$db->num_rows($result);$i++) {
 			
-			if($leavetypeid != $db->query_result($result, $i, 'leavetypeid')) {
-				$leavetype[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetypeid');
-				$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'title').'@'.$db->query_result($result, $i, 'colorcode').'@'.$db->query_result($result, $i, 'leavefrequency').'@'.$db->query_result($result, $i, 'halfdayallowed');
-				$leavetypeid = $db->query_result($result, $i, 'leave_type');
+			if($claimtypeid != $db->query_result($result, $i, 'claimtypeid')) {
+				$claimtype[$i]['claimtypeid'] = $db->query_result($result, $i, 'claimtypeid');
+				$claimtype[$i]['claimtype'] = $db->query_result($result, $i, 'claim_type');
+				$claimtypeid = $db->query_result($result, $i, 'claim_type');
 			} 
 		}
 	}
-	return $leavetype;	
+	return $claimtype;	
+
+	}
+
+
+		public function getClaimStatusList($userid,$claimid){  
+	$db = PearDatabase::getInstance();
+	global $current_user;	
+
+	 $query = "SELECT * from vtiger_claim_status";
+
+	$result = $db->pquery($query,array());
+
+	$claimtype=array();	
+	$claim_statusid  = '';
+	if($db->num_rows($result)>0) {	
+		for($i=0;$i<$db->num_rows($result);$i++) {
+			
+			if($claim_statusid != $db->query_result($result, $i, 'claim_statusid')) {
+				$claimstatus[$i]['claim_statusid'] = $db->query_result($result, $i, 'claim_statusid');
+				$claimstatus[$i]['claim_status'] = $db->query_result($result, $i, 'claim_status');
+				$claimstatusid = $db->query_result($result, $i, 'claim_status');
+			} 
+		}
+	}
+	return $claimstatus;	
 
 	}
 
 
 	//Created by Safuan for fetching leave types//	
 	//modified by jitu for concate color and balance in dropdown 
-	public function getTotaLeaveTypeList($userid,$leaveid){
+	public function getTotaClaimTypeList($userid,$claimid){
 	$db = PearDatabase::getInstance();
 	global $current_user;	
-	$query = "SELECT tblVTLT.leavetypeid, tblVTLT.title, tblVTLT.colorcode 
-	FROM vtiger_leavetype tblVTLT
-	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLT.leavetypeid
-	 WHERE tblVTC.deleted=0 ";
+	$query = "SELECT tblVTLT.claimtypeid, tblVTLT.claim_type, tblVTLT.color_code FROM vtiger_claimtype tblVTLT INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLT.claimtypeid WHERE tblVTC.deleted=0";
 	$result = $db->pquery($query,array());
-	$leavetype=array();	
+	$claimtype=array();	
 	for($i=0;$db->num_rows($result)>$i;$i++){
-		$leavetype[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetypeid');
-		$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'title');
+		$claimtype[$i]['claimtypeid'] = $db->query_result($result, $i, 'claimtypeid');
+		$claimtype[$i]['claim_type'] = $db->query_result($result, $i, 'claim_type');
 	}
-	return $leavetype;	
+	return $claimtype;	
 
 	}	
 
 	//Created by Safuan for fetching team leaves//
-	public function getMyTeamLeave($userid, $year, $page, $max,$selectedmember,$selectedleavetype){
+	public function getMyTeamClaim($userid, $year, $page, $max,$selectedmember,$selectedleavetype){
 	$db = PearDatabase::getInstance();
 		
 		$teamreporttoquery = "SELECT id FROM vtiger_users WHERE reports_to_id=$userid";
 		$resulteamreport = $db->pquery($teamreporttoquery,array());
 		
 		$teamidreport= array();
-		for($i=0;$db->num_rows($resulteamreport)>$i;$i++){
+		for($i=0;$db->num_rows($resulteamreport)>$i;$i++){ 
 			$teamidreport[] = $db->query_result($resulteamreport, $i, 'id');
 		}
 		$allteammate= implode(",", $teamidreport);
@@ -178,19 +211,18 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 			$memcondition = " AND vtiger_crmentity.smownerid = $selectedmember";
 		}
 		if(!empty($selectedleavetype)) {
-			$leavetypecondtion = " AND vtiger_leave.leavetype = $selectedleavetype";
+			$leavetypecondtion = " AND vtiger_claim.category = $selectedleavetype";
 		}	
-		$querygetteamleave="SELECT leaveid, CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, vtiger_users.id, reasonofleave, leavetype, fromdate, todate, leavestatus, reasonnotapprove,starthalf, endhalf
-					FROM vtiger_leave 
+		$querygetteamleave="SELECT claimid, CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, vtiger_users.id, claimno, category, transactiondate, vtiger_claim.description, totalamount, claim_status,taxinvoice, attachment,approved_by
+					FROM vtiger_claim 
 					INNER JOIN vtiger_crmentity
-					ON vtiger_crmentity.crmid = vtiger_leave.leaveid
+					ON vtiger_crmentity.crmid = vtiger_claim.claimid
                    			INNER JOIN vtiger_users
                     			ON vtiger_crmentity.smownerid=vtiger_users.id
-					WHERE vtiger_crmentity.deleted=0 ".$memcondition." AND DATE_FORMAT(fromdate, '%Y') = $year
-					AND (vtiger_leave.leavestatus = 'Apply' 
-						OR vtiger_leave.leavestatus = 'Approved'
-						OR vtiger_leave.leavestatus = 'Not Approved'
-						OR vtiger_leave.leavestatus = 'Cancel')" .$leavetypecondtion;
+					WHERE vtiger_crmentity.deleted=0 ".$memcondition." AND DATE_FORMAT(transactiondate, '%Y') = $year 
+					AND (vtiger_claim.claim_status = 'Apply' 
+						OR vtiger_claim.claim_status = 'Approved'
+						OR vtiger_claim.claim_status = 'Rejected')" .$leavetypecondtion;
 		//For pagination
 		if(!empty($max) || $max != ''){
 		$querygetteamleave.=" LIMIT $row,$max"; 
@@ -201,50 +233,56 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 		$myteamleave=array();	
 
 		for($i=0;$db->num_rows($resultgetteamleave)>$i;$i++){
-			$rowdetail = self::getLeaveType($db->query_result($resultgetteamleave, $i, 'leavetype'));;	
-			$myteamleave[$i]['id'] = $db->query_result($resultgetteamleave, $i, 'leaveid');
+			$rowdetail = self::getClaimType($db->query_result($resultgetteamleave, $i, 'category'));
+			$myteamleave[$i]['claimid'] = $db->query_result($resultgetteamleave, $i, 'claimid');
+			$myteamleave[$i]['claimno'] = $db->query_result($resultgetteamleave, $i, 'claimno');
 			$myteamleave[$i]['fullname'] = $db->query_result($resultgetteamleave, $i, 'fullname');
-			$myteamleave[$i]['leave_reason'] = $db->query_result($resultgetteamleave, $i, 'reasonofleave');
-			$myteamleave[$i]['leave_type'] = $rowdetail['leavetype'];
-			$myteamleave[$i]['leavetypeid'] = $db->query_result($resultgetteamleave, $i, 'leavetype');
-			$myteamleave[$i]['color_code'] = $rowdetail['colorcode'];
-			$myteamleave[$i]['starthalf'] = $rowdetail['starthalf'];
-			$myteamleave[$i]['endhalf'] = $rowdetail['endhalf'];
-			$myteamleave[$i]['from_date'] = $db->query_result($resultgetteamleave, $i, 'fromdate');
-			$myteamleave[$i]['to_date'] = $db->query_result($resultgetteamleave, $i, 'todate'); 
-			$myteamleave[$i]['leavestatus'] = $db->query_result($resultgetteamleave, $i, 'leavestatus');
-			$myteamleave[$i]['applicantid'] = $db->query_result($resultgetteamleave, $i, 'id'); 
-			$myteamleave[$i]['reasonnotapprove'] = $db->query_result($resultgetteamleave, $i, 'reasonnotapprove'); 
+			$myteamleave[$i]['category'] = $rowdetail['claim_type'];
+			//$myteamleave[$i]['category'] = $db->query_result($resultgetteamleave, $i, 'category');
+			$myteamleave[$i]['color_code'] = $rowdetail['color_code'];
+			$myteamleave[$i]['transactiondate'] = $db->query_result($resultgetteamleave, $i, 'transactiondate');
+			$myteamleave[$i]['description'] = $db->query_result($resultgetteamleave, $i, 'description'); 
+			$myteamleave[$i]['totalamount'] = $db->query_result($resultgetteamleave, $i, 'totalamount');
+			$myteamleave[$i]['claim_status'] = $db->query_result($resultgetteamleave, $i, 'claim_status'); 
+			$myteamleave[$i]['taxinvoice'] = $db->query_result($resultgetteamleave, $i, 'taxinvoice'); 
+			$myteamleave[$i]['attachment'] = $db->query_result($resultgetteamleave, $i, 'attachment');
+			$myteamleave[$i]['applicantid'] = $db->query_result($resultgetteamleave, $i, 'id');  
+			$myteamleave[$i]['approved_by'] = $db->query_result($resultgetteamleave, $i, 'approved_by'); 
+
 		}
 	return $myteamleave;
 	}
 
-	//Created by Safuan
-	public function getLeaveDetail($leaveid){
+	
+	public function getClaimDetail($claimid){
 		$db = PearDatabase::getInstance();
-	$query = "SELECT leaveid, reasonofleave, leavetype, fromdate, todate, replaceuser_id, leavestatus,starthalf, endhalf, reasonnotapprove
-			FROM vtiger_leave 
+		//$db->setDebug(true);
+	$query = "SELECT vtiger_claim.*
+			FROM vtiger_claim 
 			INNER JOIN vtiger_crmentity
-			ON vtiger_crmentity.crmid = vtiger_leave.leaveid
-			WHERE vtiger_leave.leaveid = $leaveid
+			ON vtiger_crmentity.crmid = vtiger_claim.claimid
+			WHERE vtiger_claim.claimid = $claimid
 			AND vtiger_crmentity.deleted=0";
 	$result = $db->pquery($query,array());
-	$leavedetails=array();	
+	$claimdetails=array();	
 
-		$leavedetails['id'] = $db->query_result($result, 0, 'leaveid');
-		$leavedetails['leave_reason'] = $db->query_result($result, 0, 'reasonofleave');
-		$leavedetails['leave_type'] = $db->query_result($result, 0, 'leavetype');
-		$leavedetails['from_date'] = date("d-m-Y", strtotime($db->query_result($result, 0, 'fromdate')));
-		$leavedetails['to_date'] = date("d-m-Y", strtotime($db->query_result($result, 0, 'todate'))); 
-		$leavedetails['replaceuser'] = $db->query_result($result, 0, 'replaceuser_id'); 
-		$leavedetails['leavestatus'] = $db->query_result($result, 0, 'leavestatus');
-		$leavedetails['starthalf'] = $db->query_result($result, 0, 'starthalf');
-		$leavedetails['endhalf'] = $db->query_result($result, 0, 'endhalf');
-		$leavedetails['reasonnotapprove'] = $db->query_result($result, 0, 'reasonnotapprove'); 
+		$claimdetails['claimid'] = $db->query_result($result, 0, 'claimid');
+		$claimdetails['claimno'] = $db->query_result($result, 0, 'claimno');
+		$claimdetails['description'] = $db->query_result($result, 0, 'description');
+		$claimdetails['transactiondate'] = date("d-m-Y", strtotime($db->query_result($result, 0, 'transactiondate')));
+		$claimdetails['totalamount'] = $db->query_result($result, 0, 'totalamount'); 
+		$claimdetails['claim_status'] = $db->query_result($result, 0, 'claim_status');
+		$claimdetails['taxinvoice'] = $db->query_result($result, 0, 'taxinvoice');
+		$claimdetails['attachment'] = $db->query_result($result, 0, 'attachment');
+		$claimdetails['category'] = $db->query_result($result, 0, 'category');
+		$claimdetails['approved_by'] = $db->query_result($result, 0, 'approved_by');
+		$claimdetails['reasonnotapprove'] = $db->query_result($result, 0, 'reasonnotapprove');  
+		//echo "Nirbhay Nirbhay<pre>";print_r($claimdetails);die;
+	return $claimdetails;
 
-	return $leavedetails;
 	}
-	//Created by Safuan
+
+	
 	public function getAllUsersList($userid){
 		$db = PearDatabase::getInstance();
 		$query = "SELECT id, CONCAT(first_name, ' ', last_name) AS fullname 

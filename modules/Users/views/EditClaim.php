@@ -8,25 +8,27 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Users_EditLeave_View extends Vtiger_Index_View {
+class Users_EditClaim_View extends Vtiger_Index_View {
 
 	public function process(Vtiger_Request $request) {
-		$moduleName = $request->getModule();
-		$leaveid = $request->get('record');
+		$moduleName = $request->getModule(); 
+		$claimid = $request->get('record');  
 		$userId = $request->get('userId');
-		$leavestatus = $request->get('leavestatus');
+		$claimstatus = $request->get('claimstatus');
 
 		$viewer = $this->getViewer($request);
-		$leavetype=Users_LeavesRecords_Model::getLeaveTypeList($userId,$leaveid);
+		$claimtype = Users_ClaimRecords_Model::getClaimTypeList($userId,$claimid);
 
-		$userslist=Users_LeavesRecords_Model::getAllUsersList($userId);
+		$claimstatuslist = Users_ClaimRecords_Model::getClaimStatusList($userId,$claimid);
+
+		$userslist=Users_ClaimRecords_Model::getAllUsersList($userId);
 
 		$manager = $request->get('manager');
 		
 		//Enter Edit Mode if leave id = ''
-		if(!empty($leaveid) || $leaveid != ""){
-		$leavedetail = Users_LeavesRecords_Model::getLeaveDetail($leaveid);
-		//echo '<br>FIRST AZ <br><pre>';print_r($leavedetail);echo '</pre>';
+		if(!empty($claimid) || $claimid != ""){
+		$claimdetail = Users_ClaimRecords_Model::getClaimDetail($claimid);
+		//echo '<br>FIRST AZ <br><pre>';print_r($claimdetail);echo '</pre>';die;
 		}
 		$startDateField = array(	"mandatory"=>true,
 						"presence"=>true,
@@ -47,14 +49,14 @@ class Users_EditLeave_View extends Vtiger_Index_View {
 						"label"=>"End Date",
 						"date-format"=>"dd-mm-yyyy"	);
 
-		$validator= '[{"name":"greaterThanDependentFieldOrMoreThanLeaveBalance","params":["start_date,leave_type"]}]';//Modified By Safuan-Validate leave balance and date 
+		//$validator= '[{"name":"greaterThanDependentFieldOrMoreThanLeaveBalance","params":["start_date,leave_type"]}]';//Modified By Safuan-Validate leave balance and date 
 		$viewer->assign('MODULE', $moduleName);
 		$viewer->assign('QUALIFIED_MODULE', $moduleName);
 		$viewer->assign('USERID', $userId);
-		$viewer->assign('LEAVEID', $leaveid);
-		$viewer->assign('LEAVETYPELIST', $leavetype);
-		
-		$viewer->assign('LEAVESTATUS', $leavestatus);
+		$viewer->assign('LEAVEID', $claimid);
+		$viewer->assign('CLAIMTYPELIST', $claimtype);
+		$viewer->assign('CLAIMSTATUSLIST', $claimstatuslist);
+		$viewer->assign('CLAIMSTATUS', $claimstatus);
 		$viewer->assign('CURRENT_USER_MODEL', $userRecordModel);
 		$viewer->assign('USERSLIST', $userslist);
 		$viewer->assign('MANAGER',$manager);
@@ -64,8 +66,8 @@ class Users_EditLeave_View extends Vtiger_Index_View {
 		$viewer->assign('ENDDATEFIELD', $endDateField);
 		$viewer->assign('VALIDATOR', $validator);
 
-		$viewer->assign('LEAVE_DETAIL', $leavedetail);
-		$viewer->view('EditAjaxLeave.tpl', $moduleName);
+		$viewer->assign('CLAIM_DETAIL', $claimdetail);
+		$viewer->view('EditAjaxClaim.tpl', $moduleName);
 	}
 	 
 }

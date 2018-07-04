@@ -16,9 +16,11 @@ Vtiger.Class("Users_Emergency_Js", {
 	},
 	
 	editEmergency : function(url) { 
+
 	    var aDeferred = jQuery.Deferred();
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
+
 		
 		app.helper.showProgress();
 		app.request.post({url:url}).then(
@@ -28,6 +30,7 @@ Vtiger.Class("Users_Emergency_Js", {
                 if(err == null){
                     app.helper.showModal(data);
                     var form = jQuery('#editEmergency');
+
      
                       
                         	// for textarea limit
@@ -38,6 +41,17 @@ Vtiger.Class("Users_Emergency_Js", {
                          form.submit(function(e) { 
                             e.preventDefault();
                          })
+
+						jQuery('#home_phone,#office_phone,#mobile').keyup(function(event){
+							  var $this = $(this);
+					          var input = $this.val();
+					          var input = input.replace(/[\D\s\._\-]+/g, "");
+					                   
+					                
+					           $this.val( function() {
+					                return ( input === 0 ) ? "" : input.replace();
+					           });
+						});
                            // console.log(form);
 					var params = {
                             submitHandler : function(form){
@@ -101,16 +115,19 @@ Vtiger.Class("Users_Emergency_Js", {
           );
            return aDeferred.promise();
      },	
+
 	
 },{
 	//constructor
 	init : function() {
+		
 		Users_Emergency_Js.emeInstance = this;
 	},
 	
 
 	
 	registerEvents: function(emeInstance) {
+		
 		emeInstance.registerActions();
 	}
 

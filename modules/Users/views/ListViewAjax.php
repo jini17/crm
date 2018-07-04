@@ -283,7 +283,6 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$recordId = $request->get('record');
 		$currentyear = date("Y");
 
-    
 		//if year end process run then user can apply leave for next year other wise current year
 		/*$sql  = "SELECT MAX(year) as year from secondcrm_user_balance LIMIT 0,1";
 		$res = $db->pquery($sql,array());
