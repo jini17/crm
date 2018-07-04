@@ -63,7 +63,7 @@ class Office365_Import_Action extends Vtiger_BasicAjax_Action {
 		return $syncRecords;
 	}
 
-	function removeSynchronization($request) {echo "asdasd";die;
+	function removeSynchronization($request) {
 		$sourceModule = $request->get('sourcemodule');
 		$userModel = Users_Record_Model::getCurrentUserModel();
 		Office365_Module_Model::removeSync($sourceModule, $userModel->getId());

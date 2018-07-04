@@ -973,6 +973,7 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 	}
 
 	/**
+
 	 * Added By Jitu Function to get Related Accounts/Leads Name/Email
 	 */
 	public function getRelatedModuleDetails($record,$module){
@@ -995,6 +996,7 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 	}
 
 	/**
+
 	 * Added By Mabruk Function to get Invited Users Name/Email
 	 */
 	public function getInvitedUserDetails($record){
@@ -1012,6 +1014,7 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 	}
 
 	/**
+
 	 * Added By Jitu Function to get Invited Users Name/Email
 	 */
 	public function getExternalPeoples($record){
@@ -1029,6 +1032,7 @@ class Calendar_Module_Model extends Vtiger_Module_Model {
 	}	
 
 	/**
+
 	 * Added By Mabruk Function to get MOM/AGENDA DATA 
 	 */
 	public function getMeetingData($record){

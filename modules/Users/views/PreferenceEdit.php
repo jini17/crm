@@ -162,6 +162,7 @@ Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 			"modules.Vtiger.resources.CkEditor",
 			'modules.'.$moduleName.'.resources.Education',
 			'modules.'.$moduleName.'.resources.Leave',
+			'modules.'.$moduleName.'.resources.Claim',
 			'modules.Settings.Vtiger.resources.Index',
 			"~layouts/v7/lib/jquery/Lightweight-jQuery-In-page-Filtering-Plugin-instaFilta/instafilta.min.js"
 		);

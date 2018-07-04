@@ -125,6 +125,8 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
                     app.helper.hideProgress();
                     app.helper.showModal(data);
                     thisInstance.saveRule();
+                    thisInstance.autoAddMultipleLeavetype();
+                    thisInstance.showLeaveTypeEditAddition();
                     history.pushState({}, null, window.history.back());
 
 
@@ -161,6 +163,8 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
                     app.helper.hideProgress();
                     app.helper.showModal(data);
                     thisInstance.saveRule();
+                    thisInstance.showLeaveTypeAddition();
+                    thisInstance.addMultipleLeavetype();
                     history.pushState({}, null, window.history.back());
 
 
@@ -235,10 +239,146 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
 
         aDeferred.promise();
     },
+
+
+    /**
+     * Added By Nirbhay to show and hide leave allocation
+     */
+    showLeaveTypeAddition: function(){
+
+        var thisInstance = this;
+            //LeaveTypeAllocation
+        jQuery("#LeaveTypeAllocation").hide();
+        jQuery("#AllocateLeave").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery("#AllocateLeave").click(function () {
+            //console.log("add item");
+            if(jQuery("#AllocateLeave:checkbox:checked").length>0){
+                jQuery("#LeaveTypeAllocation").show();
+            }
+            else{
+                jQuery("#LeaveTypeAllocation").hide();
+
+            }
+        });
+
+    },
+
+    /**
+     * Added By Nirbhay to show and hide leave allocation
+     */
+    showLeaveTypeEditAddition: function(){
+
+        var thisInstance = this;
+        jQuery("#EditLeaveTypeAllocation").hide();
+        jQuery("#EditAllocateLeave").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery("#EditAllocateLeave").click(function () {
+            if(jQuery("#EditAllocateLeave:checkbox:checked").length>0){
+                jQuery("#EditLeaveTypeAllocation").show();
+            }
+            else{
+                jQuery("#EditLeaveTypeAllocation").hide();
+
+            }
+        });
+
+    },
+
+
+    /**
+     * Added By Nirbhay to add leavetype allocation
+     */
+    addMultipleLeavetype: function(){
+        var counter=0;
+        var thisInstance = this;
+         jQuery("#AddLeavetype").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery("#AddLeavetype").click(function () {
+            counter++;
+            var dropdownvalues_en = jQuery("#dropdownValue").val();
+            var dropdownvalues = jQuery.parseJSON(dropdownvalues_en);
+
+
+            var element ='<div id="Leavetypesection'+ counter +'"><div class="contents row form-group"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><div class="fieldValue col-lg-4 col-md-4 col-sm-4"><select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_leavetype'+ counter +'" name="Allocation_leavetype'+ counter +'"><option value="">Select One</option>';
+
+            for(var i=0;i<dropdownvalues.length;i++){
+                    element = element + '<option value=' + dropdownvalues[i]['id'] + '>'+ dropdownvalues[i]['title'] +'</option>'
+            }
+
+            element = element + '</select><button id="removeid'+ counter +'" onclick="jQuery(\'#Leavetypesection'+counter +'\').remove();">X</button></div></div></div>';
+
+            element = element + '<div class="container float-left"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><a href="#" rel="tooltip" title="Number of days for which employees have been in company"><b>Age</b></a>&nbsp;&nbsp;<input type="text" placeholder="" id="ageleave'+ counter +'" name="ageleave'+ counter +'" style="width: 50px;">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" rel="tooltip" title="Number of leaves if the users age in the company is less than mentioned value"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;<input type="text" placeholder="" id="numberofleavesless'+ counter +'" name="numberofleavesless'+ counter +'" style="width: 50px;">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" rel="tooltip" title="Number of leaves if the users age in the company is more than mentioned value"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;<input type="text" placeholder="" id="numberofleavesmore'+ counter +'" name="numberofleavesmore'+ counter +'" style="width: 50px;"></div></div>';
+
+            element = element + '</div>';
+
+            jQuery("#LeaveTypeAllocation").append(element);
+        });
+
+    },
+
+    /**
+     * Auto Add Multiple Leave type for Edit View Form
+     */
+    autoAddMultipleLeavetype: function(){
+        var counter=0;
+        var thisInstance = this;
+
+        var exisitngvals_en = jQuery('#EditallocatedLeaveTypeValues').val();
+        var exisitngvals = jQuery.parseJSON(exisitngvals_en);
+        for(var j=0;j<exisitngvals.length;j++){
+            counter++;
+            var dropdownvalues_en = jQuery("#EditdropdownValue").val();
+            var dropdownvalues = jQuery.parseJSON(dropdownvalues_en);
+
+            var element ='<div id="Leavetypesection'+ counter +'"><div class="contents row form-group"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><div class="fieldValue col-lg-4 col-md-4 col-sm-4"><select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_leavetype'+ counter +'" name="Allocation_leavetype'+ counter +'"><option value="">Select One</option>';
+
+            for(var i=0;i<dropdownvalues.length;i++){
+                if(dropdownvalues[i]['id'] == exisitngvals[j]['leavetype_id']){
+                    element = element + '<option value=' + dropdownvalues[i]['id'] + ' selected>'+ dropdownvalues[i]['title'] +'</option>';
+                }else{
+                    element = element + '<option value=' + dropdownvalues[i]['id'] + '>'+ dropdownvalues[i]['title'] +'</option>';
+
+                }
+            }
+
+            element = element + '</select><button id="removeid'+ counter +'" onclick="jQuery(\'#Leavetypesection'+counter +'\').remove();">X</button></div></div></div>';
+
+            element = element + '<div class="container float-left"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><a href="#" rel="tooltip" title="Number of days for which employees have been in company"><b>Age</b></a>&nbsp;&nbsp;<input type="text" placeholder="" id="ageleave'+ counter +'" name="ageleave'+ counter +'" style="width: 50px;" value='+ exisitngvals[j]['ageleave'] +'>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" rel="tooltip" title="Number of leaves if the users age in the company is less than mentioned value"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;<input type="text" placeholder="" id="numberofleavesless'+ counter +'" name="numberofleavesless'+ counter +'" style="width: 50px;" value='+ exisitngvals[j]['numberofleavesless'] +'>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" rel="tooltip" title="Number of leaves if the users age in the company is more than mentioned value"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;<input type="text" placeholder="" id="numberofleavesmore'+ counter +'" name="numberofleavesmore'+ counter +'" style="width: 50px;" value='+ exisitngvals[j]['numberofleavesmore'] +'></div></div>';
+
+            element = element + '</div>';
+
+            jQuery("#EditLeaveTypeAllocation").append(element);
+        }
+
+
+        jQuery("#EditAddLeavetype").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery("#EditAddLeavetype").click(function () {
+            counter++;
+
+            var dropdownvalues_en = jQuery("#EditdropdownValue").val();
+            var dropdownvalues = jQuery.parseJSON(dropdownvalues_en);
+
+            var element ='<div id="Leavetypesection'+ counter +'"><div class="contents row form-group"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><div class="fieldValue col-lg-4 col-md-4 col-sm-4"><select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_leavetype'+ counter +'" name="Allocation_leavetype'+ counter +'"><option value="">Select One</option>';
+
+            for(var i=0;i<dropdownvalues.length;i++){
+                element = element + '<option value=' + dropdownvalues[i]['id'] + '>'+ dropdownvalues[i]['title'] +'</option>'
+            }
+
+            element = element + '</select><button id="removeid'+ counter +'" onclick="jQuery(\'#Leavetypesection'+counter +'\').remove();">X</button></div></div></div>';
+
+            element = element + '<div class="container float-left"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><a href="#" rel="tooltip" title="Number of days for which employees have been in company"><b>Age</b></a>&nbsp;&nbsp;<input type="text" placeholder="" id="ageleave'+ counter +'" name="ageleave'+ counter +'" style="width: 50px;">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" rel="tooltip" title="Number of leaves if the users age in the company is less than mentioned value"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;<input type="text" placeholder="" id="numberofleavesless'+ counter +'" name="numberofleavesless'+ counter +'" style="width: 50px;">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" rel="tooltip" title="Number of leaves if the users age in the company is more than mentioned value"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;<input type="text" placeholder="" id="numberofleavesmore'+ counter +'" name="numberofleavesmore'+ counter +'" style="width: 50px;"></div></div>';
+
+            element = element + '</div>';
+
+            jQuery("#EditLeaveTypeAllocation").append(element);
+        });
+
+    },
+
+
     registerEvents: function() {
         this.registerDeleteButton();
         this.registerAddButton();
         this.registerEditButton();
+
     }
 
 });
