@@ -52,7 +52,8 @@ class Settings_Vtiger_AdvanceGoogleConfigEdit_Action extends Settings_Vtiger_Bas
 	 	if (array_key_exists("client_id",$file) && array_key_exists("client_secret",$file)) {
 	 		$authUrl = $client->createAuthUrl();
 	 		copy('testAPI/uploaded_file.json','testAPI/client_secret.json');
-	 		echo "Please copy the following URL and select your gmail account to get the Access Key:" . "\n\n" . $authUrl;
+	 		//echo "Please copy the following URL and select your gmail account to get the Access Key:" . "\n\n" . $authUrl;
+	 		echo $authUrl;
 	 	}	 	
 	 	else 
 	 		echo "Please upload the correct file";
