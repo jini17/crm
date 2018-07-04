@@ -254,12 +254,18 @@ class EmailTemplates_Module_Model extends Vtiger_Module_Model {
 	 * @return type
 	 */
 	public function getAllModuleList(){
+		
 		$db = PearDatabase::getInstance();
+		$planid = $_SESSION['plan'];
 		// Get modules names only those are active
+		//modified by jitu@hide modules based on secondcrm_planpermission
 		$query = 'SELECT DISTINCT(name) AS modulename FROM vtiger_tab 
 					LEFT JOIN vtiger_field ON vtiger_field.tabid = vtiger_tab.tabid
-					WHERE (vtiger_field.uitype = ? AND vtiger_tab.presence = ?) ';
-		$params = array('13',0);
+					LEFT JOIN secondcrm_planpermission ON secondcrm_planpermission.tabid=vtiger_tab.tabid AND secondcrm_planpermission.visible=1
+					WHERE (vtiger_field.uitype = ? AND vtiger_tab.presence = ?) AND secondcrm_planpermission.planid=? ';
+		$params = array('13',0,$planid);
+		//end here
+		
 		// Check whether calendar module is active or not.
 		if(vtlib_isModuleActive("Calendar")){
 			$eventsTabid = getTabid('Events');

@@ -264,7 +264,7 @@ Class Office365_Contacts_Connector extends WSAPP_TargetConnector {
                 $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
                 if($http_code >= 400) {
                     echo "Error executing request to Office365 api with error code=$http_code<br/><br/>\n\n";
-                    echo "<pre>"; print_r($response);echo "methods :" .print_r($method); echo "</pre>";die;
+                   
 
                 }
                 break;
@@ -498,7 +498,7 @@ Class Office365_Contacts_Connector extends WSAPP_TargetConnector {
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if($http_code >= 400) {
             echo "Error executing request to Office365 api with error code=$http_code<br/><br/>\n\n";
-            echo "<pre>"; print_r($response); echo "</pre>";
+            echo "<pre>";echo "inside addDeleteContactEntry function";print_r($response); echo "</pre>";
 
         }
 

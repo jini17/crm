@@ -257,8 +257,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 	
 			$data = array (
 					'leavetype' => $wsleaveType,
-					'fromdate'=> $request->get('start_date'),
-					'todate'  => $request->get('end_date'),
+					'fromdate'=> $startdate,
+					'todate'  => $enddate,
 					'replaceuser_id'  => $wsUser,
 					'reasonofleave'  => $request->get('reason'),
 					'total_taken'  => $takenleave,
@@ -288,6 +288,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 			include_once 'modules/Leave/Leave.php';
 			try {
 					 $wsid = vtws_getWebserviceEntityId('Leave', $leaveid);
+
 					//Edit and manager approval
 					if($manager == 'true' || ($current_user->is_admin=='on' && $request->get('savetype')=='Approved'))
 					{	
@@ -297,6 +298,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 						$starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
 						$endhalf  = $request->get('chkboxendhalf')==1?0.5:0;
 						$wsid = vtws_getWebserviceEntityId('Leave', $leaveid);
+
 						$data = array(
 							'id' => $wsid,
 							'leavestatus'  => $request->get('savetype'),
@@ -304,7 +306,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 							'approveby'=>$approveby,
 							'approvedate'=>$approvedate,
 							);
-							if($request->get('	')=='Approved') { 
+
+							if($request->get('savetype')=='Approved') { 
 								
 								$startdate = date('Y-m-d',strtotime($request->get('hdnstartdate')));
 								$enddate = date('Y-m-d',strtotime($request->get('hdnenddate')));
@@ -320,9 +323,11 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 									$resultx = $db->pquery($leabalq,array());
 								}
 							} 
+
 						$leave = vtws_revise($data, $current_usersaving);
 						//print_r($leave);die;
 						$msg    = $request->get('savetype')=='Approved'?vtranslate("LBL_APPROVED","Users"):vtranslate("LBL_NOT_APPROVED","Users");
+
 					}else{ 
 						$starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
 						$endhalf  = $request->get('chkboxendhalf')==1?0.5:0;
@@ -330,6 +335,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 						$enddate = date('Y-m-d',strtotime($request->get('end_date')));
 						$takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);	
 						$wsid = vtws_getWebserviceEntityId('Leave', $leaveid);
+
 						$data = array(
 							'id' => $wsid,
 							'leavetype' => $wsleaveType,
@@ -341,6 +347,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 							'total_taken'  => $takenleave,
 							'assigned_user_id' =>  $wsCurrentUser,
 							);
+
 						$leave = vtws_revise($data, $current_usersaving);
 						//print_r($leave);
 						$msg    = $leave != null ? vtranslate("LBL_EDIT_SUCCESS","Users"):vtranslate("LBL_EDIT_FAILED","Users");

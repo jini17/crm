@@ -20,12 +20,20 @@ Vtiger_Edit_Js("EmailTemplates_Edit_Js",{},{
 			}
             var customConfig = {
                 "height":"300px"
-            }
+            }  
            
 			var ckEditorInstance = new Vtiger_CkEditor_Js();
 			ckEditorInstance.loadCkEditor(templateContentElement,customConfig);
 			jQuery(".padding-bottom1per").prepend('<span id="charlen"></span>').css({'color':'#d61b1b'});
-			jQuery("#charlen").html("Total Characters :"+(CKEDITOR.instances.templatecontent.getData().length-61));
+
+               var editorContent = jQuery(CKEDITOR.instances.templatecontent.getData());
+               var plainEditorContent = editorContent.text();
+
+			if(jQuery('#EditView').find('[name="record"]').val() !=''){
+     			 jQuery("#charlen").html("Total Characters :"+(plainEditorContent.length-6));
+     		} else {
+     		     jQuery("#charlen").html("Total Characters :"+(plainEditorContent.length));
+     		}	
 		}
         this.registerFillTemplateContentEvent();
 		
@@ -149,20 +157,35 @@ Vtiger_Edit_Js("EmailTemplates_Edit_Js",{},{
 	},
 	
 	registerCharacterlength :function(){
-         CKEDITOR.instances.templatecontent.on("key", function (event)
+       /*  CKEDITOR.instances.templatecontent.on("key", function (event)
           { 
-               var str = CKEDITOR.instances.templatecontent.getData();
+               var editorContent = jQuery(CKEDITOR.instances.templatecontent.getData());
+               var plainEditorContent = editorContent.text();
+               
+              
+		     
+          });
+       */   
+          CKEDITOR.instances.templatecontent.on('contentDom', function() {
+               CKEDITOR.instances.templatecontent.document.on('keyup', function(event) { 
+               jQuery("#charlen").html('');
+               jQuery(".padding-bottom1per").prepend('<span id="charlen"></span>').css({'color':'#d61b1b'});
+               var editorContent = jQuery(CKEDITOR.instances.templatecontent.getData());
+               var plainEditorContent = editorContent.text();
+               jQuery("#charlen").html("Total Characters :"+(plainEditorContent.length-6));
+              
+               });
+           })
+       
+          /*CKEDITOR.instances.templatecontent.on("change", function (event)
+          { 
+               var editorContent = jQuery(CKEDITOR.instances.templatecontent.getData());
+          alert(editorContent.data.keyCode);
+               var plainEditorContent = editorContent.text();
                   jQuery("#charlen").html('');
                   jQuery(".padding-bottom1per").prepend('<span id="charlen"></span>').css({'color':'#d61b1b'});
-			   jQuery("#charlen").html("Total Characters :"+(str.length-60));
-          });
-          CKEDITOR.instances.templatecontent.on("change", function (event)
-          { 
-               var str = CKEDITOR.instances.templatecontent.getData();
-                  jQuery("#charlen").html('');
-                  jQuery(".padding-bottom1per").prepend('<span id="charlen"></span>').css({'color':'#d61b1b'});
-			   jQuery("#charlen").html("Total Characters :"+(str.length-61));
-          });
+			   jQuery("#charlen").html("Total Characters :"+(plainEditorContent.length-6));
+          });*/
      },	
 	
 	registerPageLeaveEvents : function() {

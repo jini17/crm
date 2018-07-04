@@ -253,6 +253,10 @@ $languageStrings = array(
 	'LBL_CLIENTID' => 'Client ID',
 	'LBL_CLIENTSECRET' => 'Client Secret',
 
+	//Config fullcontact
+	'LBL_BARRIER' => 'Authorization Bearer',
+	'LBL_FULLCONTACT_CONFIG' => 'FullContact Config',
+	'LBL_FULLCONTACT_CONFIG_FILE' => 'FullContact Configuration File',
 
 
 	//Config Editor Fields

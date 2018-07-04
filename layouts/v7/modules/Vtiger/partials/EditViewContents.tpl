@@ -144,9 +144,6 @@
 								</td>
 								<td></td><td></td>
 							</tr>
-<<<<<<< HEAD
-
-=======
 							<tr>
 								<td class="fieldLabel alignMiddle">{vtranslate('LBL_INVITE_EXTERNAL_EMAILS', $MODULE)}</td>
 								<td class="fieldValue">
@@ -163,13 +160,12 @@
 									<span class="fieldvalue inputspan hide"><input type="email" class="inputElement" name="extemail" id="extemail" /></span>
 									
 									<div class="btn-group inline-save hide">
-        								<button class="button btn-success btn-small save" type="button" name="save"><i class="fa fa-check"></i></button>
-        								<button class="button btn-danger btn-small cancel" type="button" name="Cancel"><i class="fa fa-close"></i></button>
+        								<button class="button btn-success btn-small add" type="button" name="save"><i class="fa fa-check"></i></button>
+        								<button class="button btn-danger btn-small cancelbtn" type="button" name="Cancel"><i class="fa fa-close"></i></button>
     								</div>
 								</td>
 								<td></td><td></td>
 							</tr>		
->>>>>>> 554d61d93b09207c918e1f51703eaad3f3306e3c
 						{/if}
 					</table>
 				</div>

@@ -53,6 +53,7 @@ class Users_EditLeave_View extends Vtiger_Index_View {
 		$viewer->assign('USERID', $userId);
 		$viewer->assign('LEAVEID', $leaveid);
 		$viewer->assign('LEAVETYPELIST', $leavetype);
+		
 		$viewer->assign('LEAVESTATUS', $leavestatus);
 		$viewer->assign('CURRENT_USER_MODEL', $userRecordModel);
 		$viewer->assign('USERSLIST', $userslist);

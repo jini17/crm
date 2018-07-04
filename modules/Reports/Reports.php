@@ -283,22 +283,28 @@ class Reports extends CRMEntity{
 					}
 				}
 
+				//added by jitu@session for modulelist as per plan by logged in user
+				$planid=$_SESSION['plan'];
+				//$adb->setDebug(true);
 				$relatedmodules = $adb->pquery(
 					"SELECT vtiger_tab.name, vtiger_relatedlists.tabid FROM vtiger_tab
 					INNER JOIN vtiger_relatedlists on vtiger_tab.tabid=vtiger_relatedlists.related_tabid
+					LEFT JOIN secondcrm_planpermission ON secondcrm_planpermission.tabid=vtiger_tab.tabId
 					WHERE (vtiger_tab.isentitytype=1 OR vtiger_tab.tabid=29)
 					AND vtiger_tab.name NOT IN(".generateQuestionMarks($restricted_modules).")
 					AND vtiger_tab.presence = 0 AND vtiger_relatedlists.label!='Activity History'
 					UNION
-					SELECT module, vtiger_tab.tabid FROM vtiger_fieldmodulerel
+					SELECT vtiger_fieldmodulerel.module, vtiger_tab.tabid FROM vtiger_fieldmodulerel
 					INNER JOIN vtiger_tab on vtiger_tab.name = vtiger_fieldmodulerel.relmodule
 					INNER JOIN vtiger_tab AS vtiger_tabrel ON vtiger_tabrel.name = vtiger_fieldmodulerel.module AND vtiger_tabrel.presence = 0
                     INNER JOIN vtiger_field ON vtiger_field.fieldid = vtiger_fieldmodulerel.fieldid
+                    LEFT JOIN secondcrm_planpermission ON secondcrm_planpermission.tabid=vtiger_tab.tabId
 					WHERE vtiger_tab.isentitytype = 1
 					AND vtiger_tab.name NOT IN(".generateQuestionMarks($restricted_modules).")
 					AND vtiger_tab.presence = 0
-                    AND vtiger_field.fieldname NOT LIKE ?",
-					array($restricted_modules,$restricted_modules, 'cf_%')
+                    AND vtiger_field.fieldname NOT LIKE ?
+                    AND secondcrm_planpermission.planid=? AND secondcrm_planpermission.visible=1",
+					array($restricted_modules,$restricted_modules, 'cf_%', $planid)
 				);
 				if($adb->num_rows($relatedmodules)) {
 					while($resultrow = $adb->fetch_array($relatedmodules)) {

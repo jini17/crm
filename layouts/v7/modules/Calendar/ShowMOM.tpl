@@ -89,9 +89,16 @@
 				</div>
 			{else}
 				<div class="block" style="width:95%">
+					
 					<div>
-						<h4 class="maxWidth50">&nbsp;Minutes of Meeting(MOM) Content<span id="clickmeeting">&nbsp;&nbsp;<i class="fa fa-pencil" style="font-size:15px;margin-bottom: -2px" data-toggle="tooltip" title="Edit">&nbsp;</i></span></h4>	
+						<!-- Modify by jitu@Hide permission to edit agenda based on role-->
+						<h4 class="maxWidth50">&nbsp;Minutes of Meeting(MOM) Content
+							{if $EDITAGENDA}<span id="clickmeeting">&nbsp;&nbsp;<i class="fa fa-pencil" style="font-size:15px;margin-bottom: -2px" data-toggle="tooltip" title="Edit">&nbsp;</i></span>
+							{/if}
+						</h4>	
+						<!-- End here -->
 					</div>
+					
 					<hr>
 					<div class="blockData" style="padding-left:5px;">
 						<div id="meetingContent">

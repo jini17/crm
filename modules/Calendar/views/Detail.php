@@ -49,6 +49,13 @@ class Calendar_Detail_View extends Vtiger_Detail_View {
 		$names = array_filter($names);
 		$names = implode(",",$names);
 
+		//Add condition by jitu@Hide permission to edit agenda based on role-->
+		$actionName = 'EditView';
+		if(!Users_Privileges_Model::isPermitted($moduleName, $actionName, $recordId)) {
+			$viewer->assign('EDITAGENDA', false);
+		} else {
+			$viewer->assign('EDITAGENDA', true);
+		} //end here
 		
 		$viewer->assign('ATTENDEES', $names);
 		$viewer->assign('MEETINGDATA', Calendar_Module_Model::getMeetingData($recordId));

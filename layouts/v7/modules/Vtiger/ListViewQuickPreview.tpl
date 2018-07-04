@@ -120,7 +120,14 @@
                      </tbody></table>
                         {/if}              
             </div>          
-        
+            {if $PARENT_MODULE eq "Settings"}
+           <div class="btn-group pull-left">
+            <button class="btn btn-success btn" id="updatelog">
+                       {vtranslate('Update Log', $MODULE_NAME)} 
+            </button>
+            </div>
+            <br>   <br>
+            {/if}
            
             <div class="engagementsContainer" {if $PARENT_MODULE eq "Settings"}hidden{/if}>
 				{include file="ListViewQuickPreviewSectionHeader.tpl"|vtemplate_path:$MODULE_NAME TITLE="{vtranslate('LBL_UPDATES',$MODULE_NAME)}"}              
@@ -134,13 +141,7 @@
                 </div>
             {/if}
 
-            {if $PARENT_MODULE eq "Settings"}
-           <div class="btn-group pull-left">
-            <button class="btn btn-success btn" id="updatelog">
-                       {vtranslate('Update Log', $MODULE_NAME)} 
-            </button>
-            </div>
-            {/if}
+            
             
         </div>
         
@@ -150,7 +151,7 @@
 
 <script >
   $("#updatelog").click(function(){
-   $('.engagementsContainer').removeAttr("hidden");
-   $('#updatelog').hide();
+         $('.engagementsContainer').toggle();
+
   });
 </script>

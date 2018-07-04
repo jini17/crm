@@ -25,11 +25,6 @@ function meetingInvites($entity) {
 	global $adb, $log,$current_user,$site_URL;
 	//$adb->setDebug(true);
 	$entityArray 		= get_object_vars($entity);
-<<<<<<< HEAD
-	//echo "<pre>"; print_r($entityArray); die();
-=======
-	echo "<pre>"; print_r($entityArray); die();
->>>>>>> 554d61d93b09207c918e1f51703eaad3f3306e3c
 	$idArray 		= explode('x',$entityArray['data']['id']);
 
 
@@ -64,82 +59,127 @@ function meetingInvites($entity) {
 	
 	global $adb;
 	$adb->setDebug(true);
-	$result = $adb->pquery("SELECT vtiger_contactdetails.contactid AS contactid, CONCAT(firstname,' ',lastname) AS name, email FROM vtiger_contactdetails LEFT JOIN vtiger_cntactivityrel ON vtiger_contactdetails.contactid = vtiger_cntactivityrel.contactid WHERE vtiger_cntactivityrel.activityid = ?", array($id));
-	$numOfRows = $adb->num_rows($result);
+	if(vtlib_isModuleActive('Contacts')){
 
-	if ($numOfRows > 0) {
-		for ($i = 0; $i < $numOfRows; $i++){
-			$name = $adb->query_result($result,$i,'name');
-			$email = $adb->query_result($result,$i,'email');
-			$contactid = $adb->query_result($result,$i,'contactid');
-			$contactResult = $adb->pquery("SELECT status FROM contact_invite_details WHERE contactid = ? AND activityid = ?", array($contactid, $id));		
-			$rows = $adb->num_rows($contactResult);
+			$result = $adb->pquery("SELECT vtiger_contactdetails.contactid AS contactid, CONCAT(firstname,' ',lastname) AS name, email FROM vtiger_contactdetails LEFT JOIN vtiger_cntactivityrel ON vtiger_contactdetails.contactid = vtiger_cntactivityrel.contactid WHERE vtiger_cntactivityrel.activityid = ?", array($id));
+			$numOfRows = $adb->num_rows($result);
 
-			if ($rows == 0)
-<<<<<<< HEAD
-				$adb->pquery("INSERT INTO contact_invite_details VALUES (?,?,'Sent')", array($id,$contactid));
-=======
-				$adb->pquery("INSERT INTO contact_invite_details VALUES (?,?,'Sent','Contacts')", array($id,$contactid));
->>>>>>> 554d61d93b09207c918e1f51703eaad3f3306e3c
-			else 
-				$status = $adb->query_result($contactResult,0,'status');
+			if ($numOfRows > 0) {
+				for ($i = 0; $i < $numOfRows; $i++){
+					$name = $adb->query_result($result,$i,'name');
+					$email = $adb->query_result($result,$i,'email');
+					$contactid = $adb->query_result($result,$i,'contactid');
+					$contactResult = $adb->pquery("SELECT status FROM contact_invite_details WHERE contactid = ? AND activityid = ?", array($contactid, $id));		
+					$rows = $adb->num_rows($contactResult);
 
-			$accept = "
-			&nbsp;<a href=" . $site_URL . "meetingInvite.php?status=Accepted&contactid=$contactid&activityid=$id&type=contact style='text-decoration:none'><input type='submit' value='Accept'></a>
-			";
+					if ($rows == 0)
 
-			$decline = "
-				&nbsp;<a href=" . $site_URL . "meetingInvite.php?status=Declined&contactid=$contactid&activityid=$id&type=contact style='text-decoration:none'><input type='submit' value='Decline'></a>
-			";
-				   
-		    $content = 'Dear ' . $name .'<br><br>
-		    	You are invited to the following meeting: ' . $fieldValues['subject'] . '<br>' . $accept . '&nbsp;' . $decline;
+						$adb->pquery("INSERT INTO contact_invite_details VALUES (?,?,'Sent','Contacts')", array($id,$contactid));
+					else 
+						$status = $adb->query_result($contactResult,0,'status');
 
-		    if ($send && $status != 'Accepted' && $status != 'Declined')	{
-			    $vtigerMailer->ClearAddresses();	
-			    $vtigerMailer->AddAddress($email);	
-			    $vtigerMailer->Body = $content;
-			    $vtigerMailer->Send();
-			}    
-		}
-	}	
+					$accept = "
+					&nbsp;<a href=" . $site_URL . "meetingInvite.php?status=Accepted&contactid=$contactid&activityid=$id&type=contact style='text-decoration:none'><input type='submit' value='Accept'></a>
+					";
 
-	$result2 = $adb->pquery("SELECT CONCAT(first_name, ' ', last_name) AS name, inviteeid, email1, vtiger_invitees.status FROM vtiger_users LEFT JOIN vtiger_invitees ON vtiger_invitees.inviteeid = vtiger_users.id WHERE vtiger_invitees.activityid = ?", array($id));
-	$numOfRows2 = $adb->num_rows($result2);	
+					$decline = "
+						&nbsp;<a href=" . $site_URL . "meetingInvite.php?status=Declined&contactid=$contactid&activityid=$id&type=contact style='text-decoration:none'><input type='submit' value='Decline'></a>
+					";
+						   
+				    $content = 'Dear ' . $name .'<br><br>
+				    	You are invited to the following meeting: ' . $fieldValues['subject'] . '<br>' . $accept . '&nbsp;' . $decline;
 
-	if ($numOfRows2 > 0) {
-		for ($i = 0; $i < $numOfRows2; $i++){
-			$name = $adb->query_result($result2,$i,'name');
-			$email = $adb->query_result($result2,$i,'email1');
-			$userid = $adb->query_result($result2,$i,'inviteeid');
-			$status = $adb->query_result($result2,$i,'status');
+				    if ($send && $status != 'Accepted' && $status != 'Declined')	{
+					    $vtigerMailer->ClearAddresses();	
+					    $vtigerMailer->AddAddress($email);	
+					    $vtigerMailer->Body = $content;
+					    $vtigerMailer->Send();
+					}    
+				}
+			}	
+		}	
+			$result2 = $adb->pquery("SELECT CONCAT(first_name, ' ', last_name) AS name, inviteeid, email1, vtiger_invitees.status FROM vtiger_users LEFT JOIN vtiger_invitees ON vtiger_invitees.inviteeid = vtiger_users.id WHERE vtiger_invitees.activityid = ?", array($id));
+			$numOfRows2 = $adb->num_rows($result2);	
+
+			if ($numOfRows2 > 0) {
+				for ($i = 0; $i < $numOfRows2; $i++){
+					$name = $adb->query_result($result2,$i,'name');
+					$email = $adb->query_result($result2,$i,'email1');
+					$userid = $adb->query_result($result2,$i,'inviteeid');
+					$status = $adb->query_result($result2,$i,'status');
+					
+
+					$accept = "
+					&nbsp;<a href=" . $site_URL . "meetingInvite.php?status=Accepted&userid=$userid&activityid=$id&type=user style='text-decoration:none'><input type='submit' value='Accept'></a>
+					";
+
+					$decline = "
+						&nbsp;<a href=" . $site_URL . "meetingInvite.php?status=Declined&userid=$userid&activityid=$id&type=user style='text-decoration:none'><input type='submit' value='Decline'></a>
+					";
+						   
+				    $content = 'Dear ' . $name .'<br><br>
+				    	You are invited to the following meeting: ' . $fieldValues['subject'] . '<br>' . $accept . '&nbsp;' . $decline;	
+
+				    if ($send && $status != 'Accepted' && $status != 'Declined')	{
+					    $vtigerMailer->ClearAddresses();	
+					    $vtigerMailer->AddAddress($email);	
+					    $vtigerMailer->Body = $content;
+					    $vtigerMailer->Send();
+					}		    		
+				}
+			}
+
+			//Insert Subject into agenda if Agenda field is empty
+			if ($fieldValues['agenda'] == '' || $fieldValues['agenda'] == null) {
+				$agenda = "<b>Subject: </b>" . $fieldValues['subject'];
+				$adb->pquery("UPDATE vtiger_activitycf SET agenda = ? WHERE activityid = ?", array($agenda,$id));
+			}
+
+		//Send email to External EmailAddress
+			$result2 = $adb->pquery("SELECT external_invitees.emailaddress AS name, external_invitees.emailaddres as email1, external_invitees.status FROM external_invitees WHERE external_invitees.activityid = ?", array($id));
+			$numOfRows2 = $adb->num_rows($result2);	
+
+			if ($numOfRows2 > 0) {
+				for ($i = 0; $i < $numOfRows2; $i++){
+					$name = $adb->query_result($result2,$i,'name');
+					$email = $adb->query_result($result2,$i,'email1');
+					//$userid = $adb->query_result($result2,$i,'inviteeid');
+					$status = $adb->query_result($result2,$i,'status');
+					
+
+					$accept = "
+					&nbsp;<a href=" . $site_URL . "meetingInvite.php?status=Accepted&externalemail=$email&activityid=$id&type=external style='text-decoration:none'><input type='submit' value='Accept'></a>
+					";
+
+					$decline = "
+						&nbsp;<a href=" . $site_URL . "meetingInvite.php?status=Declined&externalemail=$email&activityid=$id&type=external style='text-decoration:none'><input type='submit' value='Decline'></a>
+					";
+						   
+				    $content = 'Dear ' . $name .'<br><br>
+				    	You are invited to the following meeting: ' . $fieldValues['subject'] . '<br>' . $accept . '&nbsp;' . $decline;	
+
+				    if ($send && $status != 'Accepted' && $status != 'Declined')	{
+					    $vtigerMailer->ClearAddresses();	
+					    $vtigerMailer->AddAddress($email);	
+					    $vtigerMailer->Body = $content;
+					    $vtigerMailer->Send();
+					}		    		
+				}
+			}
+
+			//Insert Subject into agenda if Agenda field is empty
+			if ($fieldValues['agenda'] == '' || $fieldValues['agenda'] == null) {
+				$agenda = "<b>Subject: </b>" . $fieldValues['subject'];
+				$adb->pquery("UPDATE vtiger_activitycf SET agenda = ? WHERE activityid = ?", array($agenda,$id));
+			}
+
+		//End here	
+
+		//Send email to Accounts/Leads
 			
 
-			$accept = "
-			&nbsp;<a href=" . $site_URL . "meetingInvite.php?status=Accepted&userid=$userid&activityid=$id&type=user style='text-decoration:none'><input type='submit' value='Accept'></a>
-			";
+		//End here	
 
-			$decline = "
-				&nbsp;<a href=" . $site_URL . "meetingInvite.php?status=Declined&userid=$userid&activityid=$id&type=user style='text-decoration:none'><input type='submit' value='Decline'></a>
-			";
-				   
-		    $content = 'Dear ' . $name .'<br><br>
-		    	You are invited to the following meeting: ' . $fieldValues['subject'] . '<br>' . $accept . '&nbsp;' . $decline;	
-
-		    if ($send && $status != 'Accepted' && $status != 'Declined')	{
-			    $vtigerMailer->ClearAddresses();	
-			    $vtigerMailer->AddAddress($email);	
-			    $vtigerMailer->Body = $content;
-			    $vtigerMailer->Send();
-			}		    		
-		}
-	}
-
-	//Insert Subject into agenda if Agenda field is empty
-	if ($fieldValues['agenda'] == '' || $fieldValues['agenda'] == null) {
-		$agenda = "<b>Subject: </b>" . $fieldValues['subject'];
-		$adb->pquery("UPDATE vtiger_activitycf SET agenda = ? WHERE activityid = ?", array($agenda,$id));
-	}
 
 }
 /**********************************Edit Done***************************/
