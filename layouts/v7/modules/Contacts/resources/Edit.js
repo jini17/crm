@@ -6,6 +6,12 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  *************************************************************************************/
+
+
+var imported = document.createElement('script');
+imported.src = 'layouts/v7/modules/Contacts/resources/google.js';
+document.head.appendChild(imported);
+
 Vtiger_Edit_Js("Contacts_Edit_Js",{},{
 	
 	//Will have the mapping of address fields based on the modules
@@ -187,10 +193,24 @@ Vtiger_Edit_Js("Contacts_Edit_Js",{},{
 
 	},
 
+		registerGoogleAddress : function(container){
+		var thisInstance = this;
+	
+		
+	    var script = document.createElement('script');
+	    script.type = 'text/javascript';
+	    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA7QuhuZ34ygC0j5RHmYuqtK_uwecsNb9E&libraries=places&callback=initAutocomplete";
+	    document.body.appendChild(script);
+
+	    
+		
+	},
+
 	registerBasicEvents: function (container) {
 		this._super(container);
 		this.registerEventForCopyingAddress(container);
 		this.registerRecordPreSaveEvent(container);
 		this.registerReferenceSelectionEvent(container);
+		this.registerGoogleAddress();
 	}
 })

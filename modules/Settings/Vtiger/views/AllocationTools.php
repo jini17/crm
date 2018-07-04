@@ -302,7 +302,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
         $query = "UPDATE `allocation_list` SET `allocation_title`=? ,`allocation_code`=? , `status`=? ,`allocation_desc`=? , `grade_id`=? WHERE allocation_id = ?";
         $result = $adb->pquery($query,array($Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'],$Allocation['Allocation_Desc
-'],$Allocation['Allocation_grade'],$Allocation['allocation_id']));
+            '],$Allocation['Allocation_grade'],$Allocation['allocation_id']));
 
         $query = "DELETE FROM `allocation_list_details` WHERE allocation_id = ?";
         $result = $adb->pquery($query,array($Allocation['allocation_id']));

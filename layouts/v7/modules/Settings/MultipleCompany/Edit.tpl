@@ -66,19 +66,19 @@
 					</div>
 					<div class="control-group col-md-12">
 						<div class="control-label col-md-2">{vtranslate('LBL_ORGANIZATION_CITY', $QUALIFIED_MODULE)}</div>
-						<div class="controls col-md-10"><input type="text" name="city" class="detailedViewTextBox" value="{$ORGANIZATIONCITY}"></div>
+						<div class="controls col-md-10"><input type="text" id="city" name="city" class="detailedViewTextBox" value="{$ORGANIZATIONCITY}"></div>
 					</div>
 					<div class="control-group col-md-12">
 						<div class="control-label col-md-2">{vtranslate('LBL_ORGANIZATION_STATE', $QUALIFIED_MODULE)}</div>
-						<div class="controls col-md-10"><input type="text" name="state" class="detailedViewTextBox" value="{$ORGANIZATIONSTATE}"></div>
+						<div class="controls col-md-10"><input type="text" id="state" name="state" class="detailedViewTextBox" value="{$ORGANIZATIONSTATE}"></div>
 					</div>
 					<div class="control-group col-md-12">
 						<div class="control-label col-md-2">{vtranslate('LBL_ORGANIZATION_CODE', $QUALIFIED_MODULE)}</div>
-						<div class="controls col-md-10"><input type="text" name="code" class="detailedViewTextBox" value="{$ORGANIZATIONCODE}"></div>
+						<div class="controls col-md-10"><input type="text"  name="code" class="detailedViewTextBox" value="{$ORGANIZATIONCODE}"></div>
 					</div>
 					<div class="control-group col-md-12">
 						<div class="control-label col-md-2">{vtranslate('LBL_ORGANIZATION_COUNTRY', $QUALIFIED_MODULE)}</div>
-						<div class="controls col-md-10"><input type="text" name="country" class="detailedViewTextBox" value="{$ORGANIZATIONCOUNTRY}"></div>
+						<div class="controls col-md-10"><input type="text" id="country" name="country" class="detailedViewTextBox" value="{$ORGANIZATIONCOUNTRY}"></div>
 					</div>
 					<div class="control-group col-md-12">
 						<div class="control-label col-md-2">{vtranslate('LBL_ORGANIZATION_PHONE', $QUALIFIED_MODULE)}</div>

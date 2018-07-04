@@ -7,6 +7,10 @@
  * All Rights Reserved.
  *************************************************************************************/
 
+var imported = document.createElement('script');
+imported.src = 'layouts/v7/modules/Users/resources/google.js';
+document.head.appendChild(imported);
+
 Vtiger_Edit_Js("Users_Edit_Js",{},{
 	
 	
@@ -109,6 +113,15 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 			ckEditorInstance.loadCkEditor(templateContentElement,customConfig);
 		}
 	},
+		registerGoogleAddress : function(container){
+		var thisInstance = this;
+	
+		
+	    var script = document.createElement('script');
+	    script.type = 'text/javascript';
+	    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA7QuhuZ34ygC0j5RHmYuqtK_uwecsNb9E&libraries=places&callback=initAutocomplete";
+	    document.body.appendChild(script);	
+	},
 	
 	registerEvents : function() {
         this._super();
@@ -119,6 +132,7 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
         
         var instance = new Settings_Vtiger_Index_Js(); 
         instance.registerBasicSettingsEvents();
+        this.registerGoogleAddress();
 	}
 });
 

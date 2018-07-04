@@ -6,6 +6,10 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  *************************************************************************************/
+var imported = document.createElement('script');
+imported.src = 'layouts/v7/modules/Accounts/resources/google.js';
+document.head.appendChild(imported);
+
 
 Vtiger_Edit_Js("Accounts_Edit_Js",{
    
@@ -125,6 +129,19 @@ Vtiger_Edit_Js("Accounts_Edit_Js",{
 			container.find('[name="'+addressDetails[key]+'"]').trigger('change');
 		}
 	},
+
+		registerGoogleAddress : function(container){
+		var thisInstance = this;
+	
+		
+	    var script = document.createElement('script');
+	    script.type = 'text/javascript';
+	    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA7QuhuZ34ygC0j5RHmYuqtK_uwecsNb9E&libraries=places&callback=initAutocomplete";
+	    document.body.appendChild(script);
+
+	    
+		
+	},
 	
 	/**
 	 * Function which will register basic events which will be used in quick create as well
@@ -133,5 +150,6 @@ Vtiger_Edit_Js("Accounts_Edit_Js",{
 	registerBasicEvents : function(container) {
 		this._super(container);
 		this.registerEventForCopyingAddress(container);
+		this.registerGoogleAddress();
 	}
 });

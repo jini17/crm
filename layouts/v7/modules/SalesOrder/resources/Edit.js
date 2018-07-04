@@ -7,6 +7,11 @@
  * All Rights Reserved.
  *************************************************************************************/
 
+
+var imported = document.createElement('script');
+imported.src = 'layouts/v7/modules/SalesOrder/resources/google.js';
+document.head.appendChild(imported);
+
 Inventory_Edit_Js("SalesOrder_Edit_Js",{},{
     
     
@@ -159,11 +164,22 @@ Inventory_Edit_Js("SalesOrder_Edit_Js",{},{
 			self.referenceSelectionEventHandler(data, container);
 		});
 	},
+		registerGoogleAddress : function(container){
+		var thisInstance = this;
+	
+	    var script = document.createElement('script');
+	    script.type = 'text/javascript';
+	    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA7QuhuZ34ygC0j5RHmYuqtK_uwecsNb9E&libraries=places&callback=initAutocomplete";
+	    document.body.appendChild(script);
+  
+		
+	},
         registerBasicEvents: function(container){
             this._super(container);
             this.registerEventForEnablingRecurrence();
             this.registerForTogglingBillingandShippingAddress();
             this.registerEventForCopyAddress();
+            this.registerGoogleAddress();
         },
     
 });

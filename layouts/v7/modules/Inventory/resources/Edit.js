@@ -7,6 +7,10 @@
  * All Rights Reserved.
  *************************************************************************************/
 
+var imported = document.createElement('script');
+imported.src = 'layouts/v7/modules/Inventory/resources/google.js';
+document.head.appendChild(imported);
+
 Vtiger_Edit_Js("Inventory_Edit_Js", {
     
     zeroDiscountType : 'zero' ,
@@ -2793,6 +2797,15 @@ Vtiger_Edit_Js("Inventory_Edit_Js", {
 
         });
     },
+
+        registerGoogleAddress : function(container){
+		var thisInstance = this;
+		var script = document.createElement('script');
+	   script.type = 'text/javascript';
+	   script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA7QuhuZ34ygC0j5RHmYuqtK_uwecsNb9E&libraries=places&callback=initAutocomplete";
+	  document.body.appendChild(script);  
+		
+	},
     registerBasicEvents: function(container){
         this._super(container);
         this.registerAddProductService();
@@ -2804,6 +2817,7 @@ Vtiger_Edit_Js("Inventory_Edit_Js", {
         this.registerLineItemAutoComplete();
         this.registerReferenceSelectionEvent(this.getForm());
         this.registerPopoverCancelEvent();
+        this.registerGoogleAddress();
     },
 });
     
