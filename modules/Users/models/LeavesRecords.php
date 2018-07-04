@@ -111,7 +111,9 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 	LEFT JOIN vtiger_leave tblVTL ON tblVTL.leavetype = tblSCUB.leave_type  
 	 WHERE tblVTC.deleted=0 ".$conduser." AND year = '".$year."' ".$condleave. " ORDER BY tblVTLT.leavetypeid ASC"; */
 
-	 $query = "SELECT * from vtiger_leavetype";
+	 $query = "SELECT * FROM vtiger_leavetype tblVTLT
+	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLT.leavetypeid
+	 WHERE tblVTC.deleted=0";
 
 	$result = $db->pquery($query,array());
 
@@ -122,7 +124,7 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 			
 			if($leavetypeid != $db->query_result($result, $i, 'leavetypeid')) {
 				$leavetype[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetypeid');
-				$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'title').'@'.$db->query_result($result, $i, 'colorcode').'@'.$db->query_result($result, $i, 'leave_count').'@'.$db->query_result($result, $i, 'halfdayallowed');
+				$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'title').'@'.$db->query_result($result, $i, 'colorcode').'@'.$db->query_result($result, $i, 'leavefrequency').'@'.$db->query_result($result, $i, 'halfdayallowed');
 				$leavetypeid = $db->query_result($result, $i, 'leave_type');
 			} 
 		}

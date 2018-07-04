@@ -48,7 +48,11 @@ Vtiger_Edit_Js("WorkingHours_Edit_Js",{},{
 	 * Function which will register basic events which will be used in quick create as well
 	 *
 	 */
+	
 	registerEvents : function() {
+    	      var vtigerinst = new Vtiger_Index_Js();
+	      vtigerinst.registerEvents();
      	this.registerEventForCopyDuration();
 	}
+	
 });

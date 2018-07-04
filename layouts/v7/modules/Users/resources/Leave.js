@@ -390,6 +390,26 @@ Vtiger.Class("Users_Leave_Js", {
 		Users_Leave_Js.registerChangeYear(changeYearActionUrl+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val(),section);
 	},
 
+	 Popup_LeaveApprove : function(url){
+
+	 	app.helper.showProgress();
+	 	app.request.post({url:url}).then(
+		function(err,data) { 
+		      app.helper.hideProgress();
+              
+                if(err == null){
+        			 app.helper.showModal(data);
+          		} else {
+                        aDeferred.reject(err);
+                    }
+	     	});
+ 		
+
+			
+		
+
+	},
+
 
 	/*
 	 * Function to register all actions in the Tax List

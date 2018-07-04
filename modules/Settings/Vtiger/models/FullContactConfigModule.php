@@ -6,12 +6,13 @@
  * The Initial Developer of the Original Code is vtiger.
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
+ Created by DANIAL FAJAR
  *************************************************************************************/
 
-class Settings_Vtiger_GoogleConfigModule_Model extends Settings_Vtiger_Module_Model {
+class Settings_Vtiger_FullContactConfigModule_Model extends Settings_Vtiger_Module_Model {
 
 
-	var $fileName = 'modules/Google/connectors/Config.php';
+	var $fileName = 'modules/Contacts/actions/Config.php';
 	var $completeData;
 	var $data;
 
@@ -31,7 +32,7 @@ class Settings_Vtiger_GoogleConfigModule_Model extends Settings_Vtiger_Module_Mo
 	 * @return menu item Model
 	 */
 	public function getMenuItem() {
-		$menuItem = Settings_Vtiger_MenuItem_Model::getInstance('LBL_GOOGLE_CONFIG');
+		$menuItem = Settings_Vtiger_MenuItem_Model::getInstance('LBL_FULLCONTACT_CONFIG');
 		return $menuItem;
 	}
     
@@ -41,17 +42,17 @@ class Settings_Vtiger_GoogleConfigModule_Model extends Settings_Vtiger_Module_Mo
 	 */
 	public function getEditViewUrl() {
 		$menuItem = $this->getMenuItem();
-		return '?module=Vtiger&parent=Settings&view=GoogleConfigEdit&block='.$menuItem->get('blockid').'&fieldid='.$menuItem->get('fieldid');
+		return '?module=Vtiger&parent=Settings&view=FullContactConfigEdit&block='.$menuItem->get('blockid').'&fieldid='.$menuItem->get('fieldid');
 	}
 
 	/**
 	 * Function to get Advance Edit view Url
 	 * @return <String> Url
 	 */
-	public function getAdvanceEditViewUrl() {
-		$menuItem = $this->getMenuItem();
-		return '?module=Vtiger&parent=Settings&view=AdvanceGoogleConfigEdit&block='.$menuItem->get('blockid').'&fieldid='.$menuItem->get('fieldid');
-	}
+	// public function getAdvanceEditViewUrl() {
+	// 	$menuItem = $this->getMenuItem();
+	// 	return '?module=Vtiger&parent=Settings&view=AdvanceGoogleConfigEdit&block='.$menuItem->get('blockid').'&fieldid='.$menuItem->get('fieldid');
+	// }
 
 	/**
 	 * Function to get Detail view Url
@@ -59,12 +60,12 @@ class Settings_Vtiger_GoogleConfigModule_Model extends Settings_Vtiger_Module_Mo
 	 */
 	public function getDetailViewUrl() {
 		$menuItem = $this->getMenuItem();
-		return '?module=Vtiger&parent=Settings&view=GoogleConfigDetail&block='.$menuItem->get('blockid').'&fieldid='.$menuItem->get('fieldid');
+		return '?module=Vtiger&parent=Settings&view=FullContactConfigDetail&block='.$menuItem->get('blockid').'&fieldid='.$menuItem->get('fieldid');
 	}
 
 	public function getIndexViewUrl() {
 		$menuItem = $this->getMenuItem();
-		return '?module=Vtiger&parent=Settings&view=GoogleConfigIndex&block='.$menuItem->get('blockid').'&fieldid='.$menuItem->get('fieldid');
+		return '?module=Vtiger&parent=Settings&view=FullContactConfigIndex&block='.$menuItem->get('blockid').'&fieldid='.$menuItem->get('fieldid');
 	}
 
 	/**
@@ -109,8 +110,7 @@ class Settings_Vtiger_GoogleConfigModule_Model extends Settings_Vtiger_Module_Mo
 	 */
 	public function getEditableFields() {
 		return array(
-			'clientId'	=> array('label' => 'LBL_CLIENTID','fieldType' => 'input'),
-			'clientSecret'	=> array('label' =>'LBL_CLIENTSECRET','fieldType' => 'input')
+			'bearer'	=> array('label' => 'LBL_BARRIER','fieldType' => 'input'),
 		);
 	}
 
@@ -145,10 +145,8 @@ class Settings_Vtiger_GoogleConfigModule_Model extends Settings_Vtiger_Module_Mo
 	 * @return <String> True/Error message
 	 */
 	public function validateFieldValues($updatedFields){
-		if (trim($updatedFields['clientId']) =='' || trim($updatedFields['clientId'])==NULL ) {
-			return "LBL_INVALID_CLIENTID";
-		} else if (trim($updatedFields['clientSecret']) =='' || trim($updatedFields['clientSecret'])==NULL ) {
-			return "LBL_INVALID_SECRET";
+		if (trim($updatedFields['bearer']) =='' || trim($updatedFields['bearer'])==NULL ) {
+			return "LBL_INVALID_BARRIER";
 		}
 		return true;
 	}
