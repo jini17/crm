@@ -172,8 +172,6 @@
 		                            {/if}
 		                        {/foreach}
 		                    </td>
-<<<<<<< HEAD
-=======
 		               </tr>
 
                			<tr>
@@ -186,7 +184,6 @@
 		                            <br>	                          
 		                        {/foreach}
 		                    </td>
->>>>>>> 554d61d93b09207c918e1f51703eaad3f3306e3c
                			</tr>
                		{/if}	
 					</tbody>

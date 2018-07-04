@@ -144,9 +144,6 @@
 								</td>
 								<td></td><td></td>
 							</tr>
-<<<<<<< HEAD
-
-=======
 							<tr>
 								<td class="fieldLabel alignMiddle">{vtranslate('LBL_INVITE_EXTERNAL_EMAILS', $MODULE)}</td>
 								<td class="fieldValue">
@@ -169,7 +166,6 @@
 								</td>
 								<td></td><td></td>
 							</tr>		
->>>>>>> 554d61d93b09207c918e1f51703eaad3f3306e3c
 						{/if}
 					</table>
 				</div>

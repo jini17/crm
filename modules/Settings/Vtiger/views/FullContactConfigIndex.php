@@ -36,7 +36,7 @@ class Settings_Vtiger_FullContactConfigIndex_View extends Settings_Vtiger_Index_
 		$moduleName = $request->getModule();
 
 		$jsFileNames = array(
-			"modules.Settings.$moduleName.resources.GoogleConfig",
+			"modules.Settings.$moduleName.resources.FullContactConfig",
 			'~/libraries/jquery/colorbox/jquery.colorbox-min.js',
 		);
 

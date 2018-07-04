@@ -38,7 +38,7 @@ class Settings_Vtiger_FullContactConfigEdit_View extends Settings_Vtiger_Index_V
 		$moduleName = $request->getModule();
 
 		$jsFileNames = array(
-			"modules.Settings.$moduleName.resources.GoogleConfig"
+			"modules.Settings.$moduleName.resources.FullContactConfig"
 		);
 
 		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
