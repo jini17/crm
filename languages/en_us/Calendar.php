@@ -183,6 +183,7 @@ $languageStrings = array(
 );
 
 $jsLanguageStrings = array(
+	'JS_EMAIL_ADDRESS_CANT_EMPTY'=>'Empty email address is not allowed',
 	'LBL_ADD_EVENT_TASK' => 'Add Meeting/Task',
 	'JS_TASK_IS_SUCCESSFULLY_ADDED_TO_YOUR_CALENDAR' => 'Task is successfully added to your Calendar',
         'LBL_CANT_SELECT_CONTACT_FROM_LEADS' => 'Cannot select related Contacts for Leads',

@@ -30,8 +30,10 @@
 
 		if ($type == 'user')
 			$adb->pquery("UPDATE vtiger_invitees SET status = ? WHERE activityid = ? AND inviteeid = ?",array($_REQUEST['status'], $_REQUEST['activityid'], $_REQUEST['userid']));	
-		else
-			$adb->pquery("UPDATE contact_invite_details SET status = ? WHERE activityid = ? AND contactid = ?",array($_REQUEST['status'], $_REQUEST['activityid'], $_REQUEST['contactid']));			
+		else if($type == 'contact')
+			$adb->pquery("UPDATE contact_invite_details SET status = ? WHERE activityid = ? AND contactid = ?",array($_REQUEST['status'], $_REQUEST['activityid'], $_REQUEST['contactid']));
+		else if($type=='external')
+			$adb->pquery("UPDATE external_invitees SET status = ? WHERE activityid = ? AND emailaddress = ?",array($_REQUEST['status'], $_REQUEST['activityid'], $_REQUEST['externalemail']));				
 	}
 
 	echo "Thanks for your response."

@@ -259,7 +259,6 @@ $languageStrings = array(
 	'LBL_FULLCONTACT_CONFIG_FILE' => 'FullContact Configuration File',
 
 
-
 	//Config Editor Fields
 	'LBL_MINI_CALENDAR_DISPLAY' => 'Mini Calendar Display',
 	'LBL_WORLD_CLOCK_DISPLAY' => 'World Clock Display',

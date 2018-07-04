@@ -7,12 +7,13 @@
 * All Rights Reserved.
 *************************************************************************************}
 
-{strip}
+{strip} 
 	{assign var="FIELD_INFO" value=$FIELD_MODEL->getFieldInfo()}
 	{assign var=FIELD_NAME value=$FIELD_MODEL->get('name')}
 	{assign var="REFERENCE_LIST" value=$FIELD_MODEL->getReferenceList()}
 	{assign var="REFERENCE_LIST_COUNT" value=count($REFERENCE_LIST)}
 	{assign var="SPECIAL_VALIDATOR" value=$FIELD_MODEL->getValidator()}
+	
 	<div class="referencefield-wrapper">
 		{if {$REFERENCE_LIST_COUNT} eq 1}
 			<input name="popupReferenceModule" type="hidden" value="{$REFERENCE_LIST[0]}" />

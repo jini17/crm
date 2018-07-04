@@ -64,10 +64,10 @@ Vtiger.Class("Settings_Vtiger_FullContactConfig_Js",{},{
 	 * Function to load the events for Edit View
 	 */
 	registerEditViewEvents : function () {
+	
 		var thisInstance = this;
 		var form = jQuery('#FullContactConfigForm');
 		var detailUrl = form.data('detailUrl');		
-
 		//register validation 
 		var params = {
 			submitHandler: function (form) {
@@ -75,7 +75,8 @@ Vtiger.Class("Settings_Vtiger_FullContactConfig_Js",{},{
 				thisInstance.saveConfigEditor(form).then(
 					function (data) {
 						if (data) {
-							var message = app.vtranslate('JS_GOOGLE_DETAILS_SAVED');
+							var message = app.vtranslate('FUCKING HELL YEAH ITS SAVED !');
+							
 							thisInstance.loadContents(detailUrl).then(
 								function (data) {
 									jQuery('#body').html(data);	
@@ -111,110 +112,34 @@ Vtiger.Class("Settings_Vtiger_FullContactConfig_Js",{},{
 		history.pushState({}, null, 'index.php?module=Vtiger&parent=Settings&view=FullContactConfigIndex&block=12&fieldid=40');
 	},	
 
-	/*
-	 * function to register the events in Advance Google Config Edit View
-	 */
-	// registerAdvanceEditViewEvents : function () {
-	// 	var thisInstance = this;
-	// 	var form = jQuery('#AdvanceGoogleConfigForm');
-	// 	var detailUrl = form.data('detailUrl');
-	// 	var requestBtn = jQuery('#requestlink');
-	// 	var inputFile = jQuery('#clientsecret');		
-
-	// 	//Request Button is disabled when the form loads
-	// 	requestBtn.prop('disabled',true);
-
-	// 	//Functions with conditions for enabling the request button
-	// 	inputFile.change(function(){
-	// 		if(inputFile.val())
-	// 			requestBtn.prop('disabled',false);
-	// 		else
-	// 			requestBtn.prop('disabled',true);
-	// 	});
-
-	// 	//Code for Uploading Client Secret File using Ajax 
-	// 	requestBtn.on('click', function() {
-	// 	    var file_data = jQuery('#clientsecret').prop('files')[0];   
-	// 	    var form_data = new FormData();                  
-	// 	    form_data.append('file', file_data);                            
-	// 	    jQuery.ajax({
-	// 	        url: 'index.php?module=Vtiger&parent=Settings&action=AdvanceGoogleConfigEdit&mode=uploadFileGenerateLink', 
-	// 	        cache: false,
-	// 	        contentType: false,
-	// 	        processData: false,
-	// 	        data: form_data,                         
-	// 	        type: 'post',
-	// 	        success: function(php_script_response){
-	// 	            alert(php_script_response); 
-	// 	        }
-	// 	    });
-	// 	});
-
-	// 	var params = {
-	// 		submitHandler: function (form) {
-	// 			var form = jQuery(form);
-	// 			thisInstance.saveConfigEditor(form,'advanceConfig').then(
-	// 				function (data) {
-	// 					if (data) {
-	// 						var message = app.vtranslate('JS_GOOGLE_DETAILS_SAVED');
-	// 						thisInstance.loadContents(detailUrl).then(
-	// 							function (data) {
-	// 								jQuery('#body').html(data);	
-	// 								thisInstance.registerDetailViewEvents();
-	// 							}
-	// 						);
-	// 					}
-	// 					app.helper.showSuccessNotification({'message': message});
-	// 				});
-	// 		}
-	// 	};
-	// 	form.vtValidate(params);
-	// 	form.on('submit', function (e) {
-	// 		e.preventDefault();
-	// 		return false;
-	// 	});
-
-	// 	//Register click event for cancel link
-	// 	var cancelLink = form.find('.cancelLink');
-	// 	cancelLink.click(function() { 
-	// 		app.helper.showProgress();	
-	// 		thisInstance.loadContents(detailUrl).then(
-	// 			function(data) {
-	// 				app.helper.hideProgress();
-	// 				jQuery('#body').html(data);			
-	// 				thisInstance.registerDetailViewEvents();
-	// 			}
-	// 		);
-	// 	})
-	// 	vtUtils.enableTooltips();
-
-	// 	//When page is refreshed/reloaded, it will redirect to the Index View	
-	// 	history.pushState({}, null, 'index.php?module=Vtiger&parent=Settings&view=GoogleConfigIndex&block=12&fieldid=40');
-	// },	
 
 	
 	/*
 	 * function to register the events in DetailView
 	 */
 	registerDetailViewEvents : function() {
+
 		var thisInstance = this;
 		var container = jQuery('#FullContactConfigDetails');
-		//var advanceConfigContainer = jQuery('#AdvanceGoogleConfigDetails');
-		var editButton = container.find('.editButton');	
+		//var advanceConfigContainer = jQuery('#AdvanceFullContactConfigDetails');
+		var editButton = container.find('editButton');	
 
-		var advanceConfigEditButton = advanceConfigContainer.find('.editButton');	
+		//var advanceConfigEditButton = advanceConfigContainer.find('.editButton');	
 		jQuery(".group4").colorbox({rel:'group4'});
 		//jQuery(".group5").colorbox({rel:'group5'});
-		
-		//Register click event for edit button
-		editButton.click(function() {
-			var url = editButton.data('url');
+
+
+		jQuery('#editButton').click(function(){
+		var url = jQuery('#editButton').data('url');
+
+			console.log(url);
 			var progressIndicatorElement = jQuery.progressIndicator({
 				'position' : 'html',
 				'blockInfo' : {
 					'enabled' : true
 				}
 			});
+
 			thisInstance.loadContents(url).then(
 				function(data) {
 					progressIndicatorElement.progressIndicator({'mode':'hide'});
@@ -225,32 +150,14 @@ Vtiger.Class("Settings_Vtiger_FullContactConfig_Js",{},{
 				}
 			);
 		});
-
-		//Register click event for advance google config edit button
-		// advanceConfigEditButton.click(function() {
-		// 	var url = advanceConfigEditButton.data('url');
-		// 	var progressIndicatorElement = jQuery.progressIndicator({
-		// 		'position' : 'html',
-		// 		'blockInfo' : {
-		// 			'enabled' : true
-		// 		}
-		// 	});
-		// 	thisInstance.loadContents(url).then(
-		// 		function(data) {
-		// 			progressIndicatorElement.progressIndicator({'mode':'hide'});
-		// 			jQuery('#AdvanceConfigContents').html(data);
-		// 			thisInstance.registerAdvanceEditViewEvents();
-		// 		}, function(error, err) {
-		// 			progressIndicatorElement.progressIndicator({'mode':'hide'});
-		// 		}
-		// 	);
-		// });
+		
 	},		
 	
 	registerEvents: function() { 
 		if(jQuery('#FullContactConfigDetails').length > 0) {
 			this.registerDetailViewEvents();
 		} else {
+
 			this.registerEditViewEvents();
 		}
 	}
@@ -258,6 +165,7 @@ Vtiger.Class("Settings_Vtiger_FullContactConfig_Js",{},{
 });
 
 jQuery(document).ready(function(e){ 
+
 	var tacInstance = new Settings_Vtiger_FullContactConfig_Js();
     var vtigerinst = new Vtiger_Index_Js();
     vtigerinst.registerEvents();

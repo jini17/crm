@@ -23,12 +23,12 @@
 
 <div class="contents tabbable clearfix">
 	<ul class="nav nav-tabs layoutTabs massEditTabs" id="tabs">
-		<li class="tab-item taxesTab active"><a data-toggle="tab" href="#GoogleConfig"><strong>{vtranslate('LBL_FULLCONTACT_CONFIG', $QUALIFIED_MODULE)}</strong></a></li>
+		<li class="tab-item taxesTab active"><a data-toggle="tab" href="#FullContactConfig"><strong>{vtranslate('LBL_FULLCONTACT_CONFIG', $QUALIFIED_MODULE)}</strong></a></li>
 		</ul>
 	<div class="tab-content layoutContent padding20 overflowVisible">
-		<div class="tab-pane active" id="GoogleConfig">
+		<div class="tab-pane active" id="FullContactConfig">
 			<div  id="contents">
-				<div class="container-fluid" id="GoogleConfigDetails">
+				<div class="container-fluid" id="FullContactConfigDetails">
 				
 					<div class="pull-right">
 						<button class="btn editButton" id="editButton" data-url='{$MODEL->getEditViewUrl()}' type="button" title="{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}"><strong>{vtranslate('LBL_EDIT', $QUALIFIED_MODULE)}</strong></button>

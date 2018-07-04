@@ -13,7 +13,7 @@ class Settings_Vtiger_FullContactConfigIndex_View extends Settings_Vtiger_Index_
 
 	public function process(Vtiger_Request $request) {
 		$qualifiedName = $request->getModule(false);
-		$moduleModel = Settings_Vtiger_FullContactConfigModule_Model::getInstance();
+		$moduleModel = Settings_Vtiger_FullContactConfigModule_Model::getInstance();		
 		$viewer = $this->getViewer($request);
 		$viewer->assign('MODEL', $moduleModel);
 		$viewer->assign('QUALIFIED_MODULE', $qualifiedName);

@@ -628,20 +628,25 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
      
      showExternalInputContainer : function(){
           jQuery(".addemail").on('click', function(e){
-            jQuery(".addemail").addClass('hide');
-            jQuery('.inline-save').removeClass('hide');
-            jQuery('.inputspan').removeClass('hide');
+                 e.preventDefault();
+                 jQuery(".addemail").addClass('hide');
+                 jQuery('.inline-save').removeClass('hide');
+                 jQuery('.inputspan').removeClass('hide');
           });
-          jQuery('.cancel').on('click',function(e){
+          jQuery('.cancelbtn').on('click',function(e){
           	e.preventDefault();
           	jQuery(".addemail").removeClass('hide');
                jQuery('.inline-save').addClass('hide');
                jQuery('.inputspan').addClass('hide');
           	
           });
-         jQuery('.save').on('click',function(e){
+         jQuery('.add').on('click',function(e){ 
                var email = jQuery("#extemail").val();
+              
                if(email ==''){
+                    e.preventDefault();
+                    alert(app.vtranslate('JS_EMAIL_ADDRESS_CANT_EMPTY'));
+				//app.helper.showErrorNotification({message:app.vtranslate('LBL_CANT_SELECT_CONTACT_FROM_LEADS')});
                     
                } else {
                     jQuery('#externalusers').removeClass('hide');

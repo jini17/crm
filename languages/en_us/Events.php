@@ -101,5 +101,9 @@ $languageStrings = array(
 	'LBL_INVITE_EXTERNAL_EMAILS'=>'Invite External People',
 	'LBL_EXTERNAL_USERS'=>'External Emails',
 	'Busy' => 'Busy',
+	
 
 );
+$jsLanguageStrings = array(
+
+); 
