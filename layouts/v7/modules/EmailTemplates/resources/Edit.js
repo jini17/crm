@@ -23,9 +23,15 @@ Vtiger_Edit_Js("EmailTemplates_Edit_Js",{},{
             }
            
 			var ckEditorInstance = new Vtiger_CkEditor_Js();
+			
+			
 			ckEditorInstance.loadCkEditor(templateContentElement,customConfig);
 			jQuery(".padding-bottom1per").prepend('<span id="charlen"></span>').css({'color':'#d61b1b'});
-			jQuery("#charlen").html("Total Characters :"+(CKEDITOR.instances.templatecontent.getData().length-61));
+			if(jQuery('#EditView').find('[name="record"]').val() !=''){
+     			jQuery("#charlen").html("Total Characters :"+(CKEDITOR.instances.templatecontent.getData().length-61));
+     		} else {
+     		     jQuery("#charlen").html("Total Characters :"+(CKEDITOR.instances.templatecontent.getData().length));
+     		}	
 		}
         this.registerFillTemplateContentEvent();
 		
