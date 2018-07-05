@@ -11,6 +11,7 @@
 -->*}
 {strip}
 	{include file="partials/EditViewContents.tpl"|@vtemplate_path:'Vtiger'}
+	<!--
 	<div name='editContent'>
 		<div class='fieldBlockContainer' data-block="{$BLOCK_LABEL}">
 			<h4 class='fieldBlockHeader'>{vtranslate('LBL_INVITE_USER_BLOCK', $MODULE)}</h4>
@@ -33,8 +34,6 @@
 					<td></td><td></td>
 				</tr>
 			</table>
-			<input type="hidden" name="recurringEditMode" value="" />
-			<!--Confirmation modal for updating Recurring Events-->
 			{assign var=MODULE value="Calendar"}
 			<div class="modal-dialog modelContainer recurringEventsUpdation modal-content hide" style='min-width:350px;'>
 				{assign var=HEADER_TITLE value={vtranslate('LBL_EDIT_RECURRING_EVENT', $MODULE)}}
@@ -69,7 +68,8 @@
 					</div>
 				</div>
 			</div>
-			<!--Confirmation modal for updating Recurring Events--> 
+			
 		</div>
-	</div>
+	</div>-->
+	<!--Confirmation modal for updating Recurring Events--> 
 {/strip}

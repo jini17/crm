@@ -1,5 +1,7 @@
 <?php
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 include_once('vtlib/Vtiger/Menu.php');
 include_once('vtlib/Vtiger/Module.php');
 // Turn on debugging level
@@ -23,6 +25,7 @@ $moduleInstance = Vtiger_Module::getInstance($MODULENAME);
 	// Schema Setup
     $moduleInstance->initTables();
 =======
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 
 /** Create New Vtlib script for module Creation
   * created : 22 Feb 2018
@@ -73,16 +76,23 @@ global $adb;
     $module->save();
 
     $module->initTables();		
+<<<<<<< HEAD
+=======
 >>>>>>> Development
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 
 	// Add the basic module block
 	$holidayInformation = new Vtiger_Block();
 	$holidayInformation->label = 'Holiday Information';
 <<<<<<< HEAD
+	$module->addBlock($holidayInformation);	
+=======
+<<<<<<< HEAD
 	$moduleInstance->addBlock($holidayInformation);	
 =======
 	$module->addBlock($holidayInformation);	
 >>>>>>> Development
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 
 	
 	/** Create required fields and add to the block */
@@ -90,10 +100,14 @@ global $adb;
 	$field1->name = 'holidayname';
 	$field1->label = 'Holiday Name';
 <<<<<<< HEAD
+	$field1->table = $module->basetable;
+=======
+<<<<<<< HEAD
 	$field1->table = $moduleInstance->basetable;
 =======
 	$field1->table = $module->basetable;
 >>>>>>> Development
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$field1->column = 'holidayname';
 	$field1->columntype = 'VARCHAR(255)';
 	$field1->uitype = 2;
@@ -102,20 +116,28 @@ global $adb;
 
 	// Set at-least one field to identifier of module record
 <<<<<<< HEAD
+	$module->setEntityIdentifier($field1);
+=======
+<<<<<<< HEAD
 	$moduleInstance->setEntityIdentifier($field1);
 =======
 	$module->setEntityIdentifier($field1);
 >>>>>>> Development
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 
 	/** Create required fields and add to the block */
 	$field2 = new Vtiger_Field();
 	$field2->name = 'startdate';
 	$field2->label = 'Start Date';
 <<<<<<< HEAD
+	$field2->table = $module->basetable;
+=======
+<<<<<<< HEAD
 	$field2->table = $moduleInstance->basetable;
 =======
 	$field2->table = $module->basetable;
 >>>>>>> Development
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$field2->column = 'startdate';
 	$field2->columntype = 'DATE';
 	$field2->uitype = 5;
@@ -127,10 +149,14 @@ global $adb;
 	$field3->name = 'enddate';
 	$field3->label = 'End Date';
 <<<<<<< HEAD
+	$field3->table = $module->basetable;
+=======
+<<<<<<< HEAD
 	$field3->table = $moduleInstance->basetable;
 =======
 	$field3->table = $module->basetable;
 >>>>>>> Development
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$field3->column = 'enddate';
 	$field3->columntype = 'DATE';
 	$field3->uitype = 5;
@@ -142,10 +168,14 @@ global $adb;
 	$field4->name = 'location';
 	$field4->label = 'Location';
 <<<<<<< HEAD
+	$field4->table = $module->basetable;
+=======
+<<<<<<< HEAD
 	$field4->table = $moduleInstance->basetable;
 =======
 	$field4->table = $module->basetable;
 >>>>>>> Development
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$field4->column = 'location';
 	$field4->columntype = 'VARCHAR(255)';
 	$field4->uitype = 1;
@@ -169,10 +199,14 @@ global $adb;
 	$field6->name = 'assignedto';
 	$field6->label = 'Assigned To';
 <<<<<<< HEAD
+	$field6->table = $module->basetable;
+=======
+<<<<<<< HEAD
 	$field6->table = $moduleInstance->basetable;
 =======
 	$field6->table = $module->basetable;
 >>>>>>> Development
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$field6->column = 'assignedto';
 	$field6->columntype = 'VARCHAR(50)';
 	$field6->uitype = 15;
@@ -180,8 +214,11 @@ global $adb;
 	$field6->setPicklistValues( Array ('Users', 'Groups'));
 	$holidayInformation->addField($field6); /** Creates the field and adds to block */
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 	
 =======
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 
 	/**
 		ADD YOUR FIELDS HERE
@@ -218,12 +255,17 @@ global $adb;
 	$field41->displaytype= 2;
 	$holidayInformation->addField($field41);
 
+<<<<<<< HEAD
+=======
 >>>>>>> Development
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 
 	// Create default custom filter (mandatory)
 	$filter1 = new Vtiger_Filter();
 	$filter1->name = 'All';
 	$filter1->isdefault = true;
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 	$moduleInstance->addFilter($filter1);
 	// Add fields to the filter created
@@ -253,6 +295,7 @@ global $adb;
 	//$moduleInstance=null;
 //}
 =======
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 	$module->addFilter($filter1);
 	// Add fields to the filter created
 	$filter1->addField($field1)->addField($field2, 1)->addField($field3, 2);
@@ -302,5 +345,8 @@ global $adb;
 	}
 
 	
+<<<<<<< HEAD
+=======
 >>>>>>> Development
+>>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 ?>

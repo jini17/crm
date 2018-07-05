@@ -65,6 +65,21 @@ class Events_Record_Model extends Calendar_Record_Model {
         }
         return $relatedContactInfo;
      }
+
+     public function getExternalPeoples() {
+        $adb = PearDatabase::getInstance();
+        $query = 'SELECT * from external_invitees where activityid=?';
+        $result = $adb->pquery($query, array($this->getId()));
+        $num_rows = $adb->num_rows($result);
+
+        $extPeopleList = array();
+        for($i=0; $i<$num_rows; $i++) {
+            $row = $adb->fetchByAssoc($result, $i);
+            $extPeopleList[$i]['emailaddress'] = $row['emailaddress'];
+            $extPeopleList[$i]['status'] = $row['status'];
+        }
+        return $extPeopleList;
+     }
      
      public function getRelatedContactInfoFromIds($eventIds){
          $adb = PearDatabase::getInstance();
@@ -127,10 +142,10 @@ class Events_Record_Model extends Calendar_Record_Model {
       * @param <String> $status
       */
      public function updateInvitationStatus($activityId,$userId,$status) {
-         $adb = PearDatabase::getInstance();
-         $sql = 'UPDATE vtiger_invitees SET status = ? WHERE activityid = ? AND inviteeid = ?';
-         $adb->pquery($sql,array($status,$activityId,$userId));
-         $this->inviteesDetails = NULL;
+        // $adb = PearDatabase::getInstance();
+        // $sql = 'UPDATE vtiger_invitees SET status = ? WHERE activityid = ? AND inviteeid = ?';
+        // $adb->pquery($sql,array($status,$activityId,$userId));
+        // $this->inviteesDetails = NULL;
      }
 
      public function getInviteUserMailData() {

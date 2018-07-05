@@ -187,6 +187,7 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
 			'modules.'.$moduleName.'.resources.Skills',
 			'modules.'.$moduleName.'.resources.Emergency',
 			'modules.'.$moduleName.'.resources.Leave',
+			'modules.'.$moduleName.'.resources.Claim',
 			'modules.'.$moduleName.'.resources.PreferenceEdit',
 			'modules.Settings.Vtiger.resources.Index',
 			"~layouts/v7/lib/jquery/Lightweight-jQuery-In-page-Filtering-Plugin-instaFilta/instafilta.min.js"

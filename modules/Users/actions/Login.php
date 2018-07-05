@@ -20,7 +20,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 
 	function process(Vtiger_Request $request) {
 		global $short_url, $adb;
-		$adb->setDebug(true);	
+		$adb->setDebug(true);
 		$username = $request->get('username');
 		$password = $request->getRaw('password');
 		//echo $username;
@@ -44,9 +44,11 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 			$usip=$_SERVER['HTTP_X_FORWARDED_FOR'];	//add one more param IP address by jitu@28Dec2016	
 		}
 
-
+        $allowedipres = false;
 		$allowedipres = $this->AllowedIp($usip,$username);
-		$allowedipres = true;
+		echo "Nirbhay";
+		//echo $allowedipres;die;
+		//$allowedipres = true;
 
 		if ($user->doLogin($password) && $allowedipres==true) {
 			session_regenerate_id(true); // to overcome session id reuse.
@@ -91,7 +93,11 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 				header("Location: index.php");
 				exit();
 			}
-		} else {
+		} else if($allowedipres==false) {
+            $moduleModel->saveLoginHistory($username, 'Failed login', $browser, $usip);
+            header('Location: index.php?module=Users&parent=Settings&view=Login&error=9');
+
+        }else{
 		   //Track the login History by jitu@10-04-2015
 			$moduleModel->saveLoginHistory($username, 'Failed login', $browser, $usip);
 			header('Location: index.php?module=Users&parent=Settings&view=Login&error=1');
@@ -108,71 +114,74 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 	 */
 	function AllowedIp($usip, $username){
 	    global $adb;
-       // echo "<pre>"; print_r($usip); die;
-        $query = "SELECT ip_id FROM allowed_ip";
-        $result = $adb->pquery($query,array());
+      //  $adb->setDebug(true);
+        /**
+         * Absolute IP validations
+         */
+        $query = "SELECT ip_id,user_name, iprestriction_type FROM allowed_ip WHERE isactive = 1 AND type='Absolute' AND ip = ?";
+        $result = $adb->pquery($query,array($usip));
+        if($adb->num_rows($result)>0) {
+            $user_name = $adb->query_result($result, 0, 'user_name');
+            $iprest_type = $adb->query_result($result, 0, 'iprestriction_type');
 
-        $count = $adb->num_rows($result);
-       // echo "<pre>"; print_r($count); die;
-        if($count==0){
-            return true;
-        }
+            $usernames = explode(',', $user_name);
 
-        $query = "SELECT ip_id,user_name FROM allowed_ip WHERE ip LIKE ? AND type = 'Absolute'";
-	    $result = $adb->pquery($query,array($usip));
-
-	    $user_name = $adb->query_result($result, 0,'user_name');
-
-
-
-        $count = $adb->num_rows($result);
-
-       // echo "<pre>"; print_r($count); die;
-	    if($user_name == 'All Users'){
-	        $user_name = true;
-        }else if($user_name == $username){
-	        $user_name = true;
-        }else{
-	        $user_name = false;
-        }
-
-	    if($count>0 && $user_name == true) {
-            return true;
-        }
-        else{
-
-	        $rangeip = explode(".",$usip);
-	        $range = '';
-	        for($i=0;$i<3;$i++){
-	            if($i!=2)
-	                $range .= $rangeip[$i].".";
-	            else
-	                $range .= $rangeip[$i];
+            for ($i = 0; $i<count($usernames); $i++) {
+                if (($usernames[$i] == $username || $usernames[$i] == 'All Users') && $iprest_type == 'notallowed') {
+                    return false;
+                }else if(($usernames[$i] == $username || $usernames[$i] == 'All Users') && $iprest_type == 'allowed'){
+                   return true;
+                }
             }
-            $query = "SELECT ip_id,user_name FROM allowed_ip WHERE ip LIKE ? AND type = 'Range'";
-
-	        $result = $adb->pquery($query,array($range));
-            $count = $adb->num_rows($result);
-
-            $user_name = $adb->query_result($result, 0,'user_name');
-
-            if($user_name == 'All Users'){
-                $user_name = true;
-            }else if($user_name == $username){
-                $user_name = true;
-            }else{
-                $user_name = false;
-            }
-
-            $count = $adb->num_rows($result);
-
-            //echo "<pre>"; print_r($count); die;
-
-            if($count>0 && $user_name == true)
-                return true;
+        }
+         /**
+         * Validation for range IP
+         */
+        $rangeip = explode(".",$usip);
+        $range = '';
+        for($i=0;$i<3;$i++){
+            if($i!=2)
+                $range .= $rangeip[$i].".";
             else
-                return false;
+                $range .= $rangeip[$i];
         }
+        $query = "SELECT ip_id,user_name,iprestriction_type FROM allowed_ip WHERE ip LIKE ? AND type = 'Range'";
+
+        $result = $adb->pquery($query,array($range));
+        $count = $adb->num_rows($result);
+
+        $user_name = $adb->query_result($result, 0,'user_name');
+        $iprest_type = $adb->query_result($result, 0, 'iprestriction_type');
+
+        $usernames = explode(',', $user_name);
+
+       //echo "<pre>"; print_r($iprest_type); die;
+        for ($i = 0;$i< count($usernames); $i++) {
+            if (($usernames[$i] == $username || $usernames[$i] == 'All Users') && $iprest_type == 'notallowed') {
+                return false;
+            }else if(($usernames[$i] == $username || $usernames[$i] == 'All Users') && $iprest_type == 'allowed'){
+                return true;
+            }
+        }
+
+        $querydefault = "SELECT * FROM allowed_ip_default ";
+
+        $resultdefault = $adb->pquery($querydefault,array());
+        $count = $adb->num_rows($resultdefault);
+
+       // echo
+        if($count > 0){
+            $defaultvalue = $adb->query_result($resultdefault,0,'defaultvalue');
+            if($defaultvalue == 'allowed'){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return true;
+        }
+
+
 
     }
 

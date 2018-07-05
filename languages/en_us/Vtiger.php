@@ -10,8 +10,10 @@
 $languageStrings = array(
 
 	// Footer
+	'LBL_MOM' => 'Agenda/MOM',
+	'LBL_MOM_BLOCK' => 'Minutes of Meeting(MOM)',
 	'APPTITLE' => 'Vtiger CRM',
-	'POWEREDBY'=> 'Powered by vtiger CRM',
+	'POWEREDBY'=> 'Powered by Agiliux CRM',
 	'LBL_READ_LICENSE' => 'Read License',
 	'LBL_PRIVACY_POLICY' => 'Privacy Policy',
 
@@ -76,7 +78,7 @@ $languageStrings = array(
 	'LBL_ADD_MORE_FIELDS' => 'Add more fields',
 	'LBL_ADD_NOTE' => 'Add Document',
 	'LBL_CREATE_NEW' => 'Create New',
-	'LBL_ADD_EVENT' => 'Add Event',
+	'LBL_ADD_EVENT' => 'Add Meeting',
 	'LBL_ADD_TASK' => 'Add Task',
 	'LBL_MARKETING_AND_SALES' => 'MARKETING & SALES',
 	'LBL_TOOLS_HEADER' => 'TOOLS',
@@ -87,7 +89,7 @@ $languageStrings = array(
 	'LBL_CONTACT' => 'CONTACT MANAGEMENT',
 	'LBL_HOME' => 'Home',
 	'LBL_NO_ATTACHMENTS' => 'No Attachments',
-	'LBL_COMPOSE_EMAIL_WARNING' => ' Warning : Your email might land in spam. Add Vtiger as an authorized sender for your domain. Learn more',
+	'LBL_COMPOSE_EMAIL_WARNING' => ' Warning : Your email might land in spam. Add Agiliux as an authorized sender for your domain. Learn more',
 	// Common Link Labels
 	'LBL_REARRANGE_DASHBOARD_TABS' => 'Rearrange Tabs',
 	'LBL_DONE' => 'Done',
@@ -504,7 +506,7 @@ $languageStrings = array(
 	'LBL_COMMENTED' => 'Commented',
 
 	//calender set-reminder
-	'LBL_BEFORE_EVENT' => ' Before Event',
+	'LBL_BEFORE_EVENT' => ' Before Meeting',
 
 	//Dashboard widgets
 	'History' => 'History',
@@ -537,7 +539,7 @@ $languageStrings = array(
 	'LBL_CAN_NOT_REMOVE_DEFAULT_WIDGET' => 'Cannot remove default widget',
 	'LBL_CUSTOM_VIEW_NAME_DUPLICATES_EXIST' => 'List already exists',
 	'LBL_TYPE_AND_SEARCH' => 'Type and Search',
-		'LBL_EXPORT_CURRENCY_TOOLTIP_TEXT'=>'For exporting Currency values in Line items, Vtiger will use this setting to export as this currency. Any currency values outside the line items tables, will be exported as in User\'s preferred currency (selected in \'My Preferences\')',
+		'LBL_EXPORT_CURRENCY_TOOLTIP_TEXT'=>'For exporting Currency values in Line items, Agiliux will use this setting to export as this currency. Any currency values outside the line items tables, will be exported as in User\'s preferred currency (selected in \'My Preferences\')',
 		'LBL_EXPORT_LINEITEM_CURRENCY'=>'Choose Currency (For Line Item Values)',
 		'LBL_EXPORT_USER_CURRENCY' =>'My preferred Currency',
 		'LBL_EXPORT_RECORD_CURRENCY'=>'Currency specified in Record',
@@ -743,7 +745,7 @@ $languageStrings = array(
 	'LBL_BLANK' => '-Blank-',
 
 	//PageTitle translations
-	'LBL_VTIGER_CRM_HONEST_OPEN_SOURCE' => 'vtiger CRM On Demand',
+	'LBL_VTIGER_CRM_HONEST_OPEN_SOURCE' => 'Agiliux CRM On Demand',
 
 	//Translations used in inventory modules for sopy address
 	'SINGLE_Accounts' => 'Organization',
@@ -895,7 +897,7 @@ $languageStrings = array(
 	'LBL_MARK_AS_HELD' => 'Mark As Held',
 	'LBL_MARK_AS_COMPLETED' => 'Mark As Completed',
 	'LBL_SMS_MAX_CHARACTERS_ALLOWED' => 'Maximum 160 characters are allowed for text message',
-	'LBL_HIDE_COMPLETED_EVENTS' => 'Hide Completed Calendar Events',
+	'LBL_HIDE_COMPLETED_EVENTS' => 'Hide Completed Calendar Meetings',
 	'LBL_SETUP_WEBFORMS' => 'Setup Webforms',
 	'LBL_SPECIAL_OPTIONS' => 'Special Options',
 	'LBL_PARENT_OWNER' => 'Parent Record Owner',
@@ -989,7 +991,7 @@ $languageStrings = array(
 									You can edit your preferences later from \'User Name > My Preferences \'',
 	'LBL_CANNOT_BE_CHANGED_LATER' => 'Cannot be changed later',
 	'IMPORT_CONTACTS_GOOGLE_HELP_TEXT' => 'We can bring contacts from Google and <br> you can also enable bi-direction sync to keep our<br>
-									Vtiger contacts and Google contacts(in selected group) updated.<br>
+									Agiliux contacts and Google contacts(in selected group) updated.<br>
 									Click the button to authorize and get Contacts from Google.',
 	'IMPORT_CONTACTS_CSV_HELP_TEXT' => 'You can import Contacts from CSV file.',
 	'IMPORT_CONTACTS_CSV_HELP_TEXT2' => 'To Import Opportunities, Leads, Tickets, please look for Actions > Import button on any of the
@@ -1004,7 +1006,7 @@ $languageStrings = array(
 	'TELL_US_ABOUT_YOU_HELP_TEXT' => 'We continue to make improvements to the CRM, and <br>
 									 knowing our users better will help us prioritize enhancements.',
 	'TELL_US_ABOUT_YOU_HELP_TEXT_2' => 'The data you submitted here will not be revealed to anyone <Br>
-										outside Vtiger.',
+										outside Agiliux.',
 	'LBL_INVALID_IMAGE' => 'Invalid Image',
 	'LBL_IMPORT_CONTACTS' => 'Import Contacts',
 	'LBL_FROM_GOOGLE' => 'From Google',
@@ -1019,8 +1021,8 @@ $languageStrings = array(
 	'LBL_SOCIAL_DETAILS' => 'Link to social networks to find new customers, and respond to queries',
 	'LBL_SOCIAL_AUTHORIZE_HELP'=>'Connect with your companys twitter account to post your messages and track engagement',
 	'LBL_SOCIAL_AUTHORIZE' => 'Connect with Twitter',
-	'LBL_SOCIAL_LINKED' => 'Your Vtiger is now linked to',
-	'LBL_ENTER_KEYWORDS_HELP'=>'Vtiger will scan twitter and find messages with these words',
+	'LBL_SOCIAL_LINKED' => 'Your Agiliux is now linked to',
+	'LBL_ENTER_KEYWORDS_HELP'=>'Agiliux will scan twitter and find messages with these words',
 	'LBL_ENTER_KEYWORDS' => 'Enter Keywords',
 
 	 // Social Module Strings
@@ -1042,7 +1044,7 @@ $languageStrings = array(
 	'LBL_FAVOURITE' => 'Favourite',
 	'LBL_UNDO_FAVOURITE' => 'Undo Favourite',
 	'LBL_TWITTER_HANDLER_MSG' => 'To see this contact\'s profile summary and history add their Twitter Username or search profiles using the link below.',
-	'LBL_ADD_EVENT_OR_TODO' => 'Add Event/Task',
+	'LBL_ADD_EVENT_OR_TODO' => 'Add Meeting/Task',
 	'LBL_ADD_TICKET_CONTACT' => 'Add Ticket + Contact',
 	'LBL_ADD_CASE_CONTACT' => 'Add Case + Contact',
 	'LBL_ADD_OPPORTUNITY_CONTACT' => 'Add Opportunity + Contact',
@@ -1124,7 +1126,7 @@ $languageStrings = array(
 	'LBL_SHOW_MAP'=>'Show Map',
 	'LBL_ADD_TAB'=>'Add Tab',
 	'LBL_TAB_NAME'=>'Dashboard Name',
-	'LBL_SHARED_TAGS_ACCESS'=>'Shared tags are accessible by all users in Vtiger',
+	'LBL_SHARED_TAGS_ACCESS'=>'Shared tags are accessible by all users in Agiliux',
 	'LBL_GOTO_TAGS'=>'Go to Settings > My preferences > My Tags to Edit or Delete your private tags',
 	'LBL_UNLINK'=>'Unlink',
 	'LBL_SWITCH_TO_OLD'=>'Switch to old version',
@@ -1146,10 +1148,10 @@ $languageStrings = array(
 	'LBL_DATE' => 'Date',
 	'LBL_TIME' => 'Time',
 	'LBL_SKIPPED' => 'Skipped',
-	'vt_create' => 'Records Created in Vtiger',
-	'vt_update' => 'Records Updated in Vtiger',
-	'vt_delete' => 'Records Deleted in Vtiger',
-	'vt_skip' => 'Records skipped in Vtiger',
+	'vt_create' => 'Records Created in Agiliux',
+	'vt_update' => 'Records Updated in Agiliux',
+	'vt_delete' => 'Records Deleted in Agiliux',
+	'vt_skip' => 'Records skipped in Agiliux',
 	'app_create' => 'Records Created in %s',
 	'app_update' => 'Records Updated in %s',
 	'app_delete' => 'Records Deleted in %s',
@@ -1323,7 +1325,7 @@ $languageStrings = array(
 	'LBL_ROLES' => 'Roles',
 	'LBL_ROLEANDSUBORDINATE' => 'Role and Subordinates',
 	'LBL_YOUR_LEARNING_SCORE' => 'Your CRM learning score',
-	'LBL_SWITCH_TO_VTIGER7_NOW' => 'Switch to Vtiger7 by Feb 15th',
+	'LBL_SWITCH_TO_VTIGER7_NOW' => 'Switch to Agiliux by Feb 15th',
 	'LBL_VTIGER6_RETIREMENT_NOTICE' => 'This version will be retired on Feb 15th 2016',
 	'ModTracker' => 'Updates',
 	'LBL_MAIL_SENT_SUCCESSFULLY' => 'Mail Sent Successfully',
@@ -1348,8 +1350,8 @@ $languageStrings = array(
 
 	'LBL_DUPLICATES' => 'Duplicates',
 	'LBL_DUPLICATES_DETECTED' => 'Duplicate(s) detected!',
-	'LBL_DUPLICATES_FOUND_MESSAGE' => 'This %s cannot be saved since duplicate %s exists in Vtiger with matching values for %s.',
-	'LBL_VTIGER_NOTIFICATION' => 'Message from : Vtiger System Notifications',
+	'LBL_DUPLICATES_FOUND_MESSAGE' => 'This %s cannot be saved since duplicate %s exists in Agiliux with matching values for %s.',
+	'LBL_VTIGER_NOTIFICATION' => 'Message from : Agiliux System Notifications',
 	'LBL_DUPLICATION_FAILURE_FROM_WORKFLOWS' => 'The following %s could not be saved from "%s" workflow, as another %s exists with the same values.',
 	'LBL_DUPLICATION_FAILURE_FROM_WEBFORMS' => 'The following %s could not be saved from "%s" webform, as another %s exists with the same values.',
 	'LBL_DUPLICATION_FAILURE_FOR_ADMIN' => 'You can %s to modify duplicate prevention rules.',
@@ -1404,6 +1406,7 @@ $languageStrings = array(
 	'LBL_DEFAULT_DASHBOARD_TOOLTIP'=>'Make this dashboard as default by reordering it as the first tab!',
 	'LBL_ALLOWED_IP'=>'IP Restriction',
 	'LBL_ADMIN'=>'Admin/Finance',
+	'LBL_ALLOCATION_TYPE'=>'Allocation List',
 );
 
 $jsLanguageStrings = array(
@@ -1632,7 +1635,7 @@ $jsLanguageStrings = array(
 	'JS_CALL_NOT_ANSWERED_UPDATE_PERMISSION' => "Call need to be answered before linking record", 
 	'JS_CALL_NOT_ANSWERED' => "Call need to be answered before performing the action",
 	// ends
-	'JS_NO_EDIT_PERMISSION' => 'You don\'t have the permission to edit this event',
+	'JS_NO_EDIT_PERMISSION' => 'You don\'t have the permission to edit this Meeting',
 
 	//Google Synchronization
 	'SYNC_REMOVED_SUCCESSFULLY' => 'Google synchronization removed successfully.',
@@ -1651,11 +1654,11 @@ $jsLanguageStrings = array(
 	'JS_CHANGES_WILL_BE_LOST' => 'Your changes will be lost!',
 	'JS_RECORD_DELETED' => 'Record deleted',
 	'JS_NO_DELETE_PERMISSION' => 'No delete permission',
-	'JS_CONFIRM_MARK_AS_HELD' => 'Are you sure you want to mark Event as Held?',
+	'JS_CONFIRM_MARK_AS_HELD' => 'Are you sure you want to mark Meeting as Held?',
 	'JS_CONFIRM_MARK_AS_COMPLETED' => 'Are you sure you want to mark Task as Completed?',
 	'JS_TODO_MARKED_AS_COMPLETED' => 'Task marked as Completed',
-	'JS_EVENT_MARKED_AS_HELD' => 'Event marked as Held',
-	'JS_FUTURE_EVENT_CANNOT_BE_MARKED_AS_HELD' => 'Future event cannot be marked as Held',
+	'JS_EVENT_MARKED_AS_HELD' => 'Meeting marked as Held',
+	'JS_FUTURE_EVENT_CANNOT_BE_MARKED_AS_HELD' => 'Future Meeting cannot be marked as Held',
 	'JS_PERMISSION_DENIED' => 'Permission denied',
 	'LBL_SMS_MAX_CHARACTERS_ALLOWED' => 'Maximum 160 characters are allowed for text message',
 	'JS_VIEWNAME_ALERT' => 'Maximum 40 characters are allowed for list name',
@@ -1669,7 +1672,7 @@ $jsLanguageStrings = array(
 
 	// For Line Iteam Currency Symbol select while Import
 	'JS_CURRENCY_TOOLTIP_CONTENT_TITLE' => 'Line Items Currency',
-	'JS_CURRENCY_TOOLTIP_CONTENT_MESSAGE' => 'For importing Currency values in Line items, Vtiger will use this setting to identify the currency. Any currency values outside the line items tables, are assumed to be in User\'s preferred currency (selected in \'My Preferences\')',
+	'JS_CURRENCY_TOOLTIP_CONTENT_MESSAGE' => 'For importing Currency values in Line items, Agiliux will use this setting to identify the currency. Any currency values outside the line items tables, are assumed to be in User\'s preferred currency (selected in \'My Preferences\')',
 	'LBL_CANT_SELECT_CONTACT_FROM_LEADS' => 'Cannot select related Contacts for Leads',
 	'JS_TRY_LATER' => 'Please try later!',
 	'JS_FILE_NAME' => 'File Name',
@@ -1739,7 +1742,7 @@ $jsLanguageStrings = array(
 	'JS_PRINTTEMPLATEMODULE_DISABLED' => 'PrintTemplates module is disabled. Cannot perform the operation',
 	'JS_SENT_FOR_SIGNATURE' => 'Sent for signature',
 	'JS_FAILED_TO_SEND_FOR_SIGNATURE' => 'Failed to send for signing',
-	'JS_SUITABLE_VTIGER_FIELD_NOT_AVAILABLE_FOR_MAPPING' => 'Suitable vtiger field not available for mapping',
+	'JS_SUITABLE_VTIGER_FIELD_NOT_AVAILABLE_FOR_MAPPING' => 'Suitable Agiliux field not available for mapping',
 	'JS_SAVED_SUCCESSFULLY' => 'Settings saved successfully',
 	'phone' => 'Phone',
 	'email' => 'Email',
@@ -1777,7 +1780,7 @@ $jsLanguageStrings = array(
 	'JS_RELATION_ADDED_SUCESSFULLY' => 'Relation Added Successfully',
 	'JS_FAILED_TO_ADD_RELATION' => 'Failed To Add Relation',
 	'JS_SOCIAL_POST_DELETE_CONFIRMATION' => 'Are you sure you want to delete?',
-	'JS_EVENT_OR_TODO_ADDED_SUCCESS_MSG' => 'Event/Task added sucessfully',
+	'JS_EVENT_OR_TODO_ADDED_SUCCESS_MSG' => 'Meeting/Task added sucessfully',
 	'JS_LEAD_ADDED_SUCCESS_MSG' => 'Lead added successfully',
 	'JS_OPPORTUNITY_ADDED_SUCESS_MSG' => 'Opportunity added successfully',
 	'JS_TICKET_ADDED_SUCESS_MSG' => 'Ticket added successfully',
@@ -1795,7 +1798,7 @@ $jsLanguageStrings = array(
 	'JS_PLEASE_ENTER_NUMBER_IN_RANGE' => 'Please enter value in the range',
 	'JS_UPLOAD' => 'Upload',
 	'JS_TODO_ADDED_SUCCESS_MSG' => 'Task added successfully',
-	'JS_EVENT_ADDED_SUCCESS_MSG' => 'Event added successfully',
+	'JS_EVENT_ADDED_SUCCESS_MSG' => 'Meeting added successfully',
 	'JS_ACTIVE' => 'Active',
 	'JS_SNOOZED' => 'Snoozed',
 	'JS_INVALID_URL' => 'Invalid URL',
@@ -1818,7 +1821,7 @@ $jsLanguageStrings = array(
 	'JS_DEFAULT_ENABLED' => 'Default enabled',
 	'JS_DEFAULT_DISABLED' => 'Default disabled',
 	'JS_EDIT_FIELDS' => '%s Fields & Layout',
-	'JS_MORE_VTIGER' => 'There are more records to be synchronized in vtiger',
+	'JS_MORE_VTIGER' => 'There are more records to be synchronized in Agiliux',
 	'JS_MORE_GOOGLE' => 'There are more records to be synchronized in Google',
 	'JS_MORE_OFFICE365' => 'There are more records to be synchronized in Office365',
 	'JS_TOKEN_EXPIRED' => 'Office365 Authentication has expired. Click on Sign in with Office365 button to re-authorize.',
@@ -1865,7 +1868,7 @@ $jsLanguageStrings = array(
 	'JS_LBL_MY_PREFERENCES' => 'My Preferences',
 	'JS_LBL_MY_PREFERENCES_TEXT' => 'Configure your personal preferences including Timezone, Currency, Date Format. You can also upload profile picture from My Preferences.',
 	'JS_LBL_HELP' => 'Help',
-	'JS_LBL_HELP_TEXT' => 'Click on Help button to find Guides and FAQs, and use the Help menu dropdown to get assistance from Vtiger support team',
+	'JS_LBL_HELP_TEXT' => 'Click on Help button to find Guides and FAQs, and use the Help menu dropdown to get assistance from Agiliux support team',
 	'JS_LBL_RESTART_TOUR' => 'Restart Guided Tour',
 	'JS_LBL_RESTART_TOUR_TEXT' => 'Click here to start this tour again',
 	'JS_GOOGLE_REMOVE_SYNC_CONFIRMATION' => 'Revoke access will only remove existing Google authentication for Contacts and Calendar, it will not delete synchronized records. If you synchronize with same Google account again, duplicate records will be created. Are you sure you want to revoke access?',
@@ -1884,7 +1887,7 @@ $jsLanguageStrings = array(
 	'JS_TASK_ADDED' => 'Task added',
 	'JS_MARKED_COMPLETED' => 'Marked as completed',
 	'JS_TASK_PRIORITY_CHANGED' => 'Task priority changed',
-	'JS_NO_PERMISSION_TO_MARK_AS_HELD' => 'You do not have permission to mark this event as held',
+	'JS_NO_PERMISSION_TO_MARK_AS_HELD' => 'You do not have permission to mark this Meeting as held',
 	'JS_TAG_ADDED' => 'Tag added',
 	'JS_TAB_DELETED' => 'deleted',
 	'JS_TAB_RENAMED' => 'Renamed',

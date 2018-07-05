@@ -51,7 +51,7 @@ jQuery.Class("Vtiger_CkEditor_Js",{},{
 	 * @params : element: element on which CkEditor has to be loaded, config: custom configurations for ckeditor
 	 */
 	loadCkEditor : function(element,customConfig){
-		
+
 		this.setElement(element);
 		var instance = this.getCkEditorInstanceFromName();
 		var elementName = this.getElementId();
@@ -75,6 +75,7 @@ jQuery.Class("Vtiger_CkEditor_Js",{},{
 	 * @params : textArea Element,contents ;
 	 */
 	loadContentsInCkeditor : function(contents){
+
 		var CkEditor = this.getCkEditorInstanceFromName();
 		CkEditor.setData(contents);
 	},

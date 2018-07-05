@@ -109,7 +109,7 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		$response->emit();
 	}
 
-	public function validateUser(Vtiger_Request $request){ alert('ok');
+	public function validateUser(Vtiger_Request $request){ 
 		$module = $request->getModule();
 		$roleid = $request->get('roleid');
 		$validate = Users_Record_Model::isValidateUserSubscription($userName, $roleid);

@@ -12,6 +12,7 @@ var Settings_Profiles_Js = {
 	initEditView: function() {
 
 		function toggleEditViewTableRow(e) {
+
 			var target = jQuery(e.currentTarget);
 			var container = jQuery('[data-togglecontent="'+ target.data('togglehandler') + '"]');
 			var closestTrElement = container.closest('tr');
@@ -419,6 +420,7 @@ var Settings_Profiles_Js = {
 			}
 		})
 	},
+	
 	registerAllowModulePermission : function() { 
 		jQuery('#planFilter').on('change',function(e) { 
 			var planid = jQuery(e.currentTarget).val();
@@ -444,6 +446,7 @@ var Settings_Profiles_Js = {
 			});
 		});
 	},
+	
 	registerEvents : function() {
 		Settings_Profiles_Js.initEditView();
 		Settings_Profiles_Js.registerSelectAllModulesEvent();

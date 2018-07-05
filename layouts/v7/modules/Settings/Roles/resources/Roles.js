@@ -7,10 +7,14 @@
  * All Rights Reserved.
  *************************************************************************************/
 var Settings_Roles_Js = {
+
 	
-	newPriviliges : false,
+		newPriviliges : false,
 	
 	initDeleteView: function() {
+
+
+
 		var form = jQuery('#roleDeleteForm');
 		
 		var params = {
@@ -79,6 +83,7 @@ var Settings_Roles_Js = {
 			jQuery('[name="transfer_record"]', form).val('');
             jQuery('.clearReferenceSelection').addClass('hide');
 		});
+
 	},
 	
 	initTreeView: function() {
@@ -262,11 +267,229 @@ var Settings_Roles_Js = {
 				});
 				Settings_Roles_Js.registerExistingProfilesChangeEvent();
                			 //Settings_Roles_Js.registerProfileEvents();
-     
-			}else {
-				app.helper.showErrorNotification({'message' : err.message});
+     					jQuery('[data-togglehandler]').click(function(e){
+
+								var target = jQuery(e.currentTarget);
+								var container = jQuery('[data-togglecontent="'+ target.data('togglehandler') + '"]');
+								var closestTrElement = container.closest('tr');
+								
+								if (target.find('i').hasClass('fa-chevron-down')) {
+									closestTrElement.removeClass('hide');
+									container.slideDown('slow');
+									target.find('.fa-chevron-down').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+								} else {
+									container.slideUp('slow',function(){
+										closestTrElement.addClass('hide');
+									});
+									target.find('.fa-chevron-up').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+								}
+					     					});
+
+				     				jQuery('[data-range]').each(function(index, item) {
+										item = jQuery(item);
+										if(item.data('locked')){
+											jQuery('.editViewMiniSlider').css('cursor','pointer');
+										}
+										var value = item.data('value');
+										item.slider({
+											min: 0,
+											max: 2,
+											value: value,
+											disabled: item.data('locked'),
+											slide: function(e,ui){
+													var target = jQuery(ui.handle);
+													if (!target.hasClass('mini-slider-control')) {
+														target = target.closest('.mini-slider-control');
+													}
+													var input  = jQuery('[data-range-input="'+target.data('range')+'"]');
+													input.val(ui.value);
+													target.attr('data-value', ui.value);
+											}
+										});
+									});	
+
+								//fix for IE jQuery UI slider
+								jQuery('[data-range]').find('a').css('filter','');
+
+								jQuery('[data-module-state]').change(function(e){
+									var target = jQuery(e.currentTarget);
+									var tabid  = target.data('value');
+									
+									var parent = target.closest('tr');
+									if (target.is(':checked')) {
+										jQuery('[data-action-state]', parent).prop('checked', true);
+										jQuery('[data-action-tool="'+tabid+'"]').prop('checked', true);
+										jQuery('[data-handlerfor]', parent).removeAttr('disabled');
+									} else {
+										jQuery('[data-action-state]', parent).prop('checked', false);
+										
+										// Pull-up fields / tools details in disabled state.
+										jQuery('[data-handlerfor]', parent).attr('disabled', 'disabled');
+										jQuery('[data-handlerfor]', parent).find('i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+										jQuery('[data-togglecontent="'+tabid+'-fields"]').hide();
+										jQuery('[data-togglecontent="'+tabid+'-tools"]').hide();
+										jQuery('[data-togglecontent="'+tabid+'-fields"]').closest('tr').addClass('hide');
+									}
+								});
+
+								jQuery('[data-action-state]').change(function(e){
+									var target = jQuery(e.currentTarget);
+									var parent = target.closest('tr');
+									var checked = target.prop('checked')? true : false;
+									
+									if (jQuery.inArray(target.data('action-state'), ['CreateView', 'EditView', 'Delete']) != -1) {
+										if (checked) {
+											jQuery('[data-action-state="DetailView"]', parent).prop('checked', true);
+											jQuery('[data-module-state]', parent).prop('checked', true);
+											jQuery('[data-handlerfor]', parent).removeAttr('disabled');
+										}
+									}
+									if (target.data('action-state') == 'EditView') {
+										if (!checked) {
+											jQuery('[data-action-state]', parent).prop('checked', false);
+											jQuery('[data-module-state]', parent).prop('checked', false).trigger('change');
+										} else {
+											jQuery('[data-module-state]', parent).prop('checked', true);
+											jQuery('[data-handlerfor]', parent).removeAttr('disabled');
+										}
+									}
+								});
+
+								var moduleCheckBoxes = jQuery('.modulesCheckBox');
+								var viewAction = jQuery('#mainAction4CheckBox');
+								var createAction = jQuery('#mainAction7CheckBox');
+								var editAction = jQuery('#mainAction1CheckBox');
+								var deleteAction = jQuery('#mainAction2CheckBox');
+								var mainModulesCheckBox = jQuery('#mainModulesCheckBox');
+								mainModulesCheckBox.on('change',function(e) {
+									var mainCheckBox = jQuery(e.currentTarget);
+									if(mainCheckBox.is(':checked')){
+										moduleCheckBoxes.prop('checked',true);
+										viewAction.prop('checked',true);
+										createAction.show().prop('checked',true);
+										editAction.show().prop('checked',true);
+										deleteAction.show().prop('checked',true);
+										moduleCheckBoxes.trigger('change');
+									} else {
+										moduleCheckBoxes.filter(':visible').not(':disabled').prop('checked',false);
+										moduleCheckBoxes.trigger('change');
+										viewAction.prop('checked',false);
+										createAction.prop('checked', false);
+										editAction.prop('checked', false);
+										deleteAction.prop('checked', false);
+									}
+								});
+
+								viewAction.on('change',function(){
+									Settings_Roles_Js.registerSelectAllViewActionsEvent();
+								});
+								createAction.on('change',function(){
+									Settings_Roles_Js.registerSelectAllCreateActionsEvent();
+								});
+								editAction.on('change',function(){
+									Settings_Roles_Js.registerSelectAllEditActionsEvent();
+								});
+								deleteAction.on('change',function(){
+									Settings_Roles_Js.registerSelectAllDeleteActionsEvent();
+								});
+
+							
+					}else {
+						app.helper.showErrorNotification({'message' : err.message});
+					}
+		});
+	},
+
+	registerSelectAllViewActionsEvent : function() {
+		var viewActionCheckBoxes = jQuery('.action4CheckBox');
+		var mainViewActionCheckBox = jQuery('#mainAction4CheckBox');
+		var modulesMainCheckBox = jQuery('#mainModulesCheckBox');
+		
+		mainViewActionCheckBox.on('change',function(e){
+			var mainCheckBox = jQuery(e.currentTarget);
+			if(mainCheckBox.is(':checked')){
+				modulesMainCheckBox.prop('checked',true);
+				modulesMainCheckBox.trigger('change');
+			} else {
+				modulesMainCheckBox.prop('checked',false);
+				modulesMainCheckBox.trigger('change');
 			}
 		});
+		
+		viewActionCheckBoxes.on('change',function() {
+			Settings_Roles_Js.checkSelectAll(viewActionCheckBoxes,mainViewActionCheckBox);
+		});
+		
+	},
+
+	registerSelectAllCreateActionsEvent : function() {
+		var createActionCheckBoxes = jQuery('.action7CheckBox');
+		var mainCreateActionCheckBox = jQuery('#mainAction7CheckBox');
+		mainCreateActionCheckBox.on('change', function (e) {
+			var mainCheckBox = jQuery(e.currentTarget);
+			if (mainCheckBox.is(':checked')) {
+				createActionCheckBoxes.prop('checked', true);
+			} else {
+				createActionCheckBoxes.prop('checked', false);
+			}
+		});
+		createActionCheckBoxes.on('change', function () {
+			Settings_Roles_Js.checkSelectAll(createActionCheckBoxes, mainCreateActionCheckBox);
+		});
+
+	},
+
+	registerSelectAllEditActionsEvent : function() {
+		var createActionCheckBoxes = jQuery('.action1CheckBox');
+		var mainCreateActionCheckBox =  jQuery('#mainAction1CheckBox');
+		mainCreateActionCheckBox.on('change',function(e){
+			var mainCheckBox = jQuery(e.currentTarget);
+			if(mainCheckBox.is(':checked')){
+				createActionCheckBoxes.prop('checked',true);
+			} else {
+				createActionCheckBoxes.prop('checked',false);
+			}
+		});
+		createActionCheckBoxes.on('change',function() {
+			Settings_Roles_Js.checkSelectAll(createActionCheckBoxes,mainCreateActionCheckBox);
+		});
+		
+	},
+	
+	registerSelectAllDeleteActionsEvent : function() {
+		var deleteActionCheckBoxes = jQuery('.action2CheckBox');
+		var mainDeleteActionCheckBox =  jQuery('#mainAction2CheckBox');
+		mainDeleteActionCheckBox.on('change',function(e){
+			var mainCheckBox = jQuery(e.currentTarget);
+			if(mainCheckBox.is(':checked')){
+				deleteActionCheckBoxes.prop('checked',true);
+			} else {
+				deleteActionCheckBoxes.prop('checked',false);
+			}
+		});
+		deleteActionCheckBoxes.on('change',function() {
+			Settings_Roles_Js.checkSelectAll(deleteActionCheckBoxes,mainDeleteActionCheckBox);
+		});
+	},
+
+	checkSelectAll : function(checkBoxElement,mainCheckBoxElement){
+		var state = true;
+		if(typeof checkBoxElement == 'undefined' || typeof mainCheckBoxElement == 'undefined'){
+			return false;
+		}
+		checkBoxElement.each(function(index,element){
+			if(jQuery(element).is(':checked')){
+				state = true;
+			}else{
+				state = false;
+				return false;
+			}
+		});
+		if(state == true){
+			mainCheckBoxElement.prop('checked',true);
+		} else {
+			mainCheckBoxElement.prop('checked', false);
+		}
 	},
 	
 	registerExistingProfilesChangeEvent : function() {
@@ -402,6 +625,7 @@ var Settings_Roles_Js = {
 	registerEvents : function() {
         var view = app.view();
         if(view === 'Index') {
+    	
             Settings_Roles_Js.initTreeView();
         } else if(view === 'Edit') {
             Settings_Roles_Js.registerShowNewProfilePrivilegesEvent();

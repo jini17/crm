@@ -70,13 +70,20 @@ $__cache_module_activeinfo = Array();
 function vtlib_prefetchModuleActiveInfo($force = true) {
 	global $__cache_module_activeinfo;
 
+	//added by jitu@session for modulelist as per plan by logged in user
+	$planid=$_SESSION['plan'];
+	
 	// Look up if cache has information
 	$tabrows = VTCacheUtils::lookupAllTabsInfo();
 
 	// Initialize from DB if cache information is not available or force flag is set
 	if($tabrows === false || $force) {
 		global $adb;
-		$tabres = $adb->pquery("SELECT * FROM vtiger_tab", array());
+
+		//modify query by jitu@plan based modulelist
+		$tabres = $adb->pquery("SELECT * FROM vtiger_tab LEFT JOIN secondcrm_planpermission ON secondcrm_planpermission.tabid=vtiger_tab.tabId
+			WHERE secondcrm_planpermission.planid=? AND secondcrm_planpermission.visible=1", array($planid));
+		//end here
 		$tabrows = array();
 		if($tabres) {
 			while($tabresrow = $adb->fetch_array($tabres)) {

@@ -271,8 +271,8 @@ Vtiger_Detail_Js("Users_Detail_Js",{
                if(container=='preference'){
                     window.location.href="?module=Users&view=PreferenceDetail&parent=Settings&record="+userid
      		}
-     			
-			if(tabIndx !=0) {
+
+			if(tabIndx !=0 && container !='') {
 			     var params = {
 					     'data' : {
 						     'module': app.getModuleName(),

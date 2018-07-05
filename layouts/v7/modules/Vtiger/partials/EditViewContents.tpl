@@ -46,6 +46,7 @@
 										{assign var=COUNTER value=$COUNTER+1}
 									{/if}
 									<td class="fieldLabel alignMiddle">
+										
 										{if $isReferenceField eq "reference"}
 											{if $refrenceListCount > 1}
 												{assign var="DISPLAYID" value=$FIELD_MODEL->get('fieldvalue')}
@@ -59,7 +60,11 @@
 													{/foreach}
 												</select>
 											{else}
-												{vtranslate($FIELD_MODEL->get('label'), $MODULE)}
+												{if $FIELD_MODEL->get('uitype') eq "66" && $DISABLEDRELATED eq 1}
+												{else}
+													{vtranslate($FIELD_MODEL->get('label'), $MODULE)}
+												{/if}
+												
 											{/if}
 										{else if $FIELD_MODEL->get('uitype') eq "83"}
 											{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE) COUNTER=$COUNTER MODULE=$MODULE}
@@ -86,15 +91,32 @@
 													{vtranslate($FIELD_MODEL->get('label'), $MODULE)}
 												{/if}
 											{else}
+												<!--added by jitu@hide HR document checkbox-->
+												{if $MODULE eq 'Documents' AND  $HRDOC eq '1' AND $FIELD_MODEL->get('label') eq 'Is HR Document?'}
+													
+												{else}
 												{vtranslate($FIELD_MODEL->get('label'), $MODULE)}
+												{/if}
+												<!-- End here -->
 											{/if}
 										{/if}
 										&nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}
 									</td>
 									{if $FIELD_MODEL->get('uitype') neq '83'}
-										<td class="fieldValue" {if $FIELD_MODEL->getFieldDataType() eq 'boolean'} style="width:25%" {/if} {if $FIELD_MODEL->get('uitype') eq '19'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
-											{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
-										</td>
+										{if $MODULE eq 'Documents' AND  $HRDOC eq '1' AND $FIELD_MODEL->get('label') eq 'Is HR Document?'}
+											
+										
+										{else}
+											<!--added by jitu@hide related to if account/leads disabled -->
+											{if $FIELD_MODEL->get('uitype') eq "66" && $DISABLEDRELATED eq 1}
+											
+											{else}
+												<td class="fieldValue" {if $FIELD_MODEL->getFieldDataType() eq 'boolean'} style="width:25%" {/if} {if $FIELD_MODEL->get('uitype') eq '19'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
+												{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
+												</td>
+											{/if}
+											<!--End here -->
+										{/if}
 									{/if}
 								{/if}
 							{/foreach}
@@ -104,8 +126,50 @@
 								<td></td>
 							{/if}
 						</tr>
+						<!-- Added By Jitu Mabruk for Meeting-->
+						{if $BLOCK_LABEL eq 'Participants' && $MODULE eq 'Events'}
+							<tr>
+								<td class="fieldLabel alignMiddle">{vtranslate('LBL_INVITE_USERS', $MODULE)}</td>
+								<td class="fieldValue">
+									<select id="selectedUsers" class="select2 inputElement" multiple name="selectedusers[]">
+										{foreach key=USER_ID item=USER_NAME from=$ACCESSIBLE_USERS}
+											{if $USER_ID eq $CURRENT_USER->getId()}
+												{continue}
+											{/if}
+											<option value="{$USER_ID}" {if in_array($USER_ID,$INVITIES_SELECTED)}selected{/if}>
+												{$USER_NAME}
+											</option>
+										{/foreach}
+									</select>
+								</td>
+								<td></td><td></td>
+							</tr>
+							<tr>
+								<td class="fieldLabel alignMiddle">{vtranslate('LBL_INVITE_EXTERNAL_EMAILS', $MODULE)}</td>
+								<td class="fieldValue">
+									
+									<select id="externalusers" class="select2 inputElement {if $EXTERNAL_EMAILS|count eq 0} hide{/if}" multiple name="externalusers[]" placeholder="Click on add icon">
+										{foreach item=EMAIL from=$EXTERNAL_EMAILS}
+											<option value="{$EMAIL['emailaddress']}" selected>
+												{$EMAIL['emailaddress']}
+											</option>
+										{/foreach}
+									</select>
+									&nbsp;&nbsp;
+									<span class="addemail" style="cursor:pointer;"><button class="btn" name="addemail"><i class="fa fa-plus"></i>&nbsp;Add Email</button></span>
+									<span class="fieldvalue inputspan hide"><input type="email" class="inputElement" name="extemail" id="extemail" /></span>
+									
+									<div class="btn-group inline-save hide">
+        								<button class="button btn-success btn-small add" type="button" name="save"><i class="fa fa-check"></i></button>
+        								<button class="button btn-danger btn-small cancelbtn" type="button" name="Cancel"><i class="fa fa-close"></i></button>
+    								</div>
+								</td>
+								<td></td><td></td>
+							</tr>		
+						{/if}
 					</table>
 				</div>
+
 			{/if}
 		{/foreach}
 	</div>

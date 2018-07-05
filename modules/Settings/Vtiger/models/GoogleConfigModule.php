@@ -102,36 +102,6 @@ class Settings_Vtiger_GoogleConfigModule_Model extends Settings_Vtiger_Module_Mo
 		return $this->getData();
 	}
 
-public function getViewableData2() {
-		
-		if (!$this->getData()) {
-			$fileContent = $this->readFile();
-			$pattern = '/\$([^=]+)=([^;]+);/';
-			$matches = null;
-			$matchesFound = preg_match_all($pattern, $fileContent, $matches);
-			
-			$configContents = array();
-			if ($matchesFound) {
-				$configContents = $matches[0];
-			}
-			
-			$data = array(); //print_r($data);
-			$editableFields = $this->getEditableFields2();
-			
-			foreach ($editableFields as $fieldName => $fieldDetails) {
-				foreach ($configContents as $configContent) {
-					if (strpos($configContent, $fieldName)) {
-						$fieldValue = explode(' = ', $configContent);
-						$fieldValue = $fieldValue[1];
-						$data[$fieldName] = str_replace(";", '', str_replace("'", '', $fieldValue));
-						break;
-					}
-				}
-			}
-			$this->setData($data);
-		}
-		return $this->getData();
-	}
 
 	/**
 	 * Function to get editable fields
@@ -144,13 +114,6 @@ public function getViewableData2() {
 		);
 	}
 
-	public function getEditableFields2() {
-		return array(
-			'clientSecretFile'	=> array('label' => 'LBL_CLIENTSECRETFILE','fieldType' => 'file'),
-			'accessKey'	=> array('label' =>'LBL_ACCESSKEY','fieldType' => 'input')
-		);
-	}
-
 	/**
 	 * Function to save the data
 	 */
@@ -158,9 +121,8 @@ public function getViewableData2() {
 		$fileContent = $this->completeData;
 		$updatedFields = $this->get('updatedFields'); //print_r($updatedFields);
 		//$validationInfo = $this->validateFieldValues($updatedFields);
-$validationInfo = true;
-//print_r($_POST);
-//print_r($_FILES);
+		$validationInfo = true;
+
 		if ($validationInfo === true) {
 			foreach ($updatedFields as $fieldName => $fieldValue) {
 				$fieldValue  = trim($fieldValue);
@@ -198,7 +160,6 @@ $validationInfo = true;
 	public static function getInstance() {
 		$moduleModel = new self();
 		$moduleModel->getViewableData();
-		$moduleModel->getViewableData2();
 		return $moduleModel;
 	}
 }

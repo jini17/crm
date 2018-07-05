@@ -9,6 +9,61 @@
  *************************************************************************************/
 
 class Calendar_Detail_View extends Vtiger_Detail_View {
+	//Added By Mabruk Jitu for Mom tab attachment
+	function __construct() {
+		parent::__construct();
+		$this->exposeMethod('showMom');
+	}
+	
+	/**
+	 * Added By Mabruk for Meeting on 07/06/2018 
+	 * @param Vtiger_Request $request
+	 */
+	function showMom(Vtiger_Request $request){	
+
+		$recordId = $request->get('record');
+		$moduleName = $request->getModule();		
+		$contactDetails = Calendar_Module_Model::getRelatedContactDetails($recordId);
+		$userDetails = Calendar_Module_Model::getInvitedUserDetails($recordId);
+		$names = array();		
+		$count = 0;
+		$viewer = $this->getViewer($request);
+		for ($i = 0; $i < count($contactDetails); $i++) {
+			$names[$count] = $contactDetails[$i]['name'];
+			$count++;
+		}		
+		
+
+		for ($i = 0; $i < count($userDetails); $i++) {
+			$names[$count] = $userDetails[$i]['name'];
+			$count++;
+		}
+
+		if(vtlib_isModuleActive('Accounts')){
+			$viewer->assign('ACCOUNTS', Calendar_Module_Model::getRelatedModuleDetails($recordId,'Accounts'));
+		}
+		if(vtlib_isModuleActive('Leads')){
+			$viewer->assign('LEADS', Calendar_Module_Model::getRelatedModuleDetails($recordId,'Leads'));
+		}
+
+		$names = array_filter($names);
+		$names = implode(",",$names);
+
+		//Add condition by jitu@Hide permission to edit agenda based on role-->
+		$actionName = 'EditView';
+		if(!Users_Privileges_Model::isPermitted($moduleName, $actionName, $recordId)) {
+			$viewer->assign('EDITAGENDA', false);
+		} else {
+			$viewer->assign('EDITAGENDA', true);
+		} //end here
+		
+		$viewer->assign('ATTENDEES', $names);
+		$viewer->assign('MEETINGDATA', Calendar_Module_Model::getMeetingData($recordId));
+		$viewer->assign('CONTACTS', Calendar_Module_Model::getRelatedContactDetails($recordId));
+		$viewer->assign('USERS', Calendar_Module_Model::getInvitedUserDetails($recordId));
+		$viewer->assign('EXTEMAILS', Calendar_Module_Model::getExternalPeoples($recordId));
+		$viewer->view('ShowMOM.tpl', $moduleName);
+	}
 
 	function checkPermission(Vtiger_Request $request) {
 		$moduleName = $request->getModule();
@@ -169,6 +224,14 @@ class Calendar_Detail_View extends Vtiger_Detail_View {
 			$viewer->assign('ACCESSIBLE_USERS', $accessibleUsers);
 			$viewer->assign('INVITIES_SELECTED', $recordModel->getInvities());
 			$viewer->assign('INVITEES_DETAILS', $recordModel->getInviteesDetails());
+			$viewer->assign('EXTEMAILS_DETAILS', $recordModel->getExternalPeoples());
+
+			//hide related to field if accounts & leads disabled by jitu
+			if($moduleName=='Events' || $moduleName=='Calendar'){
+				if(!vtlib_isModuleActive('Accounts') && !vtlib_isModuleActive('Leads')){
+					$viewer->assign('DISABLEDRELATED', 1);
+				}
+			} //end here 
 		}
 
 		if ($request->get('displayMode') == 'overlay') {
@@ -197,4 +260,24 @@ class Calendar_Detail_View extends Vtiger_Detail_View {
 	function isAjaxEnabled($recordModel) {
 		return false;
 	}
+/**
+	 * Function to get the list of Script models to be included
+	 * @param Vtiger_Request $request
+	 * @return <Array> - List of Vtiger_JsScript_Model instances
+	 */
+	function getHeaderScripts(Vtiger_Request $request) {
+		$headerScriptInstances = parent::getHeaderScripts($request);
+
+		$jsFileNames = array(
+			'modules.Calendar.resources.Detail',
+			"libraries.jquery.ckeditor.ckeditor",
+			"libraries.jquery.ckeditor.adapters.jquery",
+			'modules.Vtiger.resources.CkEditor',
+		);
+
+
+		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
+		$headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
+		return $headerScriptInstances;
+	}	
 }

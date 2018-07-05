@@ -50,7 +50,7 @@
                             </td>
 
                             <td>
-                                Status
+                                Is Active
                             </td>
                         </tr>
                         {foreach item=SPLITVALUE from=$VALUES}

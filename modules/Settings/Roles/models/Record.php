@@ -287,7 +287,7 @@ class Settings_Roles_Record_Model extends Settings_Vtiger_Record_Model {
 	 */
 	public function save() {
 		$db = PearDatabase::getInstance();
-		$db->setDebug(true);
+		//$db->setDebug(true);
 		$roleId = $this->getId();
 		$mode = 'edit';
 		$planid = $this->getPlanId();
@@ -335,7 +335,7 @@ class Settings_Roles_Record_Model extends Settings_Vtiger_Record_Model {
 				}
 			}
 		}
-die;
+
 	}
 
 	/**

@@ -20,7 +20,7 @@ class Settings_Vtiger_DeleteAllowedIp_Action extends Settings_Vtiger_Basic_Actio
             else
                 $stringVal .= "'".$SeperatedValues[$i]."'";
         }
-        $result = $adb->pquery("delete FROM allowed_ip WHERE ip in ($stringVal)",array());
+        $result = $adb->pquery("delete FROM allowed_ip WHERE ip_id in ($stringVal)",array());
 
         $responses = [true];
 

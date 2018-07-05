@@ -19,7 +19,10 @@ Class Events_Edit_View extends Calendar_Edit_View {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 
 		$jsFileNames = array(
-			'modules.Calendar.resources.Edit'
+			'modules.Calendar.resources.Edit',
+			"libraries.jquery.ckeditor.ckeditor",
+			"libraries.jquery.ckeditor.adapters.jquery",
+			'modules.Vtiger.resources.CkEditor',
 		);
 
 
@@ -27,5 +30,4 @@ Class Events_Edit_View extends Calendar_Edit_View {
 		$headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
 		return $headerScriptInstances;
 	}
-
 }

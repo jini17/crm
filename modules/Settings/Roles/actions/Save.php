@@ -51,6 +51,7 @@ class Settings_Roles_Save_Action extends Vtiger_Action_Controller {
 			       ->set('profile_permissions', $request->get('permissions'));
             $profileRecordModel->set('viewall', $request->get('viewall'));
 			$profileRecordModel->set('editall', $request->get('editall'));
+			$profileRecordModel->set('planid',$request->get('plantitle'));
 			$savedProfileId = $profileRecordModel->save();
             $roleProfiles = array($savedProfileId);
         }else{

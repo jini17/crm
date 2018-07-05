@@ -309,7 +309,7 @@ class Calendar_TaskManagement_View extends Vtiger_Index_View {
             //echo "nIRBHAY<pre>"; print_r($statuses); die
          $this->showManagementView($request,$statuses);
 
-               echo "<pre>"; print_r($this->statusrenew); die;
+               //echo "<pre>"; print_r($this->statusrenew); die;
 
         }
         /*************************/

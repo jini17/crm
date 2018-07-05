@@ -111,7 +111,9 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 	LEFT JOIN vtiger_leave tblVTL ON tblVTL.leavetype = tblSCUB.leave_type  
 	 WHERE tblVTC.deleted=0 ".$conduser." AND year = '".$year."' ".$condleave. " ORDER BY tblVTLT.leavetypeid ASC"; */
 
-	 $query = "SELECT * from vtiger_leavetype";
+	 $query = "SELECT * FROM vtiger_leavetype tblVTLT
+	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLT.leavetypeid
+	 WHERE tblVTC.deleted=0";
 
 	$result = $db->pquery($query,array());
 
@@ -122,7 +124,7 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 			
 			if($leavetypeid != $db->query_result($result, $i, 'leavetypeid')) {
 				$leavetype[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetypeid');
-				$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'title').'@'.$db->query_result($result, $i, 'colorcode').'@'.$db->query_result($result, $i, 'leave_count').'@'.$db->query_result($result, $i, 'halfdayallowed');
+				$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'title').'@'.$db->query_result($result, $i, 'colorcode').'@'.$db->query_result($result, $i, 'leavefrequency').'@'.$db->query_result($result, $i, 'halfdayallowed');
 				$leavetypeid = $db->query_result($result, $i, 'leave_type');
 			} 
 		}
@@ -137,7 +139,7 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 	public function getTotaLeaveTypeList($userid,$leaveid){
 	$db = PearDatabase::getInstance();
 	global $current_user;	
-	$query = "SELECT tblVTLT.leavetypeid, tblVTLT.leave_title, tblVTLT.color_code 
+	$query = "SELECT tblVTLT.leavetypeid, tblVTLT.title, tblVTLT.colorcode 
 	FROM vtiger_leavetype tblVTLT
 	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLT.leavetypeid
 	 WHERE tblVTC.deleted=0 ";
@@ -145,7 +147,7 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 	$leavetype=array();	
 	for($i=0;$db->num_rows($result)>$i;$i++){
 		$leavetype[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetypeid');
-		$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'leave_title').'@'.$db->query_result($result, $i, 'color_code');
+		$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'title');
 	}
 	return $leavetype;	
 

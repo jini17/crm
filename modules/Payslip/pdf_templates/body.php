@@ -8,17 +8,218 @@ ob_start();
 
 
 $xmargin = '20';
-$ymargin = '40';
-//$modulename=decode_html("");
+$ymargin = '0';
 $pdf->SetFont($default_font,'',10.5);
-//$pdf->MultiCell(160,$pdf->getFontSize(),$modulename,0,'C',0,0,$xmargin,$ymargin);
 
 /*********************Start Section A**************************/
 # Start Payments table in HTML by Haziq
 $pdf->Ln(13);
 $html = <<<EOD
 
-<p align="right">Soft Solvers Solutions Sdn Bhd<br />(890813-X)<br />C2-3-7, Block C2, CBD Perdana 3, Persiaran Cyberpoint<br />Timur, Cyber 12, 63000 Cyberjaya, Selangor.<br />0386874433</p>
+<p align="right"><b>$organization_title</b><br />$organizationname<br />$address<br />$city , $state, $country, $code<br />$phone<br />Fax : $fax<br />$website</p>
+
+<b align="left">
+$emp_name
+</b>
+                                                                                               
+Period($pay_month $pay_year)
+<br><br>
+<table>
+    <tr>
+        <td>
+            Position : $designation
+        </td>
+        <td>
+            EPF No : $epf_no
+        </td>
+        <td rowspan="3" align="right">
+        <font color="#008b8b"><b>Net Pay  </font><br /> $net_pay</b>
+        </td>
+    </tr>
+     <tr>
+        <td>
+            Dept : $dept
+        </td>
+        <td>
+            SOSCO : $socso_no
+        </td>
+    </tr>
+    <tr>
+        <td>
+            IC/Passport : $ic_passport
+        </td>
+        <td>
+            Income Tax No : $tax_no
+        </td>
+    </tr>
+</table>
+
+<br>
+
+
+
+<b>
+<font color=#5f9ea0>
+Employee Earning
+<hr>
+</font></b>
+<table align="left">
+    <tr>
+        <td>
+            Basic
+        </td>
+        <td align="right">
+            $basic_sal
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Transport Allowance
+        </td>
+        <td align="right">
+            $transport_allowance
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Phone Allowance
+        </td>
+        <td align="right">
+            $ph_allowance
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Parking Allowance
+        </td>
+        <td align="right">
+            $parking_allowance
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Over Time Meal Allowance
+        </td>
+        <td align="right">
+            $ot_meal_allowance
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Other Allowance
+        </td>
+        <td align="right">
+            $oth_allowance
+        </td>
+    </tr>
+    
+</table>
+<br><br>
+<b>
+<font color=#5f9ea0>
+Employee Deduction
+</font>
+<hr>
+<table>
+    <tr>
+        <td>
+            Zakat
+        </td>
+        <td align="right">
+            $zakat
+        </td>
+    </tr>
+    <tr>
+        <td>
+            LHDN
+        </td>
+        <td align="right">
+            $lhdn
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Employee EPF
+        </td>
+        <td align="right">
+            $emp_epf
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Employee SOCSO
+        </td>
+        <td align="right">
+            $emp_socso
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Other Dedcutions
+        </td>
+        <td align="right">
+            $other_deduction
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Total Deduction
+        </td>
+        <td align="right">
+            $total_deduction
+        </td>
+    </tr>
+</table>
+<br><br>
+<b><font color="#5f9ea0">
+Company Contribution
+</font>
+<hr>
+<table>
+    <tr>
+        <td>
+            Employer EPF
+        </td>
+        <td align="right">
+            $employer_epf
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Employer SOCSO
+        </td>
+        <td align="right">
+            $employer_socso
+        </td>
+    </tr>
+        <tr>
+        <td>
+            Employer EIS
+        </td>
+        <td align="right">
+            $employer_eis
+        </td>
+    </tr>
+    <tr>
+        <td>
+            HRDF
+        </td>
+        <td align="right">
+            $hrdf
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Total Company Contribution
+        </td>
+        <td align="right">
+            $total_comp_contribution
+        </td>
+    </tr>
+</table>
+</b>
+             
+
 
 <b align="left">
 $emp_name

@@ -19,7 +19,7 @@ config.inc.php
 .idea/**
 
 #ignore user access files
-#user_privileges/**
+user_privileges/**
 
 #ignore Smarty Temp Templates
 Smarty/templates_c/**

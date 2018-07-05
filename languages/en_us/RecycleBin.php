@@ -17,6 +17,9 @@ $languageStrings = Array(
 	'LBL_NO_PERMITTED_MODULES' => 'No permitted modules available',
 	'LBL_RECORDS_LIST' => 'Recycle Bin List',
 	'LBL_NO_RECORDS_FOUND' => 'No records found to Restore in module',
+	'Last Modified By'=>'Deleted By',
+	'EmergencyContact'=>'Emergency Contact',
+	'Modified Time'=>'Deletion Date',
 );
 
 $jsLanguageStrings = array(

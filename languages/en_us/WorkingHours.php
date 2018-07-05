@@ -15,5 +15,5 @@ $languageStrings = array(
 );
 
 $jsLanguageStrings = array(
-	
+	'JS_PLEASE_SELECT_MONDAY_TIMINGS'=>'Please select monday timings',
 );

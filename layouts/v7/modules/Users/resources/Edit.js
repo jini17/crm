@@ -7,6 +7,10 @@
  * All Rights Reserved.
  *************************************************************************************/
 
+var imported = document.createElement('script');
+imported.src = 'layouts/v7/modules/Users/resources/google.js';
+document.head.appendChild(imported);
+
 Vtiger_Edit_Js("Users_Edit_Js",{},{
 	
 	
@@ -21,10 +25,7 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 		app.event.on(Vtiger_Edit_Js.recordPresaveEvent, function(e, data) {
 			var userName = jQuery('input[name="user_name"]').val();
 			var newPassword = jQuery('input[name="user_password"]').val();
-		
-			
-			alert(userName+roleId);return false;
-			var confirmPassword = jQuery('input[name="confirm_password"]').val();
+		     var confirmPassword = jQuery('input[name="confirm_password"]').val();
 			var record = jQuery('input[name="record"]').val();
             var firstName = jQuery('input[name="first_name"]').val();
             var lastName = jQuery('input[name="last_name"]').val();
@@ -112,6 +113,15 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 			ckEditorInstance.loadCkEditor(templateContentElement,customConfig);
 		}
 	},
+		registerGoogleAddress : function(container){
+		var thisInstance = this;
+	
+		
+	    var script = document.createElement('script');
+	    script.type = 'text/javascript';
+	    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA7QuhuZ34ygC0j5RHmYuqtK_uwecsNb9E&libraries=places&callback=initAutocomplete";
+	    document.body.appendChild(script);	
+	},
 	
 	registerEvents : function() {
         this._super();
@@ -122,6 +132,7 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
         
         var instance = new Settings_Vtiger_Index_Js(); 
         instance.registerBasicSettingsEvents();
+        this.registerGoogleAddress();
 	}
 });
 

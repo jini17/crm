@@ -95,29 +95,39 @@ class Vtiger_WebUI extends Vtiger_EntryPoint {
 		Vtiger_Session::init();
 		global $site_URL, $adb;
 
-			//added by jitu@secondcrm for session inactivity handling		
-			$loginpageinfo  = Users_Record_Model::loginPageDetails();
+
+		//Added by jitu to stop multiple access . at a time only one can access in same browser.
+		global $application_unique_key;
+		if(isset($_SESSION["authenticated_user_id"]) 
+				&& $_SESSION["app_unique_key"] != $application_unique_key){ 
+			Vtiger_Session::destroy();
+			header("location:index.php");
+		}
+		//End here 
+		
+		//added by jitu@secondcrm for session inactivity handling		
+		$loginpageinfo  = Users_Record_Model::loginPageDetails();
+		
+		$timein			= Vtiger_Session::get('timein');	
+		$maxstay 		= $loginpageinfo['sessionout']*60;
+
+		if($maxstay =='' || $maxstay==0){
+			$maxstay = 15*60;
+		}	
+
+		$stayduration = $loginpageinfo['sessionout'];		
+		$session_life = time() - $timein;		
 			
-			$timein			= Vtiger_Session::get('timein');	
-			$maxstay 		= $loginpageinfo['sessionout']*60;
-
-			if($maxstay =='' || $maxstay==0){
-				$maxstay = 15*60;
-			}	
-
-			$stayduration = $loginpageinfo['sessionout'];		
-			$session_life = time() - $timein;		
-				
-			if($session_life > $maxstay && $timein!='') { 
-				//$adb->setDebug(true); 
-				$moduleModel = Users_Module_Model::getInstance('Users');
-				$moduleModel->saveLogoutHistory();		
-			    Vtiger_Session::destroy();	
-			    header("location:".$site_URL."index.php?module=Users&parent=Settings&view=Login&error=7"); 
-			    exit;		
-	  		}		
-			Vtiger_Session::set('timein', time());		
-			//end here		
+		if($session_life > $maxstay && $timein!='') { 
+			//$adb->setDebug(true); 
+			$moduleModel = Users_Module_Model::getInstance('Users');
+			$moduleModel->saveLogoutHistory();		
+		    Vtiger_Session::destroy();	
+		    header("location:".$site_URL."index.php?module=Users&parent=Settings&view=Login&error=7"); 
+		    exit;		
+  		}		
+		Vtiger_Session::set('timein', time());		
+		//end here		
 	
 
 		// Better place this here as session get initiated

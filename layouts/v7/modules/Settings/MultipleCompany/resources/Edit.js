@@ -6,6 +6,9 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  *************************************************************************************/
+var imported = document.createElement('script');
+imported.src = 'layouts/v7/modules/Settings/MultipleCompany/resources/google.js';
+document.head.appendChild(imported);
 
 Settings_Vtiger_Edit_Js('Settings_MultipleCompany_Edit_Js', {}, {
 	/**
@@ -103,6 +106,16 @@ Settings_Vtiger_Edit_Js('Settings_MultipleCompany_Edit_Js', {}, {
 		);
 		return aDeferred.promise();
 	},
+
+		registerGoogleAddress : function(container){
+		var thisInstance = this;
+	
+		
+	    var script = document.createElement('script');
+	    script.type = 'text/javascript';
+	    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA7QuhuZ34ygC0j5RHmYuqtK_uwecsNb9E&libraries=places&callback=initAutocomplete";
+	    document.body.appendChild(script);	
+	},
 	
 	/**
 	 * Function which will handle the registrations for the elements 
@@ -110,5 +123,6 @@ Settings_Vtiger_Edit_Js('Settings_MultipleCompany_Edit_Js', {}, {
 	registerEvents : function() {
 		this._super();
 		this.registerSubmitEvent();
+		this.registerGoogleAddress();
 	}
 });

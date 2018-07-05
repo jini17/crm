@@ -1,0 +1,68 @@
+<?php
+/*+**********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.1
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is:  vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ ************************************************************************************/
+
+class Settings_LoginHistory_ShowUpdates_View extends Settings_Vtiger_List_View{
+	
+	function postProcess(Vtiger_Request $request) {
+		return false;
+	}
+	public function process(Vtiger_Request $request) {
+
+		$qualifiedModuleName = $request->getModule(false);
+		$session = $request->get('session');
+		
+		global $adb;
+		$result = $adb->pquery("SELECT module, crmid");
+		$request->set('module','Contacts');
+		$request->set('record','582');
+		
+		$pagingModel = new Vtiger_Paging_Model();
+		$pagingModel->set('page', $pageNumber);
+		$pagingModel->set('limit', $limit);
+			$response = Vtiger_Detail_View::showRecentActivities($request);
+		
+		
+    }
+
+/**
+	 * Added to support Engagements view in Vtiger7
+	 * @param Vtiger_Request $request
+	 */
+	function _showRecentActivities(Vtiger_Request $request){
+		$parentRecordId = $request->get('record');
+		$pageNumber = $request->get('page');
+		$limit = $request->get('limit');
+		$moduleName = $request->get('module');
+
+		if(empty($pageNumber)) {
+			$pageNumber = 1;
+		}
+
+		$pagingModel = new Vtiger_Paging_Model();
+		$pagingModel->set('page', $pageNumber);
+		if(!empty($limit)) {
+			$pagingModel->set('limit', $limit);
+		}
+
+		$recentActivities = ModTracker_Record_Model::getUpdates($parentRecordId, $pagingModel,$moduleName);
+		$pagingModel->calculatePageRange($recentActivities);
+
+		if($pagingModel->getCurrentPage() == ModTracker_Record_Model::getTotalRecordCount($parentRecordId)/$pagingModel->getPageLimit()) {
+			$pagingModel->set('nextPageExists', false);
+		}
+		$recordModel = Vtiger_Record_Model::getInstanceById($parentRecordId);
+		$viewer = $this->getViewer($request);
+		$viewer->assign('SOURCE',$recordModel->get('source'));
+		$viewer->assign('RECENT_ACTIVITIES', $recentActivities);
+		$viewer->assign('MODULE_NAME', $moduleName);
+		$viewer->assign('PAGING_MODEL', $pagingModel);
+		$viewer->assign('RECORD_ID',$parentRecordId);
+	}
+}

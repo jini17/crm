@@ -56,13 +56,20 @@ Settings_Vtiger_List_Js('Settings_Claim_List_Js',{
                   if(error === null) {
 				app.helper.showModal(data);
 			}
+		//redirect button for 'more' updates in detailview on settings claim.
+		/*$('.moreRecentUpdates').click(function(){
+			var recentUpdateURL = "index.php?view=Detail&mode=showRecentActivities&page=1&module=Claim"+ "&record=" + url + "&tab_label=LBL_UPDATES";
+  window.location.href = recentUpdateURL;
+		});*/
 });
 	
 
      	
     },
+
+
     
-    registerEvents : function() {
+    registerEvents : function() {   
         var self = this;
         this._super();
         app.event.on('post.listViewFilter.click', function(e){

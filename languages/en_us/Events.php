@@ -12,17 +12,17 @@
 
 $languageStrings = array(
 	// Basic Strings
-	'Events' => 'Events',
-	'SINGLE_Events' => 'Event',
-	'LBL_ADD_RECORD' => 'Add Event',
-	'LBL_RECORDS_LIST' => 'Events List',
-	'LBL_EVENTS' => 'Events',
+	'Events' => 'Meetings',
+	'SINGLE_Events' => 'Meeting',
+	'LBL_ADD_RECORD' => 'Add Meeting',
+	'LBL_RECORDS_LIST' => 'Meetings List',
+	'LBL_EVENTS' => 'Meetings',
 	'LBL_TODOS' => 'Task',
 	'LBL_HOLD_FOLLOWUP_ON' => 'Hold Followup on',
-    'LBL_CREATE_FOLLOWUP_EVENT' => 'Create Follow Up Event',
+    'LBL_CREATE_FOLLOWUP_EVENT' => 'Create Follow Up Meeting',
 	
 	// Blocks
-	'LBL_EVENT_INFORMATION' => 'Event Details',
+	'LBL_EVENT_INFORMATION' => 'Meeting Details',
 	'LBL_RECURRENCE_INFORMATION' => 'Recurrence Details',
     'LBL_RELATED_TO' => 'Related To',
 	
@@ -98,6 +98,12 @@ $languageStrings = array(
     'LBL_INVITE_USERS' => 'Invite Users',
     'LBL_INVITE_PEOPLE' => 'Invite People',
 	'INVITATION'=>' Invitation ',
+	'LBL_INVITE_EXTERNAL_EMAILS'=>'Invite External People',
+	'LBL_EXTERNAL_USERS'=>'External Emails',
 	'Busy' => 'Busy',
+	
 
 );
+$jsLanguageStrings = array(
+
+); 
