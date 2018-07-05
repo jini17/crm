@@ -6,8 +6,8 @@
  * The Initial Developer of the Original Code is vtiger.
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
- Created by DANIAL FAJAR
- *************************************************************************************/
+
+  *************************************************************************************/
 
 class Settings_Vtiger_FullContactConfigModule_Model extends Settings_Vtiger_Module_Model {
 
@@ -75,17 +75,8 @@ class Settings_Vtiger_FullContactConfigModule_Model extends Settings_Vtiger_Modu
 	public function getViewableData() {
 		
 		if (!$this->getData()) {
-			$fileContent = $this->readFile();
-			$pattern = '/\$([^=]+)=([^;]+);/';
-			$matches = null;
-			$matchesFound = preg_match_all($pattern, $fileContent, $matches);
 			
-			$configContents = array();
-			if ($matchesFound) {
-				$configContents = $matches[0];
-			}
-			
-			$data = array();
+			$data = 'l64pERb0m2pKaZDtwkjd0BoaOdCsfiWi';
 			$editableFileds = $this->getEditableFields();
 			
 			foreach ($editableFileds as $fieldName => $fieldDetails) {
