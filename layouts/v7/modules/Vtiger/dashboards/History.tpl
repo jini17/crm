@@ -15,26 +15,22 @@
     </div>
     <div class="userList">
         {assign var=CURRENT_USER_ID value=$CURRENT_USER->getId()}
-        {if $ACCESSIBLE_USERS|@count gt 1}
-            <select class="select2 widgetFilter col-lg-3 reloadOnChange" name="type">
-                <option value="all"  selected>{vtranslate('All', $MODULE_NAME)}</option>
-                {foreach key=USER_ID from=$ACCESSIBLE_USERS item=USER_NAME}
-                    <option value="{$USER_ID}">
-                    {if $USER_ID eq $CURRENT_USER_ID} 
-                        {vtranslate('LBL_MINE',$MODULE_NAME)}
-                    {else}
-                        {$USER_NAME}
-                    {/if}
-                    </option>
-                {/foreach}
-            </select>
-            {else}
-                <center>{vtranslate('LBL_MY',$MODULE_NAME)} {vtranslate('History',$MODULE_NAME)}</center>
-        {/if}
+        <select class="select2 widgetFilter col-lg-3 reloadOnChange" name="type">
+            <option value="all"  selected>{vtranslate('All', $MODULE_NAME)}</option>
+            {foreach key=USER_ID from=$ACCESSIBLE_USERS item=USER_NAME}
+                <option value="{$USER_ID}">
+                {if $USER_ID eq $CURRENT_USER_ID} 
+                    {vtranslate('LBL_MINE',$MODULE_NAME)}
+                {else}
+                    {$USER_NAME}
+                {/if}
+                </option>
+            {/foreach}
+      </select>
     </div>
 </div>
 <div class="dashboardWidgetContent" style="padding-top:15px;">
-	{include file="dashboards/HistoryContents.tpl"|@vtemplate_path:$MODULE_NAME}
+    {include file="dashboards/HistoryContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 
 <div class="widgeticons dashBoardWidgetFooter">
