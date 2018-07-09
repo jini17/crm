@@ -12,7 +12,7 @@
 Class FullContact_Config_Connector {
 
 
-	static $barrier = 'l64pERb0m2pKaZDtwkjd0BoaOdCsfiWi';
+	static $bearer = 'l64pERb0m2pKaZDtwkjd0BoaOdCsfiWi';
 
 
 

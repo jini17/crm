@@ -323,10 +323,19 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 									$resultx = $db->pquery($leabalq,array());
 								}
 							} 
-
-						$leave = vtws_revise($data, $current_usersaving);
-						//print_r($leave);die;
-						$msg    = $request->get('savetype')=='Approved'?vtranslate("LBL_APPROVED","Users"):vtranslate("LBL_NOT_APPROVED","Users");
+						//$current_usersaving = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
+							include_once 'modules/Leave/Leave.php';
+							$leave = new Leave();
+							$leave->retrieve_entity_info($leaveid, 'Leave');
+							$leave->column_fields['leavestatus'] = $data['leavestatus'];
+							$leave->column_fields['reasonnotapprove'] = $data['reasonnotapprove'];
+							$leave->column_fields['approveby'] = $data['approveby'];
+							$leave->column_fields['approvedate'] = $data['approvedate'];
+							$leave->mode='Edit';
+							$leave->id= $leaveid;
+							$leave->save('Leave');
+							//$leave = vtws_revise($data, $current_user);
+							$msg    = $request->get('savetype')=='Approved'?vtranslate("LBL_APPROVED","Users"):vtranslate("LBL_NOT_APPROVED","Users");
 
 					}else{ 
 						$starthalf = $request->get('chkboxstarthalf')==1?0.5:0;

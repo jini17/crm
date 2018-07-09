@@ -291,29 +291,15 @@ Vtiger.Class("Users_Leave_Js", {
 		var message = app.vtranslate('JS_CANCEL_LEAVE_CONFIRMATION');
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
-		var section = currentTrElement.data('section');	
-		Vtiger_Helper_Js.showConfirmationBox({'message' : message}).then(function(data) {
-		AppConnector.request(cancelRecordActionUrl).then(
-		function(data){
-				var response = data['result'];
-				var result   = data['success'];
-				if(result == true) {
-					params = {
-						text: response.msg,
-						type:'success'	
-					};
-				} else {
-						params = {
-						text: response.msg,
-						type:'error'	
-					};
-				}
-				
-				Vtiger_Helper_Js.showPnotify(params);
-				//delete the Leave details in the list
-				thisInstance.updateLeaveGrid(userid, section);
-			}
-		);
+		var section = currentTrElement;	
+		app.helper.showConfirmationBox({'message' : message}).then(function(data) {
+		app.request.post({url:cancelRecordActionUrl}).then(
+          	     function(err,data){
+				      app.helper.showSuccessNotification({'message': 'Cancel successfully'});
+				     //delete the Education details in the list
+				     thisInstance.updateLeaveGrid(userid);
+			     }
+		     );
 	});
 },
 
@@ -390,7 +376,29 @@ Vtiger.Class("Users_Leave_Js", {
 		Users_Leave_Js.registerChangeYear(changeYearActionUrl+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val(),section);
 	},
 
-	 Popup_LeaveApprove : function(url){
+	 Popup_LeaveApprove : function(LeaveApproveUrl){
+
+	 	var userid = jQuery('#recordId').val();
+	 	app.helper.showProgress();
+	 	app.request.post({url:LeaveApproveUrl}).then(
+		function(err,data) { 
+		      app.helper.hideProgress();
+              
+                if(err == null){   
+                	app.helper.showSuccessNotification({data});      			
+        			 thisInstance.updateLeaveGrid(userid);
+          		} else {
+                        aDeferred.reject(err);
+                    }
+	     	});
+ 		
+
+			
+		
+
+	},
+
+	/*Popup_LeaveCancel : function(url){
 
 	 	app.helper.showProgress();
 	 	app.request.post({url:url}).then(
@@ -408,7 +416,7 @@ Vtiger.Class("Users_Leave_Js", {
 			
 		
 
-	},
+	},*/
 
 
 	/*

@@ -51,7 +51,7 @@
 									{foreach key=FIELD_NAME item=FIELD_DETAILS from=$MODEL->getEditableFields()}
 										<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted marginRight10px pull-right">{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE)}</label></td>
 											<td style="border-left: none;" class="{$WIDTHTYPE}">
-												<span>{$FIELD_DATA]}</span>
+												<span>{$FIELD_DATA}</span>
 											</td>
 										</tr>
 									{/foreach}
