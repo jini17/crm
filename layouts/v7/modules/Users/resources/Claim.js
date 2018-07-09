@@ -171,8 +171,8 @@ Vtiger.Class("Users_Claim_Js", {
 					//**
 					//**DISBLE SELECT 2 PENDING
 					//**
-					if(jQuery('#notapprove').is(':checked')){
-						$('div#rejectionreason').removeClass('hide');
+					if($('#notapprove').is(':checked')){
+						$('div#rejectionreason').show();
 					}
 					
 
