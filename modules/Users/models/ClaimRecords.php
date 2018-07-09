@@ -126,6 +126,10 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 
 	 $query = "SELECT * from vtiger_claimtype";
 
+	$query = "SELECT * FROM vtiger_claimtype tblVTLT
+	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLT.claimtypeid
+	 WHERE tblVTC.deleted=0";
+
 	$result = $db->pquery($query,array());
 
 	$claimtype=array();	
