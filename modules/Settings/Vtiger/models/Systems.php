@@ -27,9 +27,16 @@ class Settings_Vtiger_Systems_Model extends Vtiger_Base_Model{
         $db = PearDatabase::getInstance();
        // $db->setDebug(true);
         $id = $this->getId();
-        $data = array();
-        array_push($data, $this->get('server'),$this->get('server_port'),$this->get('server_username'),$this->get('server_password'),$this->get('server_type'),
-                   $this->isSmtpAuthEnabled(),$this->get('server_path'),$this->get('from_email_field'),'');
+
+        $params = array();
+
+        $server_password = $this->get('server_password');
+        if ($id && !Vtiger_Functions::isProtectedText($server_password)) {
+            $server_password = Vtiger_Functions::toProtectedText($server_password);
+        }
+        
+        array_push($params, $this->get('server'),$this->get('server_port'),$this->get('server_username'),$server_password,$this->get('server_type'),
+                   $this->isSmtpAuthEnabled(),$this->get('server_path'),$this->get('from_email_field'));
 
         if(empty($id)) { 
             $id = $db->getUniqueID(self::tableName);
