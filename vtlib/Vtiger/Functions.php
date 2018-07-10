@@ -1467,6 +1467,7 @@ class Vtiger_Functions {
 	 * Function to mask input text.
 	 */
 	static function toProtectedText($text) {
+		if (empty($text)) return $text;
 
 		require_once 'include/utils/encryption.php';
 		$encryption = new Encryption();
@@ -1478,7 +1479,8 @@ class Vtiger_Functions {
 	 */
 	static function isProtectedText($text) {
 
-		return strpos($text, '$ve$') === 0;
+		return !empty($text) && (strpos($text, '$ve$') === 0);
+
 	}
 	
 	/*
