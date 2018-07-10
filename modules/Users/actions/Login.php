@@ -46,7 +46,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 
         $allowedipres = false;
 		$allowedipres = $this->AllowedIp($usip,$username);
-		echo "Nirbhay";
+		
 		//echo $allowedipres;die;
 		//$allowedipres = true;
 

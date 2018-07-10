@@ -205,9 +205,9 @@
 					<span style="position:relative;top:4px;padding-left:20px;padding-right:15px;">{vtranslate('LBL_CLAIM_NOT_APPROVED', $QUALIFIED_MODULE)}</span>
 					<span>
 						{if {$CLAIM_DETAIL.claim_status == 'Approved'}}
-						<input type="radio" name="approval" id="approve" value="Approved" onclick="document.getElementById('claim_status').value='Approved';toggleRejectionReasontxt('hide');" checked="checked">
+						<input type="radio" name="approval" id="approve" value="Approved" onclick="document.getElementById('claim_status').value='Approved';toggleRejectionReasontxt('hide');" checked="checked" class="static_class">
 						{else}
-						<input type="radio" name="approval" id="approve" value="Approved" onclick="document.getElementById('claim_status').value='Approved';toggleRejectionReasontxt('hide');">
+						<input type="radio" name="approval" id="approve" value="Approved" onclick="document.getElementById('claim_status').value='Approved';toggleRejectionReasontxt('hide');" class="static_class">
 						{/if}
 					</span>
 					<!--not approved start-->
@@ -215,9 +215,9 @@
 						<span style="position:relative;top:4px;padding-left:20px;padding-right:15px;">{vtranslate('LBL_CLAIM_NOT_APPROVED', $QUALIFIED_MODULE)}</span>
 						<span>
 							{if {$CLAIM_DETAIL.claim_status == 'Rejected'}}
-							<input type="radio" name="approval" id="notapprove" value="Rejected" onclick="document.getElementById('claim_status').value='Rejected';toggleRejectionReasontxt('show');" checked="checked">
+							<input type="radio" name="approval" id="notapprove" value="Rejected" onclick="document.getElementById('claim_status').value='Rejected';toggleRejectionReasontxt('show');" checked="checked" class="static_class">
 							{else}
-							<input type="radio" name="approval" id="notapprove" value="Rejected" onclick="document.getElementById('claim_status').value='Rejected';toggleRejectionReasontxt('show');">
+							<input type="radio" name="approval" id="notapprove" value="Rejected" onclick="document.getElementById('claim_status').value='Rejected';toggleRejectionReasontxt('show');" class="static_class">
 							{/if}
 						</span>
 					</span>
@@ -225,20 +225,25 @@
 				
 			</div>
 		{/if}
-			<div class="hide" id="rejectionreason">
-			<div class="control-group">
-				<label class="control-label">&nbsp;{vtranslate('LBL_REJECTION_REASON', $QUALIFIED_MODULE)}</label>		
-				<div class="controls">
-					<textarea style="width:300px!important" name="rejectionreasontxt" id="rejectionreasontxt" class="span11" maxlength="300">{$CLAIM_DETAIL.reasonnotapprove}</textarea>
-				
-				</div>
-				<label class="control-label">&nbsp;</label>
-				<div class="controls" id="charNum" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
-			</div>
-			</div>
 
-
-
+				<div  id="rejectionreason" style="display:none;">
+				<div class="form-group" style="margin-bottom: 0px !important;">
+					<div class="col-md-12" style="margin-bottom: 15px;">
+						<div class="col-md-4">
+							<label class="control-label" style="text-align: right;float: right;"><span class="redColor">*</span>&nbsp;{vtranslate('LBL_REJECTION_REASON', $QUALIFIED_MODULE)}</label>
+						</div>			
+						<div class="controls date col-md-8">
+							<textarea style="width:300px!important" name="rejectionreasontxt" id="rejectionreasontxt" class="span11" maxlength="300">{$CLAIM_DETAIL.reasonnotapprove}</textarea>
+						</div>
+					</div>	
+					<div class="col-md-12" style="margin-bottom: 15px;">
+						<div class="col-md-4">
+							<label class="control-label" style="text-align: right;float: right;">&nbsp;</label>
+						</div>	
+						<div class="controls" id="chrNum" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
+					</div>
+				</div>	
+				</div>	
 
 
 
@@ -272,6 +277,46 @@
 {/strip}
 {literal}
 <script>
+
+					jQuery('#rejectionreasontxt').keyup(function () { 
+				var maxchar = 300;
+				var len = jQuery(this).val().length;
+			 	if (len > maxchar) {
+			    		jQuery('#chrNum').text(' you have reached the limit');
+					jQuery(this).val($(this).val().substring(0, len-1));
+			  	} else {
+			    		var remainchar = maxchar - len;
+			    		jQuery('#chrNum').text(remainchar + ' character(s) left');
+					
+			  	}
+			});
+
+				jQuery('#description').keyup(function () { 
+				var maxchar = 300;
+				var len = jQuery(this).val().length;
+			 	if (len > maxchar) {
+			    		jQuery('#charNum').text(' you have reached the limit');
+					jQuery(this).val($(this).val().substring(0, len-1));
+			  	} else {
+			    		var remainchar = maxchar - len;
+			    		jQuery('#charNum').text(remainchar + ' character(s) left');
+					
+			  	}
+			});
+ $(function(){
+		if($('#notapprove').is(':checked')){
+		$('div#rejectionreason').show();
+		}
+		 });
+
+	  $(function(){
+        $(".static_class").click(function(){
+          if($(this).val() === "Rejected")
+            $("#rejectionreason").show("fast");
+          else
+            $("#rejectionreason").hide("fast");
+        });
+      });
 
 	function toggleRejectionReasontxt(trigger){	
 	if(trigger == 'show'){

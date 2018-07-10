@@ -291,29 +291,15 @@ Vtiger.Class("Users_Leave_Js", {
 		var message = app.vtranslate('JS_CANCEL_LEAVE_CONFIRMATION');
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
-		var section = currentTrElement.data('section');	
-		Vtiger_Helper_Js.showConfirmationBox({'message' : message}).then(function(data) {
-		AppConnector.request(cancelRecordActionUrl).then(
-		function(data){
-				var response = data['result'];
-				var result   = data['success'];
-				if(result == true) {
-					params = {
-						text: response.msg,
-						type:'success'	
-					};
-				} else {
-						params = {
-						text: response.msg,
-						type:'error'	
-					};
-				}
-				
-				Vtiger_Helper_Js.showPnotify(params);
-				//delete the Leave details in the list
-				thisInstance.updateLeaveGrid(userid, section);
-			}
-		);
+		var section = currentTrElement;	
+		app.helper.showConfirmationBox({'message' : message}).then(function(data) {
+		app.request.post({url:cancelRecordActionUrl}).then(
+          	     function(err,data){
+				      app.helper.showSuccessNotification({'message': 'Cancel successfully'});
+				     //delete the Education details in the list
+				     thisInstance.updateLeaveGrid(userid);
+			     }
+		     );
 	});
 },
 
@@ -339,7 +325,7 @@ Vtiger.Class("Users_Leave_Js", {
                 if(err == null){
           		
                $('#' + divcontainer).html(data);
-
+               	Users_Leave_Js.registerActionsTeamLeave();
       
 
                   /* // app.helper.showModal(data);
@@ -388,9 +374,20 @@ Vtiger.Class("Users_Leave_Js", {
 		var leavetypecombo = jQuery("#sel_leavetype");	
 			
 		Users_Leave_Js.registerChangeYear(changeYearActionUrl+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val(),section);
+		
 	},
 
-	 Popup_LeaveApprove : function(url){
+	 Popup_LeaveApprove : function(LeaveApproveUrl){
+
+	 	this.editLeave(LeaveApproveUrl);
+ 		
+
+			
+		
+
+	},
+
+	/*Popup_LeaveCancel : function(url){
 
 	 	app.helper.showProgress();
 	 	app.request.post({url:url}).then(
@@ -408,7 +405,7 @@ Vtiger.Class("Users_Leave_Js", {
 			
 		
 
-	},
+	},*/
 
 
 	/*
@@ -476,7 +473,8 @@ Vtiger.Class("Users_Leave_Js", {
 
 	//MYTEAMLEAVEPAGING BY SAFUAN
 	registerPaging : function(changePageActionUrl,section) {
-		var thisInstance = this;
+	var thisInstance = this;
+	console.log(changePageActionUrl);
 		var divcontainer  = section =='T'?'myteamleavelist':'myleavelist';
 		var progressIndicatorElement = jQuery.progressIndicator({
 				'position' : 'html',
@@ -484,7 +482,7 @@ Vtiger.Class("Users_Leave_Js", {
 					'enabled' : true
 				}
 			});
-		AppConnector.request(changePageActionUrl).then(
+		AppConnector.request({changePageActionUrl}).then(
 			function(data){
 				progressIndicatorElement.progressIndicator({'mode':'hide'});
 				$('#'+divcontainer).html(data);
@@ -522,7 +520,7 @@ Vtiger.Class("Users_Leave_Js", {
 		thisInstance.cancelLeave(cancelLeaveButton.data('url'), currentTrElement);
 		});
 
-*/
+
 		//register event for my team leave year combobox.
 		container.on('change', '.team_selyear', function(e) { 
 		var myyearcombo = jQuery(e.currentTarget);
@@ -545,11 +543,11 @@ Vtiger.Class("Users_Leave_Js", {
 		var membercombo = jQuery("#sel_teammember");
 		var myyearcombo = jQuery("#team_selyear");
 		thisInstance.registerChangeYear(myyearcombo.data('url')+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val(),myyearcombo.data('section'));
-		});
+		});*/
+		
 
-		//register event for my team leave paging<next>.MYTEAMLEAVEPAGING BY SAFUAN
-		container.on('click', '#listViewNPageButton, #userleavenextpagebutton', function(e) { 
-
+		jQuery('#listViewNPageButton, #userleavenextpagebutton').click(function(e) { 
+		
 		var myyearcombo = $('#team_selyear');
 		var membercombo = jQuery("#sel_teammember");
 		var leavetypecombo = jQuery("#sel_leavetype");
@@ -606,21 +604,24 @@ Vtiger.Class("Users_Leave_Js", {
 	
 },{
 	//constructor
-	init : function() {
 
-		Users_Leave_Js.eduInstance = this;
-	},
 	
 
 	registerEvents: function(eduInstance) {
-
-		eduinstance.registerActions();
+	
 		//this._super();
-		this.registerActions();
-		this.registerActionsTeamLeave();
-		this.registerPageNavigationEvents();	
-		this.registerEventForTotalRecordsCount();
-		this.registerSetLeaveType();
+	
+		//this.registerActions();
+		Users_Leave_Js.registerActionsTeamLeave();
+		//Users_Leave_Js.registerPageNavigationEvents();	
+		//Users_Leave_Js.registerEventForTotalRecordsCount();
+		Users_Leave_Js.registerSetLeaveType();
 	}
 
 });
+
+jQuery(document).ready(function(e){ 
+
+	var eduinstance = new Users_Leave_Js();
+	eduinstance.registerEvents();
+})
