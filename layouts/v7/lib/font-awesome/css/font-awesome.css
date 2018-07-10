@@ -204,6 +204,9 @@
 .fa-user:before {
   content: "\f007";
 }
+.fa-address-book:before {
+    content: "\f2b9";
+}
 .fa-film:before {
   content: "\f008";
 }

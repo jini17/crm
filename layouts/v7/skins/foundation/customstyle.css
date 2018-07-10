@@ -344,3 +344,6 @@ button:hover{
 .glabel{
     background: #DFDFDF;
 }
+table.MOMDetails , table.MOMDetail> tr ,  table.MOMDetail>td{
+    border: 1px solid black;
+}

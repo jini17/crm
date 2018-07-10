@@ -417,6 +417,6 @@ class Users_Module_Model extends Vtiger_Module_Model {
 	**/
 	public function ValidateUserSubscription($role){
 
-		return false;
+		return true;
 	}
 }

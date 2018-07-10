@@ -70,7 +70,7 @@ body > .mCSB_inside > .mCSB_container {
 }
 body {
   font-family: 'OpenSans-Regular', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: normal;
   font-style: normal;
   font-kerning: normal;
@@ -7795,3 +7795,23 @@ a.btnReport:hover {
   height: 450px;
   overflow: auto;
 }
+/*MOM Table css*/
+td.MOMDetailslabel{
+  padding: 7px 15px;
+  background-color: #f3f3f3;
+}
+table.MOMDetails{
+  margin: 15px 0px;
+  width: 100%;
+}
+.MOMDetailsdata{
+  padding: 7px 15px;
+}
+td.MOMDetailslabel,td.MOMDetailsdata{
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  }
+td.MOMDetailslabel >label{
+  margin-bottom: 0px;
+}
+/* End here */
