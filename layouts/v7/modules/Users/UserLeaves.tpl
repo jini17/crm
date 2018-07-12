@@ -155,8 +155,8 @@
 
 {else}
 <!-- Added hidden field by jitu for paging --->
-<script src="layouts/vlayout/modules/Vtiger/resources/List.js?v=6.1.0" type="text/javascript"></script>
-<script src="layouts/vlayout/modules/Users/resources/Leave.js?v=6.1.0" type="text/javascript"></script>
+<script src="layouts/v7/modules/Vtiger/resources/List.js" type="text/javascript"></script>
+<script src="layouts/v7/modules/Users/resources/Leave.js?v=6.1.0" type="text/javascript"></script>
 <!--- End for pagination --->
 <!--start my leaves-->
 <div id="MyLeaveContainer">
@@ -168,7 +168,7 @@ onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i cl
 	<div style="float:left;margin-left:5px;">
 	 <!--	<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear"> -->
 	 	<form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST">
-		<select name="my_selyear" id="my_selyear" data-section="M"  class="my_selyear"  data-url='?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}' onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
+		<select name="my_selyear" id="my_selyear" data-section="M"  class="my_selyear"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
 
 			<!--//Added By Jitu Date Combobox-->
 			{for $year=$STARTYEAR to $CURYEAR}
@@ -241,7 +241,8 @@ onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mo
 <!--START MY TEAM LEAVE-->
 {if $MANAGER eq 'true'}
 <!--- Code for Pagination Added by jitu@secondcrm.com --->
-
+<script src="layouts/v7/modules/Vtiger/resources/List.js?v=6.1.0" type="text/javascript"></script>
+<script src="layouts/v7/modules/Users/resources/Leave.js?v=6.1.0" type="text/javascript"></script>
 
 <!----- End for pagination ----->
 <br /><br />
@@ -249,7 +250,7 @@ onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mo
 <div id="MyTeamLeaveContainer">
 	<div style="float:left;margin-bottom:21px;"><strong>{vtranslate('LBL_MYTEAM_LEAVE', $MODULE)}</strong></div>
 	<div class="listViewTopMenuDiv noprint" style="float:left;margin-left:5px;">
-		<select name="team_selyear" class="team_selyear" id="team_selyear" data-section="T" data-url='?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}' onchange="Users_Leave_Js.sel_teammember('?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}','T');" >
+		<select name="team_selyear" class="team_selyear" id="team_selyear" data-section="T" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}" onchange="Users_Leave_Js.sel_teammember('?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}','T');" >
 		{for $year=$STARTYEAR to $CURYEAR}
 			<option value="{$year}" {if $year eq $CURYEAR} selected {/if}>{$year}</option>
 		{/for}

@@ -324,11 +324,10 @@ Vtiger.Class("Users_Leave_Js", {
               
                 if(err == null){
           		
-               $('#' + divcontainer).html(data);
-               	Users_Leave_Js.registerActionsTeamLeave();
-      
-
-                  /* // app.helper.showModal(data);
+               $('#' + divcontainer).html(data);           
+     			
+                
+               
                     var form = jQuery('#my_selyear');                        
                         	// for textarea limit
                         app.helper.showVerticalScroll(jQuery('#scrollContainer'), {setHeight:'80%'});
@@ -344,36 +343,25 @@ Vtiger.Class("Users_Leave_Js", {
                                 thisInstance.saveSkillDetails(form);
                             }
                         };
-                         form.vtValidate(params);*/
+                         form.vtValidate(params);
+                  Users_Leave_Js.registerActionsTeamLeave();
           		} else {
                         aDeferred.reject(err);
                     }
 	     	});
-	     return aDeferred.promise();	
+	     //return aDeferred.promise();	
 
+///////////////////////////////////////////
 
-
-
-
-
-
-
-
-////////////////////////////////////////////
-
-
-
-
-
-
-	
 	},
+
  sel_teammember : function(changeYearActionUrl,section){
  		var membercombo = jQuery('#sel_teammember');
  		var myyearcombo = jQuery("#team_selyear");
 		var leavetypecombo = jQuery("#sel_leavetype");	
 			
 		Users_Leave_Js.registerChangeYear(changeYearActionUrl+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val(),section);
+
 		
 	},
 
@@ -473,21 +461,31 @@ Vtiger.Class("Users_Leave_Js", {
 
 	//MYTEAMLEAVEPAGING BY SAFUAN
 	registerPaging : function(changePageActionUrl,section) {
-	var thisInstance = this;
-	console.log(changePageActionUrl);
-		var divcontainer  = section =='T'?'myteamleavelist':'myleavelist';
-		var progressIndicatorElement = jQuery.progressIndicator({
-				'position' : 'html',
-				'blockInfo' : {
-					'enabled' : true
-				}
-			});
-		AppConnector.request({changePageActionUrl}).then(
-			function(data){
-				progressIndicatorElement.progressIndicator({'mode':'hide'});
-				$('#'+divcontainer).html(data);
-			}
-		);
+		var thisInstance = this;
+	 	var divcontainer  = section =='T'?'myteamleavelist':'myleavelist';
+
+//////////////////////////////////
+
+		var aDeferred = jQuery.Deferred();
+			
+		
+		app.helper.showProgress();		
+		console.log(changePageActionUrl);
+		app.request.post({url:changePageActionUrl}).then(
+		function(err,data) { 
+		      app.helper.hideProgress();
+             
+                if(err == null){
+               $('#' + divcontainer).html(data);   
+               
+           	Users_Leave_Js.registerActionsTeamLeave();	
+          			
+          		} else {
+                        aDeferred.reject(err);
+                    }
+	     	});
+
+	     return aDeferred.promise();	
 	
 	},
 	
@@ -499,51 +497,6 @@ Vtiger.Class("Users_Leave_Js", {
 		var container = jQuery('#MyTeamLeaveContainer');
 		
 
-		/*
-		//register event for edit Leave icon
-		container.on('click', '.editLeave', function(e) {
-			var editLeaveButton = jQuery(e.currentTarget);
-			var currentTrElement = editLeaveButton.closest('tr');
-			thisInstance.editLeave(editLeaveButton.data('url'), currentTrElement);
-		});
-		
-		//register event for delete leave iconSedania As-Salam Capital
-		container.on('click', '.deleteLeave', function(e) { ;
-		var deleteLeaveButton = jQuery(e.currentTarget);
-		var currentTrElement = deleteLeaveButton.closest('tr');
-		thisInstance.deleteLeave(deleteLeaveButton.data('url'), currentTrElement);
-		});
-		//register event for cancel leave icon
-		container.on('click', '.cancelLeave', function(e) { ;
-		var cancelLeaveButton = jQuery(e.currentTarget);
-		var currentTrElement = cancelLeaveButton.closest('tr');
-		thisInstance.cancelLeave(cancelLeaveButton.data('url'), currentTrElement);
-		});
-
-
-		//register event for my team leave year combobox.
-		container.on('change', '.team_selyear', function(e) { 
-		var myyearcombo = jQuery(e.currentTarget);
-		var membercombo = jQuery("#sel_teammember");
-		var leavetypecombo = jQuery("#sel_leavetype");	
-		thisInstance.registerChangeYear(myyearcombo.data('url')+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val(),myyearcombo.data('section'));
-		});
-
-		//register event for my team member combobox.
-		container.on('change', '.sel_teammember', function(e) { 
-		var membercombo = jQuery(e.currentTarget);
-		var myyearcombo = jQuery("#team_selyear");
-		var leavetypecombo = jQuery("#sel_leavetype");
-		thisInstance.registerChangeYear(myyearcombo.data('url')+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val(),myyearcombo.data('section'));
-		});
-
-		//register event for my leave type combobox.
-		container.on('change', '.sel_leavetype', function(e) { 
-		var leavetypecombo = jQuery(e.currentTarget);
-		var membercombo = jQuery("#sel_teammember");
-		var myyearcombo = jQuery("#team_selyear");
-		thisInstance.registerChangeYear(myyearcombo.data('url')+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val(),myyearcombo.data('section'));
-		});*/
 		
 
 		jQuery('#listViewNPageButton, #userleavenextpagebutton').click(function(e) { 
@@ -568,6 +521,8 @@ Vtiger.Class("Users_Leave_Js", {
 		
 		thisInstance.registerPaging(myyearcombo.data('url')+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val()+'&pagenumber='+prevpagenum,myyearcombo.data('section'));
 		});
+
+		return true;
 
 
 	},
@@ -607,14 +562,13 @@ Vtiger.Class("Users_Leave_Js", {
 
 	
 
-	registerEvents: function(eduInstance) {
+	registerEvents: function() {
 	
 		//this._super();
 	
-		//this.registerActions();
-		Users_Leave_Js.registerActionsTeamLeave();
-		//Users_Leave_Js.registerPageNavigationEvents();	
-		//Users_Leave_Js.registerEventForTotalRecordsCount();
+		//this.registerActions();	
+		Users_Leave_Js.registerActionsTeamLeave();	
+    	 	
 		Users_Leave_Js.registerSetLeaveType();
 	}
 
@@ -624,4 +578,6 @@ jQuery(document).ready(function(e){
 
 	var eduinstance = new Users_Leave_Js();
 	eduinstance.registerEvents();
+
+
 })
