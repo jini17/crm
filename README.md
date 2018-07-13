@@ -1,3 +1,9 @@
+GIT Details 
+===========
+
+Last commit taken, of 3rd Jun 2018 - 38c4121f105a12cd3826b2d99cfa12fe98a535e8, please take new commits after this date
+==============
+
 Vtiger CRM
 ==========
 
