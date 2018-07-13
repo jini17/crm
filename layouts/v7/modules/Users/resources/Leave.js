@@ -323,7 +323,7 @@ Vtiger.Class("Users_Leave_Js", {
 		      app.helper.hideProgress();
               
                 if(err == null){
-          		
+          		   
                $('#' + divcontainer).html(data);           
      			
                 
@@ -332,7 +332,7 @@ Vtiger.Class("Users_Leave_Js", {
                         	// for textarea limit
                         app.helper.showVerticalScroll(jQuery('#scrollContainer'), {setHeight:'80%'});
                     
-	
+	 Users_Leave_Js.registerActionsTeamLeave();
 
                          form.submit(function(e) { 
                             e.preventDefault();
@@ -344,7 +344,7 @@ Vtiger.Class("Users_Leave_Js", {
                             }
                         };
                          form.vtValidate(params);
-                  Users_Leave_Js.registerActionsTeamLeave();
+                 
           		} else {
                         aDeferred.reject(err);
                     }
@@ -476,6 +476,7 @@ Vtiger.Class("Users_Leave_Js", {
 		      app.helper.hideProgress();
              
                 if(err == null){
+                	
                $('#' + divcontainer).html(data);   
                
            	Users_Leave_Js.registerActionsTeamLeave();	
