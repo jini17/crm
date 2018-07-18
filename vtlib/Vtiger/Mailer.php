@@ -136,7 +136,7 @@ class Vtiger_Mailer extends PHPMailer {
 	 * Overriding default send
 	 */
 	function Send($sync=false, $linktoid=false) {
-		if(!$this->_serverConfigured) return;
+		//if(!$this->_serverConfigured) return;
 
 		if($sync) return parent::Send();
 

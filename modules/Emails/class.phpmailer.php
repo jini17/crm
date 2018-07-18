@@ -301,7 +301,7 @@ class PHPMailer {
    * Sets SMTP class debugging on or off.
    * @var bool
    */
-  public $SMTPDebug     = false;
+  public $SMTPDebug     = off;
 
   /**
    * Sets the function/method to use for debugging output.

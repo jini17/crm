@@ -215,6 +215,7 @@ class Emails_Record_Model extends Vtiger_Record_Model {
                 $smtp_auth = $adb->query_result($result,0,'smtp_auth');
 
             }else{
+            	//echo "Here";die;
                 $mailer->Username= '';
                 $mailer->Password == '';
                 $mailer->Host = '';
@@ -253,6 +254,9 @@ class Emails_Record_Model extends Vtiger_Record_Model {
            if ($addToQueue) {
 				$status = $mailer->Send(false, $this->get('parent_id'));
 			} else {
+				//echo "Here";die;
+			   	//$mailer->SMTPDebug = 3;
+			   //	echo "<pre>";print_r($mailer);
 			   	$status = $mailer->Send(true);
 
 			}
