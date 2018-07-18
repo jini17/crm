@@ -28,9 +28,9 @@
                 <div class='col-md-6 usersListDiv'>
                     <select class="select2 col-md-4" id="usersFilter" >
                         <option value="">{vtranslate('LBL_ALL', $QUALIFIED_MODULE)}</option>
-                        {foreach item=USERNAME key=USER from=$USERSLIST}
-                            <option value="{$USER}" name="{$USERNAME}" {if $USERNAME eq $SELECTED_USER} selected {/if}>{$USERNAME}</option>
-                        {/foreach}
+                      {foreach item=USERNAME key=USER from=$USERSLIST}
+                        <option value="{$USER}" name="{$USERNAME}" {if $USERNAME eq $SELECTED_USER} 'selected' {/if}>{$USERNAME}</option>
+                      {/foreach}
                     </select>
                 </div>
                 <div class="col-md-6 pull-right">

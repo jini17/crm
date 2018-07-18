@@ -229,6 +229,13 @@ class Emails_Record_Model extends Vtiger_Record_Model {
                 $smtp_auth = $adb->query_result($result,0,'smtp_auth');
             }
 
+            //added by jitu@Email Send
+            $mailer->_serverConfigured = false;
+            if($adb->num_rows($result)>0){
+                $mailer->_serverConfigured = true;
+            }
+            //End here
+
             if($mailer->SMTPAuth == ''){
 
                 $mailer->SMTPAuth =  $smtp_auth;
