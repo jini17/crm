@@ -331,7 +331,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 							$leave->column_fields['reasonnotapprove'] = $data['reasonnotapprove'];
 							$leave->column_fields['approveby'] = $data['approveby'];
 							$leave->column_fields['approvedate'] = $data['approvedate'];
-							$leave->mode='Edit';
+							$leave->mode='edit';
 							$leave->id= $leaveid;
 							$leave->save('Leave');
 							//$leave = vtws_revise($data, $current_user);
