@@ -438,7 +438,9 @@ $languageStrings = array(
 	'LBL_NOT_APPROVED'=>'Leave Not Approved',
 	'LBL_REJECTION_REASON'=> 'Reason for Rejection',
 	'LBL_NO_LEAVE_FOUND'=> 'No Leaves Found',
-	'LBL_EDIT_LEAVE'=>'Edit Leave',		
+	'LBL_EDIT_LEAVE'=>'Edit Leave',	
+	'LBL_DAY_REMAINING' => "Days Remaining",
+	'LBL_0_DAY_REMAINING'	=> ' 0 Day Remaining',
 	
 //End Leave Section
 
