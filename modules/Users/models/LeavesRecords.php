@@ -116,15 +116,18 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 	 WHERE tblVTC.deleted=0";
 
 	$result = $db->pquery($query,array());
+	
+	
 
 	$leavetype=array();	
 	$leavetypeid  = '';
 	if($db->num_rows($result)>0) {	
 		for($i=0;$i<$db->num_rows($result);$i++) {
-			
+	
 			if($leavetypeid != $db->query_result($result, $i, 'leavetypeid')) {
-				$leavetype[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetypeid');
-				$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'title').'@'.$db->query_result($result, $i, 'colorcode').'@'.$db->query_result($result, $i, 'leavefrequency').'@'.$db->query_result($result, $i, 'halfdayallowed');
+				$leavetype[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetypeid');			
+				$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'title');
+				$leavetype[$i]['leave_remain']=" ".self::getUserBalance($userid, $leavetype[$i]['leavetypeid']);
 				$leavetypeid = $db->query_result($result, $i, 'leave_type');
 			} 
 		}
@@ -568,7 +571,8 @@ LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype W
 		$hasleave = false;
 		
 		$checkleaveallocresult = $db->pquery("SELECT 1 FROM secondcrm_user_balance tblSCUB LEFT JOIN vtiger_leavetype tblVTLT ON tblVTLT.leavetypeid = tblSCUB.leave_type
-	INNER JOIN allocation_list tblVTLA ON tblVTLA.leavetype_id=tblVTLT.leavetypeid  
+	INNER JOIN allocation_list_details tblVTLAD ON tblVTLAD.leavetype_id=tblVTLT.leavetypeid
+	INNER JOIN allocation_list tblVTLA tblVTLA.allocation_id=tblVTLAD.allocation_id
 	INNER JOIN vtiger_grade	 tblVTG ON tblVTG.gradeid = tblVTLA.grade_id WHERE user_id =?",array($user_id));	
 		//$checkalreadyapplyresult = $db->pquery("SELECT tblVTL.leavestatus FROM vtiger_leave tblVTL INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTL.leaveid WHERE tblVTC.deleted =0 AND tblVTL.fromdate > CURDATE() AND tblVTL.todate < CURDATE() AND (tblVTL.leavestatus != 'Cancel' OR tblVTL.leavestatus !='Approved' ) AND tblVTC.smcreatorid = ?",array($user_id));	
 		if($db->num_rows($checkleaveallocresult) > 0) {

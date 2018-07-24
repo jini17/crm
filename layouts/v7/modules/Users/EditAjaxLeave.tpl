@@ -114,7 +114,14 @@ jQuery(document).ready(function(e){
 						{foreach key=LEAVE_ID item=LEAVE_MODEL from=$LEAVETYPELIST name=institutionIterator}		
 							{$LEAVE_MODEL.leavetypeid}
 						<option value="{$LEAVE_MODEL.leavetypeid}" {if $LEAVE_DETAIL.leave_type eq $LEAVE_MODEL.leavetypeid} selected {/if}>
-						{$LEAVE_MODEL.leavetype}</option>
+						{$LEAVE_MODEL.leavetype} 
+						{if $LEAVE_MODEL.leave_remain gt 0} 
+						  {$LEAVE_MODEL.leave_remain} {vtranslate('LBL_DAY_REMAINING', $QUALIFIED_MODULE)}
+						{else}
+						   {vtranslate('LBL_0_DAY_REMAINING', $QUALIFIED_MODULE)}
+						{/if}
+
+					</option>
 
 						{/foreach}
 						
