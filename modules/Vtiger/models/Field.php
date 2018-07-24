@@ -177,7 +177,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 				$webserviceField = $this->getWebserviceFieldObject();
 				$fieldDataType = $webserviceField->getFieldDataType();
 			}
-			echo $this->fieldDataType ;
+			
 			$this->fieldDataType = $fieldDataType;
 		}
 		return $this->fieldDataType;

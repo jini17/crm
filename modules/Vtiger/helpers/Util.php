@@ -711,11 +711,16 @@ class Vtiger_Util_Helper {
 
 	}
 
-	public static function getAllSkins(){
-		return array('alphagrey' => '#666666',	'softed'	=> '#1560BD',	'bluelagoon'=> '#204E81',
+	/*start edited by fadzil 19/9/14*/
+    public static function getAllSkins(){
+        return array('curiousblue' => '#3498DB','mariner' => '#2980B9','turquoise' => '#1ABC9C','mountainmeadow' => '#16A085','wisteria' => '#9B59B6','amethyst' => '#8E44AD','alizarin' => '#E74C3C','pomegranate' => '#C0392B','concrete' => '#95A5A6','abestos' => '#95A5A6','sherpa' => '#4A6A77','metalslate' => '#435E6F');
+		
+		/*'alphagrey' => '#666666',	'softed'	=> '#1560BD',	'bluelagoon'=> '#204E81',
 					 'nature'	=> '#008D4C',	'woodspice' => '#C19803',	'orchid'	=> '#C65479',
-					 'firebrick'=> '#E51400',	'twilight'	=> '#404952',	'almond'	=> '#894400');
-	}
+					 'firebrick'=> '#E51400',	'twilight'	=> '#404952',	'almond'	=> '#894400');*/
+    }
+	/*end edited by fadzil 19/9/14*/
+
 
 	public static function isUserDeleted($userid) {
 		$db = PearDatabase::getInstance();

@@ -20,7 +20,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 
 	function process(Vtiger_Request $request) {
 		global $short_url, $adb;
-		$adb->setDebug(true);
+		//$adb->setDebug(true);
 		$username = $request->get('username');
 		$password = $request->getRaw('password');
 		//echo $username;
@@ -46,7 +46,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 
         $allowedipres = false;
 		$allowedipres = $this->AllowedIp($usip,$username);
-		echo "Nirbhay";
+		
 		//echo $allowedipres;die;
 		//$allowedipres = true;
 

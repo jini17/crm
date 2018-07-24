@@ -1,8 +1,8 @@
 <?php
 
-$URL = 'http://192.168.2.68/secondcrm/webservice.php';
-$CRM_UserName = 'admin';
-$CRM_UserAccessKey = 'npGCtIUqv6BsH1OW';
+$URL = 'http://dev.secondcrm.com/tecprotecin_new/webservice.php';
+$CRM_UserName = 'cs_portal';
+$CRM_UserAccessKey = 'hyQNPbHeei6luUvX';
 
 $CHALLENGEURL = $URL."?operation=getchallenge&username=".$CRM_UserName;
 
@@ -66,6 +66,4 @@ $response = json_decode($result, true);
 	} else {
 		echo "No records found!";
 	}
-
-
 ?>

@@ -46,55 +46,9 @@ Vtiger.Class("Users_Claim_Js", {
                         thisInstance.textAreaLimitChar();	
                      
                         	// for textarea limit
-					$("#start_date").on("change", function(){ 
-						if($("#hdnhalfday").val()==1) {
-							$("#end_date").val($("#start_date").val());
-							$('#starthalf').prop('checked',true);
-							$("#endhalfcheck").addClass('hide');
-							$("#endhalf").addClass('hide');
-
-						} else {
-							$("#endhalfcheck").addClass('hide');
-							$("#endhalf").addClass('hide');
-							$('#endhalf').prop('checked',false);
-							$("#starthalf").prop('checked',false);
-							$("#starthalfcheck").addClass('hide');
-							$("#starthalf").addClass('hide');
-						}
-					});
-					$("#end_date").on("change", function(){
-						if($("#hdnhalfday").val()==1) {
-							if($("#end_date").val() != $("#start_date").val()) {
-								$("#endhalfcheck").removeClass('hide');
-								$("#endhalf").removeClass('hide');
-							} else {
-								$("#endhalfcheck").addClass('hide');
-								$("#endhalf").addClass('hide');
-							}
-						} else {
-							$("#endhalfcheck").addClass('hide');
-							$("#endhalf").addClass('hide');
-							$('#endhalf').prop('checked',false);
-							$("#starthalf").prop('checked',false);
-							$("#starthalfcheck").addClass('hide');
-							$("#starthalf").addClass('hide');
-						}	
-					});
-				
-					$("#starthalf").on("click", function(){	
-						if($("#start_date").val() == $("#end_date").val()) {
-						//	$('#starthalf').prop('checked',true);
-							$('#endhalf').prop('checked',false);
-						} 
-					});
-					$("#endhalf").on("click", function(){	
-						if($("#start_date").val() == $("#end_date").val()) {
-							$('#starthalf').prop('checked',false);
-							$('#endhalf').prop('checked',true);
-						} 
-					});
 	
-					$("#leave_type").select2(
+	
+					$("#category").select2( 
 						{
 						formatResult: function(item, container) { 
 									var originalOption = item.id;
@@ -150,7 +104,7 @@ Vtiger.Class("Users_Claim_Js", {
 						 $("#transactiondate").attr("disabled",true);
 						 $("#end_date").attr("disabled",true);
 						 $("#totalamount").select2("disable");
-						 $("#reason").attr("disabled", true);
+						 $("#description").attr("disabled", true);
 						 $("#rejectionreasontxt").attr("disabled", true);			
 						 $("input").attr("disabled",true);	
 					}
@@ -161,20 +115,108 @@ Vtiger.Class("Users_Claim_Js", {
 						 $("#start_date").attr("disabled",true);
 						 $("#end_date").attr("disabled",true);
 						 $("#replaceuser").select2("disable");
-						 $("#reason").attr("disabled", true);
+						 $("#description").attr("disabled", true);
 				
 					}
 
-					var len = $("#description").val().length;
-					var remainchar = 300 - len;
-			    		$('#charNum_reason').text(remainchar + ' character(s) left');
-					//**
-					//**DISBLE SELECT 2 PENDING
-					//**
+					jQuery('#listViewNPageButton, #userclaimnextpagebutton').click(function(e) {  		
+					var myyearcombo = $('#team_selyear');
+					var membercombo = jQuery("#sel_teammember");
+					var claimtypecombo = jQuery("#sel_claimtype");
+					var pagenum = parseInt($('#pageNumber').val());
+					var nextpagenum = pagenum + 1;
+
+					thisInstance.registerChangeYear(myyearcombo.data('url')+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selclaimtype='+claimtypecombo.val()+'&pagenumber='+nextpagenum,myyearcombo.data('section'));
+					});
+
 					if(jQuery('#notapprove').is(':checked')){
 						$('div#rejectionreason').removeClass('hide');
 					}
+
 					
+					$('#category').change(function(){
+   						$("#totalamount").val('');		
+					});  
+
+					$('#transactiondate').change(function(){ 
+
+/*
+						var today = new Date();
+						var dd = today.getDate();
+
+						var mm = today.getMonth()+1; 
+						var yyyy = today.getFullYear();
+						if(dd<10) 
+						{
+						    dd='0'+dd;
+						} 
+
+						if(mm<10) 
+						{
+						    mm='0'+mm;
+						} 
+
+						today = dd+'-'+mm+'-'+yyyy;*/
+
+
+
+						transactiondate = $("#transactiondate").val(); 
+					    var date = transactiondate.substring(0, 2);
+					    var month = transactiondate.substring(3, 5);
+					    var year = transactiondate.substring(6, 10);
+					 
+					    var dateToCompare = new Date(year, month - 1, date);
+					    var currentDate = new Date();
+
+
+
+
+						if(dateToCompare >= currentDate){
+						app.helper.showErrorNotification({'message': app.vtranslate('JS_ERROR_TRANSACTION_DATE')});
+						$("#transactiondate").val('');
+						$("#totalamount").val('');	
+		            	e.preventDefault();
+							
+						}
+
+
+   						//$("#totalamount").val('');		
+					});  
+
+
+				    $('#totalamount').focusout(function(){
+					if(	$("#category").val()=="select" ){
+						app.helper.showErrorNotification({'message': app.vtranslate('JS_SELECT_CLAIM_TYPE')});
+		            	e.preventDefault();
+		            	$("#totalamount").val('');  
+		            }
+					if(	$("#transactiondate").val()=="" ){
+						app.helper.showErrorNotification({'message': app.vtranslate('JS_SELECT_TRANSACTION_DATE')});
+		            	e.preventDefault();
+		            	$("#totalamount").val('');  
+
+		            }
+					var totalamount = $('#totalamount').val();
+					var current_user_id = $('#current_user_id').val();
+					var transactiondate = $("#transactiondate").val();
+					var category = $("#category").val();
+					var trans =$( "#category option:selected" ).data('trans');
+					var monthly =$( "#category option:selected" ).data('monthly');
+					var yearly =$( "#category option:selected" ).data('yearly');
+
+					 thisInstance.ValidateClaimAmount(current_user_id,trans,monthly,yearly,totalamount,transactiondate,category);
+
+					 });
+
+
+
+
+				    $("#description").keyup(function () {
+					var len = $("#description").val().length;
+					var remainchar = 300 - len;
+			    		$('#charNum').text(remainchar + ' character(s) left');
+			    	});			
+
 
 	
                     form.submit(function(e) { 
@@ -188,8 +230,7 @@ Vtiger.Class("Users_Claim_Js", {
                             }
                         };
 
-                        
-                      
+         
                          form.vtValidate(params)  //alert("hsssei");
           		} else {
                         aDeferred.reject(err);
@@ -198,20 +239,63 @@ Vtiger.Class("Users_Claim_Js", {
 	     return aDeferred.promise();	
 	},
 
+	
+ //use error notification
+		 ValidateClaimAmount : function(current_user_id,trans,monthly,yearly,totalamount,transactiondate,category){  
+		 	
+			var params = {
+					'module' 		  : app.getModuleName(),
+					'action' 		  : 'SaveSubModuleAjax',
+					'mode'   		  : 'ValidateClaimAmount',
+					'current_user_id' : current_user_id,
+					'trans'   		  : trans,
+					'monthly'  	      : monthly,
+					'yearly'   		  : yearly,
+					'totalamount'     : totalamount,
+					'transactiondate' : transactiondate,
+					'category'        : category,
+				
+				}
 
-	 saveClaimDetails : function(form){  
+              app.request.post({'data': params}).then(function (err, data) {         
+              app.helper.hideProgress(); 
+               //show notification after Education details saved
+                if((data==app.vtranslate('JS_TRANSACTION_LIMIT_EXCEED')) || (data==app.vtranslate('JS_MONTHLY_LIMIT_EXCEED')) || (data==app.vtranslate('JS_YEARLY_LIMIT_EXCEED')) || (data=='undefined')){
+                app.helper.showErrorNotification({'message': data});
+                $("#totalamount").val('');
+           		 }else{ 
+           		 	e.preventDefault();
+           		 	//app.helper.showSuccessNotification({'message': data});
+           		 }
+               //Adding or update the Education details in the list
+              
+             }
+          );
+
+           return aDeferred.promise();
+				
+
+		  
+
+
+     },	
+
+
+	 saveClaimDetails : function(form){   
           var aDeferred = jQuery.Deferred();
           app.helper.hideModal();
           var thisInstance = this;
           var userid = jQuery('#current_user_id').val();
+          var user = jQuery('#user').val();
+          var manager = jQuery('#manager').val();
           app.helper.showProgress();
 
-        var aparams = form.serializeFormData();
+        var aparams = form.serializeFormData(); 
       
 				aparams.module = app.getModuleName();
 				aparams.action = 'SaveSubModuleAjax';
 				aparams.mode = 'saveClaim';
-		  console.log(aparams);
+		  
 				
        
          app.request.post({'data': aparams}).then(function (err, data) {     
@@ -219,19 +303,26 @@ Vtiger.Class("Users_Claim_Js", {
                //show notification after Education details saved
                 app.helper.showSuccessNotification({'message': data});
                //Adding or update the Education details in the list
-               thisInstance.updateClaimGrid(userid);
+               if(manager == 'true'){
+
+               		thisInstance.updateClaimGrid(user);
+               }else{
+               		thisInstance.updateClaimGrid(userid);
+               }
+               
              }
           );
            return aDeferred.promise();
      },	
 
 		//Added by jitu@secondcrm on 17-03-2015 for 
-	registerSetLeaveType : function() {
+/*
+	registerSetClaimType : function() {
 		$("#my_selyear").select2({ width: '100px'});
 		$("#team_selyear").select2({ width: '100px'});
 		$("#sel_teammember").select2({ width: '200px'});
-		$("#sel_leavetype").select2().select2("val", ' ');
-		$("#sel_leavetype").select2(
+		$("#sel_claimtype").select2().select2("val", ' ');
+		$("#sel_claimtype").select2(
 			{ 
 				width:'200px',	
 				formatResult: function(item, container) { 
@@ -240,7 +331,7 @@ Vtiger.Class("Users_Claim_Js", {
 					var color = originalText[1];
 					var balance = originalText[2];
 					var title = originalText[0];	
-					return '<div title="' + title + '">'+'<span class="empty_fill" style="background-color:'+color+';"></span>' + title+'</div>';
+					return '<div title="' + title + '">'+'<span class="empty_fill" style="background-color:#92a8d1;"></span>' + title+'</div>';
 				},
 				formatSelection: function(item, container) { 
 					var originalOption = item.id;
@@ -253,8 +344,10 @@ Vtiger.Class("Users_Claim_Js", {
 				}
 			}
 		);
-	},
-     updateClaimGrid : function(userid) {  
+	},*/
+     updateClaimGrid : function(userid) { 
+     		//var thisInstance = this;
+    		// this.registerActionsTeamClaim(); 
 			var params = {
 					'module' : app.getModuleName(),
 					'view'   : 'ListViewAjax',
@@ -291,34 +384,20 @@ Vtiger.Class("Users_Claim_Js", {
      },
 
 
-  	cancelClaim : function(cancelRecordActionUrl,currentTrElement) { 
-		
+
+  	cancelClaim : function(cancelRecordActionUrl,currentTrElement) {  
 		var message = app.vtranslate('JS_CANCEL_CLAIM_CONFIRMATION');
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
-		var section = currentTrElement.data('section');	
-		Vtiger_Helper_Js.showConfirmationBox({'message' : message}).then(function(data) {
-		AppConnector.request(cancelRecordActionUrl).then(
-		function(data){
-				var response = data['result'];
-				var result   = data['success'];
-				if(result == true) {
-					params = {
-						text: response.msg,
-						type:'success'	
-					};
-				} else {
-						params = {
-						text: response.msg,
-						type:'error'	
-					};
-				}
-				
-				Vtiger_Helper_Js.showPnotify(params);
-				//delete the Leave details in the list
-				thisInstance.updateClaimGrid(userid, section);
-			}
-		);
+		var section = currentTrElement;	
+		app.helper.showConfirmationBox({'message' : message}).then(function(data) {
+		app.request.post({url:cancelRecordActionUrl}).then(
+          	     function(err,data){ 
+				      app.helper.showSuccessNotification({'message': 'Cancel successfully'});
+				     //delete the Education details in the list
+				     thisInstance.updateClaimGrid(userid);
+			     }
+		     );
 	});
 },
 
@@ -346,13 +425,11 @@ Vtiger.Class("Users_Claim_Js", {
                $('#' + divcontainer).html(data);
 
       
-
-                  /* // app.helper.showModal(data);
                     var form = jQuery('#my_selyear');                        
                         	// for textarea limit
                         app.helper.showVerticalScroll(jQuery('#scrollContainer'), {setHeight:'80%'});
                     
-	
+						 Users_Claim_Js.registerActionsTeamClaim();
 
                          form.submit(function(e) { 
                             e.preventDefault();
@@ -360,10 +437,11 @@ Vtiger.Class("Users_Claim_Js", {
 					var params = {
                             submitHandler : function(form){
                                 var form = jQuery('#my_selyear');   
-                                thisInstance.saveSkillDetails(form);
+                                //thisInstance.saveSkillDetails(form);
                             }
                         };
-                         form.vtValidate(params);*/
+                         form.vtValidate(params);
+                 
           		} else {
                         aDeferred.reject(err);
                     }
@@ -380,24 +458,29 @@ Vtiger.Class("Users_Claim_Js", {
 	 sel_teammember : function(changeYearActionUrl,section){
  		var membercombo = jQuery('#sel_teammember');
  		var myyearcombo = jQuery("#team_selyear");
-		var claimtypecombo = jQuery("#sel_claimtype");	
+		var claimtypecombo = jQuery("#sel_claimtype");
+		
 			
 		Users_Claim_Js.registerChangeYear(changeYearActionUrl+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selclaimtype='+claimtypecombo.val(),section);
 	},
 
-	 Popup_ClaimApprove : function(url){ 
 
-	 	app.helper.showProgress();
-	 	app.request.post({url:url}).then(
-		function(err,data) { 
-		      app.helper.hideProgress();
-              
-                if(err == null){
-        			 app.helper.showModal(data);
-          		} else {
-                        aDeferred.reject(err);
-                    }
-	     	});
+	sel_pagination : function(changeYearActionUrl,section){ 
+ 		var membercombo = jQuery('#sel_teammember');
+ 		var myyearcombo = jQuery("#team_selyear");
+		var claimtypecombo = jQuery("#sel_claimtype");	
+
+
+		var pagenum = parseInt($('#pageNumber').val());
+		var nextpagenum = pagenum + 1;
+		
+		Users_Claim_Js.registerPaging(changeYearActionUrl+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selclaimtype='+claimtypecombo.val()+'&pagenumber='+nextpagenum,section);
+			
+		},
+
+	 Popup_ClaimApprove : function(ClaimApproveUrl){   
+
+	 	this.editClaim(ClaimApproveUrl);
  		
 
 			
@@ -443,7 +526,7 @@ Vtiger.Class("Users_Claim_Js", {
 			var editLeaveButton = jQuery(e.currentTarget);
 			var currentTrElement = editLeaveButton.closest('tr');
 			thisInstance.editLeave(editLeaveButton.data('url'), currentTrElement);
-		});CurrentDate
+		});
 		
 		//register event for delete leave icon
 		container.on('click', '.deleteLeave', function(e) { ;
@@ -468,102 +551,69 @@ Vtiger.Class("Users_Claim_Js", {
 	},
 
 
-	//MYTEAMLEAVEPAGING BY SAFUAN
-	registerPaging : function(changePageActionUrl,section) {
+	registerPaging : function(changePageActionUrl,section) { 
 		var thisInstance = this;
-		var divcontainer  = section =='T'?'myteamleavelist':'myleavelist';
-		var progressIndicatorElement = jQuery.progressIndicator({
-				'position' : 'html',
-				'blockInfo' : {
-					'enabled' : true
-				}
-			});
-		AppConnector.request(changePageActionUrl).then(
-			function(data){
-				progressIndicatorElement.progressIndicator({'mode':'hide'});
-				$('#'+divcontainer).html(data);
-			}
-		);
+	 	var divcontainer  = section =='T'?'myteamclaimlist':'myclaimlist';
+
+//////////////////////////////////
+
+		var aDeferred = jQuery.Deferred();
+			
+		
+		app.helper.showProgress();		
+		console.log(changePageActionUrl);
+		app.request.post({url:changePageActionUrl}).then(
+		function(err,data) { 
+		      app.helper.hideProgress();
+             
+                if(err == null){
+                	
+               $('#' + divcontainer).html(data);   
+               
+           	this.registerActionsTeamClaim();	
+          			
+          		} else {
+                        aDeferred.reject(err);
+                    }
+	     	});
+
+	     return aDeferred.promise();	
 	
 	},
 	
 	/*
 	 * Function to register all actions in the MY Team List List List
 	 */
-	registerActionsTeamLeave : function() {
+	registerActionsTeamClaim : function() { 
+		var aDeferred = jQuery.Deferred();
 		var thisInstance = this;
-		var container = jQuery('#MyTeamLeaveContainer');
+		var container = jQuery('#MyTeamClaimContainer');
+	
+
+		jQuery('#listViewNPageButton, #userclaimnextpagebutton').click(function(e) {  
 		
-
-		/*
-		//register event for edit Leave icon
-		container.on('click', '.editLeave', function(e) {
-			var editLeaveButton = jQuery(e.currentTarget);
-			var currentTrElement = editLeaveButton.closest('tr');
-			thisInstance.editLeave(editLeaveButton.data('url'), currentTrElement);
-		});
-		
-		//register event for delete leave iconSedania As-Salam Capital
-		container.on('click', '.deleteLeave', function(e) { ;
-		var deleteLeaveButton = jQuery(e.currentTarget);
-		var currentTrElement = deleteLeaveButton.closest('tr');
-		thisInstance.deleteLeave(deleteLeaveButton.data('url'), currentTrElement);
-		});
-		//register event for cancel leave icon
-		container.on('click', '.cancelLeave', function(e) { ;
-		var cancelLeaveButton = jQuery(e.currentTarget);
-		var currentTrElement = cancelLeaveButton.closest('tr');
-		thisInstance.cancelLeave(cancelLeaveButton.data('url'), currentTrElement);
-		});
-
-*/
-		//register event for my team leave year combobox.
-		container.on('change', '.team_selyear', function(e) { 
-		var myyearcombo = jQuery(e.currentTarget);
-		var membercombo = jQuery("#sel_teammember");
-		var leavetypecombo = jQuery("#sel_leavetype");	
-		thisInstance.registerChangeYear(myyearcombo.data('url')+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val(),myyearcombo.data('section'));
-		});
-
-		//register event for my team member combobox.
-		container.on('change', '.sel_teammember', function(e) { 
-		var membercombo = jQuery(e.currentTarget);
-		var myyearcombo = jQuery("#team_selyear");
-		var leavetypecombo = jQuery("#sel_leavetype");
-		thisInstance.registerChangeYear(myyearcombo.data('url')+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val(),myyearcombo.data('section'));
-		});
-
-		//register event for my leave type combobox.
-		container.on('change', '.sel_leavetype', function(e) { 
-		var leavetypecombo = jQuery(e.currentTarget);
-		var membercombo = jQuery("#sel_teammember");
-		var myyearcombo = jQuery("#team_selyear");
-		thisInstance.registerChangeYear(myyearcombo.data('url')+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val(),myyearcombo.data('section'));
-		});
-
-		//register event for my team leave paging<next>.MYTEAMLEAVEPAGING BY SAFUAN
-		container.on('click', '#listViewNPageButton, #userleavenextpagebutton', function(e) { 
-
 		var myyearcombo = $('#team_selyear');
 		var membercombo = jQuery("#sel_teammember");
-		var leavetypecombo = jQuery("#sel_leavetype");
+		var claimtypecombo = jQuery("#sel_claimtype");
 		var pagenum = parseInt($('#pageNumber').val());
 		var nextpagenum = pagenum + 1;
 
-		thisInstance.registerPaging(myyearcombo.data('url')+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val()+'&pagenumber='+nextpagenum,myyearcombo.data('section'));
+		thisInstance.registerChangeYear(myyearcombo.data('url')+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selclaimtype='+claimtypecombo.val()+'&pagenumber='+nextpagenum,myyearcombo.data('section'));
 		});
 
 		//register event for my team leave paging<previous>.MYTEAMLEAVEPAGING BY SAFUAN
-		container.on('click', '#previouspage,#userleaveprevpagebutton', function(e) {
+		container.on('click', '#previouspage,#userclaimprevpagebutton', function(e) {
 
 		var myyearcombo = $('#team_selyear');
 		var membercombo = jQuery("#sel_teammember");
-		var leavetypecombo = jQuery("#sel_leavetype");
+		var claimtypecombo = jQuery("#sel_claimtype");
 		var pagenum = parseInt($('#pageNumber').val());
 		var prevpagenum = pagenum - 1;
 		
-		thisInstance.registerPaging(myyearcombo.data('url')+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selleavetype='+leavetypecombo.val()+'&pagenumber='+prevpagenum,myyearcombo.data('section'));
+		thisInstance.registerChangeYear(myyearcombo.data('url')+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selclaimtype='+claimtypecombo.val()+'&pagenumber='+prevpagenum,myyearcombo.data('section'));
 		});
+
+		return true;
 
 
 	},
@@ -584,35 +634,39 @@ Vtiger.Class("Users_Claim_Js", {
 	},
 
 	textAreaLimitChar : function(){
-			$('#reason').keyup(function() { 
+			$('#description').keyup(function() { 
 				var maxchar = 300;
 				var len = $(this).val().length;
 			 	if (len > maxchar) {
-			    		$('#charNum_reason').text(' you have reached the limit');
+			    		$('#charNum').text(' you have reached the limit');
 					$(this).val($(this).val().substring(0, len-1));
 			  	} else {
 			    		var remainchar = maxchar - len;
-			    		$('#charNum_reason').text(remainchar + ' character(s) left');
+			    		$('#charNum').text(remainchar + ' character(s) left');
 					
 			  	}
 			});
 	},
 	
 },{
-	//constructor
-	init : function() {
-		Users_Claim_Js.eduInstance = this;
-	},
 	
 
-	registerEvents: function(eduinstance) {
-		eduinstance.registerActions();
+	registerEvents: function() {
+	
 		//this._super();
-		this.registerActions();
-		this.registerActionsTeamLeave();
-		this.registerPageNavigationEvents();	
-		this.registerEventForTotalRecordsCount();
-		this.registerSetLeaveType();
+	
+		//this.registerActions();	
+		Users_Claim_Js.registerActionsTeamClaim();	 	
+		//Users_Claim_Js.registerSetClaimType();
 	}
 
 });
+
+jQuery(document).ready(function(e){ 
+
+	var eduinstance = new Users_Claim_Js();
+	eduinstance.registerEvents();
+
+
+
+})

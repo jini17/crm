@@ -11,6 +11,7 @@ class Users_DeleteSubModuleAjax_Action extends Vtiger_BasicAjax_Action {
 		$this->exposeMethod('deleteSkill');
 		$this->exposeMethod('deleteLeave');	
 		$this->exposeMethod('cancelLeave');	
+		$this->exposeMethod('cancelClaim');	
 	}
 
 	public function process(Vtiger_Request $request) {
@@ -182,6 +183,36 @@ class Users_DeleteSubModuleAjax_Action extends Vtiger_BasicAjax_Action {
 		$response->emit();
 	
 	}
+
+
+
+	public function cancelClaim($request) { 
+		//update leave
+		//$module = $request->getModule();
+		$db = PearDatabase::getInstance();
+ 		$response = new Vtiger_Response();
+		$claimid = $request->get('record');
+		$claimtype = $request->get('claim_type');
+		$userupdateid = $request->get('user_id');
+		$claimstatus = $request->get('claimstatus');
+		$user = new Users();
+      	 	$current_user = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
+			//include_once 'include/Webservices/Revise.php';
+			include_once 'modules/Claim/Claim.php';
+		
+
+			$db->pquery("UPDATE vtiger_claim SET claim_status='Cancel'  WHERE claimid= ?", array($claimid));
+			$return = 0;			
+				
+			/*	if($claimstatus == 'Approved'){
+					$result = Users_LeavesRecords_Model::CancelUserLeave($claimid, $userupdateid, $claimtype);
+				}*/
+				$msg    = $return=='1'? vtranslate("LBL_CREATE_FAILED","Users"):vtranslate("LBL_CLAIM_CREATE_SUCCESSFULLY","Users");
+				$response->setResult($msg);
+				$response->emit();
+	
+	}
+
 
 }
 ?>

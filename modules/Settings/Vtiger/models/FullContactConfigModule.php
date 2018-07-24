@@ -77,18 +77,7 @@ class Settings_Vtiger_FullContactConfigModule_Model extends Settings_Vtiger_Modu
 		if (!$this->getData()) {
 			
 			$data = 'l64pERb0m2pKaZDtwkjd0BoaOdCsfiWi';
-			$editableFileds = $this->getEditableFields();
 			
-			foreach ($editableFileds as $fieldName => $fieldDetails) {
-				foreach ($configContents as $configContent) {
-					if (strpos($configContent, $fieldName)) {
-						$fieldValue = explode(' = ', $configContent);
-						$fieldValue = $fieldValue[1];
-						$data[$fieldName] = str_replace(";", '', str_replace("'", '', $fieldValue));
-						break;
-					}
-				}
-			}
 			$this->setData($data);
 		}
 		return $this->getData();

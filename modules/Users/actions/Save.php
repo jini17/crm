@@ -102,12 +102,12 @@ class Users_Save_Action extends Vtiger_Save_Action {
 			
 			//validate user from CP database for no of users per plan
 			$roleid = $request->get('roleid');
-			$isvalidateUser = $userModuleModel->ValidateUserSubscription($userName, $roleid);
+			/*$isvalidateUser = $userModuleModel->ValidateUserSubscription($userName, $roleid);
 			if ($isvalidateUser == false) {
 				//header("location:index.php?module=Users&view=Edit&parent=Settings&error=".vtranslate('LBL_USER_LIMIT_EXCEED', $module));
 				//exit;
 				throw new AppException(vtranslate('LBL_USER_LIMIT_EXCEED', $module));
-			}
+			}*/
 			//end here 			
 
 		}

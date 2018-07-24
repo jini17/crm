@@ -196,15 +196,26 @@ class Users_Module_Model extends Vtiger_Module_Model {
 	 * Function to store the logout history
 	 * @param type $username
 	 */
-	public function saveLogoutHistory(){
+	public function saveLogoutHistory($username=null, $outtime=null){
 		$adb = PearDatabase::getInstance();
-
 		$userRecordModel = Users_Record_Model::getCurrentUserModel();
-		$userIPAddress = $_SERVER['REMOTE_ADDR'];
+
+		if($_SERVER['HTTP_HOST']==$short_url || $_SERVER['HTTP_HOST']=='localhost' 
+				|| stripos($_SERVER['HTTP_HOST'],'192.168.2.') !==false) { 
+			$userIPAddress=$_SERVER['REMOTE_ADDR'];	//add one more param IP address by jitu@28Dec2016
+		} else {
+		
+			$userIPAddress=$_SERVER['HTTP_X_FORWARDED_FOR'];	//add one more param IP address by jitu@28Dec2016	
+		}
+
+		//$userIPAddress = $_SERVER['REMOTE_ADDR'];
 		$outtime = date("Y-m-d H:i:s");
 
+		if($username==null || $username==''){
+			$username =$userRecordModel->get('user_name');	
+		}
 		$loginIdQuery = "SELECT MAX(login_id) AS login_id FROM vtiger_loginhistory WHERE user_name=? AND user_ip=?";
-		$result = $adb->pquery($loginIdQuery, array($userRecordModel->get('user_name'), $userIPAddress));
+		$result = $adb->pquery($loginIdQuery, array($username, $userIPAddress));
 		$loginid = $adb->query_result($result,0,"login_id");
 
 		if (!empty($loginid)){
@@ -254,10 +265,6 @@ class Users_Module_Model extends Vtiger_Module_Model {
 				$focus->column_fields[$fieldName] = decode_html($fieldValue);
 			}
 		}
-
-		$user_hash = $recordModel->get('user_hash');
-		if (!empty($user_hash))
-			$focus->column_fields['user_hash'] = $user_hash;
 
 		$focus->mode = $recordModel->get('mode');
 		$focus->id = $recordModel->getId();
@@ -417,6 +424,6 @@ class Users_Module_Model extends Vtiger_Module_Model {
 	**/
 	public function ValidateUserSubscription($role){
 
-		return false;
+		return true;
 	}
 }
