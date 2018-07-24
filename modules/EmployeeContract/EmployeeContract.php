@@ -72,6 +72,7 @@ class EmployeeContract extends Vtiger_CRMEntity {
 	// Column value to use on detail view record text display
 	var $def_detailview_recname = 'employeeno';
 
+	var $column_fields = Array();
 	// Used when enabling/disabling the mandatory fields for the module.
 	// Refers to vtiger_field.fieldname values.
 	var $mandatory_fields = Array('employeeno','assigned_user_id');
@@ -79,6 +80,11 @@ class EmployeeContract extends Vtiger_CRMEntity {
 	var $default_order_by = 'employeeno';
 	var $default_sort_order='ASC';
 
+	function EmployeeContract() {
+		$this->log =LoggerManager::getLogger('EmployeeContract');
+		$this->db = PearDatabase::getInstance();
+		$this->column_fields = getColumnFields('EmployeeContract');
+	}
 	/**
 	* Invoked when special actions are performed on the module.
 	* @param String Module name
@@ -100,6 +106,14 @@ class EmployeeContract extends Vtiger_CRMEntity {
  	}
  	function save_module($module) {
  		$this->insertIntoAttachment($this->id,$module);
+ 	
+ 		//update grade of assignto user 
+ 		global $adb;
+ 		
+ 		$assign = $this->column_fields['assigned_user_id'];
+ 		$grade = $this->column_fields['job_grade'];
+ 		$adb->pquery("UPDATE vtiger_users SET grade_id = ? WHERE id=?", array($grade,$assign));
+
 		
 	}
 

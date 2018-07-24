@@ -37,9 +37,11 @@ function createpdffile ($payslipid,$purpose='', $path='',$current_id='') {
 	$query = "SELECT * FROM vtiger_payslip INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_payslip.payslipid INNER JOIN vtiger_users ON vtiger_users.id = vtiger_payslip.emp_name WHERE vtiger_crmentity.deleted = 0 AND payslipid = ?";
 	$result = $adb->pquery($query,array($payslipid));
 
+
     $emp_name = $adb->query_result($result,0,'first_name');
     $userid = $adb->query_result($result,0,'id');
     $company_details = $adb->query_result($result,0,'company_details');
+
     $designation = $adb->query_result($result,0,'designation');
     $ic_passport = $adb->query_result($result,0,'ic_passport');
     $epf_no = $adb->query_result($result,0,'epf_no');
@@ -68,6 +70,7 @@ function createpdffile ($payslipid,$purpose='', $path='',$current_id='') {
     $total_comp_contribution = $adb->query_result($result,0,'total_comp_contribution');
     //echo  $emp_name;die;
 
+
     /**
      * Query to add Emp Designation
      */
@@ -88,6 +91,7 @@ function createpdffile ($payslipid,$purpose='', $path='',$current_id='') {
     $query2 = "SELECT * FROM vtiger_organizationdetails WHERE organization_id = ?";
 
     $result2 = $adb->pquery($query2,array($company_details));
+
 
     $organization_title = $adb->query_result($result2,0,'organization_title');
     $organizationname = $adb->query_result($result2,0,'organizationname');
