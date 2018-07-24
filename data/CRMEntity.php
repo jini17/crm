@@ -96,6 +96,57 @@ class CRMEntity {
 		}
 	}
 
+
+	//Special Uitype for CRM Instance by jitu@03072015
+	function getSpecialUitypeFieldValue($uitype, $fieldvalue) {
+	
+		global $adb;
+		if($uitype =='' || $uitype ==0){
+			return $fieldvalue;
+		}
+
+		switch($uitype) {
+			
+			case '3993' :
+				$companydata = Vtiger_Field_Model::getCompanyTitle($fieldvalue);
+				$outvalue = $companydata[0]['title'];
+			break;
+				
+			case '3994' :
+				$tcdata = Vtiger_Field_Model::getTermConditionTitle($fieldvalue);
+				$outvalue = $tcdata[0]['title'];
+			break;
+
+			case '3996' :
+				$query = "SELECT rolename FROM vtiger_role WHERE roleid = ?";
+				$result = $adb->pquery($query,$array($fieldvalue));
+				$outvalue = $adb->query_result($result, 0, 'rolename');
+			break;
+
+			case '2001' :
+				
+				$outvalue = Vtiger_Multiproduct_UIType::getWSDisplayValue($fieldvalue);
+			break;
+
+			case '2002' :
+				$outvalue = Vtiger_Multiregion_UIType::getDisplayValue($fieldvalue);
+			break;
+
+			case '2003' :
+				$outvalue = Vtiger_Multiusergroup_UIType::getWSDisplayValue($fieldvalue);
+			break;
+
+			case '2004' :
+				$outvalue = Vtiger_Inventorystatus_UIType::getDisplayValue($fieldvalue);
+			break;
+
+			default :
+				$outvalue = $fieldvalue;
+			break;
+		}
+		return $outvalue;
+	} //End Here
+
 	function saveentity($module, $fileid = '') {
 		global $current_user, $adb; //$adb added by raju for mass mailing
 		$insertion_mode = $this->mode;
@@ -122,6 +173,22 @@ class CRMEntity {
 			if ($table_name == "vtiger_crmentity") {
 				$this->insertIntoCrmEntity($module, $fileid);
 			} else {
+
+				#########################Start Assign Primary key Custom Code######################
+				# Assign Primary Value {quote_no, salesorder_no, invoice_no, account_no etc.} 
+				# Only in case of Add 
+				# Added By jitu@secondcrm.com on 24 sep 2014 	 
+				###################################################################################
+				if($this->mode != 'edit') {
+					$resprimary = $adb->pquery("SELECT fieldname FROM vtiger_field WHERE tablename = ? AND uitype = 4",array($table_name));
+					$source_company = $this->column_fields['company_details'];
+					$primary_key = $adb->query_result($resprimary, 0, "fieldname");
+					$moduleseqinfo = $this->getModuleSeqInfo($module,$source_company);
+					$this->column_fields[$primary_key] = $moduleseqinfo[0].($moduleseqinfo[1]+1);
+
+				}							
+				####################################End#############################################
+
 				$this->insertIntoEntityTable($table_name, $module, $fileid);
 			}
 		}
