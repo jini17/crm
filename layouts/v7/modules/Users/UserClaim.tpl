@@ -23,7 +23,7 @@
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_CLAIM['totalamount']}</label></td>
 					<td class="listTableRow small" valign=top>
 
-							<div class="pull-right actions">
+							<div class="pull-left actions">
 							<span class="actionImages">
 							<!--	<a class="docsLeave cursorPointer" onclick="javascript:window.open('?module=Claim&relatedModule=Documents&view=Detail&record={$USER_CLAIM['claimid']}&mode=showRelatedList&tab_label=Documents&popup=Claim','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file alignMiddle" title="Documents"></i>  
 								</a>	-->
@@ -32,10 +32,7 @@
 						{/if} <input type="hidden" name="manager" id="manager" value="false" />
 						{if $USER_CLAIM['claim_status'] eq 'Rejected' OR $USER_CLAIM['claim_status'] eq 'Apply' OR $USER_CLAIM['claim_status'] eq 'Approved'}
 						<a class="deleteLeave cursorPointer" onclick="Users_Claim_Js.deleteClaim('index.php?module=Claim&action=Delete&record={$USER_CLAIM['claimid']}');"><i class="fa fa-trash alignMiddle" title="Delete"></i></a>
-						{/if}
-						{if $USER_CLAIM['claim_status'] eq 'Approved' && $USER_CLAIM['from_date']|strtotime gt $CurrentDate|strtotime}
-						<a class="cancelLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_CLAIM['claimid']}&leave_type={$USER_CLAIM['leavetypeid']}&claim_status={$USER_CLAIM['claim_status']}"><i class="icon-trash alignMiddle" title="Cancel"></i></a>
-						{/if}
+						{/if} 
 
 						</span>
 						</div>
@@ -63,7 +60,7 @@
 				</tr>
 			{/foreach}
 			{else}
-				<tr><td colspan="6"><center>{vtranslate('LBL_NO_LEAVE_FOUND', $MODULE)}</center></td></tr>
+				<tr><td colspan="6"><center>{vtranslate('LBL_NO_CLAIM_FOUND', $MODULE)}</center></td></tr>
 			{/if}
 		</tbody>			
 	</table>
@@ -95,7 +92,7 @@
 	<div class="btn-group alignTop margin0px">
 				<span class="pull-right">
 					<span class="btn-group">
-						<button class="btn "  id="previouspage" {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if} type="button"><span class="icon-chevron-left"></span></button>
+						<button class="btn "  id="previouspage" {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if} type="button"><span class="fa fa-chevron-left"></span></button>
 							<!--<button class="btn dropdown-toggle" type="button" id="listViewPageJump" data-toggle="dropdown" {if $PAGE_COUNT eq 1} disabled {/if}>
 								<i class="vtGlyph vticon-pageJump" title="{vtranslate('LBL_LISTVIEW_PAGE_JUMP',$moduleName)}"></i>
 							</button>
@@ -113,7 +110,7 @@
 									</span>
 								</li>
 							</ul>-->
-						<button class="btn" id="listViewNPageButton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="fa fa-chevron-right"></span></button>				
+				<button class="btn" id="listViewNPageButton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="fa fa-chevron-right"></span></button>			
 					</span>
 				</span>	
 		</div>	
@@ -150,12 +147,12 @@
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_CLAIM['claim_status']}</label></td>
 
 					<td class="listTableRow small" valign=top>
-						<div class="pull-right actions">
+						<div class="pull-left actions">
 							<span class="actionImages">
-								<a onclick="javascript:window.open('?module=Claim&relatedModule=Documents&view=Detail&record={$USER_CLAIM['claimid']}&mode=showRelatedList&tab_label=Documents&popup=Claim','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file alignMiddle" title="Documents"></i>  </a>	
-								<a class="editLeave cursorPointer" data-url="{$CREATE_CLAIM_URL}&record={$USER_CLAIM['claimid']}&userId={$USER_CLAIM['applicantid']}&claim_status={$USER_CLAIM['claim_status']}&manager=true"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="fa fa-pencil alignBottom"></i></a>&nbsp;&nbsp;
-								{if $USER_CLAIM['claim_status'] neq 'Apply' && $USER_CLAIM['claim_status'] neq 'Rejected'}
-								<a class="cancelLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_CLAIM['claimid']}&leave_type={$USER_CLAIM['leavetypeid']}&user_id={$USER_CLAIM['applicantid']}&leavestatus={$USER_CLAIM['leavestatus']}">Cancel</a>				
+								<a onclick="javascript:window.open('?module=Claim&relatedModule=Documents&view=Detail&record={$USER_CLAIM['claimid']}&mode=showRelatedList&tab_label=Documents&popup=Claim','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file alignMiddle" title="Documents"></i>  </a>&nbsp;&nbsp;	
+								<a class="editLeave cursorPointer" onclick="Users_Claim_Js.Popup_ClaimApprove('{$CREATE_CLAIM_URL}&record={$USER_CLAIM['claimid']}&userId={$USER_CLAIM['applicantid']}&claimstatus={$USER_CLAIM['claim_status']}&manager=true');"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="fa fa-pencil alignBottom"></i></a>&nbsp;&nbsp;
+								{if $USER_CLAIM['claim_status'] eq 'Apply' OR $USER_CLAIM['claim_status'] eq 'Approved'}
+								<a class="cancelLeave cursorPointer" onclick="Users_Claim_Js.cancelClaim('?module=Users&action=DeleteSubModuleAjax&mode=cancelClaim&record={$USER_CLAIM['claimid']}&claim_type={$USER_CLAIM['claimtypeid']}&user_id={$USER_CLAIM['applicantid']}&claimstatus={$USER_CLAIM['claim_status']}','T');"><i title="{vtranslate('LBL_CANCEL', $MODULE)}" class="fa fa-times-circle alignBottom"></i></a>				
 								{/if}
 							</span>
 						</div>
@@ -164,7 +161,7 @@
 				</tr>
 			{/foreach}
 			{else}
-				<tr><td colspan="7"><center>{vtranslate('LBL_NO_LEAVE_FOUND', $MODULE)}</center></td></tr>
+				<tr><td colspan="7"><center>{vtranslate('LBL_NO_CLAIM_FOUND', $MODULE)}</center></td></tr>
 			{/if}
 		</tbody>				
 	</table>
@@ -175,17 +172,25 @@
 
 
 {else}
+<!-- Added hidden field by jitu for paging --->
+<script src="layouts/v7/modules/Vtiger/resources/List.js" type="text/javascript"></script>
+<script src="layouts/v7/modules/Users/resources/Claim.js?v=6.1.0" type="text/javascript"></script>
+<!--- End for pagination --->
+<!--start my leaves-->
 
-<div id="MyLeaveContainer">
-<button type="button" class="btn"
-onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_APPLY_CLAIM', $MODULE)}</strong></button>
+<div style="margin-top:10px;" id="MyClaimContainer">
 
 
-	<div style="float:left;"><strong>{vtranslate('LBL_MY_CLAIM', $MODULE)}</strong></div>
-	<div style="float:left;margin-left:5px;">
+
+	<div style="float:left;margin-bottom:10px;"><strong>{vtranslate('LBL_MY_CLAIM', $MODULE)}</strong>&nbsp;&nbsp;</div>&nbsp;&nbsp;
+
+	<div style="float:left;margin-bottom:10px;"><button type="button" class="btn"
+	onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_APPLY_CLAIM', $MODULE)}</strong></button></div> &nbsp;&nbsp;
+
+	<div style="float:left;margin-left:5px;margin-bottom:10px;">
 	 <!--	<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear"> -->
 	 	<form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST">
-		<select name="my_selyear" id="my_selyear" data-section="M"  class="my_selyear"   onchange="Users_Claim_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserClaim&section=M&record={$USERID}','M');">
+		<select name="my_selyear" id="my_selyear" data-section="M"  class="my_selyear" data-url="?module=Users&view=ListViewAjax&mode=getUserClaim&section=M&record={$USERID}"   onchange="Users_Claim_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserClaim&section=M&record={$USERID}','M');">
 
 			<!--//Added By Jitu Date Combobox-->
 			{for $year=$STARTYEAR to $CURYEAR}
@@ -220,21 +225,19 @@ onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i cl
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_CLAIM['transactiondate']}</label></td>
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_CLAIM['totalamount']}</label></td>
 					<td class="listTableRow small" valign=top>
-						<div class="pull-right actions">
+						<div class="pull-left actions">
 							<span class="actionImages">
-						<a class="docsLeave cursorPointer" onclick="javascript:window.open('?module=Claim&relatedModule=Documents&view=Detail&record={$USER_CLAIM['claimid']}&mode=showRelatedList&tab_label=Documents&popup=Claim','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file alignMiddle" title="Documents"></i>  
+						<a class="docsLeave cursorPointer" onclick="javascript:window.open('?module=Claim&relatedModule=Documents&view=Detail&record={$USER_CLAIM['claimid']}&mode=showRelatedList&tab_label=Documents&popup=Claim','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file alignMiddle" title="Documents"></i> &nbsp;&nbsp; 
 						</a>&nbsp;&nbsp;	
-					{if $USER_CLAIM['claim_status'] eq 'Apply' } 
+					{if $USER_CLAIM['claim_status'] eq 'New' } 
 						<a class="editLeave cursorPointer" onclick="Users_Claim_Js.editClaim('index.php{$CREATE_CLAIM_URL}&record={$USER_CLAIM['claimid']}&userId={$USERID}&claim_status={$USER_CLAIM['claim_status']}&manager=false');"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="fa fa-pencil alignBottom"></i></a>&nbsp;&nbsp;
-					{/if} <input type="hidden" name="manager" id="manager" value="false" />
-					{if $USER_CLAIM['claim_status'] eq 'New' OR $USER_CLAIM['claim_status'] eq 'Apply'}
-					<a class="deleteLeave cursorPointer" onclick="Users_Claim_Js.deleteClaim('index.php?module=Claim&action=Delete&record={$USER_CLAIM['claimid']}');"><i class="fa fa-trash alignMiddle" title="Delete"></i></a>
-					{/if}
-					{if $USER_CLAIM['claim_status'] eq 'Approved'}
-					<a class="cancelLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_CLAIM['claimid']}&leave_type={$USER_CLAIM['leavetypeid']}&claim_status={$USER_CLAIM['claim_status']}"><i class="icon-trash alignMiddle" title="Cancel"></i></a>
-
-	
-					{/if}
+					{/if} 
+					{if $USER_CLAIM['claim_status'] eq 'Cancel' OR $USER_CLAIM['claim_status'] eq 'Apply'}
+					<a class="deleteLeave cursorPointer" onclick="Users_Claim_Js.deleteClaim('index.php?module=Claim&action=Delete&record={$USER_CLAIM['claimid']}');"><i class="fa fa-trash alignMiddle" title="Delete"></i></a>&nbsp;&nbsp;
+					{/if} 
+				{if $USER_CLAIM['claim_status'] eq 'Apply' 	}
+					<a class="cancelLeave cursorPointer" onclick="Users_Claim_Js.cancelClaim('?module=Users&action=DeleteSubModuleAjax&mode=cancelClaim&record={$USER_CLAIM['claimid']}&claim_type={$USER_CLAIM['claimtypeid']}&user_id={$USER_CLAIM['applicantid']}&claimstatus={$USER_CLAIM['claim_status']}','T');"><i title="{vtranslate('LBL_CANCEL', $MODULE)}" class="fa fa-times-circle alignBottom"></i></a>				
+								{/if}
 
 							</span>
 						</div>
@@ -242,7 +245,7 @@ onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i cl
 				</tr>
 			{/foreach}
 			{else}
-				<tr><td colspan="6"><center>{vtranslate('LBL_NO_LEAVE_FOUND', $MODULE)}</center></td></tr>
+				<tr><td colspan="6"><center>{vtranslate('LBL_NO_CLAIM_FOUND', $MODULE)}</center></td></tr>
 			{/if}
 		</tbody>			
 	</table>
@@ -259,12 +262,12 @@ onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i cl
 <!----- End for pagination ----->
 <br /><br />
 <!--start team leaves-->
-<div id="MyTeamLeaveContainer">
+<div id="MyTeamClaimContainer">
 	<div style="float:left;margin-bottom:21px;"><strong>{vtranslate('LBL_MYTEAM_CLAIM', $MODULE)}</strong></div>
 	<div class="listViewTopMenuDiv noprint" style="float:left;margin-left:5px;">
-		<select name="team_selyear" class="team_selyear" id="team_selyear" onchange="Users_Claim_Js.sel_teammember('?module=Users&view=ListViewAjax&mode=getUserClaim&section=T&record={$USERID}','T');" >
+		<select name="team_selyear" class="team_selyear" id="team_selyear" data-section="T" data-url="?module=Users&view=ListViewAjax&mode=getUserClaim&section=T&record={$USERID}" onchange="Users_Claim_Js.sel_teammember('?module=Users&view=ListViewAjax&mode=getUserClaim&section=T&record={$USERID}','T');" >
 		{for $year=$STARTYEAR to $CURYEAR}
-			<option value="{$year}" {if $year eq $CURYEAR} selected {/if}>{$year}</option>
+			<option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
 		{/for}
 		</select>&nbsp;
 		<select name="sel_teammember" class="sel_teammember" id="sel_teammember" data-section="T" onchange="Users_Claim_Js.sel_teammember('?module=Users&view=ListViewAjax&mode=getUserClaim&section=T&record={$USERID}','T');"  >
@@ -274,7 +277,7 @@ onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i cl
 		{/foreach}
 		</select>&nbsp;
 		<select name="sel_claimtype" class="sel_claimtype" id="sel_claimtype"  data-section="T" onchange="Users_Claim_Js.sel_teammember('?module=Users&view=ListViewAjax&mode=getUserClaim&section=T&record={$USERID}','T');" >
-			<option value="All">{vtranslate('SEL_LBL_LEAVETYPE', $MODULE)}</option>
+			<option value="All">{vtranslate('SEL_LBL_CLAIMTYPE', $MODULE)}</option>
 		{foreach item=CLAIMTYPE from=$CLAIMTYPELIST}
 			<option value="{$CLAIMTYPE['claimtypeid']}">{$CLAIMTYPE['claim_type']}</option>
 		{/foreach}
@@ -305,7 +308,7 @@ onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i cl
 	<div class="btn-group alignTop margin0px">
 		<span class="pull-right">
 			<span class="btn-group">
-				<button class="btn"  id="userleaveprevpagebutton"  {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if} type="button"><span class="icon-chevron-left"></span></button>
+				<button class="btn"  id="userclaimprevpagebutton"  {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if} type="button"><span class="fa fa-chevron-left"></span></button>
 				<!--<button class="btn dropdown-toggle" type="button" id="listViewPageJump" data-toggle="dropdown" {if $PAGE_COUNT eq 1} disabled {/if}>
 					<i class="vtGlyph vticon-pageJump" title="{vtranslate('LBL_LISTVIEW_PAGE_JUMP',$moduleName)}"></i>
 					</button>
@@ -325,7 +328,7 @@ onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i cl
 							</span>
 						</li>
 					</ul>-->
-				<button class="btn" id="userleavenextpagebutton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="icon-chevron-right"></span></button>				
+				<button class="btn" id="userclaimnextpagebutton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="fa fa-chevron-right"></span></button>					
 			</span>
 		</span>	
 	</div>	
@@ -359,13 +362,13 @@ onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i cl
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_CLAIM['claim_status']}</label></td>
 
 					<td class="listTableRow small" valign=top>
-						<div class="pull-right actions">
+						<div class="pull-left actions">
 							<span class="actionImages">
 							<a onclick="javascript:window.open('?module=Claim&relatedModule=Documents&view=Detail&record={$USER_CLAIM['claimid']}&mode=showRelatedList&tab_label=Documents&popup=Claim','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file alignMiddle" 
-								title="Documents"></i>  </a>	
+								title="Documents"></i>  </a>&nbsp;&nbsp;	
 								<a class="editLeave cursorPointer" onclick="Users_Claim_Js.Popup_ClaimApprove('{$CREATE_CLAIM_URL}&record={$USER_CLAIM['claimid']}&userId={$USER_CLAIM['applicantid']}&claimstatus={$USER_CLAIM['claim_status']}&manager=true');"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="fa fa-pencil alignBottom"></i></a>&nbsp;&nbsp;
-								{if $USER_CLAIM['claim_status'] neq 'Rejected'}
-								<a class="cancelLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_CLAIM['claimid']}&leave_type={$USER_CLAIM['leavetypeid']}&user_id={$USER_CLAIM['applicantid']}&leavestatus={$USER_CLAIM['leavestatus']}">Cancel</a>				
+								{if $USER_CLAIM['claim_status'] eq 'Apply' OR $USER_CLAIM['claim_status'] eq 'New'}
+								<a class="cancelLeave cursorPointer" onclick="Users_Claim_Js.cancelClaim('?module=Users&action=DeleteSubModuleAjax&mode=cancelClaim&record={$USER_CLAIM['claimid']}&claim_type={$USER_CLAIM['claimtypeid']}&user_id={$USER_CLAIM['applicantid']}&claimstatus={$USER_CLAIM['claim_status']}','T');"><i title="{vtranslate('LBL_CANCEL', $MODULE)}" class="fa fa-times-circle alignBottom"></i></a>				
 								{/if}
 							</span>
 						</div>
@@ -374,7 +377,7 @@ onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i cl
 				</tr>
 			{/foreach}
 			{else}
-				<tr><td colspan="7"><center>{vtranslate('LBL_NO_LEAVE_FOUND', $MODULE)}</center></td></tr>
+				<tr><td colspan="7"><center>{vtranslate('LBL_NO_CLAIM_FOUND', $MODULE)}</center></td></tr>
 			{/if}
 		</tbody>			
 	</table>
