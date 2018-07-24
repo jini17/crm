@@ -10,7 +10,7 @@
 
 class Users_EditClaim_View extends Vtiger_Index_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(Vtiger_Request $request) { //print_r($request);die;
 		$moduleName = $request->getModule(); 
 		$claimid = $request->get('record');  
 		$userId = $request->get('userId');
@@ -21,7 +21,9 @@ class Users_EditClaim_View extends Vtiger_Index_View {
 
 		$claimstatuslist = Users_ClaimRecords_Model::getClaimStatusList($userId,$claimid);
 
-		$userslist=Users_ClaimRecords_Model::getAllUsersList($userId);
+		$userslist=Users_ClaimRecords_Model::getAllUsersList($userId);	
+
+		$jobgrade=Users_ClaimRecords_Model::getJobGrade($userId);
 
 		$manager = $request->get('manager');
 		
@@ -53,13 +55,14 @@ class Users_EditClaim_View extends Vtiger_Index_View {
 		$viewer->assign('MODULE', $moduleName);
 		$viewer->assign('QUALIFIED_MODULE', $moduleName);
 		$viewer->assign('USERID', $userId);
-		$viewer->assign('LEAVEID', $claimid);
+		$viewer->assign('CLAIMID', $claimid);
 		$viewer->assign('CLAIMTYPELIST', $claimtype);
 		$viewer->assign('CLAIMSTATUSLIST', $claimstatuslist);
 		$viewer->assign('CLAIMSTATUS', $claimstatus);
 		$viewer->assign('CURRENT_USER_MODEL', $userRecordModel);
 		$viewer->assign('USERSLIST', $userslist);
 		$viewer->assign('MANAGER',$manager);
+		$viewer->assign('JOBGRADE',$jobgrade);
 
 		$viewer->assign('CURRENTYEAR', date('Y'));
 		$viewer->assign('STARTDATEFIELD', $startDateField);

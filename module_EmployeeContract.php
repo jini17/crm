@@ -98,6 +98,17 @@ include_once 'include/Webservices/Utils.php';
 	$field51->typeofdata = 'D~O'; // varchar~Mandatory
 	$block->addField($field51); /** table and column are automatically set */
 
+	$field61 = new Vtiger_Field();
+	$field61->name = 'expiry_date';
+	$field61->label = 'Expiry Date';
+	$field61->table = $module->basetable;
+	$field61->column = 'expiry_date';
+	$field61->columntype = 'DATE';
+	$field61->uitype = 5;
+	$field61->displaytype = 1;
+	$field61->typeofdata = 'D~O'; // varchar~Mandatory
+	$block->addField($field61); /** table and column are automatically set */
+
 	$field6 = new Vtiger_Field();
 	$field6->name   =  'designation';
 	$field6->label  = 'Designation';
@@ -114,16 +125,11 @@ include_once 'include/Webservices/Utils.php';
 	$field7->table  =  $module->basetable;
 	$field7->column = 'job_grade';
 	$field7->columntype = 'VARCHAR(50)';
-<<<<<<< HEAD
-	$field7->uitype	= 2;
-	$field7->typeofdata = 'V~O'; // varchar~Mandatory
-	$block->addField($field7); /** table, column, label, set to default values */
-=======
 	$field7->uitype	= 10;
 	$field7->typeofdata = 'V~O'; // varchar~Mandatory
 	$block->addField($field7); /** table, column, label, set to default values */
 	$field7->setRelatedModules(Array('Grade'));
->>>>>>> Development
+
 
 	$field8 = new Vtiger_Field();
 	$field8->name   =  'starting_sal';

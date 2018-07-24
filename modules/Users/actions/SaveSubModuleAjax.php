@@ -6,7 +6,8 @@
 
 class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 	
-	function __construct() {
+	function __construct() { 
+
 		parent::__construct();
 		$this->exposeMethod('saveEducation');
 		$this->exposeMethod('saveLanguage');
@@ -16,6 +17,9 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		$this->exposeMethod('saveEmergencyContact');	
 		$this->exposeMethod('saveLeave');
 		$this->exposeMethod('saveClaim');
+		$this->exposeMethod('ValidateClaimAmount');
+		
+
 	}
 
 	public function process(Vtiger_Request $request) {
@@ -26,6 +30,108 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		}
 	}
 	
+	public function ValidateClaimAmount(Vtiger_Request $request){   //echo"<pre>";  print_r($request);die;
+		
+		$db = PearDatabase::getInstance();
+		$request= $_REQUEST['form'];
+		$current_user_id= $_REQUEST['current_user_id'];
+		$transactionLimit= $_REQUEST['trans']; 
+		$monthly = $_REQUEST['monthly']; 
+		$yearly = $_REQUEST['yearly'];
+		$totalamount = $_REQUEST['totalamount'];
+		$transactiondate = $_REQUEST['transactiondate'];
+		$unixtime = strtotime($transactiondate);
+		$month = date('m', $unixtime); //month echo
+		$year = date('Y', $unixtime); 
+		$category = $_REQUEST['category'];
+		$job_grade = $_SESSION["myjobgrade"] ;
+
+	
+        $query = "SELECT sum(totalamount) FROM vtiger_claim INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_claim.claimid WHERE vtiger_crmentity.deleted=0 AND vtiger_crmentity.smownerid=$current_user_id AND vtiger_claim.category=$category AND MONTH(transactiondate)=$month group by MONTH(transactiondate)";
+
+        $query1 = "SELECT sum(totalamount) FROM vtiger_claim INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_claim.claimid WHERE vtiger_crmentity.deleted=0 AND vtiger_crmentity.smownerid=$current_user_id AND vtiger_claim.category=$category AND YEAR(transactiondate)=$year group by YEAR(transactiondate)";
+
+
+
+	 	$result = $db->pquery($query);
+		$SumTotalAmountMonth = $db->query_result($result);
+		$balanceMonth = $totalamount+ $SumTotalAmountMonth  ; //echo $balanceMonth; echo $monthly;die;
+
+		$result1 = $db->pquery($query1);
+		$SumTotalAmountYear = $db->query_result($result1);
+		$balanceYear =  $totalamount + $SumTotalAmountYear ; //echo $SumTotalAmountYear;die;
+
+///////condition of amount exceed limit transaction limit/monthly
+		if(($totalamount>$transactionLimit) && ($transactionLimit!="-1")){ 
+			 $return =1; 
+		}elseif ($transactionLimit=="-1"){
+						if(($balanceMonth>$monthly)){ 
+							$return =2; 	
+						}elseif ($monthly=="-1"){
+									if(($balanceYear>$yearly) && ($yearly!="-1")){ 
+									$return =3; 	
+									}elseif ($monthly=="-1"){
+										$return = 0 ;	
+									}else {
+										$return = 0;
+									}	
+						}else {
+							$return = 0;
+						}
+		} elseif (($totalamount<$transactionLimit) && ($transactionLimit!="-1"))  {
+						if (($balanceMonth<$monthly) && ($monthly!="-1")){
+								if(($balanceYear<$yearly) && ($yearly!="-1")){
+									$return = 0 ;
+								}else {
+									$return = 3;
+								}
+						}else{
+							$return = 2;
+						}
+
+		} else {
+
+		}
+
+
+		$response = new Vtiger_Response();
+		try{
+		    
+			switch ($return) {
+		    case "1":
+		        $msg    = vtranslate("LBL_TRANSACTION_LIMIT_EXCEED","Users"); 
+		        break;
+		    case "2":
+		        $msg    = vtranslate("LBL_MONTHLY_LIMIT_EXCEED","Users"); 
+		        break;
+		    case "3":
+		        $msg    = vtranslate("LBL_YEARLY_LIMIT_EXCEED","Users"); 
+		        break;
+		    case "0":
+		        $msg    = vtranslate("LBL_CLAIM_NOT_EXCEED","Users"); 
+		        break;
+		
+		}
+
+
+
+
+
+		   // $msg    = vtranslate("Not exceed limit","Users"); 	
+		    $response->setResult($msg);
+		}catch(Exception $e){
+		    $response->setError($e->getCode(),$e->getMessage());
+		}
+		$response->emit();
+
+
+
+		  //echo $instance;die;
+		//  return $instance;
+  	      
+		                           
+
+	}
 	public function saveEducation(Vtiger_Request $request) {
 		
 		$module = $request->getModule();
@@ -375,14 +481,14 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		/*   Claim    */
 
 	
-	public function saveClaim(Vtiger_Request $request) {   
+	public function saveClaim(Vtiger_Request $request) {  //echo"<pre>";  print_r($request);die;
 		
   		
   			//$request= $_REQUEST['form'];	
 	$module = $request->getModule();
 	$db = PearDatabase::getInstance();
 
-	include_once 'include/Webservices/Create.php';
+	//include_once 'include/Webservices/Create.php';
 	include_once 'modules/Claim/Claim.php';
 	$user = new Users();
 	global $current_user;
@@ -393,20 +499,15 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 	$claimid= $request->get('record');
 
 
-/*	
-	$wsclaimType    = vtws_getWebserviceEntityId('ClaimType', $request->get('category'));
-	$wsUser		= vtws_getWebserviceEntityId('Users', $request->get('approved_by')); 
-	$wsCurrentUser	= vtws_getWebserviceEntityId('Users', $id);	
-*/
-
 	$category= $request->get('category');
 	$approved_by = $request->get('approved_by');
 
 	$transactiondate = date('Y-m-d',strtotime($request->get('transactiondate')));
 	$totalamount= $request->get('totalamount'); 
 	$taxinvoice= $request->get('taxinvoice'); 
-	$claim_status= $request->get('claim_status'); 
+	$claim_status= $request->get('claim_status');  
 	$description= $request->get('description'); 
+	$rejectionreasontxt= $request->get('rejectionreasontxt'); 
 	//$enddate = date('Y-m-d',strtotime($request->get('end_date')));
 
 
@@ -433,28 +534,9 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 			$claims->save('Claim');
 			//$education->mode = '';
 			$return = 0;
-			//echo "<pre>";print_r($claims->id);die;
-			/*
-			$data = array (
-					'category' => '566',
-					'transactiondate'=> $request->get('transactiondate'),
-					'totalamount'  => $request->get('totalamount'),
-					'taxinvoice'  => $request->get('taxinvoice'),
-					'claim_status'  => $request->get('claim_status'),
-					'description'  => $request->get('description'),
-					'assigned_user_id' =>  $wsCurrentUser,
-					'approved_by'  => $wsUser,
-				);
-			//print_r($data);die;
-				
 
-				
-				$claim = vtws_create('Claim', $data,1);
-				//echo "<pre>";print_r($claim);die;
-				$msg    = $claim != null ? vtranslate("LBL_CREATE_SUCCESS","Users"):vtranslate("LBL_CREATE_FAILED","Users");
-				*/
 
-				$msg    = $return=='1'? vtranslate("LBL_CREATE_FAILED","Users"):vtranslate("LBL_CREATE_SUCCESS","Users"); 	
+				$msg    = $return=='1'? vtranslate("LBL_CREATE_FAILED","Users"):vtranslate("LBL_CLAIM_CREATE_SUCCESSFULLY","Users"); 	
 		    	$response->setResult($msg);
 			
 			} catch (WebServiceException $ex) {
@@ -463,13 +545,28 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
 		$response->emit();
 
-		}else{ 
+		}else{  
 
-			$claims->mode = 'edit';
-			$claims->id = $claimid;
-			$return = 0;
-			$db->pquery("UPDATE vtiger_claim SET category=?, transactiondate=?, totalamount=?, taxinvoice=?, claim_status=?,description=?, approved_by=? WHERE 	claimid=?", array($category, $transactiondate, $totalamount, $taxinvoice,$claim_status, $description, $approved_by, 
-				$claimid));
+
+			if($manager == 'true' || ($current_user->is_admin=='on' && ($request->get('claim_status')=='Approved' || $request->get('claim_status')=='Rejected' )))
+			{		
+					//$response = new Vtiger_Response();
+					$claims->mode = 'edit';
+					$claims->id = $claimid;
+					//$return = 0;
+					$db->pquery("UPDATE vtiger_claim SET claim_status= ?, resonforreject= ? WHERE claimid= ?", array($claim_status, $rejectionreasontxt, $claimid,));
+
+							//$leave = vtws_revise($data, $current_user);
+					//$msg    = $request->get('claim_status')=='Approved'?vtranslate("LBL_APPROVED","Users"):vtranslate("LBL_NOT_APPROVED","Users");
+					//$response->setResult($msg);
+
+			}else{
+					$claims->mode = 'edit';
+					$claims->id = $claimid;
+					//$return = 0;
+					$db->pquery("UPDATE vtiger_claim SET category=?, transactiondate=?, totalamount=?, taxinvoice=?, claim_status=?,description=?, approved_by=? WHERE 	claimid=?", array($category, $transactiondate, $totalamount, $taxinvoice,$claim_status, $description, $approved_by, 
+						$claimid));
+		}
 
 
 		}

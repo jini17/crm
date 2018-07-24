@@ -462,6 +462,14 @@ $languageStrings = array(
 'LBL_MYTEAM_CLAIM'=>'My Team Claim',
 'LBL_CLAIM_APPROVED'=>'Claim Approved',
 'LBL_CLAIM_NOT_APPROVED'=>'Claim Not Approved',
+'SEL_LBL_CLAIMTYPE'=>'Claim Type',
+'LBL_NO_CLAIM_FOUND'=>'No Claim found',
+'LBL_MONTHLY_LIMIT_EXCEED'=>'Monthly limit exceeded !',
+'LBL_YEARLY_LIMIT_EXCEED'=>'Yearly limit exceeded !',
+'LBL_CLAIM_NOT_EXCEED'=>'Amount claim are fine.',	
+
+
+
 //End of section Claim
 
 //Emergency Contacts Label
@@ -522,4 +530,16 @@ $jsLanguageStrings = array(
 	'JS_DELETE_SKILL_CONFIRMATION' => 'Do you confirm to delete Skill',	
 	'JS_NO_MATCH_FOUND' => 'No match found. ',
 	'JS_ADD_NEW' => ' Add New',
+	'JS_DELETE_LEAVE_CONFIRMATION' => 'Do you confirm to delete leave',
+	'JS_DELETE_CLAIM_CONFIRMATION' => 'Do you confirm to delete claim',
+	'JS_CANCEL_CLAIM_CONFIRMATION' => 'Do you confirm to cancel claim',
+	'JS_SELECT_CLAIM_TYPE'=>'Please Select Claim Type',
+	'JS_SELECT_TRANSACTION_DATE'=>'Please Select Transaction date',
+	'JS_ERROR_TRANSACTION_DATE'=>'Failed. Transaction date cannot in future.',
+	'JS_MONTHLY_LIMIT_EXCEED'=>'Monthly limit exceeded !',
+	'JS_YEARLY_LIMIT_EXCEED'=>'Yearly limit exceeded !',
+	'JS_CLAIM_NOT_EXCEED'=>'Amount claim are fine.',																
+
+
+
 );
