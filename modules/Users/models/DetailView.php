@@ -77,10 +77,12 @@ class Users_DetailView_Model extends Vtiger_DetailView_Model {
 										'linkurl' => "javascript:Users_Detail_Js.triggerChangePassword('".$recordModel->getChangePwdUrl()."','Users')",
 										'linkicon' => ''
 									);
+			$accesskeyUrl = 'index.php?module=Users&action=SaveAjax&mode=changeAccessKey&record='.$recordId;
+
 			$detailViewActionLinks[] = array(
 										'linktype'	=> 'DETAILVIEW',
 										'linklabel' => 'LBL_CHANGE_ACCESS_KEY',
-										'linkurl'	=> "javascript:Users_Detail_Js.triggerChangeAccessKey('index.php?module=Users&action=SaveAjax&mode=changeAccessKey&record=$recordId')",
+										'linkurl'	=> "javascript:Users_Detail_Js.triggerChangeAccessKey('".$accesskeyUrl."')",
 										'linkicon'	=> ''
 									);
 

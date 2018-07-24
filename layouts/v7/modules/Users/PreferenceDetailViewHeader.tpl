@@ -65,7 +65,7 @@
 											{/if}
 										{else}
 											<li id="{$MODULE}_detailView_moreAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_LINK->getLabel())}">
-												<a href={$DETAIL_VIEW_LINK->getUrl()} >{vtranslate($DETAIL_VIEW_LINK->getLabel(), $MODULE)}</a>
+												<a href="#" onclick="{$DETAIL_VIEW_LINK->getUrl()}" >{vtranslate($DETAIL_VIEW_LINK->getLabel(), $MODULE)}</a>
 											</li>
 										{/if}
 									{/foreach}
