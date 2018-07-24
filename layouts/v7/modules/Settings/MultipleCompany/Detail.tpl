@@ -9,6 +9,14 @@
   *
  ********************************************************************************/
 -->*}
+<script>
+
+jQuery(document).ready(function(e){
+     var vtigerinst = new Vtiger_Index_Js();
+     vtigerinst.registerEvents();
+});   
+
+</script>
 <script language="JAVASCRIPT" type="text/javascript" src="include/js/smoothscroll.js"></script>
 <script language="JavaScript" type="text/javascript" src="include/js/menu.js"></script>
 <form action="index.php" method="post" name="company" onsubmit="VtigerJS_DialogBox.block();">

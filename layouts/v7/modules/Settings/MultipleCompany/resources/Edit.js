@@ -126,3 +126,7 @@ Settings_Vtiger_Edit_Js('Settings_MultipleCompany_Edit_Js', {}, {
 		this.registerGoogleAddress();
 	}
 });
+jQuery(document).ready(function(e){
+     var vtigerinst = new Vtiger_Index_Js();
+     vtigerinst.registerEvents();
+});     

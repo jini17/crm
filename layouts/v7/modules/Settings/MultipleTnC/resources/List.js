@@ -98,4 +98,9 @@ Vtiger.Class("Settings_MultipleTnC_List_Js",{
 	registerEvents : function() {
 		this.DeleteRecord();
 	}
-})
+});
+jQuery(document).ready(function(e){
+     var vtigerinst = new Vtiger_Index_Js();
+     vtigerinst.registerEvents();
+});	
+	

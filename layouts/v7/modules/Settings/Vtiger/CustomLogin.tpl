@@ -126,13 +126,14 @@
                     <option value="120" {if $MODULE_MODEL->get($FIELD) eq '120'}selected{/if}>120 min</option>
                     <option value="300" {if $MODULE_MODEL->get($FIELD) eq '300'}selected{/if}>300 min</option>
                 </select>
-                        <!--added by jitu@secondcrm.com for showhide tooltip ->
-                        {else if $FIELD eq 'istooltip'}
-                            <select name="{$FIELD}" class="select2" data-validation-engine="validate[required]" >
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>          
-                            </select>
-                        <!--End here-->
+                  <!-- added by jitu@secondcrm.com for showhide tooltip -->
+                  {else if $FIELD eq 'istooltip'}
+                      <select name="{$FIELD}" class="select2" data-validation-engine="validate[required]" >
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>          
+                      </select>
+
+                 <!-- End here-->
                 {else if $FIELD eq 'id' }
                     <input class="col-md-10" style="margin-bottom: 15px;padding: 6px 8px;" type="hidden" value="{$MODULE_MODEL->get($FIELD)}" name="{$FIELD}" /> 
                 {else}
@@ -147,7 +148,7 @@
 
     <div class="ModalFooterContainer">
             {include file="ModalFooter.tpl"|@vtemplate_path:$QUALIFIED_MODULE}
-           </div>
+    </div>
     <div class="col-md-2"></div>
 </div>
  </form>  

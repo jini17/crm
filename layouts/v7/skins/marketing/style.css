@@ -4724,7 +4724,6 @@ li.dashboardWidget {
 .dashboardWidgetHeader .title {
   padding-bottom: 10px;
   font-size: 15px;
-  margin-top: 15px;
 }
 .dashboardWidgetHeader:hover {
   cursor: move;
@@ -4757,7 +4756,7 @@ li.dashboardWidget {
 .dashBoardWidgetFooter {
   position: absolute;
   left: 0;
-  top: 0;
+  bottom: 0;
   width: 100%;
   height: 30px;
   background: #F7F7F7;
@@ -4775,7 +4774,7 @@ li.dashboardWidget {
   width: 100%;
   background: white;
   border: 1px solid #CCCCCC;
-  top: 30px;
+  bottom: 30px;
   font-size: 11px;
 }
 .dashBoardWidgetFooter .filterContainer .radio-group input {

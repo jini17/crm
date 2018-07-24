@@ -100,3 +100,7 @@ Vtiger.Class("Settings_MultipleCompany_List_Js",{},{
 		this.DeleteRecord();
 	}
 });
+jQuery(document).ready(function(e){
+     var vtigerinst = new Vtiger_Index_Js();
+     vtigerinst.registerEvents();
+}); 

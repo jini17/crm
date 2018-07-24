@@ -14,6 +14,12 @@ Change Reason: Multiple Terms An Conditions , New file created
   *
  ********************************************************************************/
 -->*}
+<script>
+	jQuery(document).ready(function(e){
+     var vtigerinst = new Vtiger_Index_Js();
+     vtigerinst.registerEvents();
+});	
+</script>
 <script language="JAVASCRIPT" type="text/javascript" src="include/js/smoothscroll.js"></script>
 <script language="JavaScript" type="text/javascript" src="include/js/menu.js"></script>
 <!--Codes modified for multiple terms&conditions-->
