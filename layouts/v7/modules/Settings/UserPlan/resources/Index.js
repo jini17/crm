@@ -101,7 +101,9 @@ Vtiger.Class("Settings_UserPlan_Index_Js",{},{
 		//var container = thisInstance.getContainer();
           //container.find('.editPlan').trigger('click');
 		//register click event for Add New Tax button
-		container.find('.editPlan').click(function(e) {
+		//container.find('.editPlan').click(function(e) {
+		//modify by jitu@editPlan on next page 
+		jQuery('#plan').on('click', '.editPlan', function(e) {
 			var changePlanButton = jQuery(e.currentTarget);
 			var editPlanUrl = changePlanButton.data('url');
 			editPlanUrl = editPlanUrl+'&username='+changePlanButton.data('username')+'&plantitle='+changePlanButton.data('plantitle');
