@@ -14,7 +14,7 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 	function __construct() {
 		parent::__construct();
 		$this->exposeMethod('userExists');
-		$this->exposeMethod('validateUser');
+		$this->exposeMethod('validateSubscription');
 		$this->exposeMethod('savePassword');
 		$this->exposeMethod('restoreUser');
 		$this->exposeMethod('transferOwner');
@@ -109,10 +109,10 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		$response->emit();
 	}
 
-	public function validateUser(Vtiger_Request $request){ 
+	public function validateSubscription(Vtiger_Request $request){ 
 		$module = $request->getModule();
 		$roleid = $request->get('roleid');
-		$validate = Users_Record_Model::isValidateUserSubscription($userName, $roleid);
+		$validate = Users_Record_Model::isValidateUserSubscription($roleid);
 		$response = new Vtiger_Response();
 		$response->setResult($validate);
 		$response->emit();
@@ -228,18 +228,20 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		$response = new Vtiger_Response();
 		try {
 			$recordModel = Users_Record_Model::getInstanceById($recordId, $moduleName);
-			$oldAccessKey = $recordModel->get('accesskey');
+			 $oldAccessKey = $recordModel->get('accesskey');
 
 			$entity = $recordModel->getEntity();
 			$entity->createAccessKey();
 
 			require_once('modules/Users/CreateUserPrivilegeFile.php');
 			createUserPrivilegesfile($recordId);
-			Vtiger_AccessControl::clearUserPrivileges($recordId);
+			//Vtiger_AccessControl::clearUserPrivileges($recordId);
+			//$recordModel = Users_Record_Model::getInstanceFromPreferenceFile($recordId);
+			//$newAccessKey = $recordModel->get('accesskey');
 
-			$recordModel = Users_Record_Model::getInstanceFromPreferenceFile($recordId);
+			$recordModel = Users_Record_Model::getInstanceById($recordId, $moduleName);
 			$newAccessKey = $recordModel->get('accesskey');
-
+			
 			if ($newAccessKey != $oldAccessKey) {
 				$response->setResult(array('success' => true, 'message' => vtranslate('LBL_ACCESS_KEY_UPDATED_SUCCESSFULLY', $moduleName), 'accessKey' => $newAccessKey));
 			} else {

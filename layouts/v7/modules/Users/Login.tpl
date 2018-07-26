@@ -100,15 +100,18 @@
 </head>
 <body>
 	<!--<h1 style="color:red;">Edited</h1>-->
-	<div class="container-fluid login-container">
+	<div class="container-fluid login-container" style="padding-left: 0px !important;
+    padding-right: 0px !important;">
 		<!-- Start logo area / welcome message-->
 		<div class="row-fluid">
 			<div class="span3">
+				<!--hide logo on top
 				<div class="logo" id="loginpagelogo">
 					<a target="_blank" href="{if $LOGINPAGE['linkurl'] eq ''}https://secondcrm.com{else}{$LOGINPAGE['linkurl']}{/if}">
 						<img src="test/loginlogo/{if $LOGINPAGE['logo'] eq ''}second-crm-logo.png{else}{$LOGINPAGE['logo']}{/if}"></a>
 					</div>
 				</div>
+			-->
 			</div><br />
 			<!-- End logo area / welcome message-->
 			<div class="row-fluid">
@@ -184,12 +187,12 @@
 														</div>
 
 														<div class="input-group p-3" id="passwordloginpg">
-															<input type="text" id="fieldsize2" class="form-control" type="password" id="password" name="password" placeholder="Password" aria-label="Username">
+															<input type="password" id="fieldsize2" class="form-control" type="password" id="password" name="password" placeholder="Password" aria-label="Username">
 														</div>
 													</div>
 													<div class="custom-control custom-checkbox align-self-start ml-3">
-														<input type="checkbox" class="custom-control-input" id="customCheck1">
-														<label class="custom-control-label" for="customCheck1">Keep me logged in</label>
+														<input type="checkbox" class="custom-control-input" id="customCheck1" style="    height: 0px !important;">
+														<label class="custom-control-label" for="customCheck1" id="login-checkbox" >Keep me logged in</label>
 													</div>
 													<div class="control-group signin-button">
 														<div id="forgotPassword" >

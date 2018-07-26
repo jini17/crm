@@ -93,14 +93,15 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	}
 
 	public function getJobGrade($recordId){ 
+
 	$db = PearDatabase::getInstance();
 	
 	$query = "SELECT vtiger_employeecontract.job_grade, vtiger_employeecontract.date_joined FROM vtiger_employeecontract INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_employeecontract.employeecontractid WHERE vtiger_crmentity.deleted=0 AND vtiger_crmentity.smownerid=$recordId AND vtiger_employeecontract.date_joined=(SELECT MAX(date_joined) FROM vtiger_employeecontract INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_employeecontract.employeecontractid WHERE vtiger_crmentity.deleted=0 AND vtiger_crmentity.smownerid=$recordId)";
 
-	$result = $db->pquery($query);
+	$result = $db->query($query);
 
 
-	$myjobgrade = $db->query_result($result);
+	$myjobgrade = $db->query_result($result, 0, 'job_grade');
 	
 	
 	return $myjobgrade;

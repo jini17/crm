@@ -19,7 +19,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 	} 
 
 	function process(Vtiger_Request $request) {
-		global $short_url, $adb;
+		global $short_url ,$site_URL, $adb;
 		//$adb->setDebug(true);
 		$username = $request->get('username');
 		$password = $request->getRaw('password');
@@ -66,7 +66,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 			$_SESSION['plan'] = $plan;
 			$_SESSION['app_unique_key'] = vglobal('application_unique_key');
 			$_SESSION['authenticated_user_language'] = vglobal('default_language');
-
+			$_SESSION['LOGOUT_URL'] = $site_URL;
 			//Enabled session variable for KCFINDER 
 			$_SESSION['KCFINDER'] = array(); 
 			$_SESSION['KCFINDER']['disabled'] = false; 

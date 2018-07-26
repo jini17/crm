@@ -262,9 +262,20 @@ class Users_Record_Model extends Vtiger_Record_Model {
 	* Function returns void
 	* insert row in secondcrm_users
 	**/
-	public function updateSecndCRMUsers($username, $password, $userid){
+	public function MakeAgiliuxUser($recordModel, $plan){
+
+		global $con, $site_URL, $application_unique_key;
 		$db = PearDatabase::getInstance();
-		$result = $db->pquery("INSERT INTO secondcrm_users(userid, username, password) VALUES(?,?,?)", array($userid, $username, $password));
+		$username 	= $recordModel->get('user_name');
+		$password 	= $recordModel->get('user_password');
+		$userid 	= $recordModel->get('id');
+		$accesskey 	= $recordModel->get('accesskey');
+		$axcode 	= $recordModel->entity->db->dbName;
+		$datetime 	= date('Y-m-d H:i:s');
+		
+		//create entry in agiliux_accounts for each new user creation
+		
+		$result = $con->query("INSERT INTO agiliux_accounts SET userid='$userid', crmurl='$site_URL', username='$username', password='$password',accesskey='$accesskey', axcode='$axcode', created_time='$datetime', modified_time='$datetime ', emailconfirmation=1, planid='$plan', app_key='$application_unique_key'");
 		return;
 	}
 
@@ -940,7 +951,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		return $response;
 	}
 
-	/**
+	/*
 	 * Function to check whether user exists in CRM and in VAS
 	 * @param <string> $userName
 	 * @return <boolean> $status
@@ -952,16 +963,30 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		return $userModuleModel->checkDuplicateUser($userName);
 	}
 
-	/**
+
+
+	/*
 	 * Function to check whether user exists in CRM and in VAS
 	 * @param <string> $userName
 	 * @return <boolean> $status
 	 */
-	public static function isValidateUserSubscription($userName, $roleid) {
-		$userModuleModel = Users_Module_Model::getCleanInstance('Users');
-		$status = false;
+	public static function isValidateUserSubscription($roleid) {
+		$db = PearDatabase::getInstance();
+
 		// To validate User in CP database
-		return $userModuleModel->ValidateUserSubscription($userName, $roleid);
+		$result = $db->pquery("SELECT planid FROM vtiger_role WHERE roleid=?", array($roleid));
+		$plan = $db->query_result($result, 0, 'planid');
+
+		$result = $db->pquery("SELECT count(userid) as availableuser, secondcrm_plan.nousers FROM `secondcrm_userplan` 
+						LEFT JOIN secondcrm_plan ON secondcrm_plan.planid=secondcrm_userplan.planid
+						WHERE secondcrm_plan.isactive=1 AND secondcrm_userplan.planid=? GROUP BY secondcrm_userplan.planid", array($plan));
+		$availableuser 	= $db->query_result($result, 0, 'availableuser');
+		$nousers 		= $db->query_result($result, 0, 'nousers');
+		if($availableuser < $nousers){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**

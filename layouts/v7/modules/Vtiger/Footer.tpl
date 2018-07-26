@@ -12,7 +12,7 @@
 	<div>
 		Agiliux Version 6 &copy; {date('Y')}  Soft Solvers Solutions. All right reserved.
 	</div>
-	<div>
+	<div class="log-footer-content">
 		<label class="mr-3">Contacts</label>
 		<label>Help</label>
 	</div>

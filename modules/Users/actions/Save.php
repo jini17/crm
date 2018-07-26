@@ -87,6 +87,9 @@ class Users_Save_Action extends Vtiger_Save_Action {
 	}
 
 	public function process(Vtiger_Request $request) {
+
+		$db = PearDatabase::getInstance();
+		//$db->setDebug(true);
 		$result = Vtiger_Util_Helper::transformUploadedFiles($_FILES, true);
 		$_FILES = $result['imagename'];
 
@@ -112,12 +115,19 @@ class Users_Save_Action extends Vtiger_Save_Action {
 
 		}
 		$recordModel = $this->saveRecord($request);
-		
-		//insert into secondcrm_users
-		if($recordId=='') {
-			$recordModel->updateSecndCRMUsers($userName, $request->get('user_password'),$recordModel->get('id'));
-		}
 
+		
+		//update secondcrm_userplan in CRM, agiliux_accounts in agiliux_cp
+		$result = $db->pquery("SELECT vtiger_role.planid FROM vtiger_role WHERE roleid=?", array($recordModel->get('roleid')));
+		$plan = $db->query_result($result, 0, 'planid');
+		
+		if($recordId=='') {
+			$plan = $recordModel->MakeAgiliuxUser($recordModel, $plan);
+		}
+		
+		$db->pquery("DELETE FROM secondcrm_userplan WHERE userid=?", array($recordModel->get('id')));	
+		$db->pquery("INSERT INTO secondcrm_userplan(planid, userid) VALUES(?,?)", array($plan, $recordModel->get('id')));	
+		
 		if ($request->get('relationOperation')) {
 			$parentRecordModel = Vtiger_Record_Model::getInstanceById($request->get('sourceRecord'), $request->get('sourceModule'));
 			$loadUrl = $parentRecordModel->getDetailViewUrl();

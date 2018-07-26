@@ -10,3 +10,12 @@
 
 //Maximum number of Mailboxes in mail converter
 $max_mailboxes = 3;
+/*
+$CONFIG['agiliuxCPConfig_server']		= '172.31.33.135';
+$CONFIG['agiliuxCPConfig_port']			= '33060';
+$CONFIG['agiliuxCPConfig_username']		= 'development';
+$CONFIG['agiliuxCPConfig_password']		= 'Dev123$%^)';
+$CONFIG['agiliuxCPConfig_name']			= 'agiliux_cp';
+$CONFIG['agiliuxCPConfig_type']			= 'mysqli';
+$CONFIG['agiliuxCPConfig_status']		= true;
+$CONFIG['agiliuxCPConfig_hostname']		= '';*/
