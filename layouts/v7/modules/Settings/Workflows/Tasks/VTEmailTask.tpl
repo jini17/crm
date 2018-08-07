@@ -16,15 +16,15 @@
 						<div class="row">
 							<div class="col-sm-3 col-xs-3">{vtranslate('LBL_FROM', $QUALIFIED_MODULE)}</div>
 							<div class="col-sm-9 col-xs-9">
-								<input id="fromEmail"  class=" fields inputElement" type="text" value="{$TASK_OBJECT->fromEmail}" />
+								<select id="fromEmailOption" name="fromEmail" style="min-width: 250px" class="select2" data-placeholder={vtranslate('LBL_SELECT_OPTIONS',$QUALIFIED_MODULE)}>
+								<option></option>
+								{$FROM_EMAIL_FIELD_OPTION}
+								</select>								
 							</div>
 						</div>
 					</div>
 					<div class="col-sm-5 col-xs-5">
-						<select id="fromEmailOption" name="fromEmail" style="min-width: 250px" class="select2" data-placeholder={vtranslate('LBL_SELECT_OPTIONS',$QUALIFIED_MODULE)}>
-							<option></option>
-							{$FROM_EMAIL_FIELD_OPTION}
-						</select>
+						<input id="fromEmail"  class=" fields inputElement" type="hidden" value="{$TASK_OBJECT->fromEmail}" />
 					</div>
 				</div>
 

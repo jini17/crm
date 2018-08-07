@@ -55,6 +55,8 @@ class SMSNotifier extends SMSNotifierBase {
 		$moduleName = 'SMSNotifier';
 		$focus = CRMEntity::getInstance($moduleName);
 
+		$message = getMergedDescription($message, $linktoids[0], $linktoModule); // Added By Mabruk
+
 		$focus->column_fields['message'] = $message;
 		$focus->column_fields['assigned_user_id'] = $ownerid;
 		$focus->save($moduleName);

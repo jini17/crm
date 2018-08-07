@@ -24,7 +24,7 @@ class SMSNotifier_MassSaveAjax_Action extends Vtiger_Mass_Action {
 	 * Function that saves SMS records
 	 * @param Vtiger_Request $request
 	 */
-	public function process(Vtiger_Request $request) {
+	public function process(Vtiger_Request $request) { 
 		$moduleName = $request->getModule();
 
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
@@ -32,7 +32,7 @@ class SMSNotifier_MassSaveAjax_Action extends Vtiger_Mass_Action {
 		$phoneFieldList = $request->get('fields');
 		$message = $request->get('message');
 		$SMSVendor = $request->get('smsvendor');  //Added By Mabruk
-		$SMSTemplate = $request->get('smstemplate');  //Added By Mabruk		
+		//$SMSTemplate = $request->get('smstemplate');  //Commented By Mabruk (Not using anywhere)		
 
 		foreach($recordIds as $recordId) {
 			$recordModel = Vtiger_Record_Model::getInstanceById($recordId);
@@ -53,8 +53,9 @@ class SMSNotifier_MassSaveAjax_Action extends Vtiger_Mass_Action {
         
 		if(!empty($toNumbers)) {
 			//Added By Mabruk/Jitu for Multiple SMS vendors Integration
-			$id = SMSNotifier_Record_Model::SendSMS($message, $toNumbers, $currentUserModel->getId(), $recordIds, $moduleName,$SMSVendor);
-	                $statusDetails = SMSNotifier::getSMSStatusInfo($id);
+			$id = SMSNotifier_Record_Model::SendSMS($message, $toNumbers, $currentUserModel->getId(), $recordIds, $request->get('source_module'),$SMSVendor);
+
+	        $statusDetails = SMSNotifier::getSMSStatusInfo($id);
 
 			$response->setResult(array('id' => $id, 'statusdetails' => $statusDetails[0]));
 		} else {
