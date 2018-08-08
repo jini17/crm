@@ -20,12 +20,38 @@
 				<div>{getDuplicatesPreventionMessage($MODULE, $DUPLICATE_RECORDS)}</div>
 			</div>
 		{/if}
-		{foreach key=BLOCK_LABEL item=BLOCK_FIELDS from=$RECORD_STRUCTURE name=blockIterator}
+		{foreach key=BLOCK_LABEL item=BLOCK_FIELDS from=$RECORD_STRUCTURE name=blockIterator} 
 			{if $BLOCK_FIELDS|@count gt 0}
 				<div class='fieldBlockContainer' data-block="{$BLOCK_LABEL}">
 					<h4 class='fieldBlockHeader'>{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
 					<hr>
 					<table class="table table-borderless">
+						{if $BLOCK_LABEL eq 'Meeting Agenda' && $MODULE eq 'Events'}
+							<tr>
+								<td class="fieldLabel alignMiddle">Select an Agenda Template</td>
+								<td class="fieldValue" style="width:1015px">
+									<select id="agendaTemplate" class="select2 inputElement" name="agendaTemplate">
+										<option value="" slected>Select a template</option>
+										{foreach item=ITEM from=$DATA}											
+											<option value="{$ITEM.body}">{$ITEM.name}</option>
+										{/foreach}
+									</select>
+								</td>								
+							</tr>
+						{/if}
+						{if $BLOCK_LABEL eq 'LBL_MOM_BLOCK' && $MODULE eq 'Events'}
+							<tr>
+								<td class="fieldLabel alignMiddle">Select a MOM Template</td>
+								<td class="fieldValue" style="width:1015px">
+									<select id="MOMTemplate" class="select2 inputElement" name="MOMTemplate">
+										<option value="" slected>Select a template</option>
+										{foreach item=ITEM from=$DATA}											
+											<option value="{$ITEM.body}">{$ITEM.name}</option>
+										{/foreach}
+									</select>
+								</td>								
+							</tr>
+						{/if}
 						<tr>
 							{assign var=COUNTER value=0}
 							{foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}

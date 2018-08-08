@@ -222,23 +222,27 @@ class Activity extends CRMEntity {
 		$log->debug("Entering insertIntoExternalUser(".$module.",".$invitees_array.") method ...");
 		if($this->mode == 'edit'){
 			//Edited By Mabruk for Meeting
-			$quesmarks = rtrim(str_repeat('?,',count($invitees_array)),',');
-			$sql = "DELETE FROM external_invitees WHERE activityid=? AND emailaddress NOT IN ($quesmarks)";		
-			$adb->pquery($sql, array($this->id,$invitees_array));
+			if(count($invitees_array)>0){
+				$quesmarks = rtrim(str_repeat('?,',count($invitees_array)),',');
+				$sql = "DELETE FROM external_invitees WHERE activityid=? AND emailaddress NOT IN ($quesmarks)";		
+				$adb->pquery($sql, array($this->id,$invitees_array));
+			}	
 		}
-		foreach($invitees_array as $inviteeid)
-		{
-			if($inviteeid != '')
-			{	
-				//Edited By Mabruk for Meeting
-				$result = $adb->pquery("SELECT * FROM external_invitees WHERE activityid = ? AND emailaddress = ?", array($this->id, $inviteeid));
-				$rows = $adb->num_rows($result); 
-				if ($adb->num_rows($result) == 0) {
-					$query="INSERT INTO external_invitees VALUES (?,?,?)";				
-					$adb->pquery($query, array($this->id, $inviteeid, 'sent'));			
+		if(count($invitees_array)>0){
+			foreach($invitees_array as $inviteeid)
+			{
+				if($inviteeid != '')
+				{	
+					//Edited By Mabruk for Meeting
+					$result = $adb->pquery("SELECT * FROM external_invitees WHERE activityid = ? AND emailaddress = ?", array($this->id, $inviteeid));
+					$rows = $adb->num_rows($result); 
+					if ($adb->num_rows($result) == 0) {
+						$query="INSERT INTO external_invitees VALUES (?,?,?)";				
+						$adb->pquery($query, array($this->id, $inviteeid, 'sent'));			
+					}
 				}
 			}
-		}
+		}	
 		$log->debug("Exiting insertIntoExternalUser method ...");
 
 	}
