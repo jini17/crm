@@ -80,7 +80,9 @@ Vtiger.Class("Settings_Vtiger_CustomLogin_Js",{},{
 jQuery(document).ready(function(e){
      var vtigerinst = new Vtiger_Index_Js();
      vtigerinst.registerEvents();
-	
-	var instance = new Settings_Vtiger_CustomLogin_Js();
-	instance.registerEvents();
+     //Added By Mabruk
+     var vtigerSettings = new Settings_Vtiger_Index_Js();
+     vtigerSettings.registerAccordionClickEvent();		
+     var instance = new Settings_Vtiger_CustomLogin_Js();
+     instance.registerEvents();
 })

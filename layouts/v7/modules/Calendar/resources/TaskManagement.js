@@ -31,8 +31,7 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 	saveFieldValue : function(recordId, fieldNameValueMap){
 		var aDeferred = jQuery.Deferred();
 
-		console.log("Inside Save Field Value" + fieldNameValueMap);
-        var data = {};
+		var data = {};
 		if(typeof fieldNameValueMap != 'undefined'){
 			data = fieldNameValueMap;
 		}

@@ -103,4 +103,6 @@ Vtiger.Class("Settings_MultipleCompany_List_Js",{},{
 jQuery(document).ready(function(e){
      var vtigerinst = new Vtiger_Index_Js();
      vtigerinst.registerEvents();
+     var vtigerSettings = new Settings_Vtiger_Index_Js();
+     vtigerSettings.registerAccordionClickEvent();
 }); 

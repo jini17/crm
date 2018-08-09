@@ -15,20 +15,18 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 	
 	
 	duplicateCheckCache : {},
-     validSubscription : {},
-     
+    
 	/**
 	 * Function to register recordpresave event
 	 */
 	registerRecordPreSaveEvent : function(form){
 		var thisInstance = this;
+		var roleId = jQuery('input[name="title"]').val(); 
 		app.event.on(Vtiger_Edit_Js.recordPresaveEvent, function(e, data) {
 			var userName = jQuery('input[name="user_name"]').val();
 			var newPassword = jQuery('input[name="user_password"]').val();
 		     var confirmPassword = jQuery('input[name="confirm_password"]').val();
 			var record = jQuery('input[name="record"]').val();
-			var roleId = jQuery('[name="roleid"]').val(); 
-     	
             var firstName = jQuery('input[name="first_name"]').val();
             var lastName = jQuery('input[name="last_name"]').val();
             var specialChars = /[<\>\"\,]/;
@@ -50,17 +48,12 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 					e.preventDefault();
 				}
 
-                if(!(userName in thisInstance.duplicateCheckCache)) { alert('kkkll');
+                if(!(userName in thisInstance.duplicateCheckCache)) {
                     e.preventDefault();
                     thisInstance.checkDuplicateUser(userName).then(
                         function(data,error){
                             thisInstance.duplicateCheckCache[userName] = data;
-                            var res = thisInstance.validateSubscription(roleId);
-                            if(res) {
-                                 form.submit();
-                            } else {
-                               e.preventDefault();
-                            }        
+                            form.submit();
                         }, 
                         function(data){
                             if(data) {
@@ -70,17 +63,12 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
                         }
                     );
                 } else {
-                    if(thisInstance.duplicateCheckCache[userName] == true){alert('cvbb');
+                    if(thisInstance.duplicateCheckCache[userName] == true){
                         app.helper.showErrorNotification({message :app.vtranslate('JS_USER_EXISTS')});
                         e.preventDefault();
                     } else {
                         delete thisInstance.duplicateCheckCache[userName];
-                         var res = thisInstance.validSubscription[roleId];
-                            if(res) {
-                              return true;
-                           } else {
-                               e.preventDefault();
-                           }      
+                        return true;
                     }
                 }
             }
@@ -98,54 +86,6 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 		app.request.post({data:params}).then(
 				function(err,data) {
 					if(data){
-						aDeferred.resolve(data);
-					}else{
-						aDeferred.reject(data);
-					}
-				}
-			);
-		return aDeferred.promise();
-	},
-	
-	validateSubscription : function(roleid) { alert(roleid);
-     	var thisInstance = this;
-	     if(!(roleid in thisInstance.validSubscription)) {
-               e.preventDefault();
-               thisInstance.checkSubscription(roleid).then(
-                   function(data,error){
-                       thisInstance.validSubscription[roleid] = data;
-                       return true;  
-                   }, 
-                   function(data){
-                       if(data) {
-                           thisInstance.validSubscription[roleid] = data;
-                           app.helper.showErrorNotification({message :app.vtranslate('JS_USER_LIMIT_EXCEED')});
-                       } 
-                   }
-               );
-           } else {
-               if(thisInstance.validSubscription[roleid] == true){
-                   app.helper.showErrorNotification({message :app.vtranslate('JS_USER_LIMIT_EXCEED')});
-                   e.preventDefault();
-               } else {
-                   delete thisInstance.validSubscription[roleid];
-                   return true;
-               }
-           }
-     },           
-	
-	checkSubscription: function(roleid){
-		var aDeferred = jQuery.Deferred();
-		var params = {
-				'module': app.getModuleName(),
-				'action' : "SaveAjax",
-				'mode' : 'validateSubscription',
-				'roleid' : roleid
-			}
-		app.request.post({data:params}).then(
-				function(err,data) {
-					if(data){
-					     aleert(data);
 						aDeferred.resolve(data);
 					}else{
 						aDeferred.reject(data);

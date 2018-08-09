@@ -89,4 +89,10 @@ jQuery(document).ready(function(){
 	//var currencyInstance = new Settings_MaxLogin_Js();
 	Settings_MaxLogin_Js.registerEvents();
     //currencyInstance.registerEvents();
+	//Added By Mabruk
+	var vtigerSettings = new Settings_Vtiger_Index_Js();
+	vtigerSettings.registerAccordionClickEvent();
+	var tacInstance = new Settings_Vtiger_OutgoingServer_Js();
+	var vtigerinst = new Vtiger_Index_Js();
+    	vtigerinst.registerEvents();
 })

@@ -48,7 +48,7 @@ Vtiger.Class("Settings_UserPlan_Index_Js",{},{
                              dropdown.append('<option value="' + v.roleid + '">' + v.rolename + '</option>');
                            });
 						//thisInstance.loadUserPlan();
-						aDeferred.resolve(data);
+						aDefem/gaming/2018/03/final-fantasy-xv-on-windows-more-beauty-more-frame-rates-maybe-fewer-bugs/rred.resolve(data);
 					} else {
 						aDeferred.reject(data);
 					}
@@ -169,6 +169,9 @@ Vtiger.Class("Settings_UserPlan_Index_Js",{},{
 	this.loadUserPlan();
 	var vtigerinst = new Vtiger_Index_Js();
 	vtigerinst.registerEvents();
+	//Added By Mabruk
+	var vtigerSettings = new Settings_Vtiger_Index_Js();
+	vtigerSettings.registerAccordionClickEvent();
 
     }
 
