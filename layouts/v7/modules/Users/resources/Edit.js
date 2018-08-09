@@ -122,12 +122,56 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 	    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA7QuhuZ34ygC0j5RHmYuqtK_uwecsNb9E&libraries=places&callback=initAutocomplete";
 	    document.body.appendChild(script);	
 	},
+
+	/**
+	 * Function Added By Mabruk
+	 * for user limit per role validation while creating a user
+	 */
+	registerEventForUserlimitValidation : function() {
+		
+		var role = jQuery("[name=roleid]");
+
+		role.change( function(){		
+
+			if (role.val() != null && role.val() != "") {
+				var aDeferred = jQuery.Deferred();
+				var params = {
+						'module': app.getModuleName(),
+						'action' : "UserLimitPerRoleValidation",				
+						'roleid' : role.val()
+					}
+				app.request.post({data:params}).then(
+						function(err,data) {
+							if(data){
+								if (data.result != true) {
+
+									app.helper.showErrorNotification({message : "User limit reached for this Role"});
+									role.val('').trigger("liszt:updated");
+									role.closest('div').find('.select2-chosen:first').text("Select Role");									
+									
+								} 
+
+								aDeferred.resolve(data);
+							}
+
+							else{ 
+								aDeferred.reject(data);
+							}
+						}
+					);
+				return aDeferred.promise();
+			}		
+		});
+
+
+	},
 	
-	registerEvents : function() {
+	registerEvents : function() { 
         this._super();
 		var form = this.getForm();
 		this.registerRecordPreSaveEvent(form);
         this.registerSignatureEvent();
+        this.registerEventForUserlimitValidation();
         Settings_Users_PreferenceEdit_Js.registerChangeEventForCurrencySeparator();
         
         var instance = new Settings_Vtiger_Index_Js(); 
