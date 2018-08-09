@@ -47,8 +47,7 @@ class Users_UserLimitPerRoleValidation_Action extends Vtiger_BasicAjax_Action {
         $maxusers = $adb->query_result($result, 0, "maxusers");
 
         $response = new Vtiger_Response();
-        try{
-            $recordModel->save();
+        try{            
             if ($users >= $maxusers)
                 $response->setResult(array('result'=>false));
             else
