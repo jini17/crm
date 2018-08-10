@@ -20,6 +20,7 @@
             data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
         {/if}
         >
+        <option value="">{vtranslate('LBL_SELECT_ROLE','Users')}</option>
     {foreach item=PICKLIST_VALUE key=PICKLIST_NAME from=$PICKLIST_VALUES}
 	<option value="{$PICKLIST_VALUE}" {if $FIELD_MODEL->get('fieldvalue') eq $PICKLIST_VALUE} selected {/if}>{$PICKLIST_NAME}</option>
 {/foreach}

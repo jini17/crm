@@ -136,7 +136,7 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 			if (role.val() != null && role.val() != "") {
 				var aDeferred = jQuery.Deferred();
 				var params = {
-						'module': app.getModuleName(),
+						'module' : app.getModuleName(),
 						'action' : "UserLimitPerRoleValidation",				
 						'roleid' : role.val()
 					}

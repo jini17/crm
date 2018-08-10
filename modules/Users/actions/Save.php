@@ -102,18 +102,8 @@ class Users_Save_Action extends Vtiger_Save_Action {
 			if ($status == true) {
 				throw new AppException(vtranslate('LBL_DUPLICATE_USER_EXISTS', $module));
 			}
-			
-			//validate user from CP database for no of users per plan
-			$roleid = $request->get('roleid');
-			/*$isvalidateUser = $userModuleModel->ValidateUserSubscription($userName, $roleid);
-			if ($isvalidateUser == false) {
-				//header("location:index.php?module=Users&view=Edit&parent=Settings&error=".vtranslate('LBL_USER_LIMIT_EXCEED', $module));
-				//exit;
-				throw new AppException(vtranslate('LBL_USER_LIMIT_EXCEED', $module));
-			}*/
-			//end here 			
-
 		}
+
 		$recordModel = $this->saveRecord($request);
 
 		
@@ -122,7 +112,7 @@ class Users_Save_Action extends Vtiger_Save_Action {
 		$plan = $db->query_result($result, 0, 'planid');
 		
 		if($recordId=='') {
-			$plan = $recordModel->MakeAgiliuxUser($recordModel, $plan);
+			$plan = $recordModel->MakeAgiliuxCPUser($recordModel->entity->db->dbName, $plan);
 		}
 		
 		$db->pquery("DELETE FROM secondcrm_userplan WHERE userid=?", array($recordModel->get('id')));	

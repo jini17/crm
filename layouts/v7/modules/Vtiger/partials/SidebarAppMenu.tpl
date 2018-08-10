@@ -90,14 +90,14 @@
 				</div>
 			{/if}
 			{if $USER_MODEL->isAdminUser()}
-				{if vtlib_isModuleActive('ExtensionStore')}
+				<!--{if vtlib_isModuleActive('ExtensionStore')}
 					<div class="menu-item app-item app-item-misc" data-default-url="index.php?module=ExtensionStore&parent=Settings&view=ExtensionStore">
 						<div class="menu-items-wrapper">
 							<span class="app-icon-list fa fa-shopping-cart"></span>
 							<span class="app-name textOverflowEllipsis"> {vtranslate('LBL_EXTENSION_STORE', 'Settings:Vtiger')}</span>
 						</div>
 					</div>
-				{/if}
+				{/if}-->
 			{/if}
 			{if $USER_MODEL->isAdminUser()}
 				<div class="dropdown app-modules-dropdown-container dropdown-compact">

@@ -506,6 +506,7 @@ $languageStrings = array(
 'LBL_SESSION_EXPIRED'=>'Session Expired, try again !!',
 'LBL_BLOCKED_IP'=>'Sorry!! Your IP is blocked, Please contact the admin',
 'LBL_USER_LIMIT_EXCEED'=>'User limit exceeded in this plan, please contact to Agiliux Team',
+'LBL_SELECT_ROLE'=>'Select Role',
 //End of Contacts
 );
 

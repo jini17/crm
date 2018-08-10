@@ -10,6 +10,8 @@
 	
 	function vtws_login($username,$pwd){
 		
+		global $short_url;
+		
 		$user = new Users();
 		$userId = $user->retrieve_user_id($username);
 		
@@ -38,8 +40,7 @@
 				|| stripos($_SERVER['HTTP_HOST'],'192.168.2.') !==false) { 
 				$usip=$_SERVER['REMOTE_ADDR'];	//add one more param IP address by jitu@28Dec2016
 			} else {
-			
-				$usip=$_SERVER['HTTP_X_FORWARDED_FOR'];	//add one more param IP address by jitu@28Dec2016	
+				$usip=$_SERVER['REMOTE_ADDR'];	//add one more param IP address by jitu@28Dec2016	
 			}
 			
 			$moduleModel->saveLoginHistory($username,'Signed in', 'WS Call', $usip);

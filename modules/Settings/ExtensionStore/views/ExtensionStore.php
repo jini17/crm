@@ -12,12 +12,19 @@ include_once dirname(__FILE__).'/../libraries/LoaderSuggest.php';
 
 class Settings_ExtensionStore_ExtensionStore_View extends Settings_Vtiger_Index_View {
 
+
+	function checkPermission(Vtiger_Request $request) {
+		//Return true as WebUI.php is already checking for module permission
+		throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
+	}
+
 	protected $registrationStatus = false;
 	protected $passwordStatus = false;
 	protected $customerProfile = array();
 	protected $customerCardInfo = array();
 
 	public function __construct() {
+		
 		parent::__construct();
 		$this->init();
 		$this->exposeMethod('searchExtension');

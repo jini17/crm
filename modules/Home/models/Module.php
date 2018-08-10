@@ -302,8 +302,8 @@ class Home_Module_Model extends Vtiger_Module_Model {
     	}
     	
     	global $dbconfig;
-		
-		$con = new mysqli($dbconfig['db_server'], $dbconfig['db_username'], $dbconfig['db_password'], $dbconfig['db_cp']);
+	
+		$con = new mysqli($dbconfig['db_server'], $dbconfig['db_username'], $dbconfig['db_password'], $dbconfig['db_cp'], str_replace(':','',$dbconfig['db_port']));
 
 		if (!$con) {
 			die('Could not connect to'.$dbconfig['db_cp'].': ' . mysqli_error($con));

@@ -56,9 +56,13 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 			$userid = $user->retrieve_user_id($username);
 			Vtiger_Session::set('AUTHUSERID', $userid);
 
+			$loginpageinfo  = Users_Record_Model::loginPageDetails();
+			
 			// For Backward compatability
 			// TODO Remove when switch-to-old look is not needed
 			$_SESSION['authenticated_user_id'] = $userid;
+			$_SESSION['sessionout'] = $loginpageinfo['sessionout'];
+
 			$db = PearDatabase::getInstance();
 			$result = $db->pquery("SELECT vtiger_role.planid FROM vtiger_role 
 				INNER JOIN vtiger_user2role  ON vtiger_user2role.roleid=vtiger_role.roleid WHERE vtiger_user2role.userid=?", array($userid));

@@ -111,7 +111,7 @@ class LoggerAppenderFile {
 	private $filename;
 	private $chmod;
 	
-	function __construct($filename, $chmod = 0222) {
+	function __construct($filename, $chmod = 0777) {
 		$this->filename = $filename;
 		$this->chmod    = $chmod;
 	}

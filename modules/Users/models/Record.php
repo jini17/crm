@@ -262,15 +262,18 @@ class Users_Record_Model extends Vtiger_Record_Model {
 	* Function returns void
 	* insert row in secondcrm_users
 	**/
-	public function MakeAgiliuxUser($recordModel, $plan){
+	public function MakeAgiliuxCPUser($axcode, $plan){
 
 		global $con, $site_URL, $application_unique_key;
 		$db = PearDatabase::getInstance();
-		$username 	= $recordModel->get('user_name');
-		$password 	= $recordModel->get('user_password');
-		$userid 	= $recordModel->get('id');
-		$accesskey 	= $recordModel->get('accesskey');
-		$axcode 	= $recordModel->entity->db->dbName;
+		
+		$recordModel = Vtiger_Record_Model::getInstanceById($this->getId(), 'Users');
+	    $modelData  = $recordModel->getData();
+		$username 	= $modelData['user_name'];
+		$password 	= $modelData['user_password'];
+		$userid 	= $modelData['id'];
+		$accesskey 	= $modelData['accesskey'];
+		$axcode 	= $axcode;
 		$datetime 	= date('Y-m-d H:i:s');
 		
 		//create entry in agiliux_accounts for each new user creation

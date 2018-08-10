@@ -106,10 +106,8 @@ class Vtiger_WebUI extends Vtiger_EntryPoint {
 		//End here 
 		
 		//added by jitu@secondcrm for session inactivity handling		
-		$loginpageinfo  = Users_Record_Model::loginPageDetails();
-		
 		$timein			= Vtiger_Session::get('timein');	
-		$maxstay 		= $loginpageinfo['sessionout']*60;
+		$maxstay 		= $_SESSION['sessionout']*60;
 
 		if($maxstay =='' || $maxstay==0){
 			$maxstay = 15*60;

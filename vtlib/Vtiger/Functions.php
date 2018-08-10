@@ -670,7 +670,7 @@ class Vtiger_Functions {
 			$parentId = self::createFolderInGoogleDrive($client, '','Storage');
 			$parentId = self::createFolderInGoogleDrive($client, $parentId,$year);
 			$parentId = self::createFolderInGoogleDrive($client, $parentId,$month . " " . $year);
-			$parentId = self::createFolderInGoogleDrive($client, $parentId,$month . "(" . $week . ")");
+			$parentId = self::createFolderInGoogleDrive($client, $parentId,$month . "(" . $week . ")" . " " . $year);
 			return $parentId;
 		}
 		//End Edit - Mabruk
