@@ -113,7 +113,7 @@ class Vtiger_WebUI extends Vtiger_EntryPoint {
 			$maxstay = 15*60;
 		}	
 
-		$stayduration = $loginpageinfo['sessionout'];		
+		//$stayduration = $_SESSION['sessionout']];		
 		$session_life = time() - $timein;		
 			
 		if($session_life > $maxstay && $timein!='') { 
