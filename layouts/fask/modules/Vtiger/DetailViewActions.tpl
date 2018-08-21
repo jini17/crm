@@ -126,15 +126,7 @@
                         {if Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_BASIC_LINK->getLabel()) eq "LBL_EDIT"}><i class="material-icons">create</i> {/if}
                         {if Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_BASIC_LINK->getLabel()) eq "LBL_SEND_EMAIL"}><i class="material-icons">email</i> {/if}
 
-{if $MODULE_NAME eq 'Project'}
- <span class="hidden-sm hidden-xs">{vtranslate($DETAIL_VIEW_BASIC_LINK->getLabel(), $MODULE_NAME)}</span>
-{/if}
-{if $MODULE_NAME eq 'Leads'}
- <span class="hidden-sm hidden-xs">{vtranslate($DETAIL_VIEW_BASIC_LINK->getLabel(), $MODULE_NAME)}</span>
-{/if}
-{if $MODULE_NAME eq 'Potentials'}
- <span class="hidden-sm hidden-xs">{vtranslate($DETAIL_VIEW_BASIC_LINK->getLabel(), $MODULE_NAME)}</span>
-{/if}
+                        <span class="hidden-sm hidden-xs">{vtranslate($DETAIL_VIEW_BASIC_LINK->getLabel(), $MODULE_NAME)}</span>
 
                 
                 </button>

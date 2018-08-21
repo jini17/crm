@@ -219,6 +219,30 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		 });
 	},
 
+
+	 /**
+     *
+     * @param massActionUrl To get the enrich data
+     */
+    triggerEnrichAPI : function(massActionUrl){
+        var thisInstance = this;
+        var params = app.convertUrlToDataParams(massActionUrl);
+        app.helper.showProgress();
+        app.request.post({data:params}).then(
+            function(error, data) {
+                app.helper.hideProgress();
+                app.helper.showModal(data);
+                var form = jQuery('form#changeOwner');
+                var isFormExists = form.length;
+                if(isFormExists){
+                    thisInstance.transferOwnershipSave(form);
+                }
+
+                window.location.reload();
+            }
+        );
+    },
+
 	/*
 	 * function to trigger send Email
 	 * @params: send email url , module name.
@@ -3119,5 +3143,5 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		//register event for picklist dependency setup
 		this.registerEventForPicklistDependencySetup(this.getForm());
 		vtUtils.enableTooltips();
-	},
+	}
 });

@@ -221,8 +221,8 @@ jQuery.Class('Settings_CustomRecordNumbering_Js', {}, {
 			}
 			return false;
 		}
-		editViewForm.validationEngine('detach');
-		editViewForm.validationEngine('attach',params);
+		//editViewForm.validationEngine('detach');
+		//editViewForm.validationEngine('attach',params);
 	}
 })
 jQuery(document).ready(function() { 

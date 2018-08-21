@@ -21,14 +21,14 @@ else
     echo "$local_branches"
   fi
   echo "###################"
-  echo "Development and ui_changes will not be deleted"
+  echo "Development, agiliuxv2 and ui_changes will not be deleted"
   read -p "Continue? (y/n): " -n 1 choice
   echo
   if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
     # Remove remote branches
-    git push origin `git branch -r --merged | grep -v '/master$' | grep -v "/$current_branch$" | grep -v "Development" |grep -v "ui_changes"|sed 's/origin\//:/g' | tr -d '\n'`
+    git push origin `git branch -r --merged | grep -v '/master$' | grep -v "/$current_branch$" | grep -v "Development" | grep -v "agiliuxv2" |grep -v "ui_changes"|sed 's/origin\//:/g' | tr -d '\n'`
     # Remove local branches
-    git branch -d `git branch --merged | grep -v 'master$' |grep -v "Development" |grep -v "ui_changes"| grep -v "$current_branch$" | sed 's/origin\///g' | tr -d '\n'`
+    git branch -d `git branch --merged | grep -v 'master$' |grep -v "Development" |grep -v "ui_changes"| grep -v "$current_branch$" | grep -v "agiliuxv2" | sed 's/origin\///g' | tr -d '\n'`
   else
     echo "No branches removed."
   fi

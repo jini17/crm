@@ -260,9 +260,107 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 			e.preventDefault();
 		}
 	},
+	
+	//Added By jitu@secondcrm.com on 29-10-2014
+	registerDisplayDetailTabClickEvent : function(form) { 
+		var userid = jQuery('#recordId').val();
+		jQuery('li.relatedListTab').on('click',function(e) {
+			var tabIndx = $(this).index();
+			var container = $('a', this).attr('href');
+			    container = container.replace('#','');
+               if(container=='preference'){
+                    window.location.href="?module=Users&view=PreferenceDetail&parent=Settings&record="+userid
+     		}
+
+			if(tabIndx !=0 && container !='') {
+			     var params = {
+					     'data' : {
+						     'module': app.getModuleName(),
+						     'view' : "ListViewAjax",
+						     'record' : userid,
+						     'mode' : 'getUser'+container.substr(0, 1).toUpperCase() + container.substr(1),
+						}
+				    };
+				
+				app.helper.showProgress(app.vtranslate('JS_PLEASE_WAIT'));
+				app.request.post(params).then(function (err, data) { 
+				if (err === null) {
+     				app.helper.hideProgress();
+     				//app.helper.showSuccessNotification({'message': data.message});
+					jQuery('.tab-pane').hide();
+					jQuery('#'+container).show();
+					jQuery('#'+container).html(data);
+				} else {
+					
+					//app.helper.showErrorNotification({'message': err.message});
+				}
+			});
+				
+			} 
+		});
+	}, 
+	/**
+	 * Function to register Quick Create Event
+	 * @returns {undefined}
+	 */
+	registerQuickCreateEvent : function (){
+		var thisInstance = this;
+		jQuery(".quickCreateModule").on("click",function(e){
+			/*var quickCreateElem = jQuery(e.currentTarget);
+			var quickCreateUrl = quickCreateElem.data('url');
+			var quickCreateModuleName = quickCreateElem.data('name');
+			if (typeof params === 'undefined') {
+				params = {};
+			}
+			if (typeof params.callbackFunction === 'undefined') {
+				params.callbackFunction = function(data, err) {
+					//fix for Refresh list view after Quick create
+					var parentModule=app.getModuleName();
+					var viewname=app.view();
+					if((quickCreateModuleName == parentModule) && (viewname=="List")){
+							var listinstance = app.controller();
+							listinstance.loadListViewRecords(); 
+					}
+				};
+			}
+			app.helper.showProgress();
+			thisInstance.getQuickCreateForm(quickCreateUrl,quickCreateModuleName,params).then(function(data){
+				app.helper.hideProgress();
+				var callbackparams = {
+					'cb' : function (container){
+						thisInstance.registerPostReferenceEvent(container);
+						app.event.trigger('post.QuickCreateForm.show',form);
+						app.helper.registerLeavePageWithoutSubmit(form);
+						app.helper.registerModalDismissWithoutSubmit(form);
+					},
+					backdrop : 'static',
+					keyboard : false
+					}
+
+				app.helper.showModal(data, callbackparams);
+				var form = jQuery('form[name="QuickCreate"]');
+				var moduleName = form.find('[name="module"]').val();
+				app.helper.showVerticalScroll(jQuery('form[name="QuickCreate"] .modal-body'), {'autoHideScrollbar': true});
+
+				var targetInstance = thisInstance;
+				var moduleInstance = Vtiger_Edit_Js.getInstanceByModuleName(moduleName);
+				if(typeof(moduleInstance.quickCreateSave) === 'function'){
+					targetInstance = moduleInstance;
+					targetInstance.registerBasicEvents(form);
+				}
+
+				vtUtils.applyFieldElementsView(form);
+				targetInstance.quickCreateSave(form,params);
+			});*/
+		});
+	},
+
 	registerEvents: function () {
 		this._super();
+		var form = this.getForm();
 		this.registerAjaxPreSaveEvent();
+		this.registerDisplayDetailTabClickEvent(form);	//added by jitu@secondcrm.com
+		this.registerQuickCreateEvent();
 	}
 });
 

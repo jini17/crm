@@ -1,0 +1,106 @@
+{*<!--
+/*********************************************************************************
+  ** The contents of this file are subject to the vtiger CRM Public License Version 1.0
+   * ("License"); You may not use this file except in compliance with the License
+   * The Original Code is:  vtiger CRM Open Source
+   * The Initial Developer of the Original Code is vtiger.
+   * Portions created by vtiger are Copyright (C) vtiger.
+   * All Rights Reserved.
+  *
+ ********************************************************************************/
+-->*}
+<script language="JAVASCRIPT" type="text/javascript" src="include/js/smoothscroll.js"></script>
+<script language="JavaScript" type="text/javascript" src="include/js/menu.js"></script>
+<form action="index.php" method="post" name="company" onsubmit="VtigerJS_DialogBox.block();">
+    	<input type="hidden" name="module" value="Vtiger">
+    	<input type="hidden" name="parent" value="Settings">
+	<input type="hidden" name="action">
+	<!--Code added for multiple company-->
+	<input type="hidden" name="organizationid" value="{$ORGANIZATIONID}"><!--Add code for multiple company details-->
+	<!--End code here-->
+				
+				<table border=0 cellspacing=0 cellpadding=10 width=90% >
+				<tr>
+				<td>
+				
+					<table border=0  width=100%>
+                                            <tr class="blockHeader">
+						<td class="big"><h3>{vtranslate('LBL_COMPANY_DETAILS', $QUALIFIED_MODULE)} </h3></td>
+						<td class="small" align=right>
+							<input class="crmButton small edit" title="{vtranslate('LBL_EDIT_BUTTON_TITLE', $QUALIFIED_MODULE)}" accessKey="{vtranslate('LBL_EDIT_BUTTON_KEY', $QUALIFIED_MODULE)}" onclick="location.href='index.php?parent=Settings&module=MultipleCompany&view=Edit&block=3&fieldid=14&organizationid={$ORGANIZATIONID}'" type="button" name="Edit" value="{vtranslate('LBL_EDIT_BUTTON_LABEL', $QUALIFIED_MODULE)}">
+						</td>
+					</tr>
+					</table>
+					
+					<table border=0 cellspacing=0 cellpadding=0 width=100% class="listRow table-bordered">
+					<tr>
+						<td class="small" valign=top ><table width="100%"  border="0" cellspacing="0" cellpadding="5">
+                                                        <tr class="table-bordered">		<!--Add code for multiple company details-->
+                            <td width="20%" class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_TITLE', $QUALIFIED_MODULE)}</strong></td>
+                            <td width="80%" class="small cellText"><strong>{$ORGANIZATIONTITLE}</strong></td>
+                          </tr>
+                          <!--End code for multiple company details-->
+                          <tr class="table-bordered">
+                            <td width="20%" class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_NAME', $QUALIFIED_MODULE)}</strong></td>
+                            <td width="80%" class="small cellText"><strong>{$ORGANIZATIONNAME}</strong></td>
+                          </tr>
+                          <tr valign="top" class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_LOGO', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText" style="background-image: url({$ORGANIZATIONLOGOPATH}/{$ORGANIZATIONLOGONAME}); background-position: left; background-repeat: no-repeat; 	background-size: 250px 70px;" width="48px" height="70px" border="0"></td>
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_ADDRESS', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText">{$ORGANIZATIONADDRESS}</td>
+                          </tr>
+                          <tr class="table-bordered"> 
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_CITY', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText">{$ORGANIZATIONCITY}</td>
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_STATE', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText">{$ORGANIZATIONSTATE}</td>
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_CODE', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText">{$ORGANIZATIONCODE}</td>
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_COUNTRY', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText">{$ORGANIZATIONCOUNTRY}</td>
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_PHONE', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText">{$ORGANIZATIONPHONE}</td>
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_FAX', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText">{$ORGANIZATIONFAX}</td>
+                          </tr>
+                          <tr class="table-bordered">
+                            <td class="small cellLabel"><strong>{vtranslate('LBL_ORGANIZATION_WEBSITE', $QUALIFIED_MODULE)}</strong></td>
+                            <td class="small cellText">{$ORGANIZATIONWEBSITE}</td>
+                          </tr>
+                        </table>
+						
+						</td>
+					  </tr>
+					</table>
+					<!--table border=0 cellspacing=0 cellpadding=5 width=100% >
+					<tr>
+					  <td class="small" nowrap align=right><a href="#top">{vtranslate('LBL_SCROLL', $QUALIFIED_MODULE)}</a></td>
+					</tr>
+					</table-->
+				</td>
+				</tr>
+				</table>
+			
+			
+			
+			</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+	</form>	
+

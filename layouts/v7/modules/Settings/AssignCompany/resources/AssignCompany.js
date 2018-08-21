@@ -7,7 +7,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 var Settings_AssignCompany_Js = {
-
+	
 	registerEnableAssignListValueClickEvent : function() {
 		jQuery('#listViewContents').on('click','.assignToUserCompanyListValue',function(e) {
 			jQuery('#saveOrder').removeAttr('disabled');
@@ -15,10 +15,10 @@ var Settings_AssignCompany_Js = {
 			var AssignListVaue = jQuery(e.currentTarget)
 			if(AssignListVaue.hasClass('selectedCell')) {
 				AssignListVaue.removeClass('selectedCell').addClass('unselectedCell');
-				AssignListVaue.find('.icon-ok').remove();
+				AssignListVaue.find('.fa-check').remove();
 			} else {
 				AssignListVaue.removeClass('unselectedCell').addClass('selectedCell');
-				AssignListVaue.prepend('<i class="icon-ok pull-left"></i>');
+				AssignListVaue.prepend('<i class="fa fa-check pull-left"></i>');
 			}
 		});
 	},

@@ -264,7 +264,7 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 	//Added By jitu@secondcrm.com on 29-10-2014
 	registerDisplayDetailTabClickEvent : function(form) { 
 		var userid = jQuery('#recordId').val();
-		jQuery('li').on('click',function(e) {
+		jQuery('li.relatedListTab').on('click',function(e) {
 			var tabIndx = $(this).index();
 			var container = $('a', this).attr('href');
 			    container = container.replace('#','');

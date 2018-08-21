@@ -23,15 +23,14 @@ $block1 = $block1->getInstance($block1->label,$module);
 
 $field1 = new Vtiger_Field();
 
-$field1->name = 'user_type';
+$field1->name = 'region';
 $field1->table = $module->basetable;
-$field1->label = 'User Type';
-$field1->column = 'user_type';
-$field1->columntype = 'varchar(10)';
-$field1->uitype = 1;
+$field1->label = 'Territory';
+$field1->column = 'region';
+$field1->columntype = 'varchar(255)';
+$field1->uitype = 2002;
 $field1->typeofdata = 'V~O';
 $block1->addField($field1);
-
 echo "NBBB";
 //after field is created, go to vtiger_field and find the field ID.
 //Then insert the field Id, module, and related module name. 
