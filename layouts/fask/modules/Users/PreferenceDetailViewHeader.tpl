@@ -14,22 +14,22 @@
 	<input id="recordId" type="hidden" value="{$RECORD->getId()}" />
 	<div class="detailViewContainer">
 		<div class="detailViewTitle" id="prefPageHeader">
-			<div class="col-lg-12 col-sm-12 col-xs-12">
-				<div class="col-xs-8">
+			<div class="row">
+				<div class="col-lg-7 col-xs-12">
 					{assign var=IMAGE_DETAILS value=$RECORD->getImageDetails()}
 					{foreach key=ITER item=IMAGE_INFO from=$IMAGE_DETAILS}
 						{if !empty($IMAGE_INFO.path) && !empty($IMAGE_INFO.orgname)}
-							<span class="logo col-xs-2">
-								<img height="75px" width="75px" src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}" alt="{$IMAGE_INFO.orgname}" title="{$IMAGE_INFO.orgname}" data-image-id="{$IMAGE_INFO.id}">
+							<span class="logo col-xs-2 hidden-sm hidden-xs">
+								<img style="border-radius: 50%;" height="75px" width="75px" src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}" alt="{$IMAGE_INFO.orgname}" title="{$IMAGE_INFO.orgname}" data-image-id="{$IMAGE_INFO.id}">
 							</span>
 						{/if}
 					{/foreach}
 					{if $IMAGE_DETAILS[0]['id'] eq null}
-						<span class="logo col-xs-2">
-							<i class="fa fa-user" style="font-size: 75px"></i>
+						<span class="profile-container logo col-xs-2 hidden-sm hidden-xs">
+							<i class="vicon-vtigeruser" style="font-size: 75px"></i>
 						</span>
 					{/if}
-					<span class="col-xs-9">
+					<span class="col-xs-10">
 						<span id="myPrefHeading">
 							<h3>{vtranslate('LBL_MY_PREFERENCES', $MODULE_NAME)} </h3>
 						</span>
@@ -38,11 +38,11 @@
 						</span>
 					</span>
 				</div>
-				<div class="col-xs-4">
-					<div class="row detailViewButtoncontainer">
+				<div class="col-lg-3 col-xs-12">
+					<div class="detailViewButtoncontainer">
 						<div class="btn-group pull-right">
 							{foreach item=DETAIL_VIEW_BASIC_LINK from=$DETAILVIEW_LINKS['DETAILVIEWPREFERENCE']}
-								<button class="btn btn-default"
+								<button class="btn btn-primary"
 									{if $DETAIL_VIEW_BASIC_LINK->isPageLoadLink()}
 										onclick="window.location.href='{$DETAIL_VIEW_BASIC_LINK->getUrl()}'"
 									{else}
@@ -52,7 +52,7 @@
 								</button>
 							{/foreach}
 							{if $DETAILVIEW_LINKS['DETAILVIEW']|@count gt 0}
-								<button class="btn btn-default" data-toggle="dropdown" href="javascript:void(0);">
+								<button class="btn btn-primary" data-toggle="dropdown" href="javascript:void(0);">
 									{vtranslate('LBL_MORE', $MODULE)}&nbsp;<i class="caret"></i>
 								</button>
 								<ul class="dropdown-menu pull-right">
@@ -65,7 +65,7 @@
 											{/if}
 										{else}
 											<li id="{$MODULE}_detailView_moreAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_LINK->getLabel())}">
-												<a href="#" onclick="{$DETAIL_VIEW_LINK->getUrl()}" >{vtranslate($DETAIL_VIEW_LINK->getLabel(), $MODULE)}</a>
+												<a href={$DETAIL_VIEW_LINK->getUrl()} >{vtranslate($DETAIL_VIEW_LINK->getLabel(), $MODULE)}</a>
 											</li>
 										{/if}
 									{/foreach}
@@ -76,6 +76,8 @@
 				</div>
 			</div>
 			<div class="detailViewInfo userPreferences">
-				<div class="details col-xs-12">
-					<br>
-{/strip}
+				<div class="details">
+					<form id="detailView" data-name-fields='{ZEND_JSON::encode($MODULE_MODEL->getNameFields())}' method="POST">
+						<div class="contents">
+							<br>
+						{/strip}
