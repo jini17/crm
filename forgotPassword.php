@@ -15,9 +15,11 @@ require_once 'modules/Vtiger/helpers/ShortURL.php';
 require_once 'vtlib/Vtiger/Mailer.php';
 
 global $adb;
+$adb->setDebug(true);
 $adb = PearDatabase::getInstance();
 
 if (isset($_REQUEST['username']) && isset($_REQUEST['emailId'])) {
+
 	$username = vtlib_purify($_REQUEST['username']);
 	$result = $adb->pquery('select email1 from vtiger_users where user_name= ? ', array($username));
 	if ($adb->num_rows($result) > 0) {
@@ -39,28 +41,30 @@ if (isset($_REQUEST['username']) && isset($_REQUEST['emailId'])) {
 		);
 		$trackURL = Vtiger_ShortURL_Helper::generateURL($options);
 		$content = 'Dear Customer,<br><br> 
-						You recently requested a password reset for your VtigerCRM Open source Account.<br> 
+						You recently requested a password reset for your Agiliux Account.<br> 
 						To create a new password, click on the link <a target="_blank" href='.$trackURL.'>here</a>. 
 						<br><br> 
 						This request was made on '.date("Y-m-d H:i:s").' and will expire in next 24 hours.<br><br> 
 						Regards,<br> 
-						VtigerCRM Open source Support Team.<br>';
+						Agiliux Team.<br>';
 
-		$subject = 'Vtiger CRM: Password Reset';
+		$subject = 'Agiliux: Password Reset';
 
 		$mail = new Vtiger_Mailer();
 		$mail->IsHTML();
 		$mail->Body = $content;
 		$mail->Subject = $subject;
 		$mail->AddAddress($email);
-
+		$mail->From = 'no-reply@agiliux.com';
+		$mail->FromName = 'Agiliux';
+		$mail->SMTPDebug =3;
 		$status = $mail->Send(true);
 		if ($status === 1 || $status === true) {
-			header('Location:  index.php?modules=Users&view=Login&mailStatus=success');
+		//	header('Location:  index.php?modules=Users&view=Login&mailStatus=success');
 		} else {
-			header('Location:  index.php?modules=Users&view=Login&error=statusError');
+		//	header('Location:  index.php?modules=Users&view=Login&error=statusError');
 		}
 	} else {
-		header('Location:  index.php?modules=Users&view=Login&error=fpError');
+	//	header('Location:  index.php?modules=Users&view=Login&error=fpError');
 	}
 }

@@ -1,350 +1,183 @@
-{*+**********************************************************************************
-* The contents of this file are subject to the vtiger CRM Public License Version 1.1
-* ("License"); You may not use this file except in compliance with the License
-* The Original Code is: vtiger CRM Open Source
-* The Initial Developer of the Original Code is vtiger.
-* Portions created by vtiger are Copyright (C) vtiger.
-* All Rights Reserved.
-************************************************************************************}
-{* modules/Users/views/Login.php *}
-
+{*<!--
+/*********************************************************************************
+** The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is:  vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+*
+ ********************************************************************************/
+-->*}
 {strip}
-	<style>
-		body {
-			background-position: center;
-			width: 100%;
-			height: 100%;
-			background-repeat: repeat;
-			background-image: url('layouts/fask/modules/Users/resources/circles.png');
-		}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- for Login page we are added -->
+	<link href="libraries/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="libraries/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="libraries/bootstrap/css/jqueryBxslider.css" rel="stylesheet" />
+	<!--UI team-->
+	<link rel="stylesheet" type="text/css" href="layouts/v7/lib/ui/css/bootstrap.css" crossorigin="anonymous">
+	<!-- Custom icon -->
+	<link rel="stylesheet" type="text/css" href="layouts/v7/lib/ui/css/social-med.css" crossorigin="anonymous">
+	<!-- custom-style -->
+	<link rel="stylesheet" type="text/css" href="layouts/v7/lib/ui/css/styles.css" crossorigin="anonymous">
+	<!--UI team-end-->
+	<script src="libraries/jquery/jquery.min.js"></script>
+	<script src="libraries/jquery/boxslider/jqueryBxslider.js"></script>
+	<script src="libraries/jquery/boxslider/respond.min.js"></script>
+	
 
-		body:before { background-color: #464961; }
+	<!--<h1 style="color:red;">Edited</h1>-->
+	<div class="container-fluid login-container" style="padding-left: 0px !important;
+    padding-right: 0px !important;">
+		<!-- Start logo area / welcome message-->
+		<div class="row-fluid">
+			<div class="span3">
+			</div><br />
+			<!-- End logo area / welcome message-->
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="content-wrapper">
+						<div class="container-fluid">
+							<div class="row-fluid">
+								<div class="login-wrapper">
+									<div class="box-wrapper">
+										<div class="login-box-container">
+											<div class="left-bar d-none d-md-flex">
+												<!-- <img src="/src/images/login-bg-left.png"> -->
+												<h5>
+													{if $LOGINPAGE['wcmsg'] eq ''}{vtranslate('LBL_WELCOME_SECONDCRM',$MODULE)}{else}{$LOGINPAGE['wcmsg']}{/if}
+												</h5>
+												<label class="mt-auto">Connect with us</label>
+												<!-- Start Social Media Link -->
+												<div class="social-wrapper">
+													<a class="login-sc-icon" target="_blank" href="https://www.facebook.com/secondcrm"><i class="icon-sc icon-sc-facebook2"></i></a>
+													<a class="login-sc-icon" target="_blank" href="https://www.linkedin.com/company/soft-solvers-solutions"><i class="icon-sc icon-sc-linkedin"></i></a>
+													<a class="login-sc-icon" target="_blank" href="https://twitter.com/secondcrm"><i class="icon-sc icon-sc-twitter"></i></a>
+													<a class="login-sc-icon" target="_blank" href="https://plus.google.com/+Secondcrm21909"><i class="icon-sc icon-sc-google-plus"></i></a>
+												</div>
+												<!-- End Social Media Link -->
+											</div>
+											<div class="right-bar">
+												<img src="layouts/v7/lib/ui/src/images/agiliux-logo.png">
+												<div class="alert alert-success hide"></div>
+												{if isset($smarty.request.error)}
+												{if $smarty.request.error eq 1}
+												<div class="alert alert-error">
+													<p>{vtranslate('LBL_INVALID_USER_OR_PASSWORD',$MODULE)}</p>
+												</div>
+												{else if $smarty.request.error eq 2}
+												<div class="alert alert-error">
+													<p>{vtranslate('LBL_SUBSCRIPTION_OUTDATE', $MODULE)}</p>
+												</div>
+												{else if $smarty.request.error eq 3 || $smarty.request.error eq 4}
+												<div class="alert alert-error">
+													<p>{vtranslate('LBL_NO_SUBSCRIPTION', $MODULE)}</p>
+												</div>
+												{else if $smarty.request.error eq 5}				
+												<div class="alert alert-error">
+													<p>{vtranslate('LBL_MANY_ATTEMPTS',$MODULE)}</p>
+												</div>
+												{else if $smarty.request.error eq 7}				
+												<div class="alert alert-error">
+													<p>{vtranslate('LBL_SESSION_EXPIRED',$MODULE)}</p>
+												</div>	
+												{/if}
+												{/if}
+												{if isset($smarty.request.fpError)}
+												<div class="alert alert-error">
+													<p>Invalid Username or Email address.</p>
+												</div>
+												{/if}
+												{if isset($smarty.request.status)}
+												<div class="alert alert-success">
+													<p>Mail was send to your inbox, please check your e-mail.</p>
+												</div>
+												{/if}
+												{if isset($smarty.request.statusError)}
+												<div class="alert alert-error">
+													<p>Outgoing mail server was not configured.</p>
+												</div>
+												{/if}
+											<div>
+												<span class="{if !$ERROR}hide{/if} failureMessage" id="validationMessage">{$MESSAGE}</span>
+												<span class="{if !$MAIL_STATUS}hide{/if} successMessage">{$MESSAGE}</span>
+											</div>
+												<div id="loginFormDiv">
+													<form class="form-horizontal login-form" style="margin:0;" action="index.php?module=Users&action=Login" method="POST">	
+														<!-- Added by jitu@secondcrm.com on 24092015 for keep return url-->
+														<input type="hidden" name="return_params" value="{$RETURN_PARAMS}" />			<!-- End here -->
+														<div class="control-group">
+															<div class="input-group p-3" id="usernameloginpg">
+																<input type="text" id="fieldsize1" class="form-control" type="text" id="username" name="username" placeholder="Username" aria-label="Username">
+															</div>
 
-		body:before { content: "";    opacity: .3;}
+															<div class="input-group p-3" id="passwordloginpg">
+																<input type="password" id="fieldsize2" class="form-control" type="password" id="password" name="password" placeholder="Password" aria-label="Username">
+															</div>
+														</div>
+														<div class="custom-control custom-checkbox align-self-start ml-3">
+															<input type="checkbox" class="custom-control-input" id="customCheck1" style="    height: 0px !important;">
+															<label class="custom-control-label" for="customCheck1" id="login-checkbox" >Keep me logged in</label>
+														</div>
+														<div class="control-group signin-button">
+															<div id="forgotPassword" >
+																<div class="p-3 align-self-stretch">
+																	<button type="submit" class="btn btn-login btn-md btn-block" onclick="myFunction()">Sign in</button>
+																</div>
+															</div>
+														</div>
+														<div class="form-check my-1 p-0" style="text-align: center;">
+															<a class="forgotPasswordLink pull-right">Forgot password?</a>
+														</div>	
+													</form>
+												</div>
+												<div id="forgotPasswordDiv" class="hide">
+													<form  action="forgotPassword.php" method="POST" id="forgetform">
+														<div class="form-group">
+														<label class="sr-only" for="inlineFormInputGroup">Username</label>
+														    <input type="text" class="form-control" id="username" placeholder="Username" name="username">
+														</div>
 
-		body:before { position: absolute;    z-index: -1;    height: 100%;    width: 100%;    display: block;}
-		
-		hr {
-		    margin-top: 15px;
-			background-color: #7C7C7C;
-			height: 2px;
-			border-width: 0;
-		}
-		h3, h4 {
-			margin-top: 0px;
-		}
-		hgroup {
-			text-align:center;
-			margin-top: 4em;
-		}
-		input {
-			font-size: 16px;
-			padding: 10px 10px 10px 0px;
-			-webkit-appearance: none;
-			display: block;
-			color: #636363;
-			width: 100%;
-			border: none;
-			border-radius: 4px;
-			border-bottom: 1px solid #757575;
-		}
-		input:focus {
-			outline: none;
-		}
-		label {
-			font-size: 16px;
-			font-weight: normal;
-			position: absolute;
-			pointer-events: none;
-			left: 0px;
-			top: 10px;
-			transition: all 0.2s ease;
-		}
-		input:focus ~ label, input.used ~ label {
-			top: -20px;
-			transform: scale(.75);
-			left: -12px;
-			font-size: 18px;
-		}
-		input:focus ~ .bar:before, input:focus ~ .bar:after {
-			width: 50%;
-		}
-		#page {
-			padding-top: 0%;
-		}
-		
-		
-		.marketingDiv {
-			color: #303030;
-			padding: 10px 20px;
-		}
-		.separatorDiv {
-			background-color: #7C7C7C;
-			width: 2px;
-			height: 460px;
-			margin-left: 20px;
-		}
-		.user-logo {
-			height: 110px;
-			margin: 0 auto;
-			padding-top: 40px;
-			padding-bottom: 20px;
-		}
-		.blockLink {
-			border: 1px solid #303030;
-			padding: 3px 5px;
-		}
-		.group {
-			position: relative;
-			margin: 20px 20px 40px;
-		}
-		.failureMessage {
-			color: red;
-			display: block;
-			text-align: center;
-			padding: 0px 0px 10px;
-		}
-		.successMessage {
-			color: green;
-			display: block;
-			text-align: center;
-			padding: 0px 0px 10px;
-		}
-		.inActiveImgDiv {
-			padding: 5px;
-			text-align: center;
-			margin: 30px 0px;
-		}
-		.app-footer p {
-			margin-top: 0px; text-align: center;
-    background: rgba(0,0,0,0.6)!important;
-    margin-bottom: 0;
-    padding: 4px 0;
-    color: #fff;
-    font-size: 10px;
-    border: none;
-    position: fixed;
-    bottom: 0;
-		}
-		.footer {
-			background-color: #fbfbfb;
-			height:26px;
-		}
-		.bar {
-			position: relative;
-			display: block;
-			width: 100%;
-		}
-		.bar:before, .bar:after {
-			content: '';
-			width: 0;
-			bottom: 1px;
-			position: absolute;
-			height: 1px;
-			background: #35aa47;
-			transition: all 0.2s ease;
-		}
-		.bar:before {
-			left: 50%;
-		}
-		.bar:after {
-			right: 50%;
-		}
-		.button {
-			position: relative;
-			display: inline-block;
-			padding: 16px 26px;
-			margin: .3em 0 1em 0;
-			/*width: 100%;*/
-			vertical-align: middle;
-			color: #fff;
-			font-size: 15px;
-			line-height: 20px;
-			-webkit-font-smoothing: antialiased;
-			text-align: center;
-			letter-spacing: 1px;
-			background: transparent;
-			border: 0;
-			border-radius: 50px;
-			cursor: pointer;
-			transition: all 0.15s ease;
-		}
-		.button:focus {
-			outline: 0;
-		}
-		.buttonPurple {
-	color: #fff;
-    background-color: #5c6bc0;
-    border-color: #5c6bc0;
-		}
-		
-		.ripples {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			overflow: hidden;
-			background: transparent;
-		}
-		.input-group {
-			margin-bottom: 10px;
-		}
-		.bg {
-    	background-repeat: no-repeat;
-   	 	background-size: cover;
-    	background-position: center center;}
-    	.img-caption {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    padding: 40px;
-    max-width: 600px;
-}		
-.full-height {
-	min-height: 100vh;
-}
-
-.caption-title {
-    color: #ffffff;
-    font-size: 35px;
-    font-weight: 300;
-}
-.caption-text {
-    color: #e6e6e6;
-}
-.bg-white {
-    background-color: #ffffff8c !important;
-}
-p {
-    font-family: Roboto, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    color: #fff;
-    line-height: 1.9;
-}
-.login-footer {
-    width: 100%;
-}
-.purple{ color:#5c6bc0;}
-.purple:hover { color: #3a4896; }
-footer { display:none;}
-.inline-block {    display: inline-block !important;}
-.form-control {
-        height: 40px;
-    font-size: 14px;
-    border-radius: 90px;
-    padding: 26px 20px!important;
-    background-color: rgba(0,0,0,.04)!important;
-    border-color: #e8e8e8;}
-.form-control::placeholder {
-  color: white;}
-
-		//Animations
-		@keyframes inputHighlighter {
-			from {
-				background: #4a89dc;
-			}
-			to 	{
-				width: 0;
-				background: transparent;
-			}
-		}
-		@keyframes ripples {
-			0% {
-				opacity: 0;
-			}
-			25% {
-				opacity: 1;
-			}
-			100% {}
-				width: 200%;
-				padding-bottom: 200%;
-				opacity: 0;
-			}
-		}
-div > .loginDiv { margin-top:20%!important; }
-.loginDiv { padding:3rem!important; margin-top:20%!important; border-radius: 10px;}
-h3 { color:#428bca }
-	</style>
-	<!-- Jquery Core Js --> 
-
-
-
-
-	<span class="app-nav"></span>
-	<div class="main-container">
-		<div class="row">
-
-
-          <div class="col-lg-4 col-md-offset-4 col-md-4 col-sm-4 col-xs-12" style="z-index:999999999999;">
-			<div class="loginDiv bg-white">
-				<div class="vertical-align ">
-				<div class="login-heading">
-                    <img class="img-responsive user-logo" src="layouts/v7/resources/Images/vtiger.png">
-                </div>
-
-				<div>
-					<span class="{if !$ERROR}hide{/if} failureMessage" id="validationMessage">{$MESSAGE}</span>
-					<span class="{if !$MAIL_STATUS}hide{/if} successMessage">{$MESSAGE}</span>
-				</div>
-<h3>Login</h3>
-<p class="mrg-btm-15 font-size-13">Please enter your user name and password to login</p>
-				<div id="loginFormDiv">
-					<form method="POST" action="index.php" >
-						<input type="hidden" name="module" value="Users"/>
-						<input type="hidden" name="action" value="Login"/>
-<div class="form-group">
-<label class="sr-only" for="inlineFormInputGroup">Username</label>
-    <input type="text" class="form-control" id="inlineFormInputGroup username" placeholder="Username" name="username" >
-</div>
-<div class="form-group">
-<label class="sr-only" for="inlineFormInputGroup">Password</label>
-    <input type="password" class="form-control" id="inlineFormInputGroup password" placeholder="Password" name="password" >
-	</div>
-<div class="text-center"><button type="submit" class="button buttonPurple">Sign in</button></div>
-							
-							<a class="purple forgotPasswordLink pull-right">Forgot password?</a>
-							
-					</form>
-				</div>
-
-				<div id="forgotPasswordDiv" class="hide">
-					<form  action="forgotPassword.php" method="POST" >
-<div class="form-group">
-<label class="sr-only" for="inlineFormInputGroup">Username</label>
-    <input type="text" class="form-control" id="username" placeholder="Username" name="username">
-</div>
-
-<div class="form-group">
-<label class="sr-only" for="inlineFormInputGroup">Email</label>
-    <input type="email" class="form-control" id="inlineFormInputGroup" placeholder="Email" name="emailId">
-	</div>
-<div class="text-center">
-							<button type="submit" class="button buttonPurple forgot-submit-btn">Submit</button></div>
-							<a class="purple forgotPasswordLink pull-right">Back</a>
-
-					</form>
-				</div>
-
-
-			</div><!--vertical align-->
-			<div class="login-footer text-center">
-            <p>Made with <i class="fa fa-heart"></i> by MakeYourCloud</p>
-                            </div>
-
-		</div>
-</div>
-		</div>
-
-
+														<div class="form-group">
+														<label class="sr-only" for="inlineFormInputGroup">Email</label>
+														    <input type="email" class="form-control" id="emailId" placeholder="Email" name="emailId">
+															</div>
+														<div class="text-center">
+															<button type="button" class="button buttonPurple forgot-submit-btn">Submit</button></div>
+															<a class="purple forgotPasswordLink pull-right">Back</a>
+													</form>
+												</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>			
+			</div>
+		</div><br /><br />
 		<script>
-			jQuery(document).ready(function () {
-				var validationMessage = jQuery('#validationMessage');
-				var forgotPasswordDiv = jQuery('#forgotPasswordDiv');
+		jQuery(document).ready(function(){
+			scrollx = jQuery(window).outerWidth();
+			window.scrollTo(scrollx,0);
+			slider = jQuery('.bxslider').bxSlider({
+				auto: true,
+				pause: 4000,
+				randomStart : true,
+				autoHover: true
+			});
+
+			jQuery('.bx-prev, .bx-next, .bx-pager-item').live('click',function(){ slider.startAuto(); });
+
+
+			var validationMessage = jQuery('#validationMessage');
+			var forgotPasswordDiv = jQuery('#forgotPasswordDiv');
 
 				var loginFormDiv = jQuery('#loginFormDiv');
 				loginFormDiv.find('#password').focus();
 
-				loginFormDiv.find('a').click(function () {
+				loginFormDiv.find('a').click(function () { 
 					loginFormDiv.toggleClass('hide');
 					forgotPasswordDiv.toggleClass('hide');
 					validationMessage.addClass('hide');
@@ -374,9 +207,9 @@ h3 { color:#428bca }
 					return result;
 				});
 
-				forgotPasswordDiv.find('button').on('click', function () {
+				forgotPasswordDiv.find('button').on('click', function () { 
 					var username = jQuery('#forgotPasswordDiv #username').val();
-					var email = jQuery('#email').val();
+					var email = jQuery('#emailId').val();
 
 					var email1 = email.replace(/^\s+/, '').replace(/\s+$/, '');
 					var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
@@ -384,7 +217,7 @@ h3 { color:#428bca }
 
 					var result = true;
 					var errorMessage = '';
-					if (username === '') {
+					if (username === '') { 
 						errorMessage = 'Please enter valid username';
 						result = false;
 					} else if (!emailFilter.test(email1) || email == '') {
@@ -396,6 +229,8 @@ h3 { color:#428bca }
 					}
 					if (errorMessage) {
 						validationMessage.removeClass('hide').text(errorMessage);
+					} else {
+						jQuery('form#forgetform').submit();
 					}
 					return result;
 				});
@@ -407,17 +242,7 @@ h3 { color:#428bca }
 						currentElement.removeClass('used');
 					}
 				});
-
-				var ripples = jQuery('.ripples');
-				ripples.on('click.Ripples', function (e) {
-					jQuery(e.currentTarget).addClass('is-active');
-				});
-
-				ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function (e) {
-					jQuery(e.currentTarget).removeClass('is-active');
-				});
-				loginFormDiv.find('#username').focus();
-			});
-		</script>
-		</div>
+		loginFormDiv.find('#username').focus();
+	});
+	</script>
 	{/strip}
