@@ -68,9 +68,7 @@
         &nbsp;<span class="toggleButton"><i class="ti-angle-down"></i></span></a>
         </div>
         <div class="sidebar-menu hidden-xs hidden-sm">
-        <!--    This file is missing. Need to ask UI Team
-        {include file="layouts/bepo/modules/Users/UsersSidebar_mobile.tpl"}
-    -->
+       
          {include file="modules/Users/UsersSidebar.tpl"}
         </div>
         </div>
