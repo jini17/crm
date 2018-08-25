@@ -26,7 +26,20 @@
 	<script src="libraries/jquery/boxslider/jqueryBxslider.js"></script>
 	<script src="libraries/jquery/boxslider/respond.min.js"></script>
 	
-
+	<style>
+	.failureMessage {
+			color: red;
+			display: block;
+			text-align: center;
+			padding: 0px 0px 10px;
+		}
+	.successMessage {
+			color: green;
+			display: block;
+			text-align: center;
+			padding: 0px 0px 10px;
+		}
+	</style>
 	<!--<h1 style="color:red;">Edited</h1>-->
 	<div class="container-fluid login-container" style="padding-left: 0px !important;
     padding-right: 0px !important;">
@@ -101,7 +114,7 @@
 												{/if}
 											<div>
 												<span class="{if !$ERROR}hide{/if} failureMessage" id="validationMessage">{$MESSAGE}</span>
-												<span class="{if !$MAIL_STATUS}hide{/if} successMessage">{$MESSAGE}</span>
+												<span class="success {if !$MAIL_STATUS}hide{/if} successMessage">{$MESSAGE}</span>
 											</div>
 												<div id="loginFormDiv">
 													<form class="form-horizontal login-form" style="margin:0;" action="index.php?module=Users&action=Login" method="POST">	

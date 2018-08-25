@@ -15,7 +15,7 @@ require_once 'modules/Vtiger/helpers/ShortURL.php';
 require_once 'vtlib/Vtiger/Mailer.php';
 
 global $adb;
-$adb->setDebug(true);
+//$adb->setDebug(true);
 $adb = PearDatabase::getInstance();
 
 if (isset($_REQUEST['username']) && isset($_REQUEST['emailId'])) {
@@ -60,11 +60,11 @@ if (isset($_REQUEST['username']) && isset($_REQUEST['emailId'])) {
 		$mail->SMTPDebug =3;
 		$status = $mail->Send(true);
 		if ($status === 1 || $status === true) {
-		//	header('Location:  index.php?modules=Users&view=Login&mailStatus=success');
+			header('Location:  index.php?modules=Users&view=Login&mailStatus=success');
 		} else {
-		//	header('Location:  index.php?modules=Users&view=Login&error=statusError');
+			header('Location:  index.php?modules=Users&view=Login&error=statusError');
 		}
 	} else {
-	//	header('Location:  index.php?modules=Users&view=Login&error=fpError');
+		header('Location:  index.php?modules=Users&view=Login&error=fpError');
 	}
 }
