@@ -3145,10 +3145,19 @@ Vtiger.Class("Vtiger_Detail_Js",{
                     	else                    		
                     		app.helper.showErrorNotification({message:data.message});
                     	
-                    	if (data.reload == "yes")
-                    		jQuery('.tab-item.active').find('a')[0].click(); //To Reload the Detail View using Ajax
+                    	if (data.reload == "yes") {
+
+                    		var detailHeader = jQuery('.detailview-header');
+                    		detailHeader.find('.firstname').html(data.firstname);
+                    		detailHeader.find('.lastname').html(data.lastname); 
+                    		jQuery('.tab-item.active').find('a')[0].click(); //To Reload the Detail View using Ajax                    		
+
+                    	}                    	
                     	                        	
-                    }	
+                    }
+
+                    else 
+                    	app.helper.showErrorNotification({message:err});	
                 }                                        
             );
         });
