@@ -119,8 +119,9 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 				// Mapping Fields for Lead Details
 				if (!empty($personDetails['fullName'])) {
 
-					$lead->column_fields['firstname'] 	= $personDetails['details']['name']['given'] . " " . $personDetails['details']['name']['middle'];		
-					$lead->column_fields['lastname'] 	= $personDetails['details']['name']['family'];
+					$firstname = $lead->column_fields['firstname'] 	= $personDetails['details']['name']['given'] . " " . $personDetails['details']['name']['middle'];	
+						
+					$lastname = $lead->column_fields['lastname'] 	= $personDetails['details']['name']['family'];
 				
 				}			
 
@@ -237,7 +238,7 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 					$message = "Please try again later";
 				else
 					$message = $personDetails['message'];
-				
+
 			}
 		}
 
@@ -247,7 +248,7 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 
 		// Sending Response to CRM	
 		$response 	= new Vtiger_Response();
-		$response->setResult(array("message" => $message, "reload" => $reload));
+		$response->setResult(array("message" => $message, "reload" => $reload,"firstname" => $firstname, "lastname" => $lastname));
 		$response->emit();
 
     }    
