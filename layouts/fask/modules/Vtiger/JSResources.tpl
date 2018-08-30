@@ -52,25 +52,31 @@
     <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Google/resources/Settings.js')}"></script>
     <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Vtiger/resources/CkEditor.js')}"></script>
     <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Documents/resources/Documents.js')}"></script>
-   
+    
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.4.0/perfect-scrollbar.min.js"></script>
     {foreach key=index item=jsModel from=$SCRIPTS}
         <script type="{$jsModel->getType()}" src="{vresource_url($jsModel->getSrc())}"></script>
     {/foreach}
 
-    <script type="text/javascript" src="{vresource_url('layouts/v7/resources/v7_client_compat.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/resources/v7_client_compat.js')}"></script>
     <!-- Added in the end since it should be after less file loaded -->
     <script type="text/javascript" src="libraries/bootstrap/js/less.min.js"></script>
 
     <!-- Enable tracking pageload time -->
 	<script type="text/javascript">
 		var _REQSTARTTIME = "{$smarty.server.REQUEST_TIME}";
-		{literal}jQuery(document).ready(function() { window._PAGEREADYAT = new Date(); });
+		{literal}
+        jQuery(document).ready(function() 
+        {
+          document._PAGEREADYAT = new Date(); 
+        });
 		jQuery(window).load(function() {
 			window._PAGELOADAT = new Date();
 			window._PAGELOADREQSENT = false;
 			// Transmit the information to server about page render time now.
 			if (typeof _REQSTARTTIME != 'undefined') {
 				// Work with time converting it to GMT (assuming _REQSTARTTIME set by server is also in GMT)
+                var _PAGEREADYAT = new Date(); 
 				var _PAGEREADYTIME = _PAGEREADYAT.getTime() / 1000.0; // seconds
 				var _PAGELOADTIME = _PAGELOADAT.getTime() / 1000.0;    // seconds
 				var data = { page_request: _REQSTARTTIME, page_ready: _PAGEREADYTIME, page_load: _PAGELOADTIME };

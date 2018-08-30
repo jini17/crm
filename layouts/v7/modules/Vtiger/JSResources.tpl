@@ -52,6 +52,7 @@
     <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Google/resources/Settings.js')}"></script>
     <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Vtiger/resources/CkEditor.js')}"></script>
     <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Documents/resources/Documents.js')}"></script>
+    
    
     {foreach key=index item=jsModel from=$SCRIPTS}
         <script type="{$jsModel->getType()}" src="{vresource_url($jsModel->getSrc())}"></script>
@@ -64,7 +65,12 @@
     <!-- Enable tracking pageload time -->
 	<script type="text/javascript">
 		var _REQSTARTTIME = "{$smarty.server.REQUEST_TIME}";
-		{literal}jQuery(document).ready(function() { window._PAGEREADYAT = new Date(); });
+		{literal}
+        jQuery(document).ready(function() 
+        {
+          document._PAGEREADYAT = new Date(); 
+        });
+
 		jQuery(window).load(function() {
 			window._PAGELOADAT = new Date();
 			window._PAGELOADREQSENT = false;
