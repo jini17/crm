@@ -77,6 +77,9 @@
 							</span>
 						{/if}
 					{/foreach}
+					<a class='btn btn-default Help-btn' >
+								<i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
+							</a>
 				</div>
 			</span>
 		</div>

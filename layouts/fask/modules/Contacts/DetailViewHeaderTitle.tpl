@@ -11,7 +11,10 @@
 -->*}
 {strip}
    <div class="col-lg-6 col-md-6 col-sm-6">
+
+									
 	  <div class="record-header clearfix ">
+	  	
 		 <div class="hidden-sm hidden-xs recordImage bgcontacts app-{$SELECTED_MENU_CATEGORY}">
 			{assign var=IMAGE_DETAILS value=$RECORD->getImageDetails()}
 			{foreach key=ITER item=IMAGE_INFO from=$IMAGE_DETAILS}
@@ -49,6 +52,8 @@
 			<div class="info-row">
 			   <i class="fa fa-map-marker"></i>&nbsp;
 			   <a class="showMap" href="javascript:void(0);" onclick='Vtiger_Index_Js.showMap(this);' data-module='{$RECORD->getModule()->getName()}' data-record='{$RECORD->getId()}'>{vtranslate('LBL_SHOW_MAP', $MODULE_NAME)}</a>
+
+						
 			</div>
 		 </div>
 	  </div>

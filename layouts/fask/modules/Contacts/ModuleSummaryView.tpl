@@ -9,6 +9,9 @@
 
 {strip}
 	<div class="recordDetails">
+		<a class='btn btn-default' >
+                    		<i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
+                		</a>
 		{include file='SummaryViewContents.tpl'|@vtemplate_path:$MODULE_NAME}
 	</div>
 {/strip}

@@ -48,7 +48,9 @@
                         <i class="ti-comment"></i>
                     </button>
                 {/if}
-                
+                    <a class='btn addButton module-buttons cursorPointer pull-right' >
+                                                    <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
+                                                </a>
                 
 
                 {if count($LISTVIEW_MASSACTIONS_1) gt 0 or $LISTVIEW_LINKS['LISTVIEW']|@count gt 0}

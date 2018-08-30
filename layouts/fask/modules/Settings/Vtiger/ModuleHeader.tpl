@@ -177,6 +177,7 @@
 									</button>
 							{/foreach}
 						{/if}
+						<a class="btn btn-default pull-right"><i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help</a>
 					</div>
 				</div>
 			</div>
