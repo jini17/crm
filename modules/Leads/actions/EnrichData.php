@@ -115,12 +115,12 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 				$lead->id 	= $leadid;
 				$lead->retrieve_entity_info($lead->id,'Leads',false,true); 
 				$lead->mode = 'edit';
-				
+					
 				// Mapping Fields for Lead Details
 				if (!empty($personDetails['fullName'])) {
 
 					$firstname = $lead->column_fields['firstname'] 	= $personDetails['details']['name']['given'] . " " . $personDetails['details']['name']['middle'];	
-						
+
 					$lastname = $lead->column_fields['lastname'] 	= $personDetails['details']['name']['family'];
 				
 				}			
