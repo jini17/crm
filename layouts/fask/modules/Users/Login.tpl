@@ -122,15 +122,16 @@
 														<input type="hidden" name="return_params" value="{$RETURN_PARAMS}" />			<!-- End here -->
 														<div class="control-group">
 															<div class="input-group p-3" id="usernameloginpg">
-																<input type="text" id="fieldsize1" class="form-control" type="text" id="username" name="username" placeholder="Username" aria-label="Username">
+																<input type="text" id="fieldsize1" class="form-control" type="text" id="username" name="username" placeholder="Username" aria-label="Username" value="{$LOGINDETAILS.user}">
 															</div>
 
 															<div class="input-group p-3" id="passwordloginpg">
-																<input type="password" id="fieldsize2" class="form-control" type="password" id="password" name="password" placeholder="Password" aria-label="Username">
+																<input type="password" id="fieldsize2" class="form-control" type="password" id="password" name="password" placeholder="Password" aria-label="Username" value="{$LOGINDETAILS.pass}">
 															</div>
 														</div>
 														<div class="custom-control custom-checkbox align-self-start ml-3">
-															<input type="checkbox" class="custom-control-input" id="customCheck1" style="    height: 0px !important;">
+															<input type="checkbox" class="custom-control-input" id="customCheck1" name="keepcheck" style="height: 0px !important;" 
+															{if $LOGINDETAILS.keepcheck eq 1} checked {/if}>
 															<label class="custom-control-label" for="customCheck1" id="login-checkbox" >Keep me logged in</label>
 														</div>
 														<div class="control-group signin-button">
@@ -139,6 +140,24 @@
 																	<button type="submit" class="btn btn-login btn-md btn-block" onclick="myFunction()">Sign in</button>
 																</div>
 															</div>
+														</div>
+														<!-- Start Social Media Link --> 
+														<!--<div class="sc-media">
+															 added by jitu@Demo for different edition -
+															<div class="col-sm-9" style="display:inline;">
+																<div class="col-sm-3" style="padding:0;">
+																	<input type="radio" name="demotype" class="demotype" value="Sales" {if $EDITION eq 'Sales'}checked{/if} style="width:25%;">Foundation
+																</div>
+						
+																<div class="col-sm-3" style="padding:0;">
+																	<input value="Support" {if $EDITION eq 'Support'}checked{/if} class="demotype" name="demotype" type="radio" style="width:25%;">Sales
+																</div>
+						
+																<div class="col-sm-3" style="padding:0;">
+																	<input type="radio" name="demotype" class="demotype" value="Enterprise" {if $EDITION eq 'Enterprise'} checked{/if} style="width:25%;">Service
+																</div>
+															</div>
+															end here -->
 														</div>
 														<div class="form-check my-1 p-0" style="text-align: center;">
 															<a class="forgotPasswordLink pull-right">Forgot password?</a>
