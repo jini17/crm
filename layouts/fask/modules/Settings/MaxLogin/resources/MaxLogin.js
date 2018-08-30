@@ -54,13 +54,13 @@ var Settings_MaxLogin_Js = {
 			return false;
 		});
 		
-		$( "#brutalforce_tab_btn_1" ).click(function() { 
+		$("#brutalforce_tab_btn_1").on('click',function() { 
 			$("#brutalforce_tab_btn_2").attr('class', '');
 			$("#brutalforce_tab_btn_1").attr('class', 'active');
 			$("#brutalforce_tab_2" ).hide(); 
 			$("#brutalforce_tab_1" ).show();      
 		});
-		$( "#brutalforce_tab_btn_2" ).click(function() { 
+		$("#brutalforce_tab_btn_2").on('click',function() { 
 			$("#brutalforce_tab_btn_1").attr('class', '');
 			$("#brutalforce_tab_btn_2").attr('class', 'active');
 			$("#brutalforce_tab_2" ).prop('class','active');

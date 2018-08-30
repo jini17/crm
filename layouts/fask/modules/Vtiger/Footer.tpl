@@ -22,7 +22,7 @@
 
 {include file='JSResources.tpl'|@vtemplate_path}
 
-<script src="https://unpkg.com/tippy.js@beta/dist/tippy.all.min.js"></script>
+<script src="https://unpkg.com/tippy.js@2.5.4/dist/tippy.all.min.js"></script>
 
 
 <script>
