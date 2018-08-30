@@ -388,9 +388,8 @@ jQuery(document).ready(function(e){
     var vtigerinst = new Vtiger_Index_Js();
     vtigerinst.registerEvents();
     tacInstance.registerEvents();
+    //Added By Mabruk
+    var vtigerSettings = new Settings_Vtiger_Index_Js();
+    vtigerSettings.registerAccordionClickEvent();	
 
 })
-
-
-
-

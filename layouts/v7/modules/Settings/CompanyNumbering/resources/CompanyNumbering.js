@@ -73,4 +73,7 @@ var Settings_CompanyNumbering_Js = {
 
 jQuery(document).ready(function() {
 	Settings_CompanyNumbering_Js.registerEvents();
+	//Added By Mabruk
+	var vtigerSettings = new Settings_Vtiger_Index_Js();
+	vtigerSettings.registerAccordionClickEvent();
 });

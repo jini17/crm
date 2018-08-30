@@ -24,7 +24,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
     	}
 
 
-	function process(Vtiger_Request $request) {
+	function process(Vtiger_Request $request) {;
 		
         	$mode = $request->get('mode');
 		if(!empty($mode)) {
@@ -280,7 +280,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$db = PearDatabase::getInstance();
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
-		$recordId = $request->get('record');
+		$recordId = $request->get('record'); 
 		$currentyear = date("Y");
 
 		//if year end process run then user can apply leave for next year other wise current year
@@ -293,7 +293,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		 } //end here 
 
 		$selectedmember = '';
-		$selectedleavetype = '';
+		$selectedclaimtype = '';
 
 		if(isset($_REQUEST['selyear'])) {
 			$currentyear = $request->get('selyear');
@@ -304,15 +304,17 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 			$selectedmember = $request->get('selmember');
 		} 
 		
-		if(isset($_REQUEST['selleavetype']) && $_REQUEST['selleavetype'] !='All') {
-			$selectedleavetype = $request->get('selleavetype');
+		if(isset($_REQUEST['selclaimtype']) && $_REQUEST['selclaimtype'] !='All') {
+			$selectedclaimtype = $request->get('selclaimtype');
 		}
 
 		
 		//check leave alloted to user or not
 		$isCreate = Users_ClaimRecords_Model::hasAllocateLeave($recordId);
+		$jobgrade = Users_ClaimRecords_Model::getJobGrade($recordId); 
+		$_SESSION["myjobgrade"] = $jobgrade;
 		
-   		
+   		//$_SESSION["favcolor"] = "yellow"; echo "hai"; echo $_SESSION["myjobgrade"]; echo $_SESSION["favcolor"];echo "hai";
 		//check if he/she is already apply then restrict to user
 
          
@@ -345,15 +347,16 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$viewer->assign('MYCLAIM', $myClaims);
 		####end my leave list###########
 
-		$pageNumber = $request->get('pagenumber');//Added By Safuan MyTeamLeave Pagination
+		$pageNumber = $request->get('pagenumber');//Added By Safuan MyTeamLeave Pagination 
 		if(empty($pageNumber)){
 			$pageNumber = '1';
 		}
 
 		$pageLimit = 5;// set number of row for each page here-//Added By Safuan MyTeamLeave Pagination
+//$selectedclaimtype = '566';
 
 		####start Get My Team leave list##### 
-		$myteamclaims = Users_ClaimRecords_Model::getMyTeamClaim($recordId,$currentyear, $pageNumber, $pageLimit,$selectedmember,$selectedleavetype);
+		$myteamclaims = Users_ClaimRecords_Model::getMyTeamClaim($recordId,$currentyear, $pageNumber, $pageLimit,$selectedmember,$selectedclaimtype);
 		$myteam = Users_ClaimRecords_Model::getMyTeamMembers($recordId);
 		$claimtypelist = Users_ClaimRecords_Model::getTotaClaimTypeList($userid,$claimid);
 		$viewer->assign('MYTEAM', $myteam);
@@ -364,7 +367,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 
 		### Code for paging added by jitu@secondcrm.com on 28-01-2015####
 
-		$totalCount = count(Users_ClaimRecords_Model::getMyTeamClaim($recordId,$currentyear, '', '',$selectedmember,$selectedleavetype));	//Added By Safuan MyTeamLeave Pagination
+		$totalCount = count(Users_ClaimRecords_Model::getMyTeamClaim($recordId,$currentyear, '', '',$selectedmember,$selectedclaimtype));	//Added By Safuan MyTeamLeave Pagination
 		$pageCount = ceil($totalCount / $pageLimit);
 
 		if($pageNumber < $pageCount){
@@ -400,7 +403,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		if($pageCount == 0){
 			$pageCount = 1;
 		}
-
+	
 		$viewer->assign('PAGE_COUNT', $pageCount);
 		$viewer->assign('PCOUNT',$pcount);
 		$viewer->assign('LISTVIEW_COUNT', $totalCount);

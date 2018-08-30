@@ -115,6 +115,9 @@ Vtiger.Class("Settings_Vtiger_CompanyDetails_Js",{},{
 		this.registerSaveCompanyDetailsEvent();
 		this.registerCancelClickEvent();
 		this.registerCompanyLogoDimensionsValidation();
+		//Added By Mabruk
+	    var vtigerSettings = new Settings_Vtiger_Index_Js();
+	    vtigerSettings.registerAccordionClickEvent();
 	}
 
 });

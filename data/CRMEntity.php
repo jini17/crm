@@ -122,6 +122,22 @@ class CRMEntity {
 			if ($table_name == "vtiger_crmentity") {
 				$this->insertIntoCrmEntity($module, $fileid);
 			} else {
+
+				#########################Start Assign Primary key Custom Code######################
+				# Assign Primary Value {quote_no, salesorder_no, invoice_no, account_no etc.} 
+				# Only in case of Add 
+				# Added By jitu@secondcrm.com on 24 sep 2014 	 
+				###################################################################################
+				if($this->mode != 'edit') {
+					$resprimary = $adb->pquery("SELECT fieldname FROM vtiger_field WHERE tablename = ? AND uitype = 4",array($table_name));
+					$source_company = $this->column_fields['company_details'];
+					$primary_key = $adb->query_result($resprimary, 0, "fieldname");
+					$moduleseqinfo = $this->getModuleSeqInfo($module,$source_company);
+					$this->column_fields[$primary_key] = $moduleseqinfo[0].($moduleseqinfo[1]+1);
+
+				}							
+				####################################End#############################################
+
 				$this->insertIntoEntityTable($table_name, $module, $fileid);
 			}
 		}

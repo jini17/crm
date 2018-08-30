@@ -1,0 +1,87 @@
+/* Login Page Styling */
+
+/* should override bootstrap */
+a , a:hover{ 
+  color: $link-grey
+}
+/* should override bootstrap */
+
+.login-wrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  min-height: 100%;
+}
+
+.box-wrapper {
+  display: flex;
+  flex:1 auto;
+  align-items: center;
+}
+
+.login-box {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  box-shadow: 0px 0px 15px 0px $shadow;
+}
+
+.footer-wrapper {
+  display: flex;
+  flex: none;
+  flex-wrap:wrap;
+  justify-content: space-around;
+  width: 100%;
+  background: $dark-grey;
+  color:$white;
+  padding: .75rem;
+}
+
+.left-bar{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  height: 513px;  
+  width: 230px;
+  background-image: url("/src/images/login-bg-left.png");
+  h5{
+    color: $white;
+    margin-top: 5.5rem;
+  }
+  label{
+    color:$white;
+  }
+  .social-wrapper{
+    color: $white;
+    margin: 1rem 0 3rem 0;
+    justify-content: space-evenly;
+    flex-flow: row nowrap;
+    width: 100%;
+    display: flex;  
+  }
+  .icon-sc{
+    font-size: 1.75rem;
+  }
+}
+
+.right-bar{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 513px;
+  width: 350px;
+  background: $white;
+  input {
+    height: 51px;
+  }
+  img {
+    height: 48px;
+    margin-bottom: 3rem; 
+  }
+}
+
+.btn-login {
+  background: $green;
+  color: $white;
+}

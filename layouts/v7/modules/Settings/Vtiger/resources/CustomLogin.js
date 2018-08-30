@@ -10,7 +10,7 @@
 Vtiger.Class("Settings_Vtiger_CustomLogin_Js",{},{
 	
 	registerUpdateDetailsClickEvent : function() {
-		jQuery('#updateCompanyDetails').on('click',function(e){ 
+		jQuery('#updateCompanyDetails').on('click',function(e){  
 			
 			jQuery('#CompanyDetailsContainer').addClass('hide');
 			jQuery('#updateCompanyDetailsForm').removeClass('hide');
@@ -45,7 +45,7 @@ Vtiger.Class("Settings_Vtiger_CustomLogin_Js",{},{
 			image_arr = imageName.split(".");
 			var image_arr_last_index = image_arr.length - 1;
 			if(image_arr_last_index < 0) {
-				imageObj.validationEngine('showPrompt', app.vtranslate('LBL_WRONG_IMAGE_TYPE') , 'error','topLeft',true);
+				//imageObj.validationEngine('showPrompt', app.vtranslate('LBL_WRONG_IMAGE_TYPE') , 'error','topLeft',true);
 				imageObj.val('');
 				return false;
 			}
@@ -56,11 +56,11 @@ Vtiger.Class("Settings_Vtiger_CustomLogin_Js",{},{
 				if (size < 1024000) {
 					return true;
 				} else {
-					imageObj.validationEngine('showPrompt', app.vtranslate('LBL_MAXIMUM_SIZE_EXCEEDS') , 'error','topLeft',true);
+				//	imageObj.validationEngine('showPrompt', app.vtranslate('LBL_MAXIMUM_SIZE_EXCEEDS') , 'error','topLeft',true);
 					return false;
 				}
 			} else {
-				imageObj.validationEngine('showPrompt', app.vtranslate('LBL_WRONG_IMAGE_TYPE') , 'error','topLeft',true);
+				//imageObj.validationEngine('showPrompt', app.vtranslate('LBL_WRONG_IMAGE_TYPE') , 'error','topLeft',true);
 				imageObj.val('');
 				return false;
 			}
@@ -72,12 +72,17 @@ Vtiger.Class("Settings_Vtiger_CustomLogin_Js",{},{
 		this.registerUpdateDetailsClickEvent();
 		this.registerSaveCompanyDetailsEvent();
 		this.registerCancelClickEvent();
-		jQuery('#updateCompanyDetailsForm').validationEngine(app.validationEngineOptions);
+		//jQuery('#updateCompanyDetailsForm').validationEngine(app.validationEngineOptions);
 	}
 
 });
 
 jQuery(document).ready(function(e){
-	var instance = new Settings_Vtiger_CustomLogin_Js();
-	instance.registerEvents();
+     var vtigerinst = new Vtiger_Index_Js();
+     vtigerinst.registerEvents();
+     //Added By Mabruk
+     var vtigerSettings = new Settings_Vtiger_Index_Js();
+     vtigerSettings.registerAccordionClickEvent();		
+     var instance = new Settings_Vtiger_CustomLogin_Js();
+     instance.registerEvents();
 })

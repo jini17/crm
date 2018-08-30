@@ -173,11 +173,13 @@ class Vtiger_Field_Model extends Vtiger_Field {
 				 $fieldDataType = 'userRole';	//Modified Line
 			} else if($uiType == '999') {		//added by jitu@5jan2017
 				 $fieldDataType = 'range';		//added by jitu@5jan2017	
+			}  else if($uiType == '2002') {		//Modified Line
+				 $fieldDataType = 'multiregion';		//Modified Line added ny jitu
 			}else {
 				$webserviceField = $this->getWebserviceFieldObject();
 				$fieldDataType = $webserviceField->getFieldDataType();
 			}
-			echo $this->fieldDataType ;
+			
 			$this->fieldDataType = $fieldDataType;
 		}
 		return $this->fieldDataType;
@@ -195,6 +197,27 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		}
 		return $roles;
 	}
+
+	/**
+	* Function to get list of territory the field referenced to Uitype 2002
+	* @return <Array> -  list of territory for which field is refered to
+	*/
+	public function getRegions() {
+		global $adb, $log;
+
+		$log->debug("Entering getRegions() method ...");
+		$regions = Array();
+
+		$result  = $adb->pquery("SELECT CONCAT(tree,'#',regionid) as regionval, region FROM secondcrm_region_data", array());	for($i=0;$i<$adb->num_rows($result);$i++) {
+			$regionval 	     = $adb->query_result($result,$i,'regionval');
+			$regions[$regionval] = $adb->query_result($result,$i,'region');
+		}
+		$log->debug("Exiting getRegions method ...");
+		return $regions;
+			
+		
+	}
+	
 	/**
 	* Function added by Jitu@secondcrm.com on Sep 19, 2014 for new UI Type 3993
 	* This function will retrieve terms details 

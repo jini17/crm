@@ -624,6 +624,66 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
 			//noteContentElement.closest('tr').find('td:nth-child(3)').hide();
 			//noteContentElement.closest('tr').find('td:nth-child(4)').hide();			
 		} 
+
+		//Added By Mabruk on 06/07/2018 For Changing Meeting Templates (Agenda)
+		var agendaTemplate = jQuery('#agendaTemplate');
+		var agendaSelector = jQuery('#s2id_agendaTemplate').find('.select2-chosen');
+		var currIndex = agendaTemplate.prop("selectedIndex");
+		var currText = agendaSelector.text();	
+
+		agendaTemplate.change(function() {	
+			
+			var currentData = CKEDITOR.instances['Events_editView_fieldName_agenda'].getData({trim: true});
+
+				if (currentData != "" && currentData != null) { 
+
+					var confirm = window.confirm("WARNING: This will replace your existing template and you will lose all your changes");
+
+					if (confirm == true) {
+						CKEDITOR.instances['Events_editView_fieldName_agenda'].setData(jQuery(this).val());
+						currIndex = agendaTemplate.prop("selectedIndex"); 
+						currText = agendaSelector.text();	
+					}
+
+					else {					
+					    agendaSelector.text(currText);
+					    agendaTemplate.prop("selectedIndex",currIndex);
+					}
+				}
+
+				else
+					CKEDITOR.instances['Events_editView_fieldName_agenda'].setData(jQuery(this).val());			
+		});
+
+		//Added By Mabruk on 06/07/2018 For Changing Meeting Templates (MOM)
+		var MOMTemplate = jQuery('#MOMTemplate');
+		var MOMSelector = jQuery('#s2id_MOMTemplate').find('.select2-chosen');
+		var currIndex = MOMTemplate.prop("selectedIndex");
+		var currText = MOMSelector.text();	
+
+		MOMTemplate.change(function() {	
+			
+			var currentData = CKEDITOR.instances['Events_editView_fieldName_min_meeting'].getData({trim: true});
+
+				if (currentData != "" && currentData != null) { 
+
+					var confirm = window.confirm("WARNING: This will replace your existing template and you will lose all your changes");
+
+					if (confirm == true) {
+						CKEDITOR.instances['Events_editView_fieldName_min_meeting'].setData(jQuery(this).val());
+						currIndex = MOMTemplate.prop("selectedIndex"); 
+						currText = MOMSelector.text();	
+					}
+
+					else {					
+					    MOMSelector.text(currText);
+					    MOMTemplate.prop("selectedIndex",currIndex);
+					}
+				}
+
+				else
+					CKEDITOR.instances['Events_editView_fieldName_min_meeting'].setData(jQuery(this).val());			
+		});
 	},
      
      showExternalInputContainer : function(){

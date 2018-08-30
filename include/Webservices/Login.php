@@ -10,6 +10,8 @@
 	
 	function vtws_login($username,$pwd){
 		
+		global $short_url;
+		
 		$user = new Users();
 		$userId = $user->retrieve_user_id($username);
 		
@@ -29,6 +31,21 @@
 		}
 		$user = $user->retrieveCurrentUserInfoFromFile($userId);
 		if($user->status != 'Inactive'){
+			
+			//Insert  into vtiger_loginhistory for webservice login call
+			$browser = Settings_MaxLogin_Module_Model::browserDetect();	
+			$moduleModel = Users_Module_Model::getInstance('Users');
+			
+			if($_SERVER['HTTP_HOST']==$short_url || $_SERVER['HTTP_HOST']=='localhost' 
+				|| stripos($_SERVER['HTTP_HOST'],'192.168.2.') !==false) { 
+				$usip=$_SERVER['REMOTE_ADDR'];	//add one more param IP address by jitu@28Dec2016
+			} else {
+				$usip=$_SERVER['REMOTE_ADDR'];	//add one more param IP address by jitu@28Dec2016	
+			}
+			
+			$moduleModel->saveLoginHistory($username,'Signed in', 'WS Call', $usip);
+			//end here
+			
 			return $user;
 		}
 		throw new WebServiceException(WebServiceErrorCode::$AUTHREQUIRED,'Given user is inactive');

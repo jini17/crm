@@ -127,6 +127,9 @@ Settings_Currency_Js('Settings_Currency_List_Js', {}, {
 	init : function() {
         this._super();
 		this.addComponents();
+		//Added By Mabruk
+		var vtigerSettings = new Settings_Vtiger_Index_Js();
+		vtigerSettings.registerAccordionClickEvent();
 		this.registerSortableEvent();
 		this.registerPostListLoadListener();
 	},

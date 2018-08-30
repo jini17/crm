@@ -1,0 +1,60 @@
+@font-face {
+  font-family: 'Fabric External MDL2 Assets';
+  src:  url('../src/fonts/FabExMDL2.ttf?rozplm') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-vt {
+  font-family: "Fabric External MDL2 Assets";
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  &.r90 {
+    transform-origin: 50% 50%;
+    transform: rotate(90deg);
+  }
+  &.flip {
+    transform: scaleX(-1);
+  }
+}
+
+$icons: 
+info f331,
+add e710,
+briefcase e821,
+dollar eafd,
+wrench e90f,
+caret-right e76c,
+account e77b,
+caret-left e76b,
+collapse e8a0,
+contacts eebd,
+organization eca6,
+calendar e787,
+sms e901,
+notification ea8f,
+reports effe,
+profile e779,
+task e9d5,
+mail e715,
+document e8b7,
+settings e713,
+more e72d,
+aspect-ratio E799,
+open-pane E8A0,
+search E721,
+more-vet f2bc,
+dashboard EF56,
+sync E895;
+
+@each $icon in $icons {
+  .icon-#{nth($icon, 1)}::before,
+  %icon-#{nth($icon, 1)} {
+    content: unquote("\"\\#{nth($icon, 2)}\"");
+  }
+}

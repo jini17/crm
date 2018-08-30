@@ -87,6 +87,9 @@ class Users_Save_Action extends Vtiger_Save_Action {
 	}
 
 	public function process(Vtiger_Request $request) {
+
+		$db = PearDatabase::getInstance();
+		//$db->setDebug(true);
 		$result = Vtiger_Util_Helper::transformUploadedFiles($_FILES, true);
 		$_FILES = $result['imagename'];
 
@@ -99,25 +102,22 @@ class Users_Save_Action extends Vtiger_Save_Action {
 			if ($status == true) {
 				throw new AppException(vtranslate('LBL_DUPLICATE_USER_EXISTS', $module));
 			}
-			
-			//validate user from CP database for no of users per plan
-			$roleid = $request->get('roleid');
-			$isvalidateUser = $userModuleModel->ValidateUserSubscription($userName, $roleid);
-			if ($isvalidateUser == false) {
-				//header("location:index.php?module=Users&view=Edit&parent=Settings&error=".vtranslate('LBL_USER_LIMIT_EXCEED', $module));
-				//exit;
-				throw new AppException(vtranslate('LBL_USER_LIMIT_EXCEED', $module));
-			}
-			//end here 			
-
 		}
+
 		$recordModel = $this->saveRecord($request);
-		
-		//insert into secondcrm_users
-		if($recordId=='') {
-			$recordModel->updateSecndCRMUsers($userName, $request->get('user_password'),$recordModel->get('id'));
-		}
 
+		
+		//update secondcrm_userplan in CRM, agiliux_accounts in agiliux_cp
+		$result = $db->pquery("SELECT vtiger_role.planid FROM vtiger_role WHERE roleid=?", array($recordModel->get('roleid')));
+		$plan = $db->query_result($result, 0, 'planid');
+		
+		if($recordId=='') {
+			$plan = $recordModel->MakeAgiliuxCPUser($recordModel->entity->db->dbName, $plan);
+		}
+		
+		$db->pquery("DELETE FROM secondcrm_userplan WHERE userid=?", array($recordModel->get('id')));	
+		$db->pquery("INSERT INTO secondcrm_userplan(planid, userid) VALUES(?,?)", array($plan, $recordModel->get('id')));	
+		
 		if ($request->get('relationOperation')) {
 			$parentRecordModel = Vtiger_Record_Model::getInstanceById($request->get('sourceRecord'), $request->get('sourceModule'));
 			$loadUrl = $parentRecordModel->getDetailViewUrl();

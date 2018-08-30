@@ -260,12 +260,12 @@
 									{assign var="tax_id_name" value="hidden_tax"|cat:$tax_row_no+1|cat:"_percentage"|cat:$row_no}
 									{assign var="taxlabel" value=$tax_data.taxlabel|cat:"_percentage"|cat:$row_no}
 									{assign var="popup_tax_rowname" value="popup_tax_row"|cat:$row_no}
-									<tr>
-										<td>&nbsp;&nbsp;{$tax_data.taxlabel}</td>
-										<td style="text-align: right;">
-											<input type="text" data-rule-positive=true data-rule-inventory_percentage=true  name="{$taxname}" id="{$taxname}" value="{$tax_data.percentage}" data-compound-on="{if $tax_data.method eq 'Compound'}{Vtiger_Util_Helper::toSafeHTML(Zend_Json::encode($tax_data.compoundon))}{/if}" data-regions-list="{Vtiger_Util_Helper::toSafeHTML(Zend_Json::encode($tax_data.regionsList))}" class="span1 taxPercentage" />&nbsp;%
+									<tr style="width: 100%;">
+										<td style="width: 20%;">&nbsp;&nbsp;{$tax_data.taxlabel}</td>
+										<td style="text-align: right;width: 40%;">
+											<input style="width: 80% !important" type="text" data-rule-positive=true data-rule-inventory_percentage=true  name="{$taxname}" id="{$taxname}" value="{$tax_data.percentage}" data-compound-on="{if $tax_data.method eq 'Compound'}{Vtiger_Util_Helper::toSafeHTML(Zend_Json::encode($tax_data.compoundon))}{/if}" data-regions-list="{Vtiger_Util_Helper::toSafeHTML(Zend_Json::encode($tax_data.regionsList))}" class="span1 taxPercentage" />&nbsp;%
 										</td>
-										<td style="text-align: right; padding-right: 10px;">
+										<td style="text-align: right; padding-right: 10px;width: 40%;">
 											<input type="text" name="{$popup_tax_rowname}" class="cursorPointer span1 taxTotal taxTotal{$tax_data.taxid}" value="{$tax_data.amount}" readonly />
 										</td>
 									</tr>

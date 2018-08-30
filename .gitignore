@@ -38,4 +38,5 @@ apilogs.txt
 #ignore test files
 test/**
 
-
+#ignore delete branch script
+bitBranch.sh

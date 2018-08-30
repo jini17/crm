@@ -19,8 +19,8 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 	} 
 
 	function process(Vtiger_Request $request) {
-		global $short_url, $adb;
-		$adb->setDebug(true);
+		global $short_url ,$site_URL, $adb;
+		//$adb->setDebug(true);
 		$username = $request->get('username');
 		$password = $request->getRaw('password');
 		//echo $username;
@@ -46,7 +46,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 
         $allowedipres = false;
 		$allowedipres = $this->AllowedIp($usip,$username);
-		echo "Nirbhay";
+		
 		//echo $allowedipres;die;
 		//$allowedipres = true;
 
@@ -56,9 +56,13 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 			$userid = $user->retrieve_user_id($username);
 			Vtiger_Session::set('AUTHUSERID', $userid);
 
+			$loginpageinfo  = Users_Record_Model::loginPageDetails();
+			
 			// For Backward compatability
 			// TODO Remove when switch-to-old look is not needed
 			$_SESSION['authenticated_user_id'] = $userid;
+			$_SESSION['sessionout'] = $loginpageinfo['sessionout'];
+
 			$db = PearDatabase::getInstance();
 			$result = $db->pquery("SELECT vtiger_role.planid FROM vtiger_role 
 				INNER JOIN vtiger_user2role  ON vtiger_user2role.roleid=vtiger_role.roleid WHERE vtiger_user2role.userid=?", array($userid));
@@ -66,7 +70,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 			$_SESSION['plan'] = $plan;
 			$_SESSION['app_unique_key'] = vglobal('application_unique_key');
 			$_SESSION['authenticated_user_language'] = vglobal('default_language');
-
+			$_SESSION['LOGOUT_URL'] = $site_URL;
 			//Enabled session variable for KCFINDER 
 			$_SESSION['KCFINDER'] = array(); 
 			$_SESSION['KCFINDER']['disabled'] = false; 

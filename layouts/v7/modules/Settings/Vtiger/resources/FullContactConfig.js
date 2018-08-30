@@ -167,7 +167,10 @@ Vtiger.Class("Settings_Vtiger_FullContactConfig_Js",{},{
 jQuery(document).ready(function(e){ 
 
 	var tacInstance = new Settings_Vtiger_FullContactConfig_Js();
-    var vtigerinst = new Vtiger_Index_Js();
-    vtigerinst.registerEvents();
+    	var vtigerinst = new Vtiger_Index_Js();
+    	vtigerinst.registerEvents();
 	tacInstance.registerEvents();
+        //Added By Mabruk
+	var vtigerSettings = new Settings_Vtiger_Index_Js();
+	vtigerSettings.registerAccordionClickEvent();
 })

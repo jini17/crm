@@ -207,4 +207,7 @@ jQuery.Class('Settings_Menu_Editor_Js', {}, {
 window.onload = function() {
 	var settingMenuEditorInstance = new Settings_Menu_Editor_Js();
 	settingMenuEditorInstance.registerEvents();
+	//Added By Mabruk
+	var vtigerSettings = new Settings_Vtiger_Index_Js();
+	vtigerSettings.registerAccordionClickEvent();
 };

@@ -45,7 +45,7 @@ Vtiger_Detail_Js("Calendar_Detail_Js", {
 
         return aDeferred.promise();
     },
-     /**
+	 /**
 	 * Added By Jitu and Mabruk Function to register event for ckeditor for description field
 	 */
 	registerTextEditorForMOM : function(e){
@@ -67,7 +67,7 @@ Vtiger_Detail_Js("Calendar_Detail_Js", {
 
 	/**
 	 * Added By Mabruk Function to Load edit View of MOM Text Editor
-     * This function is being called in the file modules/vtiger/resources/Detail.js
+     	 * This function is being called in the file modules/vtiger/resources/Detail.js
 	 */
 	loadMeetingContainer : function(){
         var clickmeeting = jQuery("#clickmeeting");

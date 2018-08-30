@@ -51,9 +51,9 @@ jQuery.Class('Settings_CustomRecordNumbering_Js', {}, {
 		var editViewForm = this.getForm();
 		editViewForm.find('[name="sourceModule"]').on('change',function(e){
 			jQuery('.saveButton').removeAttr('disabled');
-			var element = jQuery(e.currentTarget);
-			var params = {};
-			var company    = jQuery('#company').val();			
+			var element      = jQuery(e.currentTarget);
+			var params       = {};
+			var company      = jQuery('#company').val();			
 			var sourceModule = element.val();
 			
 			params = {
@@ -215,14 +215,14 @@ jQuery.Class('Settings_CustomRecordNumbering_Js', {}, {
 		this.registerChangeEventForPrefixAndSequenceNumber();
 	
 		var params = app.validationEngineOptions;
-		params.onValidationComplete = function(editViewForm, valid){
+		params.onValidationComplete = function(editViewForm, valid) {
 			if(valid) {
 				thisInstance.saveModuleCustomNumbering();
 			}
 			return false;
 		}
-		editViewForm.validationEngine('detach');
-		editViewForm.validationEngine('attach',params);
+		//editViewForm.validationEngine('detach');
+		//editViewForm.validationEngine('attach',params);
 	}
 })
 jQuery(document).ready(function() { 

@@ -209,6 +209,28 @@ class Calendar_Record_Model extends Vtiger_Record_Model {
 		$recurringRecordsList[$parentRecurringId] = $childRecords;
 		return $recurringRecordsList;
 	}
+
+	/**
+	 * Function to get Meeting Templates
+	 * Added By Mabruk Khan 
+	 * on 06/07/2018 
+	 */
+	public function getMeetingTemplates() {
+		$adb = PearDatabase::getInstance();
+		$data = array();
+		
+		$result = $adb->pquery("SELECT templatename, body FROM vtiger_emailtemplates WHERE templatetype = ?",array("Meeting Templates"));
+		$numOfRows = $adb->num_rows($result);
+
+		for ($i = 0; $i < $numOfRows; $i++) {
+
+			$data[$i]['name'] = $adb->query_result($result,$i,"templatename");
+			$data[$i]['body'] = $adb->query_result($result,$i,"body");
+
+		}	
+		
+		return $data;
+	}
 	
 	/**
 	 * Function to get recurring enabled for record

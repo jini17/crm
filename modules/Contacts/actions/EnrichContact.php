@@ -5,12 +5,33 @@
  * Date: 5/16/18
  * Time: 5:45 PM
  */
+error_reporting(1);
+		ini_set('display_erros',1);
 
+		  register_shutdown_function('handleErrors');
+		    function handleErrors() {
+
+		       $last_error = error_get_last();
+
+		       if (!is_null($last_error)) { // if there has been an error at some point
+
+			  // do something with the error
+			  print_r($last_error);
+
+		       }
+
+		    } 
 
 require_once("include/database/PearDatabase.php");
 global $adb;
 //$adb->setDebug(true);
 
+
+class Contacts_RelationAjax_Action extends Vtiger_RelationAjax_Action {
+
+	
+
+}	
  $query = "SELECT email FROM vtiger_contactdetails INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_contactdetails.contactid WHERE contactid = ? AND deleted = 0";
 $result = $adb->pquery($query,array($_REQUEST['record']));
 

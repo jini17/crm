@@ -1,0 +1,319 @@
+@import './public/sass/fonts.scss';
+@import './public/sass/color.scss';
+@import './public/sass/style-login.scss';
+
+/* Vt css override */
+
+/* custom implementation -  need to find plugin that support changing browser width cross browser */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+@mixin aside-toggled {
+  max-width: 70px;
+  min-width: 70px;
+  .label-wrapper,
+  .icon-wrapper-right {
+    display: none !important;
+  }
+}
+
+html, body{
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: column;
+}
+
+.icon-wrapper,
+.icon-wrapper-right {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.icon-wrapper {
+  margin-right: 10px;
+}
+
+.icon-wrapper-right {
+  margin-left: auto;
+  font-size: 1rem;  
+}
+
+.form-control{
+  background: $grey;
+}
+
+.form-control{
+  font-weight: 500;
+  &:focus {
+    color: #495057;
+    background-color: $white;
+    border-bottom: 2px solid $darker-blue;
+    outline: 0;
+    box-shadow: none;
+  }
+}
+
+select.form-control:not([size]):not([multiple]) {
+    height: calc(2.25rem + 1px);
+}
+
+.select-wrapper {
+  .form-control {
+      box-shadow: none;    
+  }
+}
+.dropdown-menu{
+  min-width: inherit;
+}
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  &.active{
+    border-right: 5px solid $darker-blue;
+    background-color: $sub-grey;
+    color:$black;
+  }
+  &:active{
+    @extend .active;
+  }
+}
+
+.header {
+  height: 48px;
+  nav{
+    color: $white;
+    background: $blue;
+    a {
+      .img-wrapper{
+      width: 288px;
+      background: $white;
+      border-top-right-radius: 60px 60px;
+        img {
+          height: 48px;
+        }
+      }
+    }
+  }
+}
+
+.aside, .section {
+  margin-top: 48px;
+}
+.aside {
+  min-width: 288px;
+  .sub-menu {
+    display: inline-block;
+    background: $grey;
+    height: 100%;
+    margin: auto;
+  }
+  nav {
+    background: $grey;
+    height: 100%;
+    border-right:1px solid $line-grey;
+    ul{
+      height: inherit;
+      .list-group-item {
+        &.active {
+          background-color: $darker-grey;
+          border-right: 5px solid $active;
+          border-color: $active;
+          color: $black;
+          .label-wrapper {
+            .nav-label {
+              font-weight: 500;
+            }
+          }
+        }
+      }
+      li {
+        background: $grey;
+        height: 68px;
+        display: flex;
+        align-items: center;
+        border: none;
+        &.seperator {
+          border-top: 1px solid $line-grey;
+          margin-top: 1px;
+          height: 0;
+        }
+        &:first-child,
+        &:last-child {
+          height: 48px;
+        }
+        &:first-child {
+          border-bottom: 1px solid $line-grey;
+          margin-bottom: 15px;
+        }
+        &:last-child {
+          background: $white;
+          border-top: 1px solid $line-grey;
+          margin-top: 1px;
+          cursor: pointer;
+          margin-top: auto;
+        }
+        &:active{
+          background: $darker-grey;
+          border-right: 5px solid $active;
+        }
+      }
+    }
+  }
+}
+
+.aside-collapse {
+  @include aside-toggled;
+}
+
+.section {
+  display: flex;
+  flex-flow:column;
+  width: 100%;
+  .content-header {
+    background: $grey;
+    border-bottom: 1px solid $line-grey;
+    padding: 0 1.25rem;
+    height: 48px;
+  }
+  .content-header-sub{
+    @extend .content-header;
+    background: $sub-grey;
+    padding: 0 40px;
+    height: 44px;
+  }
+  .content-body{
+    margin: 35px 0;
+
+  }
+}
+
+.d-underline{
+  border-bottom: 3px solid $darker-blue;
+  display: inline-block;
+  line-height: 41px;
+}
+
+.footer {
+  display: flex;
+  margin-top:auto;
+  padding: 10px 30px;
+  border-top: 1px solid $line-grey;
+  background: $grey;
+}
+
+.grid-stack {
+  .card-header{
+    border-left: 2px solid $darker-blue;
+    display: flex;
+    align-items: center;
+    padding: .75rem;
+    flex:none;
+    color: $darker-blue;
+    &.twitter-blue {
+      background: $twitter-blue;
+      color: $white;
+      label{
+        color: $white;
+      }
+    }
+    i{
+      padding-right: 1rem;
+      padding-top: .5rem;
+    }
+    span {
+      display: flex;
+      align-items: center;
+    }
+    label {
+      display: flex;      
+      color: $darker-blue;
+      font-weight: 500;
+      align-self: center;
+      margin: 0;
+    }
+    background: $light-blue;
+  }
+  .card-body{
+    overflow:auto;
+    &.twitter{
+      padding: 0;
+    }
+  }
+}
+
+
+.inner-addon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+.card {
+  .list-group{
+    .list-group-item{
+      display: flex;
+      border:none;
+      padding: 0.75rem 0;
+      div{
+        margin-right: 1rem; 
+        display: inline-block;
+      }
+      .list-grey {
+        color: $line-grey;
+      }
+    }
+  }
+}
+
+/* twitter style */ 
+.tweets {
+  .tweets-header {
+    display: flex;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: $line-grey;
+    padding: 1rem;
+    margin: 0;
+    align-items: baseline;
+    border-bottom: 1px solid $line-grey;
+    label{
+      font-size: 24px;
+      color: $black; 
+    }
+    .info-right{
+      margin-left:auto;
+    }
+    .card-body {
+      background: $grey;
+    }
+  }
+}
+
+@media all and (max-width: 768px) {
+  .aside {
+    @include aside-toggled;
+  }
+}

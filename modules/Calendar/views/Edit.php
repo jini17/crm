@@ -204,6 +204,9 @@ Class Calendar_Edit_View extends Vtiger_Edit_View {
 		$viewer->assign('INVITIES_SELECTED', $recordModel->getInvities());
 		$viewer->assign('CURRENT_USER', $currentUser);
 
+		//Added By Mabruk for Meeting Templates on 06/07/2018
+		$viewer->assign('DATA', Calendar_Record_Model::getMeetingTemplates());
+
 		//hide related to field if accounts & leads disabled by jitu
 		if($moduleName=='Events' || $moduleName=='Calendar'){
 			if(!vtlib_isModuleActive('Accounts') && !vtlib_isModuleActive('Leads')){

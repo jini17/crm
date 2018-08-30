@@ -262,9 +262,23 @@ class Users_Record_Model extends Vtiger_Record_Model {
 	* Function returns void
 	* insert row in secondcrm_users
 	**/
-	public function updateSecndCRMUsers($username, $password, $userid){
+	public function MakeAgiliuxCPUser($axcode, $plan){
+
+		global $con, $site_URL, $application_unique_key;
 		$db = PearDatabase::getInstance();
-		$result = $db->pquery("INSERT INTO secondcrm_users(userid, username, password) VALUES(?,?,?)", array($userid, $username, $password));
+		
+		$recordModel = Vtiger_Record_Model::getInstanceById($this->getId(), 'Users');
+	    $modelData  = $recordModel->getData();
+		$username 	= $modelData['user_name'];
+		$password 	= $modelData['user_password'];
+		$userid 	= $modelData['id'];
+		$accesskey 	= $modelData['accesskey'];
+		$axcode 	= $axcode;
+		$datetime 	= date('Y-m-d H:i:s');
+		
+		//create entry in agiliux_accounts for each new user creation
+		
+		$result = $con->query("INSERT INTO agiliux_accounts SET userid='$userid', crmurl='$site_URL', username='$username', password='$password',accesskey='$accesskey', axcode='$axcode', created_time='$datetime', modified_time='$datetime ', emailconfirmation=1, planid='$plan', app_key='$application_unique_key'");
 		return;
 	}
 
@@ -796,21 +810,6 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		return false;
     }
 	
-	/**
-	 * Function to get the user hash
-	 * @param type $userId
-	 * @return boolean
-	 */
-	public function getUserHash() {
-		$db = PearDatabase::getInstance();
-		$query = 'SELECT user_hash FROM vtiger_users WHERE id = ?';
-		$result = $db->pquery($query, array($this->getId()));
-		if($db->num_rows($result) > 0){
-			return $db->query_result($result, 0, 'user_hash');
-			
-		}
-	}
-        
 	/*
 	 * Function to delete user permanemtly from CRM and
 	 * assign all record which are assigned to that user
@@ -955,7 +954,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		return $response;
 	}
 
-	/**
+	/*
 	 * Function to check whether user exists in CRM and in VAS
 	 * @param <string> $userName
 	 * @return <boolean> $status
@@ -967,16 +966,30 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		return $userModuleModel->checkDuplicateUser($userName);
 	}
 
-	/**
+
+
+	/*
 	 * Function to check whether user exists in CRM and in VAS
 	 * @param <string> $userName
 	 * @return <boolean> $status
 	 */
-	public static function isValidateUserSubscription($userName, $roleid) {
-		$userModuleModel = Users_Module_Model::getCleanInstance('Users');
-		$status = false;
+	public static function isValidateUserSubscription($roleid) {
+		$db = PearDatabase::getInstance();
+
 		// To validate User in CP database
-		return $userModuleModel->ValidateUserSubscription($userName, $roleid);
+		$result = $db->pquery("SELECT planid FROM vtiger_role WHERE roleid=?", array($roleid));
+		$plan = $db->query_result($result, 0, 'planid');
+
+		$result = $db->pquery("SELECT count(userid) as availableuser, secondcrm_plan.nousers FROM `secondcrm_userplan` 
+						LEFT JOIN secondcrm_plan ON secondcrm_plan.planid=secondcrm_userplan.planid
+						WHERE secondcrm_plan.isactive=1 AND secondcrm_userplan.planid=? GROUP BY secondcrm_userplan.planid", array($plan));
+		$availableuser 	= $db->query_result($result, 0, 'availableuser');
+		$nousers 		= $db->query_result($result, 0, 'nousers');
+		if($availableuser < $nousers){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
