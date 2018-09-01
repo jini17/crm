@@ -349,8 +349,8 @@
 									</a></div></li>
 						{/if}
 						{if $USER_PRIVILEGES_MODEL->hasModulePermission($CALENDAR_MODULE_MODEL->getId())}
-							<li><div><a href="#" class="taskManagement" title="{vtranslate('Tasks','Vtiger')}" aria-hidden="true">
-							<i class="material-icons">card_travel</i></a></div></li>
+							<!--<li><div><a href="#" class="taskManagement" title="{vtranslate('Tasks','Vtiger')}" aria-hidden="true">
+							<i class="material-icons">card_travel</i></a></div></li>-->
 						{/if}
 						<li class="dropdown">
 							<div>

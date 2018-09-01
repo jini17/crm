@@ -871,7 +871,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 		});
 	},
 
-	registerDashBoardTabClick : function(){
+	registerDashBoardTabClick : function(){ 
 		var thisInstance = this;
 		var container = this.getContainer();
 		var dashBoardContainer = jQuery(container).closest(".dashBoardContainer");
@@ -879,6 +879,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 		dashBoardContainer.on("shown.bs.tab",".dashboardTab",function(e){
 			var currentTarget = jQuery(e.currentTarget);
 			var tabid = currentTarget.data('tabid');
+			
 			app.changeURL("index.php?module=Home&view=DashBoard&tabid="+tabid);
                if(tabid==5){
                              var params = {
@@ -908,7 +909,6 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 			               // If tab is already loaded earlier then we shouldn't reload tab and register gridster
 			               if(typeof jQuery("#tab_"+tabid).find(".dashBoardTabContainer").val() !== 'undefined'){
 				               // We should overwrite gridster with current tab which is clicked
-
 				               var widgetMargin = 10;
 				               var cols = thisInstance.getgridColumns();
 				               $(".mainContainer").css('min-width', "500px");
@@ -938,6 +938,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 						               }
 					               }
 					               app.event.trigger("post.DashBoardTab.load", dashBoardInstance);
+					               window.location.reload();
 				               }
 			               });
 			      }         

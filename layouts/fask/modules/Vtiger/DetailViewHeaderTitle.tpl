@@ -22,7 +22,7 @@
 								<img src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
 							{/if}
 						{/foreach}
-						<span><strong><i class="ti-{strtolower($MODULE)}"></i></strong></span>
+						<span><strong><i class="{if $MODULE eq 'EmailTemplates'}ti-email templates{else}ti-{strtolower($MODULE)}{/if}"></i></strong></span>
 
 				</div>  
 			</div>
