@@ -879,9 +879,10 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 		dashBoardContainer.on("shown.bs.tab",".dashboardTab",function(e){
 			var currentTarget = jQuery(e.currentTarget);
 			var tabid = currentTarget.data('tabid');
+			jQuery("#default_tab").val(tabid);
 			
 			app.changeURL("index.php?module=Home&view=DashBoard&tabid="+tabid);
-               if(tabid==5){
+               if(tabid==1){
                              var params = {
 				          'module' : 'Calendar',
 				          'view' : 'TaskManagement',
@@ -902,7 +903,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
                               app.helper.showErrorNotification({"message":err});
                           }
 			          });
-			     } else if(tabid!=5){
+			     } else {
                    //alert("Nirbhay");
                    jQuery('.tab-content').html('');
                     
@@ -938,7 +939,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 						               }
 					               }
 					               app.event.trigger("post.DashBoardTab.load", dashBoardInstance);
-					               window.location.reload();
+					               window.location = 'index.php?module=Home&view=DashBoard&tabid='+tabid;
 				               }
 			               });
 			      }         
