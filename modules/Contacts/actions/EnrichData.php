@@ -62,9 +62,7 @@ class Contacts_EnrichData_Action extends Vtiger_Action_Controller
     function enrichData(Vtiger_Request $request)
     {
 
-		require_once('modules/Contacts/Contacts.php');
-		require_once('modules/Users/Users.php');
-		require_once('data/CRMEntity.php');
+		require_once('modules/Contacts/Contacts.php');						
 
         global $adb,$current_user,$VTIGER_BULK_SAVE_MODE;
 
@@ -111,7 +109,16 @@ class Contacts_EnrichData_Action extends Vtiger_Action_Controller
 				$contact 		= new Contacts();
 				$contact->id 	= $contactid;
 				$contact->retrieve_entity_info($contact->id,'Contacts',false,true); 
-				$contact->mode = 'edit';
+
+				// To Track History of Updates
+				$em 			= new VTEventsManager($adb);
+				$em->initTriggerCache();				
+				$entityData 	= VTEntityData::fromCRMEntity($contact);
+				//$em->triggerEvent("vtiger.entity.beforesave.modifiable", $entityData);
+				$em->triggerEvent("vtiger.entity.beforesave", $entityData);				
+				//$em->triggerEvent("vtiger.entity.beforesave.final", $entityData);
+
+				$contact->mode 	= 'edit';
 					
 				// Mapping Fields for contact Details
 				if (!empty($personDetails['fullName'])) {
@@ -157,9 +164,15 @@ class Contacts_EnrichData_Action extends Vtiger_Action_Controller
 
 				if (!empty($personDetails['website']))
 					$contact->column_fields['website'] 		= $personDetails['website'];
-									
+				
 				$contact->save('Contacts');
-				$reload = "yes";
+				$reload 	= "yes";
+				
+				//$entityData = VTEntityData::fromCRMEntity($contact);
+				$em->triggerEvent("vtiger.entity.aftersave", $entityData);
+				$em->triggerEvent("vtiger.entity.aftersave.final", $entityData);
+
+				$adb->pquery("UPDATE vtiger_crmentity SET label = '$firstname $lastname' WHERE crmid = ?", array($contactid));
 
 			}
 
@@ -174,7 +187,7 @@ class Contacts_EnrichData_Action extends Vtiger_Action_Controller
 		}
 
 		else 
-			$message 		 = "Primary Email field is empty, cannot perform data enrichment";
+			$message = "Primary Email field is empty, cannot perform data enrichment";
 
 
 		// Sending Response to CRM	
