@@ -139,11 +139,7 @@
 									<button type="button" class="btn module-buttons dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 										<span class="ti-settings" aria-hidden="true" title="{vtranslate('LBL_SETTINGS', $MODULE)}"></span>&nbsp; <span class="caret"></span>
 									</button>
-									<ul class="detailViewSetting dropdown-menu animated flipInY">
-										{foreach item=SETTING from=$LISTVIEW_LINKS['LISTVIEWSETTING']}
-											<li id="{$MODULE}_setings_lisview_advancedAction_{$SETTING->getLabel()}"><a href="javascript:void(0);" onclick="{$SETTING->getUrl()};">{vtranslate($SETTING->getLabel(), $QUALIFIEDMODULE)}</a></li>
-											{/foreach}
-									</ul>
+									
 								</div>
 						{/if}
 

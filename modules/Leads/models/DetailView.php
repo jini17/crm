@@ -100,8 +100,8 @@ class Leads_DetailView_Model extends Vtiger_DetailView_Model {
 
         $basicActionLinkEnrich = array(
             'linktype' => 'DETAILVIEWBASIC',
-            'linklabel' => 'LBL_ENRICH_CONTACT',
-            'linkurl' => 'javascript:Vtiger_Detail_Js.triggerEnrichAPI("'.$recordModel->getEnrichUrl().'",this);',
+            'linklabel' => 'LBL_ENRICH_DATA',
+            //'linkurl' => $recordModel->getEnrichUrl(),
             'linkicon' => ''
         );
 

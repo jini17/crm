@@ -177,32 +177,6 @@ Vtiger.Class("Vtiger_Detail_Js",{
 	},
 
     /**
-     *
-     * @param massActionUrl To get the enrich data
-     */
-    triggerEnrichAPI : function(massActionUrl){
-        var thisInstance = this;
-        var params = app.convertUrlToDataParams(massActionUrl);
-        app.helper.showProgress();
-        app.request.post({data:params}).then(
-            function(error, data) {
-                app.helper.hideProgress();
-                app.helper.showModal(data);
-                var form = jQuery('form#changeOwner');
-                var isFormExists = form.length;
-                if(isFormExists){
-                    thisInstance.transferOwnershipSave(form);
-                }
-
-                window.location.reload();
-            }
-        );
-    },
-
-
-
-
-    /**
 	 * Saving transfer ownership 
 	 * @param {type} form
 	 * @returns {undefined}
@@ -3144,6 +3118,54 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		});
 	},
 
+	/*
+     * Function for Enrich Contact API
+     * Created By Mabruk
+     */     
+    registerEnrichData : function () { 
+
+    	var thisInstance 	= this;
+    	var moduleName 		= app.getModuleName();
+        var record 			= jQuery('#recordId').val(); 
+        var btn 			= jQuery('#' + moduleName + '_detailView_basicAction_LBL_ENRICH_DATA');
+        var params 			= [];
+		var recordId 		= jQuery('#recordId').val();
+		params.url 			= 'index.php?module=' + moduleName + '&action=EnrichData&mode=enrichData&record=' + recordId;
+		
+        btn.click(function () {        	       
+        
+            app.request.get(params).then(
+
+                function (err, data) {
+                    if (data) {
+
+                    	if (confirm("This will overwrite your existing data for the selected record. Are you sure you want to continue ?")) {
+                    		
+	                    	if (data.message == "success")
+	                			app.helper.showSuccessNotification({message:"Data updated successfully"});                    	
+
+	                    	else                    		
+	                    		app.helper.showErrorNotification({message:data.message});
+	                    	
+	                    	if (data.reload == "yes") {
+
+	                    		var detailHeader = jQuery('.detailview-header');
+	                    		detailHeader.find('.firstname').html(data.firstname.trim());
+	                    		detailHeader.find('.lastname').html(data.lastname.trim()); 
+	                    		jQuery('.tab-item.active').find('a')[0].click(); //To Reload the Detail View using Ajax                    		
+
+	                    	}  
+	                    }	
+                    }
+
+                    else 
+                    	app.helper.showErrorNotification({message:err});	
+                }                                        
+            );
+        });
+
+    }, 
+
 	registerHeaderAjaxEditEvents : function(contentHolder) {
 		var self = this;
 
@@ -3172,6 +3194,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		this.registerAjaxEditCancelEvent();
 		this.recordImageRandomColors();
 		this.registerQtipevent();
+		this.registerEnrichData();
 
 		app.event.on("post.RecordList.click", function(event, data) {
 			var responseData = JSON.parse(data);
