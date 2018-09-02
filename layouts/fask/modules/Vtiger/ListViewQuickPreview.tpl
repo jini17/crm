@@ -29,9 +29,13 @@
 
             <div class="quickPreviewActions clearfix">
                 <div class="btn-group pull-left">
-                    <button class="btn btn-primary" onclick="window.location.href = '{$RECORD->getFullDetailViewUrl()}&app={$SELECTED_MENU_CATEGORY}'">
-                       {vtranslate('LBL_VIEW_DETAILS', $MODULE_NAME)} 
-                    </button>
+
+                    {if $SELECTED_MENU_CATEGORY eq ''}
+                        {assign var=MENU_CAT value='FOUNDATION'}
+                    {else}
+                        {assign var=MENU_CAT value=$SELECTED_MENU_CATEGORY}
+                    {/if}
+                    <button href="{$RECORD->getFullDetailViewUrl()}&app={$MENU_CAT}" target="_blank" class="btn btn-primary">{vtranslate('LBL_VIEW_DETAILS', $MODULE_NAME)}</button>
                 </div>
                 {if $NAVIGATION}
                     <div class="btn-group pull-right">

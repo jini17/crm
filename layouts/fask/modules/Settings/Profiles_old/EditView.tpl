@@ -38,20 +38,6 @@
 					</div>
 
 					<div name='editContent'>
-						 <div class="form-group">
-                             <label class="control-label fieldLabel col-lg-3 col-md-3 col-sm-3">
-                                <strong>{vtranslate('Select Plan', $QUALIFIED_MODULE)}&nbsp;<span class="redColor">*</span></strong>
-                          </label>
-                            <div class="controls fieldValue col-lg-4 col-md-4 col-sm-4" >
-                               <select class="select2 inputElement col-lg-12" id="planFilter" name="plantitle">
-                                    <option value="1" {if $RECORD_MODEL->get('planid') eq '1'}selected{/if}>{vtranslate('Foundation', $QUALIFIED_MODULE)}</option>
-                                    <option value="2" {if $RECORD_MODEL->get('planid') eq '2'}selected{/if}>{vtranslate('Sales', $QUALIFIED_MODULE)}</option>
-                                    <option value="3" {if $RECORD_MODEL->get('planid') eq '3'}selected{/if}>{vtranslate('Support', $QUALIFIED_MODULE)}</option>
-                                    <option value="4" {if $RECORD_MODEL->get('planid') eq '4'}selected{/if}>{vtranslate('Enterprise', $QUALIFIED_MODULE)}</option>
-                                    <option value="5" {if $RECORD_MODEL->get('planid') eq '5'}selected{/if}>{vtranslate('Sales+Support', $QUALIFIED_MODULE)}</option>
-                                </select>
-                            </div>
-                        </div>
 						<div class="row form-group"><div class="col-lg-3 col-md-3 col-sm-3 control-label fieldLabel"> 
 								<label>
 									<strong>{vtranslate('LBL_PROFILE_NAME', $QUALIFIED_MODULE)}</strong>&nbsp;<span class="redColor">*</span>:&nbsp;
@@ -69,11 +55,7 @@
 								<textarea name="description" class="inputElement" id="description" style="height:50px; resize: vertical;padding:5px 8px;">{$RECORD_MODEL->getDescription()}</textarea>
 							</div>
 						</div>
-						<div class="form-group " data-content="new" >
-                            <div class="profileData col-sm-12">
-                            	{include file='EditViewContents.tpl'|vtemplate_path:$QUALIFIED_MODULE}
-                            </div>
-                        </div>
+						{include file='EditViewContents.tpl'|vtemplate_path:$QUALIFIED_MODULE}
 					</div>
 				</div>
 			</div>

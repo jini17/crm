@@ -113,17 +113,12 @@
 				{assign var=PROFILE_MODULES value=$RECORD_MODEL->getModulePermissions()}
 				{foreach from=$PROFILE_MODULES key=TABID item=PROFILE_MODULE}
 					{assign var=MODULE_NAME value=$PROFILE_MODULE->getName()}
-					
 					{if $MODULE_NAME neq 'Events'}
 						{assign var=IS_RESTRICTED_MODULE value=$RECORD_MODEL->isRestrictedModule($MODULE_NAME)}
-						{assign var=IS_ALLOWED_MODULE value=$RECORD_MODEL->isAllowedModule($MODULE_NAME, $PLAN)}
-						{if $IS_ALLOWED_MODULE}
 						<tr>
-							
 							<td class="verticalAlignMiddleImp">
 								<input class="modulesCheckBox" type="checkbox" name="permissions[{$TABID}][is_permitted]" data-value="{$TABID}" data-module-state="" {if $RECORD_MODEL->hasModulePermission($PROFILE_MODULE)}checked="true"{else} data-module-unchecked="true" {/if}> {$PROFILE_MODULE->get('label')|vtranslate:$PROFILE_MODULE->getName()}
 							</td>
-							
 							{assign var="BASIC_ACTION_ORDER" value=array(2,3,0,1)}
 							{foreach from=$BASIC_ACTION_ORDER item=ORDERID}
 								<td class="textAlignCenter verticalAlignMiddleImp">
@@ -142,7 +137,6 @@
 								{/if}
 							</td>
 						</tr>
-
 						<tr class="hide">
 							<td colspan="6" class="row" style="padding-left: 5%;padding-right: 5%">
 								<div class="row" data-togglecontent="{$TABID}-fields" style="display: none">
@@ -264,7 +258,6 @@
 								</td>
 							{/if}
 						</tr>
-						{/if}
 					{/if}
 				{/foreach}
 			</tbody>

@@ -37,42 +37,48 @@
 						<hr>
 						<table class="table editview-table no-border">
 							<tbody>
-								<tr>
-									<td class="{$WIDTHTYPE} fieldLabel"><label>{vtranslate('LBL_SERVER_TYPE', $QUALIFIED_MODULE)}</label></td>
-									<td class="{$WIDTHTYPE} fieldValue">
-										<div class=" col-lg-6 col-md-6 col-sm-12">
-											<select class="select2 inputElement col-lg-12 col-md-12 col-lg-12" name="serverType">
-												<option value="">{vtranslate('LBL_SELECT_OPTION','Vtiger')}</option>
-												<option value="{"ssl://smtp.gmail.com:465"}" {if {$MODEL->get('server')} eq "ssl://smtp.gmail.com:465"} selected {/if}>{vtranslate('LBL_GMAIL', $QUALIFIED_MODULE)} </option>
-												<option value="{"smtp.live.com"}" {if {$MODEL->get('server')} eq "smtp.live.com"} selected {/if}>{vtranslate('LBL_HOTMAIL', $QUALIFIED_MODULE)}</option>
-												<option value="{"smtp-mail.outlook.com"}" {if {$MODEL->get('server')} eq "smtp.live.com"} selected {/if}>{vtranslate('LBL_OFFICE365', $QUALIFIED_MODULE)}</option>
-												<option value="{"smtp.mail.yahoo.com"}" {if {$MODEL->get('server')} eq "smtp.mail.yahoo.com"} selected {/if}>{vtranslate('LBL_YAHOO', $QUALIFIED_MODULE)}</option>
-												<option value="">{vtranslate('LBL_OTHERS', $QUALIFIED_MODULE)}</option>
-											</select>
+								<div class="contentArea">
+									<div class="control-group col-md-12">
+										<div class="{$WIDTHTYPE} fieldLabel control-label col-md-2"><label>{vtranslate('LBL_SERVER_TYPE', $QUALIFIED_MODULE)}</label></div>
+										<div class="{$WIDTHTYPE} fieldValue col-md-10">
+												<select class="select2 inputElement col-lg-12 col-md-12 col-lg-12" name="serverType">
+													<option value="">{vtranslate('LBL_SELECT_OPTION','Vtiger')}</option>
+													<option value="{"ssl://smtp.gmail.com:465"}" {if {$MODEL->get('server')} eq "ssl://smtp.gmail.com:465"} selected {/if}>{vtranslate('LBL_GMAIL', $QUALIFIED_MODULE)} </option>
+													<option value="{"smtp.live.com"}" {if {$MODEL->get('server')} eq "smtp.live.com"} selected {/if}>{vtranslate('LBL_HOTMAIL', $QUALIFIED_MODULE)}</option>
+													<option value="{"smtp-mail.outlook.com"}" {if {$MODEL->get('server')} eq "smtp.live.com"} selected {/if}>{vtranslate('LBL_OFFICE365', $QUALIFIED_MODULE)}</option>
+													<option value="{"smtp.mail.yahoo.com"}" {if {$MODEL->get('server')} eq "smtp.mail.yahoo.com"} selected {/if}>{vtranslate('LBL_YAHOO', $QUALIFIED_MODULE)}</option>
+													<option value="">{vtranslate('LBL_OTHERS', $QUALIFIED_MODULE)}</option>
+												</select>
+											</div>
+										
+									</div>
+									<div class="control-group col-md-12">
+										<div class="{$WIDTHTYPE} fieldLabel control-label col-md-2"><label>{vtranslate('LBL_SERVER_NAME', $QUALIFIED_MODULE)}</label>&nbsp;<span class="redColor">*</span></div>
+										<div class="{$WIDTHTYPE} fieldValue col-md-10"><input type="text" class="inputElement" name="server" data-rule-required="true" value="{$MODEL->get('server')}" ></div>
+									</div>
+									<div class="control-group col-md-12">
+										<div class="{$WIDTHTYPE} fieldLabel control-label col-md-2"><label>{vtranslate('LBL_USER_NAME', $QUALIFIED_MODULE)}</label></div>
+										<div class="{$WIDTHTYPE} fieldValue col-md-10"><input type="text" class="inputElement" name="server_username" value="{$MODEL->get('server_username')}" ></div>
+									</div>
+									<div class="control-group col-md-12">
+										<div class="{$WIDTHTYPE} fieldLabel control-label col-md-2"><label>{vtranslate('LBL_PASSWORD', $QUALIFIED_MODULE)}</label></div>
+										<div class="{$WIDTHTYPE} fieldValue col-md-10"><input type="password" class="inputElement" name="server_password" value="{$MODEL->get('server_password')}" >
 										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="{$WIDTHTYPE} fieldLabel"><label>{vtranslate('LBL_SERVER_NAME', $QUALIFIED_MODULE)}</label>&nbsp;<span class="redColor">*</span></td>
-									<td class="{$WIDTHTYPE} fieldValue"><div class=" col-lg-6 col-md-6 col-sm-12"><input type="text" class="inputElement" name="server" data-rule-required="true" value="{$MODEL->get('server')}" ></div></td></tr>
-								<tr>
-									<td class="{$WIDTHTYPE} fieldLabel"><label>{vtranslate('LBL_USER_NAME', $QUALIFIED_MODULE)}</label></td>
-									<td class="{$WIDTHTYPE} fieldValue" ><div class=" col-lg-6 col-md-6 col-sm-12"><input type="text" class="inputElement" name="server_username" value="{$MODEL->get('server_username')}" ></div></td></tr>
-								<tr>
-									<td class="{$WIDTHTYPE} fieldLabel"><label>{vtranslate('LBL_PASSWORD', $QUALIFIED_MODULE)}</label></td>
-									<td class="{$WIDTHTYPE} fieldValue" ><div class=" col-lg-6 col-md-6 col-sm-12"><input type="password" class="inputElement" name="server_password" value="{$MODEL->get('server_password')}" ></div></td></tr>
-								<tr>
-									<td class="{$WIDTHTYPE} fieldLabel"><label>{vtranslate('LBL_FROM_EMAIL', $QUALIFIED_MODULE)}</label></td>
-									<td class="{$WIDTHTYPE} fieldValue" ><div class=" col-lg-6 col-md-6 col-sm-12"><input type="text" class="inputElement" name="from_email_field" data-rule-email="true" data-rule-illegal="true" value="{$MODEL->get('from_email_field')}" ></div> </td>
-								</tr>
-								<tr>
-									<td class="{$WIDTHTYPE} fieldLabel">&nbsp;</td>
-									<td class="{$WIDTHTYPE} fieldValue" ><div class=" col-lg-12 col-md-12 col-sm-12"><div class="alert alert-info alert-mini">{vtranslate('LBL_OUTGOING_SERVER_FROM_FIELD', $QUALIFIED_MODULE)}</div></div></td>
-								</tr>
-								<tr>
-									<td class="{$WIDTHTYPE} fieldLabel"><label>{vtranslate('LBL_REQUIRES_AUTHENTICATION', $QUALIFIED_MODULE)}</label></td>
-									<td class="{$WIDTHTYPE}" style="border-left: none;"><div class=" col-lg-6 col-md-6 col-sm-12"><input type="checkbox" name="smtp_auth" {if $MODEL->isSmtpAuthEnabled()}checked{/if} ></div></td>
-								</tr>
+									</div>
+									<div class="control-group col-md-12">
+										<div class="{$WIDTHTYPE} fieldLabel control-label col-md-2"><label>{vtranslate('LBL_FROM_EMAIL', $QUALIFIED_MODULE)}</label></div>
+										<div class="{$WIDTHTYPE} fieldValue col-md-10"><input type="text" class="inputElement" name="from_email_field" data-rule-email="true" data-rule-illegal="true" value="{$MODEL->get('from_email_field')}" >
+										</div>
+									</div>
+									<div class="control-group col-md-12">
+										<div class="{$WIDTHTYPE} fieldLabel control-label col-md-2">&nbsp;</div>
+										<div class="{$WIDTHTYPE} fieldValue col-md-10"><div class="alert alert-info col-sm-12">{vtranslate('LBL_OUTGOING_SERVER_FROM_FIELD', $QUALIFIED_MODULE)}</div></div>
+									</div>
+									<div class="control-group col-md-12">
+										<div class="{$WIDTHTYPE} fieldLabel control-label col-md-2"><label>{vtranslate('LBL_REQUIRES_AUTHENTICATION', $QUALIFIED_MODULE)}</label></div>
+										<div class="{$WIDTHTYPE}" style="border-left: none;"><div class=" col-lg-6 col-md-6 col-sm-12"><input type="checkbox" name="smtp_auth" {if $MODEL->isSmtpAuthEnabled()}checked{/if} ></div>
+									</div>
+								</div>
 							</tbody>
 						</table>
 					</div>

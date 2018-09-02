@@ -1407,6 +1407,7 @@ $languageStrings = array(
 	'LBL_ALLOWED_IP'=>'IP Restriction',
 	'LBL_ADMIN'=>'Admin/Finance',
 	'LBL_ALLOCATION_TYPE'=>'Allocation List',
+	'LBL_FROM_ADDRESS_SETTING'=>'From Address Setting',
 );
 
 $jsLanguageStrings = array(

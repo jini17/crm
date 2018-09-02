@@ -467,8 +467,10 @@ $languageStrings = array(
 	'LBL_HOLIDAY'=>'Holiday',
 	'LBL_WORKINGHOURS'=>'Working Hours',
 	'LBL_CLAIM'=>'Apply Claim',
-	
-
+	'LB_CONFIG_SAVED'=>'Config detail saved!',
+	'LBL_OUTOGING SERVER'=>'Outgoing Server List',
+	'LBL_OUTGOING_SERVER_SETTINGS'=>'Outgoing Server Settings',
+	'LBL_ADDLEAVETYPE'=>'Add LeaveType',
 
 );
 
@@ -505,4 +507,5 @@ $jsLanguageStrings = array(
     'JS_INVALID_URL' => 'Invalid URL',
     'JS_LBL_TAX_REGION_EXIST' => 'Region Name already exists',
     'JS_LOGO_IMAGE_DIMENSIONS_WRONG' => 'Logo Image dimensions did not match the allowed dimension. Resize your image and try again.',
+    'JS_GOOGLE_DETAILS_SAVED'=>'Google details Saved!!',
 );

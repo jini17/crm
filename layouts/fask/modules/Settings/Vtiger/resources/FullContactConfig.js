@@ -75,7 +75,7 @@ Vtiger.Class("Settings_Vtiger_FullContactConfig_Js",{},{
 				thisInstance.saveConfigEditor(form).then(
 					function (data) {
 						if (data) {
-							var message = app.vtranslate('FUCKING HELL YEAH ITS SAVED !');
+							var message = app.vtranslate('LB_CONFIG_SAVED');
 							
 							thisInstance.loadContents(detailUrl).then(
 								function (data) {
