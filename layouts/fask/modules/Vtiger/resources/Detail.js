@@ -218,30 +218,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 			validateAndSubmitForm(form,params);
 		 });
 	},
-
-
-	 /**
-     *
-     * @param massActionUrl To get the enrich data
-     */
-    triggerEnrichAPI : function(massActionUrl){
-        var thisInstance = this;
-        var params = app.convertUrlToDataParams(massActionUrl);
-        app.helper.showProgress();
-        app.request.post({data:params}).then(
-            function(error, data) {
-                app.helper.hideProgress();
-                app.helper.showModal(data);
-                var form = jQuery('form#changeOwner');
-                var isFormExists = form.length;
-                if(isFormExists){
-                    thisInstance.transferOwnershipSave(form);
-                }
-
-                window.location.reload();
-            }
-        );
-    },
+	
 
 	/*
 	 * function to trigger send Email
@@ -450,6 +427,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 				function(err, data) {
 					if (data) {
 						app.helper.showModal(data);
+						self.loadSMSTemplate(); // Added By Mabruk for SMS
 						if (typeof callBackFunction == 'function') {
 							callBackFunction(data);
 						}
@@ -562,6 +540,15 @@ Vtiger.Class("Vtiger_Detail_Js",{
 	},
 
 	getTabContainer : function(){
+
+		//Added By Nirbhay and Mabruk for Meeting MOM on 08/06/2018
+        if (jQuery(".MOMDetails").length) {
+
+            var calinst = new Calendar_Detail_Js();
+            calinst.loadMeetingContainer();
+
+        }
+        
 		return jQuery('div.related-tabs');
 	},
 
@@ -1057,6 +1044,54 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		var tabContainer = this.getTabContainer();
 		return tabContainer.find('li.active');
 	},
+
+	/*
+     * Function for Enrich Contact API
+     * Created By Mabruk
+     */     
+    registerEnrichData : function () { 
+
+    	var thisInstance 	= this;
+    	var moduleName 		= app.getModuleName();
+        var record 			= jQuery('#recordId').val(); 
+        var btn 			= jQuery('#' + moduleName + '_detailView_basicAction_LBL_ENRICH_DATA');
+        var params 			= [];
+		var recordId 		= jQuery('#recordId').val();
+		params.url 			= 'index.php?module=' + moduleName + '&action=EnrichData&mode=enrichData&record=' + recordId;
+		
+        btn.click(function () {        	       
+        
+            app.request.get(params).then(
+
+                function (err, data) {
+                    if (data) {
+
+                    	if (confirm("This will overwrite your existing data for the selected record. Are you sure you want to continue ?")) {
+                    		
+	                    	if (data.message == "success")
+	                			app.helper.showSuccessNotification({message:"Data updated successfully"});                    	
+
+	                    	else                    		
+	                    		app.helper.showErrorNotification({message:data.message});
+	                    	
+	                    	if (data.reload == "yes") {
+
+	                    		var detailHeader = jQuery('.detailview-header');
+	                    		detailHeader.find('.firstname').html(data.firstname.trim());
+	                    		detailHeader.find('.lastname').html(data.lastname.trim()); 
+	                    		jQuery('.tab-item.active').find('a')[0].click(); //To Reload the Detail View using Ajax                    		
+
+	                    	}  
+	                    }	
+                    }
+
+                    else 
+                    	app.helper.showErrorNotification({message:err});	
+                }                                        
+            );
+        });
+
+    }, 
 
 	/**
 	 * To Register Ajax Edit Event
@@ -2726,9 +2761,43 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		});
 	},
 
+	/**
+	 * Function to Load SMS Template on SMS Text Area
+	 * Added By Mabruk on 02/05/2018 
+	 * for SMS Template
+	*/
+	 loadSMSTemplate: function() {	
+	 	jQuery('#smstemplate').click(function(){
+			var record = jQuery('#smstemplate :selected').val();							 
+			var params = {
+		            'module' : 'EmailTemplates',
+		            'action' : 'ShowTemplateContent',
+		            'mode' : 'getContent',
+		            'record' : record            
+		        };
+
+	        app.request.post({"data":params}).then(function(err,data) {	        	
+	        	var text = jQuery.trim(jQuery(data.content).text());
+	        	jQuery('#message').text(text);	        	
+			});
+		});
+	 },
+	 //END -- Mabruk
+
+	 // Added By Mabruk
+	 registerEventForCkEditorSize : function () {
+
+	 	jQuery('#Events_detailView_fieldValue_agenda').removeClass();
+	 	jQuery('#Events_detailView_fieldValue_agenda').addClass('fieldValue col-lg-9 col-lg-9');
+	 	jQuery('#Events_detailView_fieldValue_min_meeting').removeClass();
+	 	jQuery('#Events_detailView_fieldValue_min_meeting').addClass('fieldValue col-lg-9 col-lg-9');
+
+	 },
+
 
 	registerEvents : function() {
 		this._super();
+		this.registerEventForCkEditorSize();
 		this.registerEventsForRelatedList();
 		var detailContentsHolder = this.getContentHolder();
 		var self = this;
@@ -3120,6 +3189,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		this.registerAjaxEditEvent();
 		this.registerAjaxEditSaveEvent();
 		this.registerAjaxEditCancelEvent();
+		this.registerEnrichData();
 		this.recordImageRandomColors();
 		this.registerQtipevent();
 

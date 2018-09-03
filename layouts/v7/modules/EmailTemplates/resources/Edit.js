@@ -90,17 +90,27 @@ Vtiger_Edit_Js("EmailTemplates_Edit_Js",{},{
 	},
 
 	/**
-	 * Function to load content body based on template selected 
+	 * Function to Show Hide Some Fields
 	 * Added By Mabruk on 02/05/2018
-	 * for SMS Templates Integration
+	 * for Meeting Templates 
 	 */
-/*	loadContentOnTemplateChange : function() { 
+	showHideFields : function() { 
+
+		var fields = jQuery('#extraFields');
+
+		if (jQuery('#templateType :selected').val() == 'Meeting Templates')
+			fields.hide();
+		else
+			fields.show();
+
 		jQuery('#templateType').change(function(){ 
-			if (jQuery('#templateType :selected').val() == 'SMS')
-				alert('dw');
+			if (jQuery('#templateType :selected').val() == 'Meeting Templates')
+				fields.hide();
+			else
+				fields.show();				
 		});
-	}, */
-	
+	}, 	
+
 	registerFillTemplateContentEvent : function() {
 		var thisInstance = this;
 		 CKEDITOR.instances.templatecontent.on('blur', function(){
@@ -196,6 +206,7 @@ Vtiger_Edit_Js("EmailTemplates_Edit_Js",{},{
 	 */
 	registerEvents : function() {
 		this.registerEventForCkEditor();
+		this.showHideFields();
 		this.registerChangeEventForModule();
 		this.registerCharacterlength();
 	//	this.loadContentOnTemplateChange();
