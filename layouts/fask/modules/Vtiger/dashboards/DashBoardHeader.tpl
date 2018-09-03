@@ -17,7 +17,7 @@
 				<button class='btn btn-info addButton dropdown-toggle' data-toggle='dropdown'>
 					{vtranslate('LBL_ADD_WIDGET')}&nbsp;&nbsp;<i class="caret"></i>
 				</button>
-
+				
 				<ul class="dropdown-menu dropdown-menu-right widgetsList pull-right animated flipInY" style="min-width:100%;text-align:left;">
 					{assign var="MINILISTWIDGET" value=""}
 					{foreach from=$SELECTABLE_WIDGETS item=WIDGET}
@@ -47,6 +47,7 @@
 								{vtranslate($NOTEBOOKWIDGET->getTitle(), $MODULE_NAME)}</a>
 						</li>
 					{/if}
+
 
 				</ul>
 			{else if $MODULE_PERMISSION}

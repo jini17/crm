@@ -43,7 +43,10 @@
 										<i class="material-icons">settings</i></span>
 										<span class="hidden-sm hidden-xs">&nbsp;&nbsp;{vtranslate('LBL_CUSTOMIZE', 'Reports')}&nbsp;</span> <span class="caret"></span>
 									</button>
-									<ul class="detailViewSetting dropdown-menu animated fadeIn">
+									   <a class='btn btn-' >
+						                            <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
+						                        </a>
+						             <ul class="detailViewSetting dropdown-menu animated fadeIn">
 										{foreach item=SETTING from=$MODULE_SETTING_ACTIONS}
 											{if $SETTING->getLabel() eq 'LBL_EDIT_FIELDS'}
 												<li id="{$MODULE_NAME}_listview_advancedAction_{$SETTING->getLabel()}_Events"><a href="{$SETTING->getUrl()}&sourceModule=Events">{vtranslate($SETTING->getLabel(), $MODULE_NAME,vtranslate('LBL_EVENTS',$MODULE_NAME))}</a></li>
@@ -61,6 +64,12 @@
 													{vtranslate('LBL_CALENDAR_SETTINGS', 'Calendar')}
 												</span>
 											</a>
+										</li>
+										<li>
+											   <a class='btn addButton module-buttons cursorPointer' >
+						                            <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
+						                        </a>
+						                    
 										</li>
 									</ul>
 						{/if}

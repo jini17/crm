@@ -54,6 +54,7 @@
 
  <div id="appnav" class="navbar-right">
 					<div class="btn-group">
+
 						{foreach item=BASIC_ACTION from=$MODULE_BASIC_ACTIONS}
 							{if $BASIC_ACTION->getLabel() == 'LBL_IMPORT'}
 									<button id="{$MODULE}_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($BASIC_ACTION->getLabel())}" type="button" class="btn module-buttons addButton" 
@@ -87,6 +88,9 @@
 										{/foreach}
 									</ul>
 						{/if}
+						<a class='btn btn-default Help-btn' >
+								<i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
+							</a>
 					</div>
 				</div>
 			</div>

@@ -82,13 +82,6 @@
 							<li class="{if $MODULE eq "Documents"}active{/if}"> <a class=" waves-effect waves-dark" href="index.php?module=Documents&view=List" ><i class="app-icon-list material-icons">file_download</i><span class="hide-menu"> {vtranslate('Documents')}</span></a>
                         </li>
 						{/if}
-						{if $USER_MODEL->isAdminUser()}
-							{if vtlib_isModuleActive('ExtensionStore')}
-								
-								<li class="{if $MODULE eq "ExtensionStore"}active{/if}"> <a class=" waves-effect waves-dark" href="index.php?module=ExtensionStore&parent=Settings&view=ExtensionStore" ><i class="app-icon-list material-icons">shopping_cart</i><span class="hide-menu"> {vtranslate('LBL_EXTENSION_STORE', 'Settings:Vtiger')}</span></a>
-                        </li>
-							{/if}
-						{/if}
 						<hr/>
 						{if $USER_MODEL->isAdminUser()}
 	
@@ -349,8 +342,8 @@
 									</a></div></li>
 						{/if}
 						{if $USER_PRIVILEGES_MODEL->hasModulePermission($CALENDAR_MODULE_MODEL->getId())}
-							<li><div><a href="#" class="taskManagement" title="{vtranslate('Tasks','Vtiger')}" aria-hidden="true">
-							<i class="material-icons">card_travel</i></a></div></li>
+							<!--<li><div><a href="#" class="taskManagement" title="{vtranslate('Tasks','Vtiger')}" aria-hidden="true">
+							<i class="material-icons">card_travel</i></a></div></li>-->
 						{/if}
 						<li class="dropdown">
 							<div>

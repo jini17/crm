@@ -24,6 +24,12 @@
 				{if empty($IMAGE_DETAILS)}
 					<div class="name"><span><strong>{$MODULE_MODEL->getModuleIcon()}</strong></span></div>
 				{/if}
+
+											   <a class='btn addButton module-buttons cursorPointer' >
+						                            <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
+						                        </a>
+						                    
+										
 			</div>
 			<div class="recordBasicInfo">
 				<div class="info-row" >

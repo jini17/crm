@@ -23,6 +23,7 @@
         </div>
     </div>
 <div class="main-container main-container-{$MODULE}">
+
    <!-- {assign var=LEFTPANELHIDE value=$CURRENT_USER_MODEL->get('leftpanelhide')}
 <div id="modnavigator" class="module-nav">
     <div class="hidden-xs hidden-sm mod-switcher-container">
@@ -46,6 +47,6 @@
         {assign var=LEFTPANELHIDE value=$CURRENT_USER_MODEL->get('leftpanelhide')}
         <div class="essentials-toggle" style="    left: 230px;
     z-index: 999;" title="{vtranslate('LBL_LEFT_PANEL_SHOW_HIDE', 'Vtiger')}">
-            <span class="essentials-toggle-marker fa {if $LEFTPANELHIDE eq '1'}fa-chevron-right{else}fa-chevron-left{/if} cursorPointer"></span>
+            <span class="essentials-toggle-marker fa {if $LEFTPANELHIDE eq '1'}fa-chevron-right{else}fa-chevron-right{/if} cursorPointer"></span>
         </div>
     {/if}

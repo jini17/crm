@@ -37,6 +37,7 @@ class Users_Settings_View extends Vtiger_Basic_View {
 	}
     
     public function preProcessTplName(Vtiger_Request $request) {
+
         return 'UsersSettingsMenuStart.tpl';
 	}
     

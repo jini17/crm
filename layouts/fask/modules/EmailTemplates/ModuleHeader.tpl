@@ -47,6 +47,11 @@
 								</button>
 							</li>
 						{/foreach}
+						<li>
+							<a class='btn btn-default Help-btn' >
+								<i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>

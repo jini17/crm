@@ -10,6 +10,7 @@
 {strip}
 	<form id="detailView" class="clearfix" method="POST" style="position: relative">
 		<div class="col-lg-12 resizable-summary-view">
+			
 			{include file='SummaryViewWidgets.tpl'|vtemplate_path:$MODULE_NAME}
 		</div>
 	</form>

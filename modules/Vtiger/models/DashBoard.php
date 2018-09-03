@@ -166,7 +166,12 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
 
 		$db = PearDatabase::getInstance();
 		$currentUser = Users_Record_Model::getCurrentUserModel();
-		$query = "SELECT id,tabname,sequence,isdefault,appname,modulename FROM vtiger_dashboard_tabs WHERE userid=? ORDER BY sequence ASC ";
+		if($currentUser->id==1){
+			$query = "SELECT id,tabname,sequence,isdefault,appname,modulename FROM vtiger_dashboard_tabs WHERE userid=?  ORDER BY sequence ASC ";
+		} else {
+			$query = "SELECT id,tabname,sequence,isdefault,appname,modulename FROM vtiger_dashboard_tabs WHERE (userid=? OR tabname='Trello') ORDER BY sequence ASC ";
+		}
+		
 		$result = $db->pquery($query, array($currentUser->getId()));
 		$tabs = array();
 		$num_rows = $db->num_rows($result);

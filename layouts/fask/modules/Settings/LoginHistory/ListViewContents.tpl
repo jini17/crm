@@ -10,9 +10,6 @@
 ********************************************************************************/
 -->*}
 {strip}
-
-
-
    <input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
    <input type="hidden" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" />
    <input type="hidden" id="previousPageExist" value="{$PAGING_MODEL->isPrevPageExists()}" />
@@ -25,15 +22,15 @@
    <input type='hidden' value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'>
    <input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
 
-   <div class="col-sm-12 col-xs-12 " style="margin-top:40px;">
+   <div class="col-sm-12 col-xs-12 ">
         <div id="listview-actions" class="listview-actions-container">
             <div class = "row">
                 <div class='col-md-6 usersListDiv'>
                     <select class="select2 col-md-4" id="usersFilter" >
                         <option value="">{vtranslate('LBL_ALL', $QUALIFIED_MODULE)}</option>
-                        {foreach item=USERNAME key=USER from=$USERSLIST}
-                            <option value="{$USER}" name="{$USERNAME}" {if $USERNAME eq $SELECTED_USER} selected {/if}>{$USERNAME}</option>
-                        {/foreach}
+                      {foreach item=USERNAME key=USER from=$USERSLIST}
+                        <option value="{$USER}" name="{$USERNAME}" {if $USERNAME eq $SELECTED_USER} 'selected' {/if}>{$USERNAME}</option>
+                      {/foreach}
                     </select>
                 </div>
                 <div class="col-md-6 pull-right">

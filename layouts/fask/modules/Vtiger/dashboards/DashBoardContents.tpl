@@ -9,6 +9,7 @@
 {* modules/Vtiger/views/DashBoard.php *}
     
 {strip}
+<input type="hidden" name="default_tab" id="default_tab" value="{$SELECTED_TAB}" />
 <div class="dashBoardContainer clearfix">
         <div class="tabContainer">
 		

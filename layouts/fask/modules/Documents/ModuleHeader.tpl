@@ -49,10 +49,16 @@
 				{if $smarty.request.view eq 'Detail'}
 					<p class="current-filter-name filter-name pull-left"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a title="{$RECORD->get('label')}">&nbsp;&nbsp;{$RECORD->get('label')} &nbsp;&nbsp;</a></p>
 				{/if}
+
 			</div>
 			<div class="col-xs-12 col-lg-5 col-md-5 col-sm-5 module-breadcrumb-List">
 				<div id="appnav" class="navbar-right">
 <ul class="nav navbar-nav">
+	                <li class="pull-right">
+						<a class='btn btn-default' >
+                    		<i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
+                		</a>
+	                </li>	
 
 					<li class="pull-right">
 
@@ -94,6 +100,7 @@
 							{/if}
 						{/foreach}
 					</li>
+					
 					</ul>
 				</div>
 			</div>

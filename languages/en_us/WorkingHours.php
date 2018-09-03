@@ -10,8 +10,9 @@
 $languageStrings = array(
 	// Basic Strings
 	'LBL_WORKINGHOURS_INFORMATION'=>'Working Hours Information',
-	'LBL_ADD_RECORD' => 'Add Working Hours Detail',
+	'LBL_ADD_RECORD' => 'Add Working Hours',
 	'SINGLE_WorkingHours' => 'Working Hours',
+	'WorkingHours'=>'Working Hours',
 );
 
 $jsLanguageStrings = array(

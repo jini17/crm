@@ -17,6 +17,11 @@
                     <span aria-hidden="true" class='ti-close'></span>
                 </button>
             </div>
+            <div class="pull-right">
+                        <a class='btn btn-default' >
+                            <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
+                        </a>
+             </div>   
             <h4 class="pull-left">
                 {$TITLE}
             </h4>
