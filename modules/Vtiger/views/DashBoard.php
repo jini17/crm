@@ -24,6 +24,29 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 
+		//get last login time & IP address
+		global $adb;
+	
+		$current_user = Users_Record_Model::getCurrentUserModel();	
+		$sUserName = $current_user->user_name;
+		$sql="select login_time from vtiger_loginhistory WHERE user_name ='$sUserName' ORDER BY login_time DESC LIMIT 1,1";
+		$result=$adb->pquery($sql, array());
+		$rows=$adb->num_rows($result);
+
+		if ($rows == 0){
+			$sql="select login_time,user_ip from vtiger_loginhistory WHERE status='Signed in' AND user_name ='$sUserName' ORDER BY login_id DESC";
+		}else{
+			$sql="select login_time,user_ip from vtiger_loginhistory WHERE user_name ='$sUserName' ORDER BY login_time DESC LIMIT 1,1";
+		}
+
+		$result = $adb->pquery($sql, array());
+		$sLastLoginTime = decode_html($adb->query_result($result,0,'login_time'));
+		$sLastUserIP = decode_html($adb->query_result($result,0,'user_ip'));
+		$viewer->assign("LAST_LOGIN_TIME", $sLastLoginTime);
+		$viewer->assign("LAST_USER_IP", $sLastUserIP);
+		//End here
+
+
 		$dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
 		//check profile permissions for Dashboards
 		$moduleModel = Vtiger_Module_Model::getInstance('Dashboard');

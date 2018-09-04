@@ -50,7 +50,10 @@
 			</div> 
 
 			<div class="col-xs-3 col-lg-5 col-md-5 col-sm-5 module-breadcrumb-{$smarty.request.view}" style="margin:  0px; padding: 0px;">
-	
+					<!-- added by jitu@28Dec2016-->
+			<div style="text-align:center;display:block;width:50%; margin:0 auto;">{vtranslate('LBL_LAST_LOGINTIME')} {$LAST_LOGIN_TIME} {vtranslate('LBL_USERIP')} {$LAST_USER_IP}</div>
+			<!--end here -->
+			<div class="clearfix"></div>
 
  <div id="appnav" class="navbar-right">
 					<div class="btn-group">

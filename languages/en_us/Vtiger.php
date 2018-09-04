@@ -1408,6 +1408,8 @@ $languageStrings = array(
 	'LBL_ADMIN'=>'Admin/Finance',
 	'LBL_ALLOCATION_TYPE'=>'Allocation List',
 	'LBL_FROM_ADDRESS_SETTING'=>'From Address Setting',
+	'LBL_LAST_LOGINTIME'=>'Your last successful login was',
+	'LBL_USERIP'=>'from IP',
 );
 
 $jsLanguageStrings = array(

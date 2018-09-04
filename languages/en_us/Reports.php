@@ -225,6 +225,7 @@ $languageStrings = array(
 	'LBL_CHART_REPORT' => 'Chart Report',
 	'LBL_UNPIN_CHART_FROM_DASHBOARD' => 'Unpin chart from dashboard',
 	'LBL_REPORTS_DELETED_SUCCESSFULLY' => 'Reports Deleted Successfully',
+	'LBL_USERS'=>'Employee',
 );
 $jsLanguageStrings = array(
 	'JS_DUPLICATE_RECORD' => 'Duplicate Report',
