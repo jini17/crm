@@ -4662,7 +4662,7 @@ form[name="notification_settings"] .select2-choice {
   opacity: 0.5;
 }
 .dashBoardContainer .tabContainer .sortable button {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .dashBoardContainer .tabContainer li a:hover .deleteTab {
   display: inline-block;
@@ -8900,10 +8900,3 @@ visibility: visible;top: 0;left: 60px; /*position where enlarged image should of
 ul.nav navbar-nav newtabs>li{
   padding: 0px 10px;
 }
- a.right-icon-dashboard > i{
-  color: #fff !important;
-  font-size: 16px !important;
-  line-height: 40px !important;
-}
-
-
