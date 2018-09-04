@@ -24,6 +24,38 @@
                             <input id="{$MODULE}_editView_fieldName_templatename" type="text" class="inputElement" data-rule-required="true" name="templatename" value="{$RECORD->get('templatename')}">
                         </td>
                     </tr>
+                    <!--Added By Mabruk For Notification Template--> 
+                    <tr>
+                        <td class="fieldLabel {$WIDTHTYPE} alignMiddle">{vtranslate('LBL_TEMPLATE_TYPE', $MODULE)}&nbsp;<span class="redColor">*</span></td>                        
+                        <td class="fieldValue {$WIDTHTYPE}">
+                            <div class="fieldValue">
+                                <select class="select2-container select2 inputElement col-sm-6 selectModule" name="templateType" id="templateType">
+                                    {if $RECORD->get('templatetype') eq "Push Notification"}
+                                        <option value="Email">Email</option>
+                                        <option value="SMS">SMS</option>
+                                        <option value="Push Notification" selected>Push Notification</option>
+                                        <option value="Meeting Templates">Meeting Templates</option>
+                                    {elseif $RECORD->get('templatetype') eq "SMS"}
+                                        <option value="Email">Email</option>
+                                        <option value="SMS" selected>SMS</option>
+                                        <option value="Push Notification">Push Notification</option>
+                                        <option value="Meeting Templates">Meeting Templates</option>
+                                    {elseif $RECORD->get('templatetype') eq "Meeting Templates"}
+                                        <option value="Email">Email</option>
+                                        <option value="SMS">SMS</option>
+                                        <option value="Push Notification">Push Notification</option>
+                                        <option value="Meeting Templates" selected>Meeting Templates</option>
+                                    {else}
+                                        <option value="Email" selected>Email</option>
+                                        <option value="SMS">SMS</option>
+                                        <option value="Push Notification">Push Notification</option>
+                                        <option value="Meeting Templates">Meeting Templates</option>    
+                                    {/if}
+                                </select>
+                            </div>
+                        </td>                        
+                    </tr>  
+                    <!--End-->
                     <tr>
                         <td class="fieldLabel {$WIDTHTYPE} alignMiddle">{vtranslate('LBL_DESCRIPTION', $MODULE)}</td>
                         <td class="fieldValue {$WIDTHTYPE}">
@@ -38,7 +70,7 @@
                 <h4 class='fieldBlockHeader'>{vtranslate('LBL_EMAIL_TEMPLATE', $MODULE)} {vtranslate('LBL_DESCRIPTION', $MODULE)}</h4>
             </span>
             <hr>
-            <table class="table table-borderless">
+            <table class="table table-borderless" id="extraFields">
                 <tbody>
                     <tr>
                         <td class="fieldLabel {$WIDTHTYPE}">{vtranslate('LBL_SELECT_FIELD_TYPE', $MODULE)}&nbsp;<span class="redColor">*</span></td>

@@ -17,11 +17,11 @@
 	{/foreach}
 
 	<span>
-		<a href="{$RECORD_LINK_URL[1]}" title="{vtranslate('LBL_DUPLICATE', $MODULE)}"><i class="ti-files"></i></a>
+		<a href="{$RECORD_LINK_URL[1]}" title="{vtranslate('LBL_DUPLICATE', $MODULE)}"><i class="fa fa-copy"></i></a>
 	</span>
 	<span class="more dropdown action">
 		<span href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-			<i class="ti-info-alt icon"></i></span>
+			<i class="fa fa-ellipsis-v icon"></i></span>
 		<ul class="dropdown-menu">
 			<li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="{$RECORD_LINK_URL[0]}" title="{vtranslate('LBL_EDIT', $MODULE)}">{vtranslate('LBL_EDIT', $MODULE)}</a></li>
 			<li> <a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0)" onclick="{$RECORD_LINK_URL[2]}" title="{vtranslate('LBL_DELETE', $MODULE)}">{vtranslate('LBL_DELETE', $MODULE)}</a></li>

@@ -100,7 +100,7 @@ class Settings_SwVtTools_Upgrade_View extends Settings_Vtiger_Index_View {
 <!--            -->
         </div>
     </div>
-    <?
+    <?php
    	}
 
 	public function getHeaderScripts(Vtiger_Request $request) {

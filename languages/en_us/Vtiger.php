@@ -16,6 +16,7 @@ $languageStrings = array(
 	'POWEREDBY'=> 'Powered by Agiliux CRM',
 	'LBL_READ_LICENSE' => 'Read License',
 	'LBL_PRIVACY_POLICY' => 'Privacy Policy',
+	'LBL_ENRICH_DATA' => 'Enrich Data',
 
 	// Common Actions
 	'LBL_NEW' => 'New',
@@ -1407,6 +1408,9 @@ $languageStrings = array(
 	'LBL_ALLOWED_IP'=>'IP Restriction',
 	'LBL_ADMIN'=>'Admin/Finance',
 	'LBL_ALLOCATION_TYPE'=>'Allocation List',
+	'LBL_FROM_ADDRESS_SETTING'=>'From Address Setting',
+	'LBL_LAST_LOGINTIME'=>'Your last successful login was',
+	'LBL_USERIP'=>'from IP',
 );
 
 $jsLanguageStrings = array(

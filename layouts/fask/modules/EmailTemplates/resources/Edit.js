@@ -77,6 +77,28 @@ Vtiger_Edit_Js("EmailTemplates_Edit_Js",{},{
 		return fieldSelectElement;
 		
 	},
+
+	/**
+	 * Function to Show Hide Some Fields
+	 * Added By Mabruk on 02/05/2018
+	 * for Meeting Templates 
+	 */
+	showHideFields : function() { 
+
+		var fields = jQuery('#extraFields');
+
+		if (jQuery('#templateType :selected').val() == 'Meeting Templates')
+			fields.hide();
+		else
+			fields.show();
+
+		jQuery('#templateType').change(function(){ 
+			if (jQuery('#templateType :selected').val() == 'Meeting Templates')
+				fields.hide();
+			else
+				fields.show();				
+		});
+	}, 
 	
 	registerFillTemplateContentEvent : function() {
 		var thisInstance = this;
@@ -144,6 +166,7 @@ Vtiger_Edit_Js("EmailTemplates_Edit_Js",{},{
 	registerEvents : function() {
 		this.registerEventForCkEditor();
 		this.registerChangeEventForModule();
+		this.showHideFields();
 		//To load default selected module fields in edit view
 		this.loadFields();
 

@@ -51,7 +51,6 @@
                         </div>
                     {/if}
                     </li>
-                   
                 </ul>
             </div>
         </span>

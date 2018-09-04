@@ -12,6 +12,7 @@ var Settings_Profiles_Js = {
 	initEditView: function() {
 
 		function toggleEditViewTableRow(e) {
+
 			var target = jQuery(e.currentTarget);
 			var container = jQuery('[data-togglecontent="'+ target.data('togglehandler') + '"]');
 			var closestTrElement = container.closest('tr');
@@ -420,6 +421,32 @@ var Settings_Profiles_Js = {
 		})
 	},
 	
+	registerAllowModulePermission : function() { 
+		jQuery('#planFilter').on('change',function(e) { 
+			var planid = jQuery(e.currentTarget).val();
+			var params = {
+				module : 'Profiles',
+				parent: 'Settings',
+				view : 'EditAjax',
+				plan : planid,
+				record:''
+				
+			};
+			app.helper.showProgress();
+			
+			app.request.get({'data' : params}).then(function(err, data) { 
+          	app.helper.hideProgress();
+          		if(err === null) {
+					jQuery('[data-content="new"]').find('.profileData').html(data);
+					vtUtils.showSelect2ElementView(jQuery('#directProfilePriviligesSelect'));
+				     //Settings_Profiles_Js.registerExistingProfilesChangeEvent();
+				    // Settings_Profiles_Js.registerSelectAllModulesEvent();
+                         Settings_Profiles_Js.registerEvents();
+				}
+			});
+		});
+	},
+	
 	registerEvents : function() {
 		Settings_Profiles_Js.initEditView();
 		Settings_Profiles_Js.registerSelectAllModulesEvent();
@@ -429,8 +456,9 @@ var Settings_Profiles_Js = {
 		Settings_Profiles_Js.registerSelectAllDeleteActionsEvent();
 		Settings_Profiles_Js.performSelectAllActionsOnLoad();
 		Settings_Profiles_Js.registerGlobalPermissionActionsEvent();
-		if(app.getModuleName() === 'Profiles' && app.view() === 'Edit') {
+		if(app.getModuleName() === 'Profiles' && app.view() === 'Edit') { 
 			Settings_Profiles_Js.registerSubmitEvent();
+			Settings_Profiles_Js.registerAllowModulePermission();
 		}
 	}
 

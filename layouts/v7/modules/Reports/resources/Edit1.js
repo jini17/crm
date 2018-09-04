@@ -90,6 +90,11 @@ Reports_Edit_Js("Reports_Edit1_Js",{},{
 		var thisInstance = this;
 		jQuery('#primary_module').on('change',function(e){
 			var primaryModule = jQuery(e.currentTarget).val();
+
+			if(primaryModule=='Users'){
+				jQuery("#modulecount").html(7);
+			}
+			
 			thisInstance.loadRelatedModules(primaryModule);
 		});
 	},

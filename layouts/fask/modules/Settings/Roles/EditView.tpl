@@ -32,12 +32,27 @@
                     {assign var=RECORD_ID value=$RECORD_MODEL->getId()}
                     <input type="hidden" name="record" value="{$RECORD_ID}" />
                     <input type="hidden" name="mode" value="{$MODE}">
+                    <input type="hidden" name="planid" value="{$PLAN}">
                     <input type="hidden" name="profile_directly_related_to_role_id" value="{$PROFILE_ID}" />
                     {assign var=HAS_PARENT value="{if $RECORD_MODEL->getParent()}true{/if}"}
                     {if $HAS_PARENT}
                         <input type="hidden" name="parent_roleid" value="{$RECORD_MODEL->getParent()->getId()}">
                     {/if}
                     <div name='editContent'>
+                         <div class="form-group">
+                             <label class="control-label fieldLabel col-lg-3 col-md-3 col-sm-3">
+                                <strong>{vtranslate('Select Plan', $QUALIFIED_MODULE)}&nbsp;<span class="redColor">*</span></strong>
+                          </label>
+                            <div class="controls fieldValue col-lg-4 col-md-4 col-sm-4" >
+                               <select class="select2 inputElement col-lg-12" id="planFilter" name="plantitle">
+                                     <option value="1" {if $RECORD_MODEL->get('planid') eq '1'}selected{/if}>{vtranslate('Foundation', $QUALIFIED_MODULE)}</option>
+                                    <option value="2" {if $PLAN eq '2'}selected{/if}>{vtranslate('Sales', $QUALIFIED_MODULE)}</option>
+                                    <option value="3" {if $PLAN eq '3'}selected{/if}>{vtranslate('Support', $QUALIFIED_MODULE)}</option>
+                                    <option value="4" {if $PLAN eq '4'}selected{/if}>{vtranslate('Enterprise', $QUALIFIED_MODULE)}</option>
+                                    <option value="5" {if $PLAN eq '5'}selected{/if}>{vtranslate('Sales+Support', $QUALIFIED_MODULE)}</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="control-label fieldLabel col-lg-3 col-md-3 col-sm-3">
                                 <strong>{vtranslate('LBL_NAME', $QUALIFIED_MODULE)}&nbsp;<span class="redColor">*</span></strong>

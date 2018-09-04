@@ -54,9 +54,52 @@
                         </span>
                     </div>
                 </div>
+                <!-----Added By Mabruk on 06/04/2018 For SMS Vendor---->
                 <hr>
                 <div>
-                    <span><strong>{vtranslate('LBL_STEP_2',$MODULE)}</strong></span>
+                    <div>
+                        <span><strong>{vtranslate('LBL_STEP_2',$MODULE)}</strong></span>
+                        &nbsp;:&nbsp;
+                        {vtranslate('LBL_SELECT_THE_SMS_PROVIDER',$MODULE)}
+                    </div>
+                    <br>                    
+                    <div>
+                        <select class="select2-container select2 inputElement col-sm-6 selectModule" id="smsvendor" name="smsvendor" data-rule-required="true" aria-required="true" style="width:50%">
+                            <option>{vtranslate('LBL_SELECT_VENDOR', $MODULE)}</option>
+                            {foreach item=VENDOR from=$VENDORS}
+                            <option value={$VENDOR.providertype}>{$VENDOR.providertype}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <!------END------>
+
+                <!-----Added By Mabruk on 30/04/2018 For SMS Template Type---->
+                <hr>
+                <div>
+                    <div>
+                        <span><strong>{vtranslate('LBL_STEP_3',$MODULE)}</strong></span>
+                        &nbsp;:&nbsp;
+                        {vtranslate('LBL_SELECT_THE_SMS_TEMPLATE',$MODULE)}
+                    </div>
+                    <br>                    
+                    <div>
+                        <select class="select2-container select2 inputElement col-sm-6 selectModule" id="smstemplate" name="smstemplate" data-rule-required="true" aria-required="true" style="width:50%">
+                            <option>{vtranslate('LBL_SELECT_TEMPLATE', $MODULE)}</option>
+                            {foreach item=TEMPLATE from=$TEMPLATES}
+                            <option value={$TEMPLATE.templateid}>{$TEMPLATE.templatename}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <!------END------>
+                <div>
+                <br>    
+                <hr>    
+                    <span><strong>{vtranslate('LBL_STEP_4',$MODULE)}</strong></span>
                     &nbsp;:&nbsp;
                     {vtranslate('LBL_TYPE_THE_MESSAGE',$MODULE)}&nbsp;(&nbsp;{vtranslate('LBL_SMS_MAX_CHARACTERS_ALLOWED',$MODULE)}&nbsp;)
                 </div>
@@ -74,3 +117,5 @@
         </form>
     </div>
 </div>
+
+

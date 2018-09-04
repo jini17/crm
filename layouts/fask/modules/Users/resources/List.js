@@ -523,6 +523,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
 	},
 
 	registerEvents : function() {
+
 		this._super();
 		this.registerUserStatusToggleEvent();
 		this.registerListViewSearch();

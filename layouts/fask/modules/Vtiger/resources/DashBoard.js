@@ -1015,18 +1015,46 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 		this.registerRearrangeTabsEvent();
 		this.registerQtipMessage();
 		app.event.off("post.DashBoardTab.load");
-		app.event.on("post.DashBoardTab.load",function(event, dashBoardInstance){
-			var instance = thisInstance;
-			if(typeof dashBoardInstance != 'undefined') {
+		app.event.on("post.DashBoardTab.load",function(event, dashBoardInstance){ 
+                                                                var instance = thisInstance;
+                                                                if(typeof dashBoardInstance != 'undefined') {
 				instance = dashBoardInstance;
 				instance.registerEvents();
 			}
-			instance.registerGridster();
-			instance.loadWidgets();
-			instance.registerRefreshWidget();
-			instance.removeWidget();
-			instance.registerWidgetFullScreenView();
-			instance.registerFilterInitiater();
+                                                               var  tabid= jQuery("#default_tab").val();
+                                                                if(tabid==1){
+                                                                   // instance.loadTrello();
+                                                                                                                                            var params = {
+                                                                           'module' : 'Calendar',
+                                                                           'view' : 'TaskManagement',
+                                                                           'mode' : 'showManagementView',
+                                                                                    'actmodulename':'Home'
+                                                                          }
+                                                                         app.helper.showProgress();
+                                                                         app.request.post({"data":params}).then(function(err,data){
+                                                                                  // console.log(data);
+                                                                         if(err === null) {
+                                                                           app.helper.hideProgress();
+                                                                            $('.tab-content').html(data);
+                                                                            vtUtils.showSelect2ElementView($('#overlayPage .data-header').find('select[name="assigned_user_id"]'), {placeholder: "User : All"});
+                                                                             vtUtils.showSelect2ElementView($('#overlayPage .data-header').find('select[name="taskstatus"]'), {placeholder: "Status : All"});
+                                                                             var js = new Vtiger_TaskManagement_Js();
+                                                                             js.registerEvents();
+                                                                         
+                                                                          }else{
+                                                                              app.helper.showErrorNotification({"message":err});
+                                                                          }
+                                                                       });  
+                                                                }  else {
+                                                                    instance.registerGridster();
+                                                                    instance.loadWidgets();
+
+                                                                instance.registerRefreshWidget();
+                                                                instance.removeWidget();
+                                                                instance.registerWidgetFullScreenView();
+                                                                instance.registerFilterInitiater();
+                                                                } 
+			
 		});
 		app.event.trigger("post.DashBoardTab.load");
 	}

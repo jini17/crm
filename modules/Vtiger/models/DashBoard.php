@@ -169,7 +169,7 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
 		if($currentUser->id==1){
 			$query = "SELECT id,tabname,sequence,isdefault,appname,modulename FROM vtiger_dashboard_tabs WHERE userid=?  ORDER BY sequence ASC ";
 		} else {
-			$query = "SELECT id,tabname,sequence,isdefault,appname,modulename FROM vtiger_dashboard_tabs WHERE (userid=? OR tabname='Trello') ORDER BY sequence ASC ";
+			$query = "SELECT id,tabname,sequence,isdefault,appname,modulename FROM vtiger_dashboard_tabs WHERE (userid=? OR id='1') ORDER BY sequence ASC ";
 		}
 		
 		$result = $db->pquery($query, array($currentUser->getId()));

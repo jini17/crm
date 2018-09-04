@@ -10,6 +10,13 @@
 -->*}
 
 {strip}
+ 		<div class="col-lg-4 col-md-4 col-sm-4">
+                <h3 class="module-title pull-left">&nbsp;{vtranslate($MODULE, $MODULE)}&nbsp;</h3>
+        
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          
+        </div>
     <div class="listViewPageDiv" id="listViewContent" style="width: 100%;">
 
 
