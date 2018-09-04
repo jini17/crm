@@ -110,7 +110,7 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 			}
 			$relatedModules[$primaryModule] = $translatedRelatedModules;
 		}
-		$relatedModules['Users'] = array('Education','Timesheet', 'EmergencyContact','Performance','EmployeeContract','EmployeeProjects', 'LangugageSkill','PassportVisa');
+		$relatedModules['Users'] = array('Education'=>'Education', 'EmergencyContact'=>'EmergencyContact','Performance'=>'Performance','EmployeeContract'=>'EmployeeContract','EmployeeProjects'=>'EmployeeProjects', 'LangugageSkill'=>'LangugageSkill','PassportVisa'=>'PassportVisa','Leave'=>'Leave','Claim'=>'Claim');
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 
 		$viewer->assign('SCHEDULEDREPORTS', $reportModel->getScheduledReport());
@@ -160,9 +160,10 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 		}
 		$primaryModule = $request->get('primary_module');
 		$secondaryModules = $request->get('secondary_modules');
-		if($primaryModule=='Users') {
-			$secondaryModules =  array('Education','Timesheet', 'EmergencyContact','Performance','EmployeeContract','EmployeeProjects', 'LangugageSkill','PassportVisa');
-		}
+		
+		/*if($primaryModule=='Users') {
+			$secondaryModules =  array('Leave');//array('Education', 'EmergencyContact','Performance','EmployeeContract','EmployeeProjects', 'LangugageSkill','PassportVisa','Leave','Claim');
+		}*/
 		$reportModel->setPrimaryModule($primaryModule);
 		if($secondaryModules) {
 			$secondaryModules = implode(':', $secondaryModules);

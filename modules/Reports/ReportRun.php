@@ -3050,6 +3050,7 @@ class ReportRun extends CRMEntity {
 	// Performance Optimization: Added parameter directOutput to avoid building big-string!
 	function GenerateReport($outputformat, $filtersql, $directOutput = false, $startLimit = false, $endLimit = false, $operation = false) {
 		global $adb, $current_user, $php_max_execution_time;
+		//$adb->setDebug(true);
 		global $modules, $app_strings;
 		global $mod_strings, $current_language;
 		require('user_privileges/user_privileges_' . $current_user->id . '.php');
