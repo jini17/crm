@@ -4662,7 +4662,7 @@ form[name="notification_settings"] .select2-choice {
   opacity: 0.5;
 }
 .dashBoardContainer .tabContainer .sortable button {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .dashBoardContainer .tabContainer li a:hover .deleteTab {
   display: inline-block;

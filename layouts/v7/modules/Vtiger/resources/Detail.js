@@ -1057,7 +1057,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 	registerAjaxEditEvent : function(){
 		var thisInstance = this;
 		var detailContentsHolder = this.getContentHolder();
-		detailContentsHolder.on('click','table.detailview-table td.fieldValue .editAction', function(e) {
+		detailContentsHolder.on('click','table.detailview-table td.fieldValue .editAction', function(e) { alert('ok');
 			var editedLength = jQuery('table.detailview-table td.fieldValue .ajaxEdited').length;
 			if(editedLength === 0) { 
 				var selection = window.getSelection().toString(); 

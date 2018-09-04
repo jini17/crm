@@ -667,6 +667,12 @@ class ReportRun extends CRMEntity {
 			} elseif ($selectedfields[1] == 'filesize') {
 				$columnSQL = "case " . $selectedfields[0] . "." . $selectedfields[1] . " when '' then '-' else concat(" . $selectedfields[0] . "." . $selectedfields[1] . "/1024,'  ','KB') end AS '" . decode_html($selectedfields[2]) . "'";
 			}
+		} else if($selectedfields[0]=='vtiger_user2role'){
+				$columnSQL = " vtiger_role.rolename AS '". decode_html($header_label) . "'";
+
+		} else if($selectedfields[0]=='vtiger_users' && $selectedfields[1]=='grade_id'){
+				$columnSQL = " vtiger_gradeUsers.grade AS '". decode_html($header_label) . "'";
+
 		} else {
 			$tableName = $selectedfields[0];
 			if ($module != $this->primarymodule && $module == "Emails" && $tableName == "vtiger_activity") {
@@ -2877,6 +2883,23 @@ class ReportRun extends CRMEntity {
 			$query .= " ".$this->getRelatedModulesQuery($module,$this->secondarymodule).
 					getNonAdminAccessControlQuery($this->primarymodule,$current_user).
 					" WHERE vtiger_crmentity.deleted = 0";
+
+		} else if($module=='Users') {
+
+				$query .= "from vtiger_users 
+							LEFT JOIN vtiger_user2role ON vtiger_user2role.userid= vtiger_users.id
+							LEFT JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid
+							LEFT JOIN vtiger_grade as vtiger_gradeUsers on vtiger_gradeUsers.gradeid = vtiger_users.grade_id";
+
+				if ($this->queryPlanner->requireTable("vtiger_usersRelUsers494")) {
+					$query .= " left join vtiger_users as vtiger_usersRelUsers494 on vtiger_usersRelUsers494.id = vtiger_users.reports_to_id";
+				}
+				if ($this->queryPlanner->requireTable("vtiger_currency_infoUsers")) {
+					$query .= " left join vtiger_currency_info as vtiger_currency_infoUsers on vtiger_currency_infoUsers.id = vtiger_users.currency_id";
+				}
+
+				$query .=" WHERE vtiger_users.deleted=0";
+
 		} else {
 			if ($module != '') {
 				$focus = CRMEntity::getInstance($module);
@@ -3140,7 +3163,11 @@ class ReportRun extends CRMEntity {
 							if($this->primarymodule == 'ModComments') {
 								$fieldvalue = "<a href='index.php?module=".getSalesEntityType($fieldvalue)."&view=Detail&record=".$fieldvalue."' target='_blank'>" . getTranslatedString('LBL_VIEW_DETAILS', 'Reports') . "</a>";
 							} else {
-								$fieldvalue = "<a href='index.php?module={$this->primarymodule}&view=Detail&record={$fieldvalue}' target='_blank'>" . getTranslatedString('LBL_VIEW_DETAILS', 'Reports') . "</a>";
+								if($this->primarymodule=='Users'){
+									$fieldvalue = "<a href='index.php?module={$this->primarymodule}&view=Detail&record={$fieldvalue}&parent=Settings' target='_blank'>" . getTranslatedString('LBL_VIEW_DETAILS', 'Reports') . "</a>";
+								} else {
+									$fieldvalue = "<a href='index.php?module={$this->primarymodule}&view=Detail&record={$fieldvalue}' target='_blank'>" . getTranslatedString('LBL_VIEW_DETAILS', 'Reports') . "</a>";
+								}	
 							}
 						}
 						if (is_array($sec_modules) && (in_array(str_replace('_LBL_ACTION', '', $fld->name), $sec_modules))) {
@@ -4522,6 +4549,7 @@ class ReportRun extends CRMEntity {
 
 		$fieldInstance = WebserviceField::fromArray($adb, $fieldInfo);
 		$referenceModuleList = $fieldInstance->getReferenceList(false);
+
 		if(in_array('Calendar', $referenceModuleList) && in_array('Events', $referenceModuleList)) {
 			$eventKey = array_keys($referenceModuleList, 'Events');
 			unset($referenceModuleList[$eventKey[0]]);
@@ -4657,6 +4685,12 @@ class ReportRun extends CRMEntity {
 					$columnSql = "vtiger_currency_info$moduleName.currency_name";
 					$this->queryPlanner->addTable("vtiger_currency_info$moduleName");
 				}
+
+				if ($moduleName == 'Users' && $fieldInstance->getFieldName() == 'grade_id') {
+					$columnSql = "vtiger_grade$moduleName.grade";
+					$this->queryPlanner->addTable("vtiger_grade$moduleName");
+				}
+				
 				$columnsSqlList[] = "trim($columnSql)";
 			}
 		}

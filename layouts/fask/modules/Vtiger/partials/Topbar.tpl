@@ -40,7 +40,7 @@
 
 	<div class="container-fluid global-nav">
 		<div class="row">
-			<div class="col-lg-3 col-md-5 col-sm-4 col-xs-8 paddingRight0 app-navigator-container">
+			<div class="col-lg-2 col-md-5 col-sm-4 col-xs-8 paddingRight0 app-navigator-container">
 				<div class="row">
 					<div id="appnavigator" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 cursorPointer app-switcher-container hidden-lg hidden-md" data-app-class="{if $MODULE eq 'Home' || !$MODULE}ti-dashboard{else}{$APP_IMAGE_MAP[$SELECTED_MENU_CATEGORY]}{/if}">
 						<div class="row app-navigator">
@@ -218,12 +218,12 @@
 				</div>-->
 
 				<!--top nav with lock-->
-				<div class="col-lg-5 col-md-5 col-sm-4 col-xs-8 "><div class="row">
+				<div class="col-lg-4 col-md-5 col-sm-4 col-xs-8 "><div class="row">
 					<ul class="nav navbar-nav newtabs">
 						<li>
 							<div class="search-links-container hidden-sm">
 								<div class="addtionalDashboardTab">
-									<span aria-hidden="true">Finance</span>
+									<span aria-hidden="true">Admin/HR</span>
 								</div>
 							</div>
 						</li>
@@ -271,7 +271,7 @@
 				</div>
 			</div>
 
-			<div id="navbar" class="col-sm-2 col-md-3 col-lg-3 collapse navbar-collapse navbar-right global-actions">
+			<div id="navbar" class="col-sm-4 col-md-3 col-lg-3 collapse navbar-collapse navbar-right global-actions">
 				<ul class="nav navbar-nav">
 
 
@@ -286,19 +286,23 @@
 							</div>
 						</div>
 					</li>
+
 					<li>
 						<div class="dropdown">
 							<div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 								<a href="#" id="menubar_quickCreate" class="qc-button" title="{vtranslate('LBL_QUICK_CREATE',$MODULE)}" aria-hidden="true"> 
-									<i class="material-icons">add</i></a>
-								</div>
-								<ul class="dropdown-menu animated fadeIn" role="menu" aria-labelledby="dropdownMenu1" style="width:650px;">
-									<li class="title" style="padding: 5px 0 0 15px;">
-										<h4><strong>{vtranslate('LBL_QUICK_CREATE',$MODULE)}</strong></h4>
-									</li>
-									<hr/>
-									<li id="quickCreateModules" style="padding: 0 5px;">
-										<div class="col-lg-12" style="padding-bottom:15px;">
+									<i class="material-icons">add</i>
+								</a>
+							</div>
+
+							<ul class="dropdown-menu animated fadeIn" role="menu" aria-labelledby="dropdownMenu1" style="width:650px;">
+								<li class="title" style="padding: 5px 0 0 15px;">
+									<h4><strong>{vtranslate('LBL_QUICK_CREATE',$MODULE)}</strong></h4>
+								</li>
+								<hr/>
+
+								<li id="quickCreateModules" style="padding: 0 5px;">
+									<div class="col-lg-12" style="padding-bottom:15px;">
 											{foreach key=moduleName item=moduleModel from=$QUICK_CREATE_MODULES}
 											{if $moduleModel->isPermitted('CreateView') || $moduleModel->isPermitted('EditView')}
 											{assign var='quickCreateModule' value=$moduleModel->isQuickCreateSupported()}
@@ -314,75 +318,91 @@
 											'mycthemeswitcher'=>'folder', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people' ]}
 											{if $quickCreateModule == '1'}
 											{if $count % 3 == 0}
-											<div class="row">
+										<div class="row">
 												{/if}
 												{* Adding two links,Event and Task if module is Calendar *}
 												{if $singularLabel == 'SINGLE_Calendar'}
 												{assign var='singularLabel' value='LBL_TASK'}
-												<div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
-													<a id="menubar_quickCreate_Events" class="quickCreateModule" data-name="Events"
-													data-url="index.php?module=Events&view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">event</i><span class="quick-create-module">{vtranslate('LBL_EVENT',$moduleName)}</span></a>
-												</div>
-												{if $count % 3 == 2}
+											<div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
+												<a id="menubar_quickCreate_Events" class="quickCreateModule" data-name="Events"
+													data-url="index.php?module=Events&view=QuickCreateAjax" href="javascript:void(0)">
+													<i class="material-icons pull-left">event</i>
+													<span class="quick-create-module">{vtranslate('LBL_EVENT',$moduleName)}</span>
+												</a>
 											</div>
-											<br>
-											<div class="row">
+												{if $count % 3 == 2}
+										</div>
+										<br>
+
+										<div class="row">
 												{/if}
-												<div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
-													<a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModule" data-name="{$moduleModel->getName()}"
-														data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)"><i class="material-icons pull-left">card_travel</i><span class="quick-create-module">{vtranslate($singularLabel,$moduleName)}</span></a>
-													</div>
+											<div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
+												<a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModule" data-name="{$moduleModel->getName()}"
+														data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)">
+													<i class="material-icons pull-left">card_travel</i>
+													<span class="quick-create-module">{vtranslate($singularLabel,$moduleName)}</span>
+												</a>
+											</div>
 													{if !$hideDiv}
 													{assign var='count' value=$count+1}
 													{/if}
 													{else if $singularLabel == 'SINGLE_Documents'}
-													<div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if} dropdown">
-														<a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModuleSubmenu dropdown-toggle" data-name="{$moduleModel->getName()}" data-toggle="dropdown" 
+											<div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if} dropdown">
+												<a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModuleSubmenu dropdown-toggle" data-name="{$moduleModel->getName()}" data-toggle="dropdown" 
 															data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)">
-															<i class="material-icons pull-left">{$iconsarray[{strtolower($moduleName)}]}</i>
-															<span class="quick-create-module">
+													<i class="material-icons pull-left">{$iconsarray[{strtolower($moduleName)}]}</i>
+													<span class="quick-create-module">
 																{vtranslate($singularLabel,$moduleName)}
-																<i class="fa fa-caret-down quickcreateMoreDropdownAction"></i>
-															</span>
-														</a>
-														<ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_{$moduleModel->getName()}">
-															<li class="dropdown-header"><i class="material-icons">file_upload</i> {vtranslate('LBL_FILE_UPLOAD', $moduleName)}</li>
-															<li id="VtigerAction">
-																<a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
-																	<img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">
+														<i class="fa fa-caret-down quickcreateMoreDropdownAction"></i>
+													</span>
+												</a>
+												<ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_{$moduleModel->getName()}">
+													<li class="dropdown-header"><i class="material-icons">file_upload</i> {vtranslate('LBL_FILE_UPLOAD', $moduleName)}</li>
+													<li id="VtigerAction">
+														<a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
+															<img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">
 																	{vtranslate('LBL_TO_SERVICE', $moduleName, {vtranslate('LBL_VTIGER', $moduleName)})}
-																</a>
-															</li>
-															<li class="dropdown-header"><i class="ti-link"></i> {vtranslate('LBL_LINK_EXTERNAL_DOCUMENT', $moduleName)}</li>
-															<li id="shareDocument"><a href="javascript:Documents_Index_Js.createDocument('E')">&nbsp;<i class="material-icons">link</i>&nbsp;&nbsp; {vtranslate('LBL_FROM_SERVICE', $moduleName, {vtranslate('LBL_FILE_URL', $moduleName)})}</a></li>
-															<li role="separator" class="divider"></li>
-															<li id="createDocument"><a href="javascript:Documents_Index_Js.createDocument('W')"><i class="ti-file"></i> {vtranslate('LBL_CREATE_NEW', $moduleName, {vtranslate('SINGLE_Documents', $moduleName)})}</a></li>
-														</ul>
-													</div>
-													{else}
-													<div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
-														<a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModule" data-name="{$moduleModel->getName()}"
-															data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)">
-															<i class="material-icons pull-left">{$iconsarray[{strtolower($moduleName)}]}</i>
-															<span class="quick-create-module">{vtranslate($singularLabel,$moduleName)}</span>
 														</a>
-													</div>
-													{/if}
-													{if $count % 3 == 2}
-												</div>
-												<br>
-												{/if}
-												{if !$hideDiv}
-												{assign var='count' value=$count+1}
-												{/if}
-												{/if}
-												{/if}
-												{/foreach}
+													</li>
+													<li class="dropdown-header"><i class="ti-link"></i> {vtranslate('LBL_LINK_EXTERNAL_DOCUMENT', $moduleName)}</li>
+													<li id="shareDocument"><a href="javascript:Documents_Index_Js.createDocument('E')">&nbsp;<i class="material-icons">link</i>&nbsp;&nbsp; {vtranslate('LBL_FROM_SERVICE', $moduleName, {vtranslate('LBL_FILE_URL', $moduleName)})}</a></li>
+													<li role="separator" class="divider"></li>
+													<li id="createDocument"><a href="javascript:Documents_Index_Js.createDocument('W')"><i class="ti-file"></i> {vtranslate('LBL_CREATE_NEW', $moduleName, {vtranslate('SINGLE_Documents', $moduleName)})}</a></li>
+												</ul>
 											</div>
-										</li>
-									</ul>
-								</div>
-							</li>
+											{else}
+											<div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
+												<a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModule" data-name="{$moduleModel->getName()}"
+															data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)">
+													<i class="material-icons pull-left">{$iconsarray[{strtolower($moduleName)}]}</i>
+													<span class="quick-create-module">{vtranslate($singularLabel,$moduleName)}</span>
+												</a>
+											</div>
+											{/if}
+											{if $count % 3 == 2}
+										</div>
+										<br>
+										{/if}
+										{if !$hideDiv}
+										{assign var='count' value=$count+1}
+										{/if}
+										{/if}
+										{/if}
+										{/foreach}
+									</div>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<div>
+							<a href="index.php?module=Reports&amp;view=List" title="Reports" aria-hidden="true">
+								<i class="fa fa-file-text-o" aria-hidden="true"></i>
+							</a>
+						
+							</a>
+						</div>
+					</li>
 							{assign var=USER_PRIVILEGES_MODEL value=Users_Privileges_Model::getCurrentUserPrivilegesModel()}
 							{assign var=CALENDAR_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Calendar')}
 							{if $USER_PRIVILEGES_MODEL->hasModulePermission($CALENDAR_MODULE_MODEL->getId())}

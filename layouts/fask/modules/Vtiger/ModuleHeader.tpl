@@ -52,9 +52,7 @@
 			<div class="col-xs-3 col-lg-5 col-md-5 col-sm-5 module-breadcrumb-{$smarty.request.view}" style="margin:  0px; padding: 0px;">
 				 <div id="appnav" class="navbar-right">
 
-					<!-- added by jitu@28Dec2016-->
-			<div style="text-align:center;display:block;width:50%; margin:0 auto;">{vtranslate('LBL_LAST_LOGINTIME')} {$LAST_LOGIN_TIME} {vtranslate('LBL_USERIP')} {$LAST_USER_IP}</div>
-			<!--end here -->
+					
 			<div class="clearfix"></div>
 					<div class="btn-group">
 
@@ -98,6 +96,17 @@
 				</div>
 			</div>
 		</div>
+		{if $MODULE eq 'Home'}
+		<div class="clearfix">
+			<div class="col-xs-12">
+			<!-- added by jitu@28Dec2016-->
+				<div style="text-align:center;display:block;width:50%; margin:0 auto;padding:2px 0px;">{vtranslate('LBL_LAST_LOGINTIME')} {$LAST_LOGIN_TIME} {vtranslate('LBL_USERIP')} {$LAST_USER_IP}
+				</div>
+				<!--end here -->
+			</div>
+		</div>
+		<br>
+		{/if}
 		{if $FIELDS_INFO neq null}
 			<script type="text/javascript">
 				var uimeta = (function () {
