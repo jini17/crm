@@ -221,30 +221,92 @@
 				<div class="col-lg-5 col-md-5 col-sm-4 col-xs-8 "><div class="row">
 					<ul class="nav navbar-nav newtabs">
 						<li>
-							<div class="search-links-container hidden-sm">
+							<div class="dropdownFinance">
 								<div class="addtionalDashboardTab">
 									<span aria-hidden="true">Admin/Finance</span>
 								</div>
+								
+								<div class="dropdown-content-Finance">
+
+									<ul class="dropdownlist">
+									    <li class="test">
+									    	<a class="dropdown-icon-dashboard" title="Bills" href="index.php?module=Bills&amp;view=List&amp;app=ADMIN">
+									    		<i class="fa fa-bell-o"></i>&nbsp;Bills
+									    	</a>
+									    </li>
+									    <li>
+									    	<a class="dropdown-icon-dashboard" title="Working Hours" href="index.php?module=WorkingHours&amp;view=List&amp;app=ADMIN">
+									    		<i class="fa fa-clock-o"></i>&nbsp;Working Hours
+									    	</a>
+									    </li>
+										<li>
+											<a class="dropdown-icon-dashboard"  title="Payments" href="index.php?module=Payments&amp;view=List&amp;app=ADMIN">
+												<i class="fa fa-money"></i>&nbsp;Payments
+											</a>
+										</li>
+										<li>
+											<a class="dropdown-icon-dashboard"  title="Payslip" href="index.php?module=Payslip&amp;view=List&amp;app=ADMIN">
+												<i class="fa fa-file-text-o"></i>&nbsp;Payslip
+											</a>
+										</li>
+										<li>
+											<a class="dropdown-icon-dashboard"  title="Leave Type" href="index.php?module=LeaveType&amp;view=List&amp;app=ADMIN">
+												<i class="fa fa-outdent"></i>&nbsp;Leave Type
+											</a>
+										</li>
+										<li>
+											<a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&amp;view=List&amp;app=ADMIN">
+												<i class="fa fa-sign-out"></i>&nbsp;Leave
+											</a>
+										</li>
+										<li>
+											<a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&amp;view=List&amp;app=ADMIN">
+												<i class="fa fa-bell-o"></i>&nbsp;Claim
+											</a>
+										</li>
+									</ul>
+								</div>
 							</div>
+
 						</li>
 						<li>
-							<div class="search-links-container hidden-sm">
+							<div>
 								<div class="addtionalDashboardTab">
 									<i class="fa fa-lock" style="color: #398bf7;    vertical-align: middle;"></i> &nbsp;<span aria-hidden="true">Sales</span>
 								</div>
 							</div>
+
 						</li>
 
 						<li>
-							<div class="search-links-container hidden-sm">
+							<div class="dropdownTools">
 								<div class="addtionalDashboardTab">
 									<span aria-hidden="true">Tools</span>
+								</div>
+								<div class="dropdown-content-Tools">
+
+									<ul class="dropdownlist">
+<!--------------
+<ul style="padding-top: 15px; padding-left: 5px;"><li><a class="waves-effect waves-dark " href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS"><i class="material-icons module-icon">subtitles</i> <span class="hide-menu"> Notification Templates</span></a></li>
+	<li><a class="waves-effect waves-dark " href="index.php?module=Rss&amp;view=List&amp;app=TOOLS"><i class="material-icons module-icon">rss_feed</i> <span class="hide-menu"> Rss</span></a></li>
+	<li><a class="waves-effect waves-dark " href="index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS"><i class="material-icons module-icon">delete_forever</i> <span class="hide-menu"> Recycle Bin</span></a></li>
+	<li><a class="waves-effect waves-dark " href="index.php?module=Portal&amp;view=List&amp;app=TOOLS"><i class="material-icons module-icon">web</i> <span class="hide-menu"> Our Sites</span></a></li>
+	<li><a class="waves-effect waves-dark " href="index.php?module=PBXManager&amp;view=List&amp;app=TOOLS"><i class="material-icons module-icon">perm_phone_msg</i> <span class="hide-menu"> PBX Manager</span></a></li></ul>
+------------------ -->
+
+									    <li>
+									    	<a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
+									    		<i class="fa fa-bell-o"></i>&nbsp;Notification Templates
+									    	</a>
+									    </li>
+									   
+									</ul>
 								</div>
 							</div>
 						</li>
 
 						<li>
-							<div class="search-links-container hidden-sm">
+							<div>
 								<div class="addtionalDashboardTab">
 									<i class="fa fa-lock" style="color: #398bf7;    vertical-align: middle;"></i> &nbsp;<span aria-hidden="true">Support</span>
 								</div>
@@ -252,7 +314,7 @@
 						</li>
 
 						<li>
-							<div class="search-links-container hidden-sm">
+							<div>
 								<div class="addtionalDashboardTab">
 									<span aria-hidden="true">More</span>
 								</div>
@@ -281,8 +343,9 @@
 					<li>
 						<div class="dropdown">
 							<div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-								<a href="#" id="menubar_quickCreate" class="qc-button" title="{vtranslate('LBL_QUICK_CREATE',$MODULE)}" aria-hidden="true"> 
-									<i class="material-icons">add</i></a>
+								<a  aria-hidden="true" href="#" id="menubar_quickCreate" class="qc-button rightside-icon-dashboard" title="{vtranslate('LBL_QUICK_CREATE',$MODULE)}" aria-hidden="true">
+										<i class="fa fa-plus"></i>
+								</a>
 								</div>
 								<ul class="dropdown-menu animated fadeIn" role="menu" aria-labelledby="dropdownMenu1" style="width:650px;">
 									<li class="title" style="padding: 5px 0 0 15px;">
@@ -375,19 +438,65 @@
 									</ul>
 								</div>
 							</li>
+
+							<li>
+								<div>
+									<a class="rightside-icon-dashboard" href="#" title="Notifications" aria-hidden="true">
+										<i class="fa fa-bell-o"></i>
+									</a>
+								</div>
+							</li>
+
+							<li>
+								<div>
+									<a class="rightside-icon-dashboard" href="#" title="Email" aria-hidden="true">
+										<i class="fa fa-envelope-o"></i>
+									</a>
+								</div>
+							</li>
+
+							<li>
+								<div>
+									<a class="rightside-icon-dashboard" href="#" title="Files" aria-hidden="true">
+										<i class="fa fa-file-o"></i>
+									</a>
+								</div>
+							</li>
+
 							{assign var=USER_PRIVILEGES_MODEL value=Users_Privileges_Model::getCurrentUserPrivilegesModel()}
 							{assign var=CALENDAR_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Calendar')}
 							{if $USER_PRIVILEGES_MODEL->hasModulePermission($CALENDAR_MODULE_MODEL->getId())}
-							<li><div><a href="index.php?module=Calendar&view={$CALENDAR_MODULE_MODEL->getDefaultViewName()}" title="{vtranslate('Calendar','Calendar')}" aria-hidden="true">
-								<i class="material-icons">event</i></a></div></li>
-								{/if}
-								{assign var=REPORTS_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Reports')}
-								{if $USER_PRIVILEGES_MODEL->hasModulePermission($REPORTS_MODULE_MODEL->getId())}
-								<li><div><a href="index.php?module=Reports&view=List" title="{vtranslate('Reports','Reports')}" aria-hidden="true">
+							<li>
+								
+								<div>
+									<a class="rightside-icon-dashboard" href="index.php?module=Calendar&view={$CALENDAR_MODULE_MODEL->getDefaultViewName()}" title="{vtranslate('Calendar','Calendar')}" aria-hidden="true">
+										<i class="fa fa-calendar-o"></i>
+									</a>
+								</div>
+							</li>
+							{/if}
 
-									<i class="material-icons">show_chart</i>
-								</a></div></li>
-								{/if}
+							{assign var=REPORTS_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Reports')}
+							{if $USER_PRIVILEGES_MODEL->hasModulePermission($REPORTS_MODULE_MODEL->getId())}
+							<li>
+								<div>
+									<a class="rightside-icon-dashboard"  href="index.php?module=Reports&view=List" title="{vtranslate('Reports','Reports')}" aria-hidden="true">
+										<i class="fa fa-line-chart"></i>
+									</a>
+								</div>
+							</li>
+							{/if}
+
+							<li>
+								<div>
+									<a class="rightside-icon-dashboard"  href="index.php?module=Vtiger&amp;parent=Settings&amp;view=Index" title="Setting" aria-hidden="true">
+										<i class="fa fa-gear"></i>
+									</a>
+								</div>
+							</li>
+
+
+
 								{if $USER_PRIVILEGES_MODEL->hasModulePermission($CALENDAR_MODULE_MODEL->getId())}
 							<!--<li><div><a href="#" class="taskManagement" title="{vtranslate('Tasks','Vtiger')}" aria-hidden="true">
 								<i class="material-icons">card_travel</i></a></div></li>-->

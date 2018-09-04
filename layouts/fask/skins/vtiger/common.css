@@ -8900,3 +8900,38 @@ visibility: visible;top: 0;left: 60px; /*position where enlarged image should of
 ul.nav navbar-nav newtabs>li{
   padding: 0px 10px;
 }
+
+a.rightside-icon-dashboard > i{
+  color: #fff!important;
+    font-size: 16px !important;
+    line-height: 40px;
+}
+a.dropdown-icon-dashboard > i{
+  color: #000!important;
+    font-size: 16px !important;
+    line-height: 40px;
+}
+.dropdown-content-Finance{
+  border-top: 3px solid #ff4961;
+   display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+ .dropdown-content-Tools{
+  border-top: 3px solid #06d79c;
+   display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+li> div.dropdownFinance:hover .dropdown-content-Finance ,li> div.dropdownTools:hover .dropdown-content-Tools 
+{display: block;}
+
+ul.dropdownlist{
+  list-style-type: none;
+}
