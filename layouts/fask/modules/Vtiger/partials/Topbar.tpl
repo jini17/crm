@@ -40,7 +40,7 @@
 
 	<div class="container-fluid global-nav">
 		<div class="row">
-			<div class="col-lg-3 col-md-5 col-sm-4 col-xs-8 paddingRight0 app-navigator-container">
+			<div class="col-lg-2 col-md-5 col-sm-4 col-xs-8 paddingRight0 app-navigator-container">
 				<div class="row">
 					<div id="appnavigator" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 cursorPointer app-switcher-container hidden-lg hidden-md" data-app-class="{if $MODULE eq 'Home' || !$MODULE}ti-dashboard{else}{$APP_IMAGE_MAP[$SELECTED_MENU_CATEGORY]}{/if}">
 						<div class="row app-navigator">
@@ -223,7 +223,7 @@
 						<li>
 							<div class="search-links-container hidden-sm">
 								<div class="addtionalDashboardTab">
-									<span aria-hidden="true">Finance</span>
+									<span aria-hidden="true">Admin/Finance</span>
 								</div>
 							</div>
 						</li>
@@ -247,14 +247,6 @@
 							<div class="search-links-container hidden-sm">
 								<div class="addtionalDashboardTab">
 									<i class="fa fa-lock" style="color: #398bf7;    vertical-align: middle;"></i> &nbsp;<span aria-hidden="true">Support</span>
-								</div>
-							</div>
-						</li>
-
-						<li>
-							<div class="search-links-container hidden-sm">
-								<div class="addtionalDashboardTab">
-									<span aria-hidden="true">HRM</span>
 								</div>
 							</div>
 						</li>
