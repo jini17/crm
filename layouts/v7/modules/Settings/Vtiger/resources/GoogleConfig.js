@@ -154,7 +154,11 @@ Vtiger.Class("Settings_Vtiger_GoogleConfig_Js",{},{
 		        data: form_data,                         
 		        type: 'post',
 		        success: function(php_script_response){
-		            alert(php_script_response); 
+		            var response = php_script_response; 
+		            if (response.length > 50)
+		            	window.open(php_script_response);
+		            else
+		            	alert(response);
 		        }
 		    });
 		});

@@ -24,6 +24,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 
+
 		//get last login time & IP address
 		global $adb;
 	
@@ -45,6 +46,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
 		$viewer->assign("LAST_LOGIN_TIME", $sLastLoginTime);
 		$viewer->assign("LAST_USER_IP", $sLastUserIP);
 		//End here
+
 
 
 		$dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);

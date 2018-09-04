@@ -3091,7 +3091,7 @@ position: relative;
   width: 100%;
 }
 #taskManagementContainer .title {
-  width: 20%;
+  width: 23;
   height: 25px;
   padding: 5px 0px 0px 10px;
   color: white;
@@ -8887,4 +8887,16 @@ visibility: visible;top: 0;left: 60px; /*position where enlarged image should of
 
 .detailview-table .fieldValue, .detailview-table .fieldLabel{
 	min-height: 38px;
+}
+.addtionalDashboardTab{
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    font-size: 15px;
+    padding: 10px 10px;
+    text-decoration: none;
+}
+ul.nav navbar-nav newtabs>li{
+  padding: 0px 10px;
 }

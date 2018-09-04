@@ -24,7 +24,7 @@
 </div></div>
 
 <div class="col-xs-12 text-center visible-lg " style="margin: 20px 0px;">
-<div class="btn-group">
+<div class="btn-group tippy">
 <a data-toggle="toosltip" tippytitle data-placement="top" title="My Calendar" class="btn module-buttons" href="index.php?module=Calendar&amp;view=Calendar">
                     <i class="material-icons">event</i>
                 </a>

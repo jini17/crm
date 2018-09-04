@@ -87,6 +87,7 @@
                         {assign var=SECOND_VALUE value=" "}
                         {assign var=THIRD_VALUE value=" "}
                         {foreach from=$DATA item=VALUES}
+                        
                             <tr>
                                 {foreach from=$VALUES item=VALUE key=NAME}
                                     {if ($NAME eq $FIRST_FIELD || $NAME|strstr:{$FIRST_FIELD}) && ($FIRST_VALUE eq $VALUE || $FIRST_VALUE eq " ")}

@@ -136,7 +136,7 @@ function meetingInvites($entity) {
 			}
 
 		//Send email to External EmailAddress
-			$result2 = $adb->pquery("SELECT external_invitees.emailaddress AS name, external_invitees.emailaddres as email1, external_invitees.status FROM external_invitees WHERE external_invitees.activityid = ?", array($id));
+			$result2 = $adb->pquery("SELECT external_invitees.emailaddress AS name, external_invitees.emailaddress as email1, external_invitees.status FROM external_invitees WHERE external_invitees.activityid = ?", array($id));
 			$numOfRows2 = $adb->num_rows($result2);	
 
 			if ($numOfRows2 > 0) {

@@ -603,17 +603,14 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 			 thisInstance.registerTaskDragEvent();
 			 app.helper.hideProgress();
 		});
-	}
+	
 	  window.onbeforeunload = function() {
-      	
-           var tabid = jQuery("#default_tab").val();
-           
-            window.setTimeout(function () {
-                window.location = 'index.php?module=Home&view=DashBoard&tabid='+tabid;
-            }, 0);
+                                    var tabid = jQuery("#default_tab").val();
+                                     window.setTimeout(function () {
+                                         window.location = 'index.php?module=Home&view=DashBoard&tabid='+tabid;
+                                     }, 0);
 
-            window.onbeforeunload = null;
-        }
-	}
-
+                                     window.onbeforeunload = null;
+                     }
+            }        
 });

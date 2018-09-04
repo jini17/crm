@@ -136,11 +136,12 @@ var Settings_Picklist_Js = {
 		var thisInstance = this;
         var container = this.getContainer();
 		var popupShown = false;
-		container.on('click', '.renameItem', function(e){
-			if(popupShown) {
-				return false;
-			}
-			var selectedListItem = jQuery(e.currentTarget);
+		 jQuery('#modulePickListValuesContainer ').on('click', '.renameItem', function(e){
+                                              
+                    if(popupShown) {
+                            return false;
+                    }
+                    var selectedListItem = jQuery(e.currentTarget);
             var params = {
                 module : app.getModuleName(),
                 parent : app.getParentModuleName(),
