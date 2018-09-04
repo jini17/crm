@@ -89,9 +89,9 @@
 										{/foreach}
 									</ul>
 						{/if}
-						<a class='btn btn-default Help-btn' >
-								<i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
-							</a>
+						<a class='btn btn-default Help-btn'>
+							<i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
+						</a>
 					</div>
 				</div>
 			</div>
