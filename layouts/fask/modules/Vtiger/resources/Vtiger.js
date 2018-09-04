@@ -357,6 +357,42 @@ Vtiger.Class('Vtiger_Index_Js', {
 		});
 	},
 
+	//added by jitu@agiliux for context help popup
+	triggerGetHelp : function(){
+
+		jQuery(".Help-btn").on('click',function(e){  
+			var elem = jQuery(e.currentTarget);
+			var module=app.getModuleName();
+			var viewname=app.view();
+			var css = jQuery.extend({'text-align' : 'left','overflow-y':'scroll','resizable':'Yes'},css);
+			
+			var params = {
+				'module' : module,
+				'view' : 'InternalWSAjax',
+				'func' : 'getUserManualData',
+				'type' : viewname
+			}
+
+			app.helper.showProgress();
+			app.request.post({"data":params}).then(function(err,data){
+				
+				if(err === null){ 
+					app.helper.loadPageOverlay(data,{'ignoreScroll' : false,'backdrop': 'static'}).then(function(){
+						app.helper.hideProgress();
+					//	jQuery('div[name="contents"]').find('.data').css('height','50vh');
+					//	var taskManagementPageOffset = jQuery('div[name="contents"]').offset();
+						//$('#overlayPage').find(".arrow").css("left",taskManagementPageOffset.left+13);
+						//$('#overlayPage').find(".arrow").addClass("show");
+					});
+
+				} else{
+					app.helper.showErrorNotification({"message":err});
+				}
+
+			});
+		});				
+	}, //end here
+
 	registerEvents: function() {
 		this.registerMenuToggle();
 		this.registerGlobalSearch();
@@ -372,6 +408,8 @@ Vtiger.Class('Vtiger_Index_Js', {
 		this.registerMultiUpload();
 		this.registerHoverEventOnAttachment();
 		//this.addBodyScroll();
+		this.triggerGetHelp();	//added by jitu@salespeer for Context Help	
+
 		this.mentionerCallBack();
 		this.modulesMenuScrollbar();
 		Vtiger_Index_Js.registerActivityReminder();
