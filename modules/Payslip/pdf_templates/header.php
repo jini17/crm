@@ -1,144 +1,58 @@
 <?php
-/*+**********************************************************************************
- * The contents of this file are subject to the vtiger CRM Public License Version 1.0
- * ("License"); You may not use this file except in compliance with the License
- * The Original Code is:  vtiger CRM Open Source
- * The Initial Developer of the Original Code is vtiger.
- * Portions created by vtiger are Copyright (C) vtiger.
- * All Rights Reserved.
- ************************************************************************************/
-	include_once 'vtlib/Vtiger/PDF/inventory/HeaderViewer.php';
 
-	class header extends Vtiger_PDF_InventoryHeaderViewer {
+ob_start();
+/* ************** header.jpg *********************** */
+//$pdf->Image('test/logo/amslogo.png', $x='45', $y='25', $w='120', $h='10', $type='', $link='', $align='center', $resize=false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false);
+/* ************** End header *********************** */
 
-		function display($parent) {
-		
-		$pdf = $parent->getPDF();
-		$pdf->SetFont('Helvetica', '', 11);
-		$headerFrame = $parent->getHeaderFrame();
-		$headerColumnWidth = $headerFrame->w/3.0;
-		$pdfsettings = $this->model->get('pdfsettings'); 
-		
-		$modelColumns = $this->model->get('columns');
-		$modelColumn0 = $modelColumns[0];
-		$modelColumn2 = $modelColumns[2];
-		$pdf->setCellPadding(5);
-		$vatlabel = getTranslatedString('VATID');
-		
-		list($imageWidth, $imageHeight, $imageType, $imageAttr) = $parent->getimagesize($modelColumn0['logo']);
-			$w = $imageWidth;
-			if($w > 220) {
-				$w=165;
-			}
-			/*
-			$h = $imageHeight;
-			if($h >180) {
-				$h = 135;
-			}*/
-		/* start logo, address & doc type*/	
-		if($this->model) {	//added by jitu@secondcrm.com for firstpage header
-			$invoicetitlearray  = explode('#',$this->model->get('title'));
-			$module = rtrim(strtoupper($this->model->get('module')),'S');
-			$pdftitle = $module;		
-			
-			$html = "
-			<table border=\"1\">
-				<tr>
-					<td width=\"250pt\">";
-					$html .= "</td>
-					<td width=\"40pt\"></td>
-					<td width=\"250pt\" >
-						
-					";
-					/*doc type table start*/
-					$html .="
-							<table cellpadding=\"3\" cellspacing=\"2\" border=\"1\">
-								<span style=\"font-size:15pt\"><strong>{$modelColumn0[summary]}</strong></span><br />(890813-X)<br/>
-						   {$modelColumn0[content]}<br />";
-					foreach($modelColumn2 as $label => $value) { 
-						if(is_array($value)) {
-							foreach($value as $l=>$v) {
-								$text = $l;	
-								$textvalue = $v;	
-								if(strpos($l,'Total Amount (')!==False) {	
-									$text = '<strong>'.$l.'</strong>';
-									$textvalue = '<strong>'.$v.'</strong>';
-								} 		
-									
-					 		}
-					$html .= "</table></td>
-				</tr></table><br />";
-				/*doc type table end*/
-				/* end logo, address & doc type*/
-				
-				//Empty lines after header				
-				$html .= str_repeat('<br />',$pdfsettings['emptyline']);
-						
-				$html .= <<<EOF
-					<br/><br/><table border="1">
-						<tr>
-EOF;
-				} else {
-					/* Address **/
-					$html .= "<td width=\"425pt\">
-							<span style=\"font-size:15pt\"><strong>Jitendra Gupta</strong> (Employee No: 006/0414)</span><br /><br/>
-							<table width=\"400pt\" border=\"1\">
-							<tr>
-							<td><span style=\"font-size:10pt\">Position: SR. System Analyst</span><br/>
-								<span style=\"font-size:10pt\">Dept: Technical</span><br/>
-								<span style=\"font-size:10pt\">IC/Passport: P9477763</span></td>
 
-							<td><span style=\"font-size:10pt\">EPF No: N/A</span><br/>
-								<span style=\"font-size:10pt\">SOCSO No: N/A</span><br/>
-								<span style=\"font-size:10pt\">Income Tax No: SG2333132104</span></td>
-							</tr>
-							</table>
-						</td>
-						<td>
-						<span> Period: <strong>March 2018</strong></span><br/><br/>
-						<table border=\"1\" width=\"100pt\" style=\"border-color:#FF0000;\">
-							<tr>
-							<td><span align=\"right\" style=\"font-size:10pt\" >NET PAY</span><br/><span align=\"right\" style=\"font-size:10pt\">RM 3,600.16</span></td>
-							</tr>
-							</table>
-						</td>";
-				}
-			}			
-			$html .="</tr></table>";
-			
 
-			$pdf->writeHTML($html, true, false, true, false, '');
+$xmargin = '20';
+$ymargin = '0';
+$pdf->SetFont($default_font,'',10.5);
 
-			$html = '<!--item list start-->
-				<table cellpadding="5" border="1">
-					<tr><td colspan="3"><h3>Employee Earnings</h3></td>
-					<td><h3>Current</h3></td></tr>';
-		$html .='</table><br /><br />';
-		
-	
-		$html .= '<!--item list start-->
-				<table cellpadding="5" border="1">
-					<tr><td colspan="3"><h3>Employee Deductions</h3></td>
-					<td><h3>Current</h3></td></tr>';
-					 $html .= '<tr colspan="'.$totalcols.'">'.$line.'</tr>'; 
-					 
-					 $html .='</table><br /><br />';
-		
-		
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
-		
-		$html .= '<!--item list start-->
-				<table cellpadding="5" border="1">
-					<tr><td colspan="3"><h3>Company Contributions</h3></td>
-					<td><h3>Current</h3></td></tr>';
-		$html .='</table><br /><br />';
-		
-		$pdf->writeHTML($html, true, false, true, false, '');
+/*********************Start Section A**************************/
+# Start Payments table in HTML by Haziq
+$pdf->Ln(0);
 
-		}
-			
-	}
-	
+if($logo_name=='' OR $logo_name==null){
+
+	$logo_name = "Agiliux-logo.png";
+
 }
+$html = <<<EOD
+<table cellpadding="10" border="0">
+<tr>  
+  <td align="right"><img src="test/logo/$logo_name" height="100" width="300"></img></td>
+  <td align="left">$organizationname<br />$address<br />$city , $state, $country, $code<br />Tel: $phone</td>
+</tr>
+</table>
+EOD;
+
+// output the HTML content
+$pdf->writeHTML($html, true, false, false, false, '');
+$pdf->Line(10.5,$pdf->GetY(), 201, $pdf->GetY());
+$pdf->Line(10.5,$pdf->GetY()+1, 201, $pdf->GetY()+1);
+# End
+//End Page 2
+
+
+
+
+/* ************** enddate.jpg *********************** */
+//$pdf->Image('test/logo/date.jpg', $x='10', $y=$line_y_location+15 , $w='190', $h='120', $type='', $link='', $align='center', $resize=false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false);
+/* ************** enddate *********************** */
+
+/* ************** enddate.jpg *********************** */
+//$pdf->Image('test/logo/full_hitam.jpg', $x='10', $y=$line_y_location+15 , $w='190', $h='250', $type='', $link='', $align='center', $resize=false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false);
+/* ************** enddate *********************** */
+
+/* ************** Start 3rd Page *********************** */
+//$pdf->SetXY('3','20');
+//$xmargin = '3';
+//$ymargin = '20';
+//$line_y_location= $pdf->GetY();
+
+/* ************** End 3rd Page *********************** */
 ?>
