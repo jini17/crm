@@ -22,7 +22,8 @@ jQuery.Class("Vtiger_Header_Js", {
         }
         var fileLocationType = currentTargetObject.data('filelocationtype');
         var fileName = currentTargetObject.data('filename'); 
-        if(fileLocationType == 'I'){
+        //fileLocationType == 'G' condition added By Jitu/Mabruk for Google Drive Integration 28/03/2018
+        if(fileLocationType == 'I' || fileLocationType == 'G'){
             var params = {
                 module : 'Documents',
                 view : 'FilePreview',

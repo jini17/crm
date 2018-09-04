@@ -10,7 +10,7 @@
 -->*}
 {strip}
 	{if !empty($PICKIST_DEPENDENCY_DATASOURCE)}
-		<input type="hidden" name="picklistDependency" value='{Vtiger_Util_Helper::toSafeHTML($PICKIST_DEPENDENCY_DATASOURCE)}' />
+		<input type="hidden" name="picklisdivependency" value='{Vtiger_Util_Helper::toSafeHTML($PICKIST_DEPENDENCY_DATASOURCE)}' />
 	{/if}
 
 	<div name='editContent'>
@@ -20,6 +20,36 @@
 					<h4 class='fieldBlockHeader'>{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
 					<hr>
 					<div class="table table-borderless">
+						<!--Added By Mabruk-->
+						{if $BLOCK_LABEL eq 'Meeting Agenda' && $MODULE eq 'Events'}
+							<div class="row">
+								<div class="fieldLabel alignMiddle col-xs-2">Select an Agenda Template</div>
+								<div class="fieldValue col-xs-3">
+									<select id="agendaTemplate" class="select2 inputElement" name="agendaTemplate">
+										<option value="" slected>Select a template</option>
+										{foreach item=ITEM from=$DATA}											
+											<option value="{$ITEM.body}">{$ITEM.name}</option>
+										{/foreach}
+									</select>
+								</div>
+								<div class="visible-sm visible-xs clearfix"></div>								
+							</div>
+						{/if}
+						{if $BLOCK_LABEL eq 'LBL_MOM_BLOCK' && $MODULE eq 'Events'}
+							<div class="row">
+								<div class="fieldLabel alignMiddle col-xs-2">Select a MOM Template</div>
+								<div class="fieldValue col-xs-3">
+									<select id="MOMTemplate" class="select2 inputElement" name="MOMTemplate">
+										<option value="" slected>Select a template</option>
+										{foreach item=ITEM from=$DATA}											
+											<option value="{$ITEM.body}">{$ITEM.name}</option>
+										{/foreach}
+									</select>
+								</div>	
+								<div class="visible-sm visible-xs clearfix"></div>							
+							</div>
+						{/if}
+						<!--End-->
 						<div class="row">
 							{assign var=COUNTER value=0}
 							{foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}
@@ -95,12 +125,56 @@
 								{/if}
 								
 								<div class="visible-sm visible-xs clearfix"></div>
+
 							{/foreach}
 							{*If their are odd number of fields in edit then border top is missing so adding the check*}
 							{* if $COUNTER is odd}
 								</div>
 							{/if *}
 						</div>
+						<!-- Added By Jitu Mabruk for Meeting-->
+						{if $BLOCK_LABEL eq 'Participants' && $MODULE eq 'Events'}
+							<div class="row">
+								<div class="fieldLabel alignMiddle">{vtranslate('LBL_INVITE_USERS', $MODULE)}</div>
+								<div class="fieldValue">
+									<select id="selectedUsers" class="select2 inputElement" multiple name="selectedusers[]">
+										{foreach key=USER_ID item=USER_NAME from=$ACCESSIBLE_USERS}
+											{if $USER_ID eq $CURRENT_USER->getId()}
+												{continue}
+											{/if}
+											<option value="{$USER_ID}" {if in_array($USER_ID,$INVITIES_SELECTED)}selected{/if}>
+												{$USER_NAME}
+											</option>
+										{/foreach}
+									</select>
+								</div>
+								<div class="visible-sm visible-xs clearfix"></div>
+								<div></div><div></div>
+							</div>
+							<div class="row">
+								<div class="fieldLabel alignMiddle">{vtranslate('LBL_INVITE_EXTERNAL_EMAILS', $MODULE)}</div>
+								<div class="fieldValue">
+									
+									<select id="externalusers" class="select2 inputElement {if $EXTERNAL_EMAILS|count eq 0} hide{/if}" multiple name="externalusers[]" placeholder="Click on add icon">
+										{foreach item=EMAIL from=$EXTERNAL_EMAILS}
+											<option value="{$EMAIL['emailaddress']}" selected>
+												{$EMAIL['emailaddress']}
+											</option>
+										{/foreach}
+									</select>
+									&nbsp;&nbsp;
+									<span class="addemail" style="cursor:pointer;"><button class="btn" name="addemail"><i class="fa fa-plus"></i>&nbsp;Add Email</button></span>
+									<span class="fieldvalue inputspan hide"><input type="email" class="inputElement" name="extemail" id="extemail" /></span>
+									
+									<div class="btn-group inline-save hide">
+        								<button class="button btn-success btn-small add" type="button" name="save"><i class="fa fa-check"></i></button>
+        								<button class="button btn-danger btn-small cancelbtn" type="button" name="Cancel"><i class="fa fa-close"></i></button>
+    								</div>
+								</div>
+								<div class="visible-sm visible-xs clearfix"></div>
+								<div></div><div></div>
+							</tr>		
+						{/if}
 					</div>
 				</div>
 			{/if}

@@ -233,22 +233,6 @@ Class Reports_Edit_View extends Vtiger_Edit_View {
 	}
 
 	function step3(Vtiger_Request $request) {
-		error_reporting(1);
-		ini_set('display_erros',1);
-
-		  register_shutdown_function('handleErrors');
-		    function handleErrors() {
-
-		       $last_error = error_get_last();
-
-		       if (!is_null($last_error)) { // if there has been an error at some point
-
-			  // do something with the error
-			  print_r($last_error);
-
-		       }
-
-		    }
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
 		$record = $request->get('record');

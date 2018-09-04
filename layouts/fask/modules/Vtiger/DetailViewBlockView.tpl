@@ -132,13 +132,45 @@
 										{/if}
 									</div>
 								{/if}
-								
+						
 							{/foreach}
+
 							
 						</div>
+						<!-- Added By Jitu Mabruk for Meeting--> 	
+						{if $BLOCK_LABEL_KEY eq 'Participants'}
+							<div class="row">
+			                    <div class="fieldLabel col-xs-6 col-md-3">
+			                        <span class="muted">{vtranslate('LBL_INVITE_USERS', $MODULE_NAME)}</span>
+			                    </div>
+			                    <div class="fieldValue col-xs-6 col-md-3">
+			                        {foreach key=USER_ID item=USER_NAME from=$ACCESSIBLE_USERS}
+			                            {if in_array($USER_ID,$INVITIES_SELECTED)}
+			                                {$USER_NAME} - {vtranslate($INVITEES_DETAILS[$USER_ID],$MODULE)}
+			                                <br>
+			                            {/if}
+			                        {/foreach}
+			                    </div>
+			                    <div class="visible-sm visible-xs clearfix"></div>				                
+	               			
+			                    <div class="fieldLabel col-xs-6 col-md-3">
+			                        <span class="muted">{vtranslate('LBL_EXTERNAL_USERS', $MODULE_NAME)}</span>
+			                    </div>
+			                     <div class="fieldValue col-xs-6 col-md-3">
+			                        {foreach item=EMAIL from=$EXTEMAILS_DETAILS}
+			                            {$EMAIL['emailaddress']} - {vtranslate($EMAIL['status'],$MODULE)}
+			                            <br>	                          
+			                        {/foreach}
+			                    </div>
+			                    <div class="visible-sm visible-xs clearfix"></div>
+	               			</div>			               			
+	               		{/if}	
+	               		<!--End-->	
 			</div>
 		</div>
 		</div>
+
 		</div>
+
 	{/foreach}
 {/strip}

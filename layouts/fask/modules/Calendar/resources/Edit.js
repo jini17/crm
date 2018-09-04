@@ -166,6 +166,95 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
 
 		this.fillRelatedContacts(form);
 	},
+
+	/**
+	 * Added By Jitu and Mabruk Function to register event for ckeditor for description field
+	 */
+	registerTextEditorForMOM : function(){
+		var form = this.getForm();
+		var noteContentElementMOM = form.find('[name="min_meeting"]');
+		var noteContentElementAgenda = form.find('[name="agenda"]');
+		
+		if(noteContentElementMOM.length > 0){
+			noteContentElementMOM.removeAttr('data-validation-engine').addClass('ckEditorSource');
+			var ckEditorInstance = new Vtiger_CkEditor_Js();
+			ckEditorInstance.loadCkEditor(noteContentElementMOM);
+			noteContentElementMOM.closest('div').css({'width':'1100px'});
+			//noteContentElement.closest('tr').find('td:nth-child(1)').hide();
+			//noteContentElement.closest('tr').find('td:nth-child(3)').hide();
+			//noteContentElement.closest('tr').find('td:nth-child(4)').hide();			
+		}
+
+		if(noteContentElementAgenda.length > 0){
+			noteContentElementAgenda.removeAttr('data-validation-engine').addClass('ckEditorSource');
+			var ckEditorInstance = new Vtiger_CkEditor_Js();
+			ckEditorInstance.loadCkEditor(noteContentElementAgenda);
+			noteContentElementAgenda.closest('div').css({'width':'1100px'});
+			//noteContentElement.closest('tr').find('td:nth-child(1)').hide();
+			//noteContentElement.closest('tr').find('td:nth-child(3)').hide();
+			//noteContentElement.closest('tr').find('td:nth-child(4)').hide();			
+		} 
+
+		//Added By Mabruk on 06/07/2018 For Changing Meeting Templates (Agenda)
+		var agendaTemplate = jQuery('#agendaTemplate');
+		var agendaSelector = jQuery('#s2id_agendaTemplate').find('.select2-chosen');
+		var currIndex = agendaTemplate.prop("selectedIndex");
+		var currText = agendaSelector.text();	
+
+		agendaTemplate.change(function() {	
+			
+			var currentData = CKEDITOR.instances['Events_editView_fieldName_agenda'].getData({trim: true});
+
+				if (currentData != "" && currentData != null) { 
+
+					var confirm = window.confirm("WARNING: This will replace your existing template and you will lose all your changes");
+
+					if (confirm == true) {
+						CKEDITOR.instances['Events_editView_fieldName_agenda'].setData(jQuery(this).val());
+						currIndex = agendaTemplate.prop("selectedIndex"); 
+						currText = agendaSelector.text();	
+					}
+
+					else {					
+					    agendaSelector.text(currText);
+					    agendaTemplate.prop("selectedIndex",currIndex);
+					}
+				}
+
+				else
+					CKEDITOR.instances['Events_editView_fieldName_agenda'].setData(jQuery(this).val());			
+		});
+
+		//Added By Mabruk on 06/07/2018 For Changing Meeting Templates (MOM)
+		var MOMTemplate = jQuery('#MOMTemplate');
+		var MOMSelector = jQuery('#s2id_MOMTemplate').find('.select2-chosen');
+		var currIndex = MOMTemplate.prop("selectedIndex");
+		var currText = MOMSelector.text();	
+
+		MOMTemplate.change(function() {	
+			
+			var currentData = CKEDITOR.instances['Events_editView_fieldName_min_meeting'].getData({trim: true});
+
+				if (currentData != "" && currentData != null) { 
+
+					var confirm = window.confirm("WARNING: This will replace your existing template and you will lose all your changes");
+
+					if (confirm == true) {
+						CKEDITOR.instances['Events_editView_fieldName_min_meeting'].setData(jQuery(this).val());
+						currIndex = MOMTemplate.prop("selectedIndex"); 
+						currText = MOMSelector.text();	
+					}
+
+					else {					
+					    MOMSelector.text(currText);
+					    MOMTemplate.prop("selectedIndex",currIndex);
+					}
+				}
+
+				else
+					CKEDITOR.instances['Events_editView_fieldName_min_meeting'].setData(jQuery(this).val());			
+		});
+	},
 	/**
 	 * Function to get reference search params
 	 */
@@ -600,8 +689,44 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
 		 });
 	 },
 
+	 showExternalInputContainer : function(){
+          jQuery(".addemail").on('click', function(e){
+                 e.preventDefault();
+                 jQuery(".addemail").addClass('hide');
+                 jQuery('.inline-save').removeClass('hide');
+                 jQuery('.inputspan').removeClass('hide');
+          });
+          jQuery('.cancelbtn').on('click',function(e){
+          	e.preventDefault();
+          	jQuery(".addemail").removeClass('hide');
+               jQuery('.inline-save').addClass('hide');
+               jQuery('.inputspan').addClass('hide');
+          	
+          });
+         jQuery('.add').on('click',function(e){ 
+               var email = jQuery("#extemail").val();
+              
+               if(email ==''){
+                    e.preventDefault();
+                    alert(app.vtranslate('JS_EMAIL_ADDRESS_CANT_EMPTY'));
+				//app.helper.showErrorNotification({message:app.vtranslate('LBL_CANT_SELECT_CONTACT_FROM_LEADS')});
+                    
+               } else {
+                    jQuery('#externalusers').removeClass('hide');
+                    jQuery('#externalusers').append("<option value='"+email+"' selected>"+email+"</option>");
+                    jQuery('#externalusers').trigger('change');
+                    jQuery('#extemail').val('');
+                    jQuery('.inputspan').addClass('hide');
+                    jQuery(".addemail").removeClass('hide');
+                    jQuery('.inline-save').addClass('hide');
+               }
+         }); 	
+     },
+
 	registerBasicEvents : function(container) {
 		this._super(container);
+		this.showExternalInputContainer();
+		this.registerTextEditorForMOM();
 		this.registerRecordPreSaveEvent(container);
 		this.registerDateTimeHandlers(container);
 		this.registerToggleReminderEvent(container);

@@ -26,6 +26,7 @@
 					<h4 class='fieldBlockHeader'>{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
 					<hr>
 					<table class="table table-borderless">
+						<!--Added By Mabruk-->
 						{if $BLOCK_LABEL eq 'Meeting Agenda' && $MODULE eq 'Events'}
 							<tr>
 								<td class="fieldLabel alignMiddle">Select an Agenda Template</td>
@@ -52,6 +53,7 @@
 								</td>								
 							</tr>
 						{/if}
+						<!--End-->
 						<tr>
 							{assign var=COUNTER value=0}
 							{foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}

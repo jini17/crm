@@ -614,7 +614,12 @@ class Reports extends CRMEntity{
 
 	function getPriModuleColumnsList($module)
 	{
-		//$this->updateModuleList($module);
+		//added by jitu@HR Report
+		if($module=='Users'){
+			$this->updateModuleList($module);
+			$this->module_list[$module] = array_flip($this->module_list[$module]);
+		} //end here 
+		
 		$allColumnsListByBlocks =& $this->getColumnsListbyBlock($module, array_keys($this->module_list[$module]), true);
 		foreach($this->module_list[$module] as $key=>$value) {
 			$temp = $allColumnsListByBlocks[$key];
