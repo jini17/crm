@@ -55,7 +55,7 @@ class Settings_MultipleTnC_Record_Model extends Settings_Vtiger_Record_Model {
 	public function getEditViewUrl() {
 		return '?module=MultipleTnC&parent=Settings&view=Edit&record='.$this->getId();
 	}
-z
+
 	/**
 	 * Function to get the Delete Action Url for the current group
 	 * @return <String>

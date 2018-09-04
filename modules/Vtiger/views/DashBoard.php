@@ -23,7 +23,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
 		parent::preProcess($request, false);
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
-
+		
 		$dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
 		//check profile permissions for Dashboards
 		$moduleModel = Vtiger_Module_Model::getInstance('Dashboard');

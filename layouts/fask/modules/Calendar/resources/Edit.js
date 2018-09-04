@@ -337,12 +337,14 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
 				minutesToAdd = Calendar_Edit_Js.userChangedTimeDiff;
 			}
 			m.add(parseInt(minutesToAdd), 'minutes');
-			if ((container.find('[name="time_start"]').data('userChangedDateTime') !== 1) || (container.find('[name="module"]').val()==='Calendar' || container.find('[name="module"]').val()==='Events')) {
-					if(m.format(vtUtils.getMomentDateFormat()) == 'Invalid date') {
-						m.format(vtUtils.getMomentDateFormat()) = '';
-					}
-					endDateElement.val(m.format(vtUtils.getMomentDateFormat()));
-				}
+			if ((container.find('[name="time_start"]').data('userChangedDateTime') !== 1)
+                                                                      || (container.find('[name="module"]').val()==='Calendar' 
+                                                                      || container.find('[name="module"]').val()==='Events')) {
+                                                                                if(m.format(vtUtils.getMomentDateFormat()) == 'Invalid date') {
+                                                                                        m.format(vtUtils.getMomentDateFormat()) = '';
+                                                                                }
+			endDateElement.val(m.format(vtUtils.getMomentDateFormat()));
+			}
 			endTimeElement.val(m.format(vtUtils.getMomentTimeFormat()));
 
 			vtUtils.registerEventForDateFields(endDateElement);

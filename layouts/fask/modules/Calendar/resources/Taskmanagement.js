@@ -770,7 +770,7 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 			 app.helper.hideProgress();
 		});
 
-        window.onbeforeunload = function() {
+        /*window.onbeforeunload = function() {
 
         	var tabid = jQuery("#default_tab").val();
             window.setTimeout(function () {
@@ -778,7 +778,7 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
             }, 0);
             
             window.onbeforeunload = null;
-        }
+        }*/
 	}
 
 

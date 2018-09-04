@@ -48,7 +48,7 @@ th {
 	overflow-x: auto;
 	overflow-y: hidden;
 	position: relative;
-	//margin: 3em 0;
+
 	width: 100%;
 }
 .sticky-wrap .sticky-thead,

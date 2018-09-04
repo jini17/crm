@@ -84,13 +84,13 @@ try {
 } catch (Exception $e) {
     die($e->getMessage());
 }
---CLEAN--
-<?php
-$_tmp = dirname(__FILE__) . '/tmp';
-include dirname(__FILE__) . '/functions.php';
-unlinkRecursive($_tmp);
---EXPECT--
-string(9) "Setting.."
-string(12) "Retrieving.."
-string(6) "foobar"
+
+//<?php
+//$_tmp = dirname(__FILE__) . '/tmp';
+//include dirname(__FILE__) . '/functions.php';
+//unlinkRecursive($_tmp);
+//--EXPECT--
+//string(9) "Setting.."
+//string(12) "Retrieving.."
+//string(6) "foobar"
 

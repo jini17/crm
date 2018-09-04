@@ -50,9 +50,7 @@
 			</div> 
 
 			<div class="col-xs-3 col-lg-5 col-md-5 col-sm-5 module-breadcrumb-{$smarty.request.view}" style="margin:  0px; padding: 0px;">
-	
-
- <div id="appnav" class="navbar-right">
+				 <div id="appnav" class="navbar-right">
 					<div class="btn-group">
 
 						{foreach item=BASIC_ACTION from=$MODULE_BASIC_ACTIONS}

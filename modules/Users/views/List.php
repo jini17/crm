@@ -24,7 +24,10 @@ class Users_List_View extends Settings_Vtiger_List_View {
 			'modules.Users.resources.List',
 			"modules.Emails.resources.MassEdit",
 			"~layouts/".Vtiger_Viewer::getDefaultLayoutName()."/lib/jquery/floatThead/jquery.floatThead.js",
-			"~layouts/".Vtiger_Viewer::getDefaultLayoutName()."/lib/jquery/perfect-scrollbar/js/perfect-scrollbar.jquery.js"
+			"~layouts/".Vtiger_Viewer::getDefaultLayoutName()."/lib/jquery/perfect-scrollbar/js/perfect-scrollbar.jquery.js",
+                                                                "~layouts/vlayout/modules/Users/resources/List.js"
+                    
+                //    /var/www/AG_CRM/layouts/
 		);
 
 		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
