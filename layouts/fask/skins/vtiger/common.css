@@ -8900,3 +8900,10 @@ visibility: visible;top: 0;left: 60px; /*position where enlarged image should of
 ul.nav navbar-nav newtabs>li{
   padding: 0px 10px;
 }
+ a.right-icon-dashboard > i{
+  color: #fff !important;
+  font-size: 16px !important;
+  line-height: 40px !important;
+}
+
+

@@ -218,7 +218,7 @@
 				</div>-->
 
 				<!--top nav with lock-->
-				<div class="col-lg-4 col-md-5 col-sm-4 col-xs-8 "><div class="row">
+				<div class="col-lg-5 col-md-5 col-sm-4 col-xs-8 "><div class="row">
 					<ul class="nav navbar-nav newtabs">
 						<li>
 							<div class="search-links-container hidden-sm">
@@ -271,7 +271,7 @@
 				</div>
 			</div>
 
-			<div id="navbar" class="col-sm-4 col-md-3 col-lg-3 collapse navbar-collapse navbar-right global-actions">
+			<div id="navbar" class="col-sm-3 col-md-3 col-lg-3 collapse navbar-collapse navbar-right global-actions">
 				<ul class="nav navbar-nav">
 
 
@@ -394,9 +394,28 @@
 							</ul>
 						</div>
 					</li>
+				
 					<li>
 						<div>
-							<a href="index.php?module=Reports&amp;view=List" title="Reports" aria-hidden="true">
+							<a class="right-icon-dashboard" href="#" title="Notifications" aria-hidden="true">
+								<i class="fa fa-bell-o" aria-hidden="true"></i>
+							</a>
+						
+							</a>
+						</div>
+					</li>
+					<li>
+						<div>
+							<a class="right-icon-dashboard" href="#" title="Email" aria-hidden="true">
+								<i class="fa fa-envelope-o" aria-hidden="true"></i>
+							</a>
+						
+							</a>
+						</div>
+					</li>
+					<li>
+						<div>
+							<a class="right-icon-dashboard" href="#" title="Files" aria-hidden="true">
 								<i class="fa fa-file-text-o" aria-hidden="true"></i>
 							</a>
 						
@@ -406,15 +425,32 @@
 							{assign var=USER_PRIVILEGES_MODEL value=Users_Privileges_Model::getCurrentUserPrivilegesModel()}
 							{assign var=CALENDAR_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Calendar')}
 							{if $USER_PRIVILEGES_MODEL->hasModulePermission($CALENDAR_MODULE_MODEL->getId())}
-							<li><div><a href="index.php?module=Calendar&view={$CALENDAR_MODULE_MODEL->getDefaultViewName()}" title="{vtranslate('Calendar','Calendar')}" aria-hidden="true">
-								<i class="material-icons">event</i></a></div></li>
-								{/if}
-								{assign var=REPORTS_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Reports')}
-								{if $USER_PRIVILEGES_MODEL->hasModulePermission($REPORTS_MODULE_MODEL->getId())}
-								<li><div><a href="index.php?module=Reports&view=List" title="{vtranslate('Reports','Reports')}" aria-hidden="true">
+					<li>
+						<div>
+							<a class="right-icon-dashboard" title="Files" href="index.php?module=Calendar&view={$CALENDAR_MODULE_MODEL->getDefaultViewName()}" title="{vtranslate('Calendar','Calendar')}" aria-hidden="true">
+								<i class="fa fa-calendar" aria-hidden="true"></i>
+							</a>
+						</div>
+					</li>
+					<li>
+						<div>
+							<a class="right-icon-dashboard" title="Files" href="index.php?module=Vtiger&amp;parent=Settings&amp;view=Index" title="{vtranslate('Calendar','Calendar')}" aria-hidden="true">
+								<i class="fa fa-gear" aria-hidden="true"></i>
+							</a>
+						</div>
+					</li>
+					
+					{/if}
+					{assign var=REPORTS_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Reports')}
+					{if $USER_PRIVILEGES_MODEL->hasModulePermission($REPORTS_MODULE_MODEL->getId())}
 
-									<i class="material-icons">show_chart</i>
-								</a></div></li>
+					<li>
+						<div>
+							<a class="right-icon-dashboard" href="index.php?module=Reports&view=List" title="{vtranslate('Reports','Reports')}" aria-hidden="true">
+								<i class="fa fa-area-chart" aria-hidden="true"></i>
+							</a>
+						</div>
+					</li>
 								{/if}
 								{if $USER_PRIVILEGES_MODEL->hasModulePermission($CALENDAR_MODULE_MODEL->getId())}
 							<!--<li><div><a href="#" class="taskManagement" title="{vtranslate('Tasks','Vtiger')}" aria-hidden="true">
