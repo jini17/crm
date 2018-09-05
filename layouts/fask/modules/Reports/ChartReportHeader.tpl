@@ -80,6 +80,14 @@
                     <div id='filterContainer' class='{if $filterConditionNotExists eq true} hide {/if}'>
                         {include file='AdvanceFilter.tpl'|@vtemplate_path RECORD_STRUCTURE=$RECORD_STRUCTURE ADVANCE_CRITERIA=$SELECTED_ADVANCED_FILTER_FIELDS COLUMNNAME_API=getReportFilterColumnName}
                     </div>
+                    <div id="dashboardTab">
+                        <select name="dashboard_tab" id="dashboard_tab" class="col-lg-2 select2">
+                             <option value="">{vtranslate('LBL_SELECT_DASHBOARD_TAB', $MODULE)}</option>
+                             {foreach item=TAB from=$DASHBOARD_TABS}
+                                <option value="{$TAB.id}">{$TAB.tabname}</option>
+                             {/foreach}
+                        </select>
+                    </div>
                     {if $REPORT_MODEL->isEditableBySharing()}
                         <div class="row textAlignCenter hide reportActionButtons">
                             <button class="btn btn-success generateReportChart" data-mode="save" value="{vtranslate('LBL_SAVE',$MODULE)}">

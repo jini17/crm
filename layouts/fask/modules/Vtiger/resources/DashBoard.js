@@ -13,7 +13,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 
 	//static property which will store the instance of dashboard
 	currentInstance : false,
-	dashboardTabsLimit : 10,
+	dashboardTabsLimit : 1000,
 
 	addWidget : function(element, url) {
 		var element = jQuery(element);

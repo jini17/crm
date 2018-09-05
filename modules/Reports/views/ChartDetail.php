@@ -106,6 +106,7 @@ class Reports_ChartDetail_View extends Vtiger_Index_View {
 				unset($activeTabs[$index]);
 			}
 		}
+
 		$viewer->assign('DASHBOARD_TABS', $activeTabs);
 
 		$viewer->view('ChartReportHeader.tpl', $moduleName);
@@ -132,6 +133,11 @@ class Reports_ChartDetail_View extends Vtiger_Index_View {
 		if(empty($secondaryModules)) {
 			$viewer->assign('CLICK_THROUGH', true);
 		}
+
+		//START ADDED BY JITU@SECONDCRM.COM- #dashreportchart
+		$btnstatus = self::checkwidgetsatatus($record, '1');
+		$viewer->assign('BUTTONSTATUS', $btnstatus);
+		//END ADDED BY JITU@SECONDCRM.COM- #dashreportchart
 
 		$isPercentExist = false;
 		$selectedDataFields = $reportChartModel->get('datafields');
@@ -222,6 +228,21 @@ class Reports_ChartDetail_View extends Vtiger_Index_View {
 		$cssScripts = $this->checkAndConvertCssStyles($headerCss);
 		$headerCssScriptInstances = array_merge($parentHeaderCssScriptInstances , $cssScripts);
 		return $headerCssScriptInstances;
+	}
+
+	//ADDED BY jitu@SECONDCRM.COM- #dashreportchart
+	public function checkwidgetsatatus($record, $dashboardtab) {
+
+		$db = PearDatabase::getInstance();
+		$sql = "SELECT * FROM vtiger_module_dashboard_widgets WHERE linkid=119 AND reportid =? AND dashboardtabid=?";
+		$result = $db->pquery($sql, array($record, $dashboardtab));
+		$rows = $db->num_rows($result);
+
+		if($rows >= 1){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 }

@@ -13,9 +13,9 @@ class Users_List_View extends Settings_Vtiger_List_View {
 	function checkPermission(Vtiger_Request $request) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		global $current_user;
-		
-		echo $current_user->user_name;
-		if(!$currentUserModel->isAdminUser()) {
+	
+		//echo  $current_user->get('hradmin');
+		if(!$currentUserModel->isAdminUser() && $current_user->hradmin !=1) {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
 		}
 	}

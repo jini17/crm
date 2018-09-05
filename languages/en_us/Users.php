@@ -215,7 +215,7 @@ $languageStrings = array(
 	'Summary' => 'Summary',
 	'Detail' => 'Detail',
 	'LBL_USER_LIST_DETAILS' => 'Details',
-
+	'Users' => 'Employee',
 	'LBL_OLD_PASSWORD' => 'Old Password',
 	'LBL_CHANGE_PASSWORD' => 'Change Password',
 	'LBL_NEW_PASSWORD' => 'New Password',

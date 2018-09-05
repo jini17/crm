@@ -79,7 +79,7 @@ class Vtiger_MenuStructure_Model extends Vtiger_Base_Model {
 		$menuGroupedListByParent = array();
 		$menuListArray = array();
 		$menuListArray[self::TOP_MENU_INDEX] = array();
-		$menuListArray[self::MORE_MENU_INDEX] = $structureModel->getEmptyMoreMenuList();
+		//$menuListArray[self::MORE_MENU_INDEX] = $structureModel->getEmptyMoreMenuList();
 
 		foreach($menuModelList as $menuModel) {
 			if(($menuModel->get('tabsequence') != -1 && (!$topMenuLimit || $currentTopMenuCount < $topMenuLimit)) ) {

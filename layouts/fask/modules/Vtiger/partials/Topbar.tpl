@@ -33,7 +33,21 @@
 	}
 
 </style>
-
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+      jQuery('.menu-open').on('hover',function(){
+       var $open = jQuery('.dropdown');
+         jQuery('.app-navigator-container').find('.dropdown-menu.fask').css('display','block');
+    
+	});
+       jQuery('.dropdown-menu.fask').on('mouseout,mouseleave',function(){
+       var $open = jQuery('.dropdown');
+         jQuery('.app-navigator-container').find('.dropdown-menu.fask').css('display','block');
+    
+	});
+	});
+	
+</script>
 
 <nav class="navbar navbar-default navbar-fixed-top app-fixed-navbar">
 
@@ -42,7 +56,7 @@
 		<div class="row">
 			<div class="col-lg-2 col-md-5 col-sm-4 col-xs-8 paddingRight0 app-navigator-container">
 				<div class="row">
-					<div id="appnavigator" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 cursorPointer app-switcher-container hidden-lg hidden-md" data-app-class="{if $MODULE eq 'Home' || !$MODULE}ti-dashboard{else}{$APP_IMAGE_MAP[$SELECTED_MENU_CATEGORY]}{/if}">
+					<div id="appnavigator" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 cursorPointer app-switcher-container hidden-lg hidden-md " data-app-class="{if $MODULE eq 'Home' || !$MODULE}ti-dashboard{else}{$APP_IMAGE_MAP[$SELECTED_MENU_CATEGORY]}{/if}">
 						<div class="row app-navigator">
 							<span class="app-icon fa fa-bars"></span>
 						</div>
@@ -51,9 +65,9 @@
 
 
 					<!-- nuovo menu-->	
-					<div class="dropdown col-lg-3 hidden-sm hidden-xs">
+					<div class="dropdown col-lg-3 hidden-sm hidden-xs ">
 						<button class="btn btn-fask btn-lg" type="button" id="dropdownMenuButtonDesk" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="material-icons">menu</i>
+							<i class="material-icons" style="color: #fff!important">menu</i>
 						</button>
 						<div class="dropdown-menu fask" aria-labelledby="dropdownMenuButtonDesk">
 							<div class="bluredBackground"></div>
@@ -135,7 +149,7 @@
 											{foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
 											{assign var='translatedModuleLabel' value=vtranslate($moduleModel->get('label'),$moduleName )}
 
-											<li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="{$moduleModel->getDefaultUrl()}&app={$APP_NAME}" >
+											<li><a class="waves-effect waves-dark {$module} {$APP_NAME}  {if $MODULE eq $moduleName}active{/if}" href="{$moduleModel->getDefaultUrl()}&app={$APP_NAME}" >
 												<i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> <span class="hide-menu"> {$translatedModuleLabel}</span></a></li>
 												{/foreach}
 											</ul>
@@ -223,25 +237,26 @@
 						<li>
 							<div class="dropdownFinance">
 								<div class="addtionalDashboardTab">
-									<span aria-hidden="true">Admin/Finance</span>
+									<span aria-hidden="true">HRM</span>
 								</div>
 								
 								<div class="dropdown-content-Finance">
 
 									<ul class="dropdownlist">
-									    <li class="test">
-									    	<a class="dropdown-icon-dashboard" title="Bills" href="index.php?module=Bills&amp;view=List&amp;app=ADMIN">
-									    		<i class="fa fa-bell-o"></i>&nbsp;Bills
-									    	</a>
-									    </li>
-									    <li>
-									    	<a class="dropdown-icon-dashboard" title="Working Hours" href="index.php?module=WorkingHours&amp;view=List&amp;app=ADMIN">
-									    		<i class="fa fa-clock-o"></i>&nbsp;Working Hours
-									    	</a>
-									    </li>
 										<li>
-											<a class="dropdown-icon-dashboard"  title="Payments" href="index.php?module=Payments&amp;view=List&amp;app=ADMIN">
-												<i class="fa fa-money"></i>&nbsp;Payments
+											<a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=EmployeeContract&parent=Settings&view=List&block=15&fieldid=53">
+												<i class="fa fa-user"></i>&nbsp;Employee
+											</a>
+										</li>
+									    
+										<li>
+											<a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&amp;view=List&amp;app=ADMIN">
+												<i class="fa fa-sign-out"></i>&nbsp;Leave
+											</a>
+										</li>
+										<li>
+											<a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&amp;view=List&amp;app=ADMIN">
+												<i class="fa fa-usd"></i>&nbsp;Claim
 											</a>
 										</li>
 										<li>
@@ -250,18 +265,8 @@
 											</a>
 										</li>
 										<li>
-											<a class="dropdown-icon-dashboard"  title="Leave Type" href="index.php?module=LeaveType&amp;view=List&amp;app=ADMIN">
-												<i class="fa fa-outdent"></i>&nbsp;Leave Type
-											</a>
-										</li>
-										<li>
-											<a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&amp;view=List&amp;app=ADMIN">
-												<i class="fa fa-sign-out"></i>&nbsp;Leave
-											</a>
-										</li>
-										<li>
-											<a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&amp;view=List&amp;app=ADMIN">
-												<i class="fa fa-bell-o"></i>&nbsp;Claim
+											<a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&amp;parent=Settings&amp;view=List&amp;block=15&amp;fieldid=56">
+												<i class="fa fa-bolt"></i>&nbsp;Performance
 											</a>
 										</li>
 									</ul>
@@ -270,10 +275,48 @@
 
 						</li>
 						<li>
-							<div>
+							<div class="dropdownSales">
 								<div class="addtionalDashboardTab">
-									<i class="fa fa-lock" style="color: #398bf7;    vertical-align: middle;"></i> &nbsp;<span aria-hidden="true">Sales</span>
+									<i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;"></i> &nbsp;<span aria-hidden="true">Sales</span>
 								</div>
+								
+								<div class="dropdown-content-Sales">
+									<div class="row">
+										<div class="col-md-4">
+											<div style="
+											height: 400px;
+											"><img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="
+											width: 100%;
+											">
+										</div>
+										<div style="text-align: justify;padding: 10px 0px;">Maintain all your deals with Agiliux. Even create appointments based on enquiry and stay connected to information required to close sale, from anywhere.
+										</div>
+
+									</div>
+									<div class="col-md-4">
+										<div style="
+										height: 400px;
+										"><img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="
+										width: 100%;
+										">
+									</div>
+									<div style="text-align: justify;padding: 10px 0px;">Maintain all your deals with Agiliux. Even create appointments based on enquiry and stay connected to information required to close sale, from anywhere.
+									</div>
+
+								</div>
+								<div class="col-md-4">
+									<div style="
+									height: 400px;
+									">
+									<img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="
+									width: 100%;
+									">
+								</div >
+								<div style="text-align: justify;padding: 10px 0px;">With Agiliux, you can grow more opportunities, capture and filter quality leads and drive sales faster from anywhere.
+								</div>
+							</div>
+						</div>
+					</div>
 							</div>
 
 						</li>
@@ -286,17 +329,30 @@
 								<div class="dropdown-content-Tools">
 
 									<ul class="dropdownlist">
-<!--------------
-<ul style="padding-top: 15px; padding-left: 5px;"><li><a class="waves-effect waves-dark " href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS"><i class="material-icons module-icon">subtitles</i> <span class="hide-menu"> Notification Templates</span></a></li>
-	<li><a class="waves-effect waves-dark " href="index.php?module=Rss&amp;view=List&amp;app=TOOLS"><i class="material-icons module-icon">rss_feed</i> <span class="hide-menu"> Rss</span></a></li>
-	<li><a class="waves-effect waves-dark " href="index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS"><i class="material-icons module-icon">delete_forever</i> <span class="hide-menu"> Recycle Bin</span></a></li>
-	<li><a class="waves-effect waves-dark " href="index.php?module=Portal&amp;view=List&amp;app=TOOLS"><i class="material-icons module-icon">web</i> <span class="hide-menu"> Our Sites</span></a></li>
-	<li><a class="waves-effect waves-dark " href="index.php?module=PBXManager&amp;view=List&amp;app=TOOLS"><i class="material-icons module-icon">perm_phone_msg</i> <span class="hide-menu"> PBX Manager</span></a></li></ul>
------------------- -->
 
 									    <li>
 									    	<a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
 									    		<i class="fa fa-bell-o"></i>&nbsp;Notification Templates
+									    	</a>
+									    </li>
+									    <li>
+									    	<a class="dropdown-icon-dashboard" title="Rss" href="index.php?module=Rss&amp;view=List&amp;app=TOOLS">
+									    		<i class="fa fa-rss"></i>&nbsp;Rss
+									    	</a>
+									    </li>
+									    <li>
+									    	<a class="dropdown-icon-dashboard" title="Recycle Bin" href="index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS">
+									    		<i class="fa fa-trash-o"></i>&nbsp;Recycle Bin
+									    	</a>
+									    </li>
+									    <li>
+									    	<a class="dropdown-icon-dashboard" title="Our Sites" href="index.php?module=Portal&amp;view=List&amp;app=TOOLS">
+									    		<i class="fa fa-desktop"></i>&nbsp;Our Sites
+									    	</a>
+									    </li>
+									    <li>
+									    	<a class="dropdown-icon-dashboard" title="PBX Manager" href="index.php?module=PBXManager&amp;view=List&amp;app=TOOLS">
+									    		<i class="fa fa-phone"></i>&nbsp;PBX Manager
 									    	</a>
 									    </li>
 									   
@@ -308,18 +364,194 @@
 						<li>
 							<div>
 								<div class="addtionalDashboardTab">
-									<i class="fa fa-lock" style="color: #398bf7;    vertical-align: middle;"></i> &nbsp;<span aria-hidden="true">Support</span>
+									<i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;"></i> &nbsp;<span aria-hidden="true">Support</span>
 								</div>
 							</div>
 						</li>
 
 						<li>
 							<div>
+								<a class="menu-open">
+									<span aria-hidden="true" style="font-size: 15px;
+    color: #000;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    /* color: #fff; */
+    /* font-size: 15px; */
+    padding: 10px 20px;
+    text-decoration: none;">More</span>
+								</a>
+							</div>
+						</li>
+
+			<!-- 			<li>
+							<div class="dropdownMore">
 								<div class="addtionalDashboardTab">
 									<span aria-hidden="true">More</span>
 								</div>
+
+								
+dashboard
+										    <li>
+										    	<a class="dropdown-icon-dashboard" title="Dashboard" href="index.php?module=Home&amp;view=DashBoard">
+										    		<i class="fa fa-bell-o"></i>&nbsp;Dashboard
+										    	</a>
+										    </li>   
+										     <li>
+										    	<a class="dropdown-icon-dashboard" title="Mail" href="index.php?module=MailManager&amp;view=List">
+										    		<i class="fa fa-bell-o"></i>&nbsp;Mail
+										    	</a>
+										    </li>  
+										    <li>
+										    	<a class="dropdown-icon-dashboard" title="Documents" href="index.php?module=Documents&amp;view=List">
+										    		<i class="fa fa-bell-o"></i>&nbsp;Documents
+										    	</a>
+										    </li>  
+										    <li>
+										    	<a class="dropdown-icon-dashboard" title="CRM Settings" href="index.php?module=Vtiger&amp;parent=Settings&amp;view=Index">
+										    		<i class="fa fa-bell-o"></i>&nbsp;CRM Settings
+										    	</a>
+										    </li>  
+										    <li>
+										    	<a class="dropdown-icon-dashboard" title="Manage User" href="index.php?module=Users&amp;parent=Settings&amp;view=List">
+										    		<i class="fa fa-bell-o"></i>&nbsp;Manage User
+										    	</a>
+										    </li>  
+										  
+								<div class="dropdown-content-More row" style="width: 100%;">
+									<div class="col-md-2" >
+										<ul class="dropdownlist">
+											<div style="border-bottom: 2px solid #cecece">
+										    	<span>General</span>
+										    </div>  
+											<li>
+										    	<a class="dropdown-icon-dashboard" title="Contacts" href="index.php?module=Contacts&amp;view=List&amp;app=FOUNDATION">
+										    		<i class="fa fa-bell-o"></i>&nbsp;Contacts
+										    	</a>
+										    </li>   
+										    <li>
+										    	<a class="dropdown-icon-dashboard" title="Calendar" href="index.php?module=Calendar&amp;view=List&amp;app=FOUNDATION">
+										    		<i class="fa fa-bell-o"></i>&nbsp;Calendar
+										    	</a>
+										    </li>  
+										    <li>
+										    	<a class="dropdown-icon-dashboard" title="Organizations" href="index.php?module=Accounts&amp;view=List&amp;app=FOUNDATION">
+										    		<i class="fa fa-bell-o"></i>&nbsp;Organizations
+										    	</a>
+										    </li>  
+										    <li>
+										    	<a class="dropdown-icon-dashboard" title="Leads" href="index.php?module=Leads&amp;view=List&amp;app=FOUNDATION">
+										    		<i class="fa fa-bell-o"></i>&nbsp;Leads
+										    	</a>
+										    </li>  
+										    <li>
+										    	<a class="dropdown-icon-dashboard" title="Calendar" href="index.php?module=SMSNotifier&amp;view=List&amp;app=FOUNDATION">
+										    		<i class="fa fa-bell-o"></i>&nbsp;SMS Notifier
+										    	</a>
+										    </li>  
+
+											<li>
+										    	<a class="dropdown-icon-dashboard" title="Notification Template" href="index.php?module=EmailTemplates&amp;view=List&amp;app=FOUNDATION">
+										    		<i class="fa fa-bell-o"></i>&nbsp;Notification Template
+										    	</a>
+										    </li>  
+
+
+										    <li>
+										    	<a class="dropdown-icon-dashboard" title="Report" href="index.php?module=Reports&amp;view=List&amp;app=FOUNDATION">
+										    		<i class="fa fa-bell-o"></i>&nbsp;Report
+										    	</a>
+										    </li>  
+
+											<li>
+										    	<a class="dropdown-icon-dashboard" title="My Profile" href="index.php?module=MyProfile&amp;view=List&amp;app=FOUNDATION">
+										    		<i class="fa fa-bell-o"></i>&nbsp;My Profile
+										    	</a>
+										    </li>  
+
+
+										</ul>
+									</div>
+									<div class="col-md-2" >
+										<ul class="dropdownlist">
+										   <li>
+												<a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=Users&parent=Settings&view=List">
+													<i class="fa fa-user"></i>&nbsp;Employee
+												</a>
+											</li>
+										    
+											<li>
+												<a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&amp;view=List&amp;app=ADMIN">
+													<i class="fa fa-sign-out"></i>&nbsp;Leave
+												</a>
+											</li>
+											<li>
+												<a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&amp;view=List&amp;app=ADMIN">
+													<i class="fa fa-usd"></i>&nbsp;Claim
+												</a>
+											</li>
+											<li>
+												<a class="dropdown-icon-dashboard"  title="Payslip" href="index.php?module=Payslip&amp;view=List&amp;app=ADMIN">
+													<i class="fa fa-file-text-o"></i>&nbsp;Payslip
+												</a>
+											</li>
+											<li>
+												<a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&amp;parent=Settings&amp;view=List&amp;block=15&amp;fieldid=56">
+													<i class="fa fa-bolt"></i>&nbsp;Performance
+												</a>
+											</li>
+											
+										</ul>
+									</div>
+									<div class="col-md-2" >
+										<ul class="dropdownlist">
+										    <li>
+										    	<a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
+										    		<i class="fa fa-bell-o"></i>&nbsp;3
+										    	</a>
+										    </li>   
+										     <li>
+										    	<a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
+										    		<i class="fa fa-bell-o"></i>&nbsp;3
+										    	</a>
+										    </li>  
+										</ul>
+									</div>
+									<div class="col-md-2" >
+										<ul class="dropdownlist">
+										    <li>
+										    	<a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
+										    		<i class="fa fa-bell-o"></i>&nbsp;4
+										    	</a>
+										    </li>   
+										     <li>
+										    	<a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
+										    		<i class="fa fa-bell-o"></i>&nbsp;4
+										    	</a>
+										    </li>  
+										</ul>
+									</div>
+									<div class="col-md-2" >
+										<ul class="dropdownlist">
+										    <li>
+										    	<a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
+										    		<i class="fa fa-bell-o"></i>&nbsp;5
+										    	</a>
+										    </li>   
+										     <li>
+										    	<a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
+										    		<i class="fa fa-bell-o"></i>&nbsp;5
+										    	</a>
+										    </li>  
+										</ul>
+									</div>
+									
+
+								</div>
 							</div>
 						</li>
+					-->
 					</ul>
 
 				</div>
@@ -331,12 +563,12 @@
 
 
 
-					<li>
+					<li style="width: 280px;">
 						<div class="search-links-container hidden-sm">
-							<div class="search-link hidden-xs">
-								<span class="ti-search" aria-hidden="true"></span>
-								<input class="keyword-input" type="text" placeholder="{vtranslate('LBL_TYPE_SEARCH')}" value="{$GLOBAL_SEARCH_VALUE}">
-								<span id="adv-search" title="Advanced Search" class="adv-search ti-arrow-circle-down pull-right cursorPointer" aria-hidden="true"></span>
+							<div class="search-link hidden-xs" style="    border: 1px solid #000;color: #000!important;">
+								<span class="ti-search" aria-hidden="true" style="color: #000 !important;"></span>
+								<input class="keyword-input" id="search-top-bar" type="text" placeholder="{vtranslate('LBL_TYPE_SEARCH')}" value="{$GLOBAL_SEARCH_VALUE}">
+								<span id="adv-search" title="Advanced Search" class="adv-search ti-arrow-circle-down pull-right cursorPointer" aria-hidden="true" ></span>
 							</div>
 						</div>
 					</li>

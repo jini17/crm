@@ -24,7 +24,20 @@
         <div class="modal-dialog">
         </div>
     </div>
-
+<script type="text/javascript">
+            jQuery(document).ready(function(){
+               jQuery('.main-container').on('click','.essentials-toggle',function(){
+                   var $this =   $('.main-container');
+                    var collaspe_status = $this.find('.settingsPageDiv');
+                    if(!collaspe_status.hasClass('full-width')){
+                       $this.find('.height100Per ').addClass('hide');
+                    }
+                    else{
+                          $this.find('.height100Per ').removeClass('hide');
+                    }
+                })
+        });
+ </script>   
 {if $FIELDS_INFO neq null}
     <script type="text/javascript">
         var uimeta = (function() {
@@ -60,11 +73,11 @@
 {/if}
 <div class="main-container clearfix" style="margin-top:10px">
                 {assign var=LEFTPANELHIDE value=$USER_MODEL->get('leftpanelhide')}
-        <div class="settingssidebar {$LEFTPANELHIDE}" id="modnavigator">
+        <div class="module-nav clearfix settingsNav hidden-sm hidden-xs settingssidebar {$LEFTPANELHIDE}" id="modnavigator">
             <div class="essentials-toggle" style=" top:10px;; left: -15px;" title="Left Panel Show/Hide">
-            <span class="essentials-toggle-marker fa cursorPointer fa-chevron-left"></span>
+            <span class="essentials-toggle-marker fa cursorPointer fa-chevron-right"></span>
         </div>
-       <div class="agsettings height100Per "> 
+       <div class=" height100Per"> 
                     {include file="modules/Settings/Vtiger/Sidebar.tpl"}
             </div>
         </div>
@@ -153,4 +166,4 @@
         </div>
     </div></div>
 
-        <div class="settingsPageDiv content-area clearfix ">
+        <div class="settingsPageDiv content-area clearfix">
