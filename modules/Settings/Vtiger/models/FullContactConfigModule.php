@@ -73,11 +73,27 @@ class Settings_Vtiger_FullContactConfigModule_Model extends Settings_Vtiger_Modu
 	 * @return <Array>
 	 */
 	public function getViewableData() {
-		
+		//Mabruk Fullcontact
 		if (!$this->getData()) {
-			
-			$data = 'l64pERb0m2pKaZDtwkjd0BoaOdCsfiWi';
-			
+			global $adb;
+
+			$result = $adb->pquery("SELECT * FROM ss_contactenrichment",array());
+
+			$data['bearer'] = $adb->query_result($result,0,'bearer');
+			$data['preference'] = $adb->query_result($result,0,'preference');
+			$data['status'] = $adb->query_result($result,0,'active');
+
+			if ($data['status'] == 1)
+				$data['status'] = "Active";
+			else 
+				$data['status'] = "Inactive";
+
+			if ($data['preference'] == "person")
+				$data['preference'] = "Person Enrichment (Modules: Leads, Contacts)";
+			else if ($data['preference'] == "company")
+				$data['preference'] = "Company Enrichment (Modules: Organizations)";
+			else if ($data['preference'] == "both")
+				$data['preference'] = "Both (Modules: Leads, Contacts, Organizations)";
 			$this->setData($data);
 		}
 		return $this->getData();
@@ -89,8 +105,11 @@ class Settings_Vtiger_FullContactConfigModule_Model extends Settings_Vtiger_Modu
 	 * @return <Array> list of field names
 	 */
 	public function getEditableFields() {
+		//Mabruk Fullcontact
 		return array(
-			'bearer'	=> array('label' => 'LBL_BARRIER','fieldType' => 'input'),
+			'status' => array('label' => 'Data Enrichment Feature','fieldType' => 'picklist'),
+			'preference'	=> array('label' => 'Enrichment Preference','fieldType' => 'picklist'),
+			'bearer'	=> array('label' => 'LBL_BARRIER','fieldType' => 'input'),			
 		);
 	}
 

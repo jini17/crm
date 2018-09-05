@@ -18,7 +18,7 @@
 	<div class="contents tabbable ui-sortable" id="tab">
 	<!--added by jitu@secondcrm.com for Leave approval widget link-->
 	<ul class="nav nav-tabs layoutTabs massEditTabs"> 
-		<li class="{if $DEFAULT_TAB neq ''}relatedListTab{else}active{/if}">
+		<li class="{if $DEFAULT_TAB eq ''}relatedListTab active{/if}">
 			<a data-toggle="tab" href="#preference"><strong>{vtranslate('LBL_MY_PREFERENCES', $MODULE_NAME)}</strong></a>
 		</li>
 		<li class="relatedListTab">

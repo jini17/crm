@@ -135,6 +135,17 @@ class Vtiger_Module_Model extends Vtiger_Module {
 		return $enabled;
 	}
 
+	public function getEnrichDetails() {
+
+		global $adb;
+        $result = $adb->pquery("SELECT active,preference FROM ss_contactenrichment",array());
+        $data['preference'] = $adb->query_result($result,0,"preference");
+        $data['active'] = $adb->query_result($result,0,"active");
+
+        return $data;
+
+	}
+
 	public function isQuickPreviewEnabled(){
 		$enabled = false;
 		if($this->isSummaryViewSupported()){

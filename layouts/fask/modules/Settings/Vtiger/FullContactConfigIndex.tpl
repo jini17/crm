@@ -15,7 +15,7 @@
 {assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
 <div id="Head">
 	<div class="widget_header row-fluid">
-		<div class="span8"><h3>{vtranslate('LBL_FULLCONTACT_CONFIG', $QUALIFIED_MODULE)}</h3></div>						
+		<div class="span8"><h3>Full Contact Configuration</h3></div>						
 	</div>
 	<hr>
 	<br>
@@ -39,7 +39,7 @@
 								<thead>
 									<tr class="blockHeader">
 										<th class="{$WIDTHTYPE}">
-											<span class="alignMiddle">{vtranslate('LBL_FULLCONTACT_CONFIG_FILE', $QUALIFIED_MODULE)}</span>
+											<span class="alignMiddle">Full Contact Configuration</span>
 										</th>
 										<th >
 											
@@ -48,12 +48,21 @@
 								</thead>
 								<tbody>
 									{assign var=FIELD_DATA value=$MODEL->getViewableData()}
-									{foreach key=FIELD_NAME item=FIELD_DETAILS from=$MODEL->getEditableFields()}
-										<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted marginRight10px pull-right">{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE)}</label></td>
-											<td style="border-left: none;" class="{$WIDTHTYPE}">
-												<span>{$FIELD_DATA}</span>
-											</td>
-										</tr>
+									{foreach key=FIELD_NAME item=FIELD_DETAILS from=$MODEL->getEditableFields()} 
+										{if $FIELD_DATA[$FIELD_NAME] eq "Inactive"}
+											<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted marginRight10px pull-right">{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE)}</label></td>
+												<td style="border-left: none;" class="{$WIDTHTYPE}">
+													<span>{$FIELD_DATA[$FIELD_NAME]}</span>
+												</td>
+											</tr>
+										{break}										
+										{else}
+											<tr><td width="30%" class="{$WIDTHTYPE}"><label class="muted marginRight10px pull-right">{vtranslate($FIELD_DETAILS['label'], $QUALIFIED_MODULE)}</label></td>
+												<td style="border-left: none;" class="{$WIDTHTYPE}">
+													<span>{$FIELD_DATA[$FIELD_NAME]}</span>
+												</td>
+											</tr>
+										{/if}
 									{/foreach}
 								</tbody>
 						</table>

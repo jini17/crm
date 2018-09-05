@@ -87,7 +87,7 @@ function meetingInvites($entity) {
 					";
 						   
 				    $content = 'Dear ' . $name .'<br><br>
-				    	You are invited to the following meeting: ' . $fieldValues['subject'] . '<br>' . $accept . '&nbsp;' . $decline;
+				    	You are invited to the following meeting:<br><br><b>Subject: </b>' . $fieldValues['subject'] . '<br><b>Date: </b>' . date("d-m-Y",strtotime($fieldValues['date_start'])) . '<br><b>Time: </b>' . $fieldValues['time_start'] . '<br><b>Venue: </b>' . $fieldValues['location'] . "<br><br>" . $accept . '&nbsp;' . $decline;
 
 				    if ($send && $status != 'Accepted' && $status != 'Declined')	{
 					    $vtigerMailer->ClearAddresses();	
@@ -118,7 +118,7 @@ function meetingInvites($entity) {
 					";
 						   
 				    $content = 'Dear ' . $name .'<br><br>
-				    	You are invited to the following meeting: ' . $fieldValues['subject'] . '<br>' . $accept . '&nbsp;' . $decline;	
+				    	You are invited to the following meeting:<br><br><b>Subject: </b>' . $fieldValues['subject'] . '<br><b>Date: </b>' . date("d-m-Y",strtotime($fieldValues['date_start'])) . '<br><b>Time: </b>' . $fieldValues['time_start'] . '<br><b>Venue: </b>' . $fieldValues['location'] . "<br><br>" . $accept . '&nbsp;' . $decline;	
 
 				    if ($send && $status != 'Accepted' && $status != 'Declined')	{
 					    $vtigerMailer->ClearAddresses();	
@@ -156,7 +156,7 @@ function meetingInvites($entity) {
 					";
 						   
 				    $content = 'Dear ' . $name .'<br><br>
-				    	You are invited to the following meeting: ' . $fieldValues['subject'] . '<br>' . $accept . '&nbsp;' . $decline;	
+				    	You are invited to the following meeting:<br><b>Subject: </b><br>' . $fieldValues['subject'] . '<br><b>Date: </b>' . date("d-m-Y",strtotime($fieldValues['date_start'])) . '<br><b>Time: </b>' . $fieldValues['time_start'] . "<br><b>Venue</b>" . $fieldValues['location'] . '<br><br>' . $accept . '&nbsp;' . $decline;	
 
 				    if ($send && $status != 'Accepted' && $status != 'Declined')	{
 					    $vtigerMailer->ClearAddresses();	

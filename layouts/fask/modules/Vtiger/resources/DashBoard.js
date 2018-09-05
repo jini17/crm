@@ -876,7 +876,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 		var container = this.getContainer();
 		var dashBoardContainer = jQuery(container).closest(".dashBoardContainer");
 
-		dashBoardContainer.on("shown.bs.tab",".dashboardTab",function(e){
+		dashBoardContainer.on("shown.bs.tab",".dashboardTab",function(e){ 
 			var currentTarget = jQuery(e.currentTarget);
 			var tabid = currentTarget.data('tabid');
 			jQuery("#default_tab").val(tabid);
@@ -1007,6 +1007,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 
 	registerEvents : function() {
 		var thisInstance = this;
+		//alert(jQuery("#default_tab").val());
 		this.registerLazyLoadWidgets();
 		this.registerAddDashboardTab();
 		this.registerDashBoardTabClick();
