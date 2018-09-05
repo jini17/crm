@@ -3094,7 +3094,7 @@ position: relative;
   width: 23;
   height: 25px;
   padding: 5px 0px 0px 10px;
-  color: white;
+  color: #000;
 }
 #taskManagementContainer .contentsBlock {
   margin-bottom: 25px;
@@ -7904,8 +7904,8 @@ input[type=checkbox]:checked {border: 1px solid transparent!important;background
 
 .btn-primary,
 .btn-primary.disabled {
-  background: #FF4961;
-  border: 1px solid #FF1635;
+  background: #398bf7;
+  border: 1px solid #398bf7;
   -webkit-box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
   box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
   -webkit-transition: 0.2s ease-in;
@@ -7913,15 +7913,15 @@ input[type=checkbox]:checked {border: 1px solid transparent!important;background
   transition: 0.2s ease-in; }
   .btn-primary:hover,
   .btn-primary.disabled:hover {
-    background: #FF1635;
+    background: #307fe8;
     -webkit-box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
     box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
-    border: 1px solid #FF1635; }
+    border: 1px solid #307fe8; }
   .btn-primary.active, .btn-primary:active, .btn-primary:focus,
   .btn-primary.disabled.active,
   .btn-primary.disabled:active,
   .btn-primary.disabled:focus {
-    background: #FF1635;
+    background: #307fe8;
     -webkit-box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
     box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
     border-color: transparent; }
@@ -9090,4 +9090,7 @@ a.btn.btn-default.Help-btn{
 }
 a#menubar_quickCreate_BenefitType , a#menubar_quickCreate_Leave{
   display: none;
+}
+input#search-top-bar.keyword-input{
+  color:#000;
 }

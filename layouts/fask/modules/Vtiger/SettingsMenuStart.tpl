@@ -25,7 +25,7 @@
         </div>
     </div>
 <script type="text/javascript">
-            jQuery(document).ready(function(){
+      {*      jQuery(document).ready(function(){
                jQuery('.main-container').on('click','.essentials-toggle',function(){
                    var $this =   $('.main-container');
                     var collaspe_status = $this.find('.settingsPageDiv');
@@ -36,7 +36,7 @@
                           $this.find('.height100Per ').removeClass('hide');
                     }
                 })
-        });
+        });*}
  </script>   
 {if $FIELDS_INFO neq null}
     <script type="text/javascript">

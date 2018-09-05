@@ -78,31 +78,32 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
 
 	//Created by Safuan for fetching leave types//	
-	//modified by jitu for concate color and balance in dropdown 
+	//modified by jitu for concat color and balance in dropdown 
 	public function getLeaveTypeList($userid,$leaveid){ 
-	$db = PearDatabase::getInstance();
-	global $current_user;	
-	//Modified by jitu for showing  all except those are onetime if user already applied..
-	$condleave = '';
-	$conduser = '';
-	$year = date("Y");
-	//if year end process run then user can apply leave for next year other wise current year
-	$sql  = "SELECT MAX(year) as year from secondcrm_user_balance LIMIT 0,1";
-	$res = $db->pquery($sql,array());
-	$year = $db->query_result($res, 0, 'year');
-
-	if($year > date("Y")) {
-		$year = $year;	
-	 } //end here 
 	
-	if(!empty($leaveid)) {
-		$condleave = " AND tblSCUB.user_id= ".$userid." AND tblVTLT.leavetypeid NOT IN (SELECT tblVTL.leavetype FROM vtiger_leave tblVTL INNER JOIN vtiger_crmentity tblVTCC ON tblVTCC.crmid=tblVTL.leaveid AND tblVTCC.deleted=0 
-LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype WHERE ((tblVTLTT.leave_frequency = 'Onetime' AND tblVTL.leavestatus !='Not Approved' && tblVTL.leavestatus !='Cancel' && tblVTL.leaveid != $leaveid)) AND tblVTCC.smownerid=$userid)";
-	}
-	if(!empty($userid) && empty($leaveid)) {
-		$conduser = " AND tblSCUB.user_id= ".$userid." AND tblVTLT.leavetypeid NOT IN (SELECT tblVTL.leavetype FROM vtiger_leave tblVTL INNER JOIN vtiger_crmentity tblVTCC ON tblVTCC.crmid=tblVTL.leaveid AND tblVTCC.deleted=0 
-LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype WHERE ((tblVTLTT.leave_frequency = 'Onetime' AND tblVTL.leavestatus !='Not Approved' && tblVTL.leavestatus !='Cancel')) AND tblVTCC.smownerid=$userid)";
-	}	
+		$db = PearDatabase::getInstance();
+		global $current_user;	
+		//Modified by jitu for showing  all except those are onetime if user already applied..
+		$condleave = '';
+		$conduser = '';
+		$year = date("Y");
+		//if year end process run then user can apply leave for next year other wise current year
+		$sql  = "SELECT MAX(year) as year from secondcrm_user_balance LIMIT 0,1";
+		$res = $db->pquery($sql,array());
+		$year = $db->query_result($res, 0, 'year');
+
+		if($year > date("Y")) {
+			$year = $year;	
+		 } //end here 
+	
+		if(!empty($leaveid)) {
+			$condleave = " AND tblSCUB.user_id= ".$userid." AND tblVTLT.leavetypeid NOT IN (SELECT tblVTL.leavetype FROM vtiger_leave tblVTL INNER JOIN vtiger_crmentity tblVTCC ON tblVTCC.crmid=tblVTL.leaveid AND tblVTCC.deleted=0 
+	LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype WHERE ((tblVTLTT.leave_frequency = 'Onetime' AND tblVTL.leavestatus !='Not Approved' && tblVTL.leavestatus !='Cancel' && tblVTL.leaveid != $leaveid)) AND tblVTCC.smownerid=$userid)";
+		}
+		if(!empty($userid) && empty($leaveid)) {
+			$conduser = " AND tblSCUB.user_id= ".$userid." AND tblVTLT.leavetypeid NOT IN (SELECT tblVTL.leavetype FROM vtiger_leave tblVTL INNER JOIN vtiger_crmentity tblVTCC ON tblVTCC.crmid=tblVTL.leaveid AND tblVTCC.deleted=0 
+	LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype WHERE ((tblVTLTT.leave_frequency = 'Onetime' AND tblVTL.leavestatus !='Not Approved' && tblVTL.leavestatus !='Cancel')) AND tblVTCC.smownerid=$userid)";
+		}	
 	
 	/*$query = "SELECT DISTINCT tblVTLT.leavetypeid,tblSCUB.leave_type, tblVTLT.title, tblVTLT.colorcode,tblSCUB.leave_count, tblVTLT.halfdayallowed FROM secondcrm_user_balance tblSCUB 
 	INNER JOIN allocation_list tblVTLA ON tblVTLA.leavetype_id=tblSCUB.leave_type

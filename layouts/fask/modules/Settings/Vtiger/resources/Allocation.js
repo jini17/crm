@@ -124,11 +124,10 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
                     //console.log("Inside pjax");
                     app.helper.hideProgress();
                     app.helper.showModal(data);
+                    history.pushState({}, null, window.history.back());
                     thisInstance.saveRule();
                     thisInstance.autoAddMultipleLeavetype();
                     thisInstance.showLeaveTypeEditAddition();
-                    history.pushState({}, null, window.history.back());
-
 
                     // var thisInstance1 = this;
 

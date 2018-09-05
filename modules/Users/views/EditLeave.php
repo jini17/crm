@@ -11,6 +11,7 @@
 class Users_EditLeave_View extends Vtiger_Index_View {
 
 	public function process(Vtiger_Request $request) {
+	
 		$moduleName = $request->getModule();
 		$leaveid = $request->get('record');
 		$userId = $request->get('userId');
@@ -18,15 +19,16 @@ class Users_EditLeave_View extends Vtiger_Index_View {
 
 		$viewer = $this->getViewer($request);
 		$leavetype=Users_LeavesRecords_Model::getLeaveTypeList($userId,$leaveid);
-
+echo "<pre>";print_r($leavetype);
 		$userslist=Users_LeavesRecords_Model::getAllUsersList($userId);
 
 		$manager = $request->get('manager');
 		
 		//Enter Edit Mode if leave id = ''
 		if(!empty($leaveid) || $leaveid != ""){
-		$leavedetail = Users_LeavesRecords_Model::getLeaveDetail($leaveid);
-		//echo '<br>FIRST AZ <br><pre>';print_r($leavedetail);echo '</pre>';
+		
+			$leavedetail = Users_LeavesRecords_Model::getLeaveDetail($leaveid);
+			//echo '<br>FIRST AZ <br><pre>';print_r($leavedetail);echo '</pre>';
 		}
 		$startDateField = array(	"mandatory"=>true,
 						"presence"=>true,
@@ -37,6 +39,7 @@ class Users_EditLeave_View extends Vtiger_Index_View {
 						"name"=>"start_date",
 						"label"=>"Start Date",
 						"date-format"=>"dd-mm-yyyy"	);
+						
 		$endDateField = array(	"mandatory"=>true,
 						"presence"=>true,
 						"quickcreate"=>false,
@@ -46,6 +49,7 @@ class Users_EditLeave_View extends Vtiger_Index_View {
 						"name"=>"end_date",
 						"label"=>"End Date",
 						"date-format"=>"dd-mm-yyyy"	);
+						
 
 		$validator= '[{"name":"greaterThanDependentFieldOrMoreThanLeaveBalance","params":["start_date,leave_type"]}]';//Modified By Safuan-Validate leave balance and date 
 		$viewer->assign('MODULE', $moduleName);

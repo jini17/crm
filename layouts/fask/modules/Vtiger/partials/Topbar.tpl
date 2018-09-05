@@ -115,11 +115,11 @@
 							</ul>
 							<ul class="fasksecond">
 								{assign var=APP_GROUPED_MENU value=Settings_MenuEditor_Module_Model::getAllVisibleModules()}
-								{assign var=APP_LIST value=Vtiger_MenuStructure_Model::getAppMenuList()}
+                                                                                                                                                                                    {assign var=APP_LIST value=Vtiger_MenuStructure_Model::getAppMenuList()}
 
-								{if $MODULE eq "Home"}
-								{assign var=SELECTED_MENU_CATEGORY value='Dashboard'}
-								{/if}
+                                                                                                                                                                                        {if $MODULE eq "Home"}
+                                                                                                                                                                                        {assign var=SELECTED_MENU_CATEGORY value='Dashboard'}
+                                                                                                                                                                                        {/if}
 
 								{foreach item=APP_NAME from=$APP_LIST}
 								{if $APP_NAME eq 'ANALYTICS'} {continue}{/if}
@@ -145,12 +145,12 @@
 									<a class="has-arrow waves-effect waves-dark " >
 										<i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i><span class="hide-menu">{vtranslate("LBL_$APP_NAME")}</span></a>
 
-										<ul style="padding-left:6px;padding-top:15px;">
+										<ul style="padding-left:6px;padding-top:15px;" {$APP_NAME}>
 											{foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
 											{assign var='translatedModuleLabel' value=vtranslate($moduleModel->get('label'),$moduleName )}
 
 											<li><a class="waves-effect waves-dark {$module} {$APP_NAME}  {if $MODULE eq $moduleName}active{/if}" href="{$moduleModel->getDefaultUrl()}&app={$APP_NAME}" >
-												<i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> <span class="hide-menu"> {$translatedModuleLabel}</span></a></li>
+												<i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}] }</i> <span class="hide-menu"> {$translatedModuleLabel}</span></a></li>
 												{/foreach}
 											</ul>
 
