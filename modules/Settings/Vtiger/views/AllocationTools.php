@@ -180,10 +180,18 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         global $adb;
         //$adb->setDebug(true);
         $SeperatedValues = explode(',', $request->get('values'));
-        $stringVal ='';
-        $query = "DELETE allocation_list, allocation_list_details FROM allocation_list INNER JOIN allocation_list_details ON allocation_list.allocation_id = allocation_list_details.allocation_id WHERE allocation_list.allocation_id IN ( ";
+        $qstnmark ='';
+        /*$query = "DELETE allocation_list, allocation_list_details FROM allocation_list INNER JOIN allocation_list_details ON allocation_list.allocation_id = allocation_list_details.allocation_id WHERE allocation_list.allocation_id IN ( ";*/
+        
 
-        for($i=0;$i<count($SeperatedValues);$i++){
+        for ($i = 0; $i < count($SeperatedValues); $i++) {
+
+            $adb->pquery("DELETE FROM allocation_list WHERE allocation_id = ?",array($SeperatedValues[$i]));
+            $adb->pquery("DELETE FROM allocation_list_details WHERE allocation_id = ?",array($SeperatedValues[$i]));
+
+        }    
+
+        /*for($i=0;$i<count($SeperatedValues);$i++){
             if($i!=(count($SeperatedValues)-1))
                 $query .= $SeperatedValues[$i].",";
             else
@@ -191,10 +199,10 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         }
 
         $query.= ")";
-        $result = $adb->pquery($query,array());
+        $result = $adb->pquery($query,array());*/
 
         $responses = [true];
-       die;
+       
         $responses->emit;
     }
 
