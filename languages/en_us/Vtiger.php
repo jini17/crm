@@ -16,6 +16,8 @@ $languageStrings = array(
 	'POWEREDBY'=> 'Powered by Agiliux CRM',
 	'LBL_READ_LICENSE' => 'Read License',
 	'LBL_PRIVACY_POLICY' => 'Privacy Policy',
+	'LBL_ENRICH_DATA' => 'Enrich Data',
+	'LBL_ENRICH_DATA_LOCKED' => 'Enrich Data (Inactive)', 
 
 	// Common Actions
 	'LBL_NEW' => 'New',
