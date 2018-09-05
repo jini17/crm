@@ -59,9 +59,14 @@ Vtiger.Class("Settings_Vtiger_BenefitType_Js",{},{
         var aDeferred = jQuery.Deferred();
         jQuery("#deleteItem").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
         jQuery("#deleteItem").click(function () {
-            app.helper.showProgress();
+           
             var selectedvalues = thisInstance.getAllCheckedValues();
-
+			
+		    if(selectedvalues < 1){
+                alert("Invalid Selection");
+                return aDeferred.reject();
+            }
+             app.helper.showProgress();
             var params = {
                 'module' : app.getModuleName(),
                 'parent' : app.getParentModuleName(),

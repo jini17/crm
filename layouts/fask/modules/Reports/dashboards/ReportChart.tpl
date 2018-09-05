@@ -10,11 +10,12 @@
 <div class="dashboardWidgetHeader">
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
-<style>
-.ChartWidgetContent {
-	padding : 0px 10px;
-}
-</style>
+
 <div class="ChartWidgetContent">
 	{include file="dashboards/ReportChartContents.tpl"|@vtemplate_path:$MODULE_NAME}
+</div>
+<div class="widgeticons dashBoardWidgetFooter">
+    <div class="footerIcons pull-right">
+        {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME}
+    </div>
 </div>

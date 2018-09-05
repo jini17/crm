@@ -24,7 +24,8 @@
 
 
 	<br /><br />
-	<table class="table table-bordered listViewEntriesTable">
+	<table class="block table table-bordered listViewEntriesTable" style="    width: 80%;
+    margin: 0 auto;">
 		<thead>
 			<tr>
 				<th nowrap><strong>{vtranslate('LBL_LANGUAGE', $MODULE)}</strong></th>
@@ -41,7 +42,14 @@
 					<td class="listTableRow small" valign=top>
 						<div class="pull-right actions">
 							<span class="actionImages">
-								<a class="editLanguage cursorPointer" onclick="Users_Skills_Js.editLanguage('{$CREATE_LANGUAGE_URL}&record={$USER_LANGUAGE['ss_id']}&userId={$USERID}&selected_id={$USER_LANGUAGE['language_id']}');"><i title="{vtranslate('LBL_EDIT', $MODULE)}" class="fa fa-pencil alignBottom"></i></a>&nbsp;&nbsp;<a class="deleteLanguage cursorPointer" onclick="Users_Skills_Js.deleteLanguage('{$USER_LANGUAGE['ss_id']}');"><i class="fa fa-trash alignMiddle" title="Delete"></i></a>
+								<a class="editLanguage cursorPointer editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Skills_Js.editLanguage('{$CREATE_LANGUAGE_URL}&record={$USER_LANGUAGE['ss_id']}&userId={$USERID}&selected_id={$USER_LANGUAGE['language_id']}');"></a>&nbsp;&nbsp;
+								<a class="deleteLanguage cursorPointer" onclick="Users_Skills_Js.deleteLanguage('{$USER_LANGUAGE['ss_id']}');">
+									<i class="fa fa-trash-o" title="Delete"></i>
+								</a>
+
+								
+
+
 							</span>
 										
 						</div>

@@ -10,7 +10,7 @@
 	{if $USER_MODEL->isAdminUser()}
 		{assign var=SETTINGS_MODULE_MODEL value= Settings_Vtiger_Module_Model::getInstance()}
 		{assign var=SETTINGS_MENUS value=$SETTINGS_MODULE_MODEL->getMenus()}
-		<div class="settingsgroup hidden-sm hidden-xs" style="margin-top: 0px; padding-top: 0px; padding-bottom: 40px"> 
+		<div class="settingsgroup hidden-sm hidden-xs " style="margin-top: 0px; padding-top: 0px; padding-bottom: 40px"> 
 		
 			
 			<div class="col-xs-12 text-center visible-xs visible-sm" style="margin-top: 40px;margin-bottom:20px;">

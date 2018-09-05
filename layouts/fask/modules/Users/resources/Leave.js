@@ -10,7 +10,18 @@
 Vtiger.Class("Users_Leave_Js", {
 
 	//register click event for Add New Education button
-	addLeave : function(url) { 
+	addLeave : function(url	) { 
+	
+		//add condition for valid LeaveType
+	/*	var userid = jQuery('#recordId').val();
+		alert(userid);return false;
+		var isOk =  this.checkApplyLeave(userid);		
+			
+		if(!isOk){
+			app.helper.showErrorNotification({'message': 'Not allowed, since admin havent done allocation'});	
+			return false;
+		}
+		*/	
 	     this.editLeave(url);
 	    
 	},
@@ -267,7 +278,26 @@ Vtiger.Class("Users_Leave_Js", {
 				);
 	},
 
-
+	 checkApplyLeave : function(userid) {  
+			var params = {
+					'module' :  app.getModuleName(),
+					'view'   : 'ListViewAjax',
+					'mode'   : 'checkApplyLeave',
+					'record' :userid,
+				}
+				app.request.post({'data':params}).then(
+					function(err, data) {
+						 if(data==0) 
+						 	return true;	
+						 else 
+						 	return false;	
+					},
+					
+					function(error,err){
+						aDeferred.reject();
+					}
+				);
+	},
 	
 	deleteLeave : function(deleteRecordActionUrl) { 
 		var message = app.vtranslate('JS_DELETE_EDUCATION_CONFIRMATION');

@@ -173,8 +173,8 @@
 
 {else}
 <!-- Added hidden field by jitu for paging --->
-<script src="layouts/v7/modules/Vtiger/resources/List.js" type="text/javascript"></script>
-<script src="layouts/v7/modules/Users/resources/Claim.js?v=6.1.0" type="text/javascript"></script>
+<script src="layouts/fask/modules/Vtiger/resources/List.js" type="text/javascript"></script>
+<script src="layouts/fask/modules/Users/resources/Claim.js?v=6.1.0" type="text/javascript"></script>
 <!--- End for pagination --->
 <!--start my leaves-->
 

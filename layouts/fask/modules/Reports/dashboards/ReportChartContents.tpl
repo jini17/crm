@@ -10,7 +10,7 @@
 {assign var=WIDGETDOMID value=$WIDGET->get('linkid')|cat:'-':$WIDGET->get('id')}
 
  {if count($DATA) gt 0 }
-    <input class="widgetData" type=hidden value='{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($DATA))}' />
+    <input class="widgetData" type=hidden value='{$DATA}' />
     <input class="yAxisFieldType" type="hidden" value="{$YAXIS_FIELD_TYPE}" />
 
     <input type='hidden' name='charttype' value="{$CHART_TYPE}" />
@@ -18,9 +18,9 @@
 	<input type='hidden' name='data' value='{$DATA}' />
 	<input type='hidden' name='clickthrough' value="{$CLICK_THROUGH}" />
 
-   <div class="row" style="margin:0px 10px;">
+   <div class="row" style="margin:0px 10px;height:250px;width:100%;">
         <div class="col-lg-11">
-           <div class="" id="widgetChartContainer_{$WIDGET->get('id')}" style="height:250px;width:85%;margin: 0 auto;">sdsdsdjksdhsdkjhsjsh</div>
+           <div class="" id="widgetChartContainer_{$WIDGET->get('id')}"></div>
             <br>
         </div>
 		<div class="col-lg-1"></div>
@@ -32,46 +32,44 @@
 {/if}
 
 {if $CHART_TYPE eq 'pieChart'}
+
 <script type="text/javascript">
-	Vtiger_Pie_Widget_Js('Vtiger_Reportchart_Widget_Js',{},{
+	 
+	  var jData = jQuery('.widgetData').val();
+	  var data = JSON.parse(jData);
+	  //console.log(data.links);
+	
+	  var hreflinks = [];
+      for(var i = 0; i < data.links.length ; i++){
+         hreflinks.push(data.links[i]);
+      }	
+	 var chartData = [];
+	 
+	 for(var i = 0; i < data.labels.length ; i++){
+		var label = data.labels[i];
+		var value = data.values[i];
+	 	var rowData = [label, value];
+		chartData.push(rowData);
+	}	
+		
+	     var chartOptions = {
+		        seriesDefaults:{
+		        shadowColor: 'transparent',
+		        drawBorder: false,
+		        renderer:$.jqplot.PieRenderer,
+		        rendererOptions: {
+		            showDataLabels: true,
+		        },
+		       links: hreflinks,
+       		},
+       		legend:{ show:true,fontSize:'11px', placement: 'outside', rendererOptions:{ numberRows:data.labels.length}, location:'s', marginTop:'15px' }
+        };
+        
+	
 
-		getPlotContainer : function(useCache) {
-
-			if(typeof useCache == 'undefined'){
-				useCache = false;
-			}
-			if(this.plotContainer == false || !useCache) {
-				var container = this.getContainer();
-
-				var widgetid = container.find("input[name=widgetid]").val();
-				this.plotContainer = jQuery('#widgetChartContainer_'+widgetid);
-			}
-			return this.plotContainer;
-		},
-
-		/**
-		 * Function which will give chart related Data
-		 */
-		generateData : function() {
-			//var jsonData = jQuery('input[name=data]').val();
-
-			var thisInstance  = this;
-			var parent = thisInstance.getContainer();
-			var jsonData = parent.find("input[name=data]").val();
-
-
-			var data = this.data = JSON.parse(jsonData);
-			var values = data['values'];
-
-			var chartData = [];
-			for(var i in values) {
-				chartData[i] = [];
-				chartData[i].push(data['labels'][i]);
-				chartData[i].push(values[i]);
-			}
-			return  {literal}{'chartData':chartData, 'labels':data['labels'], 'data_labels':data['data_labels']}{/literal};
-		}
-	});
+	
+	  var plot5 = $.jqplot("widgetChartContainer_{$WIDGET->get('id')}", [chartData], chartOptions);
+	
 </script>
 
 {elseif $CHART_TYPE eq 'verticalbarChart'}

@@ -241,8 +241,8 @@ onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mo
 <!--START MY TEAM LEAVE-->
 {if $MANAGER eq 'true'}
 <!--- Code for Pagination Added by jitu@secondcrm.com --->
-<script src="layouts/v7/modules/Vtiger/resources/List.js?v=6.1.0" type="text/javascript"></script>
-<script src="layouts/v7/modules/Users/resources/Leave.js?v=6.1.0" type="text/javascript"></script>
+<script src="layouts/fask/modules/Vtiger/resources/List.js?v=6.1.0" type="text/javascript"></script>
+<script src="layouts/fask/modules/Users/resources/Leave.js?v=6.1.0" type="text/javascript"></script>
 
 <!----- End for pagination ----->
 <br /><br />

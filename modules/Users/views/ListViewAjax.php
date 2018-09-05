@@ -21,6 +21,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$this->exposeMethod('getUserLanguage');
 		$this->exposeMethod('getUserLeave');
 		$this->exposeMethod('getUserClaim');
+		$this->exposeMethod('checkApplyLeave');
     	}
 
 
@@ -420,7 +421,13 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		echo $viewer->view('UserClaim.tpl',$moduleName,true);
 	}
 
-
+	public function checkApplyLeave(Vtiger_Request $request){
+		$isCreate = Users_ClaimRecords_Model::hasAllocateLeave($request->get('record'));
+		if($isCreate)
+			echo 1;
+		else 
+			echo 0;	
+	}
 
 	/**
 	 * Function to get the list of Script models to be included
@@ -431,12 +438,12 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		
 		$jsFileNames = array(
-			'modules.Vtiger.resources.List',
-			'modules.Users.resources.Leave',
-			'modules.Users.resources.Claim',
-			'modules.Users.resources.Education',
-			'modules.Users.resources.WorkExp',
-			'modules.Users.resources.EmployeeProjects',
+			"~layouts/fask/modules/Vtiger/resources/List.js",
+			"~layouts/fask/modules/Users/resources/Leave.js",	
+			"~layouts/fask/modules/Users/resources/Claim.js",				
+			"~layouts/fask/modules/Users/resources/Education.js",	
+			"~layouts/fask/modules/Users/resources/WorkExp.js",	
+			"~layouts/fask/modules/Users/resources/EmployeeProjects.js",	
 		);
 
 		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);

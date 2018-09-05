@@ -38,9 +38,9 @@
 						</span>
 					</span>
 				</div>
-				<div class="col-lg-3 col-xs-12">
+				<div class="col-lg-5 col-xs-12">
 					<div class="detailViewButtoncontainer">
-						<div class="btn-group pull-right">
+						<div class="btn-group pull-right" style="margin-right: 15px;">
 							{foreach item=DETAIL_VIEW_BASIC_LINK from=$DETAILVIEW_LINKS['DETAILVIEWPREFERENCE']}
 								<button class="btn btn-primary"
 									{if $DETAIL_VIEW_BASIC_LINK->isPageLoadLink()}

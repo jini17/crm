@@ -54,11 +54,7 @@
 			<div class="col-xs-12 col-lg-5 col-md-5 col-sm-5 module-breadcrumb-List">
 				<div id="appnav" class="navbar-right">
 <ul class="nav navbar-nav">
-	                <li class="pull-right">
-						<a class='btn btn-default' >
-                    		<i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
-                		</a>
-	                </li>	
+	           	
 
 					<li class="pull-right">
 

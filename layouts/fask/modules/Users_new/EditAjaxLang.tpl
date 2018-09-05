@@ -28,7 +28,7 @@
                 			</label>
                 		</div>
 	                	<div class="controls fieldValue col-md-8">
-	                		<select  class="select2" {if $LANGUAGE_DETAIL.language_id neq ''} disabled {/if}  onchange="updateSelectBox('language','languagebox');" name="language" id="language">	
+                                    <select  class="select2" {if $LANGUAGE_DETAIL.language_id neq ''} disabled {/if}  onchange="updateSelectBox('language','languagebox');" name="language" id="language" style="width:100%;">	
 								{foreach key=LANG_ID item=LANG_MODEL from=$LANGUAGE_LIST name=institutionIterator}
 									<option value="{$LANG_MODEL.language_id}" {if $LANGUAGE_DETAIL.language_id eq $LANG_MODEL.language_id} selected {/if}>{$LANG_MODEL.language}</option>
 								{/foreach}

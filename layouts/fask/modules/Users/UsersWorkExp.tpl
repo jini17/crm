@@ -24,7 +24,7 @@
 			</div>
 			<div class="listViewEntriesDiv contents-bottomscroll">
 				<div class="bottomscroll-div">
-					<table class="table table-bordered table-condensed listViewEntriesTable">
+					<table class="table table-bordered table-condensed listViewEntriesTable" style="background-color: #fff;">
 						<thead>
 							<tr class="listViewHeaders">
 								<th nowrap width="20%"><strong>{vtranslate('LBL_COMPANY_NAME', $MODULE)}</strong></td>
@@ -48,7 +48,10 @@
 									<td width="5%" class="listTableRow small" valign=top>
 										<div class="pull-right actions">
 											<span class="actionImages">
-												<a class="editWorkExp" onclick="Users_WorkExp_Js.editWorkExp('index.php{$CREATE_WORKEXP_URL}&record={$USER_WORKEXP['uw_id']}&userId={$USERID}');"><i class="fa fa-edit alignBottom" title="{vtranslate('LBL_EDIT', $MODULE)}"></i></a>&nbsp;&nbsp;<a class="cursorPointer" onclick="Users_WorkExp_Js.deleteWorkExp('index.php?module=Users&action=DeleteSubModuleAjax&mode=deleteWorkExp&record={$USER_WORKEXP['uw_id']}');"><i class="fa fa-trash alignMiddle" title="Delete"></i></a>
+												<a class="editWorkExp editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_WorkExp_Js.editWorkExp('index.php{$CREATE_WORKEXP_URL}&record={$USER_WORKEXP['uw_id']}&userId={$USERID}');"></a>&nbsp;&nbsp;<a class="cursorPointer" onclick="Users_WorkExp_Js.deleteWorkExp('index.php?module=Users&action=DeleteSubModuleAjax&mode=deleteWorkExp&record={$USER_WORKEXP['uw_id']}');"><i class="fa fa-trash-o" title="Delete"></i></a>
+
+											
+
 											</span>
 										</div>
 									</td>

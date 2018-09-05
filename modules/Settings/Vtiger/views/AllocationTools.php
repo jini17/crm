@@ -236,6 +236,9 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
                 $leavetype[$leavetypecounter]['numberofleavesmore'] = $insertArray[$i]['value'];
 
             }
+            else  if($insertArray[$i]['name']=='Allocation_claimtype[]') {
+                $selectedclaims .= $insertArray[$i]['value'].',';
+            }
             else{
                 $Allocation[$insertArray[$i]['name']] = $insertArray[$i]['value'];
             }
@@ -245,20 +248,15 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             $Allocation['status']= 'off';
         }
 
-       $Allocationid = $adb->getUniqueID('allocation_list');
+        $Allocationid = $adb->getUniqueID('allocation_list');
 
+        $query = "INSERT INTO `allocation_list` (`allocation_id`,`allocation_title`,`allocation_code`, `status`,`allocation_desc`, `grade_id`,`claimtype_id`) VALUES (?,?,?,?,?,?,?)";
+	  	$result = $adb->pquery($query,array($Allocationid,$Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'], $Allocation['Allocation_Desc'], $selectedgrades, $selectedclaims));
 
-
-
-            $query = "INSERT INTO `allocation_list` (`allocation_id`,`allocation_title`,`allocation_code`, `status`,`allocation_desc`, `grade_id`,`claimtype_id`) VALUES (?,?,?,?,?,?,?)";
-            $result = $adb->pquery($query,array($Allocationid,$Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'],$Allocation['Allocation_Desc
-'],$selectedgrades,$Allocation['Allocation_claimtype']));
-
-            for($i=0;$i<count($leavetype);$i++){
-                $query = "INSERT INTO `allocation_list_details` (`allocation_id`,`leavetype_id`,`ageleave`,`numberofleavesmore`,`numberofleavesless`) VALUES(?,?,?,?,?)";
-                $result = $adb->pquery($query,array($Allocationid,$leavetype[$i]['Allocation_leavetype'], $leavetype[$i]['ageleave'], $leavetype[$i]['numberofleavesmore'], $leavetype[$i]['numberofleavesless'] ));
-            }
-
+       for($i=0;$i<count($leavetype);$i++){
+          $query = "INSERT INTO `allocation_list_details` (`allocation_id`,`leavetype_id`,`ageleave`,`numberofleavesmore`,`numberofleavesless`) VALUES(?,?,?,?,?)";
+          $result = $adb->pquery($query,array($Allocationid,$leavetype[$i]['Allocation_leavetype'], $leavetype[$i]['ageleave'], $leavetype[$i]['numberofleavesmore'], $leavetype[$i]['numberofleavesless'] ));
+        }
 
         //die;
 
@@ -283,7 +281,11 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
         for($i=0;$i<count($insertArray);$i++) {
             $name = $insertArray[$i]['name'];
-            if(stripos($insertArray[$i]['name'],'Allocation_leavetype')>-1){
+            
+            if($insertArray[$i]['name']=='selectUser[]') {
+                $selectedgrades .= $insertArray[$i]['value'].',';
+            }
+            else if(stripos($insertArray[$i]['name'],'Allocation_leavetype')>-1){
                 $leavetypecounter++;
                 $leavetype[$leavetypecounter]['Allocation_leavetype'] = $insertArray[$i]['value'];
             }
@@ -298,6 +300,9 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
                 $leavetype[$leavetypecounter]['numberofleavesmore'] = $insertArray[$i]['value'];
 
             }
+            else  if($insertArray[$i]['name']=='Allocation_claimtype[]') {
+                $selectedclaims .= $insertArray[$i]['value'].',';
+            }
             else{
                 $Allocation[$insertArray[$i]['name']] = $insertArray[$i]['value'];
             }
@@ -308,9 +313,9 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         }
 
 
-        $query = "UPDATE `allocation_list` SET `allocation_title`=? ,`allocation_code`=? , `status`=? ,`allocation_desc`=? , `grade_id`=? WHERE allocation_id = ?";
+        $query = "UPDATE `allocation_list` SET `allocation_title`=? ,`allocation_code`=? , `status`=? ,`allocation_desc`=? , `grade_id`=?, claimtype_id=? WHERE allocation_id = ?";
         $result = $adb->pquery($query,array($Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'],$Allocation['Allocation_Desc
-            '],$Allocation['Allocation_grade'],$Allocation['allocation_id']));
+            '],$selectedgrades, $selectedclaims, $Allocation['allocation_id']));
 
         $query = "DELETE FROM `allocation_list_details` WHERE allocation_id = ?";
         $result = $adb->pquery($query,array($Allocation['allocation_id']));

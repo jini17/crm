@@ -24,7 +24,7 @@
 			</div>
 			<div class="listViewEntriesDiv contents-bottomscroll">
 				<div class="bottomscroll-div">
-					<table class="table table-bordered table-condensed listViewEntriesTable">
+					<table class="table table-bordered table-condensed listViewEntriesTable" style="background-color: #fff;">
 						<thead>
 							<tr class="listViewHeaders">
 								<th nowrap width="15%"><strong>{vtranslate('LBL_PROJECT_TITLE', $MODULE)}</strong></td>
@@ -47,10 +47,12 @@
 									<td class="listTableRow small" valign=top>
 										<div class="pull-right actions">
 											<span class="actionImages">
-												<a class="editProject" onclick="Users_Project_Js.editProject('index.php{$CREATE_PROJECT_URL}&record={$USER_PROJECT['employeeprojectsid']}&userId={$USERID}');"><i class="fa fa-edit alignBottom" title="{vtranslate('LBL_EDIT', $MODULE)}"></i></a>
+												
+
+												<a class="editProject editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Project_Js.editProject('index.php{$CREATE_PROJECT_URL}&record={$USER_PROJECT['employeeprojectsid']}&userId={$USERID}');"></a>
 												&nbsp;&nbsp;
 												<a class="cursorPointer" onclick="Users_Project_Js.deleteProject('index.php?module=EmployeeProjects&action=Delete&record={$USER_PROJECT['employeeprojectsid']}');">
-												<i title="{vtranslate('LBL_DELETE', $MODULE)}" class="fa fa-trash"></i></a>
+												<i title="{vtranslate('LBL_DELETE', $MODULE)}" class="fa fa-trash-o"></i></a>
 											</span>		
 										</div>
 									</td>

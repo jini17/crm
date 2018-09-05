@@ -8,7 +8,7 @@
  *************************************************************************************/
 
 var imported = document.createElement('script');
-imported.src = 'layouts/v7/modules/Users/resources/google.js';
+imported.src = 'layouts/fask/modules/Users/resources/google.js';
 document.head.appendChild(imported);
 
 Vtiger_Edit_Js("Users_Edit_Js",{},{

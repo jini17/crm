@@ -24,8 +24,6 @@ class Reports_ReportChart_Dashboard extends Reports_ChartDetail_View {
 		$reportChartModel = Reports_Chart_Model::getInstanceById($reportModel);
 		$widget = Vtiger_Widget_Model::getInstanceWithWidgetId($widgetId, $currentUser->getId());
 
-
-
         $data = $reportChartModel->getData();
 
 		$viewer->assign('DATA', json_encode($data, JSON_HEX_APOS));
@@ -49,6 +47,7 @@ class Reports_ReportChart_Dashboard extends Reports_ChartDetail_View {
 		}
 
 	}
+
 
 	public function getreportid($widgetid) {
 		$db = PearDatabase::getInstance();

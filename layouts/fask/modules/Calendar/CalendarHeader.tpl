@@ -64,9 +64,7 @@
                                                                                         </a>
                                                                                 </li>
                                                                                 <li>
-                                                                                           <a class='btn addButton module-buttons cursorPointer' >
-                                                                            <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
-                                                                        </a>
+                                                                                         
 
                                                                                 </li>
                                                                         </ul>
