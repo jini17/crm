@@ -279,7 +279,7 @@
                                                 <li>
                                                         <div class="dropdownSales">
                                                                 <div class="addtionalDashboardTab">
-                                                                        <span aria-hidden="true">Sales</span> &nbsp;<i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;"></i>
+                                                                        <span aria-hidden="true" style="margin-right: 5px;">Sales</span><i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;"></i>
                                                                 </div>
 
                                                                 <div class="dropdown-content-Sales">
@@ -287,7 +287,7 @@
                                                                                 <div class="col-md-4">
                                                                                         <div class="popup-col-4">
                                                                                                 <div class="popup-col-4img" >
-                                                                                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 100%;">
+                                                                                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 85%;">
                                                                                                 </div>
 
                                                                                                 <div class="popup-col-4text">
@@ -299,7 +299,7 @@
                                                                                 <div class="col-md-4">
                                                                                         <div class="popup-col-4">
                                                                                                 <div class="popup-col-4img">
-                                                                                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width: 100%;">
+                                                                                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width:85%;">
                                                                                                 </div>
                                                                                                 <div class="popup-col-4text">
                                                                                                         Google contacts, calendar and docs synchronization
@@ -310,7 +310,7 @@
                                                                                 <div class="col-md-4">
                                                                                         <div class="popup-col-4">
                                                                                                 <div class="popup-col-4img">
-                                                                                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 100%;">
+                                                                                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
                                                                                                 </div>
                                                                                                 <div class="popup-col-4text">
                                                                                                         Acquire more leads
@@ -318,8 +318,8 @@
                                                                                         </div>
                                                                                 </div>
                                                                         </div>
-                                                                        <div class="col-md-12 row" style="padding: 20px;">
-                                                                                <a href="#" class="buttonpopup">Subscribe Now</a>
+                                                                        <div class="col-md-12 row" style="padding: 10px;">
+                                                                                <a href="#" class="buttonpopup">Upgrade Now</a>
                                                                         </div>
                                                                 </div>
                                                         </div>
@@ -368,19 +368,19 @@
                                                 <li>
                                                         <div class="dropdownSupport">
                                                                 <div class="addtionalDashboardTab">
-                                                                        <span aria-hidden="true">Support</span> &nbsp;<i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;"></i>
+                                                                        <span aria-hidden="true" style="margin-right: 5px;">Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;"></i>
                                                                 </div>
 
-                                                                <div class="dropdown-content-Support">
+                                                                 <div class="dropdown-content-Support">
                                                                         <div class="row">
                                                                                 <div class="col-md-4">
                                                                                         <div class="popup-col-4">
                                                                                                 <div class="popup-col-4img" >
-                                                                                                        <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 100%;">
+                                                                                                        <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 85%;">
                                                                                                 </div>
 
                                                                                                 <div class="popup-col-4text">
-                                                                                                        Maintain all your deals with Agiliux. Even create appointments based on enquiry and stay connected to information required to close sale, from anywhere.
+                                                                                                        Sales Order, Invoice and Quotation Generator
                                                                                                 </div>
                                                                                         </div>
                                                                                 </div>
@@ -388,10 +388,10 @@
                                                                                 <div class="col-md-4">
                                                                                         <div class="popup-col-4">
                                                                                                 <div class="popup-col-4img">
-                                                                                                        <img src="http://www.secondcrm.com/sites/default/files/send-email-template-easier.jpg" alt="sync from google calendar" style="width: 100%;">
+                                                                                                        <img src="http://www.secondcrm.com/sites/default/files/send-email-template-easier.jpg" alt="sync from google calendar" style="width:85%;">
                                                                                                 </div>
                                                                                                 <div class="popup-col-4text">
-                                                                                                        Agiliux automate many of your business operations, other than just sales, marketing and support and can be customized, meeting all business requirements and you still pay SAAS like pricing.
+                                                                                                        Email and SMS Marketing Service
                                                                                                 </div>
                                                                                         </div>
                                                                                 </div>
@@ -399,18 +399,21 @@
                                                                                 <div class="col-md-4">
                                                                                         <div class="popup-col-4">
                                                                                                 <div class="popup-col-4img">
-                                                                                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/support-img1.jpg" alt="second crm dashboard" style="width: 100%;">
+                                                                                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/support-img1.jpg" style="width: 85%;">
                                                                                                 </div>
                                                                                                 <div class="popup-col-4text">
-                                                                                                        Agiliux Support offers everything you need to deliver faster and helpful customer support. Get started and working in just hours, offer prioritized support wherever customers are, and easily scale as your business grows.
+                                                                                                        Auto capture requests from multiple support channels
                                                                                                 </div>
                                                                                         </div>
                                                                                 </div>
                                                                         </div>
-                                                                        <div class="col-md-12 row" style="padding: 20px;">
-                                                                                <a href="#" class="buttonpopup">Subscribe Now</a>
+                                                                        <div class="col-md-12 row" style="padding: 10px;">
+                                                                                <a href="#" class="buttonpopup">Upgrade Now</a>
                                                                         </div>
                                                                 </div>
+
+
+                                                                
                                                         </div>
 
                                                 </li>
