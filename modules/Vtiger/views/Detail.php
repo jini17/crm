@@ -282,11 +282,18 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 
 		$moduleModel = $recordModel->getModule();
 
+		//Mabruk to hide field if user is not admin
+		if ($_SESSION['authenticated_user_id'] != 1)
+			$isAdmin = "no";
+		else
+			$isAdmin = "yes";
+
 		$viewer = $this->getViewer($request);
 		$viewer->assign('RECORD', $recordModel);
 		$viewer->assign('RECORD_STRUCTURE', $structuredValues);
 		$viewer->assign('BLOCK_LIST', $moduleModel->getBlocks());
 		$viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
+		$viewer->assign('ISADMIN', $isAdmin);
 		$viewer->assign('MODULE_NAME', $moduleName);
 		$viewer->assign('IS_AJAX_ENABLED', $this->isAjaxEnabled($recordModel));
 		$viewer->assign('MODULE', $moduleName);

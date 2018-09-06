@@ -26,6 +26,10 @@
                      <div class="row">
                      {assign var=COUNTER value=0}
                      {foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}
+                                    <!-- Mabruk -->
+                                    {if $FIELD_NAME eq "hradmin" && $ISADMIN eq "no"}
+                                        {continue}
+                                    {/if}
                          {assign var="isReferenceField" value=$FIELD_MODEL->getFieldDataType()}
                          {assign var="refrenceList" value=$FIELD_MODEL->getReferenceList()}
                          {assign var="refrenceListCount" value=count($refrenceList)}
