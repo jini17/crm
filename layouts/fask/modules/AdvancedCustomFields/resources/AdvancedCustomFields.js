@@ -157,7 +157,7 @@ Vtiger.Class("AdvancedCustomFields_Js",{
         if (typeof CkEditor === 'undefined') {
             loadScript('libraries/jquery/ckeditor/ckeditor.js', function () {
                 loadScript('libraries/jquery/ckeditor/adapters/jquery.js', function () {
-                    loadScript('layouts/v7/modules/Vtiger/resources/CkEditor.js', function () {
+                    loadScript('layouts/fask/modules/Vtiger/resources/CkEditor.js', function () {
                         thisInstance.registerLoadAdvancedCustomFieldsControl();
                     });
                 });
@@ -167,11 +167,11 @@ Vtiger.Class("AdvancedCustomFields_Js",{
         }
 
         thisInstance.registerDisplayAdvancedCustomFieldsControl();
-        
+
         // 123720
         thisInstance.createUITypeOption();
     },
-    
+
     createUITypeOption: function(){
         var moduleName = app.getModuleName();
         if (moduleName == 'LayoutEditor'){
@@ -181,11 +181,11 @@ Vtiger.Class("AdvancedCustomFields_Js",{
                     $("select[name=fieldType]").append(new Option(supportedAdvancedCustomFields[key]['name'], key, false, false));
                 }
             }
-            
+
             // Overwrite event submit form
             overwriteFunctionAddCustomField();
         }
-        
+
         $("[name='layoutEditorModules']").change(function(){
             var url = "index.php?module=LayoutEditor&parent=Settings&view=Index&sourceModule=" + $(this).val();
             location.href = url;
@@ -218,7 +218,7 @@ jQuery(document).ready(function(){
             hideAllSmartChangeButtonForACF();
         }
     });
-    
+
     hideAllSmartChangeButtonForACF();
 });
 
@@ -369,7 +369,7 @@ function overwriteFunctionAddCustomField(){
             }
             return aDeferred.promise();
         };
-        
+
         $("body").delegate("#createFieldForm [name='fieldType']", "change", function(){
             var supportedFields = Object.keys(supportedAdvancedCustomFields);
             fieldType = $(this).val();
@@ -382,7 +382,7 @@ function overwriteFunctionAddCustomField(){
                 $("#createFieldForm .fieldProperty").show();
             }
         });
-        
+
         registerEditFieldButton();
     } else {
         setTimeout(function(){

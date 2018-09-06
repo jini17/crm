@@ -25,7 +25,7 @@
                     </div>
                     <div class="container float-left">
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Claim Code :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Leave Type Code :</label></div>
                             <div class="col-lg-4 col-md-4">
                                 <input type="text" placeholder="L01" id="LeaveTypeCode" name="LeaveTypeCode" value="{$VALUES['leave_type_leavecode']}">
                             </div>

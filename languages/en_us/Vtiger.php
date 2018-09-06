@@ -18,6 +18,8 @@ $languageStrings = array(
 	'LBL_PRIVACY_POLICY' => 'Privacy Policy',
 	'LBL_ENRICH_DATA' => 'Enrich Data',
 
+	'LBL_ENRICH_DATA_LOCKED' => 'Enrich Data (Inactive)', 
+
 	// Common Actions
 	'LBL_NEW' => 'New',
 	'LBL_LINKED' => 'Linked',
@@ -1182,7 +1184,7 @@ $languageStrings = array(
 	'LBL_MARKETING' => 'MARKETING',
 	'LBL_SALES' => 'SALES',
 	'LBL_PROJECT' => 'PROJECTS',
-	'LBL_TOOLS' => 'Tools',
+	'LBL_TOOLS' => 'Communications',
 	'LBL_TAGS' => 'Tags',
 	'LBL_SHARE_TAGS' => 'Public Tags',
 	'LBL_SHARE_TAG' => 'Shared Tag(s)',
@@ -1411,6 +1413,7 @@ $languageStrings = array(
 	'LBL_FROM_ADDRESS_SETTING'=>'From Address Setting',
 	'LBL_LAST_LOGINTIME'=>'Your last successful login was',
 	'LBL_USERIP'=>'from IP',
+	'LBL_ADDLEAVETYPE'=>'Add Leave Type',
 );
 
 $jsLanguageStrings = array(

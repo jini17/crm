@@ -59,9 +59,14 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
         var aDeferred = jQuery.Deferred();
         jQuery("#deleteItem").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
         jQuery("#deleteItem").click(function () {
-            app.helper.showProgress();
+          
             var selectedvalues = thisInstance.getAllCheckedValues();
-
+		
+		    if(selectedvalues < 1){
+                alert("Invalid Selection");
+                return aDeferred.reject();
+            }
+            app.helper.showProgress();
             var params = {
                 'module' : app.getModuleName(),
                 'parent' : app.getParentModuleName(),
@@ -78,7 +83,7 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
                         jQuery(".settingsPageDiv.content-area.clearfix").html(data);
 
                         thisInstance.registerEvents();
-                        app.helper.showSuccessNotification({"message":"Deleted Result Successfully"});
+                        app.helper.showSuccessNotification({"message":"Records deleted successfully"});
                     });
                     aDeferred.resolve();
 
@@ -124,11 +129,10 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
                     //console.log("Inside pjax");
                     app.helper.hideProgress();
                     app.helper.showModal(data);
+                    history.pushState({}, null, window.history.back());
                     thisInstance.saveRule();
                     thisInstance.autoAddMultipleLeavetype();
                     thisInstance.showLeaveTypeEditAddition();
-                    history.pushState({}, null, window.history.back());
-
 
                     // var thisInstance1 = this;
 

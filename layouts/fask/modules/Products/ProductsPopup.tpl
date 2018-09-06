@@ -8,7 +8,7 @@
  ************************************************************************************}
 
 {strip}
-<script type="text/javascript" src="{vresource_url('layouts/v7/modules/Products/resources/ProductRelatedProductBundles.js')}"></script>
+<script type="text/javascript" src="{vresource_url('layouts/fask/modules/Products/resources/ProductRelatedProductBundles.js')}"></script>
 <div class = "productsBundlePopup">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

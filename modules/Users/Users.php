@@ -1745,7 +1745,7 @@ class Users extends CRMEntity {
 			foreach($fieldInstances as $blockInstance) {
 				foreach($blockInstance as $fieldInstance) {
 					$fieldName = $fieldInstance->getName();
-					$fieldValue = $data[$fieldName];
+					$fieldValue = trim($data[$fieldName]);
 					$dataType = $fieldInstance->getFieldDataType();
 					if($fieldInstance->isMandatory()) {
 						$mandatoryFields[] = $fieldName;
@@ -1759,8 +1759,9 @@ class Users extends CRMEntity {
 							$mandatoryFlag = false;
 						}
 					} else if($fieldName == 'roleid') {
-						foreach($allRoles as $role) {
-							if(strtolower($fieldValue) == strtolower($role->getName())) {
+						foreach($allRoles as $role) {							
+							if(strtolower($fieldValue) == trim(strtolower($role->getName()))) {
+								echo "here";
 								$roleId = $role->getId();
 								break;
 							}

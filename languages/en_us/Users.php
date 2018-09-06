@@ -13,6 +13,7 @@ $languageStrings = array(
 	'LBL_MANY_ATTEMPTS'=>'Your account has been blocked due too many failed login attempt. Please contact your Administrator.',
 	//MyPreference Blocks
 	'LBL_MY_PREFERENCES'  =>  'My Profile',
+                     'LBL_CLAIM_CREATE_SUCCESSFULLY'  =>  'Claim Created Successfully',
 	'LBL_MORE_INFORMATION'  =>  'More Information',
 	'LBL_USERLOGIN_ROLE'  =>  'User Login & Role',
 	'LBL_USER_IMAGE_INFORMATION' => 'User Photograph',

@@ -74,6 +74,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 			$result = $db->pquery("SELECT vtiger_role.planid FROM vtiger_role 
 				INNER JOIN vtiger_user2role  ON vtiger_user2role.roleid=vtiger_role.roleid WHERE vtiger_user2role.userid=?", array($userid));
 			$plan = $db->query_result($result, 0, 'planid');
+		
 			$_SESSION['plan'] = $plan;
 			$_SESSION['app_unique_key'] = vglobal('application_unique_key');
 			$_SESSION['authenticated_user_language'] = vglobal('default_language');
@@ -85,6 +86,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 			$_SESSION['KCFINDER']['uploadDir'] = "../test/upload";
 			$deniedExts = implode(" ", vglobal('upload_badext'));
 			$_SESSION['KCFINDER']['deniedExts'] = $deniedExts;
+
 			// End
 
 			//Track the login History

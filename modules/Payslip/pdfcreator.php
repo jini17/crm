@@ -41,6 +41,7 @@ function createpdffile ($payslipid,$purpose='', $path='',$current_id='') {
     $emp_name = $adb->query_result($result,0,'first_name');
     $userid = $adb->query_result($result,0,'id');
     $company_details = $adb->query_result($result,0,'company_details');
+    $department = $adb->query_result($result,0,'department');
 
     $designation = $adb->query_result($result,0,'designation');
     $ic_passport = $adb->query_result($result,0,'ic_passport');
@@ -68,7 +69,16 @@ function createpdffile ($payslipid,$purpose='', $path='',$current_id='') {
     $employer_eis = $adb->query_result($result,0,'employer_eis');
     $hrdf = $adb->query_result($result,0,'hrdf');
     $total_comp_contribution = $adb->query_result($result,0,'total_comp_contribution');
+    $currency_id = $adb->query_result($result,0,'currency_id');
+
+    $total_earning= number_format((float)$basic_sal+$transport_allowance, 2, '.', '');
     //echo  $emp_name;die;
+
+    //get currency
+
+    $query3 = "SELECT * FROM vtiger_currency_info WHERE id = ?";
+    $result3 = $adb->pquery($query3,array($currency_id));
+    $currency_symbol = $adb->query_result($result3,0,'currency_symbol');
 
 
     /**
@@ -104,6 +114,7 @@ function createpdffile ($payslipid,$purpose='', $path='',$current_id='') {
     $fax = $adb->query_result($result2,0,'fax');
     $website = $adb->query_result($result2,0,'website');
     $vatid = $adb->query_result($result2,0,'vatid');
+    $logo_name = $adb->query_result($result2,0,'logoname');
    // $title = $adb->query_result($result2,0,'department');
 
     //die;

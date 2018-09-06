@@ -55,7 +55,7 @@
         })();
     </script>
 {/if}
-<div class="main-container clearfix" style="margin-top:10px">
+<div class="main-container clearfix" style="margin-top:10pxz">
 		{assign var=LEFTPANELHIDE value=$USER_MODEL->get('leftpanelhide')}
         <div class="module-nav clearfix settingsNav hidden-sm hidden-xs" id="modnavigator">
             <div class=" height100Per">

@@ -88,7 +88,7 @@ Class Reports_ChartEdit_View extends Vtiger_Edit_View {
 		}
 
 		$modulesList = $reportModel->getModulesList();
-
+		$modulesList['Users'] = 'Users';
 		if (!empty($record)) {
 			$viewer->assign('MODE', 'edit');
 		} else {
@@ -111,6 +111,7 @@ Class Reports_ChartEdit_View extends Vtiger_Edit_View {
 			}
 			$relatedModules[$primaryModule] = $translatedRelatedModules;
 		}
+		$relatedModules['Users'] = array('Education'=>'Education', 'EmergencyContact'=>'EmergencyContact','Performance'=>'Performance','EmployeeContract'=>'EmployeeContract','EmployeeProjects'=>'EmployeeProjects', 'LangugageSkill'=>'LangugageSkill','PassportVisa'=>'PassportVisa','Leave'=>'Leave','Claim'=>'Claim');
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 
 		$viewer->assign('SCHEDULEDREPORTS', $reportModel->getScheduledReport());

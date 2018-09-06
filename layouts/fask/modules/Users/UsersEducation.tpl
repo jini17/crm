@@ -17,7 +17,7 @@
 			<!--<a id="menubar_quickCreate_Education" class="quickCreateModule" data-name="Education" data-url="index.php?module=Education&view=QuickCreateAjax" href="javascript:void(0)">Add Education</a>-->
 			<button type="button" class="btn" onclick="Users_Education_Js.addEducation('{$CREATE_EDUCATION_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_EDUCATION', $MODULE)}</strong></button>
 		</div>
-		<div class="listViewContentDiv" id="listViewContents">
+		<div class="block listViewContentDiv" id="listViewContents">
 			<div class="contents-topscroll noprint">
 				<div class="topscroll-div" style="width:756px">
 					&nbsp;
@@ -50,7 +50,12 @@
 									<td width="5%" class="listTableRow small" valign=top>
 										<div class="pull-right actions">
 											<span class="actionImages">
-												<a class="editEducation" onclick="Users_Education_Js.editEducation('index.php{$CREATE_EDUCATION_URL}&record={$USER_EDUCATION['educationid']}&userId={$USERID}');"><i class="fa fa-edit alignBottom" title="{vtranslate('LBL_EDIT', $MODULE)}"></i></a>&nbsp;&nbsp;<a class="cursorPointer" onclick="Users_Education_Js.deleteEducation('index.php?module=Education&action=Delete&record={$USER_EDUCATION['educationid']}');"><i class="fa fa-trash alignMiddle" title="Delete"></i></a>
+												<a class="editEducation editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Education_Js.editEducation('index.php{$CREATE_EDUCATION_URL}&record={$USER_EDUCATION['educationid']}&userId={$USERID}');"></a>
+												&nbsp;&nbsp;
+												<a class="cursorPointer" onclick="Users_Education_Js.deleteEducation('index.php?module=Education&action=Delete&record={$USER_EDUCATION['educationid']}');"><i class="fa fa-trash-o" title="Delete"></i></a>
+
+												
+
 											</span>
 										</div>
 									</td>

@@ -17,6 +17,15 @@
     <div class='border1px filterConditionContainer' style="padding:30px;">
         <div id='chartcontent' name='chartcontent' style="min-height:400px;" data-mode='Reports'></div>
         <br>
+
+    <!--//ADDED BY JITU@SECONDCRM.COM- #dashreportchart-->
+    {if !$BUTTONSTATUS}  
+        <a href="javascript:Reports_Detail_Js.registerBringToDashboard();" data-mode="dash" class="btn btn-success"><strong>Bring to Dashboard</strong></a>
+    {else}  
+        <a href="javascript:" data-mode="dash" class="btn disabled"><strong>Bring to Dashboard</strong></a>
+    {/if}
+    <br />
+
         {if $CLICK_THROUGH neq 'true'}
             <div class='row-fluid alert-info'>
                 <span class='col-lg-4 offset4'> &nbsp;</span>

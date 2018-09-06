@@ -1105,6 +1105,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
     	var moduleName 		= app.getModuleName();
         var record 			= jQuery('#recordId').val(); 
         var btn 			= jQuery('#' + moduleName + '_detailView_basicAction_LBL_ENRICH_DATA');
+        var btnLocked		= jQuery('#' + moduleName + '_detailView_basicAction_LBL_ENRICH_DATA_LOCKED');
         var params 			= [];
 		var recordId 		= jQuery('#recordId').val();
 		params.url 			= 'index.php?module=' + moduleName + '&action=EnrichData&mode=enrichData&record=' + recordId;
@@ -1139,6 +1140,10 @@ Vtiger.Class("Vtiger_Detail_Js",{
                     	app.helper.showErrorNotification({message:err});	
                 }                                        
             );
+        });
+
+        btnLocked.click( function () {
+        	window.open('https://www.fullcontact.com/', 'FullContact'); 
         });
 
     }, 

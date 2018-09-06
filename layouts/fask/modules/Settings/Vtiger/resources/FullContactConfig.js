@@ -5,7 +5,7 @@
  * The Initial Developer of the Original Code is vtiger.
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
- * Created by Mabruk
+ * Created by DANIAL... MODIFIED AND FIXED BY MABRUK.. but not enough
  *************************************************************************************/
 
 Vtiger.Class("Settings_Vtiger_FullContactConfig_Js",{},{
@@ -19,19 +19,22 @@ Vtiger.Class("Settings_Vtiger_FullContactConfig_Js",{},{
 		var updatedFields = {};
 		var accesskey = "";
 
-		jQuery.each(data, function(key, value) {
+		/*jQuery.each(data, function(key, value) {
 			if (key == "accesskey")
 				accesskey = value;
 			updatedFields[key] = value;
-		})
+		})*/
 
+
+		//alert(JSON.stringify(form));
 			var params = {
 				'module' : app.getModuleName(),
 				'parent' : app.getParentModuleName(),
 				'action' : 'FullContactConfigSaveAjax',
-				'updatedFields' : JSON.stringify(updatedFields)
-			}
-
+				'bearer' : jQuery('[name=bearer]').val(),
+				'preference' : jQuery('[name=preference]').val(),
+				'status' : jQuery('[name=status]').val()
+			}			
 		AppConnector.request(params).then(
 			function(data) {
 				aDeferred.resolve(data);
@@ -67,7 +70,45 @@ Vtiger.Class("Settings_Vtiger_FullContactConfig_Js",{},{
 	
 		var thisInstance = this;
 		var form = jQuery('#FullContactConfigForm');
-		var detailUrl = form.data('detailUrl');		
+		var detailUrl = form.data('detailUrl');	
+
+		var status = jQuery("[name=status]");
+		var preferenceTd = jQuery("#pref");
+		var bearerTd = jQuery("#bear");
+
+		if (jQuery("[name=status]").val() == "0") {
+
+			preferenceTd.hide();
+			bearerTd.hide();
+
+		}
+
+		else {
+
+			preferenceTd.show();
+			bearerTd.show();			
+
+		}
+
+		status.change( function () {
+
+			if (jQuery("[name=status]").val() == "0") {
+
+			preferenceTd.hide();
+			bearerTd.hide();
+
+			}
+
+			else {
+
+				preferenceTd.show();
+				bearerTd.show();			
+
+			}
+
+		});
+
+
 		//register validation 
 		var params = {
 			submitHandler: function (form) {

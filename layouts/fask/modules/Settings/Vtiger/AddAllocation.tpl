@@ -106,7 +106,7 @@
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Claim Allocation :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
-                                <select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_claimtype" name="Allocation_claimtype">
+                                <select class="select2-container select2 inputElement col-sm-6 selectModule" multiple style="width:150px;" id="Allocation_claimtype" name="Allocation_claimtype">
                                     <option value="">Select One</option>
                                     {foreach item=SPLITVALUE key=k from=$CLAIMTYPE}
                                         <option value={$CLAIMTYPE[$k]['id']}>{$CLAIMTYPE[$k]['claimtype']}</option>

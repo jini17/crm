@@ -56,9 +56,7 @@
                             <i class="material-icons">arrow_drop_down</i>
                         </button>
                         
-                        <a class='btn btn-default' >
-                            <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
-                        </a>
+               
                     
                         <ul class="dropdown-menu" role="menu">
                             {foreach item=LISTVIEW_MASSACTION from=$LISTVIEW_MASSACTIONS_1 name=advancedMassActions}

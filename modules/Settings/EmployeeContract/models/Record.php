@@ -27,7 +27,7 @@ class Settings_EmployeeContract_Record_Model extends Settings_Vtiger_Record_Mode
 	public function getRecordLinks() {
 		$currentuser = Users_Record_Model::getCurrentUserModel();
 		$links = array();
-		if($currentuser->get('is_admin')=='on'){
+		if($currentuser->get('is_admin')=='on' || $currentuser->get('hradmin')=='1'){
 		$recordLinks = array(
 			array(
 				'linktype' => 'LISTVIEWRECORD',

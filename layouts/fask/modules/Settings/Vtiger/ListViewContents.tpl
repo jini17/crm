@@ -27,6 +27,8 @@
 					<div class='col-md-6'>
 						{if $MODULE eq 'Tags'}
 							<h4 class="pull-left">{vtranslate('LBL_MY_TAGS', $QUALIFIED_MODULE)}</h4>
+						{else}
+							<h4 class="pull-left">{vtranslate($MODULE_NAME, $MODULE_NAME)}</h4>
 						{/if}
 					</div>
 					<div class="col-md-6">

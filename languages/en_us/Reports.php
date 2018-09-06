@@ -226,6 +226,7 @@ $languageStrings = array(
 	'LBL_UNPIN_CHART_FROM_DASHBOARD' => 'Unpin chart from dashboard',
  	'LBL_REPORTS_DELETED_SUCCESSFULLY' => 'Reports Deleted Successfully',
 	'LBL_USERS'=>'Employee',
+	'LBL_SELECT_DASHBOARD_TAB'=>'Select Dashboard Tab',
 
 );
 $jsLanguageStrings = array(
@@ -239,4 +240,5 @@ $jsLanguageStrings = array(
 	'JSLBL_PIN_CHART_TO_DASHBOARD' => 'Pin Chart To DashBoard',
 	'JSLBL_UNPIN_CHART_FROM_DASHBOARD' => 'Unpin chart from dashboard',
 	'JS_CHART_REMOVED_FROM_DASHBOARD' => 'Chart removed from dashboard',
+	'JS_SELECT_DASHBOARD_TAB'=>'Please select the dashboard',
 );

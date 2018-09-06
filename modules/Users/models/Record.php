@@ -1098,7 +1098,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
 	}
 
 	//added by jitu@Tab permission to nonadmin user like admin settings
-	public function getTabDetails($blockid){
+	public function getTabDetails($blockid, $filtersubtab=array()){
 
 		$db  = PearDatabase::getInstance();
 		//$db->setDebug(true);
@@ -1106,7 +1106,12 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		$result = $db->pquery($query,array($blockid));
 		$blocklabel = $db->query_result($result,0, 'label');
 
-		$fieldqry = "SELECT name, linkto FROM vtiger_settings_field WHERE blockid=? ORDER BY sequence ASC";
+		$filtercond = '';
+		if(count($filtersubtab)>0){
+			$filter = implode(',',$filtersubtab);
+			$filtercond = " AND fieldid IN ($filter)";
+		}
+		$fieldqry = "SELECT name, linkto FROM vtiger_settings_field WHERE blockid=? ".$filtercond ." ORDER BY sequence ASC";
 		$fldresult = $db->pquery($fieldqry,array($blockid));
 		$row = array();
 		if($db->num_rows($fldresult)>0) {
