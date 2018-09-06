@@ -611,7 +611,7 @@ dashboard
 
 
 
-                                        <li style="width: 280px;">
+                                        <li style="width: 250px;">
                                                 <div class="search-links-container hidden-sm">
                                                         <div class="search-link hidden-xs" style="    border: 1px solid #000;color: #000!important;">
                                                                 <span class="ti-search" aria-hidden="true" style="color: #000 !important;"></span>
