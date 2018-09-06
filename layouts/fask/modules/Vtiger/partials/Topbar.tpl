@@ -291,7 +291,7 @@
                                                                                                 </div>
 
                                                                                                 <div class="popup-col-4text">
-                                                                                                        Maintain all your deals with Agiliux. Even create appointments based on enquiry and stay connected to information required to close sale, from anywhere.
+                                                                                                        Manage Sales Team and activities.
                                                                                                 </div>
                                                                                         </div>
                                                                                 </div>
@@ -302,7 +302,7 @@
                                                                                                         <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width: 100%;">
                                                                                                 </div>
                                                                                                 <div class="popup-col-4text">
-                                                                                                        Maintain all your deals with Agiliux. Even create appointments based on enquiry and stay connected to information required to close sale, from anywhere.
+                                                                                                        Google contacts, calendar and docs synchronization
                                                                                                 </div>
                                                                                         </div>
                                                                                 </div>
@@ -313,7 +313,7 @@
                                                                                                         <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 100%;">
                                                                                                 </div>
                                                                                                 <div class="popup-col-4text">
-                                                                                                        With Agiliux, you can grow more opportunities, capture and filter quality leads and drive sales faster from anywhere.
+                                                                                                        Acquire more leads
                                                                                                 </div>
                                                                                         </div>
                                                                                 </div>
