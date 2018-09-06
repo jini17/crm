@@ -1183,7 +1183,7 @@ $languageStrings = array(
 	'LBL_MARKETING' => 'MARKETING',
 	'LBL_SALES' => 'SALES',
 	'LBL_PROJECT' => 'PROJECTS',
-	'LBL_TOOLS' => 'Tools',
+	'LBL_TOOLS' => 'Communications',
 	'LBL_TAGS' => 'Tags',
 	'LBL_SHARE_TAGS' => 'Public Tags',
 	'LBL_SHARE_TAG' => 'Shared Tag(s)',
@@ -1281,7 +1281,9 @@ $languageStrings = array(
 
 	'LBL_GENERAL_FIELDS' => 'General Fields',
 	'LBL_ROLL_UP' => 'Roll up',
-
+	'LBL_LAST_LOGINTIME'=>'Your last successful login was',
+	'LBL_USERIP'=>'from IP',
+	
 	'LBL_TOUCH_POINTS' => 'Touchpoints',
 	'LBL_HISTORY' => 'Touchpoints',
 	'LBL_ENGAGEMENT_HISTORY' => 'Touchpoint History',
@@ -1407,7 +1409,7 @@ $languageStrings = array(
 	'LBL_VIEW_UPDATES_IN_DETAIL' => 'Read More ...',
 	'LBL_DEFAULT_DASHBOARD_TOOLTIP'=>'Make this dashboard as default by reordering it as the first tab!',
 	'LBL_ALLOWED_IP'=>'IP Restriction',
-	'LBL_ADMIN'=>'Admin/Finance',
+	'LBL_ADMIN'=>'HRM',
 	'LBL_ALLOCATION_TYPE'=>'Allocation List',
 	'LBL_FROM_ADDRESS_SETTING'=>'From Address Setting',
 );
