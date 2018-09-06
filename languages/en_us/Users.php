@@ -65,6 +65,7 @@ $languageStrings = array(
 	'Default Calendar View' => 'Default Calendar View',
 	'Default Lead View' => 'Default Lead View',
 	'Title' => 'Title',
+                   
 	'Office Phone' => 'Office Phone',
 	'Department' => 'Department',
 	'Reports To' => 'Reports To',
@@ -455,7 +456,7 @@ $languageStrings = array(
 'LBL_MY_CLAIM'=>'My Claims',
 'LBL_APPLY_CLAIM'=>'Apply Claim',
 'LBL_ADD_NEW_CLAIM'=>'Add New Claim',
-'LBL_INVOICE'=>' Invoice No',
+'LBL_INVOICE'=>' Receipt No',
 'LBL_CLAIM_STATUS'=>'Claim Status',
 'LBL_APPROVED_BY'=>'Approved By',
 'LBL_EDIT_CLAIM'=>'Edit Claim',

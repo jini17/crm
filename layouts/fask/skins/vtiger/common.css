@@ -9129,3 +9129,6 @@ div#prefernces.tab-pane {
 span.actionImages>a{
   padding: 0px 5px;
 }
+ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard{
+      padding: 15px 5px 10px !important;
+}
