@@ -50,7 +50,7 @@
                         </div>
                         <div class="control-group">
                                 <label class="control-label fieldLabel">
-                                        &nbsp;{vtranslate('LBL_OFFICE_PH', $MODULE)} &nbsp; <span class="redColor">*</span>
+                                        &nbsp;{vtranslate('LBL_OFFICE_PH', $MODULE)} <span class="redColor">*</span>
                                 </label>
                                 <div class="controls">
                                         <input id="office_phone" class="input-large inputElement nameField" type="text" value="{$EMERGENCY_DETAIL['office_phone']}" name="office_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($OFFICEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">

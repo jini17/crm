@@ -124,7 +124,7 @@
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
-                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)} &nbsp;<span class="redColor">*</span></label>
+                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                                 </div>	
                                                 <div class="controls date col-md-8">
                                                         <input id="start_date" type="text" class="dateField inputElement" type="text" value="{$WORKEXP_DETAIL.start_date}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($STARTDATEFIELD))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" name="start_date" data-date-format="dd-mm-yyyy">	

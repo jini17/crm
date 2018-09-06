@@ -9132,3 +9132,6 @@ span.actionImages>a{
 ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard{
       padding: 15px 5px 10px !important;
 }
+table.table.table-bordered.listViewEntriesTable{
+  background-color: #fff !important;
+}

@@ -105,7 +105,7 @@ jQuery(document).ready(function(e){
 
                         <div class="control-group">
                                 <label class="control-label fieldLabel col-md-4">
-                                        &nbsp;{vtranslate('LBL_LEAVE_TYPE', $QUALIFIED_MODULE)} &nbsp; <span class="redColor">*</span>
+                                        &nbsp;{vtranslate('LBL_LEAVE_TYPE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
                                 </label>
 
                                 <div class="controls  col-md-8">
@@ -135,7 +135,7 @@ jQuery(document).ready(function(e){
                         </div>
                 <!--end-->
                         <div class="control-group">
-                                <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)} &nbsp; <span class="redColor">*</span></label>
+                                <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                 <div class="controls date  col-md-8">
                                         <input id="start_date" type="text" class="dateField inputElement" type="text" value="{$LEAVE_DETAIL.from_date}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($STARTDATEFIELD))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" name="start_date" data-date-format="dd-mm-yyyy">	
                                         <span class="add-on">&nbsp;<i class="icon-calendar"></i></span>&nbsp;&nbsp;
@@ -145,7 +145,7 @@ jQuery(document).ready(function(e){
                         </div>
                         <div class="control-group">
                         <div class="control-group" id="enddate_div">
-                                <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_END_DATE', $QUALIFIED_MODULE)} &nbsp; <span class="redColor">*</span></label>
+                                <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_END_DATE', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                 <div class="controls row-fluid date  col-md-8">
                                         <input id="end_date" type="text" class="dateField inputElement nameFields" type="text" value="{if $LEAVE_DETAIL.to_date neq '00-00-0000'}{$LEAVE_DETAIL.to_date}{/if}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($ENDDATEFIELD))}'  data-validator={$VALIDATOR} data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"  name="end_date" data-date-format="dd-mm-yyyy" >	
                                         <span class="add-on">&nbsp;<i class="icon-calendar"></i></span>&nbsp;&nbsp;
@@ -167,7 +167,7 @@ jQuery(document).ready(function(e){
                         </div>
                 </div>
                         <div class="control-group">
-                                <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_REASON', $QUALIFIED_MODULE)}  &nbsp; <span class="redColor">*</span> </label>		
+                                <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_REASON', $QUALIFIED_MODULE)}  <span class="redColor">*</span> </label>		
                                 <div class="controls  col-md-8">
                                         <textarea style="width:300px!important" name="reason" id="reason" class="span11" maxlength="300" data-validation-engine="validate[required]">{$LEAVE_DETAIL.leave_reason}</textarea>
                                 </div>
