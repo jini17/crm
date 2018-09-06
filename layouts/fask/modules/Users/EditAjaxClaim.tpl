@@ -29,8 +29,6 @@
 
         <form id="editClaim" name="editClaim" class="form-horizontal" method="POST">
                 <input type="hidden" name="record" value="{$CLAIMID}" />
-
-
                 <input type="hidden" id="manager"  name="manager" value="{$MANAGER}" />
                 <input type="hidden" name="jobgrade" value="{$JOBGRADE}" />
                 <input type="hidden" value="Users" name="module">
@@ -55,7 +53,7 @@
                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                         <div class="col-md-4">
                                                                 <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                                        &nbsp;{vtranslate('LBL_CLAIM_TYPE', $QUALIFIED_MODULE)} &nbsp;<span class="redColor">*</span>
+                                                                        &nbsp;{vtranslate('LBL_CLAIM_TYPE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
                                                                 </label>
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
@@ -104,7 +102,7 @@
                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                         <div class="col-md-4">
                                                                 <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                                        {vtranslate('LBL_AMOUNT', $QUALIFIED_MODULE)}&nbsp;&nbsp;<span class="redColor">*</span>
+                                                                        {vtranslate('LBL_AMOUNT', $QUALIFIED_MODULE)}&nbsp;<span class="redColor">*</span>
                                                                 </label>
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
@@ -125,7 +123,7 @@
                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                         <div class="col-md-4">
                                                                 <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                                        &nbsp;{vtranslate('LBL_INVOICE', $QUALIFIED_MODULE)}<span class="redColor">*</span>
+                                                                        &nbsp;{vtranslate('LBL_INVOICE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
                                                                 </label>
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
@@ -188,7 +186,7 @@
                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                         <div class="col-md-4">
                                                                 <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                                        &nbsp;{vtranslate('LBL_APPROVED_BY', $QUALIFIED_MODULE)} &nbsp; <span class="redColor">*</span>
+                                                                        &nbsp;{vtranslate('LBL_APPROVED_BY', $QUALIFIED_MODULE)} <span class="redColor">*</span>
                                                                 </label>
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">

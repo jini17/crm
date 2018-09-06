@@ -24,7 +24,7 @@
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                 <div class="col-md-4">
                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                {vtranslate('LBL_SELECT_LANGUAGE', $MODULE)} &nbsp; <span class="redColor">*</span>
+                                                {vtranslate('LBL_SELECT_LANGUAGE', $MODULE)} <span class="redColor">*</span>
                                         </label>
                                 </div>
                                 <div class="controls fieldValue col-md-8">

@@ -14,7 +14,7 @@ class Settings_Performance_ListView_Model extends Settings_Vtiger_ListView_Model
     public function getBasicListQuery() {
         $currentUser = Users_Record_Model::getCurrentUserModel();
 
-        if(!$currentUser->isAdminUser()){
+       if(!$currentUser->isAdminUser() && $currentUser->hradmin !='1'){
         	$where = "AND vtiger_crmentity.smownerid = ".$currentUser->getId();	
         }
         $userNameSql = getSqlForNameInDisplayFormat(array('first_name'=>
