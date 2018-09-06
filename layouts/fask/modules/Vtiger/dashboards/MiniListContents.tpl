@@ -29,7 +29,7 @@
 		{foreach item=FIELD key=NAME from=$HEADER_FIELDS name="minilistWidgetModelRowHeaders"}
 			<div class="col-lg-{$SPANSIZE} textOverflowEllipsis" title="{strip_tags($RECORD->get($NAME))}" style="padding-right: 10px;">
                {if $smarty.foreach.minilistWidgetModelRowHeaders.last}
-					<a href="{$RECORD->getDetailViewUrl()}" class="pull-right"><i title="{vtranslate('LBL_SHOW_COMPLETE_DETAILS',$MODULE_NAME)}" class="material-icons text-info">search</i></a>
+					<a href="{$RECORD->getDetailViewUrl()}" class="pull-right"><i title="{vtranslate('LBL_SHOW_COMPLETE_DETAILS',$MODULE_NAME)}" class="material-icons text-info">view_day</i></a>
 				{/if}
 				{if $FIELD->get('uitype') eq '71' || ($FIELD->get('uitype') eq '72' && $FIELD->getName() eq 'unit_price')}
 					{assign var=CURRENCY_ID value=$USER_MODEL->get('currency_id')}

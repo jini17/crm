@@ -16,7 +16,7 @@ $languageStrings = array(
 	'LBL_SKILLS_EVALUATED' => 'Skills Evaluated',
 	'LBL_TOTAL_PERFORMANCE_RATING' => 'Total Performance Rating',
 	'LBL_Employment_Contract_Information' => 'Employee Contract Information',
-
+	'Assigned To'=>'Employee Name',
 	// Blocks
 	'LBL_Salary_Tracking' => 'Salary Tracking',
 

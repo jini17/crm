@@ -259,7 +259,7 @@
                         <div class="pull-right cancelLinkContainer" style="margin-top:0px;">
 
                 {if $MANAGER eq 'true'}
-                        <input class="cancelLink btn btn-danger pull-right" type="button" value="Cancel" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal">
+                        <input class="cancelLink btn btn-danger pull-right" type="button" value="Cancel" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal" style="margin-left: 5px;">
 
                         <input class="btn btn-success" type="submit" value="Save Changes" name="savechanges" accesskey="LBL_SAVE_CHANGES_BUTTON_KEY" title="Save Changes">
 

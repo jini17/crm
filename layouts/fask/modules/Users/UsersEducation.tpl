@@ -9,7 +9,7 @@
  ********************************************************************************/
 -->*}
 {strip}
-<div id="UserEducationContainer">
+<div class="tab-pane" id="UserEducationContainer">
 	<div class="contents row-fluid">
 		{assign var=CREATE_EDUCATION_URL value=$EDUCATION_RECORD_MODEL->getCreateEducationUrl()}
 		{assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}	

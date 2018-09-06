@@ -132,17 +132,21 @@ jQuery(document).ready(function(e){
                                         </select>
                                 </div>
 
-                        </div>
+                        </div><br><br>
                 <!--end-->
                         <div class="control-group">
                                 <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                 <div class="controls date  col-md-8">
                                         <input id="start_date" type="text" class="dateField inputElement" type="text" value="{$LEAVE_DETAIL.from_date}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($STARTDATEFIELD))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" name="start_date" data-date-format="dd-mm-yyyy">	
                                         <span class="add-on">&nbsp;<i class="icon-calendar"></i></span>&nbsp;&nbsp;
-                                        <span style="margin-right:7px;" id="starthalfcheck" class="hide">{vtranslate('LBL_HALF_DAY', $QUALIFIED_MODULE)}</span>
-                                        <input type="checkbox" class="hide" {if $LEAVE_DETAIL.starthalf eq 1} checked {/if} name="starthalf" id="starthalf" value="">
+                                        <div style="float: right;margin-bottom:10px;margin-top:10px;">
+                                            <span style="margin-right:7px;" id="starthalfcheck" class="hide">{vtranslate('LBL_HALF_DAY', $QUALIFIED_MODULE)}</span>
+                                            <input type="checkbox" class="hide" {if $LEAVE_DETAIL.starthalf eq 1} checked {/if} name="starthalf" id="starthalf" value="" style="float: left;
+    margin-right: 10px;">
+
+                                        </div>
                                 </div>
-                        </div>
+                        </div><br><br>
                         <div class="control-group">
                         <div class="control-group" id="enddate_div">
                                 <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_END_DATE', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
@@ -152,7 +156,7 @@ jQuery(document).ready(function(e){
                                         <span style="margin-right:7px;" class="{if $LEAVE_DETAIL.endhalf eq 0} hide {/if}" id="endhalfcheck">{vtranslate('LBL_HALF_DAY', $QUALIFIED_MODULE)}</span>
                                         <input type="checkbox" name="endhalf" class="{if $LEAVE_DETAIL.endhalf eq 0} hide {/if}"  {if $LEAVE_DETAIL.endhalf eq 1} checked{/if} id="endhalf" value="">
                                 </div>
-                        </div>
+                        </div><br><br>
                         <div class="control-group">
                                 <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_REPLACE_USER', $QUALIFIED_MODULE)}</label>		
                                         <div class="controls  col-md-8">
@@ -164,16 +168,16 @@ jQuery(document).ready(function(e){
 
                                         </select>
                                 </div>
-                        </div>
+                        </div><br>&nbsp;<br>
                 </div>
                         <div class="control-group">
                                 <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_REASON', $QUALIFIED_MODULE)}  <span class="redColor">*</span> </label>		
                                 <div class="controls  col-md-8">
-                                        <textarea style="width:300px!important" name="reason" id="reason" class="span11" maxlength="300" data-validation-engine="validate[required]">{$LEAVE_DETAIL.leave_reason}</textarea>
+                                        <textarea style="width:100%;" name="reason" id="reason" class="span11" maxlength="300" data-validation-engine="validate[required]">{$LEAVE_DETAIL.leave_reason}</textarea>
                                 </div>
                                 <label class="control-label fieldLabel">&nbsp;</label>
                                 <div class="controls" id="charNum_reason" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
-                        </div>
+                        </div><br><br>
                 {if $MANAGER eq 'true'}
                         <div class="control-group">
                                 <!--approved start-->
@@ -200,7 +204,7 @@ jQuery(document).ready(function(e){
                                         </span>
                                 </div>
 
-                        </div>
+                        </div><br><br>
                 {/if}
                         <div class="hide" id="rejectionreason">
                         <div class="control-group">
@@ -211,12 +215,12 @@ jQuery(document).ready(function(e){
                                 </div>
                                 <label class="control-label fieldLabel">&nbsp;</label>
                                 <div class="controls inputElement" id="charNum" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
-                        </div>
+                        </div><br><br>
                         </div>
 
                 </div>
                 <div class="modal-footer">
-                        <div class="pull-right cancelLinkContainer" style="margin-top:0px;">
+                        <div class="pull-right cancelLinkContainer" style="margin-top:0px;margin-left: 5px;">
 
                 {if $MANAGER eq 'true'}
                         <input class="cancelLink btn btn-danger" type="button" value="Cancel" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel" aria-hidden="true" data-dismiss="modal">
