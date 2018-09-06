@@ -604,7 +604,8 @@ $languageStrings = array(
 	'Biotechnology'=>'Biotechnology',
 	'Chemicals'=>'Chemicals',
 	'Communications'=>'Communications',
-              
+                     'Admin/Finance' => 'HRM',
+                    'Tools'=>'Communications',
 	'Construction'=>'Construction',
 	'Consulting'=>'Consulting',
 	'Education'=>'Education',

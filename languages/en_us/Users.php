@@ -469,7 +469,7 @@ $languageStrings = array(
 'LBL_MONTHLY_LIMIT_EXCEED'=>'Monthly limit exceeded !',
 'LBL_YEARLY_LIMIT_EXCEED'=>'Yearly limit exceeded !',
 'LBL_CLAIM_NOT_EXCEED'=>'Amount claim are fine.',	
-
+'Claim '=>'Claims',
 
 
 //End of section Claim

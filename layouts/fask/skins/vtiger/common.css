@@ -9087,7 +9087,7 @@ a.btn.btn-default.Help-btn{
   height: 400px
 }
 .popup-col-4text{
-  text-align: justify;padding: 10px;height: 130px;
+  text-align: center;padding: 10px;height: 130px;font-size: 18px;
 }
 a#menubar_quickCreate_BenefitType , a#menubar_quickCreate_Leave{
   display: none;
