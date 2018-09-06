@@ -23,12 +23,12 @@ $block1 = $block1->getInstance($block1->label,$module);
 
 $field1 = new Vtiger_Field();
 
-$field1->name = 'region';
+$field1->name = 'hradmin';
 $field1->table = $module->basetable;
-$field1->label = 'Territory';
-$field1->column = 'region';
-$field1->columntype = 'varchar(255)';
-$field1->uitype = 2002;
+$field1->label = 'Is HR-Admin';
+$field1->column = 'hradmin';
+$field1->columntype = 'varchar(1)';
+$field1->uitype = 56;
 $field1->typeofdata = 'V~O';
 $block1->addField($field1);
 echo "NBBB";
