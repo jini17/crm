@@ -45,6 +45,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
 	//Created by Safuan for fetching current user leaves for current year//	
 	public function getMyLeaves($userid, $year){
+	
 	$db = PearDatabase::getInstance();
 	
 	$query = "SELECT leaveid, reasonofleave, leavetype, fromdate, todate, leavestatus, reasonnotapprove, starthalf, endhalf
@@ -76,67 +77,70 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
 	}
 
-
+	
 	//Created by Safuan for fetching leave types//	
 	//modified by jitu for concate color and balance in dropdown 
-	public function getLeaveTypeList($userid,$leaveid){ 
+	public function getLeaveTypeList($leaveid){ 
 	
 		$db = PearDatabase::getInstance();
 		global $current_user;	
-		//Modified by jitu for showing  all except those are onetime if user already applied..
-		$condleave = '';
-		$conduser = '';
-		$year = date("Y");
-		//if year end process run then user can apply leave for next year other wise current year
-		$sql  = "SELECT MAX(year) as year from secondcrm_user_balance LIMIT 0,1";
-		$res = $db->pquery($sql,array());
-		$year = $db->query_result($res, 0, 'year');
-
-		if($year > date("Y")) {
-			$year = $year;	
-		 } //end here 
+		//$db->setDebug(true);
+		$userid = $current_user->id;
 	
-		if(!empty($leaveid)) {
-			$condleave = " AND tblSCUB.user_id= ".$userid." AND tblVTLT.leavetypeid NOT IN (SELECT tblVTL.leavetype FROM vtiger_leave tblVTL INNER JOIN vtiger_crmentity tblVTCC ON tblVTCC.crmid=tblVTL.leaveid AND tblVTCC.deleted=0 
-	LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype WHERE ((tblVTLTT.leave_frequency = 'Onetime' AND tblVTL.leavestatus !='Not Approved' && tblVTL.leavestatus !='Cancel' && tblVTL.leaveid != $leaveid)) AND tblVTCC.smownerid=$userid)";
-		}
-		if(!empty($userid) && empty($leaveid)) {
-			$conduser = " AND tblSCUB.user_id= ".$userid." AND tblVTLT.leavetypeid NOT IN (SELECT tblVTL.leavetype FROM vtiger_leave tblVTL INNER JOIN vtiger_crmentity tblVTCC ON tblVTCC.crmid=tblVTL.leaveid AND tblVTCC.deleted=0 
-	LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype WHERE ((tblVTLTT.leave_frequency = 'Onetime' AND tblVTL.leavestatus !='Not Approved' && tblVTL.leavestatus !='Cancel')) AND tblVTCC.smownerid=$userid)";
+		
+		//get Date of Joining 
+		$result = $db->pquery("SELECT date_joined, job_grade FROM vtiger_employeecontract tblVTEC 
+							INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
+							INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
+							WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTEC.date_joined DESC LIMIT 0, 1", array($userid));
+							
+		$dateofJoining = $db->query_result($result, 0, 'date_joined');	
+		$grade_id	   = $db->query_result($result, 0, 'job_grade');	
+		$datediff = time() - strtotime($dateofJoining);				 
+		$earneddays = round($datediff / (60 * 60 * 24));
+		$curr_year	   = date('Y');	
+				
+		//Get all leavetypes with balance for which leave to be apply
+		$leavers = $db->pquery("SELECT distinct tblVTLT.title, tblVTLT.leavetypeid, allocleaverel.ageleave, allocleaverel.numberofleavesmore, 
+					allocleaverel.numberofleavesless FROM vtiger_leavetype tblVTLT 
+					INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTLT.leavetypeid
+					LEFT JOIN allocation_leaverel allocleaverel ON allocleaverel.leavetype_id = tblVTLT.leavetypeid 
+					LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocleaverel.allocation_id
+					LEFT JOIN allocation_list alloclist ON alloclist.allocation_id=allocleaverel.allocation_id AND alloclist.status='on'			
+					WHERE tblVTC.deleted=0 AND alloclist.allocation_year=? AND allocation_graderel.grade_id=? 
+					", array($curr_year, $grade_id));			
+		
+		$norows = $db->num_rows($leavers);
+		$data	= array();
+		
+		//check LeaveType balance with Earned days
+		if($norows > 0){
+		
+			for($i=0;$i<$norows;$i++){
+				$leavetype		= $db->query_result($leavers,$i, 'title');
+				$leavetypeid	= $db->query_result($leavers,$i, 'leavetypeid');
+				//get all taken leaves against to leavetype
+				$rstaken 		= $db->pquery("SELECT SUM(leave_count) as takenleave FROM secondcrm_user_balance WHERE user_id=? AND leave_type=? AND year=?",
+					 array($userid, $leavetypeid, $curr_year));
+				$takenleave 	= $db->query_result($rstaken,0, 'takenleave');
+				$leavetypeid 	= $db->query_result($leavers,$i, 'leavetypeid');
+				$ageleave	 	= $db->query_result($leavers,$i, 'ageleave');
+				$nummoreleave 	= $db->query_result($leavers,$i, 'numberofleavesmore');
+				$numlessleave 	= $db->query_result($leavers,$i, 'numberofleavesless');
+				
+				if($earneddays > $ageleave){
+					$balance_leave = $nummoreleave - $takenleave;
+				} else {
+					$balance_leave = $numlessleave - $takenleave;
+				}
+				if($balance_leave>0) {
+					$data[$i]['leavetypeid'] 	= $leavetypeid;			
+					$data[$i]['leavetype'] 	 	= $leavetype;
+					$data[$i]['leave_remain']	= $balance_leave;
+				} 	
+			}	
 		}	
-	
-		$query = "SELECT alloclist.";	
-	
-	/*$query = "SELECT DISTINCT tblVTLT.leavetypeid,tblSCUB.leave_type, tblVTLT.title, tblVTLT.colorcode,tblSCUB.leave_count, tblVTLT.halfdayallowed FROM secondcrm_user_balance tblSCUB 
-	INNER JOIN allocation_list tblVTLA ON tblVTLA.leavetype_id=tblSCUB.leave_type
-	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLA.allocation_id
-	INNER JOIN vtiger_leavetype tblVTLT ON tblVTLT.leavetypeid = tblVTLA.leavetype_id
-	LEFT JOIN vtiger_leave tblVTL ON tblVTL.leavetype = tblSCUB.leave_type  
-	 WHERE tblVTC.deleted=0 ".$conduser." AND year = '".$year."' ".$condleave. " ORDER BY tblVTLT.leavetypeid ASC"; */
-
-	 $query = "SELECT * FROM vtiger_leavetype tblVTLT
-	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLT.leavetypeid
-	 WHERE tblVTC.deleted=0";
-
-	$result = $db->pquery($query,array());
-
-
-
-	$leavetype=array();	
-	$leavetypeid  = '';
-	if($db->num_rows($result)>0) {	
-		for($i=0;$i<$db->num_rows($result);$i++) {
-
-			if($leavetypeid != $db->query_result($result, $i, 'leavetypeid')) {
-				$leavetype[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetypeid');			
-				$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'title');
-				$leavetype[$i]['leave_remain']=" ".self::getUserBalance($userid, $leavetype[$i]['leavetypeid']);
-				$leavetypeid = $db->query_result($result, $i, 'leave_type');
-			} 
-		}
-	}
-	return $leavetype;	
-
+		return $data;
 	}
 
 
@@ -163,7 +167,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	public function getMyTeamLeave($userid, $year, $page, $max,$selectedmember,$selectedleavetype){
 	
 		$db = PearDatabase::getInstance();
-		
+		//$db->setDebug(true);
 		$teamreporttoquery = "SELECT id FROM vtiger_users WHERE reports_to_id=$userid";
 		$resulteamreport = $db->pquery($teamreporttoquery,array());
 		
@@ -189,18 +193,14 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 		}	
 		$querygetteamleave="SELECT leaveid, CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, vtiger_users.id, reasonofleave, leavetype, fromdate, todate, leavestatus, reasonnotapprove,starthalf, endhalf
 					FROM vtiger_leave 
-					INNER JOIN vtiger_crmentity
-					ON vtiger_crmentity.crmid = vtiger_leave.leaveid
-                   			INNER JOIN vtiger_users
-                    			ON vtiger_crmentity.smownerid=vtiger_users.id
+					INNER JOIN vtiger_crmentity	ON vtiger_crmentity.crmid = vtiger_leave.leaveid
+          			INNER JOIN vtiger_users ON vtiger_crmentity.smownerid=vtiger_users.id
+                    LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid=	vtiger_leave.leavetype		
 					WHERE vtiger_crmentity.deleted=0 ".$memcondition." AND DATE_FORMAT(fromdate, '%Y') = $year
-					AND (vtiger_leave.leavestatus = 'Apply' 
-						OR vtiger_leave.leavestatus = 'Approved'
-						OR vtiger_leave.leavestatus = 'Not Approved'
-						OR vtiger_leave.leavestatus = 'Cancel')" .$leavetypecondtion;
+					AND vtiger_leave.leavestatus IN ('Apply','Approved','Not Approved','Cancel')" .$leavetypecondtion;
 		//For pagination
 		if(!empty($max) || $max != ''){
-		$querygetteamleave.=" LIMIT $row,$max"; 
+			$querygetteamleave.=" LIMIT $row,$max"; 
 		}
 
 
@@ -223,6 +223,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 			$myteamleave[$i]['applicantid'] = $db->query_result($resultgetteamleave, $i, 'id'); 
 			$myteamleave[$i]['reasonnotapprove'] = $db->query_result($resultgetteamleave, $i, 'reasonnotapprove'); 
 		}
+		
 	return $myteamleave;
 	}
 
@@ -291,13 +292,13 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	    $endDate   = strtotime($to);
 	    $startDate = strtotime($from);
 	    $holidays = array();
-	    $rsholidays = $db->pquery("SELECT tblVTH.holiday_date, tblVTH.holiday_endate 
+	    $rsholidays = $db->pquery("SELECT tblVTH.start_date, tblVTH.end_date 
 			FROM vtiger_holiday tblVTH INNER JOIN vtiger_crmentity tblVTC 
-				ON tblVTC.crmid = tblVTH.holidayid WHERE  ((? between tblVTH.holiday_date AND  tblVTH.holiday_endate ) OR  (? between tblVTH.holiday_date AND tblVTH.holiday_endate)) AND tblVTC.deleted=0",array($from, $to));
+				ON tblVTC.crmid = tblVTH.holidayid WHERE  ((? between tblVTH.start_date AND  tblVTH.end_date ) OR  (? between tblVTH.start_date AND tblVTH.end_date)) AND tblVTC.deleted=0",array($from, $to));
 				
 		for($i=0;$i<$db->num_rows($rsholidays);$i++) {
-			$holiday_date = $db->query_result($rsholidays, $i, 'holiday_date');
-			$holiday_endate	= $db->query_result($rsholidays, $i, 'holiday_endate');
+			$holiday_date = $db->query_result($rsholidays, $i, 'start_date');
+			$holiday_endate	= $db->query_result($rsholidays, $i, 'end_date');
 			if(strtotime($holiday_date) == strtotime($holiday_endate)){
 				$holidays[] = $holiday_date;	
 			} else {
@@ -488,6 +489,8 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 		}
 	return $usersleave;
 	}
+	
+	
 	/*USED IN LEAVES APPROVAL WIDGET - By Safuan
 	**FUNCTION Get team leaves and link*/
 	public function widgetgetmyteamleaves($filter) {
@@ -547,6 +550,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 			$myteamleave[$i]['applicantid'] = $db->query_result($resultgetteamleave, $i, 'id'); 
 			$myteamleave[$i]['reasonnotapprove'] = $db->query_result($resultgetteamleave, $i, 'reasonnotapprove'); 
 		}
+		
 	return $myteamleave;
 
 	}
@@ -555,16 +559,18 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 		$db = PearDatabase::getInstance();
 		$leavearr= self::getLeaveDetail($leaveid);
 		
-		$startdate=$leavearr['from_date'];
-		$enddate=$leavearr['to_date'];
-		$starthalf=$leavearr['starthalf']==1?0.5:0;
-		$endhalf=$leavearr['endhalf']==1?0.5:0;
-		$takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);
+		$startdate	 = $leavearr['from_date'];
+		$enddate	 = $leavearr['to_date'];
+		$leavestatus = $leavearr['leavestatus'];
+		$starthalf	 = $leavearr['starthalf']==1?0.5:0;
+		$endhalf	 = $leavearr['endhalf']==1?0.5:0;
+		$takenleave	 = $leavearr['total_taken'];
+		//$takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);
 		//$takenleave = (($enddate - $startdate) / 86400)+1-($starthalf+$endhalf);
-
-		$leavecancelsql="UPDATE secondcrm_user_balance SET leave_count = leave_count+$takenleave 
-				WHERE user_id=$userupdateid AND leave_type= $leavetype";
-		$result = $db->pquery($leavecancelsql,array());
+		if($leavestatus=='Approved'){
+			$leavecancelsql="UPDATE secondcrm_user_balance SET leave_count = leave_count-? WHERE user_id=? AND leave_type= ? AND year=?";
+			$result = $db->pquery($leavecancelsql,array($takenleave, $userupdateid, $leavetype, date('Y')));	
+		} 	
 		return $result;		
 	}
 

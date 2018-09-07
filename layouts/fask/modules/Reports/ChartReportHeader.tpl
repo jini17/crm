@@ -81,13 +81,21 @@
                         {include file='AdvanceFilter.tpl'|@vtemplate_path RECORD_STRUCTURE=$RECORD_STRUCTURE ADVANCE_CRITERIA=$SELECTED_ADVANCED_FILTER_FIELDS COLUMNNAME_API=getReportFilterColumnName}
                     </div>
                     <div id="dashboardTab">
-                        <select name="dashboard_tab" id="dashboard_tab" class="col-lg-2 select2">
-                             <option value="">{vtranslate('LBL_SELECT_DASHBOARD_TAB', $MODULE)}</option>
-                             {foreach item=TAB from=$DASHBOARD_TABS}
-                                <option value="{$TAB.id}">{$TAB.tabname}</option>
-                             {/foreach}
-                        </select>
+                            <select name="dashboard_tab" id="dashboard_tab" class="col-lg-2 select2">
+                                 <option value="">{vtranslate('LBL_SELECT_DASHBOARD_TAB', $MODULE)}</option>
+                                 {foreach item=TAB from=$DASHBOARD_TABS}
+                                    <option value="{$TAB.id}">{$TAB.tabname}</option>
+                                 {/foreach}
+                            </select>
+                          <span class="col-lg-4">
+                             {if !$BUTTONSTATUS}  
+                                <a href="javascript:Reports_Detail_Js.registerBringToDashboard();" data-mode="dash" class="btn btn-success"><strong>Bring to Dashboard</strong></a>
+                            {else}  
+                                <a href="javascript:" data-mode="dash" class="btn disabled"><strong>Bring to Dashboard</strong></a>
+                            {/if}
+                        </span>    
                     </div>
+                           
                     {if $REPORT_MODEL->isEditableBySharing()}
                         <div class="row textAlignCenter hide reportActionButtons">
                             <button class="btn btn-success generateReportChart" data-mode="save" value="{vtranslate('LBL_SAVE',$MODULE)}">

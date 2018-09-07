@@ -13,7 +13,6 @@ $languageStrings = array(
 	'SINGLE_EmployeeContract' => 'Employee Contract',
 	'LBL_ADD_RECORD' => 'Add Employee Contract',
 	'LBL_Employment_Contract_Information' => 'Employee Contract Information',
-	'Assigned To'=>'Employee Name',
 	// Blocks
 	'LBL_Salary_Tracking' => 'Salary Tracking',
 
