@@ -11,23 +11,23 @@
 
 {strip}
 
-    <div class="taxModalContainer modal-dialog modal-xs" id="EditAllocationContainer">
+    <div class="taxModalContainer modal-dialog modal-lg" id="EditAllocationContainer">
         <div class="modal-content">
             <form id="AddAllocation" class="form-horizontal" method="POST">
                 <div class="modal-body" id="scrollContainer" name="test">
                     <div class="container float-left">
                         <div class="contents row form-group">
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Allocation Title :</label></div>
-                            <div class="col-lg-4 col-md-4">
-                                <input type="text" placeholder="New Joiners" id="AllocationTitle" name="AllocationTitle" value="{$VALUES['allocationtitle']}">
+                            <div class="fieldValue col-lg-4 col-md-4">
+                                <input class="inputElement col-sm-9" type="text" placeholder="New Joiners" id="AllocationTitle" name="AllocationTitle" value="{$VALUES['allocationtitle']}">
                             </div>
                         </div>
                     </div>
                     <div class="container float-left">
                         <div class="contents row form-group">
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Allocation Code :</label></div>
-                            <div class="col-lg-4 col-md-4">
-                                <input type="text" placeholder="A01" id="AllocationCode" name="AllocationCode" value="{$VALUES['allocation_code']}">
+                            <div class="fieldValue col-lg-4 col-md-4">
+                                <input class="inputElement col-sm-9" type="text" placeholder="A01" id="AllocationCode" name="AllocationCode" value="{$VALUES['allocation_code']}">
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Description :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
-                                <input type="text" id="Allocation_Desc" name="Allocation_Desc" value="{$VALUES['allocation_desc']}">
+                                <textarea class="inputElement col-sm-9" style="width: 359px; height: 111px;" type="text" id="Allocation_Desc" name="Allocation_Desc" value="{$VALUES['allocation_desc']}"></textarea>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
                                 <select class="select2-container select2 inputElement col-sm-6 selectModule" multiple style="width:150px;" id="Allocation_grade" name="Allocation_grade">
                                     {foreach item=SPLITVALUE key=k from=$GRADE}
-                                        {if {$GRADE[$k]['id']} eq {$VALUES['grade_id']}}
+                                        {if in_array($GRADE[$k]['id'],$PREVALUES['grade_id'])}
                                             <option value={$GRADE[$k]['id']} selected="true">{$GRADE[$k]['grade']}</option>
                                         {else}
                                             <option value={$GRADE[$k]['id']}>{$GRADE[$k]['grade']}</option>
@@ -78,7 +78,7 @@
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Allocate LeaveType :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
-                                <input type="checkbox" id="EditAllocateLeave" name="EditAllocateLeave">
+                                <input class="inputElement nameField" type="checkbox" id="EditAllocateLeave" name="EditAllocateLeave">
                             </div>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
                                 <select class="select2-container select2 inputElement col-sm-6 selectModule" multiple style="width:150px;" id="Allocation_claimtype" name="Allocation_claimtype">
                                     {foreach item=SPLITVALUE key=k from=$CLAIMTYPE}
-                                        {if {$CLAIMTYPE[$k]['id']} eq {$VALUES['claimtype_id']}}
+                                        {if in_array($CLAIMTYPE[$k]['id'],$PREVALUES['claim_id'])}
                                             <option value={$CLAIMTYPE[$k]['id']} selected="true">{$CLAIMTYPE[$k]['claimtype']}</option>
                                         {else}
                                             <option value={$CLAIMTYPE[$k]['id']}>{$CLAIMTYPE[$k]['claimtype']}</option>
@@ -122,12 +122,7 @@
                         </div>
                     </div>
 
-
-
-
-
                     <input type="hidden" id="allocation_id" name="allocation_id" value="{$VALUES['allocation_id']}">
-
 
                 </div>
                 <div class="modal-footer ">
