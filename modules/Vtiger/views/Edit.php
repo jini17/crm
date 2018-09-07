@@ -139,6 +139,12 @@ Class Vtiger_Edit_View extends Vtiger_Index_View {
 		$recordStructureInstance = Vtiger_RecordStructure_Model::getInstanceFromRecordModel($recordModel, Vtiger_RecordStructure_Model::RECORD_STRUCTURE_MODE_EDIT);
 		$picklistDependencyDatasource = Vtiger_DependencyPicklist::getPicklistDependencyDatasource($moduleName);
 
+		//Mabruk to hide field if user is not admin
+		if ($_SESSION['authenticated_user_id'] != 1)
+			$isAdmin = "no";
+		else
+			$isAdmin = "yes";
+
 		$viewer->assign('PICKIST_DEPENDENCY_DATASOURCE',Vtiger_Functions::jsonEncode($picklistDependencyDatasource));
 		$viewer->assign('RECORD_STRUCTURE_MODEL', $recordStructureInstance);
 		$viewer->assign('RECORD_STRUCTURE', $recordStructureInstance->getStructure());
@@ -161,6 +167,7 @@ Class Vtiger_Edit_View extends Vtiger_Index_View {
 		}
 		$viewer->assign('MAX_UPLOAD_LIMIT_MB', Vtiger_Util_Helper::getMaxUploadSize());
 		$viewer->assign('MAX_UPLOAD_LIMIT_BYTES', Vtiger_Util_Helper::getMaxUploadSizeInBytes());
+		$viewer->assign('ISADMIN', $isAdmin);
 		$viewer->assign('parentmodule', $request->get('parent'));
 		if($request->get('displayMode')=='overlay'){
 			$viewer->assign('SCRIPTS',$this->getOverlayHeaderScripts($request));

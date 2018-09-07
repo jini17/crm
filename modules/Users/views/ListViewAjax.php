@@ -146,20 +146,13 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 	}
 
 	public function getUserLeave(Vtiger_Request $request) { 
+	
 		$db = PearDatabase::getInstance();
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$recordId = $request->get('record');
 		$currentyear = date("Y");
-
-		//if year end process run then user can apply leave for next year other wise current year
-		$sql  = "SELECT MAX(year) as year from secondcrm_user_balance LIMIT 0,1";
-		$res = $db->pquery($sql,array());
-		$currentyear = $db->query_result($res, 0, 'year');
-		if($currentyear > date("Y")) {
-			$currentyear = $currentyear;	
-		 } //end here 
-
+		
 		$selectedmember = '';
 		$selectedleavetype = '';
 
@@ -173,23 +166,20 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		if(isset($_REQUEST['selleavetype']) && $_REQUEST['selleavetype'] !='All') {
 			$selectedleavetype = $request->get('selleavetype');
 		}
+		
 		//check leave alloted to user or not
 		$isCreate = Users_LeavesRecords_Model::hasAllocateLeave($recordId);
 		
-   		
-		//check if he/she is already apply then restrict to user
-
-         
-		$viewer->assign('ISCREATE',$isCreate);
+   		$viewer->assign('ISCREATE',$isCreate);
 	
 		$manager = Users_LeavesRecords_Model::checkIfManager($recordId);
 
 		$section  = $request->get('section');   
 		
 		$viewer->assign('MODULE',$moduleName);
-		$viewer->assign('CURRENTYEAR',date('Y'));//Added By Jitu Date Combobox 
-		$viewer->assign('CURYEAR',(date('Y')+1));//Added By Jitu Date Combobox
-		$viewer->assign('STARTYEAR',date('Y')-5);//Added By Jitu Date Combobox
+		$viewer->assign('STARTYEAR',date('Y'));//Added By Jitu Date Combobox 
+		$viewer->assign('ENDYEAR',(date('Y')+1));//Added By Jitu Date Combobox
+
 		$viewer->assign('CREATE_LEAVE_URL', Users_LeavesRecords_Model::getCreateLeaveURL());
 		$viewer->assign('USERID',$recordId);
 
@@ -197,8 +187,6 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$viewer->assign('SECTION',$section);
 
 		####start Get My leave list##### 
-		//$currentyear='2019';
-
 		$myleaves = Users_LeavesRecords_Model::getMyLeaves($recordId, $currentyear); //echo $currentyear;
 		$viewer->assign('CurrentDate', date('Y-m-d'));
 		$viewer->assign('MYLEAVES', $myleaves);

@@ -80,7 +80,7 @@
 						{/if}
 					</div>
 					<div class="more pull-right cursorPointer task-actions">
-						<a href="#" class="quickTask" id="taskPopover"><i class="fa fa-pencil-square-o icon"></i></a>&nbsp;&nbsp;
+						<a href="#" class="quickTask " id="taskPopover"><i class="fa fa-pencil-square-o icon"></i></a>&nbsp;&nbsp;
 						<a href="#" class="taskDelete"><i class="fa fa-trash icon"></i></a>
 					</div>
 				</div>

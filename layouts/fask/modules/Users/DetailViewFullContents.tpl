@@ -45,6 +45,7 @@
 		<li class="{if $DEFAULT_TAB neq ''}active{else}relatedListTab{/if}">
 			<a data-toggle="tab" href="#claim"><strong>{vtranslate('LBL_CLAIM', $MODULE_NAME)}</strong></a>
 		</li>	
+                                       
 		{/if}
 		<!-- End Leave Tab-->
 	</ul>

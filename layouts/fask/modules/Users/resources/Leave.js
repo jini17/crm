@@ -317,7 +317,7 @@ Vtiger.Class("Users_Leave_Js", {
 
 
   	cancelLeave : function(cancelRecordActionUrl,currentTrElement) { 
-		alert(cancelRecordActionUrl);
+
 		var message = app.vtranslate('JS_CANCEL_LEAVE_CONFIRMATION');
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();

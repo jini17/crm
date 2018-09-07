@@ -1,6 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
+ * Modified By Mabruk
  * User: root
  * Date: 5/18/18
  * Time: 6:14 PM
@@ -22,28 +23,32 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
         $users = array();
         $type = array();
 
-        for($i=0;$i<$count;$i++){
-            $values[$i]['checkbox'] = $adb->query_result($resultalloc, $i,'allocation_id');
-            $values[$i]['allocationtitle'] = $adb->query_result($resultalloc, $i,'allocation_title');
-            $leavetype_id = $adb->query_result($resultalloc, $i,'leavetype_id');
+        // Modified By Mabruk
+        for($i=0;$i<$count;$i++){ 
+            $allocationId = $values[$i]['checkbox'] = $adb->query_result($resultalloc, $i,'allocation_id');
+            $values[$i]['allocationtitle'] = $adb->query_result($resultalloc, $i,'allocation_title');           
 
 
             /**** Getting the name of the leave type ******************/
-            $query = "SELECT * FROM vtiger_leavetype WHERE leavetypeid = ?";
+            /*$query = "SELECT * FROM vtiger_leavetype WHERE leavetypeid = ?";
             $result = $adb->pquery($query,array($leavetype_id));
-            $values[$i]['leavetype'] = $adb->query_result($result,0,'title');
+            $values[$i]['leavetype'] = $adb->query_result($result,0,'title');*/
+
+            
+            $leaveTypeResult = $adb->pquery("SELECT GROUP_CONCAT(title) AS titles FROM vtiger_leavetype INNER JOIN allocation_leaverel ON allocation_leaverel.leavetype_id = vtiger_leavetype.leavetypeid WHERE allocation_leaverel.allocation_id = ?", array($allocationId));
+
+            $values[$i]['leavetype'] = $adb->query_result($leaveTypeResult,0,'titles');
 
             /**** Getting the name of the claim type ******************/
-            $claimtype_id = $adb->query_result($resultalloc, $i,'claimtype_id');
-            $query = "SELECT * FROM vtiger_claimtype WHERE claimtypeid = ?";
-            $result = $adb->pquery($query,array($claimtype_id));
-            $values[$i]['claimtype'] = $adb->query_result($result,0,'claim_type');
+            $claimTypeResult = $adb->pquery("SELECT GROUP_CONCAT(claim_type) AS claims FROM vtiger_claimtype INNER JOIN allocation_claimrel ON allocation_claimrel.claim_id = vtiger_claimtype.claimtypeid WHERE allocation_claimrel.allocation_id = ?", array($allocationId));
+
+            $values[$i]['claimtype'] = $adb->query_result($claimTypeResult,0,'claims');
+        
 
             /**** Getting the name of the grade ******************/
-            $grade_id = $adb->query_result($resultalloc, $i,'grade_id');
-            $query = "SELECT * FROM vtiger_grade WHERE gradeid = ?";
-            $result = $adb->pquery($query,array($grade_id));
-            $values[$i]['grade'] = $adb->query_result($result,0,'grade');
+            $gradeResult = $adb->pquery("SELECT GROUP_CONCAT(grade) AS grade FROM vtiger_grade INNER JOIN allocation_graderel ON allocation_graderel.grade_id = vtiger_grade.gradeid WHERE allocation_graderel.allocation_id = ?", array($allocationId));
+
+            $values[$i]['grade'] = $adb->query_result($gradeResult,0,'grade');
 
 
 

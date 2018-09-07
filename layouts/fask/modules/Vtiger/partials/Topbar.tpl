@@ -48,8 +48,14 @@
 
         });
         
+$( '.app-navigator-container' ).on('mouseleave','.dropdown-menu.fask', function(){
+ $(this).hide();
+});
+
    
 });
+
+
 </script>
 
 <nav class="navbar navbar-default navbar-fixed-top app-fixed-navbar">
