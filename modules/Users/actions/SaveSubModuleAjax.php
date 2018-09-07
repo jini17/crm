@@ -283,8 +283,10 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 	public function saveLeave(Vtiger_Request $request) {   
 
 	//$request= $_REQUEST['form'];	
+	
 	$module = $request->getModule();
 	$db = PearDatabase::getInstance();
+	//$db->setDebug(true);
 	include_once 'include/Webservices/Create.php';
 	$user = new Users();
 	global $current_user;
@@ -299,6 +301,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 	$wsUser		= vtws_getWebserviceEntityId('Users', $request->get('replaceuser'));
 	$wsCurrentUser	= vtws_getWebserviceEntityId('Users', $current_user->id);	
 	$manager= $request->get('manager');
+	
 	$startdate = date('Y-m-d',strtotime($request->get('start_date')));
 	$enddate = date('Y-m-d',strtotime($request->get('end_date')));
 
@@ -368,8 +371,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 					'replaceuser_id'  => $wsUser,
 					'reasonofleave'  => $request->get('reason'),
 					'total_taken'  => $takenleave,
-					'starthalf'  => $request->get('chkboxstarthalf'),
-					'endhalf'  => $request->get('chkboxendhalf'),
+					'starthalf'  => $request->get('starthalf'),
+					'endhalf'  => $request->get('endhalf'),
 					'leavestatus'  => $request->get('savetype'),
 					'assigned_user_id' =>  $wsCurrentUser,
 				);
@@ -419,15 +422,16 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 								$enddate = date('Y-m-d',strtotime($request->get('hdnenddate')));
 								$takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);
 								//find the total balance leave
-								$userbalanceleave = Users_LeavesRecords_Model::getUserBalance($request->get('current_user_id'), $leavetype);
+								//$userbalanceleave = Users_LeavesRecords_Model::getUserBalance($request->get('current_user_id'), $leavetype);
 
-								if($userbalanceleave<$takenleave) {
-									$msg = vtranslate("LBL_LESS_BALANCE","Users");
-								} else { 
+								//if($userbalanceleave < $takenleave) {
+								//	$msg = vtranslate("LBL_LESS_BALANCE","Users");
+								//} else { 
 									$userupdateid=$request->get('current_user_id');
-									$leabalq="UPDATE secondcrm_user_balance SET leave_count = leave_count-$takenleave WHERE user_id=$userupdateid AND leave_type=$leavetype";
-									$resultx = $db->pquery($leabalq,array());
-								}
+									$leavetype = $request->get('hdnleavetype');
+									$leabalq="INSERT INTO secondcrm_user_balance SET user_id=?, leave_count =?, leave_type=?, year=?";
+									$resultx = $db->pquery($leabalq,array($request->get('current_user_id'), $takenleave, $leavetype, date('Y')));
+								//}
 							} 
 						//$current_usersaving = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
 							
@@ -442,6 +446,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 							$leave->save('Leave');
 							//$leave = vtws_revise($data, $current_user);
 							$msg    = $request->get('savetype')=='Approved'?vtranslate("LBL_APPROVED","Users"):vtranslate("LBL_NOT_APPROVED","Users");
+							
 
 					}else{ 
 						$starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
@@ -460,6 +465,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 							'reasonofleave'  => $request->get('reason'),
 							'leavestatus'  => $request->get('savetype'),
 							'total_taken'  => $takenleave,
+							'starthalf'  => $request->get('starthalf'),
+							'endhalf'  => $request->get('endhalf'),
 							'assigned_user_id' =>  $wsCurrentUser,
 							);
 

@@ -132,17 +132,11 @@
 <a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>			
 
 	
-
+								{if $USER_LEAVE['leavestatus'] eq 'Apply'}
 								<a class="editLeave cursorPointer editAction ti-pencil" data-url='{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true'
 								 title="{vtranslate('LBL_LEAVE_APPROVAL', $MODULE)}" onclick="Users_Leave_Js.Popup_LeaveApprove('{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true');"></a>&nbsp;&nbsp;
-
-								{if $USER_LEAVE['leavestatus'] neq 'New' && $USER_LEAVE['leavestatus'] neq 'Cancel'}
-
-
-
-
-
-
+								 {/if}	
+								{if $USER_LEAVE['leavestatus'] eq 'Approved'}
 								
 								<a class="cancelLeave cursorPointer" data-section ='T' data-url='?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}'
 								onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}','T');"><i title="Cancel" class="fa fa-times-circle alignBottom"></i></a>				
@@ -179,10 +173,10 @@ onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i cl
 	<div style="float:left;margin-left:5px;">
 	 <!--	<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear"> -->
 	 	<form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST">
-		<select name="my_selyear" id="my_selyear" data-section="M"  class="my_selyear"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
+		<select name="my_selyear" id="my_selyear" data-section="M"  class="select2"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
 
 			<!--//Added By Jitu Date Combobox-->
-			{for $year=$STARTYEAR to $CURYEAR}
+			{for $year=$STARTYEAR to $ENDYEAR}
 				<option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
 			{/for}
 		</select>	
@@ -208,8 +202,8 @@ onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i cl
 			{foreach item=USER_LEAVE from=$MYLEAVES}
 				<tr data-section="M">
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leave_reason']}</label></td>
-					<td class="listTableRow small" valign=top><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['colorcode']};width:30px;height:20px;"></label><label style="float:left;" class="instlabel">{$USER_LEAVE['leave_type']}</label></td>		<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['from_date']}</label></td>
-					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['to_date']}</label></td>
+					<td class="listTableRow small" valign=top><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['colorcode']};width:30px;height:20px;"></label><label style="float:left;" class="instlabel">{$USER_LEAVE['leave_type']}</label></td>		<td class="listTableRow small" valign=top><label class="instlabel">{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($USER_LEAVE['from_date'])}</label></td>
+					<td class="listTableRow small" valign=top><label class="instlabel">{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($USER_LEAVE['to_date'])}</label></td>
 					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leavestatus']}</label></td>
 					<td class="listTableRow small" valign=top>
 						<div class="pull-right actions">
@@ -265,7 +259,7 @@ onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mo
 	<div style="float:left;margin-bottom:21px;"><strong>{vtranslate('LBL_MYTEAM_LEAVE', $MODULE)}</strong></div>
 	<div class="listViewTopMenuDiv noprint" style="float:left;margin-left:5px;">
 		<select name="team_selyear" class="team_selyear" id="team_selyear" data-section="T" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}" onchange="Users_Leave_Js.sel_teammember('?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}','T');" >
-		{for $year=$STARTYEAR to $CURYEAR}
+		{for $year=$STARTYEAR to $ENDYEAR}
 			<option value="{$year}" {if $year eq $CURYEAR} selected {/if}>{$year}</option>
 		{/for}
 		</select>&nbsp;
@@ -363,10 +357,11 @@ onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mo
 <a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>	
 
 	
-
+								{if $USER_LEAVE['leavestatus'] eq 'Apply'}
 								<a class="editLeave cursorPointer editAction ti-pencil" data-url='{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true'
 								title="{vtranslate('LBL_EDIT', $MODULE)}"  onclick="Users_Leave_Js.Popup_LeaveApprove('{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true');"></a>&nbsp;&nbsp;
-								{if $USER_LEAVE['leavestatus'] neq 'New' && $USER_LEAVE['leavestatus'] neq 'Cancel'}
+								{/if}
+								{if $USER_LEAVE['leavestatus'] eq 'Apply' || ($USER_LEAVE['leavestatus'] eq 'Approved' && $USER_LEAVE['from_date']|strtotime gt $CurrentDate|strtotime)}
 								<a class="cancelLeave cursorPointer" onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}','T');"><i title="Cancel" class="fa fa-times-circle alignBottom"></i></a>				
 								{/if}
 							</span>

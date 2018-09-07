@@ -2270,7 +2270,7 @@ class CRMEntity {
 			}
 		}
 		if($module=='Users') {
-			$query = "from $moduletable as {$moduletabl}Employee  inner join vtiger_crmentity on vtiger_crmentity.smownerid={$moduletabl}Employee.id";
+			$query = "from $moduletable as vtiger_usersEmployee";
 		} else {
 			$query = "from $moduletable inner join vtiger_crmentity on vtiger_crmentity.crmid=$moduletable.$moduleindex";	
 		}
@@ -2293,9 +2293,12 @@ class CRMEntity {
 			$query .= " LEFT JOIN vtiger_users AS vtiger_createdby$module ON vtiger_createdby$module.id=vtiger_crmentity.smcreatorid";
 		}
 		// TODO Optimize the tables below based on requirement
-		$query .= "	left join vtiger_groups on vtiger_groups.groupid = vtiger_crmentity.smownerid";
-		$query .= " left join vtiger_users on vtiger_users.id = vtiger_crmentity.smownerid";
-
+		
+		if($module !='Users') {
+			$query .= "	left join vtiger_groups on vtiger_groups.groupid = vtiger_crmentity.smownerid";
+			$query .= " left join vtiger_users on vtiger_users.id = vtiger_crmentity.smownerid";
+		}
+		
 		// Add the pre-joined relation table query
 		$query .= " " . $relquery;
 
