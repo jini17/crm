@@ -1062,41 +1062,54 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		var recordId 		= jQuery('#recordId').val();
 		params.url 			= 'index.php?module=' + moduleName + '&action=EnrichData&mode=enrichData&record=' + recordId;
 		
-        btn.click(function () {        	       
-        
-            app.request.get(params).then(
+		
+		if (btnLocked.length > 0) {
 
-                function (err, data) {
-                    if (data) {
+			btnLocked.append("&ensp;<i class='fa fa-lock'></i>");
 
-                    	if (confirm("This will overwrite your existing data for the selected record. Are you sure you want to continue ?")) {
-                    		
-	                    	if (data.message == "success")
-	                			app.helper.showSuccessNotification({message:"Data updated successfully"});                    	
+			btnLocked.click( function() {
 
-	                    	else                    		
-	                    		app.helper.showErrorNotification({message:data.message});
-	                    	
-	                    	if (data.reload == "yes") {
+				app.helper.showErrorNotification({message:"Data Enrichment feature is not active for " + moduleName + " module"});
 
-	                    		var detailHeader = jQuery('.detailview-header');
-	                    		detailHeader.find('.firstname').html(data.firstname.trim());
-	                    		detailHeader.find('.lastname').html(data.lastname.trim()); 
-	                    		jQuery('.tab-item.active').find('a')[0].click(); //To Reload the Detail View using Ajax                    		
+			});
 
-	                    	}  
-	                    }	
-                    }
+		}
 
-                    else 
-                    	app.helper.showErrorNotification({message:err});	
-                }                                        
-            );
-        });
+		else {
 
-        btnLocked.click( function () {
-        	window.open('https://www.fullcontact.com/', 'FullContact'); 
-        });
+	        btn.click(function () {        	       
+	        
+	            app.request.get(params).then(
+
+	                function (err, data) {
+	                    if (data) {
+
+	                    	if (confirm("This will overwrite your existing data for the selected record. Are you sure you want to continue ?")) {
+	                    		
+		                    	if (data.message == "success")
+		                			app.helper.showSuccessNotification({message:"Data updated successfully"});                    	
+
+		                    	else                    		
+		                    		app.helper.showErrorNotification({message:data.message});
+		                    	
+		                    	if (data.reload == "yes") {
+
+		                    		var detailHeader = jQuery('.detailview-header');
+		                    		detailHeader.find('.firstname').html(data.firstname.trim());
+		                    		detailHeader.find('.lastname').html(data.lastname.trim()); 
+		                    		jQuery('.tab-item.active').find('a')[0].click(); //To Reload the Detail View using Ajax                    		
+
+		                    	}  
+		                    }	
+	                    }
+
+	                    else 
+	                    	app.helper.showErrorNotification({message:err});	
+	                }                                        
+	            );
+	        });
+
+    	}        
 
     }, 
 
