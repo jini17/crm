@@ -76,67 +76,70 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
 	}
 
-
+	
 	//Created by Safuan for fetching leave types//	
 	//modified by jitu for concate color and balance in dropdown 
-	public function getLeaveTypeList($userid,$leaveid){ 
+	public function getLeaveTypeList($leaveid){ 
 	
 		$db = PearDatabase::getInstance();
 		global $current_user;	
-		//Modified by jitu for showing  all except those are onetime if user already applied..
-		$condleave = '';
-		$conduser = '';
-		$year = date("Y");
-		//if year end process run then user can apply leave for next year other wise current year
-		$sql  = "SELECT MAX(year) as year from secondcrm_user_balance LIMIT 0,1";
-		$res = $db->pquery($sql,array());
-		$year = $db->query_result($res, 0, 'year');
-
-		if($year > date("Y")) {
-			$year = $year;	
-		 } //end here 
-	
-		if(!empty($leaveid)) {
-			$condleave = " AND tblSCUB.user_id= ".$userid." AND tblVTLT.leavetypeid NOT IN (SELECT tblVTL.leavetype FROM vtiger_leave tblVTL INNER JOIN vtiger_crmentity tblVTCC ON tblVTCC.crmid=tblVTL.leaveid AND tblVTCC.deleted=0 
-	LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype WHERE ((tblVTLTT.leave_frequency = 'Onetime' AND tblVTL.leavestatus !='Not Approved' && tblVTL.leavestatus !='Cancel' && tblVTL.leaveid != $leaveid)) AND tblVTCC.smownerid=$userid)";
-		}
-		if(!empty($userid) && empty($leaveid)) {
-			$conduser = " AND tblSCUB.user_id= ".$userid." AND tblVTLT.leavetypeid NOT IN (SELECT tblVTL.leavetype FROM vtiger_leave tblVTL INNER JOIN vtiger_crmentity tblVTCC ON tblVTCC.crmid=tblVTL.leaveid AND tblVTCC.deleted=0 
-	LEFT JOIN vtiger_leavetype tblVTLTT ON tblVTLTT.leavetypeid = tblVTL.leavetype WHERE ((tblVTLTT.leave_frequency = 'Onetime' AND tblVTL.leavestatus !='Not Approved' && tblVTL.leavestatus !='Cancel')) AND tblVTCC.smownerid=$userid)";
+		//$db->setDebug(true);
+		$userid = $current_user->id;
+		
+		$grade_id = $current_user->grade_id;
+		
+		//get Date of Joining 
+		$result = $db->pquery("SELECT date_joined FROM vtiger_employeecontract tblVTEC 
+							INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
+							INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
+							WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTEC.date_joined DESC LIMIT 0, 1", array($userid));
+							
+		$dateofJoining = $db->query_result($result, 0, 'date_joined');	
+		$datediff = time() - strtotime($dateofJoining);				 
+		$earneddays = round($datediff / (60 * 60 * 24));
+		$curr_year	   = date('Y');	
+				
+		//Get all leavetypes with balance for which leave to be apply
+		$leavers = $db->pquery("SELECT distinct tblVTLT.title, tblVTLT.leavetypeid, allocleaverel.ageleave, allocleaverel.numberofleavesmore, 
+					allocleaverel.numberofleavesless FROM vtiger_leavetype tblVTLT 
+					INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTLT.leavetypeid
+					LEFT JOIN allocation_leaverel allocleaverel ON allocleaverel.leavetype_id = tblVTLT.leavetypeid 
+					LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocleaverel.allocation_id
+					LEFT JOIN allocation_list alloclist ON alloclist.allocation_id=allocleaverel.allocation_id AND alloclist.status='on'			
+					WHERE tblVTC.deleted=0 AND alloclist.allocation_year=? AND allocation_graderel.grade_id=? 
+					", array($curr_year, $grade_id));			
+		
+		$norows = $db->num_rows($leavers);
+		$data	= array();
+		
+		//check LeaveType balance with Earned days
+		if($norows > 0){
+		
+			for($i=0;$i<$norows;$i++){
+				$leavetype		= $db->query_result($leavers,$i, 'title');
+				$leavetypeid	= $db->query_result($leavers,$i, 'leavetypeid');
+				//get all taken leaves against to leavetype
+				$rstaken 		= $db->pquery("SELECT SUM(leave_count) as takenleave FROM secondcrm_user_balance WHERE user_id=? AND leave_type=? AND year=?",
+					 array($userid, $leavetypeid, $curr_year));
+				$takenleave 	= $db->query_result($rstaken,0, 'takenleave');
+				$leavetypeid 	= $db->query_result($leavers,$i, 'leavetypeid');
+				$ageleave	 	= $db->query_result($leavers,$i, 'ageleave');
+				$nummoreleave 	= $db->query_result($leavers,$i, 'numberofleavesmore');
+				$numlessleave 	= $db->query_result($leavers,$i, 'numberofleavesless');
+				
+				if($earneddays > $ageleave){
+					$balance_leave = $nummoreleave - $takenleave;
+				} else {
+					$balance_leave = $numlessleave - $takenleave;
+				}
+				if($balance_leave>0) {
+					$data[$i]['leavetypeid'] 	= $leavetypeid;			
+					$data[$i]['leavetype'] 	 	= $leavetype;
+					$data[$i]['leave_remain']	= $balance_leave;
+				} 	
+			}	
 		}	
-	
-		$query = "SELECT alloclist.";	
-	
-	/*$query = "SELECT DISTINCT tblVTLT.leavetypeid,tblSCUB.leave_type, tblVTLT.title, tblVTLT.colorcode,tblSCUB.leave_count, tblVTLT.halfdayallowed FROM secondcrm_user_balance tblSCUB 
-	INNER JOIN allocation_list tblVTLA ON tblVTLA.leavetype_id=tblSCUB.leave_type
-	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLA.allocation_id
-	INNER JOIN vtiger_leavetype tblVTLT ON tblVTLT.leavetypeid = tblVTLA.leavetype_id
-	LEFT JOIN vtiger_leave tblVTL ON tblVTL.leavetype = tblSCUB.leave_type  
-	 WHERE tblVTC.deleted=0 ".$conduser." AND year = '".$year."' ".$condleave. " ORDER BY tblVTLT.leavetypeid ASC"; */
-
-	 $query = "SELECT * FROM vtiger_leavetype tblVTLT
-	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLT.leavetypeid
-	 WHERE tblVTC.deleted=0";
-
-	$result = $db->pquery($query,array());
-
-
-
-	$leavetype=array();	
-	$leavetypeid  = '';
-	if($db->num_rows($result)>0) {	
-		for($i=0;$i<$db->num_rows($result);$i++) {
-
-			if($leavetypeid != $db->query_result($result, $i, 'leavetypeid')) {
-				$leavetype[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetypeid');			
-				$leavetype[$i]['leavetype'] = $db->query_result($result, $i, 'title');
-				$leavetype[$i]['leave_remain']=" ".self::getUserBalance($userid, $leavetype[$i]['leavetypeid']);
-				$leavetypeid = $db->query_result($result, $i, 'leave_type');
-			} 
-		}
-	}
-	return $leavetype;	
-
+		return $data;
 	}
 
 

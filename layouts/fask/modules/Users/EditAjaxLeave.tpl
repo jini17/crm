@@ -115,11 +115,8 @@ jQuery(document).ready(function(e){
                                                         {$LEAVE_MODEL.leavetypeid}
                                                 <option value="{$LEAVE_MODEL.leavetypeid}" {if $LEAVE_DETAIL.leave_type eq $LEAVE_MODEL.leavetypeid} selected {/if}>
                                                 {$LEAVE_MODEL.leavetype} 
-                                                {if $LEAVE_MODEL.leave_remain gt 0} 
-                                                  {$LEAVE_MODEL.leave_remain} {vtranslate('LBL_DAY_REMAINING', $QUALIFIED_MODULE)}
-                                                {else}
-                                                   {vtranslate('LBL_0_DAY_REMAINING', $QUALIFIED_MODULE)}
-                                                {/if}
+                                                &nbsp;&nbsp;({$LEAVE_MODEL.leave_remain}) 
+                                              
 
                                         </option>
 
