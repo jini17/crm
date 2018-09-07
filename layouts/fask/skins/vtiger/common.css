@@ -30,7 +30,7 @@ body > .mCSB_inside > .mCSB_container {
   font-family: 'OpenSans-Regular', sans-serif;
 }
 body {
-  font-family: Quicksand,Georgia,'Times New Roman',Times,serif;
+ font-family: "Open Sans", Arial, sans-serif;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
   font-weight: normal;
@@ -4916,7 +4916,7 @@ hr {
   margin: 0 2px;
 }
 .massEditTabs.nav>li {
-  padding: 0 10px;
+  padding: 0 5px;
   margin: 0 4px;
 }
 .row .nav>li>a,
@@ -8895,7 +8895,7 @@ visibility: visible;top: 0;left: 60px; /*position where enlarged image should of
     width: 100%;
     color: #fff;
     font-size: 15px;
-    padding: 10px 20px;
+    padding: 10px 15px;
     text-decoration: none;
 }
 ul.nav navbar-nav newtabs>li{
@@ -8952,7 +8952,7 @@ display: none;
     height: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    padding: 20px;
+    padding: 10px;
 }
  .dropdown-content-Support{
  border-top: 3px solid #06d79c;
@@ -8964,7 +8964,7 @@ display: none;
     height: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    padding: 20px;
+    padding: 10px;
 }
 li> div.dropdownFinance:hover .dropdown-content-Finance ,li> div.dropdownTools:hover .dropdown-content-Tools ,li> div.dropdownMore:hover .dropdown-content-More 
 {display: block;}
@@ -9084,10 +9084,10 @@ a.btn.btn-default.Help-btn{
   padding: 10px;
 }
 .popup-col-4img{
-  height: 400px
+  height: 300px;
 }
 .popup-col-4text{
-  text-align: justify;padding: 10px;height: 130px;
+  text-align: center;padding: 10px;height: 78px;font-size: 18px;
 }
 a#menubar_quickCreate_BenefitType , a#menubar_quickCreate_Leave{
   display: none;
@@ -9129,3 +9129,14 @@ div#prefernces.tab-pane {
 span.actionImages>a{
   padding: 0px 5px;
 }
+ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard{
+      padding: 15px 5px 10px !important;
+}
+table.table.table-bordered.listViewEntriesTable{
+  background-color: #fff !important;
+}
+/*
+div.col-lg-5.col-xs-12> div.detailViewButtoncontainer> div.btn-group.pull-right> button.btn.btn-primary{
+  margin-right: 5px;
+}
+*/

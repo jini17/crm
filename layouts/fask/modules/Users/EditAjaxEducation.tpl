@@ -34,7 +34,7 @@
                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                         <div class="col-md-4">
                                                                 <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                                        &nbsp;{vtranslate('LBL_INSTITUTION_NAME', $QUALIFIED_MODULE)} &nbsp; <span class="redColor">*</span>
+                                                                        &nbsp;{vtranslate('LBL_INSTITUTION_NAME', $QUALIFIED_MODULE)} <span class="redColor">*</span>
                                                                 </label>
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
@@ -65,7 +65,7 @@
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
-                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)}&nbsp; <span class="redColor">*</span></label>
+                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)}<span class="redColor">*</span></label>
                                                 </div>
                                                 <div class="controls date col-md-8">
                                                         <input id="start_date" type="text" class="dateField inputElement" type="text" value="{$EDUCATION_DETAIL.start_date}" data-rule-required = "true" name="start_date" data-date-format="dd-mm-yyyy">	
@@ -97,7 +97,7 @@
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
-                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_EDUCATION_LEVEL', $QUALIFIED_MODULE)} &nbsp; <span class="redColor">*</span></label>
+                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_EDUCATION_LEVEL', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                                 </div>	
                                                 <div class="controls date col-md-8">
                                                     <select class="select2 inputElement" name="education_level" id="education_level" data-rule-required = "true" style="width:100%;">
@@ -117,7 +117,7 @@
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
-                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_AREA_OF_STUDY', $QUALIFIED_MODULE)} &nbsp; <span class="redColor">*</span></label>
+                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_AREA_OF_STUDY', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                                 </div>	
                                                 <div class="controls date col-md-8">
                                                         <select class="select2 inputElement" onchange="updateSelectBox('areaofstudy','areaofstudytxt');" name="areaofstudy" 	id ="areaofstudy" data-rule-required = "true">	

@@ -10,6 +10,7 @@
 -->*}
 	
 {strip}
+
     <div class="listViewPageDiv" id="listViewContent" style="width: 100%;">
 
 
