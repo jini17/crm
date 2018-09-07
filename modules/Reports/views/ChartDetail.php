@@ -51,12 +51,12 @@ class Reports_ChartDetail_View extends Vtiger_Index_View {
 		$userPrivilegesModel = Users_Privileges_Model::getInstanceById($currentUser->getId());
 		$permission = $userPrivilegesModel->hasModulePermission($primaryModuleModel->getId());
 
-		if(!$permission) {
+		/*if(!$permission) {
 			$viewer->assign('MODULE', $primaryModule);
 			$viewer->assign('MESSAGE', vtranslate('LBL_PERMISSION_DENIED'));
 			$viewer->view('OperationNotPermitted.tpl', $primaryModule);
 			exit;
-		}
+		}*/
 
 		// Advanced filter conditions
 		$viewer->assign('SELECTED_ADVANCED_FILTER_FIELDS', $reportModel->transformToNewAdvancedFilter());
