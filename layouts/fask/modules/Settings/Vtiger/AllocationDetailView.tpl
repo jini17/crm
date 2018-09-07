@@ -40,7 +40,7 @@
                                 Allocation Title
                             </td>
                             <td>
-                                 Leave Type
+                                Leave Type
                             </td>
                             <td>
                                 Claim Type
@@ -48,9 +48,8 @@
                             <td>
                                 Grade
                             </td>
-
                             <td>
-                                Is Active
+                                Status
                             </td>
                         </tr>
                         {foreach item=SPLITVALUE from=$VALUES}
