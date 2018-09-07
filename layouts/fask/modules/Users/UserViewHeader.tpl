@@ -68,6 +68,10 @@
                             </ul>
                         {/if}
                     </div>
+                    <div class="module-nav clearfix settingsNav hidden-sm hidden-xs settingssidebar {$LEFTPANELHIDE}" id="modnavigator">
+                        <div class="essentials-toggle" style=" top:10px; right:0;" title="Left Panel Show/Hide">
+                        <span class="essentials-toggle-marker fa cursorPointer fa-chevron-right"></span>
+                    </div>
                 </div>
             </div>
         </div>
