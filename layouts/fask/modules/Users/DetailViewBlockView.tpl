@@ -25,13 +25,15 @@
 							{assign var=COUNTER value=0}
 							<div class="row">
 								{foreach item=FIELD_MODEL key=FIELD_NAME from=$FIELD_MODEL_LIST}
+									<!-- Mabruk -->
+									{if $FIELD_NAME eq "hradmin" && $ISADMIN eq "no"}
+										{continue}
+									{/if}	
 									{assign var=fieldDataType value=$FIELD_MODEL->getFieldDataType()}
 									{if !$FIELD_MODEL->isViewableInDetailView()}
 										{continue}
 									{/if}
-									{if $FIELD_MODEL->getName() eq 'theme' or $FIELD_MODEL->getName() eq 'rowheight'}
-										{continue}
-									{/if}
+									
 									{if $FIELD_MODEL->get('uitype') eq "83"}
 										{foreach item=tax key=count from=$TAXCLASS_DETAILS}
 											{if $COUNTER eq 2}
