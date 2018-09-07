@@ -264,7 +264,7 @@
                         <input class="btn btn-success" type="submit" value="Save Changes" name="savechanges" accesskey="LBL_SAVE_CHANGES_BUTTON_KEY" title="Save Changes">
 
                 {else}	
-                        <input class="cancelLink btn btn-danger  pull-right" type="button" value="Cancel" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal">
+                        <input class="cancelLink btn btn-danger  pull-right" type="button" value="Cancel" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal" style="margin-left: 5px;">
 
                         </div>
                         <!--Enable or disable button-->

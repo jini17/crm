@@ -16,7 +16,7 @@
 		{foreach item=PICKLIST_COLOR key=PICKLIST_KEY_ID from=$PICKLIST_COLOR_MAP}
 			{assign var=PICKLIST_TEXT_COLOR value= Settings_Picklist_Module_Model::getTextColor($PICKLIST_COLOR)}
 			.picklist-{$SELECTED_PICKLIST_FIELDMODEL->getId()}-{$PICKLIST_KEY_ID} {
-				background-color: {$PICKLIST_COLOR};
+				border-bottom: 2px solid {$PICKLIST_COLOR};
 				color: {$PICKLIST_TEXT_COLOR}; 
 			}
 		{/foreach}
@@ -55,7 +55,7 @@
 
 					<div class="task-details">
 						<span class='taskDueDate'>
-							<i class="fa fa-calendar"></i>&nbsp;<span style="vertical-align: middle">{Vtiger_Date_UIType::getDisplayDateValue($RECORD_MODEL->get('due_date'))}</span>
+							<i class="material-icons module-icon">event</i>&nbsp;<span style="vertical-align: middle">{Vtiger_Date_UIType::getDisplayDateValue($RECORD_MODEL->get('due_date'))}</span>
 						</span>
 
 						{assign var=RELATED_PARENT value = $RECORD_BASIC_INFO['parent_id']}
@@ -64,7 +64,7 @@
 						{if !empty($RELATED_PARENT)}
 							<span class='related_account' style='margin-left: 8px;'>
 								{assign var=RELATED_PARENT_MODULE value=$RELATED_PARENT['module']}
-								<span style="font-size: 12px;">{Vtiger_Module_Model::getModuleIconPath($RELATED_PARENT_MODULE)}&nbsp;</span>
+								<span style="font-size: 12px;"><i class="fa fa-user"></i>&nbsp;</span>
 								<span class="recordName textOverflowEllipsis" style="vertical-align: middle">
 									<a class="quickPreview" href="index.php?module={$RELATED_PARENT_MODULE}&view=Detail&record={$RELATED_PARENT['id']}"  data-id="{$RELATED_PARENT['id']}" title="{$RELATED_PARENT['display_value']}">{$RELATED_PARENT['display_value']}</a>
 								</span>
@@ -72,7 +72,7 @@
 						{/if}
 						{if !empty($RELATED_CONTACT['id'])}
 							<span class='related_contact' style='margin-left: 8px;'>
-								<span style="font-size: 12px;">{Vtiger_Module_Model::getModuleIconPath('Contacts')}&nbsp;</span>
+								<span style="font-size: 12px;"><i class="material-icons module-icon">contacts</i>&nbsp;</span>
 								<span class="recordName textOverflowEllipsis" style="vertical-align: middle">
 									<a class="quickPreview" href="index.php?module={$RELATED_CONTACT['module']}&view=Detail&record={$RELATED_CONTACT['id']}" data-id="{$RELATED_CONTACT['id']}" title="{$RELATED_CONTACT['display_value']}">{$RELATED_CONTACT['display_value']}</a>
 								</span>
@@ -80,8 +80,8 @@
 						{/if}
 					</div>
 					<div class="more pull-right cursorPointer task-actions">
-						<a href="#" class="quickTask" id="taskPopover"><i class="fa fa-pencil-square-o icon"></i></a>&nbsp;&nbsp;
-						<a href="#" class="taskDelete"><i class="fa fa-trash icon"></i></a>
+						<a href="#" class="quickTask editAction ti-pencil" id="taskPopover"></a>&nbsp;&nbsp;
+						<a href="#" class="taskDelete"><i class="fa fa-trash-o"></i></a>
 					</div>
 				</div>
 			</div>
