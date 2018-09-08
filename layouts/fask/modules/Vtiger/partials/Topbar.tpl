@@ -75,9 +75,10 @@ $(this).hide();
 
                                 <!-- nuovo menu-->	
                                 <div class="dropdown col-lg-3 hidden-sm hidden-xs ">
-                                        <button class="btn btn-fask btn-lg" type="button" id="dropdownMenuButtonDesk" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="material-icons" style="color: #fff!important"></i>
-                                        </button>
+                                    <div class="addtionalDashboardTab">&nbsp;</div>
+                                        <!--<button class="btn btn-fask btn-lg" type="button" id="dropdownMenuButtonDesk" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="material-icons" style="color: #fff!important">menu</i>
+                                        </button>-->
                                         <div class="dropdown-menu fask" id="moredropdown"  aria-labelledby="dropdownMenuButtonDesk">
                                                 <div class="bluredBackground"></div>
                                                 <ul class="faskfirst">
@@ -163,7 +164,7 @@ $(this).hide();
 									{else}
 										{assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME}"}
 									{/if}	
-                                                                                <li {$APP_NAME}><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="{$moduleURL}" >
+                                                                                <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="{$moduleURL}" >
                                                                                         <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> <span class="hide-menu"> {$translatedModuleLabel}</span></a></li>
                                                                                         {/foreach}
                                                                                 </ul>

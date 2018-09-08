@@ -186,7 +186,7 @@
 <!--start my leaves-->
 
 <div style="margin-top:10px;" id="MyClaimContainer">
-	
+
 
 
 
@@ -194,6 +194,22 @@
 
 	<div class="myProfileBtnLeft">
 		<button type="button" class="btn btn-primary"onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_APPLY_CLAIM', $MODULE)}</strong></button>
+	</div>
+	<div class="myProfileBtnRight">
+		<div style="float:left;"><strong>{vtranslate('LBL_MY_LEAVE', $MODULE)}</strong></div>
+		<div style="float:right;margin-left:5px;">
+
+			<!--	<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear"> -->
+				<form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST">
+					<select name="my_selyear" id="my_selyear" data-section="M"  class="select2"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
+
+						<!--//Added By Jitu Date Combobox-->
+						{for $year=$STARTYEAR to $ENDYEAR}
+						<option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
+						{/for}
+					</select>	
+				</form>
+			</div>
 	</div>
 
 	

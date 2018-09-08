@@ -391,9 +391,20 @@ Vtiger.Class('Vtiger_Index_Js', {
 
 			});
 		});				
-	}, //end here
+	}, //end 
+
+	// Function to hide Create new Document Mabruk
+	hideCreateDoc : function() { 
+
+		if (app.getModuleName() == "Documents") {
+			jQuery('#createDocument').prev().hide();
+			jQuery('#createDocument').hide();			
+		}	
+
+	},
 
 	registerEvents: function() {
+		this.hideCreateDoc();
 		this.registerMenuToggle();
 		this.registerGlobalSearch();
 		this.registerAppTriggerEvent();
