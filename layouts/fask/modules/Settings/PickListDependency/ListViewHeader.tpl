@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="row">
-                        <span class="pull-right listViewActions" style="padding-right: 15px;">
+                        <span class="pull-right listViewActions" style="padding-right: 10px; margin-right:27px;">
                             <select class="select2 pickListSupportedModules" name="pickListSupportedModules" style="min-width: 220px;">
                                 <option value="">{vtranslate('LBL_ALL', $QUALIFIED_MODULE)}</option>
                                 {foreach item=MODULE_MODEL from=$PICKLIST_MODULES_LIST}
@@ -32,7 +32,7 @@
                                 {/foreach}
                             </select>
                         </span>
-                    </div>
+<button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;left: 96%;" title="Left Panel Show/Hide"><span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>                    </div>
                 </div>
             </div>
             <br>

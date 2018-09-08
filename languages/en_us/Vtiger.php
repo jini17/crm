@@ -130,7 +130,8 @@ $languageStrings = array(
 	'LBL_EDIT_TAG'=>'Edit Tag',
 	'LBL_NO_TAG_EXISTS' => 'No Tag Exists' ,
 	'LBL_RELATED_USERS' => 'Related Users',
-
+                      'LBL_LAST_SIX_MONTH' =>'Last 6 Month',
+                       'LBL_NEXT_SIX_MONTH' =>'Next 6 Month',
 	// Common Fields
 	'LBL_USER' => 'User',
 	'LBL_GROUP' => 'Group',
@@ -1181,9 +1182,9 @@ $languageStrings = array(
 	'LBL_ENGAGEMENT_HISTORY' => 'Engagement History',
 	'LBL_NO_ENGAGEMENTS_FOUND' => 'No related Touchpoints',
 	'LBL_MARKETING' => 'MARKETING',
-	'LBL_SALES' => 'SALES',
+	'LBL_SALES' => 'Sales',
 	'LBL_PROJECT' => 'PROJECTS',
-	'LBL_TOOLS' => 'Communications',
+	'LBL_TOOLS' => 'Tools',
 	'LBL_TAGS' => 'Tags',
 	'LBL_SHARE_TAGS' => 'Public Tags',
 	'LBL_SHARE_TAG' => 'Shared Tag(s)',
@@ -1281,9 +1282,7 @@ $languageStrings = array(
 
 	'LBL_GENERAL_FIELDS' => 'General Fields',
 	'LBL_ROLL_UP' => 'Roll up',
-	'LBL_LAST_LOGINTIME'=>'Your last successful login was',
-	'LBL_USERIP'=>'from IP',
-	
+
 	'LBL_TOUCH_POINTS' => 'Touchpoints',
 	'LBL_HISTORY' => 'Touchpoints',
 	'LBL_ENGAGEMENT_HISTORY' => 'Touchpoint History',

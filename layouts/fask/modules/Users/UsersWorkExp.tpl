@@ -13,18 +13,17 @@
 	<div class="contents row-fluid">
 		{assign var=CREATE_WORKEXP_URL value=$WORKEXP_RECORD_MODEL->getCreateUserWorkExpUrl()}
 		{assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}	
-		<div class="marginBottom10px">
-			<button type="button" class="btn" onclick="Users_WorkExp_Js.addWorkExp('{$CREATE_WORKEXP_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_WORKEXP', $MODULE)}</strong></button>
+
+		<div class="myProfileBtn">
+			<button type="button" class="btn btn-primary" onclick="Users_WorkExp_Js.addWorkExp('{$CREATE_WORKEXP_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_WORKEXP', $MODULE)}</strong></button>
 		</div>
+
+		
 		<div class="listViewContentDiv" id="listViewContents">
-			<div class="contents-topscroll noprint">
-				<div class="topscroll-div" style="width:756px">
-					&nbsp;
-				 </div>
-			</div>
+			
 			<div class="listViewEntriesDiv contents-bottomscroll">
 				<div class="bottomscroll-div">
-					<table class="table table-bordered table-condensed listViewEntriesTable" style="background-color: #fff;">
+					<table class="table table-bordered table-condensed listViewEntriesTable" style="background-color: #fff;margin: 14px;width: 98%;">
 						<thead>
 							<tr class="listViewHeaders">
 								<th nowrap width="20%"><strong>{vtranslate('LBL_COMPANY_NAME', $MODULE)}</strong></td>

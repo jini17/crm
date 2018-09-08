@@ -18,14 +18,10 @@
 {assign var=CREATE_LANGUAGE_URL value=$LANGUAGE_RECORD_MODEL->getCreateLanguageUrl()}
 {assign var=CREATE_SKILL_URL value=$LANGUAGE_RECORD_MODEL->getCreateSkillUrl()}
 {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
-
-	<button type="button" class="btn" onclick="Users_Skills_Js.addLanguage('{$CREATE_LANGUAGE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_LANGUAGE', $MODULE)}</strong></button>
-
-
-
-	<br /><br />
-	<table class="block table table-bordered listViewEntriesTable" style="    width: 80%;
-    margin: 0 auto;">
+		<div class="myProfileBtn">
+			<button type="button" class="btn btn-primary" onclick="Users_Skills_Js.addLanguage('{$CREATE_LANGUAGE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_LANGUAGE', $MODULE)}</strong></button>
+		</div>
+	<table class="block table table-bordered listViewEntriesTable" style="background-color: #fff;margin: 14px;width: 98%;">
 		<thead>
 			<tr>
 				<th nowrap><strong>{vtranslate('LBL_LANGUAGE', $MODULE)}</strong></th>

@@ -976,7 +976,7 @@ class QueryGenerator {
 			$valueArray = array($value);
 		}
 		$sql = array();
-		if($operator == 'between' || $operator == 'bw' || $operator == 'notequal') {
+		if($operator == 'between' || $operator == 'bw' || $operator == 'notequal' || $operator =='last6month' || $operator =='next6month') {
 			if($field->getFieldName() == 'birthday') {
 				$valueArray[0] = getValidDBInsertDateTimeValue($valueArray[0]);
 				$valueArray[1] = getValidDBInsertDateTimeValue($valueArray[1]);

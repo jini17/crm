@@ -513,7 +513,7 @@ $languageStrings = array(
 );
 
 $jsLanguageStrings = array(
-	'JS_CANCEL_LEAVE_CONFIRMATION'=>'Are you sure to cancel leave',
+
 	//Curency seperator validation messages
 	'JS_ENTER_OLD_PASSWORD'=>'Please enter your old password.',
 	'JS_ENTER_NEW_PASSWORD'=>'Please enter your new password.',

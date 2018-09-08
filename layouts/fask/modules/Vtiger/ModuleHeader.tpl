@@ -10,7 +10,7 @@
 {strip}
 	 <div class="col-sm-12 col-xs-12 module-action-bar clearfix coloredBorderTop">
 		<div class="module-action-content clearfix {$MODULE}-module-action-content">
-			<div class="col-xs-{if $smarty.request.view eq 'Edit'}12{else}9{/if} col-lg-7 col-md-7 col-sm-7 module-breadcrumb module-breadcrumb-{$smarty.request.view} transitionsAllHalfSecond">
+			<div class="col-xs-{if $smarty.request.view eq 'Edit'}12{else}3{/if} col-lg-3 module-breadcrumb module-breadcrumb-{$smarty.request.view} transitionsAllHalfSecond">
 				{assign var=MODULE_MODEL value=Vtiger_Module_Model::getInstance($MODULE)}
 				{if $MODULE_MODEL->getDefaultViewName() neq 'List'}
 					{assign var=DEFAULT_FILTER_URL value=$MODULE_MODEL->getDefaultUrl()}
@@ -48,8 +48,21 @@
 					<p class="current-filter-name filter-name pull-left"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a title="{$RECORD->get('label')}">&nbsp;&nbsp;{$RECORD->get('label')} &nbsp;&nbsp;</a></p>
 				{/if}
 			</div> 
+			<div class="col-xs-5 col-lg-5 col-md-5 col-sm-5">
+				{if $MODULE eq 'Home'}
+				<div class="clearfix">
+					<div class="col-xs-12">
+						<!-- added by jitu@28Dec2016-->
+						<div style="text-align:center;display:block;width:100%; margin:0 auto;padding: 5px;">{vtranslate('LBL_LAST_LOGINTIME')} {$LAST_LOGIN_TIME} {vtranslate('LBL_USERIP')} {$LAST_USER_IP}
+						</div>
+						<!--end here -->
+					</div>
+				</div>
+				<br>
+				{/if}
+			</div>
 
-			<div class="col-xs-3 col-lg-5 col-md-5 col-sm-5 module-breadcrumb-{$smarty.request.view}" style="margin:  0px; padding: 0px;">
+			<div class="col-xs-4 col-lg-4 col-md-4 col-sm-4 module-breadcrumb-{$smarty.request.view}" style="margin:  0px; padding: 0px;">
 				 <div id="appnav" class="navbar-right">
 
 					
@@ -98,17 +111,7 @@
 				</div>
 			</div>
 		</div>
-		{if $MODULE eq 'Home'}
-		<div class="clearfix">
-			<div class="col-xs-12">
-			<!-- added by jitu@28Dec2016-->
-				<div style="text-align:center;display:block;width:50%; margin:0 auto;padding: 5px;">{vtranslate('LBL_LAST_LOGINTIME')} {$LAST_LOGIN_TIME} {vtranslate('LBL_USERIP')} {$LAST_USER_IP}
-				</div>
-				<!--end here -->
-			</div>
-		</div>
-		<br>
-		{/if}
+		
 		{if $FIELDS_INFO neq null}
 			<script type="text/javascript">
 				var uimeta = (function () {

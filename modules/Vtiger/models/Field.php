@@ -669,7 +669,12 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		$lastmonth1 = date("Y-m-t", strtotime($lastmonth0));
 		$nextmonth0 = date("Y-m-d", mktime(0, 0, 0, $m + 1, "01", $y));
 		$nextmonth1 = date("Y-m-t", strtotime($nextmonth0));
-
+                        
+                                                $last6month1 = $today;
+		$last6month0 =  date("Y-m-d", mktime(0, 0, 0, $m, $d - 180, $y));
+		$next6month0 = $today;
+		$next6month1 =date("Y-m-d", mktime(0, 0, 0, $m, $d+ 180, $y));
+                
 		  // (Last Week) If Today is "Sunday" then "-2 week Sunday" will give before last week Sunday date
 		if(!$userPeferredDayOfTheWeek){
 			$userPeferredDayOfTheWeek = 'Sunday';
@@ -773,6 +778,12 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		} elseif ($type == "lastmonth") {
 			$dateValues[0] = $lastmonth0;
 			$dateValues[1] = $lastmonth1;
+		} elseif ($type == "last6month") {
+			$dateValues[0] = $last6month0;
+			$dateValues[1] = $last6month1;
+		} elseif ($type == "next6month") {
+			$dateValues[0] = $next6month0;
+			$dateValues[1] = $next6month1;
 		} elseif ($type == "nextmonth") {
 			$dateValues[0] = $nextmonth0;
 			$dateValues[1] = $nextmonth1;
@@ -862,6 +873,8 @@ class Vtiger_Field_Model extends Vtiger_Field {
 								'lastmonth' => array('label' => 'LBL_LAST_MONTH'),
 								'thismonth' => array('label' => 'LBL_CURRENT_MONTH'),
 								'nextmonth' => array('label' => 'LBL_NEXT_MONTH'),
+                                                                                                                                                                                                 'next6month' => array('label' => 'LBL_NEXT_SIX_MONTH'),
+                                                                                                                                                                                                  'last6month' => array('label' => 'LBL_LAST_SIX_MONTH'),
 								'last7days' => array('label' => 'LBL_LAST_7_DAYS'),
 								'last14days' => array('label' => 'LBL_LAST_14_DAYS'),
 								'last30days' => array('label' => 'LBL_LAST_30_DAYS'),

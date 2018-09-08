@@ -165,27 +165,31 @@
 <!--- End for pagination --->
 <!--start my leaves-->
 <div id="MyLeaveContainer">
-<button type="button" class="btn"
-onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
+	<div class="myProfileBtnLeft">
+		<button type="button" class="btn btn-primary"onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
+	</div>
 
+	<div class="myProfileBtnRight">
+		<div style="float:left;"><strong>{vtranslate('LBL_MY_LEAVE', $MODULE)}</strong></div>
+		<div style="float:right;margin-left:5px;">
 
-	<div style="float:left;"><strong>{vtranslate('LBL_MY_LEAVE', $MODULE)}</strong></div>
-	<div style="float:left;margin-left:5px;">
-	 <!--	<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear"> -->
-	 	<form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST">
-		<select name="my_selyear" id="my_selyear" data-section="M"  class="select2"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
+			<!--	<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear"> -->
+				<form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST">
+					<select name="my_selyear" id="my_selyear" data-section="M"  class="select2"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
 
-			<!--//Added By Jitu Date Combobox-->
-			{for $year=$STARTYEAR to $ENDYEAR}
-				<option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
-			{/for}
-		</select>	
-	</form>
-	</div><br /><br />
+						<!--//Added By Jitu Date Combobox-->
+						{for $year=$STARTYEAR to $ENDYEAR}
+						<option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
+						{/for}
+					</select>	
+				</form>
+			</div>
+	</div>
+<br /><br />
 	<div style="clear:both;"></div>
 	
 	<div id="myleavelist">
-	<table class="table table-bordered listViewEntriesTable">
+	<table class="table table-bordered listViewEntriesTable" style="background-color: #fff;margin: 14px;width: 98%;">
 		<thead>
 			<tr>
 				<th nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
@@ -255,7 +259,7 @@ onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mo
 <!----- End for pagination ----->
 <br /><br />
 <!--start team leaves-->
-<div id="MyTeamLeaveContainer">
+<div id="MyTeamLeaveContainer" style="margin: 14px;width: 98%;">
 	<div style="float:left;margin-bottom:21px;"><strong>{vtranslate('LBL_MYTEAM_LEAVE', $MODULE)}</strong></div>
 	<div class="listViewTopMenuDiv noprint" style="float:left;margin-left:5px;">
 		<select name="team_selyear" class="team_selyear" id="team_selyear" data-section="T" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}" onchange="Users_Leave_Js.sel_teammember('?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}','T');" >
@@ -290,16 +294,18 @@ onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mo
 				<input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
 
 <div class="listViewActions pull-right {if $PCOUNT eq 0} hide{/if}">
-	<div class="pageNumbers alignTop {if $LISTVIEW_LINKS['LISTVIEWSETTING']|@count gt 0}{else}{/if}">
+
+	<div class="pageNumbers alignTop {if $LISTVIEW_LINKS['LISTVIEWSETTING']|@count gt 0}{else}{/if}" style="display: inline-block;    padding: 7px 12px;">
 		<span>
 			<span class="pageNumbersText" style="padding-right:5px">{if $LISTVIEW_ENTRIES_COUNT}{$PAGING_MODEL->getRecordStartRange()} {vtranslate('LBL_to', $MODULE)} {$PAGING_MODEL->getRecordEndRange()}{else}<span>&nbsp;</span>{/if}</span>
 			<!--<span class="icon-refresh pull-right totalNumberOfRecords cursorPointer{if $PCOUNT eq 0} hide{/if}"></span>-->
 		</span>
 	</div>
-	<div class="btn-group alignTop margin0px">
+
+	<div class="btn-group alignTop margin0px" style="display: inline-block;">
 		<span class="pull-right">
 			<span class="btn-group">
-				<button class="btn"  id="userleaveprevpagebutton"  {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if} type="button"><span class="icon-chevron-left"></span></button>
+				<button class="btn"  id="userleaveprevpagebutton"  {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if} type="button"><span class="fa fa-chevron-left"></span></button>
 				<!--<button class="btn dropdown-toggle" type="button" id="listViewPageJump" data-toggle="dropdown" {if $PAGE_COUNT eq 1} disabled {/if}>
 					<i class="vtGlyph vticon-pageJump" title="{vtranslate('LBL_LISTVIEW_PAGE_JUMP',$moduleName)}"></i>
 					</button>
@@ -319,7 +325,7 @@ onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mo
 							</span>
 						</li>
 					</ul>-->
-				<button class="btn" id="userleavenextpagebutton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="icon-chevron-right"></span></button>				
+				<button class="btn" id="userleavenextpagebutton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="fa fa-chevron-right"></span></button>				
 			</span>
 		</span>	
 	</div>	

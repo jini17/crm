@@ -186,13 +186,17 @@
 <!--start my leaves-->
 
 <div style="margin-top:10px;" id="MyClaimContainer">
+	
 
 
 
 	<div style="float:left;margin-bottom:10px;"><strong>{vtranslate('LBL_MY_CLAIM', $MODULE)}</strong>&nbsp;&nbsp;</div>&nbsp;&nbsp;
 
-	<div style="float:left;margin-bottom:10px;"><button type="button" class="btn"
-	onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_APPLY_CLAIM', $MODULE)}</strong></button></div> &nbsp;&nbsp;
+	<div class="myProfileBtnLeft">
+		<button type="button" class="btn btn-primary"onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_APPLY_CLAIM', $MODULE)}</strong></button>
+	</div>
+
+	
 
 	<div style="float:left;margin-left:5px;margin-bottom:10px;">
 	 <!--	<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear"> -->
@@ -309,14 +313,14 @@
 				<input type='hidden' value="{$PAGE_LIMIT}" id='pageLimit'>
 				<input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
 
-<div class="listViewActions pull-right {if $PCOUNT eq 0} hide{/if}">
-	<div class="pageNumbers alignTop {if $LISTVIEW_LINKS['LISTVIEWSETTING']|@count gt 0}{else}{/if}">
+<div class="listViewActions pull-right {if $PCOUNT eq 0} hide{/if}" style="display: inline-block;">
+	<div class="pageNumbers alignTop {if $LISTVIEW_LINKS['LISTVIEWSETTING']|@count gt 0}{else}{/if}" style="display: inline-block;    padding: 7px 12px;">
 		<span>
 			<span class="pageNumbersText" style="padding-right:5px">{if $LISTVIEW_ENTRIES_COUNT}{$PAGING_MODEL->getRecordStartRange()} {vtranslate('LBL_to', $MODULE)} {$PAGING_MODEL->getRecordEndRange()}{else}<span>&nbsp;</span>{/if}</span>
 			<!--<span class="icon-refresh pull-right totalNumberOfRecords cursorPointer{if $PCOUNT eq 0} hide{/if}"></span>-->
 		</span>
 	</div>
-	<div class="btn-group alignTop margin0px">
+	<div class="btn-group alignTop margin0px" style="display: inline-block;">
 		<span class="pull-right">
 			<span class="btn-group">
 				<button class="btn"  id="userclaimprevpagebutton"  {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if} type="button"><span class="fa fa-chevron-left"></span></button>

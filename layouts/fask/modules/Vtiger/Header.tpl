@@ -34,6 +34,7 @@
         <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
         <link rel="stylesheet" href="layouts/fask/skins/vtiger/themify-icons.css">
 		<link rel="stylesheet" href="layouts/fask/skins/vtiger/material-icons.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
         <input type="hidden" id="inventoryModules" value={ZEND_JSON::encode($INVENTORY_MODULES)}>
          
