@@ -213,7 +213,8 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
                 app.request.post({'data' : params}).then(
                     function(err, data) {
                         app.helper.hideProgress();
-                        if(data=='success'){
+                       // var jsonData = JSON.stringify(data); alert(jsonData);
+                        if(data.result=='success'){
                             //console.log(data);
                             var url = "?module=Vtiger&parent=Settings&view=AllocationListView&block=14&fieldid=49";
                             thisInstance.loadContents(url).then(function(data){
@@ -226,7 +227,30 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
                             aDeferred.resolve(data);
                             return;
                         }
-                        else{ alert(JSON.stringify(data.claims));
+
+                        else if (data.result == "Missing") {
+
+                            app.helper.showErrorNotification({"message": "Empty:<br>" + data.data});
+
+                        }
+
+                        
+                        else if (data.result == "Not Allowed") { 
+//alert(JSON.stringify(data));
+                            var claims      = JSON.stringify(data.data.claims);
+                            var leaveTypes  = JSON.stringify(data.data.leaveTypes); 
+                            if (data.data.claims != "") {                              
+
+                                    app.helper.showErrorNotification({"message":claims.replace(/"/g , "")});
+                              
+                            }
+                            if (data.data.leaveTypes != "") {                              
+
+                                    app.helper.showErrorNotification({"message":leaveTypes.replace(/"/g , "")});
+                              
+                            }
+                        }
+                        else{ 
                             app.hideModalWindow();
                             app.helper.showErrorNotification({"message":err});
                             thisInstance.registerEvents();
