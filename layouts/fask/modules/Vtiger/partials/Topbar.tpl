@@ -75,10 +75,9 @@ $(this).hide();
 
                                 <!-- nuovo menu-->	
                                 <div class="dropdown col-lg-3 hidden-sm hidden-xs ">
-                                    <div class="addtionalDashboardTab">&nbsp;</div>
-                                        <!--<button class="btn btn-fask btn-lg" type="button" id="dropdownMenuButtonDesk" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="material-icons" style="color: #fff!important">menu</i>
-                                        </button>-->
+                                        <button class="btn btn-fask btn-lg" type="button" id="dropdownMenuButtonDesk" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="material-icons" style="color: #fff!important"></i>
+                                        </button>
                                         <div class="dropdown-menu fask" id="moredropdown"  aria-labelledby="dropdownMenuButtonDesk">
                                                 <div class="bluredBackground"></div>
                                                 <ul class="faskfirst">
@@ -149,7 +148,7 @@ $(this).hide();
                                                         'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
                                                         'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
                                                         'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-                                                        'mycthemeswitcher'=>'folder', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
+                                                        'mycthemeswitcher'=>'folder', 'chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
 
 
                                                         <li class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> 
@@ -164,7 +163,7 @@ $(this).hide();
 									{else}
 										{assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME}"}
 									{/if}	
-                                                                                <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="{$moduleURL}" >
+                                                                                <li {$APP_NAME}><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="{$moduleURL}" >
                                                                                         <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> <span class="hide-menu"> {$translatedModuleLabel}</span></a></li>
                                                                                         {/foreach}
                                                                                 </ul>
@@ -212,6 +211,40 @@ $(this).hide();
 
 
                                                                                         <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Portal&view=List"><i class="material-icons module-icon">web</i> <span class="hide-menu"> {vtranslate('Portal')}</span></a></li>
+
+                                                                                        {/if}
+                                                                                              {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Bills')}
+                                                                                        {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
+
+
+
+                                                                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Bills&view=List"><i class="material-icons module-icon">receipt</i> <span class="hide-menu"> {vtranslate('Bills')}</span></a></li>
+
+                                                                                        {/if}
+                                                                                                                                                          
+                                                                                        {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('WorkingHours')}
+                                                                                        {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
+
+
+
+                                                                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=WorkingHours&view=List"><i class="material-icons module-icon">access_time</i> <span class="hide-menu"> {vtranslate('WorkingHours')}</span></a></li>
+
+                                                                                        {/if}
+                                                                                        
+                                                                                        {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Payments')}
+                                                                                        {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
+
+
+
+                                                                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Payments&view=List"><i class="material-icons module-icon">payment</i> <span class="hide-menu"> {vtranslate('Payments')}</span></a></li>
+
+                                                                                        {/if}
+                                                                                                {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('LeaveType')}
+                                                                                        {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
+
+
+
+                                                                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=LeaveType&view=List"><i class="material-icons module-icon">keyboard_tab</i> <span class="hide-menu"> {vtranslate('LeaveType')}</span></a></li>
 
                                                                                         {/if}
                                                                                 </ul>
