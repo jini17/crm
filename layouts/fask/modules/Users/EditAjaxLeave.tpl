@@ -9,53 +9,7 @@
 *
 ********************************************************************************/
 -->*}
-<!--
-{strip}
-<style>
-.select2
-{
-        width:300px;
-}
-span.empty_fill {
-    display:block;
-    overflow:visible;
-    width:20px;
-    height:20px;
-    color:#FFFFFF;
-   float:left;
-margin-right:10px;
-margin-top:2px;
-}
-#starthalf{
-        position:relative;
-        top:-3px;
-}
-</style>
-<script>
-jQuery(document).ready(function(e){ 
-/*('#testSelect').select2({
-                                allowClear: true,
-                                formatResult: format,
-                                formatSelection: format
-                        });
-*/
-});
 
-</script>
-<div class="leaveModalContainer">
-        <div class="modal-header contentsBackground">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                {if $MANAGER eq 'true'}	
-                <h3>{vtranslate('LBL_LEAVE_APPROVAL', $QUALIFIED_MODULE)}</h3>
-                {else}
-                        {if $LEAVEID neq ''}
-                         <h3>{vtranslate('LBL_EDIT_LEAVE', $QUALIFIED_MODULE)}</h3>
-                        {else} 
-                         <h3>{vtranslate('LBL_ADD_NEW_LEAVE', $QUALIFIED_MODULE)}</h3>
-                        {/if}
-                {/if}
-        </div>
--->
 {*<!--
 /*********************************************************************************
 ** The contents of this file are subject to the vtiger CRM Public License Version 1.0
@@ -134,11 +88,11 @@ jQuery(document).ready(function(e){
                         <div class="control-group">
                                 <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                 <div class="controls date  col-md-8">
-                                        <input id="start_date" type="text" class="dateField inputElement" type="text" value="{$LEAVE_DETAIL.from_date}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($STARTDATEFIELD))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" name="start_date" data-date-format="dd-mm-yyyy">	
+                                        <input id="start_date" type="text" class="dateField inputElement" type="text" value="{$LEAVE_DETAIL.from_date}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($STARTDATEFIELD))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" name="start_date" data-date-format="dd-mm-yyyy" required>	
                                         <span class="add-on">&nbsp;<i class="icon-calendar"></i></span>&nbsp;&nbsp;
                                         <div style="float: right;margin-bottom:10px;margin-top:10px;">
                                             <span style="margin-right:7px;" id="starthalfcheck" class="hide">{vtranslate('LBL_HALF_DAY', $QUALIFIED_MODULE)}</span>
-                                            <input type="checkbox" class="hide" {if $LEAVE_DETAIL.starthalf eq 1} checked {/if} name="starthalf" id="starthalf" value="1" style="float: left;
+                                            <input type="checkbox" {if $LEAVE_DETAIL.starthalf eq 1} checked {/if} name="starthalf" id="starthalf" value="1" style="float: left;
     margin-right: 10px;">
 
                                         </div>
@@ -148,7 +102,7 @@ jQuery(document).ready(function(e){
                         <div class="control-group" id="enddate_div">
                                 <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_END_DATE', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                 <div class="controls row-fluid date  col-md-8">
-                                        <input id="end_date" type="text" class="dateField inputElement nameFields" type="text" value="{if $LEAVE_DETAIL.to_date neq '00-00-0000'}{$LEAVE_DETAIL.to_date}{/if}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($ENDDATEFIELD))}'  data-validator={$VALIDATOR} data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"  name="end_date" data-date-format="dd-mm-yyyy" >	
+                                        <input id="end_date" type="text" class="dateField inputElement nameFields" type="text" value="{if $LEAVE_DETAIL.to_date neq '00-00-0000'}{$LEAVE_DETAIL.to_date}{/if}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($ENDDATEFIELD))}'  data-validator={$VALIDATOR} data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"  name="end_date" data-date-format="dd-mm-yyyy" required>	
                                         <span class="add-on">&nbsp;<i class="icon-calendar"></i></span>&nbsp;&nbsp;
                                         <span style="margin-right:7px;" class="{if $LEAVE_DETAIL.endhalf eq 0} hide {/if}" id="endhalfcheck">{vtranslate('LBL_HALF_DAY', $QUALIFIED_MODULE)}</span>
                                         <input type="checkbox" name="endhalf" class="{if $LEAVE_DETAIL.endhalf eq 0} hide {/if}"  {if $LEAVE_DETAIL.endhalf eq 1} checked{/if} id="endhalf" value="1">
@@ -170,18 +124,10 @@ jQuery(document).ready(function(e){
                         <div class="control-group">
                                 <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_REASON', $QUALIFIED_MODULE)}  <span class="redColor">*</span> </label>		
                                 <div class="controls  col-md-8">
-                                        <textarea style="width:100%;" name="reason" id="reason" class="span11" maxlength="300" data-validation-engine="validate[required]">{$LEAVE_DETAIL.leave_reason}</textarea>
+                                        <textarea style="width:100%;" name="reason" id="reason" class="span11" required maxlength="300">{$LEAVE_DETAIL.leave_reason}</textarea>
                                 </div>
                                 <div class="controls text-right" id="charNum_reason" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                         </div>
-                            <div id="attachments">
-                            <div class="control-group">
-                                    <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_ATTACHMENTS', $QUALIFIED_MODULE)}</label>     
-                                    <div class="controls  col-md-8">
-                                    <input type="file" name="leave_attachment[]" multiple>
-                                    </div>
-                            </div><br>
-                        </div>    
                 {if $MANAGER eq 'true'}
                         <div class="control-group">
                                 <!--approved start-->

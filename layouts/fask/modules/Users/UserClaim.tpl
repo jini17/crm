@@ -254,7 +254,7 @@
 					<td class="listTableRow small" valign=top>
 						<div class="pull-left actions">
 							<span class="actionImages">
-						<a class="docsLeave cursorPointer" onclick="javascript:window.open('?module=Claim&relatedModule=Documents&view=Detail&record={$USER_CLAIM['claimid']}&mode=showRelatedList&tab_label=Documents&popup=Claim','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i> &nbsp;&nbsp; 
+						<a class="docsLeave cursorPointer" onclick="javascript:window.open('index.php?module=Claim&relatedModule=Documents&view=Detail&record={$USER_CLAIM['claimid']}&mode=showRelatedList&tab_label=Documents&popup=Claim','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i> &nbsp;&nbsp; 
 						</a>&nbsp;&nbsp;	
 					{if $USER_CLAIM['claim_status'] eq 'New' } 
 
