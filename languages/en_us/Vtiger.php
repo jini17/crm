@@ -16,12 +16,11 @@ $languageStrings = array(
 	'POWEREDBY'=> 'Powered by Agiliux CRM',
 	'LBL_READ_LICENSE' => 'Read License',
 	'LBL_PRIVACY_POLICY' => 'Privacy Policy',
-<<<<<<< HEAD
-=======
+
 	'LBL_ENRICH_DATA' => 'Enrich Data',
 
 	'LBL_ENRICH_DATA_LOCKED' => 'Enrich Data', 
->>>>>>> 276ecf4e2872a28747aa0a169e9f14a7502cf565
+
 
 	// Common Actions
 	'LBL_NEW' => 'New',
