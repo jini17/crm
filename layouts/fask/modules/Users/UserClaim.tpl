@@ -190,27 +190,6 @@
 			<button type="button" class="btn btn-primary"onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_APPLY_CLAIM', $MODULE)}</strong></button>
 		</div>
 
-<<<<<<< HEAD
-		<div class="myProfileBtnRight">
-		<div style="float:left;"><strong>{vtranslate('LBL_MY_CLAIM', $MODULE)}</strong></div>
-		<div style="float:right;margin-left:5px;">
-
-			<!--	<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear"> -->
-				<form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST">
-				<select name="my_selyear" id="my_selyear" data-section="M"  class="my_selyear" data-url="?module=Users&view=ListViewAjax&mode=getUserClaim&section=M&record={$USERID}"   onchange="Users_Claim_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserClaim&section=M&record={$USERID}','M');">
-
-							<!--//Added By Jitu Date Combobox-->
-							{for $year=$STARTYEAR to $CURYEAR}
-							<option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
-							{/for}
-				</select>	
-			</form>
-			</div>
-	</div>
-
-
-=======
-
 	<div style="float:left;margin-bottom:10px;"><strong>{vtranslate('LBL_MY_CLAIM', $MODULE)}</strong>&nbsp;&nbsp;</div>&nbsp;&nbsp;
 
 	
@@ -264,7 +243,7 @@
 						<a class="docsLeave cursorPointer" onclick="javascript:window.open('index.php?module=Claim&relatedModule=Documents&view=ClaimDetail&record={$USER_CLAIM['claimid']}&mode=showRelatedList&tab_label=Documents&popup=Claim','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i> &nbsp;&nbsp; 
 						</a>&nbsp;&nbsp;	
 					{if $USER_CLAIM['claim_status'] eq 'New' } 
->>>>>>> d8cc06137d44a6c5f7e1dd456eb2b0358a1f39e1
+
 
 
 		<br /><br />
