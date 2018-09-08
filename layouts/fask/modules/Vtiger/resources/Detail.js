@@ -1078,14 +1078,14 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		else {
 
 	        btn.click(function () {        	       
-	        
-	            app.request.get(params).then(
+	        	if (confirm("This will overwrite your existing data for the selected record. Are you sure you want to continue ?")) {
 
-	                function (err, data) {
-	                    if (data) {
+		            app.request.get(params).then(
 
-	                    	if (confirm("This will overwrite your existing data for the selected record. Are you sure you want to continue ?")) {
-	                    		
+		                function (err, data) {
+		                	
+		                    if (data) {		                    	
+		                    		
 		                    	if (data.message == "success")
 		                			app.helper.showSuccessNotification({message:"Data updated successfully"});                    	
 
@@ -1100,13 +1100,15 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		                    		jQuery('.tab-item.active').find('a')[0].click(); //To Reload the Detail View using Ajax                    		
 
 		                    	}  
-		                    }	
-	                    }
+			                    	
+		                    }
+		                    else 
+		                    	app.helper.showErrorNotification({message:err});
 
-	                    else 
-	                    	app.helper.showErrorNotification({message:err});	
-	                }                                        
-	            );
+		                }                                        
+		            );
+
+	        	}
 	        });
 
     	}        

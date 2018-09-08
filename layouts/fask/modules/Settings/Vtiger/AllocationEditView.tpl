@@ -11,8 +11,12 @@
 
 {strip}
 
-    <div class="taxModalContainer modal-dialog modal-lg" id="EditAllocationContainer">
-        <div class="modal-content">
+    <div class="allocationModalContainer modal-dialog modal-lg" id="EditAllocationContainer">
+        <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position:absolute;top:-5px;left:97%"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span><div></div></button>
+                Edit Allocation
+        </div>
+        <div class="modal-content">            
             <form id="AddAllocation" class="form-horizontal" method="POST">
                 <div class="modal-body" id="scrollContainer" name="test">
                     <div class="container float-left">
@@ -36,8 +40,12 @@
                         <div class="contents row form-group">
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Status :</label></div>
 
-                            <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
-                                <input type="checkbox" id="status" name="status">
+                            <div class="fieldValue col-lg-4 col-md-4 col-sm-6 ">
+                                {if $VALUES['status'] eq 'on'}
+                                    <input type="checkbox" id="status" name="status" checked>
+                                {else}    
+                                    <input type="checkbox" id="status" name="status">
+                                {/if}                                    
                             </div>
                         </div>
                     </div>
@@ -47,8 +55,8 @@
                         <div class="contents row form-group">
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Description :</label></div>
 
-                            <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
-                                <textarea class="inputElement col-sm-9" style="width: 359px; height: 111px;" type="text" id="Allocation_Desc" name="Allocation_Desc" value="{$VALUES['allocation_desc']}"></textarea>
+                            <div class="fieldValue col-lg-4 col-md-4 col-sm-6 ">
+                                <textarea class="inputElement col-sm-9" style="width: 359px; height: 111px;" id="Allocation_Desc" name="Allocation_Desc">{$VALUES['allocation_desc']}</textarea>
                             </div>
                         </div>
                     </div>
@@ -57,8 +65,8 @@
                         <div class="contents row form-group">
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Grade Allocation :</label></div>
 
-                            <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
-                                <select class="select2-container select2 inputElement col-sm-6 selectModule" multiple style="width:150px;" id="Allocation_grade" name="Allocation_grade">
+                            <div class="fieldValue col-lg-4 col-md-4 col-sm-6 ">
+                                <select class="select2-container select2 inputElement col-sm-6 selectModule" multiple style="width:359px;" id="Allocation_grade" name="Allocation_grade">
                                     {foreach item=SPLITVALUE key=k from=$GRADE}
                                         {if in_array($GRADE[$k]['id'],$PREVALUES['grade_id'])}
                                             <option value={$GRADE[$k]['id']} selected="true">{$GRADE[$k]['grade']}</option>
@@ -75,9 +83,9 @@
                     <div class="container float-left">
 
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Allocate LeaveType :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Show LeaveType :</label></div>
 
-                            <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
+                            <div class="fieldValue col-lg-4 col-md-4 col-sm-6 ">
                                 <input class="inputElement nameField" type="checkbox" id="EditAllocateLeave" name="EditAllocateLeave">
                             </div>
                         </div>
@@ -87,7 +95,7 @@
 
                             <div class="contents row form-group">
 
-                                <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
+                                <div class="fieldValue col-lg-4 col-md-4 col-sm-6 ">
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -108,8 +116,8 @@
                         <div class="contents row form-group">
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Claim Allocation :</label></div>
 		
-                            <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
-                                <select class="select2-container select2 inputElement col-sm-6 selectModule" multiple style="width:150px;" id="Allocation_claimtype" name="Allocation_claimtype">
+                            <div class="fieldValue col-lg-4 col-md-6 col-sm-6 ">
+                                <select class="select2-container select2 inputElement col-sm-6 selectModule" multiple style="width:359px;" id="Allocation_claimtype" name="Allocation_claimtype">
                                     {foreach item=SPLITVALUE key=k from=$CLAIMTYPE}
                                         {if in_array($CLAIMTYPE[$k]['id'],$PREVALUES['claim_id'])}
                                             <option value={$CLAIMTYPE[$k]['id']} selected="true">{$CLAIMTYPE[$k]['claimtype']}</option>
@@ -135,6 +143,7 @@
             </form>
         </div>
     </div>
+    
 {/strip}
 
 

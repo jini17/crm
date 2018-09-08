@@ -13,16 +13,21 @@ Vtiger_Edit_Js("Documents_Edit_Js", {
 
 	INTERNAL_FILE_LOCATION_TYPE : 'I',
 	EXTERNAL_FILE_LOCATION_TYPE : 'E',
+    GOOGLE_DRIVE_FILE_LOCATION_TYPE : 'G',
     
 	getMaxiumFileUploadingSize : function(container) {
 		//TODO : get it from the server
 		return container.find('.maxUploadSize').data('value');
 	},
 
+    // Modified By Mabruk (Later I will add another function isFileLocationGoogeDriveType)
 	isFileLocationInternalType : function(fileLocationElement) {
 		if(fileLocationElement.val() == this.INTERNAL_FILE_LOCATION_TYPE) {
 			return true;
 		}
+        else if(fileLocationElement.val() == this.GOOGLE_DRIVE_FILE_LOCATION_TYPE) {
+            return true;
+        }
 		return false;
 	},
 
@@ -45,15 +50,24 @@ Vtiger_Edit_Js("Documents_Edit_Js", {
 
 	},
 
-	registerFileLocationTypeChangeEvent : function(container) {
+	registerFileLocationTypeChangeEvent : function(container) { 
 		var thisInstance = this;
+        // Added by Mabruk
+        var prevFileLocationTypeElementValue = container.find('select[name="filelocationtype"]').val();
+        
+
 		container.on('change', 'select[name="filelocationtype"],input[name="filelocationtype"]', function(e){
-                    var fileLocationTypeElement = container.find('select[name="filelocationtype"]');
-            var fileNameElement = container.find('[name="filename"]');
+            var fileLocationTypeElement = container.find('select[name="filelocationtype"]');
+            var fileNameElement = container.find('[name=filename]');
+
             jQuery(fileNameElement).removeClass('input-error').trigger('Vtiger.Validation.Hide.Messsage');
             var dragDropElement = fileNameElement.closest('table').find('#dragandrophandler');
             var replaceElement = fileNameElement;
-			if(thisInstance.isFileLocationInternalType(fileLocationTypeElement)) {
+			if(thisInstance.isFileLocationInternalType(fileLocationTypeElement)) { 
+                // Added By Mabruk
+                if (prevFileLocationTypeElementValue == "I" || prevFileLocationTypeElementValue == "G")
+                    replaceElement = fileNameElement.closest('.fileUploadBtn');
+                
 				var newFileNameElement = jQuery(
                     '<div class="fileUploadBtn btn btn-primary">'+
                         '<span><i class="fa fa-laptop"></i>&nbsp;'+
@@ -63,7 +77,7 @@ Vtiger_Edit_Js("Documents_Edit_Js", {
                     '</div>'
                 );
                 if(dragDropElement.length) dragDropElement.removeClass('hide');
-			}else{
+			}else{ 
 				var newFileNameElement = jQuery('<input type="text" data-rule-url="true" data-rule-required="true"/>');
                 if(dragDropElement.length) dragDropElement.addClass('hide');
                 replaceElement = fileNameElement.closest('.fileUploadBtn');
@@ -82,9 +96,9 @@ Vtiger_Edit_Js("Documents_Edit_Js", {
                     newFileNameElement.attr(attributeObject.name, attributeObject.value);
                 }
 			}
-            
-			replaceElement.replaceWith(newFileNameElement);
-            
+         
+            replaceElement.replaceWith(newFileNameElement);
+
 			var fileNameElementTd = newFileNameElement.closest('td');
             if(thisInstance.isFileLocationExternalType(fileLocationTypeElement)){
                 fileNameElementTd.prev('td.fieldLabel').empty().append('<label class="">'+app.vtranslate('JS_EXTERNAL_FILE_URL')+'&nbsp;'+'<span class="redColor">*</span></label>');
@@ -98,6 +112,9 @@ Vtiger_Edit_Js("Documents_Edit_Js", {
 			}else{
 				uploadFileDetails.addClass('show').removeClass('hide');
 			}
+
+            prevFileLocationTypeElementValue = fileLocationTypeElement.val();
+
 		});
         if(container.find('input[name="filelocationtype"]').val() == 'E'){
             jQuery('select[name="filelocationtype"],input[name="filelocationtype"]').trigger('change');
