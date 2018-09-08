@@ -231,7 +231,15 @@
 												</span>
 											{/foreach}
 										{else}
-											{$LISTVIEW_ENTRY_VALUE}
+											<!-- Modified By mabruk to Show proper File Names -->
+											{if $LISTVIEW_HEADER->getName() eq 'filename' && $MODULE eq 'Documents'}
+												{$LISTVIEW_ENTRY_RAWVALUE}
+											{else if $LISTVIEW_HEADER->getName() eq 'filelocationtype' && $LISTVIEW_ENTRY_RAWVALUE eq 'G' && $MODULE eq 'Documents'}
+												Google Drive
+											{else}
+												{$LISTVIEW_ENTRY_VALUE}											
+											{/if}
+											<!--End-->
 										{/if}
 									{/if}
 								</span>
