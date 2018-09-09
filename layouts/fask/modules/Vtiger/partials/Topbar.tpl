@@ -148,7 +148,7 @@ $(this).hide();
                                                         'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
                                                         'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
                                                         'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-                                                        'mycthemeswitcher'=>'folder', 'chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
+                                                        'mycthemeswitcher'=>'folder', 'chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
 
 
                                                         <li class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> 
@@ -291,28 +291,33 @@ $(this).hide();
                                                                 <ul class="dropdownlist">
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=EmployeeContract&parent=Settings&view=List&block=15&fieldid=53">
-                                                                                        <i class="fa fa-user"></i>&nbsp;Employee
+                                                                                	<i class="material-icons module-icon">person</i>&nbsp;Employee
+                                                                                     
                                                                                 </a>
                                                                         </li>
 
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&amp;view=List&amp;app=ADMIN">
-                                                                                        <i class="fa fa-sign-out"></i>&nbsp;Leave
+                                                                                	<i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
+                                                                                      
                                                                                 </a>
                                                                         </li>
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&amp;view=List&amp;app=ADMIN">
-                                                                                        <i class="fa fa-usd"></i>&nbsp;Claim
+                                                                                	<i class="material-icons module-icon">attach_money</i>&nbsp;Claim
+                                                                                       
                                                                                 </a>
                                                                         </li>
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Payslip" href="index.php?module=Payslip&amp;view=List&amp;app=ADMIN">
-                                                                                        <i class="fa fa-file-text-o"></i>&nbsp;Payslip
+                                                                                	<i class="material-icons module-icon">insert_drive_file</i>&nbsp;Payslip
+                                                                                       
                                                                                 </a>
                                                                         </li>
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&amp;parent=Settings&amp;view=List&amp;block=15&amp;fieldid=56">
-                                                                                        <i class="fa fa-bolt"></i>&nbsp;Performance
+                                                                                	<i class="material-icons module-icon">timeline</i>&nbsp;Performance
+                                                                                       
                                                                                 </a>
                                                                         </li>
                                                                 </ul>
