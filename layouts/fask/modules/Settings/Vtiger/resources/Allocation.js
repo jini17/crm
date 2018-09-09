@@ -170,11 +170,7 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
                     thisInstance.showLeaveTypeAddition();
                     thisInstance.addMultipleLeavetype();
                     history.pushState({}, null, window.history.back());
-
-
-                    // var thisInstance1 = this;
-
-
+                    // var thisInstance1 = this
                 });
 
         });
@@ -206,9 +202,9 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
                 var params = {
                     'module' : 'Vtiger',
                     'parent' : 'Settings',
-                    'view' : 'AllocationTools',
+                    'view'   : 'AllocationTools',
                     'mode'   : mode,
-                    'form' : form
+                    'form'   : form
 
 
                 };
@@ -230,7 +226,7 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
                             aDeferred.resolve(data);
                             return;
                         }
-                        else{
+                        else{ alert(JSON.stringify(data.claims));
                             app.hideModalWindow();
                             app.helper.showErrorNotification({"message":err});
                             thisInstance.registerEvents();

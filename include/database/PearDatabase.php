@@ -1090,8 +1090,8 @@ class PearDatabase{
 			}
 		}
 		return $db_character_set;
-	}
-} /* End of class */
+	}}
+ /* End of class */
 
 if(empty($adb)) {
 	$adb = new PearDatabase();

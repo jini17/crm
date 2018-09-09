@@ -16,7 +16,6 @@ $languageStrings = array(
 	'POWEREDBY'=> 'Powered by Agiliux CRM',
 	'LBL_READ_LICENSE' => 'Read License',
 	'LBL_PRIVACY_POLICY' => 'Privacy Policy',
-	'LBL_REPORT_CHART' => 'Chart Report',
 
 	'LBL_ENRICH_DATA' => 'Enrich Data',
 
@@ -176,7 +175,7 @@ $languageStrings = array(
 	'LBL_PLEASE_SELECT_MODULE' => 'Please select any module to search',
 
 	//DropDown Category
-	'LBL_USERS' => 'Employee',
+	'LBL_USERS' => 'Users',
 	'LBL_GROUPS' => 'Groups',
 	'LBL_USER_PLAN_SETTING' => 'User Plan Settings',
 
@@ -428,7 +427,7 @@ $languageStrings = array(
 	'LBL_SHOW' => 'Show',
 	'LBL_MY' => 'My',
 	'LBL_SELECT_DATE_RANGE' => 'Select Date Range',
-                       'Users'=>"Employee",
+
 	// Basic Strings- custom view
 	'LBL_VIEW_NAME' => 'List Name',
 	'LBL_CREATE_VIEW' => 'Creating new view',
