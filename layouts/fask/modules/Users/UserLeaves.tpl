@@ -24,8 +24,8 @@
 					<td class="listTableRow small" valign=top>
 						<div class="pull-right actions">
 							<span class="actionImages">
-			<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );">
-			<i class="fa fa-file-o" title="Documents"></i>  </a>	
+		{*	<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );">
+			<i class="fa fa-file-o" title="Documents"></i>  </a>	*}
 					{if $USER_LEAVE['leavestatus'] eq 'New'} 
 				
 						<a class="editLeave cursorPointer editAction ti-pencil" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false" title="{vtranslate('LBL_EDIT', $MODULE)}"></a>&nbsp;&nbsp;
