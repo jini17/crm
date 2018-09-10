@@ -1128,12 +1128,42 @@ class Users extends CRMEntity {
 				$adb->pquery("INSERT INTO secondcrm_userplan(userid, planid) VALUES(?,?)", array($this->id, $planid));
 		}
 		//end here 
+		
+		//Set Default Dashboard onfirst time User creation 
+		
+		if($this->mode==''){
+			//$this->CreateDefaultDashboard($this->id, $this->column_fields['roleid']);
+		}
+		//	
+		
 		require_once('modules/Users/CreateUserPrivilegeFile.php');
 		createUserPrivilegesfile($this->id);
 		createUserSharingPrivilegesfile($this->id);
 		Vtiger_AccessControl::clearUserPrivileges($this->id);
 	}
 
+	/*function CreateDefaultDashboard($userid, $roleid){
+	
+		global $adb;
+		
+		if($roleid == 'H12' || 	$roleid =='H13'){				//HR Manager or HR Staff	
+			$adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
+			array('People', 1, 1, 'Default', '', $userid));
+			$adb->pquery("INSERT INTO vtiger_module_dashboard_widgets(linkid, userid, filterid, title, data, position, reportid, dashboardtabid, size)
+			VALUES (?,?,?,?,?,?,?,?,?)", array(35, $userid, '', );
+			
+			$adb->pquery("INSERT INTO tiger_module_dashboard_widgets SELECT * FROM vtiger_dashboard_tabs WHERE userid=1 isdefault=1 AND id NOT IN (1,362, 363,364)", array())
+		} else if($roleid == 'H14' || 	$roleid =='H15'){			//Manager or Staff
+			$adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
+			array('Employment', 1, 1, 'Default', '', $userid));
+			
+		} else if($roleid == 'H2'){	//Management
+			
+			$adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
+			array('Subscription', 1, 1, 'Default', '', $userid));
+			
+		}
+	}*/
 
 	/**
 	 * gives the order in which the modules have to be displayed in the home page for the specified user id
