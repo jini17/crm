@@ -59,9 +59,6 @@
                                                             
                                                         {/foreach}
                                                         {if $DETAILVIEW_LINKS['DETAILVIEW']|@count gt 0}
-                                                            <button  class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;left: 100%;" title="Left Panel Show/Hide">
-                                                                                    <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
-                                                                </button>
                                                                 <button class="btn btn-primary" data-toggle="dropdown" href="javascript:void(0);">
                                                                         {vtranslate('LBL_MORE', $MODULE)}&nbsp;<i class="caret"></i>
                                                                 </button>
@@ -84,6 +81,9 @@
                                                         {/if}
                                                 </div>
                                         </div>
+                                         <button  class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 15px;left:93%;" title="Left Panel Show/Hide">
+											<span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
+                                                                </button>
                                 </div>
                         </div>
                         <div class="detailViewInfo userPreferences">

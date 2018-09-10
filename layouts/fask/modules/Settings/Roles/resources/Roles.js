@@ -336,34 +336,86 @@ var Settings_Roles_Js = {
                                                                         }
                                                                 });
 
-                                                                jQuery('[data-action-state]').change(function(e){
+                                                                jQuery('[data-action-state]').change(function(e){ 
                                                                         var target = jQuery(e.currentTarget);
                                                                         var parent = target.closest('tr');
                                                                         var checked = target.prop('checked')? true : false;
 
                                                                         if (jQuery.inArray(target.data('action-state'), ['CreateView', 'EditView', 'Delete']) != -1) {
                                                                                 if (checked) {
-                                                                                    //parent.find('input:first').attr('checked',false);
-
-                                                                                    jQuery('[data-action-state="DetailView"]', parent).prop('checked', true);
+                                                                                 jQuery('[data-action-state="DetailView"]', parent).prop('checked', true);
                                                                                     jQuery('[data-action-state="EditView"]', parent).prop('checked', true);
                                                                                    jQuery('[data-module-state]', parent).prop('checked', true);
                                                                                    jQuery('[data-handlerfor]', parent).removeAttr('disabled');
                                                                                 }
                                                                         }
-                                                                        if (target.data('action-state') == 'EditView') {
-                                                                                if (!checked) {
-                                                                                        jQuery('[data-action-state]', parent).prop('checked', false);
-                                                                                           jQuery('[data-action-state="DetailView"]', parent).prop('checked', true);
-                                                                                           jQuery( parent).find('input:first').prop('checked', true);
-                                                                                         //  jQuery('[data-module-state]', parent).prop('checked', false).trigger('change');
-
-                                                                                } else {
-                                                                                        jQuery('[data-module-state]', parent).prop('checked', true);
-                                                                                        jQuery('[data-handlerfor]', parent).removeAttr('disabled');
-
-                                                                                }
+                                                                        
+                                                                        if(target.data('action-state') == 'DetailView'){
+                                                                            if(checked){
+                                                                                   jQuery('[data-handlerfor]', parent).removeAttr('disabled');
+                                                                                    jQuery('[data-module-state]', parent).prop('checked', true);
+                                                                                    
+                                                                            }
+                                                                            
+                                                                            if(!checked){
+                                                                                 var lenght = parent.not('td').find("input[checked='true']").length;
+                                                                           
+                                                                                 if(lenght <3){
+                                                                                     jQuery('[data-handlerfor]', parent).attr('disabled','disabled');
+                                                                                    jQuery('[data-module-state]', parent).prop('checked', false);
+                                                                                     jQuery('[data-action-state="EditView"]', parent).prop('checked', false);
+                                                                                 }
+                                                                            }
+                                                                            
                                                                         }
+                                                                        
+                                                                         if(target.data('action-state') == 'EditView'){
+                                                                            if(checked){
+                                                                                   jQuery('[data-handlerfor]', parent).removeAttr('disabled');
+                                                                                    jQuery('[data-module-state]', parent).prop('checked', true);
+                                                                                    jQuery('[data-action-state="DetailView"]', parent).prop('checked', true);
+                                                                            }
+                                                                            
+                                                                            if(!checked){
+                                                                                 var lenght = parent.find("input[type='checkbox'").length;
+                                                                                alert(lenght);
+                                                                                 if(lenght <3){
+                                                                                     jQuery('[data-handlerfor]', parent).attr('disabled','disabled');
+                                                                                    jQuery('[data-module-state]', parent).prop('checked', false);
+                                                                                 }
+                                                                                 else{
+                                                                                           jQuery('[data-handlerfor]', parent).removeAttr('disabled','disabled');
+                                                                                    jQuery('[data-module-state]', parent).prop('checked', true);
+                                                                                 }
+                                                                            }
+                                                                            
+                                                                        }
+                                                                        
+//                                                                        if (target.data('action-state') == 'EditView') {
+//                                                                                        var lenght = parent.not('td').find("input[checked='true']").length;
+//                                                                                     if (!checked) {
+//                                                                                        jQuery('[data-action-state]', parent).prop('checked', false);
+//                                                                                           jQuery('[data-action-state="DetailView"]', parent).prop('checked', true);
+//                                                                                           jQuery( parent).find('input:first').prop('checked', true);
+//                                                                                        jQuery('[data-module-state]', parent).prop('checked', false).trigger('change');
+//                                                                             
+//                                                                           
+//                                                                                 if(lenght <3){
+//                                                                                     jQuery('[data-handlerfor]', parent).attr('disabled','disabled');
+//                                                                                    jQuery('[data-module-state]', parent).prop('checked', false);
+//                                                                                 }
+//                                                                                 else{
+//                                                                                            jQuery('[data-handlerfor]', parent).removeAttr('disabled','disabled');
+//                                                                                    jQuery('[data-module-state]', parent).prop('checked', false);
+//                                                                                 }
+//
+//                                                                                } else {
+//                                                                                        jQuery('[data-module-state]', parent).prop('checked', true);
+//                                                                                        jQuery('[data-handlerfor]', parent).removeAttr('disabled');
+//
+//                                                                                }
+//                                                                        }
+                                                                
                                                                         
                                                                 });
 

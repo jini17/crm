@@ -295,19 +295,37 @@ $(this).hide();
                                                                                      
                                                                                 </a>
                                                                         </li>
-
+                                                                          {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                                                         <li>
-                                                                                <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
+                                                                               <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&view=List">
                                                                                 	<i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
                                                                                       
                                                                                 </a>
                                                                         </li>
+                                                                        {else}
+                                                                                     <li>
+                                                                                <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
+
+                                                                                	<i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
+                                                                                      
+                                                                                </a>
+                                                                        </li>
+                                                                        {/if}
+                                                                           {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                                                         <li>
+                                                                                <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
+                                                                                	<i class="material-icons module-icon">attach_money</i>&nbsp;Claim
+                                                                                       
+                                                                                </a>
+                                                                        </li>
+                                                                            {else}
+                                                                                  <li>
                                                                                 <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
                                                                                 	<i class="material-icons module-icon">attach_money</i>&nbsp;Claim
                                                                                        
                                                                                 </a>
                                                                         </li>
+                                                                        {/if}
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Payslip" href="index.php?module=Payslip&amp;view=List&amp;app=ADMIN">
                                                                                 	<i class="material-icons module-icon">insert_drive_file</i>&nbsp;Payslip
@@ -317,12 +335,6 @@ $(this).hide();
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
                                                                                 	<i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                                                                                       
-                                                                                </a>
-                                                                        </li>
-                                                                           <li>
-                                                                                <a class="dropdown-icon-dashboard"  title="Timesheet" href="index.php?module=Timesheet&view=List&amp;block=15&amp;fieldid=56">
-                                                                                	<i class="material-icons module-icon">alarm</i>&nbsp;Timesheet
                                                                                        
                                                                                 </a>
                                                                         </li>

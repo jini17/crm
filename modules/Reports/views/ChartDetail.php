@@ -25,7 +25,7 @@ class Reports_ChartDetail_View extends Vtiger_Index_View {
 		if(($currentUserPriviligesModel->id != $owner) && $sharingType == "Private"){
 			$isRecordShared = $reportModel->isRecordHasViewAccess($sharingType);
 		}
-		if(!$isRecordShared || !$currentUserPriviligesModel->hasModulePermission($moduleModel->getId())) {
+		if(!$isRecordShared || !$currentUserPriviligesModel->hasModulePermission($moduleModel->getId())|| && $primaryModule !='Users') {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
 		}
 	}
@@ -49,9 +49,10 @@ class Reports_ChartDetail_View extends Vtiger_Index_View {
 
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$userPrivilegesModel = Users_Privileges_Model::getInstanceById($currentUser->getId());
+		
 		$permission = $userPrivilegesModel->hasModulePermission($primaryModuleModel->getId());
 
-		if(!$permission) {
+		if(!$permission && $primaryModule !='Users') {
 			$viewer->assign('MODULE', $primaryModule);
 			$viewer->assign('MESSAGE', vtranslate('LBL_PERMISSION_DENIED'));
 			$viewer->view('OperationNotPermitted.tpl', $primaryModule);
