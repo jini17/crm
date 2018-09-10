@@ -87,7 +87,7 @@ $languageStrings = array(
 	'LBL_ADD_EVENT' => 'Add Meeting',
 	'LBL_ADD_TASK' => 'Add Task',
 	'LBL_MARKETING_AND_SALES' => 'MARKETING & SALES',
-	'LBL_TOOLS_HEADER' => 'TOOLS',
+	'LBL_TOOLS_HEADER' => 'Employee',
 	'LBL_SUPPORT' => 'SUPPORT',
 	'LBL_INVENTORY' => 'INVENTORY',
 	'LBL_FOUNDATION' => 'General',
@@ -222,7 +222,7 @@ $languageStrings = array(
 	'Portal' => 'Our Sites',
 	'Email Templates' => 'Notification Templates',
 	'Recycle Bin' => 'Recycle Bin',
-
+                    
 	//Basic String Translation
 	'LBL_ADD_RECORD' => 'Add Record',
 	'LBL_RECENTLY_MODIFIED' => 'Recently Modified',
@@ -1190,7 +1190,7 @@ $languageStrings = array(
 	'LBL_MARKETING' => 'MARKETING',
 	'LBL_SALES' => 'Sales',
 	'LBL_PROJECT' => 'PROJECTS',
-	'LBL_TOOLS' => 'Tools',
+	'LBL_TOOLS' => 'Communications',
 	'LBL_TAGS' => 'Tags',
 	'LBL_SHARE_TAGS' => 'Public Tags',
 	'LBL_SHARE_TAG' => 'Shared Tag(s)',

@@ -670,7 +670,7 @@ var app = {
                         var element = jQuery('.dateField', parentElement);
                 }
                 element.datepicker({'autoclose':true}).on('changeDate', function(ev){
-
+                    
                         var currentElement = jQuery(ev.currentTarget);
                         var dateFormat = currentElement.data('dateFormat');
                         var finalFormat = app.getDateInVtigerFormat(dateFormat,ev.date);
