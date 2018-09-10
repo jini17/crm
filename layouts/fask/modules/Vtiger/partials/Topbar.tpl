@@ -290,20 +290,20 @@ $(this).hide();
 
                                                                 <ul class="dropdownlist">
                                                                         <li>
-                                                                                <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=EmployeeContract&parent=Settings&view=List&block=15&fieldid=53">
+                                                                                <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=EmployeeContract&view=List&block=15&fieldid=53">
                                                                                 	<i class="material-icons module-icon">person</i>&nbsp;Employee
                                                                                      
                                                                                 </a>
                                                                         </li>
 
                                                                         <li>
-                                                                                <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&amp;view=List&amp;app=ADMIN">
+                                                                                <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
                                                                                 	<i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
                                                                                       
                                                                                 </a>
                                                                         </li>
                                                                         <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&amp;view=List&amp;app=ADMIN">
+                                                                                <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
                                                                                 	<i class="material-icons module-icon">attach_money</i>&nbsp;Claim
                                                                                        
                                                                                 </a>
@@ -315,7 +315,7 @@ $(this).hide();
                                                                                 </a>
                                                                         </li>
                                                                         <li>
-                                                                                <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&amp;parent=Settings&amp;view=List&amp;block=15&amp;fieldid=56">
+                                                                                <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
                                                                                 	<i class="material-icons module-icon">timeline</i>&nbsp;Performance
                                                                                        
                                                                                 </a>
