@@ -320,6 +320,12 @@ $(this).hide();
                                                                                        
                                                                                 </a>
                                                                         </li>
+                                                                           <li>
+                                                                                <a class="dropdown-icon-dashboard"  title="Timesheet" href="index.php?module=Timesheet&view=List&amp;block=15&amp;fieldid=56">
+                                                                                	<i class="material-icons module-icon">alarm</i>&nbsp;Timesheet
+                                                                                       
+                                                                                </a>
+                                                                        </li>
                                                                 </ul>
                                                         </div>
                                                 </div>

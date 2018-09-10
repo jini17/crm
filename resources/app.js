@@ -557,7 +557,7 @@ var app = {
                 var joinedDateFormat =  splitDateFormat.join('-');
                 return joinedDateFormat;
         },
-        getDateInVtigerFormat: function(dateFormat,dateObject){
+        getDateInVtigerFormat: function(dateFormat,dateObject){ 
                 var finalFormat = app.convertTojQueryDatePickerFormat(dateFormat);
                 var date = jQuery.datepicker.formatDate(finalFormat,dateObject);
                 return date;
@@ -670,6 +670,7 @@ var app = {
                         var element = jQuery('.dateField', parentElement);
                 }
                 element.datepicker({'autoclose':true}).on('changeDate', function(ev){
+
                         var currentElement = jQuery(ev.currentTarget);
                         var dateFormat = currentElement.data('dateFormat');
                         var finalFormat = app.getDateInVtigerFormat(dateFormat,ev.date);
