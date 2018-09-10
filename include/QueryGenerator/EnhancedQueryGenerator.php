@@ -603,8 +603,8 @@ class EnhancedQueryGenerator extends QueryGenerator {
 		$HRModules = array('EmployeeContract','PassportVisa','Performance','Payslip');
 		$baseModule = $this->getModule();
 		$ownrecsql = '';
-		
-		if(in_array($baseModule,$HRModules) && ($current_user->roleid !='H12' && $current_user->is_admin !='on' && $current_user->roleid !='H13')){
+
+		if(in_array($baseModule,$HRModules) && ($current_user->roleid !='H2' && $current_user->is_admin !='on' && $current_user->roleid !='H12' && $current_user->roleid !='H13')){
 			$ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$current_user->id;
 		}
 		
