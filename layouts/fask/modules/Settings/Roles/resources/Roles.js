@@ -323,7 +323,7 @@ var Settings_Roles_Js = {
                                                                                 jQuery('[data-action-tool="'+tabid+'"]').prop('checked', true);
                                                                                 jQuery('[data-handlerfor]', parent).removeAttr('disabled');
                                                                         } else {
-                                                                            
+
                                                                                jQuery('[data-action-state]', parent).prop('checked', false);
 
                                                                                 // Pull-up fields / tools details in disabled state.
@@ -332,7 +332,7 @@ var Settings_Roles_Js = {
                                                                                 jQuery('[data-togglecontent="'+tabid+'-fields"]').hide();
                                                                                 jQuery('[data-togglecontent="'+tabid+'-tools"]').hide();
                                                                                 jQuery('[data-togglecontent="'+tabid+'-fields"]').closest('tr').addClass('hide');
-                                                                          
+
                                                                         }
                                                                 });
 
@@ -343,21 +343,28 @@ var Settings_Roles_Js = {
 
                                                                         if (jQuery.inArray(target.data('action-state'), ['CreateView', 'EditView', 'Delete']) != -1) {
                                                                                 if (checked) {
-                                                                                    parent.find('input:first').attr('checked',true);
-                                                                                        jQuery('[data-action-state="EditView"]', parent).prop('checked', true);
-                                                                                        jQuery('[data-module-state]', parent).prop('checked', true);
-                                                                                        jQuery('[data-handlerfor]', parent).removeAttr('disabled');
+                                                                                    //parent.find('input:first').attr('checked',false);
+
+                                                                                    jQuery('[data-action-state="DetailView"]', parent).prop('checked', true);
+                                                                                    jQuery('[data-action-state="EditView"]', parent).prop('checked', true);
+                                                                                   jQuery('[data-module-state]', parent).prop('checked', true);
+                                                                                   jQuery('[data-handlerfor]', parent).removeAttr('disabled');
                                                                                 }
                                                                         }
                                                                         if (target.data('action-state') == 'EditView') {
                                                                                 if (!checked) {
                                                                                         jQuery('[data-action-state]', parent).prop('checked', false);
-                                                                                        jQuery('[data-module-state]', parent).prop('checked', false).trigger('change');
+                                                                                           jQuery('[data-action-state="DetailView"]', parent).prop('checked', true);
+                                                                                           jQuery( parent).find('input:first').prop('checked', true);
+                                                                                         //  jQuery('[data-module-state]', parent).prop('checked', false).trigger('change');
+
                                                                                 } else {
                                                                                         jQuery('[data-module-state]', parent).prop('checked', true);
                                                                                         jQuery('[data-handlerfor]', parent).removeAttr('disabled');
+
                                                                                 }
                                                                         }
+                                                                        
                                                                 });
 
                                                                 var moduleCheckBoxes = jQuery('.modulesCheckBox');
