@@ -28,9 +28,7 @@ Vtiger.Class('Documents_Index_Js', {
 		instance.detectReferenceCreateMode(referenceFieldName);
 		instance.createDocument(type,parentId,relatedModule);
 	},
-
-},
-DownloadFile : function(url){
+DownloadFile: function(url){
 		app.helper.showProgress();
 		app.request.get({'url':url}).then(function(e,resp) {
 			app.helper.hideProgress();
@@ -49,6 +47,8 @@ DownloadFile : function(url){
 	},
 
 },
+
+
 
 
  {

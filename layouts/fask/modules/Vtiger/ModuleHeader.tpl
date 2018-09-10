@@ -23,7 +23,14 @@
 						{assign var=DEFAULT_FILTER_URL value=$MODULE_MODEL->getListViewUrlWithAllFilter()}
 					{/if}
 				{/if}
-				<a title="{vtranslate($MODULE, $MODULE)}" href='{$DEFAULT_FILTER_URL}&app={$SELECTED_MENU_CATEGORY}'><h4 class="module-title pull-left text-uppercase"> {vtranslate($MODULE, $MODULE)} </h4>&nbsp;&nbsp;</a>
+				{if ($MODULE eq 'LeaveType' || $MODULE eq 'BenefitType' || $MODULE eq 'EmployeeContract' || $MODULE eq 'Holiday' || $MODULE eq 'WorkingHours' || $MODULE eq 'Claim' || $MODULE eq 'Grade' || $MODULE eq 'ClaimType' || $MODULE eq 'PassportVisa' || $MODULE eq 'Performance' || $MODULE eq 'Payslip') 
+					&& ($CURRENT_USER_MODEL->is_admin eq 'on' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H2' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H12') }
+					<a title="{vtranslate($MODULE, $MODULE)}" href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record=1'><h4 class="module-title pull-left text-uppercase"> {vtranslate('SETTINGS', 'SETTINGS')} </h4>&nbsp;&nbsp;</a>
+				{else}
+					<a title="{vtranslate($MODULE, $MODULE)}" href='{$DEFAULT_FILTER_URL}&app={$SELECTED_MENU_CATEGORY}'><h4 class="module-title pull-left text-uppercase"> {vtranslate($MODULE, $MODULE)} </h4>&nbsp;&nbsp;</a>
+				{/if}
+				
+				
 				{if $smarty.session.lvs.$MODULE.viewname}
 					{assign var=VIEWID value=$smarty.session.lvs.$MODULE.viewname}
 				{/if}
@@ -36,7 +43,15 @@
 							{/if}
 						{/foreach}
 					{/foreach}
+					{if ($MODULE eq 'LeaveType' || $MODULE eq 'BenefitType' || $MODULE eq 'EmployeeContract' || $MODULE eq 'Holiday' || $MODULE eq 'WorkingHours' || $MODULE eq 'Claim' || $MODULE eq 'Grade' || $MODULE eq 'ClaimType' || $MODULE eq 'PassportVisa' || $MODULE eq 'Performance' || $MODULE eq 'Payslip') 
+					&& ($CURRENT_USER_MODEL->is_admin eq 'on' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H2' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H12') }
+					<p class="current-filter-name filter-name pull-left cursorPointer {if $smarty.request.view eq 'Edit' or $RECORD}hidden-xs{/if}" title="{$CVNAME}"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}&app={$SELECTED_MENU_CATEGORY}'>&nbsp;&nbsp;{$CVNAME}&nbsp;&nbsp;{$MODULE}</a> </p>
+				{else}
 					<p class="current-filter-name filter-name pull-left cursorPointer {if $smarty.request.view eq 'Edit' or $RECORD}hidden-xs{/if}" title="{$CVNAME}"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}&app={$SELECTED_MENU_CATEGORY}'>&nbsp;&nbsp;{$CVNAME}&nbsp;&nbsp;</a> </p>
+				{/if}
+					
+					
+					
 				{/if}
 				{assign var=SINGLE_MODULE_NAME value='SINGLE_'|cat:$MODULE}
 				{if $RECORD and $smarty.request.view eq 'Edit'}

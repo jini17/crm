@@ -327,4 +327,187 @@ class Home_Module_Model extends Vtiger_Module_Model {
        
         return $plandetail;
     }
+    
+    
+    //#added by safuan@secondcrm for birthday widget
+	function getBirthdays($group, $type){
+
+		$db = PearDatabase::getInstance();			
+		
+		if(empty($group)) {
+		$group = 'user';
+		}		
+		if(empty($type)) {
+		$type = 'today';
+		}
+		//echo 'group '.$group.' XDXD type '.$type;
+		if ($group == 'user'){
+		$query = "(SELECT CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) as fullname, 
+				dateofbirth AS birthdate,vtiger_users.id AS 'id','Users' AS module,'email1' AS fieldname,
+				TIMESTAMPDIFF( YEAR, dateofbirth, CURDATE( ) ) AS age
+				FROM vtiger_users
+				
+				";
+
+			if($type == 'today'){
+			$query .= "WHERE DATE_FORMAT(dateofbirth,'%m-%d') = DATE_FORMAT(NOW(),'%m-%d')
+					     OR (
+						    (
+							DATE_FORMAT(NOW(),'%Y') % 4 <> 0
+							OR (
+								DATE_FORMAT(NOW(),'%Y') % 100 = 0
+								AND DATE_FORMAT(NOW(),'%Y') % 400 <> 0
+							    )
+						    )
+						    AND DATE_FORMAT(NOW(),'%m-%d') = '03-01'
+						    AND DATE_FORMAT(dateofbirth,'%m-%d') = '02-29'
+						)
+				)";
+					
+			}elseif($type == 'tomorrow'){
+			$query .= "WHERE DATE_FORMAT(dateofbirth,'%m-%d') = DATE_FORMAT(CURDATE() + INTERVAL 1 DAY,'%m-%d') )";			
+			
+
+			}elseif($type == 'thisweek'){
+			$query .= "WHERE WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(dateofbirth,'%m-%d'))) = WEEKOFYEAR(CURDATE()))"; 
+			/*$query .= "WHERE DATE_ADD( dateofbirth, INTERVAL YEAR( CURDATE() ) - YEAR( dateofbirth ) YEAR )
+					BETWEEN CURDATE()
+					AND DATE_ADD( CURDATE() , INTERVAL 7
+					DAY ))";			
+			*/
+
+			}elseif($type == 'nextweek'){
+			$query .= " WHERE WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(dateofbirth,'%m-%d'))) = WEEKOFYEAR(CURDATE())+1)";
+		/*	$query .= "WHERE DATE_ADD( dateofbirth, INTERVAL YEAR( CURDATE() + INTERVAL 7 DAY ) - YEAR( dateofbirth ) YEAR )
+					BETWEEN CURDATE() + INTERVAL 7 DAY
+					AND DATE_ADD( CURDATE() + INTERVAL 7
+					DAY , INTERVAL 7 DAY ))";
+		*/	
+
+			}elseif($type == 'thismonth'){
+			$query .= "WHERE DATE_FORMAT(dateofbirth,'%m') = DATE_FORMAT(CURDATE(),'%m') )";			
+			
+
+			}
+		//echo $query;	
+		}
+
+		
+		if ($group == 'customer'){
+		
+		$query = "(SELECT DISTINCT CONCAT(vtiger_contactdetails.firstname, ' ', vtiger_contactdetails.lastname) AS fullname,		
+				vtiger_contactsubdetails.birthday AS birthdate,vtiger_contactdetails.contactid AS 'id',
+				'Accounts' AS module,'email1' AS fieldname,
+				TIMESTAMPDIFF( YEAR, vtiger_contactsubdetails.birthday, CURDATE( ) ) AS age
+				FROM vtiger_contactdetails
+				INNER JOIN vtiger_contactsubdetails
+				ON vtiger_contactdetails.contactid = vtiger_contactsubdetails.contactsubscriptionid
+				WHERE 1	";
+
+			if($type == 'today'){
+			$query .= "AND DATE_FORMAT(birthday,'%m-%d') = DATE_FORMAT(NOW(),'%m-%d')
+				     OR (
+					    (
+						DATE_FORMAT(NOW(),'%Y') % 4 <> 0
+						OR (
+							DATE_FORMAT(NOW(),'%Y') % 100 = 0
+							AND DATE_FORMAT(NOW(),'%Y') % 400 <> 0
+						    )
+					    )
+					    AND DATE_FORMAT(NOW(),'%m-%d') = '03-01'
+					    AND DATE_FORMAT(birthday,'%m-%d') = '02-29'
+					)
+				)";
+					
+			}elseif($type == 'tomorrow'){
+			$query .= "AND DATE_FORMAT(birthday,'%m-%d') = DATE_FORMAT(CURDATE() + INTERVAL 1 DAY,'%m-%d') )";			
+			
+
+			}elseif($type == 'thisweek'){
+			$query .= "AND WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(birthday,'%m-%d'))) = WEEKOFYEAR(CURDATE()))"; 
+
+			}elseif($type == 'nextweek'){
+				
+			$query .= " AND WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(birthday,'%m-%d'))) = WEEKOFYEAR(CURDATE())+1)";
+
+
+			}elseif($type == 'thismonth'){
+			$query .= "AND DATE_FORMAT(birthday,'%m') = DATE_FORMAT(CURDATE(),'%m') )";			
+			
+
+			}
+		//echo $query;			
+		}
+
+		if ($group == 'vendor'){
+		
+		$query = "(SELECT DISTINCT CONCAT(vtiger_contactdetails.firstname, ' ', vtiger_contactdetails.lastname) AS fullname,		
+				vtiger_contactsubdetails.birthday AS birthdate,vtiger_vendorcontactrel.vendorid AS 'id',
+				'Vendors' AS module,'email' AS fieldname,
+				TIMESTAMPDIFF( YEAR, vtiger_contactsubdetails.birthday, CURDATE( ) ) AS age
+				FROM vtiger_contactdetails
+				INNER JOIN vtiger_contactsubdetails
+				ON vtiger_contactdetails.contactid = vtiger_contactsubdetails.contactsubscriptionid
+				INNER JOIN vtiger_vendorcontactrel
+				ON vtiger_vendorcontactrel.contactid = vtiger_contactdetails.contactid
+				WHERE vtiger_contactdetails.contactid = vtiger_vendorcontactrel.contactid ";
+
+
+			if($type == 'today'){
+			$query .= "AND DATE_FORMAT(birthday,'%m-%d') = DATE_FORMAT(NOW(),'%m-%d')
+				     OR (
+					    (
+						DATE_FORMAT(NOW(),'%Y') % 4 <> 0
+						OR (
+							DATE_FORMAT(NOW(),'%Y') % 100 = 0
+							AND DATE_FORMAT(NOW(),'%Y') % 400 <> 0
+						    )
+					    )
+					    AND DATE_FORMAT(NOW(),'%m-%d') = '03-01'
+					    AND DATE_FORMAT(birthday,'%m-%d') = '02-29'
+					)
+				)";
+					
+			}elseif($type == 'tomorrow'){
+			$query .= "AND DATE_FORMAT(birthday,'%m-%d') = DATE_FORMAT(CURDATE() + INTERVAL 1 DAY,'%m-%d') )";			
+			
+
+			}elseif($type == 'thisweek'){
+			$query .= " AND WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(birthday,'%m-%d'))) = WEEKOFYEAR(CURDATE()))";	
+			/*$query .= "AND DATE_ADD( birthday, INTERVAL YEAR( CURDATE() ) - YEAR( birthday ) YEAR )
+					BETWEEN CURDATE()
+					AND DATE_ADD( CURDATE() , INTERVAL 7
+					DAY ))";			
+			*/
+
+			}elseif($type == 'nextweek'){
+			$query .= " AND WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(birthday,'%m-%d'))) = WEEKOFYEAR(CURDATE())+1)";	
+			/*$query .= "AND DATE_ADD( birthday, INTERVAL YEAR( CURDATE() + INTERVAL 7 DAY ) - YEAR( birthday ) YEAR )
+					BETWEEN CURDATE() + INTERVAL 7 DAY
+					AND DATE_ADD( CURDATE() + INTERVAL 7
+					DAY , INTERVAL 7 DAY ))";
+			*/
+
+			}elseif($type == 'thismonth'){
+			$query .= "AND DATE_FORMAT(birthday,'%m') = DATE_FORMAT(CURDATE(),'%m') )";			
+			
+
+			}
+		//echo $query;
+		}
+		$query .= "ORDER BY birthdate ASC";
+		$result = $db->pquery($query, array());
+				$birthdays = array();
+		if($db->num_rows($result) > 0) {
+			for($i=0;$i<$db->num_rows($result);$i++) {
+			  	$birthdays[$i]['fullname'] = $db->query_result($result, $i, 'fullname');
+			  	$birthdays[$i]['dateofbirth'] = date('dS M, Y', strtotime($db->query_result($result, $i, 'birthdate')));		$birthdays[$i]['id'] = $db->query_result($result, $i, 'id');		
+				$birthdays[$i]['module'] = $db->query_result($result, $i, 'module');		
+				$birthdays[$i]['fieldname'] = $db->query_result($result, $i, 'fieldname');		
+				$birthdays[$i]['age'] = $db->query_result($result, $i, 'age');		
+			}
+		}
+		return $birthdays;
+
+	}
 }
