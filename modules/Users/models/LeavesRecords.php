@@ -80,15 +80,12 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	
 	//Created by Safuan for fetching leave types//	
 	//modified by jitu for concate color and balance in dropdown 
-	public function getLeaveTypeList($leaveid){ 
+	public function getLeaveTypeList($leaveid, $userid){ 
 	
 		$db = PearDatabase::getInstance();
-		global $current_user;	
-		//$db->setDebug(true);
-		$userid = $current_user->id;
+		
 	
 		
-		//get Date of Joining 
 		$result = $db->pquery("SELECT date_joined, job_grade FROM vtiger_employeecontract tblVTEC 
 							INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
 							INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid

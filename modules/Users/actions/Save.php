@@ -103,7 +103,12 @@ class Users_Save_Action extends Vtiger_Save_Action {
 				throw new AppException(vtranslate('LBL_DUPLICATE_USER_EXISTS', $module));
 			}
 		}
-
+		
+		//added by jitu@Birthday date format	
+		$birthday = date('Y-m-d',strtotime($request->get('birthday')));
+		$request->set('birthday',$birthday);	
+		//end here
+		
 		$recordModel = $this->saveRecord($request);
 
 		

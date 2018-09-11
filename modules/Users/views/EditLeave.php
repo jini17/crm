@@ -11,17 +11,26 @@
 class Users_EditLeave_View extends Vtiger_Index_View {
 
 	public function process(Vtiger_Request $request) {
+		global $current_user;
+		
 		$moduleName = $request->getModule();
 		$leaveid = $request->get('record');
 		$userId = $request->get('userId');
 		$leavestatus = $request->get('leavestatus');
-
+		$manager = $request->get('manager');
+		
 		$viewer = $this->getViewer($request);
 		
-		$leavetype=Users_LeavesRecords_Model::getLeaveTypeList($userId,$leaveid);
+		
+		if(!$manager){
+			$userId = $current_user->id;	
+		} 
+		
+		$leavetype=Users_LeavesRecords_Model::getLeaveTypeList($leaveid,$userId);
+
 		$userslist=Users_LeavesRecords_Model::getAllUsersList($userId);
 
-		$manager = $request->get('manager');
+		
 		
 		//Enter Edit Mode if leave id = ''
 		if(!empty($leaveid) || $leaveid != ""){
