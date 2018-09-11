@@ -129,7 +129,7 @@
                                                 <div class="pull-right actions">
                                                         <span class="actionImages">
 
-<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>			
+ {*<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>*}			
 
 
                                                                 {if $USER_LEAVE['leavestatus'] eq 'Apply'}
@@ -214,7 +214,7 @@
                                                 <div class="pull-right actions">
                                                         <span class="actionImages">
 
-                                                                <a class="docsLeave cursorPointer" onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>	
+                                {*                                <a class="docsLeave cursorPointer" onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>	*}
 
                                         {if $USER_LEAVE['leavestatus'] eq 'New'}
 
@@ -363,7 +363,7 @@ onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mo
                                                 <div class="pull-right actions">
                                                         <span class="actionImages">
 
-                                                                 <a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>	
+{*                                                                 <a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>	*}
 
                                                                 {if $USER_LEAVE['leavestatus'] eq 'Apply'}
                                                                     <a class="editLeave cursorPointer editAction ti-pencil" data-url='{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true'
