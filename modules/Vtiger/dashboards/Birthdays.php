@@ -10,7 +10,7 @@
 
 class Vtiger_Birthdays_Dashboard extends Vtiger_IndexAjax_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(Vtiger_Request $request) { 
 
 		$db = PearDatabase::getInstance();
 		//$db->setDebug(true);
@@ -21,11 +21,14 @@ class Vtiger_Birthdays_Dashboard extends Vtiger_IndexAjax_View {
 		$type = $request->get('type');
 		$group = $request->get('group');
 
-		//Edited By Mabruk for defulat value (Customer and month also selected in Birthdays.tpl)
+		//Edited By Mabruk for default value (Customer and month also selected in Birthdays.tpl)
 		if ($type == '' || $type == null)
-			$type = 'today';
+			$type = 'thismonth';
 		if ($group == '' || $group == null)
 			$group = 'customer';
+
+		//$type = "thismonth";
+		//$group = "user";
 
 		$typeLabel = 'LBL_IN_TODAY';
 		if($type=='today') {
@@ -41,10 +44,10 @@ class Vtiger_Birthdays_Dashboard extends Vtiger_IndexAjax_View {
 		}
 
 		$viewer->assign('TYPELABEL', $typeLabel);
-				
+	//echo "asd";die;			
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
-	
+	//echo "asd";die;
 		$moduleModel = Home_Module_Model::getInstance($moduleName);
 		$birthdays = $moduleModel->getBirthdays($group, $type);
 		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
@@ -53,8 +56,8 @@ class Vtiger_Birthdays_Dashboard extends Vtiger_IndexAjax_View {
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('MODULE_NAME', $moduleName);
 
-		$viewer->assign('MODELS', $birthdays);
-		
+		$viewer->assign('MODELS', $birthdays); //echo "<pre>"; print_r($birthdays);die;
+	//	echo "asd";die;
 		$content = $request->get('content');
 		if(!empty($content)) {
 			$viewer->view('dashboards/BirthdaysContents.tpl', $moduleName);

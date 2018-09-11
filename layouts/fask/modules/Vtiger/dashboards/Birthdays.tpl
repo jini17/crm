@@ -13,7 +13,7 @@
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
 </div>
 
-<div class="dashboardWidgetContent">
+<div class="dashboardWidgetContent" id="birthdayContents">
 	{include file="dashboards/BirthdaysContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 
@@ -21,20 +21,20 @@
 	<div class="filterContainer">
         <div class="row">
             <div class="col-sm-12">
-                <span class="col-lg-4">
-                   <select class="widgetFilter" id="userGroup" name="group" style='width:120px;margin-bottom:0px;margin-left:10px;'>
-						<option value="user" >{vtranslate('LBL_USER',$MODULE_NAME)}</option>					 
-						<option value="customer" selected>{vtranslate('LBL_CUSTOMER',$MODULE_NAME)}</option>	
-					</select>
-                </span>
-                <div class="col-lg-7">
-                   <select class="widgetFilter" id="historyType" name="type" style='width:120px;margin-bottom:0px;margin-left:2px;'>
-						<option value="today" >{vtranslate('LBL_TODAY',$MODULE_NAME)}</option>
-						<option value="tomorrow" >{vtranslate('LBL_TOMORROW',$MODULE_NAME)}</option>
-						<option value="thisweek" >{vtranslate('LBL_THIS_WEEK',$MODULE_NAME)}</option>
-						<option value="nextweek" >{vtranslate('LBL_NEXT_WEEK',$MODULE_NAME)}</option>		
-						<option value="thismonth" selected>{vtranslate('LBL_THIS_MONTH',$MODULE_NAME)}</option>	
-					</select>
+                <div style="display:block;">
+                   
+                
+                   <select class="select2 widgetFilter" id="historyType" name="type" style='width:150px;float:right' >
+          						<option value="today" >{vtranslate('LBL_TODAY',$MODULE_NAME)}</option>
+          						<option value="tomorrow" >{vtranslate('LBL_TOMORROW',$MODULE_NAME)}</option>
+          						<option value="thisweek" >{vtranslate('LBL_THIS_WEEK',$MODULE_NAME)}</option>
+          						<option value="nextweek" >{vtranslate('LBL_NEXT_WEEK',$MODULE_NAME)}</option>		
+          						<option value="thismonth" selected>{vtranslate('LBL_THIS_MONTH',$MODULE_NAME)}</option>	
+					         </select>
+                   <select class="select2 widgetFilter" id="userGroup" name="group" style='width:120px;float:right'>
+                      <option value="user" >{vtranslate('LBL_USER',$MODULE_NAME)}</option>           
+                      <option value="customer" selected>{vtranslate('LBL_CUSTOMER',$MODULE_NAME)}</option>  
+                   </select>
                 </div>
             </div>
         </div>
