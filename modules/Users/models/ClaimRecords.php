@@ -113,6 +113,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	//modified by jitu for concate color and balance in dropdown 
 	public function getClaimTypeList($userid,$claimid){  
 	$db = PearDatabase::getInstance();
+	//$db->setDebug(true);
 	global $current_user;	
 
 	$year = date("Y");
@@ -124,9 +125,9 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	LEFT JOIN allocation_claimrel ON allocation_claimrel.claim_id = vtiger_claimtype.claimtypeid
 	LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocation_claimrel.allocation_id
 	LEFT JOIN allocation_list ON allocation_list.allocation_id = allocation_graderel.allocation_id
-	WHERE vtiger_crmentity.deleted=0 AND allocation_list.status ='on'AND allocation_graderel.grade_id=? AND allocation_list.allocation_year=?";
+	WHERE vtiger_crmentity.deleted=0 AND allocation_list.status ='on'AND allocation_graderel.grade_id=(SELECT grade_id from vtiger_users where id=?) AND allocation_list.allocation_year=?";
 
-	$result = $db->pquery($query,array($grade_id, $year));
+	$result = $db->pquery($query,array($userid, $year));
 
 	$claimtype=array();	
 	$claimtypeid  = '';

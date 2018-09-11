@@ -58,8 +58,8 @@
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
 
-                                        <select  class="select2" name="category" id="category" data-validation-engine="validate[required]" style="width:100%;">
-                                                <option value="select">Please Select</option>
+                                        <select  class="select2" name="category" id="category" required data-validation-engine="validate[required]" style="width:100%;">
+                                                <option value="">Please Select</option>
                                                 {if $CLAIMTYPELIST|count gt 0}
                                                 {foreach key=LEAVE_ID item=CLAIM_MODEL from=$CLAIMTYPELIST name=institutionIterator}		
                                                  
