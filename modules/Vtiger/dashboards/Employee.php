@@ -8,9 +8,9 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Vtiger_Birthdays_Dashboard extends Vtiger_IndexAjax_View {
+class Vtiger_Employee_Dashboard extends Vtiger_IndexAjax_View {
 
-	public function process(Vtiger_Request $request) { 
+	public function process(Vtiger_Request $request) {
 
 		$db = PearDatabase::getInstance();
 		//$db->setDebug(true);
@@ -18,36 +18,18 @@ class Vtiger_Birthdays_Dashboard extends Vtiger_IndexAjax_View {
 		$viewer = $this->getViewer($request);
 
 		$moduleName = $request->getModule();
-		$type = $request->get('type');
-		$group = $request->get('group');
-
-		//Edited By Mabruk for default value (Customer and month also selected in Birthdays.tpl)
-		if ($type == '' || $type == null)
-			$type = 'thismonth';
-		if ($group == '' || $group == null)
-			$group = 'customer';
-
-		//$type = "thismonth";
-		//$group = "user";
-
-		$typeLabel = 'LBL_IN_TODAY';
-		if($type=='today') {
-			$typeLabel = 'LBL_IN_TODAY';
-		} else if($type=='tomorrow') {	
-			$typeLabel = 'LBL_IN_TOMORROW';
-		} else if($type=='thisweek') {	
-			$typeLabel = 'LBL_IN_THIS_WEEK';
-		} else if($type=='nextweek') {	
-			$typeLabel = 'LBL_IN_NEXT_WEEK';
-		} else if($type=='thismonth') {	
-			$typeLabel = 'LBL_IN_THIS_MONTH';
-		}
+		$type = $request->get('department');
+		
+		
+		$moduleModel = Home_Module_Model::getInstance($moduleName);
+		$birthdays = $moduleModel->getDepartments();
+		//$departmentlist = 
 
 		$viewer->assign('TYPELABEL', $typeLabel);
-	//echo "asd";die;			
+				
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
-	//echo "asd";die;
+	
 		$moduleModel = Home_Module_Model::getInstance($moduleName);
 		$birthdays = $moduleModel->getBirthdays($group, $type);
 		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
@@ -56,8 +38,8 @@ class Vtiger_Birthdays_Dashboard extends Vtiger_IndexAjax_View {
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('MODULE_NAME', $moduleName);
 
-		$viewer->assign('MODELS', $birthdays); //echo "<pre>"; print_r($birthdays);die;
-	//	echo "asd";die;
+		$viewer->assign('MODELS', $birthdays);
+		
 		$content = $request->get('content');
 		if(!empty($content)) {
 			$viewer->view('dashboards/BirthdaysContents.tpl', $moduleName);

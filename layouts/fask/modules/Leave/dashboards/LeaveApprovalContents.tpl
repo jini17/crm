@@ -9,45 +9,46 @@
   *
  ********************************************************************************/
 -->*}
-<!--<script src="layouts/vlayout/modules/Emails/resources/MassEdit.js?v=6.1.0" type="text/javascript"></script>-->
+
 <div style='padding:5px;'>
 {if count($MODELS) > 0}
 <table class="table table-bordered listViewEntriesTable">
 	<thead>
 		<tr>
-			<th style="width:52%;">
+			<th style="width:43%;">
 			<b>{vtranslate('LBL_NAME', $MODULE_NAME)}</b>
 			</th>
+			<th>
+			<b>{vtranslate('LBL_DURATIONOFLEAVE', $MODULE_NAME)}</b>
+			</th>
 			<th colspan="2">
-			<b>{vtranslate('LBL_BIRTHDATE', $MODULE_NAME)}</b>
+			<b>{vtranslate('LBL_STATUS', $MODULE_NAME)}</b>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		{foreach item=MODEL from=$MODELS}
-			<tr class="birthdaywish" style="cursor:pointer;">
+			<tr>
 				<td>
 				{$MODEL['fullname']}
 				</td>
 				<td>
-				{$MODEL['birthday']}
+				{$MODEL['duration']}
+				</td>
+				<td style="text-align:center;">
+				{$MODEL['leavestatus']}
 				</td>
 				<td>
-			<!--added by fadzil 27/2/15--><i class="fa fa-gift" title="Send Birthday wish"></i>
-			{if $MODEL['module'] eq 'Accounts'}
-				<input id="modulename" type="hidden" value="Contacts">
-				<input id="fieldname" type="hidden" value="email">
-			{else}	
-			<input id="modulename" type="hidden" value="{$MODEL['module']}">
-			<input id="fieldname" type="hidden" value="{$MODEL['fieldname']}">
-			{/if}
-			<input id="birthdayid" type="hidden" value="{$MODEL['id']}"></td></tr>
+					{$MODEL['icon']}
+				</td>
+			</tr>
 		{/foreach}
 	</tbody>
 </table>
+<br /><br />
 {else}
 	<span class="noDataMsg">
-		{vtranslate('LBL_NO','Home')} {vtranslate('LBL_BIRTHDAY','Home')} {vtranslate($TYPELABEL,'Home')}
+		{vtranslate($TYPELABEL,$MODULE_NAME)}
 	</span>
 {/if}
 </div>

@@ -163,8 +163,12 @@ $(this).hide();
 									{else}
 										{assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME}"}
 									{/if}	
-                                                                                <li {$APP_NAME}><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="{$moduleURL}" >
-                                                                                        <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> <span class="hide-menu"> {$translatedModuleLabel}</span></a></li>
+                                                                                <li {$APP_NAME}>
+                                                                                    <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
+                                                                                       href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
+                                                                                       {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
+                                                                                        <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> <span class="hide-menu"> {$translatedModuleLabel}</span></a>
+                                                                                </li>
                                                                                         {/foreach}
                                                                                 </ul>
 

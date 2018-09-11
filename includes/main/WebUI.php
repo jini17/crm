@@ -121,7 +121,7 @@ class Vtiger_WebUI extends Vtiger_EntryPoint {
 			$moduleModel = Users_Module_Model::getInstance('Users');
 			$moduleModel->saveLogoutHistory();		
 		    Vtiger_Session::destroy();	
-		    header("location:".$site_URL."index.php?module=Users&parent=Settings&view=Login&error=7"); 
+		    header("location:".$site_URL."/index.php?module=Users&parent=Settings&view=Login&error=7"); 
 		    exit;		
   		}		
 		Vtiger_Session::set('timein', time());		

@@ -45,14 +45,16 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 			$this->invokeExposedMethod($mode, $request);
 			return;
 		}
+
 		//added by jitu@Birthday date format
 		if($request->get('field')=='birthday'){
 			$birthday = date('Y-m-d',strtotime($request->get('value')));
 			$request->set('birthday',$birthday);	
 		}//end here	
 		
-		$recordModel = $this->saveRecord($request);
 
+		$recordModel = $this->saveRecord($request);
+		
 		$fieldModelList = $recordModel->getModule()->getFields();
 		$result = array();
 		foreach ($fieldModelList as $fieldName => $fieldModel) {

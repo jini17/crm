@@ -166,7 +166,6 @@
 <!--start my leaves-->
 <div id="MyLeaveContainer">
         <div class="myProfileBtnLeft">
-            <div style="float:left;"><strong>{vtranslate('LBL_MY_LEAVE', $MODULE)}</strong></div>
             <div class="clear"></div>
                 <button type="button" class="btn btn-primary"onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
         </div>
@@ -214,7 +213,9 @@
                                         <td class="listTableRow small" valign=top>
                                                 <div class="pull-right actions">
                                                         <span class="actionImages">
+
                                                                 <a class="docsLeave cursorPointer" onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>	
+
                                         {if $USER_LEAVE['leavestatus'] eq 'New'}
 
 
@@ -361,7 +362,9 @@ onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mo
                                         <td class="listTableRow small" valign=top>
                                                 <div class="pull-right actions">
                                                         <span class="actionImages">
+
                                                                  <a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>	
+
                                                                 {if $USER_LEAVE['leavestatus'] eq 'Apply'}
                                                                     <a class="editLeave cursorPointer editAction ti-pencil" data-url='{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true'
                                                                     title="{vtranslate('LBL_EDIT', $MODULE)}"  onclick="Users_Leave_Js.Popup_LeaveApprove('{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true');"></a>&nbsp;&nbsp;

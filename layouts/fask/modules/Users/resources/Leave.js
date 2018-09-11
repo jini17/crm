@@ -11,17 +11,8 @@ Vtiger.Class("Users_Leave_Js", {
 
 	//register click event for Add New Education button
 	addLeave : function(url	) { 
-	
-		//add condition for valid LeaveType
-	/*	var userid = jQuery('#recordId').val();
-		alert(userid);return false;
-		var isOk =  this.checkApplyLeave(userid);		
-			
-		if(!isOk){
-			app.helper.showErrorNotification({'message': 'Not allowed, since admin havent done allocation'});	
-			return false;
-		}
-		*/	
+
+
 	     this.editLeave(url);
 	    
 	},

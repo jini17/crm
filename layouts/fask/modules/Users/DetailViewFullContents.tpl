@@ -17,8 +17,9 @@
 	<!--start added by fadzil 28/8/14-->
 	<div class="contents tabbable ui-sortable" id="tab">
 	<!--added by jitu@secondcrm.com for Leave approval widget link-->
+
 	<ul class="nav nav-tabs layoutTabs massEditTabs"> 
-		<li class="{if $DEFAULT_TAB eq ''}relatedListTab active{/if}">
+		<li class="{if $DEFAULT_TAB eq ''} relatedListTab active{/if}">
 			<a data-toggle="tab" href="#preference"><strong>{vtranslate('LBL_MY_PREFERENCES', $MODULE_NAME)}</strong></a>
 		</li>
 		<li class="relatedListTab">
@@ -38,11 +39,11 @@
 		</li>
 		<!--Added by jitu@secondcrm.com on 24-12-2014 
 		added by jitu@secondcrm.com for Leave approval widget link-->
-		{if $ISACTIVE eq 0 && $VIEW eq 'PreferenceDetail'}
-		<li class="{if $DEFAULT_TAB neq ''}active{else}relatedListTab{/if}">
+		{if $ISACTIVE eq 0 && $VIEW eq 'PreferenceDetail'} 
+		<li class="{if $DEFAULT_TAB neq '' && $TABTYPE eq 'leave'}active{else}relatedListTab{/if}">
 			<a data-toggle="tab" href="#leave"><strong>{vtranslate('LBL_LEAVE', $MODULE_NAME)}</strong></a>
 		</li>	
-		<li class="{if $DEFAULT_TAB neq ''}active{else}relatedListTab{/if}">
+		<li class="{if $DEFAULT_TAB neq '' && $TABTYPE eq 'claim'}active{else}relatedListTab{/if}">
 			<a data-toggle="tab" href="#claim"><strong>{vtranslate('LBL_CLAIM', $MODULE_NAME)}</strong></a>
 		</li>	
                                        
@@ -55,6 +56,10 @@
         	{include file='DetailViewBlockView.tpl'|@vtemplate_path:$MODULE_NAME RECORD_STRUCTURE=$RECORD_STRUCTURE MODULE_NAME=$MODULE_NAME}
     	</form>
 	</div>
+	<input type="hidden" id="tabtype" value="{$TABTYPE}">
+	<input type="hidden" id="leaveid" value="{$leaveid}">
+	<input type="hidden" id="appid" value="{$appid}">
+	
     <div class="tab-pane" id="education"></div>
 	<div class="tab-pane" id="workexp"></div>
 	<div class="tab-pane" id="skills"></div>

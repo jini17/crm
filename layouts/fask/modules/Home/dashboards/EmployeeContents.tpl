@@ -9,7 +9,7 @@
   *
  ********************************************************************************/
 -->*}
-<!--<script src="layouts/vlayout/modules/Emails/resources/MassEdit.js?v=6.1.0" type="text/javascript"></script>-->
+<script src="layouts/vlayout/modules/Emails/resources/MassEdit.js?v=6.1.0" type="text/javascript"></script>
 <div style='padding:5px;'>
 {if count($MODELS) > 0}
 <table class="table table-bordered listViewEntriesTable">
@@ -30,17 +30,12 @@
 				{$MODEL['fullname']}
 				</td>
 				<td>
-				{$MODEL['birthday']}
+				{$MODEL['dateofbirth']}
 				</td>
 				<td>
-			<!--added by fadzil 27/2/15--><i class="fa fa-gift" title="Send Birthday wish"></i>
-			{if $MODEL['module'] eq 'Accounts'}
-				<input id="modulename" type="hidden" value="Contacts">
-				<input id="fieldname" type="hidden" value="email">
-			{else}	
+			<!--added by fadzil 27/2/15--><i class="icon-gift alignBottom" title="{vtranslate('LBL_BIRTHDAY_WISH')}"></i>
 			<input id="modulename" type="hidden" value="{$MODEL['module']}">
 			<input id="fieldname" type="hidden" value="{$MODEL['fieldname']}">
-			{/if}
 			<input id="birthdayid" type="hidden" value="{$MODEL['id']}"></td></tr>
 		{/foreach}
 	</tbody>

@@ -490,9 +490,48 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	
 	/*USED IN LEAVES APPROVAL WIDGET - By Safuan
 	**FUNCTION Get team leaves and link*/
-	public function widgetgetmyteamleaves($filter) {
+	public function widgetgetmyteamleaves($filter=null) {
+	
 		$db = PearDatabase::getInstance();
+		//$db->setDebug(true);
 		global $current_user;
+		
+		if($filter == 'today'){
+			$query = " AND DATE_FORMAT(fromdate,'%m-%d') = DATE_FORMAT(NOW(),'%m-%d')
+					     OR (
+						    (
+							DATE_FORMAT(NOW(),'%Y') % 4 <> 0
+							OR (
+								DATE_FORMAT(NOW(),'%Y') % 100 = 0
+								AND DATE_FORMAT(NOW(),'%Y') % 400 <> 0
+							    )
+						    )
+						    AND DATE_FORMAT(NOW(),'%m-%d') = '03-01'
+						    AND DATE_FORMAT(fromdate,'%m-%d') = '02-29'
+						)
+			)";
+				
+		} elseif($filter == 'tomorrow'){
+			$query = " AND DATE_FORMAT(fromdate,'%m-%d') = DATE_FORMAT(CURDATE() + INTERVAL 1 DAY,'%m-%d') ";			
+			
+
+		} elseif($filter == 'thisweek'){
+			$query = " AND WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(fromdate,'%m-%d'))) = WEEKOFYEAR(CURDATE())"; 
+		
+
+		} elseif($filter == 'nextweek'){
+			$query = " AND WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(fromdate,'%m-%d'))) = WEEKOFYEAR(CURDATE())+1";
+
+
+		} elseif($filter == 'thismonth'){
+			$query = " AND DATE_FORMAT(fromdate,'%m') = DATE_FORMAT(CURDATE(),'%m')";			
+		} 
+		
+		
+		
+		
+		
+		
 		$teamreporttoquery = "SELECT id FROM vtiger_users WHERE reports_to_id=$current_user->id";
 		$resulteamreport = $db->pquery($teamreporttoquery,array());
 		
@@ -509,10 +548,9 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 					ON vtiger_crmentity.crmid = vtiger_leave.leaveid
                    			INNER JOIN vtiger_users
                     			ON vtiger_crmentity.smownerid=vtiger_users.id
-					WHERE vtiger_crmentity.smownerid IN($allteammate)
+					WHERE vtiger_crmentity.smownerid IN ($allteammate)
 					AND vtiger_crmentity.deleted=0 
-					AND (vtiger_leave.leavestatus = 'Apply')
-					ORDER BY fromdate DESC LIMIT 5";
+					AND (vtiger_leave.leavestatus = 'Apply') ".$query. " ORDER BY fromdate DESC LIMIT 5";
 
 		$resultgetteamleave = $db->pquery($querygetteamleave,array());
 		$myteamleave=array();	
@@ -535,14 +573,14 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 			$todate= date('d-M', strtotime($db->query_result($resultgetteamleave, $i, 'todate')));
 		
 			if(strtotime($fromdate) == strtotime($todate)){
-				$myteamleave[$i]['duration'] = '<a href="index.php?module=Users&appid='.$applicantid.'&leaveid='.$leaveid.'&view=PreferenceDetail&record='.$current_user->id.'&tab=leave" onclick="gotoLeavePreference()";>'.$fromdate.'</a>';
+				$myteamleave[$i]['duration'] = '<a href="index.php?module=Users&appid='.$applicantid.'&leaveid='.$leaveid.'&view=PreferenceDetail&record='.$current_user->id.'&tab=leave&parent=Settings">'.$fromdate.'</a>';
 			}else{
 				$duration= $fromdate . ' to ' . $todate;
-				$myteamleave[$i]['duration'] = '<a href="index.php?module=Users&appid='.$applicantid.'&leaveid='.$leaveid.'&view=PreferenceDetail&record='.$current_user->id.'&tab=leave" onclick="gotoLeavePreference()";>'.$duration.'</a>';
+				$myteamleave[$i]['duration'] = '<a href="index.php?module=Users&appid='.$applicantid.'&leaveid='.$leaveid.'&view=PreferenceDetail&record='.$current_user->id.'&tab=leave&parent=Settings">'.$duration.'</a>';
 			}
 		
-			$myteamleave[$i]['leavestatus'] = '<a href="index.php?module=Users&appid='.$applicantid.'&leaveid='.$leaveid.'&view=PreferenceDetail&record='.$current_user->id.'&tab=leave" onclick="gotoLeavePreference()";>'.$db->query_result($resultgetteamleave, $i, 'leavestatus').'</a>';
-			$myteamleave[$i]['icon'] = '<a href="index.php?module=Users&appid='.$applicantid.'&leaveid='.$leaveid.'&view=PreferenceDetail&record='.$current_user->id.'&tab=leave" onclick="gotoLeavePreference()";><i class="icon-exclamation-sign alignBottom" title="'.vtranslate('LBL_LEAVE_APPROVED', 'Users').'"></i></a>';
+			$myteamleave[$i]['leavestatus'] = '<a href="index.php?module=Users&appid='.$applicantid.'&leaveid='.$leaveid.'&view=PreferenceDetail&record='.$current_user->id.'&tab=leave&parent=Settings">'.$db->query_result($resultgetteamleave, $i, 'leavestatus').'</a>';
+			$myteamleave[$i]['icon'] = '<a href="index.php?module=Users&appid='.$applicantid.'&leaveid='.$leaveid.'&view=PreferenceDetail&record='.$current_user->id.'&tab=leave&parent=Settings"><i class="icon-exclamation-sign alignBottom" title="'.vtranslate('LBL_LEAVE_APPROVED', 'Users').'"></i></a>';
 
 			$myteamleave[$i]['applicantid'] = $db->query_result($resultgetteamleave, $i, 'id'); 
 			$myteamleave[$i]['reasonnotapprove'] = $db->query_result($resultgetteamleave, $i, 'reasonnotapprove'); 

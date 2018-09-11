@@ -343,14 +343,14 @@ class Home_Module_Model extends Vtiger_Module_Model {
 		//echo 'group '.$group.' XDXD type '.$type;
 		if ($group == 'user'){
 		$query = "(SELECT CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) as fullname, 
-				dateofbirth AS birthdate,vtiger_users.id AS 'id','Users' AS module,'email1' AS fieldname,
-				TIMESTAMPDIFF( YEAR, dateofbirth, CURDATE( ) ) AS age
+				birthday AS birthdate,vtiger_users.id AS 'id','Users' AS module,'email1' AS fieldname,
+				TIMESTAMPDIFF( YEAR, birthday, CURDATE( ) ) AS age
 				FROM vtiger_users
 				
 				";
 
 			if($type == 'today'){
-			$query .= "WHERE DATE_FORMAT(dateofbirth,'%m-%d') = DATE_FORMAT(NOW(),'%m-%d')
+			$query .= "WHERE DATE_FORMAT(birthday,'%m-%d') = DATE_FORMAT(NOW(),'%m-%d')
 					     OR (
 						    (
 							DATE_FORMAT(NOW(),'%Y') % 4 <> 0
@@ -360,32 +360,32 @@ class Home_Module_Model extends Vtiger_Module_Model {
 							    )
 						    )
 						    AND DATE_FORMAT(NOW(),'%m-%d') = '03-01'
-						    AND DATE_FORMAT(dateofbirth,'%m-%d') = '02-29'
+						    AND DATE_FORMAT(birthday,'%m-%d') = '02-29'
 						)
 				)";
 					
 			}elseif($type == 'tomorrow'){
-			$query .= "WHERE DATE_FORMAT(dateofbirth,'%m-%d') = DATE_FORMAT(CURDATE() + INTERVAL 1 DAY,'%m-%d') )";			
+			$query .= "WHERE DATE_FORMAT(birthday,'%m-%d') = DATE_FORMAT(CURDATE() + INTERVAL 1 DAY,'%m-%d') )";			
 			
 
 			}elseif($type == 'thisweek'){
-			$query .= "WHERE WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(dateofbirth,'%m-%d'))) = WEEKOFYEAR(CURDATE()))"; 
-			/*$query .= "WHERE DATE_ADD( dateofbirth, INTERVAL YEAR( CURDATE() ) - YEAR( dateofbirth ) YEAR )
+			$query .= "WHERE WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(birthday,'%m-%d'))) = WEEKOFYEAR(CURDATE()))"; 
+			/*$query .= "WHERE DATE_ADD( birthday, INTERVAL YEAR( CURDATE() ) - YEAR( birthday ) YEAR )
 					BETWEEN CURDATE()
 					AND DATE_ADD( CURDATE() , INTERVAL 7
 					DAY ))";			
 			*/
 
 			}elseif($type == 'nextweek'){
-			$query .= " WHERE WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(dateofbirth,'%m-%d'))) = WEEKOFYEAR(CURDATE())+1)";
-		/*	$query .= "WHERE DATE_ADD( dateofbirth, INTERVAL YEAR( CURDATE() + INTERVAL 7 DAY ) - YEAR( dateofbirth ) YEAR )
+			$query .= " WHERE WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(birthday,'%m-%d'))) = WEEKOFYEAR(CURDATE())+1)";
+		/*	$query .= "WHERE DATE_ADD( birthday, INTERVAL YEAR( CURDATE() + INTERVAL 7 DAY ) - YEAR( birthday ) YEAR )
 					BETWEEN CURDATE() + INTERVAL 7 DAY
 					AND DATE_ADD( CURDATE() + INTERVAL 7
 					DAY , INTERVAL 7 DAY ))";
 		*/	
 
 			}elseif($type == 'thismonth'){
-			$query .= "WHERE DATE_FORMAT(dateofbirth,'%m') = DATE_FORMAT(CURDATE(),'%m') )";			
+			$query .= "WHERE DATE_FORMAT(birthday,'%m') = DATE_FORMAT(CURDATE(),'%m') )";			
 			
 
 			}
@@ -501,7 +501,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 		if($db->num_rows($result) > 0) {
 			for($i=0;$i<$db->num_rows($result);$i++) {
 			  	$birthdays[$i]['fullname'] = $db->query_result($result, $i, 'fullname');
-			  	$birthdays[$i]['dateofbirth'] = date('dS M, Y', strtotime($db->query_result($result, $i, 'birthdate')));		$birthdays[$i]['id'] = $db->query_result($result, $i, 'id');		
+			  	$birthdays[$i]['birthday'] = date('dS M, Y', strtotime($db->query_result($result, $i, 'birthdate')));		$birthdays[$i]['id'] = $db->query_result($result, $i, 'id');		
 				$birthdays[$i]['module'] = $db->query_result($result, $i, 'module');		
 				$birthdays[$i]['fieldname'] = $db->query_result($result, $i, 'fieldname');		
 				$birthdays[$i]['age'] = $db->query_result($result, $i, 'age');		
@@ -510,4 +510,10 @@ class Home_Module_Model extends Vtiger_Module_Model {
 		return $birthdays;
 
 	}
+	
+	 function getDepartments(){
+ 
+ 		$db = PearDatabase::getInstance();	
+ 		$result = $db->pquery("SELECT * from vtiger_department WHERE presence=1 ORDER BY ");
+ 	}
 }
