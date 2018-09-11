@@ -104,6 +104,10 @@ class Users_Save_Action extends Vtiger_Save_Action {
 			}
 		}
 
+			$birthday = date('Y-m-d',strtotime($request->get('birthday')));
+			$request->set('birthday',$birthday);	
+	
+
 		$recordModel = $this->saveRecord($request);
 
 		

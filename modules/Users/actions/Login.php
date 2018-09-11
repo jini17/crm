@@ -19,6 +19,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 	} 
 
 	function process(Vtiger_Request $request) {
+
 		global $short_url ,$site_URL, $adb;
 		//$adb->setDebug(true);
 		$username = $request->get('username');
@@ -56,6 +57,12 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 			$userid = $user->retrieve_user_id($username);
 			Vtiger_Session::set('AUTHUSERID', $userid);
 
+			//setCookie 
+			if($request->get('keepcheck')=='on'){
+				setcookie('agiliuxuser', $username, time() + (86400 * 30), "/");
+				setcookie('agiliuxpass', $password, time() + (86400 * 30), "/");
+				setcookie('keepcheck', 1, time() + (86400 * 30), "/");
+			}	
 			$loginpageinfo  = Users_Record_Model::loginPageDetails();
 			
 			// For Backward compatability

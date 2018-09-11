@@ -187,16 +187,16 @@
 
 <div style="margin-top:10px;" id="MyClaimContainer">
 
-
+{*
 
 
 	<div style="float:left;margin-bottom:10px;"><strong>{vtranslate('LBL_MY_CLAIM', $MODULE)}</strong>&nbsp;&nbsp;</div>&nbsp;&nbsp;
 
 	
-
+*}
 	
 
-	<div style="float:left;margin-left:5px;margin-bottom:10px;">
+	<div style="float:right;margin-right:5px;margin-bottom:10px;">
 	 <!--	<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear"> -->
 	 	<form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST">
 		<select name="my_selyear" id="my_selyear" data-section="M"  class="my_selyear" data-url="?module=Users&view=ListViewAjax&mode=getUserClaim&section=M&record={$USERID}"   onchange="Users_Claim_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserClaim&section=M&record={$USERID}','M');">
@@ -240,8 +240,7 @@
 					<td class="listTableRow small" valign=top>
 						<div class="pull-left actions">
 							<span class="actionImages">
-						<a class="docsLeave cursorPointer" onclick="javascript:window.open('index.php?module=Claim&relatedModule=Documents&view=ClaimDetail&record={$USER_CLAIM['claimid']}&mode=showRelatedList&tab_label=Documents&popup=Claim','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i> &nbsp;&nbsp; 
-						</a>&nbsp;&nbsp;	
+						
 					{if $USER_CLAIM['claim_status'] eq 'New' } 
 
 					
@@ -381,8 +380,7 @@
 					<td class="listTableRow small" valign=top>
 						<div class="pull-left actions">
 							<span class="actionImages">
-							<a onclick="javascript:window.open('?module=Claim&relatedModule=Documents&view=Detail&record={$USER_CLAIM['claimid']}&mode=showRelatedList&tab_label=Documents&popup=Claim','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" 
-								title="Documents"></i>  </a>&nbsp;&nbsp;	
+							
 
 							
 

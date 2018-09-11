@@ -21,7 +21,6 @@ $languageStrings = array(
 
 	'LBL_ENRICH_DATA_LOCKED' => 'Enrich Data', 
 
-
 	// Common Actions
 	'LBL_NEW' => 'New',
 	'LBL_LINKED' => 'Linked',

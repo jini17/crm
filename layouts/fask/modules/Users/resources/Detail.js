@@ -357,6 +357,34 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 			});*/
 		});
 	},
+	
+	registerLeaveApproveTrigger : function(leaveid,appid){
+	
+		var userid = jQuery('#recordId').val();
+		
+		var params = {
+						 'data'  : {
+						 'module': 'Users',
+						 'view'  : "ListViewAjax",
+						 'record': userid,
+						 'mode'  : 'getUserLeave',
+						}
+					};
+			
+			app.helper.showProgress(app.vtranslate('JS_PLEASE_WAIT'));
+			app.request.post(params).then(function (err, data) { 
+			if (err === null) {
+ 				app.helper.hideProgress();
+ 				//app.helper.showSuccessNotification({'message': data.message});
+				jQuery('.tab-pane').hide();
+				jQuery('#leave').show();
+				jQuery('#leave').html(data);
+			}
+		});	
+			var url = 'index.php?module=Users&view=EditLeave&record='+leaveid+'&userId='+appid+'&leavestatus=Apply&manager=true';
+			Users_Leave_Js.editLeave(url)		
+	
+	},
 
 	registerEvents: function () {
 		this._super();
@@ -364,6 +392,15 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 		this.registerAjaxPreSaveEvent();
 		this.registerDisplayDetailTabClickEvent(form);	//added by jitu@secondcrm.com
 		this.registerQuickCreateEvent();
+		
+		var defaultTab = jQuery("#tabtype").val();
+		if(defaultTab =='leave'){
+			jQuery(".detailViewButtoncontainer").addClass('hide');
+			var leaveid = jQuery("#leaveid").val();
+			var appid	= jQuery("#appid").val();
+			this.registerLeaveApproveTrigger(leaveid, appid);
+		}	
+		
 	}
 });
 

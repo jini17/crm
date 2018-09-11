@@ -299,7 +299,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 
 		
 		//check leave alloted to user or not
-		$isCreate = Users_ClaimRecords_Model::hasAllocateLeave($recordId);
+		//$isCreate = Users_ClaimRecords_Model::hasAllocateLeave($recordId);
 		$jobgrade = Users_ClaimRecords_Model::getJobGrade($recordId); 
 		$_SESSION["myjobgrade"] = $jobgrade;
 		

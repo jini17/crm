@@ -114,27 +114,19 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	public function getClaimTypeList($userid,$claimid){  
 	$db = PearDatabase::getInstance();
 	global $current_user;	
-	//Modified by jitu for showing  all except those are onetime if user already applied..
-	$condleave = '';
-	$conduser = '';
-	$year = date("Y");
-	//if year end process run then user can apply leave for next year other wise current year
-	$sql  = "SELECT MAX(year) as year from secondcrm_user_balance LIMIT 0,1";
-	$res = $db->pquery($sql,array());
-	$year = $db->query_result($res, 0, 'year');
-	$grade_id= $_SESSION["myjobgrade"];
 
-	if($year > date("Y")) {
-		$year = $year;	
-	 } //end here 
-	
+	$year = date("Y");
+	$grade_id= $current_user->grade_id;
+
 
 	$query = "Select vtiger_claimtype.claimtypeid, vtiger_claimtype.claim_type,vtiger_claimtype.color_code,vtiger_claimtype.transactionlimit,
-	vtiger_claimtype.monthlylimit,vtiger_claimtype.yearlylimit from vtiger_claimtype INNER JOIN vtiger_crmentity ON vtiger_claimtype.claimtypeid=vtiger_crmentity.crmid LEFT JOIN allocation_list on allocation_list.claimtype_id = vtiger_claimtype.claimtypeid WHERE vtiger_crmentity.deleted=0 AND allocation_list.status ='on'AND allocation_list.grade_id=$grade_id ";
+	vtiger_claimtype.monthlylimit,vtiger_claimtype.yearlylimit from vtiger_claimtype INNER JOIN vtiger_crmentity ON vtiger_claimtype.claimtypeid=vtiger_crmentity.crmid 
+	LEFT JOIN allocation_claimrel ON allocation_claimrel.claim_id = vtiger_claimtype.claimtypeid
+	LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocation_claimrel.allocation_id
+	LEFT JOIN allocation_list ON allocation_list.allocation_id = allocation_graderel.allocation_id
+	WHERE vtiger_crmentity.deleted=0 AND allocation_list.status ='on'AND allocation_graderel.grade_id=? AND allocation_list.allocation_year=?";
 
-
-
-	$result = $db->pquery($query,array());
+	$result = $db->pquery($query,array($grade_id, $year));
 
 	$claimtype=array();	
 	$claimtypeid  = '';

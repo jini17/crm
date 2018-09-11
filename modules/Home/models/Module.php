@@ -510,4 +510,10 @@ class Home_Module_Model extends Vtiger_Module_Model {
 		return $birthdays;
 
 	}
+	
+	 function getDepartments(){
+ 
+ 		$db = PearDatabase::getInstance();	
+ 		$result = $db->pquery("SELECT * from vtiger_department WHERE presence=1 ORDER BY ");
+ 	}
 }

@@ -8,7 +8,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Vtiger_Birthdays_Dashboard extends Vtiger_IndexAjax_View {
+class Vtiger_Employee_Dashboard extends Vtiger_IndexAjax_View {
 
 	public function process(Vtiger_Request $request) {
 
@@ -18,27 +18,12 @@ class Vtiger_Birthdays_Dashboard extends Vtiger_IndexAjax_View {
 		$viewer = $this->getViewer($request);
 
 		$moduleName = $request->getModule();
-		$type = $request->get('type');
-		$group = $request->get('group');
-
-		//Edited By Mabruk for defulat value (Customer and month also selected in Birthdays.tpl)
-		if ($type == '' || $type == null)
-			$type = 'today';
-		if ($group == '' || $group == null)
-			$group = 'customer';
-
-		$typeLabel = 'LBL_IN_TODAY';
-		if($type=='today') {
-			$typeLabel = 'LBL_IN_TODAY';
-		} else if($type=='tomorrow') {	
-			$typeLabel = 'LBL_IN_TOMORROW';
-		} else if($type=='thisweek') {	
-			$typeLabel = 'LBL_IN_THIS_WEEK';
-		} else if($type=='nextweek') {	
-			$typeLabel = 'LBL_IN_NEXT_WEEK';
-		} else if($type=='thismonth') {	
-			$typeLabel = 'LBL_IN_THIS_MONTH';
-		}
+		$type = $request->get('department');
+		
+		
+		$moduleModel = Home_Module_Model::getInstance($moduleName);
+		$birthdays = $moduleModel->getDepartments();
+		//$departmentlist = 
 
 		$viewer->assign('TYPELABEL', $typeLabel);
 				

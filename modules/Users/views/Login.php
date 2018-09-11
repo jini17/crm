@@ -77,6 +77,15 @@ class Users_Login_View extends Vtiger_View_Controller {
 			$message = 'Mail has been sent to your inbox, please check your e-mail';
 		}
 
+		$logindetails = array();
+
+		if(isset($_COOKIE['agiliuxuser']) && isset($_COOKIE['agiliuxpass'])) {
+			$logindetails['user'] = $_COOKIE['agiliuxuser'];
+			$logindetails['pass'] = $_COOKIE['agiliuxpass'];
+			$logindetails['keepcheck'] = 1;
+			$viewer->assign('LOGINDETAILS', $logindetails);	
+		}
+
 		$viewer->assign('ERROR', $error);
 		$viewer->assign('MESSAGE', $message);
 		$viewer->assign('MAIL_STATUS', $mailStatus);

@@ -54,6 +54,7 @@ class Settings_MenuEditor_Module_Model extends Settings_Vtiger_Module_Model {
 	}
 
 	public static function getAllVisibleModules() {
+		global $current_user;
 		$modules = array();
 		$presence = array('0', '2');
 		$db = PearDatabase::getInstance();
@@ -72,7 +73,7 @@ class Settings_MenuEditor_Module_Model extends Settings_Vtiger_Module_Model {
 				$sequence = $db->query_result($result, $i, 'sequence');
 				$appname = $db->query_result($result, $i, 'appname');
 				$moduleModel->set('app2tab_sequence', $sequence);
-				if (($userPrivModel->isAdminUser() ||
+				if (($userPrivModel->isAdminUser() || $current_user->roleid=='H12' ||
 						$userPrivModel->hasGlobalReadPermission() ||
 						$userPrivModel->hasModulePermission($moduleModel->getId())) && in_array($moduleModel->get('presence'), $presence)) {
 					$modules[$appname][$moduleName] = $moduleModel;
