@@ -290,7 +290,7 @@ $(this).hide();
 
                                                                 <ul class="dropdownlist">
                                                                         <li>
-                                                                                <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=EmployeeContract&view=List&block=15&fieldid=53">
+                                                                                <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings">
                                                                                 	<i class="material-icons module-icon">person</i>&nbsp;Employee
                                                                                      
                                                                                 </a>

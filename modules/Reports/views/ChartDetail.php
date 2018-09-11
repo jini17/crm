@@ -25,7 +25,7 @@ class Reports_ChartDetail_View extends Vtiger_Index_View {
 		if(($currentUserPriviligesModel->id != $owner) && $sharingType == "Private"){
 			$isRecordShared = $reportModel->isRecordHasViewAccess($sharingType);
 		}
-		if(!$isRecordShared || !$currentUserPriviligesModel->hasModulePermission($moduleModel->getId())|| && $primaryModule !='Users') {
+		if(!$isRecordShared || !$currentUserPriviligesModel->hasModulePermission($moduleModel->getId())) {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
 		}
 	}
