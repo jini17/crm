@@ -94,7 +94,7 @@
         <div class="sidebar-menu-u hidden-xs hidden-sm hide">
 
 
-            <div class="settingsgroup" style="overflow: scroll">
+            <div class="settingsgroup" style="overflow: scroll; padding-top: 0; margin-top: 0;">
                     <div class="col-xs-12 text-center visible-xs visible-sm" style="margin-top: 40px;margin-bottom:20px; width: 100%">
         <a class="btn btn-info" onclick="$('.sidebar-menu-u, .settingsNav').toggleClass('hidden-xs hidden-sm');  $('.settingsNav').find('.settingsgroup').toggleClass('hidden-xs hidden-sm');">Sidebar 
         &nbsp;<span class="toggleButton"><i class="ti-angle-down"></i></span></a>
