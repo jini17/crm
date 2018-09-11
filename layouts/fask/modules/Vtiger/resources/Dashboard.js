@@ -196,7 +196,7 @@ Vtiger_Pie_Widget_Js('Dashboard_Piechart_Js',{},{
 
 });
 
-jQuery(document).ready(function(e){ 
+jQuery(document).ready(function(e){ alert('board');
 	var rcinstance = new Dashboard_ReportChart_Js();
 	rcinstance.registerEvents();
 })

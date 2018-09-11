@@ -1005,7 +1005,178 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 
 	},
 
-	registerEvents : function() {
+	/////////////////////////////////////////
+
+	/***************ADDED BY JITU@secondcrm***************/
+	birthdayEmail : function() {
+		var thisInstance = this;
+		this.getContainer().on('click', 'tr.birthdaywish', function(e) {
+				var userid = jQuery("input#birthdayid").val();//jitu 
+				var module = jQuery("input#modulename").val();//jitu
+				var fieldname = jQuery("input#fieldname").val();//jitu	
+			
+				Vtiger_Helper_Js.getInternalMailer(userid,fieldname,module);
+
+		});	
+	},		
+	/*********End for birthday email***********************/
+	
+	/***************ADDED BY SAFUAN@09122014***************/
+	buttonemail : function() {
+		var thisInstance = this;
+		
+		this.getContainer().on('click', 'button[id="emailbutton"]', function(e) {
+				var userid = jQuery("input#recordId").val();//safuan
+				Vtiger_Helper_Js.getInternalMailer(userid,'email1','Users');
+
+		});
+	},
+
+	/***************ADDED BY SAFUAN@09122014***************/
+	searchWidgetPressEnter : function() {
+		var thisInstance = this;
+		
+		this.getContainer().on('keypress', 'input[id="searchvalue"]', function(e) {
+		    	if(e.which == 13) {
+					
+			//alert('You pressed enter!XDXDXD');		
+            	var sevalue = jQuery("input#searchvalue").val(); 
+
+				var url = "index.php?module=Users&view=SearchResult&mode=searchResult&key="+sevalue;
+					AppConnector.request(url).then(
+						function(data){ 
+							//alert(data);
+							//var panel = $("#panel");
+							var dataContainer = $("#searchresult");
+							//panel.toggleClass('hide');
+							dataContainer.html(data);
+							//thisInstance.registerDisplayDetailTabClickEvent();
+					});
+			}
+		});
+	},
+	/***************ADDED@05122014***************/
+	searchWidgetButton : function() {
+		var thisInstance = this;
+		
+		this.getContainer().on('click', 'button[id="keysearch"]', function(e) { 
+		var sevalue = jQuery("input#searchvalue").val(); 		
+		var url = "index.php?module=Users&view=SearchResult&mode=searchResult&key="+sevalue;
+			AppConnector.request(url).then(
+				function(data){ 
+					//alert(data);
+					//var panel = $("#panel");
+					var dataContainer = $("#searchresult");
+					//panel.toggleClass('hide');
+					dataContainer.html(data);
+					//thisInstance.registerDisplayDetailTabClickEvent();
+			});
+		});
+	},	
+	/***************ADDED@05122014***************/
+	searchWidgets : function() {
+		var thisInstance = this;
+		
+		this.getContainer().on('click', 'a[class="widgetFilter"]', function(e) { 
+		var element = $(e.currentTarget);
+		var url = element.data('url');
+			AppConnector.request(url).then(
+				function(data){ 
+					var panel = $("#panel");
+					var dataContainer = $("#content");
+					panel.toggleClass('hide');
+					dataContainer.html(data);
+					thisInstance.registerDisplayDetailTabClickEvent();
+			});
+		});
+	},
+	/***************ADDED@05122014***************/
+	//Modified By Mabruk
+	/*userFilter : function() {
+		var thisInstance = this; 
+		
+		this.getContainer().on('change', '#userGroup', function(e) { 
+		var element = $(e.currentTarget); 
+		var user_id = $("#userGroup").val(); 
+		//alert(user_id);alert(jQuery('#historyType').val());
+		var params = {
+
+					'content': 'data',
+					'module' : 'Home',
+					'name'   : 'Birthdays',
+					'view'	 : 'ShowWidget',	
+					'group'  : user_id,
+					'type'   : jQuery('#historyType').val(),
+					'linkid' : element.closest('.dashboardWidget').attr('id')	
+					
+				}		
+		
+
+			AppConnector.request(params).then( 
+				function(data){ //alert(data);
+					//var panel = $("#panel");
+					//var dataContainer = $("#content"); alert(JSON.stringify(data));
+					jQuery('#birthdayContents').html(data);
+					//progressIndicatorElement.progressIndicator({'mode':'hide'});
+					//dataContainer.html(data);
+					//thisInstance.registerDisplayDetailTabClickEvent();
+			});
+		});
+	},*/
+
+	/***************ADDED@05122014***************/
+	registerDisplayDetailTabClickEvent : function(form) { 
+		var userid = jQuery('#selectUserfilter').val();			
+		var module = app.getModuleName();
+		var aDeferred = jQuery.Deferred();
+		
+				var params = {
+					'module' : 'Users',
+					'view'   : 'DashboardListViewAjax',
+					'record' : userid,	
+					'mode': 'getUserEducation',
+				}
+	
+				AppConnector.request(params).then(
+					function(data) {
+						$('#education').html(data);
+					},
+					
+					function(error,err){
+						aDeferred.reject();
+					}
+				);
+			
+
+		jQuery('div#tab ul li').on('click',function(e) { 
+			var tabIndx = $(this).index();
+			var container = $('a', this).attr('href');
+			    container =	container.replace('#','');
+
+			if(tabIndx >=0) {
+				var params = {
+					'module' : 'Users',
+					'view'   : 'DashboardListViewAjax',
+					'record' : userid,	
+					'mode': 'getUser'+container.substr(0, 1).toUpperCase() + container.substr(1),
+				}
+	
+				AppConnector.request(params).then(
+					function(data) {
+						$('#'+container).html(data);
+					},
+					
+					function(error,err){
+						aDeferred.reject();
+					}
+				);
+			} 
+		});
+	},
+
+	////////////////////////////////////////
+
+	registerEvents : function() { 
 		var thisInstance = this;
 		//alert(jQuery("#default_tab").val());
 		this.registerLazyLoadWidgets();
@@ -1014,6 +1185,17 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 		this.registerDashBoardTabRename();
 		this.registerDeleteDashboardTab();
 		this.registerRearrangeTabsEvent();
+
+		//this.backButton();	/***************ADDED@05122014***************/
+		this.searchWidgetButton();	/***************ADDED@05122014***************/
+		this.searchWidgets();			/***************ADDED@05122014***************/	
+		//this.userFilter();	/***************ADDED@05122014***************/
+		this.searchWidgetPressEnter();
+		this.buttonemail();
+		this.birthdayEmail();
+		//this.gridsterStop();
+
+
 		this.registerQtipMessage();
 		app.event.off("post.DashBoardTab.load");
 		app.event.on("post.DashBoardTab.load",function(event, dashBoardInstance){ 
