@@ -11,6 +11,7 @@
 /**
  * Vtiger Menu Model Class
  */
+ 
 class Vtiger_Menu_Model extends Vtiger_Module_Model {
 
 	/**
@@ -38,9 +39,9 @@ class Vtiger_Menu_Model extends Vtiger_Module_Model {
 		$modules = array_merge($moduleSeqs, $moduleNonSeqs);
 
 		foreach($modules as $module) {
-			if (($userPrivModel->isAdminUser() ||
+			if ((($userPrivModel->isAdminUser() || $currentUser->get('roleid')=='H12' || $currentUser->get('roleid')=='H13') ||
 					$userPrivModel->hasGlobalReadPermission() ||
-					$userPrivModel->hasModulePermission($module->getId()))& !in_array($module->getName(), $restrictedModulesList) && $module->get('parent') != '') {
+					$userPrivModel->hasModulePermission($module->getId())) & !in_array($module->getName(), $restrictedModulesList) ) {
 					$menuModels[$module->getName()] = $module;
 
 			}
