@@ -289,14 +289,12 @@ $(this).hide();
                                                         <div class="dropdown-content-Finance">
 
                                                                 <ul class="dropdownlist">
-                                                                        {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings">
                                                                                 	<i class="material-icons module-icon">person</i>&nbsp;Employee
                                                                                      
-                                                                                </a>                                                                   
+                                                                                </a>
                                                                         </li>
-                                                                        {/if} 
                                                                           {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                                                         <li>
                                                                                <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&view=List">
