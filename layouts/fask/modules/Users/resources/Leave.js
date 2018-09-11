@@ -212,7 +212,7 @@ Vtiger.Class("Users_Leave_Js", {
 		  var chkboxendhalf = $('#endhalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
           var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
           var chkboxstudying = $('#chkstudying').is(':checked')?'1':'0';
-        var aparams = form.serializeFormData();
+          var aparams = form.serializeFormData();
 									aparams.chkboxstarthalf = jQuery('#starthalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
 									aparams.chkboxendhalf = jQuery('#endhalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
 									aparams.module = app.getModuleName();
@@ -222,10 +222,13 @@ Vtiger.Class("Users_Leave_Js", {
        console.log(aparams);
          app.request.post({'data': aparams}).then(function (err, data) {     
               app.helper.hideProgress(); 
-               //show notification after Education details saved
-                app.helper.showSuccessNotification({'message': data});
-               //Adding or update the Education details in the list
-               thisInstance.updateLeaveGrid(userid);
+           
+              if(data.success){
+              	 app.helper.showSuccessNotification({'message': app.vtranslate(data.msg, 'Users')});	
+              	 thisInstance.updateLeaveGrid(userid);
+              } else {
+              	 app.helper.showErrorNotification({'message': app.vtranslate(data.msg, 'Users')});
+              }
              }
           );
            return aDeferred.promise();
@@ -300,7 +303,7 @@ Vtiger.Class("Users_Leave_Js", {
 	},
 	
 	deleteLeave : function(deleteRecordActionUrl) { 
-		var message = app.vtranslate('JS_DELETE_EDUCATION_CONFIRMATION');
+		var message = app.vtranslate('JS_DELETE_LEAVE_CONFIRMATION');
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();
 		app.helper.showConfirmationBox({'message' : message}).then(function(e) {
@@ -317,7 +320,7 @@ Vtiger.Class("Users_Leave_Js", {
 
 
   	cancelLeave : function(cancelRecordActionUrl,currentTrElement) { 
-		alert(cancelRecordActionUrl);
+
 		var message = app.vtranslate('JS_CANCEL_LEAVE_CONFIRMATION');
 		var thisInstance = this;
 		var userid = jQuery('#recordId').val();

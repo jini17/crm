@@ -30,7 +30,7 @@ body > .mCSB_inside > .mCSB_container {
   font-family: 'OpenSans-Regular', sans-serif;
 }
 body {
-  font-family: Quicksand,Georgia,'Times New Roman',Times,serif;
+ font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
   font-weight: normal;
@@ -3095,6 +3095,9 @@ position: relative;
   height: 25px;
   padding: 5px 0px 0px 10px;
   color: #000;
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 #taskManagementContainer .contentsBlock {
   margin-bottom: 25px;
@@ -4585,7 +4588,7 @@ form[name="notification_settings"] .select2-choice {
 
 .dashboardWidgetContent {padding:4px;}
 .dashBoardContainer .tabContainer {
-  margin-top: 40px !important;background-color:#F4F5FA;padding: 10px; padding-top: 0px;
+  margin-top: 15px !important;background-color:#F4F5FA;padding: 10px; padding-top: 0px;
 }
 .dashBoardContainer .tabContainer ul {
   margin: 0 auto;
@@ -4916,7 +4919,7 @@ hr {
   margin: 0 2px;
 }
 .massEditTabs.nav>li {
-  padding: 0 10px;
+  padding: 0 5px;
   margin: 0 4px;
 }
 .row .nav>li>a,
@@ -8828,14 +8831,14 @@ tr.listViewEntries:nth-child(odd) {    background-color: #f9f9f9;}
 
 .sidebar-essentials i[class^="material"] {font-size:22px!important;}
 
-.fask{ list-style-type: none; width: 100vw;left: 0px!important;box-shadow: 0 5px 75px 2px rgba(64,70,74,.2)!important;
+.fask{ list-style-type: none; width: 80vw;left: 0px!important;box-shadow: 0 5px 75px 2px rgba(64,70,74,.2)!important;
 border-radius: .35rem; background-color: rgba(255, 255, 255, 1); margin-top: 0px; }
-.faskfirst{ list-style-type: none;width: 200px;float: left;-webkit-padding-start: 10px; border-right: 0px solid #ddd;    height: 400px;}
+.faskfirst{ list-style-type: none;float: left;-webkit-padding-start: 10px; border-right: 0px solid #ddd;    height: 400px;}
 .faskfirst li{ padding: 14px 4px;}
 .faskfirst li a i{ font-size: 18px;margin-right: 10px;}
-.fasksecond{list-style-type: none;width:calc(100vw - 202px); overflow-y: scroll; max-height: calc(100vh - 20px); }
+.fasksecond{list-style-type: none; overflow-y: scroll;  }
 /* .fasksecond>li.with-childs:first-child { border-left: none;} */
-.fasksecond>li.with-childs { float: left; border-left:1px solid #ddd; margin: 0 0px; height:400px; width: 14.28%} 
+.fasksecond>li.with-childs { float: left; border-left:1px solid #ddd; margin: 0 0px; height:400px; width: 20%} 
 .fasksecond>li.with-childs>a{ border-bottom: 3px solid #ddd;padding: 15px 10px; line-height: 40px;} 
 .fasksecond>li.with-childs>a i { font-size: 18px;margin-right: 10px;}
 .fasksecond>li>a i { font-size: 18px;margin-right: 10px;}
@@ -8895,7 +8898,7 @@ visibility: visible;top: 0;left: 60px; /*position where enlarged image should of
     width: 100%;
     color: #fff;
     font-size: 15px;
-    padding: 10px 20px;
+    padding: 10px 15px;
     text-decoration: none;
 }
 ul.nav navbar-nav newtabs>li{
@@ -8952,7 +8955,7 @@ display: none;
     height: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    padding: 20px;
+    padding: 10px;
 }
  .dropdown-content-Support{
  border-top: 3px solid #06d79c;
@@ -8964,7 +8967,7 @@ display: none;
     height: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    padding: 20px;
+    padding: 10px;
 }
 li> div.dropdownFinance:hover .dropdown-content-Finance ,li> div.dropdownTools:hover .dropdown-content-Tools ,li> div.dropdownMore:hover .dropdown-content-More 
 {display: block;}
@@ -9073,10 +9076,11 @@ a.btn.btn-default.Help-btn{
       padding: 5px 5px 6px 8px;
     margin: 0px;
     border-radius: 1px;
-    border: 1px solid #eee;
+    border: 1px solid #c1c1c1;
     color: #666;
     background: #fff;
     margin-top: 5px;
+    margin-right: 15px;
 }
 .popup-col-4{
   border-radius: 10px;
@@ -9084,10 +9088,10 @@ a.btn.btn-default.Help-btn{
   padding: 10px;
 }
 .popup-col-4img{
-  height: 400px
+  height: 300px;
 }
 .popup-col-4text{
-  text-align: justify;padding: 10px;height: 130px;
+  text-align: center;padding: 10px;height: 78px;font-size: 18px;
 }
 a#menubar_quickCreate_BenefitType , a#menubar_quickCreate_Leave{
   display: none;
@@ -9123,9 +9127,39 @@ a.forgotPasswordLink.pull-right{
     line-height: 20px;
 }
 div#prefernces.tab-pane {
-  width: 80%;
+  width: 100%;
   margin:0 auto;
 }
 span.actionImages>a{
   padding: 0px 5px;
+}
+ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard{
+      padding: 15px 5px 10px !important;
+}
+table.table.table-bordered.listViewEntriesTable{
+  background-color: #fff !important;
+}
+/*
+div.col-lg-5.col-xs-12> div.detailViewButtoncontainer> div.btn-group.pull-right> button.btn.btn-primary{
+  margin-right: 5px;
+}
+*/
+a.dropdown-icon-dashboard > i{
+    width: 20px !important;
+}
+  
+div#CalendarStartDuration.col-sm-8> div> div.input-group.inputElement, div#CalendarEndDuration.col-sm-8> div> div.input-group.inputElement{
+  width: 50% !important;
+}
+div#CalendarStartDuration.col-sm-8 , div#CalendarEndDuration.col-sm-8{
+  padding: 0px 8px;
+}
+.myProfileBtnLeft{
+float: left;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-left: 14px;
+}
+.myProfileBtn{
+margin-top: 15px;margin-bottom: 15px;margin-left: 14px;
+}
+.myProfileBtnRight{
+float: right;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-left: 14px;
 }

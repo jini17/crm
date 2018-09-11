@@ -41,7 +41,7 @@ function ifselected()
 	<form method="POST" name="massdelete">
 	<input type="hidden" name="idlist" id="idlist">	<!--id attr added by jitu@tar -->
 	<div class="listViewPageDiv">	
-		<div class="widget_header row-fluid"><h3>{vtranslate('LBL_COMPANY_DETAILS', $QUALIFIED_MODULE)}</h3></div>
+		<div class="widget_header row-fluid"><h3>{vtranslate('LBL_COMPANY_DETAILS', $QUALIFIED_MODULE)} </h3></div>
 		<!--start button-->
 		<div class="listViewTopMenuDiv noprint">
 			<div class="listViewActionsDiv row-fluid">

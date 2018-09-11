@@ -53,8 +53,9 @@
 						{/if}
 
 						<div>
+							<div class="col-md-4"><label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;Subject <span class="redColor">*</span></label></div>
 							{assign var="FIELD_MODEL" value=$RECORD_STRUCTURE['subject']}
-							<div style="margin-left: 14px;width: 95%;">
+							<div class="controls fieldValue col-md-8">
 								{assign var="FIELD_INFO" value=$FIELD_MODEL->getFieldInfo()}
 								{assign var="SPECIAL_VALIDATOR" value=$FIELD_MODEL->getValidator()}
 								<input id="{$MODULE}_editView_fieldName_{$FIELD_MODEL->get('name')}" type="text" class="inputElement {if $FIELD_MODEL->isNameField()}nameField{/if}" name="{$FIELD_MODEL->getFieldName()}" value="{$FIELD_MODEL->get('fieldvalue')}"
@@ -64,69 +65,79 @@
 										   {assign var=VALIDATOR_NAME value=$VALIDATOR["name"]}
 										   data-rule-{$VALIDATOR_NAME} = "true" 
 									   {/foreach}
-									   placeholder="{vtranslate($FIELD_MODEL->get('label'), $MODULE)} *" style="width: 100%;"/>
+									   style="width: 100%;"/>
 							</div>
 						</div>
 
-						<div class="row" style="padding-top: 2%;">
-							<div class="col-sm-12">
-								<div class="col-sm-5">
-									{assign var="FIELD_MODEL" value=$RECORD_STRUCTURE['date_start']}
-									{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
-								</div>
-								<div class="muted col-sm-1" style="line-height: 67px;left: 20px; padding-right: 7%;">
-									{vtranslate('LBL_TO',$MODULE)}
-								</div>
-								<div class="col-sm-5" {if $MODULE eq 'Calendar'}style="margin-top: 4%;"{/if}>
-									{assign var="FIELD_MODEL" value=$RECORD_STRUCTURE['due_date']}
-									{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
-								</div>
+						
+						<div class="col-sm-12"style="padding-top: 2%;">
+							<div class="muted col-sm-4" >
+								<label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_FROM',$MODULE)} <span class="redColor">*</span></label>
+							</div>
+							<div class="col-sm-8" id="CalendarStartDuration">
+								{assign var="FIELD_MODEL" value=$RECORD_STRUCTURE['date_start']}
+								{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
+							</div>
+								
+						</div>
+						<div class="col-sm-12" style="padding-top: 2%;">
+							<div class="muted col-sm-4" >
+								<label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_TO',$MODULE)} <span class="redColor">*</span></label>
+							</div>
+							<div class="col-sm-8" id="CalendarEndDuration" {if $MODULE eq 'Calendar'}{/if}>
+								{assign var="FIELD_MODEL" value=$RECORD_STRUCTURE['due_date']}
+								{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
 							</div>
 						</div>
+
+						
 
 						<table class="massEditTable table no-border">
 							<tr>
 								{foreach key=FIELD_NAME item=FIELD_MODEL from=$RECORD_STRUCTURE name=blockfields}
-									{if $FIELD_NAME eq 'subject' || $FIELD_NAME eq 'date_start' || $FIELD_NAME eq 'due_date'}
-									</tr>{continue}
+								{if $FIELD_NAME eq 'subject' || $FIELD_NAME eq 'date_start' || $FIELD_NAME eq 'due_date'}
+							</tr>{continue}
+							{/if}
+							{assign var="isReferenceField" value=$FIELD_MODEL->getFieldDataType()}
+							{assign var="referenceList" value=$FIELD_MODEL->getReferenceList()}
+							{assign var="referenceListCount" value=count($referenceList)}
+							{if $FIELD_MODEL->get('uitype') eq "19"}
+							{if $COUNTER eq '1'}
+							<td></td><td></td></tr><tr>
+								{assign var=COUNTER value=0}
 								{/if}
-								{assign var="isReferenceField" value=$FIELD_MODEL->getFieldDataType()}
-								{assign var="referenceList" value=$FIELD_MODEL->getReferenceList()}
-								{assign var="referenceListCount" value=count($referenceList)}
-								{if $FIELD_MODEL->get('uitype') eq "19"}
-									{if $COUNTER eq '1'}
-										<td></td><td></td></tr><tr>
-											{assign var=COUNTER value=0}
-										{/if}
+								{/if}
+							</tr><tr>
+								<td class="col-lg-4">
+									{if $isReferenceField neq "reference"}
+									<label class="control-label fieldLabel" style="text-align: right;float: right;">
+										
 									{/if}
-								</tr><tr>
-									<td class='fieldLabel col-lg-3'>
-										{if $isReferenceField neq "reference"}<label class="muted pull-right">{/if}
-											{if $isReferenceField eq "reference"}
-												{if $referenceListCount > 1}
-													{assign var="DISPLAYID" value=$FIELD_MODEL->get('fieldvalue')}
-													{assign var="REFERENCED_MODULE_STRUCT" value=$FIELD_MODEL->getUITypeModel()->getReferenceModule($DISPLAYID)}
-													{if !empty($REFERENCED_MODULE_STRUCT)}
-														{assign var="REFERENCED_MODULE_NAME" value=$REFERENCED_MODULE_STRUCT->get('name')}
-													{/if}
-													<span class="pull-right">
-														<select style="width: 150px;" class="select2 referenceModulesList">
-															{foreach key=index item=value from=$referenceList}
-																<option value="{$value}" {if $value eq $REFERENCED_MODULE_NAME} selected {/if} >{vtranslate($value, $value)}</option>
-															{/foreach}
-														</select>
-													</span>
-												{else}
-													<label class="muted pull-right">{vtranslate($FIELD_MODEL->get('label'), $MODULE)} &nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}</label>
-												{/if}
-											{else}
-												{vtranslate($FIELD_MODEL->get('label'), $MODULE)}&nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}
-											{/if}
-											{if $isReferenceField neq "reference"}</label>{/if}
-									</td>
-									<td class="fieldValue col-lg-9" {if $FIELD_MODEL->get('uitype') eq '19'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
-										{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
-									</td>
+										{if $isReferenceField eq "reference"}
+										{if $referenceListCount > 1}
+										{assign var="DISPLAYID" value=$FIELD_MODEL->get('fieldvalue')}
+										{assign var="REFERENCED_MODULE_STRUCT" value=$FIELD_MODEL->getUITypeModel()->getReferenceModule($DISPLAYID)}
+										{if !empty($REFERENCED_MODULE_STRUCT)}
+										{assign var="REFERENCED_MODULE_NAME" value=$REFERENCED_MODULE_STRUCT->get('name')}
+										{/if}
+										<span class="pull-right">
+											<select style="width: 150px;" class="select2 referenceModulesList">
+												{foreach key=index item=value from=$referenceList}
+												<option value="{$value}" {if $value eq $REFERENCED_MODULE_NAME} selected {/if} >{vtranslate($value, $value)}</option>
+												{/foreach}
+											</select>
+										</span>
+										{else}
+										<label class="muted pull-right">{vtranslate($FIELD_MODEL->get('label'), $MODULE)} &nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}</label>
+										{/if}
+										{else}
+										{vtranslate($FIELD_MODEL->get('label'), $MODULE)}&nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}
+										{/if}
+									{if $isReferenceField neq "reference"}</label>{/if}
+								</td>
+								<td class="col-lg-8" {if $FIELD_MODEL->get('uitype') eq '19'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
+									{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
+								</td>
 								{/foreach}
 							</tr>
 						</table>

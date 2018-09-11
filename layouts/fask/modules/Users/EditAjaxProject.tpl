@@ -34,7 +34,7 @@
                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                         <div class="col-md-4">
                                                                 <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                                        &nbsp;{vtranslate('LBL_PROJECT_TITLE', $QUALIFIED_MODULE)} &nbsp; <span class="redColor">*</span>
+                                                                        &nbsp;{vtranslate('LBL_PROJECT_TITLE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
                                                                 </label>
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
@@ -62,7 +62,7 @@
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
-                                                        <label class="control-label fieldLabel  pull-right btn-block">&nbsp;{vtranslate('LBL_OCCUPATION', $QUALIFIED_MODULE)} &nbsp; <span class="redColor">*</span></label>
+                                                        <label class="control-label fieldLabel  pull-right btn-block">&nbsp;{vtranslate('LBL_OCCUPATION', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                                 </div>
                                                 <div class="controls col-md-8">
                                                         <select class="select2" name="designation" id="designation" onchange="updateSelectBox('designation','designationtxt');" data-rule-required = "true" style="width: 100%;">	
@@ -89,7 +89,7 @@
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
-                                                        <label class="control-label fieldLabel pull-right btn-block">&nbsp;{vtranslate('LBL_DATE', $QUALIFIED_MODULE)} &nbsp; <span class="redColor">*</span></label>
+                                                        <label class="control-label fieldLabel pull-right btn-block">&nbsp;{vtranslate('LBL_DATE', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                                 </div>	
                                                 <div class="controls date col-md-8">
                                                         <select style="width:50%;" class="select2" name="project_month" id="project_month" data-rule-required = "true" >

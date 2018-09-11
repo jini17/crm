@@ -17,8 +17,8 @@ class Users_EditLeave_View extends Vtiger_Index_View {
 		$leavestatus = $request->get('leavestatus');
 
 		$viewer = $this->getViewer($request);
+		
 		$leavetype=Users_LeavesRecords_Model::getLeaveTypeList($userId,$leaveid);
-
 		$userslist=Users_LeavesRecords_Model::getAllUsersList($userId);
 
 		$manager = $request->get('manager');
@@ -47,7 +47,7 @@ class Users_EditLeave_View extends Vtiger_Index_View {
 						"label"=>"End Date",
 						"date-format"=>"dd-mm-yyyy"	);
 
-		$validator= '[{"name":"greaterThanDependentFieldOrMoreThanLeaveBalance","params":["start_date,leave_type"]}]';//Modified By Safuan-Validate leave balance and date 
+		//$validator= '[{"name":"greaterThanDependentFieldOrMoreThanLeaveBalance","params":["start_date,leave_type"]}]';//Modified By Safuan-Validate leave balance and date 
 		$viewer->assign('MODULE', $moduleName);
 		$viewer->assign('QUALIFIED_MODULE', $moduleName);
 		$viewer->assign('USERID', $userId);
@@ -62,7 +62,7 @@ class Users_EditLeave_View extends Vtiger_Index_View {
 		$viewer->assign('CURRENTYEAR', date('Y'));
 		$viewer->assign('STARTDATEFIELD', $startDateField);
 		$viewer->assign('ENDDATEFIELD', $endDateField);
-		$viewer->assign('VALIDATOR', $validator);
+	//	$viewer->assign('VALIDATOR', $validator);
 
 		$viewer->assign('LEAVE_DETAIL', $leavedetail);
 		$viewer->view('EditAjaxLeave.tpl', $moduleName);

@@ -13,26 +13,24 @@
 	<div class="contents row-fluid">
 		{assign var=CREATE_PROJECT_URL value=$PROJECT_RECORD_MODEL->getCreateProjectUrl()}
 		{assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}	
-		<div class="marginBottom10px">
-			<button type="button" class="btn" onclick="Users_Project_Js.addProject('{$CREATE_PROJECT_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_PROJECT', $MODULE)}</strong></button>
+
+		<div class="myProfileBtn">
+			<button type="button" class="btn btn-primary" onclick="Users_Project_Js.addProject('{$CREATE_PROJECT_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_PROJECT', $MODULE)}</strong></button>
 		</div>
+
 		<div class="listViewContentDiv" id="listViewContents">
-			<div class="contents-topscroll noprint">
-				<div class="topscroll-div" style="width:756px">
-					&nbsp;
-				 </div>
-			</div>
+			
 			<div class="listViewEntriesDiv contents-bottomscroll">
 				<div class="bottomscroll-div">
-					<table class="table table-bordered table-condensed listViewEntriesTable" style="background-color: #fff;">
+					<table class="table table-bordered table-condensed listViewEntriesTable" style="background-color: #fff;margin: 14px;width: 98%;">
 						<thead>
 							<tr class="listViewHeaders">
-								<th nowrap width="15%"><strong>{vtranslate('LBL_PROJECT_TITLE', $MODULE)}</strong></td>
-								<th nowrap><strong>{vtranslate('LBL_DESCRIPTION', $MODULE)}</strong></td>
-								<th nowrap><strong>{vtranslate('LBL_OCCUPATION', $MODULE)}</strong></td>
-								<th nowrap width="10%"><strong>{vtranslate('LBL_DATE', $MODULE)}</strong></td>
-								<th nowrap><strong>{vtranslate('LBL_PROJECT_URL', $MODULE)}</strong></td>
-								<th nowrap width="10%" colspan="2" class="medium"><strong>{vtranslate('LBL_EDUCATION_ISVIEW', $MODULE)}</strong></td>
+								<th nowrap width="15%"><strong>{vtranslate('LBL_PROJECT_TITLE', $MODULE)}</strong></th>
+								<th nowrap><strong>{vtranslate('LBL_DESCRIPTION', $MODULE)}</strong></th>
+								<th nowrap><strong>{vtranslate('LBL_OCCUPATION', $MODULE)}</strong></th>
+								<th nowrap width="10%"><strong>{vtranslate('LBL_DATE', $MODULE)}</strong></th>
+								<th nowrap><strong>{vtranslate('LBL_PROJECT_URL', $MODULE)}</strong></th>
+								<th nowrap width="10%" colspan="2" class="medium"><strong>{vtranslate('LBL_EDUCATION_ISVIEW', $MODULE)}</strong></th>
 							</tr>
 						<thead>
 						<tbody>

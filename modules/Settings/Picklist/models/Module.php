@@ -301,7 +301,8 @@ class Settings_Picklist_Module_Model extends Vtiger_Module_Model {
 
 	public static function getPicklistSupportedModules() {
 		$db = PearDatabase::getInstance();
-		$unsupportedModuleIds = array(getTabId('Users'), getTabId('Emails'));
+		//getTabId('Users'),
+		$unsupportedModuleIds = array(getTabId('Emails'));
 		$query = "SELECT distinct vtiger_tab.tablabel, vtiger_tab.name as tabname
 				  FROM vtiger_tab
 						inner join vtiger_field on vtiger_tab.tabid=vtiger_field.tabid

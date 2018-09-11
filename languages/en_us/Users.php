@@ -28,7 +28,7 @@ $languageStrings = array(
 	'LBL_USER_PROJECTS'=>'User Projects',
 	'LBL_SKILL_LANG'=>'Skill Language',
 	'LBL_LEAVE'=>'Leave',
-	'LBL_CLAIM'=>'Claim',
+	'LBL_CLAIM'=>'Claims',
 	'LBL_USER_EMERGENCY'=>'Emergency Contacts',
 	'LBL_ADD_NEW_EDUCATION'=>'Add New Education',
 	'LBL_INSTITUTION_NAME'=>'Institution Name',
@@ -65,6 +65,7 @@ $languageStrings = array(
 	'Default Calendar View' => 'Default Calendar View',
 	'Default Lead View' => 'Default Lead View',
 	'Title' => 'Title',
+                   
 	'Office Phone' => 'Office Phone',
 	'Department' => 'Department',
 	'Reports To' => 'Reports To',
@@ -455,7 +456,7 @@ $languageStrings = array(
 'LBL_MY_CLAIM'=>'My Claims',
 'LBL_APPLY_CLAIM'=>'Apply Claim',
 'LBL_ADD_NEW_CLAIM'=>'Add New Claim',
-'LBL_INVOICE'=>' Invoice No',
+'LBL_INVOICE'=>' Receipt No',
 'LBL_CLAIM_STATUS'=>'Claim Status',
 'LBL_APPROVED_BY'=>'Approved By',
 'LBL_EDIT_CLAIM'=>'Edit Claim',
@@ -468,7 +469,7 @@ $languageStrings = array(
 'LBL_MONTHLY_LIMIT_EXCEED'=>'Monthly limit exceeded !',
 'LBL_YEARLY_LIMIT_EXCEED'=>'Yearly limit exceeded !',
 'LBL_CLAIM_NOT_EXCEED'=>'Amount claim are fine.',	
-
+'Claim '=>'Claims',
 
 
 //End of section Claim
@@ -512,7 +513,8 @@ $languageStrings = array(
 );
 
 $jsLanguageStrings = array(
-
+	'JS_USER_ALREADY_APPLIED'=>'User already applied leave',
+	'JS_INVALID_DATES_OR_BLANK'=>'Invalid date or empty',
 	//Curency seperator validation messages
 	'JS_ENTER_OLD_PASSWORD'=>'Please enter your old password.',
 	'JS_ENTER_NEW_PASSWORD'=>'Please enter your new password.',

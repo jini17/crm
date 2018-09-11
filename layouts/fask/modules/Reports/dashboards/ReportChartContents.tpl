@@ -10,7 +10,7 @@
 {assign var=WIDGETDOMID value=$WIDGET->get('linkid')|cat:'-':$WIDGET->get('id')}
 
  {if count($DATA) gt 0 }
-    <input class="widgetData" type=hidden value='{$DATA}' />
+    <input id="widgetChart_{$WIDGET->get('id')}" type=hidden value='{$DATA}' />
     <input class="yAxisFieldType" type="hidden" value="{$YAXIS_FIELD_TYPE}" />
 
     <input type='hidden' name='charttype' value="{$CHART_TYPE}" />
@@ -35,7 +35,7 @@
 
 <script type="text/javascript">
 	 
-	  var jData = jQuery('.widgetData').val();
+	  var jData = jQuery("#widgetChart_{$WIDGET->get('id')}").val();
 	  var data = JSON.parse(jData);
 	  //console.log(data.links);
 	

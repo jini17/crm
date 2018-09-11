@@ -224,10 +224,8 @@ $languageStrings = array(
 	'LBL_SEARCH_FOR_FOLDERS' => 'Search for folders',
 	'LBL_CHART_REPORT' => 'Chart Report',
 	'LBL_UNPIN_CHART_FROM_DASHBOARD' => 'Unpin chart from dashboard',
- 	'LBL_REPORTS_DELETED_SUCCESSFULLY' => 'Reports Deleted Successfully',
-	'LBL_USERS'=>'Employee',
-	'LBL_SELECT_DASHBOARD_TAB'=>'Select Dashboard Tab',
-
+	'LBL_REPORTS_DELETED_SUCCESSFULLY' => 'Reports Deleted Successfully',
+	'LBL_SELECT_DASHBOARD_TAB'=>'Select Dashboard',
 );
 $jsLanguageStrings = array(
 	'JS_DUPLICATE_RECORD' => 'Duplicate Report',
@@ -240,5 +238,4 @@ $jsLanguageStrings = array(
 	'JSLBL_PIN_CHART_TO_DASHBOARD' => 'Pin Chart To DashBoard',
 	'JSLBL_UNPIN_CHART_FROM_DASHBOARD' => 'Unpin chart from dashboard',
 	'JS_CHART_REMOVED_FROM_DASHBOARD' => 'Chart removed from dashboard',
-	'JS_SELECT_DASHBOARD_TAB'=>'Please select the dashboard',
 );

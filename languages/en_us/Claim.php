@@ -11,7 +11,8 @@ $languageStrings = array(
 	// Basic Strings
 	'Category'=>'Claim Type',
 	'LBL_ADD_RECORD' => 'Add Claim Detail',
-	'SINGLE_Claim' => 'Claim',	
+	'SINGLE_Claim' => 'Claim',
+                       'Claim'=> 'Claims'
 );
 
 $jsLanguageStrings = array(

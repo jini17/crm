@@ -28,6 +28,7 @@
 							<button class="btn btn-secondary" type="button" onclick='window.location.href = "{$IMPORT_MODULE_URL}"'>
 								{vtranslate('LBL_EXTENSION_STORE', 'Settings:ExtensionStore')}
 							</button>
+                                                        
 						</div>
 					</div>
 				</div>

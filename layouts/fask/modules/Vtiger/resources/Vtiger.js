@@ -1843,7 +1843,11 @@ $(function(){
 		if($("#dropdownMenuButtonDesk").attr("aria-expanded")){
 			$(".main-container, .dashBoardContainer").removeClass("blurredContent");
 		}
-		else $(".main-container, .dashBoardContainer").addClass("blurredContent");
+		else {
+			//commented by jitu to hide blurred screen 
+			//$(".main-container, .dashBoardContainer").addClass("blurredContent");
+		}
+
 
 		if($("#sidebarnav").hasClass("mini-sidebar")){
 			return;

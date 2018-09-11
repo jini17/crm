@@ -7,7 +7,7 @@
  * All Rights Reserved.
  ************************************************************************************} 
 
-<div style="width:60px">
+<div style="width:90px">
 	{foreach item=RECORD_LINK from=$LISTVIEW_ENTRY->getRecordLinks()}
 		{assign var="RECORD_LINK_URL" value=$RECORD_LINK->getUrl()}
 		{if $RECORD_LINK->getIcon() eq 'icon-pencil'}

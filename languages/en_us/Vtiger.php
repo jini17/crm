@@ -16,9 +16,11 @@ $languageStrings = array(
 	'POWEREDBY'=> 'Powered by Agiliux CRM',
 	'LBL_READ_LICENSE' => 'Read License',
 	'LBL_PRIVACY_POLICY' => 'Privacy Policy',
+
 	'LBL_ENRICH_DATA' => 'Enrich Data',
 
 	'LBL_ENRICH_DATA_LOCKED' => 'Enrich Data', 
+
 
 	// Common Actions
 	'LBL_NEW' => 'New',
@@ -84,7 +86,7 @@ $languageStrings = array(
 	'LBL_ADD_EVENT' => 'Add Meeting',
 	'LBL_ADD_TASK' => 'Add Task',
 	'LBL_MARKETING_AND_SALES' => 'MARKETING & SALES',
-	'LBL_TOOLS_HEADER' => 'TOOLS',
+	'LBL_TOOLS_HEADER' => 'Employee',
 	'LBL_SUPPORT' => 'SUPPORT',
 	'LBL_INVENTORY' => 'INVENTORY',
 	'LBL_FOUNDATION' => 'General',
@@ -133,7 +135,8 @@ $languageStrings = array(
 	'LBL_EDIT_TAG'=>'Edit Tag',
 	'LBL_NO_TAG_EXISTS' => 'No Tag Exists' ,
 	'LBL_RELATED_USERS' => 'Related Users',
-
+                      'LBL_LAST_SIX_MONTH' =>'Last 6 Month',
+                       'LBL_NEXT_SIX_MONTH' =>'Next 6 Month',
 	// Common Fields
 	'LBL_USER' => 'User',
 	'LBL_GROUP' => 'Group',
@@ -172,7 +175,7 @@ $languageStrings = array(
 	'LBL_PLEASE_SELECT_MODULE' => 'Please select any module to search',
 
 	//DropDown Category
-	'LBL_USERS' => 'Users',
+	'LBL_USERS' => 'Employee',
 	'LBL_GROUPS' => 'Groups',
 	'LBL_USER_PLAN_SETTING' => 'User Plan Settings',
 
@@ -218,7 +221,7 @@ $languageStrings = array(
 	'Portal' => 'Our Sites',
 	'Email Templates' => 'Notification Templates',
 	'Recycle Bin' => 'Recycle Bin',
-
+                    
 	//Basic String Translation
 	'LBL_ADD_RECORD' => 'Add Record',
 	'LBL_RECENTLY_MODIFIED' => 'Recently Modified',
@@ -424,7 +427,7 @@ $languageStrings = array(
 	'LBL_SHOW' => 'Show',
 	'LBL_MY' => 'My',
 	'LBL_SELECT_DATE_RANGE' => 'Select Date Range',
-
+                       'Users'=>"Employee",
 	// Basic Strings- custom view
 	'LBL_VIEW_NAME' => 'List Name',
 	'LBL_CREATE_VIEW' => 'Creating new view',
@@ -607,6 +610,8 @@ $languageStrings = array(
 	'Biotechnology'=>'Biotechnology',
 	'Chemicals'=>'Chemicals',
 	'Communications'=>'Communications',
+                     'Admin/Finance' => 'HRM',
+                    'Tools'=>'Communications',
 	'Construction'=>'Construction',
 	'Consulting'=>'Consulting',
 	'Education'=>'Education',
@@ -1182,7 +1187,7 @@ $languageStrings = array(
 	'LBL_ENGAGEMENT_HISTORY' => 'Engagement History',
 	'LBL_NO_ENGAGEMENTS_FOUND' => 'No related Touchpoints',
 	'LBL_MARKETING' => 'MARKETING',
-	'LBL_SALES' => 'SALES',
+	'LBL_SALES' => 'Sales',
 	'LBL_PROJECT' => 'PROJECTS',
 	'LBL_TOOLS' => 'Communications',
 	'LBL_TAGS' => 'Tags',
@@ -1408,12 +1413,11 @@ $languageStrings = array(
 	'LBL_VIEW_UPDATES_IN_DETAIL' => 'Read More ...',
 	'LBL_DEFAULT_DASHBOARD_TOOLTIP'=>'Make this dashboard as default by reordering it as the first tab!',
 	'LBL_ALLOWED_IP'=>'IP Restriction',
-	'LBL_ADMIN'=>'Admin/Finance',
+	'LBL_ADMIN'=>'HRM',
 	'LBL_ALLOCATION_TYPE'=>'Allocation List',
 	'LBL_FROM_ADDRESS_SETTING'=>'From Address Setting',
 	'LBL_LAST_LOGINTIME'=>'Your last successful login was',
 	'LBL_USERIP'=>'from IP',
-	'LBL_ADDLEAVETYPE'=>'Add Leave Type',
 );
 
 $jsLanguageStrings = array(

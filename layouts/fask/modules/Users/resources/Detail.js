@@ -269,8 +269,11 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 			var container = $('a', this).attr('href');
 			    container = container.replace('#','');
                if(container=='preference'){
+               		jQuery(".detailViewButtoncontainer").removeClass('hide');	
                     window.location.href="?module=Users&view=PreferenceDetail&parent=Settings&record="+userid
-     		}
+     			} else {
+     				jQuery(".detailViewButtoncontainer").addClass('hide');
+     			}
 
 			if(tabIndx !=0 && container !='') {
 			     var params = {

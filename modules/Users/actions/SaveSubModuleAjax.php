@@ -257,34 +257,16 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
 
 
-/*
-	public function saveLeave(Vtiger_Request $request) {
-		
-		$module = $request->getModule();
-		$request= $_REQUEST['form'];
-		//$request['isview']= $_REQUEST['isview'];
-		//$request['is_studying']= $_REQUEST['is_studying'];
-		
-		$response = new Vtiger_Response();
-		try{
-		    $return = Users_LeavesRecords_Model::saveLeaveDetail($request);
-		    $msg    = $return=='1'? vtranslate("LBL_INSTITUTION_UPDATE_SUCCESS","Users"):vtranslate("LBL_INSTITUTION_ADD_SUCCESS","Users"); 	
-		    $response->setResult($msg);
-		}catch(Exception $e){
-		    $response->setError($e->getCode(),$e->getMessage());
-		}
-		$response->emit();
-
-	}
-*/
 
 
 	//Saving leave in-/new/edit/managerapproval//
 	public function saveLeave(Vtiger_Request $request) {   
 
 	//$request= $_REQUEST['form'];	
+	
 	$module = $request->getModule();
 	$db = PearDatabase::getInstance();
+	//$db->setDebug(true);
 	include_once 'include/Webservices/Create.php';
 	$user = new Users();
 	global $current_user;
@@ -299,8 +281,22 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 	$wsUser		= vtws_getWebserviceEntityId('Users', $request->get('replaceuser'));
 	$wsCurrentUser	= vtws_getWebserviceEntityId('Users', $current_user->id);	
 	$manager= $request->get('manager');
+	
 	$startdate = date('Y-m-d',strtotime($request->get('start_date')));
 	$enddate = date('Y-m-d',strtotime($request->get('end_date')));
+	
+	$date1 = strtotime($startdate);
+	$date2 = strtotime($enddate);
+	
+	if($date1 > $date2 || ($date1=='' || $date2== '')){
+		$response = new Vtiger_Response();
+		$msg    = array("success"=>false,"msg"=>"JS_INVALID_DATES_OR_BLANK");
+		$response->setResult($msg);
+		$response->emit();	
+		exit();
+	}
+	
+	
 
 	//Check if leave is already applied during startdate and enddate by loggedIN User
 	
@@ -309,37 +305,23 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		if ($leaveid =='') { 
 			$resultleave = $db->pquery("SELECT vtiger_leave.leaveid FROM vtiger_leave 
 				INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leave.leaveid 
-				WHERE ((fromdate between ? AND ?) OR (todate between ? AND ?)) AND (vtiger_leave.leavestatus ='Apply' || vtiger_leave.leavestatus ='New' || vtiger_leave.leavestatus ='Approved') AND vtiger_crmentity.smcreatorid = ? AND vtiger_crmentity.deleted=0",
+				WHERE ((fromdate between ? AND ?) OR (todate between ? AND ?)) AND vtiger_leave.leavestatus IN ('Apply','Approved','New') AND vtiger_crmentity.smcreatorid = ? AND vtiger_crmentity.deleted=0",
 			array($startdate, $enddate, $startdate, $enddate, $current_user->id));
 		}		
 		else { 
 			$resultleave = $db->pquery("SELECT vtiger_leave.leaveid FROM vtiger_leave 
 				INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leave.leaveid 
-				WHERE ((fromdate between ? AND ?) OR (todate between ? AND ?)) AND (vtiger_leave.leavestatus ='Apply' || vtiger_leave.leavestatus ='Approved') AND vtiger_crmentity.smcreatorid = ? AND vtiger_crmentity.deleted=0",
+				WHERE ((fromdate between ? AND ?) OR (todate between ? AND ?)) AND vtiger_leave.leavestatus IN ('Apply','Approved') AND vtiger_crmentity.smcreatorid = ? AND vtiger_crmentity.deleted=0",
 			array($startdate, $enddate, $startdate, $enddate, $current_user->id));
 		}
 
-	
-		$date1 = strtotime($startdate);
-		$date2 = strtotime($enddate);
-
-		if($date1 > $date2){
-			$response = new Vtiger_Response();
-			$msg    = "date_wrong";
-			$response->setResult($msg);
-			$response->emit();	
-			exit();
-		}
-		else{
-		  // Date 2 is >
-		}
-
-			
 		if($db->num_rows($resultleave) > 0) { 
 			$response = new Vtiger_Response();
 			$msg    = "JS_USER_ALREADY_APPLIED";
+			$msg    = array("success"=>false,"msg"=>$msg );
 			$response->setResult($msg);
 			$response->emit();	
+		
 			exit();
 		}
 	}
@@ -368,19 +350,28 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 					'replaceuser_id'  => $wsUser,
 					'reasonofleave'  => $request->get('reason'),
 					'total_taken'  => $takenleave,
-					'starthalf'  => $request->get('chkboxstarthalf'),
-					'endhalf'  => $request->get('chkboxendhalf'),
+					'starthalf'  => $request->get('starthalf'),
+					'endhalf'  => $request->get('endhalf'),
 					'leavestatus'  => $request->get('savetype'),
 					'assigned_user_id' =>  $wsCurrentUser,
 				);
 				
 				$leave = vtws_create('Leave', $data,$current_usersaving);
-				$msg    = $leave != null ? vtranslate("LBL_CREATE_SUCCESS","Users"):vtranslate("LBL_CREATE_FAILED","Users");
+				
+				if($leave != null) {
+					$msg    = vtranslate("LBL_CREATE_SUCCESS","Users");
+					$success = true;
+				}	
+				else {
+					$msg    = vtranslate("LBL_CREATE_FAILED","Users");	
+					$success = false;
+				}	
 
-		    	$response->setResult($msg);
+		    	$response->setResult(array("success"=>$success, "msg"=>$msg));
 			
 			} catch (WebServiceException $ex) {
-				echo $ex->getMessage();
+			
+				$response->setResult(array("success"=>false, "msg"=>$ex->getMessage()));
 			}
 
 		$response->emit();
@@ -418,18 +409,13 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 								$startdate = date('Y-m-d',strtotime($request->get('hdnstartdate')));
 								$enddate = date('Y-m-d',strtotime($request->get('hdnenddate')));
 								$takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);
-								//find the total balance leave
-								$userbalanceleave = Users_LeavesRecords_Model::getUserBalance($request->get('current_user_id'), $leavetype);
-
-								if($userbalanceleave<$takenleave) {
-									$msg = vtranslate("LBL_LESS_BALANCE","Users");
-								} else { 
-									$userupdateid=$request->get('current_user_id');
-									$leabalq="UPDATE secondcrm_user_balance SET leave_count = leave_count-$takenleave WHERE user_id=$userupdateid AND leave_type=$leavetype";
-									$resultx = $db->pquery($leabalq,array());
-								}
+								
+								$userupdateid=$request->get('current_user_id');
+								$leavetype = $request->get('hdnleavetype');
+								$leabalq="INSERT INTO secondcrm_user_balance SET user_id=?, leave_count =?, leave_type=?, year=?";
+								$resultx = $db->pquery($leabalq,array($request->get('current_user_id'), $takenleave, $leavetype, date('Y')));
+								
 							} 
-						//$current_usersaving = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
 							
 							$leave = new Leave();
 							$leave->retrieve_entity_info($leaveid, 'Leave');
@@ -440,9 +426,13 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 							$leave->mode='edit';
 							$leave->id= $leaveid;
 							$leave->save('Leave');
-							//$leave = vtws_revise($data, $current_user);
-							$msg    = $request->get('savetype')=='Approved'?vtranslate("LBL_APPROVED","Users"):vtranslate("LBL_NOT_APPROVED","Users");
-
+							
+							if($request->get('savetype')=='Approved'){
+								$message = vtranslate("LBL_APPROVED","Users");
+							} else {
+								$message = vtranslate("LBL_NOT_APPROVED","Users");	
+							}
+							$response->setResult(array("success"=>true, "msg"=>$message));								
 					}else{ 
 						$starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
 						$endhalf  = $request->get('chkboxendhalf')==1?0.5:0;
@@ -460,17 +450,23 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 							'reasonofleave'  => $request->get('reason'),
 							'leavestatus'  => $request->get('savetype'),
 							'total_taken'  => $takenleave,
+							'starthalf'  => $request->get('starthalf'),
+							'endhalf'  => $request->get('endhalf'),
 							'assigned_user_id' =>  $wsCurrentUser,
 							);
 
 						$leave = vtws_revise($data, $current_usersaving);
-						//print_r($leave);
-						$msg    = $leave != null ? vtranslate("LBL_EDIT_SUCCESS","Users"):vtranslate("LBL_EDIT_FAILED","Users");
+						if($leave != null){
+							$message = vtranslate("LBL_EDIT_SUCCESS","Users");
+						} else {
+							$message = vtranslate("LBL_EDIT_FAILED","Users");	
+						}
+						$response->setResult(array("success"=>true, "msg"=>$message));
 					}
-		    		$response->setResult($msg);
+		    		
 
 			} catch (WebServiceException $ex) {
-				echo $ex->getMessage();
+				$response->setResult(array("success"=>false, "msg"=>$ex->getMessage()));
 			}
 		$response->emit();
 		}

@@ -1,6 +1,4 @@
---TEST--
-HTTP_Session2 with MDB2 container (and sqlite) write and read
---SKIPIF--
+
 <?php
 if (
     false === @include_once 'MDB2.php'
