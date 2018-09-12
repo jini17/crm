@@ -93,11 +93,11 @@ class Reports_DetailView_Model extends Vtiger_DetailView_Model {
 			);
 		}
         if($recordModel->getReportType() == 'chart') {
-            $detailViewActions[] = array(
+            /*$detailViewActions[] = array(
                 'linktitle' => vtranslate('LBL_PIN_CHART_TO_DASHBOARD', $moduleName),
                 'customclass' => 'pinToDashboard',
                 'linkiconclass' => 'vtGlyph vticon-attach',
-            );
+            );*/
         }
 		if($recordModel->isEditableBySharing()) {
 			$detailViewActions[] = array(
