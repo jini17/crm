@@ -842,13 +842,13 @@ dashboard
                                                 </li>
                                                 {/if}
 
-                                                <li>
+                                               {* <li>
                                                         <div>
                                                                 <a class="rightside-icon-dashboard"  href="index.php?module=Vtiger&amp;parent=Settings&amp;view=Index" title="Setting" aria-hidden="true">
                                                                         <i class="fa fa-gear"></i>
                                                                 </a>
                                                         </div>
-                                                </li>
+                                                </li>*}
 
 
 
