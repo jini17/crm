@@ -164,8 +164,8 @@
 
                                 </div>
                                 <label class="control-label fieldLabel">&nbsp;</label>
-                                <div class="controls inputElement" id="charNum" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
-                        </div><br><br>
+                              <!--  <div class="controls inputElement" id="charNum" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>-->
+                        </div>
                         </div>
 
                 </div>
