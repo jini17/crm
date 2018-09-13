@@ -32,8 +32,8 @@
           						<option value="thismonth" selected>{vtranslate('LBL_THIS_MONTH',$MODULE_NAME)}</option>	
 					         </select>
                    <select class="select2 widgetFilter" id="userGroup" name="group" style='width:120px;float:right'>
-                      <option value="user" >{vtranslate('LBL_USER',$MODULE_NAME)}</option>           
-                      <option value="customer" selected>{vtranslate('LBL_CUSTOMER',$MODULE_NAME)}</option>  
+                      <option value="user" selected>{vtranslate('LBL_USER',$MODULE_NAME)}</option>           
+                      <option value="customer">{vtranslate('LBL_CUSTOMER',$MODULE_NAME)}</option>  
                    </select>
                 </div>
             </div>

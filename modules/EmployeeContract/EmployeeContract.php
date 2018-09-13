@@ -109,8 +109,8 @@ class EmployeeContract extends Vtiger_CRMEntity {
  	
  		//update grade of assignto user 
  		global $adb;
- 		
- 		$assign = $this->column_fields['assigned_user_id'];
+
+ 		$assign = $this->column_fields['employee_id'];
  		$grade = $this->column_fields['job_grade'];
  		$adb->pquery("UPDATE vtiger_users SET grade_id = ? WHERE id=?", array($grade,$assign));
 
