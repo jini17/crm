@@ -39,8 +39,8 @@
 					{if $DATADETAILS['Sales']}
 					<div class="col-md-4" style="padding-right: 0px !important;padding-left: 0px !important;text-align: left;">
 						<div style="margin-right: 20px !important; padding-left: 0px !important;text-align: left;border-bottom: 2px solid #ffc400; border-right: 2px solid #ffc400;">
-								<p class="mb-lg" style="display: inline-block;"><strong>{vtranslate('Sales', 'Home')}</strong></p>
-								<p style="float: right;padding:0px 20px 0px 0px ">{$DATADETAILS['Sales']}</p>
+								<p class="mb-lg" style="display: inline-block;">{vtranslate('Sales', 'Home')}</p>
+								<p style="float: right;padding:0px 10px 0px 0px ">{$DATADETAILS['Sales']}</p>
 						</div>
 					</div>
 					
@@ -48,19 +48,20 @@
 					{if $DATADETAILS['Support']}
 					<div class="col-md-4" style="padding-right: 0px !important;padding-left: 0px !important;text-align: left;">
 						<div style="margin-right: 20px !important; padding-left: 0px !important;text-align: left;border-bottom: 2px solid #40e0d0; border-right: 2px solid #40e0d0;">
-								<p class="mb-lg" style="display: inline-block;"><strong>{vtranslate('Support', 'Home')}</strong></p>
-								<p style="float: right;padding:0px 20px 0px 0px ;display: inline-block;">{$DATADETAILS['Support']}</p>
+								<p class="mb-lg" style="display: inline-block;">{vtranslate('Support', 'Home')}</p>
+								<p style="float: right;padding:0px 10px 0px 0px ">{$DATADETAILS['Support']}</p>
 						</div>
 					</div>
 
 					{/if}
 					{if $DATADETAILS['Enterprise']}
 					<div class="col-md-4" style="padding-right: 0px !important;padding-left: 0px !important;text-align: left;">
-						<div style="margin-right: 20px !important; padding-left: 0px !important;text-align: left;border-bottom: 2px solid #b382c7; border-right: 2px solid #b382c7;">
-								<p class="mb-lg" style="display: inline-block;"><strong>{vtranslate('Enterprise', 'Home')}</strong></p>
-								<p style="float: right;padding:0px 20px 0px 0px ;display: inline-block;">{$DATADETAILS['Enterprise']}</p>
+						<div style=" padding-left: 0px !important;text-align: left;border-bottom: 2px solid #b382c7; border-right: 2px solid #b382c7;">
+								<p class="mb-lg" style="display: inline-block;">{vtranslate('Enterprise', 'Home')}</p>
+								<p style="float: right;padding:0px 10px 0px 0px ">{$DATADETAILS['Enterprise']}</p>
 						</div>
 					</div>
+					
 			
 					{/if}
 

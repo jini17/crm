@@ -26,7 +26,7 @@ class Users_EditLeave_View extends Vtiger_Index_View {
 			$userId = $current_user->id;	
 		} 
 		
-		$leavetype=Users_LeavesRecords_Model::getLeaveTypeList($leaveid,$userId);
+		$leavetype=Users_LeavesRecords_Model::getLeaveTypeList($userId);
 
 		$userslist=Users_LeavesRecords_Model::getAllUsersList($userId);
 

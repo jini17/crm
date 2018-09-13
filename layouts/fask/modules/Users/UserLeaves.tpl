@@ -163,11 +163,12 @@
 <script src="layouts/fask/modules/Vtiger/resources/List.js" type="text/javascript"></script>
 <script src="layouts/fask/modules/Users/resources/Leave.js?v=6.1.0" type="text/javascript"></script>
 <!--- End for pagination --->
+<input type="hidden" id="leaveallow" value="{$ISCREATE}" />
 <!--start my leaves-->
 <div id="MyLeaveContainer">
         <div class="myProfileBtnLeft">
             <div class="clear"></div>
-                <button type="button" class="btn btn-primary"onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
+                <button type="button" class="btn btn-primary" onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
         </div>
 
         <div class="myProfileBtnRight">

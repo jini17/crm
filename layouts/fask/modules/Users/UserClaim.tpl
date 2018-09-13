@@ -182,6 +182,7 @@
 <!-- Added hidden field by jitu for paging --->
 <script src="layouts/fask/modules/Vtiger/resources/List.js" type="text/javascript"></script>
 <script src="layouts/fask/modules/Users/resources/Claim.js?v=6.1.0" type="text/javascript"></script>
+<input type="hidden" id="claimallow" value="{$ISCREATE}" />
 <!--- End for pagination --->
 <!--start my leaves-->
 

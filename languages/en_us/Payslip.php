@@ -13,4 +13,5 @@ $languageStrings = array(
 	'LBL_DEDUCTION_INFORMATION' => 'Deduction Information',
 	'LBL_COMPANY_CONTRIBUTION'=>'Company Contribution',
 	'SINGLE_Payslip' =>'Payslip',
+	'LBL_PDF_EXPORT'=>'Export To PDF',
 );

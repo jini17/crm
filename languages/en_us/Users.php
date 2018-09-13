@@ -53,7 +53,7 @@ $languageStrings = array(
 	'LBL_OFFICE_PH'=>'Office Phone',
 	'LBL_MOBILE'=>'Mobile',
 	'LBL_EDIT_CONTACT'=>'Edit Contact',
-
+	
 
 
 
@@ -513,6 +513,8 @@ $languageStrings = array(
 );
 
 $jsLanguageStrings = array(
+	'JS_PERMISSION_LEAVE_DENIED'=>'Sorry, Either you have consumed all leaves or not assign, <br>Please contact admin',
+	'JS_PERMISSION_ClAIM_DENIED'=>'Sorry, Either you have consumed all claims or not assign, <br>Please contact admin',
 	'JS_USER_ALREADY_APPLIED'=>'User already applied leave',
 	'JS_INVALID_DATES_OR_BLANK'=>'Invalid date or empty',
 	//Curency seperator validation messages
