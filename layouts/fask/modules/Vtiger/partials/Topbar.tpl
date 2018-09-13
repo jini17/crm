@@ -350,7 +350,7 @@ $(this).hide();
                                         <li>
                                                 <div class="dropdownSales">
                                                          <div class="addtionalDashboardTab">
-                                                                <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 15px;"></i>
+                                                                <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
                                                         </div>
                                                        
 
@@ -440,7 +440,7 @@ $(this).hide();
                                         <li>
                                                 <div class="dropdownSupport">
                                                         <div class="addtionalDashboardTab">
-                                                                <span aria-hidden="true" >Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 15px;"></i>
+                                                                <span aria-hidden="true" >Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
                                                         </div>
 
                                                          <div class="dropdown-content-Support">

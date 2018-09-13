@@ -618,14 +618,18 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 		$result2 = $db->pquery("SELECT grade_id FROM vtiger_users WHERE vtiger_users.id = ?", array($user_id));
 		$grade_id = $db->query_result($result2, 0, 'grade_id');
 		
-		$checkleaveallocresult = $db->pquery("SELECT 1 FROM allocation_list tblVTLA 
+		if($grade_id !=''){
+			
+		
+			$checkleaveallocresult = $db->pquery("SELECT 1 FROM allocation_list tblVTLA 
 			LEFT JOIN allocation_list_details tblVTLAD ON tblVTLAD.allocation_id=tblVTLA.allocation_id
 			LEFT JOIN secondcrm_user_balance SCUB ON SCUB.leave_type=tblVTLAD.leavetype_id
 			WHERE ? IN (tblVTLA.grade_id) AND SCUB.leave_count >0 AND SCUB.user_id=?",array($grade_id, $user_id));	
 		
-		if($db->num_rows($checkleaveallocresult) > 0) {
-			$hasleave = true;
-		}
+			if($db->num_rows($checkleaveallocresult) > 0) {
+				$hasleave = true;
+			}
+		}	
 		return $hasleave;
 	}
 
