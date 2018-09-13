@@ -25,7 +25,7 @@ class Vtiger_Birthdays_Dashboard extends Vtiger_IndexAjax_View {
 		if ($type == '' || $type == null)
 			$type = 'thismonth';
 		if ($group == '' || $group == null)
-			$group = 'customer';
+			$group = 'user';
 
 		//$type = "thismonth";
 		//$group = "user";
