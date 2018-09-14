@@ -23,9 +23,12 @@
 						{assign var=DEFAULT_FILTER_URL value=$MODULE_MODEL->getListViewUrlWithAllFilter()}
 					{/if}
 				{/if}
-				{if ($MODULE eq 'LeaveType' || $MODULE eq 'BenefitType' || $MODULE eq 'EmployeeContract' || $MODULE eq 'Holiday' || $MODULE eq 'WorkingHours' || $MODULE eq 'Claim' || $MODULE eq 'Grade' || $MODULE eq 'ClaimType' || $MODULE eq 'PassportVisa' || $MODULE eq 'Performance' || $MODULE eq 'Payslip') 
-					&& ($CURRENT_USER_MODEL->is_admin eq 'on' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H2' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H12') }
-					<a title="{vtranslate($MODULE, $MODULE)}" href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record=1'><h4 class="module-title pull-left text-uppercase"> {vtranslate('SETTINGS', 'SETTINGS')} </h4>&nbsp;&nbsp;</a>
+				{if ($MODULE eq 'LeaveType' || $MODULE eq 'BenefitType' || $MODULE eq 'Holiday' || $MODULE eq 'Grade' || $MODULE eq 'ClaimType' || $MODULE eq 'WorkingHours') 
+					&& ($CURRENT_USER_MODEL->is_admin eq 'on' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H12' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H12') }
+					<a title="{vtranslate($MODULE, $MODULE)}" href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record=1&subtype=H'><h4 class="module-title pull-left text-uppercase"> {vtranslate('SETTINGS', 'SETTINGS')} </h4>&nbsp;&nbsp;</a>
+				{elseif ($MODULE eq 'EmployeeContract' || $MODULE eq 'PassportVisa' || $MODULE eq 'Performance' || $MODULE eq 'Payslip') 
+					&& ($CURRENT_USER_MODEL->is_admin eq 'on' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H13' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H12')}	
+					<a title="{vtranslate($MODULE, $MODULE)}" href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record=1&subtype=E'><h4 class="module-title pull-left text-uppercase"> {vtranslate('SETTINGS', 'SETTINGS')} </h4>&nbsp;&nbsp;</a>
 				{else}
 					<a title="{vtranslate($MODULE, $MODULE)}" href='{$DEFAULT_FILTER_URL}&app={$SELECTED_MENU_CATEGORY}'><h4 class="module-title pull-left text-uppercase"> {vtranslate($MODULE, $MODULE)} </h4>&nbsp;&nbsp;</a>
 				{/if}

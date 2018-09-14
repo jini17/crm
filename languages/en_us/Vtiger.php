@@ -1418,6 +1418,7 @@ $languageStrings = array(
 	'LBL_FROM_ADDRESS_SETTING'=>'From Address Setting',
 	'LBL_LAST_LOGINTIME'=>'Your last successful login was',
 	'LBL_USERIP'=>'from IP',
+	'LBL_POLICY_DOCUMENT'=>'Policy Document',
 );
 
 $jsLanguageStrings = array(
