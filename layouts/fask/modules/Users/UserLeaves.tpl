@@ -167,7 +167,9 @@
 <!--start my leaves-->
 <div id="MyLeaveContainer">
         <div class="myProfileBtnLeft">
+
             <strong class="pull-left" style="margin:0;"> My Leave </strong>
+
         </div>
 
         <div class="myProfileBtnRight">

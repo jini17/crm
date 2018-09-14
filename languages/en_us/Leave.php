@@ -11,7 +11,7 @@ $languageStrings = array(
 		
 	'LBL_THIS_WEEk'=>'This week',	
 	'LBL_THIS_MONTH'=>'This month',	
-	'LBL_NAME'=>'Employee',
+	'LBL_NAME'=>'employee',
 	'LBL_LEAVE_APPROVAL'=>'My Team Approval',
     'LBL_DURATIONOFLEAVE'=>'Leave Duration',                
     'LBL_IN_TODAY'=>'No Leaves for today',
@@ -23,6 +23,9 @@ $languageStrings = array(
     'LBL_THIS_WEEK'=>'This Week',
     'LBL_LEAVE_TYPE'=>'Leave Type',
     'LBL_LAST_5_LEAVES'=>'Last 5 Leaves',
+    'LBL_NO_EMPLOYEE_FOUND'=>'No Employee found',
+    'LBL_DESIGNATION'=>'Designation',
+    'LBL_DEPARTMENT'=>'Department', 
 );
 
 $jsLanguageStrings = array(
