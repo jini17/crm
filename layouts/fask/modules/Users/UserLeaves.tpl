@@ -167,24 +167,26 @@
 <!--start my leaves-->
 <div id="MyLeaveContainer">
         <div class="myProfileBtnLeft">
-            <div class="clear"></div>
-                <button type="button" class="btn btn-primary" onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
+            <h4 class="pull-left" style="margin:0;"> My Leave </h3>
         </div>
 
         <div class="myProfileBtnRight">
-                
-                <div style="float:right;margin-left:5px;">
+
+                <div class="pull-right" style="margin-left:5px;">
 
                         <!--	<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear"> -->
-                                <form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST">
-                                        <select name="my_selyear" class="my_selyear" id="my_selyear" data-section="M"  class="select2"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
+                    <form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST" style="margin-right: 5px;">
+                                        <select style="padding-bottom: 3px;" name="my_selyear" class="my_selyear" id="my_selyear" data-section="M"  class="select2"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
 
                                                 <!--//Added By Jitu Date Combobox-->
                                                 {for $year=$STARTYEAR to $ENDYEAR}
                                                 <option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
                                                 {/for}
                                         </select>	
+                                                                        <button style="margin-left:10px;" type="button" class="btn btn-primary pull-right" onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
+
                                 </form>
+
                         </div>
         </div>
 <br /><br />
