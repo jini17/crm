@@ -8777,7 +8777,7 @@ html body .bg-white {  background-color: #ffffff; }
 #mailmanagerContainer{background-color: #fff;padding-top: 20px;  margin-top: 0px;margin-left: 5px;margin-right: 5px;}
 .moduleManagerBlock i[class^="ti-"] {    font-size: 20px;    line-height: 28px;}
 #listview-table .fieldValue img{border-radius: 50%;width: 35px; height: 35px;}
-.detailViewContainer{padding-top: 0px;    padding-left: 15px;}
+.detailViewContainer{padding-top: 0px;    padding-left: 15px; padding-right: 15px;}
 #layoutEditorContainer, #TaxCalculationsContainer {padding-top:20px;}
 
 .myc-filters .dropdown-menu li{margin-bottom: 3px;border-bottom:1px solid #eee;padding: 2px;margin: 0px 6px;}
@@ -9012,7 +9012,7 @@ ul.dropdownlist{
   padding: 2px;
 }
 .tabContainer{
-      padding-top: 20px !important;
+/*      padding-top: 20px !important;*/
 }
 li> a.dropdown-icon-dashboard>i{
   padding-right: 10px;

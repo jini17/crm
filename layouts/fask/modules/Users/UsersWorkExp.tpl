@@ -15,10 +15,11 @@
 		{assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}	
 
 		<div class="myProfileBtn">
-			<button type="button" class="btn btn-primary" onclick="Users_WorkExp_Js.addWorkExp('{$CREATE_WORKEXP_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_WORKEXP', $MODULE)}</strong></button>
+                    <strong class="pull-left"> Work Experience </strong>
+			<button type="button" class="btn btn-primary pull-right" onclick="Users_WorkExp_Js.addWorkExp('{$CREATE_WORKEXP_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_WORKEXP', $MODULE)}</strong></button>
 		</div>
 
-		
+                <div class="clearfix"></div>
 		<div class="listViewContentDiv" id="listViewContents">
 			
 			<div class="listViewEntriesDiv contents-bottomscroll">
