@@ -195,9 +195,10 @@
 
 	
 *}
-	
 
+<strong class="pull-left" style="font-weight:bold;"> Claims </strong>	
 	<div style="float:right;margin-right:5px;margin-bottom:10px;">
+            
 	 <!--	<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear"> -->
 	 	<form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST">
 		<select name="my_selyear" id="my_selyear" data-section="M"  class="my_selyear" data-url="?module=Users&view=ListViewAjax&mode=getUserClaim&section=M&record={$USERID}"   onchange="Users_Claim_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserClaim&section=M&record={$USERID}','M');">
@@ -208,12 +209,12 @@
 			{/for}
 		</select>	
 	</form>
-	</div><br /><br />
-	<div class="myProfileBtnLeft">
-		<button type="button" class="btn btn-primary"onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_APPLY_CLAIM', $MODULE)}</strong></button>
+                        <button style="margin-left:15px;" type="button" class="btn btn-primary pull-right"onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_APPLY_CLAIM', $MODULE)}</strong></button>
+
 	</div>
 	
-	<div style="clear:both;"></div>
+	
+	<div class="clearfix"></div>
 	
 	<div id="myclaimlist">
 	<table class="table table-bordered listViewEntriesTable">
