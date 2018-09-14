@@ -471,7 +471,10 @@ $languageStrings = array(
 	'LBL_OUTOGING SERVER'=>'Outgoing Server List',
 	'LBL_OUTGOING_SERVER_SETTINGS'=>'Outgoing Server Settings',
 	'LBL_ADDLEAVETYPE'=>'Add LeaveType',
-
+	'My Preferences'=>'Profile',
+	'Calendar Settings'=>'Preferences',
+	'LBL_MY_TAGS'=>'Tags',
+	'LBL_OFFICE365'=>'Office 365',
 );
 
 $jsLanguageStrings = array(

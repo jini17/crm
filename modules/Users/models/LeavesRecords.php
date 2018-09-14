@@ -97,7 +97,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	
 	//Created by Safuan for fetching leave types//	
 	//modified by jitu for concate color and balance in dropdown 
-	public function getLeaveTypeList($leaveid, $userid){ 
+	public function getLeaveTypeList($userid){ 
 	
 		$db = PearDatabase::getInstance();
 		
@@ -626,48 +626,4 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 		} 	
 		return $result;		
 	}
-
-	/*Added by jitu@secondcrm on 25 Feb 2015 
-	 * Use to check it allocate leave or not
-	*/
-	public function hasAllocateLeave($user_id) {
-		$db = PearDatabase::getInstance();		
-		$hasleave = false;
-		$result2 = $db->pquery("SELECT grade_id FROM vtiger_users WHERE vtiger_users.id = ?", array($user_id));
-		$grade_id = $db->query_result($result2, 0, 'grade_id');
-		
-		$checkleaveallocresult = $db->pquery("SELECT 1 FROM allocation_list tblVTLA 
-			LEFT JOIN allocation_list_details tblVTLAD ON tblVTLAD.allocation_id=tblVTLA.allocation_id
-			LEFT JOIN secondcrm_user_balance SCUB ON SCUB.leave_type=tblVTLAD.leavetype_id
-			WHERE ? IN (tblVTLA.grade_id) AND SCUB.leave_count >0 AND SCUB.user_id=?",array($grade_id, $user_id));	
-		
-		if($db->num_rows($checkleaveallocresult) > 0) {
-			$hasleave = true;
-		}
-		return $hasleave;
-	}
-
-	/*
-  public function saveEducationDetail($request)
-	{
-
-	}
-	*/
-
-	public function getDepartmentList(){
-		$db = PearDatabase::getInstance();
-		$query = "SELECT * FROM vtiger_department WHERE presence=1";
-		$result = $db->pquery($query);
-		$departments = array();
-		for($i=0;$db->num_rows($result)>$i;$i++){
-
-			$departments[$i]['department'] = $db->query_result($result, $i, 'department');
-			$departments[$i]['color'] = $db->query_result($result, $i, 'color');
-		}
-
-		return $departments;
-		
-	}
-
-
 }

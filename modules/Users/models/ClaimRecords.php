@@ -111,13 +111,19 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 
 	//Created by Safuan for fetching leave types//	
 	//modified by jitu for concate color and balance in dropdown 
-	public function getClaimTypeList($userid,$claimid){  
+	public function getClaimTypeList($userid){  
 	$db = PearDatabase::getInstance();
-	global $current_user;	
-
-	$year = date("Y");
-	$grade_id= $current_user->grade_id;
-
+	
+	$result = $db->pquery("SELECT date_joined, job_grade FROM vtiger_employeecontract tblVTEC 
+							INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
+							INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
+							WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTEC.date_joined DESC LIMIT 0, 1", array($userid));
+							
+		$dateofJoining = $db->query_result($result, 0, 'date_joined');	
+		$grade_id	   = $db->query_result($result, 0, 'job_grade');	
+		$datediff = time() - strtotime($dateofJoining);				 
+		$earneddays = round($datediff / (60 * 60 * 24));
+		$curr_year	   = date('Y');	
 
 	$query = "Select vtiger_claimtype.claimtypeid, vtiger_claimtype.claim_type,vtiger_claimtype.color_code,vtiger_claimtype.transactionlimit,
 	vtiger_claimtype.monthlylimit,vtiger_claimtype.yearlylimit from vtiger_claimtype INNER JOIN vtiger_crmentity ON vtiger_claimtype.claimtypeid=vtiger_crmentity.crmid 
@@ -132,17 +138,15 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	$claimtypeid  = '';
 	if($db->num_rows($result)>0) {	
 		for($i=0;$i<$db->num_rows($result);$i++) {
-			
-			if($claimtypeid != $db->query_result($result, $i, 'claimtypeid')) {
-				$claimtype[$i]['claimtypeid'] = $db->query_result($result, $i, 'claimtypeid');
-				$claimtype[$i]['claimtype'] = $db->query_result($result, $i, 'claim_type');	
-				$claimtype[$i]['color_code'] = $db->query_result($result, $i, 'color_code');	
-				$claimtype[$i]['transactionlimit'] = $db->query_result($result, $i, 'transactionlimit');
-				$claimtype[$i]['monthlylimit'] = $db->query_result($result, $i, 'monthlylimit');
-				$claimtype[$i]['yearlylimit'] = $db->query_result($result, $i, 'yearlylimit');					
+			$claimtype[$i]['claimtypeid'] = $db->query_result($result, $i, 'claimtypeid');
+			$claimtype[$i]['claimtype'] = $db->query_result($result, $i, 'claim_type');	
+			$claimtype[$i]['color_code'] = $db->query_result($result, $i, 'color_code');	
+			$claimtype[$i]['transactionlimit'] = $db->query_result($result, $i, 'transactionlimit');
+			$claimtype[$i]['monthlylimit'] = $db->query_result($result, $i, 'monthlylimit');
+			$claimtype[$i]['yearlylimit'] = $db->query_result($result, $i, 'yearlylimit');					
 				$claimtypeid = $db->query_result($result, $i, 'claim_type');
-			} 
-		}
+		} 
+
 	}
 	return $claimtype;	
 

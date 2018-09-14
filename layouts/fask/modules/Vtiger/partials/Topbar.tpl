@@ -342,6 +342,12 @@ $(this).hide();
                                                                                        
                                                                                 </a>
                                                                         </li>
+                                                                        <li>
+                                                                                <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_POLICY_DOCUMENT')}" href="index.php?module=Documents&view=List&type=H">
+                                                                                	<i class="material-icons module-icon">assignment</i>&nbsp;{vtranslate('LBL_POLICY_DOCUMENT')}
+                                                                                       
+                                                                                </a>
+                                                                        </li>
                                                                 </ul>
                                                         </div>
                                                 </div>
@@ -350,7 +356,7 @@ $(this).hide();
                                         <li>
                                                 <div class="dropdownSales">
                                                          <div class="addtionalDashboardTab">
-                                                                <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 15px;"></i>
+                                                                <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
                                                         </div>
                                                        
 
@@ -412,17 +418,19 @@ $(this).hide();
                                                                                 <i class="fa fa-bell-o"></i>&nbsp;Notification Templates
                                                                         </a>
                                                                     </li>
-                                                                    <li>
+                                                                 <!--   <li>
                                                                         <a class="dropdown-icon-dashboard" title="Rss" href="index.php?module=Rss&amp;view=List&amp;app=TOOLS">
                                                                                 <i class="fa fa-rss"></i>&nbsp;Rss
                                                                         </a>
-                                                                    </li>
+                                                                    </li>-->
+                                                                     {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                                                     <li>
                                                                         <a class="dropdown-icon-dashboard" title="Recycle Bin" href="index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS">
                                                                                 <i class="fa fa-trash-o"></i>&nbsp;Recycle Bin
                                                                         </a>
                                                                     </li>
-                                                                    <li>
+                                                                    {/if}
+                                                             <!--       <li>
                                                                         <a class="dropdown-icon-dashboard" title="Our Sites" href="index.php?module=Portal&amp;view=List&amp;app=TOOLS">
                                                                                 <i class="fa fa-desktop"></i>&nbsp;Our Sites
                                                                         </a>
@@ -431,7 +439,7 @@ $(this).hide();
                                                                         <a class="dropdown-icon-dashboard" title="PBX Manager" href="index.php?module=PBXManager&amp;view=List&amp;app=TOOLS">
                                                                                 <i class="fa fa-phone"></i>&nbsp;PBX Manager
                                                                         </a>
-                                                                    </li>
+                                                                    </li>-->
 
                                                                 </ul>
                                                         </div>
@@ -440,7 +448,7 @@ $(this).hide();
                                         <li>
                                                 <div class="dropdownSupport">
                                                         <div class="addtionalDashboardTab">
-                                                                <span aria-hidden="true" >Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 15px;"></i>
+                                                                <span aria-hidden="true" >Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
                                                         </div>
 
                                                          <div class="dropdown-content-Support">

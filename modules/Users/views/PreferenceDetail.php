@@ -142,6 +142,7 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
 
 			$activeBLock = Settings_Vtiger_Module_Model::getActiveBlockName($request);
 			$viewer->assign('ACTIVE_BLOCK', $activeBLock);
+			$viewer->assign('SubType',$request->get('subtype'));
 			
 			if($request->get('tab')){
 				$viewer->assign('DEFAULT_TAB', 1);

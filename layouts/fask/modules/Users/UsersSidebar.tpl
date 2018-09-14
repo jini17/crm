@@ -9,10 +9,6 @@
 {strip}
 {assign var=SETTINGS_MENU_LIST value=Settings_Vtiger_Module_Model::getSettingsMenuListForNonAdmin()}
 
-        
-
-
-
 <div class="settingsgroup hidden-sm hidden-xs" style="overflow: scroll">
 	 <div class="col-xs-12 text-center visible-xs visible-sm" style="margin-top: 20px;margin-bottom:20px;">
 

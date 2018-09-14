@@ -13,15 +13,14 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 	function __construct() {
 	
 		parent::__construct();
-       	$this->exposeMethod('getUserEducation');
-	    $this->exposeMethod('getUserWorkexp');
-		$this->exposeMethod('getUserSkills');
-		$this->exposeMethod('getUserProject');
-		$this->exposeMethod('getUserEmergency');
-		$this->exposeMethod('getUserLanguage');
-		$this->exposeMethod('getUserLeave');
-		$this->exposeMethod('getUserClaim');
-		$this->exposeMethod('checkApplyLeave');
+		   	$this->exposeMethod('getUserEducation');
+			$this->exposeMethod('getUserWorkexp');
+			$this->exposeMethod('getUserSkills');
+			$this->exposeMethod('getUserProject');
+			$this->exposeMethod('getUserEmergency');
+			$this->exposeMethod('getUserLanguage');
+			$this->exposeMethod('getUserLeave');
+			$this->exposeMethod('getUserClaim');
     	}
 
 
@@ -168,7 +167,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		}
 		
 		//check leave alloted to user or not
-		$isCreate = Users_LeavesRecords_Model::hasAllocateLeave($recordId);
+		$isCreate = count(Users_LeavesRecords_Model::getLeaveTypeList($recordId)) >0 ?true:false;
 		
    		$viewer->assign('ISCREATE',$isCreate);
 	
@@ -305,7 +304,8 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		
    		//$_SESSION["favcolor"] = "yellow"; echo "hai"; echo $_SESSION["myjobgrade"]; echo $_SESSION["favcolor"];echo "hai";
 		//check if he/she is already apply then restrict to user
-
+		
+		$isCreate = count(Users_ClaimRecords_Model::getClaimTypeList($recordId)) >0 ?true:false;
          
 		$viewer->assign('ISCREATE',$isCreate);
 	
@@ -342,7 +342,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		}
 
 		$pageLimit = 5;// set number of row for each page here-//Added By Safuan MyTeamLeave Pagination
-//$selectedclaimtype = '566';
+
 
 		####start Get My Team leave list##### 
 		$myteamclaims = Users_ClaimRecords_Model::getMyTeamClaim($recordId,$currentyear, $pageNumber, $pageLimit,$selectedmember,$selectedclaimtype);
@@ -409,13 +409,6 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		echo $viewer->view('UserClaim.tpl',$moduleName,true);
 	}
 
-	public function checkApplyLeave(Vtiger_Request $request){
-		$isCreate = Users_ClaimRecords_Model::hasAllocateLeave($request->get('record'));
-		if($isCreate)
-			echo 1;
-		else 
-			echo 0;	
-	}
 
 	/**
 	 * Function to get the list of Script models to be included
