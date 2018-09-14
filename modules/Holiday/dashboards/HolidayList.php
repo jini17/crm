@@ -8,54 +8,40 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Leave_MyLeaves_Dashboard extends Vtiger_IndexAjax_View {
+class Holiday_HolidayList_Dashboard extends Vtiger_IndexAjax_View {
 
 	public function process(Vtiger_Request $request) {
-
+		
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 
 		$moduleName = $request->getModule();
-		$type = $request->get('type');
-		$filter = $request->get('group');
+		$monthname = $request->get('type');
+		$filter = $request->get('month');
 
-		$leaveTypelist = Users_LeavesRecords_Model::getLeaveTypeList($currentUser->getId());
-		$value = $type;
-		if($type == '' || $type == null) {
-				$value = 'leavetype';
-				$filter = $leaveTypelist[0]['leavetypeid'];
+		if($monthname == '' || $monthname == null) {
+				$monthname = null;
 		}
-		
-		$valueLabel = 'LBL_LEAVE_TYPE';
 
-		if($type=='leavetype') {
-			$valueLabel = $valueLabel;
-		}  else if($type=='latest') {	
-			$valueLabel = 'LBL_LAST_5_LEAVES';
-		}
-		
-		
-		
-		$leavemodel = Users_LeavesRecords_Model::getMyLeaves($currentUser->getId(), date('Y'), $value, $filter);	
+		$holidaymodel = Users_LeavesRecords_Model::getHolidayList($monthname);
+			
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
 		
 		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 		$viewer->assign('WIDGET', $widget);
-		$viewer->assign('VALUE', $value );
-		$viewer->assign('VALUELABEL', $valueLabel);
+		$viewer->assign('TYPE', $type);
+		$viewer->assign('TYPELABEL', $typeLabel);
 		
 		$viewer->assign('MODULE_NAME', $moduleName);
-		$viewer->assign('MODELS', $leavemodel);
-		$viewer->assign('LEAVE_TYPE_LIST', $leaveTypelist);
-		$viewer->assign('DURATION', $duration);
+		$viewer->assign('MODELS', $holidaymodel);
 		$content = $request->get('content');
      
 
 		if(!empty($content)) {
-			$viewer->view('dashboards/MyLeavesContent.tpl', $moduleName);
+			$viewer->view('dashboards/HolidayContents.tpl', $moduleName);
 		} else {
-			$viewer->view('dashboards/MyLeaves.tpl', $moduleName);
+			$viewer->view('dashboards/Holiday.tpl', $moduleName);
 		}
 	}
 }

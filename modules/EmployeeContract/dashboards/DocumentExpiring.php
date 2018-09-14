@@ -8,7 +8,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Leave_MyLeaves_Dashboard extends Vtiger_IndexAjax_View {
+class EmployeeContract_Document_Expiring_Dashboard extends Vtiger_IndexAjax_View {
 
 	public function process(Vtiger_Request $request) {
 
@@ -53,9 +53,9 @@ class Leave_MyLeaves_Dashboard extends Vtiger_IndexAjax_View {
      
 
 		if(!empty($content)) {
-			$viewer->view('dashboards/MyLeavesContent.tpl', $moduleName);
+			$viewer->view('dashboards/DocumentExpiringContents.tpl', $moduleName);
 		} else {
-			$viewer->view('dashboards/MyLeaves.tpl', $moduleName);
+			$viewer->view('dashboards/DocumentExpiring.tpl', $moduleName);
 		}
 	}
 }

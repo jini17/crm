@@ -16,7 +16,7 @@
 	<thead>
 		<tr>
 			<th style="width:43%;">
-			<b>{vtranslate('LBL_LEAVE_TYPE', $MODULE_NAME)}</b>
+			<b>{vtranslate('LBL_NAME', $MODULE_NAME)}</b>
 			</th>
 			<th>
 			<b>{vtranslate('LBL_DURATIONOFLEAVE', $MODULE_NAME)}</b>
@@ -30,13 +30,16 @@
 		{foreach item=MODEL from=$MODELS}
 			<tr>
 				<td>
-				{$MODEL['leave_type']}
+				{$MODEL['fullname']}
 				</td>
 				<td>
-				{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($MODEL['from_date'])} To {Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($MODEL['to_date'])}
+				{$MODEL['duration']}
 				</td>
 				<td style="text-align:center;">
 				{$MODEL['leavestatus']}
+				</td>
+				<td>
+					{$MODEL['icon']}
 				</td>
 			</tr>
 		{/foreach}

@@ -23,6 +23,8 @@ $languageStrings = array(
     'LBL_THIS_WEEK'=>'This Week',
     'LBL_LEAVE_TYPE'=>'Leave Type',
     'LBL_LAST_5_LEAVES'=>'Last 5 Leaves',
+    'LBL_LEAVE_TYPE'=>'Leaves Type',
+    
 );
 
 $jsLanguageStrings = array(
