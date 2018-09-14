@@ -21,6 +21,8 @@ $languageStrings = array(
     'LBL_IN_THIS_MONTH'=>'No leave in this month',
     'LBL_NEXT_MONTH'=>'No leaves on next month',
     'LBL_THIS_WEEK'=>'This Week',
+    'LBL_LEAVE_TYPE'=>'Leave Type',
+    'LBL_LAST_5_LEAVES'=>'Last 5 Leaves',
 );
 
 $jsLanguageStrings = array(

@@ -43,6 +43,23 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
 	}
 
+	public function getAllLeaveTypeList(){
+	$db = PearDatabase::getInstance();
+	$query = "SELECT * FROM vtiger_leavetype";
+	
+	$result = $db->pquery($query);
+	$rowdetail = array();
+	for($i=0;$db->num_rows($result)>$i;$i++){
+
+		$rowdetail[$i]['title'] = $db->query_result($result, $i, 'title');
+		$rowdetail[$i]['colorcode'] = $db->query_result($result, $i, 'colorcode');
+	}
+	
+
+	return $rowdetail;
+
+	}
+
 	//Created by Safuan for fetching current user leaves for current year//	
 	public function getMyLeaves($userid, $year){
 	
@@ -134,6 +151,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 					$data[$i]['leavetypeid'] 	= $leavetypeid;			
 					$data[$i]['leavetype'] 	 	= $leavetype;
 					$data[$i]['leave_remain']	= $balance_leave;
+					$data[$i]['leave_used']		= $takenleave;
 				} 	
 			}	
 		}	
@@ -635,6 +653,21 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
 	}
 	*/
+
+	public function getDepartmentList(){
+		$db = PearDatabase::getInstance();
+		$query = "SELECT * FROM vtiger_department WHERE presence=1";
+		$result = $db->pquery($query);
+		$departments = array();
+		for($i=0;$db->num_rows($result)>$i;$i++){
+
+			$departments[$i]['department'] = $db->query_result($result, $i, 'department');
+			$departments[$i]['color'] = $db->query_result($result, $i, 'color');
+		}
+
+		return $departments;
+		
+	}
 
 
 }

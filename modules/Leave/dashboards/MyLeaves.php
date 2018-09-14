@@ -8,7 +8,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Leave_MembersLeaves_Dashboard extends Vtiger_IndexAjax_View {
+class Leave_MyLeaves_Dashboard extends Vtiger_IndexAjax_View {
 
 	public function process(Vtiger_Request $request) {
 		
@@ -16,33 +16,42 @@ class Leave_MembersLeaves_Dashboard extends Vtiger_IndexAjax_View {
 		$viewer = $this->getViewer($request);
 
 		$moduleName = $request->getModule();
-		$duration = $request->get('duration');
-		$group = $request->get('group');
-		$linkId = $request->get('linkid');
+		$type = $request->get('type');
+	
 		
-		$leavemodel = Users_LeavesRecords_Model::widgetgetusersleaves($group, $duration);
-		$timeLabel = vtranslate('LBL_TODAY',$moduleName);
+		if($value == '' || $value == null)
+			$value = 'LeaveType';
+		
+		$valueLabel = 'LBL_LEAVE_TYPE';
 
-		if($duration == 'today') {
-			$timeLabel = vtranslate('LBL_IN_TODAY',$moduleName);
-		} else if($duration == 'nextsevendays') {
-			$timeLabel = vtranslate('LBL_IN_NEXTSEVENDAYS',$moduleName);
-		} else if ($duration == 'nextthirtydays'){
-			$timeLabel = vtranslate('LBL_IN_NEXTTHIRTYDAYS',$moduleName);
-		}	
-		
+		if($value=='LeaveType') {
+			$valueLabel = 'LBL_LEAVE_TYPE';
+		}  else if($value=='lastleaves') {	
+			$valueLabel = 'LBL_LAST_5_LEAVES';
+		}
+
+		$leavemodel = Users_LeavesRecords_Model::getMyLeaves($currentUser->getId(), 2018);
+		$leaveTypelist = Users_LeavesRecords_Model::getAllLeaveTypeList();
+			
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
+		
 		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 		$viewer->assign('WIDGET', $widget);
+		$viewer->assign('VALUE', $value);
+		$viewer->assign('VALUELABEL', $valueLabel);
+		
 		$viewer->assign('MODULE_NAME', $moduleName);
-		$viewer->assign('TIME_LABEL', $timeLabel);
 		$viewer->assign('MODELS', $leavemodel);
+		$viewer->assign('LEAVE_TYPE_LIST', $leaveTypelist);
+		$viewer->assign('DURATION', $duration);
 		$content = $request->get('content');
+     
+
 		if(!empty($content)) {
-			$viewer->view('dashboards/MembersLeavesContents.tpl', $moduleName);
+			$viewer->view('dashboards/MyLeavesContent.tpl', $moduleName);
 		} else {
-			$viewer->view('dashboards/MembersLeaves.tpl', $moduleName);
+			$viewer->view('dashboards/MyLeaves.tpl', $moduleName);
 		}
 	}
 }
