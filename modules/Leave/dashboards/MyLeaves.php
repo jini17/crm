@@ -8,55 +8,54 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Leave_LeaveApproval_Dashboard extends Vtiger_IndexAjax_View {
+class Leave_MyLeaves_Dashboard extends Vtiger_IndexAjax_View {
 
 	public function process(Vtiger_Request $request) {
-		
+
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 
 		$moduleName = $request->getModule();
 		$type = $request->get('type');
-	
-		
-		if($type == '' || $type == null)
-			$type = 'today';
-		
-		$typeLabel = 'LBL_IN_TODAY';
+		$filter = $request->get('group');
 
-		if($type=='today') {
-			$typeLabel = 'LBL_IN_TODAY';
-		} else if($type=='tomorrow') {	
-			$typeLabel = 'LBL_IN_TOMORROW';
-		} else if($type=='thisweek') {	
-			$typeLabel = 'LBL_IN_THIS_WEEK';
-		} else if($type=='nextweek') {	
-			$typeLabel = 'LBL_IN_NEXT_WEEK';
-		} else if($type=='thismonth') {	
-			$typeLabel = 'LBL_IN_THIS_MONTH';
-		} else if($type=='nextmonth') {	
-			$typeLabel = 'LBL_NEXT_MONTH';
+		$leaveTypelist = Users_LeavesRecords_Model::getLeaveTypeList($currentUser->getId());
+		$value = $type;
+		if($type == '' || $type == null) {
+				$value = 'leavetype';
+				$filter = $leaveTypelist[0]['leavetypeid'];
 		}
+		
+		$valueLabel = 'LBL_LEAVE_TYPE';
 
-		$leavemodel = Users_LeavesRecords_Model::widgetgetmyteamleaves($type);
-			
+		if($type=='leavetype') {
+			$valueLabel = $valueLabel;
+		}  else if($type=='latest') {	
+			$valueLabel = 'LBL_LAST_5_LEAVES';
+		}
+		
+		
+		
+		$leavemodel = Users_LeavesRecords_Model::getMyLeaves($currentUser->getId(), date('Y'), $value, $filter);	
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
 		
 		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 		$viewer->assign('WIDGET', $widget);
-		$viewer->assign('TYPE', $type);
-		$viewer->assign('TYPELABEL', $typeLabel);
+		$viewer->assign('VALUE', $filter );
+		$viewer->assign('VALUELABEL', $valueLabel);
 		
 		$viewer->assign('MODULE_NAME', $moduleName);
 		$viewer->assign('MODELS', $leavemodel);
+		$viewer->assign('LEAVE_TYPE_LIST', $leaveTypelist);
+		$viewer->assign('DURATION', $duration);
 		$content = $request->get('content');
      
 
 		if(!empty($content)) {
-			$viewer->view('dashboards/LeaveApprovalContents.tpl', $moduleName);
+			$viewer->view('dashboards/MyLeavesContent.tpl', $moduleName);
 		} else {
-			$viewer->view('dashboards/LeaveApproval.tpl', $moduleName);
+			$viewer->view('dashboards/MyLeaves.tpl', $moduleName);
 		}
 	}
 }

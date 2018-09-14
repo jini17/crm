@@ -167,24 +167,28 @@
 <!--start my leaves-->
 <div id="MyLeaveContainer">
         <div class="myProfileBtnLeft">
-            <div class="clear"></div>
-                <button type="button" class="btn btn-primary" onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
+
+            <strong class="pull-left" style="margin:0;"> My Leave </strong>
+
         </div>
 
         <div class="myProfileBtnRight">
-                
-                <div style="float:right;margin-left:5px;">
+
+                <div class="pull-right" style="margin-left:5px;">
 
                         <!--	<select name="my_selyear" id="my_selyear" data-section="M" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" class="my_selyear"> -->
-                                <form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST">
-                                        <select name="my_selyear" class="my_selyear" id="my_selyear" data-section="M"  class="select2"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
+                    <form id="my_selyear" name="my_selyear" class="form-horizontal" method="POST" style="margin-right: 5px;">
+                                        <select style="padding-bottom: 3px;" name="my_selyear" class="my_selyear" id="my_selyear" data-section="M"  class="select2"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
 
                                                 <!--//Added By Jitu Date Combobox-->
                                                 {for $year=$STARTYEAR to $ENDYEAR}
                                                 <option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
                                                 {/for}
                                         </select>	
+                                                                        <button style="margin-left:10px;" type="button" class="btn btn-primary pull-right" onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
+
                                 </form>
+
                         </div>
         </div>
 <br /><br />
@@ -264,8 +268,8 @@ onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mo
 <br /><br />
 <!--start team leaves-->
 <div id="MyTeamLeaveContainer" style="margin: 14px;width: 98%;">
-        <div style="float:left;margin-bottom:21px;"><strong>{vtranslate('LBL_MYTEAM_LEAVE', $MODULE)}</strong></div>
-        <div class="listViewTopMenuDiv noprint" style="float:left;margin-left:5px;">
+        <div class="pull-left" style="margin-bottom:21px;"><strong>{vtranslate('LBL_MYTEAM_LEAVE', $MODULE)}</strong></div>
+        <div class="listViewTopMenuDiv noprint pull-right" style="margin-left:5px;">
                 <select name="team_selyear" class="team_selyear" id="team_selyear" data-section="T" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}" onchange="Users_Leave_Js.sel_teammember('?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}','T');" >
                 {for $year=$STARTYEAR to $ENDYEAR}
                         <option value="{$year}" {if $year eq $CURYEAR} selected {/if}>{$year}</option>
