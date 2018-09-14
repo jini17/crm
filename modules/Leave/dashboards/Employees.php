@@ -8,7 +8,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Leave_MembersLeaves_Dashboard extends Vtiger_IndexAjax_View {
+class Leave_Employees_Dashboard extends Vtiger_IndexAjax_View {
 
 	public function process(Vtiger_Request $request) {
 		
@@ -16,33 +16,30 @@ class Leave_MembersLeaves_Dashboard extends Vtiger_IndexAjax_View {
 		$viewer = $this->getViewer($request);
 
 		$moduleName = $request->getModule();
-		$duration = $request->get('duration');
-		$group = $request->get('group');
-		$linkId = $request->get('linkid');
+		$department = $request->get('department');
+		$departmentList = getAllPickListValues('department');
 		
-		$leavemodel = Users_LeavesRecords_Model::widgetgetusersleaves($group, $duration);
-		$timeLabel = vtranslate('LBL_TODAY',$moduleName);
-
-		if($duration == 'today') {
-			$timeLabel = vtranslate('LBL_IN_TODAY',$moduleName);
-		} else if($duration == 'nextsevendays') {
-			$timeLabel = vtranslate('LBL_IN_NEXTSEVENDAYS',$moduleName);
-		} else if ($duration == 'nextthirtydays'){
-			$timeLabel = vtranslate('LBL_IN_NEXTTHIRTYDAYS',$moduleName);
-		}	
+		if($department == '' || $department == null)
+			$type = 'Technical';
 		
+		$leavemodel = Users_LeavesRecords_Model::widgetTopNOMCEmployee($type);
+			
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
+		
 		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 		$viewer->assign('WIDGET', $widget);
+		$viewer->assign('TYPE', $type);
+		
 		$viewer->assign('MODULE_NAME', $moduleName);
-		$viewer->assign('TIME_LABEL', $timeLabel);
 		$viewer->assign('MODELS', $leavemodel);
 		$content = $request->get('content');
+     
+
 		if(!empty($content)) {
-			$viewer->view('dashboards/MembersLeavesContents.tpl', $moduleName);
+			$viewer->view('dashboards/EmployeesContents.tpl', $moduleName);
 		} else {
-			$viewer->view('dashboards/MembersLeaves.tpl', $moduleName);
+			$viewer->view('dashboards/Employees.tpl', $moduleName);
 		}
 	}
 }

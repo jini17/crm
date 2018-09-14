@@ -43,17 +43,42 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
 	}
 
+	public function getAllLeaveTypeList(){
+	$db = PearDatabase::getInstance();
+	$query = "SELECT * FROM vtiger_leavetype";
+	
+	$result = $db->pquery($query);
+	$rowdetail = array();
+	for($i=0;$db->num_rows($result)>$i;$i++){
+
+		$rowdetail[$i]['title'] = $db->query_result($result, $i, 'title');
+		$rowdetail[$i]['colorcode'] = $db->query_result($result, $i, 'colorcode');
+	}
+	
+
+	return $rowdetail;
+
+	}
+
 	//Created by Safuan for fetching current user leaves for current year//	
-	public function getMyLeaves($userid, $year){
+	public function getMyLeaves($userid, $year, $filtertype=null, $filtervalue=null){
 	
 	$db = PearDatabase::getInstance();
 	//$db->setDebug(true);
+	$filtercond = '';
+	if($filtertype =='leavetype'){
+		$filtercond = " AND vtiger_leave.leavetype=". $filtervalue;
+
+	} else if($filtertype=='latest'){
+		$filtercond = " ORDER BY vtiger_leave.fromdate DESC Limit 0, 5";
+	}
+
 	$query = "SELECT leaveid, reasonofleave, leavetype, fromdate, todate, leavestatus, reasonnotapprove, starthalf, endhalf
 			FROM vtiger_leave 
 			INNER JOIN vtiger_crmentity
 			ON vtiger_crmentity.crmid = vtiger_leave.leaveid
-			WHERE vtiger_crmentity.smownerid = ?
-			AND vtiger_crmentity.deleted=0 AND DATE_FORMAT(fromdate, '%Y') = ? AND vtiger_crmentity.deleted=0";
+			WHERE vtiger_leave.employee_id = ?
+			AND vtiger_crmentity.deleted=0 AND DATE_FORMAT(fromdate, '%Y') = ? AND vtiger_crmentity.deleted=0 ".$filtercond;
 
 	$result = $db->pquery($query,array($userid, $year));
 	$myleave=array();	
@@ -134,6 +159,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 					$data[$i]['leavetypeid'] 	= $leavetypeid;			
 					$data[$i]['leavetype'] 	 	= $leavetype;
 					$data[$i]['leave_remain']	= $balance_leave;
+					$data[$i]['leave_used']		= $takenleave;
 				} 	
 			}	
 		}	
@@ -191,7 +217,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 		$querygetteamleave="SELECT leaveid, CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, vtiger_users.id, reasonofleave, leavetype, fromdate, todate, leavestatus, reasonnotapprove,starthalf, endhalf
 					FROM vtiger_leave 
 					INNER JOIN vtiger_crmentity	ON vtiger_crmentity.crmid = vtiger_leave.leaveid
-          			INNER JOIN vtiger_users ON vtiger_crmentity.smownerid=vtiger_users.id
+          			INNER JOIN vtiger_users ON vtiger_leave.employee_id=vtiger_users.id
                     LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid=	vtiger_leave.leavetype		
 					WHERE vtiger_crmentity.deleted=0 ".$memcondition." AND DATE_FORMAT(fromdate, '%Y') = $year
 					AND vtiger_leave.leavestatus IN ('Apply','Approved','Not Approved','Cancel')" .$leavetypecondtion;
@@ -416,7 +442,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 					INNER JOIN vtiger_crmentity
 					ON vtiger_crmentity.crmid = vtiger_leave.leaveid
                    			INNER JOIN vtiger_users
-                    			ON vtiger_crmentity.smownerid=vtiger_users.id
+                    			ON vtiger_leave.employee_id=vtiger_users.id
 					AND vtiger_crmentity.deleted=0 
 					AND (vtiger_leave.leavestatus = 'Apply' 
 						OR vtiger_leave.leavestatus = 'Approved'
@@ -528,10 +554,6 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 		} 
 		
 		
-		
-		
-		
-		
 		$teamreporttoquery = "SELECT id FROM vtiger_users WHERE reports_to_id=$current_user->id";
 		$resulteamreport = $db->pquery($teamreporttoquery,array());
 		
@@ -548,7 +570,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 					ON vtiger_crmentity.crmid = vtiger_leave.leaveid
                    			INNER JOIN vtiger_users
                     			ON vtiger_crmentity.smownerid=vtiger_users.id
-					WHERE vtiger_crmentity.smownerid IN ($allteammate)
+					WHERE vtiger_leave.employee_id IN ($allteammate)
 					AND vtiger_crmentity.deleted=0 
 					AND (vtiger_leave.leavestatus = 'Apply') ".$query. " ORDER BY fromdate DESC LIMIT 5";
 
@@ -607,5 +629,54 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 			$result = $db->pquery($leavecancelsql,array($takenleave, $userupdateid, $leavetype, date('Y')));	
 		} 	
 		return $result;		
+	}
+	
+	
+	public function getEmployeeImage($userId){
+			
+			$db = PearDatabase::getInstance();
+			
+			$query = "SELECT vtiger_attachments.attachmentsid, vtiger_attachments.path, vtiger_attachments.name FROM vtiger_attachments
+                                  LEFT JOIN vtiger_salesmanattachmentsrel ON vtiger_salesmanattachmentsrel.attachmentsid = vtiger_attachments.attachmentsid
+                                  WHERE vtiger_salesmanattachmentsrel.smid=?";
+
+			$result = $db->pquery($query, array($userId));
+
+			$imageId = $db->query_result($result, 0, 'attachmentsid');
+			$imagePath = $db->query_result($result, 0, 'path');
+			$imageName = $db->query_result($result, 0, 'name');
+
+			//decode_html - added to handle UTF-8 characters in file names
+			$imageOriginalName = urlencode(decode_html($imageName));
+
+			$imageDetails = $imagePath.$imageId.'_'.$imageOriginalName;
+			return $imageDetails;
+	}
+	
+	public function widgetTopNOMCEmployee($department){
+		$db = PearDatabase::getInstance();
+		
+		$deptCond = '';
+		if($department !=''){
+			$deptCond = " AND department='$department'";
+		}
+		$query = "SELECT count(vtiger_leave.employee_id) as leavecount, vtiger_users.id, CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, 						vtiger_users.department, vtiger_users.title 
+					FROM vtiger_leave 
+					INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_leave.leaveid
+					LEFT JOIN vtiger_users ON vtiger_users.id=vtiger_leave.employee_id
+					WHERE vtiger_crmentity.deleted = 0 AND vtiger_users.deleted = 0 AND vtiger_leave.leavetype=790 ".$deptCond ." 
+					GROUP BY vtiger_leave.employee_id ORDER BY leavecount ASC LIMIT 0, 5";
+		$result = $db->pquery($query, array());
+		$numrows = $db->num_rows($result);
+		$employeelist = array();
+		
+		for($i=0;$i<$numrows;$i++){
+			
+			//$employeelist[$i]['imagedetail'] = self::getEmployeeImage($db->query_result($result, $i, 'id'));
+			$employeelist[$i]['empname'] = $db->query_result($result, $i, 'fullname');
+			$employeelist[$i]['department'] = $db->query_result($result, $i, 'department');
+			$employeelist[$i]['title'] = $db->query_result($result, $i, 'title');
+		}
+		return $employeelist;
 	}
 }
