@@ -630,6 +630,35 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 		} 	
 		return $result;		
 	}
+
+
+	public function getHolidayList($monthname=null){
+		$db = PearDatabase::getInstance();
+		//$db->setDebug(true);
+		$filtercond = '';
+		if($monthname == 1|| $monthname == 2 || $monthname == 3 || $monthname == 4 || $monthname == 5 || $monthname == 6 
+			|| $monthname == 7 || $monthname == 8 || $monthname == 9 || $monthname == 10 || $monthname == 11 || $monthname == 12){
+
+			
+			$filtercond = " AND MONTH(vtiger_holiday.start_date)=".$monthname;
+
+		}
+
+		$query = "SELECT * FROM vtiger_holiday INNER JOIN vtiger_crmentity 
+					ON vtiger_crmentity.crmid = vtiger_holiday.holidayid 
+					WHERE vtiger_crmentity.deleted=0 ".$filtercond;
+	
+		$result = $db->pquery($query);
+		$rowdetail = array();
+		for($i=0;$db->num_rows($result)>$i;$i++){
+
+			$rowdetail[$i]['holiday_name'] = $db->query_result($result, $i, 'holiday_name');
+			$rowdetail[$i]['start_date'] = $db->query_result($result, $i, 'start_date');
+			$rowdetail[$i]['end_date'] = $db->query_result($result, $i, 'end_date');
+		}
+
+		return $rowdetail;
+}
 	
 	
 	public function getEmployeeImage($userId){
@@ -678,5 +707,6 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 			$employeelist[$i]['title'] = $db->query_result($result, $i, 'title');
 		}
 		return $employeelist;
+
 	}
 }

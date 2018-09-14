@@ -16,13 +16,13 @@
 	<thead>
 		<tr>
 			<th style="width:43%;">
-			<b>{vtranslate('LBL_LEAVE_TYPE', $MODULE_NAME)}</b>
+			<b>Holiday Name</b>
 			</th>
 			<th>
-			<b>{vtranslate('LBL_DURATIONOFLEAVE', $MODULE_NAME)}</b>
+			<b>Start Date</b>
 			</th>
 			<th colspan="2">
-			<b>{vtranslate('LBL_STATUS', $MODULE_NAME)}</b>
+			<b>End Date</b>
 			</th>
 		</tr>
 	</thead>
@@ -30,13 +30,13 @@
 		{foreach item=MODEL from=$MODELS}
 			<tr>
 				<td>
-				{$MODEL['leave_type']}
+				{$MODEL['holiday_name']}
 				</td>
 				<td>
-				{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($MODEL['from_date'])} To {Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($MODEL['to_date'])}
+				{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($MODEL['start_date'])}
 				</td>
 				<td style="text-align:center;">
-				{$MODEL['leavestatus']}
+				{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($MODEL['end_date'])}
 				</td>
 			</tr>
 		{/foreach}
@@ -45,7 +45,7 @@
 <br /><br />
 {else}
 	<span class="noDataMsg">
-		{vtranslate($TYPELABEL,$MODULE_NAME)}
+		{vtranslate('LBL_NO_HOLIDAY',$MODULE_NAME)}
 	</span>
 {/if}
 </div>
