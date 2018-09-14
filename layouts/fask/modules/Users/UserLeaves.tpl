@@ -167,7 +167,7 @@
 <!--start my leaves-->
 <div id="MyLeaveContainer">
         <div class="myProfileBtnLeft">
-            <h4 class="pull-left" style="margin:0;"> My Leave </h3>
+            <strong class="pull-left" style="margin:0;"> My Leave </strong>
         </div>
 
         <div class="myProfileBtnRight">
@@ -266,8 +266,8 @@ onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mo
 <br /><br />
 <!--start team leaves-->
 <div id="MyTeamLeaveContainer" style="margin: 14px;width: 98%;">
-        <div style="float:left;margin-bottom:21px;"><strong>{vtranslate('LBL_MYTEAM_LEAVE', $MODULE)}</strong></div>
-        <div class="listViewTopMenuDiv noprint" style="float:left;margin-left:5px;">
+        <div class="pull-left" style="margin-bottom:21px;"><strong>{vtranslate('LBL_MYTEAM_LEAVE', $MODULE)}</strong></div>
+        <div class="listViewTopMenuDiv noprint pull-right" style="margin-left:5px;">
                 <select name="team_selyear" class="team_selyear" id="team_selyear" data-section="T" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}" onchange="Users_Leave_Js.sel_teammember('?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}','T');" >
                 {for $year=$STARTYEAR to $ENDYEAR}
                         <option value="{$year}" {if $year eq $CURYEAR} selected {/if}>{$year}</option>

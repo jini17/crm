@@ -19,9 +19,11 @@
 {assign var=CREATE_SKILL_URL value=$LANGUAGE_RECORD_MODEL->getCreateSkillUrl()}
 {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
 		<div class="myProfileBtn">
-			<button type="button" class="btn btn-primary" onclick="Users_Skills_Js.addLanguage('{$CREATE_LANGUAGE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_LANGUAGE', $MODULE)}</strong></button>
+                    <stong class="pull-left" style="font-weight: bold;"> Language & Skills </stong>
+			<button type="button" class="btn btn-primary pull-right" onclick="Users_Skills_Js.addLanguage('{$CREATE_LANGUAGE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_LANGUAGE', $MODULE)}</strong></button>
 		</div>
-	<table class="block table table-bordered listViewEntriesTable" style="background-color: #fff;margin: 14px;width: 98%;">
+                <div class="clearfix"></div>
+	<table class="block table table-bordered listViewEntriesTable" style="background-color: #fff;margin: 14px;">
 		<thead>
 			<tr>
 				<th nowrap><strong>{vtranslate('LBL_LANGUAGE', $MODULE)}</strong></th>
@@ -59,11 +61,11 @@
 <!--- Start of Skill Container-->
 <div id="SkillContainer">
 
-	<button type="button" class="btn" onclick="Users_Skills_Js.addSkill('{$CREATE_SKILL_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_SKILL', $MODULE)}</strong></button>
+	<button type="button" class="btn btn-primary pull-right" onclick="Users_Skills_Js.addSkill('{$CREATE_SKILL_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_SKILL', $MODULE)}</strong></button>
 
-	<br />
-	<div class="row-fluid paddingTop20">
-		<div class="select2-container select2-container-multi select2 span12" id="allskillslist">
+        <div class="clearfix"></div>
+        <div class="row-fluid paddingTop20" style="width: 100%; margin-top: 10px;">
+		<div class="select2-container select2-container-multi select2 span12" id="allskillslist"  style="width: 100%;">
 			<ul class="select2-choices ui-sortable">
 				{foreach item=SKILL from=$USER_SKILL_CLOUD}
 				<li class="select2-search-choice" style="cursor:default;" data-id="54" data-item-name="SQL">
