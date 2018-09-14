@@ -61,16 +61,24 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	}
 
 	//Created by Safuan for fetching current user leaves for current year//	
-	public function getMyLeaves($userid, $year){
+	public function getMyLeaves($userid, $year, $filtertype=null, $filtervalue=null){
 	
 	$db = PearDatabase::getInstance();
 	//$db->setDebug(true);
+	$filtercond = '';
+	if($filtertype =='leavetype'){
+		$filtercond = " AND vtiger_leave.leavetype=". $filtervalue;
+
+	} else if($filtertype=='latest'){
+		$filtercond = " ORDER BY vtiger_leave.fromdate DESC Limit 0, 5";
+	}
+
 	$query = "SELECT leaveid, reasonofleave, leavetype, fromdate, todate, leavestatus, reasonnotapprove, starthalf, endhalf
 			FROM vtiger_leave 
 			INNER JOIN vtiger_crmentity
 			ON vtiger_crmentity.crmid = vtiger_leave.leaveid
 			WHERE vtiger_crmentity.smownerid = ?
-			AND vtiger_crmentity.deleted=0 AND DATE_FORMAT(fromdate, '%Y') = ? AND vtiger_crmentity.deleted=0";
+			AND vtiger_crmentity.deleted=0 AND DATE_FORMAT(fromdate, '%Y') = ? AND vtiger_crmentity.deleted=0 ".$filtercond;
 
 	$result = $db->pquery($query,array($userid, $year));
 	$myleave=array();	

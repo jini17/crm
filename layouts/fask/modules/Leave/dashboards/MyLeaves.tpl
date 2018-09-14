@@ -22,21 +22,23 @@
         
         <div class="row">
             <div class="col-sm-12">
+               <div class="col-lg-6">
                 <label class="radio-group cursorPointer">
                     <input type="radio" id="myleavetype" name="type" class="widgetFilter reloadOnChange cursorPointer" value="leavetype" checked="checked" /> {vtranslate('LBL_LEAVE_TYPE', $MODULE_NAME)}
                 </label>
-                
-               
-                 <label class="radio-group cursorPointer">
-                    <input type="radio" id="leave5" name="type" class="widgetFilter reloadOnChange cursorPointer" value="latest" /> 
-                    <span>{vtranslate('LBL_LAST_5_LEAVES', $MODULE_NAME)}</span>
-                </label>
+              </div>
+                <div class="col-lg-6">
+                   <label class="radio-group cursorPointer">
+                      <input type="radio" id="leave5" name="type" class="widgetFilter reloadOnChange cursorPointer" value="latest" /> 
+                      <span>{vtranslate('LBL_LAST_5_LEAVES', $MODULE_NAME)}</span>
+                    </label>
+                </div>
             </div> 
             <div class='clearfix'></div>
             <div class="col-sm-12" id="leave_type_dropdown">
-              <select class="select2 widgetFilter"  name="group" style='width:120px;'>
+              <select class="select2 widgetFilter col-lg-6"  name="group" >
                 {foreach item=LEAVE_TYPE from=$LEAVE_TYPE_LIST}
-                <option value="{$LEAVE_TYPE['title']}">{$LEAVE_TYPE['title']}</option> 
+                <option value="{$LEAVE_TYPE['leavetypeid']}" {if $VALUE eq $LEAVE_TYPE['leavetypeid']}selected{/if}>{$LEAVE_TYPE['leavetype']}&nbsp;[{$LEAVE_TYPE['leave_remain']}]</option> 
                 {/foreach}
               </select>
             </div>  
@@ -56,6 +58,7 @@
       
        jQuery('#leave_type_dropdown').hide('slow');
     });
+
       $("#myleavetype").on('click',function(){
       
        jQuery('#leave_type_dropdown').show('slow');

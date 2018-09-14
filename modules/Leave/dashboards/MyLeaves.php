@@ -11,34 +11,38 @@
 class Leave_MyLeaves_Dashboard extends Vtiger_IndexAjax_View {
 
 	public function process(Vtiger_Request $request) {
-		
+
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 
 		$moduleName = $request->getModule();
 		$type = $request->get('type');
-	
-		
-		if($value == '' || $value == null)
-			$value = 'LeaveType';
+		$filter = $request->get('group');
+
+		$leaveTypelist = Users_LeavesRecords_Model::getLeaveTypeList($currentUser->getId());
+		$value = $type;
+		if($type == '' || $type == null) {
+				$value = 'leavetype';
+				$filter = $leaveTypelist[0]['leavetypeid'];
+		}
 		
 		$valueLabel = 'LBL_LEAVE_TYPE';
 
-		if($value=='LeaveType') {
-			$valueLabel = 'LBL_LEAVE_TYPE';
-		}  else if($value=='lastleaves') {	
+		if($type=='leavetype') {
+			$valueLabel = $valueLabel;
+		}  else if($type=='latest') {	
 			$valueLabel = 'LBL_LAST_5_LEAVES';
 		}
-
-		$leavemodel = Users_LeavesRecords_Model::getMyLeaves($currentUser->getId(), 2018);
-		$leaveTypelist = Users_LeavesRecords_Model::getAllLeaveTypeList();
-			
+		
+		
+		
+		$leavemodel = Users_LeavesRecords_Model::getMyLeaves($currentUser->getId(), date('Y'), $value, $filter);	
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
 		
 		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 		$viewer->assign('WIDGET', $widget);
-		$viewer->assign('VALUE', $value);
+		$viewer->assign('VALUE', $filter );
 		$viewer->assign('VALUELABEL', $valueLabel);
 		
 		$viewer->assign('MODULE_NAME', $moduleName);

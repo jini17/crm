@@ -33,7 +33,7 @@
 				{$MODEL['leave_type']}
 				</td>
 				<td>
-				{$MODEL['from_date']}
+				{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($MODEL['from_date'])} To {Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($MODEL['to_date'])}
 				</td>
 				<td style="text-align:center;">
 				{$MODEL['leavestatus']}
