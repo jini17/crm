@@ -16,7 +16,10 @@ $languageStrings = array(
 
 	// Blocks
 	'LBL_Salary_Tracking' => 'Salary Tracking',
-
+	'LBL_NOT_DURATION'=>'are expiring in 30 days',
+	'LBL_EMPLOYEE_CONTRACT'=>'No employee contracts',
+	'LBL_PASSPORT'=>'No Passports',
+	'LBL_VISA'=>"No Visa's",
 	
 );
 
