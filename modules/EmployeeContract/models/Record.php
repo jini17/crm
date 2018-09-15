@@ -101,5 +101,50 @@ class EmployeeContract_Record_Model extends Vtiger_Record_Model {
 		}
 		return $value;
 	}
-    
+
+	function getExpiringDocument($filter, $pagingModel){
+		$db = PearDatabase::getInstance();
+		//$db->setDebug(true);
+		
+
+		if($filter == 'contract' || $filter==null){
+			$query = "SELECT concat(vtiger_users.first_name, '', vtiger_users.last_name) as fullname, vtiger_employeecontract.department, vtiger_employeecontract.designation, contract_expiry_date as expirydate FROM vtiger_employeecontract 
+					  INNER JOIN vtiger_employeecontractcf ON vtiger_employeecontractcf.employeecontractid=vtiger_employeecontract.employeecontractid 
+					  INNER JOIN vtiger_users ON vtiger_users.id = vtiger_employeecontract.employee_id 
+					  WHERE contract_expiry_date between curdate() AND ADDDATE(curdate(), 30) LIMIT ?, ?";
+		}
+		if($filter == 'passport'){
+			$query = "SELECT  concat(vtiger_users.first_name, '', vtiger_users.last_name) as fullname, vtiger_users.department, vtiger_users.title as designation, date_expired as expirydate FROM vtiger_passportvisa
+					  INNER JOIN vtiger_users ON vtiger_users.id = vtiger_passportvisa.employee_id 
+					  WHERE date_expired between curdate() AND ADDDATE(curdate(), 30) LIMIT ?, ?";
+		}
+		if($filter == 'visa'){
+			$query = "SELECT concat(vtiger_users.first_name, '', vtiger_users.last_name) as fullname, vtiger_users.department, vtiger_users.title as designation, visa_date_expired as expirydate FROM vtiger_passportvisa
+					  INNER JOIN vtiger_users ON vtiger_users.id = vtiger_passportvisa.employee_id 
+					  WHERE visa_date_expired between curdate() AND ADDDATE(curdate(), 30) LIMIT ?, ?";
+		}
+		$params = array();
+		$params[] = $pagingModel->getStartIndex();
+		$params[] = $pagingModel->getPageLimit();
+
+
+		$result 	= $db->pquery($query, $params);
+		$noOfRows 	= $db->num_rows($result);
+
+		if($pagingModel->get('recordcount') < $noOfRows) {
+			$pagingModel->set('recordcount', $noOfRows);
+		}
+		
+
+		$rowdetails = array();
+		for($i=0;$i<$noOfRows;$i++){
+			$rowdetails[$i]['fullname'] = $db->query_result($result, $i, 'fullname');
+			$rowdetails[$i]['department'] = $db->query_result($result, $i, 'department');
+			$rowdetails[$i]['designation'] = $db->query_result($result, $i, 'designation');
+			$rowdetails[$i]['expirydate'] = $db->query_result($result, $i, 'expirydate');
+		}
+		
+		return $rowdetails;
+	}
+   
 }
