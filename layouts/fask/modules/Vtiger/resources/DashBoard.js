@@ -1010,7 +1010,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 	/***************ADDED BY JITU@secondcrm***************/
 	birthdayEmail : function() {
 		var thisInstance = this;
-		this.getContainer().on('click', 'tr.birthdaywish', function(e) {
+		this.getContainer().on('click', 'div.birthdaywish', function(e) {
 				var userid = jQuery("input#birthdayid").val();//jitu 
 				var module = jQuery("input#modulename").val();//jitu
 				var fieldname = jQuery("input#fieldname").val();//jitu	

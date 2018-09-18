@@ -19,43 +19,38 @@
 {assign var=CREATE_SKILL_URL value=$LANGUAGE_RECORD_MODEL->getCreateSkillUrl()}
 {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
 		<div class="myProfileBtn">
-                    <stong class="pull-left" style="font-weight: bold;"> Language & Skills </stong>
 			<button type="button" class="btn btn-primary pull-right" onclick="Users_Skills_Js.addLanguage('{$CREATE_LANGUAGE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_LANGUAGE', $MODULE)}</strong></button>
 		</div>
-                <div class="clearfix"></div>
-	<table class="block table table-bordered listViewEntriesTable" style="background-color: #fff;margin: 14px;">
-		<thead>
-			<tr>
-				<th nowrap><strong>{vtranslate('LBL_LANGUAGE', $MODULE)}</strong></th>
-				<th nowrap colspan="2"><strong>{vtranslate('LBL_PROFICIENCY', $MODULE)}</strong></th>
-				<!--<th nowrap><strong>{vtranslate('LBL_EDUCATION_ISVIEW', $MODULE)}</strong></th>-->
-			</tr>
-		</thead>
-		<tbody>
-			{foreach item=USER_LANGUAGE from=$USER_SOFTSKILL_LIST}
-				<tr>
-					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LANGUAGE['language']}</label></td>
-					<td class="listTableRow small" valign=top><label class="instlabel">{$USER_LANGUAGE['proficiency']}</label></td>
-					<!--<td class="listTableRow small" valign=top><span class="isviewlabel">{('0'==$USER_LANGUAGE['isview'])?{vtranslate('LBL_NO', $MODULE)}:{vtranslate('LBL_YES', $MODULE)}}</span></td>-->
-					<td class="listTableRow small" valign=top>
-						<div class="pull-right actions">
-							<span class="actionImages">
-								<a class="editLanguage cursorPointer editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Skills_Js.editLanguage('{$CREATE_LANGUAGE_URL}&record={$USER_LANGUAGE['ss_id']}&userId={$USERID}&selected_id={$USER_LANGUAGE['language_id']}');"></a>&nbsp;&nbsp;
-								<a class="deleteLanguage cursorPointer" onclick="Users_Skills_Js.deleteLanguage('{$USER_LANGUAGE['ss_id']}');">
-									<i class="fa fa-trash-o" title="Delete"></i>
-								</a>
+        <div class="clearfix"></div>
 
-								
-
-
-							</span>
-										
-						</div>
-					</td>
-				</tr>
-			{/foreach}
-		</tbody>			
-	</table>	
+        <div class="block block_LBL_SKILL_LANG">
+                            <div>
+                                <h5>{vtranslate('LBL_SKILL_LANG', $MODULE)}</h5>
+                                <hr>
+                                <div class="blockData">
+                                    <div class="table detailview-table no-border">
+                                         {foreach item=USER_LANGUAGE from=$USER_SOFTSKILL_LIST}
+                                            <div class="row">
+                                                <div id="Users_detailView_fieldLabel_LBL_LANGUAGE" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                                    <span class="muted">{vtranslate('LBL_LANGUAGE', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_LANGUAGE" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_LANGUAGE['language']}</span>
+                                                </div>
+                                                <div class="fieldLabel col-xs-6 textOverflowEllipsis   col-md-3 medium" id="Users_detailView_fieldLabel_LBL_DURATION">
+                                                    <span class="muted">{vtranslate('LBL_PROFICIENCY', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_DURATION" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_LANGUAGE['proficiency']}</span>
+                                                </div>
+                                        	</div>
+                                        {/foreach}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>	
 </div>
 <!--End of Language Container-->
 <!--- Start of Skill Container-->

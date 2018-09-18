@@ -13,18 +13,13 @@
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
 </div>
 
-<div class="dashboardWidgetContent">
-	{include file="dashboards/MyLeavesContent.tpl"|@vtemplate_path:$MODULE_NAME}
-</div>
-
-<div class="widgeticons dashBoardWidgetFooter">
-	<div class="filterContainer">
+    <div class="filterContainer">
         
         <div class="row">
             <div class="col-sm-12">
                <div class="col-lg-6">
                 <label class="radio-group cursorPointer">
-                    <input type="radio" id="myleavetype" name="type" class="widgetFilter reloadOnChange cursorPointer" value="leavetype" checked="checked" /> {vtranslate('LBL_LEAVE_TYPE', $MODULE_NAME)}
+                    <input type="radio" id="myleavetype" name="type" class="widgetFilter reloadOnChange cursorPointer" value="leavetype" checked="true" /> {vtranslate('LBL_LEAVE_TYPE', $MODULE_NAME)}
                 </label>
               </div>
                 <div class="col-lg-6">
@@ -35,34 +30,15 @@
                 </div>
             </div> 
             <div class='clearfix'></div>
-            <div class="col-sm-12" id="leave_type_dropdown">
-              <select class="select2 widgetFilter col-lg-6"  name="group" >
-                {foreach item=LEAVE_TYPE from=$LEAVE_TYPE_LIST}
-                <option value="{$LEAVE_TYPE['leavetypeid']}" {if $VALUE eq $LEAVE_TYPE['leavetypeid']}selected{/if}>{$LEAVE_TYPE['leavetype']}&nbsp;[{$LEAVE_TYPE['leave_remain']}]</option> 
-                {/foreach}
-              </select>
-            </div>  
         </div>
-     
-
     </div>    
+<hr >
+<div class="dashboardWidgetContent mCustomScrollbar _mCS_5" style="height:200px;">
+  {include file="dashboards/MyLeavesContent.tpl"|@vtemplate_path:$MODULE_NAME}
+</div>
 
-
+<div class="widgeticons dashBoardWidgetFooter">
   <div class="footerIcons pull-right">
-        {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
+        {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=false}
   </div>
 </div>
-<script>
-  jQuery(document).ready(function(){
-    $("#leave5").on('click',function(){
-      
-       jQuery('#leave_type_dropdown').hide('slow');
-    });
-
-      $("#myleavetype").on('click',function(){
-      
-       jQuery('#leave_type_dropdown').show('slow');
-    });
-  })
-</script>  
-

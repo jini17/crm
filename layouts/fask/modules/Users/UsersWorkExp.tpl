@@ -15,53 +15,67 @@
 		{assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}	
 
 		<div class="myProfileBtn">
-                    <strong class="pull-left"> Work Experience </strong>
 			<button type="button" class="btn btn-primary pull-right" onclick="Users_WorkExp_Js.addWorkExp('{$CREATE_WORKEXP_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_WORKEXP', $MODULE)}</strong></button>
 		</div>
 
-                <div class="clearfix"></div>
-		<div class="listViewContentDiv" id="listViewContents">
-			
-			<div class="listViewEntriesDiv contents-bottomscroll">
-				<div class="bottomscroll-div">
-					<table class="table table-bordered table-condensed listViewEntriesTable" style="background-color: #fff;margin: 14px;width: 98%;">
-						<thead>
-							<tr class="listViewHeaders">
-								<th nowrap width="20%"><strong>{vtranslate('LBL_COMPANY_NAME', $MODULE)}</strong></td>
-								<th nowrap width="15%"><strong>{vtranslate('LBL_DESIGNATION', $MODULE)}</strong></td>
-								<th nowrap width="15%"><strong>{vtranslate('LBL_LOCATION', $MODULE)}</strong></td>
-								<th nowrap width="15%"><strong>{vtranslate('LBL_TIMEPERIOD', $MODULE)}</strong></td>
-								<th nowrap><strong>{vtranslate('LBL_DESCRIPTION', $MODULE)}</strong></td>
-								<th nowrap width="10%" colspan="2" class="medium"><strong>{vtranslate('LBL_EDUCATION_ISVIEW', $MODULE)}</strong></td>
-							</tr>
-						</thead>
-						<tbody>
-							{foreach item=USER_WORKEXP from=$USER_WORKEXP_LIST}
-								<tr>
-									<td class="listTableRow small" valign=top><label class="instlabel">{$USER_WORKEXP['company_title']}</label></td>
-									<td class="listTableRow small" valign=top><span class="durationlabel">{$USER_WORKEXP['designation']}</span></td>
-									<td class="listTableRow small" valign=top><span class="Workexplabel">{$USER_WORKEXP['location']}</span></td>
-									<td class="listTableRow small" valign=top><span class="startdatelable">{$USER_WORKEXP['start_date']} {vtranslate('LBL_TO', $MODULE)} {if $USER_WORKEXP['end_date'] eq ''}{vtranslate('LBL_TILL_NOW', $MODULE)}{else}{$USER_WORKEXP['end_date']}{/if}</span></td>
-									<td class="listTableRow small" valign=top><span class="descriptionlable">{$USER_WORKEXP['description']}</span></td>
-									<td class="listTableRow small" valign=top><span class="isviewlabel">{('0'==$USER_WORKEXP['isview'])?{vtranslate('LBL_NO', $MODULE)}:{vtranslate('LBL_YES', $MODULE)}}</span></td>
+        <div class="clearfix"></div>
 
-									<td width="5%" class="listTableRow small" valign=top>
-										<div class="pull-right actions">
-											<span class="actionImages">
-												<a class="editWorkExp editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_WorkExp_Js.editWorkExp('index.php{$CREATE_WORKEXP_URL}&record={$USER_WORKEXP['uw_id']}&userId={$USERID}');"></a>&nbsp;&nbsp;<a class="cursorPointer" onclick="Users_WorkExp_Js.deleteWorkExp('index.php?module=Users&action=DeleteSubModuleAjax&mode=deleteWorkExp&record={$USER_WORKEXP['uw_id']}');"><i class="fa fa-trash-o" title="Delete"></i></a>
+        <div class="block block_WorkExperience">
+            <div>
+                <h5>Work Experience</h5>
+                    <hr>
+                        <div class="blockData">
+                            <div class="table detailview-table no-border">
+                                 {foreach item=USER_WORKEXP from=$USER_WORKEXP_LIST}
+                                <div class="row">
+                                    <div id="Users_detailView_fieldLabel_LBL_COMPANY_NAME" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                    	<span class="muted">{vtranslate('LBL_COMPANY_NAME', $MODULE)}</span>
+                                	</div>
+                                	<div id="Users_detailView_fieldLabel_LBL_COMPANY_NAME" class="fieldValue  col-xs-6 col-md-3 medium">
+                                        <span class="value textOverflowEllipsis" data-field-type="string">{$USER_WORKEXP['company_title']}</span>
+                                    </div>
+                                    <div class="fieldLabel col-xs-6 textOverflowEllipsis   col-md-3 medium" id="Users_detailView_fieldLabel_LBL_DESIGNATION">
+                                    	<span class="muted">{vtranslate('LBL_DESIGNATION', $MODULE)}</span>
+                                    </div>
+                                    <div id="Users_detailView_fieldLabel_LBL_DESIGNATION" class="fieldValue  col-xs-6 col-md-3 medium">
+                                        <span class="value textOverflowEllipsis" data-field-type="string">{$USER_WORKEXP['designation']}</span>
+                                    </div>
+                                </div>
 
-											
+                                <div class="row">
+                                    <div id="Users_detailView_fieldLabel_LBL_LOCATION" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                        <span class="muted">{vtranslate('LBL_LOCATION', $MODULE)}</span>
+                                    </div>
+                                    <div id="Users_detailView_fieldLabel_LBL_LOCATION" class="fieldValue  col-xs-6 col-md-3 medium">
+                                        <span class="value textOverflowEllipsis" data-field-type="string">{$USER_WORKEXP['location']}}</span>
+                                    </div>
+                                    <div class="fieldLabel col-xs-6 textOverflowEllipsis   col-md-3 medium" id="Users_detailView_fieldLabel_LBL_TIMEPERIOD">
+                                        <span class="muted">{vtranslate('LBL_TIMEPERIOD', $MODULE)}</span>
+                                    </div>
+                                    <div id="Users_detailView_fieldLabel_LBL_TIMEPERIOD" class="fieldValue  col-xs-6 col-md-3 medium">
+                                    	<span class="value textOverflowEllipsis" data-field-type="string">{$USER_WORKEXP['start_date']} {vtranslate('LBL_TO', $MODULE)} {if $USER_WORKEXP['end_date'] eq ''}{vtranslate('LBL_TILL_NOW', $MODULE)}{else}{$USER_WORKEXP['end_date']}{/if}</span>
+                                    </div>
+                                </div>
 
-											</span>
-										</div>
-									</td>
-								</tr>
-							{/foreach}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
+                                <div class="row">
+                                    <div id="Users_detailView_fieldLabel_LBL_DESCRIPTION" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                        <span class="muted">{vtranslate('LBL_DESCRIPTION', $MODULE)}</span>
+                                    </div>
+                                    <div id="Users_detailView_fieldLabel_LBL_DESCRIPTION" class="fieldValue  col-xs-6 col-md-3 medium">
+                                        <span class="value textOverflowEllipsis" data-field-type="string">{$USER_WORKEXP['description']}</span>
+                                    </div>
+                                    <div class="fieldLabel col-xs-6 textOverflowEllipsis   col-md-3 medium" id="Users_detailView_fieldLabel_duration">
+                                        <span class="muted">{vtranslate('LBL_EDUCATION_ISVIEW', $MODULE)}</span>
+                                    </div>
+                                    <div id="Users_detailView_fieldLabel_duration" class="fieldValue  col-xs-6 col-md-3 medium">
+                                        <span class="value textOverflowEllipsis" data-field-type="string">{('0'==$USER_WORKEXP['isview'])?{vtranslate('LBL_NO', $MODULE)}:{vtranslate('LBL_YES', $MODULE)}}</span>
+                                    </div>
+                                </div>
+                                {/foreach}
+                            </div>
+                        </div>
+            </div>
+		</div>	
 	</div>
 </div>
 {/strip}
