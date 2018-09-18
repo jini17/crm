@@ -430,6 +430,12 @@ $(this).hide();
                                                                         </a>
                                                                     </li>
                                                                     {/if}
+                                                                    <li>
+                                                                         <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_MAIL_MANAGER')}" href="index.php?module=MailManager&view=List">
+                                                                                    <i class="material-icons module-icon">email</i>&nbsp;{vtranslate('LBL_MAIL_MANAGER')}
+                                                                                       
+                                                                                </a>
+                                                                    </li>
                                                              <!--       <li>
                                                                         <a class="dropdown-icon-dashboard" title="Our Sites" href="index.php?module=Portal&amp;view=List&amp;app=TOOLS">
                                                                                 <i class="fa fa-desktop"></i>&nbsp;Our Sites
