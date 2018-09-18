@@ -12,20 +12,13 @@
 
 <div class="dashboardWidgetHeader">
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
-</div>
-
-<div class="dashboardWidgetContent">
-	{include file="dashboards/HolidayContents.tpl"|@vtemplate_path:$MODULE_NAME}
-</div>
-
-<div class="widgeticons dashBoardWidgetFooter">
-	<div class="filterContainer">
+  <div class="filterContainer">
         <div class="row">
             <div class="col-sm-12">
                 <div class="col-lg-7">
                    <select class="widgetFilter select2" id="month" name="type" style='width:100%;'>
                     <option value="" selected>{vtranslate('LBL_SELECT_ALL',$MODULE_NAME)}</option>
-						          <option value="1" >{vtranslate('LBL_JANUARY',$MODULE_NAME)}</option>
+                      <option value="1" >{vtranslate('LBL_JANUARY',$MODULE_NAME)}</option>
                       <option value="2" >{vtranslate('LBL_FEBRUARY',$MODULE_NAME)}</option>
                       <option value="3" >{vtranslate('LBL_MARCH',$MODULE_NAME)}</option>
                       <option value="4" >{vtranslate('LBL_APRIL',$MODULE_NAME)}</option>
@@ -43,9 +36,16 @@
         </div>
 
   </div>
+</div>
+ 
+<div class="dashboardWidgetContent mCustomScrollbar _mCS_5" style="height:200px;">
+	{include file="dashboards/HolidayContents.tpl"|@vtemplate_path:$MODULE_NAME}
+</div>
 
+
+<div class="widgeticons dashBoardWidgetFooter">
   <div class="footerIcons pull-right">
-        {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
+        {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=false}
   </div>
 </div>
 

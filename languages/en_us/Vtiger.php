@@ -1339,7 +1339,7 @@ $languageStrings = array(
 	'ModTracker' => 'Updates',
 	'LBL_MAIL_SENT_SUCCESSFULLY' => 'Mail Sent Successfully',
 	'LBL_FAILED_TO_SEND' => 'Failed to Send',
-
+	'LBL_MAIL_MANAGER'=>'Mail Manager',
 	'LBL_ESSENTIALS' => 'Essentials',
 	'LBL_ALL_SETTINGS' => 'All Settings',
 	'On' => 'On',

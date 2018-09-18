@@ -53,6 +53,13 @@
 	}	
 		
 	     var chartOptions = {
+	     		grid : {
+	     			drawBorder:false,
+	     			drawGridlines:false,
+	     			background:'',
+	     			shadow:false,
+
+	     		},
 		        seriesDefaults:{
 		        shadowColor: 'transparent',
 		        drawBorder: false,
@@ -62,14 +69,10 @@
 		        },
 		       links: hreflinks,
        		},
-       		legend:{ show:true,fontSize:'11px', placement: 'outside', rendererOptions:{ numberRows:data.labels.length}, location:'s', marginTop:'15px' }
+       		legend:{ show:true,fontSize:'11px', placement: 'outside', rendererOptions:{ numberRows:data.labels.length}, location:'s', marginTop:'5px' }
         };
-        
-	
-
-	
+   
 	  var plot5 = $.jqplot("widgetChartContainer_{$WIDGET->get('id')}", [chartData], chartOptions);
-	
 </script>
 
 {elseif $CHART_TYPE eq 'verticalbarChart'}
@@ -353,4 +356,9 @@
 </script>
 
 {/if}
+<style>
+	[data-name="ChartReportWidget"]{
+		width: 400px !important;
+	}
+</style>
 
