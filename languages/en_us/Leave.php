@@ -27,8 +27,9 @@ $languageStrings = array(
     'LBL_NO_EMPLOYEE_FOUND'=>'No Employee found',
     'LBL_DESIGNATION'=>'Designation',
     'LBL_DEPARTMENT'=>'Department',
-    'LBL_MC_TAKEN'=>'MC Taken',
+    'LBL_MC_TAKEN'=>'Total MC',
     'LBL_NAME'=>'Employee', 
+	'LBL_APPLY'=>'Apply Leave',
 
 );
 

@@ -10,48 +10,76 @@
  ********************************************************************************/
 -->*}
 
-<div style='padding:5px;'>
+<div style='padding:5px'>
 {if count($MODELS) > 0}
-<table class="table table-bordered listViewEntriesTable">
-	<thead>
-		<tr>
-			<th style="width:43%;">
-			<b>{vtranslate('LBL_LEAVE_TYPE', $MODULE_NAME)}</b>
-			</th>
-			<th>
-			<b>{vtranslate('LBL_DURATIONOFLEAVE', $MODULE_NAME)}</b>
-			</th>
-			<th colspan="2">
-			<b>{vtranslate('LBL_STATUS', $MODULE_NAME)}</b>
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		{foreach item=MODEL from=$MODELS}
-			<tr>
-				<td>
-				{$MODEL['leave_type']}
-				</td>
-				<td>	
-				{$MODEL['from_date_day']}{if $MODEL['from_date_day'] eq 1}st
-				{elseif $MODEL['from_date_day'] eq 2}nd
-				{elseif $MODEL['from_date_day'] eq 3}rd
-				{else}th{/if} 
-				{Vtiger_Util_Helper::getMonthName($MODEL['from_date_month'])}
-				{if $MODEL['from_date_day'] eq $MODEL['to_date_day']}2018 
-				{else} - {$MODEL['to_date_day']}{if $MODEL['to_date_day'] eq 1}st{elseif $MODEL['to_date_day'] eq 2}nd{elseif $MODEL['to_date_day'] eq 3}rd{else}th{/if} {Vtiger_Util_Helper::getMonthName($MODEL['to_date_month'])} {$MODEL['to_date_year']}{/if}
-				</td>
-				<td style="text-align:center;">
-				{$MODEL['leavestatus']}
-				</td>
-			</tr>
-		{/foreach}
-	</tbody>
-</table>
-<br /><br />
+	<div>
+        <div class='row th' style="padding:5px">
+        	{if $VALUE eq 'leavetype'}
+	            <div class='col-lg-3'>
+	                <strong>{vtranslate('Allocates', $MODULE_NAME)}</strong>
+	            </div>
+	            <div class='col-lg-2'>
+	                <strong>{vtranslate('Used', $MODULE_NAME)}</strong>
+	            </div>
+	            <div class='col-lg-3'>
+	                <strong>{vtranslate('Balanced', $MODULE_NAME)}</strong>
+	            </div>
+	            <div class='col-lg-4'>
+	                <strong>{vtranslate('Type', $MODULE_NAME)}</strong>
+	            </div>
+            {else}
+	            <div class='col-lg-4'>
+	                <strong>{vtranslate('Leave Type', $MODULE_NAME)}</strong>
+	            </div>
+	            <div class='col-lg-4'>
+	                <strong>{vtranslate('Start Date', $MODULE_NAME)}</strong>
+	            </div>
+	            <div class='col-lg-4'>
+	                <strong>{vtranslate('Status', $MODULE_NAME)}</strong>
+	            </div>
+	        {/if}
+        </div>
+		{if $VALUE eq 'leavetype'}
+			{foreach item=MODEL from=$MODELS['display']}
+			
+			<div class='row miniListContent' style="padding:5px">
+				<div class='col-lg-3' align="center">
+					{$MODEL['allocateleaves']}
+				</div>
+				<div class='col-lg-2' align="center">
+					{$MODEL['takenleave']}
+				</div>
+				<div class='col-lg-3' align="center">
+					{$MODEL['balanceleave']}
+				</div>
+				<div class='col-lg-4'>
+					{$MODEL['leavetype']}
+				</div>
+			</div>
+			{/foreach}
+			{if $MODELS['balance'] gt 0}
+			<br />
+			<div style="padding:0px;" align="right"><input type="button" class="btn btn-info" onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USERID}'" name="applyleave" value="{vtranslate('LBL_APPLY', $MODULE_NAME)}"></div>
+			{/if}
+		{else}
+			{foreach item=MODEL from=$MODELS}
+			<div class='row miniListContent' style="padding:5px">
+				<div class='col-lg-4'>
+					{$MODEL['title']}
+				</div>
+				<div class='col-lg-4'>
+					{$MODEL['fromdate']}
+				</div>
+				<div class='col-lg-4'>
+					{$MODEL['leavestatus']}
+				</div>
+			</div>
+			{/foreach}
+		{/if}
+	</div>
 {else}
 	<span class="noDataMsg">
-		{vtranslate($TYPELABEL,$MODULE_NAME)}
+		{vtranslate('LBL_NO')} {vtranslate($MODULE_NAME, $MODULE_NAME)} {vtranslate('LBL_MATCHED_THIS_CRITERIA')}
 	</span>
 {/if}
 </div>

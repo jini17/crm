@@ -9,42 +9,42 @@
   *
  ********************************************************************************/
 -->*}
-<!--<script src="layouts/vlayout/modules/Emails/resources/MassEdit.js?v=6.1.0" type="text/javascript"></script>-->
-<div style='padding:5px;'>
+<div style='padding:5px'>
 {if count($MODELS) > 0}
-<table class="table table-bordered listViewEntriesTable">
-	<thead>
-		<tr>
-			<th style="width:52%;">
-			<b>{vtranslate('LBL_NAME', $MODULE_NAME)}</b>
-			</th>
-			<th colspan="2">
-			<b>{vtranslate('LBL_BIRTHDATE', $MODULE_NAME)}</b>
-			</th>
-		</tr>
-	</thead>
-	<tbody>
+	<div>
+        <div class='row th' style="padding:5px">
+       		<div class='col-lg-6'>
+             	<strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
+            </div>
+            <div class='col-lg-6'>
+               <strong>{vtranslate('LBL_BIRTHDATE', $MODULE_NAME)}</strong>
+            </div>
+          </div>
 		{foreach item=MODEL from=$MODELS}
-			<tr class="birthdaywish" style="cursor:pointer;">
-				<td>
-				{$MODEL['fullname']}
-				</td>
-				<td>
+			<div class='row miniListContent' style="padding:5px">
+				<div class='col-lg-4'>
+					{$MODEL['fullname']}
+				</div>
+				<div class='col-lg-4'>
 				{$MODEL['birthday']}
-				</td>
-				<td>
-			<!--added by fadzil 27/2/15--><i class="fa fa-gift" title="Send Birthday wish"></i>
-			{if $MODEL['module'] eq 'Accounts'}
-				<input id="modulename" type="hidden" value="Contacts">
-				<input id="fieldname" type="hidden" value="email">
-			{else}	
-			<input id="modulename" type="hidden" value="{$MODEL['module']}">
-			<input id="fieldname" type="hidden" value="{$MODEL['fieldname']}">
-			{/if}
-			<input id="birthdayid" type="hidden" value="{$MODEL['id']}"></td></tr>
+				</div>
+				
+				<div class='col-lg-2 birthdaywish'>
+				
+				<!--added by fadzil 27/2/15-->
+				<i class="fa fa-gift" title="Send Birthday wish"></i>
+					{if $MODEL['module'] eq 'Accounts'}
+						<input id="modulename" type="hidden" value="Contacts">
+						<input id="fieldname" type="hidden" value="email">
+					{else}	
+					<input id="modulename" type="hidden" value="{$MODEL['module']}">
+					<input id="fieldname" type="hidden" value="{$MODEL['fieldname']}">
+					{/if}
+					<input id="birthdayid" type="hidden" value="{$MODEL['id']}">
+				</div>
+			</div>
 		{/foreach}
-	</tbody>
-</table>
+	</div>
 {else}
 	<span class="noDataMsg">
 		{vtranslate('LBL_NO','Home')} {vtranslate('LBL_BIRTHDAY','Home')} {vtranslate($TYPELABEL,'Home')}
