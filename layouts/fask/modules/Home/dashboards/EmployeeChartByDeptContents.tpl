@@ -98,7 +98,7 @@
 
                                                 rendererOptions:{ 
                                                 numberRows:data.labels.length}, 
-                                                location: 'e', 
+                                                location: 's', 
                                                 marginTop:'5px',
                                                  marginLeft:'100px;'
                                             },
@@ -532,6 +532,6 @@ $(document).ready(function(){
 
 <style>
     [data-name="EmployeeChartByDept"]{
-      width: 480px !important; 
+      height: 700px !important; 
     }
-</style>    
+</style>
