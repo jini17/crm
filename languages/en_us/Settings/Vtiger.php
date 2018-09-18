@@ -475,6 +475,8 @@ $languageStrings = array(
 	'Calendar Settings'=>'Preferences',
 	'LBL_MY_TAGS'=>'Tags',
 	'LBL_OFFICE365'=>'Office 365',
+	'LBL_MY_PREFERENCES'=>'My Profile',
+	'My Profile'=>'Profile',
 );
 
 $jsLanguageStrings = array(

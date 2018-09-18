@@ -47,6 +47,7 @@ $languageStrings = array(
 	'LBL_NAME' => 'Employee Name',
 	'LBL_BIRTHDATE' => 'Birthday Date',	
 	'LBL_LEAVE_APPROVAL'=>'My Team Leave Approval',
+	
 	                
    
 );

@@ -2,61 +2,57 @@
 {assign var=EDIT_EMERGENCY_URL value=$EMERGENCY_RECORD_MODEL->getEditEmergencyUrl()}
 <div id="UserEmergencyContainer">
 	<div class="myProfileBtn">
-            <strong style="margin:0;" class="pull-left"> Emergency Contact</strong>
 			<button type="button" class="btn btn-primary pull-right" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}');"><i class="fa fa-pencil"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_EDIT_CONTACT', $MODULE)}</strong></button>
 		</div>
-                <div class="clearfix"></div>
+        <div class="clearfix"></div>
 
-	<table class="table table-bordered equalSplit detailview-table" style="background-color: #fff;margin: 14px;width: 98%;">
-		<thead>
-			<tr>
-				<th nowrap><strong>Emergency Contact</strong></th>
-				
-			</tr>
-		</thead>	
-		<tbody>
-			<tr>
-				<td class="fieldLabel medium">
-					<label class="muted pull-right marginRight10px">{vtranslate('LBL_CONTACT_NAME', $MODULE)}</label>
-				</td>
-				<td class="fieldValue medium">
-					<span class="value"> {$USER_EMERGENCY_CONTACTS['contact_name']} </span>
-				</td>
-				<td class="fieldLabel medium">
-					<label class="muted pull-right marginRight10px">{vtranslate('LBL_HOME_PH', $MODULE)}</label>
-				</td>
-				<td class="fieldValue medium">
-					<span class="value"> {$USER_EMERGENCY_CONTACTS['home_phone']} </span>
-				</td>
-			</tr>
-			<tr>
-				<td class="fieldLabel medium">
-					<label class="muted pull-right marginRight10px">{vtranslate('LBL_OFFICE_PH', $MODULE)}</label>		</td>
-				<td class="fieldValue medium">
-					<span class="value" data-field-type="boolean"> {$USER_EMERGENCY_CONTACTS['office_phone']} </span>
-				</td>
-				<td class="fieldLabel medium">
-					<label class="muted pull-right marginRight10px">{vtranslate('LBL_MOBILE', $MODULE)}</label>
-				</td>
-				<td class="fieldValue medium">
-					<span class="value" data-field-type="userRole"> {$USER_EMERGENCY_CONTACTS['mobile']} </span>
-				</td>
-			</tr>
-			<tr>
-				<td class="fieldLabel medium">
-					<label class="muted pull-right marginRight10px">{vtranslate('LBL_RELATIONSHIP', $MODULE)}</label>
-				</td>
-				<td class="fieldValue medium">
-					<span class="value" data-field-type="picklist"> {$USER_EMERGENCY_CONTACTS['relationship']} </span>
-				</td>
-				<!--<td class="fieldLabel medium">
-					<label class="muted pull-right marginRight10px">{vtranslate('LBL_PUBLIC', $MODULE)}</label>
-				</td>
-				<td class="fieldValue medium">
-					<span class="value">{('0'==$USER_EMERGENCY_CONTACTS['isview'])?{vtranslate('LBL_NO', $MODULE)}:{vtranslate('LBL_YES', $MODULE)}}</span>
-				</td>-->
-			</tr>
-		</tbody>
-	</table>
+        <div class="block block_LBL_USER_EMERGENCY">
+                            <div>
+                                <h5>Emergency Contacts</h5>
+                                <hr>
+                                <div class="blockData">
+                                    <div class="table detailview-table no-border">
+                                            <div class="row">
+                                                <div id="Users_detailView_fieldLabel_LBL_CONTACT_NAME" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                                    <span class="muted">{vtranslate('LBL_CONTACT_NAME', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_CONTACT_NAME" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_EMERGENCY_CONTACTS['contact_name']}</span>
+                                                </div>
+                                                <div class="fieldLabel col-xs-6 textOverflowEllipsis   col-md-3 medium" id="Users_detailView_fieldLabel_LBL_HOME_PH">
+                                                    <span class="muted">{vtranslate('LBL_HOME_PH', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_HOME_PH" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_EMERGENCY_CONTACTS['home_phone']}</span>
+                                                </div>
+
+                                                <div class="row">
+                                                <div id="Users_detailView_fieldLabel_LBL_OFFICE_PH" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                                    <span class="muted">{vtranslate('LBL_OFFICE_PH', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_OFFICE_PH" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_EMERGENCY_CONTACTS['office_phone']}</span>
+                                                </div>
+                                                <div class="fieldLabel col-xs-6 textOverflowEllipsis   col-md-3 medium" id="Users_detailView_fieldLabel_LBL_MOBILE">
+                                                    <span class="muted">{vtranslate('LBL_MOBILE', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_MOBILE" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_EMERGENCY_CONTACTS['mobile']}</span>
+                                                </div>
+
+                                                <div class="row">
+                                                <div id="Users_detailView_fieldLabel_LBL_RELATIONSHIP" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                                    <span class="muted">{vtranslate('LBL_RELATIONSHIP', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_RELATIONSHIP" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_EMERGENCY_CONTACTS['relationship']}</span>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
 </div>
 {/strip}

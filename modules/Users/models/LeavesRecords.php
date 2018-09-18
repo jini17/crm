@@ -25,8 +25,9 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	}
         return $instance;
     }
+    
     public function getCreateLeaveURL() {
-	return '?module=Users&view=EditLeave';
+		return '?module=Users&view=EditLeave';
     }
 
 	//Created by Safuan
@@ -61,43 +62,48 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	}
 
 	//Created by Safuan for fetching current user leaves for current year//	
-	public function getMyLeaves($userid, $year, $filtertype=null, $filtervalue=null){
+	public function getMyLeaves($userid, $year){
 	
 	$db = PearDatabase::getInstance();
-	//$db->setDebug(true);
-	$filtercond = '';
 	
-	if($filtertype =='leavetype'){
-		$query = "SELECT vtiger_leavetype.title, sum(secondcrm_user_balance.leave_count), allocation_leaverel.ageleave, 
-					allocation_leaverel.numberofleavesmore, allocation_leaverel.numberofleavesless
-			FROM allocation_leaverel
-			LEFT JOIN allocation_list ON allocation_list.allocation_id=allocation_leaverel.allocation_id
-			LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocation_list.allocation_id
-			LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = allocation_leaverel.leavetype_id
-			LEFT OUTER JOIN secondcrm_user_balance ON secondcrm_user_balance.leave_type=vtiger_leavetype.leavetypeid
-			WHERE secondcrm_user_balance.user_id =? AND allocation_graderel=? AND allocation_list.allocation_year=?";		
-		$filtercond = " AND vtiger_leave.leavetype=". $filtervalue;
+	$result = $db->pquery("SELECT date_joined, job_grade FROM vtiger_employeecontract tblVTEC 
+							INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
+							INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
+							WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTEC.date_joined DESC LIMIT 0, 1", array($userid));
+							
+		$dateofJoining = $db->query_result($result, 0, 'date_joined');	
+		$grade_id	   = $db->query_result($result, 0, 'job_grade');	
+		$datediff = time() - strtotime($dateofJoining);				 
+		$earneddays = round($datediff / (60 * 60 * 24));
+		$curr_year	   = date('Y');	
+	
+	
+		$query = "SELECT vtiger_leavetype.leavetypeid, vtiger_leavetype.title, allocation_leaverel.ageleave, allocation_leaverel.numberofleavesmore, allocation_leaverel.numberofleavesless
+					FROM allocation_leaverel
+					LEFT JOIN allocation_list ON allocation_list.allocation_id=allocation_leaverel.allocation_id
+					LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocation_list.allocation_id
+					LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = allocation_leaverel.leavetype_id
+					WHERE allocation_graderel=? AND allocation_list.allocation_year=?";		
+	
 
-	} else if($filtertype=='latest'){
-		$filtercond = " ORDER BY vtiger_leave.fromdate DESC Limit 0, 5";
-	}
 
 
-
-	$result = $db->pquery($query,array($userid, $year));
+	$result = $db->pquery($query,array($grade_id, $year));
+	
 	$myleave=array();	
 	
 	for($i=0;$db->num_rows($result)>$i;$i++){
-		$rowdetail = self::getLeaveType($db->query_result($result, $i, 'leavetype'));
-		$myleave[$i]['id'] = $db->query_result($result, $i, 'leaveid');
-		$myleave[$i]['leave_reason'] = $db->query_result($result, $i, 'reasonofleave');
+		$rowdetail = self::getLeaveTypeDetail($db->query_result($result, $i, 'leavetypeid'));
 		$myleave[$i]['leave_type'] = $rowdetail['leavetype'];
 		$myleave[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetype');
 		$myleave[$i]['colorcode'] = $rowdetail['colorcode'];
 		$myleave[$i]['starthalf'] = $rowdetail['starthalf'];
 		$myleave[$i]['endhalf'] = $rowdetail['endhalf'];
-		$myleave[$i]['from_date'] = $db->query_result($result, $i, 'fromdate');
-		$myleave[$i]['to_date'] = $db->query_result($result, $i, 'todate'); 
+		$myleave[$i]['from_date_day'] = $db->query_result($result, $i, 'startday');
+		$myleave[$i]['from_date_month'] = $db->query_result($result, $i, 'startmonth');
+		$myleave[$i]['to_date_day'] = $db->query_result($result, $i, 'endday');
+		$myleave[$i]['to_date_month'] = $db->query_result($result, $i, 'endmonth');
+		$myleave[$i]['to_date_year'] = $db->query_result($result, $i, 'endyear'); 
 		$myleave[$i]['leavestatus'] = $db->query_result($result, $i, 'leavestatus'); 
 		$myleave[$i]['reasonnotapprove'] = $db->query_result($result, $i, 'reasonnotapprove'); 
 	}
@@ -106,14 +112,94 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
 	}
 
+	public function getLeaveTypeDetail($user_id, $leavetype){
+		$db = PearDatabase::getInstance();
+		
+		$query = "SELECT sum(secondcrm_user_balance.leave_count) as takenleave FROM secondcrm_user_balance WHERE user_id=? AND leave_type=? AND year=?";
+		$result = $db->pquery($query, array($user_id, $leavetype, date('Y')));
+		return $db->query_result($result, 0, 'takenleave');
+		
+	}
+	
+	//Created by Safuan for fetching current user leaves for current year//	
+	public function getWidgetsMyLeaves($userid, $year, $filtertype=null){
+	
+		$db = PearDatabase::getInstance();
+		
+		//$db->setDebug(true);
+		$result = $db->pquery("SELECT date_joined, job_grade FROM vtiger_employeecontract tblVTEC 
+								INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
+								INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
+								WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTEC.date_joined DESC LIMIT 0, 1", array($userid));
+							
+		$dateofJoining = $db->query_result($result, 0, 'date_joined');	
+		$grade_id	   = $db->query_result($result, 0, 'job_grade');	
+		$datediff = time() - strtotime($dateofJoining);				 
+		$earneddays = round($datediff / (60 * 60 * 24));
+		$curr_year	   = date('Y');	
+	
+		if($filtertype =='leavetype'){
+	
+			$query = "SELECT vtiger_leavetype.leavetypeid, vtiger_leavetype.title, allocation_leaverel.ageleave, allocation_leaverel.numberofleavesmore, allocation_leaverel.numberofleavesless
+						FROM allocation_leaverel
+						LEFT JOIN allocation_list ON allocation_list.allocation_id=allocation_leaverel.allocation_id
+						LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocation_list.allocation_id
+						LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = allocation_leaverel.leavetype_id
+						WHERE allocation_graderel.grade_id=? AND allocation_list.allocation_year=?";	
+		
+			$result = $db->pquery($query,array($grade_id, $year));
+			$myleave=array();	
+			$balance = 0;
+			for($i=0;$db->num_rows($result)>$i;$i++){
+				$conditionage = $db->query_result($result, $i, 'ageleave');	
+				$leavemore	  = $db->query_result($result, $i, 'numberofleavesmore');
+				$leaveless 	  = $db->query_result($result, $i, 'numberofleavesless');
+				$title	   	  = $db->query_result($result, $i, 'title');		
+				$leavetype	  = $db->query_result($result, $i, 'leavetype');
+				$takenleave   = self::getLeaveTypeDetail($userid, $leavetype);
+				if($takenleave=='' || $takenleave ==null)
+					$takenleave = 0;
+					
+				if($earneddays > $conditionage){
+					$allocateleave = $leavemore;
+				} else {
+					$allocateleave = $leaveless;
+				}
+				$balanceleave = $allocateleave-$takenleave;
+				
+				if($balanceleave > 0) {
+					$balance++;
+				}
+				$myleave['display'][$i]['allocateleaves'] 	= $allocateleave;
+				$myleave['display'][$i]['takenleave'] 		= $takenleave;
+				$myleave['display'][$i]['balanceleave'] 	= $balanceleave;	
+				$myleave['display'][$i]['leavetype'] 		= $title;
+		
+			}				
+			$myleave['balance'] = $balance;				
+		} else {
+			$result = $db->pquery("SELECT vtiger_leavetype.title, vtiger_leave.fromdate, vtiger_leave.leavestatus FROM vtiger_leave
+								INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_leave.leaveid
+								LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid=vtiger_leave.leavetype
+								WHERE vtiger_crmentity.deleted=0 AND vtiger_leave.employee_id=? ORDER BY vtiger_leave.fromdate DESC, vtiger_leavetype.title ASC  LIMIT 0, 5", array($userid));
+							
+			$myleave=array();	
+	
+			for($i=0;$db->num_rows($result)>$i;$i++){						
+				$myleave[$i]['title'] 			= $db->query_result($result, $i, 'title');
+				$myleave[$i]['fromdate'] 		= date('jS M, Y',strtotime($db->query_result($result, $i, 'fromdate')));
+				$myleave[$i]['leavestatus'] 	= $db->query_result($result, $i, 'leavestatus');
+			}
+				
+		}
+		return $myleave;
+	}
 	
 	//Created by Safuan for fetching leave types//	
 	//modified by jitu for concate color and balance in dropdown 
 	public function getLeaveTypeList($userid){ 
 	
 		$db = PearDatabase::getInstance();
-		
-	
 		
 		$result = $db->pquery("SELECT date_joined, job_grade FROM vtiger_employeecontract tblVTEC 
 							INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
@@ -648,7 +734,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
 		}
 
-		$query = "SELECT * FROM vtiger_holiday INNER JOIN vtiger_crmentity 
+		$query = "SELECT holiday_name, DAY(start_date) AS startday, MONTH(start_date) AS startmonth, DAY(end_date) AS endday, MONTH(end_date) AS endmonth, YEAR(end_date) AS endyear FROM vtiger_holiday INNER JOIN vtiger_crmentity 
 					ON vtiger_crmentity.crmid = vtiger_holiday.holidayid 
 					WHERE vtiger_crmentity.deleted=0 ".$filtercond;
 	
@@ -657,8 +743,11 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 		for($i=0;$db->num_rows($result)>$i;$i++){
 
 			$rowdetail[$i]['holiday_name'] = $db->query_result($result, $i, 'holiday_name');
-			$rowdetail[$i]['start_date'] = $db->query_result($result, $i, 'start_date');
-			$rowdetail[$i]['end_date'] = $db->query_result($result, $i, 'end_date');
+			$rowdetail[$i]['start_date_day'] = $db->query_result($result, $i, 'startday');
+			$rowdetail[$i]['start_date_month'] = $db->query_result($result, $i, 'startmonth');
+			$rowdetail[$i]['end_date_day'] = $db->query_result($result, $i, 'endday');
+			$rowdetail[$i]['end_date_month'] = $db->query_result($result, $i, 'endmonth');
+			$rowdetail[$i]['end_date_year'] = $db->query_result($result, $i, 'endyear');
 		}
 
 		return $rowdetail;
@@ -709,8 +798,55 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 			$employeelist[$i]['empname'] = $db->query_result($result, $i, 'fullname');
 			$employeelist[$i]['department'] = $db->query_result($result, $i, 'department');
 			$employeelist[$i]['title'] = $db->query_result($result, $i, 'title');
+			$employeelist[$i]['leavecount'] = $db->query_result($result, $i, 'leavecount');
 		}
 		return $employeelist;
 
+	}
+
+	public function getMonthName($month){
+		switch ($month) {
+			case '1':
+				$month = "Jan";
+				break;
+			case '2':
+				$month = "Feb";
+				break;
+			case '3':
+				$month = "Mar";
+				break;
+			case '4':
+				$month = "Apr";
+				break;
+			case '5':
+				$month = "May";
+				break;
+			case '6':
+				$month = "June";
+				break;
+			case '7':
+				$month = "July";
+				break;
+			case '8':
+				$month = "Aug";
+				break;
+			case '9':
+				$month = "Sept";
+				break;
+			case '10':
+				$month = "Oct";
+				break;
+			case '11':
+				$month = "Nov";
+				break;
+			case '12':
+				$month = "Dec";
+				break;
+
+			default:
+				$month = "undefined";
+				break;
+		}
+		return $month;
 	}
 }

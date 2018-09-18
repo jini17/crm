@@ -37,7 +37,11 @@
 				{$MODEL['department']}
 				</td>
 				<td>
-				{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($MODEL['expirydate'])}
+				{$MODEL['expirydate_day']}{if $MODEL['expirydate_day'] eq 1}st
+				{elseif $MODEL['expirydate_day'] eq 2}nd
+				{elseif $MODEL['expirydate_day'] eq 3}rd
+				{else}th{/if}
+				{Vtiger_Util_Helper::getMonthName($MODEL['expirydate_month'])} {$MODEL['expirydate_year']}
 				</td>
 
 			</tr>

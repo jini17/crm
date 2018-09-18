@@ -11,7 +11,7 @@
 class Leave_TopNoMCEmployees_Dashboard extends Vtiger_IndexAjax_View {
 
 	public function process(Vtiger_Request $request) {
-		global $adb;
+		//global $adb;
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 
