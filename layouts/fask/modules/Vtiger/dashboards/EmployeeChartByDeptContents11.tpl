@@ -10,29 +10,16 @@
  ********************************************************************************/
 -->*}
 
-{assign var=WIDGETDOMID value=$WIDGET->get('linkid')|cat:'-':$WIDGET->get('id')}
-
- {if count($DATA) gt 0 }
-    <input id="widgetChart_{$WIDGET->get('id')}" type=hidden value='{$DATA}' />
-    <input class="yAxisFieldType" type="hidden" value="{$YAXIS_FIELD_TYPE}" />
-
-    <input type='hidden' name='charttype' value="{$CHART_TYPE}" />
-	<input type='hidden' name='widgetid' id="{$WIDGET->get('id')}" value="{$WIDGET->get('id')}" />
-	<input type='hidden' name='data' value='{$DATA}' />
-	<input type='hidden' name='clickthrough' value="{$CLICK_THROUGH}" />
-
-   <div class="row" style="margin:0px 10px;height:250px;width:100%;">
-        <div class="col-lg-11">
-           <div class="" id="widgetChartContainer_{$WIDGET->get('id')}"></div>
-            <br>
-        </div>
-		<div class="col-lg-1"></div>
-    </div>
+<div style='padding:5px;'>
+{if count($MODELS) > 0}
+        {php} print_r($MODULES) {/php}
+    
 {else}
-    <span class="noDataMsg">
-        {vtranslate('LBL_NO')} {vtranslate($MODULE_NAME, $MODULE_NAME)} {vtranslate('LBL_MATCHED_THIS_CRITERIA')}
-    </span>
+	<span class="noDataMsg">
+		{vtranslate($TYPELABEL,$MODULE_NAME)}
+	</span>
 {/if}
+</div>
 
 {if $CHART_TYPE eq 'pieChart'}
 
