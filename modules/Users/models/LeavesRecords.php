@@ -796,6 +796,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 			
 			//$employeelist[$i]['imagedetail'] = self::getEmployeeImage($db->query_result($result, $i, 'id'));
 			$employeelist[$i]['empname'] = $db->query_result($result, $i, 'fullname');
+			$employeelist[$i]['userid'] = $db->query_result($result, $i, 'id');
 			$employeelist[$i]['department'] = $db->query_result($result, $i, 'department');
 			$employeelist[$i]['title'] = $db->query_result($result, $i, 'title');
 			$employeelist[$i]['leavecount'] = $db->query_result($result, $i, 'leavecount');
