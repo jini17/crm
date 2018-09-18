@@ -66,12 +66,22 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	$db = PearDatabase::getInstance();
 	//$db->setDebug(true);
 	$filtercond = '';
+	
 	if($filtertype =='leavetype'){
+		$query = "SELECT vtiger_leavetype.title, sum(secondcrm_user_balance.leave_count), allocation_leaverel.ageleave, 
+					allocation_leaverel.numberofleavesmore, allocation_leaverel.numberofleavesless
+			FROM allocation_leaverel
+			LEFT JOIN allocation_list ON allocation_list.allocation_id=allocation_leaverel.allocation_id
+			LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocation_list.allocation_id
+			LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = allocation_leaverel.leavetype_id
+			LEFT OUTER JOIN secondcrm_user_balance ON secondcrm_user_balance.leave_type=vtiger_leavetype.leavetypeid
+			WHERE secondcrm_user_balance.user_id =? AND allocation_graderel=? AND allocation_list.allocation_year=?";		
 		$filtercond = " AND vtiger_leave.leavetype=". $filtervalue;
 
 	} else if($filtertype=='latest'){
 		$filtercond = " ORDER BY vtiger_leave.fromdate DESC Limit 0, 5";
 	}
+
 
 	$query = "SELECT leaveid, reasonofleave, leavetype, DAY(fromdate) AS startday, MONTH(fromdate) AS startmonth, DAY(todate) AS endday, MONTH(todate) AS endmonth, YEAR(todate) AS endyear, leavestatus, reasonnotapprove, starthalf, endhalf
 			FROM vtiger_leave 
@@ -79,6 +89,8 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 			ON vtiger_crmentity.crmid = vtiger_leave.leaveid
 			WHERE vtiger_leave.employee_id = ?
 			AND vtiger_crmentity.deleted=0 AND DATE_FORMAT(fromdate, '%Y') = ? AND vtiger_crmentity.deleted=0 ".$filtercond;
+
+
 
 	$result = $db->pquery($query,array($userid, $year));
 	$myleave=array();	
