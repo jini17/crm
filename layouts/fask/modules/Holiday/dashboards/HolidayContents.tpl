@@ -16,13 +16,10 @@
 	<thead>
 		<tr>
 			<th style="width:43%;">
-			<b>Holiday Name</b>
+			<b>Holidays</b>
 			</th>
 			<th>
-			<b>Start Date</b>
-			</th>
-			<th colspan="2">
-			<b>End Date</b>
+			<b>Date</b>
 			</th>
 		</tr>
 	</thead>
@@ -33,10 +30,11 @@
 				{$MODEL['holiday_name']}
 				</td>
 				<td>
-				{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($MODEL['start_date'])}
-				</td>
-				<td style="text-align:center;">
-				{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($MODEL['end_date'])}
+				{$MODEL['start_date_day']}{if $MODEL['start_date_day'] eq 1}st{elseif $MODEL['start_date_day'] eq 2}nd{elseif $MODEL['start_date_day'] eq 3}rd{else}th{/if} 
+				{Vtiger_Util_Helper::getMonthName($MODEL['start_date_month'])}
+				{if $MODEL['start_date_day'] eq $MODEL['end_date_day']}{$MODEL['end_date_year']}
+				{else} - {$MODEL['end_date_day']}{if $MODEL['end_date_day'] eq 1}st{elseif $MODEL['end_date_day'] eq 2}nd{elseif $MODEL['end_date_day'] eq 3}rd{else}th{/if} 
+				{Vtiger_Util_Helper::getMonthName($MODEL['end_date_month'])} {$MODEL['end_date_year']}{/if}
 				</td>
 			</tr>
 		{/foreach}
