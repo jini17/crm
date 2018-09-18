@@ -36,8 +36,6 @@ class Leave_MyLeaves_Dashboard extends Vtiger_IndexAjax_View {
 			$valueLabel = 'LBL_LAST_5_LEAVES';
 		}
 		
-		
-		
 		$leavemodel = Users_LeavesRecords_Model::getMyLeaves($currentUser->getId(), date('Y'), $value, $filter);	
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');

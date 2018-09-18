@@ -86,6 +86,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	}
 
 
+
 	$result = $db->pquery($query,array($grade_id, $year));
 	
 	$myleave=array();	
@@ -97,8 +98,11 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 		$myleave[$i]['colorcode'] = $rowdetail['colorcode'];
 		$myleave[$i]['starthalf'] = $rowdetail['starthalf'];
 		$myleave[$i]['endhalf'] = $rowdetail['endhalf'];
-		$myleave[$i]['from_date'] = $db->query_result($result, $i, 'fromdate');
-		$myleave[$i]['to_date'] = $db->query_result($result, $i, 'todate'); 
+		$myleave[$i]['from_date_day'] = $db->query_result($result, $i, 'startday');
+		$myleave[$i]['from_date_month'] = $db->query_result($result, $i, 'startmonth');
+		$myleave[$i]['to_date_day'] = $db->query_result($result, $i, 'endday');
+		$myleave[$i]['to_date_month'] = $db->query_result($result, $i, 'endmonth');
+		$myleave[$i]['to_date_year'] = $db->query_result($result, $i, 'endyear'); 
 		$myleave[$i]['leavestatus'] = $db->query_result($result, $i, 'leavestatus'); 
 		$myleave[$i]['reasonnotapprove'] = $db->query_result($result, $i, 'reasonnotapprove'); 
 	}
@@ -649,7 +653,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
 		}
 
-		$query = "SELECT * FROM vtiger_holiday INNER JOIN vtiger_crmentity 
+		$query = "SELECT holiday_name, DAY(start_date) AS startday, MONTH(start_date) AS startmonth, DAY(end_date) AS endday, MONTH(end_date) AS endmonth, YEAR(end_date) AS endyear FROM vtiger_holiday INNER JOIN vtiger_crmentity 
 					ON vtiger_crmentity.crmid = vtiger_holiday.holidayid 
 					WHERE vtiger_crmentity.deleted=0 ".$filtercond;
 	
@@ -658,8 +662,11 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 		for($i=0;$db->num_rows($result)>$i;$i++){
 
 			$rowdetail[$i]['holiday_name'] = $db->query_result($result, $i, 'holiday_name');
-			$rowdetail[$i]['start_date'] = $db->query_result($result, $i, 'start_date');
-			$rowdetail[$i]['end_date'] = $db->query_result($result, $i, 'end_date');
+			$rowdetail[$i]['start_date_day'] = $db->query_result($result, $i, 'startday');
+			$rowdetail[$i]['start_date_month'] = $db->query_result($result, $i, 'startmonth');
+			$rowdetail[$i]['end_date_day'] = $db->query_result($result, $i, 'endday');
+			$rowdetail[$i]['end_date_month'] = $db->query_result($result, $i, 'endmonth');
+			$rowdetail[$i]['end_date_year'] = $db->query_result($result, $i, 'endyear');
 		}
 
 		return $rowdetail;
@@ -710,8 +717,55 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 			$employeelist[$i]['empname'] = $db->query_result($result, $i, 'fullname');
 			$employeelist[$i]['department'] = $db->query_result($result, $i, 'department');
 			$employeelist[$i]['title'] = $db->query_result($result, $i, 'title');
+			$employeelist[$i]['leavecount'] = $db->query_result($result, $i, 'leavecount');
 		}
 		return $employeelist;
 
+	}
+
+	public function getMonthName($month){
+		switch ($month) {
+			case '1':
+				$month = "Jan";
+				break;
+			case '2':
+				$month = "Feb";
+				break;
+			case '3':
+				$month = "Mar";
+				break;
+			case '4':
+				$month = "Apr";
+				break;
+			case '5':
+				$month = "May";
+				break;
+			case '6':
+				$month = "June";
+				break;
+			case '7':
+				$month = "July";
+				break;
+			case '8':
+				$month = "Aug";
+				break;
+			case '9':
+				$month = "Sept";
+				break;
+			case '10':
+				$month = "Oct";
+				break;
+			case '11':
+				$month = "Nov";
+				break;
+			case '12':
+				$month = "Dec";
+				break;
+
+			default:
+				$month = "undefined";
+				break;
+		}
+		return $month;
 	}
 }

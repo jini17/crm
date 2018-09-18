@@ -108,18 +108,18 @@ class EmployeeContract_Record_Model extends Vtiger_Record_Model {
 		
 
 		if($filter == 'contract' || $filter==null){
-			$query = "SELECT concat(vtiger_users.first_name, '', vtiger_users.last_name) as fullname, vtiger_employeecontract.department, vtiger_employeecontract.designation, contract_expiry_date as expirydate FROM vtiger_employeecontract 
+			$query = "SELECT concat(vtiger_users.first_name, '', vtiger_users.last_name) as fullname, vtiger_employeecontract.department, vtiger_employeecontract.designation, DAY(contract_expiry_date) as expirydate_day, MONTH(contract_expiry_date) as expirydate_month, YEAR(contract_expiry_date) as expirydate_year FROM vtiger_employeecontract 
 					  INNER JOIN vtiger_employeecontractcf ON vtiger_employeecontractcf.employeecontractid=vtiger_employeecontract.employeecontractid 
 					  INNER JOIN vtiger_users ON vtiger_users.id = vtiger_employeecontract.employee_id 
 					  WHERE contract_expiry_date between curdate() AND ADDDATE(curdate(), 30) LIMIT ?, ?";
 		}
 		if($filter == 'passport'){
-			$query = "SELECT  concat(vtiger_users.first_name, '', vtiger_users.last_name) as fullname, vtiger_users.department, vtiger_users.title as designation, date_expired as expirydate FROM vtiger_passportvisa
+			$query = "SELECT  concat(vtiger_users.first_name, '', vtiger_users.last_name) as fullname, vtiger_users.department, vtiger_users.title as designation, DAY(date_expired) as expirydate_day, MONTH(date_expired) as expirydate_month, YEAR(date_expired) as expirydate_year FROM vtiger_passportvisa
 					  INNER JOIN vtiger_users ON vtiger_users.id = vtiger_passportvisa.employee_id 
 					  WHERE date_expired between curdate() AND ADDDATE(curdate(), 30) LIMIT ?, ?";
 		}
 		if($filter == 'visa'){
-			$query = "SELECT concat(vtiger_users.first_name, '', vtiger_users.last_name) as fullname, vtiger_users.department, vtiger_users.title as designation, visa_date_expired as expirydate FROM vtiger_passportvisa
+			$query = "SELECT concat(vtiger_users.first_name, '', vtiger_users.last_name) as fullname, vtiger_users.department, vtiger_users.title as designation, DAY(visa_date_expired) as expirydate_day, MONTH(visa_date_expired) as expirydate_month, YEAR(visa_date_expired) as expirydate_year FROM vtiger_passportvisa
 					  INNER JOIN vtiger_users ON vtiger_users.id = vtiger_passportvisa.employee_id 
 					  WHERE visa_date_expired between curdate() AND ADDDATE(curdate(), 30) LIMIT ?, ?";
 		}
@@ -141,7 +141,9 @@ class EmployeeContract_Record_Model extends Vtiger_Record_Model {
 			$rowdetails[$i]['fullname'] = $db->query_result($result, $i, 'fullname');
 			$rowdetails[$i]['department'] = $db->query_result($result, $i, 'department');
 			$rowdetails[$i]['designation'] = $db->query_result($result, $i, 'designation');
-			$rowdetails[$i]['expirydate'] = $db->query_result($result, $i, 'expirydate');
+			$rowdetails[$i]['expirydate_day'] = $db->query_result($result, $i, 'expirydate_day');
+			$rowdetails[$i]['expirydate_month'] = $db->query_result($result, $i, 'expirydate_month');
+			$rowdetails[$i]['expirydate_year'] = $db->query_result($result, $i, 'expirydate_year');
 		}
 		
 		return $rowdetails;

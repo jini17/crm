@@ -22,6 +22,9 @@
 			<th>
 			<b>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</b>
 			</th>
+			<th>
+			<b>{vtranslate('LBL_MC_TAKEN', $MODULE_NAME)}</b>
+			</th>
 			{/if}
 			
 		</tr>
@@ -40,6 +43,9 @@
 					{$MODEL['department']}
 				</td>
 				{/if}
+				<td style="text-align:center;">
+					{$MODEL['leavecount']}
+				</td>
 			</tr>
 		{/foreach}
 	</tbody>

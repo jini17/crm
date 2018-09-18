@@ -32,8 +32,14 @@
 				<td>
 				{$MODEL['leave_type']}
 				</td>
-				<td>
-				{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($MODEL['from_date'])} To {Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($MODEL['to_date'])}
+				<td>	
+				{$MODEL['from_date_day']}{if $MODEL['from_date_day'] eq 1}st
+				{elseif $MODEL['from_date_day'] eq 2}nd
+				{elseif $MODEL['from_date_day'] eq 3}rd
+				{else}th{/if} 
+				{Vtiger_Util_Helper::getMonthName($MODEL['from_date_month'])}
+				{if $MODEL['from_date_day'] eq $MODEL['to_date_day']}2018 
+				{else} - {$MODEL['to_date_day']}{if $MODEL['to_date_day'] eq 1}st{elseif $MODEL['to_date_day'] eq 2}nd{elseif $MODEL['to_date_day'] eq 3}rd{else}th{/if} {Vtiger_Util_Helper::getMonthName($MODEL['to_date_month'])} {$MODEL['to_date_year']}{/if}
 				</td>
 				<td style="text-align:center;">
 				{$MODEL['leavestatus']}
