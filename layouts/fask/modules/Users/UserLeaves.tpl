@@ -1,31 +1,54 @@
 {strip}
 {if $SECTION eq 'M'}
-        <table class="table table-bordered listViewEntriesTable">
-                <thead>
-                        <tr>
-                                <th nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_LEAVE_TYPE', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_START_DATE', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_END_DATE', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_LEAVE_STATUS', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_ACTION', $MODULE)}</th>	
-                        </tr>
-                </thead>
-                <tbody>
-                        {if count($MYLEAVES) gt 0}
-                        {foreach item=USER_LEAVE from=$MYLEAVES}
-                                <tr data-section="M">
-                                        <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leave_reason']}</label></td>
-                                        <td class="listTableRow small" valign=top><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['colorcode']};width:30px;height:20px;"></label><label style="float:left;" class="instlabel">{$USER_LEAVE['leave_type']}</label></td>		
-                                        <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['from_date']}</label></td>
+<div class="block block_LBL_LEAVE">
+                            <div>
+                                <h5>Leave</h5>
+                                <hr>
+                                <div class="blockData">
+                                    <div class="table detailview-table no-border">
+                                            <div class="row">
+                                                <div id="Users_detailView_fieldLabel_LBL_LEAVE_DESC" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                                    <span class="muted">{vtranslate('LBL_LEAVE_DESC', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_LEAVE_DESC" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_LEAVE['leave_reason']}</span>
+                                                </div>
+                                                <div class="fieldLabel col-xs-6 textOverflowEllipsis   col-md-3 medium" id="Users_detailView_fieldLabel_LBL_LEAVE_TYPE">
+                                                    <span class="muted">{vtranslate('LBL_LEAVE_TYPE', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_LEAVE_TYPE" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string"><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['colorcode']};width:30px;height:20px;"></label><label style="float:left;" class="instlabel">{$USER_LEAVE['leave_type']}</label></span>
+                                                </div>
 
-                                        <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['to_date']}</label></td>
-                                        <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leavestatus']}</label></td>
-                                        <td class="listTableRow small" valign=top>
-                                                <div class="pull-right actions">
+                                                <div class="row">
+                                                <div id="Users_detailView_fieldLabel_LBL_START_DATE" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                                    <span class="muted">{vtranslate('LBL_START_DATE', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_START_DATE" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_LEAVE['from_date']}</span>
+                                                </div>
+                                                <div class="fieldLabel col-xs-6 textOverflowEllipsis   col-md-3 medium" id="Users_detailView_fieldLabel_LBL_END_DATE">
+                                                    <span class="muted">{vtranslate('LBL_END_DATE', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_END_DATE" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_LEAVE['to_date']}</span>
+                                                </div>
+
+                                                <div class="row">
+                                                <div id="Users_detailView_fieldLabel_LBL_LEAVE_STATUS" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                                    <span class="muted">{vtranslate('LBL_LEAVE_STATUS', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_LEAVE_STATUS" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_LEAVE['leavestatus']}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_ACTION" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                                    <span class="muted">{vtranslate('LBL_ACTION', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_ACTION" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <div class="pull-right actions">
                                                         <span class="actionImages">
-                {*	<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );">
-                        <i class="fa fa-file-o" title="Documents"></i>  </a>	*}
+                {*  <a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );">
+                        <i class="fa fa-file-o" title="Documents"></i>  </a>    *}
                                         {if $USER_LEAVE['leavestatus'] eq 'New'} 
 
                                                 <a class="editLeave cursorPointer editAction ti-pencil" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false" title="{vtranslate('LBL_EDIT', $MODULE)}"></a>&nbsp;&nbsp;
@@ -38,18 +61,21 @@
 
                                                         </span>
                                                 </div>
-                                        </td>
-                                </tr>
-                        {/foreach}
-                        {else}
-                                <tr><td colspan="6"><center>{vtranslate('LBL_NO_LEAVE_FOUND', $MODULE)}</center></td></tr>
-                        {/if}
-                </tbody>			
-        </table>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+        
 
 
 <!--@@@@@@@@@@@@START PAGINATION TOOLS@@@@@@@@@@@@@@@-->
 {elseif $SECTION eq 'T'}
+
+
 <div class="listViewActionsDiv row-fluid">
                         <span class="span4 btn-toolbar" style="float:right;margin-left:0.12766%;margin-top:0;margin-bottom:9px;">
 
@@ -100,63 +126,86 @@
                         </span>
                 </div>
                                 <!--@@@@@@@@@@@@END PAGINATION TOOLS@@@@@@@@@@@@@@@-->
-        <table class="table table-bordered listViewEntriesTable">
-                <thead>
-                        <tr>
-                                <th nowrap>{vtranslate('LBL_FULLNAME', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_LEAVE_TYPE', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_START_DATE', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_END_DATE', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_LEAVE_STATUS', $MODULE)}</th>
 
-                                <th nowrap>{vtranslate('LBL_ACTION', $MODULE)}</th>
-
-                        </tr>
-                </thead>
-                <tbody>
-                        {if count($MYTEAMLEAVES) gt 0}
-                        {foreach item=USER_LEAVE from=$MYTEAMLEAVES}
-                                <tr data-section="T">
-                                        <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['fullname']}</label></td>
-                                        <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leave_reason']}</label></td>
-                                        <td class="listTableRow small" valign=top><label style="background-color:{$USER_LEAVE['color_code']};float:left;margin-right:5px;width:30px;height:20px;"></label><label class="instlabel">{$USER_LEAVE['leave_type']}</label></td>		
-                                        <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['from_date']}</label></td>
-                                        <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['to_date']}</label></td>
-                                        <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leavestatus']}</label></td>
-
-                                        <td class="listTableRow small" valign=top>
-                                                <div class="pull-right actions">
-                                                        <span class="actionImages">
-
- {*<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>*}			
-
-
-                                                                {if $USER_LEAVE['leavestatus'] eq 'Apply'}
-                                                                <a class="editLeave cursorPointer editAction ti-pencil" data-url='{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true'
-                                                                 title="{vtranslate('LBL_LEAVE_APPROVAL', $MODULE)}" onclick="Users_Leave_Js.Popup_LeaveApprove('{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true');"></a>&nbsp;&nbsp;
-                                                                 {/if}	
-                                                                {if $USER_LEAVE['leavestatus'] eq 'Approved'}
-
-                                                                <a class="cancelLeave cursorPointer" data-section ='T' data-url='?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}'
-                                                                onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}','T');"><i title="Cancel" class="fa fa-times-circle alignBottom"></i></a>				
-                                                                {/if}
-                                                        </span>
+        <div class="block block_LBL_LEAVE">
+                            <div>
+                                <h5>Leave</h5>
+                                <hr>
+                                <div class="blockData">
+                                    <div class="table detailview-table no-border">
+                                            <div class="row">
+                                                <div id="Users_detailView_fieldLabel_LBL_FULLNAME" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                                    <span class="muted">{vtranslate('LBL_FULLNAME', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_LEAVE_DESC" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_LEAVE['fullname']}</span>
+                                                </div>
+                                                <div class="fieldLabel col-xs-6 textOverflowEllipsis   col-md-3 medium" id="Users_detailView_fieldLabel_LBL_LEAVE_DESC">
+                                                    <span class="muted">{vtranslate('LBL_LEAVE_DESC', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_LEAVE_DESC" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_LEAVE['leave_reason']}</span>
+                                                    
                                                 </div>
 
-                                        </td>
-                                </tr>
-                        {/foreach}
-                        {else}
-                                <tr><td colspan="7"><center>{vtranslate('LBL_NO_LEAVE_FOUND', $MODULE)}</center></td></tr>
-                        {/if}
-                </tbody>			
-        </table>
+                                                <div class="row">
+                                                <div id="Users_detailView_fieldLabel_LBL_LEAVE_TYPE" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                                    <span class="muted">{vtranslate('LBL_LEAVE_TYPE', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_LBL_LEAVE_TYPE" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string"><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['colorcode']};width:30px;height:20px;"></label><label style="float:left;" class="instlabel">{$USER_LEAVE['leave_type']}</label></span>
+                                                </div>
+                                                <div class="fieldLabel col-xs-6 textOverflowEllipsis   col-md-3 medium" id="Users_detailView_fieldLabel_LBL_START_DATE">
+                                                    <span class="muted">{vtranslate('LBL_START_DATE', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_START_DATE" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_LEAVE['from_date']}</span>
+                                                </div>
 
+                                                <div class="row">
+                                                <div id="Users_detailView_fieldLabel_LBL_END_DATE" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                                    <span class="muted">{vtranslate('LBL_END_DATE', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_END_DATE" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_LEAVE['to_date']}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_LEAVE_STATUS" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                                    <span class="muted">{vtranslate('LBL_LEAVE_STATUS', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_LEAVE_STATUS" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string">{$USER_LEAVE['leavestatus']}</span>
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                                <div id="Users_detailView_fieldLabel_LBL_ACTION" class="fieldLabel col-xs-6 textOverflowEllipsis col-md-3 medium">
+                                                    <span class="muted">{vtranslate('LBL_ACTION', $MODULE)}</span>
+                                                </div>
+                                                <div id="Users_detailView_fieldLabel_LBL_ACTION" class="fieldValue  col-xs-6 col-md-3 medium">
+                                                    <span class="value textOverflowEllipsis" data-field-type="string"><div class="pull-right actions">
+                                                        <span class="actionImages">
+                {*  <a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );">
+                        <i class="fa fa-file-o" title="Documents"></i>  </a>    *}
+                                        {if $USER_LEAVE['leavestatus'] eq 'New'} 
 
+                                                <a class="editLeave cursorPointer editAction ti-pencil" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false" title="{vtranslate('LBL_EDIT', $MODULE)}"></a>&nbsp;&nbsp;
+                                        {/if}
+                                        {if $USER_LEAVE['leavestatus'] eq 'New' OR $USER_LEAVE['leavestatus'] eq 'Apply'}
+                                        <a class="deleteLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=deleteLeave&record={$USER_LEAVE['id']}"><i class="fa fa-trash-o" title="Delete"></i></a>
+                                        {/if}
+                                        {if $USER_LEAVE['leavestatus'] eq 'Approved' && $USER_LEAVE['from_date']|strtotime gt $CurrentDate|strtotime}<a class="cancelLeave cursorPointer" onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}','M');"><i class="fa fa-trash-o" title="Cancel"></i></a>
+                                        {/if}
 
-
-
+                                                        </span>
+                                                </div>
+                                                </div>
+                                        </div></span>
+                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
 
 {else}
 <!-- Added hidden field by jitu for paging --->
