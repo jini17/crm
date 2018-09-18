@@ -64,33 +64,34 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	public function getMyLeaves($userid, $year, $filtertype=null, $filtervalue=null){
 	
 	$db = PearDatabase::getInstance();
-	//$db->setDebug(true);
-	$filtercond = '';
+	
+	$result = $db->pquery("SELECT date_joined, job_grade FROM vtiger_employeecontract tblVTEC 
+							INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
+							INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
+							WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTEC.date_joined DESC LIMIT 0, 1", array($userid));
+							
+		$dateofJoining = $db->query_result($result, 0, 'date_joined');	
+		$grade_id	   = $db->query_result($result, 0, 'job_grade');	
+		$datediff = time() - strtotime($dateofJoining);				 
+		$earneddays = round($datediff / (60 * 60 * 24));
+		$curr_year	   = date('Y');	
 	
 	if($filtertype =='leavetype'){
-		$query = "SELECT vtiger_leavetype.title, sum(secondcrm_user_balance.leave_count), allocation_leaverel.ageleave, 
-					allocation_leaverel.numberofleavesmore, allocation_leaverel.numberofleavesless
-			FROM allocation_leaverel
-			LEFT JOIN allocation_list ON allocation_list.allocation_id=allocation_leaverel.allocation_id
-			LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocation_list.allocation_id
-			LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = allocation_leaverel.leavetype_id
-			LEFT OUTER JOIN secondcrm_user_balance ON secondcrm_user_balance.leave_type=vtiger_leavetype.leavetypeid
-			WHERE secondcrm_user_balance.user_id =? AND allocation_graderel=? AND allocation_list.allocation_year=?";		
-		$filtercond = " AND vtiger_leave.leavetype=". $filtervalue;
-
-	} else if($filtertype=='latest'){
-		$filtercond = " ORDER BY vtiger_leave.fromdate DESC Limit 0, 5";
+		$query = "SELECT vtiger_leavetype.leavetypeid, vtiger_leavetype.title, allocation_leaverel.ageleave, allocation_leaverel.numberofleavesmore, allocation_leaverel.numberofleavesless
+					FROM allocation_leaverel
+					LEFT JOIN allocation_list ON allocation_list.allocation_id=allocation_leaverel.allocation_id
+					LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocation_list.allocation_id
+					LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = allocation_leaverel.leavetype_id
+					WHERE allocation_graderel=? AND allocation_list.allocation_year=?";		
 	}
 
 
-
-	$result = $db->pquery($query,array($userid, $year));
+	$result = $db->pquery($query,array($grade_id, $year));
+	
 	$myleave=array();	
 	
 	for($i=0;$db->num_rows($result)>$i;$i++){
-		$rowdetail = self::getLeaveType($db->query_result($result, $i, 'leavetype'));
-		$myleave[$i]['id'] = $db->query_result($result, $i, 'leaveid');
-		$myleave[$i]['leave_reason'] = $db->query_result($result, $i, 'reasonofleave');
+		$rowdetail = self::getLeaveTypeDetail($db->query_result($result, $i, 'leavetypeid'));
 		$myleave[$i]['leave_type'] = $rowdetail['leavetype'];
 		$myleave[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetype');
 		$myleave[$i]['colorcode'] = $rowdetail['colorcode'];

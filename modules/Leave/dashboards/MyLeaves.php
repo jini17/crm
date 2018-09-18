@@ -16,11 +16,13 @@ class Leave_MyLeaves_Dashboard extends Vtiger_IndexAjax_View {
 		$viewer = $this->getViewer($request);
 
 		$moduleName = $request->getModule();
+
 		$type = $request->get('type');
 		$filter = $request->get('group');
 
 		$leaveTypelist = Users_LeavesRecords_Model::getLeaveTypeList($currentUser->getId());
 		$value = $type;
+
 		if($type == '' || $type == null) {
 				$value = 'leavetype';
 				$filter = $leaveTypelist[0]['leavetypeid'];
