@@ -53,7 +53,7 @@ $languageStrings = array(
 	'LBL_OFFICE_PH'=>'Office Phone',
 	'LBL_MOBILE'=>'Mobile',
 	'LBL_EDIT_CONTACT'=>'Edit Contact',
-	
+	'YOU_ARE_CURRENLY_VIEWING'=>'You are viewing employees of company',
 
 
 

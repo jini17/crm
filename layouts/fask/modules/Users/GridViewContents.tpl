@@ -5,7 +5,7 @@
         font-weight: bold;
     }
     .box-content{
-      padding:17px 10px;
+      padding:5px 10px;
       border: 1px solid #ddd;
       background: #fff;
       min-height: 300px;
@@ -76,7 +76,7 @@
 <div class="clearfix" style="height:20px;"></div>
 <div class="col-lg-6">
       <strong>
-        {vtranslate('YOU_ARE_CURRENLY_VIEWING','You are currently viewing')}
+        {vtranslate('YOU_ARE_CURRENLY_VIEWING',$MODULE)} "Soft Solvers Solutions"
     </strong>
 </div>
     <div class="col-lg-6">
