@@ -12,8 +12,15 @@
 
 <div class="dashboardWidgetHeader">
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
-  <div class="filterContainer">
-        <div class="row">
+</div>
+
+<div class="dashboardWidgetContent mCustomScrollbar" style="height:250px;">
+	{include file="dashboards/HolidayContents.tpl"|@vtemplate_path:$MODULE_NAME}
+</div>
+
+<div class="widgeticons dashBoardWidgetFooter">
+	<div class="filterContainer">
+       <div class="row">
             <div class="col-sm-12">
                 <div class="col-lg-7">
                    <select class="widgetFilter select2" id="month" name="type" style='width:100%;'>
