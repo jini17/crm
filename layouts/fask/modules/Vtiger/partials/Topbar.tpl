@@ -197,12 +197,6 @@ $(this).hide();
 
 
 
-                                                                                        {assign var=RECYCLEBIN_MODULE_MODEL value=Vtiger_Module_Model::getInstance('RecycleBin')}
-                                                                                        {if $RECYCLEBIN_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($RECYCLEBIN_MODULE_MODEL->getId())}
-
-                                                                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="{$RECYCLEBIN_MODULE_MODEL->getDefaultUrl()}" ><span class="module-icon"><i class="material-icons">delete_forever</i></span><span class="hide-menu"> {vtranslate('Recycle Bin')}</span></a></li>
-
-                                                                                        {/if}
                                                                                         {assign var=RSS_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Rss')}
                                                                                         {if $RSS_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($RSS_MODULE_MODEL->getId())}
 
@@ -231,8 +225,8 @@ $(this).hide();
 
 
 
-                                                                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=WorkingHours&view=List"><i class="material-icons module-icon">access_time</i> <span class="hide-menu"> {vtranslate('WorkingHours')}</span></a></li>
-
+                                                                                       <!-- <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=WorkingHours&view=List"><i class="material-icons module-icon">access_time</i> <span class="hide-menu"> {vtranslate('WorkingHours')}</span></a></li>
+                                                                                        -->        
                                                                                         {/if}
                                                                                         
                                                                                         {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Payments')}
@@ -248,8 +242,8 @@ $(this).hide();
 
 
 
-                                                                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=LeaveType&view=List"><i class="material-icons module-icon">keyboard_tab</i> <span class="hide-menu"> {vtranslate('LeaveType')}</span></a></li>
-
+                                                                                        <!--<li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=LeaveType&view=List"><i class="material-icons module-icon">keyboard_tab</i> <span class="hide-menu"> {vtranslate('LeaveType')}</span></a></li>
+                                                                                        -->
                                                                                         {/if}
                                                                                 </ul>
                                                                         </li>
@@ -344,7 +338,11 @@ $(this).hide();
                                                                         </li>
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_POLICY_DOCUMENT')}" href="index.php?module=Documents&view=List&type=H">
+<<<<<<< HEAD
                                                                                     <i class="material-icons module-icon">assignment</i>&nbsp;{vtranslate('LBL_POLICY_DOCUMENT')}
+=======
+                                                                                	<i class="material-icons module-icon">file_download</i>&nbsp;{vtranslate('LBL_POLICY_DOCUMENT')}
+>>>>>>> a535f26608187b9f37db488b67227e733c943df9
                                                                                        
                                                                                 </a>
                                                                         </li>
@@ -430,7 +428,9 @@ $(this).hide();
                                                                         </a>
                                                                     </li>
                                                                     {/if}
-                                                                    <li>
+                                                                      <li>
+
+
                                                                          <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_MAIL_MANAGER')}" href="index.php?module=MailManager&view=List">
                                                                                     <i class="material-icons module-icon">email</i>&nbsp;{vtranslate('LBL_MAIL_MANAGER')}
                                                                                        

@@ -23,7 +23,10 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
                 $department     = $request->get('department');
                 $gender              = $request->get('gender');
                 $age_group       = $request->get('age_group');
-                
+                $chartTYPE          = $request->get('type');
+//                if($chartTYPE ==''){
+//                    $chartTYPE  = 'pieChart';
+//                }
                 $dept                  = $this->department($deparment);
                 $agegroup         = $this->age_group($age_group);
                 $Gender             = $this->gender($gender);
@@ -37,25 +40,23 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
                 $viewer->assign('DEPARTMENT', $departmentList);
                 $viewer->assign('AGE_GROUP', $age_groupList);
                 $viewer->assign('GENDER', $genderList);
-                
-                 
-                 
-                
+                $viewer->assign('CHART_TYPE',$chartTYPE);
        
                 $page     = $request->get('page');
                 $linkId     = $request->get('linkid');
 
                 $moduleModel  = Home_Module_Model::getInstance($moduleName);
-                $birthdays          = $moduleModel->getBirthdays($group, $type);
-                $widget              = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+                $empbydept       = $this->get_employee_by_dept($db,$where);
+                $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 
 
                 $viewer->assign('WIDGET', $widget);
                 $viewer->assign('MODULE_NAME', $moduleName);
 
-                $viewer->assign('MODELS', $birthdays);
+                $viewer->assign('DATA', json_encode($empbydept));
 
                 $content = $request->get('content');
+            
                 if(!empty($content)) {
                         $viewer->view('dashboards/EmployeeChartByDeptContents.tpl', $moduleName);
                 } else {
@@ -108,5 +109,22 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
                                                 $gender = 'Male';
             }
             return $gender;
+        }
+        
+        public function get_employee_by_dept($db,$where){
+            $data = array();
+            $sql = 'SELECT department as dept,COUNT(employeeno) as total FROM vtiger_employeecontract   ';
+            $sql .= 'group BY department';
+           $query = $db->pquery($sql,array());
+           $num_rows = $db->num_rows($query);
+           if($num_rows > 0){
+                for($i = 0; $i < $num_rows; $i++){
+                     $dept= $db->query_result($query,$i,'dept');
+                     $counts= $db->query_result($query,$i,'total');
+                     $data['labels'][] =$dept;
+                     $data['values'][] =$counts;
+                }
+           }
+           return $data;
         }
 }

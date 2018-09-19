@@ -11,6 +11,17 @@
 -->*}
 <div class="dashboardWidgetHeader">
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
+  <div class="filterContainer">
+      <div class="row">
+          <div class="col-sm-12" id="department_dropdown">
+            <select class="select2 widgetFilter col-lg-6"  name="department" >
+              {foreach item=DEPT from=$DEPARTMENT}
+              <option value="{$DEPT}" {if $VALUE eq $DEPT}selected{/if}>{$DEPT}</option> 
+              {/foreach}
+            </select>
+          </div>  
+      </div>
+  </div>    
 </div>
 
 <div class="dashboardWidgetContent mCustomScrollbar _mCS_5" style="height:200px;">
@@ -18,23 +29,7 @@
 </div>
 
 <div class="widgeticons dashBoardWidgetFooter">
-	<div class="filterContainer">
-        
-        <div class="row">
-            <div class="col-sm-12" id="department_dropdown">
-              <select class="select2 widgetFilter col-lg-6"  name="department" >
-                {foreach item=DEPT from=$DEPARTMENT}
-                <option value="{$DEPT}" {if $VALUE eq $DEPT}selected{/if}>{$DEPT}</option> 
-                {/foreach}
-              </select>
-            </div>  
-        </div>
-     
-
-    </div>    
-
-
   <div class="footerIcons pull-right">
-        {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
+        {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=false}
   </div>
 </div>
