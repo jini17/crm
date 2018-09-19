@@ -112,7 +112,7 @@
     <div class="row">
         <div class="col-lg-12">
             {foreach  item=LISTVIEW_ENTRY from=$LISTVIEW_ENTRIES }
-                    {assign var=birthday value=$LISTVIEW_ENTRY->getBirthdayWish('19-09-2018',$LISTVIEW_ENTRY->getId())}
+                    {assign var=birthday value=$LISTVIEW_ENTRY->getBirthdayWish($LISTVIEW_ENTRY->get('birthday'),$LISTVIEW_ENTRY->getId())}
                     
                 <div class="col-lg-4"   data-id='{$LISTVIEW_ENTRY->getId()}' data-recordUrl='{$LISTVIEW_ENTRY->getDetailViewUrl()}' id="{$MODULE}_listView_row_{$smarty.foreach.listview.index+1}">
 
