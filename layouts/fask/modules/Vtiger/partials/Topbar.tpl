@@ -9,7 +9,7 @@
 
 {strip}
 {include file="layouts/fask/modules/Vtiger/Header.tpl"}
-{assign var="APP_IMAGE_MAP" value=[	'MARKETING' => 'ti-thumb-up',
+{assign var="APP_IMAGE_MAP" value=[ 'MARKETING' => 'ti-thumb-up',
 'SALES' => 'ti-money',
 'SUPPORT' => 'ti-headphone-alt',
 'INVENTORY' => 'ti-archive',
@@ -73,7 +73,7 @@ $(this).hide();
 
 
 
-                                <!-- nuovo menu-->	
+                                <!-- nuovo menu-->  
                                 <div class="dropdown col-lg-3 hidden-sm hidden-xs ">
                                         <button class="btn btn-fask btn-lg" type="button" id="dropdownMenuButtonDesk" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="material-icons" style="color: #fff!important"></i>
@@ -159,10 +159,10 @@ $(this).hide();
                                                                                 {foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
                                                                                 {assign var='translatedModuleLabel' value=vtranslate($moduleModel->get('label'),$moduleName )}
                                     {if $moduleName eq 'MyProfile'}                                            
-										{assign var='moduleURL' value="index.php?module=Users&view=Detail&record={$USER_MODEL->getId()}&app=$APP_NAME&parent=Settings"}
-									{else}
-										{assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME}"}
-									{/if}	
+                                        {assign var='moduleURL' value="index.php?module=Users&view=Detail&record={$USER_MODEL->getId()}&app=$APP_NAME&parent=Settings"}
+                                    {else}
+                                        {assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME}"}
+                                    {/if}   
                                                                                 <li {$APP_NAME}>
                                                                                     <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
                                                                                        href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
@@ -295,14 +295,14 @@ $(this).hide();
                                                                 <ul class="dropdownlist">
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings">
-                                                                                	<i class="material-icons module-icon">person</i>&nbsp;Employee
+                                                                                    <i class="material-icons module-icon">person</i>&nbsp;Employee
                                                                                      
                                                                                 </a>
                                                                         </li>
                                                                           {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                                                         <li>
                                                                                <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&view=List">
-                                                                                	<i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
+                                                                                    <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
                                                                                       
                                                                                 </a>
                                                                         </li>
@@ -310,7 +310,7 @@ $(this).hide();
                                                                                      <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
 
-                                                                                	<i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
+                                                                                    <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
                                                                                       
                                                                                 </a>
                                                                         </li>
@@ -318,33 +318,33 @@ $(this).hide();
                                                                            {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
-                                                                                	<i class="material-icons module-icon">attach_money</i>&nbsp;Claim
+                                                                                    <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
                                                                                        
                                                                                 </a>
                                                                         </li>
                                                                             {else}
                                                                                   <li>
                                                                                 <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
-                                                                                	<i class="material-icons module-icon">attach_money</i>&nbsp;Claim
+                                                                                    <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
                                                                                        
                                                                                 </a>
                                                                         </li>
                                                                         {/if}
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Payslip" href="index.php?module=Payslip&amp;view=List&amp;app=ADMIN">
-                                                                                	<i class="material-icons module-icon">insert_drive_file</i>&nbsp;Payslip
+                                                                                    <i class="material-icons module-icon">insert_drive_file</i>&nbsp;Payslip
                                                                                        
                                                                                 </a>
                                                                         </li>
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
-                                                                                	<i class="material-icons module-icon">timeline</i>&nbsp;Performance
+                                                                                    <i class="material-icons module-icon">timeline</i>&nbsp;Performance
                                                                                        
                                                                                 </a>
                                                                         </li>
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_POLICY_DOCUMENT')}" href="index.php?module=Documents&view=List&type=H">
-                                                                                	<i class="material-icons module-icon">assignment</i>&nbsp;{vtranslate('LBL_POLICY_DOCUMENT')}
+                                                                                    <i class="material-icons module-icon">assignment</i>&nbsp;{vtranslate('LBL_POLICY_DOCUMENT')}
                                                                                        
                                                                                 </a>
                                                                         </li>
@@ -430,6 +430,12 @@ $(this).hide();
                                                                         </a>
                                                                     </li>
                                                                     {/if}
+                                                                    <li>
+                                                                         <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_MAIL_MANAGER')}" href="index.php?module=MailManager&view=List">
+                                                                                    <i class="material-icons module-icon">email</i>&nbsp;{vtranslate('LBL_MAIL_MANAGER')}
+                                                                                       
+                                                                                </a>
+                                                                    </li>
                                                              <!--       <li>
                                                                         <a class="dropdown-icon-dashboard" title="Our Sites" href="index.php?module=Portal&amp;view=List&amp;app=TOOLS">
                                                                                 <i class="fa fa-desktop"></i>&nbsp;Our Sites
@@ -516,7 +522,7 @@ text-decoration: none;">All</span>
                                                 </div>
                                         </li>
 
-                <!-- 			<li>
+                <!--            <li>
                                                 <div class="dropdownMore">
                                                         <div class="addtionalDashboardTab">
                                                                 <span aria-hidden="true">More</span>

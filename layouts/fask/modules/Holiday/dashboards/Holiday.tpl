@@ -14,7 +14,7 @@
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
 </div>
 
-<div class="dashboardWidgetContent">
+<div class="dashboardWidgetContent mCustomScrollbar" style="height:250px;">
 	{include file="dashboards/HolidayContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 

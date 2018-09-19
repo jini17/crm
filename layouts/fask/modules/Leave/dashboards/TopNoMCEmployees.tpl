@@ -13,7 +13,7 @@
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
 </div>
 
-<div class="dashboardWidgetContent">
+<div class="dashboardWidgetContent mCustomScrollbar _mCS_5" style="height:200px;">
 	{include file="dashboards/TopNoMCEmployeesContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 
