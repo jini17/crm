@@ -12,10 +12,6 @@
             <!--id="listViewContent"-->
             <div class="col-sm-12 col-xs-12 full-height">
                  {if $EMP_VIEW eq 'grid'}
-<<<<<<< HEAD
-                 
-
-=======
                    <div class="tabContainer"><ul class="nav nav-tabs tabs sortable container-fluid visible-lg">
 
                         <li class="active employeeTab" data-tabname="Employee Directory">
@@ -39,7 +35,7 @@
                             </span><span class="editTabName hide"><input name="tabName" type="text"></span><i class="fa fa-bars moveTab hide"></i>
                         </div></a></li>
                    </div>
->>>>>>> c10b058... New Layout Employee
+
                 {else}
                     <div id="listview-actions" class="listview-actions-container">
                         <div class = "row">
