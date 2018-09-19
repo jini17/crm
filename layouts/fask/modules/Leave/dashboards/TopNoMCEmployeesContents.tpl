@@ -10,47 +10,37 @@
  ********************************************************************************/
 -->*}
 
-<div style='padding:5px;'>
+<div style='padding:5px'>
 {if count($MODELS) > 0}
-<table class="table table-bordered listViewEntriesTable">
-	<thead>
-		<tr>
-			<th style="width:43%;">
-			<b>{vtranslate('LBL_NAME', $MODULE_NAME)}</b>
-			</th>
-			{if $VALUE eq  ''}
-			<th>
-			<b>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</b>
-			</th>
-			<th>
-			<b>{vtranslate('LBL_MC_TAKEN', $MODULE_NAME)}</b>
-			</th>
-			{/if}
-			
-		</tr>
-	</thead>
-	<tbody>
+	<div>
+        <div class='row th' style="padding:5px">
+       		<div class='col-lg-5'>
+             	<strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
+            </div>
+            <div class='col-lg-5'>
+               <strong>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</strong>
+            </div>
+            <div class='col-lg-2'>
+              <strong>{vtranslate('LBL_MC_TAKEN', $MODULE_NAME)}</strong>
+            </div>
+          </div>
+		<hr>
 		{foreach item=MODEL from=$MODELS}
-			<tr>
-				<td>
-					<strong>{$MODEL['empname']}</strong>
-					<br />
+			<div class='row miniListContent' style="padding:5px">
+				<div class='col-lg-5'>
+					<a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$MODEL['userid']}"><strong>{$MODEL['empname']}</strong></a>
+						<br />
 					(<i>{$MODEL['title']}<i>)
-				</td>
-			
-				{if $VALUE eq ''}			
-				<td style="text-align:center;">
+				</div>
+				<div class='col-lg-5'>
 					{$MODEL['department']}
-				</td>
-				{/if}
-				<td style="text-align:center;">
+				</div>
+				<div class='col-lg-2'>
 					{$MODEL['leavecount']}
-				</td>
-			</tr>
-		{/foreach}
-	</tbody>
-</table>
-<br /><br />
+				</div>
+			</div>
+			{/foreach}
+	</div>
 {else}
 	<span class="noDataMsg">
 		{vtranslate($TYPELABEL,$MODULE_NAME)} in {$VALUE}

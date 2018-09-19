@@ -1,5 +1,6 @@
 {strip}
 {if $SECTION eq 'M'}
+
         <table class="table detailview-table no-border listViewEntriesTable">
                 <thead>
                         <tr>
@@ -8,7 +9,7 @@
                                 <th nowrap>{vtranslate('LBL_START_DATE', $MODULE)}</th>
                                 <th nowrap>{vtranslate('LBL_END_DATE', $MODULE)}</th>
                                 <th nowrap>{vtranslate('LBL_LEAVE_STATUS', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_ACTION', $MODULE)}</th> 
+                                <th nowrap>{vtranslate('LBL_ACTION', $MODULE)}</th>	
                         </tr>
                 </thead>
                 <tbody>
@@ -16,7 +17,8 @@
                         {foreach item=USER_LEAVE from=$MYLEAVES}
                                 <tr data-section="M">
                                         <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leave_reason']}</label></td>
-                                        <td class="listTableRow small" valign=top><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['colorcode']};width:30px;height:20px;"></label><label style="float:left;" class="instlabel">{$USER_LEAVE['leave_type']}</label></td>      
+                                        <td class="listTableRow small" valign=top><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['colorcode']};width:30px;height:20px;"></label><label style="float:left;" class="instlabel">{$USER_LEAVE['leave_type']}</label></td>		
+
                                         <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['from_date']}</label></td>
 
                                         <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['to_date']}</label></td>
@@ -24,8 +26,8 @@
                                         <td class="listTableRow small" valign=top>
                                                 <div class="pull-right actions">
                                                         <span class="actionImages">
-                {*  <a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );">
-                        <i class="fa fa-file-o" title="Documents"></i>  </a>    *}
+                {*	<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );">
+                        <i class="fa fa-file-o" title="Documents"></i>  </a>	*}
                                         {if $USER_LEAVE['leavestatus'] eq 'New'} 
 
                                                 <a class="editLeave cursorPointer editAction ti-pencil" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false" title="{vtranslate('LBL_EDIT', $MODULE)}"></a>&nbsp;&nbsp;
@@ -44,7 +46,8 @@
                         {else}
                                 <tr><td colspan="6"><center>{vtranslate('LBL_NO_LEAVE_FOUND', $MODULE)}</center></td></tr>
                         {/if}
-                </tbody>            
+
+                </tbody>			
         </table>
 
 
@@ -100,8 +103,9 @@
                         </span>
                 </div>
                                 <!--@@@@@@@@@@@@END PAGINATION TOOLS@@@@@@@@@@@@@@@-->
+
         <table class="table detailview-table no-border listViewEntriesTable">
-                <thead>
+              <thead>
                         <tr>
                                 <th nowrap>{vtranslate('LBL_FULLNAME', $MODULE)}</th>
                                 <th nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
@@ -120,7 +124,9 @@
                                 <tr data-section="T">
                                         <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['fullname']}</label></td>
                                         <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leave_reason']}</label></td>
-                                        <td class="listTableRow small" valign=top><label style="background-color:{$USER_LEAVE['color_code']};float:left;margin-right:5px;width:30px;height:20px;"></label><label class="instlabel">{$USER_LEAVE['leave_type']}</label></td>     
+
+                                        <td class="listTableRow small" valign=top><label style="background-color:{$USER_LEAVE['color_code']};float:left;margin-right:5px;width:30px;height:20px;"></label><label class="instlabel">{$USER_LEAVE['leave_type']}</label></td>		
+
                                         <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['from_date']}</label></td>
                                         <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['to_date']}</label></td>
                                         <td class="listTableRow small" valign=top><label class="instlabel">{$USER_LEAVE['leavestatus']}</label></td>
@@ -129,17 +135,20 @@
                                                 <div class="pull-right actions">
                                                         <span class="actionImages">
 
- {*<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>*}            
+
+ {*<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>*}			
+
 
 
                                                                 {if $USER_LEAVE['leavestatus'] eq 'Apply'}
                                                                 <a class="editLeave cursorPointer editAction ti-pencil" data-url='{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true'
                                                                  title="{vtranslate('LBL_LEAVE_APPROVAL', $MODULE)}" onclick="Users_Leave_Js.Popup_LeaveApprove('{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true');"></a>&nbsp;&nbsp;
+
                                                                  {/if}  
                                                                 {if $USER_LEAVE['leavestatus'] eq 'Approved'}
 
                                                                 <a class="cancelLeave cursorPointer" data-section ='T' data-url='?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}'
-                                                                onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}','T');"><i title="Cancel" class="fa fa-times-circle alignBottom"></i></a>               
+                                                                onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}','T');"><i title="Cancel" class="fa fa-times-circle alignBottom"></i></a>				
                                                                 {/if}
                                                         </span>
                                                 </div>
@@ -150,7 +159,7 @@
                         {else}
                                 <tr><td colspan="7"><center>{vtranslate('LBL_NO_LEAVE_FOUND', $MODULE)}</center></td></tr>
                         {/if}
-                </tbody>            
+                </tbody>			
         </table>
 
 

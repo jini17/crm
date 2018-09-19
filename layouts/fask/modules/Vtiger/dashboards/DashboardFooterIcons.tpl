@@ -19,9 +19,9 @@
     {assign var=CHART_VALUES value=$CHART_DATA['values']}
 {/if}
 {if (!empty($DATA) && empty($CHART_TYPE))|| !empty($CHART_VALUES)}
-<a href="javascript:void(0);" name="widgetFullScreen">
+<!--<a href="javascript:void(0);" name="widgetFullScreen">
 	<i class="material-icons" hspace="2" border="0" align="absmiddle" title="{vtranslate('LBL_FULLSCREEN')}" alt="{vtranslate('LBL_FULLSCREEN')}">fullscreen</i>
-</a>
+</a>-->
 {/if}
 {if !empty($CHART_TYPE) && $REPORT_MODEL->isEditable() eq true}
 <a href="{$REPORT_MODEL->getEditViewUrl()}" name="customizeChartReportWidget">

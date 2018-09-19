@@ -9,29 +9,49 @@
 
 {strip}
         <div class="listViewPageDiv" id="listViewContent" style="padding-left: 0px; width: 100%">
-                <!--id="listViewContent"-->
-                <div class="col-sm-12 col-xs-12 full-height">
-                        <div id="listview-actions" class="listview-actions-container">
-                                <div class = "row">
-                                        <div class="btn-group col-md-3"></div>
-                                        <div class='col-lg-6 col-md-6 col-xs-12' style="padding-top: 5px">
-                                                <div class="btn-group userFilter" style="margin-left: 25%">
-                                                        <button class="btn btn-info" id="activeUsers" data-searchvalue="Active">
-                                                                {vtranslate('LBL_ACTIVE_USERS', $MODULE)}
-                                                        </button>
-                                                        <button class="btn btn-danger" id="inactiveUsers" data-searchvalue="Inactive">
-                                                                {vtranslate('LBL_INACTIVE_USERS', $MODULE)}
-                                                        </button>
-                                                </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-xs-12">
-                                                {assign var=RECORD_COUNT value=$LISTVIEW_ENTIRES_COUNT}
-                                                {include file="Pagination.tpl"|vtemplate_path:$MODULE SHOWPAGEJUMP=true}
-                                                <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;left: 96%;" title="Left Panel Show/Hide">
-                                                    <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>                    
-                                        </div>
+            <!--id="listViewContent"-->
+            <div class="col-sm-12 col-xs-12 full-height">
+                 {if $EMP_VIEW eq 'grid'}
+                   <div class="tabContainer"><ul class="nav nav-tabs tabs sortable container-fluid visible-lg">
 
-                                        </div>
+                        <li class="active employeeTab" data-tabname="Employee Directory">
+                            <a data-toggle="tab" href="#tab_2">
+                                    <div><span class="name textOverflowEllipsis" value="Employee Directory" style="width:10%">
+                                        <strong>Employee Directory</strong></span><span class="editTabName hide">
+                                        <input name="tabName" type="text"></span><i class="fa fa-bars moveTab hide"></i>
+                                    </div>
+                            </a>
+                        </li>
+                        <li class=" employeeTab" data-tabname="My Department">
+                                <a data-toggle="tab" href="#tab_1">
+                                    <div><span class="name textOverflowEllipsis" value="Tasks" style="width:10%">
+                                        <strong>My Department</strong></span><span class="editTabName hide">
+                                        <input name="tabName" type="text"></span><i class="fa fa-bars moveTab hide"></i>
+                                    </div></a>
+                        </li>
+                        <li class=" employeeTab" data-tabid="210" data-tabname="Where am i">
+                            <a data-toggle="tab" href="#tab_210"><div><span class="name textOverflowEllipsis" value="Employees" style="width:10%">
+                                <strong>{vtranslate('Where am i',$MODULE)}</strong>
+                            </span><span class="editTabName hide"><input name="tabName" type="text"></span><i class="fa fa-bars moveTab hide"></i>
+                        </div></a></li>
+                   </div>
+
+                {else}
+                    <div id="listview-actions" class="listview-actions-container">
+                        <div class = "row">
+                            <div class="btn-group col-md-3"></div>
+                            <div class='col-lg-6 col-md-6 col-xs-12' style="padding-top: 5px">
+                                <div class="btn-group userFilter" style="margin-left: 25%">
+                                    <button class="btn btn-info" id="activeUsers" data-searchvalue="Active">
+                                            {vtranslate('LBL_ACTIVE_USERS', $MODULE)}
+                                    </button>
+                                    <button class="btn btn-danger" id="inactiveUsers" data-searchvalue="Inactive">
+                                            {vtranslate('LBL_INACTIVE_USERS', $MODULE)}
+                                    </button>
                                 </div>
-                                <div class="list-content">
+                            </div>
+                        </div>
+                    </div>
+                {/if}
+                <div class="list-content">
 {/strip}

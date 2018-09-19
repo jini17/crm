@@ -11,34 +11,33 @@
 -->*}
 <div class="dashboardWidgetHeader">
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
-</div>
-
-    <div class="filterContainer">
-        
+  <div class="filterContainer">
         <div class="row">
             <div class="col-sm-12">
-               <div class="col-lg-6">
-                <label class="radio-group cursorPointer">
-                    <input type="radio" id="myleavetype" name="type" class="widgetFilter reloadOnChange cursorPointer" value="leavetype" checked="true" /> {vtranslate('LBL_LEAVE_TYPE', $MODULE_NAME)}
-                </label>
-              </div>
-                <div class="col-lg-6">
-                   <label class="radio-group cursorPointer">
-                      <input type="radio" id="leave5" name="type" class="widgetFilter reloadOnChange cursorPointer" value="latest" /> 
-                      <span>{vtranslate('LBL_LAST_5_LEAVES', $MODULE_NAME)}</span>
-                    </label>
+                <div class="col-lg-12">
+                    <select class="widgetFilter select2" id="duration" name="type" >
+                        <option value="pieChart"> Pie Chart</option>
+                        <option value="verticalbarChart"> Verticalbar Chart</option>
+                        <option value="lineChart"> Line Chart</option>
+                      <!--  <option value="horizontalbarChart"> Horizontalbar Chart</option>-->
+                      </select>
                 </div>
-            </div> 
-            <div class='clearfix'></div>
+            </div>
         </div>
-    </div>    
-<hr >
-<div class="dashboardWidgetContent mCustomScrollbar _mCS_5" style="height:200px;">
-  {include file="dashboards/MyLeavesContent.tpl"|@vtemplate_path:$MODULE_NAME}
+
+  </div>
+</div>
+
+<div class="dashboardWidgetContent" style="widht:300px;height:300px;">
+	{include file="dashboards/EmployeeChartByDeptContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 
 <div class="widgeticons dashBoardWidgetFooter">
+	
+
   <div class="footerIcons pull-right">
         {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=false}
   </div>
 </div>
+
+

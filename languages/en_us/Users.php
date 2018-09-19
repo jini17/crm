@@ -513,6 +513,7 @@ $languageStrings = array(
 );
 
 $jsLanguageStrings = array(
+	'JS_CANCEL_LEAVE_CONFIRMATION'=>'Are you sure to cancel approve leave',
 	'JS_PERMISSION_LEAVE_DENIED'=>'Sorry, Either you have consumed all leaves or not assign, <br>Please contact admin',
 	'JS_PERMISSION_ClAIM_DENIED'=>'Sorry, Either you have consumed all claims or not assign, <br>Please contact admin',
 	'JS_USER_ALREADY_APPLIED'=>'User already applied leave',
