@@ -10,6 +10,15 @@
 -->*}
 
 {strip}
+		
+		<hr>
+		<div class="col-lg-3 col-md-3 col-xs-12">
+                {assign var=RECORD_COUNT value=$LISTVIEW_ENTIRES_COUNT}
+                {include file="Pagination.tpl"|vtemplate_path:$MODULE SHOWPAGEJUMP=true}
+                <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;left: 96%;" title="Left Panel Show/Hide">
+                    <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>                    
+        </div>
+
     </div>
 </div>
 </div>
