@@ -1122,5 +1122,26 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		}
 		return $row;
 	}	//end here 
+        
+                    public function getBirthdayWish($date,$id) {
+                                    
+//		$module = $this->getModule();
+//		return 'index.php?module='.$this->getModuleName().'&parent=Settings&view='.$module->getDetailViewName().'&record='.$this->getId();
+                                           $cur_day_month = date('d-m');
+                                            $day_month = date('d-m',strtotime($date));
+                                            if($cur_day_month == $day_month){
+                                                $wish = '<div class="message" id="birthdaysms"  >';
+                                                $wish .= '<a class="birthday" style="font-weight: bold;" onclick="javascript:Settings_Users_List_Js.birthdayEmail('.$id.')">';
+                                                $wish .= "<i class='fa fa-gift'></i>";
+                                                $wish .= date('d-F');
+                                                $wish .= " Say Happy Birthday";
+                                                $wish .= '</a>';
+                                                $wish .= '</div>';
+                                                return $wish;
+                                            }
+                                            else{
+                                                return false;
+                                            }
+	}
 
 }

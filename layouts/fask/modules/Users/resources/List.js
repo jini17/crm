@@ -8,6 +8,7 @@
  *************************************************************************************/
 
 Settings_Vtiger_List_Js("Settings_Users_List_Js",{
+
 	showTransferOwnershipForm : function() {
 		var thisInstance = this;
 		app.helper.showProgress();
@@ -27,6 +28,14 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
 			}
 		});
 	},
+	
+	birthdayEmail : function(userid) { 
+		var module	 	= 'Users';
+		var fieldname 	= 'email1';
+		Vtiger_Helper_Js.getInternalMailer(userid,fieldname,module);
+
+		
+	},		
 
 	registerTransferOwnership : function() {
 		jQuery('#transferOwner').on('submit',function(e) {
@@ -521,12 +530,13 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
 
 		return listSearchParams;
 	},
-
+	
 	registerEvents : function() {
 
 		this._super();
 		this.registerUserStatusToggleEvent();
 		this.registerListViewSearch();
+	
 		this.registerPostListLoadListener();
 		this.registerListViewSort();
 		this.registerRemoveListViewSort();
