@@ -16,24 +16,25 @@
     <div class="filterContainer">
         
         <div class="row">
-            <div class="col-sm-12">
-               <div class="col-lg-6">
+               <div class="col-lg-4">
                 <label class="radio-group cursorPointer">
                     <input type="radio" id="myleavetype" name="type" class="widgetFilter reloadOnChange cursorPointer" value="leavetype" checked="true" /> {vtranslate('LBL_LEAVE_TYPE', $MODULE_NAME)}
                 </label>
               </div>
-                <div class="col-lg-6">
+                <div class="col-lg-5">
                    <label class="radio-group cursorPointer">
                       <input type="radio" id="leave5" name="type" class="widgetFilter reloadOnChange cursorPointer" value="latest" /> 
                       <span>{vtranslate('LBL_LAST_5_LEAVES', $MODULE_NAME)}</span>
                     </label>
                 </div>
-            </div> 
+             {if $MODELS['balance'] gt 0}
+               <div class="col-lg-4 pull-right"><input type="button" class="btn btn-primary" style="padding:5px;" onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USERID}'" name="applyleave" value="{vtranslate('LBL_APPLY', $MODULE_NAME)}"></div>
+             {/if}
             <div class='clearfix'></div>
-        </div>
-    </div>    
-<hr >
-<div class="dashboardWidgetContent mCustomScrollbar _mCS_5" style="height:200px;">
+      </div>    
+   </div>
+ <hr >
+<div class="dashboardWidgetContent mCustomScrollbar _mCS_5">
   {include file="dashboards/MyLeavesContent.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 
