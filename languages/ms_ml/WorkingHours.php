@@ -10,6 +10,7 @@
 //started edit by SITI@SECONDCRM ON 24DEC2014
 
 $languageStrings = Array(
+
 	'Working Hour No' => 'No waktu bekerja',
 	'Working Hours Information' => 'Maklumat waktu bekerja',
 	'Title' => 'Tajuk',

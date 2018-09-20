@@ -10,6 +10,7 @@
 //started edit by SITI@SECONDCRM ON 24DEC2014
 
 $languageStrings = Array(
+
 	'Job grade ' => 'Gred pekerjaan',
 	'Grade status' => 'Gred Status',
 	'Grade Details' => 'Gred Butiran',

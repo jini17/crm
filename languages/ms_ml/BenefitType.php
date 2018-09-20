@@ -10,6 +10,7 @@
 //started edit by SITI@SECONDCRM ON 24DEC2014
 
 $languageStrings = Array(
+
 	'Benefit type ' => 'Jenis manfaat',
 	'Benefit type information' => 'Maklumat jenis manfaat',
 	'Benefit Desc' => 'Deskripsi Manfaat',
