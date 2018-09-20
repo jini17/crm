@@ -338,11 +338,8 @@ $(this).hide();
                                                                         </li>
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_POLICY_DOCUMENT')}" href="index.php?module=Documents&view=List&type=H">
-<<<<<<< HEAD
-                                                                                    <i class="material-icons module-icon">assignment</i>&nbsp;{vtranslate('LBL_POLICY_DOCUMENT')}
-=======
                                                                                 	<i class="material-icons module-icon">file_download</i>&nbsp;{vtranslate('LBL_POLICY_DOCUMENT')}
->>>>>>> a535f26608187b9f37db488b67227e733c943df9
+
                                                                                        
                                                                                 </a>
                                                                         </li>
