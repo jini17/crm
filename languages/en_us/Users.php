@@ -315,7 +315,7 @@ $languageStrings = array(
     'LBL_EDUCATION_LEVEL' => 'Education Level',
     'LBL_AREA_OF_STUDY'=>'Area of Study',
     'LBL_DESCRIPTION' => 'Description',
-    'LBL_WANT_TO_MAKE_PUBLIC' => 'Do you want to make it Public',					      	      'LBL_CANCEL_BUTTON_KEY' =>'Cancel Button',
+    'LBL_WANT_TO_MAKE_PUBLIC' => 'Public?',					      	      'LBL_CANCEL_BUTTON_KEY' =>'Cancel Button',
  'LBL_SAVE_BUTTON_KEY'=>'Save Button',
  'LBL_USER_EDUCATIONS' => 'User Educations',
  'LBL_ADD_NEW_EDUCATION' => 'Add Education',
