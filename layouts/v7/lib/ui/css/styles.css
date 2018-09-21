@@ -172,10 +172,10 @@
   background: #FFF; }
   .right-bar input {
     height: 51px; }
-  .right-bar img {
+  /*.right-bar img {
     height: 48px;
     margin-bottom: 3rem; }
-
+*/
 .btn-login {
   background: #19D44B;
   color: #FFF; }

@@ -72,7 +72,11 @@
 												<!-- End Social Media Link -->
 											</div>
 											<div class="right-bar">
-												<img src="layouts/v7/lib/ui/src/images/agiliux-logo.png">
+												{if $LOGINPAGE['logo'] eq '' || !file_exists("test/loginlogo/{$LOGINPAGE['logo']}")}
+													<img src="layouts/v7/lib/ui/src/images/agiliux-logo.png">
+												{else}
+													<img src="test/loginlogo/{$LOGINPAGE['logo']}">
+												{/if}	
 												<div class="alert alert-success hide"></div>
 												{if isset($smarty.request.error)}
 												{if $smarty.request.error eq 1}
