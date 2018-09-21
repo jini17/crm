@@ -84,7 +84,7 @@ Class Users_Edit_View extends Users_PreferenceEdit_View {
 		$moduleName = $request->getModule();
 
 		$jsFileNames = array(
-			'modules.Settings.Vtiger.resources.Index',
+			'modules.Settings.Vtiger.resources.-Index',
 			"~layouts/v7/lib/jquery/Lightweight-jQuery-In-page-Filtering-Plugin-instaFilta/instafilta.js",
 		);
 

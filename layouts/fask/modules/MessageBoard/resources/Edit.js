@@ -7,14 +7,14 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-Settings_Users_PreferenceDetail_Js("Settings_Users_Calendar_Js",{},{
+Vtiger_Edit_Js("MessageBoard_Edit_Js",{},{
     
     
     /**
 	 * Function load the ckeditor for signature field in edit view of my preference page.
 	 */
-	registerSignatureEvent: function(){
-		var templateContentElement = jQuery("#Users_editView_fieldName_signature");
+	registerMessageBoardEvent: function(){
+		var templateContentElement = jQuery("#MessageBoard_editView_fieldName_message");
 		if(templateContentElement.length > 0) {
 			var ckEditorInstance = new Vtiger_CkEditor_Js();
 			//Customized toolbar configuration for ckeditor  
@@ -35,8 +35,7 @@ Settings_Users_PreferenceDetail_Js("Settings_Users_Calendar_Js",{},{
 	 */
 	registerEvents : function(){
 		this._super();
-		this.registerSignatureEvent();
-		Settings_Users_PreferenceEdit_Js.registerChangeEventForCurrencySeparator();
-		Settings_Users_PreferenceEdit_Js.registerNameFieldChangeEvent();
+		this.registerMessageBoardEvent();
+		
 	}
 });

@@ -212,7 +212,7 @@ Vtiger.Class('Vtiger_Widget_Js',{
 				if(contentContainer.closest('.mCustomScrollbar').length) {
 					contentContainer.mCustomScrollbar('destroy');
 					contentContainer.html(data);
-					var adjustedHeight = parent.height()-100;
+					var adjustedHeight = parent.height()-150;
 					app.helper.showVerticalScroll(contentContainer,{'setHeight' : adjustedHeight});
 				}else {
 					contentContainer.html(data);
@@ -420,7 +420,7 @@ Vtiger_Widget_Js('Vtiger_History_Widget_Js', {}, {
             app.helper.showProgress();
 			app.request.post(params).then(function(err,data){
 				app.helper.hideProgress();
-				loadMoreHandler.parent().parent().replaceWith(jQuery(data).html());
+				loadMoreHandler.parent().replaceWith(jQuery(data).html());
 				thisInstance.registerLoadMore();
 			}, function(){
 				app.helper.hideProgress();
