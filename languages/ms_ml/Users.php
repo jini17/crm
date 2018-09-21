@@ -446,7 +446,12 @@ $languageStrings = array(
 	//Added by jitu@10-04-2014 
 	'LBL_MANY_ATTEMPTS'=>'Terlalu banyak percubaan log masuk gagal.',
 	'Edit'=>'Sunting',	
-	//end here	
+	//end here
+
+	//added by Azim 20/9/2018
+	'Employee No.'=>'No. Pekerja',
+	'Employee Name'=>'Nama Pekerja',
+		
 );
 
 $jsLanguageStrings = array(

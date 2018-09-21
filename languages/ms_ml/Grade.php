@@ -12,7 +12,7 @@
 $languageStrings = Array(
 
 	'Job grade ' => 'Gred pekerjaan',
-	'Grade status' => 'Gred Status',
+	'Grade status' => 'Status Gred',
 	'Grade Details' => 'Gred Butiran',
 	'Start Date' => 'Tarikh mula',
 	'End date'=>'Tarikh tamat',

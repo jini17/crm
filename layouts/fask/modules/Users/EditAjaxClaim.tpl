@@ -255,8 +255,7 @@
                                 </div>	
 
 
-
-                <div class="modal-footer">
+                <div class="modal-footer" style="margin-bottom: 10px;margin-right: 10px; margin-left: 10px;">
                         <div class="pull-right cancelLinkContainer" style="margin-top:0px;">
 
                 {if $MANAGER eq 'true'}

@@ -18,7 +18,7 @@ $languageStrings = Array(
 
 	'Leave Title' => 'Nama',
 	'Color Code' => 'Kod Warna',
-	'Description' => 'Deskripsi',
+	'Description' => 'Huraian',
 	'Assigned To' => 'Diperuntukkan Kepada',
 	'Leave Type No' => 'No. Jenis Cuti',
 	'Mid Year Joining' => 'Pertengahan Tahun Menyertai',

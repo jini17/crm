@@ -8,12 +8,12 @@
  * All Rights Reserved.
  ************************************************************************************/
 $languageStrings = array(
-	'SINGLE_Calendar'              => 'Akan Dibuat'                       , 
-	'LBL_ADD_TASK'                 => 'Tambah Akan Dibuat'                    , 
+	'SINGLE_Calendar'              => 'Tugas'                       ,
+	'LBL_ADD_TASK'                 => 'Tambah Tugas'                    , 
 	'LBL_ADD_EVENT'                => 'Tambah Acara'                   , 
 	'LBL_RECORDS_LIST'             => 'Paparan Senarai'                   , 
 	'LBL_EVENTS'                   => 'Acara'                      , 
-	'LBL_TODOS'                    => 'Akan Dibuat'                      , 
+	'LBL_TODOS'                    => 'Tugas'                      , 
 	'LBL_CALENDAR_SETTINGS'        => 'Tetapan Kalendar'           , // TODO: Review
 	'LBL_CALENDAR_SHARING'         => 'Perkongsian Kalendar'            , // TODO: Review
 	'LBL_DEFAULT_EVENT_DURATION'   => 'Jangka Masa Acara Sedia Ada'      , // TODO: Review  //Default Event Duration
@@ -21,8 +21,8 @@ $languageStrings = array(
 	'LBL_OTHER_EVENTS'             => 'Acara Lain-lain'                , // TODO: Review
 	'LBL_MINUTES'                  => 'Minit'                     , // TODO: Review
 	'LBL_SELECT_USERS'             => 'Pilih Pengguna'                , // TODO: Review
-	'LBL_EVENT_OR_TASK'            => 'Acara / Akan Dibuat'                ,
-	'LBL_TASK_INFORMATION'         => 'Maklumat Akan Dibuat'            , 
+	'LBL_EVENT_OR_TASK'            => 'Acara / Tugas'                ,
+	'LBL_TASK_INFORMATION'         => 'Maklumat Tugas'            , 
     'LBL_EVENT_INFORMATION'        => 'Butiran Acara'               ,
 	'Subject'                      => 'Subjek'                     , 
 	'Start Date & Time'            => 'Tarikh & Masa Mula'           , 
@@ -36,21 +36,21 @@ $languageStrings = array(
 	'LBL_ADDED_CALENDARS'          => 'Kalendar Ditambah'             , // TODO: Review
 	'Call'                         => 'Panggilan'                        , 
 	'Meeting'                      => 'Mesyuarat'                     , 
-	'Task'                         => 'Akan Dibuat'                        , // TODO: Review
+	'Task'                         => 'Tugas'                        , // TODO: Review
 	'Planned'                      => 'Dirancang'                     , 
         'Held'                         =>   'Diadakan',
         'Not Held'                     =>   'Tidak Diadakan',
 	'Completed'                    => 'Selesai'                   , 
 	'Pending Input'                => 'Input Belum Selesai'               , 
 	'Not Started'                  => 'Belum Bermula'                 , 
-	'Deferred'                     => 'Tertunda'                    , 
+	'Deferred'                     => 'Ditunda'                    , 
 	'Medium'                       => 'Sederhana'                      , 
 	'LBL_CHANGE_OWNER'             => 'Tukar Pemilik'                , 
 	'LBL_EVENT'                    => 'Acara'                       , 
-	'LBL_TASK'                     => 'Akan Dibuat'                        , 
-	'LBL_TASKS'                    => 'Akan Dibuat'						,
+	'LBL_TASK'                     => 'Tugas'                        , 
+	'LBL_TASKS'                    => 'Tugas'						,
 	'LBL_CALENDAR_VIEW'            => 'Paparan Kalendar'               , 
-	'LBL_SHARED_CALENDAR'          => 'Perkongsian kalendar'             , // TODO: Review shared calendar
+	'LBL_SHARED_CALENDAR'          => 'Kongsi Kalendar'             , // TODO: Review shared calendar
 	'LBL_DAY0'                     => 'Ahad'                      , // TODO: Review
 	'LBL_DAY1'                     => 'Isnin'                      , // TODO: Review
 	'LBL_DAY2'                     => 'Selasa'                     , // TODO: Review
@@ -77,7 +77,7 @@ $languageStrings = array(
 	'LBL_EDITING_CALENDAR_VIEW' => 'Kemaskini Pengguna Kalendar',
 	'LBL_DELETE_CALENDAR' => 'Buang Kalendar',
 	'LBL_SELECT_ACTIVITY_TYPE' => 'Pilih Jenis Aktiviti',
-	'Tasks' => 'Akan Dibuat',
+	'Tasks' => 'Tugas',
 	'Starting Day of the week'=>'Hari Permulaan Dalam Seminggu',
 	'Day starts at' => 'Hari Bermula Pada',
 	'Date Format' =>'Format Tarikh',
@@ -86,12 +86,22 @@ $languageStrings = array(
 	'Default Activity View'=>'Paparan Aktiviti Lalai',
 	'Selected Users'=>'Pengguna Terpilih',
 	'Private'=>'Peribadi',
-	
+	'Shared List'=>'Senarai Kongsi',
+	'My Calendar'=>'Kalendar Saya',
+	'Select an Agenda Template'=>'Pilih Templat Agenda',
+	'Select a template'=>'Sila pilih templat',
+	'LBL_FROM' => 'Tarikh & Masa Mula',
+	'LBL_TO' => 'Tarikh & Masa Akhir',
+
+
+	//Added by Azim 20/9/2018
+	'Meeting Agenda' => 'Agenda Mesyuarat',
+	'Recurrence' => 'Ulang',
 	
 	
 );
 $jsLanguageStrings = array(
-	'LBL_ADD_EVENT_TASK'           => 'Tambah Acara / Akan Dibuat'            , 
+	'LBL_ADD_EVENT_TASK'           => 'Tambah Acara / Tugas'            , 
 	'JS_TASK_IS_SUCCESSFULLY_ADDED_TO_YOUR_CALENDAR' => 'Tugasan sudah berjaya ditambah ke kalendar anda', // TODO: Review
 	'LBL_SYNC_BUTTON'              => 'Segerak Sekarang'             , // TODO: Review
 	'LBL_SYNCRONIZING'             => 'Penyegerakan....'           , // TODO: Review

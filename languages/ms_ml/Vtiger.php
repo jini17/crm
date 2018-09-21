@@ -8,6 +8,7 @@
  * All Rights Reserved.
  ************************************************************************************/
 $languageStrings = array(
+	'LBL_CURRENT'=>'Semasa',
 	'APPTITLE'=>'vtiger CRM', 
 	'POWEREDBY'=>'Powered by vtiger CRM', 
 	'LBL_READ_LICENSE'=>'Read License', 
@@ -29,9 +30,10 @@ $languageStrings = array(
 	'LBL_DELETE'=> 'Padam', 
 	'LBL_SETTINGS'=> 'Tetapan', 
 	'LBL_ADD_COMMENT'=> 'Tambah Komen', 
-	'LBL_EDIT_FIELDS'=> 'Kemaskini Medan', 
+	'LBL_EDIT_FIELDS' => 'Kemaskini Medan',
+	
 	'LBL_EDIT_WORKFLOWS' => 'Kemaskini Aliran Kerja', 
-	'LBL_SETUP_WEBFORMS'=> 'Menetapkan BorangWeb',
+	'LBL_SETUP_WEBFORMS'=> 'Menetapkan Borang Web',
 	'LBL_EDIT_PICKLIST_VALUES'=> 'Kemaskini Nilai Pilih Senarai', 
 	'LBL_EDIT_MAILSCANNER' => 'Tukar E-mel'              , //fiza
 	'LBL_RECORD_DELETE' => 'Rekod yang anda cuba lihat telah dipadam.', 
@@ -67,7 +69,8 @@ $languageStrings = array(
 	'LBL_USER_SETTINGS'            => 'Tetapan Pengguna'               , 
 	'LBL_MY_PREFERENCES'           => 'Profil'              ,    //fiza
 	'LBL_SIGN_OUT'                 => 'Keluar'                    , 
-	'LBL_HELP'                     => 'Bantuan'                        , 
+	'LBL_HELP'                     => 'Bantuan'                        ,
+	'LBL_LISTS' 				   => 'Senarai'                        ,
 	'LBL_DOCUMENTATION'            => 'Dokumentasi'               , // TODO: Review
 	'LBL_VIDEO_TUTORIAL'           => 'Video Tutorial'              , // TODO: Review
 	'LBL_FEEDBACK'                 => 'Maklum Balas'                    ,
@@ -86,11 +89,13 @@ $languageStrings = array(
 	'LBL_PAGE'                     => 'Halaman'                        , // TODO: Review
 	'LBL_LISTVIEW_PAGE_JUMP'       => 'Lompat Halaman'                   , // TODO: Review
 	'LBL_USER'                     => 'Pengguna'                        , 
-	'LBL_GROUP'                    => 'Kumpulan'                       , 
+	'LBL_GROUP'                    => 'Kumpulan'                       ,
+	'LBL_SHARED_LIST'              => 'Senarai Dikongsi'                       ,
+	'LBL_EXTENSIONS'              => 'Sambungan'                       ,
 	'Last Modified By'             => 'Terakhir Dikemaskini Oleh'            , 
-	'Created Time'                 => 'Waktu Diciptakan'                , 
+	'Created Time'                 => 'Waktu Dicipta'                , 
 	'Created By'                   => 'Diciptakan Oleh'                ,
-	'Modified Time'                => 'Waktu Diubahsuai'               , 
+	'Modified Time'                => 'Masa Kemaskini'               , 
 	'Description'                  => 'Huraian'                 ,     //edited by hafizah
 	'Assigned To'                  => 'Ditugaskan untuk'                 , 
 	'LBL_LOADING'                  => 'Memuat...'                  , 
@@ -251,7 +256,7 @@ $languageStrings = array(
 	'LBL_UPDATED'                  => 'Telah dikemaskini'                     ,  //fiza
 	'LBL_FROM'                     => 'daripada'                        , 
 	'LBL_TO'                       => 'kepada'                          , 
-	'LBL_to' => 'kepada',
+	'LBL_to' 					   => 'hingga',
 	'LBL_ON'                       => 'pada'                          , //fiza
 	'LBL_OF'                       => 'daripada'                          , //fiza
 	'LBL_LIST_of'=>'dari',
@@ -545,7 +550,7 @@ $languageStrings = array(
 	'HelpDesk'                     => 'Perkhidmatan Permintaan'                     , // TODO: Review
 	'LBL_TAG_CLOUD'                => 'Tag Cloud'                   , // TODO: Review  //fiza
 	'LBL_NO_RECORDS'               => 'Tiada Rekod'                  , // TODO: Review
-	'LBL_NO_RELATED'               => 'Tidak Berkaitan'                  , // TODO: Review
+	'LBL_NO_RELATED'               => 'Tiada Berkaitan'                  , // TODO: Review
 	'LBL_GLOBAL_SEARCH_MAX_MESSAGE' => 'Hanya 100 hasil pertama bagi setiap modul dipaparkan dibawah. Untuk hasil modul tertentu, silih pilih modul masing-masing dan carian', // TODO: Review
 	'LBL_GLOBAL_SEARCH_MAX_MESSAGE_FOR_MODULE' => 'Hanya 100 hasil pertama bagi setiap modul dipaparkan dibawah. Sila gunakan Carian Terperinci jika anda tidak berpuas hati dengan hasil dibawah.', // TODO: Review
 	'LBL ACTION'                   => 'Tindakan'                      , // TODO: Review
@@ -647,7 +652,7 @@ $languageStrings = array(
 	'is not empty'=>'tidak kosong',
 	
 	'Send Mail'=>'Hantar E-mel',
-	'Create Todo'=>'Cipta Akan Dibuat',
+	'Create Todo'=>'Cipta Tugas',
 	'Create Event'=>'Cipta Acara',
 	'Update Fields'=>'Kemaskini Medan',
 	'Create Entity'=>'Cipta Entiti',
@@ -715,6 +720,37 @@ $languageStrings = array(
 	'ManageTerritory'=>'Mengurus Wilayah',
 	'ManageDiscount'=>'Mengurus Diskaun',
 	//END
+	
+	//Added by Azim 20/9/2018
+	'LBL_SELECT_CSV_FILE'      => 'Pilih fail CSV',
+	'LBL_SHARE_THIS_LIST'      => 'Kongsi senarai',
+	'LBL_CREATE_LIST'      => 'Buat Senarai Baru',
+	'LBL_TAGS'      => 'Tag',
+	'LBL_POST_YOUR_COMMENT_HERE'      => 'Hantar komen anda di sini',
+	'LBL_RECENT_COMMENTS'      => 'Komen Terkini',
+	'LBL_ATTACH_FILES'      => 'Lampirkan Fail',
+	'LBL_SENDER_NAME'      => 'Nama Penghantar',
+	'LBL_MY_LIST' => 'Senarai Saya',
+	'Current' => 'Semasa',
+	'LBL_SEARCH_FOR_LIST' => 'Cari Senarai',
+	'Payslip'=>'Slip Gaji',
+	'Claim' => 'Tuntutan'	,
+	'WorkingHours' => 'Waktu Bekerja',
+	'Performance' => 'Prestasi',
+	'Meeting Agenda' => 'Agenda Mesyuarat',
+	'Parent ID' => 'Rekod Utama',
+	'Click Count' => 'Kiraan Klik',
+    'Access Count' => 'Kiraan Akses',
+    'Origin' => 'Asal',
+	'LBL_FOLLOW' => 'Ikuti',
+	'Total Company Contribution' => 'Jumlah Caruman Majikan',
+	'Documents'                    => 'Dokumen',
+
+
+	
+	
+	
+	
 	
 	
 	

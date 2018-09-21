@@ -116,7 +116,7 @@
 									</button>
 									<ul class="detailViewSetting dropdown-menu pull-right animated fadeIn">
 										{foreach item=SETTING from=$MODULE_SETTING_ACTIONS}
-											<li id="{$MODULE_NAME}_listview_advancedAction_{$SETTING->getLabel()}"><a href={$SETTING->getUrl()}>{vtranslate($SETTING->getLabel(), $MODULE_NAME ,vtranslate($MODULE_NAME, $MODULE_NAME))}</a></li>
+											<li id="{$MODULE_NAME}_listview_advancedAction_{$SETTING->getLabel()}"><a href={$SETTING->getUrl()}>{vtranslate($MODULE_NAME, $MODULE_NAME)} {vtranslate($SETTING->getLabel(), $MODULE_NAME)}</a></li>
 										{/foreach}
 									</ul>
 						{/if}

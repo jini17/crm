@@ -511,6 +511,9 @@ $languageStrings = array(
 'LBL_SELECT_ROLE'=>'Select Role',
 'birthday'=>'Date of Birth',
 //End of Contacts
+
+'LBL_CLAIM' => 'Tuntutan',
+
 );
 
 $jsLanguageStrings = array(
