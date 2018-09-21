@@ -6,38 +6,36 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  *************************************************************************************/
-
-var imported = document.createElement('script');
-imported.src = 'layouts/v7/modules/Leads/resources/google.js';
-document.head.appendChild(imported);
-
-Vtiger_Edit_Js("Leads_Edit_Js",{},{
-    
-    
+Vtiger_Edit_Js("MessageBoard_Edit_Js",{},{
 
 
-    registerGoogleAddress : function(container){
-        var thisInstance = this;
-    
-        
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA7QuhuZ34ygC0j5RHmYuqtK_uwecsNb9E&libraries=places&callback=initAutocomplete";
-        document.body.appendChild(script);
+    /**
+         * Function load the ckeditor for signature field in edit view of my preference page.
+         */
+        registerMessageBoardEvent: function(){
+                var templateContentElement = jQuery("#MessageBoard_editView_fieldName_message");
+                if(templateContentElement.length > 0) {
+                        var ckEditorInstance = new Vtiger_CkEditor_Js();
+                        //Customized toolbar configuration for ckeditor  
+                        //to support basic operations
+                        var customConfig = {
+                                toolbar: [
+                                        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup','align','list', 'indent','colors' ,'links'], items: [ 'Bold', 'Italic', 'Underline', '-','TextColor', 'BGColor' ,'-','JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'NumberedList', 'BulletedList','-', 'Link', 'Unlink','Image','-','RemoveFormat'] },
+                                        { name: 'styles', items: ['Font', 'FontSize' ] },
+                    {name: 'document', items:['Source']}
+                                ]};
+                        ckEditorInstance.loadCkEditor(templateContentElement,customConfig);
+                }
+        },
 
-        
-        
-    },
 
+        /**
+         * register Events for my preference
+         */
+        registerEvents : function(){
+                this._super();
+                this.registerMessageBoardEvent();
 
-
-
-    registerBasicEvents: function (container) {
-        this._super(container);
-    
-        this.registerGoogleAddress();
-    }
-
-    
-})
+        }
+});
 

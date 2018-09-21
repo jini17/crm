@@ -209,14 +209,16 @@ Vtiger.Class('Vtiger_Widget_Js',{
                         function(err,data){
                 app.helper.hideProgress();
 
-                                if(contentContainer.closest('.mCustomScrollbar').length) {
-                                        contentContainer.mCustomScrollbar('destroy');
-                                        contentContainer.html(data);
-                                        var adjustedHeight = parent.height()-100;
-                                        app.helper.showVerticalScroll(contentContainer,{'setHeight' : adjustedHeight});
-                                }else {
-                                        contentContainer.html(data);
-                                }
+				
+				if(contentContainer.closest('.mCustomScrollbar').length) {
+					contentContainer.mCustomScrollbar('destroy');
+					contentContainer.html(data);
+					var adjustedHeight = parent.height()-150;
+					app.helper.showVerticalScroll(contentContainer,{'setHeight' : adjustedHeight});
+				}else {
+					contentContainer.html(data);
+				}
+                
 
                 /**
                  * we are setting default height in DashBoardWidgetContents.tpl
