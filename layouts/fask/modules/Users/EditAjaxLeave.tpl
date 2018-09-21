@@ -169,7 +169,7 @@
                         </div>
 
                 </div>
-                <div class="modal-footer" style="margin-bottom: 10px;">
+                <div class="modal-footer" style="margin-bottom: 10px;margin-right: 10px; margin-left: 10px;">
                     <div style="margin-right: 140px;">
                         <div class="pull-right cancelLinkContainer" style="margin-top:0px;margin-left: 5px;">
 

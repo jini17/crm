@@ -66,12 +66,14 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	
 	$db = PearDatabase::getInstance();
 	
-	$result = $db->pquery("SELECT date_joined, job_grade FROM vtiger_employeecontract tblVTEC 
+	$result = $db->pquery("SELECT job_grade FROM vtiger_employeecontract tblVTEC 
 							INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
 							INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
-							WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTEC.date_joined DESC LIMIT 0, 1", array($userid));
-							
-		$dateofJoining = $db->query_result($result, 0, 'date_joined');	
+							WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTC.createdtime DESC LIMIT 0, 1", array($userid));
+
+		$userModel = Vtiger_Record_Model::getInstanceById($userid, 'Users');					
+		$dateofJoining = $userModel->get('date_joined');
+
 		$grade_id	   = $db->query_result($result, 0, 'job_grade');	
 		$datediff = time() - strtotime($dateofJoining);				 
 		$earneddays = round($datediff / (60 * 60 * 24));
@@ -127,12 +129,14 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 		$db = PearDatabase::getInstance();
 		
 		//$db->setDebug(true);
-		$result = $db->pquery("SELECT date_joined, job_grade FROM vtiger_employeecontract tblVTEC 
+		$result = $db->pquery("SELECT job_grade FROM vtiger_employeecontract tblVTEC 
 								INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
 								INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
-								WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTEC.date_joined DESC LIMIT 0, 1", array($userid));
+								WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTC.createdtime DESC LIMIT 0, 1", array($userid));
 							
-		$dateofJoining = $db->query_result($result, 0, 'date_joined');	
+		$userModel = Vtiger_Record_Model::getInstanceById($userid, 'Users');					
+		$dateofJoining = $userModel->get('date_joined');
+
 		$grade_id	   = $db->query_result($result, 0, 'job_grade');	
 		$datediff = time() - strtotime($dateofJoining);				 
 		$earneddays = round($datediff / (60 * 60 * 24));
@@ -201,17 +205,19 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	
 		$db = PearDatabase::getInstance();
 		
-		$result = $db->pquery("SELECT date_joined, job_grade FROM vtiger_employeecontract tblVTEC 
+		$result = $db->pquery("SELECT job_grade FROM vtiger_employeecontract tblVTEC 
 							INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
 							INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
-							WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTEC.date_joined DESC LIMIT 0, 1", array($userid));
-							
-		$dateofJoining = $db->query_result($result, 0, 'date_joined');	
+							WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTC.createdtime DESC LIMIT 0, 1", array($userid));
+
+		$userModel = Vtiger_Record_Model::getInstanceById($userid, 'Users');					
+		$dateofJoining = $userModel->get('date_joined');
+
 		$grade_id	   = $db->query_result($result, 0, 'job_grade');	
 		$datediff = time() - strtotime($dateofJoining);				 
 		$earneddays = round($datediff / (60 * 60 * 24));
 		$curr_year	   = date('Y');	
-				
+		
 		//Get all leavetypes with balance for which leave to be apply
 		$leavers = $db->pquery("SELECT distinct tblVTLT.title, tblVTLT.leavetypeid, allocleaverel.ageleave, allocleaverel.numberofleavesmore, 
 					allocleaverel.numberofleavesless FROM vtiger_leavetype tblVTLT 
@@ -262,10 +268,12 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 	public function getTotaLeaveTypeList($userid,$leaveid){
 	$db = PearDatabase::getInstance();
 	global $current_user;	
+
 	$query = "SELECT tblVTLT.leavetypeid, tblVTLT.title, tblVTLT.colorcode 
 	FROM vtiger_leavetype tblVTLT
 	INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLT.leavetypeid
 	 WHERE tblVTC.deleted=0 ";
+
 	$result = $db->pquery($query,array());
 	$leavetype=array();	
 	for($i=0;$db->num_rows($result)>$i;$i++){

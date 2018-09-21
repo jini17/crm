@@ -10,6 +10,7 @@
 $languageStrings = array(
 
 	// Footer
+	'LBL_CURRENT'=>'Current',
 	'LBL_MOM' => 'Agenda/MOM',
 	'LBL_MOM_BLOCK' => 'Minutes of Meeting(MOM)',
 	'APPTITLE' => 'Vtiger CRM',

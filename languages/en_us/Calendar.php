@@ -180,6 +180,7 @@ $languageStrings = array(
 	'LBL_NOVEMBER' => 'November',
 	'LBL_DECEMBER' => 'December',
 	'LBL_CLICK_HERE_TO_VIEW' => 'Click here to view',
+
 );
 
 $jsLanguageStrings = array(

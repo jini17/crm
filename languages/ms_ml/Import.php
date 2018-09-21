@@ -16,7 +16,7 @@ $languageStrings = array(
 	'LBL_FILE_TYPE'                => 'Jenis Fail'                   , 
 	'LBL_CHARACTER_ENCODING'       => 'Pengekodan Aksara'          , 
 	'LBL_DELIMITER'                => 'Penyahhad:'                  , 
-	'LBL_HAS_HEADER'               => 'Mempunyai Pengepala'                  , 
+	'LBL_HAS_HEADER'               => 'Mempunyai tajuk'                  , 
 	'LBL_IMPORT_STEP_3'            => 'Langkah 3'                      , 
 	'LBL_IMPORT_STEP_3_DESCRIPTION' => 'Pengendalian Rekod Duplikasi '   , 
 	'LBL_IMPORT_STEP_3_DESCRIPTION_DETAILED' => 'Pilih pilihan ini untuk mengaktifkan dan tetapkan  kriteria penggabungan duplikasi', //Select this option to enable and set duplicate merge criteria FIZA
@@ -27,7 +27,7 @@ $languageStrings = array(
 	'LBL_NEXT_BUTTON_LABEL'        => 'Seterusnya'                        , 
 	'LBL_IMPORT_STEP_4'            => 'Langkah 4'                      , 
 	'LBL_IMPORT_STEP_4_DESCRIPTION' => 'Memetakan Lajur untuk Medan Modul', 
-	'LBL_FILE_COLUMN_HEADER'       => 'Pengepala'                      , 
+	'LBL_FILE_COLUMN_HEADER'       => 'Tajuk'                      , 
 	'LBL_ROW_1'                    => 'Baris 1'                       , 
 	'LBL_CRM_FIELDS'               => 'Medan CRM'                  , 
 	'LBL_DEFAULT_VALUE'            => 'Nilai Lalai'               , 
@@ -47,12 +47,25 @@ $languageStrings = array(
 	'LBL_UNDO_RESULT'              => 'Batalkan Hasil Import'          , 
 	'LBL_TOTAL_RECORDS'            => 'Jumlah Rekod'     , 
 	'LBL_NUMBER_OF_RECORDS_DELETED' => 'Jumlah Rekod yang Dipadam'   , 
-	'LBL_OK_BUTTON_LABEL'          => 'OK'                          , 
+	'LBL_OK_BUTTON_LABEL'          => 'OK'                          ,
+	'LBL_SELECT_IMPORT_FILE_FORMAT'=> 'Daripada manakah anda ingin mengimport?'                          , 
 	'LBL_IMPORT_SCHEDULED'         => 'Import Berjadual '            , 
 	'LBL_RUNNING'                  => 'Running'                     , 
 	'LBL_CANCEL_IMPORT'            => 'Batalkan Import'               , 
 	'LBL_ERROR'                    => 'Ralat:'                      , 
-	'LBL_CLEAR_DATA'               => 'Kosongkan Data'                  , 
+	'LBL_CLEAR_DATA'               => 'Kosongkan Data'                  ,
+	'LBL_DUPLICATE_HANDLING'       => 'Pengendalian Salinan',
+	'LBL_IMPORT_FROM_CSV_FILE'     => 'Import daripada fail CSV',
+	'LBL_DUPLICATE_RECORD_HANDLING'     => 'Pengendalian Salinan rekod',
+	'LBL_SKIP_THIS_STEP'     => 'Langkau langkah ini',
+	'LBL_USE_SAVED_MAPS'     => 'Gunakan Pemetaan Tersimpan',
+	'LBL_IMPORT_MAP_FIELDS'     => 'Memetakan lajur ke medan CRM',
+	'LBL_UPLOAD_CSV'     => 'Muat naik fail CSV',
+	'Select from My Computer'     => 'Pilih daripada \'My Computer\'',
+	
+	
+	
+
 	'ERR_UNIMPORTED_RECORDS_EXIST' => '
 Masih ada beberapa rekod tidak dapat diimport dalam barisan import anda, ia menyekat anda daripada mengimport lebih banyak data. Bersihkan dengan kosongkan data dan mulakan dengan import yg baru.', 
 	'ERR_IMPORT_INTERRUPTED'       => 'Import semasa telah terganggu. Sila cuba sekali lagi.', 

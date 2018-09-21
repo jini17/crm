@@ -14,7 +14,7 @@ $languageStrings = array(
 	'LBL_RECORDS_LIST'             => 'Senarai Dokumen'              , 
 	'LBL_NOTE_INFORMATION'         => 'Informasi Asas'           , 
 	'LBL_FILE_INFORMATION'         => 'Informasi Fail'            , 
-	'LBL_DESCRIPTION'              => 'Diskripsi'                 , 
+	'LBL_DESCRIPTION'              => 'Keterangan'                 , 
 	'Title'                        => 'Tajuk'                       , 
 	'File Name'                    => 'Nama Fail'                   , 
 	'Note'                         => 'Nota'                       , 
@@ -44,7 +44,16 @@ $languageStrings = array(
 	'LBL_FOLDER_NAME'              => 'Nama Folder'                 , 
 	'LBL_FOLDER_DESCRIPTION'       => 'Deskripsi Folder'          , 
 	'LBL_FILE_AVAILABLE'           => 'Fail sedia dimuat turun', 
-	'LBL_FILE_NOT_AVAILABLE'       => 'Dokumen ini tidak tersedia untuk dimuat turun', 
+	'LBL_FILE_NOT_AVAILABLE'       => 'Dokumen ini tidak tersedia untuk dimuat turun',
+	'Source'                       => 'Sumber',
+	'Is HR Document?'              => 'Adakah Dokumen HR?',
+	'Information'                  => 'Maklumat',
+
+	//added by Azim 20/9/2018
+	'LBL_NEW_DOCUMENT'                  => 'Dokumen Baru',
+	'LBL_SELECT_FILE_FROM_COMPUTER'     => 'Pilih daripada \'My Computer\'',
+	
+	 
 
 );
 $jsLanguageStrings = array(
