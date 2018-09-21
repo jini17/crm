@@ -15,21 +15,16 @@
 {/if}
 <div name='editContent'>
     {foreach key=BLOCK_LABEL item=BLOCK_FIELDS from=$RECORD_STRUCTURE name=blockIterator}
-		{if $BLOCK_LABEL neq 'LBL_CALENDAR_SETTINGS'}
+		{if $BLOCK_LABEL neq 'LBL_CALENDAR_SETTINGS' && $BLOCK_LABEL neq 'LBL_CURRENCY_CONFIGURATION' && $BLOCK_LABEL neq 'Other Preferences'}
          {if $BLOCK_FIELDS|@count gt 0}
              <div class="fieldBlockContainer">
-                 <div>
-                     <h4 class="display-inline-block">{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
-                 </div>
+                  <h4 class='fieldBlockHeader' >{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
+                  <hr>
                  <br/>
                  <div class="table table-borderless">
                      <div class="row">
                      {assign var=COUNTER value=0}
                      {foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}
-                                    <!-- Mabruk -->
-                                    {if $FIELD_NAME eq "hradmin" && $ISADMIN eq "no"}
-                                        {continue}
-                                    {/if}
                          {assign var="isReferenceField" value=$FIELD_MODEL->getFieldDataType()}
                          {assign var="refrenceList" value=$FIELD_MODEL->getReferenceList()}
                          {assign var="refrenceListCount" value=count($refrenceList)}
@@ -40,17 +35,17 @@
                          {if $FIELD_MODEL->isEditable() eq true}
                              {if $FIELD_MODEL->get('uitype') eq "19"}
                                  {if $COUNTER eq '1'}
-                                     <div class="col-xs-12 col-md-3"></div><div class="col-xs-12 col-md-3"></div></div><div class="row">
+                                     <div class="col-xs-6 col-md-3"></div><div class="col-xs-6 col-md-3"></div></div><div class="row">
                                      {assign var=COUNTER value=0}
                                  {/if}
                              {/if}
-                             {if $COUNTER eq 2}
+                             {if $COUNTER eq 3}
                                  </div><div class="row">
                                  {assign var=COUNTER value=1}
                              {else}
                                  {assign var=COUNTER value=$COUNTER+1}
                              {/if}
-                             <div class="fieldLabel col-xs-12 col-md-3 alignMiddle">
+                             <div class="fieldLabel col-xs-6 col-md-3 alignMiddle">
                             
                              {if $isReferenceField eq "reference"}
                                  {if $refrenceListCount > 1}
@@ -67,15 +62,15 @@
                              {/if}
                              &nbsp; {if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}
                          </div>
-                         <div class="fieldValue col-xs-12 col-md-9 {if $FIELD_MODEL->getFieldDataType() eq 'boolean'} col-xs-6 {/if} {if $FIELD_MODEL->get('uitype') eq '19'} col-xs-12 {assign var=COUNTER value=$COUNTER+1} {/if}">
+                         <div class="fieldValue col-xs-6 col-md-2 {if $FIELD_MODEL->getFieldDataType() eq 'boolean'} col-xs-6 {/if} {if $FIELD_MODEL->get('uitype') eq '19'} col-xs-6 {assign var=COUNTER value=$COUNTER+1} {/if}">
                              {include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
                          </div>
                      {/if}
                      {/foreach}
                      {*If their are odd number of fields in edit then border top is missing so adding the check*}
                      {if $COUNTER is odd}
-                         <div class="col-xs-12 col-md-3"></div>
-                         <div class="col-xs-12 col-md-3"></div>
+                         <div class="col-xs-6 col-md-2"></div>
+                         <div class="col-xs-6 col-md-2"></div>
                      {/if}
                      </div>
                  </div>
