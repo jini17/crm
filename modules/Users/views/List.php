@@ -35,22 +35,33 @@ class Users_List_View extends Settings_Vtiger_List_View {
 	}
 
 	public function process(Vtiger_Request $request) {
-		
-		$defaultview = $request->get('empview');	
+		global $site_URL;
+		$URL = $site_URL.'/index.php?module=Users&parent=Settings&view=List&block=1&fieldid=1';
+                                         $defaultview = $request->get('empview');	
+                                         $Alphabet = $request->get('Alphabet');
 		if(!$request->get('empview')){
 			$defaultview = 'grid';	
 		}	
-		
+		elseif($request->get('empview') == 'grid'){
+                                                    $defaultview = 'grid';	
+                                            }
+                                            else{
+                                                     $defaultview = 'list';
+                                            }
 		$viewer = $this->getViewer($request);
 		$this->initializeListViewContents($request, $viewer);
 		$viewer->assign('EMP_VIEW', $defaultview);
-		
-		if($defaultview =='grid'){
-			$viewer->view('GridViewContents.tpl', $request->getModule(false));
-		}
-		else {
-			$viewer->view('ListViewContents.tpl', $request->getModule(false));
-		}	
+                                           $viewer->assign('PAGE_URL',$URL);
+                                             $viewer->assign('TEXT_FILTER',$Alphabet);
+                                       
+		$viewer->view('GridViewContents.tpl', $request->getModule(false));
+                
+//		if($defaultview =='grid'){
+//			$viewer->view('GridViewContents.tpl', $request->getModule(false));
+//		}
+//		else {
+//			$viewer->view('ListViewContents.tpl', $request->getModule(false));
+//		}	
 	}
 
 	/*
@@ -82,7 +93,9 @@ class Users_List_View extends Settings_Vtiger_List_View {
 		$status = $request->get('status');
 		if(empty($status))
 			$status = 'Active';
-
+                                            
+                                                print_r($cvId);
+                                           
 		$listViewModel = Vtiger_ListView_Model::getInstance($moduleName, $cvId);
 
 		$linkParams = array('MODULE'=>$moduleName, 'ACTION'=>$request->get('view'), 'CVID'=>$cvId);

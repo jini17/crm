@@ -3,7 +3,7 @@
 		<tbody>
 			<tr>
 			{foreach item=ALPHABET from=$ALPHABETS}
-				<td class="alphabetSearch textAlignCenter cursorPointer {if $ALPHABET_VALUE eq $ALPHABET} highlightBackgroundColor {/if}" style="padding : 0px !important"><a id="{$ALPHABET}" href="#">{$ALPHABET}</a></td>
+				<td class="alphabetSearch textAlignCenter cursorPointer {if $ALPHABET_VALUE eq $TEXT_FILTER} highlightBackgroundColor {/if}" style="padding : 0px !important"><a id="{$ALPHABET}" href="{$PAGE_URL}&empview={$EMP_VIEW}&Alphabet={$ALPHABET}">{$ALPHABET}</a></td>
 			{/foreach}
 			</tr>
 		</tbody>

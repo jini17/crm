@@ -178,6 +178,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
         $hourFormatFeildModel = $recordStructure['LBL_CALENDAR_SETTINGS']['hour_format'];
 		$calendarSettings['LBL_CALENDAR_SETTINGS'] = $recordStructure['LBL_CALENDAR_SETTINGS'];
 		$calendarSettings['LBL_CURRENCY_CONFIGURATION'] = $recordStructure['LBL_CURRENCY_CONFIGURATION'];
+		$calendarSettings['Other Preferences'] = $recordStructure['Other Preferences'];
 		$recordModel = $detailViewModel->getRecord();
 		$moduleModel = $recordModel->getModule();
 		$viewer->assign('IS_AJAX_ENABLED', $recordModel->isEditable());

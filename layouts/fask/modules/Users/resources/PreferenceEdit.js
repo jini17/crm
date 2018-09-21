@@ -9,6 +9,42 @@
 
 Users_Edit_Js("Settings_Users_PreferenceEdit_Js",{
 	
+	addressFieldsMappingInModule : 
+	{
+		'address_street' : 'paddress_street',
+		'address_city' : 'paddress_city',
+		'address_state' : 'paddress_state',
+		'address_postalcode' : 'paddress_postalcode',
+		'address_country' : 'paddress_country'
+	},	
+	
+	registerCopyPermanentAddress: function(){ 
+		var container = jQuery("form");
+		var thisInstance = this;
+		var element = jQuery('[name="sameaddresscheck"]', container);
+		element.on('click', function(e){
+			var response = element.is(':checked');
+			
+			if (response) { 
+				var addressMapping = thisInstance.addressFieldsMappingInModule;
+		
+				for(var key in addressMapping) {
+						var fromElement = container.find('[name="'+key+'"]');
+						var toElement = container.find('[name="'+addressMapping[key]+'"]');
+						var inputctr = toElement.get(0).tagName;
+						if(inputctr == 'SELECT') { 
+							var selectcontainerID = toElement.get(0).id+'_chzn';
+							jQuery('#'+selectcontainerID).remove();
+							toElement.select2().select2('val',fromElement.val());
+							jQuery('#s2id_'+toElement.get(0).id).addClass('chzn-container chzn-container-single').css('width','220px');
+						} else {
+							toElement.val(fromElement.val());
+						}
+				}
+			} 
+		});	
+	},
+    
 	/**
 	 * Function to register change event for currency separator
 	 */
@@ -40,6 +76,7 @@ Users_Edit_Js("Settings_Users_PreferenceEdit_Js",{
 		})
 	},
 
+	
 	registerNameFieldChangeEvent : function() {
 		var form = jQuery('form');
 		var specialChars = /[<\>\"\,]/;
@@ -63,7 +100,8 @@ Users_Edit_Js("Settings_Users_PreferenceEdit_Js",{
 		});
 	}
 },{
-
+	
+	
 	registerNameFieldChangeEvent: function () {
 		var form = jQuery('form');
 		jQuery('[name="first_name"]', form).on('change', function (e) {
@@ -85,13 +123,17 @@ Users_Edit_Js("Settings_Users_PreferenceEdit_Js",{
 			}
 		});
 	}
+		
+	
 }, {
 	
+
 	/**
 	 * register Events for my preference
 	 */
 	registerEvents : function(){
 		this._super();
+		Users_PreferenceEdit_Js.registercopyPermanentAddress();
 		Users_PreferenceEdit_Js.registerChangeEventForCurrencySeparator();
 	}
 });

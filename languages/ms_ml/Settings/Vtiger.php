@@ -274,7 +274,6 @@ $languageStrings = array(
 	
 	//added by jitu@9-04-2015 for password left menu in settings
 	'LBL_PASSWORD_CONF' => 'Kata Laluan Persediaan',
-
 	'LBL_PASSWORD_DESCRIPTION' => 'Kerumitan set kata laluan untuk pengguna perisian',
 	'LBL_MAXLOGIN'=>'Daftar disekat',
 	//end here
@@ -292,12 +291,12 @@ $languageStrings = array(
 	'smicon'=>'Pilih Mana-mana satu',
 	'smdetail'=>'Copy-Paste anda Feed Twitter / FB Id',
 
-
 	//Added by Azim 20/9/2018
 	'allocation list'=>'Senarai peruntukan',
 	'Leave Type'=>'Jenis Cuti',
 	'Claim Type'=>'Jenis Tuntutan',
 	'Grade'=>'Gred',
+
 	'Status'=>'Status',
 	'Select'=>'Pilih',
 	'Allocation Title'=>'Peruntukkan Cuti',
@@ -324,9 +323,7 @@ $languageStrings = array(
 	'LBL_TEMPLATES' => 'Templat',
 	'LBL_CONFIGURATION' => 'Konfigurasi',
 
-	
 	//End here	
-
 );
 $jsLanguageStrings = array(
 	'JS_PLEASE_SELECT_ATLEAST_ONE_MEMBER_FOR_A_GROUP' => 'Sila pilih sekurang kurangnya satu ahli untuk Kumpulan ', // TODO: Review

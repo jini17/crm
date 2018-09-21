@@ -20,6 +20,7 @@ $languageStrings = array(
 	'LBL_EMPLOYEE_CONTRACT'=>'No employee contracts',
 	'LBL_PASSPORT'=>'No Passports',
 	'LBL_VISA'=>"No Visa's",
+	'LBL_Benefits'=>'Benefits & Entitlement',
 	
 );
 
