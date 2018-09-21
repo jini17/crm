@@ -126,7 +126,7 @@
                                 <div class="controls  col-md-8">
                                         <textarea style="width:100%;" name="reason" id="reason" class="span11" required maxlength="300">{$LEAVE_DETAIL.leave_reason}</textarea>
                                 </div>
-                                <div class="controls text-right" id="charNum_reason" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
+                                <div class="controls text-right" id="charNum_reason" style="font-size:12px; margin-right: 13px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                         </div>
                 {if $MANAGER eq 'true'}
                         <div class="control-group">
@@ -169,7 +169,8 @@
                         </div>
 
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" style="margin-bottom: 10px;">
+                    <div style="margin-right: 140px;">
                         <div class="pull-right cancelLinkContainer" style="margin-top:0px;margin-left: 5px;">
 
                 {if $MANAGER eq 'true'}
@@ -195,6 +196,7 @@
                         <input class="btn btn-success" type="submit" onclick="document.getElementById('savetype').value='New';" value="Save As Draft" name="saverecord" accesskey="LBL_SAVE_BUTTON_KEY" title="Save">
                         {/if}
                 {/if}
+                    </div>
                 </div>    	 	
         </form>
 </div>

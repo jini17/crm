@@ -52,6 +52,9 @@
       .img-circle{
       background-color: #fff;
       }
+      .email-icon i{
+          color: #333;
+      }
 </style>
 <input type="hidden" id="listViewEntriesCount" value="{$LISTVIEW_ENTRIES_COUNT}" />
 <input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
@@ -80,9 +83,9 @@
     </strong>
 </div>
     <div class="col-lg-6">
-      <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-primary" title="List View"><i class='fa fa-list'></i> List View</button>
-          <button type="button" class="btn btn-danger" title="Grid View"> <i class="fa fa-th-large"></i> Grid View</button>
+      <div class="btn-group list-switcher" role="group" aria-label="Basic example">
+          <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-primary" data-listType='List' title="List View"><i class='fa fa-list'></i> List View</button>
+          <button type="button"  onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('grid','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-danger" data-listType='Grid' title="Grid View"> <i class="fa fa-th-large"></i> Grid View</button>
       </div>
    
         <form class='form-inline pull-right'>
@@ -90,7 +93,7 @@
                 <input type="text" placeholder="Enter Keyword" class="form-control">
             </div>
             <div class="form-group">
-                <button type="button" class='btn btn-primary'> Search </button>
+                <button type="button" class='btn btn-primary'> Search   </button>
             </div>
      </form>
     </div>
@@ -110,62 +113,12 @@
     </select>
 </div>
 <div style="min-height:450px;">
-    <div class="row">
-        <div class="col-lg-12">
-            {foreach  item=LISTVIEW_ENTRY from=$LISTVIEW_ENTRIES }
-                    {assign var=birthday value=$LISTVIEW_ENTRY->getBirthdayWish($LISTVIEW_ENTRY->get('birthday'),$LISTVIEW_ENTRY->getId())}
-                    
-                <div class="col-lg-4"   data-id='{$LISTVIEW_ENTRY->getId()}' data-recordUrl='{$LISTVIEW_ENTRY->getDetailViewUrl()}' id="{$MODULE}_listView_row_{$smarty.foreach.listview.index+1}">
 
-                           <div class="box-content {if $birthday } highlight-birthday{/if}">
-                        <div class="img-holder">
-                           {assign var=IMAGE_DETAILS value=$LISTVIEW_ENTRY->getImageDetails()}
-                                {foreach item=IMAGE_INFO from=$IMAGE_DETAILS}
-	                 {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
-                             <img width="120" height='120' class="img-circle"  style="display:block; margin:0 auto;"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
-                                        {/if}
-
-                                {/foreach}
-                                {if $IMAGE_DETAILS[0]['id'] eq null}
-
-                                    <img width="120" height='120' class="img-circle"  style="display:block; margin:0 auto;" src="{vimage_path('DefaultUserIcon.png')}">
-
-                                {/if}
-                        </div>
-                        <div class="user-meta text-center">
-                            <h4 class="username text-center">								
-                                <a href="{$LISTVIEW_ENTRY->getDetailViewUrl()}">
-                                            {$LISTVIEW_ENTRY->get('last_name')}
-                                </a>
-                            </h4>
-                                <div class="designation_label designation">
-                                     {$LISTVIEW_ENTRY->get('title')}
-                                </div>   
-                                <div class="email-address">  {$LISTVIEW_ENTRY->get('email1')}</div>
-                                   
-                        </div>
-                        <div class='user-social text-center'>
-                            <a class='facebook' href="#"><i class='fa fa-facebook'></i></a>
-                            <a class='twitter' href="#"><i class='fa fa-twitter'></i></a>
-                            <a  class='linkedin' href="#"><i class='fa fa-linkedin'></i></a>
-                        </div>
-                        <div class='clearfix'></div>
-                        {assign var = BIRTHDAY value =$LISTVIEW_ENTRY->get('birthday')}
-                           {php}
-                                
-                            {/php}
-                        <div class='birthdaybox text-center'>{$birthday}</div>
-                    </div>
-                             <div class="clearfix"></div>
-                            </div>
-               
-            
-                
-                {/foreach}
-        </div>
-        
-    </div>
+ {if $EMP_VIEW eq 'grid'}
+   {include file="GridBoxContents.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
+   {else}
+        {include file="ListViewContents.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
+    {/if}   
     
-
 </div>
 

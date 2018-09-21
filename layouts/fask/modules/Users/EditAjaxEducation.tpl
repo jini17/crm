@@ -147,14 +147,14 @@
                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)}</label>
                                                 </div>			
                                                 <div class="controls date col-md-8">
-                                                        <textarea style="width:300px!important" name="description" id="description" class="span11" maxlength="300" data-rule-required = "true" >{$EDUCATION_DETAIL.description}</textarea>	
+                                                        <textarea style="width:350px!important" name="description" id="description" class="span11" maxlength="300" data-rule-required = "true" >{$EDUCATION_DETAIL.description}</textarea>	
                                                 </div>
                                         </div>	
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
-                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;</label>
+                                                        <label class="control-label fieldLabel" style="text-align: right;float:right;">&nbsp;</label>
                                                 </div>	
-                                                <div class="controls" id="charNum" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
+                                                <div class="controls" id="charNum" style="font-size:12px;text-align: right;float:right;margin-right: 13px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                                         </div>
                                 </div>	
                                 <div class="form-group" style="margin-bottom: 0px !important;">
