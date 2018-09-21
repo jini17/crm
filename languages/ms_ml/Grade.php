@@ -10,24 +10,12 @@
 //started edit by SITI@SECONDCRM ON 24DEC2014
 
 $languageStrings = Array(
-	'Holiday' => 'Perayaan',
-	'SINGLE_Holiday' => 'Perayaan',
-	'Holiday' => 'Perayaan',
-	'Holiday ID' => 'ID Perayaan',
-	'Holidays'=>'Perayaan',
-
-	'LBL_CUSTOM_INFORMATION' => 'Maklumat Tersuai',
-	'LBL_HOLIDAY_INFORMATION' => 'Maklumat Perayaan ',
-
-	'Holiday Name' => 'Nama Perayaan',
-	'Holiday Date' => 'Tarikh Mula', //edited by SITI@SECONDCRM ON 25FEB2015
-	'Holiday End Date' => 'Tarikh Akhir', //added by SITI@SECONDCRM ON 25FEB2015
-	'Location' => 'Lokasi',
-	'Assigned To' => 'Diperuntukkan Kepada',
-	'Holiday No' => 'No Perayaan',
-	'Perayaan Butiran' => 'Butiran Perayaan',
-	
-
+	'Job grade ' => 'Gred pekerjaan',
+	'Grade status' => 'Gred Status',
+	'Grade Details' => 'Gred Butiran',
+	'Start Date' => 'Tarikh mula',
+	'End date'=>'Tarikh tamat',
+	'Holiday id '=>'Id cuti',
 );
 
 ?>

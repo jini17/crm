@@ -161,7 +161,7 @@ $(this).hide();
                                     {if $moduleName eq 'MyProfile'}                                            
                                         {assign var='moduleURL' value="index.php?module=Users&view=Detail&record={$USER_MODEL->getId()}&app=$APP_NAME&parent=Settings"}
                                     {else}
-                                        {assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME}"}
+                                        {assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME"}
                                     {/if}   
                                                                                 <li {$APP_NAME}>
                                                                                     <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 

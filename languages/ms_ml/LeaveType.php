@@ -30,6 +30,7 @@ $languageStrings = Array(
 	'Leave Code' => 'Kod Cuti',
 	'Mid Year Allocation' => 'Peruntukan Pertengahan Tahun',
 	'Half Day Allowed' => 'Setengah Hari Dibenarkan',
+	'Title' => 'Tajuk',
 
 	//START ADDED BY HARIZ@8/10/15
 	'Inactive'=>'Tidak Aktif',

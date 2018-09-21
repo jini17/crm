@@ -290,7 +290,14 @@ $languageStrings = array(
 	'wcmsg'=>'Perutusan',
 	'smicon'=>'Pilih Mana-mana satu',
 	'smdetail'=>'Copy-Paste anda Feed Twitter / FB Id',
-	//End here	
+	//End here
+
+	//Added by Azim 20/9/2018
+	'allocation list'=>'Senarai peruntukan',
+	'Leave Type'=>'Jenis Cuti',
+	'Claim Type'=>'Jenis Tuntutan',
+	'Grade'=>'Gred',
+	'Status'=>'Status',	
 );
 $jsLanguageStrings = array(
 	'JS_PLEASE_SELECT_ATLEAST_ONE_MEMBER_FOR_A_GROUP' => 'Sila pilih sekurang kurangnya satu ahli untuk Kumpulan ', // TODO: Review
