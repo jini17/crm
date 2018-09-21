@@ -145,7 +145,7 @@
                             {vtranslate($CURRENT_VIEW_RECORD_MODEL->get('viewname'))}&nbsp;
                             -->
                         <button type="button" class="btn module-buttons btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" style="width: 100%">
-                            {vtranslate('LBL_LISTS',$MODULE)} | Current: <b class="listViewFilterElipsis">{vtranslate($CURRENT_VIEW_RECORD_MODEL->get('viewname'))|truncate:50:"...":true}</b >&nbsp;
+                            {vtranslate('LBL_LISTS',$MODULE)} | {vtranslate('LBL_CURRENT',$MODULE)}: <b class="listViewFilterElipsis">{vtranslate($CURRENT_VIEW_RECORD_MODEL->get('viewname'))|truncate:50:"...":true}</b >&nbsp;
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu" style="width: 100%;">

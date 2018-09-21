@@ -392,7 +392,7 @@ $(this).hide();
                                                                         </div>
                                                                 </div>
                                                                 <div class="col-md-12 row" style="padding: 10px;">
-                                                                        <a href="#" class="buttonpopup">Read More</a>
+                                                                        <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
                                                                 </div>
                                                         </div>
                                                 </div>
@@ -491,7 +491,7 @@ $(this).hide();
                                                                         </div>
                                                                 </div>
                                                                 <div class="col-md-12 row" style="padding: 10px;">
-                                                                        <a href="#" class="buttonpopup">Read More</a>
+                                                                        <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
                                                                 </div>
                                                         </div>
 
