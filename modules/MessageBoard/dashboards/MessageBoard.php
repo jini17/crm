@@ -12,7 +12,7 @@ class MessageBoard_MessageBoard_Dashboard extends Vtiger_IndexAjax_View {
 
         public function process(Vtiger_Request $request) {
                 $db = PearDatabase::getInstance();
-                  $db->setDebug(true);
+                  //$db->setDebug(true);
 
                 $currentUser = Users_Record_Model::getCurrentUserModel();
                 $viewer = $this->getViewer($request);

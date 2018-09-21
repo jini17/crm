@@ -44,7 +44,9 @@
                                                                         'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
                                                                         'mycthemeswitcher'=>'folder', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people' ]}
 
-                                                        <span><i class="material-icons entryIcon" title={$TRANSLATED_MODULE_NAME}>{$iconsarray[{strtolower($VT_ICON)}]}</i></span>&nbsp;&nbsp;
+                                                        {*<span><i class="material-icons entryIcon" title={$TRANSLATED_MODULE_NAME}>{$iconsarray[{strtolower($VT_ICON)}]}</i></span>&nbsp;&nbsp;*}
+                                                                                                      <span><i class="fa fa-envelope" title={$TRANSLATED_MODULE_NAME}>{$iconsarray[{strtolower($VT_ICON)}]}</i></span>&nbsp;&nbsp;
+
                                                 </div>
                                                 <div class="col-lg-10 col-xs-9 pull-right">
                                                         {assign var=DETAILVIEW_URL value=$PARENT->getDetailViewUrl()}
@@ -129,7 +131,8 @@
                         {else if $MODELNAME == 'ModComments_Record_Model'}
                                 <div class="row">
                                         <div class="col-lg-2 col-xs-3 pull-left">
-                                                <span><i class="material-icons entryIcon" title={$TRANSLATED_MODULE_NAME}>chat</i></span>
+                                            {*<span><i class="material-icons entryIcon" title={$TRANSLATED_MODULE_NAME}>chat</i></span>*}
+                                                <span><i class="fa fa-envelope" title="{$TRANSLATED_MODULE_NAME}"></i></span>
                                         </div>
                                         <div class="col-lg-10 col-xs-9 pull-right" style="margin-top:5px;">
                                                 {assign var=COMMENT_TIME value=$HISTORY->getCommentedTime()}
