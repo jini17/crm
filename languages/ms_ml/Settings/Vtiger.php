@@ -272,16 +272,11 @@ $languageStrings = array(
 	'LBL_CREATE_PROJECT'=>'Pilih Buat projek',
 	//End here
 	
-	//added by jitu@9-04-2015 for password left menu in settings
-<<<<<<< HEAD
+
 	'LBL_PASSWORD_CONF' => 'Kata Laluan Persediaan',
-=======
-<<<<<<< HEAD
-	'LBL_PASSWORD_CONF' => 'Kata Laluan Persediaan',
-=======
-	'LBL_PASSWORD_CONF' => 'Kata Laluan Persediaan',
->>>>>>> 590091c14c4edf723dbea3baa67e9dae7dff7da3
->>>>>>> 066289346d90f737cb656f1cc02b243b09e87b08
+
+
+
 	'LBL_PASSWORD_DESCRIPTION' => 'Kerumitan set kata laluan untuk pengguna perisian',
 	'LBL_MAXLOGIN'=>'Daftar disekat',
 	//end here
@@ -298,11 +293,7 @@ $languageStrings = array(
 	'wcmsg'=>'Perutusan',
 	'smicon'=>'Pilih Mana-mana satu',
 	'smdetail'=>'Copy-Paste anda Feed Twitter / FB Id',
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 066289346d90f737cb656f1cc02b243b09e87b08
-	//End here
+
 
 	//Added by Azim 20/9/2018
 	'allocation list'=>'Senarai peruntukan',
@@ -310,12 +301,7 @@ $languageStrings = array(
 	'Claim Type'=>'Jenis Tuntutan',
 	'Grade'=>'Gred',
 	'Status'=>'Status',	
-<<<<<<< HEAD
-=======
-=======
-	//End here	
->>>>>>> 590091c14c4edf723dbea3baa67e9dae7dff7da3
->>>>>>> 066289346d90f737cb656f1cc02b243b09e87b08
+
 );
 $jsLanguageStrings = array(
 	'JS_PLEASE_SELECT_ATLEAST_ONE_MEMBER_FOR_A_GROUP' => 'Sila pilih sekurang kurangnya satu ahli untuk Kumpulan ', // TODO: Review
