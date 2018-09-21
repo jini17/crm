@@ -1242,3 +1242,11 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
                 app.event.trigger("post.DashBoardTab.load");
         }
 });
+jQuery(document).ready(function(){
+$triggered_times = 0;
+
+    $(".dashBoardTabContents").scroll(function(){
+            window.reload();
+            //alert('scrolling ...');
+        });
+})

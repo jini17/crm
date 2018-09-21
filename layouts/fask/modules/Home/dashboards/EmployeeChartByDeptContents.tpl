@@ -36,12 +36,25 @@
 
 {if $CHART_TYPE eq 'pieChart' OR $CHART_TYPE eq ''  OR empty($CHART_TYPE)}
 <script type="text/javascript">
-
+LBL_MessageBoard_Information
 
 
           var jData = jQuery("#widgetChart_{$WIDGET->get('id')}").val();
           var data = JSON.parse(jData);
-
+    console.log(data);
+                 var chartData = [];
+                      var labelarray = [];
+                      var labelobjarray = [];
+         var valuearray = []; 
+         for(var i = 0; i < data.labels.length ; i++){
+                var label = data.labels[i];
+                var value = data.values[i];
+                var rowData = [label, value];
+                chartData.push(rowData);
+                               labelarray.push(label);
+                               
+                               valuearray.push(value);
+        }	
 
          {* var hreflinks = [];
       for(var i = 0; i < data.links.length ; i++){
