@@ -9,8 +9,10 @@
   *
  ********************************************************************************/
 -->*}
-<div class="dashboardWidgetHeader">
-	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
+<div class="dashboardWidgetHeader clearfix">
+	  <div class="title">
+        <div class="dashboardTitle" title="{vtranslate($WIDGET->getTitle(), $MODULE_NAME)}">{vtranslate($WIDGET->getTitle())}</div>
+    </div>
   <div class="filterContainer">
       <div class="row">
           
@@ -33,7 +35,7 @@
       </div>
 </div>
   
-<div class="dashboardWidgetContent" id="birthdayContents">
+<div class="dashboardWidgetContent" style="padding-top:15px;" id="birthdayContents">
 	{include file="dashboards/BirthdaysContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 
