@@ -101,7 +101,7 @@ $languageStrings = array(
 	'LBL_MESSAGE' => 'Mesej',
     
 	//Translation for module
-	'Calendar' => 'Akan Dibuat',
+	'Calendar' => 'Tugas',
 	'Summary'=>'Ringkasan',
 	'Module'=>'Modul',
 	'Execution Condition'=>'Syarat Pelaksanaan',

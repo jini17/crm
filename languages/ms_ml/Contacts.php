@@ -34,12 +34,12 @@ $languageStrings = array(
 	'Mailing Zip'                  => 'Poskod Surat Menyurat'            , 
 	'Mailing Country'              => 'Negara Surat Menyurat'             , 
 	'Mailing Po Box'               => 'Peti PO Surat Menyurat'            , 
-	'Other Street'                 => 'Lain-lain Surat Menyurat'             , 
-	'Other City'                   => 'Lain-lain Bandar'               , 
-	'Other State'                  => 'Lain-lain Negeri'             , 
-	'Other Zip'                    => 'Lain-lain Poskod'           , 
-	'Other Country'                => 'Lain-lain Negara'            , 
-	'Other Po Box'                 => 'Peti PO Lain-lain'              , 
+	'Other Street'                 => 'Jalan Lain'             , 
+	'Other City'                   => 'Bandar Lain'               , 
+	'Other State'                  => 'Negeri Lain'             , 
+	'Other Zip'                    => 'Poskod Lain'           , 
+	'Other Country'                => 'Negara lain'            , 
+	'Other Po Box'                 => 'Peti PO Lain'              , 
 	'Contact Image'                => 'Imej Kenalan'               , 
 	'Mr.'                          => 'En.'                         , 
 	'Ms.'                          => 'Cik'                         , 
@@ -55,6 +55,27 @@ $languageStrings = array(
     'Google Contacts'=>'Kenalan Google',
     'Google Map'=>'Peta Google',
     'Google Contacts'=>'Kenalan Google',
+    'LBL_EDIT_FIELDS' => 'Medan & Susun Atur',
+    //Summary
+    'Key Fields'                   => 'Senarai Pengguna',
+    'Add tag'                      => 'Tambah Tag',
+    'Follow'                       => 'Ikut',
+    'Enrich Data'                  => 'Memperkayakan Data',
+    'Duplicate'                    => 'Salinan',
+    
+    //Detail view
+    'Location'                       => 'Lokasi',
+    'Gender'                       => 'Jantina',
+    'Website'                       => 'Laman Sesawang',
+
+    //Settings
+    //Related Module
+    'No Related Documents'                  => 'Tiada Dokumen',
+    
+	'SINGLE_Document'             => 'Dokumen',
+	'Document'                    => 'Dokumen',
+	'LBL_DOCUMENT'				  => 'Dokumen',
+    
 );
 $jsLanguageStrings = array(
 	'LBL_SYNC_BUTTON'              => 'Segerakkan Sekarang'             , // TODO: Review

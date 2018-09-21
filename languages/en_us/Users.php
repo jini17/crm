@@ -510,6 +510,9 @@ $languageStrings = array(
 'LBL_USER_LIMIT_EXCEED'=>'User limit exceeded in this plan, please contact to Agiliux Team',
 'LBL_SELECT_ROLE'=>'Select Role',
 //End of Contacts
+
+'LBL_CLAIM' => 'Tuntutan',
+
 );
 
 $jsLanguageStrings = array(

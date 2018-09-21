@@ -22,6 +22,9 @@ $languageStrings = Array(
 	'Friday'=>'Jumaat',
 	'Saturday '=>'Sabtu',
 	'Sunday'=>'Ahad',
+	'WH No'=>'No. Waktu Bekerja',
+	'Title'=>'Tajuk',
+	
 );
 
 ?>
