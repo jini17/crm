@@ -1195,7 +1195,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
                 this.birthdayEmail();
                 //this.gridsterStop();
 
-
+				 jQuery("a[name='drefresh']").trigger('click');
                 this.registerQtipMessage();
                 app.event.off("post.DashBoardTab.load");
                 app.event.on("post.DashBoardTab.load",function(event, dashBoardInstance){ 

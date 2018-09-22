@@ -212,7 +212,7 @@ Vtiger.Class('Vtiger_Widget_Js',{
 				if(contentContainer.closest('.mCustomScrollbar').length) {
 					contentContainer.mCustomScrollbar('destroy');
 					contentContainer.html(data);
-					var adjustedHeight = parent.height()-100;
+					var adjustedHeight = parent.height()-150;
 					app.helper.showVerticalScroll(contentContainer,{'setHeight' : adjustedHeight});
 				}else {
 					contentContainer.html(data);
