@@ -27,6 +27,7 @@ $languageStrings = array(
 	'LBL_NO_HOLIDAY' => 'No holiday in this month',
 	'LBL_SELECT_ALL' => 'Select All',
 	'LBL_HOLIDAY' => 'Holiday',
+	'Holiday List'=>'Holidays List',
 
 );
 

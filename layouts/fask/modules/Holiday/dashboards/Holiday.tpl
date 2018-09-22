@@ -14,10 +14,6 @@
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
 </div>
 
-<div class="dashboardWidgetContent mCustomScrollbar" style="height:250px;">
-	{include file="dashboards/HolidayContents.tpl"|@vtemplate_path:$MODULE_NAME}
-</div>
-
 <div class="widgeticons dashBoardWidgetFooter">
 	<div class="filterContainer">
        <div class="row">
@@ -45,7 +41,7 @@
   </div>
 </div>
  
-<div class="dashboardWidgetContent mCustomScrollbar _mCS_5" style="height:200px;">
+<div class="dashboardWidgetContent mCustomScrollbar _mCS_5" style="height:250px;">
 	{include file="dashboards/HolidayContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 
