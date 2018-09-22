@@ -45,7 +45,7 @@
                                                                         'mycthemeswitcher'=>'folder', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people' ]}
 
                                                         {*<span><i class="material-icons entryIcon" title={$TRANSLATED_MODULE_NAME}>{$iconsarray[{strtolower($VT_ICON)}]}</i></span>&nbsp;&nbsp;*}
-                                                                                                      <span><i class="fa fa-envelope" title={$TRANSLATED_MODULE_NAME}>{$iconsarray[{strtolower($VT_ICON)}]}</i></span>&nbsp;&nbsp;
+                                                                                                    <i class="fa fa-envelope" title="{$TRANSLATED_MODULE_NAME}"></i>&nbsp;&nbsp;
 
                                                 </div>
                                                 <div class="col-lg-10 col-xs-9 pull-right">

@@ -11,10 +11,11 @@
 -->*}
 
 <div class="dashboardWidgetHeader">
-	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
+	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=false}     
+        <div class="clearfix"
 </div>
 <div class="dashboardWidgetContent">
-    {$ANNOUNCEMENTS}
+
 	{include file="dashboards/MessageBoardContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 
