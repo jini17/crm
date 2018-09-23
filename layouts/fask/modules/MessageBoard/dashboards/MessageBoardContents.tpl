@@ -11,43 +11,31 @@
 -->*}
 
 <div style='padding:5px;'>
-{if count($MODELS) > 0}
-<table class="table table-bordered listViewEntriesTable">
-	<thead>
-		<tr>
-			<th style="width:43%;">
-			<b>Name</b>
-			</th>
-			<th>
-			<b>Message</b>
-			</th>
-			<th colspan="2">
-			<b>Time</b>
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		{foreach item=MODEL from=$ANNOUNCEMENTS}
-			<tr>
-				<td>
-				{$MODEL['first_name']}
-				</td>
-				<td>
-				{$MODEL['message']}
-				</td>
-				<td style="text-align:center;">
-				{$MODEL['messagetime']}
-				</td>
-				
-			</tr>
-		{/foreach}
-                                   {$ANNOUNCEMENTS}
-	</tbody>
-</table>
-<br /><br />
+{if $MODELS > 0}
+    {foreach item=MODEL key=k from=$ANNOUNCEMENTS}
+        <div class="row row miniListContent" style="padding-top: 5px; padding-bottom: 5px;">
+             <div class="col-lg-1">
+                 <div class="img-holder"  style="border-radius: 50%; float:left;">
+                     <img class="img-circle pull-left" src='{$MODEL['image']}' width='30;' height='30'  />
+                    </div>
+             </div>      
+{*                                         <div class="col-lg-8"><span class="relatedpop"><a href="index.php?module=MessageBoard&view=Popup"> {$MODEL['message']} </a></span></div>
+*}
+                     <div class="col-lg-7">
+                         <span class="relatedPopup" onclick="Vtiger_DashBoard_Js.ViewMessage({$MODEL['user_id']})">
+                              {$MODEL['message']}
+                           {*  <a href="index.php?module=MessageBoard&view=Popup"> {$MODEL['message']} </a>*}
+                         </span>
+                     </div>
+              <div class="col-lg-4">{$MODEL['messagetime']}</div>
+        </div>
+
+    {/foreach}
+ 
+
 {else}
-	<span class="noDataMsg">
-		{vtranslate($TYPELABEL,$MODULE_NAME)}
-	</span>
+    <span class="noDataMsg">
+            {vtranslate($TYPELABEL,$MODULE_NAME)}
+    </span>
 {/if}
 </div>

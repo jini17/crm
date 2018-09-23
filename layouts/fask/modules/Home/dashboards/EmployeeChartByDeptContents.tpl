@@ -36,9 +36,6 @@
 
 {if $CHART_TYPE eq 'pieChart' OR $CHART_TYPE eq ''  OR empty($CHART_TYPE)}
 <script type="text/javascript">
-LBL_MessageBoard_Information
-
-
           var jData = jQuery("#widgetChart_{$WIDGET->get('id')}").val();
           var data = JSON.parse(jData);
     console.log(data);
