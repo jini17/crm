@@ -10,24 +10,35 @@
  ********************************************************************************/
 -->*}
 {strip}
+<style type="text/javascript">
+.fieldLabel{
+    height: 50px !important;
+    display: block;
+}
+.inputElement {
+    width: 100% !important;
+    display: block !important;
+}
+</style>
 {if !empty($PICKIST_DEPENDENCY_DATASOURCE)}
     <input type="hidden" name="picklistDependency" value='{Vtiger_Util_Helper::toSafeHTML($PICKIST_DEPENDENCY_DATASOURCE)}' />
 {/if}
 <div name='editContent'>
     {foreach key=BLOCK_LABEL item=BLOCK_FIELDS from=$RECORD_STRUCTURE name=blockIterator}
-		{if $BLOCK_LABEL neq 'LBL_CALENDAR_SETTINGS' && $BLOCK_LABEL neq 'LBL_CURRENCY_CONFIGURATION' && $BLOCK_LABEL neq 'Other Preferences'}
+		{if $BLOCK_LABEL neq 'LBL_CALENDAR_SETTINGS' && $BLOCK_LABEL neq 'LBL_CURRENCY_CONFIGURATION' && $BLOCK_LABEL neq 'Other Preferences' &&  $BLOCK_LABEL neq 'LBL_USER_IMAGE_INFORMATION'}
          {if $BLOCK_FIELDS|@count gt 0}
-             <div class="fieldBlockContainer">
-                  <h4 class='fieldBlockHeader' >{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
+             <div class="detailViewContainer block">
+                  <h5 class='fieldBlockHeader' >{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
                   <hr>
                  <br/>
-                 <div class="table table-borderless">
+                 <div class="table detailview-table no-border">
                      <div class="row">
                      {assign var=COUNTER value=0}
                      {foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}
                          {assign var="isReferenceField" value=$FIELD_MODEL->getFieldDataType()}
                          {assign var="refrenceList" value=$FIELD_MODEL->getReferenceList()}
                          {assign var="refrenceListCount" value=count($refrenceList)}
+
                          {if $FIELD_MODEL->getName() eq 'theme' or $FIELD_MODEL->getName() eq 'rowheight'}
                             <input type="hidden" name="{$FIELD_MODEL->getName()}" value="{$FIELD_MODEL->get('fieldvalue')}"/> 
                             {continue}
@@ -35,21 +46,22 @@
                          {if $FIELD_MODEL->isEditable() eq true}
                              {if $FIELD_MODEL->get('uitype') eq "19"}
                                  {if $COUNTER eq '1'}
-                                     <div class="col-xs-6 col-md-3"></div><div class="col-xs-6 col-md-3"></div></div><div class="row">
+                                     <div class="col-xs-6 col-md-3"></div><div class="col-xs-6 col-md-3"></div></div>
+                                     <div class="row">
                                      {assign var=COUNTER value=0}
                                  {/if}
                              {/if}
-                             {if $COUNTER eq 3}
+                             {if $COUNTER eq 4}
                                  </div><div class="row">
                                  {assign var=COUNTER value=1}
                              {else}
                                  {assign var=COUNTER value=$COUNTER+1}
                              {/if}
-                             <div class="fieldLabel col-xs-6 col-md-3 alignMiddle">
+                             <div class="fieldLabel col-xs-6 col-md-3 text-right" style="min-height: 53px;padding-bottom:10px;">
                             
                              {if $isReferenceField eq "reference"}
                                  {if $refrenceListCount > 1}
-                                     <select style="width: 140px;" class="select2 referenceModulesList">
+                                     <select style="width: 140px;" class="select2 referenceModulesList form-control">
                                         {foreach key=index item=value from=$refrenceList}
                                             <option value="{$value}">{vtranslate($value, $value)}</option>
                                         {/foreach}
@@ -62,7 +74,7 @@
                              {/if}
                              &nbsp; {if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}
                          </div>
-                         <div class="fieldValue col-xs-6 col-md-2 {if $FIELD_MODEL->getFieldDataType() eq 'boolean'} col-xs-6 {/if} {if $FIELD_MODEL->get('uitype') eq '19'} col-xs-6 {assign var=COUNTER value=$COUNTER+1} {/if}">
+                         <div class="fieldValue col-xs-6 col-md-3 {if $FIELD_MODEL->getFieldDataType() eq 'boolean'} col-xs-6 {/if} {if $FIELD_MODEL->get('uitype') eq '19'} col-xs-6 {assign var=COUNTER value=$COUNTER+1} {/if}" style="padding-bottom:10px;">
                              {include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
                          </div>
                      {/if}
@@ -77,6 +89,27 @@
              </div>
              <br>
          {/if}
+         {else if $BLOCK_LABEL eq 'LBL_USER_IMAGE_INFORMATION'}
+            {if $BLOCK_FIELDS|@count gt 0}
+                <div class="fieldBlockContainer">
+                    <h4 class='fieldBlockHeader' >{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
+                    <hr>
+                    <br/>
+                    <div class="table detailview-table no-border">
+                        <div class="row">
+                            {assign var=COUNTER value=0}
+                            {foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}
+                                <div class="fieldLabel col-xs-3 col-md-3 text-right" style="min-height: 49px;">
+                                    {vtranslate($FIELD_MODEL->get('label'), $MODULE)}
+                                </div>   
+                                <div class="fieldValue col-xs-9 col-md-9">
+                                    {include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
+                                </div>   
+                            {/foreach}    
+                        </div>
+                    </div>    
+                </div>    
+            {/if}                
 		{/if}
      {/foreach}
 </div>
