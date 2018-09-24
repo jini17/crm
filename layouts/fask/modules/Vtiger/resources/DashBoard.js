@@ -17,13 +17,12 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
                     
                         ViewMessage : function(userId){
                             var popupInstance = Vtiger_Popup_Js.getInstance();
-
+							var searchparam = {};
+							searchparam['employee_id'] = userId;
                             var params = {};
                                     params['module'] = "MessageBoard";
                                     params['view'] = "MessagePopup";
-                                    params['search_param'] = userId;
-                                    params['search_key'] = 'employee_id';
-                                    params['search_value'] = 'Thiliba';
+                                    params['search_param'] = searchparam;
                                     params['record'] = userId;
                                     params['relatedLoad'] = true;
 

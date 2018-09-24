@@ -23,7 +23,7 @@
 *}
                      <div class="col-lg-7">
                          <span class="relatedPopup" onclick="Vtiger_DashBoard_Js.ViewMessage({$MODEL['user_id']})">
-                              {$MODEL['message']}
+                              {$MODEL['title']}
                            {*  <a href="index.php?module=MessageBoard&view=Popup"> {$MODEL['message']} </a>*}
                          </span>
                      </div>
