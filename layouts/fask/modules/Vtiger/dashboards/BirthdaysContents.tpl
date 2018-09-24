@@ -11,10 +11,12 @@
 -->*}
 <div class="" style="height: 200px; ">
 {if count($MODELS) > 0}
+<<<<<<< HEAD
         <div>
         <div class='row th' style="padding:5px">
                 <div class='col-lg-4'>
                 <strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
+
             </div>
             <div class='col-lg-4'>
                 <strong>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</strong>
@@ -23,6 +25,7 @@
                <strong>{vtranslate('LBL_BIRTHDATE', $MODULE_NAME)}</strong>
             </div>
           </div>
+
                 {foreach item=MODEL from=$MODELS}
                         <div class='row miniListContent' >
                                 <div class='col-lg-4'>
@@ -51,6 +54,7 @@
                         </div>
                 {/foreach}
         </div>
+
 {else}
         <span class="noDataMsg">
                 {vtranslate('LBL_NO','Home')} {vtranslate('LBL_BIRTHDAY','Home')} {vtranslate($TYPELABEL,'Home')}

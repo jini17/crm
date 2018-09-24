@@ -13,7 +13,7 @@ $languageStrings = array(
 	'SINGLE_EmployeeContract' => 'Employee Contract',
 	'LBL_ADD_RECORD' => 'Add Employee Contract',
 	'LBL_Employment_Contract_Information' => 'Employee Contract Information',
-
+	'LBL_NAME' => 'Employee',
 	// Blocks
 	'LBL_Salary_Tracking' => 'Salary Tracking',
 	'LBL_NOT_DURATION'=>'are expiring in 30 days',
