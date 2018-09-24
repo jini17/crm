@@ -101,7 +101,7 @@
          <div class="row">
             {assign var=COUNTER value=0}
             {foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}
-            <div class="fieldLabel col-xs-3 col-md-3 text-right" style="min-height: 49px;">fitriah
+            <div class="fieldLabel col-xs-3 col-md-3 text-right" style="min-height: 49px;">
                {vtranslate($FIELD_MODEL->get('label'), $MODULE)}
             </div>
             <div class="fieldValue col-xs-9 col-md-9">
