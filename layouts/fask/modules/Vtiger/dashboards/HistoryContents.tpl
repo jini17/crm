@@ -27,7 +27,7 @@
                             {/if}
                             {if $PROCEED}
                                     <div class="row entry clearfix">
-                                            <div class='col-lg-2 col-xs-3 pull-left'>
+                                            <div class='col-lg-1 col-xs-3 pull-left'>
                                                     {assign var=VT_ICON value=$MOD_NAME}
                                                     {if $MOD_NAME eq "Events"}
                                                             {assign var="TRANSLATED_MODULE_NAME" value="Calendar"}
@@ -50,7 +50,7 @@
 
 
                                             </div>
-                                            <div class="col-lg-10 col-xs-9 pull-right">
+                                            <div class="col-lg-11 col-xs-9 pull-right">
                                                     {assign var=DETAILVIEW_URL value=$PARENT->getDetailViewUrl()}
                                                     {if $HISTORY->isUpdate()}
                                                             {assign var=FIELDS value=$HISTORY->getFieldInstances()}
