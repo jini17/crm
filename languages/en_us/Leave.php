@@ -11,7 +11,7 @@ $languageStrings = array(
 		
 	'LBL_THIS_WEEk'=>'This week',	
 	'LBL_THIS_MONTH'=>'This month',	
-	'LBL_NAME'=>'employee',
+	'LBL_NAME'=>'Employee Name',
 	'LBL_LEAVE_APPROVAL'=>'My Team Approval',
     'LBL_DURATIONOFLEAVE'=>'Leave Duration',                
     'LBL_IN_TODAY'=>'No Leaves for today',

@@ -12,18 +12,46 @@
 
 <div style='padding:5px'>
 {if count($MODELS) > 0}
+<<<<<<< HEAD
+        <div>
+        <div class='row th' style="padding:5px">
+                <div class='col-lg-5'>
+                <strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
+=======
 	<div>
         <div class='row th' style="padding:5px;margin-right:-1px;margin-left:-1px;">
        		<div class='col-lg-5'>
              	<strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
+>>>>>>> 44ecaa6abb9b8d44ead8a8ac20958cdcb2f542da
             </div>
-            <div class='col-lg-5'>
+            <div class='col-lg-4'>
                <strong>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</strong>
             </div>
-            <div class='col-lg-2'>
+            <div class='col-lg-3'>
               <strong>{vtranslate('LBL_MC_TAKEN', $MODULE_NAME)}</strong>
             </div>
           </div>
+<<<<<<< HEAD
+             
+                {foreach item=MODEL from=$MODELS}
+                        <div class='row miniListContent' style="padding:5px">
+                                <div class='col-lg-5'>
+                                        <a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$MODEL['userid']}">
+
+                                            <strong>{$MODEL['empname']}</strong>
+                                        </a>
+        
+                                </div>
+                                <div class='col-lg-4'>
+                                    <small>{$MODEL['department']}</small>
+                                </div>
+                                <div class='col-lg-3 text-center'>
+                                        {$MODEL['leavecount']}
+                                </div>
+                        </div>
+                        {/foreach}
+        </div>
+=======
 		<hr>
 		{foreach item=MODEL from=$MODELS}
 			<div class='row miniListContent' style="padding:5px;margin-right:-1px;margin-left:-1px;">
@@ -41,9 +69,10 @@
 			</div>
 			{/foreach}
 	</div>
+>>>>>>> 44ecaa6abb9b8d44ead8a8ac20958cdcb2f542da
 {else}
-	<span class="noDataMsg">
-		{vtranslate($TYPELABEL,$MODULE_NAME)} in {$VALUE}
-	</span>
+        <span class="noDataMsg">
+                {vtranslate($TYPELABEL,$MODULE_NAME)} in {$VALUE}
+        </span>
 {/if}
 </div>

@@ -240,6 +240,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
 			$sql .= ' WHERE status = ?';
 			$params[] = 'Active';
 		}
+                                            
 		$result = $db->pquery($sql, $params);
 
 		$noOfUsers = $db->num_rows($result);

@@ -4575,7 +4575,9 @@ form[name="notification_settings"] .select2-choice {
 }
 .dashboardWidgetHeader
 {   background: #fff;
-    padding: 4px; border-bottom:1px solid #ddd;margin-bottom:10px;    border-top-left-radius: 10px;
+    padding: 4px; border-bottom:1px solid #ddd;
+/*    margin-bottom:10px;   */
+    border-top-left-radius: 10px;
     border-top-right-radius: 10px;}
 
 

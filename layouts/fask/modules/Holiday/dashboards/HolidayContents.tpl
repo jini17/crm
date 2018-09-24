@@ -22,7 +22,11 @@
             </div>
           </div>
 		{foreach item=MODEL from=$MODELS}
+<<<<<<< HEAD
+			<div class='row miniListContent' style="padding:5px">
+=======
 			<div class='row miniListContent' style="padding:5px;margin-right:-1px;margin-left:-1px;">
+>>>>>>> 44ecaa6abb9b8d44ead8a8ac20958cdcb2f542da
 				<div class='col-lg-6'>
 					{$MODEL['holiday_name']}
 				</div>
