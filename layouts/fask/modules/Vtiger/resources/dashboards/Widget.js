@@ -882,6 +882,7 @@ Vtiger_History_Widget_Js('Vtiger_OverdueActivities_Widget_Js', {}, {
         }
 
 });
+Vtiger_History_Widget_Js('Vtiger_DocumentExpiring_Widget_Js', {}, {});
 Vtiger_History_Widget_Js('Vtiger_Birthdays_Widget_Js', {}, {});
 Vtiger_History_Widget_Js('Vtiger_HolidayList_Widget_Js', {}, {});
 Vtiger_History_Widget_Js('Vtiger_TopNoMCEmployees_Widget_Js', {}, {});

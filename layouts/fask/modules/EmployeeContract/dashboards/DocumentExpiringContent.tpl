@@ -12,48 +12,47 @@
 
 <div style='padding:5px;'>
 {if count($MODELS) > 0}
-<table class="table table-bordered listViewEntriesTable">
-	<thead>
-		<tr>
-			<th>
-			<b>{vtranslate('Name',$MODULE_NAME)}</b>
-			</th>
-			<th>
+
+		<div class='row th' style="padding:5px;margin-right:-1px;margin-left:-1px;">
+			<div class='col-lg-7'>
+			<b>{vtranslate('Name',$MODULE_NAME)} ({vtranslate('Department',$MODULE_NAME)})</b>
+			</div>
+			<!--<div class='col-lg-6'>
 			<b>{vtranslate('Department',$MODULE_NAME)}</b>
-			</th>
-			<th>
+			</div>-->
+			<div class='col-lg-5'>
 			<b>{vtranslate('Expiry Date',$MODULE_NAME)}</b>
-			</th>
-		</tr>
-	</thead>
-	<tbody>
+			</div>
+		</div>
+
+
 		{foreach item=MODEL from=$MODELS}
-			<tr>
-				<td>
+			<div class='row miniListContent' style="padding:5px;margin-right:-1px;margin-left:-1px;">
+				<div class='col-lg-7'>
 				<strong>{$MODEL['fullname']}</strong>
-				{if $MODEL['designation'] neq ''}<br />(<i>{$MODEL['designation']}</i>){/if}
-				</td>
-				<td>
+				{if $MODEL['department'] neq ''}<br />(<i>{$MODEL['department']}</i>){/if}
+				</div>
+				<!--<div class='col-lg-6'>
 				{$MODEL['department']}
-				</td>
-				<td>
+				</div>-->
+				<div class='col-lg-5'>
 				{$MODEL['expirydate_day']}{if $MODEL['expirydate_day'] eq 1}st
 				{elseif $MODEL['expirydate_day'] eq 2}nd
 				{elseif $MODEL['expirydate_day'] eq 3}rd
 				{else}th{/if}
 				{Vtiger_Util_Helper::getMonthName($MODEL['expirydate_month'])} {$MODEL['expirydate_year']}
-				</td>
+				</div>
 
-			</tr>
+			</div>
 		{/foreach}
-	</tbody>
-</table>
+
+
 {if $PAGE gt 0}
-	<div class="row">
+	<!--<div class="row">
 			<div class="col-lg-12">
 				<h4><a href="javascript:;" class="text-info load-more" data-page="{$PAGE}" data-nextpage="{$NEXTPAGE}">{vtranslate('LBL_MORE')}...</a></h4>
 		</div>
-	</div>
+	</div>-->
 {/if}
 <br /><br />
 {else}
