@@ -35,7 +35,10 @@
 </div>
   
 <div class="dashboardWidgetContent dashboardWidget" style="padding:5px;">
-  {include file="dashboards/BirthdaysContents.tpl"|@vtemplate_path:$MODULE_NAME}
+
+
+	{include file="dashboards/BirthdaysContents.tpl"|@vtemplate_path:$MODULE_NAME}
+
 </div>
 
 <div class="widgeticons dashBoardWidgetFooter">

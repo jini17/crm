@@ -12,6 +12,32 @@
 
 <div style='padding:5px;'>
 {if count($MODELS) > 0}
+<div class='row th' style="padding:5px">
+          {if $VALUE eq 'leavetype'}
+              <div class='col-lg-3'>
+                  <strong>{vtranslate('Allocates', $MODULE_NAME)}</strong>
+              </div>
+              <div class='col-lg-2'>
+                  <strong>{vtranslate('Used', $MODULE_NAME)}</strong>
+              </div>
+              <div class='col-lg-3'>
+                  <strong>{vtranslate('Balanced', $MODULE_NAME)}</strong>
+              </div>
+              <div class='col-lg-4'>
+                  <strong>{vtranslate('Type', $MODULE_NAME)}</strong>
+              </div>
+            {else}
+              <div class='col-lg-4'>
+                  <strong>{vtranslate('Leave Type', $MODULE_NAME)}</strong>
+              </div>
+              <div class='col-lg-4'>
+                  <strong>{vtranslate('Start Date', $MODULE_NAME)}</strong>
+              </div>
+              <div class='col-lg-4'>
+                  <strong>{vtranslate('Status', $MODULE_NAME)}</strong>
+              </div>
+          {/if}
+        </div>
 	 {if $VALUE eq 'leavetype'}
 			{foreach item=MODEL from=$MODELS['display']}
 			
@@ -32,7 +58,7 @@
 			{/foreach}
 		{else}
 			{foreach item=MODEL from=$MODELS}
-			<div class='row miniListContent' style="padding:5px">
+			<div class='row miniListContent'>
 				<div class='col-lg-4'>
 					{$MODEL['title']}
 				</div>
