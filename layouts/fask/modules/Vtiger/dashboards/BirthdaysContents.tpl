@@ -11,7 +11,7 @@
 -->*}
 <div class="" style="height: 200px; ">
 {if count($MODELS) > 0}
-<<<<<<< HEAD
+
         <div>
         <div class='row th' style="padding:5px">
                 <div class='col-lg-4'>
