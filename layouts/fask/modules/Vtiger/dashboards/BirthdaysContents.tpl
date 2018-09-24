@@ -12,7 +12,7 @@
 <div style='padding:5px'>
 {if count($MODELS) > 0}
 	<div class="row entry clearfix">
-        <div class='row th' style="padding:5px">
+        <div class='row th' style="padding:5px;margin-right:-1px;margin-left:-1px;">
        		<div class='col-lg-6'>
              	<strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
             </div>
@@ -21,8 +21,8 @@
             </div>
           </div>
 		{foreach item=MODEL from=$MODELS}
-			<div class='row miniListContent' style="padding:5px">
-				<div class='col-lg-4'>
+			<div class='row miniListContent' style="padding:5px;margin-right:-1px;margin-left:-1px;">
+				<div class='col-lg-6'>
 					{$MODEL['fullname']}
 				</div>
 				<div class='col-lg-4'>

@@ -15,6 +15,7 @@
       <div class="row">
           <div class="col-sm-12" id="department_dropdown">
             <select class="select2 widgetFilter col-lg-6"  name="department" >
+              <option value="">{vtranslate('LBL_COMPANY', $MODULE_NAME)}</option>	
               {foreach item=DEPT from=$DEPARTMENT}
               <option value="{$DEPT}" {if $VALUE eq $DEPT}selected{/if}>{$DEPT}</option> 
               {/foreach}

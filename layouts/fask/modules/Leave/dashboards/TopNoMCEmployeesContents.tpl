@@ -13,7 +13,7 @@
 <div style='padding:5px'>
 {if count($MODELS) > 0}
 	<div>
-        <div class='row th' style="padding:5px">
+        <div class='row th' style="padding:5px;margin-right:-1px;margin-left:-1px;">
        		<div class='col-lg-5'>
              	<strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
             </div>
@@ -26,7 +26,7 @@
           </div>
 		<hr>
 		{foreach item=MODEL from=$MODELS}
-			<div class='row miniListContent' style="padding:5px">
+			<div class='row miniListContent' style="padding:5px;margin-right:-1px;margin-left:-1px;">
 				<div class='col-lg-5'>
 					<a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$MODEL['userid']}"><strong>{$MODEL['empname']}</strong></a>
 						<br />

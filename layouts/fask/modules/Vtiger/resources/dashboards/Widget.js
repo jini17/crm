@@ -11,7 +11,7 @@ Vtiger.Class('Vtiger_Widget_Js',{
 
         widgetPostLoadEvent : 'Vtiget.Dashboard.PostLoad',
         widgetPostRefereshEvent : 'Vtiger.Dashboard.PostRefresh',
-    widgetPostResizeEvent : 'Vtiger.DashboardWidget.PostResize',
+     widgetPostResizeEvent : 'Vtiger.DashboardWidget.PostResize',
 
         getInstance : function(container, widgetName, moduleName) {
                 if(typeof moduleName == 'undefined') {
@@ -842,7 +842,7 @@ Vtiger_Widget_Js('Vtiger_Notebook_Widget_Js', {
                                 if(contentContainer.closest('.mCustomScrollbar').length) {
                                         contentContainer.mCustomScrollbar('destroy');
                                         contentContainer.html(data);
-                                        var adjustedHeight = parent.height()-50;
+                                        var adjustedHeight = parent.height()-100;
                                         app.helper.showVerticalScroll(contentContainer,{'setHeight' : adjustedHeight});
                                 }else {
                                         contentContainer.html(data);
@@ -882,5 +882,9 @@ Vtiger_History_Widget_Js('Vtiger_OverdueActivities_Widget_Js', {}, {
         }
 
 });
-
+Vtiger_History_Widget_Js('Vtiger_Birthdays_Widget_Js', {}, {});
+Vtiger_History_Widget_Js('Vtiger_HolidayList_Widget_Js', {}, {});
+Vtiger_History_Widget_Js('Vtiger_TopNoMCEmployees_Widget_Js', {}, {});
+Vtiger_History_Widget_Js('Vtiger_LeaveApproval_Widget_Js', {}, {});
+Vtiger_History_Widget_Js('Vtiger_MyLeaves_Widget_Js', {}, {});
 Vtiger_OverdueActivities_Widget_Js('Vtiger_CalendarActivities_Widget_Js', {}, {});
