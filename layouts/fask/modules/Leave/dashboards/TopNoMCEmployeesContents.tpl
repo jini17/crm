@@ -30,7 +30,7 @@
 				<div class='col-lg-5'>
 					<a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$MODEL['userid']}"><strong>{$MODEL['empname']}</strong></a>
 						<br />
-					(<i>{$MODEL['title']}<i>)
+					<!--(<i>{$MODEL['title']}</i>)-->
 				</div>
 				<div class='col-lg-5'>
 					{$MODEL['department']}

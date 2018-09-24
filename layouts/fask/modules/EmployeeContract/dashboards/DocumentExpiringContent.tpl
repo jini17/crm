@@ -16,7 +16,7 @@
 	<thead>
 		<tr>
 			<th>
-			<b>{vtranslate('Name',$MODULE_NAME)}</b>
+			<b>{vtranslate('LBL_NAME',$MODULE_NAME)}</b>
 			</th>
 			<th>
 			<b>{vtranslate('Department',$MODULE_NAME)}</b>

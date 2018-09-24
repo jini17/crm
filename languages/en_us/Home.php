@@ -44,7 +44,7 @@ $languageStrings = array(
 	'LBL_IN_NEXT_MONTH' => 'in next month',
 	'LBL_IN_NEXT_WEEK' => 'in next week',
 	'LBL_IN_THIS_MONTH'=>'in this month',
-	'LBL_NAME' => 'Employee Name',
+	'LBL_NAME' => 'Employee',
 	'LBL_BIRTHDATE' => 'Birthday Date',	
 	'LBL_LEAVE_APPROVAL'=>'My Team Leave Approval',
 	

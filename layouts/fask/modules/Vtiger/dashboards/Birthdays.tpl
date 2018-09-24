@@ -15,7 +15,6 @@
     </div>
   <div class="filterContainer">
       <div class="row">
-          
              <div class="col-lg-6">
                  <select class="select2 col-lg-10 widgetFilter" id="userGroup" name="group">
                     <option value="user" selected>{vtranslate('LBL_USER',$MODULE_NAME)}</option>           
