@@ -11,7 +11,7 @@
 -->*}
 <div style='padding:5px'>
 {if count($MODELS) > 0}
-	<div>
+	<div class="row entry clearfix">
         <div class='row th' style="padding:5px">
        		<div class='col-lg-6'>
              	<strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
