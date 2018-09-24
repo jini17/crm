@@ -35,7 +35,7 @@
       </div>
 </div>
   
-<div class="dashboardWidgetContent" style="padding-top:15px;" id="birthdayContents">
+<div class="dashboardWidgetContent" id="birthdayContents">
 	{include file="dashboards/BirthdaysContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 

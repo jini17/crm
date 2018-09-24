@@ -12,38 +12,40 @@
 
 <div style='padding:5px'>
 {if count($MODELS) > 0}
-	<div>
+        <div>
         <div class='row th' style="padding:5px">
-       		<div class='col-lg-5'>
-             	<strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
+                <div class='col-lg-5'>
+                <strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
             </div>
-            <div class='col-lg-5'>
+            <div class='col-lg-4'>
                <strong>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</strong>
             </div>
-            <div class='col-lg-2'>
+            <div class='col-lg-3'>
               <strong>{vtranslate('LBL_MC_TAKEN', $MODULE_NAME)}</strong>
             </div>
           </div>
-		<hr>
-		{foreach item=MODEL from=$MODELS}
-			<div class='row miniListContent' style="padding:5px">
-				<div class='col-lg-5'>
-					<a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$MODEL['userid']}"><strong>{$MODEL['empname']}</strong></a>
-						<br />
-					(<i>{$MODEL['title']}<i>)
-				</div>
-				<div class='col-lg-5'>
-					{$MODEL['department']}
-				</div>
-				<div class='col-lg-2'>
-					{$MODEL['leavecount']}
-				</div>
-			</div>
-			{/foreach}
-	</div>
+             
+                {foreach item=MODEL from=$MODELS}
+                        <div class='row miniListContent' style="padding:5px">
+                                <div class='col-lg-5'>
+                                        <a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$MODEL['userid']}">
+
+                                            <strong>{$MODEL['empname']}</strong>
+                                        </a>
+        
+                                </div>
+                                <div class='col-lg-4'>
+                                    <small>{$MODEL['department']}</small>
+                                </div>
+                                <div class='col-lg-3 text-center'>
+                                        {$MODEL['leavecount']}
+                                </div>
+                        </div>
+                        {/foreach}
+        </div>
 {else}
-	<span class="noDataMsg">
-		{vtranslate($TYPELABEL,$MODULE_NAME)} in {$VALUE}
-	</span>
+        <span class="noDataMsg">
+                {vtranslate($TYPELABEL,$MODULE_NAME)} in {$VALUE}
+        </span>
 {/if}
 </div>

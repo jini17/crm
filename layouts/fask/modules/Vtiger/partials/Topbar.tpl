@@ -43,7 +43,7 @@ jQuery('.menu-open').on('hover',function(){
 });
 
   jQuery('.addtionalDashboardTab').on('hover',function(){
-       
+
           jQuery('.dropdown-menu.fask').css('display','none');
 
 });
@@ -136,9 +136,9 @@ $(this).hide();
 
                                                         {foreach item=APP_MENU_MODEL from=$APP_GROUPED_MENU.$APP_NAME}
                                                         {assign var=FIRST_MENU_MODEL value=$APP_MENU_MODEL}
-                                                        {if $APP_MENU_MODEL}
-                                                        {break}
-                                                        {/if}
+                                                            {if $APP_MENU_MODEL}
+                                                            {break}
+                                                            {/if}
                                                         {/foreach}
 
                                                         {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
@@ -150,31 +150,30 @@ $(this).hide();
                                                         'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
                                                         'mycthemeswitcher'=>'folder', 'chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
 
+                                                                            {if $APP_NAME neq 'SALES'}
+                                                                                    <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> 
+                                                                                            <a class="has-arrow waves-effect waves-dark " >
+                                                                                                    <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i><span class="hide-menu">{vtranslate("LBL_$APP_NAME")}</span></a>
 
-                                                        <li class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> 
-                                                                <a class="has-arrow waves-effect waves-dark " >
-                                                                        <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i><span class="hide-menu">{vtranslate("LBL_$APP_NAME")}</span></a>
+                                                                                                    <ul style="padding-left:6px;padding-top:15px;">
+                                                                                                            {foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
+                                                                                                            {assign var='translatedModuleLabel' value=vtranslate($moduleModel->get('label'),$moduleName )}
+                                                                                                    {if $moduleName eq 'MyProfile'}                                            
+                                                                                                        {assign var='moduleURL' value="index.php?module=Users&view=Detail&record={$USER_MODEL->getId()}&app=$APP_NAME&parent=Settings"}
+                                                                                                    {else}
+                                                                                                        {assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME"}
+                                                                                                    {/if}   
+                                                                                                            <li {$APP_NAME}>
+                                                                                                                <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
+                                                                                                                   href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
+                                                                                                                   {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
+                                                                                                                    <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> <span class="hide-menu"> {$translatedModuleLabel}</span></a>
+                                                                                                            </li>
+                                                                                                                    {/foreach}
+                                                                                                            </ul>
 
-                                                                        <ul style="padding-left:6px;padding-top:15px;">
-                                                                                {foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
-                                                                                {assign var='translatedModuleLabel' value=vtranslate($moduleModel->get('label'),$moduleName )}
-                                    {if $moduleName eq 'MyProfile'}                                            
-                                        {assign var='moduleURL' value="index.php?module=Users&view=Detail&record={$USER_MODEL->getId()}&app=$APP_NAME&parent=Settings"}
-                                    {else}
-                                        {assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME"}
-                                    {/if}   
-                                                                                <li {$APP_NAME}>
-                                                                                    <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
-                                                                                       href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
-                                                                                       {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
-                                                                                        <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> <span class="hide-menu"> {$translatedModuleLabel}</span></a>
-                                                                                </li>
-                                                                                        {/foreach}
-                                                                                </ul>
-
-                                                                        </li>
-
-
+                                                                                                    </li>
+                                                                                {/if}
                                                                         {/if}
                                                                         {/foreach}
 
@@ -219,7 +218,7 @@ $(this).hide();
                                                                                         <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Bills&view=List"><i class="material-icons module-icon">receipt</i> <span class="hide-menu"> {vtranslate('Bills')}</span></a></li>
 
                                                                                         {/if}
-                                                                                                                                                          
+
                                                                                         {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('WorkingHours')}
                                                                                         {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
 
@@ -228,7 +227,7 @@ $(this).hide();
                                                                                        <!-- <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=WorkingHours&view=List"><i class="material-icons module-icon">access_time</i> <span class="hide-menu"> {vtranslate('WorkingHours')}</span></a></li>
                                                                                         -->        
                                                                                         {/if}
-                                                                                        
+
                                                                                         {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Payments')}
                                                                                         {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
 
@@ -290,14 +289,14 @@ $(this).hide();
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings">
                                                                                     <i class="material-icons module-icon">person</i>&nbsp;Employee
-                                                                                     
+
                                                                                 </a>
                                                                         </li>
                                                                           {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                                                         <li>
                                                                                <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&view=List">
                                                                                     <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
-                                                                                      
+
                                                                                 </a>
                                                                         </li>
                                                                         {else}
@@ -305,7 +304,7 @@ $(this).hide();
                                                                                 <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
 
                                                                                     <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
-                                                                                      
+
                                                                                 </a>
                                                                         </li>
                                                                         {/if}
@@ -313,34 +312,34 @@ $(this).hide();
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
                                                                                     <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
-                                                                                       
+
                                                                                 </a>
                                                                         </li>
                                                                             {else}
                                                                                   <li>
                                                                                 <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
                                                                                     <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
-                                                                                       
+
                                                                                 </a>
                                                                         </li>
                                                                         {/if}
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Payslip" href="index.php?module=Payslip&amp;view=List&amp;app=ADMIN">
                                                                                     <i class="material-icons module-icon">insert_drive_file</i>&nbsp;Payslip
-                                                                                       
+
                                                                                 </a>
                                                                         </li>
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
                                                                                     <i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                                                                                       
+
                                                                                 </a>
                                                                         </li>
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_POLICY_DOCUMENT')}" href="index.php?module=Documents&view=List&type=H">
-                                                                                	<i class="material-icons module-icon">file_download</i>&nbsp;{vtranslate('LBL_POLICY_DOCUMENT')}
+                                                                                        <i class="material-icons module-icon">file_download</i>&nbsp;{vtranslate('LBL_POLICY_DOCUMENT')}
 
-                                                                                       
+
                                                                                 </a>
                                                                         </li>
                                                                 </ul>
@@ -353,7 +352,7 @@ $(this).hide();
                                                          <div class="addtionalDashboardTab">
                                                                 <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
                                                         </div>
-                                                       
+
 
                                                         <div class="dropdown-content-Sales">
                                                                 <div class="row">
@@ -430,7 +429,7 @@ $(this).hide();
 
                                                                          <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_MAIL_MANAGER')}" href="index.php?module=MailManager&view=List">
                                                                                     <i class="material-icons module-icon">email</i>&nbsp;{vtranslate('LBL_MAIL_MANAGER')}
-                                                                                       
+
                                                                                 </a>
                                                                     </li>
                                                              <!--       <li>
@@ -496,7 +495,7 @@ $(this).hide();
                                                         </div>
 
 
-                                                        
+
                                                 </div>
 
                                         </li>
