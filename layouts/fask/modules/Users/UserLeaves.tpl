@@ -26,8 +26,10 @@
                                         <td class="listTableRow small" valign=top>
                                                 <div class="pull-right actions">
                                                         <span class="actionImages">
-                {*	<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );">
-                        <i class="fa fa-file-o" title="Documents"></i>  </a>	*}
+                                            {if $USER_LEAVE['attachment'] neq ''}                    
+                                            <a href="{$USER_LEAVE['attachment']}" target="_blank"><i class="fa fa-file-o" title="Documents"></i></a>	
+                                            {/if}
+
                                         {if $USER_LEAVE['leavestatus'] eq 'New'} 
 
                                                 <a class="editLeave cursorPointer editAction ti-pencil" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false" title="{vtranslate('LBL_EDIT', $MODULE)}"></a>&nbsp;&nbsp;
@@ -78,23 +80,7 @@
                                 <span class="pull-right">
                                         <span class="btn-group">
                                                 <button class="btn "  id="previouspage" {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if} type="button"><span class="icon-chevron-left"></span></button>
-                                                        <!--<button class="btn dropdown-toggle" type="button" id="listViewPageJump" data-toggle="dropdown" {if $PAGE_COUNT eq 1} disabled {/if}>
-                                                                <i class="vtGlyph vticon-pageJump" title="{vtranslate('LBL_LISTVIEW_PAGE_JUMP',$moduleName)}"></i>
-                                                        </button>
-                                                        <ul class="listViewBasicAction dropdown-menu" id="listViewPageJumpDropDown">
-                                                                <li>
-                                                                        <span class="row-fluid">
-                                                                                <span class="span3 pushUpandDown2per"><span class="pull-right">{vtranslate('LBL_PAGE',$moduleName)}</span></span>
-                                                                                <span class="span4">
-                                                                                        <input type="text" id="pageToJump" class="listViewPagingInput" value="{$PAGE_NUMBER}"/>
-                                                                                </span>
-                                                                                <span class="span2 textAlignCenter pushUpandDown2per">
-                                                                                        {vtranslate('LBL_OF',$moduleName)}&nbsp;
-                                                                                </span>
-                                                                                <span class="span2 pushUpandDown2per" id="totalPageCount">{$PAGE_COUNT}</span>
-                                                                        </span>
-                                                                </li>
-                                                        </ul>-->
+                                                      
                                                 <button class="btn" id="listViewNPageButton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="fa fa-chevron-right"></span></button>                
                                         </span>
                                 </span> 
@@ -227,7 +213,11 @@
                                                 <div class="pull-right actions">
                                                         <span class="actionImages">
 
-                                {*                                <a class="docsLeave cursorPointer" onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>   *}
+                                            {if $USER_LEAVE['fileid'] neq ''}     
+
+                                            <a href="index.php?module=Leave&action=DownloadAttachment&record={$USER_LEAVE['id']}&attachmentid={$USER_LEAVE['fileid']}"><i class="fa fa-file-o" title="Documents"></i></a>    
+                                            {/if}
+
 
                                         {if $USER_LEAVE['leavestatus'] eq 'New'}
 

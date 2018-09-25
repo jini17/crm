@@ -21,6 +21,12 @@
 *
 ********************************************************************************/
 -->*}
+<style>
+    .uploadedFileDetails{
+
+    }
+
+</style>
 {strip}   
  <div class="leaveModalContainer modal-dialog modal-xs modelContainer">
                 {if $MANAGER eq 'true'}
@@ -132,12 +138,17 @@
                             <div class="col-md-12" style="margin-bottom: 15px;">
                                <div class="col-md-4">
                                     <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                            &nbsp;{vtranslate('LBL_INVOICE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
+                                            &nbsp;{vtranslate('LBL_ATTACHMENTS', $QUALIFIED_MODULE)} 
                                     </label>
                                 </div>  
-                                <div class="controls fieldValue col-md-8">
-                                         <input id="attachment" class="fieldValue inputElement" data-rule-required = "true" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment">
+                                <div class="fileUploadContainer">
+                                    <div class="fileUploadBtn btn btn-primary" onclick="javascript:Users_Leave_Js.registerFileChange();">
+                                        <i class="fa fa-laptop"></i>
+                                        <span>{vtranslate('LBL_UPLOAD', $QUALIFIED_MODULE)}</span>
+                                        <input id="attachment" class="fieldValue inputElement" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment">
+                                    </div>&nbsp;<span class="uploadedFileDetails"></span>
                                 </div>
+                                
                             </div>    
                         </div>        
                 {if $MANAGER eq 'true'}
