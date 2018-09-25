@@ -262,37 +262,37 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 	//Saving leave in-/new/edit/managerapproval//
 	public function saveLeave(Vtiger_Request $request) {   
 
-	$module = $request->getModule();
-	$db = PearDatabase::getInstance();
-	//$db->setDebug(true);
-	include_once 'include/Webservices/Create.php';
-	$user = new Users();
-	global $current_user;
-	
-    $current_usersaving = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
-	
-	$applicant_id = $request->get('current_user_id');
-	$leaveid= $request->get('record'); 
-	
-	$wsleaveType    = vtws_getWebserviceEntityId('LeaveType', $request->get('leave_type'));
-	//echo $wsleaveType;die;
-	$wsUser		= vtws_getWebserviceEntityId('Users', $request->get('replaceuser'));
-	$wsCurrentUser	= vtws_getWebserviceEntityId('Users', $current_user->id);	
-	$manager= $request->get('manager');
-	
-	$startdate = date('Y-m-d',strtotime($request->get('start_date')));
-	$enddate = date('Y-m-d',strtotime($request->get('end_date')));
-	
-	$date1 = strtotime($startdate);
-	$date2 = strtotime($enddate);
-	
-	if($date1 > $date2 || ($date1=='' || $date2== '')){
-		$response = new Vtiger_Response();
-		$msg    = array("success"=>false,"msg"=>"JS_INVALID_DATES_OR_BLANK");
-		$response->setResult($msg);
-		$response->emit();	
-		exit();
-	}
+		$module = $request->getModule();
+		$db = PearDatabase::getInstance();
+		//$db->setDebug(true);
+		include_once 'include/Webservices/Create.php';
+		$user = new Users();
+		global $current_user;
+		
+	    $current_usersaving = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
+		
+		$applicant_id = $request->get('current_user_id');
+		$leaveid= $request->get('record'); 
+		
+		$wsleaveType    = vtws_getWebserviceEntityId('LeaveType', $request->get('leave_type'));
+		//echo $wsleaveType;die;
+		$wsUser		= vtws_getWebserviceEntityId('Users', $request->get('replaceuser'));
+		$wsCurrentUser	= vtws_getWebserviceEntityId('Users', $current_user->id);	
+		$manager= $request->get('manager');
+		
+		$startdate = date('Y-m-d',strtotime($request->get('start_date')));
+		$enddate = date('Y-m-d',strtotime($request->get('end_date')));
+		
+		$date1 = strtotime($startdate);
+		$date2 = strtotime($enddate);
+		
+		if($date1 > $date2 || ($date1=='' || $date2== '')){
+			$response = new Vtiger_Response();
+			$msg    = array("success"=>false,"msg"=>"JS_INVALID_DATES_OR_BLANK");
+			$response->setResult($msg);
+			$response->emit();	
+			exit();
+		}
 	
 	
 
@@ -324,10 +324,6 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		}
 	}
 
-		if(!empty($_FILES['attachment']['name'])){
-			
-		}
-		
 		//Check If new record.//
 		if(empty($leaveid) || $leaveid==""){
  			$response = new Vtiger_Response();
@@ -358,7 +354,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
 				
 				$leave = vtws_create('Leave', $data,$current_usersaving);
-				
+				$leaveIdarray = explode('x',$leave['id']);
 				if($leave != null) {
 					$msg    = vtranslate("LBL_CREATE_SUCCESS","Users");
 					$success = true;
@@ -367,6 +363,10 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 					$msg    = vtranslate("LBL_CREATE_FAILED","Users");	
 					$success = false;
 				}	
+			
+				if(!empty($_FILES['attachment']['name'])){ 
+					$this->insertIntoAttachment($leaveIdarray[1], 'Leave');
+				}
 
 		    	$response->setResult(array("success"=>$success, "msg"=>$msg));
 			
@@ -387,6 +387,9 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 			try {
 					 $wsid = vtws_getWebserviceEntityId('Leave', $leaveid);
 
+					 if(!empty($_FILES['attachment']['name'])){ 
+						$this->insertIntoAttachment($leaveid, 'Leave');
+					 }
 					//Edit and manager approval
 					if($manager == 'true' || ($current_user->is_admin=='on' && $request->get('savetype')=='Approved'))
 					{	
@@ -454,6 +457,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 							'starthalf'  => $request->get('starthalf'),
 							'endhalf'  => $request->get('endhalf'),
 							'assigned_user_id' =>  $wsCurrentUser,
+							'employee_id' =>  $wsCurrentUser,
 							);
 
 						$leave = vtws_revise($data, $current_usersaving);
@@ -474,8 +478,92 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
 	}
 
+		/** Function to insert values into the attachment table
+		* @param $id -- entity id:: Type integer
+		* @param $module -- module:: Type varchar
+		*/
+    	public function insertIntoAttachment($id,$module) {
 
-		/*   Claim    */
+	        global $log;
+	        $log->debug("Entering into insertIntoAttachment($id,$module) method.");
+
+	        foreach($_FILES as $fileindex => $files) {
+	                if($files['name'] != '' && $files['size'] > 0) {
+	                        $files['original_name'] = vtlib_purify($_FILES['attachment']['name']);
+	                        $this->uploadAndSaveFile($id,$module,$files,'Image');
+	                }
+	        }
+
+       		$log->debug("Exiting from insertIntoAttachment($id,$module) method.");
+    	}
+
+		
+		/** Function to upload the file to the server and add the file details in the attachments table
+		* @param $id -- user id:: Type varchar
+		* @param $module -- module name:: Type varchar
+		* @param $file_details -- file details array:: Type array
+		*/
+		public function uploadAndSaveFile($id,$module,$file_details,$attachmentType='Attachment') {
+
+		        global $log;
+		        $db = PearDatabase::getInstance();
+		        $log->debug("Entering into uploadAndSaveFile($id,$module,$file_details) method.");
+
+		        global $current_user;
+		        global $upload_badext;
+
+		        $date_var = date('Y-m-d H:i:s');
+
+		        //to get the owner id
+		        $ownerid = 1;
+		        if(!isset($ownerid) || $ownerid=='')
+		                $ownerid = $current_user->id;
+
+		        
+		        $file = $file_details['name'];
+		        $binFile = sanitizeUploadFileName($file, $upload_badext);
+
+		        $filename = ltrim(basename(" ".$binFile)); //allowed filename like UTF-8 characters
+		        $filetype= $file_details['type'];
+		        $filesize = $file_details['size'];
+		        $filetmp_name = $file_details['tmp_name'];
+
+		        $current_id = $db->getUniqueID("vtiger_crmentity");
+
+		        //get the file path inwhich folder we want to upload the file
+		        $upload_file_path = decideFilePath();
+		        //upload the file in server
+		        $upload_status = move_uploaded_file($filetmp_name,$upload_file_path.$current_id."_".$binFile);
+
+		        $sql1 = "insert into vtiger_crmentity (crmid,smcreatorid,smownerid,setype,description,createdtime,modifiedtime) values(?,?,?,?,?,?,?)";
+                $params1 = array($current_id, $current_user->id, $ownerid, $module." Image", '', $db->formatString("vtiger_crmentity","createdtime",$date_var), $db->formatDate($date_var, true));
+                $db->pquery($sql1, $params1);
+
+                $sql2="insert into vtiger_attachments(attachmentsid, name, description, type, path) values(?,?,?,?,?)";
+                $params2 = array($current_id, $filename, '', $filetype, $upload_file_path);
+                $result=$db->pquery($sql2, $params2);
+
+                if($id != '') {
+                        $delquery = 'delete from vtiger_seattachmentsrel where crmid = ?';
+                        $db->pquery($delquery, array($id));
+                }
+
+                $sql3='insert into vtiger_seattachmentsrel values(?,?)';
+                $db->pquery($sql3, array($id, $current_id));
+
+                //we should update the imagename in the users table
+                if($module =='Leave'){
+                	$db->pquery("update vtiger_leave set attachment=? where leaveid=?", array($filename, $id));
+                } else if($module =='Claim'){
+                	$db->pquery("update vtiger_claim set attachment=? where claimid=?", array($filename, $id));
+                }
+		        
+		        $log->debug("Exiting from uploadAndSaveFile($id,$module,$file_details) method.");
+
+		        return;
+		}
+
+	/*   Claim    */
 
 	
 	public function saveClaim(Vtiger_Request $request) {  //echo"<pre>";  print_r($request);die;

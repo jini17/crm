@@ -109,14 +109,23 @@ $(this).hide();
                                                         {if $USER_MODEL->isAdminUser()}
 
 
-                                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="index.php?module=Vtiger&parent=Settings&view=Index" ><span class="module-icon"><i class="material-icons">settings</i></span><span class="hide-menu">  {vtranslate('LBL_CRM_SETTINGS','Vtiger')}</span></a></li>
+                                                        <li>
+                                                            <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
+                                                               href="index.php?module=Vtiger&parent=Settings&view=Index" >
+                                                                <span class="module-icon">
+                                                                    <i class="material-icons">settings</i></span><span class="hide-menu">  
+                                                                        {vtranslate('LBL_CRM_SETTINGS','Vtiger')}</span></a>
+                                                        </li>
 
                                                         <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="index.php?module=Users&parent=Settings&view=List" ><span class="module-icon"><i class="material-icons">contacts</i></span><span class="hide-menu">   {vtranslate('LBL_MANAGE_USERS','Vtiger')}</span></a></li>
 
 
                                                         {else}
 
-                                                        <li class="{if $MODULE eq "Users"}active{/if}"> <a class=" waves-effect waves-dark" href="index.php?module=Users&view=Settings" ><i class="material-icons">settings</i><span class="hide-menu" style="text-transform: uppercase"> {vtranslate('LBL_SETTINGS', 'Settings:Vtiger')}</span></a>
+                                                        <li class="{if $MODULE eq "Users"}active{/if}"> 
+                                                            <a class=" waves-effect waves-dark" href="index.php?module=Users&view=Settings" >
+                                                                <i class="material-icons">settings</i>
+                                                                <span class="hide-menu" style="text-transform: uppercase"> {vtranslate('LBL_SETTINGS', 'Settings:Vtiger')}</span></a>
                                                         </li>
 
                                                         {/if}
@@ -299,6 +308,10 @@ $(this).hide();
 
                                                                                 </a>
                                                                         </li>
+                                                                        <li admin="">
+                                                                            <a class="waves-effect waves-dark " href=" index.php?module=LeaveType&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">keyboard_tab</i> <span class="hide-menu"> 
+                                                                                    &nbsp;Leave Type</span></a></li>
                                                                         {else}
                                                                                      <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
@@ -347,12 +360,8 @@ $(this).hide();
                                                                                 <i class="material-icons module-icon">access_time</i> <span class="hide-menu"> Working Hours</span>
                                                                             </a>
                                                                         </li>
-                                                                         
-                                                                        <li admin="">
-                                                                            <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=Documents&amp;view=List&amp;app=ADMIN ">
-                                                                                <i class="material-icons module-icon">file_download</i> <span class="hide-menu"> Documents</span>
-                                                                            </a>
-                                                                        </li>
+
+                                                                   
                                                                         <li admin="">
                                                                             <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=MessageBoard&amp;view=List&amp;app=ADMIN ">
                                                                                 <i class="material-icons module-icon">assignment</i> <span class="hide-menu"> Message Board</span>
