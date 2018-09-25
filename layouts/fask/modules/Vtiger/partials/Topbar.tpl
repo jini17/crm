@@ -350,7 +350,7 @@ $(this).hide();
                                         <li>
                                                 <div class="dropdownSales">
                                                          <div class="addtionalDashboardTab">
-                                                                <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
+                                                                <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #1abbe9;vertical-align: middle;font-size: 13px;"></i>
                                                         </div>
                                                        
 
@@ -358,6 +358,19 @@ $(this).hide();
                                                                 <div class="row">
                                                                         <div class="col-md-4">
                                                                                 <div class="popup-col-4">
+                                                                                    <div class="popup-col-4img">
+                                                                                                <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
+                                                                                        </div>
+                                                                                        <div class="popup-col-4text">
+                                                                                                Acquire more leads
+                                                                                        </div>
+
+                                                                                </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-4">
+                                                                                <div class="popup-col-4">
+                                                                                        
                                                                                         <div class="popup-col-4img" >
                                                                                                 <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 85%;">
                                                                                         </div>
@@ -365,33 +378,24 @@ $(this).hide();
                                                                                         <div class="popup-col-4text">
                                                                                                 Manage Sales Team and activities.
                                                                                         </div>
+                                                                                       
                                                                                 </div>
                                                                         </div>
 
                                                                         <div class="col-md-4">
                                                                                 <div class="popup-col-4">
-                                                                                        <div class="popup-col-4img">
-                                                                                                <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width:85%;">
+                                                                                        <div class="popup-col-4img" >
+                                                                                                <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 85%;">
                                                                                         </div>
-                                                                                        <div class="popup-col-4text">
-                                                                                                Google contacts, calendar and docs synchronization
-                                                                                        </div>
-                                                                                </div>
-                                                                        </div>
 
-                                                                        <div class="col-md-4">
-                                                                                <div class="popup-col-4">
-                                                                                        <div class="popup-col-4img">
-                                                                                                <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
-                                                                                        </div>
                                                                                         <div class="popup-col-4text">
-                                                                                                Acquire more leads
+                                                                                                Sales Order, Invoice and Quotation Generator
                                                                                         </div>
                                                                                 </div>
                                                                         </div>
                                                                 </div>
                                                                 <div class="col-md-12 row" style="padding: 10px;">
-                                                                        <a href="#" class="buttonpopup">Read More</a>
+                                                                        <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
                                                                 </div>
                                                         </div>
                                                 </div>
@@ -451,36 +455,13 @@ $(this).hide();
                                         <li>
                                                 <div class="dropdownSupport">
                                                         <div class="addtionalDashboardTab">
-                                                                <span aria-hidden="true" >Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
+                                                                <span aria-hidden="true" >Support</span> <i class="fa fa-lock" style="color: #1abbe9;    vertical-align: middle;font-size: 13px;"></i>
                                                         </div>
 
                                                          <div class="dropdown-content-Support">
                                                                 <div class="row">
                                                                         <div class="col-md-4">
-                                                                                <div class="popup-col-4">
-                                                                                        <div class="popup-col-4img" >
-                                                                                                <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 85%;">
-                                                                                        </div>
-
-                                                                                        <div class="popup-col-4text">
-                                                                                                Sales Order, Invoice and Quotation Generator
-                                                                                        </div>
-                                                                                </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-4">
-                                                                                <div class="popup-col-4">
-                                                                                        <div class="popup-col-4img">
-                                                                                                <img src="http://www.secondcrm.com/sites/default/files/send-email-template-easier.jpg" alt="sync from google calendar" style="width:85%;">
-                                                                                        </div>
-                                                                                        <div class="popup-col-4text">
-                                                                                                Email and SMS Marketing Service
-                                                                                        </div>
-                                                                                </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-4">
-                                                                                <div class="popup-col-4">
+                                                                            <div class="popup-col-4">
                                                                                         <div class="popup-col-4img">
                                                                                                 <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/support-img1.jpg" style="width: 85%;">
                                                                                         </div>
@@ -488,10 +469,33 @@ $(this).hide();
                                                                                                 Auto capture requests from multiple support channels
                                                                                         </div>
                                                                                 </div>
+
+                                                                        </div>
+
+                                                                        <div class="col-md-4">
+                                                                                <div class="popup-col-4">
+                                                                                        <div class="popup-col-4img">
+                                                                                                <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/service-contract-status.jpg" alt="sync from google calendar" style="width:85%;">
+                                                                                        </div>
+                                                                                        <div class="popup-col-4text">
+                                                                                                Create, monitor and administer service contracts
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-4">
+                                                                                <div class="popup-col-4">
+                                                                                        <div class="popup-col-4img">
+                                                                                                <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/manage-FAQ.jpg" style="width: 85%;">
+                                                                                        </div>
+                                                                                        <div class="popup-col-4text">
+                                                                                               A resolved Service Request can be converted to a FAQ record
+                                                                                        </div>
+                                                                                </div>
                                                                         </div>
                                                                 </div>
                                                                 <div class="col-md-12 row" style="padding: 10px;">
-                                                                        <a href="#" class="buttonpopup">Read More</a>
+                                                                        <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
                                                                 </div>
                                                         </div>
 
