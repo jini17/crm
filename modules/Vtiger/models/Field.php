@@ -175,7 +175,9 @@ class Vtiger_Field_Model extends Vtiger_Field {
 				 $fieldDataType = 'range';		//added by jitu@5jan2017	
 			}  else if($uiType == '2002') {		//Modified Line
 				 $fieldDataType = 'multiregion';		//Modified Line added ny jitu
-			}else {
+			}else if($uiType == '3995') {		//Modified Line
+				 $fieldDataType = 'Country';		//Modified Line added ny jitu
+			} else {
 				$webserviceField = $this->getWebserviceFieldObject();
 				$fieldDataType = $webserviceField->getFieldDataType();
 			}
@@ -184,6 +186,26 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		}
 		return $this->fieldDataType;
 	}
+	
+	/**
+	* Function added by Jitu@secondcrm.com on Mar 05, 2015 for new UI Type 3995
+	* This function will retrieve all country
+	*/
+	public function getAllCountry() {
+		global $adb;
+
+		$sql="select * from secondcrm_country WHERE presence =1";
+		$result = $adb->pquery($sql, array());
+		
+		$country = array();
+	
+		for($i=0;$i<$adb->num_rows($result);$i++) {
+			$countryid 	     	 = $adb->query_result($result,$i,'countryid');
+			$country[$countryid] = $adb->query_result($result,$i,'country');
+		}
+		return $country;	
+	}
+	
 	/**
 	 * Function returns all the User Roles
 	 * @return
@@ -453,8 +475,8 @@ class Vtiger_Field_Model extends Vtiger_Field {
 	 */
 	public function isAjaxEditable() {
 
-		$ajaxRestrictedFields = array('4', '72', '61', '999','28');
-		if(!$this->isEditable() || in_array($this->get('uitype'), $ajaxRestrictedFields) || $this->get('name')=='category') {
+		$ajaxRestrictedFields = array('4', '72', '61', '999','28','3995');
+		if(!$this->isEditable() || in_array($this->get('uitype'), $ajaxRestrictedFields) || $this->get('name')=='category' || $this->get('name')=='message') {
 			return false;
 		}
 		return true;

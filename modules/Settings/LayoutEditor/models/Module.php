@@ -384,7 +384,7 @@ class Settings_LayoutEditor_Module_Model extends Vtiger_Module_Model {
 
 		$query = 'SELECT name FROM vtiger_tab WHERE
 						presence IN ('. generateQuestionMarks($presence) .')
-						AND isentitytype = ?
+						AND (isentitytype = ? OR tabid=29)
 						AND name NOT IN ('. generateQuestionMarks($restrictedModules) .')';
 		$result = $db->pquery($query, array($presence, 1, $restrictedModules));
 		$numOfRows = $db->num_rows($result);

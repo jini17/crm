@@ -202,7 +202,7 @@
 				</div>
 				<footer>
 					<div class="agiliuxfooter-login">
-						<p>Agiliux © Copyright {date('Y')}  <a href="http://dev7.secondcrm.com/agiliux/" target="_blank">Soft Solvers Solutions.</a>&nbsp;All rights reserved</p>
+						<p>Agiliux © Copyright {date('Y')}  <a href="{$SITE_URL}" target="_blank">Soft Solvers Solutions.</a>&nbsp;All rights reserved</p>
 					</div>
 				</footer>			
 			</div>

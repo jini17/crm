@@ -18,11 +18,19 @@ class Settings_Vtiger_List_View extends Settings_Vtiger_Index_View {
 
 	function preProcess(Vtiger_Request $request, $display=true) {
 		parent::preProcess($request, true);
-
+		
+		$defaultview = $request->get('empview');	
+		if(!$request->get('empview')){
+			$defaultview = 'grid';	
+		}	
+		
 		$viewer = $this->getViewer($request);
 		$this->initializeListViewContents($request, $viewer);
 		$sourceModule  = $request->get('sourceModule');
 		$viewer->assign('SOURCE_MODULE', $sourceModule);
+		
+		$viewer->assign('EMP_VIEW', $defaultview);
+		
 		$viewer->view('ListViewHeader.tpl', $request->getModule(false));
 	}
 

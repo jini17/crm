@@ -147,6 +147,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 	public function getUserLeave(Vtiger_Request $request) { 
 	
 		$db = PearDatabase::getInstance();
+		//$db->setDebug(true);
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$recordId = $request->get('record');
@@ -266,6 +267,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 
 	public function getUserClaim(Vtiger_Request $request) { 
 		$db = PearDatabase::getInstance();
+		
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$recordId = $request->get('record'); 

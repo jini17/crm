@@ -13,8 +13,37 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 
 	//static property which will store the instance of dashboard
 	currentInstance : false,
-	dashboardTabsLimit : 1000,
+	dashboardTabsLimit : 10,
+                    
+                        ViewMessage : function(userId){
+                            var popupInstance = Vtiger_Popup_Js.getInstance();
+							var searchparam = {};
+							searchparam['employee_id'] = userId;
+                            var params = {};
+                                    params['module'] = "MessageBoard";
+                                    params['view'] = "MessagePopup";
+                                    params['search_param'] = searchparam;
+                                    params['record'] = userId;
+                                    params['relatedLoad'] = true;
 
+                            var callback = function(data){
+                                    emailPreviewClass = app.getModuleSpecificViewClass('EmailPreview','Vtiger');
+                                    _controller = new window[emailPreviewClass]();
+                                    _controller.registerEventsForActionButtons();
+                                    var descriptionContent = data.find('#iframeDescription').val();
+                                    var frameElement = jQuery("#emailPreviewIframe")[0].contentWindow.document;
+                                    frameElement.open();
+                                    frameElement.close();
+                                    jQuery('#emailPreviewIframe').contents().find('html').html(descriptionContent);
+                                    jQuery("#emailPreviewIframe").height(jQuery('#emailPreviewIframe').contents().find('html').height());
+                                    jQuery('#emailPreviewIframe').contents().find('html').find('a').on('click', function(e) {
+                                            e.preventDefault();
+                                            var url = jQuery(e.currentTarget).attr('href');
+                                            window.open(url, '_blank');
+                                    });
+                            }
+                            popupInstance.showPopup(params,null,callback);
+	},
 	addWidget : function(element, url) {
 		var element = jQuery(element);
 		var linkId = element.data('linkid');
@@ -175,7 +204,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 							'linkId' : linkId,
 							'tab' : jQuery(".tab-pane.active").data("tabid")
 						}
-						app.request.post({"data":noteBookParams}).then(function(err,data) {
+						app.request.post({"data":noteBookParams}).then(function(err,data)  {
 							if(data){
 								var widgetId = data.widgetId;
 								app.helper.hideModal();
@@ -196,7 +225,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 				}
 				form.vtValidate(params);
 			}
-			app.helper.showModal(res,{"cb":callback});
+		   app.helper.showModal(res,{"cb":callback});
 		});
 
 	}
@@ -217,7 +246,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 	},
 
 	getDashboardContainer : function(){
-		return jQuery(".dashBoardContainer");
+	  return jQuery(".dashBoardContainer");  
 	},
 
 	getContainer : function(tabid) {
@@ -268,32 +297,9 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 		return gridWidth;
 	},
 
-	saveWidgetSize: function (widget) {
-		var dashboardTabId = widget.closest('.tab-pane.active').data('tabid');
-		var widgetSize = {
-			'sizex': widget.attr('data-sizex'),
-			'sizey': widget.attr('data-sizey')
-		};
-		if (widgetSize.sizex && widgetSize.sizey) {
-			var params = {
-				'module': 'Vtiger',
-				'action': 'SaveWidgetSize',
-				'id': widget.attr('id'),
-				'size': widgetSize,
-				'tabid': dashboardTabId
-			};
-			app.request.post({"data": params}).then(function (err, data) {
-			});
-		}
-	},
-
-	getWaitingForResizeCompleteMsg: function () {
-		return '<div class="wait_resizing_msg"><p class="text-info">'+app.vtranslate('JS_WIDGET_RESIZING_WAIT_MSG')+'</p></div>';
-	},
-
 	registerGridster : function() {
 		var thisInstance = this;
-		var widgetMargin = 10;
+		var widgetMargin = 5;
 		var activeTabId = this.getActiveTabId();
 		var activeGridster = jQuery(".gridster_"+activeTabId);
 		var items = activeGridster.find('ul li');
@@ -301,42 +307,31 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 
 		// Constructing the grid based on window width
 		var cols = this.getgridColumns();
-		$(".mainContainer").css('min-width', "500px");
-		var col_width = (cols === 1)?(Math.floor(($(".mainContainer").width()-41)/cols) - (2*widgetMargin)):(Math.floor(($(window).width()-41)/cols) - (2*widgetMargin));
+		$(".mainContainer").css('min-width', "800px");
+		var col_width = (cols === 1)?(Math.floor(($(".mainContainer").width()-20)/cols) - (2*widgetMargin)):(Math.floor(($(window).width()-20)/cols) - (2*widgetMargin));
 
 
 		Vtiger_DashBoard_Js.gridster = this.getContainer().gridster({
 			widget_margins: [widgetMargin, widgetMargin],
-			widget_base_dimensions: [col_width, 300],
+			widget_base_dimensions: [col_width, 280],
 			min_cols: 1,
 			max_cols: 4,
 			min_rows: 20,
 			resize : {
-				enabled : true,
-				start: function (e, ui, widget) {
-					var widgetContent = widget.find('.dashboardWidgetContent');
-					widgetContent.before(thisInstance.getWaitingForResizeCompleteMsg());
-					widgetContent.addClass('hide');
-				},
-				stop : function(e, ui, widget) {
-					var widgetContent = widget.find('.dashboardWidgetContent');
-					widgetContent.prev('.wait_resizing_msg').remove();
-					widgetContent.removeClass('hide');
-
-					var widgetName = widget.data('name');
-					 /**
-					 * we are setting default height in DashBoardWidgetContents.tpl
-					 * need to overwrite based on resized widget height
-					 */ 
-					var widgetChartContainer = widget.find(".widgetChartContainer");
-					if(widgetChartContainer.length > 0){
-						widgetChartContainer.css("height",widget.height() - 60);
-					}
-					widgetChartContainer.html('');
-					Vtiger_Widget_Js.getInstance(widget, widgetName);
-					widget.trigger(Vtiger_Widget_Js.widgetPostResizeEvent);
-					thisInstance.saveWidgetSize(widget);
+			  enabled : true,  
+			  stop : function(e,ui,widget){
+				var widgetName = widget.data('name');
+				 /**
+				 * we are setting default height in DashBoardWidgetContents.tpl
+				 * need to overwrite based on resized widget height
+				 */ 
+				var widgetChartContainer = widget.find(".widgetChartContainer");
+				if(widgetChartContainer.length > 0){
+					widgetChartContainer.css("height",widget.height() - 60);
 				}
+				Vtiger_Widget_Js.getInstance(widget, widgetName);
+				widget.trigger(Vtiger_Widget_Js.widgetPostResizeEvent);
+			  }
 			},
 			draggable: {
 				'stop': function(event, ui) {
@@ -362,7 +357,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 				return 1;
 			}
 			return -1;
-		});
+		});    
 		jQuery.each(items , function (i, e) {
 			var item = $(this);
 			var columns = parseInt(item.attr("data-sizex")) > cols ? cols : parseInt(item.attr("data-sizex"));
@@ -402,10 +397,8 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 		var thisInstance = this;
 		var widgetList = thisInstance.getDashboardWidgets();
 		widgetList.each(function(index,widgetContainerELement){
-			if(thisInstance.isScrolledIntoView(widgetContainerELement)){
-				thisInstance.loadWidget(jQuery(widgetContainerELement));
-				jQuery(widgetContainerELement).addClass('loadcompleted');
-			}
+			thisInstance.loadWidget(jQuery(widgetContainerELement));
+			jQuery(widgetContainerELement).addClass('loadcompleted');
 		});
 	},
 
@@ -446,18 +439,8 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 			app.request.post({"url":urlParams}).then(function(err,data){
 				widgetContainer.prepend(data);
 				vtUtils.applyFieldElementsView(widgetContainer);
-
-				var widgetChartContainer = widgetContainer.find(".widgetChartContainer");
-				if (widgetChartContainer.length > 0) {
-					widgetChartContainer.css("height", widgetContainer.height() - 60);
-				}
-
 				thisInstance.getWidgetInstance(widgetContainer);
-				try {
-					widgetContainer.trigger(Vtiger_Widget_Js.widgetPostLoadEvent);
-				} catch (error) {
-					widgetContainer.find('[name="chartcontent"]').html('<div>'+app.vtranslate('JS_NO_DATA_AVAILABLE')+'</div>').css({'text-align': 'center', 'position': 'relative', 'top': '100px'});
-				}
+				widgetContainer.trigger(Vtiger_Widget_Js.widgetPostLoadEvent);
 				app.helper.hideProgress();
 			});
 		} else {
@@ -609,11 +592,9 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 			var filterContainer = widgetContainer.find('.filterContainer');
 			var dashboardWidgetFooter = jQuery('.dashBoardWidgetFooter', widgetContainer);
 
-			widgetContainer.toggleClass('dashboardFilterExpanded');
 			filterContainer.slideToggle(500);
 
 			var callbackFunction = function() {
-				widgetContainer.toggleClass('dashboardFilterExpanded');
 				filterContainer.slideToggle(500);
 			}
 			//adding clickoutside event on the dashboardWidgetHeader
@@ -644,8 +625,8 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 				var data = {
 					'module' : 'Vtiger',
 					'action' : 'DashBoardTab',
-					'mode' : 'deleteTab',
-					'tabid': tabId
+					'mode'   : 'deleteTab',
+					'tabid'  : tabId
 				}
 
 				app.request.post({"data":data}).then(function(err,data){
@@ -686,9 +667,9 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 			}
 			var currentElement = jQuery(e.currentTarget);
 			var data = {
-				'module'	: 'Home',
-				'view'		: 'DashBoardTab',
-				'mode'		: 'showDashBoardAddTabForm'
+			  'module'  : 'Home',
+			  'view'    : 'DashBoardTab',
+			  'mode'    : 'showDashBoardAddTabForm'
 			};
 
 			app.request.post({"data":data}).then(function(err,res){
@@ -712,9 +693,9 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 									vtUtils.hideValidationMessage(labelEle);
 								}
 
-								var params = jQuery(form).serializeFormData();
-								params['tabName'] = params['tabName'].trim();
-								app.request.post({"data":params}).then(function (err,data) {
+							   var params = jQuery(form).serializeFormData();
+							   params['tabName'] = params['tabName'].trim();
+							   app.request.post({"data":params}).then(function (err,data) {
 									app.helper.hideModal();
 									if(err) {
 										app.helper.showErrorNotification({"message":err});
@@ -750,7 +731,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 
 
 									}
-								});
+							   });
 							}
 						}
 						form.vtValidate(params);
@@ -804,11 +785,6 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 			var oldName = nameEle.attr("value");
 			var editEle = currentTarget.find(".editTabName");
 
-			// Lock renaming default dashboard for user (which otherwise would be recreated)
-			if (oldName == "My Dashboard") {
-				return;
-			}
-
 			nameEle.addClass("hide");
 			editEle.removeClass("hide");
 			editEle.find("input").val(oldName);
@@ -818,36 +794,37 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 				var tabId = currentTarget.data("tabid");
 
 			if(newName.trim() == "") {
-				vtUtils.showValidationMessage(editEle, app.vtranslate('JS_TAB_NAME_SHOULD_NOT_BE_EMPTY'), {
-					position : {
-					my: 'top left',
-					at: 'bottom left',
-					container: editEle.closest('.dashboardTab')
-					}
-				});
-				return false;
-			}
-			vtUtils.hideValidationMessage(editEle);
+				   vtUtils.showValidationMessage(editEle, app.vtranslate('JS_TAB_NAME_SHOULD_NOT_BE_EMPTY'), {
+					   position : {
+						my: 'top left',
+						at: 'bottom left',
+						container: editEle.closest('.dashboardTab')
+					   }
+				   });
+				   return false;
+			   }	
+			   vtUtils.hideValidationMessage(editEle);
 
 			if(newName.length > 50) {
-				vtUtils.showValidationMessage(editEle, app.vtranslate('JS_TAB_LABEL_EXCEEDS_CHARS', 50), {
-					position: {
-						my: 'bottom left',
-						at: 'top left',
-						container : jQuery('.module-action-content')
-					}
-				});
-				return false;
-			 } else {
+					vtUtils.showValidationMessage(editEle, app.vtranslate('JS_TAB_LABEL_EXCEEDS_CHARS', 50), {
+										position: {
+											my: 'bottom left',
+											at: 'top left',
+											container : jQuery('.module-action-content')
+										}
+									});
+									return false;
+			   }else {
 				vtUtils.hideValidationMessage(editEle);
-			 }
+			   }
 			currentTarget.off("clickoutside");	
 				if(newName != oldName){
+
 					var data = {
 						'module' : 'Vtiger',
 						'action' : 'DashBoardTab',
-						'mode' : 'renameTab',
-						'tabid': tabId,
+						'mode'   : 'renameTab',
+						'tabid'  : tabId,
 						'tabname': newName
 					}
 					currentTarget.find('.name > strong').text(newName);
@@ -871,79 +848,79 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 		});
 	},
 
-	registerDashBoardTabClick : function(){ 
-		var thisInstance = this;
-		var container = this.getContainer();
-		var dashBoardContainer = jQuery(container).closest(".dashBoardContainer");
+	registerDashBoardTabClick : function(){
+                            var thisInstance = this;
+                            var container = this.getContainer();
+                            var dashBoardContainer = jQuery(container).closest(".dashBoardContainer");
 
-		dashBoardContainer.on("shown.bs.tab",".dashboardTab",function(e){ 
-			var currentTarget = jQuery(e.currentTarget);
-			var tabid = currentTarget.data('tabid');
-			jQuery("#default_tab").val(tabid);
-			
-			app.changeURL("index.php?module=Home&view=DashBoard&tabid="+tabid);
-               if(tabid==1){
-                             var params = {
-				          'module' : 'Calendar',
-				          'view' : 'TaskManagement',
-				          'mode' : 'showManagementView',
-                           'actmodulename':'Home'
-			          }
-			          app.helper.showProgress();
-			          app.request.post({"data":params}).then(function(err,data){
-                         // console.log(data);
-			              if(err === null) {
-                              app.helper.hideProgress();
-                              $('.tab-content').html(data);
-                              vtUtils.showSelect2ElementView($('#overlayPage .data-header').find('select[name="assigned_user_id"]'), {placeholder: "User : All"});
-                              vtUtils.showSelect2ElementView($('#overlayPage .data-header').find('select[name="taskstatus"]'), {placeholder: "Status : All"});
-                              var js = new Vtiger_TaskManagement_Js();
-                              js.registerEvents();
-                          }else{
-                              app.helper.showErrorNotification({"message":err});
-                          }
-			          });
-			     } else {
-                   //alert("Nirbhay");
-                   jQuery('.tab-content').html('');
-                    
-			               // If tab is already loaded earlier then we shouldn't reload tab and register gridster
-			               if(typeof jQuery("#tab_"+tabid).find(".dashBoardTabContainer").val() !== 'undefined'){
-				               // We should overwrite gridster with current tab which is clicked
-				               var widgetMargin = 10;
-				               var cols = thisInstance.getgridColumns();
-				               $(".mainContainer").css('min-width', "500px");
-				               var col_width = (cols === 1)?(Math.floor(($(".mainContainer").width()-41)/cols) - (2*widgetMargin)):(Math.floor(($(window).width()-41)/cols) - (2*widgetMargin));
+                            dashBoardContainer.on("shown.bs.tab",".dashboardTab",function(e){ 
+                                    var currentTarget = jQuery(e.currentTarget);
+                                    var tabid = currentTarget.data('tabid');
+                                    jQuery("#default_tab").val(tabid);
 
-				               Vtiger_DashBoard_Js.gridster = thisInstance.getContainer(tabid).gridster({ 
-					               // Need to set the base dimensions to eliminate widgets overlapping
-					               widget_base_dimensions: [col_width,300]
-				               }).data("gridster");
+                                    app.changeURL("index.php?module=Home&view=DashBoard&tabid="+tabid);
+                            if(tabid==1){
+                                         var params = {
+                                                      'module' : 'Calendar',
+                                                      'view' : 'TaskManagement',
+                                                      'mode' : 'showManagementView',
+                                       'actmodulename':'Home'
+                                              }
+                                              app.helper.showProgress();
+                                              app.request.post({"data":params}).then(function(err,data){
+                                     // console.log(data);
+                                                  if(err === null) {
+                                          app.helper.hideProgress();
+                                          $('.tab-content').html(data);
+                                          vtUtils.showSelect2ElementView($('#overlayPage .data-header').find('select[name="assigned_user_id"]'), {placeholder: "User : All"});
+                                          vtUtils.showSelect2ElementView($('#overlayPage .data-header').find('select[name="taskstatus"]'), {placeholder: "Status : All"});
+                                          var js = new Vtiger_TaskManagement_Js();
+                                          js.registerEvents();
+                                      }else{
+                                          app.helper.showErrorNotification({"message":err});
+                                      }
+                                              });
+                                         } else {
+                               //alert("Nirbhay");
+                               jQuery('.tab-content').html('');
 
-				               return;
-			               }
-			               var data = {
-				               'module': 'Home',
-				               'view': 'DashBoardTab',
-				               'mode': 'getTabContents',
-				               'tabid' : tabid
-			               }
+                                                   // If tab is already loaded earlier then we shouldn't reload tab and register gridster
+                                                   if(typeof jQuery("#tab_"+tabid).find(".dashBoardTabContainer").val() !== 'undefined'){
+                                                           // We should overwrite gridster with current tab which is clicked
+                                                           var widgetMargin = 10;
+                                                           var cols = thisInstance.getgridColumns();
+                                                           $(".mainContainer").css('min-width', "500px");
+                                                           var col_width = (cols === 1)?(Math.floor(($(".mainContainer").width()-41)/cols) - (2*widgetMargin)):(Math.floor(($(window).width()-41)/cols) - (2*widgetMargin));
 
-			               app.request.post({"data":data}).then(function(err,data){
-				               if(err === null){
-					               var dashBoardModuleName = jQuery("#tab_"+tabid,".tab-content").html(data).find('[name="dashBoardModuleName"]').val();
-					               if(typeof dashBoardModuleName != 'undefined' && dashBoardModuleName.length > 0 ) {
-						               var dashBoardInstanceClassName = app.getModuleSpecificViewClass(app.view(),dashBoardModuleName);
-						               if(dashBoardInstanceClassName != null) {
-							               var dashBoardInstance = new window[dashBoardInstanceClassName]();
-						               }
-					               }
-					               app.event.trigger("post.DashBoardTab.load", dashBoardInstance);
-					               window.location = 'index.php?module=Home&view=DashBoard&tabid='+tabid;
-				               }
-			               });
-			      }         
-		});
+                                                           Vtiger_DashBoard_Js.gridster = thisInstance.getContainer(tabid).gridster({ 
+                                                                   // Need to set the base dimensions to eliminate widgets overlapping
+                                                                   widget_base_dimensions: [col_width,300]
+                                                           }).data("gridster");
+
+                                                           return;
+                                                   }
+                                                   var data = {
+                                                           'module': 'Home',
+                                                           'view': 'DashBoardTab',
+                                                           'mode': 'getTabContents',
+                                                           'tabid' : tabid
+                                                   }
+
+                                                   app.request.post({"data":data}).then(function(err,data){
+                                                           if(err === null){
+                                                                   var dashBoardModuleName = jQuery("#tab_"+tabid,".tab-content").html(data).find('[name="dashBoardModuleName"]').val();
+                                                                   if(typeof dashBoardModuleName != 'undefined' && dashBoardModuleName.length > 0 ) {
+                                                                           var dashBoardInstanceClassName = app.getModuleSpecificViewClass(app.view(),dashBoardModuleName);
+                                                                           if(dashBoardInstanceClassName != null) {
+                                                                                   var dashBoardInstance = new window[dashBoardInstanceClassName]();
+                                                                           }
+                                                                   }
+                                                                   app.event.trigger("post.DashBoardTab.load", dashBoardInstance);
+                                                                   window.location = 'index.php?module=Home&view=DashBoard&tabid='+tabid;
+                                                           }
+                                                   });
+                                          }         
+                            });
 	},
 
 	registerRearrangeTabsEvent : function(){
@@ -979,9 +956,9 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 			});
 
 			var data = {
-				"module" : "Vtiger",
-				"action" : "DashBoardTab",
-				"mode" : "updateTabSequence",
+				"module"   : "Vtiger",
+				"action"   : "DashBoardTab",
+				"mode"     : "updateTabSequence",
 				"sequence" : JSON.stringify(reArrangedList)
 			}
 
@@ -1004,240 +981,187 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 		});
 
 	},
+                        buttonemail : function() {
+                            var thisInstance = this;
 
-	/////////////////////////////////////////
+                            this.getContainer().on('click', 'button[id="emailbutton"]', function(e) {
+                                            var userid = jQuery("input#recordId").val();//safuan
+                                            Vtiger_Helper_Js.getInternalMailer(userid,'email1','Users');
 
-	/***************ADDED BY JITU@secondcrm***************/
-	birthdayEmail : function() {
-		var thisInstance = this;
-		this.getContainer().on('click', 'div.birthdaywish', function(e) {
-				var userid = jQuery("input#birthdayid").val();//jitu 
-				var module = jQuery("input#modulename").val();//jitu
-				var fieldname = jQuery("input#fieldname").val();//jitu	
-			
-				Vtiger_Helper_Js.getInternalMailer(userid,fieldname,module);
+                            });
+                        },
+                        
+                        birthdayEmail : function() {
+                            var thisInstance = this;
+                            this.getContainer().on('click', 'div.birthdaywish', function(e) {
+                                            var userid = jQuery("input#birthdayid").val();//jitu 
+                                            var module = jQuery("input#modulename").val();//jitu
+                                            var fieldname = jQuery("input#fieldname").val();//jitu	
 
-		});	
-	},		
-	/*********End for birthday email***********************/
-	
-	/***************ADDED BY SAFUAN@09122014***************/
-	buttonemail : function() {
-		var thisInstance = this;
-		
-		this.getContainer().on('click', 'button[id="emailbutton"]', function(e) {
-				var userid = jQuery("input#recordId").val();//safuan
-				Vtiger_Helper_Js.getInternalMailer(userid,'email1','Users');
+                                            Vtiger_Helper_Js.getInternalMailer(userid,fieldname,module);
 
-		});
-	},
+                            });	
+                        },	
+                        registerDisplayDetailTabClickEvent : function(form) { 
+                            var userid = jQuery('#selectUserfilter').val();			
+                            var module = app.getModuleName();
+                            var aDeferred = jQuery.Deferred();
 
-	/***************ADDED BY SAFUAN@09122014***************/
-	searchWidgetPressEnter : function() {
-		var thisInstance = this;
-		
-		this.getContainer().on('keypress', 'input[id="searchvalue"]', function(e) {
-		    	if(e.which == 13) {
-					
-			//alert('You pressed enter!XDXDXD');		
-            	var sevalue = jQuery("input#searchvalue").val(); 
+                                            var params = {
+                                                    'module' : 'Users',
+                                                    'view'   : 'DashboardListViewAjax',
+                                                    'record' : userid,	
+                                                    'mode': 'getUserEducation',
+                                            }
 
-				var url = "index.php?module=Users&view=SearchResult&mode=searchResult&key="+sevalue;
-					AppConnector.request(url).then(
-						function(data){ 
-							//alert(data);
-							//var panel = $("#panel");
-							var dataContainer = $("#searchresult");
-							//panel.toggleClass('hide');
-							dataContainer.html(data);
-							//thisInstance.registerDisplayDetailTabClickEvent();
-					});
-			}
-		});
-	},
-	/***************ADDED@05122014***************/
-	searchWidgetButton : function() {
-		var thisInstance = this;
-		
-		this.getContainer().on('click', 'button[id="keysearch"]', function(e) { 
-		var sevalue = jQuery("input#searchvalue").val(); 		
-		var url = "index.php?module=Users&view=SearchResult&mode=searchResult&key="+sevalue;
-			AppConnector.request(url).then(
-				function(data){ 
-					//alert(data);
-					//var panel = $("#panel");
-					var dataContainer = $("#searchresult");
-					//panel.toggleClass('hide');
-					dataContainer.html(data);
-					//thisInstance.registerDisplayDetailTabClickEvent();
-			});
-		});
-	},	
-	/***************ADDED@05122014***************/
-	searchWidgets : function() {
-		var thisInstance = this;
-		
-		this.getContainer().on('click', 'a[class="widgetFilter"]', function(e) { 
-		var element = $(e.currentTarget);
-		var url = element.data('url');
-			AppConnector.request(url).then(
-				function(data){ 
-					var panel = $("#panel");
-					var dataContainer = $("#content");
-					panel.toggleClass('hide');
-					dataContainer.html(data);
-					thisInstance.registerDisplayDetailTabClickEvent();
-			});
-		});
-	},
-	/***************ADDED@05122014***************/
-	//Modified By Mabruk
-	/*userFilter : function() {
-		var thisInstance = this; 
-		
-		this.getContainer().on('change', '#userGroup', function(e) { 
-		var element = $(e.currentTarget); 
-		var user_id = $("#userGroup").val(); 
-		//alert(user_id);alert(jQuery('#historyType').val());
-		var params = {
+                                            AppConnector.request(params).then(
+                                                    function(data) {
+                                                            $('#education').html(data);
+                                                    },
 
-					'content': 'data',
-					'module' : 'Home',
-					'name'   : 'Birthdays',
-					'view'	 : 'ShowWidget',	
-					'group'  : user_id,
-					'type'   : jQuery('#historyType').val(),
-					'linkid' : element.closest('.dashboardWidget').attr('id')	
-					
-				}		
-		
+                                                    function(error,err){
+                                                            aDeferred.reject();
+                                                    }
+                                            );
 
-			AppConnector.request(params).then( 
-				function(data){ //alert(data);
-					//var panel = $("#panel");
-					//var dataContainer = $("#content"); alert(JSON.stringify(data));
-					jQuery('#birthdayContents').html(data);
-					//progressIndicatorElement.progressIndicator({'mode':'hide'});
-					//dataContainer.html(data);
-					//thisInstance.registerDisplayDetailTabClickEvent();
-			});
-		});
-	},*/
 
-	/***************ADDED@05122014***************/
-	registerDisplayDetailTabClickEvent : function(form) { 
-		var userid = jQuery('#selectUserfilter').val();			
-		var module = app.getModuleName();
-		var aDeferred = jQuery.Deferred();
-		
-				var params = {
-					'module' : 'Users',
-					'view'   : 'DashboardListViewAjax',
-					'record' : userid,	
-					'mode': 'getUserEducation',
-				}
-	
-				AppConnector.request(params).then(
-					function(data) {
-						$('#education').html(data);
-					},
-					
-					function(error,err){
-						aDeferred.reject();
-					}
-				);
-			
+                                jQuery('div#tab ul li').on('click',function(e) { 
+                                        var tabIndx = $(this).index();
+                                        var container = $('a', this).attr('href');
+                                            container =	container.replace('#','');
 
-		jQuery('div#tab ul li').on('click',function(e) { 
-			var tabIndx = $(this).index();
-			var container = $('a', this).attr('href');
-			    container =	container.replace('#','');
+                                        if(tabIndx >=0) {
+                                                var params = {
+                                                        'module' : 'Users',
+                                                        'view'   : 'DashboardListViewAjax',
+                                                        'record' : userid,	
+                                                        'mode': 'getUser'+container.substr(0, 1).toUpperCase() + container.substr(1),
+                                                }
 
-			if(tabIndx >=0) {
-				var params = {
-					'module' : 'Users',
-					'view'   : 'DashboardListViewAjax',
-					'record' : userid,	
-					'mode': 'getUser'+container.substr(0, 1).toUpperCase() + container.substr(1),
-				}
-	
-				AppConnector.request(params).then(
-					function(data) {
-						$('#'+container).html(data);
-					},
-					
-					function(error,err){
-						aDeferred.reject();
-					}
-				);
-			} 
-		});
-	},
+                                                AppConnector.request(params).then(
+                                                        function(data) {
+                                                                $('#'+container).html(data);
+                                                        },
 
-	////////////////////////////////////////
+                                                        function(error,err){
+                                                                aDeferred.reject();
+                                                        }
+                                                );
+                                        } 
+                                });
+                        },
+                        searchWidgetPressEnter : function() {
+                                var thisInstance = this;
 
-	registerEvents : function() { 
-		var thisInstance = this;
-		//alert(jQuery("#default_tab").val());
-		this.registerLazyLoadWidgets();
-		this.registerAddDashboardTab();
-		this.registerDashBoardTabClick();
-		this.registerDashBoardTabRename();
-		this.registerDeleteDashboardTab();
-		this.registerRearrangeTabsEvent();
+                                this.getContainer().on('keypress', 'input[id="searchvalue"]', function(e) {
+                                        if(e.which == 13) {
 
-		//this.backButton();	/***************ADDED@05122014***************/
-		this.searchWidgetButton();	/***************ADDED@05122014***************/
-		this.searchWidgets();			/***************ADDED@05122014***************/	
-		//this.userFilter();	/***************ADDED@05122014***************/
-		this.searchWidgetPressEnter();
-		this.buttonemail();
-		this.birthdayEmail();
-		//this.gridsterStop();
+                                        //alert('You pressed enter!XDXDXD');		
+                                var sevalue = jQuery("input#searchvalue").val(); 
 
+                                                var url = "index.php?module=Users&view=SearchResult&mode=searchResult&key="+sevalue;
+                                                        AppConnector.request(url).then(
+                                                                function(data){ 
+                                                                        //alert(data);
+                                                                        //var panel = $("#panel");
+                                                                        var dataContainer = $("#searchresult");
+                                                                        //panel.toggleClass('hide');
+                                                                        dataContainer.html(data);
+                                                                        //thisInstance.registerDisplayDetailTabClickEvent();
+                                                        });
+                                        }
+                                });
+                      },
+                        searchWidgets : function() {
+                            var thisInstance = this;
+
+                            this.getContainer().on('click', 'a[class="widgetFilter"]', function(e) { 
+                            var element = $(e.currentTarget);
+                            var url = element.data('url');
+                                    AppConnector.request(url).then(
+                                            function(data){ 
+                                                    var panel = $("#panel");
+                                                    var dataContainer = $("#content");
+                                                    panel.toggleClass('hide');
+                                                    dataContainer.html(data);
+                                                    thisInstance.registerDisplayDetailTabClickEvent();
+                                    });
+                            });
+                        },
+                        searchWidgetButton : function() {
+                            var thisInstance = this;
+
+                            this.getContainer().on('click', 'button[id="keysearch"]', function(e) { 
+                            var sevalue = jQuery("input#searchvalue").val(); 		
+                            var url = "index.php?module=Users&view=SearchResult&mode=searchResult&key="+sevalue;
+                                    AppConnector.request(url).then(
+                                            function(data){ 
+                                                    //alert(data);
+                                                    //var panel = $("#panel");
+                                                    var dataContainer = $("#searchresult");
+                                                    //panel.toggleClass('hide');
+                                                    dataContainer.html(data);
+                                                    //thisInstance.registerDisplayDetailTabClickEvent();
+                                    });
+                            });
+                        },
+                        
+                        registerEvents : function() {
+                                var thisInstance = this;
+                                this.registerLazyLoadWidgets();
+                                this.registerAddDashboardTab();
+                                this.registerDashBoardTabClick();
+                                this.registerDashBoardTabRename();
+                                this.registerDeleteDashboardTab();
+                                this.registerRearrangeTabsEvent();
+
+                                this.searchWidgetButton();	/***************ADDED@05122014***************/
+                                this.searchWidgets();	/**************ADDED@05122014***************/	
+                                this.searchWidgetPressEnter();
+                                this.buttonemail();
+                                this.birthdayEmail();
 
 		this.registerQtipMessage();
 		app.event.off("post.DashBoardTab.load");
-		app.event.on("post.DashBoardTab.load",function(event, dashBoardInstance){ 
-                                                                var instance = thisInstance;
-                                                                if(typeof dashBoardInstance != 'undefined') {
+		app.event.on("post.DashBoardTab.load",function(event, dashBoardInstance){
+			var instance = thisInstance;
+			if(typeof dashBoardInstance != 'undefined') {
 				instance = dashBoardInstance;
 				instance.registerEvents();
+				return;
 			}
-                                                               var  tabid= jQuery("#default_tab").val();
-                                                                if(tabid==1){
-                                                                   // instance.loadTrello();
-                                                                                                                                            var params = {
-                                                                           'module' : 'Calendar',
-                                                                           'view' : 'TaskManagement',
-                                                                           'mode' : 'showManagementView',
-                                                                                    'actmodulename':'Home'
-                                                                          }
-                                                                         app.helper.showProgress();
-                                                                         app.request.post({"data":params}).then(function(err,data){
-                                                                                  // console.log(data);
-                                                                         if(err === null) {
-                                                                           app.helper.hideProgress();
-                                                                            $('.tab-content').html(data);
-                                                                            vtUtils.showSelect2ElementView($('#overlayPage .data-header').find('select[name="assigned_user_id"]'), {placeholder: "User : All"});
-                                                                             vtUtils.showSelect2ElementView($('#overlayPage .data-header').find('select[name="taskstatus"]'), {placeholder: "Status : All"});
-                                                                             var js = new Vtiger_TaskManagement_Js();
-                                                                             js.registerEvents();
-                                                                         
-                                                                          }else{
-                                                                              app.helper.showErrorNotification({"message":err});
-                                                                          }
-                                                                       });  
-                                                                }  else {
-                                                                    instance.registerGridster();
-                                                                    instance.loadWidgets();
-
-                                                                instance.registerRefreshWidget();
-                                                                instance.removeWidget();
-                                                                instance.registerWidgetFullScreenView();
-                                                                instance.registerFilterInitiater();
-                                                                } 
-			
+                        
+                                                                        var  tabid= jQuery("#default_tab").val();  // instance.loadTrello();
+                                                                        
+                                                                        if(tabid==1){
+                                                                                    var params = {
+                                                                                        'module' : 'Calendar',
+                                                                                        'view' : 'TaskManagement',
+                                                                                        'mode' : 'showManagementView',
+                                                                                        'actmodulename':'Home'
+                                                                                    }
+                                                                                    app.helper.showProgress();
+                                                                                    app.request.post({"data":params}).then(function(err,data){
+                                                                                    // console.log(data);
+                                                                                  if(err === null) {
+                                                                                       app.helper.hideProgress();
+                                                                                       $('.tab-content').html(data);
+                                                                                       vtUtils.showSelect2ElementView($('#overlayPage .data-header').find('select[name="assigned_user_id"]'), {placeholder: "User : All"});
+                                                                                       vtUtils.showSelect2ElementView($('#overlayPage .data-header').find('select[name="taskstatus"]'), {placeholder: "Status : All"});
+                                                                                      var js = new Vtiger_TaskManagement_Js();
+                                                                                       js.registerEvents();
+                                                                                  }else{
+                                                                                     app.helper.showErrorNotification({"message":err});
+                                                                                 }
+                                                                            });  
+                                                                        } else {
+                                                                            instance.registerGridster();
+                                                                            instance.loadWidgets();
+                                                                            instance.registerRefreshWidget();
+                                                                            instance.removeWidget();
+                                                                            instance.registerWidgetFullScreenView();
+                                                                            instance.registerFilterInitiater();
+                                                                        }     
 		});
 		app.event.trigger("post.DashBoardTab.load");
 	}

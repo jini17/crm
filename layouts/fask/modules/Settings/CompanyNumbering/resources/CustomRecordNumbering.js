@@ -82,62 +82,67 @@ jQuery.Class('Settings_CustomRecordNumbering_Js', {}, {
 	 * Function to register event for saving module custom numbering
 	 */
 	saveModuleCustomNumbering : function(){
-		if(jQuery('.saveButton').attr("disabled")){
-			return;
-		}
+
 		var editViewForm = this.getForm();
-		var params = {}
-		var company = editViewForm.find('[name="company"]').val();
-		var sourceModule = editViewForm.find('[name="sourceModule"]').val();
-		var sourceModuleLabel = editViewForm.find('option[value="'+sourceModule+'"]').text();
-		var prefix = editViewForm.find('[name="prefix"]');
-		var currentPrefix = jQuery.trim(prefix.val());
-		var oldPrefix = prefix.data('oldPrefix');
-		var oldcompany = editViewForm.find('[name="oldcompany"]').val();
-		
-		var sequenceNumberElement = editViewForm.find('[name="sequenceNumber"]');
-		var sequenceNumber = sequenceNumberElement.val();
-		var oldSequenceNumber = sequenceNumberElement.data('oldSequenceNumber');
+		jQuery('.saveButton').on('click', function(){
+			
+			var params = {}
+				
+			var company = editViewForm.find('[name="company"]').val();
+				
+			var sourceModule = editViewForm.find('[name="sourceModule"]').val();
+				
+			var sourceModuleLabel = editViewForm.find('option[value="'+sourceModule+'"]').text();
+			var prefix = editViewForm.find('[name="prefix"]');
+			var currentPrefix = jQuery.trim(prefix.val());
+			var oldPrefix = prefix.data('oldPrefix');
+			var oldcompany = editViewForm.find('[name="oldcompany"]').val();
 
-		if((sequenceNumber < oldSequenceNumber) && (currentPrefix == oldPrefix) && (oldcompany == company)){
-			var errorMessage = app.vtranslate('JS_SEQUENCE_NUMBER_MESSAGE')+" "+oldSequenceNumber;
-			sequenceNumberElement.validationEngine('showPrompt', errorMessage , 'error','topLeft',true);
-			return;
-		}
+			var sequenceNumberElement = editViewForm.find('[name="sequenceNumber"]');
+			var sequenceNumber = sequenceNumberElement.val();
+			var oldSequenceNumber = sequenceNumberElement.data('oldSequenceNumber');
 
-		params = {
-			'module' : app.getModuleName(),
-			'parent' : app.getParentModuleName(),
-			'action' : "CustomRecordNumberingAjax",
-			'mode' : "saveModuleCustomNumberingData",
-			'company' : company,
-			'sourceModule' : sourceModule,
-			'prefix' : currentPrefix,
-			'sequenceNumber' : sequenceNumber
-		}
+			if((sequenceNumber < oldSequenceNumber) && (currentPrefix == oldPrefix) && (oldcompany == company)){
+				var errorMessage = app.vtranslate('JS_SEQUENCE_NUMBER_MESSAGE')+" "+oldSequenceNumber;
+				sequenceNumberElement.validationEngine('showPrompt', errorMessage , 'error','topLeft',true);
+				return;
+			}
+
+			params = {
+				'module' : app.getModuleName(),
+				'parent' : app.getParentModuleName(),
+				'action' : "CustomRecordNumberingAjax",
+				'mode' : "saveModuleCustomNumberingData",
+				'company' : company,
+				'sourceModule' : sourceModule,
+				'prefix' : currentPrefix,
+				'sequenceNumber' : sequenceNumber
+			}
 		
-		jQuery('.saveButton').attr("disabled","disabled");
-		AppConnector.request(params).then(
-				function(data){
-					var params;
-					var successfullSaveMessage = app.vtranslate('JS_RECORD_NUMBERING_UPDATED_SUCCESSFULLY')+" "+sourceModuleLabel;
-					if(data.success == true){
-						params = {
-							text: successfullSaveMessage
-						};
-						Settings_Vtiger_Index_Js.showMessage(params);
-					}else{
-						var errorMessage = currentPrefix+" "+app.vtranslate(data.error.message);
-						params = {
-							text: errorMessage,
-							type: 'error'
-						};
-						Settings_Vtiger_Index_Js.showMessage(params);
-					}
-				},
-				function(jqXHR,textStatus, errorThrown){
-		})
-	},
+				jQuery('.saveButton').attr("disabled","disabled");
+				AppConnector.request(params).then(
+						function(data){
+							var params;
+							var successfullSaveMessage = app.vtranslate('JS_RECORD_NUMBERING_UPDATED_SUCCESSFULLY')+" "+sourceModuleLabel;
+							if(data.success == true){
+								params = {
+									text: successfullSaveMessage
+								};
+								Settings_Vtiger_Index_Js.showMessage(params);
+							}else{
+								var errorMessage = currentPrefix+" "+app.vtranslate(data.error.message);
+								params = {
+									text: errorMessage,
+									type: 'error'
+								};
+								Settings_Vtiger_Index_Js.showMessage(params);
+							}
+						},
+						function(jqXHR,textStatus, errorThrown){
+				});
+		
+		});
+	},	
 	
 	/**
 	 * Function to handle update record with the given sequence number
@@ -213,16 +218,8 @@ jQuery.Class('Settings_CustomRecordNumbering_Js', {}, {
 		this.registerOnChangeEventOfSourceModule();
 		this.registerEventToUpdateRecordsWithSequenceNumber();
 		this.registerChangeEventForPrefixAndSequenceNumber();
-	
-		var params = app.validationEngineOptions;
-		params.onValidationComplete = function(editViewForm, valid){
-			if(valid) {
-				thisInstance.saveModuleCustomNumbering();
-			}
-			return false;
-		}
-		editViewForm.validationEngine('detach');
-		editViewForm.validationEngine('attach',params);
+		this.saveModuleCustomNumbering();
+		
 	}
 })
 jQuery(document).ready(function() { 

@@ -405,7 +405,8 @@ Vtiger.Class("Users_Claim_Js", {
 
 		var thisInstance = this;
 	 	var divcontainer  = section =='T'?'myteamclaimlist':'myclaimlist';
-
+	 	//jQuery("#"+divcontainer).html('');
+	 	//jQuery('.listViewEntriesTable').eq(1).remove();
 //////////////////////////////////
 
 		var aDeferred = jQuery.Deferred();
@@ -414,7 +415,7 @@ Vtiger.Class("Users_Claim_Js", {
 		app.helper.showProgress();
 		if (section == 'M'){
 		my_selyear=jQuery('.my_selyear').val();
-		changeYearActionUrl=changeYearActionUrl+'&selyear='+my_selyear;
+			changeYearActionUrl=changeYearActionUrl+'&selyear='+my_selyear;
 			}
 		app.request.post({url:changeYearActionUrl}).then(
 		function(err,data) { 

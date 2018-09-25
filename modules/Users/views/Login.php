@@ -33,6 +33,8 @@ class Users_Login_View extends Vtiger_View_Controller {
 	}
 
 	function process (Vtiger_Request $request) {
+		global $site_URL;
+		
 		$finalJsonData = array();
 		$loginpageinfo = Users_Record_Model::loginPageDetails();
 		
@@ -64,6 +66,8 @@ class Users_Login_View extends Vtiger_View_Controller {
 		$viewer->assign('DATA_COUNT', count($jsonData));
 		$viewer->assign('JSON_DATA', $finalJsonData);
 		$viewer->assign('LOGINPAGE', $loginpageinfo);
+		
+		$viewer->assign('SITE_URL', $site_URL);
 		$mailStatus = $request->get('mailStatus');
 		$error = $request->get('error');
 		$message = '';

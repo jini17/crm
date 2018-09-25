@@ -145,6 +145,7 @@ if($focus->is_authenticated()) {
 	}
 	$_SESSION['login_user_name'] = $focus->column_fields["user_name"];
 	$_SESSION['login_password'] = $user_password;
+                      
 	$_SESSION['login_error'] = $mod_strings['ERR_INVALID_PASSWORD'];
 
 	// go back to the login screen.

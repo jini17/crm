@@ -76,10 +76,13 @@
                         </div>
                 </div>	
                 <div class="modal-footer">
-                        <div class="pull-right cancelLinkContainer" style="margin-top:0px;">
+                    <div style="margin-right: 200px;">
+                        <div class="cancelLinkContainer pull-right" style="margin-top:0px;margin-left: 5px;">
                                 <input class="cancelLink btn btn-danger" type="button" value="Cancel" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal">
                         </div>
+
                         <input class="btn btn-success" type="submit" value="Save" name="saverecord" accesskey="LBL_SAVE_BUTTON_KEY" title="Save">
+                    </div>
                 </div>    	  		
         </form>		
 

@@ -342,10 +342,10 @@ class Home_Module_Model extends Vtiger_Module_Model {
 		}
 		//echo 'group '.$group.' XDXD type '.$type;
 		if ($group == 'user'){
-		$query = "(SELECT CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) as fullname, 
+		$query = "(SELECT CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) as fullname,department,
 				birthday AS birthdate,vtiger_users.id AS 'id','Users' AS module,'email1' AS fieldname,
 				TIMESTAMPDIFF( YEAR, birthday, CURDATE( ) ) AS age
-				FROM vtiger_users
+				FROM vtiger_users 
 				
 				";
 
@@ -436,6 +436,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 			
 
 			}
+                                                        
 		//echo $query;			
 		}
 
@@ -495,7 +496,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 			}
 		//echo $query;
 		}
-		$query .= "ORDER BY birthdate ASC";
+		 $query .= "ORDER BY unix_timestamp(CONCAT(YEAR(CURDATE()),'-', date_format(birthday,'%m-%d'))) ASC ";
 		$result = $db->pquery($query, array());
 				$birthdays = array();
 		if($db->num_rows($result) > 0) {
@@ -505,6 +506,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 				$birthdays[$i]['module'] = $db->query_result($result, $i, 'module');		
 				$birthdays[$i]['fieldname'] = $db->query_result($result, $i, 'fieldname');		
 				$birthdays[$i]['age'] = $db->query_result($result, $i, 'age');		
+                                                                                      $birthdays[$i]['department'] =$db->query_result($result, $i, 'department');		
 			}
 		}
 		return $birthdays;
