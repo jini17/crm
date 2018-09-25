@@ -857,7 +857,11 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
                                     var currentTarget = jQuery(e.currentTarget);
                                     var tabid = currentTarget.data('tabid');
                                     
+<<<<<<< HEAD
                                     if(tabid ==1){
+=======
+                                    if(tabid==1){
+>>>>>>> 77114df57e66d6cc725f1c297eb746cadc36d73d
                                          dashBoardContainer.find('.widget-btn').css('display','none')
                                     }
                                     else{

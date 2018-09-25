@@ -55,6 +55,10 @@ $languageStrings = array(
 	'Total Company Contribution'	=>	'Jumlah Caruman Majikan',
 	'Employer Socso'				=>	'PERKESO Majikan',
 	'HRDF'							=>	'Caruman HRDF',
+	'Socso No'					    => 	'No Socso',
+
+	
+	'LBL_EMPLOYEE_INFORMATION' => 'Maklumat Pekerja',
 
 
 );

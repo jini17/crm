@@ -3,9 +3,7 @@
 /** Create New Vtlib script for module Creation
   * created : 22 Feb 2018
   * Author  : Jitendra Gupta <jitendraknp2004@gmail.com>
-  * For enable Related list go line no 181 and uncomment / modify as per your requirement
   */
-
 /*error_reporting(1);
 		ini_set('display_erros',1);
 		 
@@ -22,22 +20,22 @@
 		       } 
 		     
 		    }*/
+include_once('vtlib/Vtiger/Menu.php');
+include_once('vtlib/Vtiger/Module.php');
+include_once('vtlib/Vtiger/Package.php');
+include_once 'includes/main/WebUI.php';
+include_once 'include/Webservices/Utils.php';
 
-	include_once('vtlib/Vtiger/Menu.php');
-	include_once('vtlib/Vtiger/Module.php');
-	include_once('vtlib/Vtiger/Package.php');
-	include_once 'includes/main/WebUI.php';
-	include_once 'include/Webservices/Utils.php';
-
-	global $adb;
-
-	$adb->setDebug(true);
 	$Vtiger_Utils_Log = true;
+	global $adb;
+	$adb->setDebug(true);
 
-	$MODULENAME = 'Attendance'; //Give your module name
-	$PARENT 	= 'FOUNDATION';  //Give Parent name
-	$ENTITYNAME = 'attendanceno'; //Give Duplicate check field name
-	$ENTITYLABEL= 'Attendance No';
+
+
+	$MODULENAME = 'Training'; //Give your module name
+	$PARENT 	= 'Support';  //Give Parent name
+	$ENTITYNAME = 'trainingno'; //Give Duplicate check field name
+	$ENTITYLABEL= 'Training ID';
 
 	$module = Vtiger_Module::getInstance($MODULENAME);
 	
@@ -93,7 +91,7 @@
 	$field3->table  =  $module->basetable;
 	$field3->column = 'attendancedate';
 	$field3->columntype = 'DATE';
-	$field3->uitype	= 2;
+	$field3->uitype	= 5;
 	$field3->typeofdata = 'D~M'; // varchar~Mandatory
 	$block->addField($field3); /** table, column, label, set to default values */
 	
@@ -189,7 +187,7 @@
 	$filter1->isdefault = true;
 	$module->addFilter($filter1);
 	// Add fields to the filter created
-	$filter1->addField($field1)->addField($field16, 1)->addField($field2, 2);
+	$filter1->addField($field1)->addField($field2, 1)->addField($field3, 2);
 
 	// Set sharing access of this module
 	$module->setDefaultSharing();
@@ -208,32 +206,10 @@
 
 	echo "Module is created";
 
-	//Enable Comment module
-	require_once 'modules/ModComments/ModComments.php';
-	$commentsmodule = vtiger_module::getinstance( 'ModComments' );
-	$fieldinstance = vtiger_field::getinstance( 'related_to', $commentsmodule );
-	$fieldinstance->setrelatedmodules( array($MODULENAME) );
-	$detailviewblock = modcomments::addwidgetto( $MODULENAME );
-
-	echo "comment widget for module $modulename has been created";
-	//end here
-
-	//Tracking History
-	ModTracker::disableTrackingForModule($module->id);
-	ModTracker::enableTrackingForModule($module->id);
-	echo "History Enabled";
-	//end here
-
-	//Add your related module name & custom function (get_payslip) & CUSTOM_LABEL (Display name in related module tab of detailview)
-	//$relatedmodule = 'Payslip';
-	//$module->setRelatedList(Vtiger_Module::getInstance($relatedmodule ), 'CUSTOM_LABEL', array('ADD','SELECT'), 'get_payslip');
-	//end here
 
 	function createFiles(Vtiger_Module $module, Vtiger_Field $entityField) {
 
 		$targetpath = 'modules/' . $module->name;
-		$targetSummaryTemplate = 'layouts/fask/modules/' . $module->name;
-
 
 		if (!is_file($targetpath)) {
 			mkdir($targetpath);
@@ -254,15 +230,6 @@
 				$moduleFileContents = str_replace($key, $value, $moduleFileContents);
 			}
 			file_put_contents($targetpath.'/'.$module->name.'.php', $moduleFileContents);
-
-			if(!copy($templatepath.'/DetailViewSummaryContents.tpl', $targetSummaryTemplate.'/DetailViewSummaryContents.tpl')){
-				echo "failed to copy DetailViewSummaryContents.tpl ...\n";
-			}
-			if(!copy($templatepath.'/ModuleSummaryView.tpl', $targetSummaryTemplate.'/ModuleSummaryView.tpl')){
-				echo "failed to copy ModuleSummaryView.tpl ...\n";
-			}
-
-			
 		}
 	}
 

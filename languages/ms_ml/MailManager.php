@@ -105,6 +105,10 @@ Pengurus Mail adalah klien e-mel berintegrasi yang membolehkan pengguna untuk me
 	'LBL_WRITE_YOUR_COMMENT_HERE' => 'Tambah komen anda disini ...',
 	'LBL_Your_Mailbox_Account' => 'akaun peti mel anda',
 	'MailManager' => 'Pengurus Mel',
+	'Help' => 'Bantuan',
+	'LBL_NO_MAIL_SELECTED_DESC' => 'Tiada mel dipilih. Klik mel untuk lihat.',
+	'LBL_SENT' => 'Dihantar',
+	'LBL_TRASH' => 'Dipadam',
 );
 
 $jsLanguageStrings = Array (
@@ -175,6 +179,7 @@ $jsLanguageStrings = Array (
 	'JSLBL_Yahoo'=>'Yahoo',
 	'MailManager' => 'Pengurus Mel',
 	'LBL_SWITCH_MAILBOX'=>'Tukar Peti Mel',
+	'JSLBL_NO_MAIL_SELECTED_DESC' => 'Tiada mel dipilih. Klik mel untuk lihat.',
 	//'If you want to change the default sent mail folder, after creating the mail box click on Settings icon and Edit the Mailbox.' => 'sss',
 
 );
