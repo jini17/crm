@@ -44,6 +44,7 @@
       			</div>
       			{/foreach}
      </div>
+
 {else}
         <span class="noDataMsg">
                 {vtranslate($TYPELABEL,$MODULE_NAME)} in {$VALUE}

@@ -13,26 +13,28 @@
 {if count($MODELS) > 0}
   <div class="row entry clearfix">
         <div class='row th' style="padding:5px;margin-right:-1px;margin-left:-1px;font-size:12px;">
-          <div class='col-lg-3'>
+          <div class='col-lg-5'>
               <strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
+
+
             </div>
-             <div class='col-lg-4'>
+             <div class='col-lg-3'>
               <strong>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</strong>
             </div>
-            <div class='col-lg-5'>
+            <div class='col-lg-4'>
                <strong>{vtranslate('LBL_BIRTHDATE', $MODULE_NAME)}</strong>
             </div>
           </div>
     {foreach item=MODEL from=$MODELS}
       <div class='row miniListContent' style="padding:5px;margin-right:-1px;margin-left:-1px;">
-        <div class='col-lg-3'>
+        <div class='col-lg-5'>
           {$MODEL['fullname']}
         </div>
-         <div class='col-lg-4'>
-          {$MODEL['department']}
+         <div class='col-lg-3'>
+          {if $MODEL['department'] eq 'Human Resource & Management'} HRM {else}  {$MODEL['department']}  {/if}
         </div>
-        <div class='col-lg-5 birthdaywish'>
-          <span>{$MODEL['birthday']}</span>
+        <div class='col-lg-4 birthdaywish'>
+          <span>   {$MODEL['birthday']|date_format:" %b %e"}</span>
           <!--added by fadzil 27/2/15-->
           &nbsp;&nbsp;
         <i class="fa fa-gift pull-right" style="position: absolute;right: 15px;top: 3px; cursor:pointer;" title="Send Birthday wish"></i>

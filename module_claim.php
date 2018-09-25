@@ -1,8 +1,5 @@
 <?php
-<<<<<<< HEAD
 
-=======
->>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
 /** Create New Vtlib script for module Creation
   * created : 22 Feb 2018
   * Author  : Jitendra Gupta <jitendraknp2004@gmail.com>
@@ -29,11 +26,9 @@ include_once('vtlib/Vtiger/Package.php');
 include_once 'includes/main/WebUI.php';
 include_once 'include/Webservices/Utils.php';
 global $adb;
-<<<<<<< HEAD
+
 //$adb->setDebug(true);
-=======
-$adb->setDebug(true);
->>>>>>> 0b3d5add69adde6c623e874428b267f62dcbcf51
+
 	$Vtiger_Utils_Log = true;
 
 	$MODULENAME = 'Claim'; //Give your module name

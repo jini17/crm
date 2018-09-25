@@ -100,9 +100,12 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 			
 			if(isset($_SESSION['return_params'])) {
 				$return_params = urldecode($_SESSION['return_params']);
+                                                                     $_SESSION['logged_status'] = true;
+                                                                     $_SESSION['loggedin_now'] = true;
 				header("Location: index.php?$return_params");
 				exit();
 			} else {
+                                                                    $_SESSION['loggedin_now'] = FALSE;
 				header("Location: index.php");
 				exit();
 			}
