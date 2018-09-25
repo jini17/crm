@@ -12,7 +12,8 @@
 
 <div style='padding:5px;'>
 {if count($MODELS) > 0}
-<div class='row th' style="padding:5px">
+	<div>
+		<div class='row th' style="padding:5px">
           {if $VALUE eq 'leavetype'}
               <div class='col-lg-3'>
                   <strong>{vtranslate('Allocates', $MODULE_NAME)}</strong>
@@ -41,7 +42,7 @@
 	 {if $VALUE eq 'leavetype'}
 			{foreach item=MODEL from=$MODELS['display']}
 			
-			<div class='row miniListContent'>
+			<div class='row miniListContent' style="padding:5px;">
 				<div class='col-lg-3' align="center">
 					{$MODEL['allocateleaves']}
 				</div>
@@ -58,7 +59,7 @@
 			{/foreach}
 		{else}
 			{foreach item=MODEL from=$MODELS}
-			<div class='row miniListContent'>
+			<div class='row miniListContent' style="padding:5px;">
 				<div class='col-lg-4'>
 					{$MODEL['title']}
 				</div>
@@ -71,6 +72,7 @@
 			</div>
 			{/foreach}
 		{/if}
+	</div>		
 {else}
 	<span class="noDataMsg">
 		{vtranslate('LBL_NO')} {vtranslate($MODULE_NAME, $MODULE_NAME)} {vtranslate('LBL_MATCHED_THIS_CRITERIA')}
