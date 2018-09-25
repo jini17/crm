@@ -9175,6 +9175,7 @@ margin-top: 15px;margin-bottom: 15px;margin-left: 14px;
 .myProfileBtnRight{
 float: right;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-left: 14px;
 }
+
 /*Employee Grid view*/
 .employee-directory-grid-container{
   margin: 20px 0px;
@@ -9199,3 +9200,15 @@ float: right;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-l
     padding: 30px;
     box-shadow: 4px 4px 15px #E3E3E3;
 }
+
+.agiliuxfooter-login {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #fff;
+   color: #000;
+   text-align: center;
+}
+div.agiliuxfooter-login>p {margin-top: 1rem;}
+

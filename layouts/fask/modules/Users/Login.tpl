@@ -199,7 +199,12 @@
 							</div>
 						</div>
 					</div>
-				</div>			
+				</div>
+				<footer>
+					<div class="agiliuxfooter-login">
+						<p>Agiliux © Copyright {date('Y')}  <a href="http://dev7.secondcrm.com/agiliux/" target="_blank">Soft Solvers Solutions.</a>&nbsp;All rights reserved</p>
+					</div>
+				</footer>			
 			</div>
 		</div><br /><br />
 		<script>
