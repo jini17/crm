@@ -34,10 +34,10 @@
 	$adb->setDebug(true);
 	$Vtiger_Utils_Log = true;
 
-	$MODULENAME = 'MessageBoard'; //Give your module name
-	$PARENT 	= 'Admin';  //Give Parent name
-	$ENTITYNAME = 'title'; //Give Duplicate check field name
-	$ENTITYLABEL= 'Title';
+	$MODULENAME = 'Attendance'; //Give your module name
+	$PARENT 	= 'FOUNDATION';  //Give Parent name
+	$ENTITYNAME = 'attendanceno'; //Give Duplicate check field name
+	$ENTITYLABEL= 'Attendance No';
 
 	$module = Vtiger_Module::getInstance($MODULENAME);
 	
@@ -56,8 +56,12 @@
     $module->initTables();
 
 	$block = new Vtiger_Block();
-	$block->label = 'LBL_MessageBoard_Information';
+	$block->label = 'LBL_Attendance_Information';
 	$module->addBlock($block);
+
+	$blockcf = new Vtiger_Block();
+	$blockcf->label = 'LBL_CUSTOM_INFORMATION';
+	$module->addBlock($blockcf);
 
 	
 	$field1  = new Vtiger_Field();
@@ -71,70 +75,112 @@
 
 	$module->setEntityIdentifier($field1); //make primary key for module
 
-	$field5 = new Vtiger_Field();
-	$field5->name = 'employee_id';
-	$field5->label = 'Employee Name';
-	$field5->table = $module->basetable;
-	$field5->column = 'employee_id';
-	$field5->columntype = 'INT(11)';
-	$field5->uitype = 101;
-	$field5->displaytype = 5;
-	$field5->typeofdata = 'V~M'; // varchar~Mandatory
-	$block->addField($field5); /** table and column are automatically set */
+	/** Create required fields and add to the block */
+	$field2 = new Vtiger_Field();
+	$field2->name = 'attendanceday';
+	$field2->label = 'Day';
+	$field2->table = $module->basetable;
+	$field2->column = 'attendanceday';	
+	$field2->uitype = 15;
+	$field2->typeofdata = 'V~M';
+	$field2->setPicklistValues( Array ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'));
+	$field2->iscustom	= 0;
+	$block->addField($field2); /** Creates the field and adds to block */
 
-	$field16 = new Vtiger_Field();
-	$field16->name   =  'message';
-	$field16->label  = 'Message';
-	$field16->table  =  $module->basetable;
-	$field16->column = 'message';
-	$field16->columntype = 'TEXT';
-	$field16->uitype	= 19;
-	$field16->typeofdata = 'V~M'; // varchar~Mandatory
-	$block->addField($field16); /** table, column, label, set to default values */
+	$field3 = new Vtiger_Field();
+	$field3->name   =  'attendancedate';
+	$field3->label  = 'Date';
+	$field3->table  =  $module->basetable;
+	$field3->column = 'attendancedate';
+	$field3->columntype = 'DATE';
+	$field3->uitype	= 2;
+	$field3->typeofdata = 'D~M'; // varchar~Mandatory
+	$block->addField($field3); /** table, column, label, set to default values */
 	
-	$field16 = new Vtiger_Field();
-	$field16->name   =  'time';
-	$field16->label  = 'messagetime';
-	$field16->table  =  $module->basetable;
-	$field16->column = 'messagetime';
-	$field16->columntype = 'timestamp';
-	$field16->uitype	= 70;
-	$field16->typeofdata = 'V~M'; // varchar~Mandatory
-	$block->addField($field16); /** table, column, label, set to default values */
+	$field4 = new vtiger_field();
+	$field4->label = 'Employee Name';
+	$field4->name = 'relatedemployee';
+	$field4->table = $module->basetable;
+	$field4->column = 'relatedemployee';
+	$field4->columntype = 'varchar(100)';
+	$field4->uitype = 10;
+	$field4->typeofdata = 'v~o';
+
+	$block->addfield($field4);
+	$field4->setrelatedmodules(array('Users')); 
+
+	$field5 = new Vtiger_Field();
+	$field5->name = 'timein';
+	$field5->label = 'Time In';
+	$field5->table = $module->basetable;
+	$field5->column = 'timein';
+	$field5->uitype = 2;
+	$field5->typeofdata = 'T~M';
+	$block->addField($field5);
+
+	$field6 = new Vtiger_Field();
+	$field6->name = 'timeout';
+	$field6->label = 'Time Out';
+	$field6->table = $module->basetable;
+	$field6->column = 'timeout';
+	$field6->uitype = 2;
+	$field6->typeofdata = 'T~M';
+	$block->addField($field6);
+
+	$field7 = new Vtiger_Field();
+	$field7->name = 'totalhours';
+	$field7->label = 'Total Hours';
+	$field7->table = $module->basetable;
+	$field7->column = 'totalhours';
+	$field7->uitype = 7;
+	$field7->typeofdata = 'I~O';
+	$block->addField($field7);	
+
+	/** Create required fields and add to the block */
+	$field8 = new Vtiger_Field();
+	$field8->name = 'description';
+	$field8->label = 'Description';
+	$field8->table = $module->basetable;
+	$field8->column = 'description';
+	$field8->columntype = 'VARCHAR(500)';
+	$field8->uitype = 19;
+	$field8->typeofdata = 'V~O';
+	$field8->iscustom	= 0;
+	$blockcf->addField($field8); /** Creates the field and adds to block */
 
 	/**
 		ADD YOUR FIELDS HERE
 	*/
 
 	/** Common fields that should be in every module, linked to vtiger CRM core table */
-	$field2 = new Vtiger_Field();
-	$field2->name = 'assigned_user_id';
-	$field2->label = 'Assigned To';
-	$field2->table = 'vtiger_crmentity';
-	$field2->column = 'smownerid';
-	$field2->uitype = 53;
-	$field2->typeofdata = 'V~M';
-	$block->addField($field2);
+	$field21 = new Vtiger_Field();
+	$field21->name = 'assigned_user_id';
+	$field21->label = 'Assigned To';
+	$field21->table = 'vtiger_crmentity';
+	$field21->column = 'smownerid';
+	$field21->uitype = 53;
+	$field21->typeofdata = 'V~M';
+	$block->addField($field21);
 
-	$field3 = new Vtiger_Field();
-	$field3->name = 'createdtime';
-	$field3->label= 'Created Time';
-	$field3->table = 'vtiger_crmentity';
-	$field3->column = 'createdtime';
-	$field3->uitype = 70;
-	$field3->typeofdata = 'T~O';
-	$field3->displaytype= 2;
-	$block->addField($field3);
+	$field31 = new Vtiger_Field();
+	$field31->name = 'createdtime';
+	$field31->label= 'Created Time';
+	$field31->table = 'vtiger_crmentity';
+	$field31->column = 'createdtime';
+	$field31->uitype = 70;
+	$field31->typeofdata = 'T~O';
+	$field31->displaytype= 2;
+	$block->addField($field31);
 
-	$field4 = new Vtiger_Field();
-	$field4->name = 'modifiedtime';
-	$field4->label= 'Modified Time';
-	$field4->table = 'vtiger_crmentity';
-	$field4->column = 'modifiedtime';
-	$field4->uitype = 70;
-	$field4->typeofdata = 'T~O';
-	$field4->displaytype= 2;
-	$block->addField($field4);
+	$field41 = new Vtiger_Field();
+	$field41->name = 'modifiedtime';
+	$field41->label= 'Modified Time';
+	$field41->table = 'vtiger_crmentity';
+	$field41->column = 'modifiedtime';
+	$field41->uitype = 70;
+	$field41->typeofdata = 'T~O';
+	$field41->displaytype= 2;
+	$block->addField($field41);
 
 
 	// Create default custom filter (mandatory)
