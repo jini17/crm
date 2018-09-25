@@ -17,6 +17,9 @@ $languageStrings = array(
 	'LBL_ADD_USERS_ROLES'          => 'Tambah Pengguna, Peranan...'         , // TODO: Review
 	'LBL_ROLEANDSUBORDINATE'       => 'Peranan dan Orang Bawahan'       , // TODO: Review
 	'RoleAndSubordinates'          => 'Peranan dan Orang Bawahan'       , // TODO: Review
+	'Groups'					   => 'Kumpulan',
+	'Name'                         => 'Nama',
+
 );
 $jsLanguageStrings = array(
 	'JS_PLEASE_SELECT_ATLEAST_ONE_MEMBER_FOR_A_GROUP' => 'Sila Pilih sekurang-kurangnya satu ahli untuk kumpulan ini', // TODO: Review

@@ -45,7 +45,9 @@ class Users_Login_Action extends Vtiger_Action_Controller {
                         $usip=$_SERVER['HTTP_X_FORWARDED_FOR'];	//add one more param IP address by jitu@28Dec2016	
                 }
 
-        $allowedipres = false;
+
+                $allowedipres = false;
+
                 $allowedipres = $this->AllowedIp($usip,$username);
 
                 //echo $allowedipres;die;
@@ -109,9 +111,12 @@ class Users_Login_Action extends Vtiger_Action_Controller {
                                 header("Location: index.php");
                                 exit();
                         }
-                } else if($allowedipres==false) {
-            $moduleModel->saveLoginHistory($username, 'Failed login', $browser, $usip);
-            header('Location: index.php?module=Users&parent=Settings&view=Login&error=9');
+
+                } 
+                else if($allowedipres==false) {
+                    $moduleModel->saveLoginHistory($username, 'Failed login', $browser, $usip);
+                    header('Location: index.php?module=Users&parent=Settings&view=Login&error=9');
+
 
         }else{
                    //Track the login History by jitu@10-04-2015

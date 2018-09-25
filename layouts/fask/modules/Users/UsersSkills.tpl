@@ -25,7 +25,7 @@
                                 <h5>{vtranslate('LBL_SKILL_LANG', $MODULE)}</h5>
                             </div>
                             <hr>
-                            <table class="table detailview-table no-border">
+                            <table class="table detailview-table">
                                 <thead>
                                     <tr>
                                         <th nowrap="">

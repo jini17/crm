@@ -26,6 +26,9 @@ $languageStrings = Array(
 	'Assigned To' => 'Diperuntukkan Kepada',
 	'Holiday No' => 'No Perayaan',
 	'Perayaan Butiran' => 'Butiran Perayaan',
+	'Holiday List' => 'Senarai Perayaan',
+	'LBL_HOLIDAY' => 'Perayaan',
+	'LBL_DATE' => 'Tarikh',
 	
 
 );

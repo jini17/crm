@@ -168,9 +168,7 @@ Vtiger.Class("Users_Leave_Js", {
 					var len = $("#reason").val().length;
 					var remainchar = 300 - len;
 			    		$('#charNum_reason').text(remainchar + ' character(s) left');
-					//**
-					//**DISBLE SELECT 2 PENDING
-					//**
+					
 					if(jQuery('#notapprove').is(':checked')){
 						$('div#rejectionreason').removeClass('hide');
 					}
@@ -180,9 +178,36 @@ Vtiger.Class("Users_Leave_Js", {
                          })
 					var params = {
                             submitHandler : function(form){
-                                var form = jQuery('#editLeave');   
-                                thisInstance.saveLeaveDetails(form);
-                            }
+                              
+                              
+
+                              var userid = jQuery('#current_user_id').val();
+                              
+                             // app.helper.showProgress();
+                              var extraData = {};
+                              var chkboxstarthalf = $('#starthalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
+	                         var chkboxendhalf = $('#endhalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
+                              var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
+                              var chkboxstudying = $('#chkstudying').is(':checked')?'1':'0';
+                              /*var extraData = form.serializeFormData();
+			
+                              extraData.chkboxstarthalf = jQuery('#starthalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
+                              extraData.chkboxendhalf = jQuery('#endhalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
+                              extraData.module = app.getModuleName();
+                              extraData.action = 'SaveSubModuleAjax';
+                              extraData.mode = 'saveLeave';
+                              */
+                                thisInstance._upload(form, extraData).then(function(data) { 
+                                  // app.helper.hideProgress(); 
+                                  // app.helper.hideModal();
+		                      //   app.helper.showSuccessNotification({'message': app.vtranslate(data.msg, 'Users')});	
+         	                       //  thisInstance.updateLeaveGrid(userid);
+		                         
+		                         }, function(e) {
+		                         //   app.helper.showErrorNotification({'message': app.vtranslate(data.msg, 'Users')});
+	                         }); 
+                             
+                             }
                         };
                          form.vtValidate(params)
           		} else {
@@ -192,39 +217,62 @@ Vtiger.Class("Users_Leave_Js", {
 	     return aDeferred.promise();	
 	},
 
+     _upload : function(form,extraData) {
+  
+    	var aDeferred = jQuery.Deferred();
+		 var file_data = jQuery('#attachment').prop('files')[0];   
+                 
+	
+		jQuery('#btnsuccess').on('click', function() {	alert('ok');
+		     var file_data = jQuery('#attachment').prop('files')[0];   
+		     var formData = new FormData();                    
+		    formData.append('file', file_data);                            
+		    jQuery.ajax({
+		        url: 'index.php?module=Users&parent=Settings&action=SaveSubModuleAjax&mode=saveLeave', 
+		        cache: false,
+		        contentType: false,
+		        processData: false,
+		        data: formData,                         
+		        type: 'post',
+		        success: function(php_script_response){
+		            alert(php_script_response); 
+		        }
+		    });
+		});
+		/*if(file_data) {
+	     if(typeof extraData === 'object') {
+				jQuery.each(extraData, function(name,value) {
+					formData.append(name,value);
+				});
+			}
+			//append file
+			formData.append('file',file_data);
+               alert(formData);
+     		var params = {
+				url: "index.php?module=Users&parent=Settings&action=SaveSubModuleAjax&mode=saveLeave",
+				type: "POST",
+				cache: false,
+				data: formData,
+				processData: false,
+				contentType: false
+			};
+			console.log(params);
 
-	 saveLeaveDetails : function(form){  
-          var aDeferred = jQuery.Deferred();
-          app.helper.hideModal();
-          var thisInstance = this;
-          var userid = jQuery('#current_user_id').val();
-          app.helper.showProgress();
-          var chkboxstarthalf = $('#starthalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
-		  var chkboxendhalf = $('#endhalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
-          var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
-          var chkboxstudying = $('#chkstudying').is(':checked')?'1':'0';
-          var aparams = form.serializeFormData();
-									aparams.chkboxstarthalf = jQuery('#starthalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
-									aparams.chkboxendhalf = jQuery('#endhalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
-									aparams.module = app.getModuleName();
-									aparams.action = 'SaveSubModuleAjax';
-									aparams.mode = 'saveLeave';
+			app.helper.showProgress();
+			app.request.post(params).then(function(e,res) {
 				
-       console.log(aparams);
-         app.request.post({'data': aparams}).then(function (err, data) {     
-              app.helper.hideProgress(); 
-           
-              if(data.success){
-              	 app.helper.showSuccessNotification({'message': app.vtranslate(data.msg, 'Users')});	
-              	 thisInstance.updateLeaveGrid(userid);
-              } else {
-              	 app.helper.showErrorNotification({'message': app.vtranslate(data.msg, 'Users')});
-              }
-             }
-          );
-           return aDeferred.promise();
-     },	
-
+				if(!e) {
+					aDeferred.resolve(res);
+				} else {
+					aDeferred.reject(e);
+				}
+			});
+		} else {
+			aDeferred.reject();
+		}*/
+		return aDeferred.promise();
+	},
+	 
 		//Added by jitu@secondcrm on 17-03-2015 for 
 	registerSetLeaveType : function() {
 		$("#my_selyear").select2({ width: '100px'});

@@ -3,7 +3,7 @@
 require_once 'vtlib/Vtiger/Module.php';
 $vtiger_utils_log = true;
 
-$modulename = 'Training';
+$modulename = 'Attendance';
 $moduleinstance = vtiger_module::getinstance($modulename);
 
 require_once 'modules/ModComments/ModComments.php';

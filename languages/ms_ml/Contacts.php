@@ -75,6 +75,10 @@ $languageStrings = array(
 	'SINGLE_Document'             => 'Dokumen',
 	'Document'                    => 'Dokumen',
 	'LBL_DOCUMENT'				  => 'Dokumen',
+	'LBL_UPLOAD' => 'Muat Naik',
+	'LBL_NOTE_EXISTING_ATTACHMENTS_WILL_BE_REPLACED' => 'Nota: Lampiran sebelum ini(Gambar/Fail) akan digantikan',
+	'LBL_KEY_FIELDS' => 'Medan Utama',
+	'LBL_ENRICH_DATA_LOCKED' => 'Memperkayakan Data',
     
 );
 $jsLanguageStrings = array(
