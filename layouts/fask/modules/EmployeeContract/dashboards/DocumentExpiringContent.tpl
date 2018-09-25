@@ -14,7 +14,7 @@
 {if count($MODELS) > 0}
         <div class='row th' style="padding:5px;margin-right:-1px;margin-left:-1px;">
                         <div class='col-lg-4'>
-                        <b>{vtranslate('Name',$MODULE_NAME)} </b>
+                        <b>{vtranslate('LBL_NAME',$MODULE_NAME)} </b>
                         </div>
                         <div class='col-lg-4'>
                         <b>{vtranslate('Department',$MODULE_NAME)}</b>
