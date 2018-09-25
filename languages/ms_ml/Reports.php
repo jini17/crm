@@ -184,6 +184,15 @@ $languageStrings = array(
 	'LBL_CHARTS' => 'Carta',
     //Schedule Reports - Mail Content
     'LBL_AUTO_GENERATED_REPORT_EMAIL' => 'This is an auto-generated email sent by a scheduled report.', //fiza
+    'Report Type' => 'Jenis Laporan',
+    'Primary Module' => 'Modul Utama',
+    'LBL_SELECT_GROUP_BY_FIELD' => 'Pilih Kumpulan dari Medan',
+    'LBL_SELECT_DATA_FIELD' => 'Pilih Medan Data',
+    'Bring to Dashboard' => 'Bawa ke Paparan Utama',
+    'LBL_SELECT_DASHBOARD_TAB' => 'Pilih Paparan Utama',
+    'Help' => 'Bantuan',
+    'Jump To' => 'Lompat ke',
+
 );
 $jsLanguageStrings = array(
 	'JS_DUPLICATE_RECORD'          => 'Laporan berduplikasi'            , // TODO: Review

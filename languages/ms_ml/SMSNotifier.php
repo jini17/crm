@@ -21,4 +21,5 @@ $languageStrings = array(
 	'LBL_SMSNOTIFIER_INFORMATION'  => 'Maklumat SMS'             , 
 	'SINGLE_SMSNotifier'           => 'Mesej SMS'                , // TODO: Review
 	'SMSNotifier'=>'Mesej SMS',
+	'Source' => 'Sumber',
 );

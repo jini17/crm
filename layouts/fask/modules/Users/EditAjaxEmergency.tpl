@@ -29,47 +29,71 @@
                 <input type="hidden" value="saveEmergencyContact" name="mode">
                 <input id="current_user_id" name="current_user_id" type="hidden" value="{$USERID}">
                 <div class="modal-body">
-                        <!--start-->
-                        <div class="control-group">
-                                <label class="control-label fieldLabel">
-                                    &nbsp;{vtranslate('LBL_CONTACT_NAME', $MODULE)} &nbsp;  <span class="redColor">*</span>
-                                </label>
-                                <div class="controls">
-                                        <input id="contact_name" class="input-large inputElement nameField" type="text"  value="{$EMERGENCY_DETAIL['contact_name']}" name="contact_name"  data-validation-engine="validate[required]" data-rule-required = "true">
-                                </div>
-                          
-                        </div>
-                <!--end-->
-                        <div class="control-group">
-                                <label class="control-label fieldLabel">
-                                    &nbsp;{vtranslate('LBL_HOME_PH', $MODULE)} &nbsp;  <span class="redColor">*</span>
-                                </label>
-                                <div class="controls">
-                                        <input id="home_phone" class="input-large inputElement nameField" type="text"  value="{$EMERGENCY_DETAIL['home_phone']}" name="home_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($HOMEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
+                         <!--start-->
+                    <div class="row-fluid">
+                        <div class="form-group" style="margin-bottom: 0px !important;">
+                                <div class="col-md-12" style="margin-bottom: 15px;">
+                                        <div class="col-md-4">
+                                                <label class="control-label fieldLabel">
+                                                    &nbsp;{vtranslate('LBL_CONTACT_NAME', $MODULE)} &nbsp;  <span class="redColor">*</span>
+                                                </label>
+                                        </div>
+                                        <div class="controls fieldValue col-md-8">
+                                            <input id="contact_name" class="input-large inputElement nameField" type="text"  value="{$EMERGENCY_DETAIL['contact_name']}" name="contact_name"  data-validation-engine="validate[required]" data-rule-required = "true">
+                                        </div>
                                 </div>
                         </div>
-                        <div class="control-group">
-                                <label class="control-label fieldLabel">
-                                        &nbsp;{vtranslate('LBL_OFFICE_PH', $MODULE)} <span class="redColor">*</span>
-                                </label>
-                                <div class="controls">
-                                        <input id="office_phone" class="input-large inputElement nameField" type="text" value="{$EMERGENCY_DETAIL['office_phone']}" name="office_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($OFFICEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
+                        <!--end-->
+                        <div class="form-group" style="margin-bottom: 0px !important;">
+                                <div class="col-md-12" style="margin-bottom: 15px;">
+                                        <div class="col-md-4">
+                                                <label class="control-label fieldLabel">
+                                                    &nbsp;{vtranslate('LBL_HOME_PH', $MODULE)} &nbsp;  <span class="redColor">*</span>
+                                                </label>
+                                        </div>
+                                        <div class="controls fieldValue col-md-8">
+                                            <input id="home_phone" class="input-large inputElement nameField" type="text"  value="{$EMERGENCY_DETAIL['home_phone']}" name="home_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($HOMEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
+                                        </div>
+                                </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 0px !important;">
+                                <div class="col-md-12" style="margin-bottom: 15px;">
+                                        <div class="col-md-4">
+                                                <label class="control-label fieldLabel">
+                                                    &nbsp;{vtranslate('LBL_OFFICE_PH', $MODULE)} <span class="redColor">*</span>
+                                                </label>
+                                        </div>
+                                        <div class="controls fieldValue col-md-8">
+                                            <input id="office_phone" class="input-large inputElement nameField" type="text" value="{$EMERGENCY_DETAIL['office_phone']}" name="office_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($OFFICEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
+                                        </div>
+                                </div>
+
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 0px !important;">
+                                <div class="col-md-12" style="margin-bottom: 15px;">
+                                        <div class="col-md-4">
+                                                <label class="control-label  fieldLabel">
+                                                    &nbsp;{vtranslate('LBL_MOBILE', $MODULE)} &nbsp;    <span class="redColor">*</span>
+                                                </label>
+                                        </div>
+                                        <div class="controls fieldValue col-md-8">
+                                            <input id="mobile" class="input-large inputElement nameField" type="text"  value="{$EMERGENCY_DETAIL['mobile']}" name="mobile" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($MOBILEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
+                                        </div>
                                 </div>
                         </div>
-                        <div class="control-group">
-                                <label class="control-label  fieldLabel">
-                                     &nbsp;{vtranslate('LBL_MOBILE', $MODULE)} &nbsp;    <span class="redColor">*</span>
-                                </label>
-                                <div class="controls">
-                                        <input id="mobile" class="input-large inputElement nameField" type="text"  value="{$EMERGENCY_DETAIL['mobile']}" name="mobile" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($MOBILEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
-                                </div>
-                        </div>		 	
-                        <div class="control-group">
-                                <label class="control-label fieldLabel">
-                                      &nbsp;{vtranslate('LBL_RELATIONSHIP', $MODULE)} &nbsp;   <span class="redColor">*</span>
-                                </label>
-                                <div class="controls">
-                                    <select class="select2" name="relationship" id ="relationship" data-rule-required = "true" style="width:100%;">	
+
+                        <div class="form-group" style="margin-bottom: 0px !important;">
+                                <div class="col-md-12" style="margin-bottom: 15px;">
+                                        <div class="col-md-4">
+                                                <label class="control-label fieldLabel">
+                                                    &nbsp;{vtranslate('LBL_RELATIONSHIP', $MODULE)} &nbsp;   <span class="redColor">*</span>
+                                                </label>
+                                        </div>
+                                        <div class="controls fieldValue col-md-8">
+                                            <select class="select2" name="relationship" id ="relationship" data-rule-required = "true" style="width:100%;"> 
                                                 <option value="{vtranslate('LBL_FATHER', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL.relationship eq {vtranslate('LBL_FATHER', $QUALIFIED_MODULE)}} selected {/if}>
                                                 {vtranslate('LBL_FATHER', $QUALIFIED_MODULE)}</option>
 
@@ -86,9 +110,12 @@
                                                 {vtranslate('LBL_FRIEND', $QUALIFIED_MODULE)}</option>
 
                                                 <option value="{vtranslate('OTHERS', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL.relationship eq {vtranslate('OTHERS', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> 
-                                        </select>	
+                                        </select>
+                                        </div>
                                 </div>
                         </div>
+                                
+                    </div>
                         <!--<div class="control-group">
                                 <label class="control-label">&nbsp;{vtranslate('LBL_WANT_TO_MAKE_PUBLIC', $QUALIFIED_MODULE)}</label>
                                 <div class="controls">
@@ -96,11 +123,13 @@
                                 </div>
                         </div>-->
                 </div>
-                <div class="modal-footer">
-                        <div class="pull-right cancelLinkContainer" style="margin-top:0px;">
-                                <input class="cancelLink btn btn-danger" type="button" value="Cancel" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal">
+                <div class="modal-footer" style="margin-bottom: 10px;margin-right: 10px; margin-left: 10px;">
+                    <div style="margin-right: 220px;">
+                        <div class="pull-right cancelLinkContainer" style="margin-top:0px;margin-left: 5px;">
+                                <input class="cancelLink btn btn-danger" type="button" value="{vtranslate('Cancel',$MODULE)}" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal">
                         </div>
-                        <input class="btn btn-success" type="submit" value="Save" name="saverecord" accesskey="LBL_SAVE_BUTTON_KEY" title="Save">
+                        <input class="btn btn-success" type="submit" value="{vtranslate('Save',$MODULE)}" name="saverecord" accesskey="LBL_SAVE_BUTTON_KEY" title="Save">
+                    </div>
                 </div>    	 	
         </form>
 
