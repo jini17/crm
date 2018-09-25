@@ -17,6 +17,8 @@ $languageStrings = Array(
 	'LBL_RECORDS_LIST' => 'Senarai Tong Kitar Semula',
 	'LBL_NO_RECORDS_FOUND' => 'Tiada rekod dijumpai untuk Di Simpan semula di dalam modul',
 	'Recycle Bin' => 'Tong Kitar Semula',
+	'Sales Stage' => 'Peringkat Jualan',
+	'Amount' => 'Jumlah',
 );
 
 $jsLanguageStrings = array(

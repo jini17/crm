@@ -181,31 +181,35 @@
                         </div>
 
                 </div>
-                <div class="modal-footer" style="margin-bottom: 10px;margin-right: 10px; margin-left: 10px;">
+                <div class="modal-footer" style="margin-bottom: 10px;margin-right: 10px; margin-left: 10px; padding-top: 5px; padding-bottom: 5px;">
                     <div style="margin-right: 140px;">
                         <div class="pull-right cancelLinkContainer" style="margin-top:0px;margin-left: 5px;">
 
                 {if $MANAGER eq 'true'}
-                        <input class="cancelLink btn btn-danger" type="button" value="Cancel" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel" aria-hidden="true" data-dismiss="modal">
+                        <input class="cancelLink btn btn-danger" type="button" value="{vtranslate('Cancel',$MODULE)}" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel" aria-hidden="true" data-dismiss="modal">
 
-                        <input class="btn btn-success" type="submit" value="Save Changes" name="savechanges" accesskey="LBL_SAVE_CHANGES_BUTTON_KEY" title="Save Changes">
+                        <input class="btn btn-success" type="submit" value="{vtranslate('Save Changes',$MODULE)}" name="savechanges" accesskey="LBL_SAVE_CHANGES_BUTTON_KEY" title="Save Changes">
 
                 {else}	
-                        <input class="cancelLink btn btn-danger" type="button" value="Cancel" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal">
+                        <input class="cancelLink btn btn-danger" type="button" value="{vtranslate('Cancel',$MODULE)}" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal">
 
                         </div>
                         <!--Enable or disable button-->
                         {if $LEAVESTATUS eq 'Apply' || $LEAVESTATUS eq 'Approve' || $LEAVESTATUS eq 'Not Approved' || $LEAVESTATUS eq 'Canccel'}
-                        <input class="btn btn-disable" type="button"   value="Apply Leave" name="applyleave" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Leave">
+
+                        <input class="btn btn-disable" type="button" onclick="document.getElementById('savetype').value='Apply'"  value= "{vtranslate('Apply Leave',$MODULE)}" name="applyleave" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Leave">
                         {else}
-                        <input class="btn btn-success" id ="btnsuccess" type="submit"  value="Apply Leave" name="applyleave" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Leave">
+                        <input class="btn btn-success" type="submit" onclick="document.getElementById('savetype').value='Apply'"  value="{vtranslate('Apply Leave',$MODULE)}" name="applyleave" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Leave">
+
                         {/if}
 
                         <!--Enable or disable button-->
                         {if $LEAVESTATUS eq 'Apply' || $LEAVESTATUS eq 'Approve' || $LEAVESTATUS eq 'Not Approved' || $LEAVESTATUS eq 'Canccel'}
-                        <input class="btn btn-disable" type="button" value="Save As Draft" name="saverecord" accesskey="LBL_SAVE_BUTTON_KEY" title="Save">
+
+                        <input class="btn btn-disable" type="button" onclick="document.getElementById('savetype').value='New';" value="{vtranslate('Save As Draft',$MODULE)}" name="saverecord" accesskey="LBL_SAVE_BUTTON_KEY" title="Save">
                         {else}
-                        <input class="btn btn-success" type="submit" value="Save As Draft" name="saverecord" accesskey="LBL_SAVE_BUTTON_KEY" title="Save">
+                        <input class="btn btn-success" type="submit" onclick="document.getElementById('savetype').value='New';" value="{vtranslate('Save As Draft',$MODULE)}" name="saverecord" accesskey="LBL_SAVE_BUTTON_KEY" title="Save">
+
                         {/if}
                 {/if}
                     </div>

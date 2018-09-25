@@ -4,10 +4,10 @@
 	<div class="listViewEntriesDiv contents-bottomscroll " style="padding-top: 5px;">
 	    <div class="bottomscroll-div">
 		    <div>
-		        <h5>Claims</h5>
+		        <h5>{vtranslate('Claims', $MODULE)}</h5>
 		    </div>
 	    <hr>
-		<table class="table detailview-table no-border listViewEntriesTable">
+		<table class="table detailview-table listViewEntriesTable">
 			<thead>
 				<tr>
 					<th nowrap>{vtranslate('LBL_CLAIM_NO', $MODULE)}</th>
@@ -114,7 +114,7 @@
 
 
 
-<table class="table detailview-table no-border  listViewEntriesTable">
+<table class="table detailview-table  listViewEntriesTable">
 <thead>
 	<tr>
 		<th nowrap>{vtranslate('LBL_FULLNAME', $MODULE)}</th>
@@ -209,7 +209,7 @@
 		        <h5>{vtranslate('Claims', $MODULE)}</h5>
 		    </div>
 		    <hr />
-				<table class="table detailview-table no-border listViewEntriesTable">
+				<table class="table detailview-table listViewEntriesTable">
 					<thead>
 						<tr>
 							<th nowrap>{vtranslate('LBL_CLAIM_NO', $MODULE)}</th>
@@ -353,7 +353,7 @@
 	</span>
 </div>
 		<!--@@@@@@@@@@@@END PAGINATION TOOLS@@@@@@@@@@@@@@@-->
-<table class="table detailview-table no-border listViewEntriesTable">
+<table class="table detailview-table listViewEntriesTable">
 <thead>
 	<tr>
 		<th nowrap>{vtranslate('LBL_FULLNAME', $MODULE)}</th>

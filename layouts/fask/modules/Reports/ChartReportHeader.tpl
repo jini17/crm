@@ -89,7 +89,7 @@
                             </select>
                           <span class="col-lg-4">
                              {if !$BUTTONSTATUS}  
-                                <a href="javascript:Reports_Detail_Js.registerBringToDashboard();" data-mode="dash" class="btn btn-success"><strong>Bring to Dashboard</strong></a>
+                                <a href="javascript:Reports_Detail_Js.registerBringToDashboard();" data-mode="dash" class="btn btn-success"><strong>{vtranslate('Bring to Dashboard', $MODULE)}</strong></a>
                             {else}  
                                 <a href="javascript:" data-mode="dash" class="btn disabled"><strong>Bring to Dashboard</strong></a>
                             {/if}

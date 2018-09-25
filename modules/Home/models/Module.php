@@ -496,7 +496,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 			}
 		//echo $query;
 		}
-		$query .= "ORDER BY birthdate ASC  Limit 3";
+		 $query .= "ORDER BY unix_timestamp(CONCAT(YEAR(CURDATE()),'-', date_format(birthday,'%m-%d'))) ASC ";
 		$result = $db->pquery($query, array());
 				$birthdays = array();
 		if($db->num_rows($result) > 0) {

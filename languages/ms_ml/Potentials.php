@@ -44,5 +44,6 @@ $languageStrings = array(
 	'LBL_RELATED_CONTACTS'         => 'Kenalan Berkaitan'            , // TODO: Review
 	'LBL_RELATED_PRODUCTS'         => 'Produk Berkaitan'            , // TODO: Review
 	'Potentials Won' =>'Potensi Menang',
+	'Funnel' => 'Corong Jualan',
 	//'Total Amount by Sales stage'=>'Jumlah keseluruhan mengikut peringkat Jualan',
 );
