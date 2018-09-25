@@ -37,6 +37,9 @@ $languageStrings = array(
 	'Amount Approved'				=>	'Jumlah Diluluskan',
 
 	'Job Scope' => 'Skop Kerja',
+	'Name' => 'Nama',
+	'Department' => 'Jabatan',
+	'Expiry Date' => 'Tarikh Tamat Tempoh',
 
 	
 

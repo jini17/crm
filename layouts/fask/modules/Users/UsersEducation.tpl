@@ -24,10 +24,10 @@
                         <div class="listViewEntriesDiv contents-bottomscroll " style="padding-top: 5px;">
                             <div class="bottomscroll-div">
                             <div>
-                                <h5>Education</h5>
+                                <h5>{vtranslate('Education', $MODULE)}</h5>
                             </div>
                             <hr>
-                            <table class="table detailview-table no-border">
+                            <table class="table detailview-table">
                                 <thead>
                                     <tr>
                                         <th nowrap="">

@@ -30,4 +30,41 @@ $languageStrings = array(
 	'Total Amount by Sales stage'=>'',
 	'LBL_MEMBERS_LEAVES'=>'Cuti',
 	'LBL_LEAVE_APPROVAL'=>'Kelulusan Cuti Ditahan',
+	'Current Subscription' => 'Langganan Semasa',
+	'Chart Report' => 'Laporan Carta',
+	
+	'Employee Contract Expiring' => 'Kontrak Pekerja Tamat Tempoh',
+	'Notebook' => 'Buku Nota',
+
+	
+	'Upcoming Meetings' => 'Mesyuarat Akan Datang',
+	'Foundation' => 'Asas',
+	'User' => 'Pengguna',
+	'Add-On\'s' => 'Tambahan',
+	'Sales' => 'Jualan',
+	'Support' => 'Sokongan',
+	'Enterprise' => 'Enterprise',
+	'Your subscription is started at' => 'Langganan anda bermula pada',
+	'and will expire on' => 'dan akan tamat pada',
+	'LBL_TODAY' => 'Hari ini',
+	'LBL_TOMORROW' => 'Esok',
+	'LBL_THIS_WEEK' => 'Minggu ini',
+	'LBL_NEXT_WEEK' => 'Minggu depan',
+	'LBL_THIS_MONTH' => 'Bulan ini',
+	'LBL_NAME' => 'Nama Pekerja',
+	'LBL_BIRTHDATE' => 'Tarikh Lahir',
+	'LBL_NO' => 'Tiada',
+	'Total' => 'Jumlah',
+	
+	
+	'Employees Chart List' => 'Carta Senarai Pekerja',
+	'LBL_MAX_CHARACTERS_ALLOWED_DASHBOARD' => 'Hanya 30 huruf yang dibenarkan untuk nama laman muka baru.',
+	'LBL_ADD_NEW_DASHBOARD' => 'Tambah Laman Baru',
+	'LBL_REARRANGE_DASHBOARD_TABS' => 'Susun Semula Tab',
+	'Holiday List' => 'Senarai Perayaan',
+	'Employees List' => 'Senarai Pekerja',
+	'Message Board' => 'Papan Mesej',
+	'My Claim' => 'Tuntutan Saya',
+	'LBL_REPORT_CHART' => 'Laporan Carta',
+
 );

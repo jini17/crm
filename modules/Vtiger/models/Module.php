@@ -800,18 +800,31 @@ class Vtiger_Module_Model extends Vtiger_Module {
 		$userPrivModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
 
 		$entityModules = self::getEntityModules();
-
+                                           $restrictedModules = self::getRestrictedModules($userPrivModel ->get('roleid')); 
 		$searchableModules = array();
 		foreach ($entityModules as $tabid => $moduleModel) {
 				$moduleName = $moduleModel->getName();
-				if ($moduleName == 'Users' || $moduleName == 'Emails' || $moduleName == 'Events') continue;
+				if ($moduleName == 'Users' || $moduleName == 'Emails' || $moduleName == 'Events' 
+                                                                                    || in_array($moduleName, $restrictedModules )) continue;
 				if($userPrivModel->hasModuleActionPermission($moduleModel->getId(), 'DetailView')) {
 						$searchableModules[$moduleName] = $moduleModel;
 				}
 		}
 		return $searchableModules;
 	}
-
+                    public static function getRestrictedModules($roleid){
+                                $db = PearDatabase::getInstance();
+                                $resplan =  $db->pquery("SELECT planid FROM vtiger_role WHERE roleid=?", array($roleid));
+                                $planid    = $db->query_result($resplan, 0, 'planid');
+                                $result = $db->pquery("SELECT module FROM secondcrm_planpermission WHERE visible=0 AND planid=?", array($planid));
+                                
+                                 $modules = array();
+                                for($i=0;$i<$db->num_rows($result);$i++){
+                                    $modules[] = $db->query_result($result, $i, 'module');
+                                }
+                                
+                                return  $modules;
+                    }
 	protected static function preModuleInitialize2() {
 		if(!Vtiger_Cache::get('EntityField','all')){
 			$db = PearDatabase::getInstance();

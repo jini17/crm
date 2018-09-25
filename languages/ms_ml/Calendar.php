@@ -97,6 +97,17 @@ $languageStrings = array(
 	//Added by Azim 20/9/2018
 	'Meeting Agenda' => 'Agenda Mesyuarat',
 	'Recurrence' => 'Ulang',
+	'LBL_EDIT_WORKFLOWS' => 'Kemaskini Aliran Kerja',
+	'Calendar List' => 'Senarai Kalendar',
+	'Subject' => 'Subjek',
+	'LBL_FROM' => 'Tarikh & Masa Mula',
+	'LBL_TO' => 'Tarikh & Masa Akhir',
+	'LBL_EVENTS' => 'Acara',
+	'LBL_TASKS' => 'Tugas',
+	'LBL_EDIT_FIELDS' => 'Medan & Susun Atur',
+	'LBL_WORKFLOWS' => ' Aliran Kerja',
+	'LBL_PICKLIST_VALUES' => 'Nilai Pilih Senarai',
+
 	
 	
 );
@@ -161,6 +172,9 @@ $jsLanguageStrings = array(
 	'LBL_ALL_DAY' => 'Semua Hari',
 	
 	'Mobile Call' => 'Panggilan Telefon Bimbit',
+	
+	
+	
 	//End
 	
 	//Fixing colors for Shared Calendar and My Calendar

@@ -17,7 +17,7 @@
                         <li class="active employeeTab" data-tabname="Employee Directory">
                             <a data-toggle="tab" href="#tab_2">
                                     <div><span class="name textOverflowEllipsis" value="Employee Directory" style="width:10%">
-                                        <strong>Employee Directory</strong></span><span class="editTabName hide">
+                                        <strong>{vtranslate('Employee Directory',$MODULE)}</strong></span><span class="editTabName hide">
                                         <input name="tabName" type="text"></span><i class="fa fa-bars moveTab hide"></i>
                                     </div>
                             </a>
@@ -25,7 +25,7 @@
                         <li class=" employeeTab" data-tabname="My Department">
                                 <a data-toggle="tab" href="#tab_1">
                                     <div><span class="name textOverflowEllipsis" value="Tasks" style="width:10%">
-                                        <strong>My Department</strong></span><span class="editTabName hide">
+                                        <strong>{vtranslate('My Department',$MODULE)}</strong></span><span class="editTabName hide">
                                         <input name="tabName" type="text"></span><i class="fa fa-bars moveTab hide"></i>
                                     </div></a>
                         </li>
