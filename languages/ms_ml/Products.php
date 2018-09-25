@@ -76,5 +76,7 @@ $languageStrings = array(
     'LBL_PRODUCTSMOD_DISABLED' => 'Aktifkan Produk Modul untuk melihat Produk',
    	 'Service'                     =>'Servis',
    	 'Sales'                       =>'Jualan',
+   	 'Source'					   => 'Sumber',
+   	 'Purchase Cost'			   => 'Harga Jualan',
    	 
 );

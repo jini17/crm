@@ -22,10 +22,10 @@
                     <div class="block listViewContentDiv" id="listViewContents" style="marign-top: 15px;">
                         <div class="listViewEntriesDiv contents-bottomscroll " style="padding-top: 5px;">
                             <div class="bottomscroll-div"><div>
-                                <h5>User Projects</h5>
+                                <h5>{vtranslate('User Projects', $MODULE)}</h5>
                             </div>
                             <hr>
-                            <table class="table detailview-table no-border">
+                            <table class="table detailview-table">
                                 <thead>
                                     <tr>
                                         <th nowrap="">

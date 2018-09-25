@@ -51,7 +51,19 @@ $languageStrings = array(
 
 	//added by Azim 20/9/2018
 	'LBL_NEW_DOCUMENT'                  => 'Dokumen Baru',
-	'LBL_SELECT_FILE_FROM_COMPUTER'     => 'Pilih daripada \'My Computer\'',
+	'LBL_SELECT_FILE_FROM_COMPUTER'     => 'Pilih dari \'My Computer\'',
+	'LBL_FILE_UPLOAD'	=> 'Muat Naik Fail',
+	'LBL_LINK_EXTERNAL_DOCUMENT' => 'Link Dokumen Dari Luar',
+	'LBL_VIEW_FILE' => 'Lihat Fail',
+	'LBL_EMAIL_FILE_AS_ATTACHMENT' => 'Emel Fail Sebagai Lampiran',
+	'Fields & Layout' => 'Medan & Susun Atur',
+	'LBL_CREATE_NEW' => 'Buat Baru',
+	'LBL_TO_SERVICE' => 'Ke %s',
+	'LBL_VTIGER' => 'Agiliux',
+	'LBL_FROM_SERVICE' => 'Dari',
+	'LBL_FILE_URL' => 'Fail URL',
+	'LBL_EDIT_FIELDS' => 'Medan & Susun Atur',
+	'LBL_EDIT_WORKFLOWS' => 'Aliran Kerja',
 	
 	 
 

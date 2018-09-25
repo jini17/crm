@@ -23,7 +23,7 @@
 					<option value=''>{vtranslate('LBL_SELECT_OPTION', $QUALIFIED_MODULE)}</option>
 					{foreach item=MODULE_NAME key=TRANSLATED_MODULE_NAME from=$SUPPORTED_MODULES}
 						<option value="{$MODULE_NAME}" {if $MODULE_NAME eq $SELECTED_MODULE_NAME} selected {/if}>
-							{$TRANSLATED_MODULE_NAME}
+							{vtranslate($TRANSLATED_MODULE_NAME, $MODULE_NAME)}
 						</option>
 					{/foreach}
 				</select>

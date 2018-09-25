@@ -281,7 +281,7 @@ $(this).hide();
                                         <li>
                                                 <div class="dropdownFinance">
                                                         <div class="addtionalDashboardTab">
-                                                                <span aria-hidden="true">HRM</span>
+                                                                <span aria-hidden="true">{vtranslate('HRM','Vtiger')}</span>
                                                         </div>
 
                                                         <div class="dropdown-content-Finance">
@@ -289,14 +289,14 @@ $(this).hide();
                                                                 <ul class="dropdownlist">
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings">
-                                                                                    <i class="material-icons module-icon">person</i>&nbsp;Employee
+                                                                                    <i class="material-icons module-icon">person</i>&nbsp;{vtranslate('Employee','Vtiger')}
                                                                                      
                                                                                 </a>
                                                                         </li>
                                                                           {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                                                         <li>
                                                                                <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&view=List">
-                                                                                    <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
+                                                                                    <i class="material-icons module-icon">exit_to_app</i>&nbsp;{vtranslate('Leave','Vtiger')}
                                                                                       
                                                                                 </a>
                                                                         </li>
@@ -304,7 +304,7 @@ $(this).hide();
                                                                                      <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
 
-                                                                                    <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
+                                                                                    <i class="material-icons module-icon">exit_to_app</i>&nbsp;{vtranslate('Leave','Vtiger')}
                                                                                       
                                                                                 </a>
                                                                         </li>
@@ -312,27 +312,27 @@ $(this).hide();
                                                                            {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
-                                                                                    <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
+                                                                                    <i class="material-icons module-icon">attach_money</i>&nbsp;{vtranslate('Claim','Vtiger')}
                                                                                        
                                                                                 </a>
                                                                         </li>
                                                                             {else}
                                                                                   <li>
                                                                                 <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
-                                                                                    <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
+                                                                                    <i class="material-icons module-icon">attach_money</i>&nbsp;{vtranslate('Claim','Vtiger')}
                                                                                        
                                                                                 </a>
                                                                         </li>
                                                                         {/if}
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Payslip" href="index.php?module=Payslip&amp;view=List&amp;app=ADMIN">
-                                                                                    <i class="material-icons module-icon">insert_drive_file</i>&nbsp;Payslip
+                                                                                    <i class="material-icons module-icon">insert_drive_file</i>&nbsp;{vtranslate('Payslip','Vtiger')}
                                                                                        
                                                                                 </a>
                                                                         </li>
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
-                                                                                    <i class="material-icons module-icon">timeline</i>&nbsp;Performance
+                                                                                    <i class="material-icons module-icon">timeline</i>&nbsp;{vtranslate('Performance','Vtiger')}
                                                                                        
                                                                                 </a>
                                                                         </li>
@@ -351,7 +351,7 @@ $(this).hide();
                                         <li>
                                                 <div class="dropdownSales">
                                                          <div class="addtionalDashboardTab">
-                                                                <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
+                                                                <span aria-hidden="true">{vtranslate('Sales','Vtiger')}</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
                                                         </div>
                                                        
 
@@ -402,7 +402,7 @@ $(this).hide();
                                         <li>
                                                 <div class="dropdownTools">
                                                         <div class="addtionalDashboardTab">
-                                                                <span aria-hidden="true">Communications</span>
+                                                                <span aria-hidden="true">{vtranslate('Communications','Vtiger')}</span>
                                                         </div>
                                                         <div class="dropdown-content-Tools">
 
@@ -410,7 +410,7 @@ $(this).hide();
 
                                                                     <li>
                                                                         <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                                                                                <i class="fa fa-bell-o"></i>&nbsp;Notification Templates
+                                                                                <i class="fa fa-bell-o"></i>&nbsp;{vtranslate('Notification Templates','Vtiger')}
                                                                         </a>
                                                                     </li>
                                                                  <!--   <li>
@@ -421,7 +421,7 @@ $(this).hide();
                                                                      {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                                                     <li>
                                                                         <a class="dropdown-icon-dashboard" title="Recycle Bin" href="index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS">
-                                                                                <i class="fa fa-trash-o"></i>&nbsp;Recycle Bin
+                                                                                <i class="fa fa-trash-o"></i>&nbsp;{vtranslate('Recycle Bin','Vtiger')}
                                                                         </a>
                                                                     </li>
                                                                     {/if}
@@ -451,7 +451,7 @@ $(this).hide();
                                         <li>
                                                 <div class="dropdownSupport">
                                                         <div class="addtionalDashboardTab">
-                                                                <span aria-hidden="true" >Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
+                                                                <span aria-hidden="true" >{vtranslate('Support','Vtiger')}</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
                                                         </div>
 
                                                          <div class="dropdown-content-Support">
@@ -514,7 +514,7 @@ width: 100%;
 /* color: #fff; */
 /* font-size: 15px; */
 padding: 10px 20px;
-text-decoration: none;">All</span>
+text-decoration: none;">{vtranslate('All','Vtiger')}</span>
                                                         </a>
                                                 </div>
                                         </li>
@@ -807,7 +807,7 @@ dashboard
 
                                                 <li>
                                                         <div>
-                                                                <a class="rightside-icon-dashboard" href="index.php?module=SMSNotifier&view=List&app=FOUNDATION" title="Notifications" aria-hidden="true">
+                                                                <a class="rightside-icon-dashboard" href="index.php?module=SMSNotifier&view=List&app=FOUNDATION" title="{vtranslate('Notifications','Vtiger')}" aria-hidden="true">
                                                                         <i class="fa fa-bell-o"></i>
                                                                 </a>
                                                         </div>
@@ -815,7 +815,7 @@ dashboard
 
                                                 <li>
                                                         <div>
-                                                                <a class="rightside-icon-dashboard" href="index.php?module=MailManager&view=List" title="Email" aria-hidden="true">
+                                                                <a class="rightside-icon-dashboard" href="index.php?module=MailManager&view=List" title="{vtranslate('Email','Vtiger')}" aria-hidden="true">
                                                                         <i class="fa fa-envelope-o"></i>
                                                                 </a>
                                                         </div>
@@ -823,7 +823,7 @@ dashboard
 
                                                 <li>
                                                         <div>
-                                                                <a class="rightside-icon-dashboard" href="index.php?module=Documents&view=List" title="Files" aria-hidden="true">
+                                                                <a class="rightside-icon-dashboard" href="index.php?module=Documents&view=List" title="{vtranslate('Files','Vtiger')}" aria-hidden="true">
                                                                         <i class="fa fa-file-o"></i>
                                                                 </a>
                                                         </div>

@@ -49,7 +49,7 @@ $languageStrings = array(
 	'LBL_PICKLIST_DESCRIPTION'     => 'Ubahsuai nilai Pilih Senarai dalam setiap modul', 
 	'LBL_PICKLIST_DEPENDENCY_SETUP' => 'Tetapan Pergantungan Pilih Senarai'   , 
 	'LBL_PICKLIST_DEPENDENCY_DESCRIPTION' => 'Tetapan Pergantungan antara nilai Pilih Senarai dalam setiap modul ', 
-	'LBL_MENU_EDITOR'              => 'Editor Menu'                 , 
+	'LBL_MENU_EDITOR'              => 'Penyunting Menu'                 , 
 	'LBL_MENU_DESC'                => 'Ubahsuai Turutan Menu'     , 
 	'LBL_MENU_EDITOR_MESSAGE'		=> 'Bilangan sebenar menu yang dipaparkan akan bergantung kepada saiz skrin dan mungkin kurang daripada dipilih.',
 	'EMAILTEMPLATES'               => 'Templat E-mel'             , 
@@ -194,7 +194,7 @@ $languageStrings = array(
 	'Workflows'=>'Aliran Kerja',
 	'LBL_COMPANY_NUMBERING_SETTING'=>'Tetapan Penomboran Syarikat',
 	'LBL_ASSIGN_COMPANY'=>'Menyerahhakkan Syarikat kepada Pengguna',
-	'LBL_AUTOMATION'=>'pengautomasian',
+	'LBL_AUTOMATION'=>'Pengautomasian',
 	'Yes'=>'Ya',
 	'Cancel'=>'Batal',
 	'Active'=>'Aktif',
@@ -322,7 +322,20 @@ $languageStrings = array(
 	'LBL_MY_TAGS' => 'Tag',
 	'LBL_TEMPLATES' => 'Templat',
 	'LBL_CONFIGURATION' => 'Konfigurasi',
-
+	'LBL_MY_PREFERENCES' => 'Profil Saya',
+	'LBL_SEARCH_FOR_SETTINGS' => 'Cari Tetapan',
+	'LBL_HR_MATTERS' => 'Perkara HR',
+	'Message Board' => 'Papan Mesej',
+	'LBL_MODULE_CUSTOMIZATION' => 'Medan dan Susun Atur Modul',
+	'LBL_USER_PLAN_SETTING' => 'Tetapan Pelan Pengguna',
+	'LBL_FULLCONTACT_CONFIG' => 'Konfig Kenalan Penuh',
+	'LBL_PICKLIST_DEPENDENCY' =>  'Pengantungan Pilihan Senarai',
+	'LBL_COMPANY_NUMBERING' => 'Tetapan Penomboran Syarikat',
+	'LBL_ALLOWED_IP' => 'Sekatan IP',
+	'LBL_RELATION_SHIPS' => 'Hubungan',
+	'LBL_DUPLICATE_HANDLING' => 'Kendali Pendua',
+	'LBL_NO_RELATION_TYPE' => 'Tiada hubungan untuk jenis ini',
+ 
 	//End here	
 );
 $jsLanguageStrings = array(

@@ -84,13 +84,13 @@
 </div>
     <div class="col-lg-6">
       <div class="btn-group list-switcher" role="group" aria-label="Basic example">
-          <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-primary" data-listType='List' title="List View"><i class='fa fa-list'></i> List View</button>
-          <button type="button"  onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('grid','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-danger" data-listType='Grid' title="Grid View"> <i class="fa fa-th-large"></i> Grid View</button>
+          <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-primary" data-listType='List' title="List View"><i class='fa fa-list'></i> {vtranslate('List View', $MODULE)}</button>
+          <button type="button"  onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('grid','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-danger" data-listType='Grid' title="Grid View"> <i class="fa fa-th-large"></i> {vtranslate('Grid View', $MODULE)}</button>
       </div>
    
         <form class='form-inline pull-right'>
             <div class='form-group'>
-                <input type="text" placeholder="Enter Keyword" class="form-control">
+                <input type="text" placeholder="{vtranslate('Enter Keyword',$MODULE)}" class="form-control">
             </div>
             <div class="form-group">
                 <button type="button" class='btn btn-primary'> Search   </button>
@@ -106,10 +106,10 @@
 <!--  Filter -->
 <div class="col-lg-3">
     <select class="select2 grid-filter form-control pull-right">
-        <option value=""> Filter by</option>
-        <option value="N"> New Joinees </option>
-        <option value="B"> Bithdays </option>
-        <option value="G"> Gender </option>
+        <option value=""> {vtranslate('Filter by',$MODULE)}</option>
+        <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
+        <option value="B"> {vtranslate('Bithdays',$MODULE)} </option>
+        <option value="G"> {vtranslate('Gender',$MODULE)} </option>
     </select>
 </div>
 <div style="min-height:450px;">

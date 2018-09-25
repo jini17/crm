@@ -16,6 +16,14 @@ $languageStrings = Array(
 	'color code' => 'Kod warna',
 	'claim status'=>'Status tuntutan',
 	'claim code'=>'Kod tuntutan',
+	'Transaction Date' => 'Tarikh Transaksi',
+	'Total Amount' => 'Jumlah Kesuluruhan',
+	'Claim This Month' => 'Tuntutan Bulan Ini',
+	'My Claim Filter' => 'Penyaring Tuntutan Saya',
+	'LBL_CLAIM_TYPE'  => 'Jenis Tuntutan',
+	'LBL_LAST_5_CLAIM' => '5 Tuntutan Terakhir',
+	'LBL_APPLY' => 'Mohon Tuntutan',
+	'My Claim' => 'Tuntutan Saya',
 );
 
 ?>

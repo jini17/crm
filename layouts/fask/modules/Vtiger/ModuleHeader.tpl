@@ -48,7 +48,7 @@
 					{/foreach}
 					{if ($MODULE eq 'LeaveType' || $MODULE eq 'BenefitType' || $MODULE eq 'EmployeeContract' || $MODULE eq 'Holiday' || $MODULE eq 'WorkingHours' || $MODULE eq 'Claim' || $MODULE eq 'Grade' || $MODULE eq 'ClaimType' || $MODULE eq 'PassportVisa' || $MODULE eq 'Performance' || $MODULE eq 'Payslip') 
 					&& ($CURRENT_USER_MODEL->is_admin eq 'on' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H2' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H12') }
-					<p class="current-filter-name filter-name pull-left cursorPointer {if $smarty.request.view eq 'Edit' or $RECORD}hidden-xs{/if}" title="{$CVNAME}"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}&app={$SELECTED_MENU_CATEGORY}'>&nbsp;&nbsp;{$CVNAME}&nbsp;&nbsp;{$MODULE}</a> </p>
+					<p class="current-filter-name filter-name pull-left cursorPointer {if $smarty.request.view eq 'Edit' or $RECORD}hidden-xs{/if}" title="{$CVNAME}"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}&app={$SELECTED_MENU_CATEGORY}'>&nbsp;&nbsp;{vtranslate($CVNAME,'Vtiger')}&nbsp;&nbsp;{vtranslate($MODULE,'Vtiger')}</a> </p>
 				{else}
 					<p class="current-filter-name filter-name pull-left cursorPointer {if $smarty.request.view eq 'Edit' or $RECORD}hidden-xs{/if}" title="{$CVNAME}"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}&app={$SELECTED_MENU_CATEGORY}'>&nbsp;&nbsp;{$CVNAME}&nbsp;&nbsp;</a> </p>
 				{/if}
@@ -121,7 +121,7 @@
 									</ul>
 						{/if}
 						<a class='btn btn-default Help-btn'>
-							<i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
+							<i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; {vtranslate('Help','Vtiger')}
 						</a>
 						
 

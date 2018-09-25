@@ -32,7 +32,7 @@
 				<div class='col-lg-2 birthdaywish'>
 				
 				<!--added by fadzil 27/2/15-->
-				<i class="fa fa-gift" title="Send Birthday wish"></i>
+				<i class="fa fa-gift" title="{vtranslate('Send Birthday wish', $MODULE_NAME)}"></i>
 					{if $MODEL['module'] eq 'Accounts'}
 						<input id="modulename" type="hidden" value="Contacts">
 						<input id="fieldname" type="hidden" value="email">

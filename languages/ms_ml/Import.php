@@ -61,7 +61,7 @@ $languageStrings = array(
 	'LBL_USE_SAVED_MAPS'     => 'Gunakan Pemetaan Tersimpan',
 	'LBL_IMPORT_MAP_FIELDS'     => 'Memetakan lajur ke medan CRM',
 	'LBL_UPLOAD_CSV'     => 'Muat naik fail CSV',
-	'Select from My Computer'     => 'Pilih daripada \'My Computer\'',
+	'Select from My Computer'     => 'Pilih dari \'My Computer\'',
 	
 	
 	

@@ -1,7 +1,7 @@
 {strip}
 {if $SECTION eq 'M'}
 
-        <table class="table detailview-table no-border listViewEntriesTable">
+        <table class="table detailview-table listViewEntriesTable">
                 <thead>
                         <tr>
                                 <th nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
@@ -104,7 +104,7 @@
                 </div>
                                 <!--@@@@@@@@@@@@END PAGINATION TOOLS@@@@@@@@@@@@@@@-->
 
-        <table class="table detailview-table no-border listViewEntriesTable">
+        <table class="table detailview-table listViewEntriesTable">
               <thead>
                         <tr>
                                 <th nowrap>{vtranslate('LBL_FULLNAME', $MODULE)}</th>
@@ -197,13 +197,13 @@
 <div class="block listViewContentDiv" id="listViewContents" style="marign-top: 15px;">
         <div class="listViewEntriesDiv contents-bottomscroll " style="padding-top: 5px;">
         <div>
-            <h5>My Leave</h5>
+            <h5>{vtranslate('My Leave', $MODULE)}</h5>
         </div>
         <hr>
         <div style="clear:both;"></div>
 
         <div id="myleavelist">
-        <table class="table detailview-table no-border listViewEntriesTable" style="background-color: #fff;margin: 14px;width: 98%;">
+        <table class="table detailview-table listViewEntriesTable" style="background-color: #fff;margin: 14px;width: 98%;">
                 <thead>
                         <tr>
                                 <th nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
@@ -357,7 +357,7 @@
                         </span>
 </div>
                                 <!--@@@@@@@@@@@@END PAGINATION TOOLS@@@@@@@@@@@@@@@-->
-        <table class="table detailview-table no-border listViewEntriesTable">
+        <table class="table detailview-table listViewEntriesTable">
                 <thead>
                         <tr>
                                 <th nowrap>{vtranslate('LBL_FULLNAME', $MODULE)}</th>

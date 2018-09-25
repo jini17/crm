@@ -55,6 +55,7 @@ $languageStrings = array(
 	'Picklist'=>'Pilih Senarai',
 	'Time'=>'Masa',
 	'Percent'=>'Peratus',
+	'Claim Type' => 'Jenis Tuntutan',
 	
 	
 );
