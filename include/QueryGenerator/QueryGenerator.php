@@ -369,7 +369,7 @@ class QueryGenerator {
 			$query .= $this->getWhereClause();
 			$this->query = $query;
 			return $query;
-		} else {
+                                            } else {
 			return $this->query;
 		}
 	}

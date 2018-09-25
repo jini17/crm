@@ -40,16 +40,16 @@
 
                     <tbody>
 			 <tr>
-                        <td class="{$WIDTHTYPE}">
-                            <label class="pull-right marginRight10px"><b>{vtranslate('LBL_SELECT_COMPANY', $QUALIFIED_MODULE)}</b></label>
-                        </td>
-			 <td class="fieldValue {$WIDTHTYPE}" style="border-left: none">
-				<select id="company" class="chzn-select" name="company" data-placeholder="{vtranslate('LBL_ADD_COMPANY', $QUALIFIED_MODULE)}" data-validation-engine="validate[required]" data-old-company="{$DEFAULT_COMPANY}" >
-				{foreach from=$ALL_COMPANY item=COMPANY}
-				<option value="{$COMPANY.organizationId}" {if $COMPANY.organizationId eq $DEFAULT_COMPANY} selected="selected"{/if}>{$COMPANY.organization_title}</option>
-				{/foreach}
-				</select>
-			</td>
+                <td class="{$WIDTHTYPE}">
+                    <label class="pull-right marginRight10px"><b>{vtranslate('LBL_SELECT_COMPANY', $QUALIFIED_MODULE)}</b></label>
+                </td>
+				<td class="fieldValue {$WIDTHTYPE}" style="border-left: none">
+					<select id="company" class="select2" name="company" data-placeholder="{vtranslate('LBL_ADD_COMPANY', $QUALIFIED_MODULE)}" data-validation-engine="validate[required]" data-old-company="{$DEFAULT_COMPANY}" >
+					{foreach from=$ALL_COMPANY item=COMPANY}
+					<option value="{$COMPANY.organizationId}" {if $COMPANY.organizationId eq $DEFAULT_COMPANY} selected="selected"{/if}>{$COMPANY.organization_title}</option>
+					{/foreach}
+					</select>
+				</td>
 
 
                     <tr>
@@ -57,7 +57,7 @@
                             <label class="pull-right marginRight10px"><b>{vtranslate('LBL_SELECT_MODULE', $QUALIFIED_MODULE)}</b></label>
                         </td>
                         <td class="fieldValue {$WIDTHTYPE}" style="border-left: none">
-                            <select class="chzn-select" name="sourceModule" id="sourceModule">
+                            <select class="select2" name="sourceModule" id="sourceModule">
 				{foreach key=index item=MODULE_MODEL from=$SUPPORTED_MODULES}
                                     {assign var=MODULE_NAME value=$MODULE_MODEL->get('name')}
                                     <option value={$MODULE_NAME} {if $MODULE_NAME eq $DEFAULT_MODULE_NAME} selected {/if}>
@@ -95,7 +95,7 @@
         <div class="row-fluid">
             <div class="span12 pull-right">
                 <div class="pull-right">
-                    <button class="btn btn-success saveButton" type="submit" disabled="disabled"><strong>{vtranslate('LBL_SAVE', $QUALIFIED_MODULE)}</strong></button>
+                    <button class="btn btn-success saveButton" type="button" disabled="disabled"><strong>{vtranslate('LBL_SAVE', $QUALIFIED_MODULE)}</strong></button>
                     <a class="cancelLink" type="reset" onclick="javascript:window.history.back();">{vtranslate('LBL_CANCEL', $QUALIFIED_MODULE)}</a>
                 </div>
             </div>

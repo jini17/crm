@@ -96,9 +96,11 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 
 	$db = PearDatabase::getInstance();
 	
-	$query = "SELECT vtiger_employeecontract.job_grade, vtiger_employeecontract.date_joined FROM vtiger_employeecontract INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_employeecontract.employeecontractid WHERE vtiger_crmentity.deleted=0 AND vtiger_crmentity.smownerid=$recordId AND vtiger_employeecontract.date_joined=(SELECT MAX(date_joined) FROM vtiger_employeecontract INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_employeecontract.employeecontractid WHERE vtiger_crmentity.deleted=0 AND vtiger_crmentity.smownerid=$recordId)";
+	$query = "SELECT vtiger_employeecontract.job_grade FROM vtiger_employeecontract 
+			INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_employeecontract.employeecontractid 
+			WHERE vtiger_crmentity.deleted=0 AND vtiger_employeecontract.employee_id=? ORDER BY vtiger_crmentity.createdtime DESC Limit 0, 1";
 
-	$result = $db->query($query);
+	$result = $db->pquery($query, array($recordId));
 
 
 	$myjobgrade = $db->query_result($result, 0, 'job_grade');
@@ -114,12 +116,14 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	public function getClaimTypeList($userid){  
 	$db = PearDatabase::getInstance();
 	
-	$result = $db->pquery("SELECT date_joined, job_grade FROM vtiger_employeecontract tblVTEC 
+	$result = $db->pquery("SELECT job_grade FROM vtiger_employeecontract tblVTEC 
 							INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
 							INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
-							WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTEC.date_joined DESC LIMIT 0, 1", array($userid));
+							WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTC.createdtime DESC LIMIT 0, 1", array($userid));
 							
-		$dateofJoining = $db->query_result($result, 0, 'date_joined');	
+		$userModel = Vtiger_Record_Model::getInstanceById($userid, 'Users');					
+		$dateofJoining = $userModel->get('date_joined');
+		
 		$grade_id	   = $db->query_result($result, 0, 'job_grade');	
 		$datediff = time() - strtotime($dateofJoining);				 
 		$earneddays = round($datediff / (60 * 60 * 24));

@@ -14,11 +14,11 @@ $languageStrings = array(
 	//MyPreference Blocks
 	'LBL_MY_PREFERENCES'  =>  'My Profile',
                      'LBL_CLAIM_CREATE_SUCCESSFULLY'  =>  'Claim Created Successfully',
-	'LBL_MORE_INFORMATION'  =>  'More Information',
+	'LBL_MORE_INFORMATION'  =>  'User Information',
 	'LBL_USERLOGIN_ROLE'  =>  'User Login & Role',
 	'LBL_USER_IMAGE_INFORMATION' => 'User Photograph',
 	'LBL_CURRENCY_CONFIGURATION' =>  'Currency and Number Field Configuration',
-	'LBL_ADDRESS_INFORMATION' => 'User Address',
+	'LBL_ADDRESS_INFORMATION' => 'Correspondence Address',
 	'LBL_USER_ADV_OPTIONS' => 'User Advanced Options',
 	'Asterisk Configuration'  =>  'Asterisk Configuration',
 	'LBL_HOME_PAGE_COMPONENTS' => 'Home Page Components',
@@ -53,7 +53,7 @@ $languageStrings = array(
 	'LBL_OFFICE_PH'=>'Office Phone',
 	'LBL_MOBILE'=>'Mobile',
 	'LBL_EDIT_CONTACT'=>'Edit Contact',
-	
+	'YOU_ARE_CURRENLY_VIEWING'=>'You are viewing employees of company',
 
 
 
@@ -64,7 +64,7 @@ $languageStrings = array(
 	'Default Activity View' => 'Default MyCalendar View',
 	'Default Calendar View' => 'Default Calendar View',
 	'Default Lead View' => 'Default Lead View',
-	'Title' => 'Title',
+	'Title' => 'Designation',
                    
 	'Office Phone' => 'Office Phone',
 	'Department' => 'Department',
@@ -315,7 +315,7 @@ $languageStrings = array(
     'LBL_EDUCATION_LEVEL' => 'Education Level',
     'LBL_AREA_OF_STUDY'=>'Area of Study',
     'LBL_DESCRIPTION' => 'Description',
-    'LBL_WANT_TO_MAKE_PUBLIC' => 'Do you want to make it Public',					      	      'LBL_CANCEL_BUTTON_KEY' =>'Cancel Button',
+    'LBL_WANT_TO_MAKE_PUBLIC' => 'Public?',					      	      'LBL_CANCEL_BUTTON_KEY' =>'Cancel Button',
  'LBL_SAVE_BUTTON_KEY'=>'Save Button',
  'LBL_USER_EDUCATIONS' => 'User Educations',
  'LBL_ADD_NEW_EDUCATION' => 'Add Education',
@@ -509,7 +509,11 @@ $languageStrings = array(
 'LBL_BLOCKED_IP'=>'Sorry!! Your IP is blocked, Please contact the admin',
 'LBL_USER_LIMIT_EXCEED'=>'User limit exceeded in this plan, please contact to Agiliux Team',
 'LBL_SELECT_ROLE'=>'Select Role',
+'birthday'=>'Date of Birth',
 //End of Contacts
+
+'LBL_CLAIM' => 'Tuntutan',
+
 );
 
 $jsLanguageStrings = array(

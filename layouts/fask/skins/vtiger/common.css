@@ -4581,7 +4581,9 @@ form[name="notification_settings"] .select2-choice {
 }
 .dashboardWidgetHeader
 {   background: #fff;
-    padding: 4px; border-bottom:1px solid #ddd;margin-bottom:10px;    border-top-left-radius: 10px;
+    padding: 4px; border-bottom:1px solid #ddd;
+/*    margin-bottom:10px;   */
+    border-top-left-radius: 10px;
     border-top-right-radius: 10px;}
 
 
@@ -9172,4 +9174,28 @@ margin-top: 15px;margin-bottom: 15px;margin-left: 14px;
 }
 .myProfileBtnRight{
 float: right;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-left: 14px;
+}
+/*Employee Grid view*/
+.employee-directory-grid-container{
+  margin: 20px 0px;
+}
+.user-img{
+  display:block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+.row.employee-direct-content-grid{
+  text-align: center;
+    display: block;
+    background-color: #fff;
+    border: 1px solid #cecece;
+    margin: 25px;
+    padding: 30px;
+    box-shadow: 4px 4px 15px #E3E3E3;
 }

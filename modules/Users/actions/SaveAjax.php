@@ -39,7 +39,7 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 	}
 
 	public function process(Vtiger_Request $request) {
-
+		
 		$mode = $request->get('mode');
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -48,13 +48,17 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 
 		//added by jitu@Birthday date format
 		if($request->get('field')=='birthday'){
-			$birthday = date('Y-m-d',strtotime($request->get('value')));
-			$request->set('birthday',$birthday);	
+			$value = date('Y-m-d',strtotime($request->get('value')));
+			$request->set($request->get('field'),$value);	
+		}
+		else if($request->get('field')=='date_joined'){
+			$value = date('Y-m-d',strtotime($request->get('value')));
+			$request->set($request->get('field'),$value);	
 		}//end here	
 		
 
 		$recordModel = $this->saveRecord($request);
-		
+
 		$fieldModelList = $recordModel->getModule()->getFields();
 		$result = array();
 		foreach ($fieldModelList as $fieldName => $fieldModel) {

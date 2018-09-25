@@ -271,10 +271,11 @@ $languageStrings = array(
 	'LBL_GOTO'=>'Pergi Ke',
 	'LBL_CREATE_PROJECT'=>'Pilih Buat projek',
 	//End here
-	
-	//added by jitu@9-04-2015 for password left menu in settings
-	'LBL_PASSWORD_CONF' => 'Kata Laluan Persediaan',
 
+	//added by jitu@9-04-2015 for password left menu in settings
+
+
+	'LBL_PASSWORD_CONF' => 'Kata Laluan Persediaan',
 	'LBL_PASSWORD_DESCRIPTION' => 'Kerumitan set kata laluan untuk pengguna perisian',
 	'LBL_MAXLOGIN'=>'Daftar disekat',
 	//end here
@@ -298,6 +299,7 @@ $languageStrings = array(
 	'Leave Type'=>'Jenis Cuti',
 	'Claim Type'=>'Jenis Tuntutan',
 	'Grade'=>'Gred',
+
 	'Status'=>'Status',
 	'Select'=>'Pilih',
 	'Allocation Title'=>'Peruntukkan Cuti',
@@ -324,7 +326,6 @@ $languageStrings = array(
 	'LBL_TEMPLATES' => 'Templat',
 	'LBL_CONFIGURATION' => 'Konfigurasi',
 
-	
 	//End here	
 
 );

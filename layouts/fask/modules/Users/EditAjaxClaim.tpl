@@ -133,37 +133,7 @@
                                                 </div>
                                         </div>
                         <!--end-->
-                        <!--start
-                                <div class="row-fluid">
-                        <div class="form-group" style="margin-bottom: 0px !important;">
-                                <div class="col-md-12" style="margin-bottom: 15px;">
-                                        <div class="col-md-4">
-                                                                <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                                        <span class="redColor">*</span>&nbsp;{vtranslate('LBL_CLAIM_STATUS', $QUALIFIED_MODULE)}
-                                                                </label>
-                                                        </div>
-                                                        <div class="controls fieldValue col-md-8">
-                                        <select class="select2" name="claim_status" id="leave_type" data-validation-engine="validate[required]">
-                                                {if $CLAIMSTATUSLIST|count gt 0}
-                                                {foreach key=LEAVE_ID item=STATUS_MODEL from=$CLAIMSTATUSLIST	 name=institutionIterator}		
-                                                        {$STATUS_MODEL.claim_statusid}
-                                                <option value="{$STATUS_MODEL.claim_status}" {if $CLAIM_DETAIL.claim_status eq $STATUS_MODEL.claim_statusid} selected {/if}>
-                                                {$STATUS_MODEL.claim_status}</option>
-
-                                                {/foreach}
-
-                                                 {else}
-                                                        <option value=''></option>	
-                                                {/if}	
-
-                                        </select>
-                                                        </div>
-                                                </div>
-                                        </div>
-                        end-->
-
-
-                                <div class="form-group" style="margin-bottom: 0px !important;">
+                             <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
@@ -178,8 +148,19 @@
                                                 </div>	
                                                 <div class="controls" id="charNum" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                                         </div>
-                                </div>	
-
+                            </div>	
+                            <div class="form-group" style="margin-bottom: 0px !important;">
+                                <div class="col-md-12" style="margin-bottom: 15px;">
+                                   <div class="col-md-4">
+                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">
+                                                &nbsp;{vtranslate('LBL_INVOICE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
+                                        </label>
+                                    </div>  
+                                    <div class="controls fieldValue col-md-8">
+                                             <input id="attachment" class="fieldValue inputElement" data-rule-required = "true" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment">
+                                    </div>
+                                </div>    
+                            </div>    
                         <!--start-->
                         {if $MANAGER eq 'true'}
                                 <div class="row-fluid">
@@ -255,8 +236,7 @@
                                 </div>	
 
 
-
-                <div class="modal-footer">
+                <div class="modal-footer" style="margin-bottom: 10px;margin-right: 10px; margin-left: 10px;">
                         <div class="pull-right cancelLinkContainer" style="margin-top:0px;">
 
                 {if $MANAGER eq 'true'}

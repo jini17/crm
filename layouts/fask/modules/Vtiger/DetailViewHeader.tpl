@@ -13,7 +13,11 @@
 <div class=" detailview-header-block">
     <div class="detailview-header">
         <div class="row">
-            {include file="modules/Vtiger/DetailViewHeaderTitle.tpl"}
+        	{if $MODULE_NAME eq 'MessageBoard'}
+        		{include file="modules/MessageBoard/DetailViewHeaderTitle.tpl"}
+            {else}
+            	{include file="modules/Vtiger/DetailViewHeaderTitle.tpl"}
+            {/if}	
             {include file="modules/Vtiger/DetailViewActions.tpl"}
         </div>
 </div>

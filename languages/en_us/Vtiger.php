@@ -10,6 +10,7 @@
 $languageStrings = array(
 
 	// Footer
+	'LBL_CURRENT'=>'Current',
 	'LBL_MOM' => 'Agenda/MOM',
 	'LBL_MOM_BLOCK' => 'Minutes of Meeting(MOM)',
 	'APPTITLE' => 'Vtiger CRM',
@@ -559,7 +560,8 @@ $languageStrings = array(
 	'LBL_LABELS' => 'Labels',
 	'LBL_WORKFLOWS' => 'Workflows',
 	'LBL_PICKLIST' => 'Picklists',
-
+                      ' LBL_YOU_ARE_CURRENLY_VIEWING ' => 'You are currently viewing',
+                      'LBL_Employees_OF_THE' => 'employees of the',
 	// Added Common Keys for all modules
 	'Account Name' => 'Organization Name',
 	'Add Comment' => 'Add Comment',

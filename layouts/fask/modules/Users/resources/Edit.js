@@ -12,6 +12,7 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 	
 	duplicateCheckCache : {},
     
+    
 	/**
 	 * Function to register recordpresave event
 	 */
@@ -109,11 +110,14 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 		}
 	},
 	
+	
+	
 	registerEvents : function() {
         this._super();
 		var form = this.getForm();
 		this.registerRecordPreSaveEvent(form);
         this.registerSignatureEvent();
+        Settings_Users_PreferenceEdit_Js.registerCopyPermanentAddress();
         Settings_Users_PreferenceEdit_Js.registerChangeEventForCurrencySeparator();
         
         var instance = new Settings_Vtiger_Index_Js(); 
