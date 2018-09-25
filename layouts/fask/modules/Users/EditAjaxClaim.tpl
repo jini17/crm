@@ -133,8 +133,7 @@
                                                 </div>
                                         </div>
                         <!--end-->
-                       
-                                <div class="form-group" style="margin-bottom: 0px !important;">
+                             <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
@@ -149,19 +148,19 @@
                                                 </div>	
                                                 <div class="controls" id="charNum" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                                         </div>
-                                </div>	
-                                <div class="form-group" style="margin-bottom: 0px !important;">
-                                    <div class="col-md-12" style="margin-bottom: 15px;">
-                                       <div class="col-md-4">
-                                            <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                    &nbsp;{vtranslate('LBL_INVOICE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
-                                            </label>
-                                        </div>  
-                                        <div class="controls fieldValue col-md-8">
-                                                 <input id="attachment" class="fieldValue inputElement" data-rule-required = "true" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment">
-                                        </div>
-                                    </div>    
-                            </div>          
+                            </div>	
+                            <div class="form-group" style="margin-bottom: 0px !important;">
+                                <div class="col-md-12" style="margin-bottom: 15px;">
+                                   <div class="col-md-4">
+                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">
+                                                &nbsp;{vtranslate('LBL_INVOICE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
+                                        </label>
+                                    </div>  
+                                    <div class="controls fieldValue col-md-8">
+                                             <input id="attachment" class="fieldValue inputElement" data-rule-required = "true" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment">
+                                    </div>
+                                </div>    
+                            </div>    
                         <!--start-->
                         {if $MANAGER eq 'true'}
                                 <div class="row-fluid">

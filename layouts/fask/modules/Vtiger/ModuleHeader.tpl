@@ -67,14 +67,16 @@
 				{/if}
 			</div> 
 			<div class="col-xs-5 col-lg-5 col-md-5 col-sm-5">
-				{if $MODULE eq 'Home'}
+				{if $MODULE eq 'Home' AND     $LOGGED_NOW == 'in' }
 				<div class="clearfix">
+                                                                                             
 					<div class="col-xs-12">
 						<!-- added by jitu@28Dec2016-->
 						<div style="text-align:center;display:block;width:100%;margin:0 auto;padding:2px;">{vtranslate('LBL_LAST_LOGINTIME')} {$LAST_LOGIN_TIME} {vtranslate('LBL_USERIP')} {$LAST_USER_IP}
 						</div>
 						<!--end here -->
 					</div>
+                                                                                           
 				</div>
 				<br>
 				{/if}
