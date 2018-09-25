@@ -17,11 +17,11 @@
                <div class="col-md-8">
                 
                 <label class="radio-group cursorPointer" style="font-size:13px; padding:5px;">
-                    <input style="vertical-align:middle;" type="radio" id="myleavetype" name="type" class="widgetFilter reloadOnChange cursorPointer" value="leavetype" checked="true" / >{vtranslate('LBL_LEAVE_TYPE', $MODULE_NAME)}
+                    <input style="vertical-align:middle;" type="radio" id="myleavetype" name="type" class="widgetFilter reloadOnChange cursorPointer" value="leavetype" checked="checked" / >&nbsp;&nbsp;{vtranslate('LBL_LEAVE_TYPE', $MODULE_NAME)}
                 </label>&nbsp;&nbsp;
                 
                 <label class="radio-group cursorPointer" style="font-size:13px;padding:5px;">
-                      <input style="vertical-align:middle;"  type="radio" id="leave5" name="type" class="widgetFilter reloadOnChange cursorPointer" value="latest" /> 
+                      <input style="vertical-align:middle;"  type="radio" id="leave5" name="type" class="widgetFilter reloadOnChange cursorPointer" value="latest" />&nbsp; 
                       <span>{vtranslate('LBL_LAST_5_LEAVES', $MODULE_NAME)}</span>
                 </label>
              </div>
