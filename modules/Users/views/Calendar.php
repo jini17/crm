@@ -223,6 +223,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
             "modules.Users.resources.Detail",
 			"modules.Users.resources.Users",
             'modules.'.$moduleName.'.resources.PreferenceDetail',
+            "modules.Vtiger.resources.CkEditor",
 			'modules.'.$moduleName.'.resources.Calendar',
 			'modules.'.$moduleName.'.resources.PreferenceEdit',
              'modules.Settings.Vtiger.resources.Index',

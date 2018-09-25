@@ -11,8 +11,9 @@ $languageStrings = array(
 		
 	'LBL_THIS_WEEk'=>'This week',	
 	'LBL_THIS_MONTH'=>'This month',	
-	'LBL_NAME'=>'employee',
-	'LBL_LEAVE_APPROVAL'=>'My Team Approval',
+	'LBL_NAME'=>'Employee Name',
+	'LBL_LEAVE_APPROVAL'=>'My Team Leave Approval',
+                      'LBL_CLAIM_WIDGET' => 'MY Team Claims',
     'LBL_DURATIONOFLEAVE'=>'Leave Duration',                
     'LBL_IN_TODAY'=>'No Leaves for today',
     'LBL_IN_TOMORROW'=>'No leaves for tomorrow',
@@ -27,9 +28,10 @@ $languageStrings = array(
     'LBL_NO_EMPLOYEE_FOUND'=>'No Employee found',
     'LBL_DESIGNATION'=>'Designation',
     'LBL_DEPARTMENT'=>'Department',
-    'LBL_MC_TAKEN'=>'Total MC',
+    'LBL_MC_TAKEN'=>'MC\'s',
     'LBL_NAME'=>'Employee', 
 	'LBL_APPLY'=>'Apply Leave',
+    'LBL_COMPANY'=>'Company'
 
 );
 

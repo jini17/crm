@@ -476,7 +476,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 	public function isAjaxEditable() {
 
 		$ajaxRestrictedFields = array('4', '72', '61', '999','28','3995');
-		if(!$this->isEditable() || in_array($this->get('uitype'), $ajaxRestrictedFields) || $this->get('name')=='category') {
+		if(!$this->isEditable() || in_array($this->get('uitype'), $ajaxRestrictedFields) || $this->get('name')=='category' || $this->get('name')=='message') {
 			return false;
 		}
 		return true;

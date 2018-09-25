@@ -9,11 +9,12 @@
   *
  ********************************************************************************/
 -->*}
-<div class="dashboardWidgetHeader">
-	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
+<div class="dashboardWidgetHeader clearfix">
+    <div class="title">
+        <div class="dashboardTitle" title="{vtranslate($WIDGET->getTitle(), $MODULE_NAME)}">{vtranslate($WIDGET->getTitle())}</div>
+    </div>
   <div class="filterContainer">
       <div class="row">
-          
              <div class="col-lg-6">
                  <select class="select2 col-lg-10 widgetFilter" id="userGroup" name="group">
                     <option value="user" selected>{vtranslate('LBL_USER',$MODULE_NAME)}</option>           
@@ -32,9 +33,9 @@
           </div>
       </div>
 </div>
-  
-<div class="dashboardWidgetContent" id="birthdayContents">
-	{include file="dashboards/BirthdaysContents.tpl"|@vtemplate_path:$MODULE_NAME}
+
+<div class="dashboardWidgetContent dashboardWidget" style="padding:5px;">
+        {include file="dashboards/BirthdaysContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 
 <div class="widgeticons dashBoardWidgetFooter">
@@ -44,13 +45,3 @@
         {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=false}
   </div>
 </div>
-{literal}
-<!-- Added by jitu@secondcrm for common Select2 Class
-<script>
-	jQuery(document).ready(function(e){ 
-		$("#userGroup").select2({ width: '100px'});
-		$("#historyType").select2({ width: '100px'});
-	})
-</script>
-<!-- End Here --->
-{/literal}

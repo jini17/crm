@@ -29,8 +29,8 @@ $languageStrings = array(
 	
 	'LBL_LAST_LOGINTIME'=>'Login Time',
 	'Claim'=> 'Claims',
-	'LBL_USER'=>'User',
-	'LBL_CUSTOMER' => 'Customer',
+	'LBL_USER'=>'Employee',
+	'LBL_CUSTOMER' => 'Contacts',
 	'LBL_TODAY'=>'Today',
 	'LBL_TOMORROW'=>'Tomorrow',
 	'LBL_THIS_WEEK'=>'Current Week',
@@ -44,8 +44,9 @@ $languageStrings = array(
 	'LBL_IN_NEXT_MONTH' => 'in next month',
 	'LBL_IN_NEXT_WEEK' => 'in next week',
 	'LBL_IN_THIS_MONTH'=>'in this month',
-	'LBL_NAME' => 'Employee Name',
+	'LBL_NAME' => 'Employee',
 	'LBL_BIRTHDATE' => 'Birthday Date',	
+                     'LBL_DEPARTMENT' => 'Department',
 	'LBL_LEAVE_APPROVAL'=>'My Team Leave Approval',
 	
 	                

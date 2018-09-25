@@ -10,27 +10,27 @@
 
 include_once 'modules/Vtiger/CRMEntity.php';
 
-class Holidays extends Vtiger_CRMEntity {
-	var $table_name = 'vtiger_holidays';
-	var $table_index= 'holidaysid';
+class MessageBoard extends Vtiger_CRMEntity {
+	var $table_name = 'vtiger_messageboard';
+	var $table_index= 'messageboardid';
 
 	/**
 	 * Mandatory table for supporting custom fields.
 	 */
-	var $customFieldTable = Array('vtiger_holidayscf', 'holidaysid');
+	var $customFieldTable = Array('vtiger_messageboardcf', 'messageboardid');
 
 	/**
 	 * Mandatory for Saving, Include tables related to this module.
 	 */
-	var $tab_name = Array('vtiger_crmentity', 'vtiger_holidays', 'vtiger_holidayscf');
+	var $tab_name = Array('vtiger_crmentity', 'vtiger_messageboard', 'vtiger_messageboardcf');
 
 	/**
 	 * Mandatory for Saving, Include tablename and tablekey columnname here.
 	 */
 	var $tab_name_index = Array(
 		'vtiger_crmentity' => 'crmid',
-		'vtiger_holidays' => 'holidaysid',
-		'vtiger_holidayscf'=>'holidaysid');
+		'vtiger_messageboard' => 'messageboardid',
+		'vtiger_messageboardcf'=>'messageboardid');
 
 	/**
 	 * Mandatory for Listing (Related listview)
@@ -38,45 +38,45 @@ class Holidays extends Vtiger_CRMEntity {
 	var $list_fields = Array (
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Holiday Name' => Array('holidays', 'holidayname'),
+		'Title' => Array('messageboard', 'title'),
 		'Assigned To' => Array('crmentity','smownerid')
 	);
 	var $list_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'Holiday Name' => 'holidayname',
+		'Title' => 'title',
 		'Assigned To' => 'assigned_user_id',
 	);
 
 	// Make the field link to detail view
-	var $list_link_field = 'holidayname';
+	var $list_link_field = 'title';
 
 	// For Popup listview and UI type support
 	var $search_fields = Array(
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Holiday Name' => Array('holidays', 'holidayname'),
+		'Title' => Array('messageboard', 'title'),
 		'Assigned To' => Array('vtiger_crmentity','assigned_user_id'),
 	);
 	var $search_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'Holiday Name' => 'holidayname',
+		'Title' => 'title',
 		'Assigned To' => 'assigned_user_id',
 	);
 
 	// For Popup window record selection
-	var $popup_fields = Array ('holidayname');
+	var $popup_fields = Array ('title');
 
 	// For Alphabetical search
-	var $def_basicsearch_col = 'holidayname';
+	var $def_basicsearch_col = 'title';
 
 	// Column value to use on detail view record text display
-	var $def_detailview_recname = 'holidayname';
+	var $def_detailview_recname = 'title';
 
 	// Used when enabling/disabling the mandatory fields for the module.
 	// Refers to vtiger_field.fieldname values.
-	var $mandatory_fields = Array('holidayname','assigned_user_id');
+	var $mandatory_fields = Array('title','assigned_user_id');
 
-	var $default_order_by = 'holidayname';
+	var $default_order_by = 'title';
 	var $default_sort_order='ASC';
 
 	/**

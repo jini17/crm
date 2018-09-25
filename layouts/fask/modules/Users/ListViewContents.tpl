@@ -59,7 +59,9 @@
                                                                 </th>
                                                         {/if}
                                                 {/foreach}
-                                                <td><a href="#" class="listViewContentHeaderValues" data-nextsortorderval="ASC" data-columnname="title"><i class="fa fa-sort customsort"></i>&nbsp; Get in Touch&nbsp;</a></td>
+                                                <td>
+                                                    <a href="#" class="listViewContentHeaderValues" data-nextsortorderval="ASC" data-columnname="title">
+                                                        <i class="fa fa-sort customsort"></i>&nbsp; Get in Touch&nbsp;</a></td>
                                                 
                                         </tr>
                                 </thead>

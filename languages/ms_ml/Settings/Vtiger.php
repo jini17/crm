@@ -271,8 +271,11 @@ $languageStrings = array(
 	'LBL_GOTO'=>'Pergi Ke',
 	'LBL_CREATE_PROJECT'=>'Pilih Buat projek',
 	//End here
-	
+
+
 	//added by jitu@9-04-2015 for password left menu in settings
+
+
 	'LBL_PASSWORD_CONF' => 'Kata Laluan Persediaan',
 	'LBL_PASSWORD_DESCRIPTION' => 'Kerumitan set kata laluan untuk pengguna perisian',
 	'LBL_MAXLOGIN'=>'Daftar disekat',
@@ -291,11 +294,14 @@ $languageStrings = array(
 	'smicon'=>'Pilih Mana-mana satu',
 	'smdetail'=>'Copy-Paste anda Feed Twitter / FB Id',
 
+
 	//Added by Azim 20/9/2018
 	'allocation list'=>'Senarai peruntukan',
 	'Leave Type'=>'Jenis Cuti',
 	'Claim Type'=>'Jenis Tuntutan',
 	'Grade'=>'Gred',
+
+
 
 	'Status'=>'Status',
 	'Select'=>'Pilih',
@@ -322,6 +328,7 @@ $languageStrings = array(
 	'LBL_MY_TAGS' => 'Tag',
 	'LBL_TEMPLATES' => 'Templat',
 	'LBL_CONFIGURATION' => 'Konfigurasi',
+
 	'LBL_MY_PREFERENCES' => 'Profil Saya',
 	'LBL_SEARCH_FOR_SETTINGS' => 'Cari Tetapan',
 	'LBL_HR_MATTERS' => 'Perkara HR',

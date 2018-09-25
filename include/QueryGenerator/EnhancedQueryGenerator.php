@@ -607,7 +607,10 @@ class EnhancedQueryGenerator extends QueryGenerator {
 		if(in_array($baseModule,$HRModules) && ($current_user->roleid !='H2' && $current_user->is_admin !='on' && $current_user->roleid !='H12' && $current_user->roleid !='H13')){
 			$ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$current_user->id;
 		}
-		
+		if($baseModule =='MessageBoard'){
+                                                $ownrecsql = ' AND ( vtiger_'.strtolower($baseModule).'.employee_id IN (SELECT id FROM vtiger_users WHERE reports_to_id='.$current_user->id.')'
+                                                        . ' OR ( vtiger_'.strtolower($baseModule).'.employee_id ='.$current_user->id.'))';
+                                           }
 		if ($this->query || $this->whereClause) {
 
 			return $this->whereClause.$ownrecsql;
