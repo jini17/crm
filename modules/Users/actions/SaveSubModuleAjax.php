@@ -264,6 +264,10 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
 	//$request= $_REQUEST['form'];	
 	
+		print_r($_REQUEST);
+		print_r($_FILES);
+		die;
+
 	$module = $request->getModule();
 	$db = PearDatabase::getInstance();
 	//$db->setDebug(true);
