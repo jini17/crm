@@ -29,13 +29,18 @@ include_once 'include/Webservices/Utils.php';
 	$Vtiger_Utils_Log = true;
 	global $adb;
 	$adb->setDebug(true);
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 77114df57e66d6cc725f1c297eb746cadc36d73d
 
 
 
-	$MODULENAME = 'Attendance'; //Give your module name
-	$PARENT 	= 'FOUNDATION';  //Give Parent name
-	$ENTITYNAME = 'attendanceno'; //Give Duplicate check field name
-	$ENTITYLABEL= 'Attendance No';
+	$MODULENAME = 'Training'; //Give your module name
+	$PARENT 	= 'Support';  //Give Parent name
+	$ENTITYNAME = 'trainingno'; //Give Duplicate check field name
+	$ENTITYLABEL= 'Training ID';
 
 	$module = Vtiger_Module::getInstance($MODULENAME);
 	
@@ -91,7 +96,7 @@ include_once 'include/Webservices/Utils.php';
 	$field3->table  =  $module->basetable;
 	$field3->column = 'attendancedate';
 	$field3->columntype = 'DATE';
-	$field3->uitype	= 2;
+	$field3->uitype	= 5;
 	$field3->typeofdata = 'D~M'; // varchar~Mandatory
 	$block->addField($field3); /** table, column, label, set to default values */
 	

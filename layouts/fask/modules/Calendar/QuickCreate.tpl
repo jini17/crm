@@ -53,7 +53,7 @@
 						{/if}
 
 						<div>
-							<div class="col-md-4"><label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;Subject <span class="redColor">*</span></label></div>
+							<div class="col-md-4"><label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('Subject',$MODULE)} <span class="redColor">*</span></label></div>
 							{assign var="FIELD_MODEL" value=$RECORD_STRUCTURE['subject']}
 							<div class="controls fieldValue col-md-8">
 								{assign var="FIELD_INFO" value=$FIELD_MODEL->getFieldInfo()}

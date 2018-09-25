@@ -71,6 +71,21 @@ $languageStrings = array(
 	'LBL_NO_ONE'=>'Tiada Yang Bercuti',
 	'LBL_NO_LEAVES_TODAY'=>'Tiada Cuti Untuk Diluluskan',
 	'Leaves'=>'Cuti',
+	'LBL_DEPARTMENT' => 'Jabatan',
+	'LBL_MC_TAKEN' => 'Jumlah MC',
+	'LBL_LEAVE_TYPE' => 'Jenis Cuti',
+	'LBL_LAST_5_LEAVES' => '5 Cuti Terakhir',
+	'LBL_APPLY' => 'Mohon Cuti',
+	'Balanced' => 'Baki',
+	'Used' => 'Sudah Guna',
+	'Allocates' => 'Jumlah Cuti',
+	'Leave Type' => 'Jenis Cuti',
+	'Leave Information' => 'Maklumat Cuti',
+	'Duties Taken Over By' => 'Tugas Diambil Oleh',
+	'Employee Name' => 'Nama Pekerja',
+	'Reason For Rejection' => 'Sebab Ditolak',
+	'Documents (If any)' => 'Dokumen (Jika ada)',
+	
 );
 
 $jsLanguageStrings = array(

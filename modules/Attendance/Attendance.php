@@ -38,11 +38,14 @@ class Attendance extends Vtiger_CRMEntity {
 	var $list_fields = Array (
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
+
 		'Attendance No' => Array('attendance', 'attendanceno'),
+
 		'Assigned To' => Array('crmentity','smownerid')
 	);
 	var $list_fields_name = Array (
 		/* Format: Field Label => fieldname */
+
 		'Attendance No' => 'attendanceno',
 		'Assigned To' => 'assigned_user_id',
 	);
@@ -54,11 +57,13 @@ class Attendance extends Vtiger_CRMEntity {
 	var $search_fields = Array(
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
+
 		'Attendance No' => Array('attendance', 'attendanceno'),
 		'Assigned To' => Array('vtiger_crmentity','assigned_user_id'),
 	);
 	var $search_fields_name = Array (
 		/* Format: Field Label => fieldname */
+
 		'Attendance No' => 'attendanceno',
 		'Assigned To' => 'assigned_user_id',
 	);
@@ -98,4 +103,6 @@ class Attendance extends Vtiger_CRMEntity {
 			// TODO Handle actions after this module is updated.
 		}
  	}
+
 }
+

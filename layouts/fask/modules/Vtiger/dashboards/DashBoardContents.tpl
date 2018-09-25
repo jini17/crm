@@ -19,7 +19,7 @@
                         <a data-toggle="tab" href="#tab_{$TAB_DATA["id"]}">
                             <div>
                                 <span class="name textOverflowEllipsis" value="{$TAB_DATA["tabname"]}" style="width:10%">
-                                    <strong>{$TAB_DATA["tabname"]}</strong>
+                                    <strong>{vtranslate($TAB_DATA["tabname"],'Vtiger')}</strong>
                                 </span>
                                 <span class="editTabName hide">
                                     <input type="text" name="tabName"/>
@@ -38,7 +38,7 @@
                    {if $SELECTED_TAB neq 1}
 		<div class="btn-group"  {$SELECTED_TAB}>
 			{if $SELECTABLE_WIDGETS|count gt 0}
-				<button class='btn btn-info addButton dropdown-toggle' data-toggle='dropdown'>
+				<button class='btn btn-info addButton dropdown-toggle widget-btn' data-toggle='dropdown'>
 					{vtranslate('LBL_ADD_WIDGET')}&nbsp;&nbsp;<i class="caret"></i>
 				</button>
 				

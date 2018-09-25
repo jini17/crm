@@ -24,6 +24,8 @@ $languageStrings = Array(
 	'Sunday'=>'Ahad',
 	'WH No'=>'No. Waktu Bekerja',
 	'Title'=>'Tajuk',
+
+	'LBL_WORKINGHOURS_INFORMATION' => 'Maklumat Waktu Bekerja',
 	
 );
 
