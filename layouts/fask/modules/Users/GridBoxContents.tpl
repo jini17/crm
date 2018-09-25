@@ -115,6 +115,7 @@
             
                 
                 {/foreach}
+                {$LISTVIEW_LINKS}
         </div>
         
     </div>

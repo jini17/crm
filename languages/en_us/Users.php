@@ -8,7 +8,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'LBL_ADD_RECORD' => 'Add User',
+	'LBL_ADD_RECORD' => 'Add Employee',
 	'LBL_WELCOME_SECONDCRM'=>'Welcome Secondcrm',
 	'LBL_MANY_ATTEMPTS'=>'Your account has been blocked due too many failed login attempt. Please contact your Administrator.',
 	//MyPreference Blocks

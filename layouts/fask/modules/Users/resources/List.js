@@ -359,7 +359,34 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                         listInstance.loadListViewRecords(listParams);
                 });
         },
+        registerAlphabetSearch:function(){
+            jQuery('a[data-alphabet]').on('click',function(){
+                      var currentEle = jQuery(e.currentTarget);
+                    var atext = $(this).data('alphabet');
+                   app.helper.showProgress();
+                        if(currentEle.attr('id') === 'activeUsers') {
+                                jQuery('#inactiveUsers').removeClass('btn-primary');
+                        }else {
+                                jQuery('#activeUsers').removeClass('btn-primary');
+                        }
+                        currentEle.addClass('btn-primary');
 
+                        var listInstance = new Settings_Users_List_Js;
+                        var listParams = listInstance.getListViewParams();
+                        listParams['search_value'] = currentEle.data('alphabet');
+                         var params={
+                                "module" : "Users",
+                                "action" : "ShowTemplateContent",
+                                "mode"   : "getContent",
+                                
+                             
+                            };
+                        //To clear the search params while switching between active and inactive users 
+                        listParams.search_params = {};
+                        listInstance.loadListViewRecords(listParams);
+            });
+            
+        },
 
         /**
          * Function to get Page Jump Params
@@ -543,7 +570,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                 this._super();
                 this.registerUserStatusToggleEvent();
                 this.registerListViewSearch();
-              
+                this.registerAlphabetSearch();
                 this.registerPostListLoadListener();
                 this.registerListViewSort();
                 this.registerRemoveListViewSort();

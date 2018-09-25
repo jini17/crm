@@ -342,6 +342,22 @@ $(this).hide();
 
                                                                                 </a>
                                                                         </li>
+                                                                        <li admin="">
+                                                                            <a class="waves-effect waves-dark dropdown-icon-dashboard " href=" index.php?module=WorkingHours&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">access_time</i> <span class="hide-menu"> Working Hours</span>
+                                                                            </a>
+                                                                        </li>
+                                                                         
+                                                                        <li admin="">
+                                                                            <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=Documents&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">file_download</i> <span class="hide-menu"> Documents</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li admin="">
+                                                                            <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=MessageBoard&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">assignment</i> <span class="hide-menu"> Message Board</span>
+                                                                            </a>
+                                                                        </li>
                                                                 </ul>
                                                         </div>
                                                 </div>

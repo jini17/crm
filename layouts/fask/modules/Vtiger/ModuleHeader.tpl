@@ -67,7 +67,7 @@
                                 {/if}
                         </div> 
                         <div class="col-xs-5 col-lg-5 col-md-5 col-sm-5">
-                                {if $MODULE eq 'Home' AND     $LOGGED_NOW == 'in' }
+                                {if $MODULE eq 'Home'  AND     $LOGGED_NOW == 'in' }
                                 <div class="clearfix">
 
                                         <div class="col-xs-12">
