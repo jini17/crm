@@ -47,16 +47,15 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer->assign("LAST_USER_IP", $sLastUserIP);
                 //End here
  
-                                         if($_SESSION['loggedin_now'] === false){
-                                       
-                                                    $viewer->assign("LOGGED_NOW",'in');
-                                                    $_SESSION['loggedin_now'] = TRUE;
-                                         }
-                                         else{
-                                                $viewer->assign("LOGGED_NOW",'out');
-                                         }
+                 if($_SESSION['loggedin_now'] === false){
+               
+                            $viewer->assign("LOGGED_NOW",'in');
+                            $_SESSION['loggedin_now'] = TRUE;
+                 }
+                 else{
+                        $viewer->assign("LOGGED_NOW",'out');
+                 }
 
-            echo '<script type="text/javascript"> </script>';
                 $dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
                 //check profile permissions for Dashboards
                 $moduleModel = Vtiger_Module_Model::getInstance('Dashboard');
