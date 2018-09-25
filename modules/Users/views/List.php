@@ -94,7 +94,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 		if(empty($status))
 			$status = 'Active';
                                             
-                                                print_r($cvId);
+                        
                                            
 		$listViewModel = Vtiger_ListView_Model::getInstance($moduleName, $cvId);
 

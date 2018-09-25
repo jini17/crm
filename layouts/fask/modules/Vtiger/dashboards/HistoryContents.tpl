@@ -131,11 +131,11 @@
                     {/if}
                     {else if $MODELNAME == 'ModComments_Record_Model'}
                             <div class="row">
-                                    <div class="col-lg-2 col-xs-3 pull-left">
+                                    <div class="col-lg-1 col-xs-3 pull-left">
                                         {*<span><i class="material-icons entryIcon" title={$TRANSLATED_MODULE_NAME}>chat</i></span>*}
-                                            <span><i class="fa fa-envelope" title="{$TRANSLATED_MODULE_NAME}"></i></span>
+                                        <i class="fa fa-envelope"  title="{$TRANSLATED_MODULE_NAME}"></i>
                                     </div>
-                                    <div class="col-lg-10 col-xs-9 pull-right" style="margin-top:5px;">
+                                    <div class="col-lg-11 col-xs-9 pull-right" style="margin-top:5px;">
                                             {assign var=COMMENT_TIME value=$HISTORY->getCommentedTime()}
                                             <div>
                                                     <b>{$HISTORY->getCommentedByName()}</b> {vtranslate('LBL_COMMENTED')} {vtranslate('LBL_ON')} <a class="text-info textOverflowEllipsis" href="{$HISTORY->getParentRecordModel()->getDetailViewUrl()}">{$HISTORY->getParentRecordModel()->getName()}</a>
