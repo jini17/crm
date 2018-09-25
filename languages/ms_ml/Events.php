@@ -13,7 +13,7 @@ $languageStrings = array(
 	'LBL_ADD_RECORD'               => 'Tambah Acara'                   , 
 	'LBL_RECORDS_LIST'             => 'Paparan Senarai'                   , 
 	'LBL_EVENTS'                   => 'Acara'                      , 
-	'LBL_TODOS'                    => 'Akan Dibuat'                       , 
+	'LBL_TODOS'                    => 'Tugas'                       , 
 	'LBL_HOLD_FOLLOWUP_ON'         => 'Tahan Susulan ke Atas'            ,
     'LBL_CREATE_FOLLOWUP_EVENT'    => 'Buat Acara Susulan'      ,
 	'LBL_EVENT_INFORMATION'        => 'Butiran Acara'               , 
@@ -70,4 +70,8 @@ $languageStrings = array(
 	'Mobile Call' => 'Panggilan Telefon Bimbit',
 	'October' => 'Oktober',
 	//'Support End Date' => 'Tarikh Tamat Sokongan',
+
+	//Added by Azim 20/9/2018
+	'Send Reminder' => 'Hantar Peringatan',
+	'Recurrence' => 'Ulang', 
 );

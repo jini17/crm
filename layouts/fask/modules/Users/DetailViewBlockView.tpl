@@ -62,10 +62,10 @@
 										{/if}
 										<div class="fieldLabel  col-xs-6 col-md-3 {$WIDTHTYPE}"><span class="muted">{vtranslate({$FIELD_MODEL->get('label')},{$MODULE_NAME})}</span></div>
 										<div class="fieldValue  col-xs-6 col-md-3 {$WIDTHTYPE}">
-											<div id="imageContainer" width="300" height="200">
+											<div id="imageContainer" style="width:300px; height: auto;" >
 												{foreach key=ITER item=IMAGE_INFO from=$IMAGE_DETAILS}
 													{if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
-														<img src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}" width="300" height="200">
+														<img src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}" style="width:300px; height: auto;" >
 													{/if}
 												{/foreach}
 											</div>

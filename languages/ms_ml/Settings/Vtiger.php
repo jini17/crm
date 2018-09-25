@@ -94,7 +94,7 @@ $languageStrings = array(
 	'LBL_DELETE_RECORD'            => 'Padam'                      , // TODO: Review
 	'LBL_ADD_MOVE_MENU_ITEMS'      => 'Tambah/Gerakkan Item Menu'         , // TODO: Review
 	'LBL_ADD_MENU_ITEM'            => 'Tambah Item Menu'               , // TODO: Review
-	'LBL_MAX'                      => 'Max'                         , // TODO: Review
+	'LBL_MAX'                      => 'Maks'                         , // TODO: Review
 	'LBL_TAX_CALCULATIONS'         => 'Pengiraan Cukai'            , // TODO: Review
 	'LBL_TAX_DESC'                 => 'Menguruskan jenis kadar cukai untuk cukai seperti Cukai Jualan, VAT dan lain-lain.,', // TODO: Review
 	'LBL_PRODUCT_SERVICE_TAXES'    => 'Cukai Produk & Servis'     , // TODO: Review
@@ -194,7 +194,7 @@ $languageStrings = array(
 	'Workflows'=>'Aliran Kerja',
 	'LBL_COMPANY_NUMBERING_SETTING'=>'Tetapan Penomboran Syarikat',
 	'LBL_ASSIGN_COMPANY'=>'Menyerahhakkan Syarikat kepada Pengguna',
-	'LBL_AUTOMATION'=>'automatik',
+	'LBL_AUTOMATION'=>'pengautomasian',
 	'Yes'=>'Ya',
 	'Cancel'=>'Batal',
 	'Active'=>'Aktif',
@@ -209,7 +209,7 @@ $languageStrings = array(
 	'LBL_MAKE_DEFAULT'=>'Make It Default',
 	'LBL_LIST_DEFAULT'=>'Default',
 	'LBL_NEW_EMAIL_ADDRESS'=>'New From Email Address', 
-	'LBL_EMAIL_NAME'=>'Name', 
+	'LBL_EMAIL_NAME'=>'Nama', 
 	'LBL_EMAIL_EMAIL'=>'Email',
 	'LBL_SET_DEFAULT'=>'Set Default',
 	'LBL_SETDEFAULT' =>'Set Default',
@@ -274,6 +274,7 @@ $languageStrings = array(
 	
 	//added by jitu@9-04-2015 for password left menu in settings
 	'LBL_PASSWORD_CONF' => 'Kata Laluan Persediaan',
+
 	'LBL_PASSWORD_DESCRIPTION' => 'Kerumitan set kata laluan untuk pengguna perisian',
 	'LBL_MAXLOGIN'=>'Daftar disekat',
 	//end here
@@ -290,7 +291,42 @@ $languageStrings = array(
 	'wcmsg'=>'Perutusan',
 	'smicon'=>'Pilih Mana-mana satu',
 	'smdetail'=>'Copy-Paste anda Feed Twitter / FB Id',
+
+
+	//Added by Azim 20/9/2018
+	'allocation list'=>'Senarai peruntukan',
+	'Leave Type'=>'Jenis Cuti',
+	'Claim Type'=>'Jenis Tuntutan',
+	'Grade'=>'Gred',
+	'Status'=>'Status',
+	'Select'=>'Pilih',
+	'Allocation Title'=>'Peruntukkan Cuti',
+	'Leave Type'=>'Jenis Cuti',
+	'Claim Type'=>'Jenis Tuntutan',
+	'Grade'=>'Gred',
+	'Status'=>'Status',
+	'LBL_EMPLOYEMENT'=>'Pekerjaan',
+	'LBL_PASSPORTVISA'=>'Pasport & Visa',
+	'LBL_PERFORMANCE'=>'Prestasi',
+	'LBL_PAYSLIP'=>'Slip Gaji',
+	'LBL_EMPLOYEMENT_DETAILS'=>'Kontrak Pekerja',
+	'LBL_GRADE' => 'Gred',
+	'LBL_HOLIDAY' => 'Cuti',
+	'LBL_LEAVE_TYPE' => 'Jenis Cuti',
+	'LBL_CLAIM_TYPE' => 'Jenis Tuntutan',
+	'LBL_BENEFIT_TYPE' => 'Jenis Manfaat',
+	'LBL_ALLOCATION' => 'Peruntukkan Cuti/Tuntutan',
+	'LBL_WORKINGHOURS' => 'Waktu Bekerja',
+	'LBL_TAGS' => 'Tag',
+	'My Profile' => 'Profil',
+	'Calendar Settings' => 'Tetapan',
+	'LBL_MY_TAGS' => 'Tag',
+	'LBL_TEMPLATES' => 'Templat',
+	'LBL_CONFIGURATION' => 'Konfigurasi',
+
+	
 	//End here	
+
 );
 $jsLanguageStrings = array(
 	'JS_PLEASE_SELECT_ATLEAST_ONE_MEMBER_FOR_A_GROUP' => 'Sila pilih sekurang kurangnya satu ahli untuk Kumpulan ', // TODO: Review

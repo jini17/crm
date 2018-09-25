@@ -39,7 +39,7 @@ $languageStrings = array(
 	'NO_PICKLIST_FIELDS'           => 'tidak mempunyai apa-apa medan Pilihan Senarai', // TODO: Review
 	
 	//Translation for module
-	'Calendar' => 'Akan Dibuat',
+	'Calendar' => 'Tugas',
 );
 $jsLanguageStrings = array(
 	'JS_ITEM_RENAMED_SUCCESSFULLY' => 'Item berjaya dinamakan semula'   , // TODO: Review

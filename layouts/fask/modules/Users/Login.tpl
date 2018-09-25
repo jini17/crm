@@ -56,18 +56,27 @@
 								<div class="login-wrapper">
 									<div class="box-wrapper">
 										<div class="login-box-container">
-											<div class="left-bar d-none d-md-flex">
-												<!-- <img src="/src/images/login-bg-left.png"> -->
+											<div class="left-bar d-none d-md-flex" style="background-image: url(http://dev7.secondcrm.com/jpj/layouts/fask/lib/src/img/login-bg-left.png);">
+										
 												<h5>
 													{if $LOGINPAGE['wcmsg'] eq ''}{vtranslate('LBL_WELCOME_SECONDCRM',$MODULE)}{else}{$LOGINPAGE['wcmsg']}{/if}
 												</h5>
 												<label class="mt-auto">Connect with us</label>
 												<!-- Start Social Media Link -->
-												<div class="social-wrapper">
-													<a class="login-sc-icon" target="_blank" href="https://www.facebook.com/secondcrm"><i class="icon-sc icon-sc-facebook2"></i></a>
-													<a class="login-sc-icon" target="_blank" href="https://www.linkedin.com/company/soft-solvers-solutions"><i class="icon-sc icon-sc-linkedin"></i></a>
-													<a class="login-sc-icon" target="_blank" href="https://twitter.com/secondcrm"><i class="icon-sc icon-sc-twitter"></i></a>
-													<a class="login-sc-icon" target="_blank" href="https://plus.google.com/+Secondcrm21909"><i class="icon-sc icon-sc-google-plus"></i></a>
+												<div class="social-wrapper row">
+													<div class="col-sm-3" style="display: inline-block;">
+														<a class="login-sc-icon" target="_blank" href="https://www.facebook.com/secondcrm"><i class="icon-sc icon-sc-facebook2"></i></a>
+													</div>
+													<div class="col-sm-3" style="display: inline-block;">
+														<a class="login-sc-icon" target="_blank" href="https://www.linkedin.com/company/soft-solvers-solutions"><i class="icon-sc icon-sc-linkedin"></i></a>
+													</div>
+													<div class="col-sm-3" style="display: inline-block;">
+														<a class="login-sc-icon" target="_blank" href="https://twitter.com/secondcrm"><i class="icon-sc icon-sc-twitter"></i></a>
+													</div>
+													<div class="col-sm-3" style="display: inline-block;">
+														<a class="login-sc-icon" target="_blank" href="https://plus.google.com/+Secondcrm21909"><i class="icon-sc icon-sc-google-plus"></i></a>
+													</div>
+											
 												</div>
 												<!-- End Social Media Link -->
 											</div>
@@ -75,7 +84,7 @@
 												{if $LOGINPAGE['logo'] eq '' || !file_exists("test/loginlogo/{$LOGINPAGE['logo']}")}
 													<img src="layouts/v7/lib/ui/src/images/agiliux-logo.png">
 												{else}
-													<img src="test/loginlogo/{$LOGINPAGE['logo']}">
+													<img src="test/loginlogo/{$LOGINPAGE['logo']}" style="width: 120px;height: auto;margin: 15px 0px;">
 												{/if}	
 												<div class="alert alert-success hide"></div>
 												{if isset($smarty.request.error)}
@@ -124,7 +133,7 @@
 													<form class="form-horizontal login-form" style="margin:0;" action="index.php?module=Users&action=Login" method="POST">	
 														<!-- Added by jitu@secondcrm.com on 24092015 for keep return url-->
 														<input type="hidden" name="return_params" value="{$RETURN_PARAMS}" />			<!-- End here -->
-														<div class="control-group">
+														<div class="control-group" style="margin-bottom: 10px !important">
 															<div class="input-group p-3" id="usernameloginpg">
 																<input type="text" id="fieldsize1" class="form-control" type="text" id="username" name="username" placeholder="Username" aria-label="Username" value="{$LOGINDETAILS.user}">
 															</div>
@@ -138,9 +147,9 @@
 															{if $LOGINDETAILS.keepcheck eq 1} checked {/if}>
 															<label class="custom-control-label" for="customCheck1" id="login-checkbox" >Keep me logged in</label>
 														</div>
-														<div class="control-group signin-button">
+														<div class="control-group signin-button" style="margin-bottom: 0px !important;">
 															<div id="forgotPassword" >
-																<div class="p-3 align-self-stretch">
+																<div class="align-self-stretch" style="padding:10px;">
 																	<button type="submit" class="btn btn-login btn-md btn-block" onclick="myFunction()">Sign in</button>
 																</div>
 															</div>
