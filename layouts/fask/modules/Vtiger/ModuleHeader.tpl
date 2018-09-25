@@ -76,11 +76,11 @@
 						<!--end here -->
 					</div>
 
+
 					
 					<!--<div class="marquee noprint" id="announcement" data-duration='5000' data-gap='10' data-dupilcated='true' >
 						{if !empty($announcement)}{$announcement}{else}{vtranslate('LBL_NO_ANNOUNCEMENTS',$MODULE)}{/if}
 					</div>-->
-                                                                                           
 
 				</div>
 				<br>
