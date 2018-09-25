@@ -22,7 +22,8 @@
 {*                                         <div class="col-lg-8"><span class="relatedpop"><a href="index.php?module=MessageBoard&view=Popup"> {$MODEL['message']} </a></span></div>
 *}
                      <div class="col-lg-7">
-                         <span class="relatedPopup" onclick="Vtiger_DashBoard_Js.ViewMessage({$MODEL['user_id']})">
+                    {*     <span class="relatedPopup" onclick="Vtiger_DashBoard_Js.ViewMessage({$MODEL['user_id']})">*}
+                    <a href="index.php?module=MessageBoard&view=Detail&record={$MODEL['record_id']}">  <span>
                               {$MODEL['title']}
                            {*  <a href="index.php?module=MessageBoard&view=Popup"> {$MODEL['message']} </a>*}
                          </span>
