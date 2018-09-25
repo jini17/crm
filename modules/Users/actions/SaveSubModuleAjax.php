@@ -262,12 +262,6 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 	//Saving leave in-/new/edit/managerapproval//
 	public function saveLeave(Vtiger_Request $request) {   
 
-	//$request= $_REQUEST['form'];	
-	
-		print_r($_REQUEST);
-		print_r($_FILES);
-		die;
-
 	$module = $request->getModule();
 	$db = PearDatabase::getInstance();
 	//$db->setDebug(true);
@@ -330,14 +324,15 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		}
 	}
 
-
+		if(!empty($_FILES['attachment']['name'])){
+			
+		}
 		
 		//Check If new record.//
 		if(empty($leaveid) || $leaveid==""){
- 		$response = new Vtiger_Response();
+ 			$response = new Vtiger_Response();
 		
-		//$total_taken = ceil(abs($end - $start) / 86400);
-		//New Create leave
+			//New Create leave
 			try {	
 			
 			//print_r($current_user);
@@ -358,7 +353,9 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 					'endhalf'  => $request->get('endhalf'),
 					'leavestatus'  => $request->get('savetype'),
 					'assigned_user_id' =>  $wsCurrentUser,
+					'employee_id' =>  $wsCurrentUser,
 				);
+
 				
 				$leave = vtws_create('Leave', $data,$current_usersaving);
 				
