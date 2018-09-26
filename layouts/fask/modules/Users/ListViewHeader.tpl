@@ -38,7 +38,7 @@
 
                 {else}
                     <div id="listview-actions" class="listview-actions-container">
-                        <div class = "row">
+                       <!-- <div class = "row">
                             <div class="btn-group col-md-3"></div>
                             <div class='col-lg-6 col-md-6 col-xs-12' style="padding-top: 5px">
                                 <div class="btn-group userFilter" style="margin-left: 25%">
@@ -50,8 +50,31 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
+                    <div class="tabContainer"><ul class="nav nav-tabs tabs sortable container-fluid visible-lg">
+
+                        <li class="active employeeTab" data-tabname="Employee Directory">
+                            <a data-toggle="tab" href="#tab_2">
+                                    <div><span class="name textOverflowEllipsis" value="Employee Directory" style="width:10%">
+                                        <strong>{vtranslate('Employee Directory',$MODULE)}</strong></span><span class="editTabName hide">
+                                        <input name="tabName" type="text"></span><i class="fa fa-bars moveTab hide"></i>
+                                    </div>
+                            </a>
+                        </li>
+                        <li class=" employeeTab" data-tabname="My Department">
+                                <a data-toggle="tab" href="#tab_1">
+                                    <div><span class="name textOverflowEllipsis" value="Tasks" style="width:10%">
+                                        <strong>{vtranslate('My Department',$MODULE)}</strong></span><span class="editTabName hide">
+                                        <input name="tabName" type="text"></span><i class="fa fa-bars moveTab hide"></i>
+                                    </div></a>
+                        </li>
+                        <li class=" employeeTab" data-tabid="210" data-tabname="Where am i">
+                            <a data-toggle="tab" href="#tab_210"><div><span class="name textOverflowEllipsis" value="Employees" style="width:10%">
+                                <strong>{vtranslate('Where am i',$MODULE)}</strong>
+                            </span><span class="editTabName hide"><input name="tabName" type="text"></span><i class="fa fa-bars moveTab hide"></i>
+                        </div></a></li>
+                   </div>
                 {/if}
                 <div class="list-content">
 {/strip}

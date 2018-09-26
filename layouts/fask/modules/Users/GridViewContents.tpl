@@ -83,11 +83,11 @@
   </div>
   <div class="col-lg-6" style="float: right;">
 
-     <div class="btn-group list-switcher" role="group" aria-label="Basic example" style="display: inline-block; margin-left: 20%;">
+    <!-- <div class="btn-group list-switcher" role="group" aria-label="Basic example" style="display: inline-block; margin-left: 20%;">
         <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-primary" data-listType='List' title="List View"><i class='fa fa-list'></i> List View</button>
         <button type="button"  onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('grid','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-danger" data-listType='Grid' title="Grid View"> <i class="fa fa-th-large"></i> Grid View</button>
 
-     </div>
+     </div>-
      <div style="display: inline-block;float: right;">
        <form class="form-inline" >
         <div class="form-group">
@@ -97,7 +97,7 @@
             <button type="button" class='btn btn-primary'> Search   </button>
         </div>
       </form>
-     </div>
+     </div>-->
      
       
       
