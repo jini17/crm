@@ -9232,5 +9232,16 @@ float: right;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-l
     position: relative; //changed to relative from fixed also works if position is not there
     font-size: small;
     width:100%;
+    margin-top: 50px;
 }
-div.agiliuxfooter-login>p {margin-top: 1rem;}
+div.agiliuxfooter-login>p 
+{margin-top: 1rem;}
+
+h5#login-page-title{
+     display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+    margin-top: 40%;
+
+}

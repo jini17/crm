@@ -58,9 +58,11 @@
 										<div class="login-box-container">
 											<div class="left-bar d-none d-md-flex" style="background-image: url(http://dev7.secondcrm.com/jpj/layouts/fask/lib/src/img/login-bg-left.png);">
 										
-												<h5>
+												
+													<h5 id="login-page-title">
 													{if $LOGINPAGE['wcmsg'] eq ''}{vtranslate('LBL_WELCOME_SECONDCRM',$MODULE)}{else}{$LOGINPAGE['wcmsg']}{/if}
-												</h5>
+													</h5>
+												
 												<label class="mt-auto">Connect with us</label>
 												<!-- Start Social Media Link -->
 												<div class="social-wrapper row">
