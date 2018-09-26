@@ -9232,7 +9232,7 @@ float: right;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-l
     position: relative; //changed to relative from fixed also works if position is not there
     font-size: small;
     width:100%;
-    margin-top: 50px;
+    background-color:#EFEFEF;
 }
 div.agiliuxfooter-login>p 
 {margin-top: 1rem;}
