@@ -9224,12 +9224,13 @@ float: right;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-l
 
 
 .agiliuxfooter-login {
-   position: fixed;
-   left: 0;
    bottom: 0;
-   width: 100%;
-   background-color: #fff;
-   color: #000;
-   text-align: center;
+    color: #707070;
+    height: 2em;
+    left: 0;
+    text-align: center;
+    position: relative; //changed to relative from fixed also works if position is not there
+    font-size: small;
+    width:100%;
 }
 div.agiliuxfooter-login>p {margin-top: 1rem;}
