@@ -195,14 +195,13 @@ Vtiger.Class("Users_Leave_Js", {
                               extraData.chkboxendhalf = jQuery('#endhalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
                             
                               thisInstance._upload(form, extraData).then(function(data) { 
-                                   //  app.helper.hideProgress(); 
-                                  //   app.helper.hideModal();
-                                     
-		                           app.helper.showSuccessNotification({'message': app.vtranslate(data.msg, 'Users')});	
-         	                         thisInstance.updateLeaveGrid(userid);
+                                     app.helper.hideProgress(); 
+                                     app.helper.hideModal();
+                                     app.helper.showSuccessNotification({'message': app.vtranslate(data.result.msg, 'Users')});	
+         	                           thisInstance.updateLeaveGrid(userid);
 		                         
 		                         }, function(e) {
-		                            app.helper.showErrorNotification({'message': app.vtranslate(data.msg, 'Users')});
+		                            app.helper.showErrorNotification({'message': app.vtranslate(data.result.msg, 'Users')});
 	                         }); 
                              
                              }
