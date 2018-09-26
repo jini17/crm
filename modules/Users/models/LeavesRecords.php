@@ -65,11 +65,11 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
         public function getMyLeaves($userid, $year){
 
         $db = PearDatabase::getInstance();
-
+       // $db ->setDebug(true);
         $result = $db->pquery("SELECT job_grade FROM vtiger_employeecontract tblVTEC 
-                                                        INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
-                                                        INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
-                                                        WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTC.createdtime DESC LIMIT 0, 1", array($userid));
+                                INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
+                                INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
+                                WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTC.createdtime DESC LIMIT 0, 1", array($userid));
 
                 $userModel = Vtiger_Record_Model::getInstanceById($userid, 'Users');					
                 $dateofJoining = $userModel->get('date_joined');
@@ -80,37 +80,52 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 $curr_year	   = date('Y');	
 
 
-                $query = "SELECT vtiger_leavetype.leavetypeid, vtiger_leavetype.title, allocation_leaverel.ageleave, allocation_leaverel.numberofleavesmore, allocation_leaverel.numberofleavesless
-                                        FROM allocation_leaverel
-                                        LEFT JOIN allocation_list ON allocation_list.allocation_id=allocation_leaverel.allocation_id
-                                        LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocation_list.allocation_id
-                                        LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = allocation_leaverel.leavetype_id
-                                        WHERE allocation_graderel=? AND allocation_list.allocation_year=?";		
+                $query = "SELECT leaveid, vtiger_users.id, reasonofleave, vtiger_leave.leavetype, vtiger_leavetype.title,vtiger_leavetype.colorcode,reasonofleave,  fromdate, todate, leavestatus,employee_id
+                        FROM vtiger_leave 
+                        INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leave.leaveid 
+                        INNER JOIN vtiger_users ON vtiger_leave.employee_id=vtiger_users.id 
+                        LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid= vtiger_leave.leavetype 
+                        WHERE vtiger_crmentity.deleted=0 AND vtiger_leave.employee_id =?  AND DATE_FORMAT(fromdate, '%Y') = ?";		
 
 
 
 
-        $result = $db->pquery($query,array($grade_id, $year));
+        $result = $db->pquery($query,array($userid, $year));
 
         $myleave=array();	
 
         for($i=0;$db->num_rows($result)>$i;$i++){
-                $rowdetail = self::getLeaveTypeDetail($db->query_result($result, $i, 'leavetypeid'));
-                $myleave[$i]['leave_type'] = $rowdetail['leavetype'];
-                $myleave[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetype');
-                $myleave[$i]['colorcode'] = $rowdetail['colorcode'];
-                $myleave[$i]['starthalf'] = $rowdetail['starthalf'];
-                $myleave[$i]['endhalf'] = $rowdetail['endhalf'];
-                $myleave[$i]['from_date_day'] = $db->query_result($result, $i, 'startday');
-                $myleave[$i]['from_date_month'] = $db->query_result($result, $i, 'startmonth');
-                $myleave[$i]['to_date_day'] = $db->query_result($result, $i, 'endday');
-                $myleave[$i]['to_date_month'] = $db->query_result($result, $i, 'endmonth');
-                $myleave[$i]['to_date_year'] = $db->query_result($result, $i, 'endyear'); 
-                $myleave[$i]['leavestatus'] = $db->query_result($result, $i, 'leavestatus'); 
-                $myleave[$i]['reasonnotapprove'] = $db->query_result($result, $i, 'reasonnotapprove'); 
+                $leaveid                        = $db->query_result($result, $i, 'leaveid');
+                $attachment                     = self::getAttachment($leaveid);
+                $myleave[$i]['leave_type']      = $db->query_result($result, $i, 'title');
+                $myleave[$i]['leavetypeid']     = $db->query_result($result, $i, 'leave_type');
+                $myleave[$i]['colorcode']       = $db->query_result($result, $i, 'colorcode');
+                $myleave[$i]['fromdate']        = $db->query_result($result, $i, 'fromdate');
+                $myleave[$i]['todate']          = $db->query_result($result, $i, 'todate');
+                $myleave[$i]['leavestatus']     = $db->query_result($result, $i, 'leavestatus');
+                $myleave[$i]['id']              = $leaveid;
+                $myleave[$i]['applicantid']     = $db->query_result($result, $i, 'employee_id'); 
+                $myleave[$i]['leavestatus']     = $db->query_result($result, $i, 'leavestatus'); 
+                $myleave[$i]['leave_reason']    = $db->query_result($result, $i, 'reasonofleave'); 
+                $myleave[$i]['fileid']          = $attachment; 
         }
 
         return $myleave;
+
+        }
+
+        public static function getAttachment($record){
+             $db = PearDatabase::getInstance();
+             //$db->setDebug(true);
+             $result = $db->pquery("SELECT vtiger_attachments.attachmentsid, vtiger_attachments.path, vtiger_attachments.name FROM vtiger_attachments LEFT JOIN vtiger_seattachmentsrel 
+                ON vtiger_seattachmentsrel.attachmentsid=vtiger_attachments.attachmentsid
+                WHERE vtiger_seattachmentsrel.crmid=?", array($record));
+
+             if($db->num_rows($result)>0){
+                return $db->query_result($result, 0, 'attachmentsid');
+             } else {
+                return '';
+             }
 
         }
 

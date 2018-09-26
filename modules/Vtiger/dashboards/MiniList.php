@@ -31,7 +31,11 @@ class Vtiger_MiniList_Dashboard extends Vtiger_IndexAjax_View {
                 }
 
                 $widget = Vtiger_Widget_Model::getInstanceWithWidgetId($widgetId, $currentUser->getId());
+<<<<<<< HEAD
+     
+=======
             
+>>>>>>> 77114df57e66d6cc725f1c297eb746cadc36d73d
                 $minilistWidgetModel = new Vtiger_MiniList_Model();
                 $minilistWidgetModel->setWidgetModel($widget);
                 $minilistWidgetModel->set('nextPage', $nextPage);
