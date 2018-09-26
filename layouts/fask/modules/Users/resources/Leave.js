@@ -177,34 +177,32 @@ Vtiger.Class("Users_Leave_Js", {
                             e.preventDefault();
                          })
 					var params = {
-                            submitHandler : function(form){
-                              
+                            submitHandler : function(form1){
+                              var form = jQuery("#editLeave");
                               
 
                               var userid = jQuery('#current_user_id').val();
                               
                              // app.helper.showProgress();
-                              var extraData = {};
+                              var extraData = form.serializeFormData();
                               var chkboxstarthalf = $('#starthalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
 	                         var chkboxendhalf = $('#endhalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
                               var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
                               var chkboxstudying = $('#chkstudying').is(':checked')?'1':'0';
-                              /*var extraData = form.serializeFormData();
+                             
 			
                               extraData.chkboxstarthalf = jQuery('#starthalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
                               extraData.chkboxendhalf = jQuery('#endhalf').is(':checked')?'1':'0';//ADDED BY JITU - HALFDAY CHECKBOX
-                              extraData.module = app.getModuleName();
-                              extraData.action = 'SaveSubModuleAjax';
-                              extraData.mode = 'saveLeave';
-                              */
-                                thisInstance._upload(form, extraData).then(function(data) { 
-                                  // app.helper.hideProgress(); 
-                                  // app.helper.hideModal();
-		                      //   app.helper.showSuccessNotification({'message': app.vtranslate(data.msg, 'Users')});	
-         	                       //  thisInstance.updateLeaveGrid(userid);
+                            
+                              thisInstance._upload(form, extraData).then(function(data) { 
+                                   //  app.helper.hideProgress(); 
+                                  //   app.helper.hideModal();
+                                     
+		                           app.helper.showSuccessNotification({'message': app.vtranslate(data.msg, 'Users')});	
+         	                         thisInstance.updateLeaveGrid(userid);
 		                         
 		                         }, function(e) {
-		                         //   app.helper.showErrorNotification({'message': app.vtranslate(data.msg, 'Users')});
+		                            app.helper.showErrorNotification({'message': app.vtranslate(data.msg, 'Users')});
 	                         }); 
                              
                              }
@@ -216,17 +214,20 @@ Vtiger.Class("Users_Leave_Js", {
 	     	});
 	     return aDeferred.promise();	
 	},
-
+	
      _upload : function(form,extraData) {
   
     	var aDeferred = jQuery.Deferred();
 		 var file_data = jQuery('#attachment').prop('files')[0];   
-                 
-	
-		jQuery('#btnsuccess').on('click', function() {	alert('ok');
-		     var file_data = jQuery('#attachment').prop('files')[0];   
-		     var formData = new FormData();                    
-		    formData.append('file', file_data);                            
+           var formData = new FormData();                    
+		     
+		     formData.append('attachment', file_data);                            
+	          if(typeof extraData === 'object') {
+			     jQuery.each(extraData, function(name,value) {
+				     formData.append(name,value);
+			     });
+		     }
+		     
 		    jQuery.ajax({
 		        url: 'index.php?module=Users&parent=Settings&action=SaveSubModuleAjax&mode=saveLeave', 
 		        cache: false,
@@ -234,46 +235,15 @@ Vtiger.Class("Users_Leave_Js", {
 		        processData: false,
 		        data: formData,                         
 		        type: 'post',
-		        success: function(php_script_response){
-		            alert(php_script_response); 
-		        }
-		    });
+		        success: function(res){
+		            aDeferred.resolve(res);
+		       }
 		});
-		/*if(file_data) {
-	     if(typeof extraData === 'object') {
-				jQuery.each(extraData, function(name,value) {
-					formData.append(name,value);
-				});
-			}
-			//append file
-			formData.append('file',file_data);
-               alert(formData);
-     		var params = {
-				url: "index.php?module=Users&parent=Settings&action=SaveSubModuleAjax&mode=saveLeave",
-				type: "POST",
-				cache: false,
-				data: formData,
-				processData: false,
-				contentType: false
-			};
-			console.log(params);
-
-			app.helper.showProgress();
-			app.request.post(params).then(function(e,res) {
-				
-				if(!e) {
-					aDeferred.resolve(res);
-				} else {
-					aDeferred.reject(e);
-				}
-			});
-		} else {
-			aDeferred.reject();
-		}*/
 		return aDeferred.promise();
 	},
 	 
 		//Added by jitu@secondcrm on 17-03-2015 for 
+		
 	registerSetLeaveType : function() {
 		$("#my_selyear").select2({ width: '100px'});
 		$("#team_selyear").select2({ width: '100px'});
@@ -381,9 +351,7 @@ Vtiger.Class("Users_Leave_Js", {
 		var thisInstance = this;
 	 	var divcontainer  = section =='T'?'myteamleavelist':'myleavelist';
 
-//////////////////////////////////
-
-		var aDeferred = jQuery.Deferred();
+     	var aDeferred = jQuery.Deferred();
 			
 		
 		app.helper.showProgress();
@@ -447,27 +415,6 @@ Vtiger.Class("Users_Leave_Js", {
 		
 
 	},
-
-	/*Popup_LeaveCancel : function(url){
-
-	 	app.helper.showProgress();
-	 	app.request.post({url:url}).then(
-		function(err,data) { 
-		      app.helper.hideProgress();
-              
-                if(err == null){
-        			 app.helper.showModal(data);
-          		} else {
-                        aDeferred.reject(err);
-                    }
-	     	});
- 		
-
-			
-		
-
-	},*/
-
 
 	/*
 	 * Function to register all actions in the Tax List
@@ -630,20 +577,25 @@ Vtiger.Class("Users_Leave_Js", {
 			  	}
 			});
 	},
-	
+	registerFileChange: function(){
+          jQuery('#attachment').on('change', function(e){
+               var element = jQuery('#attachment')
+			var uploadFileSizeHolder = jQuery('.uploadedFileDetails');
+               var fileName = e.target.files[0].name;
+			uploadFileSizeHolder.text(fileName);
+		});
+	},
 },{
 	//constructor
 
 	
 
 	registerEvents: function() {
-	
+	    
 		//this._super();
-	
 		//this.registerActions();	
 		Users_Leave_Js.registerActionsTeamLeave();	
-    	 	
-		Users_Leave_Js.registerSetLeaveType();
+    	 	Users_Leave_Js.registerSetLeaveType();
 	}
 
 });

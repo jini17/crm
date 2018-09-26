@@ -47,7 +47,8 @@
                 <div class="col-lg-7">
                         {if $COMMENTS_MODULE_MODEL->isPermitted('DetailView')}
                             <label class="radio-group cursorPointer">
-                                <input type="radio" name="historyType" class="widgetFilter reloadOnChange cursorPointer" value="comments" /> {vtranslate('LBL_COMMENTS', $MODULE_NAME)}
+                                <input type="radio" name="historyType" class="widgetFilter reloadOnChange cursorPointer" value="comments" />
+                                {vtranslate('LBL_COMMENTS', $MODULE_NAME)}
                             </label><br>
                         {/if}
                         <label class="radio-group cursorPointer">

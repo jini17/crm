@@ -857,7 +857,9 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
                                     var currentTarget = jQuery(e.currentTarget);
                                     var tabid = currentTarget.data('tabid');
                                     
+
                                     if(tabid==1){
+
                                          dashBoardContainer.find('.widget-btn').css('display','none')
                                     }
                                     else{
