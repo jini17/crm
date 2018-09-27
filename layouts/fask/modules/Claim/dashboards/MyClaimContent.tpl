@@ -13,46 +13,46 @@
 <div style='padding:5px'>
 {if count($MODELS) > 0}
 	  <div class='row th' style="padding:5px">
-        	{if $VALUE eq 'leavetype'}
+        	{if $VALUE eq 'claimtype'}
 	            <div class='col-lg-3'>
-	                <strong>{vtranslate('Allocates', $MODULE_NAME)}</strong>
+	                <strong>{vtranslate('Allocated', $MODULE_NAME)}</strong>
 	            </div>
 	            <div class='col-lg-2'>
 	                <strong>{vtranslate('Used', $MODULE_NAME)}</strong>
 	            </div>
 	            <div class='col-lg-3'>
-	                <strong>{vtranslate('Balanced', $MODULE_NAME)}</strong>
+	                <strong>{vtranslate('Balance', $MODULE_NAME)}</strong>
 	            </div>
 	            <div class='col-lg-4'>
 	                <strong>{vtranslate('Type', $MODULE_NAME)}</strong>
 	            </div>
             {else}
 	            <div class='col-lg-4'>
-	                <strong>{vtranslate('Leave Type', $MODULE_NAME)}</strong>
+	                <strong>{vtranslate('Claim Type', $MODULE_NAME)}</strong>
 	            </div>
 	            <div class='col-lg-4'>
-	                <strong>{vtranslate('Start Date', $MODULE_NAME)}</strong>
+	                <strong>{vtranslate('Amount', $MODULE_NAME)}</strong>
 	            </div>
 	            <div class='col-lg-4'>
-	                <strong>{vtranslate('Status', $MODULE_NAME)}</strong>
+	                <strong>{vtranslate('Date', $MODULE_NAME)}</strong>
 	            </div>
 	        {/if}
         </div>
-		{if $VALUE eq 'leavetype'}
-			{foreach item=MODEL from=$MODELS['display']}
+		{if $VALUE eq 'claimtype'}
+			{foreach item=MODEL from=$MODELS}
 			
 			<div class='row miniListContent'>
 				<div class='col-lg-3' align="center">
-					{$MODEL['allocateleaves']}
+					{$MODEL['yearlylimit']}
 				</div>
 				<div class='col-lg-2' align="center">
-					{$MODEL['takenleave']}
+					{$MODEL['totalamount']}
 				</div>
 				<div class='col-lg-3' align="center">
-					{$MODEL['balanceleave']}
+					{$MODEL['balance']}
 				</div>
 				<div class='col-lg-4'>
-					{$MODEL['leavetype']}
+					{$MODEL['category']}
 				</div>
 			</div>
 			{/foreach}
@@ -60,13 +60,13 @@
 			{foreach item=MODEL from=$MODELS}
 			<div class='row miniListContent' style="padding:5px">
 				<div class='col-lg-4'>
-					{$MODEL['title']}
+					{$MODEL['category']}
 				</div>
 				<div class='col-lg-4'>
-					{$MODEL['fromdate']}
+					{$MODEL['totalamount']}
 				</div>
 				<div class='col-lg-4'>
-					{$MODEL['leavestatus']}
+					{$MODEL['transactiondate']}
 				</div>
 			</div>
 			{/foreach}
