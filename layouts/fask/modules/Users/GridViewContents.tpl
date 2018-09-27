@@ -53,6 +53,12 @@
    .email-icon i{
    color: #333;
    }
+   .view{
+   
+     }
+   .activeview{
+       
+   }
 </style>
 <input type="hidden" id="listViewEntriesCount" value="{$LISTVIEW_ENTRIES_COUNT}" />
 <input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
@@ -74,6 +80,15 @@
 {*
 <pre />
 {$LISTVIEW_ENTRIES|print_r}*}
+
+{if $EMP_VIEW eq 'grid'}
+    {assign var =LIST value = 'btn-white'}
+    {assign var =GRID value = 'btn-primary'}
+
+{else}
+        {assign var =LIST value = 'btn-primary'}
+    {assign var =GRID value = 'btn-white'}
+{/if}
 <div class="clearfix" style="height:20px;"></div>
 <div class="row">
   <div class="col-lg-6" style="float: left;">
@@ -81,32 +96,12 @@
      {vtranslate('YOU_ARE_CURRENLY_VIEWING',$MODULE)} "Soft Solvers Solutions"
      </strong>
   </div>
-  <div class="col-lg-6" style="float: right;">
-
-     <div class="btn-group list-switcher" role="group" aria-label="Basic example" style="display: inline-block; margin-left: 20%;">
-        <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-primary" data-listType='List' title="List View"><i class='fa fa-list'></i> List View</button>
-        <button type="button"  onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('grid','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-danger" data-listType='Grid' title="Grid View"> <i class="fa fa-th-large"></i> Grid View</button>
-
-     </div>
-     <div style="display: inline-block;float: right;">
-       <form class="form-inline" >
-        <div class="form-group">
-            <input type="text" placeholder="Enter Keyword" class="form-control">
-        </div>
-        <div class="form-group">
-            <button type="button" class='btn btn-primary'> Search   </button>
-        </div>
-      </form>
-     </div>
-     
-      
-      
-  </div>
+ 
 </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6 pull-right">
       <div class="btn-group list-switcher" role="group" aria-label="Basic example">
-          <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-primary" data-listType='List' title="List View"><i class='fa fa-list'></i> {vtranslate('List View', $MODULE)}</button>
-          <button type="button"  onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('grid','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-danger" data-listType='Grid' title="Grid View"> <i class="fa fa-th-large"></i> {vtranslate('Grid View', $MODULE)}</button>
+          <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn {$LIST} btn-white view" data-listType='List' title="List View"><i class='fa fa-list'></i> {vtranslate('List View', $MODULE)}</button>
+          <button type="button"  onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('grid','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn {$GRID} activeview" data-listType='Grid' title="Grid View"> <i class="fa fa-th-large"></i> {vtranslate('Grid View', $MODULE)}</button>
       </div>
    
         <form class='form-inline pull-right'>

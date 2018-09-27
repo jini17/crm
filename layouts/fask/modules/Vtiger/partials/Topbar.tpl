@@ -89,7 +89,11 @@ $(this).hide();
                                                         {assign var=DASHBOARD_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Dashboard')}
 
                                                         {if $USER_PRIVILEGES_MODEL->hasModulePermission($DASHBOARD_MODULE_MODEL->getId())}
-                                                        <li class="{if $MODULE eq "Home"}active{/if}"> <a class=" waves-effect waves-dark" href="{$HOME_MODULE_MODEL->getDefaultUrl()}" ><i class="material-icons">dashboard</i><span class="hide-menu" style="text-transform: uppercase">{vtranslate('LBL_DASHBOARD',$MODULE)} </span></a>
+                                                        <li class="{if $MODULE eq "Home"}active{/if}"> 
+                                                            <a class=" waves-effect waves-dark" href="{$HOME_MODULE_MODEL->getDefaultUrl()}" >
+                                                                <i class="material-icons">dashboard</i>
+                                                                <span class="hide-menu" style="text-transform: uppercase">{vtranslate('LBL_DASHBOARD',$MODULE)} </span>
+                                                            </a>
                                                         </li>
                                                         {/if}
 
@@ -102,7 +106,11 @@ $(this).hide();
                                                         {assign var=DOCUMENTS_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Documents')}
                                                         {if $USER_PRIVILEGES_MODEL->hasModulePermission($DOCUMENTS_MODULE_MODEL->getId())}
 
-                                                        <li class="{if $MODULE eq "Documents"}active{/if}"> <a class=" waves-effect waves-dark" href="index.php?module=Documents&view=List" ><i class="app-icon-list material-icons">insert_drive_file</i><span class="hide-menu"> {vtranslate('Documents')}</span></a>
+                                                        <li class="{if $MODULE eq "Documents"}active{/if}"> 
+                                                            <a class=" waves-effect waves-dark" href="index.php?module=Documents&view=List" >
+                                                                <i class="app-icon-list material-icons">insert_drive_file</i><span class="hide-menu"> 
+                                                                    {vtranslate('Documents')}</span>
+                                                            </a>
                                                         </li>
                                                         {/if}
                                                         <hr/>
@@ -113,11 +121,20 @@ $(this).hide();
                                                             <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
                                                                href="index.php?module=Vtiger&parent=Settings&view=Index" >
                                                                 <span class="module-icon">
-                                                                    <i class="material-icons">settings</i></span><span class="hide-menu">  
-                                                                        {vtranslate('LBL_CRM_SETTINGS','Vtiger')}</span></a>
+                                                                    <i class="material-icons">settings</i></span>
+                                                                    <span class="hide-menu">  
+                                                                        {vtranslate('LBL_CRM_SETTINGS','Vtiger')}
+                                                                    </span>
+                                                            </a>
                                                         </li>
 
-                                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="index.php?module=Users&parent=Settings&view=List" ><span class="module-icon"><i class="material-icons">contacts</i></span><span class="hide-menu">   {vtranslate('LBL_MANAGE_USERS','Vtiger')}</span></a></li>
+                                                        <li>
+                                                            <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
+                                                               href="index.php?module=Users&parent=Settings&view=List" >
+                                                                <span class="module-icon"><i class="material-icons">contacts</i></span>
+                                                                <span class="hide-menu">   {vtranslate('LBL_MANAGE_USERS','Vtiger')}</span>
+                                                            </a>
+                                                        </li>
 
 
                                                         {else}
@@ -125,7 +142,8 @@ $(this).hide();
                                                         <li class="{if $MODULE eq "Users"}active{/if}"> 
                                                             <a class=" waves-effect waves-dark" href="index.php?module=Users&view=Settings" >
                                                                 <i class="material-icons">settings</i>
-                                                                <span class="hide-menu" style="text-transform: uppercase"> {vtranslate('LBL_SETTINGS', 'Settings:Vtiger')}</span></a>
+                                                                <span class="hide-menu" style="text-transform: uppercase"> {vtranslate('LBL_SETTINGS', 'Settings:Vtiger')}</span>
+                                                            </a>
                                                         </li>
 
                                                         {/if}
@@ -361,7 +379,7 @@ $(this).hide();
                                                                             </a>
                                                                         </li>
 
-                                                                   
+
                                                                         <li admin="">
                                                                             <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=MessageBoard&amp;view=List&amp;app=ADMIN ">
                                                                                 <i class="material-icons module-icon">assignment</i> <span class="hide-menu"> Message Board</span>
@@ -1091,8 +1109,6 @@ dashboard
                                                                                                 </ul>
                                                                                         </div>
                                                                                 </div>
-
-
                                                                         </div>
                                                                 </div>
 

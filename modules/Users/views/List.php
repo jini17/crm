@@ -40,7 +40,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
                                          $defaultview = $request->get('empview');	
                                          $Alphabet = $request->get('Alphabet');
 		if(!$request->get('empview')){
-			$defaultview = 'grid';	
+                                                    $defaultview = 'grid';	
 		}	
 		elseif($request->get('empview') == 'grid'){
                                                     $defaultview = 'grid';	

@@ -289,7 +289,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 			gridWidth = 1;
 		} else if (_device_width >= 768 && _device_width < 992) {
 			gridWidth = 2;
-		} else if (_device_width >= 992 && _device_width < 1440) {
+		} else if (_device_width >= 992 && _device_width < 1800) {
 			gridWidth = 3;
 		} else {
 			gridWidth = 4;
