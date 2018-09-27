@@ -817,6 +817,8 @@ $languageStrings = array(
 	'Files' => 'Fail',
 	
 	'Kontrak Pekerja - All' => 'Kontrak Pekerja - Semua',
+	'Attendence' => 'Kedatangan',
+	'Training' => 'Kursus',
 
 
 	
