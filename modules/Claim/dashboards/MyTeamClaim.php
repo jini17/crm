@@ -8,7 +8,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Claim_MyClaim_Dashboard extends Vtiger_IndexAjax_View {
+class Claim_MyTeamClaim_Dashboard extends Vtiger_IndexAjax_View {
 
 	public function process(Vtiger_Request $request) {
 
@@ -17,6 +17,8 @@ class Claim_MyClaim_Dashboard extends Vtiger_IndexAjax_View {
 
 		$moduleName = $request->getModule();
 		$type = $request->get('type');
+		$userModel = Users_ClaimRecords_Model::getMyTeamMembers($currentUser->getId());
+		$select_value = $request->get('employee_name');
 		
 		if($type == '' || $type == null) {
 				$type = 'claimtype';
@@ -27,16 +29,16 @@ class Claim_MyClaim_Dashboard extends Vtiger_IndexAjax_View {
 		if($type=='claimtype') {
 			$valueLabel = $valueLabel;
 			
-		}  else if($type=='latest') {	
+		}  else if($type=='pending') {	
 		
-			$valueLabel = 'LBL_LAST_5_CLAIM';
+			$valueLabel = 'LBL_PENDING_APPROVAL';
 		}
 		
-		$claimmodel = Users_ClaimRecords_Model::getMyClaim($currentUser->getId(), date('Y'),$type);	
+		
+			
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
-
-		
+		$claimmodel = Users_ClaimRecords_Model::getMyTeamClaim($currentUser->getId(), date('Y'), 1, 1,$select_value,'');
 		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('VALUE', $type );
@@ -44,14 +46,15 @@ class Claim_MyClaim_Dashboard extends Vtiger_IndexAjax_View {
 		$viewer->assign('USERID', $currentUser->getId());
 		
 		$viewer->assign('MODULE_NAME', $moduleName);
+		$viewer->assign('USERMODELS', $userModel);
 		$viewer->assign('MODELS', $claimmodel);
 		$content = $request->get('content');
      
 
 		if(!empty($content)) {
-			$viewer->view('dashboards/MyClaimContent.tpl', $moduleName);
+			$viewer->view('dashboards/MyTeamClaimContents.tpl', $moduleName);
 		} else {
-			$viewer->view('dashboards/MyClaim.tpl', $moduleName);
+			$viewer->view('dashboards/MyTeamClaim.tpl', $moduleName);
 		}
 	}
 }

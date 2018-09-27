@@ -24,6 +24,8 @@ $languageStrings = Array(
 	'LBL_LAST_5_CLAIM' => '5 Tuntutan Terakhir',
 	'LBL_APPLY' => 'Mohon Tuntutan',
 	'My Claim' => 'Tuntutan Saya',
+	'LBL_PENDING_APPROVAL' => 'Menunggu Kelulusan',
+	'My Team Claim' => 'Tuntutan Kumpulan Saya',
 );
 
 ?>
