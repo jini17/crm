@@ -23,7 +23,7 @@ class MessageBoard_MessageBoard_Dashboard extends Vtiger_IndexAjax_View {
                 $viewer->assign('WIDGET', $widget);
 
                 $viewer->assign('USERID', $currentUser->getId());
-                $sql =  " SELECT  first_name,employee_id,message, vtiger_messageboard.title, createdtime FROM vtiger_messageboard  "
+                $sql =  " SELECT  vtiger_messageboard.messageboardid as record_id,first_name,employee_id,message, vtiger_messageboard.title, createdtime FROM vtiger_messageboard  "
                          . " INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_messageboard.messageboardid  "
                          . " Left JOIN  vtiger_users  ON vtiger_users.id = vtiger_messageboard.employee_id "
                          . " WHERE vtiger_crmentity.deleted=0 AND ( vtiger_users.reports_to_id = ? OR vtiger_messageboard.employee_id=?) ORDER BY vtiger_crmentity.createdtime DESC Limit 5";
@@ -54,12 +54,13 @@ class MessageBoard_MessageBoard_Dashboard extends Vtiger_IndexAjax_View {
                            $pos=strpos($content, ' ', 30);
                            $summery  = substr($content,0,$pos ); 
                             
-                          $messages[$i]["first_name"]        =  $db->query_result($query,$i,"first_name");
-                          $messages[$i]["message"]            = $summery;
-                           $messages[$i]["title"]            = $title;
-                          $messages[$i]["messagetime"]   =  $this->time_elapsed_string($createtime);
-                          $messages[$i]["image"]                =  $imagepath;
-                          $messages[$i]["user_id"]                =  $db->query_result($query,$i,"employee_id");
+                          $messages[$i]["first_name"]      =  $db->query_result($query,$i,"first_name");
+                          $messages[$i]["message"]          = $summery;
+                           $messages[$i]["title"]                  = $title;
+                          $messages[$i]["messagetime"]  =  $this->time_elapsed_string($createtime);
+                          $messages[$i]["image"]               =  $imagepath;
+                          $messages[$i]["user_id"]             =  $db->query_result($query,$i,"employee_id");
+                          $messages[$i]["record_id"]         = $db->query_result($query,$i,"record_id");
                           
                        }
                      

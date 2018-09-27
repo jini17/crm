@@ -15,18 +15,24 @@
 	  <div class='row th' style="padding:5px">
         	{if $VALUE eq 'claimtype'}
 	            <div class='col-lg-3'>
-	                <strong>{vtranslate('Allocated', $MODULE_NAME)}</strong>
+	                <strong>{vtranslate('Employee Name', $MODULE_NAME)}</strong>
 	            </div>
 	            <div class='col-lg-2'>
-	                <strong>{vtranslate('Used', $MODULE_NAME)}</strong>
-	            </div>
+	                <strong>{vtranslate('Claim Type', $MODULE_NAME)}</strong>
+	            </div>l
 	            <div class='col-lg-3'>
-	                <strong>{vtranslate('Balance', $MODULE_NAME)}</strong>
+	                <strong>{vtranslate('Allocated', $MODULE_NAME)}</strong>
 	            </div>
 	            <div class='col-lg-4'>
-	                <strong>{vtranslate('Type', $MODULE_NAME)}</strong>
+	                <strong>{vtranslate('Used', $MODULE_NAME)}</strong>
+	            </div>
+	            <div class='col-lg-4'>
+	                <strong>{vtranslate('Balance', $MODULE_NAME)}</strong>
 	            </div>
             {else}
+	            <div class='col-lg-4'>
+	                <strong>{vtranslate('Employee Name', $MODULE_NAME)}</strong>
+	            </div>
 	            <div class='col-lg-4'>
 	                <strong>{vtranslate('Claim Type', $MODULE_NAME)}</strong>
 	            </div>
@@ -43,22 +49,28 @@
 			
 			<div class='row miniListContent'>
 				<div class='col-lg-3' align="center">
-					{$MODEL['yearlylimit']}
-				</div>
-				<div class='col-lg-2' align="center">
-					{$MODEL['totalamount']}
+					{$MODEL['fullname']}
 				</div>
 				<div class='col-lg-3' align="center">
-					{$MODEL['balance']}
+					{$MODEL['category']}
+				</div>
+				<div class='col-lg-2' align="center">
+					{$MODEL['yearlylimit']}
+				</div>
+				<div class='col-lg-3' align="center">
+					{$MODEL['totalamount']}
 				</div>
 				<div class='col-lg-4'>
-					{$MODEL['category']}
+					{$MODEL['balance']}
 				</div>
 			</div>
 			{/foreach}
 		{else}
 			{foreach item=MODEL from=$MODELS}
 			<div class='row miniListContent' style="padding:5px">
+				<div class='col-lg-4'>
+					{$MODEL['fullname']}
+				</div>
 				<div class='col-lg-4'>
 					{$MODEL['category']}
 				</div>

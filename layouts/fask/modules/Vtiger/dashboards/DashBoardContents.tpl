@@ -38,7 +38,7 @@
                    {if $SELECTED_TAB neq 1}
 		<div class="btn-group"  {$SELECTED_TAB}>
 			{if $SELECTABLE_WIDGETS|count gt 0}
-				<button class='btn btn-info addButton dropdown-toggle' data-toggle='dropdown'>
+				<button class='btn btn-info addButton dropdown-toggle widget-btn' data-toggle='dropdown'>
 					{vtranslate('LBL_ADD_WIDGET')}&nbsp;&nbsp;<i class="caret"></i>
 				</button>
 				

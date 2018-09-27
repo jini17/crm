@@ -21,6 +21,12 @@
 *
 ********************************************************************************/
 -->*}
+<style>
+    .uploadedFileDetails{
+
+    }
+
+</style>
 {strip}   
  <div class="leaveModalContainer modal-dialog modal-xs modelContainer">
                 {if $MANAGER eq 'true'}
@@ -128,6 +134,23 @@
                                 </div>
                                 <div class="controls text-right" id="charNum_reason" style="font-size:12px; margin-right: 13px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                         </div>
+                        <div class="form-group" style="margin-bottom: 0px !important;">
+                            <div class="col-md-12" style="margin-bottom: 15px;">
+                               <div class="col-md-4">
+                                    <label class="control-label fieldLabel" style="text-align: right;float: right;">
+                                            &nbsp;{vtranslate('LBL_ATTACHMENTS', $QUALIFIED_MODULE)} 
+                                    </label>
+                                </div>  
+                                <div class="fileUploadContainer">
+                                    <div class="fileUploadBtn btn btn-primary" onclick="javascript:Users_Leave_Js.registerFileChange();">
+                                        <i class="fa fa-laptop"></i>
+                                        <span>{vtranslate('LBL_UPLOAD', $QUALIFIED_MODULE)}</span>
+                                        <input id="attachment" class="fieldValue inputElement" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment">
+                                    </div>&nbsp;<span class="uploadedFileDetails"></span>
+                                </div>
+                                
+                            </div>    
+                        </div>        
                 {if $MANAGER eq 'true'}
                         <div class="control-group">
                                 <!--approved start-->
@@ -184,16 +207,20 @@
                         </div>
                         <!--Enable or disable button-->
                         {if $LEAVESTATUS eq 'Apply' || $LEAVESTATUS eq 'Approve' || $LEAVESTATUS eq 'Not Approved' || $LEAVESTATUS eq 'Canccel'}
+
                         <input class="btn btn-disable" type="button" onclick="document.getElementById('savetype').value='Apply'"  value= "{vtranslate('Apply Leave',$MODULE)}" name="applyleave" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Leave">
                         {else}
                         <input class="btn btn-success" type="submit" onclick="document.getElementById('savetype').value='Apply'"  value="{vtranslate('Apply Leave',$MODULE)}" name="applyleave" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Leave">
+
                         {/if}
 
                         <!--Enable or disable button-->
                         {if $LEAVESTATUS eq 'Apply' || $LEAVESTATUS eq 'Approve' || $LEAVESTATUS eq 'Not Approved' || $LEAVESTATUS eq 'Canccel'}
+
                         <input class="btn btn-disable" type="button" onclick="document.getElementById('savetype').value='New';" value="{vtranslate('Save As Draft',$MODULE)}" name="saverecord" accesskey="LBL_SAVE_BUTTON_KEY" title="Save">
                         {else}
                         <input class="btn btn-success" type="submit" onclick="document.getElementById('savetype').value='New';" value="{vtranslate('Save As Draft',$MODULE)}" name="saverecord" accesskey="LBL_SAVE_BUTTON_KEY" title="Save">
+
                         {/if}
                 {/if}
                     </div>

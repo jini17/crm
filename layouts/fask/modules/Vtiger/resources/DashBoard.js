@@ -856,6 +856,16 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
                             dashBoardContainer.on("shown.bs.tab",".dashboardTab",function(e){ 
                                     var currentTarget = jQuery(e.currentTarget);
                                     var tabid = currentTarget.data('tabid');
+                                    
+
+                                    if(tabid==1){
+
+                                         dashBoardContainer.find('.widget-btn').css('display','none')
+                                    }
+                                    else{
+                                        dashBoardContainer.find('.widget-btn').css('display','block')
+                                    }
+                                    
                                     jQuery("#default_tab").val(tabid);
 
                                     app.changeURL("index.php?module=Home&view=DashBoard&tabid="+tabid);
