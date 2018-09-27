@@ -18,22 +18,19 @@
 
 		       if (!is_null($last_error)) { // if there has been an error at some point
 
-<<<<<<< HEAD
+
 			  // do something with the error
-=======
+
 //			  // do something with the error
->>>>>>> 97c16a6cc78a0add87d1635533403ea8db5342e4
+
 			  print_r($last_error);
 
 		       }
 
-<<<<<<< HEAD
-		    }*/
-=======
-		    }
->>>>>>> 97c16a6cc78a0add87d1635533403ea8db5342e4
 
-*/
+		    }*/
+
+
 		    
 //Overrides GetRelatedList : used to get related query
 //TODO : Eliminate below hacking solution
