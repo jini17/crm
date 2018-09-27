@@ -273,17 +273,6 @@ $(this).hide();
 
                                                 </div>
                                         </div>
-                        <!--<div class="search-links-container col-md-3 col-lg-3 hidden-sm">
-
-
-
-                                <div class="search-link hidden-xs">
-                                        <span class="ti-search" aria-hidden="true"></span>
-                                        <input class="keyword-input" type="text" placeholder="{vtranslate('LBL_TYPE_SEARCH')}" value="{$GLOBAL_SEARCH_VALUE}">
-                                        <span id="adv-search" class="adv-search ti-arrow-circle-down pull-right cursorPointer" aria-hidden="true"></span>
-                                </div>
-                        </div>-->
-
                         <!--top nav with lock-->
                         <div class="col-lg-5 col-md-5 col-sm-4 col-xs-8 "><div class="row">
                                 <ul class="nav navbar-nav newtabs">
@@ -477,107 +466,6 @@ $(this).hide();
                                                         </div>
                                                 </div>
 
-                                        </li>
-                                        <li>
-                                                <div class="dropdownSales">
-                                                         <div class="addtionalDashboardTab">
-                                                                <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #1abbe9;vertical-align: middle;font-size: 13px;"></i>
-                                                        </div>
-
-
-                                                        <div class="dropdown-content-Sales">
-                                                                <div class="row">
-                                                                        <div class="col-md-4">
-                                                                                <div class="popup-col-4">
-                                                                                        <div class="popup-col-4img" >
-                                                                                                <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 85%;">
-                                                                                        </div>
-
-                                                                                        <div class="popup-col-4text">
-                                                                                                Manage Sales Team and activities.
-                                                                                        </div>
-                                                                                </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-4">
-                                                                                <div class="popup-col-4">
-                                                                                        <div class="popup-col-4img">
-                                                                                                <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width:85%;">
-                                                                                        </div>
-                                                                                        <div class="popup-col-4text">
-                                                                                                Google contacts, calendar and docs synchronization
-                                                                                        </div>
-                                                                                </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-4">
-                                                                                <div class="popup-col-4">
-                                                                                        <div class="popup-col-4img">
-                                                                                                <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
-                                                                                        </div>
-                                                                                        <div class="popup-col-4text">
-                                                                                                Acquire more leads
-                                                                                        </div>
-                                                                                </div>
-                                                                        </div>
-                                                                </div>
-                                                                <div class="col-md-12 row" style="padding: 10px;">
-                                                                        <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
-                                                                </div>
-                                                        </div>
-                                                </div>
-
-                                        </li>
-
-                                        <li>
-                                                <div class="dropdownTools">
-                                                        <div class="addtionalDashboardTab">
-                                                                <span aria-hidden="true">Communications</span>
-                                                        </div>
-                                                        <div class="dropdown-content-Tools">
-
-                                                                <ul class="dropdownlist">
-
-                                                                    <li>
-                                                                        <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                                                                                <i class="fa fa-bell-o"></i>&nbsp;Notification Templates
-                                                                        </a>
-                                                                    </li>
-                                                                 <!--   <li>
-                                                                        <a class="dropdown-icon-dashboard" title="Rss" href="index.php?module=Rss&amp;view=List&amp;app=TOOLS">
-                                                                                <i class="fa fa-rss"></i>&nbsp;Rss
-                                                                        </a>
-                                                                    </li>-->
-                                                                     {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
-                                                                    <li>
-                                                                        <a class="dropdown-icon-dashboard" title="Recycle Bin" href="index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS">
-                                                                                <i class="fa fa-trash-o"></i>&nbsp;Recycle Bin
-                                                                        </a>
-                                                                    </li>
-                                                                    {/if}
-                                                                      <li>
-
-
-                                                                         <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_MAIL_MANAGER')}" href="index.php?module=MailManager&view=List">
-                                                                                    <i class="material-icons module-icon">email</i>&nbsp;{vtranslate('LBL_MAIL_MANAGER')}
-
-                                                                                </a>
-
-                                                                    </li>
-                                                             <!--       <li>
-                                                                        <a class="dropdown-icon-dashboard" title="Our Sites" href="index.php?module=Portal&amp;view=List&amp;app=TOOLS">
-                                                                                <i class="fa fa-desktop"></i>&nbsp;Our Sites
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="dropdown-icon-dashboard" title="PBX Manager" href="index.php?module=PBXManager&amp;view=List&amp;app=TOOLS">
-                                                                                <i class="fa fa-phone"></i>&nbsp;PBX Manager
-                                                                        </a>
-                                                                    </li>-->
-
-                                                                </ul>
-                                                        </div>
-                                                </div>
                                         </li>
                                         <li>
                                                 <div class="dropdownSupport">
