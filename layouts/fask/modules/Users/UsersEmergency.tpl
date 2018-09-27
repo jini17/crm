@@ -1,8 +1,8 @@
 {strip}
 {assign var=EDIT_EMERGENCY_URL value=$EMERGENCY_RECORD_MODEL->getEditEmergencyUrl()}
 <div id="UserEmergencyContainer">
-	<div class="myProfileBtn">
-			<button type="button" class="btn btn-primary pull-right" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}');"><i class="fa fa-pencil"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_EDIT_CONTACT', $MODULE)}</strong></button>
+	<div class="btn-group pull-right allprofilebtn">
+			<button type="button" class="btn btn-primary" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}');"><i class="fa fa-pencil"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_EDIT_CONTACT', $MODULE)}</strong></button>
 		</div>
         <div class="clearfix"></div>
 

@@ -14,12 +14,12 @@
 {assign var=CREATE_LANGUAGE_URL value=$LANGUAGE_RECORD_MODEL->getCreateLanguageUrl()}
 {assign var=CREATE_SKILL_URL value=$LANGUAGE_RECORD_MODEL->getCreateSkillUrl()}
 {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
-        <div class="myProfileBtn">
-            <button type="button" class="btn btn-primary pull-right" onclick="Users_Skills_Js.addLanguage('{$CREATE_LANGUAGE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_LANGUAGE', $MODULE)}</strong></button>
+        <div class="btn-group pull-right allprofilebtn">
+            <button type="button" class="btn btn-primary" onclick="Users_Skills_Js.addLanguage('{$CREATE_LANGUAGE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_LANGUAGE', $MODULE)}</strong></button>
         </div>
         <div class="clearfix"></div>
 
-                    <div class="block listViewContentDiv" id="listViewContents" style="marign-top: 15px;">
+                    <div class="block listViewContentDiv" id="listViewContents" >
                         <div class="listViewEntriesDiv contents-bottomscroll " style="padding-top: 5px;">
                             <div class="bottomscroll-div"><div>
                                 <h5>{vtranslate('LBL_SKILL_LANG', $MODULE)}</h5>
@@ -37,9 +37,9 @@
                                 <tbody>
                                     {foreach item=USER_LANGUAGE from=$USER_SOFTSKILL_LIST}
                                     <tr>
-                                        <td class="listTableRow small" valign="top">{$USER_LANGUAGE['language']}</td>
-                                        <td class="listTableRow small" valign="top">{$USER_LANGUAGE['proficiency']}</td>
-                                        <td class="listTableRow small" width="5%" valign="top">
+                                        <td class="medium" valign="top">{$USER_LANGUAGE['language']}</td>
+                                        <td class="medium" valign="top">{$USER_LANGUAGE['proficiency']}</td>
+                                        <td class="medium" width="5%" valign="top">
                                             <div class="pull-right actions">
                                                 <span class="actionImages">
                                                     <a class="editLanguage cursorPointer editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Skills_Js.editLanguage('{$CREATE_LANGUAGE_URL}&record={$USER_LANGUAGE['ss_id']}&userId={$USERID}&selected_id={$USER_LANGUAGE['language_id']}');"></a>&nbsp;&nbsp;
@@ -59,24 +59,34 @@
             </div>
 </div>
 <!--- Start of Skill Container-->
-<div id="SkillContainer">
+<div id="SkillContainer" >
+    <div class="btn-group pull-right allprofilebtn">
 
-    <button type="button" class="btn btn-primary pull-right" onclick="Users_Skills_Js.addSkill('{$CREATE_SKILL_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_SKILL', $MODULE)}</strong></button>
-
-        <div class="clearfix"></div>
-        <div class="row-fluid paddingTop20" style="width: 100%; margin-top: 10px;">
-        <div class="select2-container select2-container-multi select2 span12" id="allskillslist"  style="width: 100%;">
-            <ul class="select2-choices ui-sortable">
-                {foreach item=SKILL from=$USER_SKILL_CLOUD}
-                <li class="select2-search-choice" style="cursor:default;" data-id="54" data-item-name="SQL">
-                    <div class="pull-left" style="padding-right:25px;">{$SKILL['skill_title']}</div>
-                    <a class="deleteSkill select2-search-choice-close" onclick="Users_Skills_Js.deleteSkill('{$SKILL['skill_id']}')" title="Delete"></a>
-                    <div class="pull-right skillnum">{$SKILL['endorsement']}</div>
-                </li>   
-                {/foreach}
-            </ul>
-        </div>
+        <button type="button" class="btn btn-primary pull-right" onclick="Users_Skills_Js.addSkill('{$CREATE_SKILL_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_SKILL', $MODULE)}</strong></button>
     </div>
+    <div class="clearfix"></div>
+    <div class="block listViewContentDiv" id="listViewContents" >
+        <div class="listViewEntriesDiv contents-bottomscroll " style="padding-top: 5px;">
+            <div class="bottomscroll-div">
+                <div>
+
+                    <div  style="width: 100%;    padding: 10px 0px; ">
+                        <div class="select2-container select2-container-multi select2 span12" id="allskillslist"  style="width: 100%;">
+                            <ul class="select2-choices ui-sortable" style="    border: none !important;">
+                                {foreach item=SKILL from=$USER_SKILL_CLOUD}
+                                <li class="select2-search-choice" style="cursor:default;" data-id="54" data-item-name="SQL">
+                                    <div class="pull-left" style="padding-right:25px;">{$SKILL['skill_title']}</div>
+                                    <a class="deleteSkill select2-search-choice-close" onclick="Users_Skills_Js.deleteSkill('{$SKILL['skill_id']}')" title="Delete"></a>
+                                    <div class="pull-right skillnum">{$SKILL['endorsement']}</div>
+                                </li>   
+                                {/foreach}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>        
 </div>
 </div>
 {/strip}

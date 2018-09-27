@@ -6194,6 +6194,10 @@ div.tooltip-inner {
   height: 960px;
   min-width: 100%!important;
 }
+.tab-pane{
+  margin-bottom: 30px !important;
+}
+
 .nav-tabs>li {
   border-bottom: 3px solid transparent;
   margin: 0 2px;
@@ -9163,6 +9167,7 @@ div#prefernces.tab-pane {
   width: 100%;
   margin:0 auto;
 }
+
 span.actionImages>a{
   padding: 0px 5px;
 }
@@ -9247,4 +9252,10 @@ h5#login-page-title{
 }
 .editviewbtncontainer{
   margin-bottom: 5% !important;
+}
+.allprofilebtn{
+margin-right: 14px;margin-top:10px;margin-bottom: 10px;
+}
+.selectProfileCont{
+  padding: 6px 12px;border-radius: .25rem;font-weight: 100;
 }
