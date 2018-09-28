@@ -407,7 +407,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                 app.request.get({data:usersListParams}).then(function(err, res){
                         aDeferred.resolve(res);
                         var container = thisInstance.getListViewContainer();
-                        container.find('#listview-actions div.list-content').html(res);
+                        container.find('.list-content').html(res);
                         thisInstance.updatePagination();
                         app.event.trigger('post.listViewFilter.click', container.find('.searchRow'));
                         thisInstance.registerDynamicDropdownPosition('table-actions', 'listview-table');

@@ -602,7 +602,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		$this->fieldInfo['masseditable'] = $this->isMassEditable();
 		$this->fieldInfo['defaultvalue'] = $this->hasDefaultValue();
 		$this->fieldInfo['column'] = $this->get('column');
-		$this->fieldInfo['type'] = $fieldDataType;
+		$this->fieldInfo['type'] = $fieldDataType; 
 		$this->fieldInfo['name'] = $this->get('name');
 		$this->fieldInfo['label'] = vtranslate($this->get('label'), $this->getModuleName());
 
