@@ -9,7 +9,7 @@
 var Settings_Picklist_Js = {
 
     getContainer : function() {
-        return jQuery('#listViewContent');
+        return jQuery('.listViewPageDiv');
     },
     
 	registerModuleChangeEvent : function() {
@@ -136,12 +136,11 @@ var Settings_Picklist_Js = {
 		var thisInstance = this;
         var container = this.getContainer();
 		var popupShown = false;
-		 jQuery('#modulePickListValuesContainer ').on('click', '.renameItem', function(e){
-                                              
-                    if(popupShown) {
-                            return false;
-                    }
-                    var selectedListItem = jQuery(e.currentTarget);
+		container.on('click', '.renameItem', function(e){
+			if(popupShown) {
+				return false;
+			}
+            var selectedListItem = jQuery(e.currentTarget);
             var params = {
                 module : app.getModuleName(),
                 parent : app.getParentModuleName(),

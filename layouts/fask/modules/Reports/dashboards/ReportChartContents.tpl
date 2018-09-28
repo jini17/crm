@@ -43,36 +43,62 @@
       for(var i = 0; i < data.links.length ; i++){
          hreflinks.push(data.links[i]);
       }	
-	 var chartData = [];
+	 var chartData = [];	 
 	 
 	 for(var i = 0; i < data.labels.length ; i++){
 		var label = data.labels[i];
 		var value = data.values[i];
-	 	var rowData = [label, value];
+		var links = data.links[i];
+	 	var rowData = [label, value,links];	 	
 		chartData.push(rowData);
 	}	
 		
 	     var chartOptions = {
+	     		// Added By Mabruk
+	     		height: 275,
+	     		width:  275,
+	     		// End
 	     		grid : {
 	     			drawBorder:false,
 	     			drawGridlines:false,
 	     			background:'',
 	     			shadow:false,
-
 	     		},
 		        seriesDefaults:{
-		        shadowColor: 'transparent',
-		        drawBorder: false,
-		        renderer:$.jqplot.PieRenderer,
-		        rendererOptions: {
-		            showDataLabels: true,
-		        },
-		       links: hreflinks,
+			        shadowColor: 'transparent',
+			        drawBorder: false,
+			        renderer:$.jqplot.PieRenderer,
+			        rendererOptions: {
+			        	sliceMargin: 4, // Added By Mabruk
+			            showDataLabels: true,
+			        },
+			       	
        		},
-       		legend:{ show:true,fontSize:'11px', placement: 'outside', rendererOptions:{ numberRows:data.labels.length}, location:'s', marginTop:'5px' }
+       		// location and placement changed by Mabruk
+       		legend:{ show:true,fontSize:'11px', placement: 'inside', rendererOptions:{ numberRows:data.labels.length}, location:'e', marginTop:'5px'}
         };
    
 	  var plot5 = $.jqplot("widgetChartContainer_{$WIDGET->get('id')}", [chartData], chartOptions);
+
+	  // Added By Mabruk and jitu 
+	  $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataHighlight', function () {
+			  						
+			  				$('html,body').css('cursor','pointer');	  											
+		});
+
+	  $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataUnhighlight', function () {
+			  						
+			  				$('html,body').css('cursor','default');	  											
+		}); 	
+
+	  $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataClick', function (ev, seriesIndex, pointIndex, data) {
+			  											
+							link = data.pop();
+							window.open(link,"_blank");
+
+		});
+	  // End
+
 </script>
 
 {elseif $CHART_TYPE eq 'verticalbarChart'}
@@ -356,9 +382,3 @@
 </script>
 
 {/if}
-<style>
-	[data-name="ChartReportWidget"]{
-		width: 400px !important;
-	}
-</style>
-

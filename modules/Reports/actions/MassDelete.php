@@ -32,6 +32,14 @@ class Reports_MassDelete_Action extends Vtiger_Mass_Action {
 		$parentModule = 'Reports';
 		$recordIds = Reports_Record_Model::getRecordsListFromRequest($request);
 
+		/***************Edited By Mabruk**************/
+        $db = PearDatabase::getInstance();
+        foreach ($recordIds as $recordId) {
+            $db->pquery('DELETE FROM `vtiger_module_dashboard_widgets` WHERE linkid = ? AND filterid = ?',array(119,$recordId));
+        }
+        /***************Editing Done*****************/
+
+
 		$reportsDeleteDenied = array();
 		foreach($recordIds as $recordId) {
 			$recordModel = Reports_Record_Model::getInstanceById($recordId);
