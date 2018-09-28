@@ -5,7 +5,7 @@
         font-weight: bold;
     }
     .box-content{
-      padding:5px 10px;
+      padding:0 10px;
       border: 1px solid #ddd;
       background: #fff;
       min-height: 300px;
@@ -21,28 +21,31 @@
     .user-social a{
         color: #fff;
     }
-    .facebook {
-        background:  #3B5998;
-      padding-left:4px;
-        padding-right:4px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-    
-    }
-    .twitter {
-        background: #0084b4;
-             padding-left:3px;
-        padding-right:3px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-    }
-    .linkedin {
-       background: #0077B5;
-           padding-left:3px;
-        padding-right:3px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-    }
+
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+  padding: 11px;
+}.fa-twitter {
+  background: #55ACEE;
+  color: white;
+  padding: 10px;
+}
+.fa-envelope {
+  background: #ff6600;
+  color: white;
+  padding: 10px;
+}
+
+
+
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+  padding: 10px;
+}
     .birthdaybox{
         margin-top: 30px;
     }
@@ -97,10 +100,11 @@
                                    
                         </div>
                         <div class='user-social text-center'>
-                            <a class='facebook' href="#"><i class='fa fa-facebook'></i></a>
-                            <a class='twitter' href="#"><i class='fa fa-twitter'></i></a>
-                            <a  class='linkedin' href="#"><i class='fa fa-linkedin'></i></a>
-                            <a  class='email-icon' href="#" onclick="javascript:Settings_Users_List_Js.birthdayEmail({$LISTVIEW_ENTRY->getId()})"><i class='fa fa-envelope'></i></a>
+                            <a href="#" class="fa fa-facebook"></a>
+                            <a href="#" class="fa fa-twitter"></a>
+                            <a href="#" class="fa fa-linkedin"></a>
+                            <a href="#" onclick="javascript:Settings_Users_List_Js.birthdayEmail({$LISTVIEW_ENTRY->getId()})" class="fa fa-envelope"></a>
+                            
                         </div>
                         <div class='clearfix'></div>
                         <div class='birthdaybox text-center'>{$birthday}</div>
@@ -111,6 +115,7 @@
             
                 
                 {/foreach}
+     
         </div>
         
     </div>

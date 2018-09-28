@@ -76,6 +76,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 		$myleave[$i]['category'] = $rowdetail['claim_type'];
 		//$myleave[$i]['category'] = $db->query_result($result, $i, 'category');
 		$myleave[$i]['color_code'] = $rowdetail['color_code'];
+		$myleave[$i]['yearlylimit'] = $rowdetail['yearlylimit'];
 		//$myleave[$i]['starthalf'] = $rowdetail['starthalf'];
 		//$myleave[$i]['endhalf'] = $rowdetail['endhalf'];
 		$myleave[$i]['transactiondate'] = Vtiger_Date_UIType::getDisplayDateValue($db->query_result($result, $i, 'transactiondate'));
@@ -110,12 +111,9 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 
 	}
 
-
-	//Created by Safuan for fetching leave types//	
-	//modified by jitu for concate color and balance in dropdown 
 	public function getClaimTypeList($userid){  
 	$db = PearDatabase::getInstance();
-	
+	//$db->setDebug(true);
 	$result = $db->pquery("SELECT job_grade FROM vtiger_employeecontract tblVTEC 
 							INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
 							INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
@@ -127,14 +125,13 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 		$grade_id	   = $db->query_result($result, 0, 'job_grade');	
 		$datediff = time() - strtotime($dateofJoining);				 
 		$earneddays = round($datediff / (60 * 60 * 24));
-		$curr_year	   = date('Y');	
+		$year	   = date('Y');	
 
-	$query = "Select vtiger_claimtype.claimtypeid, vtiger_claimtype.claim_type,vtiger_claimtype.color_code,vtiger_claimtype.transactionlimit,
-	vtiger_claimtype.monthlylimit,vtiger_claimtype.yearlylimit from vtiger_claimtype INNER JOIN vtiger_crmentity ON vtiger_claimtype.claimtypeid=vtiger_crmentity.crmid 
+	$query = "Select vtiger_claimtype.claimtypeid, vtiger_claimtype.claim_type,vtiger_claimtype.color_code,allocation_claimrel.transaction_limit,
+	allocation_claimrel.monthly_limit,allocation_claimrel.yearly_limit from vtiger_claimtype INNER JOIN vtiger_crmentity ON vtiger_claimtype.claimtypeid=vtiger_crmentity.crmid 
 	LEFT JOIN allocation_claimrel ON allocation_claimrel.claim_id = vtiger_claimtype.claimtypeid
-	LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocation_claimrel.allocation_id
-	LEFT JOIN allocation_list ON allocation_list.allocation_id = allocation_graderel.allocation_id
-	WHERE vtiger_crmentity.deleted=0 AND allocation_list.status ='on'AND allocation_graderel.grade_id=? AND allocation_list.allocation_year=?";
+	LEFT JOIN allocation_list ON allocation_list.allocation_id = allocation_claimrel.allocation_id
+	WHERE vtiger_crmentity.deleted=0 AND allocation_list.status ='on'AND allocation_claimrel.grade_id=? AND allocation_list.allocation_year=?";
 
 	$result = $db->pquery($query,array($grade_id, $year));
 
@@ -145,13 +142,57 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 			$claimtype[$i]['claimtypeid'] = $db->query_result($result, $i, 'claimtypeid');
 			$claimtype[$i]['claimtype'] = $db->query_result($result, $i, 'claim_type');	
 			$claimtype[$i]['color_code'] = $db->query_result($result, $i, 'color_code');	
-			$claimtype[$i]['transactionlimit'] = $db->query_result($result, $i, 'transactionlimit');
-			$claimtype[$i]['monthlylimit'] = $db->query_result($result, $i, 'monthlylimit');
-			$claimtype[$i]['yearlylimit'] = $db->query_result($result, $i, 'yearlylimit');					
-				$claimtypeid = $db->query_result($result, $i, 'claim_type');
+			$claimtype[$i]['transactionlimit'] = $db->query_result($result, $i, 'transaction_limit');
+			$claimtype[$i]['monthlylimit'] = $db->query_result($result, $i, 'monthly_limit');
+			$claimtype[$i]['yearlylimit'] = $db->query_result($result, $i, 'yearly_limit');					
 		} 
 
 	}
+	
+	return $claimtype;	
+
+	}
+
+	//Created by Safuan for fetching leave types//	
+	//modified by jitu for concate color and balance in dropdown 
+	public function getClaimTypeList($userid){  
+	$db = PearDatabase::getInstance();
+	//$db->setDebug(true);
+	$result = $db->pquery("SELECT job_grade FROM vtiger_employeecontract tblVTEC 
+							INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
+							INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
+							WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTC.createdtime DESC LIMIT 0, 1", array($userid));
+							
+		$userModel = Vtiger_Record_Model::getInstanceById($userid, 'Users');					
+		$dateofJoining = $userModel->get('date_joined');
+		
+		$grade_id	   = $db->query_result($result, 0, 'job_grade');	
+		$datediff = time() - strtotime($dateofJoining);				 
+		$earneddays = round($datediff / (60 * 60 * 24));
+		$year	   = date('Y');	
+
+	$query = "Select vtiger_claimtype.claimtypeid, vtiger_claimtype.claim_type,vtiger_claimtype.color_code,allocation_claimrel.transaction_limit,
+	allocation_claimrel.monthly_limit,allocation_claimrel.yearly_limit from vtiger_claimtype INNER JOIN vtiger_crmentity ON vtiger_claimtype.claimtypeid=vtiger_crmentity.crmid 
+	LEFT JOIN allocation_claimrel ON allocation_claimrel.claim_id = vtiger_claimtype.claimtypeid
+	LEFT JOIN allocation_list ON allocation_list.allocation_id = allocation_claimrel.allocation_id
+	WHERE vtiger_crmentity.deleted=0 AND allocation_list.status ='on'AND allocation_claimrel.grade_id=? AND allocation_list.allocation_year=?";
+
+	$result = $db->pquery($query,array($grade_id, $year));
+
+	$claimtype=array();	
+	$claimtypeid  = '';
+	if($db->num_rows($result)>0) {	
+		for($i=0;$i<$db->num_rows($result);$i++) {
+			$claimtype[$i]['claimtypeid'] = $db->query_result($result, $i, 'claimtypeid');
+			$claimtype[$i]['claimtype'] = $db->query_result($result, $i, 'claim_type');	
+			$claimtype[$i]['color_code'] = $db->query_result($result, $i, 'color_code');	
+			$claimtype[$i]['transactionlimit'] = $db->query_result($result, $i, 'transaction_limit');
+			$claimtype[$i]['monthlylimit'] = $db->query_result($result, $i, 'monthly_limit');
+			$claimtype[$i]['yearlylimit'] = $db->query_result($result, $i, 'yearly_limit');					
+		} 
+
+	}
+	
 	return $claimtype;	
 
 	}

@@ -8,7 +8,7 @@
 
         <div class="block block_LBL_USER_EMERGENCY">
                             <div>
-                                <h5>Emergency Contacts</h5>
+                                <h5>{vtranslate('Emergency Contacts', $MODULE)}</h5>
                                 <hr>
                                 <div class="blockData">
                                     <div class="table detailview-table no-border">

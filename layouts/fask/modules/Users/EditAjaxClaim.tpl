@@ -133,53 +133,34 @@
                                                 </div>
                                         </div>
                         <!--end-->
-                        <!--start
-                                <div class="row-fluid">
-                        <div class="form-group" style="margin-bottom: 0px !important;">
-                                <div class="col-md-12" style="margin-bottom: 15px;">
-                                        <div class="col-md-4">
-                                                                <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                                        <span class="redColor">*</span>&nbsp;{vtranslate('LBL_CLAIM_STATUS', $QUALIFIED_MODULE)}
-                                                                </label>
-                                                        </div>
-                                                        <div class="controls fieldValue col-md-8">
-                                        <select class="select2" name="claim_status" id="leave_type" data-validation-engine="validate[required]">
-                                                {if $CLAIMSTATUSLIST|count gt 0}
-                                                {foreach key=LEAVE_ID item=STATUS_MODEL from=$CLAIMSTATUSLIST	 name=institutionIterator}		
-                                                        {$STATUS_MODEL.claim_statusid}
-                                                <option value="{$STATUS_MODEL.claim_status}" {if $CLAIM_DETAIL.claim_status eq $STATUS_MODEL.claim_statusid} selected {/if}>
-                                                {$STATUS_MODEL.claim_status}</option>
-
-                                                {/foreach}
-
-                                                 {else}
-                                                        <option value=''></option>	
-                                                {/if}	
-
-                                        </select>
-                                                        </div>
-                                                </div>
-                                        </div>
-                        end-->
-
-
-                                <div class="form-group" style="margin-bottom: 0px !important;">
+                             <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                                 </div>			
                                                 <div class="controls date col-md-8">
-                                                         <textarea style="width:300px!important" data-rule-required = "true"  id="description" name="description" class="span11"  maxlength="300">{$CLAIM_DETAIL['description']}</textarea>
+                                                         <textarea style="width:350px!important" data-rule-required = "true"  id="description" name="description" class="span11"  maxlength="300">{$CLAIM_DETAIL['description']}</textarea>
                                                 </div>
                                         </div>	
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
                                                         <label class="control-label" style="text-align: right;float: right;">&nbsp;</label>
                                                 </div>	
-                                                <div class="controls" id="charNum" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
+                                                <div class="controls pull-right" id="charNum" style="font-size:12px; margin-right: 10px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                                         </div>
-                                </div>	
-
+                            </div>	
+                            <div class="form-group" style="margin-bottom: 0px !important;">
+                                <div class="col-md-12" style="margin-bottom: 15px;">
+                                   <div class="col-md-4">
+                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">
+                                                &nbsp;{vtranslate('LBL_INVOICE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
+                                        </label>
+                                    </div>  
+                                    <div class="controls fieldValue col-md-8">
+                                             <input id="attachment" class="fieldValue inputElement" data-rule-required = "true" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment">
+                                    </div>
+                                </div>    
+                            </div>    
                         <!--start-->
                         {if $MANAGER eq 'true'}
                                 <div class="row-fluid">
@@ -255,27 +236,29 @@
                                 </div>	
 
 
-                <div class="modal-footer" style="margin-bottom: 10px;margin-right: 10px; margin-left: 10px;">
+                <div class="modal-footer" >
+                    <div style="margin-right: 190px;">
                         <div class="pull-right cancelLinkContainer" style="margin-top:0px;">
 
                 {if $MANAGER eq 'true'}
-                        <input class="cancelLink btn btn-danger pull-right" type="button" value="Cancel" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal" style="margin-left: 5px;">
+                        <input class="cancelLink btn btn-danger pull-right" type="button" value="{vtranslate('Cancel',$MODULE)}" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal" style="margin-left: 5px;">
 
                         <input class="btn btn-success" type="submit" value="Save Changes" name="savechanges" accesskey="LBL_SAVE_CHANGES_BUTTON_KEY" title="Save Changes">
 
                 {else}	
-                        <input class="cancelLink btn btn-danger  pull-right" type="button" value="Cancel" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal" style="margin-left: 5px;">
+                        <input class="cancelLink btn btn-danger  pull-right" type="button" value="{vtranslate('Cancel',$MODULE)}" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal" style="margin-left: 5px;">
 
                         </div>
                         <!--Enable or disable button-->
                         {if $CLAIMSTATUS eq 'Apply' || $CLAIMSTATUS eq 'Approve' || $CLAIMSTATUS eq 'Not Approved' || $CLAIMSTATUS eq 'Cancel'}
-                              <input class="btn btn-disable" type="button"    value="Apply" name="claim_status" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Leave">
+                              <input class="btn btn-disable" type="button"    value="{vtranslate('Apply',$MODULE)}" name="claim_status" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Leave">
                         {else}
-                             <input class="btn btn-success" type="submit" value="Apply" name="claim_status" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Leave">
+                             <input class="btn btn-success" type="submit" value="{vtranslate('Apply',$MODULE)}" name="claim_status" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Leave">
                         {/if}
 
 
                 {/if}
+                    </div>
                 </div>  
 
 

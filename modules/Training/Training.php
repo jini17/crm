@@ -98,4 +98,5 @@ class Training extends Vtiger_CRMEntity {
 			// TODO Handle actions after this module is updated.
 		}
  	}
+
 }

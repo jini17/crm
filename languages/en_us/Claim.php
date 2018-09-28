@@ -12,7 +12,11 @@ $languageStrings = array(
 	'Category'=>'Claim Type',
 	'LBL_ADD_RECORD' => 'Add Claim Detail',
 	'SINGLE_Claim' => 'Claim',
-                       'Claim'=> 'Claims'
+    'Claim'=> 'Claims',
+    'LBL_CLAIM_TYPE' => 'Claim Type',
+    'LBL_LAST_5_CLAIM' => 'Last 5 Claims',
+    'LBL_PENDING_APPROVAL' => 'Pending Approval',
+
 );
 
 $jsLanguageStrings = array(

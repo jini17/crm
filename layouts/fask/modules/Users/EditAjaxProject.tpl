@@ -134,7 +134,7 @@
                                         </div>
                                 </div>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer" style="padding-top: 5px; padding-bottom: 5px;">
                                  {include file='ModalFooter.tpl'|@vtemplate_path:'Vtiger'}
                         </div>    	 	
                 </form>

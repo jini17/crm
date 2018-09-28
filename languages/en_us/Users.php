@@ -8,7 +8,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'LBL_ADD_RECORD' => 'Add User',
+	'LBL_ADD_RECORD' => 'Add Employee',
 	'LBL_WELCOME_SECONDCRM'=>'Welcome Secondcrm',
 	'LBL_MANY_ATTEMPTS'=>'Your account has been blocked due too many failed login attempt. Please contact your Administrator.',
 	//MyPreference Blocks
@@ -54,7 +54,7 @@ $languageStrings = array(
 	'LBL_MOBILE'=>'Mobile',
 	'LBL_EDIT_CONTACT'=>'Edit Contact',
 	'YOU_ARE_CURRENLY_VIEWING'=>'You are viewing employees of company',
-
+	'LBL_ATTACHMENTS'=>'Attachment (if any)',
 
 
 	//MyPreference Fields
@@ -511,9 +511,6 @@ $languageStrings = array(
 'LBL_SELECT_ROLE'=>'Select Role',
 'birthday'=>'Date of Birth',
 //End of Contacts
-
-'LBL_CLAIM' => 'Tuntutan',
-
 );
 
 $jsLanguageStrings = array(

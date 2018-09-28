@@ -20,9 +20,16 @@ $languageStrings = array(
 	'LBL_SELECT_FIELD_TYPE' => 'Pilih Jenis Medan',
 	
 	'LBL_EMAIL_TEMPLATE_DESCRIPTION'=>'Mengurus templat untuk modul E-Mel ',
-	'Template Name' => 'Nama Templat',
 	'Email Templates'=>'Templat E-mel',
-	'EmailTemplates'               =>'Templat E-mel'
+	'EmailTemplates'               =>'Templat E-mel',
+	'LBL_TEMPLATE_TYPE' => 'Jenis Templat',
+	'LBL_MODULE_NAME' => 'Nama Modul',
+	'Help' => 'Bantuan',
+	'LBL_THUMBNAIL_VIEW' => 'Paparan Thumbnail',
+	'LBL_LIST_VIEW' => 'Paparan Senarai',
+	'Email Template - Properties of ' => 'Ciri Ciri Template Emel',
+	'Templatename' => 'Nama Templat',
+	'Message' => 'Mesej',
 	//'generalFields' => 'Medan Umum',
 	
 );

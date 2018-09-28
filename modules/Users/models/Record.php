@@ -65,7 +65,9 @@ class Users_Record_Model extends Vtiger_Record_Model {
 	public function getCalendarSettingsDetailViewUrl(){
 		return 'index.php?module=' .$this->getModuleName() . '&parent=Settings&view=Calendar&record='.$this->getId();
 	}
-	
+	public function getEmploymentTabURL($url){
+		return $url.'&record='.$_REQUEST['record'];
+	}
 	public function getCalendarSettingsEditViewUrl(){
 		return 'index.php?module='.$this->getModuleName() . '&parent=Settings&view=Calendar&mode=Edit&record='.$this->getId();
 	}
@@ -240,6 +242,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
 			$sql .= ' WHERE status = ?';
 			$params[] = 'Active';
 		}
+                                            
 		$result = $db->pquery($sql, $params);
 
 		$noOfUsers = $db->num_rows($result);

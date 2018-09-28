@@ -43,7 +43,7 @@ jQuery('.menu-open').on('hover',function(){
 });
 
   jQuery('.addtionalDashboardTab').on('hover',function(){
-       
+
           jQuery('.dropdown-menu.fask').css('display','none');
 
 });
@@ -89,7 +89,11 @@ $(this).hide();
                                                         {assign var=DASHBOARD_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Dashboard')}
 
                                                         {if $USER_PRIVILEGES_MODEL->hasModulePermission($DASHBOARD_MODULE_MODEL->getId())}
-                                                        <li class="{if $MODULE eq "Home"}active{/if}"> <a class=" waves-effect waves-dark" href="{$HOME_MODULE_MODEL->getDefaultUrl()}" ><i class="material-icons">dashboard</i><span class="hide-menu" style="text-transform: uppercase">{vtranslate('LBL_DASHBOARD',$MODULE)} </span></a>
+                                                        <li class="{if $MODULE eq "Home"}active{/if}"> 
+                                                            <a class=" waves-effect waves-dark" href="{$HOME_MODULE_MODEL->getDefaultUrl()}" >
+                                                                <i class="material-icons">dashboard</i>
+                                                                <span class="hide-menu" style="text-transform: uppercase">{vtranslate('LBL_DASHBOARD',$MODULE)} </span>
+                                                            </a>
                                                         </li>
                                                         {/if}
 
@@ -102,21 +106,45 @@ $(this).hide();
                                                         {assign var=DOCUMENTS_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Documents')}
                                                         {if $USER_PRIVILEGES_MODEL->hasModulePermission($DOCUMENTS_MODULE_MODEL->getId())}
 
-                                                        <li class="{if $MODULE eq "Documents"}active{/if}"> <a class=" waves-effect waves-dark" href="index.php?module=Documents&view=List" ><i class="app-icon-list material-icons">insert_drive_file</i><span class="hide-menu"> {vtranslate('Documents')}</span></a>
+                                                        <li class="{if $MODULE eq "Documents"}active{/if}"> 
+                                                            <a class=" waves-effect waves-dark" href="index.php?module=Documents&view=List" >
+                                                                <i class="app-icon-list material-icons">insert_drive_file</i><span class="hide-menu"> 
+                                                                    {vtranslate('Documents')}</span>
+                                                            </a>
                                                         </li>
                                                         {/if}
                                                         <hr/>
                                                         {if $USER_MODEL->isAdminUser()}
 
 
-                                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="index.php?module=Vtiger&parent=Settings&view=Index" ><span class="module-icon"><i class="material-icons">settings</i></span><span class="hide-menu">  {vtranslate('LBL_CRM_SETTINGS','Vtiger')}</span></a></li>
+                                                        <li>
+                                                            <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
+                                                               href="index.php?module=Vtiger&parent=Settings&view=Index" >
+                                                                <span class="module-icon">
+                                                                    <i class="material-icons">settings</i></span>
+                                                                    <span class="hide-menu">  
+                                                                        {vtranslate('LBL_CRM_SETTINGS','Vtiger')}
+                                                                    </span>
+                                                            </a>
+                                                        </li>
 
-                                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="index.php?module=Users&parent=Settings&view=List" ><span class="module-icon"><i class="material-icons">contacts</i></span><span class="hide-menu">   {vtranslate('LBL_MANAGE_USERS','Vtiger')}</span></a></li>
+                                                        <li>
+                                                            <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
+                                                               href="index.php?module=Users&parent=Settings&view=List" >
+                                                                <span class="module-icon"><i class="material-icons">contacts</i></span>
+                                                                <span class="hide-menu">   {vtranslate('LBL_MANAGE_USERS','Vtiger')}</span>
+                                                            </a>
+                                                        </li>
 
 
                                                         {else}
 
-                                                        <li class="{if $MODULE eq "Users"}active{/if}"> <a class=" waves-effect waves-dark" href="index.php?module=Users&view=Settings" ><i class="material-icons">settings</i><span class="hide-menu" style="text-transform: uppercase"> {vtranslate('LBL_SETTINGS', 'Settings:Vtiger')}</span></a>
+
+                                                        <li class="{if $MODULE eq "Users"}active{/if}"> 
+                                                            <a class=" waves-effect waves-dark" href="index.php?module=Users&view=Settings" >
+                                                                <i class="material-icons">settings</i>
+                                                                <span class="hide-menu" style="text-transform: uppercase"> {vtranslate('LBL_SETTINGS', 'Settings:Vtiger')}</span>
+                                                            </a>
                                                         </li>
 
                                                         {/if}
@@ -136,9 +164,9 @@ $(this).hide();
 
                                                         {foreach item=APP_MENU_MODEL from=$APP_GROUPED_MENU.$APP_NAME}
                                                         {assign var=FIRST_MENU_MODEL value=$APP_MENU_MODEL}
-                                                        {if $APP_MENU_MODEL}
-                                                        {break}
-                                                        {/if}
+                                                            {if $APP_MENU_MODEL}
+                                                            {break}
+                                                            {/if}
                                                         {/foreach}
 
                                                         {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
@@ -148,33 +176,32 @@ $(this).hide();
                                                         'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
                                                         'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
                                                         'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-                                                        'mycthemeswitcher'=>'folder', 'chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
+                                                        'mycthemeswitcher'=>'folder', 'chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
 
+                                                                            {if $APP_NAME neq 'SALES'}
+                                                                                    <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> 
+                                                                                            <a class="has-arrow waves-effect waves-dark " >
+                                                                                                    <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i><span class="hide-menu">{vtranslate("LBL_$APP_NAME")}</span></a>
 
-                                                        <li class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> 
-                                                                <a class="has-arrow waves-effect waves-dark " >
-                                                                        <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i><span class="hide-menu">{vtranslate("LBL_$APP_NAME")}</span></a>
+                                                                                                    <ul style="padding-left:6px;padding-top:15px;">
+                                                                                                            {foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
+                                                                                                            {assign var='translatedModuleLabel' value=vtranslate($moduleModel->get('label'),$moduleName )}
+                                                                                                    {if $moduleName eq 'MyProfile'}                                            
+                                                                                                        {assign var='moduleURL' value="index.php?module=Users&view=Detail&record={$USER_MODEL->getId()}&app=$APP_NAME&parent=Settings"}
+                                                                                                    {else}
+                                                                                                        {assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME"}
+                                                                                                    {/if}   
+                                                                                                            <li {$APP_NAME}>
+                                                                                                                <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
+                                                                                                                   href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
+                                                                                                                   {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
+                                                                                                                    <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> <span class="hide-menu"> {$translatedModuleLabel}</span></a>
+                                                                                                            </li>
+                                                                                                                    {/foreach}
+                                                                                                            </ul>
 
-                                                                        <ul style="padding-left:6px;padding-top:15px;">
-                                                                                {foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
-                                                                                {assign var='translatedModuleLabel' value=vtranslate($moduleModel->get('label'),$moduleName )}
-                                    {if $moduleName eq 'MyProfile'}                                            
-                                        {assign var='moduleURL' value="index.php?module=Users&view=Detail&record={$USER_MODEL->getId()}&app=$APP_NAME&parent=Settings"}
-                                    {else}
-                                        {assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME"}
-                                    {/if}   
-                                                                                <li {$APP_NAME}>
-                                                                                    <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
-                                                                                       href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
-                                                                                       {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
-                                                                                        <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> <span class="hide-menu"> {$translatedModuleLabel}</span></a>
-                                                                                </li>
-                                                                                        {/foreach}
-                                                                                </ul>
-
-                                                                        </li>
-
-
+                                                                                                    </li>
+                                                                                {/if}
                                                                         {/if}
                                                                         {/foreach}
 
@@ -219,7 +246,7 @@ $(this).hide();
                                                                                         <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Bills&view=List"><i class="material-icons module-icon">receipt</i> <span class="hide-menu"> {vtranslate('Bills')}</span></a></li>
 
                                                                                         {/if}
-                                                                                                                                                          
+
                                                                                         {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('WorkingHours')}
                                                                                         {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
 
@@ -228,7 +255,7 @@ $(this).hide();
                                                                                        <!-- <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=WorkingHours&view=List"><i class="material-icons module-icon">access_time</i> <span class="hide-menu"> {vtranslate('WorkingHours')}</span></a></li>
                                                                                         -->        
                                                                                         {/if}
-                                                                                        
+
                                                                                         {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Payments')}
                                                                                         {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
 
@@ -264,17 +291,6 @@ $(this).hide();
 
                                                 </div>
                                         </div>
-                        <!--<div class="search-links-container col-md-3 col-lg-3 hidden-sm">
-
-
-
-                                <div class="search-link hidden-xs">
-                                        <span class="ti-search" aria-hidden="true"></span>
-                                        <input class="keyword-input" type="text" placeholder="{vtranslate('LBL_TYPE_SEARCH')}" value="{$GLOBAL_SEARCH_VALUE}">
-                                        <span id="adv-search" class="adv-search ti-arrow-circle-down pull-right cursorPointer" aria-hidden="true"></span>
-                                </div>
-                        </div>-->
-
                         <!--top nav with lock-->
                         <div class="col-lg-5 col-md-5 col-sm-4 col-xs-8 "><div class="row">
                                 <ul class="nav navbar-nav newtabs">
@@ -290,22 +306,27 @@ $(this).hide();
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings">
                                                                                     <i class="material-icons module-icon">person</i>&nbsp;Employee
-                                                                                     
+
                                                                                 </a>
                                                                         </li>
                                                                           {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                                                         <li>
                                                                                <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&view=List">
                                                                                     <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
-                                                                                      
+
                                                                                 </a>
                                                                         </li>
+                                                                        <li admin="">
+                                                                            <a class="waves-effect waves-dark " href=" index.php?module=LeaveType&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">keyboard_tab</i> <span class="hide-menu"> 
+                                                                                    &nbsp;Leave Type</span></a></li>
+
                                                                         {else}
                                                                                      <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
 
                                                                                     <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
-                                                                                      
+
                                                                                 </a>
                                                                         </li>
                                                                         {/if}
@@ -313,35 +334,44 @@ $(this).hide();
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
                                                                                     <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
-                                                                                       
+
                                                                                 </a>
                                                                         </li>
                                                                             {else}
                                                                                   <li>
                                                                                 <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
                                                                                     <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
-                                                                                       
+
                                                                                 </a>
                                                                         </li>
                                                                         {/if}
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Payslip" href="index.php?module=Payslip&amp;view=List&amp;app=ADMIN">
                                                                                     <i class="material-icons module-icon">insert_drive_file</i>&nbsp;Payslip
-                                                                                       
+
                                                                                 </a>
                                                                         </li>
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
                                                                                     <i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                                                                                       
-                                                                                </a>
-                                                                        </li>
                                                                         <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_POLICY_DOCUMENT')}" href="index.php?module=Documents&view=List&type=H">
-                                                                                	<i class="material-icons module-icon">file_download</i>&nbsp;{vtranslate('LBL_POLICY_DOCUMENT')}
+                                                                                        <i class="material-icons module-icon">file_download</i>&nbsp;{vtranslate('LBL_POLICY_DOCUMENT')}
 
-                                                                                       
+
                                                                                 </a>
+                                                                        </li>
+                                                                        <li admin="">
+                                                                            <a class="waves-effect waves-dark dropdown-icon-dashboard " href=" index.php?module=WorkingHours&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">access_time</i> <span class="hide-menu"> Working Hours</span>
+                                                                            </a>
+                                                                        </li>
+
+
+                                                                        <li admin="">
+                                                                            <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=MessageBoard&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">assignment</i> <span class="hide-menu"> Message Board</span>
+                                                                            </a>
                                                                         </li>
                                                                 </ul>
                                                         </div>
@@ -353,7 +383,7 @@ $(this).hide();
                                                          <div class="addtionalDashboardTab">
                                                                 <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
                                                         </div>
-                                                       
+
 
                                                         <div class="dropdown-content-Sales">
                                                                 <div class="row">
@@ -430,28 +460,36 @@ $(this).hide();
 
                                                                          <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_MAIL_MANAGER')}" href="index.php?module=MailManager&view=List">
                                                                                     <i class="material-icons module-icon">email</i>&nbsp;{vtranslate('LBL_MAIL_MANAGER')}
-                                                                                       
-                                                                                </a>
-                                                                    </li>
-                                                             <!--       <li>
-                                                                        <a class="dropdown-icon-dashboard" title="Our Sites" href="index.php?module=Portal&amp;view=List&amp;app=TOOLS">
-                                                                                <i class="fa fa-desktop"></i>&nbsp;Our Sites
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="dropdown-icon-dashboard" title="PBX Manager" href="index.php?module=PBXManager&amp;view=List&amp;app=TOOLS">
-                                                                                <i class="fa fa-phone"></i>&nbsp;PBX Manager
-                                                                        </a>
-                                                                    </li>-->
 
+                                                                                </a>
+
+                                                                        </li>
+                                                                        <li admin="">
+                                                                            <a class="waves-effect waves-dark dropdown-icon-dashboard " href=" index.php?module=WorkingHours&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">access_time</i> <span class="hide-menu"> Working Hours</span>
+                                                                            </a>
+                                                                        </li>
+                                                                         
+                                                                        <li admin="">
+                                                                            <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=Documents&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">file_download</i> <span class="hide-menu"> Documents</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li admin="">
+                                                                            <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=MessageBoard&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">assignment</i> <span class="hide-menu"> Message Board</span>
+                                                                            </a>
+                                                                        </li>
                                                                 </ul>
                                                         </div>
                                                 </div>
+
                                         </li>
                                         <li>
                                                 <div class="dropdownSupport">
                                                         <div class="addtionalDashboardTab">
                                                                 <span aria-hidden="true" >Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
+
                                                         </div>
 
                                                          <div class="dropdown-content-Support">
@@ -496,7 +534,7 @@ $(this).hide();
                                                         </div>
 
 
-                                                        
+
                                                 </div>
 
                                         </li>
@@ -519,173 +557,6 @@ text-decoration: none;">All</span>
                                                 </div>
                                         </li>
 
-                <!--            <li>
-                                                <div class="dropdownMore">
-                                                        <div class="addtionalDashboardTab">
-                                                                <span aria-hidden="true">More</span>
-                                                        </div>
-
-
-dashboard
-                                                                            <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Dashboard" href="index.php?module=Home&amp;view=DashBoard">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;Dashboard
-                                                                                </a>
-                                                                            </li>   
-                                                                             <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Mail" href="index.php?module=MailManager&amp;view=List">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;Mail
-                                                                                </a>
-                                                                            </li>  
-                                                                            <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Documents" href="index.php?module=Documents&amp;view=List">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;Documents
-                                                                                </a>
-                                                                            </li>  
-                                                                            <li>
-                                                                                <a class="dropdown-icon-dashboard" title="CRM Settings" href="index.php?module=Vtiger&amp;parent=Settings&amp;view=Index">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;CRM Settings
-                                                                                </a>
-                                                                            </li>  
-                                                                            <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Manage User" href="index.php?module=Users&amp;parent=Settings&amp;view=List">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;Manage User
-                                                                                </a>
-                                                                            </li>  
-
-                                                        <div class="dropdown-content-More row" style="width: 100%;">
-                                                                <div class="col-md-2" >
-                                                                        <ul class="dropdownlist">
-                                                                                <div style="border-bottom: 2px solid #cecece">
-                                                                                <span>General</span>
-                                                                            </div>  
-                                                                                <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Contacts" href="index.php?module=Contacts&amp;view=List&amp;app=FOUNDATION">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;Contacts
-                                                                                </a>
-                                                                            </li>   
-                                                                            <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Calendar" href="index.php?module=Calendar&amp;view=List&amp;app=FOUNDATION">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;Calendar
-                                                                                </a>
-                                                                            </li>  
-                                                                            <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Organizations" href="index.php?module=Accounts&amp;view=List&amp;app=FOUNDATION">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;Organizations
-                                                                                </a>
-                                                                            </li>  
-                                                                            <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Leads" href="index.php?module=Leads&amp;view=List&amp;app=FOUNDATION">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;Leads
-                                                                                </a>
-                                                                            </li>  
-                                                                            <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Calendar" href="index.php?module=SMSNotifier&amp;view=List&amp;app=FOUNDATION">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;SMS Notifier
-                                                                                </a>
-                                                                            </li>  
-
-                                                                                <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Notification Template" href="index.php?module=EmailTemplates&amp;view=List&amp;app=FOUNDATION">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;Notification Template
-                                                                                </a>
-                                                                            </li>  
-
-
-                                                                            <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Report" href="index.php?module=Reports&amp;view=List&amp;app=FOUNDATION">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;Report
-                                                                                </a>
-                                                                            </li>  
-
-                                                                                <li>
-                                                                                <a class="dropdown-icon-dashboard" title="My Profile" href="index.php?module=MyProfile&amp;view=List&amp;app=FOUNDATION">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;My Profile
-                                                                                </a>
-                                                                            </li>  
-
-
-                                                                        </ul>
-                                                                </div>
-                                                                <div class="col-md-2" >
-                                                                        <ul class="dropdownlist">
-                                                                           <li>
-                                                                                        <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=Users&parent=Settings&view=List">
-                                                                                                <i class="fa fa-user"></i>&nbsp;Employee
-                                                                                        </a>
-                                                                                </li>
-
-                                                                                <li>
-                                                                                        <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&amp;view=List&amp;app=ADMIN">
-                                                                                                <i class="fa fa-sign-out"></i>&nbsp;Leave
-                                                                                        </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                        <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&amp;view=List&amp;app=ADMIN">
-                                                                                                <i class="fa fa-usd"></i>&nbsp;Claim
-                                                                                        </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                        <a class="dropdown-icon-dashboard"  title="Payslip" href="index.php?module=Payslip&amp;view=List&amp;app=ADMIN">
-                                                                                                <i class="fa fa-file-text-o"></i>&nbsp;Payslip
-                                                                                        </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                        <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&amp;parent=Settings&amp;view=List&amp;block=15&amp;fieldid=56">
-                                                                                                <i class="fa fa-bolt"></i>&nbsp;Performance
-                                                                                        </a>
-                                                                                </li>
-
-                                                                        </ul>
-                                                                </div>
-                                                                <div class="col-md-2" >
-                                                                        <ul class="dropdownlist">
-                                                                            <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;3
-                                                                                </a>
-                                                                            </li>   
-                                                                             <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;3
-                                                                                </a>
-                                                                            </li>  
-                                                                        </ul>
-                                                                </div>
-                                                                <div class="col-md-2" >
-                                                                        <ul class="dropdownlist">
-                                                                            <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;4
-                                                                                </a>
-                                                                            </li>   
-                                                                             <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;4
-                                                                                </a>
-                                                                            </li>  
-                                                                        </ul>
-                                                                </div>
-                                                                <div class="col-md-2" >
-                                                                        <ul class="dropdownlist">
-                                                                            <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;5
-                                                                                </a>
-                                                                            </li>   
-                                                                             <li>
-                                                                                <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                                                                                        <i class="fa fa-bell-o"></i>&nbsp;5
-                                                                                </a>
-                                                                            </li>  
-                                                                        </ul>
-                                                                </div>
-
-
-                                                        </div>
-                                                </div>
-                                        </li>
-                                -->
                                 </ul>
 
                         </div>
@@ -821,6 +692,7 @@ dashboard
                                                         </div>
                                                 </li>
 
+
                                                 <li>
                                                         <div>
                                                                 <a class="rightside-icon-dashboard" href="index.php?module=Documents&view=List" title="Files" aria-hidden="true">
@@ -837,10 +709,12 @@ dashboard
                                                         <div>
                                                                 <a class="rightside-icon-dashboard" href="index.php?module=Calendar&view={$CALENDAR_MODULE_MODEL->getDefaultViewName()}" title="{vtranslate('Calendar','Calendar')}" aria-hidden="true">
                                                                         <i class="fa fa-calendar-o"></i>
+
                                                                 </a>
                                                         </div>
                                                 </li>
                                                 {/if}
+
 
                                                 {assign var=REPORTS_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Reports')}
                                                 {if $USER_PRIVILEGES_MODEL->hasModulePermission($REPORTS_MODULE_MODEL->getId())}
@@ -860,6 +734,7 @@ dashboard
                                                                 </a>
                                                         </div>
                                                 </li>*}
+
 
 
 
@@ -935,6 +810,7 @@ dashboard
                                                                                 </div>
                                                                         </li>
                                                                 </ul>
+
 
 
                                                         </div>
@@ -1067,9 +943,8 @@ dashboard
                                                                                                 </ul>
                                                                                         </div>
                                                                                 </div>
-
-
                                                                         </div>
                                                                 </div>
 
                                                                 {/strip}
+

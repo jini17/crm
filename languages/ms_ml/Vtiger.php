@@ -259,7 +259,7 @@ $languageStrings = array(
 	'LBL_to' 					   => 'hingga',
 	'LBL_ON'                       => 'pada'                          , //fiza
 	'LBL_OF'                       => 'daripada'                          , //fiza
-	'LBL_LIST_of'=>'dari',
+	'LBL_LIST_of'				   => 'dari',
 	'LBL_BY'                       => 'Oleh'                         , 
 	'LBL_ADDED'                    => 'telah menambah'                       , 
 	'LBL_FOR'                      => 'untuk'                         , 
@@ -745,16 +745,84 @@ $languageStrings = array(
 	'LBL_FOLLOW' => 'Ikuti',
 	'Total Company Contribution' => 'Jumlah Caruman Majikan',
 	'Documents'                    => 'Dokumen',
+	'LBL_LAST_LOGINTIME' => 'Log Masuk terakhir',
+	'LBL_USERIP' => 'dari IP',
+	'LBL_FOUNDATION' => 'Umum',
+	'LBL_SALES' => 'Jualan',
+	'My Leaves' => 'Cuti Saya',
+	'Top "NO MC" Employees' => 'Pekerja TIADA CUTI SAKIT',
+	'Completed' => 'Selesai',
+	'Not Started' => 'Belum Mula',
+	'Pending Input' => 'Input Belum Selesai',
+	'Deferred' => 'Tertunda',
+	'Planned' => 'Dirancangan',
+	'LBL_ADD_TASK_AND_PRESS_ENTER' => 'Tambah Tugas dan Tekan Enter',
+	'LBL_THIS_WEEK' => 'Minggu Ini',
+
+	//Employee Dashboard
+	'Employee By Age Group' => 'Pekerja Menurut Kumpulan Umur',
+	'Employees By Department' => 'Pekerja Menurut Jabatan',
+	'Employees' => 'Pekerja',
+	'Employee' => 'Pekerja',
+	'Tasks' => 'Tugas',
+	'My Dashboard' => 'Laman Utama Saya',
+	'LBL_TAB_NAME' => 'Name Laman',
+	'LBL_ADD_DASHBOARD' => 'Tambah Laman',
+	'LBL_LISTVIEW_JUMP_TO' => 'Lompat Ke',
+	'LBL_SEARCH_FOR_FOLDERS' => 'Cari Folder',
+	'Help' => 'Bantuan',
+	'SETTINGS' => 'Tetapan',
+	'  All' => 'Semua',
+	'Performance Settings' => 'Tetapan Prestasi',
+	'LBL_SOURCE' => 'Sumber',
+	'LBL_POLICY_DOCUMENT' => 'Dokumen Polisi',
+	'Notification Templates' => 'Templat Notifikasi',
+	'Recycle Bin'=>'Tong Kitar Semula',
+	'LBL_MAIL_MANAGER' => 'Pengurus Mel',
+	'Sales' => 'Jualan',
+	'Support' => 'Sokongan',
+	'All' => 'Menu Penuh',
+
+	'Template Name' => 'Nama Templat',
+	'Template Type' => 'Jenis Templat',
+	'Module Name' => 'Nama Modul',
+	'SINGLE_Claim' => 'Tuntutan',
+	'SINGLE_WorkingHours' => 'Waktu Bekerja',
+	'SINGLE_Timesheet' => 'Lembaran Masa',
+	'SINGLE_MessageBoard' => 'Papan Mesej',
+	'My profile' => 'Profil Saya',
+	'MessageBoard' => 'Papan Mesej',
+	'LBL_EDIT_FIELDS' => ' Medan & Susun Atur',
+	'LBL_EDIT_WORKFLOWS' => ' Aliran Kerja',
+	'Current Subscription' => 'Langganan Semasa',
+	'Employee Contract Expiring' => 'Kontrak Pekerja Tamat Tempoh',
+	'LBL_EDIT_FIELDS' => 'Medan & Susun Atur',
+	'Job Grade' => 'Gred Pekerjaan',
+	'BenefitType' => 'Jenis Manfaat',
+	'Claim Type' => 'Jenis Tuntutan',
+	'EmergencyContact' => 'Kenalan Kecemasan',
+	'Employee Projects' => 'Kontrak Pekerja',
+	'Langugage Skill' => 'Bahasa dan Kemahiran',
+	'Passport Visa' => 'Passpot Visa',
+	'TimeSheet' => 'Lampiran Masa',
+	'To Do' => 'Tugas',
+	'Training' => 'Latihan',
+	'Send Birthday wish' => 'Hantar ucapan hari jadi',
+	'LBL_SHOW_HIDDEN_FIELDS' => 'Lihat Medan Tersembunyi',
+	'LBL_DUPLICATION_INFO_MESSAGE' => 'Pengendali pendua hanya mencegah rekod pendua baru dari tercipta oleh pengguna dan aplikasi luar. Rekod yg dicipta dari import dan dari aliran kerja tidak akan di semak pendua.<br><br>Rekod pendua yand sudah tercipta boleh dibuang menggunakan "Cari Pendua" dari muka modul.',
+	'LBL_DUPLICATE_CHECK' => 'Membolehkan Semakkan Pendua',
+	'LBL_PLEASE_SELECT_MODULE' => 'Sila pilih modul yang ingin dicari',
+	'Notifications' => 'Notifikasi',
+	'Email' => 'Emel',
+	'Files' => 'Fail',
+	
+	'Kontrak Pekerja - All' => 'Kontrak Pekerja - Semua',
+	'Attendence' => 'Kedatangan',
+	'Training' => 'Kursus',
 
 
 	
-	
-	
-	
-	
-	
-	
-	
+
 );
 $jsLanguageStrings = array(
 	'JS_EMAIL_SERVER_CONFIGURATION' => 'Sila mengkonfigurasi tetapan pelayan keluar anda dari halaman Tetapan', 

@@ -10,7 +10,7 @@
     <div class="col-sm-12">
 
         <div class="text-info">
-        <h5><i class="material-icons">bookmark</i> Total {vtranslate('LBL_TAGS', $MODULE_NAME)} : {count($TAGS)}</h5></div>
+        <h5><i class="material-icons">bookmark</i> {vtranslate('Total', $MODULE_NAME)} {vtranslate('LBL_TAGS', $MODULE_NAME)} : {count($TAGS)}</h5></div>
 
 
 

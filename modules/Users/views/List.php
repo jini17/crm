@@ -40,7 +40,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
                                          $defaultview = $request->get('empview');	
                                          $Alphabet = $request->get('Alphabet');
 		if(!$request->get('empview')){
-			$defaultview = 'grid';	
+                                                    $defaultview = 'grid';	
 		}	
 		elseif($request->get('empview') == 'grid'){
                                                     $defaultview = 'grid';	
@@ -94,7 +94,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 		if(empty($status))
 			$status = 'Active';
                                             
-                                                //print_r($cvId); Why print_r $cvId ?? echo bro !!
+
                                            
 		$listViewModel = Vtiger_ListView_Model::getInstance($moduleName, $cvId);
 

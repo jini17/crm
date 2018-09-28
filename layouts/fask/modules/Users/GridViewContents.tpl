@@ -1,60 +1,64 @@
-
 <style>
-    .alphabetSearch a{
-        color: #307fe8;
-        font-weight: bold;
-    }
-    .box-content{
-      padding:5px 10px;
-      border: 1px solid #ddd;
-      background: #fff;
-      min-height: 300px;
-      margin-top: 20px;
-      marign-bottom: 20px;
-    }
-    .user-social{
-        margin-top: 15px;
-    }
-    .username{
-    margin-bottom: 5px;
-    }
-    .user-social a{
-        color: #fff;
-    }
-    .facebook {
-        background:  #3B5998;
-      padding-left:4px;
-        padding-right:4px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-    
-    }
-    .twitter {
-        background: #0084b4;
-             padding-left:3px;
-        padding-right:3px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-    }
-    .linkedin {
-       background: #0077B5;
-           padding-left:3px;
-        padding-right:3px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-    }
-    .birthdaybox{
-        margin-top: 30px;
-    }
-    .highlight-birthday{
-       background: #b3ffff;   
-      }
-      .img-circle{
-      background-color: #fff;
-      }
-      .email-icon i{
-          color: #333;
-      }
+   .alphabetSearch a{
+   color: #307fe8;
+   font-weight: bold;
+   }
+   .box-content{
+   padding:5px 10px;
+   border: 1px solid #ddd;
+   background: #fff;
+   min-height: 300px;
+   margin-top: 20px;
+   marign-bottom: 20px;
+   }
+   .user-social{
+   margin-top: 15px;
+   }
+   .username{
+   margin-bottom: 5px;
+   }
+   .user-social a{
+   color: #fff;
+   }
+   .facebook {
+   background:  #3B5998;
+   padding-left:4px;
+   padding-right:4px;
+   padding-top: 3px;
+   padding-bottom: 3px;
+   }
+   .twitter {
+   background: #0084b4;
+   padding-left:3px;
+   padding-right:3px;
+   padding-top: 3px;
+   padding-bottom: 3px;
+   }
+   .linkedin {
+   background: #0077B5;
+   padding-left:3px;
+   padding-right:3px;
+   padding-top: 3px;
+   padding-bottom: 3px;
+   }
+   .birthdaybox{
+   margin-top: 30px;
+   }
+   .highlight-birthday{
+   background: #b3ffff;   
+   }
+   .img-circle{
+   background-color: #fff;
+   }
+   .email-icon i{
+   color: #333;
+   }
+   .view{
+   
+     }
+   .activeview{
+       
+   }
 </style>
 <input type="hidden" id="listViewEntriesCount" value="{$LISTVIEW_ENTRIES_COUNT}" />
 <input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
@@ -71,26 +75,38 @@
 <input type='hidden' value="{$PAGE_NUMBER}" id='pageNumber'>
 <input type='hidden' value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'>
 <input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
-
 {assign var = ALPHABETS_LABEL value = vtranslate('LBL_ALPHABETS', 'Vtiger')}
 {assign var = ALPHABETS value = ','|explode:$ALPHABETS_LABEL}
-{*<pre />
+{*
+<pre />
 {$LISTVIEW_ENTRIES|print_r}*}
+
+{if $EMP_VIEW eq 'grid'}
+    {assign var =LIST value = 'btn-white'}
+    {assign var =GRID value = 'btn-primary'}
+
+{else}
+        {assign var =LIST value = 'btn-primary'}
+    {assign var =GRID value = 'btn-white'}
+{/if}
 <div class="clearfix" style="height:20px;"></div>
-<div class="col-lg-6">
-      <strong>
-        {vtranslate('YOU_ARE_CURRENLY_VIEWING',$MODULE)} "Soft Solvers Solutions"
-    </strong>
+<div class="row">
+  <div class="col-lg-6" style="float: left;">
+     <strong>
+     {vtranslate('YOU_ARE_CURRENLY_VIEWING',$MODULE)} "Soft Solvers Solutions"
+     </strong>
+  </div>
+ 
 </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6 pull-right">
       <div class="btn-group list-switcher" role="group" aria-label="Basic example">
-          <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-primary" data-listType='List' title="List View"><i class='fa fa-list'></i> List View</button>
-          <button type="button"  onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('grid','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn btn-danger" data-listType='Grid' title="Grid View"> <i class="fa fa-th-large"></i> Grid View</button>
+          <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn {$LIST} btn-white view" data-listType='List' title="List View"><i class='fa fa-list'></i> {vtranslate('List View', $MODULE)}</button>
+          <button type="button"  onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('grid','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn {$GRID} activeview" data-listType='Grid' title="Grid View"> <i class="fa fa-th-large"></i> {vtranslate('Grid View', $MODULE)}</button>
       </div>
    
         <form class='form-inline pull-right'>
             <div class='form-group'>
-                <input type="text" placeholder="Enter Keyword" class="form-control">
+                <input type="text" placeholder="{vtranslate('Enter Keyword',$MODULE)}" class="form-control">
             </div>
             <div class="form-group">
                 <button type="button" class='btn btn-primary'> Search   </button>
@@ -98,27 +114,27 @@
      </form>
     </div>
     <div class="clearfix" style="height: 50px;"></div>
+
 <!-- Alphabets -->
 <div class="col-lg-9">
-  
-{include file="ListViewAlphabet.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
+   {include file="ListViewAlphabet.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
 </div>
 <!--  Filter -->
 <div class="col-lg-3">
+
     <select class="select2 grid-filter form-control pull-right">
-        <option value=""> Filter by</option>
-        <option value="N"> New Joinees </option>
-        <option value="B"> Bithdays </option>
-        <option value="G"> Gender </option>
+        <option value=""> {vtranslate('Filter by',$MODULE)}</option>
+        <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
+        <option value="B"> {vtranslate('Bithdays',$MODULE)} </option>
+        <option value="G"> {vtranslate('Gender',$MODULE)} </option>
     </select>
+
 </div>
 <div style="min-height:450px;">
-
- {if $EMP_VIEW eq 'grid'}
+   {if $EMP_VIEW eq 'grid'}
    {include file="GridBoxContents.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
    {else}
-        {include file="ListViewContents.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
-    {/if}   
-    
-</div>
+   {include file="ListViewContents.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
+   {/if}   
 
+</div>

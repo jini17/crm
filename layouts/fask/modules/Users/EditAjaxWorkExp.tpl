@@ -29,7 +29,7 @@
                         <input id="current_user_id" name="current_user_id" type="hidden" value="{$USERID}">
                         <div class="modal-body">
                                 <!--start-->
-                                <div class="row-fluid">
+                        <div class="row-fluid">
                         <div class="form-group" style="margin-bottom: 0px !important;">
                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                         <div class="col-md-4">
@@ -181,7 +181,7 @@
                                         </div>
                                 </div>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer" style="padding-top: 5px; padding-bottom: 5px;">
                                  {include file='ModalFooter.tpl'|@vtemplate_path:'Vtiger'}
                         </div>    	 	
                 </form>
