@@ -46,9 +46,28 @@
                                                 {/if}
                                         {/foreach}
                                 {/foreach}
-                              {if ($MODULE eq 'LeaveType' || $MODULE eq 'BenefitType' || $MODULE eq 'EmployeeContract' || $MODULE eq 'Holiday' || $MODULE eq 'WorkingHours' || $MODULE eq 'Claim' || $MODULE eq 'Grade' || $MODULE eq 'ClaimType' || $MODULE eq 'PassportVisa' || $MODULE eq 'Performance' || $MODULE eq 'Payslip') 
-                                    && ($CURRENT_USER_MODEL->is_admin eq 'on' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H2' || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H12') }
-                                    <p class="current-filter-name filter-name pull-left cursorPointer {if $smarty.request.view eq 'Edit' or $RECORD}hidden-xs{/if}" title="{$CVNAME}"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}&app={$SELECTED_MENU_CATEGORY}'>&nbsp;&nbsp;{vtranslate($CVNAME,'Vtiger')}&nbsp;&nbsp;{vtranslate($MODULE,'Vtiger')}</a> </p>
+                              {if ($MODULE eq 'LeaveType' 
+                                    || $MODULE eq 'BenefitType' 
+                                    || $MODULE eq 'EmployeeContract' 
+                                    || $MODULE eq 'Holiday' 
+                                    || $MODULE eq 'WorkingHours' 
+                                    || $MODULE eq 'Claim' 
+                                    || $MODULE eq 'Grade' 
+                                    || $MODULE eq 'ClaimType' 
+                                    || $MODULE eq 'PassportVisa' 
+                                    || $MODULE eq 'Performance' 
+                                    || $MODULE eq 'Payslip'
+                                    ) 
+                                    && ($CURRENT_USER_MODEL->is_admin eq 'on' 
+                                    || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H2' 
+                                    || $CURRENT_USER_MODEL->column_fields['roleid'] eq 'H12')
+                              }
+                                    <p class="current-filter-name filter-name pull-left cursorPointer {if $smarty.request.view eq 'Edit' or $RECORD}hidden-xs{/if}" title="{$CVNAME}">
+                                        <span class="ti-angle-right pull-left" aria-hidden="true"></span>
+                                        <a href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}&app={$SELECTED_MENU_CATEGORY}'>
+                                            &nbsp;&nbsp;{vtranslate($CVNAME,'Vtiger')}&nbsp;&nbsp;{vtranslate($MODULE,'Vtiger')}
+                                        </a> 
+                                    </p>
                         {else}
                                 <p class="current-filter-name filter-name pull-left cursorPointer {if $smarty.request.view eq 'Edit' or $RECORD}hidden-xs{/if}" title="{$CVNAME}"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}&app={$SELECTED_MENU_CATEGORY}'>&nbsp;&nbsp;{vtranslate($CVNAME,'Vtiger')}&nbsp;&nbsp;</a> </p>
                         {/if}
@@ -58,12 +77,26 @@
                         {/if}
                         {assign var=SINGLE_MODULE_NAME value='SINGLE_'|cat:$MODULE}
                         {if $RECORD and $smarty.request.view eq 'Edit'}
-                                <p class="current-filter-name filter-name pull-left "><span class="ti-angle-right pull-left" aria-hidden="true"></span><a title="{$RECORD->get('label')}">&nbsp;&nbsp;{vtranslate('LBL_EDITING', $MODULE)} : {$RECORD->get('label')} &nbsp;&nbsp;</a></p>
+                                <p class="current-filter-name filter-name pull-left ">
+                                    <span class="ti-angle-right pull-left" aria-hidden="true"></span>
+                                    <a title="{$RECORD->get('label')}">
+                                        &nbsp;&nbsp;{vtranslate('LBL_EDITING', $MODULE)} : {$RECORD->get('label')} &nbsp;&nbsp;
+                                    </a>
+                                </p>
                         {else if $smarty.request.view eq 'Edit'}
-                                <p class="current-filter-name filter-name pull-left "><span class="ti-angle-right pull-left" aria-hidden="true"></span><a>&nbsp;&nbsp;{vtranslate('LBL_ADDING_NEW', $MODULE)}&nbsp;&nbsp;</a></p>
+                                <p class="current-filter-name filter-name pull-left ">
+                                    <span class="ti-angle-right pull-left" aria-hidden="true"></span>
+                                    <a>
+                                        &nbsp;&nbsp;{vtranslate('LBL_ADDING_NEW', $MODULE)}&nbsp;&nbsp;
+                                    </a>
+                                </p>
                         {/if}
                         {if $smarty.request.view eq 'Detail'}
-                                <p class="current-filter-name filter-name pull-left"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a title="{$RECORD->get('label')}">&nbsp;&nbsp;{$RECORD->get('label')} &nbsp;&nbsp;</a></p>
+                                <p class="current-filter-name filter-name pull-left">
+                                    <span class="ti-angle-right pull-left" aria-hidden="true"></span>
+                                    <a title="{$RECORD->get('label')}">&nbsp;&nbsp;{$RECORD->get('label')} &nbsp;&nbsp;
+                                    </a>
+                                </p>
                         {/if}
                 </div> 
                 <div class="col-xs-5 col-lg-5 col-md-5 col-sm-5">
