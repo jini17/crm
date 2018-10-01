@@ -10,7 +10,7 @@
 {strip}
  <div class="col-sm-12 col-xs-12 module-action-bar clearfix coloredBorderTop">
         <div class="module-action-content clearfix {$MODULE}-module-action-content">
-                <div class="col-xs-{if $smarty.request.view eq 'Edit'}12{else}3{/if} col-lg-3 module-breadcrumb module-breadcrumb-{$smarty.request.view} transitionsAllHalfSecond">
+                <div class="col-xs-{if $smarty.request.view eq 'Edit'}12{else}3{/if} {if $MODULE eq 'Home'  AND   $LOGGED_NOW == 'in' }col-lg-3{else} col-lg-6 {/if} module-breadcrumb module-breadcrumb-{$smarty.request.view} transitionsAllHalfSecond">
                         {assign var=MODULE_MODEL value=Vtiger_Module_Model::getInstance($MODULE)}
                         {if $MODULE_MODEL->getDefaultViewName() neq 'List'}
                                 {assign var=DEFAULT_FILTER_URL value=$MODULE_MODEL->getDefaultUrl()}
@@ -99,23 +99,25 @@
                                 </p>
                         {/if}
                 </div> 
+                    {if $MODULE eq 'Home'  AND     $LOGGED_NOW == 'in' }
                 <div class="col-xs-5 col-lg-5 col-md-5 col-sm-5">
-                        {if $MODULE eq 'Home'  AND     $LOGGED_NOW == 'in' }
+                    
                         <div class="clearfix">
 
                                 <div class="col-xs-12">
                                         <!-- added by jitu@28Dec2016-->
-                                        <div style="text-align:center;display:block;width:100%;margin:0 auto;padding:2px;">{vtranslate('LBL_LAST_LOGINTIME')} {$LAST_LOGIN_TIME} {vtranslate('LBL_USERIP')} {$LAST_USER_IP}
+                                        <div style="text-align:center;display:block;width:100%;margin:0 auto;padding:2px;">
+                                            {vtranslate('LBL_LAST_LOGINTIME')} {$LAST_LOGIN_TIME} {vtranslate('LBL_USERIP')} {$LAST_USER_IP}
                                         </div>
                                         <!--end here -->
                                 </div>
 
                         </div>
                         <br>
-                        {/if}
+                       
                 </div>
-
-                <div class="col-xs-4 col-lg-4 col-md-4 col-sm-4 module-breadcrumb-{$smarty.request.view}" style="margin:  0px; padding: 0px;">
+                {/if}
+                <div class="{if $MODULE eq 'Home'  AND     $LOGGED_NOW == 'in' } col-xs-4 col-lg-4 col-md-4 col-sm-4 {else} col-xs-4 col-lg-6 col-md-6 col-sm-6  {/if}module-breadcrumb-{$smarty.request.view}" style="margin:  0px; padding: 0px;">
                          <div id="appnav" class="navbar-right">
 
 
@@ -155,8 +157,8 @@
                                                                         {/foreach}
                                                                 </ul>
                                         {/if}
-                                        <a class='btn btn-default Help-btn'>
-                                                <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; Help
+                                        <a class='btn btn-default Help-btn text-center'>
+                                                <i class="glyphicon glyphicon-question-sign"></i>&nbsp;Help
                                         </a>
 
 
