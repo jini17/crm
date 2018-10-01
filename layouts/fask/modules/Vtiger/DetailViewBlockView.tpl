@@ -195,7 +195,7 @@
                                                                                                 {if $fieldDataType eq 'multipicklist'}
                                                                                                         <input type="hidden" class="fieldBasicData" data-name='{$FIELD_MODEL->get('name')}[]' data-type="{$fieldDataType}" data-displayvalue='{$FIELD_DISPLAY_VALUE}' data-value="{$FIELD_VALUE}" />
                                                                                                 {else}
-                                                                                                        <input type="hidden" class="fieldBasicData" data-name='{$FIELD_MODEL->get('name')}' data-type="{$fieldDataType}" data-displayvalue='{$FIELD_DISPLAY_VALUE}' data-value="{$FIELD_VALUE}" />
+                                                                                                        <input type="hidden" class="fieldBasicData" data-name='{$FIELD_MODEL->get('name')}' data-type="{$fieldDataType}" data-displayvalue='{$FIELD_DISPLAY_VALUE}' value="{$FIELD_VALUE}" data-value="{$FIELD_VALUE}" />
                                                                                                 {/if}
                                                                                         </span>
                                                                                         <span class="action pull-right"><a href="#" onclick="return false;" class="editAction"><i class="material-icons">create</i></a></span>

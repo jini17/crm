@@ -636,19 +636,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 global $current_user;
 
                 if($filter == 'today'){
-                        $query = " AND DATE_FORMAT(fromdate,'%m-%d') = DATE_FORMAT(NOW(),'%m-%d')
-                                             OR (
-                                                    (
-                                                        DATE_FORMAT(NOW(),'%Y') % 4 <> 0
-                                                        OR (
-                                                                DATE_FORMAT(NOW(),'%Y') % 100 = 0
-                                                                AND DATE_FORMAT(NOW(),'%Y') % 400 <> 0
-                                                            )
-                                                    )
-                                                    AND DATE_FORMAT(NOW(),'%m-%d') = '03-01'
-                                                    AND DATE_FORMAT(fromdate,'%m-%d') = '02-29'
-                                                )
-                        )";
+                        $query = " AND DATE_FORMAT(CURDATE(),'%m-%d') between DATE_FORMAT(fromdate,'%m-%d') and DATE_FORMAT(todate,'%m-%d')  ";
 
                 } elseif($filter == 'tomorrow'){
                         $query = " AND DATE_FORMAT(fromdate,'%m-%d') = DATE_FORMAT(CURDATE() + INTERVAL 1 DAY,'%m-%d') ";			
@@ -687,6 +675,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                                         AND vtiger_crmentity.deleted=0 
                                         AND (vtiger_leave.leavestatus = 'Apply') ".$query. " ORDER BY fromdate DESC LIMIT 5";
 
+               
                 $resultgetteamleave = $db->pquery($querygetteamleave,array());
                 $myteamleave=array();	
 

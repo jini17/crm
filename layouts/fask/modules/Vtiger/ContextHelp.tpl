@@ -5,9 +5,9 @@
 	</div>
 	<div class="modal-body">
 		<div class="top-btn pull-right">
-			<button title="{vtranslate('Go to Support')}" class="help-btn" onclick="window.location.href='{$REF_URL}support'">{vtranslate('Go to Support')}</button>
+			{*<button title="{vtranslate('Go to Support')}" class="help-btn" onclick="window.location.href='{$REF_URL}support'">{vtranslate('Go to Support')}</button>
 			<button title="{vtranslate('Create Ticket')}" class="help-btn" onclick="window.location.href='{$REF_URL}support/index.php?module=HelpDesk&action=new'">{vtranslate('Create Ticket')}</button>
-		
+		*}
 			{if $DATA['cf_1324'] neq ''}
 			<a class="btn btn-lg btn-primary" href="#youtube" data-toggle="modal" data-height="360" data-width="720" href="https://www.youtube.com/watch?v=b16k1vJgLgk">
 			<img alt="{$DATA['question']}" src="layouts/vlayout/skins/images/youtube.png" height="30" width="30" data-target="youtube">

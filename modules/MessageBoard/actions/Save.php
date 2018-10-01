@@ -9,7 +9,7 @@
  *************************************************************************************/
 class MessageBoard_Save_Action extends Vtiger_Save_Action {
 
-	public function process($request) {
+	public function process(Vtiger_Request $request) {
 	
 		global $current_user;
 		$request->set('employee_id',$current_user->id);

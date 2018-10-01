@@ -16,7 +16,7 @@ Vtiger_Edit_Js("Leave_Edit_Js",{
                         }else if(typeElement.val() == 'lastleaves'){
                                 $("div.row").attr("hidden");
                         }
-                }
+                });
 
         },
 

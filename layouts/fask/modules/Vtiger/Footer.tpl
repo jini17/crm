@@ -22,7 +22,7 @@
 
 {include file='JSResources.tpl'|@vtemplate_path}
 
-<script src="https://unpkg.com/tippy.js@2.5.4/dist/tippy.all.min.js"></script>
+<script src="https://unpkg.com/tippy.js@3/dist/tippy.all.min.js"></script>
 
 
 <script>
@@ -32,8 +32,8 @@
 	  inertia: true,
 	  duration: 600,
 	  arrow: true,
-	  arrowtype: "round",
-	  arrowtransform: "scale(0.7, 1)",	  
+	  arrowType: "round",
+	  arrowTransform: "scale(0.7, 1)", 
 	  theme: "fask"
 	});
 	/*

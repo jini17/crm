@@ -289,7 +289,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 			gridWidth = 1;
 		} else if (_device_width >= 768 && _device_width < 992) {
 			gridWidth = 2;
-		} else if (_device_width >= 992 && _device_width < 1440) {
+		} else if (_device_width >= 992 && _device_width < 1800) {
 			gridWidth = 3;
 		} else {
 			gridWidth = 4;
@@ -313,7 +313,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 
 		Vtiger_DashBoard_Js.gridster = this.getContainer().gridster({
 			widget_margins: [widgetMargin, widgetMargin],
-			widget_base_dimensions: [col_width, 280],
+			widget_base_dimensions: [col_width, 350],
 			min_cols: 1,
 			max_cols: 4,
 			min_rows: 20,
@@ -1171,8 +1171,13 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
                                                                             instance.removeWidget();
                                                                             instance.registerWidgetFullScreenView();
                                                                             instance.registerFilterInitiater();
+
+                                                                            
+															
                                                                         }     
 		});
 		app.event.trigger("post.DashBoardTab.load");
+		
+
 	}
 });

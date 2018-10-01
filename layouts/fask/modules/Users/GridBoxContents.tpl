@@ -5,7 +5,7 @@
         font-weight: bold;
     }
     .box-content{
-      padding:5px 10px;
+      padding:0 10px;
       border: 1px solid #ddd;
       background: #fff;
       min-height: 300px;
@@ -115,7 +115,7 @@
             
                 
                 {/foreach}
-                {$LISTVIEW_LINKS}
+     
         </div>
         
     </div>
