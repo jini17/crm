@@ -259,6 +259,11 @@ class Users_Module_Model extends Vtiger_Module_Model {
 		$fields = $focus->column_fields;
 		foreach ($fields as $fieldName => $fieldValue) {
 			$fieldValue = $recordModel->get($fieldName);
+
+			// Added By Mabruk Fix Bug
+			if ($fieldName == "birthday" || $fieldName == "date_joined")
+				$fieldValue = date("Y-m-d",strtotime($fieldValue));
+							
 			if (is_array($fieldValue)) {
 				$focus->column_fields[$fieldName] = $fieldValue;
 			} else if ($fieldValue !== null) {

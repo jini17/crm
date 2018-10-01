@@ -1249,7 +1249,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 				var referenceElement = jQuery('input[name="'+fieldName+'"]',editElement);
 				if(!referenceElement.attr('disabled')) {
 					referenceElement.attr('disabled','disabled');
-					editElement.find('.clearReferenceSelection').removeClass('hide')
+					//editElement.find('.clearReferenceSelection').removeClass('hide')
 				}
 			}
 		}
@@ -1328,12 +1328,25 @@ Vtiger.Class("Vtiger_Detail_Js",{
 			var fieldBasicData = jQuery('.fieldBasicData', editElement);
 			var fieldName = fieldBasicData.data('name');
 			var fieldType = fieldBasicData.data("type");
-			var previousValue = jQuery.trim(fieldBasicData.data('displayvalue'));
+			var previousValue = jQuery.trim(fieldBasicData.data('displayvalue')); 
+			var fieldElement = jQuery('[name="'+ fieldName +'"]', editElement);			
 
-			var fieldElement = jQuery('[name="'+ fieldName +'"]', editElement);
-			var ajaxEditNewValue = fieldElement.val();
+			// Added By Mabruk Legendary bug
+			fieldElement.each(function() {
+				  $.each(this.attributes, function() {
+				    // this.attributes is not a plain object, but an array
+				    // of attribute nodes, which contain both the name and value
+				    if(this.specified) {
+				      //console.log(this.name, this.value);
+				      if (this.name == "value")
+				      	fieldBasicData.val(this.value);
+				    }
+				  });
+				});	
 
-			 // ajaxEditNewValue should be taken based on field Type
+
+
+			var ajaxEditNewValue = fieldElement.val();			
 			if(fieldElement.is('input:checkbox')) {
 				if(fieldElement.is(':checked')) {
 					ajaxEditNewValue = '1';
@@ -1341,10 +1354,11 @@ Vtiger.Class("Vtiger_Detail_Js",{
 					ajaxEditNewValue = '0';
 				}
 				fieldElement = fieldElement.filter('[type="checkbox"]');
-			} else if(fieldType == 'reference'){
-				ajaxEditNewValue = fieldElement.data('value');
-				if(ajaxEditNewValue===undefined) ajaxEditNewValue = fieldElement.attr('value');
-
+			} else if(fieldType == 'reference'){				
+				ajaxEditNewValue = fieldBasicData.val(); alert(ajaxEditNewValue);
+				//if(ajaxEditNewValue===undefined) ajaxEditNewValue = fieldElement.attr('value');				
+				if (ajaxEditNewValue == "") ajaxEditNewValue = fieldBasicData.data('value');
+				
 			}
 
 			// prev Value should be taken based on field Type

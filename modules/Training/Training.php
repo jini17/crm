@@ -99,34 +99,4 @@ class Training extends Vtiger_CRMEntity {
 		}
  	}
 
- 		/**
-	 * Function to get Activity related Users
-	 * @param  integer   $id      - activityid
-	 * returns related Users record in array format
-	 */
-
-	function get_users($id) {
-		global $log;
-				$log->debug("Entering get_contacts(".$id.") method ...");
-		global $app_strings;
-
-		$focus = new Users();
-
-		$button = '<input title="Change" accessKey="" tabindex="2" type="button" class="crmbutton small edit"
-					value="'.getTranslatedString('LBL_SELECT_USER_BUTTON_LABEL').'" name="button" LANGUAGE=javascript
-					onclick=\'return window.open("index.php?module=Users&return_module=Training&return_action={$return_modname}&action=Popup&popuptype=detailview&form=EditView&form_submit=true&select=enable&return_id='.$id.'&recordid='.$id.'","test","width=640,height=525,resizable=0,scrollbars=0")\';>';
-
-		$returnset = '&return_module=Training&return_action=CallRelatedList&return_id='.$id;
-
-		$query = 'SELECT vtiger_users.id, vtiger_users.first_name,vtiger_users.last_name, vtiger_users.user_name, vtiger_users.email1, vtiger_users.email2, vtiger_users.status, vtiger_users.is_admin, vtiger_user2role.roleid, vtiger_users.secondaryemail, vtiger_users.phone_home, vtiger_users.phone_work, vtiger_users.phone_mobile, vtiger_users.phone_other, vtiger_users.phone_fax,vtiger_activity.date_start,vtiger_activity.due_date,vtiger_activity.time_start,vtiger_activity.duration_hours,vtiger_activity.duration_minutes from vtiger_users inner join vtiger_salesmanactivityrel on vtiger_salesmanactivityrel.smid=vtiger_users.id  inner join vtiger_activity on vtiger_activity.activityid=vtiger_salesmanactivityrel.activityid inner join vtiger_user2role on vtiger_user2role.userid=vtiger_users.id where vtiger_activity.activityid='.$id;
-
-		$return_data = GetRelatedList('Training','Users',$focus,$query,$button,$returnset);
-
-		if($return_data == null) $return_data = Array();
-		$return_data['CUSTOM_BUTTON'] = $button;
-
-		$log->debug("Exiting get_users method ...");
-		return $return_data;
-	}
-
 }

@@ -54,13 +54,13 @@ class Users_List_View extends Settings_Vtiger_List_View {
                                            $viewer->assign('PAGE_URL',$URL);
                                              $viewer->assign('TEXT_FILTER',$Alphabet);
                                        
-		$viewer->view('GridViewContents.tpl', $request->getModule(false));
+		//$viewer->view('GridViewContents.tpl', $request->getModule(false));
                 
 //		if($defaultview =='grid'){
-//			$viewer->view('GridViewContents.tpl', $request->getModule(false));
+			$viewer->view('GridViewContents.tpl', $request->getModule(false));
 //		}
 //		else {
-//			$viewer->view('ListViewContents.tpl', $request->getModule(false));
+		//$viewer->view('ListViewContents.tpl', $request->getModule(false));
 //		}	
 	}
 
@@ -94,7 +94,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 		if(empty($status))
 			$status = 'Active';
                                             
-                        
+
                                            
 		$listViewModel = Vtiger_ListView_Model::getInstance($moduleName, $cvId);
 
@@ -156,7 +156,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 			$this->listViewHeaders = $listViewModel->getListViewHeaders();
 		}
 		if(!$this->listViewEntries){
-			$this->listViewEntries = $listViewModel->getListViewEntries($pagingModel);
+			$this->listViewEntries = $listViewModel->getListViewEntries($pagingModel); 
 		}
 		$noOfEntries = count($this->listViewEntries);
 
