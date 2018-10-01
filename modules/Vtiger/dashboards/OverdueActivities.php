@@ -33,6 +33,7 @@ Class Vtiger_OverdueActivities_Dashboard extends Vtiger_IndexAjax_View {
 		$viewer->assign('ACTIVITIES', $overDueActivities);
 		$viewer->assign('PAGING', $pagingModel);
 		$viewer->assign('CURRENTUSER', $currentUser);
+                                           $viewer->assign('USER_NOW',$user);
 		
 		$content = $request->get('content');
 		if(!empty($content)) {

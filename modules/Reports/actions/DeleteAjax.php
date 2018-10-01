@@ -23,6 +23,12 @@ class Reports_DeleteAjax_Action extends Vtiger_DeleteAjax_Action {
 	public function process(Vtiger_Request $request) {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
+
+		/***************Edited By Mabruk**************/
+        $db = PearDatabase::getInstance();
+        $db->pquery('DELETE FROM `vtiger_module_dashboard_widgets` WHERE linkid = ? AND filterid = ?',array(119,$recordId));       
+        /***************Editing Done*****************/
+        
 		$response = new Vtiger_Response();
 
 		$recordModel = Reports_Record_Model::getInstanceById($recordId, $moduleName);

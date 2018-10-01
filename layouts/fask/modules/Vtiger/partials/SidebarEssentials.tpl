@@ -41,7 +41,7 @@
                                     {/if}
                                 </h5>
                                 <input type="hidden" name="allCvId" value="{CustomView_Record_Model::getAllFilterByModule($MODULE)->get('cvid')}" />
-                                <ul class="lists-menu">
+                                <ul class="lists-menu" style="max-height: 300px; overflow-y: auto; ">
 								{assign var=count value=0}
 								{assign var=LISTVIEW_URL value=$MODULE_MODEL->getListViewUrl()}
                                 {foreach item="CUSTOM_VIEW" from=$GROUP_CUSTOM_VIEWS name="customView"}
@@ -54,7 +54,7 @@
 										{assign var="SHARED_MEMBER_COUNT" value=1}
 										{/if}
 									{/foreach}
-									<li style="font-size:13px;" class='listViewFilter {if $VIEWID eq $CUSTOM_VIEW->getId() && ($CURRENT_TAG eq '')} active {if $smarty.foreach.customView.iteration gt 10} {assign var=count value=1} {/if} {else if $smarty.foreach.customView.iteration gt 10} filterHidden hide{/if} '> 
+									<li style="font-size:13px;" class='listViewFilter {if $VIEWID eq $CUSTOM_VIEW->getId() && ($CURRENT_TAG eq '')} active {/if} '> 
                                         {assign var=VIEWNAME value={vtranslate($CUSTOM_VIEW->get('viewname'), $MODULE)}}
 										{append var="CUSTOM_VIEW_NAMES" value=$VIEWNAME}
                                          <a class="filterName listViewFilterElipsis" href="{$LISTVIEW_URL|cat:'&viewname='|cat:$CUSTOM_VIEW->getId()}" oncontextmenu="return false;" data-filter-id="{$CUSTOM_VIEW->getId()}" title="{$VIEWNAME|@escape:'html'}">{$VIEWNAME|@escape:'html'}</a> 

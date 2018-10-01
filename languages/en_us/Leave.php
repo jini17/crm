@@ -31,7 +31,8 @@ $languageStrings = array(
     'LBL_MC_TAKEN'=>'MC\'s',
     'LBL_NAME'=>'Employee', 
 	'LBL_APPLY'=>'Apply Leave',
-    'LBL_COMPANY'=>'Company'
+    'LBL_COMPANY'=>'Company',
+    'SINGLE_Leave'=>'Leave',
 
 );
 

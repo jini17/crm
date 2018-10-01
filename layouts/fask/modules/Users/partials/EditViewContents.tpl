@@ -115,3 +115,9 @@
    {/if}
    {/foreach}
 </div>
+
+<script type="text/javascript">
+     jQuery(document).ready(function(){
+       jQuery('.bodyContents').find("#Users_editView_fieldName_sameaddresscheck").closest('.row').find('.col-xs-6').attr('style',"min-height:60px;")
+    });
+ </script>  
