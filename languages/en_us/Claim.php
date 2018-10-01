@@ -20,5 +20,7 @@ $languageStrings = array(
 );
 
 $jsLanguageStrings = array(
-	
+	'JS_TRANSACTION_AMOUNT_EXCEEDED' => 'The amount exceeds the transaction limit',
+	'JS_MONTHLY_AMOUNT_EXCEEDED' => 'The amount exceeds the monthly limit',
+	'JS_YEARLY_AMOUNT_EXCEEDED' => 'The amount exceeds the yearly limit',
 );

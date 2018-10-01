@@ -781,7 +781,6 @@ $languageStrings = array(
 	'LBL_MAIL_MANAGER' => 'Pengurus Mel',
 	'Sales' => 'Jualan',
 	'Support' => 'Sokongan',
-	'All' => 'Menu Penuh',
 
 	'Template Name' => 'Nama Templat',
 	'Template Type' => 'Jenis Templat',
@@ -819,6 +818,8 @@ $languageStrings = array(
 	'Kontrak Pekerja - All' => 'Kontrak Pekerja - Semua',
 	'Attendence' => 'Kedatangan',
 	'Training' => 'Kursus',
+	'Employee by Gender' => 'Pekerja Mengikut Jantina',
+
 
 
 	
@@ -963,5 +964,9 @@ $jsLanguageStrings = array(
 	//END
         
         'LBL_DELETE_USER_PERMANENT_CONFIRMATION'=>'Anda pasti untuk membuang pengguna ini?',
+
+        'JS_TRANSACTION_AMOUNT_EXCEEDED' => 'Jumlah yang dimasukkan telah melebihi had transaksi',
+	'JS_MONTHLY_AMOUNT_EXCEEDED' => 'Jumlah yang dimasukkan telah melebihi had bulanan',
+	'JS_YEARLY_AMOUNT_EXCEEDED' => 'Jumlah yang dimasukkan telah melebihi had tahunan',
       
 );

@@ -28,4 +28,8 @@ $languageStrings = Array(
 	'My Team Claim' => 'Tuntutan Kumpulan Saya',
 );
 
+$jsLanguageStrings = array(
+	
+);
+
 ?>
