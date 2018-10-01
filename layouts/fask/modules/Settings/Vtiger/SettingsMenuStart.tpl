@@ -55,7 +55,7 @@
         })();
     </script>
 {/if}
-<div class="main-container clearfix" style="margin-top:10pxz">
+<div class="main-container clearfix" style="margin-top:10px;">
 
                 {assign var=LEFTPANELHIDE value=$USER_MODEL->get('leftpanelhide')}
 

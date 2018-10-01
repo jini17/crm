@@ -11,7 +11,6 @@
 -->*}
 <div class="dashboardWidgetHeader">
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
-</div>
 
     <div class="filterContainer">
         
@@ -28,12 +27,12 @@
                     </label>
                 </div>
              {if $MODELS['balance'] gt 0}
-               <div class="col-lg-4 pull-right"><input type="button" class="btn btn-primary" style="padding:5px;" onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USERID}'" name="applyleave" value="{vtranslate('LBL_APPLY', $MODULE_NAME)}"></div>
+               <div class="col-lg-4 pull-right"><input type="button" class="btn btn-primary" style="padding:5px;" onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USERID}'" name="applyclaim" value="{vtranslate('LBL_APPLY', $MODULE_NAME)}"></div>
              {/if}
             <div class='clearfix'></div>
       </div>    
    </div>
- <hr >
+  </div>
 <div class="dashboardWidgetContent mCustomScrollbar _mCS_5">
   {include file="dashboards/MyClaimContent.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>

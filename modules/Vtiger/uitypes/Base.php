@@ -41,9 +41,14 @@ class Vtiger_Base_UIType extends Vtiger_Base_Model {
 	 * @param <Object> $value
 	 * @return <Object>
 	 */
+	/**
+	* Data Display Limited
+	*/
 	public function getDisplayValue($value, $record=false, $recordInstance=false) {
-		return $value;
+		return chunk_split(nl2br($value),50);	//modified by jitu@Tar for show 50 char in single line before break-in
 	}
+
+
 
 	/**
 	 * Static function to get the UIType object from Vtiger Field Model

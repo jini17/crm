@@ -182,7 +182,7 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 		//Delete Language
 	public function deleteLanguagePermanently($langId){	
 		$db  		= PearDatabase::getInstance();
-		$db->setDebug(true);
+		//$db->setDebug(true);
 		$params 	= array();
 		if(!empty($langId)) {
 			$params = array($langId);

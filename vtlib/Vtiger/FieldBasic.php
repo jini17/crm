@@ -61,6 +61,7 @@ class Vtiger_FieldBasic {
 		$this->column = $valuemap['columnname'];
 		$this->table  = $valuemap['tablename'];
 		$this->uitype = $valuemap['uitype'];
+		$this->maximumlength = $valuemap['maximumlength'];
 		$this->typeofdata = $valuemap['typeofdata'];
 		$this->helpinfo = $valuemap['helpinfo'];
 		$this->masseditable = $valuemap['masseditable'];

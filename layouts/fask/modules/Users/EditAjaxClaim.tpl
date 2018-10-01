@@ -63,8 +63,8 @@
                                                 {if $CLAIMTYPELIST|count gt 0}
                                                 {foreach key=LEAVE_ID item=CLAIM_MODEL from=$CLAIMTYPELIST name=institutionIterator}		
                                                  
-                                                <option value="{$CLAIM_MODEL.claimtypeid}" style="float:left;margin-right:5px;background-color:{$CLAIM_MODEL['color_code']};width:30px;height:20px;" data-trans="{$CLAIM_MODEL.transactionlimit}" data-monthly="{$CLAIM_MODEL.monthlylimit}" data-yearly="{$CLAIM_MODEL.yearlylimit}" {if $CLAIM_DETAIL.category eq $CLAIM_MODEL.claimtypeid} selected {/if}>
-                                                {$CLAIM_MODEL.claimtype}</option>
+                                                <option value="{$CLAIM_MODEL.claimtypeid}" style="float:left;margin-right:5px;background-color:{$CLAIM_MODEL['color_code']};width:30px;height:20px;" data-bal="{$CLAIM_MODEL.balance}" data-transaction="{$CLAIM_MODEL.transaction_limit}" data-monthly="{$CLAIM_MODEL.monthly_limit}" data-yearly="{$CLAIM_MODEL.yearly_limit}" {if $CLAIM_DETAIL.category eq $CLAIM_MODEL.claimtypeid} selected {/if}>
+                                                {$CLAIM_MODEL.claimtype} {if $CLAIM_MODEL.balance ne 0} ({$CLAIM_MODEL.balance}){/if}</option>
 
                                                 {/foreach}
 
@@ -77,7 +77,7 @@
                                                 </div>
                                         </div>
                         <!--end-->
-
+ 
 
                                 <!--start DATE -->
                                 <div class="row-fluid">
@@ -107,7 +107,7 @@
                                                                 </label>
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
-                                                                 <input id="totalamount" class="fieldValue inputElement" data-rule-required = "true" type="text" value="{$CLAIM_DETAIL['totalamount']}" name="totalamount">
+                                                                 <input id="totalamount" class="fieldValue inputElement" data-trans ="{$CLAIM_MODEL.transaction_limit}"  data-rule-required = "true" type="text" value="{$CLAIM_DETAIL['totalamount']}" name="totalamount">
                                                         </div>
                                                 </div>
                                         <div class="col-md-12" id="validateamount" style="margin-bottom: 15px;display:none;">
@@ -268,6 +268,22 @@
 {/strip}
 {literal}
 <script>
+    $('#totalamount').on('change', function() {
+        var balance = jQuery('#category').find(':selected').data('bal');
+        var transaction = jQuery('#category').find(':selected').data('transaction');
+        var monthly = jQuery('#category').find(':selected').data('monthly');
+        var yearly = jQuery('#category').find(':selected').data('yearly');
+        var useramount = jQuery('#totalamount').val();
+        if( useramount > balance){
+           if(transaction != 0.00){
+                app.helper.showErrorNotification({'message': app.vtranslate('JS_TRANSACTION_AMOUNT_EXCEEDED')});
+            }else if(monthly != 0.00){
+                app.helper.showErrorNotification({'message': app.vtranslate('JS_MONTHLY_AMOUNT_EXCEEDED')});
+            }else
+                app.helper.showErrorNotification({'message': app.vtranslate('JS_YEARLY_AMOUNT_EXCEEDED')});
+            
+        }
+    });
 
                                 function show1(){
                                   document.getElementById('div1').style.display ='none';

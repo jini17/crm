@@ -79,6 +79,7 @@ $languageStrings = array(
 	'LBL_NOTE_EXISTING_ATTACHMENTS_WILL_BE_REPLACED' => 'Nota: Lampiran sebelum ini(Gambar/Fail) akan digantikan',
 	'LBL_KEY_FIELDS' => 'Medan Utama',
 	'LBL_ENRICH_DATA_LOCKED' => 'Memperkayakan Data',
+	'LBL_CUSTOMIZE' => 'Tetapan',
     
 );
 $jsLanguageStrings = array(

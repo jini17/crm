@@ -19,12 +19,12 @@ class Claim_MyClaim_Dashboard extends Vtiger_IndexAjax_View {
 		$type = $request->get('type');
 		
 		if($type == '' || $type == null) {
-				$type = 'leavetype';
+				$type = 'claimtype';
 		}
 		
 		$valueLabel = 'LBL_CLAIM_TYPE';
 
-		if($type=='leavetype') {
+		if($type=='claimtype') {
 			$valueLabel = $valueLabel;
 			
 		}  else if($type=='latest') {	
@@ -32,7 +32,7 @@ class Claim_MyClaim_Dashboard extends Vtiger_IndexAjax_View {
 			$valueLabel = 'LBL_LAST_5_CLAIM';
 		}
 		
-		$leavemodel = Users_LeavesRecords_Model::getWidgetsMyLeaves($currentUser->getId(), date('Y'), $type);	
+		$claimmodel = Users_ClaimRecords_Model::getMyClaim($currentUser->getId(), date('Y'),$type);	
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
 
@@ -44,7 +44,7 @@ class Claim_MyClaim_Dashboard extends Vtiger_IndexAjax_View {
 		$viewer->assign('USERID', $currentUser->getId());
 		
 		$viewer->assign('MODULE_NAME', $moduleName);
-		$viewer->assign('MODELS', $leavemodel);
+		$viewer->assign('MODELS', $claimmodel);
 		$content = $request->get('content');
      
 

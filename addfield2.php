@@ -23,13 +23,13 @@ $block1 = $block1->getInstance($block1->label,$module);
 
 $field1 = new Vtiger_Field();
 
-$field1->name = 'employee_id';
+$field1->name = 'employeesno';
 $field1->table = $module->basetable;
-$field1->label = 'Employee Name';
-$field1->column = 'employee_id';
-$field1->columntype = 'int(11)';
-$field1->uitype = 101;
-$field1->typeofdata = 'I~M';
+$field1->label = 'Employee No.';
+$field1->column = 'employeesno';
+$field1->columntype = 'varchar(100)';
+$field1->uitype = 4;
+$field1->typeofdata = 'V~M';
 $block1->addField($field1);
 echo "NBBB";
 //after field is created, go to vtiger_field and find the field ID.

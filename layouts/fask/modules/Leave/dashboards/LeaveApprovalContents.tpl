@@ -12,40 +12,22 @@
 
 <div style='padding:5px;'>
 {if count($MODELS) > 0}
-<table class="table table-bordered listViewEntriesTable">
-	<thead>
-		<tr>
-			<th style="width:43%;">
-			<b>{vtranslate('LBL_NAME', $MODULE_NAME)}</b>
-			</th>
-			<th>
-			<b>{vtranslate('LBL_DURATIONOFLEAVE', $MODULE_NAME)}</b>
-			</th>
-			<th colspan="2">
-			<b>{vtranslate('LBL_STATUS', $MODULE_NAME)}</b>
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		{foreach item=MODEL from=$MODELS}
-			<tr>
-				<td>
-				{$MODEL['fullname']}
-				</td>
-				<td>
-				{$MODEL['duration']}
-				</td>
-				<td style="text-align:center;">
-				{$MODEL['leavestatus']}
-				</td>
-				<td>
-					{$MODEL['icon']}
-				</td>
-			</tr>
-		{/foreach}
-	</tbody>
-</table>
-<br /><br />
+    <div class="row th" style="padding-top:5px; padding-bottom: 5px;">
+        <div class="col-lg-5"><strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong></div>
+        <div class="col-lg-5"><strong>{vtranslate('LBL_DURATIONOFLEAVE', $MODULE_NAME)}</strong></div>
+        <div class="col-lg-2"><strong>{vtranslate('LBL_STATUS', $MODULE_NAME)}</strong></div>
+    </div>
+    <div class="clearfix"></div>
+  
+        {foreach item=MODEL from=$MODELS}
+              <div class="row miniListContent">
+                    <div class="col-lg-5">{$MODEL['fullname']}</div>
+                    <div class="col-lg-5">{$MODEL['duration']}</div>
+                    <div class="col-lg-2">{$MODEL['leavestatus']} &nbsp; {$MODEL['icon']}</div>
+              </div>    
+         {/foreach}
+
+
 {else}
 	<span class="noDataMsg">
 		{vtranslate($TYPELABEL,$MODULE_NAME)}

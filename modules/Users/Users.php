@@ -99,11 +99,12 @@ class Users extends CRMEntity {
                         'Admin'=>Array('vtiger_users'=>'is_admin'),
 
                                                                 'Designation'=>Array('vtiger_users'=>'title'),
-                                                                'Birthday'=>Array('vtiger_users'=>'birthday'),
+                                                                
                                                                 'Facebook'=>Array('vtiger_users'=>'facebook'),
                                                                 'Twitter'=>Array('vtiger_users'=>'twitter'),
                                                                  'Linkedin'=>Array('vtiger_users'=>'Linkedin'),
                                                                   'Phone'=>Array('vtiger_users'=>'phone_work'),
+                                                                  'Birthday'=>Array('vtiger_users'=>'birthday')
         );
         var $list_fields_name = Array(
                         'Last Name'=>'last_name',
@@ -116,11 +117,12 @@ class Users extends CRMEntity {
                         'Admin'=>'is_admin',
 
                                                                 'Designation'=>'title',
-                                                                'Birthday'=>'birthday',  
+                                                                
                                                                 'Facebook'=>Array('vtiger_users'=>'facebook'),
                                                                 'Twitter'=>Array('vtiger_users'=>'twitter'),
                                                                  'Linkedin'=>Array('vtiger_users'=>'Linkedin'),
                                                                 'Phone'=>'phone_work',
+                                                                'Birthday'=>'birthday'  
         );
 
         //Default Fields for Email Templates -- Pavani
