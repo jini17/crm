@@ -50,6 +50,7 @@
                 </div>
             </div>        
 
+
             <div class="col-lg-6 pull-right">
                 <div class="btn-group list-switcher" role="group" aria-label="Basic example">
                     <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn {$LIST} btn-white view" data-listType='List' title="List View"><i class='fa fa-list'></i> {vtranslate('List View', $MODULE)}</button>

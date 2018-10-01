@@ -107,10 +107,14 @@
 
 /* should override bootstrap */
 .login-wrapper {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  min-height: 100%; }
+  width: 580px;
+    height: auto;
+    position: absolute;
+    top:10%;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
 
 .box-wrapper {
   display: flex;
@@ -172,10 +176,10 @@
   background: #FFF; }
   .right-bar input {
     height: 51px; }
-  .right-bar img {
+  /*.right-bar img {
     height: 48px;
     margin-bottom: 3rem; }
-
+*/
 .btn-login {
   background: #19D44B;
   color: #FFF; }
@@ -427,3 +431,4 @@ label#log-checkbox.custom-control-label::before , label#log-checkbox.custom-cont
 label#login-checkbox.custom-control-label{
   font-weight: normal !important;
 }
+

@@ -29,6 +29,7 @@ $languageStrings = array(
 	'Individual Classes' => 'Kelas Individual',
 	'Description Information' => 'Maklumat Penerangan',
 	'Remarks' => 'Penerangan',
+	'Kursus - Upcoming Traning' => 'Kursus Akan Datang',
 
 
 
