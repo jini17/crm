@@ -58,7 +58,7 @@ function meetingInvites($entity) {
 	$emails = array();
 	
 	global $adb;
-	$adb->setDebug(true);
+	//$adb->setDebug(true);
 	if(vtlib_isModuleActive('Contacts')){
 
 			$result = $adb->pquery("SELECT vtiger_contactdetails.contactid AS contactid, CONCAT(firstname,' ',lastname) AS name, email FROM vtiger_contactdetails LEFT JOIN vtiger_cntactivityrel ON vtiger_contactdetails.contactid = vtiger_cntactivityrel.contactid WHERE vtiger_cntactivityrel.activityid = ?", array($id));
