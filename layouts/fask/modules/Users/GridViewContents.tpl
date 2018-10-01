@@ -1,65 +1,4 @@
-<style>
-   .alphabetSearch a{
-   color: #307fe8;
-   font-weight: bold;
-   }
-   .box-content{
-   padding:5px 10px;
-   border: 1px solid #ddd;
-   background: #fff;
-   min-height: 300px;
-   margin-top: 20px;
-   marign-bottom: 20px;
-   }
-   .user-social{
-   margin-top: 15px;
-   }
-   .username{
-   margin-bottom: 5px;
-   }
-   .user-social a{
-   color: #fff;
-   }
-   .facebook {
-   background:  #3B5998;
-   padding-left:4px;
-   padding-right:4px;
-   padding-top: 3px;
-   padding-bottom: 3px;
-   }
-   .twitter {
-   background: #0084b4;
-   padding-left:3px;
-   padding-right:3px;
-   padding-top: 3px;
-   padding-bottom: 3px;
-   }
-   .linkedin {
-   background: #0077B5;
-   padding-left:3px;
-   padding-right:3px;
-   padding-top: 3px;
-   padding-bottom: 3px;
-   }
-   .birthdaybox{
-   margin-top: 30px;
-   }
-   .highlight-birthday{
-   background: #b3ffff;   
-   }
-   .img-circle{
-   background-color: #fff;
-   }
-   .email-icon i{
-   color: #333;
-   }
-   .view{
-   
-     }
-   .activeview{
-       
-   }
-</style>
+
 <input type="hidden" id="listViewEntriesCount" value="{$LISTVIEW_ENTRIES_COUNT}" />
 <input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
 <input type="hidden" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" />
@@ -75,11 +14,7 @@
 <input type='hidden' value="{$PAGE_NUMBER}" id='pageNumber'>
 <input type='hidden' value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'>
 <input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
-{assign var = ALPHABETS_LABEL value = vtranslate('LBL_ALPHABETS', 'Vtiger')}
-{assign var = ALPHABETS value = ','|explode:$ALPHABETS_LABEL}
-{*
-<pre />
-{$LISTVIEW_ENTRIES|print_r}*}
+
 
 {if $EMP_VIEW eq 'grid'}
     {assign var =LIST value = 'btn-white'}
