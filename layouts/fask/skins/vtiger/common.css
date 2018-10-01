@@ -1363,7 +1363,7 @@ ul.unstyled {
   white-space: nowrap;
   text-overflow: ellipsis;
   display: inline-block;
-  overflow: hidden;
+ 
 }
 .listViewContentHeaderValues .customsort {
   opacity: 0.3;
@@ -3190,7 +3190,7 @@ position: relative;
 
 
 .settingsgroup div.panel-collapse {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color:#fff;
 }
 .settingsgroup-accordion {
   color: #FFFFFF;
@@ -4912,7 +4912,7 @@ hr {
   opacity: 1;
 }
 .panel-collapse ul li a.settingsgroup-menu-color {
-  background-color: rgba(0, 0, 0, 0.05);
+  color:#2f5597;
 }
 .calendar-sidebar-tab {
   padding: 10px;
@@ -8410,7 +8410,16 @@ Text Colors
 .bepo {color:#2f5597;}
 .bepobg {background-color:#2f5597;color:#fff;}
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
-    color: #2f5597;}
+       color: #2f5597;
+
+  }
+#listViewContent.listViewPageDiv .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
+    border: none;
+    border-bottom: 2px solid #2f5597;
+  }
+#listViewContent.listViewPageDiv .nav-tabs>li>a{
+  font-size: 15px;
+}
 .lstick {
     width: 2px;
     background: #2f5597;
@@ -9213,3 +9222,15 @@ float: right;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-l
     transition: 0.2s ease-in;
     color: #fff;
   }
+.settingsgroup div.settingsgroup-accordion a:active , .settingsgroup div.settingsgroup-accordion a:focus{
+  background-color: #2f5597;
+  color: #fff;
+}
+
+.alphabetSorting table{
+background-color: #fff;
+
+}
+.alphabetSorting table .alphabetSearch a{
+color: #2f5597 !important;
+}
