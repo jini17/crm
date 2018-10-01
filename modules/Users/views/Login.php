@@ -11,108 +11,112 @@
 vimport('~~/vtlib/Vtiger/Net/Client.php');
 class Users_Login_View extends Vtiger_View_Controller {
 
-        function loginRequired() {
-                return false;
-        }
+	function loginRequired() {
+		return false;
+	}
+	
+	function checkPermission(Vtiger_Request $request) {
+		return true;
+	}
+	
+	function preProcess(Vtiger_Request $request, $display = true) {
+		$viewer = $this->getViewer($request);
+		$viewer->assign('PAGETITLE', $this->getPageTitle($request));
+		$viewer->assign('SCRIPTS', $this->getHeaderScripts($request));
+		$viewer->assign('STYLES', $this->getHeaderCss($request));
+		$viewer->assign('MODULE', $request->getModule());
+		$viewer->assign('VIEW', $request->get('view'));
+		$viewer->assign('LANGUAGE_STRINGS', array());
+		if ($display) {
+			$this->preProcessDisplay($request);
+		}
+	}
 
-        function checkPermission(Vtiger_Request $request) {
-                return true;
-        }
+	function process (Vtiger_Request $request) {
+		global $site_URL;
+		
+		$finalJsonData = array();
+		$loginpageinfo = Users_Record_Model::loginPageDetails();
+		
+		$modelInstance = Settings_ExtensionStore_Extension_Model::getInstance();
+		$news = $modelInstance->getNews();
 
-        function preProcess(Vtiger_Request $request, $display = true) {
-                $viewer = $this->getViewer($request);
-                $viewer->assign('PAGETITLE', $this->getPageTitle($request));
-                $viewer->assign('SCRIPTS', $this->getHeaderScripts($request));
-                $viewer->assign('STYLES', $this->getHeaderCss($request));
-                $viewer->assign('MODULE', $request->getModule());
-                $viewer->assign('VIEW', $request->get('view'));
-                $viewer->assign('LANGUAGE_STRINGS', array());
-                if ($display) {
-                        $this->preProcessDisplay($request);
-                }
-        }
+		if ($news && $news['result']) {
+			$jsonData = $news['result'];
+			$oldTextLength = vglobal('listview_max_textlength');
+			foreach ($jsonData as $blockData) {
+				if ($blockData['type'] === 'feature') {
+					$blockData['heading'] = "What's new in Vtiger Cloud";
+				} else if ($blockData['type'] === 'news') {
+					$blockData['heading'] = "Latest News";
+					$blockData['image'] = '';
+				}
 
-        function process (Vtiger_Request $request) {
-                $finalJsonData = array();
-                $loginpageinfo = Users_Record_Model::loginPageDetails();
+				vglobal('listview_max_textlength', 80);
+				$blockData['displayTitle'] = textlength_check($blockData['title']);
 
-                $modelInstance = Settings_ExtensionStore_Extension_Model::getInstance();
-                $news = $modelInstance->getNews();
+				vglobal('listview_max_textlength', 200);
+				$blockData['displaySummary'] = textlength_check($blockData['summary']);
+				$finalJsonData[$blockData['type']][] = $blockData;
+			}
+			vglobal('listview_max_textlength', $oldTextLength);
+		}
 
-                if ($news && $news['result']) {
-                        $jsonData = $news['result'];
-                        $oldTextLength = vglobal('listview_max_textlength');
-                        foreach ($jsonData as $blockData) {
-                                if ($blockData['type'] === 'feature') {
-                                        $blockData['heading'] = "What's new in Vtiger Cloud";
-                                } else if ($blockData['type'] === 'news') {
-                                        $blockData['heading'] = "Latest News";
-                                        $blockData['image'] = '';
-                                }
+		$viewer = $this->getViewer($request);
+		$viewer->assign('DATA_COUNT', count($jsonData));
+		$viewer->assign('JSON_DATA', $finalJsonData);
+		$viewer->assign('LOGINPAGE', $loginpageinfo);
+		
+		$viewer->assign('SITE_URL', $site_URL);
+		$mailStatus = $request->get('mailStatus');
+		$error = $request->get('error');
+		$message = '';
+		if ($error) {
+			switch ($error) {
+				case 'login'		:	$message = 'Invalid credentials';						break;
+				case 'fpError'		:	$message = 'Invalid Username or Email address';			break;
+				case 'statusError'	:	$message = 'Outgoing mail server was not configured';	break;
+			}
+		} else if ($mailStatus) {
+			$message = 'Mail has been sent to your inbox, please check your e-mail';
+		}
 
-                                vglobal('listview_max_textlength', 80);
-                                $blockData['displayTitle'] = textlength_check($blockData['title']);
+		$logindetails = array();
 
-                                vglobal('listview_max_textlength', 200);
-                                $blockData['displaySummary'] = textlength_check($blockData['summary']);
-                                $finalJsonData[$blockData['type']][] = $blockData;
-                        }
-                        vglobal('listview_max_textlength', $oldTextLength);
-                }
+		if(isset($_COOKIE['agiliuxuser']) && isset($_COOKIE['agiliuxpass'])) {
+			$logindetails['user'] = $_COOKIE['agiliuxuser'];
+			$logindetails['pass'] = $_COOKIE['agiliuxpass'];
+			$logindetails['keepcheck'] = 1;
+			$viewer->assign('LOGINDETAILS', $logindetails);	
+		}
 
-                $viewer = $this->getViewer($request);
-                $viewer->assign('DATA_COUNT', count($jsonData));
-                $viewer->assign('JSON_DATA', $finalJsonData);
-                $viewer->assign('LOGINPAGE', $loginpageinfo);
-                $mailStatus = $request->get('mailStatus');
-                $error = $request->get('error');
-                $message = '';
-                if ($error) {
-                        switch ($error) {
-                                case 'login'		:	$message = 'Invalid credentials';						break;
-                                case 'fpError'		:	$message = 'Invalid Username or Email address';			break;
-                                case 'statusError'	:	$message = 'Outgoing mail server was not configured';	break;
-                        }
-                } else if ($mailStatus) {
-                        $message = 'Mail has been sent to your inbox, please check your e-mail';
-                }
+		$viewer->assign('ERROR', $error);
+		$viewer->assign('MESSAGE', $message);
+		$viewer->assign('MAIL_STATUS', $mailStatus);
+		$viewer->view('Login.tpl', 'Users');
+	}
 
-                $logindetails = array();
+	function postProcess(Vtiger_Request $request) {
+		$moduleName = $request->getModule();
+		$viewer = $this->getViewer($request);
+		$viewer->view('Footer.tpl', $moduleName);
+	}
 
-                if(isset($_COOKIE['agiliuxuser']) && isset($_COOKIE['agiliuxpass'])) {
-                        $logindetails['user'] = $_COOKIE['agiliuxuser'];
-                        $logindetails['pass'] = $_COOKIE['agiliuxpass'];
-                        $logindetails['keepcheck'] = 1;
-                        $viewer->assign('LOGINDETAILS', $logindetails);	
-                }
+	function getPageTitle(Vtiger_Request $request) {
+		$companyDetails = Vtiger_CompanyDetails_Model::getInstanceById();
+		return $companyDetails->get('organizationname');
+	}
 
-                $viewer->assign('ERROR', $error);
-                $viewer->assign('MESSAGE', $message);
-                $viewer->assign('MAIL_STATUS', $mailStatus);
-                $viewer->view('Login.tpl', 'Users');
-        }
+	function getHeaderScripts(Vtiger_Request $request){
+		$headerScriptInstances = parent::getHeaderScripts($request);
 
-        function postProcess(Vtiger_Request $request) {
-                $moduleName = $request->getModule();
-                $viewer = $this->getViewer($request);
-                $viewer->view('Footer.tpl', $moduleName);
-        }
-
-        function getPageTitle(Vtiger_Request $request) {
-                $companyDetails = Vtiger_CompanyDetails_Model::getInstanceById();
-                return $companyDetails->get('organizationname');
-        }
-
-        function getHeaderScripts(Vtiger_Request $request){
-                $headerScriptInstances = parent::getHeaderScripts($request);
-
-                $jsFileNames = array(
-                                                        '~libraries/jquery/boxslider/jquery.bxslider.min.js',
-                                                        'modules.Vtiger.resources.List',
-                                                        'modules.Vtiger.resources.Popup',
-                                                        );
-                $jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
-                $headerScriptInstances = array_merge($jsScriptInstances,$headerScriptInstances);
-                return $headerScriptInstances;
-        }
+		$jsFileNames = array(
+							'~libraries/jquery/boxslider/jquery.bxslider.min.js',
+							'modules.Vtiger.resources.List',
+							'modules.Vtiger.resources.Popup',
+							);
+		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
+		$headerScriptInstances = array_merge($jsScriptInstances,$headerScriptInstances);
+		return $headerScriptInstances;
+	}
 }
