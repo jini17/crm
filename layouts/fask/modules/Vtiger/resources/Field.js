@@ -208,11 +208,11 @@ Vtiger_Field_Js('Vtiger_Reference_Field_Js',{},{
 		}
 		html += '/>';
 
-		if(reset){
+		/*if(reset){
 			html += '<a href="#" class="clearReferenceSelection"> X </a>';
 		}else {
 			html += '<a href="#" class="clearReferenceSelection hide"> X </a>';
-		}
+		}*/
 		//popup search element
 		html += '<span class="input-group-addon relatedPopup cursorPointer" title="'+referenceModules[0]+'">';
 		html += '<i class="fa fa-search"></i>';

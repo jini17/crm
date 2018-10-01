@@ -19,48 +19,51 @@
 	            </div>
 	            <div class='col-lg-2'>
 	                <strong>{vtranslate('Claim Type', $MODULE_NAME)}</strong>
-	            </div>l
+	            </div>
 	            <div class='col-lg-3'>
 	                <strong>{vtranslate('Allocated', $MODULE_NAME)}</strong>
 	            </div>
-	            <div class='col-lg-4'>
+	            <div class='col-lg-2'>
 	                <strong>{vtranslate('Used', $MODULE_NAME)}</strong>
 	            </div>
-	            <div class='col-lg-4'>
+	            <div class='col-lg-2'>
 	                <strong>{vtranslate('Balance', $MODULE_NAME)}</strong>
 	            </div>
             {else}
-	            <div class='col-lg-4'>
+	            <div class='col-lg-3'>
 	                <strong>{vtranslate('Employee Name', $MODULE_NAME)}</strong>
 	            </div>
-	            <div class='col-lg-4'>
+	            <div class='col-lg-2'>
 	                <strong>{vtranslate('Claim Type', $MODULE_NAME)}</strong>
 	            </div>
-	            <div class='col-lg-4'>
+	            <div class='col-lg-2'>
 	                <strong>{vtranslate('Amount', $MODULE_NAME)}</strong>
 	            </div>
-	            <div class='col-lg-4'>
+	            <div class='col-lg-3'>
 	                <strong>{vtranslate('Date', $MODULE_NAME)}</strong>
+	            </div>
+	            <div class='col-lg-2'>
+	                <strong>{vtranslate('Action', $MODULE_NAME)}</strong>
 	            </div>
 	        {/if}
         </div>
 		{if $VALUE eq 'claimtype'}
 			{foreach item=MODEL from=$MODELS}
 			
-			<div class='row miniListContent'>
+			<div class='row miniListContent' style="padding:5px">
 				<div class='col-lg-3' align="center">
 					{$MODEL['fullname']}
 				</div>
-				<div class='col-lg-3' align="center">
+				<div class='col-lg-2' align="center">
 					{$MODEL['category']}
 				</div>
-				<div class='col-lg-2' align="center">
-					{$MODEL['yearlylimit']}
-				</div>
 				<div class='col-lg-3' align="center">
+					{$MODEL['yearly_limit']}
+				</div>
+				<div class='col-lg-2' align="center">
 					{$MODEL['totalamount']}
 				</div>
-				<div class='col-lg-4'>
+				<div class='col-lg-2'>
 					{$MODEL['balance']}
 				</div>
 			</div>
@@ -68,17 +71,21 @@
 		{else}
 			{foreach item=MODEL from=$MODELS}
 			<div class='row miniListContent' style="padding:5px">
-				<div class='col-lg-4'>
+				<div class='col-lg-3'>
 					{$MODEL['fullname']}
 				</div>
-				<div class='col-lg-4'>
+				<div class='col-lg-2'>
 					{$MODEL['category']}
 				</div>
-				<div class='col-lg-4'>
+				<div class='col-lg-2' align="center">
 					{$MODEL['totalamount']}
 				</div>
-				<div class='col-lg-4'>
+				<div class='col-lg-3'>
 					{$MODEL['transactiondate']}
+				</div>
+				<div class='col-lg-2'>
+					<a class="editLeave cursorPointer editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Claim_Js.Popup_ClaimApprove('{$CREATE_CLAIM_URL}&record={$USER_CLAIM['claimid']}&userId={$USER_CLAIM['applicantid']}&claimstatus={$USER_CLAIM['claim_status']}&manager=true');"></a>&nbsp;&nbsp;
+						
 				</div>
 			</div>
 			{/foreach}

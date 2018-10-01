@@ -1363,7 +1363,7 @@ ul.unstyled {
   white-space: nowrap;
   text-overflow: ellipsis;
   display: inline-block;
-  overflow: hidden;
+
 }
 .listViewContentHeaderValues .customsort {
   opacity: 0.3;

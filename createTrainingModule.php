@@ -33,9 +33,11 @@ include_once 'include/Webservices/Utils.php';
 
 
 	$MODULENAME = 'Training'; //Give your module name
+
 	$PARENT 	= 'Foundation';  //Give Parent name
 	$ENTITYNAME = 'trainingno'; //Give Duplicate check field name
 	$ENTITYLABEL= 'Training No';
+
 
 	$module = Vtiger_Module::getInstance($MODULENAME);
 	
