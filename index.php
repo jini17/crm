@@ -9,7 +9,7 @@
  ************************************************************************************/
 
 
-/*error_reporting(1);
+error_reporting(1);
 		ini_set('display_erros',1);
 		  register_shutdown_function('handleErrors');
 		    function handleErrors() {
@@ -22,7 +22,7 @@
 			  print_r($last_error);
 
 		       }
-		    }*/
+		    }
 
 	    
 //Overrides GetRelatedList : used to get related query

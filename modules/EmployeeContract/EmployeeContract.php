@@ -142,12 +142,26 @@ class EmployeeContract extends Vtiger_CRMEntity {
 	function get_Entitlement_list($id){
 
 		global $log, $adb;
-		//$adb->setDebug(true);
+		$adb->setDebug(true);
 		$log->debug("Entering into get_Entitlement_list($id) method.");
 
-		echo "BABBAABABABABA";
-		return "TOP CHANDRA";
+		$result = $adb->pquery("SELECT job_grade FROM vtiger_employeecontract WHERE employeecontractid=?", array($id));
+		$grade_id = $adb->query_result($result, 0, 'job_grade');
 
+		$reclaim = $adb->pquery("SELECT vtiger_claimtype.claim_type FROM vtiger_claimtype 
+			LEFT JOIN allocation_claimrel ON allocation_claimrel.claim_id=vtiger_claimtype.claimtypeid
+			LEFT JOIN allocation_list ON allocation_list.allocation_id=allocation_claimrel.allocation_id
+			WHERE allocation_claimrel.grade_id=? AND allocation_list.allocation_year=?", array($grade_id, date('Y')));
+
+		$numclaim = $adb->num_rows($reclaim);
+		$output = array();
+
+		for($i=0;$i<$numclaim;$i++){
+			$output[] = $adb->query_result($reclaim, 0, 'claim_type');
+
+		}
+		
+		print_r($output);
 		$log->debug("Exiting from get_Entitlement_list($id) method.");
 	}
 }
