@@ -747,6 +747,7 @@ case when (vtiger_users.user_name not like '') then $userNameSql else vtiger_gro
 
 	public static function getPortalTicketEmailContents($entityData) {
 		require_once 'config.inc.php';
+		
 		global $PORTAL_URL, $HELPDESK_SUPPORT_NAME;
 
 		$moduleName = $entityData->getModuleName();

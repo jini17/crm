@@ -152,7 +152,7 @@
                                                                 <input type="hidden" class="operatorValue" value="{$SEARCH_DETAILS[$LISTVIEW_HEADER->getName()]['comparator']}">
                                                         </th>
                                                         {else}
-                                                            <th>&nbsp;</th>
+                                                            <th><input type="text" disabled class="listSearchContributor inputElement"/></th>
                                                        {/if} 
                                                 {/foreach}
                                         </tr>
