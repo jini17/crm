@@ -10,7 +10,7 @@
       background: #fff;
       min-height: 300px;
       margin-top: 20px;
-      marign-bottom: 20px;
+      margin-bottom: 20px;
     }
     .user-social{
         margin-top: 15px;
@@ -26,7 +26,7 @@
 .fa-facebook {
   background: #3B5998;
   color: white;
-  padding: 11px;
+  padding: 10px;
 }.fa-twitter {
   background: #55ACEE;
   color: white;
