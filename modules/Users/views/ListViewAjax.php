@@ -34,6 +34,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 	}
 
 	public function getUserEducation(Vtiger_Request $request){
+
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$recordId = $request->get('record');

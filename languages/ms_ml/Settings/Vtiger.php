@@ -272,7 +272,6 @@ $languageStrings = array(
 	'LBL_CREATE_PROJECT'=>'Pilih Buat projek',
 	//End here
 
-
 	//added by jitu@9-04-2015 for password left menu in settings
 
 
@@ -301,8 +300,6 @@ $languageStrings = array(
 	'Claim Type'=>'Jenis Tuntutan',
 	'Grade'=>'Gred',
 
-
-
 	'Status'=>'Status',
 	'Select'=>'Pilih',
 	'Allocation Title'=>'Peruntukkan Cuti',
@@ -328,6 +325,9 @@ $languageStrings = array(
 	'LBL_MY_TAGS' => 'Tag',
 	'LBL_TEMPLATES' => 'Templat',
 	'LBL_CONFIGURATION' => 'Konfigurasi',
+
+	//End here	
+
 
 	'LBL_MY_PREFERENCES' => 'Profil Saya',
 	'LBL_SEARCH_FOR_SETTINGS' => 'Cari Tetapan',

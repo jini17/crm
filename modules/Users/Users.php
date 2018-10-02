@@ -98,13 +98,10 @@ class Users extends CRMEntity {
 //			'Email2'=>Array('vtiger_users'=>'email2'),
                         'Admin'=>Array('vtiger_users'=>'is_admin'),
 
-                                                                'Designation'=>Array('vtiger_users'=>'title'),
-                                                                
-                                                                'Facebook'=>Array('vtiger_users'=>'facebook'),
-                                                                'Twitter'=>Array('vtiger_users'=>'twitter'),
-                                                                 'Linkedin'=>Array('vtiger_users'=>'Linkedin'),
-                                                                  'Phone'=>Array('vtiger_users'=>'phone_work'),
-                                                                  'Birthday'=>Array('vtiger_users'=>'birthday')
+                        'Designation'=>Array('vtiger_users'=>'title'),
+                        'Phone'=>Array('vtiger_users'=>'phone_work'),
+                        'Birthday'=>Array('vtiger_users'=>'birthday'),
+                        'LBL_GET_IN_TOUCH'=>Array('vtiger_users'=>'facebook'),
         );
         var $list_fields_name = Array(
                         'Last Name'=>'last_name',
@@ -116,13 +113,10 @@ class Users extends CRMEntity {
 //			'Email2'=>'email2',
                         'Admin'=>'is_admin',
 
-                                                                'Designation'=>'title',
-                                                                
-                                                                'Facebook'=>Array('vtiger_users'=>'facebook'),
-                                                                'Twitter'=>Array('vtiger_users'=>'twitter'),
-                                                                 'Linkedin'=>Array('vtiger_users'=>'Linkedin'),
-                                                                'Phone'=>'phone_work',
-                                                                'Birthday'=>'birthday'  
+                    'Designation'=>'title',
+                    'Phone'=>'phone_work',
+                    'Birthday'=>'birthday',
+                    'LBL_GET_IN_TOUCH'=>'facebook',  
         );
 
         //Default Fields for Email Templates -- Pavani

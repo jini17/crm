@@ -435,6 +435,15 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		return $imageDetails;
 	}
 
+	/**
+	 * Function to get Social Media Links to respective Users
+	 * @return <Array>
+	*/
+
+	public function getSocialMediaLinks($mediafield, $userid){
+		$userobjectModel = self::getInstanceFromPreferenceFile($userid);
+		return $userobjectModel->get($mediafield);
+	}
 
     /**
 	 * Function to get all the accessible users

@@ -1363,7 +1363,7 @@ ul.unstyled {
   white-space: nowrap;
   text-overflow: ellipsis;
   display: inline-block;
-
+  overflow: hidden;
 }
 .listViewContentHeaderValues .customsort {
   opacity: 0.3;
@@ -9213,3 +9213,14 @@ float: right;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-l
     transition: 0.2s ease-in;
     color: #fff;
   }
+  
+  .allprofilebtn {
+    margin-right: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.selectProfileCont {
+    padding: 6px 12px;
+    border-radius: .25rem;
+    font-weight: 100;
+}

@@ -29,6 +29,11 @@ include_once 'include/Webservices/Utils.php';
 	$Vtiger_Utils_Log = true;
 	global $adb;
 	$adb->setDebug(true);
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 77114df57e66d6cc725f1c297eb746cadc36d73d
 
 
 
