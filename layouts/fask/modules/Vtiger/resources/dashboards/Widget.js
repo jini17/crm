@@ -888,4 +888,6 @@ Vtiger_History_Widget_Js('Vtiger_HolidayList_Widget_Js', {}, {});
 Vtiger_History_Widget_Js('Vtiger_TopNoMCEmployees_Widget_Js', {}, {});
 Vtiger_History_Widget_Js('Vtiger_LeaveApproval_Widget_Js', {}, {});
 Vtiger_History_Widget_Js('Vtiger_MyLeaves_Widget_Js', {}, {});
+Vtiger_History_Widget_Js('Vtiger_MyClaim_Widget_Js', {}, {});
+Vtiger_History_Widget_Js('Vtiger_MyTeamClaim_Widget_Js', {}, {});
 Vtiger_OverdueActivities_Widget_Js('Vtiger_CalendarActivities_Widget_Js', {}, {});

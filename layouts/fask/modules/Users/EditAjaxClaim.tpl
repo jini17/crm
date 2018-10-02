@@ -58,7 +58,7 @@
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
 
-                                        <select  class="select2" name="category" id="category" required data-validation-engine="validate[required]" style="width:100%;">
+                                        <select  class="select2" name="category" id="category" required data-validation-engine="validate[required]" style="width:100%;" {if $CLAIMSTATUS eq 'Apply'} disabled {/if} >
                                                 <option value="">Please Select</option>
                                                 {if $CLAIMTYPELIST|count gt 0}
                                                 {foreach key=LEAVE_ID item=CLAIM_MODEL from=$CLAIMTYPELIST name=institutionIterator}		
@@ -89,7 +89,7 @@
                                                                 </label>
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
-                                        <input id="transactiondate" type="text" class="dateField inputElement" type="text" value="{$CLAIM_DETAIL.transactiondate}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($STARTDATEFIELD))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" name="transactiondate" data-date-format="dd-mm-yyyy" data-rule-required = "true" >	
+                                        <input id="transactiondate" type="text" class="dateField inputElement" type="text" value="{$CLAIM_DETAIL.transactiondate}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($STARTDATEFIELD))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" name="transactiondate" data-date-format="dd-mm-yyyy" data-rule-required = "true" {if $CLAIMSTATUS eq 'Apply'} disabled {/if} >	
                                         <span class="add-on">&nbsp;<i class="icon-calendar"></i></span>&nbsp;&nbsp;
                                                         </div>
                                                 </div>
@@ -107,7 +107,7 @@
                                                                 </label>
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
-                                                                 <input id="totalamount" class="fieldValue inputElement" data-trans ="{$CLAIM_MODEL.transaction_limit}"  data-rule-required = "true" type="text" value="{$CLAIM_DETAIL['totalamount']}" name="totalamount">
+                                                                 <input id="totalamount" class="fieldValue inputElement" data-trans ="{$CLAIM_MODEL.transaction_limit}"  data-rule-required = "true" type="text" value="{$CLAIM_DETAIL['totalamount']}" name="totalamount" {if $CLAIMSTATUS eq 'Apply'} disabled {/if}>
                                                         </div>
                                                 </div>
                                         <div class="col-md-12" id="validateamount" style="margin-bottom: 15px;display:none;">
@@ -128,7 +128,7 @@
                                                                 </label>
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
-                                                                 <input id="title" class="fieldValue inputElement" data-rule-required = "true" type="text" value="{$CLAIM_DETAIL['taxinvoice']}" name="taxinvoice">
+                                                                 <input id="title" class="fieldValue inputElement" data-rule-required = "true" type="text" value="{$CLAIM_DETAIL['taxinvoice']}" name="taxinvoice" {if $CLAIMSTATUS eq 'Apply'} disabled {/if}>
                                                         </div>
                                                 </div>
                                         </div>
@@ -160,7 +160,7 @@
                                         <div class="fileUploadBtn btn btn-primary" style="margin-left:15px;" onclick="javascript:Users_Claim_Js.registerFileChange();">
                                             <i class="fa fa-laptop"></i>
                                             <span>{vtranslate('LBL_UPLOAD', $QUALIFIED_MODULE)}</span>
-                                            <input id="attachment" class="fieldValue inputElement" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment">
+                                            <input id="attachment" class="fieldValue inputElement" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment" {if $CLAIMSTATUS eq 'Apply'} disabled {/if}>
                                         </div>&nbsp;<span class="uploadedFileDetails"></span>
                                     </div>
                                 </div>    
@@ -224,7 +224,7 @@
                                                         <label class="control-label" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_REJECTION_REASON', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                                 </div>			
                                                 <div class="controls date col-md-8">
-                                                        <textarea style="width:350px!important" name="rejectionreasontxt" id="rejectionreasontxt" class="span11" maxlength="300">{$CLAIM_DETAIL['resonforreject']}</textarea>
+                                                        <textarea style="width:350px!important" name="rejectionreasontxt" id="rejectionreasontxt" class="span11" maxlength="300" required data-validation-engine="validate[required]">{$CLAIM_DETAIL['resonforreject']}</textarea>
                                                 </div>
                                         </div>	
                                         <div class="col-md-12" style="margin-bottom: 15px;">

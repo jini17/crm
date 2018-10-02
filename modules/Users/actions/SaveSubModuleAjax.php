@@ -575,6 +575,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
 	//include_once 'include/Webservices/Create.php';
 	include_once 'modules/Claim/Claim.php';
+	//$db->setDebug(true);
 	$user = new Users();
 	global $current_user;
 	
@@ -582,7 +583,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 	
 	$current_user_id = $request->get('current_user_id');
 	$claimid= $request->get('record');
-
+	$manager = $request->get('manager'); 
 
 	$category= $request->get('category');
 	$approved_by = $request->get('approved_by');
@@ -615,12 +616,17 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 			$claims->column_fields['claim_status'] 	= $claim_status;	
 			$claims->column_fields['description'] 		= $description;	
 			$claims->column_fields['assigned_user_id'] 		= $current_user_id;
+			$claims->column_fields['employee_id'] 		= $current_user_id;
 			$claims->column_fields['approved_by'] 			= $approved_by;
 			$claims->save('Claim');
 			//$education->mode = '';
 			$return = 0;
+			
+				
 
-
+				if(!empty($_FILES['attachment']['name'])){ 
+					$this->insertIntoAttachment($claims->id, 'Claim');
+				}
 				$msg    = $return=='1'? vtranslate("LBL_CREATE_FAILED","Users"):vtranslate("LBL_CLAIM_CREATE_SUCCESSFULLY","Users"); 	
 		    	$response->setResult($msg);
 			
@@ -632,20 +638,25 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
 		}else{  
 
-
-			if($manager == 'true' || ($current_user->is_admin=='on' && ($request->get('claim_status')=='Approved' || $request->get('claim_status')=='Rejected' )))
+			
+			if(($manager == 'true' || $current_user->is_admin=='on') && ($request->get('claim_status')=='Approved' || $request->get('claim_status')=='Rejected' ))
 			{		
+					
 					//$response = new Vtiger_Response();
 					$claims->mode = 'edit';
 					$claims->id = $claimid;
 					//$return = 0;
 					$db->pquery("UPDATE vtiger_claim SET claim_status= ?, resonforreject= ? WHERE claimid= ?", array($claim_status, $rejectionreasontxt, $claimid));
-					
-					if($request->get('claim_status')=='Approved'){
 
-						$claimbalq="INSERT INTO secondcrm_claim_balance SET user_id=?, claim_id =?, amount=?, claimdate=?";
-						$resultx = $db->pquery($claimbalq,array($request->get('current_user_id'), $category, $totalamount, $transactiondate));
-					}			
+					
+					//fetch employeeid for respective claim 
+						
+					$employeeidq = "SELECT employee_id FROM vtiger_claim WHERE claimid = $claimid";
+					$result = $db->pquery($employeeidq);
+					$employeeid = $db->query_result($result, 'employee_id');
+					$claimbalq="INSERT INTO secondcrm_claim_balance SET user_id=?, claim_id =?, amount=?, claimdate=?";
+					$resultx = $db->pquery($claimbalq,array($employeeid, $category, $totalamount, $transactiondate));
+								
 					
 
 							//$leave = vtws_revise($data, $current_user);
@@ -656,8 +667,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 					$claims->mode = 'edit';
 					$claims->id = $claimid;
 					//$return = 0;
-					$db->pquery("UPDATE vtiger_claim SET category=?, transactiondate=?, totalamount=?, taxinvoice=?, claim_status=?,description=?, approved_by=?, employee_id = ? WHERE claimid=?", array($category, $transactiondate, $totalamount, $taxinvoice,$claim_status, $description, $approved_by,
-						$current_user,$claimid));
+					$db->pquery("UPDATE vtiger_claim SET category=?, transactiondate=?, totalamount=?, taxinvoice=?, claim_status=?,description=?, approved_by=? WHERE claimid=?", array($category, $transactiondate, $totalamount, $taxinvoice,$claim_status, $description, $approved_by, $claimid));
 
 					
 		}
@@ -665,9 +675,6 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		
 
 		}
-
-
-
 	}
 /*** end claim   *///
 

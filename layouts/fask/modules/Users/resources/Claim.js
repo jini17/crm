@@ -225,13 +225,32 @@ Vtiger.Class("Users_Claim_Js", {
  
 					var params = { 
                             submitHandler : function(form){
-                                var form = jQuery('#editClaim');   
-                                thisInstance.saveClaimDetails(form); 
-                            }
+                              var form = jQuery('#editClaim');   
+                              thisInstance.saveClaimDetails(form); 
+                              
+                              var userid = jQuery('#current_user_id').val();
+                              var user = jQuery('#user').val();
+          					  var manager = jQuery('#manager').val();
+                             
+                              var extraData = form.serializeFormData();
+                            
+                              thisInstance._upload(form, extraData).then(function(data) { 
+                                     app.helper.hideProgress(); 
+                                     app.helper.hideModal();
+                                     app.helper.showSuccessNotification({'message': app.vtranslate(data.result.msg, 'Users')});	
+         	                          if(manager == 'true'){
+						               		thisInstance.updateClaimGrid(user);
+						               }else{
+						               		thisInstance.updateClaimGrid(userid);
+						               }
+								                         
+		                         }, function(e) {
+		                            app.helper.showErrorNotification({'message': app.vtranslate(data.result.msg, 'Users')});
+	                         }); 
+                             
+                             }
                         };
-
-         
-                         form.vtValidate(params)  //alert("hsssei");
+                         form.vtValidate(params)
           		} else {
                         aDeferred.reject(err);
                     }
@@ -281,7 +300,7 @@ Vtiger.Class("Users_Claim_Js", {
      },	
 
 
-	 saveClaimDetails : function(form){   
+	/* saveClaimDetails : function(form){   
           var aDeferred = jQuery.Deferred();
           app.helper.hideModal();
           var thisInstance = this;
@@ -314,7 +333,7 @@ Vtiger.Class("Users_Claim_Js", {
           );
            return aDeferred.promise();
      },	
-
+*/
 		//Added by jitu@secondcrm on 17-03-2015 for 
 /*
 	registerSetClaimType : function() {

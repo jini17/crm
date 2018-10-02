@@ -35,7 +35,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	//Created by Safuan
 	public function getClaimType($claimtypeid){
 	$db = PearDatabase::getInstance();
-	$query = "SELECT * FROM vtiger_claimtype WHERE claimtypeid = $claimtypeid";
+	$query = "SELECT vtiger_claimtype.claimtypeid, vtiger_claimtype.claim_type, vtiger_claimtype.claim_no, vtiger_claimtype.claim_code, vtiger_claimtype.color_code, vtiger_claimtype.claim_status, vtiger_claimtype.claim_description, allocation_claimrel.transaction_limit, allocation_claimrel.monthly_limit, allocation_claimrel.yearly_limit FROM vtiger_claimtype INNER JOIN allocation_claimrel ON allocation_claimrel.claim_id = vtiger_claimtype.claimtypeid WHERE claimtypeid = $claimtypeid";
 	
 	$result = $db->pquery($query,array());
 	$rowdetail = array();
@@ -46,9 +46,9 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	$rowdetail['color_code'] = $db->query_result($result, $i, 'color_code');
 	$rowdetail['claim_status'] = $db->query_result($result, $i, 'claim_status');
 	$rowdetail['claim_description'] = $db->query_result($result, $i, 'claim_description');
-	$rowdetail['transactionlimit'] = $db->query_result($result, $i, 'transactionlimit');
-	$rowdetail['monthlylimit'] = $db->query_result($result, $i, 'monthlylimit');
-		 $rowdetail['yearlylimit'] = $db->query_result($result, $i, 'yearlylimit');
+	$rowdetail['transaction_limit'] = $db->query_result($result, $i, 'transaction_limit');
+	$rowdetail['monthly_limit'] = $db->query_result($result, $i, 'monthly_limit');
+	$rowdetail['yearly_limit'] = $db->query_result($result, $i, 'yearly_limit');
 
 	return $rowdetail;
 
@@ -68,6 +68,11 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	$result = $db->pquery($query,array($userid, $year));
 	$myleave=array();
 	for($i=0;$db->num_rows($result)>$i;$i++){ 
+
+		$claimid                        = $db->query_result($result, $i, 'claimid');
+        $attachment                     = self::getAttachment($claimid);
+
+
 		$rowdetail = self::getClaimType($db->query_result($result, $i, 'category'));
 		$claimtype[$i]['claimid'] = $db->query_result($result, $i, 'claimid');
 		$claimtype[$i]['claimno'] = $db->query_result($result, $i, 'claimno');
@@ -85,7 +90,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 		$claimtype[$i]['totalamount'] = $db->query_result($result, $i, 'totalamount'); 
 		$claimtype[$i]['claim_status'] = $db->query_result($result, $i, 'claim_status'); 
 		$claimtype[$i]['taxinvoice'] = $db->query_result($result, $i, 'taxinvoice'); 
-		$claimtype[$i]['attachment'] = $db->query_result($result, $i, 'attachment'); 
+		$claimtype[$i]['attachment'] = $attachment;
 		$claimtype[$i]['approved_by'] = $db->query_result($result, $i, 'approved_by');
 		$rowUsedAmount = self::getClaimTypeUsedAmount($userid, $rowdetail['claimtypeid']);
 		$balance = 0;
@@ -108,6 +113,22 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	return $claimtype;
 
 	}
+
+	
+	  public static function getAttachment($record){
+             $db = PearDatabase::getInstance();
+             //$db->setDebug(true);
+             $result = $db->pquery("SELECT vtiger_attachments.attachmentsid, vtiger_attachments.path, vtiger_attachments.name FROM vtiger_attachments LEFT JOIN vtiger_seattachmentsrel 
+                ON vtiger_seattachmentsrel.attachmentsid=vtiger_attachments.attachmentsid
+                WHERE vtiger_seattachmentsrel.crmid=?", array($record));
+
+             if($db->num_rows($result)>0){
+                return $db->query_result($result, 0, 'attachmentsid');
+             } else {
+                return '';
+             }
+
+        }
 
 	public function getJobGrade($recordId){ 
 
@@ -253,7 +274,8 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 
 	//Created by Safuan for fetching team leaves//
 	public function getMyTeamClaim($userid, $year, $page, $max,$selectedmember,$selectedleavetype){
-	$db = PearDatabase::getInstance();
+
+		$db = PearDatabase::getInstance();
 		
 		$teamreporttoquery = "SELECT id FROM vtiger_users WHERE reports_to_id=$userid";
 		$resulteamreport = $db->pquery($teamreporttoquery,array());
@@ -313,8 +335,11 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 		$myteamleave=array();	
 
 		for($i=0;$db->num_rows($resultgetteamleave)>$i;$i++){
+			$claimid                        = $db->query_result($resultgetteamleave, $i, 'claimid');
+            $attachment                     = self::getAttachment($claimid);
+
 			$rowdetail = self::getClaimType($db->query_result($resultgetteamleave, $i, 'category'));
-			$myteamleave[$i]['claimid'] = $db->query_result($resultgetteamleave, $i, 'claimid');
+			$myteamleave[$i]['claimid'] = $claimid ;
 			$myteamleave[$i]['claimno'] = $db->query_result($resultgetteamleave, $i, 'claimno');
 			$myteamleave[$i]['fullname'] = $db->query_result($resultgetteamleave, $i, 'fullname');
 			$myteamleave[$i]['claimtypeid'] = $rowdetail['claimtypeid'];
@@ -327,10 +352,28 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 			$myteamleave[$i]['totalamount'] = $db->query_result($resultgetteamleave, $i, 'totalamount');
 			$myteamleave[$i]['claim_status'] = $db->query_result($resultgetteamleave, $i, 'claim_status'); 
 			$myteamleave[$i]['taxinvoice'] = $db->query_result($resultgetteamleave, $i, 'taxinvoice'); 
-			$myteamleave[$i]['attachment'] = $db->query_result($resultgetteamleave, $i, 'attachment');
+			$myteamleave[$i]['attachment'] = $attachment;
 			$myteamleave[$i]['applicantid'] = $db->query_result($resultgetteamleave, $i, 'id');  
-			$myteamleave[$i]['approved_by'] = $db->query_result($resultgetteamleave, $i, 'approved_by'); 
-			$myteamleave[$i]['yearly_limit'] = $db->query_result($resultgetteamleave, $i, 'yearly_limit');
+			$myteamleave[$i]['approved_by'] = $db->query_result($resultgetteamleave, $i, 'approved_by');
+			$myteamleave[$i]['transaction_limit'] = $rowdetail['transaction_limit'];
+			$myteamleave[$i]['monthly_limit'] = $rowdetail['monthly_limit']; 
+			$myteamleave[$i]['yearly_limit'] = $rowdetail['yearly_limit'];
+
+			$rowdetailUsed = self::getClaimTypeUsedAmount($userid,$claimtypeid );
+			$balance = 0;
+			if ($myteamleave[$i]['monthly_limit'] > 0) {
+				$balance = $myteamleave[$i]['monthly_limit']- $rowdetailUsed['mused'];
+				if($balance > $myteamleave[$i]['transaction_limit']){
+					$balance = $myteamleave[$i]['transaction_limit'];
+				}
+				
+			} elseif($myteamleave[$i]['yearly_limit'] > 0){
+				$balance = $myteamleave[$i]['yearly_limit']- $rowdetailUsed['yused'];
+				if($balance > $myteamleave[$i]['transaction_limit']){
+					$balance = $myteamleave[$i]['transaction_limit'];
+				}
+			}
+			$myteamleave[$i]['balance'] = $balance;
 
 		}
 	return $myteamleave;
