@@ -1,5 +1,5 @@
 .no-scroll{
-	overflow: hidden !important;
+  overflow: hidden !important;
 }
 
 *:focus,
@@ -24,7 +24,7 @@ body > .mCSB_inside > .mCSB_container {
 }
 #page {
   min-height: 100%;
-  padding-top: 84px;
+  padding-top: 100px;
 }
 .select2-container .select2-choice {
   font-family: 'OpenSans-Regular', sans-serif;
@@ -250,7 +250,7 @@ body {
 }
 
 .search-link .keyword-input::placeholder {
-	color: #fff;
+  color: #fff;
     opacity: 1;
 }
 .search-link .keyword-input:focus {
@@ -1152,6 +1152,7 @@ input[type="password"].inputElement {
   width: 100%;
   height: 30px;
   background-color: #f5f5f5;
+
 }
 .footer p {
   margin: 5px 0;
@@ -1966,7 +1967,7 @@ input[type=checkbox]:checked {
     padding: 4px 10px 0px 6px;
     border: 1px solid #E3EBF3;
     margin: 6px 14px;
-	box-shadow:0 1px 15px 1px rgba(62,57,107,.07);
+  box-shadow:0 1px 15px 1px rgba(62,57,107,.07);
 }
 .detailViewContainer .block h5{color: #1E9FF2;font-weight:bold;}
 .editViewContainer .block {
@@ -7336,9 +7337,9 @@ input:focus:-ms-input-placeholder {
 
 
 .navbar-nav .open .dropdown-menu{
-	position: absolute !important;
-	padding: 3px;
-	background-color: white;
+  position: absolute !important;
+  padding: 3px;
+  background-color: white;
       box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
     -webkit-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
     -moz-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
@@ -7347,78 +7348,78 @@ input:focus:-ms-input-placeholder {
 }
 
 .detailview-table .fieldValue, .detailview-table .fieldLabel{
-	padding: 12px;border-bottom: 1px solid #ddd;
+  padding: 12px;border-bottom: 1px solid #ddd;
 }
 .detailview-table .fieldLabel{background: #fafafa;}
 
 .table .fieldValue, .table .fieldLabel{
-	padding-bottom: 1px; min-height: 0px;
+  padding-bottom: 1px; min-height: 0px;
 }
 
 .detailview-table .row{
-	margin-left: 0px;
-	margin-right: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 
 .related-tabs ul{
-	max-width: 100%;
-	overflow-x: initial;    height: initial;box-shadow: none;
+  max-width: 100%;
+  overflow-x: initial;    height: initial;box-shadow: none;
 }
 
 .related-tabs li{
-	float: none;
-	white-space: nowrap;
-	display: inline;
+  float: none;
+  white-space: nowrap;
+  display: inline;
 }
 
 
 .maxWidth100{
-	max-width: 100%;
+  max-width: 100%;
 }
 
 /*.fieldBlockContainer .inputElement,*/ .editViewContents textarea.textAreaElement{
-	width: 100%
+  width: 100%
 }
 
 @media (max-width: 768px){
-	.modal-overlay-footer{
-		border-left: none;
-	}
-	
-	.app-modules-dropdown{
-		left: 45px !important;
-		top: -1px !important;
-		min-height: 101% !important;
-	}
-	
-	.app-menu .dropdown-compact .app-menu-items-wrapper .app-name, .menu-items-wrapper .app-name{
-		padding-left: 7px;
-	}
-	
-	#helpPageOverlay{
-		max-width: 100%;
-	}
-	
-	.sidebar-essentials{
-		min-width: 100%;
-		margin-top: 0px;
+  .modal-overlay-footer{
+    border-left: none;
+  }
+  
+  .app-modules-dropdown{
+    left: 45px !important;
+    top: -1px !important;
+    min-height: 101% !important;
+  }
+  
+  .app-menu .dropdown-compact .app-menu-items-wrapper .app-name, .menu-items-wrapper .app-name{
+    padding-left: 7px;
+  }
+  
+  #helpPageOverlay{
+    max-width: 100%;
+  }
+  
+  .sidebar-essentials{
+    min-width: 100%;
+    margin-top: 0px;
     margin-bottom: 20px;
-	}
-	
-	.sidebar-essentials .sidebar-menu{
-		padding: 5px;
-		margin: 15px;
-		border: 1px solid #ddd;
-	}
-	
-	.sidebar-essentials .menu-scroller{
-		height: 100% !important;
-	}
-	
-	.detailViewContainer .content-area{
-		margin-top: 0px;
-	}
+  }
+  
+  .sidebar-essentials .sidebar-menu{
+    padding: 5px;
+    margin: 15px;
+    border: 1px solid #ddd;
+  }
+  
+  .sidebar-essentials .menu-scroller{
+    height: 100% !important;
+  }
+  
+  .detailViewContainer .content-area{
+    margin-top: 0px;
+  }
 }
 
 /* -- se7en -- */
@@ -7469,7 +7470,7 @@ color: #fff;background-color: #c14444!important;border: 1px solid indianred!impo
 
 
 #sidebar-essentials{background:#fff;box-shadow:0 2px 4px rgba(0, 0, 0, 0.08)}
-footer{min-width: 100%;margin: 0px;position: fixed;bottom: 0px;z-index:99;}
+footer{min-width: 100%;margin: 0px;position: fixed;bottom: 0px;z-index:99;left: 0;}
 .login-heading{background-color: #039be5;color: #fff;border-top-left-radius: 4px;
   border-top-right-radius: 4px;}
 
@@ -7538,7 +7539,7 @@ width: 120px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;displa
 }
 
 @media only screen and (min-width: 427px) and (max-width: 768px){
-	
+  
 .dashBoardContainer .dashBoardTabContents ul li{width: 320px;}
 .dashBoardContainer .dashBoardTabContents ul li canvas {max-width: 500px;}
 
@@ -7590,7 +7591,7 @@ span.summaryCount{
 #listViewContent.listViewPageDiv.detailViewContainer{    margin-top: 60px;}/* ?????*/
 
 .main-container{
-	margin-top: 0px;
+  margin-top: 0px;
 }
 /*Table list mobile */
 .listview-table-norecords .table-actions, .listview-table .table-actions{    width: 95px!important;}
@@ -7771,8 +7772,8 @@ input[type=checkbox]:checked {border: 1px solid transparent!important;background
   }}
 
 .widget_contents{padding: 10px;margin-bottom: 20px;}
-.stop-hor-scrol{	overflow-x: hidden !important;}
-.stop-ver-scrol{	overflow-y: hidden !important;}
+.stop-hor-scrol{  overflow-x: hidden !important;}
+.stop-ver-scrol{  overflow-y: hidden !important;}
 
 .btn-success:hover{background-color:#3CB878;}
 
@@ -7781,10 +7782,10 @@ input[type=checkbox]:checked {border: 1px solid transparent!important;background
 #listview-table{width: 100%;max-width: 100%;background: #ffffff;}
 
 .floatThead-wrapper, #table-content{
-	overflow-y: hidden !important;} 
+  overflow-y: hidden !important;} 
 
 .table-container{
-	margin-bottom: 60px;}
+  margin-bottom: 60px;}
 
 /* dashboard icons */
 .footerIcons a[name*="dfilter"] {color: #009DD2;}
@@ -7937,7 +7938,7 @@ input[type=checkbox]:checked {border: 1px solid transparent!important;background
 
 .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
 background-image: linear-gradient(to bottom,#4894f9 0,#307fe8 100%);border:1px solid #307fe8;}
-	
+  
 .btn-themecolor,
 .btn-themecolor.disabled {
   background: #2f5597;
@@ -8794,16 +8795,16 @@ html body .bg-white {  background-color: #ffffff; }
 
 #folders_list {margin-top:10px;}
 @media (max-width: 768px){
-	
-	
-	
+  
+  
+  
   #messageBar img{ width: 80%;}
   #messageBar{right:50px;}#messageBar div{left:10%!important;}
   #modules-menu {width: 100%;background: #fff;padding: 20px;border-bottom: 1px solid #ddd;}
   #imageContainer img {width:50%; height:50%;}
 .dashBoardContainer .tab-pane .dashBoardTabContents ul {min-width:100%;}
 
-.detailViewButtoncontainer .btn-toolbar{	width: 100%; }
+.detailViewButtoncontainer .btn-toolbar{  width: 100%; }
 .editViewContents input[type="text"], .editViewContents textarea{ width: 100% !important; }
 
 }
@@ -8878,25 +8879,25 @@ visibility: visible;top: 0;left: 60px; /*position where enlarged image should of
 .alert-success{    background: #06d79c; border: 1px solid #04b381;color:#fff;}
 
 .blurredContent{
-	filter: blur(5px);
+  filter: blur(5px);
 }
 
 .module-action-bar{
-	background-color: #fff;
+  background-color: #fff;
 }
 
 #searchResults-container{
-	width: 100vw;
-	top: 0;
-	bottom: 0;
+  width: 100vw;
+  top: 0;
+  bottom: 0;
 }
 
 .editViewPageDiv .content-area{
-	padding-right: 0px;
+  padding-right: 0px;
 }
 
 .detailview-table .fieldValue, .detailview-table .fieldLabel{
-	min-height: 38px;
+  min-height: 38px;
 }
 .addtionalDashboardTab{
     display: inline-block;
@@ -9126,7 +9127,7 @@ a.buttonpopup:hover {
     cursor: pointer;
 }
 a.forgotPasswordLink.pull-right{
-  padding-right: 22px;
+ 
     color: #2f5597 !important;
     font-size: 15px;
     font-weight: normal;
@@ -9213,3 +9214,205 @@ float: right;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-l
     transition: 0.2s ease-in;
     color: #fff;
   }
+  
+  .allprofilebtn {
+    margin-right: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.selectProfileCont {
+    padding: 6px 12px;
+    border-radius: .25rem;
+    font-weight: 100;
+}
+#listViewContent.listViewPageDiv .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
+    border: none;
+    border-bottom: 2px solid #2f5597;
+  }
+#listViewContent.listViewPageDiv .nav-tabs>li>a{
+  font-size: 15px;
+}
+.alphabetSorting table{
+background-color: #fff;
+
+}
+.alphabetSorting table .alphabetSearch a{
+color: #2f5597 !important;
+}
+
+.alphabetSearch a:active , .alphabetSearch a:focus{
+  background-color: #b2b7c0;
+  color: #666;
+}
+
+/*START-header moving text*/
+.headertext{
+  width: 100%;
+    display: block;
+    height: auto;
+    text-align: right;
+    position: relative;
+    -webkit-animation: mymove 20s infinite ease-in-out; /* Safari 4.0 - 8.0 */
+    animation: mymove 20s infinite ease-in-out;
+}
+@-webkit-keyframes mymove{
+  from {
+    right: 00%;
+  }
+
+  to {
+    /* left: auto; */
+    right: 100%;
+  }
+}
+
+/*END-header moving text*/
+
+/*START-login page*/
+h5#login-page-title {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+    margin-top: 40%;
+}
+div.row.social-wrapper > div.col-sm-3{
+  text-align: center;
+}
+.SocialMedLabel{
+    text-align: center;
+    display: block;
+    margin-bottom: 20px;
+}
+.forgotpassgroup{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    float: left;
+    min-width: 220px;
+    margin-bottom: 10px;
+}
+  .login-sc-icon {
+    color: #2f5597;
+    font-size: 20px;
+     position: relative;
+  /* Adjust these values accordingly */
+  top: 5px;
+  left: 5px;
+}  
+a.socialiconnew{
+  color: #2f5597;
+  font-size: 18px;
+  padding: 5px;
+}
+a.socialiconnew:hover{
+  color: #e51f2a;
+
+}
+
+
+.signin-button{
+  width: 100%;
+}
+row.social-wrapper > .col-sm-3 >a:hover {
+  color:red;
+}
+.loginpagecontainer{
+  display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    padding: 20px;
+    background: #FFF;
+}
+#social #container {
+  text-align: center;
+}
+
+#social #container ul {
+  float: left;
+}
+
+#social #container ul li {
+  float: left;
+  padding-left: 10px;
+  list-style-type: none;
+}
+.form-check{
+  float: right !important;
+    width: 100%;
+    padding-right: 2rem;
+}
+/*responsive login page*/
+@media (min-width:320px)and (max-width:481px) { /* smartphones, iPhone, portrait 480x320 phones */
+  .login-wrapper {
+    width: 80% !important;
+    margin: 0 auto !important;
+    display: block;
+    top: 0;    
+  }
+  .right-bar {
+    margin-top: 20%;
+  }
+  .input-group.p-3{
+  padding: 4px 15px !important;
+  }
+  .form-horizontal .control-group {
+   margin-bottom: 10px !important;
+  }
+  .p-3.align-self-stretch{
+  padding: 5px !important;
+  }
+  .SocialMedLabel {
+  
+    margin-top: 10px !important;
+    margin-bottom: : 10px !important;
+}
+.form-check{
+    padding-right: 1rem;
+}
+span.login-page-title{
+  font-size: 17px ;
+}
+
+}
+@media (min-width:481px) and (max-width:641px) {
+ /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+ .login-wrapper {
+    width: 80% !important;
+    margin: 0 auto !important;
+    display: block;
+    top: 0;    
+  }
+  .right-bar {
+    margin-top: 20%;
+  }
+   }
+@media (min-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+
+/*END-login page*/
+
+/*START-Footer*/
+.agiliuxfooter-login {
+    bottom: 0;
+    color: #707070;
+    height: 2em;
+    left: 0;
+    text-align: center;
+    position: relative;
+    //changed to relative from fixed also works if position is not there: ;
+    font-size: small;
+    width: 100%;
+    background-color: #EFEFEF;
+  }
+  div.agiliuxfooter-login>p {
+    margin-top: 1rem;
+}
+
+/*END-Footer*/
