@@ -17,6 +17,7 @@
 		       $last_error = error_get_last();
 
 		       if (!is_null($last_error)) { // if there has been an error at some point
+
 			  // do something with the error
 			  print_r($last_error);
 
