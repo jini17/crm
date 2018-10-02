@@ -675,7 +675,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                                         AND vtiger_crmentity.deleted=0 
                                         AND (vtiger_leave.leavestatus = 'Apply') ".$query. " ORDER BY fromdate DESC LIMIT 5";
 
-               
+
                 $resultgetteamleave = $db->pquery($querygetteamleave,array());
                 $myteamleave=array();	
 
@@ -734,7 +734,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
         }
 
 
-        public function getHolidayList($monthname=null){
+        public function getHolidayList($monthname=null,$type = ""){
                 $db = PearDatabase::getInstance();
                 //$db->setDebug(true);
                 $filtercond = '';
@@ -746,13 +746,43 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
                 }
 
+                if($type == 'today'){
+                        $filtercond = " AND DATE_FORMAT(CURDATE(),'%m-%d') BETWEEN DATE_FORMAT(vtiger_holiday.start_date,'%m-%d') AND DATE_FORMAT(vtiger_holiday.end_date,'%m-%d')";
+
+                        }elseif($type == 'tomorrow'){
+                        $filtercond = " AND DATE_FORMAT((CURDATE() + INTERVAL 1 DAY),'%m-%d')  between DATE_FORMAT(vtiger_holiday.start_date,'%m-%d') AND DATE_FORMAT(vtiger_holiday.end_date,'%m-%d') ";			
+
+
+                        }elseif($type == 'thisweek'){
+                        $filtercond = " AND yearweek(DATE(vtiger_holiday.start_date), 1) = yearweek(curdate(), 1)  OR  yearweek(DATE(vtiger_holiday.end_date), 1) = yearweek(curdate(), 1)  "; 
+                        /*$query .= "WHERE DATE_ADD( birthday, INTERVAL YEAR( CURDATE() ) - YEAR( birthday ) YEAR )
+                                        BETWEEN CURDATE()
+                                        AND DATE_ADD( CURDATE() , INTERVAL 7
+                                        DAY ))";			
+                        */
+
+                        }elseif($type == 'nextweek'){
+                        $filtercond = "  AND  YEARWEEK(vtiger_holiday.start_date) = YEARWEEK(NOW() + INTERVAL 1 WEEK) OR YEARWEEK(vtiger_holiday.end_date) = YEARWEEK(NOW() + INTERVAL 1 WEEK)";
+                /*	$query .= "WHERE DATE_ADD( birthday, INTERVAL YEAR( CURDATE() + INTERVAL 7 DAY ) - YEAR( birthday ) YEAR )
+                                        BETWEEN CURDATE() + INTERVAL 7 DAY
+                                        AND DATE_ADD( CURDATE() + INTERVAL 7
+                                        DAY , INTERVAL 7 DAY ))";
+                */	
+
+                        }elseif($type == 'thismonth'){
+                        $filtercond = " AND DATE_FORMAT(vtiger_holiday.start_date,'%m') = DATE_FORMAT(CURDATE(),'%m') OR  DATE_FORMAT(vtiger_holiday.end_date,'%m') = DATE_FORMAT(CURDATE(),'%m')";			
+
+
+                        }
+                     
                 $query = "SELECT holiday_name, DAY(start_date) AS startday, MONTH(start_date) AS startmonth, DAY(end_date) AS endday, MONTH(end_date) AS endmonth, YEAR(end_date) AS endyear FROM vtiger_holiday INNER JOIN vtiger_crmentity 
                                         ON vtiger_crmentity.crmid = vtiger_holiday.holidayid 
                                         WHERE vtiger_crmentity.deleted=0 ".$filtercond;
-
-                $result = $db->pquery($query);
+   
+                $result = $db->pquery($query,array());
+ 
                 $rowdetail = array();
-                for($i=0;$db->num_rows($result)>$i;$i++){
+                for($i=0; $i < $db->num_rows($result);$i++){
 
                         $rowdetail[$i]['holiday_name'] = $db->query_result($result, $i, 'holiday_name');
                         $rowdetail[$i]['start_date_day'] = $db->query_result($result, $i, 'startday');
@@ -802,6 +832,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                                         LEFT JOIN vtiger_users ON vtiger_users.id=vtiger_leave.employee_id
                                         WHERE vtiger_crmentity.deleted = 0 AND vtiger_users.deleted = 0 AND vtiger_leave.leavetype=790 ".$deptCond ." 
                                         GROUP BY vtiger_leave.employee_id ORDER BY leavecount ASC LIMIT 4";
+                
                 $result = $db->pquery($query, array());
                 $numrows = $db->num_rows($result);
                 $employeelist = array();
