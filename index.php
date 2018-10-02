@@ -24,22 +24,6 @@
 		       }
 		    }*/
 
-=======
-
-
-			  // do something with the error
-
-//			  // do something with the error
-
-			  print_r($last_error);
-
-		       }
-
-
-		    }*/
-
-
->>>>>>> b346381383d022cf74314e1c4c042287f9afc9d3
 		    
 //Overrides GetRelatedList : used to get related query
 //TODO : Eliminate below hacking solution
