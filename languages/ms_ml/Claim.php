@@ -10,6 +10,7 @@
 //started edit by SITI@SECONDCRM ON 24DEC2014
 
 $languageStrings = Array(
+
 	'Claim Type information' => 'Jenis maklumat tuntutan',
 	'Title' => 'Tajuk',
 	'claim type no' => 'No jenis tuntutan',
