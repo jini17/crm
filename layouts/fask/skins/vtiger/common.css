@@ -24,7 +24,7 @@ body > .mCSB_inside > .mCSB_container {
 }
 #page {
   min-height: 100%;
-  padding-top: 84px;
+  padding-top: 100px;
 }
 .select2-container .select2-choice {
   font-family: 'OpenSans-Regular', sans-serif;
@@ -9224,3 +9224,25 @@ float: right;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-l
     border-radius: .25rem;
     font-weight: 100;
 }
+/*START-header moving text*/
+.headertext{
+  width: 100%;
+    display: block;
+    height: auto;
+    text-align: right;
+    position: relative;
+    -webkit-animation: mymove 20s infinite ease-in-out; /* Safari 4.0 - 8.0 */
+    animation: mymove 20s infinite ease-in-out;
+}
+@-webkit-keyframes mymove{
+  from {
+    right: 00%;
+  }
+
+  to {
+    /* left: auto; */
+    right: 100%;
+  }
+}
+
+/*END-header moving text*/

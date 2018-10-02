@@ -138,4 +138,16 @@ class EmployeeContract extends Vtiger_CRMEntity {
 		}
 		$log->debug("Exiting from insertIntoAttachment($id,$module) method.");
 	}
+
+	function get_Entitlement_list($id){
+
+		global $log, $adb;
+		//$adb->setDebug(true);
+		$log->debug("Entering into get_Entitlement_list($id) method.");
+
+		echo "BABBAABABABABA";
+		return "TOP CHANDRA";
+
+		$log->debug("Exiting from get_Entitlement_list($id) method.");
+	}
 }
