@@ -64,7 +64,7 @@
                                                 {foreach key=LEAVE_ID item=CLAIM_MODEL from=$CLAIMTYPELIST name=institutionIterator}		
                                                  
                                                 <option value="{$CLAIM_MODEL.claimtypeid}" style="float:left;margin-right:5px;background-color:{$CLAIM_MODEL['color_code']};width:30px;height:20px;" data-bal="{$CLAIM_MODEL.balance}" data-transaction="{$CLAIM_MODEL.transaction_limit}" data-monthly="{$CLAIM_MODEL.monthly_limit}" data-yearly="{$CLAIM_MODEL.yearly_limit}" {if $CLAIM_DETAIL.category eq $CLAIM_MODEL.claimtypeid} selected {/if}>
-                                                {$CLAIM_MODEL.claimtype} {if $CLAIM_MODEL.balance ne 0} ({$CLAIM_MODEL.balance}){/if}</option>
+                                                {$CLAIM_MODEL.claimtype} {if $CLAIM_MODEL.balance ne 0} (Max: {$CLAIM_MODEL.balance}){/if}</option>
 
                                                 {/foreach}
 
@@ -149,72 +149,73 @@
                                                 <div class="controls pull-right" id="charNum" style="font-size:12px; margin-right: 10px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                                         </div>
                             </div>	
-                            <div class="form-group" style="margin-bottom: 0px !important;">
+                             <div class="form-group" style="margin-bottom: 0px !important;">
                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                    <div class="col-md-4">
                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                &nbsp;{vtranslate('LBL_INVOICE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
+                                                &nbsp;{vtranslate('LBL_ATTACHMENTS', $QUALIFIED_MODULE)}
                                         </label>
                                     </div>  
-                                    <div class="controls fieldValue col-md-8">
-                                             <input id="attachment" class="fieldValue inputElement" data-rule-required = "true" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment">
+                                    <div class="fileUploadContainer">
+                                        <div class="fileUploadBtn btn btn-primary" style="margin-left:15px;" onclick="javascript:Users_Claim_Js.registerFileChange();">
+                                            <i class="fa fa-laptop"></i>
+                                            <span>{vtranslate('LBL_UPLOAD', $QUALIFIED_MODULE)}</span>
+                                            <input id="attachment" class="fieldValue inputElement" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment">
+                                        </div>&nbsp;<span class="uploadedFileDetails"></span>
                                     </div>
                                 </div>    
-                            </div>    
+                            </div>   
                         <!--start-->
                         {if $MANAGER eq 'true'}
-                                <div class="row-fluid">
-                        <div class="form-group" style="margin-bottom: 0px !important;">
-                                <div class="col-md-12" style="margin-bottom: 15px;">
+                            <div class="row-fluid">
+                                <div class="form-group" style="margin-bottom: 0px !important;">
+                                    <div class="col-md-12" style="margin-bottom: 15px;">
                                         <div class="col-md-4">
-                                                                <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                                        &nbsp;{vtranslate('LBL_APPROVED_BY', $QUALIFIED_MODULE)} <span class="redColor">*</span>
-                                                                </label>
-                                                        </div>
-                                                        <div class="controls fieldValue col-md-8">
-                                        <select class="select2 form-control" name="approved_by" id="replaceuser" data-validation-engine="validate[required]">
-                                                {foreach key=USER_ID item=USER_MODEL from=$USERSLIST name=userIterator}
+                                            <label class="control-label fieldLabel" style="text-align: right;float: right;">
+                                                    &nbsp;{vtranslate('LBL_APPROVED_BY', $QUALIFIED_MODULE)} <span class="redColor">*</span>
+                                            </label>
+                                        </div>
+                                        <div class="controls fieldValue col-md-8">
+                                            <select class="select2 form-control" name="approved_by" id="replaceuser" data-validation-engine="validate[required]">
+                                            {foreach key=USER_ID item=USER_MODEL from=$USERSLIST name=userIterator}
                                                 <option value="{$USER_MODEL.id}" {if $LEAVE_DETAIL.approved_by eq $USER_MODEL.id} selected {/if}>
                                                 {$USER_MODEL.fullname}</option>
                                                 {/foreach}
 
-                                        </select>
-                                                        </div>
-                                                </div>
+                                            </select>
                                         </div>
-                                                </div>
-                                                {/if}
+                                    </div>
+                                </div>
+                             </div>
                                                 <!--end-->
 
-                {if $MANAGER eq 'true'}
-                        <div class="control-group">
-                                <!--approved start-->
-                                <!--<label class="control-label">&nbsp;{vtranslate('LBL_CLAIM_APPROVED', $QUALIFIED_MODULE)}</label>  -->
 
-                                <div class="controls">
-                                        <span style="position:relative;top:4px;padding-left:20px;padding-right:15px;">{vtranslate('LBL_CLAIM_APPROVED', $QUALIFIED_MODULE)}</span>
-                                        <span>
-                                                {if {$CLAIM_DETAIL.claim_status == 'Approved'}}
-                                                <input type="radio" name="claim_status" id="approve" value="Approved" onclick="toggleRejectionReasontxt('hide');" checked="checked" class="static_class">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-8">
+                                 <label for="approve"> 
+                                        {if $CLAIM_DETAIL.claim_status == 'Approved'}
+                                                &nbsp;<input type="radio" name="claim_status" id="approve" class="pull-left" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');" checked="checked">
                                                 {else}
-                                                <input type="radio" name="claim_status" id="approve" value="Approved" onclick="toggleRejectionReasontxt('hide');"  class="static_class">
+                                                &nbsp;<input type="radio" name="claim_status" id="approve"  class="pull-left" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');">
                                                 {/if}
-                                        </span>
-                                        <!--not approved start-->
-                                        <span>
-                                                <span style="position:relative;top:4px;padding-left:20px;padding-right:15px;">{vtranslate('LBL_CLAIM_NOT_APPROVED', $QUALIFIED_MODULE)}</span>
-                                                <span>
-                                                        {if {$CLAIM_DETAIL.claim_status == 'Rejected'}}
-                                                        <input type="radio" name="claim_status" id="notapprove" value="Rejected" onclick="toggleRejectionReasontxt('show');" checked="checked" class="static_class">
+                                                {vtranslate('LBL_CLAIM_APPROVED', $QUALIFIED_MODULE)}
+                                 </label>
+                                 <label for="notapprove" style="margin-left: 31px">
+                                                        {if $CLAIM_DETAIL.claim_status eq 'Rejected'}
+                                                        <input type="radio" name="claim_status"  class="pull-left" id="notapprove" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');" checked="checked">
                                                         {else}
-                                                        <input type="radio" name="claim_status" id="notapprove" value="Rejected" onclick="toggleRejectionReasontxt('show');"  class="static_class">
+                                                        <input type="radio" name="claim_status"  class="pull-left" id="notapprove" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');">
                                                         {/if}
-                                                </span>
-                                        </span>
-                                </div>
-
-                        </div>
-                {/if}
+                                                        &nbsp;{vtranslate('LBL_CLAIM_NOT_APPROVED', $QUALIFIED_MODULE)}
+                                 </label>   
+                            </div>    
+                                <!--approved start-->
+                               
+                        </div><br><br>
+                              
+                        {/if}
 
                                 <div class="hide" id="rejectionreason" >
                                 <div class="form-group" style="margin-bottom: 0px !important;">
@@ -223,14 +224,14 @@
                                                         <label class="control-label" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_REJECTION_REASON', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                                 </div>			
                                                 <div class="controls date col-md-8">
-                                                        <textarea style="width:300px!important" name="rejectionreasontxt" id="rejectionreasontxt" class="span11" maxlength="300">{$CLAIM_DETAIL['resonforreject']}</textarea>
+                                                        <textarea style="width:350px!important" name="rejectionreasontxt" id="rejectionreasontxt" class="span11" maxlength="300">{$CLAIM_DETAIL['resonforreject']}</textarea>
                                                 </div>
                                         </div>	
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
                                                         <label class="control-label" style="text-align: right;float: right;">&nbsp;</label>
                                                 </div>	
-                                                <div class="controls" id="chrNum" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
+                                                <div class="controls pull-right" id="chrNum" style="font-size:12px;margin-right: 10px;">&nbsp;{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                                         </div>
                                 </div>	
                                 </div>	
@@ -273,7 +274,7 @@
         var transaction = jQuery('#category').find(':selected').data('transaction');
         var monthly = jQuery('#category').find(':selected').data('monthly');
         var yearly = jQuery('#category').find(':selected').data('yearly');
-        var useramount = jQuery('#totalamount').val();
+        var useramount = jQuery('#totalamount').val();        
         if( useramount > balance){
            if(transaction != 0.00){
                 app.helper.showErrorNotification({'message': app.vtranslate('JS_TRANSACTION_AMOUNT_EXCEEDED')});
@@ -281,7 +282,11 @@
                 app.helper.showErrorNotification({'message': app.vtranslate('JS_MONTHLY_AMOUNT_EXCEEDED')});
             }else
                 app.helper.showErrorNotification({'message': app.vtranslate('JS_YEARLY_AMOUNT_EXCEEDED')});
+
+            jQuery('#totalamount').val('');
             
+        }else if(useramount <= 0){
+            jQuery('#totalamount').val('');
         }
     });
 
