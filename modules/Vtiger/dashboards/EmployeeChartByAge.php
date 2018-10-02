@@ -20,13 +20,14 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
                 $age_groupList    = getAllPickListValues('age_group');
                 $genderList           = getAllPickListValues('gender');
                 
-                $department     = $request->get('department');
+                $department     = $request->get('type');
                if(empty($department)){
-                   $department = "Human Resource & Management";
+                   $department = "All";
                }
+              
                 $gender              = $request->get('gender');
                 $age_group       = $request->get('age_group');
-                $chartTYPE          = $request->get('type');
+//                $chartTYPE          = $request->get('type');
 //                if($chartTYPE ==''){
 //                    $chartTYPE  = 'pieChart';
 //                }
@@ -50,7 +51,7 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
                 $linkId     = $request->get('linkid');
 
                 $moduleModel  = Home_Module_Model::getInstance($moduleName);
-                $empbydept       = $this->get_employee_by_AGE($db,$where);
+                $empbydept       = $this->get_employee_by_AGE($db,$department);
                 $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 
 
@@ -115,12 +116,19 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
             return $gender;
         }
         
+        /**
+         * Get Age Group Chart Data
+         * 
+         * @param type $db
+         * @param type $where
+         * @return type
+         */
         public function get_employee_by_AGE($db,$where=""){
            
             $data = array();
             $sql = 'SELECT age_group,COUNT(employeesno) as total FROM vtiger_employeecontract   ';
             $sql .= 'WHERE age_group IS NOT NULL ';
-           if(!empty($where)){
+           if($where != 'All'){
                $sql .= "  AND department = '$where' ";
            }
             $sql .= 'group BY age_group';

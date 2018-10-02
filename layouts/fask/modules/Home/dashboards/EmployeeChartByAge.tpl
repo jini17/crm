@@ -16,6 +16,7 @@
             <div class="col-sm-12">
                 <div class="col-lg-12">
                     <select class="widgetFilter " id="department" name="type" >
+                        <option> All</option>
                         {foreach item=DEPT key=k from=$DEPARTMENT}
                             <option value="{$k}"> {$DEPT}</option>
                         {/foreach}    

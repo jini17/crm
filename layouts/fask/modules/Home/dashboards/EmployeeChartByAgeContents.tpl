@@ -44,13 +44,15 @@
          var valuearray = []; 
          for(var i = 0; i < data.labels.length ; i++){
                 var label = data.labels[i];
-                var value = data.values[i];
+                labelarray.push( data.labels[i]);
+                var value = parseInt(data.values[i]);
                 var rowData = [label, value];
                 chartData.push(rowData);
                           
         }	
+       
         console.log(chartData);
-    var plot1 = $.jqplot("widgetChartContainer_{$WIDGET->get('id')}", chartData, {
+    var plot1 = $.jqplot("widgetChartContainer_{$WIDGET->get('id')}", [chartData], {
         gridPadding: {
             top:0, 
             bottom:38,
@@ -64,14 +66,27 @@
         },
         
         legend:{
-            show:true, 
-            placement: 'outside', 
-            rendererOptions: {
-                numberRows: 1
-            }, 
-            location:'s',
-            marginTop: '5px'
+          show: true,
+                location: 'e',
+                renderer: $.jqplot.EnhancedPieLegendRenderer,
+                rendererOptions: {
+                    numberColumns: 1,
+                    toolTips: labelarray
+                }
         }       
     });
 });
 </script>
+{*[
+    [
+        ['a',25],
+        ['b',14],
+        ['c',7]
+    ]
+]
+ Array [ "", "4" ]​
+ 1:  Array [ "Gen X", "3" ]​
+ 2: Array [ "Gen Z", "2" ]​
+ 3: Array [ "Millennials", "9" ]​
+ 4: Array [ "Xennials", "4" ]​
+*}
