@@ -68,6 +68,11 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	$result = $db->pquery($query,array($userid, $year));
 	$myleave=array();
 	for($i=0;$db->num_rows($result)>$i;$i++){ 
+
+		$claimid                        = $db->query_result($result, $i, 'claimid');
+        $attachment                     = self::getAttachment($claimid);
+
+
 		$rowdetail = self::getClaimType($db->query_result($result, $i, 'category'));
 		$claimtype[$i]['claimid'] = $db->query_result($result, $i, 'claimid');
 		$claimtype[$i]['claimno'] = $db->query_result($result, $i, 'claimno');
@@ -85,7 +90,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 		$claimtype[$i]['totalamount'] = $db->query_result($result, $i, 'totalamount'); 
 		$claimtype[$i]['claim_status'] = $db->query_result($result, $i, 'claim_status'); 
 		$claimtype[$i]['taxinvoice'] = $db->query_result($result, $i, 'taxinvoice'); 
-		$claimtype[$i]['attachment'] = $db->query_result($result, $i, 'attachment'); 
+		$claimtype[$i]['attachment'] = $attachment;
 		$claimtype[$i]['approved_by'] = $db->query_result($result, $i, 'approved_by');
 		$rowUsedAmount = self::getClaimTypeUsedAmount($userid, $rowdetail['claimtypeid']);
 		$balance = 0;
@@ -108,6 +113,22 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	return $claimtype;
 
 	}
+
+	
+	  public static function getAttachment($record){
+             $db = PearDatabase::getInstance();
+             //$db->setDebug(true);
+             $result = $db->pquery("SELECT vtiger_attachments.attachmentsid, vtiger_attachments.path, vtiger_attachments.name FROM vtiger_attachments LEFT JOIN vtiger_seattachmentsrel 
+                ON vtiger_seattachmentsrel.attachmentsid=vtiger_attachments.attachmentsid
+                WHERE vtiger_seattachmentsrel.crmid=?", array($record));
+
+             if($db->num_rows($result)>0){
+                return $db->query_result($result, 0, 'attachmentsid');
+             } else {
+                return '';
+             }
+
+        }
 
 	public function getJobGrade($recordId){ 
 
@@ -253,7 +274,8 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 
 	//Created by Safuan for fetching team leaves//
 	public function getMyTeamClaim($userid, $year, $page, $max,$selectedmember,$selectedleavetype){
-	$db = PearDatabase::getInstance();
+
+		$db = PearDatabase::getInstance();
 		
 		$teamreporttoquery = "SELECT id FROM vtiger_users WHERE reports_to_id=$userid";
 		$resulteamreport = $db->pquery($teamreporttoquery,array());
@@ -313,8 +335,11 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 		$myteamleave=array();	
 
 		for($i=0;$db->num_rows($resultgetteamleave)>$i;$i++){
+			$claimid                        = $db->query_result($resultgetteamleave, $i, 'claimid');
+            $attachment                     = self::getAttachment($claimid);
+
 			$rowdetail = self::getClaimType($db->query_result($resultgetteamleave, $i, 'category'));
-			$myteamleave[$i]['claimid'] = $db->query_result($resultgetteamleave, $i, 'claimid');
+			$myteamleave[$i]['claimid'] = $claimid ;
 			$myteamleave[$i]['claimno'] = $db->query_result($resultgetteamleave, $i, 'claimno');
 			$myteamleave[$i]['fullname'] = $db->query_result($resultgetteamleave, $i, 'fullname');
 			$myteamleave[$i]['claimtypeid'] = $rowdetail['claimtypeid'];
@@ -327,7 +352,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 			$myteamleave[$i]['totalamount'] = $db->query_result($resultgetteamleave, $i, 'totalamount');
 			$myteamleave[$i]['claim_status'] = $db->query_result($resultgetteamleave, $i, 'claim_status'); 
 			$myteamleave[$i]['taxinvoice'] = $db->query_result($resultgetteamleave, $i, 'taxinvoice'); 
-			$myteamleave[$i]['attachment'] = $db->query_result($resultgetteamleave, $i, 'attachment');
+			$myteamleave[$i]['attachment'] = $attachment;
 			$myteamleave[$i]['applicantid'] = $db->query_result($resultgetteamleave, $i, 'id');  
 			$myteamleave[$i]['approved_by'] = $db->query_result($resultgetteamleave, $i, 'approved_by');
 			$myteamleave[$i]['transaction_limit'] = $rowdetail['transaction_limit'];

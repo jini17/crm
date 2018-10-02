@@ -26,8 +26,9 @@
             <td class="medium" valign=top>
                 <div class="pull-right actions">
                     <span class="actionImages">
-                        {if $USER_LEAVE['attachment'] neq ''}                    
-                        <a href="{$USER_LEAVE['attachment']}" target="_blank"><i class="fa fa-file-o" title="Documents"></i></a>	
+                        {if $USER_LEAVE['fileid'] neq ''}     
+
+                        <a href="index.php?module=Leave&action=DownloadAttachment&record={$USER_LEAVE['id']}&attachmentid={$USER_LEAVE['fileid']}"><i class="fa fa-file-o" title="Documents"></i></a>    
                         {/if}
 
                         {if $USER_LEAVE['leavestatus'] eq 'New'} 
@@ -122,7 +123,10 @@
                 <span class="actionImages">
 
 
-                   {*<a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>*}			
+                  {if $USER_LEAVE['fileid'] neq ''}     
+
+                    <a href="index.php?module=Leave&action=DownloadAttachment&record={$USER_LEAVE['id']}&attachmentid={$USER_LEAVE['fileid']}"><i class="fa fa-file-o" title="Documents"></i></a>    
+                    {/if}	
 
 
 
@@ -375,7 +379,10 @@
                                     <div class="pull-right actions">
                                         <span class="actionImages">
 
-                                            {*                                                                 <a onclick="javascript:window.open('?module=Leave&relatedModule=Documents&view=Detail&record={$USER_LEAVE['id']}&mode=showRelatedList&tab_label=Documents&popup=Leave','name','scrollbars=1,resizable=0,width=770,height=500,left=0,top=0' );"><i class="fa fa-file-o" title="Documents"></i>  </a>  *}
+                                              {if $USER_LEAVE['fileid'] neq ''}     
+
+                                                <a href="index.php?module=Leave&action=DownloadAttachment&record={$USER_LEAVE['id']}&attachmentid={$USER_LEAVE['fileid']}"><i class="fa fa-file-o" title="Documents"></i></a>    
+                                                {/if}
 
                                             {if $USER_LEAVE['leavestatus'] eq 'Apply'}
                                             <a class="editLeave cursorPointer editAction ti-pencil" data-url='{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true'

@@ -621,8 +621,12 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 			$claims->save('Claim');
 			//$education->mode = '';
 			$return = 0;
+			
+				
 
-
+				if(!empty($_FILES['attachment']['name'])){ 
+					$this->insertIntoAttachment($claims->id, 'Claim');
+				}
 				$msg    = $return=='1'? vtranslate("LBL_CREATE_FAILED","Users"):vtranslate("LBL_CLAIM_CREATE_SUCCESSFULLY","Users"); 	
 		    	$response->setResult($msg);
 			
@@ -643,7 +647,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 					$claims->id = $claimid;
 					//$return = 0;
 					$db->pquery("UPDATE vtiger_claim SET claim_status= ?, resonforreject= ? WHERE claimid= ?", array($claim_status, $rejectionreasontxt, $claimid));
-					
+
 					
 					//fetch employeeid for respective claim 
 						

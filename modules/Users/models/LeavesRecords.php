@@ -344,8 +344,10 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 $myteamleave=array();	
 
                 for($i=0;$db->num_rows($resultgetteamleave)>$i;$i++){
+                        $leaveid                        = $db->query_result($resultgetteamleave, $i, 'leaveid');
+                        $attachment                     = self::getAttachment($leaveid);
                         $rowdetail = self::getLeaveType($db->query_result($resultgetteamleave, $i, 'leavetype'));;	
-                        $myteamleave[$i]['id'] = $db->query_result($resultgetteamleave, $i, 'leaveid');
+                        $myteamleave[$i]['id'] =  $leaveid;
                         $myteamleave[$i]['fullname'] = $db->query_result($resultgetteamleave, $i, 'fullname');
                         $myteamleave[$i]['leave_reason'] = $db->query_result($resultgetteamleave, $i, 'reasonofleave');
                         $myteamleave[$i]['leave_type'] = $rowdetail['leavetype'];
@@ -358,6 +360,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                         $myteamleave[$i]['leavestatus'] = $db->query_result($resultgetteamleave, $i, 'leavestatus');
                         $myteamleave[$i]['applicantid'] = $db->query_result($resultgetteamleave, $i, 'id'); 
                         $myteamleave[$i]['reasonnotapprove'] = $db->query_result($resultgetteamleave, $i, 'reasonnotapprove'); 
+                        $myteamleave[$i]['fileid']          = $attachment; 
                 }
 
         return $myteamleave;
