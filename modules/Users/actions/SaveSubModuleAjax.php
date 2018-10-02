@@ -605,7 +605,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		//New Create leave
 			try {	
 			
-			//print_r($current_user);
+			//print_r($current_user->id);
 			
 			$claims = new Claim();
 			$claims->column_fields['category'] 	= $category;	
@@ -639,7 +639,14 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 					$claims->mode = 'edit';
 					$claims->id = $claimid;
 					//$return = 0;
-					$db->pquery("UPDATE vtiger_claim SET claim_status= ?, resonforreject= ? WHERE claimid= ?", array($claim_status, $rejectionreasontxt, $claimid,));
+					$db->pquery("UPDATE vtiger_claim SET claim_status= ?, resonforreject= ? WHERE claimid= ?", array($claim_status, $rejectionreasontxt, $claimid));
+					
+					if($request->get('claim_status')=='Approved'){
+
+						$claimbalq="INSERT INTO secondcrm_claim_balance SET user_id=?, claim_id =?, amount=?, claimdate=?";
+						$resultx = $db->pquery($claimbalq,array($request->get('current_user_id'), $category, $totalamount, $transactiondate));
+					}			
+					
 
 							//$leave = vtws_revise($data, $current_user);
 					//$msg    = $request->get('claim_status')=='Approved'?vtranslate("LBL_APPROVED","Users"):vtranslate("LBL_NOT_APPROVED","Users");
@@ -649,10 +656,13 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 					$claims->mode = 'edit';
 					$claims->id = $claimid;
 					//$return = 0;
-					$db->pquery("UPDATE vtiger_claim SET category=?, transactiondate=?, totalamount=?, taxinvoice=?, claim_status=?,description=?, approved_by=? WHERE 	claimid=?", array($category, $transactiondate, $totalamount, $taxinvoice,$claim_status, $description, $approved_by, 
-						$claimid));
-		}
+					$db->pquery("UPDATE vtiger_claim SET category=?, transactiondate=?, totalamount=?, taxinvoice=?, claim_status=?,description=?, approved_by=?, employee_id = ? WHERE claimid=?", array($category, $transactiondate, $totalamount, $taxinvoice,$claim_status, $description, $approved_by,
+						$current_user,$claimid));
 
+					
+		}
+		
+		
 
 		}
 
