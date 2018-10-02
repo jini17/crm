@@ -142,7 +142,7 @@
                                     </label>
                                 </div>  
                                 <div class="fileUploadContainer">
-                                    <div class="fileUploadBtn btn btn-primary" onclick="javascript:Users_Leave_Js.registerFileChange();">
+                                    <div class="fileUploadBtn btn btn-primary" style="margin-left:15px;" onclick="javascript:Users_Leave_Js.registerFileChange();">
                                         <i class="fa fa-laptop"></i>
                                         <span>{vtranslate('LBL_UPLOAD', $QUALIFIED_MODULE)}</span>
                                         <input id="attachment" class="fieldValue inputElement" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment">
@@ -154,38 +154,37 @@
                 {if $MANAGER eq 'true'}
                         <div class="control-group">
                                 <!--approved start-->
-                                <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_APPROVED', $QUALIFIED_MODULE)}</label>
-
-                                <div class="controls  col-md-8">
-                                        <span>
-                                                {if {$LEAVE_DETAIL.leavestatus == 'Approved'}}
-                                                <input type="radio" name="approval" id="approve" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');" checked="checked">
-                                                {else}
-                                                <input type="radio" name="approval" id="approve" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');">
-                                                {/if}
-                                        </span>
-                                        <!--not approved start-->
-                                        <span>
-                                                <span style="position:relative;top:4px;padding-left:20px;padding-right:15px;">{vtranslate('LBL_NOT_APPROVED', $QUALIFIED_MODULE)}</span>
-                                                <span>
-                                                        {if {$LEAVE_DETAIL.leavestatus == 'Not Approved'}}
-                                                        <input type="radio" name="approval" id="notapprove" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');" checked="checked">
-                                                        {else}
-                                                        <input type="radio" name="approval" id="notapprove" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');">
-                                                        {/if}
-                                                </span>
-                                        </span>
-                                </div>
-
-                        </div><br><br>
+                                <div class="form-group">
+                                        <div class="col-md-4">
+                                        </div>
+                                            <div class="col-md-8">
+                                                 <label for="approve"> 
+                                                        {if $LEAVE_DETAIL.leavestatus eq 'Approved'}
+                                                                &nbsp;<input type="radio" name="approval" id="approve" class="pull-left" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');" checked="checked">
+                                                                {else}
+                                                                &nbsp;<input type="radio" name="approval" id="approve"  class="pull-left" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');">
+                                                                {/if}
+                                                                {vtranslate('LBL_APPROVED', $QUALIFIED_MODULE)}
+                                                 </label>
+                                                 <label for="notapprove" style="margin-left: 31px">
+                                                                        {if $LEAVE_DETAIL.leavestatus eq 'Not Approved'}
+                                                                        <input type="radio" name="approval"  class="pull-left" id="notapprove" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');" checked="checked">
+                                                                        {else}
+                                                                        <input type="radio" name="approval"  class="pull-left" id="notapprove" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');">
+                                                                        {/if}
+                                                                        &nbsp;{vtranslate('LBL_NOT_APPROVED', $QUALIFIED_MODULE)}
+                                                 </label>   
+                                            </div>
+                                </div><br>
                 {/if}
                         <div class="hide" id="rejectionreason">
                         <div class="control-group">
-                                <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_REJECTION_REASON', $QUALIFIED_MODULE)}</label>		
+                                <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_REJECTION_REASON', $QUALIFIED_MODULE)}<span class="redColor">*</span></label>		
                                 <div class="controls  col-md-8">
-                                        <textarea style="width:300px!important" name="rejectionreasontxt" id="rejectionreasontxt" class="span11" maxlength="300">{$LEAVE_DETAIL.reasonnotapprove}</textarea>
+                                        <textarea style="width:350px!important" name="rejectionreasontxt" id="rejectionreasontxt" class="span11" maxlength="300">{$LEAVE_DETAIL.reasonnotapprove}</textarea>
 
                                 </div>
+                                <div class="controls text-right" id="charNum_reason" style="font-size:12px; margin-right: 13px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                                 <label class="control-label fieldLabel">&nbsp;</label>
                               <!--  <div class="controls inputElement" id="charNum" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>-->
                         </div>

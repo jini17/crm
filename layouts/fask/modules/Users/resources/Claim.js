@@ -648,6 +648,15 @@ Vtiger.Class("Users_Claim_Js", {
 			  	}
 			});
 	},
+
+	registerFileChange: function(){
+          jQuery('#attachment').on('change', function(e){
+               var element = jQuery('#attachment')
+			var uploadFileSizeHolder = jQuery('.uploadedFileDetails');
+               var fileName = e.target.files[0].name;
+			uploadFileSizeHolder.text(fileName);
+		});
+	},
 	
 },{
 	

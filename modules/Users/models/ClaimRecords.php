@@ -58,18 +58,15 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	public function getMyClaim($userid,$year){ 
 	$db = PearDatabase::getInstance();
 	//$db->setDebug(true);
-	$query = "SELECT claimid, claimno, category, transactiondate, vtiger_claim.description, totalamount, claim_status, taxinvoice, attachment,approved_by, allocation_claimrel.transaction_limit, allocation_claimrel.monthly_limit, allocation_claimrel.yearly_limit
+	$query = "SELECT claimid, claimno, category, transactiondate, vtiger_claim.description, totalamount, claim_status, taxinvoice, attachment,approved_by
 			FROM vtiger_claim 
 			INNER JOIN vtiger_crmentity
 			ON vtiger_crmentity.crmid = vtiger_claim.claimid
-			INNER JOIN allocation_claimrel
-			ON allocation_claimrel.claim_id = vtiger_claim.category
 			WHERE vtiger_crmentity.smownerid = ?
 			AND vtiger_crmentity.deleted=0 AND DATE_FORMAT(transactiondate, '%Y') = ? AND vtiger_crmentity.deleted=0 ";
 
 	$result = $db->pquery($query,array($userid, $year));
 	$myleave=array();
-
 	for($i=0;$db->num_rows($result)>$i;$i++){ 
 		$rowdetail = self::getClaimType($db->query_result($result, $i, 'category'));
 		$claimtype[$i]['claimid'] = $db->query_result($result, $i, 'claimid');
@@ -281,27 +278,23 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 		
 		if($selectedleavetype == 'pending'){
 
-			$querygetteamleave="SELECT claimid, CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, vtiger_users.id, claimno, category, transactiondate, vtiger_claim.description, totalamount, claim_status,taxinvoice, attachment,approved_by,resonforreject, allocation_claimrel.yearly_limit
+			$querygetteamleave="SELECT claimid, CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, vtiger_users.id, claimno, category, transactiondate, vtiger_claim.description, totalamount, claim_status,taxinvoice, attachment,approved_by,resonforreject
 					FROM vtiger_claim 
 					INNER JOIN vtiger_crmentity
 					ON vtiger_crmentity.crmid = vtiger_claim.claimid
                    	INNER JOIN vtiger_users
                     ON vtiger_crmentity.smownerid=vtiger_users.id
-                    INNER JOIN allocation_claimrel
-					ON allocation_claimrel.claim_id = vtiger_claim.category
 					WHERE vtiger_crmentity.deleted=0 ".$memcondition." AND DATE_FORMAT(transactiondate, '%Y') = $year 
 					AND (vtiger_claim.claim_status = 'Apply')" .$claimtypecondtion;
 
 		}else{
 			
-			$querygetteamleave="SELECT claimid, CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, vtiger_users.id, claimno, category, transactiondate, vtiger_claim.description, totalamount, claim_status,taxinvoice, attachment,approved_by,resonforreject, allocation_claimrel.yearly_limit
+			$querygetteamleave="SELECT claimid, CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, vtiger_users.id, claimno, category, transactiondate, vtiger_claim.description, totalamount, claim_status,taxinvoice, attachment,approved_by,resonforreject
 					FROM vtiger_claim 
 					INNER JOIN vtiger_crmentity
 					ON vtiger_crmentity.crmid = vtiger_claim.claimid
                    	INNER JOIN vtiger_users
                     ON vtiger_crmentity.smownerid=vtiger_users.id
-                    INNER JOIN allocation_claimrel
-					ON allocation_claimrel.claim_id = vtiger_claim.category
 					WHERE vtiger_crmentity.deleted=0 ".$memcondition." AND DATE_FORMAT(transactiondate, '%Y') = $year 
 					AND (vtiger_claim.claim_status = 'Apply' 
 						OR vtiger_claim.claim_status = 'Approved'
