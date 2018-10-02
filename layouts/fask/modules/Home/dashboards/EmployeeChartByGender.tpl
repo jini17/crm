@@ -16,9 +16,17 @@
             <div class="col-sm-12">
                 <div class="col-lg-12">
                     <select class="widgetFilter " id="department" name="type" >
-                        <option value=""> All</option>
+                        <option value=""> The Company </option>
                         {foreach item=DEPT key=k from=$DEPARTMENT}
                             <option value="{$k}"> {$DEPT}</option>
+                        {/foreach}    
+                       
+                      <!--  <option value="horizontalbarChart"> Horizontalbar Chart</option>-->
+                      </select>
+                        <select class="widgetFilter " id="gender" name="gender" >
+                       <option value=""> Gender </option>
+                        {foreach item=GEN key=k from=$GENDER}
+                            <option value="{$k}"> {$GEN}</option>
                         {/foreach}    
                        
                       <!--  <option value="horizontalbarChart"> Horizontalbar Chart</option>-->
@@ -32,7 +40,7 @@
 
 <div class="dashboardWidgetContent" style="widht:300px;height:300px;">
           
-	{include file="dashboards/EmployeeChartByAgeContents.tpl"|@vtemplate_path:$MODULE_NAME}
+	{include file="dashboards/EmployeeChartByGenderContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 
 <div class="widgeticons dashBoardWidgetFooter">
