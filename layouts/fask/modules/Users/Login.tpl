@@ -45,6 +45,20 @@
    border: 1px solid transparent !important;
    }
 </style>
+<div style="    background-color: #fff;
+   display: block;
+   margin: 0 auto;
+   text-align: center;
+   position: fixed;
+   top: 0;
+   width: 100%;
+   z-index: 100;    left: 0;">
+   {if $LOGINPAGE['logo'] eq '' || !file_exists("test/loginlogo/{$LOGINPAGE['logo']}")}
+   <img src="layouts/v7/lib/ui/src/images/agiliux-logo.png" style="width: 120px;height: auto;margin: 15px 0px;">
+   {else}
+   <img src="test/loginlogo/{$LOGINPAGE['logo']}" class="loginlogo" width="150" height="150" style="width: 120px;height: auto;margin: 15px 0px;">
+   {/if} 
+</div>
 <!--<h1 style="color:red;">Edited</h1>-->
 <div class="container-fluid login-container" style="padding-left: 0px !important;
    padding-right: 0px !important;">
@@ -62,27 +76,10 @@
                   <div class="login-wrapper">
                      <div class="box-wrapper">
                         <div class="login-box-container">
-                           <div class="left-bar d-none d-md-flex">
-                              <!-- <img src="/src/images/login-bg-left.png"> -->
-                              <h5>
-                                 {if $LOGINPAGE['wcmsg'] eq ''}{vtranslate('LBL_WELCOME_SECONDCRM',$MODULE)}{else}{$LOGINPAGE['wcmsg']}{/if}
-                              </h5>
-                              <label class="mt-auto">Connect with us</label>
-                              <!-- Start Social Media Link -->
-                              <div class="social-wrapper">
-                                 <a class="login-sc-icon" target="_blank" href="https://www.facebook.com/secondcrm"><i class="icon-sc icon-sc-facebook2"></i></a>
-                                 <a class="login-sc-icon" target="_blank" href="https://www.linkedin.com/company/soft-solvers-solutions"><i class="icon-sc icon-sc-linkedin"></i></a>
-                                 <a class="login-sc-icon" target="_blank" href="https://twitter.com/secondcrm"><i class="icon-sc icon-sc-twitter"></i></a>
-                                 <a class="login-sc-icon" target="_blank" href="https://plus.google.com/+Secondcrm21909"><i class="icon-sc icon-sc-google-plus"></i></a>
-                              </div>
-                              <!-- End Social Media Link -->
-                           </div>
                            <div class="right-bar">
-                              {if $LOGINPAGE['logo'] eq '' || !file_exists("test/loginlogo/{$LOGINPAGE['logo']}")}
-                              <img src="layouts/v7/lib/ui/src/images/agiliux-logo.png" style="width: 120px;height: auto;margin: 15px 0px;">
-                              {else}
-                              <img src="test/loginlogo/{$LOGINPAGE['logo']}" class="loginlogo" width="150" height="150" style="width: 120px;height: auto;margin: 15px 0px;">
-                              {/if}   
+                              <span class="login-page-title">
+                              {if $LOGINPAGE['wcmsg'] eq ''}{vtranslate('LBL_WELCOME_SECONDCRM',$MODULE)}{else}{$LOGINPAGE['wcmsg']}{/if}
+                              </span>
                               <div class="alert alert-success hide"></div>
                               {if isset($smarty.request.error)}
                               {if $smarty.request.error eq 1}
@@ -150,7 +147,7 @@
                                           </div>
                                        </div>
                                     </div>
-                                    <!-- Start Social Media Link --> 
+                                    
                                     <!--<div class="sc-media">
                                        added by jitu@Demo for different edition -
                                        <div class="col-sm-9" style="display:inline;">
@@ -168,9 +165,43 @@
                                        </div>
                                        end here -->
                               </div>
-                              <div class="form-check my-1 p-0" style="text-align: center;">
+                              <div class="form-check">
                               <a class="forgotPasswordLink pull-right">Forgot password?</a>
-                              </div>    
+                              </div> 
+                            
+                              <div id="social">
+  <div id="container">
+     <label class="SocialMedLabel">Connect with us</label>
+     <ul style="margin: 0;">
+        <li>
+           <a class="socialiconnew" href="https://www.facebook.com/secondcrm" title="facebook" target="_blank">
+              <i class="icon-sc icon-sc-facebook2"></i>
+           </a>
+        </li>
+
+        <li>
+           <a class="socialiconnew" href="https://www.linkedin.com/company/soft-solvers-solutions" title="linkedin" target="_blank">
+              <i class="icon-sc icon-sc-linkedin"></i>
+           </a>
+        </li>
+
+        <li>
+           <a class="socialiconnew" href="https://twitter.com/secondcrm" title="twitter" target="_blank">
+              <i class="icon-sc icon-sc-twitter"></i>
+           </a>
+        </li>
+
+        <li>
+           <a class="socialiconnew" href="https://plus.google.com/+Secondcrm21909" title="instagram" target="_blank">
+              <i class="icon-sc icon-sc-google-plus"></i>
+           </a>
+        </li>
+     </ul>
+  </div>
+</div>
+                                    
+                                       <!-- Start Social Media Link --> 
+                                    </div>   
                               </form>
                            </div>
                            <div id="forgotPasswordDiv" class="hide">

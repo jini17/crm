@@ -107,13 +107,23 @@
 
 /* should override bootstrap */
 .login-wrapper {
-  width: 580px;
+  width: 500px;
     height: auto;
     position: absolute;
-    top:10%;
+  
     left: 0;
     right: 0;
     margin: auto;
+}
+.login-page-title {
+        display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+    font-weight: 500;
+    font-size: 21px;
+    margin-top: 10px;
+    color: #2f5597;
 }
 
 .box-wrapper {
@@ -171,8 +181,10 @@
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  height: 513px;
-  width: 350px;
+  height: auto;
+  width: 100%;
+  padding: 20px;
+  
   background: #FFF; }
   .right-bar input {
     height: 51px; }
@@ -181,7 +193,10 @@
     margin-bottom: 3rem; }
 */
 .btn-login {
-  background: #19D44B;
+  background: #2f5597;
+  color: #FFF; }
+  .btn-login:hover {
+  background: #e51f2a;
   color: #FFF; }
 
 /* Vt css override */
@@ -419,7 +434,7 @@ select.form-control:not([size]):not([multiple]) {
     .aside .icon-wrapper-right {
       display: none !important; } }
 .login-sc-icon{
-  color:#fff;
+  color:#2f5597;
 }
 div.log-footer-content > label{
   color:#fff !important;
@@ -429,6 +444,9 @@ label#log-checkbox.custom-control-label::before , label#log-checkbox.custom-cont
 
 }
 label#login-checkbox.custom-control-label{
-  font-weight: normal !important;
+    padding-right: 22px;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 20px;
 }
 

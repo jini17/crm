@@ -51,11 +51,11 @@
     <div class="clearfix" style="height: 50px;"></div>
 
 <!-- Alphabets -->
-<div class="col-lg-9">
+<div class="col-lg-10">
    {include file="ListViewAlphabet.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
 </div>
 <!--  Filter -->
-<div class="col-lg-3">
+<div class="col-lg-2">
 
     <select class="select2 grid-filter form-control pull-right">
         <option value=""> {vtranslate('Filter by',$MODULE)}</option>

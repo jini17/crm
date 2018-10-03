@@ -8,7 +8,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
+class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
 
         public function process(Vtiger_Request $request) {
                 $db = PearDatabase::getInstance();
@@ -19,21 +19,12 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
                 $departmentList  = getAllPickListValues('department');
                 $age_groupList    = getAllPickListValues('age_group');
                 $genderList           = getAllPickListValues('gender');
-                
-                $department     = $request->get('type');
-               if(empty($department)){
-                   $department = NULL;
-               }
               
-               echo $department;
+                    $department     = $request->get('type');
                 $gender              = $request->get('gender');
                 $age_group       = $request->get('age_group');
-//                $chartTYPE          = $request->get('type');
-//                if($chartTYPE ==''){
-//                    $chartTYPE  = 'pieChart';
-//                }
-                $dept                  = $this->department($deparment);
-              
+
+                 $dept                  = $this->department($department);
                 $agegroup         = $this->age_group($age_group);
                 $Gender             = $this->gender($gender);
                 
@@ -52,7 +43,7 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
                 $linkId     = $request->get('linkid');
 
                 $moduleModel  = Home_Module_Model::getInstance($moduleName);
-                $empbydept       = $this->get_employee_by_AGE($db,$department);
+                $empbydept       = $this->get_employee_by_gender($db,$dept,$Gender);
                 $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 
            
@@ -65,9 +56,9 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
                 $content = $request->get('content');
             
                 if(!empty($content)) {
-                        $viewer->view('dashboards/EmployeeChartByAgeContents.tpl', $moduleName);
+                        $viewer->view('dashboards/EmployeeChartByGenderContents.tpl', $moduleName);
                 } else {
-                        $viewer->view('dashboards/EmployeeChartByAge.tpl', $moduleName);
+                        $viewer->view('dashboards/EmployeeChartByGender.tpl', $moduleName);
                 }
         }
 
@@ -88,11 +79,11 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
  * @param type $deparment
  * @return type
  */
-        function department($deparment){
-            if($department=='' || $department==null){
-                                                $department = 'Technical';
+        function department($department){
+            if($department=='' || $department==null || empty($department)){
+                $department = null;
             }
-                return $deparment;
+                return $department;
         }
         /**
          * 
@@ -125,22 +116,26 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
          * @param type $where
          * @return type
          */
-        public function get_employee_by_AGE($db,$where=NULL){
+        public function get_employee_by_gender($db,$deparment=null,$gender=null){
            
             $data = array();
-            $sql = 'SELECT age_group,COUNT(employeesno) as total FROM vtiger_employeecontract   ';
-            $sql .= 'WHERE department IS NOT NULL AND age_group IS NOT NULL ';
-           if($where != NULL){
-               $sql .= "  AND department = '$where' ";
+            $sql = 'SELECT gender,COUNT(employeeno) as total FROM vtiger_users   ';
+            $sql .= "WHERE gender IS NOT NULL";
+           
+           if($deparment != null){
+               $sql .= "  AND department = '$deparment' ";
            }
-            $sql .= 'group BY age_group';
-   
+            if($gender != null){
+               $sql .= "  AND gender = '$gender' ";
+           }
+            $sql .= ' group BY gender';
+
            $query = $db->pquery($sql,array());
            $num_rows = $db->num_rows($query);
               
            if($num_rows > 0){
                 for($i = 0; $i < $num_rows; $i++){
-                     $dept= $db->query_result($query,$i,'age_group');
+                     $dept= $db->query_result($query,$i,'gender');
                      $counts= $db->query_result($query,$i,'total');
                      $data['labels'][] =$dept;
                      $data['values'][] =$counts;
