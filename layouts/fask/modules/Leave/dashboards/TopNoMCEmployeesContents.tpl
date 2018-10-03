@@ -27,7 +27,6 @@
               <strong>{vtranslate('LBL_MC_TAKEN', $MODULE_NAME)}</strong>
             </div>
           </div>
-      		<hr>
       		{foreach item=MODEL from=$MODELS}
       			<div class='row miniListContent' style="padding:5px;margin-right:-1px;margin-left:-1px;">
       				<div class='col-lg-5'>

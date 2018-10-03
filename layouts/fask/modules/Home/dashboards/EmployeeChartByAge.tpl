@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="col-lg-12">
-                    <select class="widgetFilter " id="department" name="type" >
+                    <select class="widgetFilter select2" id="department" name="type" style="width:100%;">
                         <option value=""> All</option>
                         {foreach item=DEPT key=k from=$DEPARTMENT}
                             <option value="{$k}"> {$DEPT}</option>
@@ -30,7 +30,7 @@
   </div>
 </div>
 
-<div class="dashboardWidgetContent" style="widht:300px;height:300px;">
+<div class="dashboardWidgetContent" style="widht:400px;height:400px;">
           
 	{include file="dashboards/EmployeeChartByAgeContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>

@@ -141,8 +141,14 @@ class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
                      $data['values'][] =$counts;
                 }
            }
+           else{
+               $data['labels'][] = [0,0];
+               $data['values'][] = [0,0];
+           }
+           
            return $data;
         }
         
+
        
 }

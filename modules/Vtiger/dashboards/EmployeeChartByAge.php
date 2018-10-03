@@ -12,7 +12,7 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
 
         public function process(Vtiger_Request $request) {
                 $db = PearDatabase::getInstance();
-               // $db->setDebug(true);
+              // $db->setDebug(true);
                 $currentUser        = Users_Record_Model::getCurrentUserModel();
                 $viewer                   = $this->getViewer($request);
                 $moduleName      = $request->getModule();
@@ -25,7 +25,7 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
                    $department = NULL;
                }
               
-               echo $department;
+//               echo $department;
                 $gender              = $request->get('gender');
                 $age_group       = $request->get('age_group');
 //                $chartTYPE          = $request->get('type');
@@ -128,24 +128,47 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
         public function get_employee_by_AGE($db,$where=NULL){
            
             $data = array();
-            $sql = 'SELECT age_group,COUNT(employeesno) as total FROM vtiger_employeecontract   ';
-            $sql .= 'WHERE department IS NOT NULL AND age_group IS NOT NULL ';
+            $sql = "SELECT count(employeeno) as total,DATE_FORMAT(birthday,'%Y') as age_range from vtiger_users WHERE DATE_FORMAT(birthday,'%Y')  != '0000' ";
+           
            if($where != NULL){
                $sql .= "  AND department = '$where' ";
            }
-            $sql .= 'group BY age_group';
+            $sql .= " GROUP BY DATE_FORMAT(birthday,'%Y')";
    
            $query = $db->pquery($sql,array());
-           $num_rows = $db->num_rows($query);
+            $num_rows = $db->num_rows($query);
               
            if($num_rows > 0){
                 for($i = 0; $i < $num_rows; $i++){
-                     $dept= $db->query_result($query,$i,'age_group');
+                     $age_year= $db->query_result($query,$i,'age_range');
                      $counts= $db->query_result($query,$i,'total');
-                     $data['labels'][] =$dept;
-                     $data['values'][] =$counts;
+                     if($age_year >= '1946' && $age_year <= '1954'){
+                           $data['labels'][] ="Baby Boomers (1946-1954)";
+                           $data['values'][] =$counts;
+                     }
+                     elseif($age_year >= '1955' && $age_year <= '1965'){
+                          $data['labels'][] ="Boomers (1955-1965)";
+                           $data['values'][] =$counts;
+                     }
+                     elseif($age_year >= '1966' && $age_year <= '1976'){
+                          $data['labels'][] ="Generation X (1966-1976)";
+                           $data['values'][] =$counts;
+                     }
+                     elseif($age_year >= '1977' && $age_year <= '1994'){
+                          $data['labels'][] ="Generation Y (1977-1994)";
+                           $data['values'][] =$counts;
+                     }
+                     else{
+                          $data['labels'][] = [0,0];
+                          $data['values'][] = [0,0];
+                     }
                 }
            }
+             else{
+               $data['labels'][] = [0,0];
+               $data['values'][] = [0,0];
+           }
+           
            return $data;
         }
         
