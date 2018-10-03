@@ -226,7 +226,7 @@ Vtiger.Class("Users_Claim_Js", {
 					var params = { 
                             submitHandler : function(form){
                               var form = jQuery('#editClaim');   
-                              thisInstance.saveClaimDetails(form); 
+                              //thisInstance.saveClaimDetails(form); 
                               
                               var userid = jQuery('#current_user_id').val();
                               var user = jQuery('#user').val();
@@ -257,6 +257,34 @@ Vtiger.Class("Users_Claim_Js", {
 	     	});
 	     return aDeferred.promise();	
 	},
+
+	_upload : function(form,extraData) {
+  
+    	var aDeferred = jQuery.Deferred();
+		 var file_data = jQuery('#attachment').prop('files')[0];   
+           var formData = new FormData();                    
+		     
+		     formData.append('attachment', file_data);                            
+	          if(typeof extraData === 'object') {
+			     jQuery.each(extraData, function(name,value) {
+				     formData.append(name,value);
+			     });
+		     }
+		     
+		    jQuery.ajax({
+		        url: 'index.php?module=Users&parent=Settings&action=SaveSubModuleAjax&mode=saveLeave', 
+		        cache: false,
+		        contentType: false,
+		        processData: false,
+		        data: formData,                         
+		        type: 'post',
+		        success: function(res){
+		            aDeferred.resolve(res);
+		       }
+		});
+		return aDeferred.promise();
+	},
+
 
 	
  //use error notification
@@ -300,7 +328,7 @@ Vtiger.Class("Users_Claim_Js", {
      },	
 
 
-	/* saveClaimDetails : function(form){   
+	 /*saveClaimDetails : function(form){   
           var aDeferred = jQuery.Deferred();
           app.helper.hideModal();
           var thisInstance = this;
@@ -332,8 +360,8 @@ Vtiger.Class("Users_Claim_Js", {
              }
           );
            return aDeferred.promise();
-     },	
-*/
+     },	*/
+
 		//Added by jitu@secondcrm on 17-03-2015 for 
 /*
 	registerSetClaimType : function() {
