@@ -23,11 +23,10 @@
            
               <div class="col-lg-12">
                   <select class="select2 col-lg-10 widgetFilter" id="historyType" name="type">
-                    <option value="today" >{vtranslate('LBL_TODAY',$MODULE_NAME)}</option>
-                    <option value="tomorrow" >{vtranslate('LBL_TOMORROW',$MODULE_NAME)}</option>
                     <option value="thisweek" >{vtranslate('LBL_THIS_WEEK',$MODULE_NAME)}</option>
                     <option value="nextweek" >{vtranslate('LBL_NEXT_WEEK',$MODULE_NAME)}</option>   
                     <option value="thismonth" selected>{vtranslate('LBL_THIS_MONTH',$MODULE_NAME)}</option> 
+                    <option value="thisyear" selected>{vtranslate('LBL_THIS_YEAR',$MODULE_NAME)}</option> 
                  </select>
               </div>
           </div>
