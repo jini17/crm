@@ -28,7 +28,7 @@
                 </div>
              {if $MODELS['balance'] gt 0}
                <div class="col-lg-4 pull-right"><input type="button" class="btn btn-primary" style="padding:5px;" onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USERID}'" name="applyclaim" value="{vtranslate('LBL_APPLY', $MODULE_NAME)}"></div>
-             {/if}
+             {/if}  
             <div class='clearfix'></div>
       </div>    
    </div>

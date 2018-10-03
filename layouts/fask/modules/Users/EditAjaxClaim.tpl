@@ -213,7 +213,7 @@
                             </div>    
                                 <!--approved start-->
                                
-                        </div><br><br>
+                        </div>
                               
                         {/if}
 
@@ -231,7 +231,7 @@
                                                 <div class="col-md-4">
                                                         <label class="control-label" style="text-align: right;float: right;">&nbsp;</label>
                                                 </div>	
-                                                <div class="controls pull-right" id="chrNum" style="font-size:12px;margin-right: 10px;">&nbsp;{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
+                                                <div class="controls pull-right" id="chrNum" style="font-size:12px;margin-right: 13px;">&nbsp;{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                                         </div>
                                 </div>	
                                 </div>	

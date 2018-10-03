@@ -30,9 +30,9 @@
 						<td class="medium" valign=top>{$USER_CLAIM['totalamount']}</td>
 						<td class="medium" valign=top>
 
-							<div class="pull-left actions">
+							<div class="pull-right actions">
 								<span class="actionImages">
-								  {if $USER_CLAIM['fileid'] neq ''}     
+								  {if $USER_CLAIM['attachment'] neq ''}     
 
 			                        <a href="index.php?module=Claim&action=DownloadAttachment&record={$USER_CLAIM['claimid']}&attachmentid={$USER_CLAIM['fileid']}"><i class="fa fa-file-o" title="Documents"></i></a>    
 			                        {/if}
@@ -44,7 +44,7 @@
 								{if $USER_CLAIM['claim_status'] eq 'Apply'}
 								<a class="editLeave cursorPointer editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Claim_Js.editClaim('index.php{$CREATE_CLAIM_URL}&record={$USER_CLAIM['claimid']}&userId={$USERID}&claim_status={$USER_CLAIM['claim_status']}&manager=false');"></a>{/if}&nbsp;&nbsp;
 								{/if} <input type="hidden" name="manager" id="manager" value="false" />
-								{if $USER_CLAIM['claim_status'] eq 'Rejected' OR $USER_CLAIM['claim_status'] eq 'Apply' OR $USER_CLAIM['claim_status'] eq 'Approved'}
+								{if $USER_CLAIM['claim_status'] eq 'Apply'}
 								<a class="deleteLeave cursorPointer" onclick="Users_Claim_Js.deleteClaim('index.php?module=Claim&action=Delete&record={$USER_CLAIM['claimid']}');"><i class="fa fa-trash-o" title="Delete"></i></a>
 								{/if} 
 
@@ -145,9 +145,9 @@
 			<td class="medium" valign=top>{$USER_CLAIM['claim_status']}</td>
 
 			<td class="medium" valign=top>
-				<div class="pull-left actions">
+				<div class="pull-right actions">
 					<span class="actionImages">
-					  {if $USER_CLAIM['fileid'] neq ''}     
+					  {if $USER_CLAIM['attachment'] neq ''}     
 	                        <a href="index.php?module=Claim&action=DownloadAttachment&record={$USER_CLAIM['claimid']}&attachmentid={$USER_CLAIM['fileid']}"><i class="fa fa-file-o" title="Documents"></i></a>    
                        {/if}
 
@@ -156,7 +156,7 @@
 						{if $USER_CLAIM['claim_status'] eq 'Apply'}
 						<a class="editLeave cursorPointer editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Claim_Js.Popup_ClaimApprove('{$CREATE_CLAIM_URL}&record={$USER_CLAIM['claimid']}&userId={$USER_CLAIM['applicantid']}&claimstatus={$USER_CLAIM['claim_status']}&manager=true');"></a>&nbsp;&nbsp;
 						{/if}
-						{if $USER_CLAIM['claim_status'] eq 'Apply' OR $USER_CLAIM['claim_status'] eq 'Approved'}
+						{if $USER_CLAIM['claim_status'] eq 'Apply'}
 						<a class="cancelLeave cursorPointer" onclick="Users_Claim_Js.cancelClaim('?module=Users&action=DeleteSubModuleAjax&mode=cancelClaim&record={$USER_CLAIM['claimid']}&claim_type={$USER_CLAIM['claimtypeid']}&user_id={$USER_CLAIM['applicantid']}&claimstatus={$USER_CLAIM['claim_status']}','T');"><i title="{vtranslate('LBL_CANCEL', $MODULE)}" class="fa fa-times-circle alignBottom"></i></a>				
 						{/if}
 					</span>
@@ -242,11 +242,11 @@
 									<td class="medium" valign=top>{$USER_CLAIM['transactiondate']}</td>
 									<td class="medium" valign=top>{$USER_CLAIM['totalamount']}</td>
 									<td class="medium" valign=top>
-										<div class="pull-left actions">
+										<div class="pull-right actions">
 											<span class="actionImages">
 
 
-												  {if $USER_CLAIM['fileid'] neq ''}     
+												  {if $USER_CLAIM['attachment'] neq ''}     
 	                        						<a href="index.php?module=Claim&action=DownloadAttachment&record={$USER_CLAIM['claimid']}&attachmentid={$USER_CLAIM['fileid']}"><i class="fa fa-file-o" title="Documents"></i></a>    
                        							  {/if}
 		
@@ -259,7 +259,7 @@
 												<a class="deleteLeave cursorPointer" onclick="Users_Claim_Js.deleteClaim('index.php?module=Claim&action=Delete&record={$USER_CLAIM['claimid']}');"><i class="fa fa-trash-o" title="Delete"></i></a>&nbsp;&nbsp;
 												{/if} 
 
-												{if $USER_CLAIM['claim_status'] eq 'Apply' 	}
+												{if $USER_CLAIM['claim_status'] eq 'Apply' }
 												<a class="cancelLeave cursorPointer" onclick="Users_Claim_Js.cancelClaim('?module=Users&action=DeleteSubModuleAjax&mode=cancelClaim&record={$USER_CLAIM['claimid']}&claim_type={$USER_CLAIM['claimtypeid']}&user_id={$USER_CLAIM['applicantid']}&claimstatus={$USER_CLAIM['claim_status']}','T');"><i title="{vtranslate('LBL_CANCEL', $MODULE)}" class="fa fa-times-circle alignBottom"></i></a>				
 												{/if}
 
@@ -393,10 +393,10 @@
 			<td class="medium" valign=top>{$USER_CLAIM['claim_status']}</td>
 
 			<td class="medium" valign=top>
-				<div class="pull-left actions">
+				<div class="pull-right actions">
 					<span class="actionImages">
 
-						  {if $USER_CLAIM['fileid'] neq ''}     
+						  {if $USER_CLAIM['attachment'] neq ''}     
 	                        <a href="index.php?module=Claim&action=DownloadAttachment&record={$USER_CLAIM['claimid']}&attachmentid={$USER_CLAIM['fileid']}"><i class="fa fa-file-o" title="Documents"></i></a>    
                           {/if}
 
