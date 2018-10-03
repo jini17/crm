@@ -752,12 +752,12 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 if($type == 'today'){
                         $filtercond = " AND DATE_FORMAT(CURDATE(),'%m-%d') BETWEEN DATE_FORMAT(vtiger_holiday.start_date,'%m-%d') AND DATE_FORMAT(vtiger_holiday.end_date,'%m-%d')";
 
-                        }elseif($type == 'tomorrow'){
-                        $filtercond = " AND DATE_FORMAT((CURDATE() + INTERVAL 1 DAY),'%m-%d')  between DATE_FORMAT(vtiger_holiday.start_date,'%m-%d') AND DATE_FORMAT(vtiger_holiday.end_date,'%m-%d') ";			
+                        }elseif($type == 'thisyear'){
+                        $filtercond = " AND DATE_FORMAT(CURDATE() ,'%m')  between DATE_FORMAT(vtiger_holiday.start_date,'%m') AND DATE_FORMAT(vtiger_holiday.end_date,'%m') ";			
 
 
                         }elseif($type == 'thisweek'){
-                        $filtercond = " AND yearweek(DATE(vtiger_holiday.start_date), 1) = yearweek(curdate(), 1)  OR  yearweek(DATE(vtiger_holiday.end_date), 1) = yearweek(curdate(), 1)  "; 
+                        $filtercond = " AND   (YEARWEEK(vtiger_holiday.start_date, 1) = YEARWEEK(CURDATE(), 1)  OR YEARWEEK(vtiger_holiday.end_date, 1) = YEARWEEK(CURDATE(), 1) )"; 
                         /*$query .= "WHERE DATE_ADD( birthday, INTERVAL YEAR( CURDATE() ) - YEAR( birthday ) YEAR )
                                         BETWEEN CURDATE()
                                         AND DATE_ADD( CURDATE() , INTERVAL 7
@@ -765,7 +765,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                         */
 
                         }elseif($type == 'nextweek'){
-                        $filtercond = "  AND  YEARWEEK(vtiger_holiday.start_date) = YEARWEEK(NOW() + INTERVAL 1 WEEK) OR YEARWEEK(vtiger_holiday.end_date) = YEARWEEK(NOW() + INTERVAL 1 WEEK)";
+                        $filtercond = "  AND  (  DATE_FORMAT(CURDATE() + INTERVAL 7 DAY,'%Y-%m-%d') >= DATE_FORMAT(start_date,'%Y-%m-%d') OR DATE_FORMAT(CURDATE() + INTERVAL 14 DAY,'%Y-%m-%d') <= DATE_FORMAT(start_date,'%Y-%m-%d') OR ";
                 /*	$query .= "WHERE DATE_ADD( birthday, INTERVAL YEAR( CURDATE() + INTERVAL 7 DAY ) - YEAR( birthday ) YEAR )
                                         BETWEEN CURDATE() + INTERVAL 7 DAY
                                         AND DATE_ADD( CURDATE() + INTERVAL 7
