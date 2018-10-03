@@ -145,8 +145,8 @@
                                     <div class="fileUploadBtn btn btn-primary" style="margin-left:15px;" onclick="javascript:Users_Leave_Js.registerFileChange();">
                                         <i class="fa fa-laptop"></i>
                                         <span>{vtranslate('LBL_UPLOAD', $QUALIFIED_MODULE)}</span>
-                                        <input id="attachment" class="fieldValue inputElement" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment">
-                                    </div>&nbsp;<span class="uploadedFileDetails"></span>
+                                        <input id="attachment" class="fieldValue inputElement" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment" {if $LEAVESTATUS eq 'Apply'} disabled {/if}>
+                                    </div>&nbsp;<span class="uploadedFileDetails">{$CLAIM_DETAIL['attachment']}</span>
                                 </div>
                                 
                             </div>    
