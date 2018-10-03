@@ -94,7 +94,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 		$claimtype[$i]['approved_by'] = $db->query_result($result, $i, 'approved_by');
 		$rowUsedAmount = self::getClaimTypeUsedAmount($userid, $rowdetail['claimtypeid']);
 		$balance = 0;
-			if ($claimtype[$i]['monthlylimit'] > 0) {
+			if ($claimtype[$i]['monthly_limit'] > 0) {
 				$balance = $claimtype[$i]['monthly_limit']- $rowUsedAmount['mused'];
 				if($balance > $claimtype[$i]['transaction_limit']){
 					$balance = $claimtype[$i]['transaction_limit'];
