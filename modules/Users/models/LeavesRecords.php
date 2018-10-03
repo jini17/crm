@@ -765,7 +765,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                         */
 
                         }elseif($type == 'nextweek'){
-                        $filtercond = "  AND  (  DATE_FORMAT(CURDATE() + INTERVAL 7 DAY,'%Y-%m-%d') >= DATE_FORMAT(start_date,'%Y-%m-%d') OR DATE_FORMAT(CURDATE() + INTERVAL 14 DAY,'%Y-%m-%d') <= DATE_FORMAT(start_date,'%Y-%m-%d') OR ";
+                        $filtercond = "  AND  YEARWEEK(vtiger_holiday.start_date) = YEARWEEK(NOW() + INTERVAL 1 WEEK) OR YEARWEEK(vtiger_holiday.end_date) = YEARWEEK(NOW() + INTERVAL 1 WEEK)";
                 /*	$query .= "WHERE DATE_ADD( birthday, INTERVAL YEAR( CURDATE() + INTERVAL 7 DAY ) - YEAR( birthday ) YEAR )
                                         BETWEEN CURDATE() + INTERVAL 7 DAY
                                         AND DATE_ADD( CURDATE() + INTERVAL 7
