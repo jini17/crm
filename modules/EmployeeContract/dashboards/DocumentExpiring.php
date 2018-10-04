@@ -10,58 +10,58 @@
 
 class EmployeeContract_DocumentExpiring_Dashboard extends Vtiger_IndexAjax_View {
 
-	public function process(Vtiger_Request $request) {
+        public function process(Vtiger_Request $request) {
 
-		$LIMIT = 5;
+                $LIMIT = 5;
 
-		$currentUser = Users_Record_Model::getCurrentUserModel();
-		$viewer = $this->getViewer($request);
+                $currentUser = Users_Record_Model::getCurrentUserModel();
+                $viewer = $this->getViewer($request);
 
-		$moduleName = $request->getModule();
-		$type = trim($request->get('type'));
+                $moduleName = $request->getModule();
+                $type = trim($request->get('type'));
 
-		if($type == '' || $type == null) {
-				$type = 'contract';
-		}
-		
-		$valueLabel = 'LBL_EMPLOYEE_CONTRACT';
+                if($type == '' || $type == null) {
+                                $type = 'contract';
+                }
 
-		if($type=='passport') {	
-			$valueLabel = 'LBL_PASSPORT';
-		}	else if($type=='visa') {	
-			$valueLabel = 'LBL_VISA';
-		}
-		
-		
-		$page = $request->get('page');
+                $valueLabel = 'LBL_EMPLOYEE_CONTRACT';
 
-		if(empty($page)) {
-			$page = 1;
-		}
-		$pagingModel = new Vtiger_Paging_Model();
-		$pagingModel->set('page', $page);
-		$pagingModel->set('limit', $LIMIT);
+                if($type=='passport') {	
+                        $valueLabel = 'LBL_PASSPORT';
+                }	else if($type=='visa') {	
+                        $valueLabel = 'LBL_VISA';
+                }
 
 
-		$linkId = $request->get('linkid');
-		$documentmodel = EmployeeContract_Record_Model::getExpiringDocument($type,$pagingModel);	
+                $page = $request->get('page');
 
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+                if(empty($page)) {
+                        $page = 1;
+                }
+                $pagingModel = new Vtiger_Paging_Model();
+                $pagingModel->set('page', $page);
+                $pagingModel->set('limit', $LIMIT);
 
-		$viewer->assign('WIDGET', $widget);
-		$viewer->assign('VALUE', $value );
-		$viewer->assign('VALUELABEL', $valueLabel);
-		$viewer->assign('PAGE', $page);
-		$viewer->assign('NEXTPAGE', ($pagingModel->get('recordcount') < $LIMIT)? 0 : $page+1);
-		$viewer->assign('MODULE_NAME', $moduleName);
-		$viewer->assign('MODELS', $documentmodel);
-		$content = $request->get('content');
-     
 
-		if(!empty($content)) {
-			$viewer->view('dashboards/DocumentExpiringContent.tpl', $moduleName);
-		} else {
-			$viewer->view('dashboards/DocumentExpiring.tpl', $moduleName);
-		}
-	}
+                $linkId = $request->get('linkid');
+                $documentmodel = EmployeeContract_Record_Model::getExpiringDocument($type,$pagingModel);	
+          
+                $widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+
+                $viewer->assign('WIDGET', $widget);
+                $viewer->assign('VALUE', $value );
+                $viewer->assign('VALUELABEL', $valueLabel);
+                $viewer->assign('PAGE', $page);
+                $viewer->assign('NEXTPAGE', ($pagingModel->get('recordcount') < $LIMIT)? 0 : $page+1);
+                $viewer->assign('MODULE_NAME', $moduleName);
+                $viewer->assign('MODELS', $documentmodel);
+                $content = $request->get('content');
+
+
+                if(!empty($content)) {
+                        $viewer->view('dashboards/DocumentExpiringContent.tpl', $moduleName);
+                } else {
+                        $viewer->view('dashboards/DocumentExpiring.tpl', $moduleName);
+                }
+        }
 }
