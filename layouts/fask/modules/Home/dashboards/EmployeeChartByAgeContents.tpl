@@ -45,20 +45,24 @@
          hreflinks.push(data.links[i]);
       }	
 
-             var chartData = [];
-                      var labelarray = [];
-                      var labelobjarray = [];
-         var valuearray = []; 
-         for(var i = 0; i < data.labels.length ; i++){
-                var label = data.labels[i];
-                var links = data.links[i];
-                var value = parseInt(data.values[i]);
-                var rowData = [label, value,links];
-                chartData.push(rowData);
-                          
-        }	
+    var chartData = [];
+    var labelarray = [];
+    var labelobjarray = [];
+    var valuearray = []; 
+    var ledgend_color = []
+
+    for(var i = 0; i < data.labels.length ; i++){
+       var label = data.labels[i];
+       var links = data.links[i];
+       var value = parseInt(data.values[i]);
+       var rowData = [label, value,links];
+        var colors = data.colors[i]
+           ledgend_color.push(colors);
+       chartData.push(rowData);
+
+    }	
        
-        console.log(chartData);
+
     var plot1 = $.jqplot("widgetChartContainer_{$WIDGET->get('id')}", [chartData], {
         gridPadding: {
             top:0, 
@@ -71,6 +75,7 @@
             shadow: false, 
             drawBorder: true
         },
+           seriesColors:ledgend_color,
           seriesDefaults:{
             renderer:$.jqplot.PieRenderer, 
             trendline:{ show:true }, 
@@ -109,16 +114,3 @@
     });
 });
 </script>
-{*[
-    [
-        ['a',25],
-        ['b',14],
-        ['c',7]
-    ]
-]
- Array [ "", "4" ]​
- 1:  Array [ "Gen X", "3" ]​
- 2: Array [ "Gen Z", "2" ]​
- 3: Array [ "Millennials", "9" ]​
- 4: Array [ "Xennials", "4" ]​
-*}

@@ -37,26 +37,31 @@
 <script type="text/javascript">
     $(document).ready(function(){
 
-           var jData = jQuery("#widgetChart_{$WIDGET->get('id')}").val();
-           var hreflinks = [];
-          var data = JSON.parse(jData);
-                 for(var i = 0; i < data.links.length ; i++){
-         hreflinks.push(data.links[i]);
-      }	
+        var jData = jQuery("#widgetChart_{$WIDGET->get('id')}").val();
+        var hreflinks = [];
+        var data = JSON.parse(jData);
+          
+        for(var i = 0; i < data.links.length ; i++){
+           hreflinks.push(data.links[i]);
+        }	
 
-             var chartData = [];
-                      var labelarray = [];
-                      var labelobjarray = [];
-         var valuearray = []; 
-         for(var i = 0; i < data.labels.length ; i++){
-                var label = data.labels[i];
-                var links = data.links[i];
-                var value = parseInt(data.values[i]);
-                var rowData = [label, value,links];
-                chartData.push(rowData);
-                          
+        var chartData = [];
+        var labelarray = [];
+        var labelobjarray = [];
+        var valuearray = []; 
+        var ledgend_color = [];
+        
+        for(var i = 0; i < data.labels.length ; i++){
+           var label = data.labels[i];
+           var links = data.links[i];
+           var value = parseInt(data.values[i]);
+           var colors = data.colors[i]
+           var rowData = [label, value,links];
+           chartData.push(rowData);
+           ledgend_color.push(colors);
         }	
        
+
        
         console.log(chartData);
     var plot1 = $.jqplot("widgetChartContainer_{$WIDGET->get('id')}", [chartData], {
@@ -71,6 +76,7 @@
             left:0, 
             right:0
         },
+        seriesColors:ledgend_color,
         seriesDefaults:{
             renderer:$.jqplot.PieRenderer, 
             trendline:{ show:true }, 

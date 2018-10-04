@@ -111,6 +111,12 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
             return $gender;
         }
         
+        /**
+         * Employee Chart By Department 
+         * @param type $db
+         * @param type $where
+         * @return type
+         */
         public function get_employee_by_dept($db,$where){
             $data = array();
             $sql = 'SELECT department as dept,COUNT(employeeno) as total FROM vtiger_employeecontract   ';
@@ -123,8 +129,24 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
                      $counts= $db->query_result($query,$i,'total');
                      $data['labels'][] =$dept;
                      $data['values'][] =$counts;
+                     $data['colors'][] ="";
                 }
            }
            return $data;
+        }
+        
+        function get_dept_colors($db,$dept){
+                $sql = "SELECT * from vtiger_department where department = '$dept'";
+                $query = $db->pquery($sql);
+                $numrows = $db->num_rows($query);
+                
+                if($numrows > 0){
+                    $color = $db->query_result($query,0,'color');
+                }
+                else{
+                    $color = "#fff";
+                }
+
+                return $color;
         }
 }
