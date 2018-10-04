@@ -51,7 +51,7 @@
 
 {else}
         <span class="noDataMsg">
-                {vtranslate('LBL_NO_HOLIDAY',$MODULE_NAME)}
+                {vtranslate('LBL_NO_HOLIDAY',$MODULE_NAME)} {vtranslate($TYPELABEL,$MODULE_NAME)}
         </span>
 {/if}
 </div>

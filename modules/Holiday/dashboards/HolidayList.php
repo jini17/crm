@@ -18,15 +18,24 @@ class Holiday_HolidayList_Dashboard extends Vtiger_IndexAjax_View {
 		$moduleName = $request->getModule();
 		 $type = $request->get('type');
                  
-                                            if(empty($type)){
-                                                $type = 'today';
-                                            }
+        if(empty($type)){
+            $type = 'thisyear';
+             $typeLabel = 'LBL_THIS_YEAR';
+        }
+
+       
+
+        if($type=='thisweek') {
+                $typeLabel = 'LBL_THIS_WEEK';
+        } else if($type=='nextweek') {	
+                $typeLabel = 'LBL_NEXT_WEEK';
+        } else if($type=='thismonth') {	
+                $typeLabel = 'LBL_THIS_MONTH';
+        } else if($type=='thisyear') {	
+                $typeLabel = 'LBL_THIS_YEAR';
+        }
                                        
 		$monthname = $request->get('month');
-
-		if($monthname == '' || $monthname == null) {
-                                                $monthname = null;
-		}
 
 		$holidaymodel = Users_LeavesRecords_Model::getHolidayList(null,$type);
          			

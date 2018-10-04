@@ -87,7 +87,20 @@
                 showDataLabels: true
             }
         },
-        
+        highlighter: {
+        tooltipContentEditor: function (str, seriesIndex, pointIndex) {
+            return str + "<br/> additional data";
+        },
+
+        // other options just for completeness
+        show: true,
+        showTooltip: true,
+        tooltipFade: true,
+        sizeAdjust: 10,
+        formatString: '%s',
+        tooltipLocation: 'n',
+        useAxesFormatters: false,
+    },
         legend:{
           show: true,
                 location: 'e',
