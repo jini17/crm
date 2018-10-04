@@ -58,22 +58,26 @@
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
 
-                                        <select  class="select2" name="category" id="category" required data-validation-engine="validate[required]" style="width:100%;" {if $CLAIMSTATUS eq 'Apply'} disabled {/if} >
-                                                <option value="">Please Select</option>
-                                                {if $CLAIMTYPELIST|count gt 0}
-                                                {foreach key=LEAVE_ID item=CLAIM_MODEL from=$CLAIMTYPELIST name=institutionIterator}		
-                                                 
-                                                <option value="{$CLAIM_MODEL.claimtypeid}" style="float:left;margin-right:5px;background-color:{$CLAIM_MODEL['color_code']};width:30px;height:20px;" data-bal="{$CLAIM_MODEL.balance}" data-transaction="{$CLAIM_MODEL.transaction_limit}" data-monthly="{$CLAIM_MODEL.monthly_limit}" data-yearly="{$CLAIM_MODEL.yearly_limit}" {if $CLAIM_DETAIL.category eq $CLAIM_MODEL.claimtypeid} selected {/if}>
-                                                {$CLAIM_MODEL.claimtype} {if $CLAIM_MODEL.balance ne 0} (Max: {$CLAIM_MODEL.balance}){/if}</option>
+                                                            <select  class="select2" name="category" id="category" required data-validation-engine="validate[required]" style="width:100%;" {if $CLAIMSTATUS eq 'Apply'} disabled {/if} >
+                                                                    <option id="default" value="">Please Select</option>
+                                                                    {if $CLAIMTYPELIST|count gt 0}
+                                                                    {foreach key=LEAVE_ID item=CLAIM_MODEL from=$CLAIMTYPELIST name=institutionIterator}		
+                                                                     
+                                                                    <option id="claimtype" value="{$CLAIM_MODEL.claimtypeid}" style="float:left;margin-right:5px;background-color:{$CLAIM_MODEL['color_code']};width:30px;height:20px;" data-bal="{$CLAIM_MODEL.balance}" data-transaction="{$CLAIM_MODEL.transaction_limit}" data-monthly="{$CLAIM_MODEL.monthly_limit}" data-yearly="{$CLAIM_MODEL.yearly_limit}" {if $CLAIM_DETAIL.category eq $CLAIM_MODEL.claimtypeid} selected {/if}>
+                                                                    {$CLAIM_MODEL.claimtype} {if $CLAIM_MODEL.balance ne 0} (Max: {$CLAIM_MODEL.balance}){/if}</option>
 
-                                                {/foreach}
+                                                                    {/foreach}
 
-                                                 {else}
-                                                        <option value=''></option>	
-                                                {/if}	
+                                                                     {else}
+                                                                            <option value=''></option>	
+                                                                    {/if}	
 
-                                        </select>
+                                                            </select>
+
+                                                           <!-- <div class="controls pull-left" id="limitlbl" style="font-size:12px;" data-transaction="" data-monthly="" data-yearly="" hidden>{vtranslate('Limit', $QUALIFIED_MODULE)}&nbsp;&nbsp;[&nbsp;&nbsp;{vtranslate('Trans:', $QUALIFIED_MODULE)}&nbsp;&nbsp;{vtranslate('Monthly:', $QUALIFIED_MODULE)}&nbsp;&nbsp;{vtranslate('Yearly:', $QUALIFIED_MODULE)}&nbsp;&nbsp;]</div>-->
+
                                                         </div>
+
                                                 </div>
                                         </div>
                         <!--end-->
@@ -196,19 +200,25 @@
                             <div class="col-md-8">
                                  <label for="approve"> 
                                         {if $CLAIM_DETAIL.claim_status == 'Approved'}
-                                                &nbsp;<input type="radio" name="claim_status" id="approve" class="pull-left" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');" checked="checked">
+                                                &nbsp;<input type="radio" name="claim_status" id="approve" class="pull-left" style="margin-top:7px;" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');" checked="checked">
                                                 {else}
-                                                &nbsp;<input type="radio" name="claim_status" id="approve"  class="pull-left" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');">
+                                                &nbsp;<input type="radio" name="claim_status" id="approve"  class="pull-left" style="margin-top:7px;" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');">
                                                 {/if}
-                                                {vtranslate('LBL_CLAIM_APPROVED', $QUALIFIED_MODULE)}
+                                                <label class="control-label fieldLabel">
+                                                    {vtranslate('LBL_CLAIM_APPROVED', $QUALIFIED_MODULE)}
+                                                </label>
+                                                
                                  </label>
                                  <label for="notapprove" style="margin-left: 31px">
                                                         {if $CLAIM_DETAIL.claim_status eq 'Rejected'}
-                                                        <input type="radio" name="claim_status"  class="pull-left" id="notapprove" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');" checked="checked">
+                                                        <input type="radio" name="claim_status"  class="pull-left" id="notapprove" style="margin-top:7px;" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');" checked="checked">
                                                         {else}
-                                                        <input type="radio" name="claim_status"  class="pull-left" id="notapprove" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');">
+                                                        <input type="radio" name="claim_status"  class="pull-left" id="notapprove" style="margin-top:7px;" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');">
                                                         {/if}
-                                                        &nbsp;{vtranslate('LBL_CLAIM_NOT_APPROVED', $QUALIFIED_MODULE)}
+                                                        <label class="control-label fieldLabel">
+                                                            &nbsp;{vtranslate('LBL_CLAIM_NOT_APPROVED', $QUALIFIED_MODULE)}
+                                                        </label>
+                                                        
                                  </label>   
                             </div>    
                                 <!--approved start-->
@@ -221,7 +231,7 @@
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
-                                                        <label class="control-label" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_REJECTION_REASON', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
+                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_REJECTION_REASON', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                                 </div>			
                                                 <div class="controls date col-md-8">
                                                         <textarea style="width:350px!important" name="rejectionreasontxt" id="rejectionreasontxt" class="span11" maxlength="300" required data-validation-engine="validate[required]">{$CLAIM_DETAIL['resonforreject']}</textarea>
@@ -269,6 +279,23 @@
 {/strip}
 {literal}
 <script>
+    $('#category').on('change', function(){
+        
+        //console.log(jQuery('#category').find(':selected').data('transaction'));
+        //var category = jQuery('#category').find(':selected').data('transaction');
+        var transaction = jQuery('#category').find(':selected').data('transaction');
+        var monthly =jQuery('#category').find(':selected').data('monthly');
+        var yearly = jQuery('#category').find(':selected').data('yearly');
+        //console.log(a);
+        if ($('#limit').length) {
+            $('#limit').remove();
+        }
+        jQuery("<span id='limit'>Limit  [  Trans:&nbsp;"+transaction+" &nbsp;Monthly:&nbsp;"+monthly+" &nbsp;Yearly:&nbsp;"+yearly+"]</span>").insertAfter('#category');
+        //data-transaction="300.00"
+
+
+    });
+
     $('#totalamount').on('change', function() {
         var balance = jQuery('#category').find(':selected').data('bal');
         var transaction = jQuery('#category').find(':selected').data('transaction');

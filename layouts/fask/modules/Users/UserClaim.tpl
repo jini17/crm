@@ -90,23 +90,24 @@
 				<span class="pull-right">
 					<span class="btn-group">
 						<button class="btn "  id="previouspage" {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if} type="button"><span class="fa fa-chevron-left"></span></button>
-					<!--<button class="btn dropdown-toggle" type="button" id="listViewPageJump" data-toggle="dropdown" {if $PAGE_COUNT eq 1} disabled {/if}>
-						<i class="vtGlyph vticon-pageJump" title="{vtranslate('LBL_LISTVIEW_PAGE_JUMP',$moduleName)}"></i>
-					</button>
-					<ul class="listViewBasicAction dropdown-menu" id="listViewPageJumpDropDown">
-						<li>
-							<span class="row-fluid">
-								<span class="span3 pushUpandDown2per"><span class="pull-right">{vtranslate('LBL_PAGE',$moduleName)}</span></span>
-								<span class="span4">
-									<input type="text" id="pageToJump" class="listViewPagingInput" value="{$PAGE_NUMBER}"/>
-								</span>
-								<span class="span2 textAlignCenter pushUpandDown2per">
-									{vtranslate('LBL_OF',$moduleName)}&nbsp;
-								</span>
-								<span class="span2 pushUpandDown2per" id="totalPageCount">{$PAGE_COUNT}</span>
-							</span>
-						</li>
-					</ul>-->
+						
+					<button type="button" id="PageJump" data-toggle="dropdown" class="btn btn-secondary">
+                		<i class="material-icons icon" title="{vtranslate('LBL_LISTVIEW_PAGE_JUMP',$moduleName)}">more_horiz</i>
+            		</button>
+		            <ul class="listViewBasicAction dropdown-menu" id="PageJumpDropDown">
+		                <li>
+		                    <div class="listview-pagenum">
+		                        <span >{vtranslate('LBL_PAGE',$moduleName)}</span>&nbsp;
+		                        <strong><span>{$PAGE_NUMBER}</span></strong>&nbsp;
+		                        <span >{vtranslate('LBL_OF',$moduleName)}</span>&nbsp;
+		                        <strong><span id="totalPageCount">{$PAGE_LIMIT}</span></strong>
+		                    </div>
+		                    <div class="listview-pagejump">
+		                        <input type="text" id="pageToJump" placeholder="Jump To" class="listViewPagingInput text-center"/>&nbsp;
+		                        <button type="button" id="pageToJumpSubmit" class="btn btn-success listViewPagingInputSubmit text-center">{'GO'}</button>
+		                    </div>    
+		                </li>
+		            </ul>
 					<button class="btn" id="listViewNPageButton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="fa fa-chevron-right"></span></button>			
 				</span>
 			</span>	
@@ -340,6 +341,25 @@
 											<span class="pull-right">
 												<span class="btn-group">
 													<button class="btn"  id="userclaimprevpagebutton"  {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if} type="button"><span class="fa fa-chevron-left"></span></button>
+
+										<button type="button" id="PageJump" data-toggle="dropdown" class="btn btn-secondary">
+					                		<i class="material-icons icon" title="{vtranslate('LBL_LISTVIEW_PAGE_JUMP',$moduleName)}">more_horiz</i>
+					            		</button>
+							            <ul class="listViewBasicAction dropdown-menu" id="PageJumpDropDown">
+							                <li>
+							                    <div class="listview-pagenum">
+							                        <span >{vtranslate('LBL_PAGE',$moduleName)}</span>&nbsp;
+							                        <strong><span>{$PAGE_NUMBER}</span></strong>&nbsp;
+							                        <span >{vtranslate('LBL_OF',$moduleName)}</span>&nbsp;
+							                        <strong><span id="totalPageCount">{$PAGE_LIMIT}</span></strong>
+							                    </div>
+							                    <div class="listview-pagejump">
+							                        <input type="text" id="pageToJump" placeholder="Jump To" class="listViewPagingInput text-center"/>&nbsp;
+							                        <button type="button" id="pageToJumpSubmit" class="btn btn-success listViewPagingInputSubmit text-center">{'GO'}</button>
+							                    </div>    
+							                </li>
+							            </ul>
+
 		<!--<button class="btn dropdown-toggle" type="button" id="listViewPageJump" data-toggle="dropdown" {if $PAGE_COUNT eq 1} disabled {/if}>
 			<i class="vtGlyph vticon-pageJump" title="{vtranslate('LBL_LISTVIEW_PAGE_JUMP',$moduleName)}"></i>
 			</button>
@@ -359,12 +379,13 @@
 					</span>
 				</li>
 			</ul>-->
-			<button class="btn" id="userclaimnextpagebutton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="fa fa-chevron-right"></span></button>					
-		</span>
-	</span>	
-</div>	
-</div>
-</span>
+
+														<button class="btn" id="userclaimnextpagebutton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="fa fa-chevron-right"></span></button>					
+												</span>
+											</span>	
+										</div>	
+									</div>
+								</span>
 </div>
 <!--@@@@@@@@@@@@END PAGINATION TOOLS@@@@@@@@@@@@@@@-->
 <table class="table detailview-table listViewEntriesTable">

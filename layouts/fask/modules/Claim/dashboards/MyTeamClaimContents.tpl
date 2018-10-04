@@ -84,7 +84,7 @@
 					{$MODEL['transactiondate']}
 				</div>
 				<div class='col-lg-2'>
-					<a class="editLeave cursorPointer editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Claim_Js.Popup_ClaimApprove('{$CREATE_CLAIM_URL}&record={$USER_CLAIM['claimid']}&userId={$USER_CLAIM['applicantid']}&claimstatus={$USER_CLAIM['claim_status']}&manager=true');"></a>&nbsp;&nbsp;
+					{$MODEL['claim_status']}
 						
 				</div>
 			</div>
