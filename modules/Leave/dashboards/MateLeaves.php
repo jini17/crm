@@ -57,7 +57,7 @@ class Leave_MateLeaves_Dashboard extends Vtiger_IndexAjax_View {
      
 
 		if(!empty($content)) {
-			$viewer->view('dashboards/ColleaguesContent.tpl', $moduleName);
+			$viewer->view('dashboards/ColleaguesContents.tpl', $moduleName);
 		} else {
 			$viewer->view('dashboards/Colleagues.tpl', $moduleName);
 		}

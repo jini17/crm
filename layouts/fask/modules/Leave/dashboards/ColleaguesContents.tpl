@@ -15,10 +15,8 @@
 
         <div>
         <div class='row th' style="padding:5px">
-                <div class='col-lg-3'>
+            <div class='col-lg-3'>
                 <strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
-
-
             </div>
             <div class='col-lg-3'>
                <strong>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</strong>
@@ -51,7 +49,7 @@
 
 {else}
         <span class="noDataMsg">
-                {vtranslate($VALUELABEL,$MODULE_NAME)} in {$VALUE}
+                {vtranslate($VALUELABEL,$MODULE_NAME)}
         </span>
 {/if}
 </div>

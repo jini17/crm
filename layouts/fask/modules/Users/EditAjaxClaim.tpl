@@ -270,11 +270,11 @@
 {literal}
 <script>
     $('#totalamount').on('change', function() {
-        var balance = jQuery('#category').find(':selected').data('bal');
-        var transaction = jQuery('#category').find(':selected').data('transaction');
-        var monthly = jQuery('#category').find(':selected').data('monthly');
-        var yearly = jQuery('#category').find(':selected').data('yearly');
-        var useramount = jQuery('#totalamount').val();        
+        var balance     = parseFloat(jQuery('#category').find(':selected').data('bal'));
+        var transaction = parseFloat(jQuery('#category').find(':selected').data('transaction'));
+        var monthly     = parseFloat(jQuery('#category').find(':selected').data('monthly'));
+        var yearly      = parseFloat(jQuery('#category').find(':selected').data('yearly'));
+        var useramount = parseFloat(jQuery('#totalamount').val());        
         if( useramount > balance){
            if(transaction != 0.00){
                 app.helper.showErrorNotification({'message': app.vtranslate('JS_TRANSACTION_AMOUNT_EXCEEDED')});
