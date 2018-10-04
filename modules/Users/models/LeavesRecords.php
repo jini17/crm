@@ -898,4 +898,55 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 }
                 return $month;
         }
+
+   public function getWidgetsColleaguesLeave($type, $department){
+        $db = PearDatabase::getInstance();
+
+        $deptCond = '';
+
+        if($department !=''){
+                $deptCond = " AND vtiger_users.department='$department'";
+        }
+
+        if($type == 'today'){
+            $query = " AND DATE_FORMAT(CURDATE(),'%m-%d') between DATE_FORMAT(fromdate,'%m-%d') and DATE_FORMAT(todate,'%m-%d')  ";
+
+        } elseif($type == 'tomorrow'){
+            $query = " AND DATE_FORMAT(fromdate,'%m-%d') = DATE_FORMAT(CURDATE() + INTERVAL 1 DAY,'%m-%d') ";           
+
+
+        } elseif($type == 'thisweek'){
+            $query = " AND WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(fromdate,'%m-%d'))) = WEEKOFYEAR(CURDATE())"; 
+
+
+        } elseif($type == 'nextweek'){
+                $query = " AND WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(fromdate,'%m-%d'))) = WEEKOFYEAR(CURDATE())+1";
+
+
+        } elseif($type == 'thismonth'){
+                $query = " AND DATE_FORMAT(fromdate,'%m') = DATE_FORMAT(CURDATE(),'%m')";           
+        } 
+
+        $sql = "SELECT vtiger_users.id, CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, vtiger_users.department, 
+                                vtiger_leave.fromdate, vtiger_leave.todate                      
+                FROM vtiger_leave 
+                INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_leave.leaveid
+                LEFT JOIN vtiger_users ON vtiger_users.id=vtiger_leave.employee_id
+                WHERE vtiger_crmentity.deleted = 0 AND vtiger_users.deleted = 0 AND vtiger_leave.leavestatus='Approved' ".$deptCond . $query;
+        
+        $result = $db->pquery($sql, array());
+        $numrows = $db->num_rows($result);
+        $employeelist = array();
+
+        for($i=0;$i<$numrows;$i++){
+            $employeelist[$i]['userid'] = $db->query_result($result, $i, 'id');
+            $employeelist[$i]['empname'] = $db->query_result($result, $i, 'fullname');
+            $employeelist[$i]['department'] = $db->query_result($result, $i, 'department');
+            $employeelist[$i]['fromdate'] = $db->query_result($result, $i, 'fromdate');
+            $employeelist[$i]['todate'] = $db->query_result($result, $i, 'todate');
+        }
+
+        return $employeelist;
+
+   }     
 }
