@@ -11,6 +11,7 @@
 class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
 
         public function process(Vtiger_Request $request) {
+            global $site_URL;
                 $db = PearDatabase::getInstance();
                // $db->setDebug(true);
                 $currentUser        = Users_Record_Model::getCurrentUserModel();
@@ -43,7 +44,7 @@ class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
                 $linkId     = $request->get('linkid');
 
                 $moduleModel  = Home_Module_Model::getInstance($moduleName);
-                $empbydept       = $this->get_employee_by_gender($db,$dept,$Gender);
+                $empbydept       = $this->get_employee_by_gender($db,$dept,$Gender,$site_URL);
                 $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 
            
@@ -116,7 +117,7 @@ class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
          * @param type $where
          * @return type
          */
-        public function get_employee_by_gender($db,$deparment=null,$gender=null){
+        public function get_employee_by_gender($db,$deparment=null,$gender=null,$url){
            
             $data = array();
             $sql = 'SELECT gender,COUNT(employeeno) as total FROM vtiger_users   ';
@@ -132,11 +133,15 @@ class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
            $num_rows = $db->num_rows($query);
               
            if($num_rows > 0){
+               
                 for($i = 0; $i < $num_rows; $i++){
                      $dept= $db->query_result($query,$i,'gender');
                      $counts= $db->query_result($query,$i,'total');
                      $data['labels'][] =$dept;
                      $data['values'][] =$counts;
+                   
+                          $data['links'][] =$url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["gender","e","'.$dept.'"]]]';
+                     
                 }
            }
            else{
