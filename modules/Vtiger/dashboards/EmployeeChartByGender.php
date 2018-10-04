@@ -132,6 +132,7 @@ class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
            $num_rows = $db->num_rows($query);
               
            if($num_rows > 0){
+               if($db->query_result($query,$i,'gender') == 'Male')
                 for($i = 0; $i < $num_rows; $i++){
                      $dept= $db->query_result($query,$i,'gender');
                      $counts= $db->query_result($query,$i,'total');

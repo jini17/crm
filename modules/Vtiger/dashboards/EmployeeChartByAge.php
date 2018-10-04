@@ -11,8 +11,9 @@
 class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
 
         public function process(Vtiger_Request $request) {
+            global $site_URL;
                 $db = PearDatabase::getInstance();
-              // $db->setDebug(true);
+               //$db->setDebug(true);
                 $currentUser        = Users_Record_Model::getCurrentUserModel();
                 $viewer                   = $this->getViewer($request);
                 $moduleName      = $request->getModule();
@@ -52,7 +53,7 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
                 $linkId     = $request->get('linkid');
 
                 $moduleModel  = Home_Module_Model::getInstance($moduleName);
-                $empbydept       = $this->get_employee_by_AGE($db,$department);
+                $empbydept       = $this->get_employee_by_AGE($db,$department,$site_URL);
                 $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 
            
@@ -125,51 +126,42 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
          * @param type $where
          * @return type
          */
-        public function get_employee_by_AGE($db,$where=NULL){
+        public function get_employee_by_AGE($db,$where=NULL,$url){
            
             $data = array();
-            $sql = "SELECT count(employeeno) as total,DATE_FORMAT(birthday,'%Y') as age_range from vtiger_users WHERE DATE_FORMAT(birthday,'%Y')  != '0000' ";
+           $sql_bbs = "SELECT count(employeeno) as total,DATE_FORMAT(birthday,'%Y') as age_range from vtiger_users WHERE DATE_FORMAT(birthday,'%Y')  >= '1946'  AND  DATE_FORMAT(birthday,'%Y')  <=   '1954' ";
+           $sql_bb = "SELECT count(employeeno) as total,DATE_FORMAT(birthday,'%Y') as age_range from vtiger_users WHERE DATE_FORMAT(birthday,'%Y')  >= '1955'  AND  DATE_FORMAT(birthday,'%Y')  <=   '1965' ";
+           $sql_gez = "SELECT count(employeeno) as total,DATE_FORMAT(birthday,'%Y') as age_range from vtiger_users WHERE DATE_FORMAT(birthday,'%Y')  >= '1966'  AND  DATE_FORMAT(birthday,'%Y')  <=   '1976'  ";
+           $sql_gex = "SELECT count(employeeno) as total,DATE_FORMAT(birthday,'%Y') as age_range from vtiger_users WHERE DATE_FORMAT(birthday,'%Y')  >= '1977'  AND  DATE_FORMAT(birthday,'%Y')  <=   '1994'  ";
            
            if($where != NULL){
                $sql .= "  AND department = '$where' ";
            }
-            $sql .= " GROUP BY DATE_FORMAT(birthday,'%Y')";
-   
-           $query = $db->pquery($sql,array());
-            $num_rows = $db->num_rows($query);
-              
-           if($num_rows > 0){
-                for($i = 0; $i < $num_rows; $i++){
-                     $age_year= $db->query_result($query,$i,'age_range');
-                     $counts= $db->query_result($query,$i,'total');
-                     if($age_year >= '1946' && $age_year <= '1954'){
-                           $data['labels'][] ="Baby Boomers (1946-1954)";
-                           $data['values'][] =$counts;
-                     }
-                     elseif($age_year >= '1955' && $age_year <= '1965'){
-                          $data['labels'][] ="Boomers (1955-1965)";
-                           $data['values'][] =$counts;
-                     }
-                     elseif($age_year >= '1966' && $age_year <= '1976'){
-                          $data['labels'][] ="Generation X (1966-1976)";
-                           $data['values'][] =$counts;
-                     }
-                     elseif($age_year >= '1977' && $age_year <= '1994'){
-                          $data['labels'][] ="Generation Y (1977-1994)";
-                           $data['values'][] =$counts;
-                     }
-                     else{
-                          $data['labels'][] = [0,0];
-                          $data['values'][] = [0,0];
-                     }
-                }
-           }
-             else{
-               $data['labels'][] = [0,0];
-               $data['values'][] = [0,0];
-           }
+            $sql .= " ";
+
+           $bbs_query = $db->pquery($sql_bbs.$sql,array());
+            $bb_query = $db->pquery($sql_bb.$sql,array());
+            $genx_query = $db->pquery($sql_gez.$sql,array());
+            $genz_query = $db->pquery($sql_gex.$sql,array());
+
+            $data['labels'][] =  'Baby Boomers (1946-1954)'  ;
+            $data['values'][] = $db->query_result($bbs_query,0,'total');// (empty($db->query_result($bbs_query,0,'age_range'))?$db->query_result($bbs_query,0,'age_range'): $num_rows = $db->num_rows($bbs_query) );
+            $data['links'][]    = $url.'/index.php?module=EmployeeContract&view=List&viewname=58&search_params=[[["age_group","e","Baby Boomers+(1946-1954)"]]]&nolistcache=1';
            
-           return $data;
+            $data['labels'][] =  'Boomers (1955-1965)' ;
+            $data['values'][] = $db->query_result($bb_query,0,'total');
+            $data['links'][]    =$url.'/index.php?module=EmployeeContract&view=List&viewname=58&search_params=[[["age_group","e","Boomers+(1955-1965)"]]]&nolistcache=1';
+
+            $data['labels'][] =  "Generation X (1966-1976)" ;
+            $data['values'][] =$db->query_result($genx_query,0,'total');;//(empty($db->query_result($genx_query,0,'age_range'))?$db->query_result($genx_query,0,'age_range'): $num_rows = $db->num_rows($genx_query)  ); 
+            $data['links'][]    =$url.'/index.php?module=EmployeeContract&view=List&viewname=58&search_params=[[["age_group","e","Boomers+(1966-1976)"]]]&nolistcache=1';
+
+            $data['labels'][] =  "Generation Y (1977-1994)" ;
+            $data['values'][] =  $db->query_result($genz_query,0,'total');//(empty($db->query_result($genz_query,0,'age_range'))?$db->query_result($genz_query,0,'age_range'): $num_rows = $db->num_rows($genz_query) ); 
+            $data['links'][]    = $url.'/index.php?module=EmployeeContract&view=List&viewname=58&search_params=[[["age_group","e","Boomers+(1977-1994)"]]]&nolistcache=1';
+
+
+         return $data;
         }
         
        
