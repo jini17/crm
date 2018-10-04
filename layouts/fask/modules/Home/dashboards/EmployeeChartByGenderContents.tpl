@@ -61,9 +61,6 @@
            ledgend_color.push(colors);
         }	
        
-
-       
-        console.log(chartData);
     var plot1 = $.jqplot("widgetChartContainer_{$WIDGET->get('id')}", [chartData], {
         grid: {
             borderColor: 'white', 
@@ -127,24 +124,4 @@ $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataClick', function
     });
 });
 
-{* var urls = ["www.yahoo.com", "www.google.com", "www.java.com", "www.w3schools.com/js/js_obj_date.asp"];
-  $('#widgetChartContainer_{$WIDGET->get('id')}').bind('jqplotDataClick', function (ev, seriesIndex, pointIndex, data) {
-      if(seriesIndex === 0){
-          var url = urls[pointIndex];
-          window.open("http://"+url);
-      }
-  });*}
 </script>
-{*[
-    [
-        ['a',25],
-        ['b',14],
-        ['c',7]
-    ]
-]
- Array [ "", "4" ]​
- 1:  Array [ "Gen X", "3" ]​
- 2: Array [ "Gen Z", "2" ]​
- 3: Array [ "Millennials", "9" ]​
- 4: Array [ "Xennials", "4" ]​
-*}

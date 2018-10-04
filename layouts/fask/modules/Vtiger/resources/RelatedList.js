@@ -51,7 +51,7 @@ jQuery.Class("Vtiger_RelatedList_Js",{
     
 	updateRelatedRecordsCount: function (relationId) {
 		var recordId = app.getRecordId();
-		var moduleName = app.getModuleName();
+		var moduleName = app.getModuleName();alert(moduleName);
 		var detailInstance = new Vtiger_Detail_Js();
 		detailInstance.getRelatedRecordsCount(recordId, moduleName, relationId).then(function (data) {
 			var relatedRecordsCount = data[relationId];

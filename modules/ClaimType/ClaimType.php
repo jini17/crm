@@ -43,8 +43,7 @@ class ClaimType extends Vtiger_CRMEntity {
 	);
 	var $list_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'Title' => 'claim_type',
-		'Assigned To' => 'assigned_user_id',
+		'Title' => 'claim_type'
 	);
 
 	// Make the field link to detail view
@@ -54,13 +53,13 @@ class ClaimType extends Vtiger_CRMEntity {
 	var $search_fields = Array(
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Title' => Array('claimtype', 'claim_type'),
-		'Assigned To' => Array('vtiger_crmentity','assigned_user_id'),
+		'Title' => Array('claimtype', 'claim_type')
 	);
 	var $search_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'Title' => 'claim_type',
-		'Assigned To' => 'assigned_user_id',
+		'Title' => 'claim_type'
+		
+
 	);
 
 	// For Popup window record selection
