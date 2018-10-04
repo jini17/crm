@@ -165,7 +165,7 @@
                                             <i class="fa fa-laptop"></i>
                                             <span>{vtranslate('LBL_UPLOAD', $QUALIFIED_MODULE)}</span>
                                             <input id="attachment" class="fieldValue inputElement" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment" {if $CLAIMSTATUS eq 'Apply'} disabled {/if}>
-                                        </div>&nbsp;<span class="uploadedFileDetails"></span>
+                                        </div>&nbsp;<span class="uploadedFileDetails">{$CLAIM_DETAIL['attachment']}</span>
                                     </div>
                                 </div>    
                             </div>   

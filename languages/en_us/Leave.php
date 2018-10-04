@@ -33,7 +33,8 @@ $languageStrings = array(
 	'LBL_APPLY'=>'Apply Leave',
     'LBL_COMPANY'=>'Company',
     'SINGLE_Leave'=>'Leave',
-
+    'LBL_STARTDATE'=>'Start Date',
+    'LBL_ENDDATE'=>'End Date',
 );
 
 $jsLanguageStrings = array(

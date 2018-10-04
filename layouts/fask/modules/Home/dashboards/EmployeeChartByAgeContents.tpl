@@ -23,7 +23,7 @@
         <div class="col-lg-11">
 
 
-           <div class="" id="widgetChartContainer_{$WIDGET->get('id')}" style="height:200px; width:300px;"></div>
+           <div class="" id="widgetChartContainer_{$WIDGET->get('id')}" style="height:250px; width:100%;"></div>
             <br>
         </div>
                 <div class="col-lg-1"></div>
@@ -39,20 +39,30 @@
 
            var jData = jQuery("#widgetChart_{$WIDGET->get('id')}").val();
           var data = JSON.parse(jData);
-             var chartData = [];
-                      var labelarray = [];
-                      var labelobjarray = [];
-         var valuearray = []; 
-         for(var i = 0; i < data.labels.length ; i++){
-                var label = data.labels[i];
-                labelarray.push( data.labels[i]);
-                var value = parseInt(data.values[i]);
-                var rowData = [label, value];
-                chartData.push(rowData);
-                          
-        }	
+          
+          var hreflinks = [];
+      for(var i = 0; i < data.links.length ; i++){
+         hreflinks.push(data.links[i]);
+      }	
+
+    var chartData = [];
+    var labelarray = [];
+    var labelobjarray = [];
+    var valuearray = []; 
+    var ledgend_color = []
+
+    for(var i = 0; i < data.labels.length ; i++){
+       var label = data.labels[i];
+       var links = data.links[i];
+       var value = parseInt(data.values[i]);
+       var rowData = [label, value,links];
+        var colors = data.colors[i]
+           ledgend_color.push(colors);
+       chartData.push(rowData);
+
+    }	
        
-        console.log(chartData);
+
     var plot1 = $.jqplot("widgetChartContainer_{$WIDGET->get('id')}", [chartData], {
         gridPadding: {
             top:0, 
@@ -60,10 +70,26 @@
             left:0, 
             right:0
         },
-        seriesDefaults:{
+        grid: {
+            borderColor: 'white', 
+            shadow: false, 
+            drawBorder: true
+        },
+           seriesColors:ledgend_color,
+          seriesDefaults:{
             renderer:$.jqplot.PieRenderer, 
             trendline:{ show:true }, 
-            rendererOptions: { padding: 4, showDataLabels: true }
+            rendererOptions: { padding: 4, showDataLabels: true },
+             
+            trendline:{ show:true }, 
+            rendererOptions: { padding: 4, showDataLabels: true },
+            shadow: false, 
+            rendererOptions:{
+                sliceMargin: 4, 
+                // rotate the starting position of the pie around to 12 o'clock.
+                startAngle: -90,
+                showDataLabels: true
+            }
         },
         
         legend:{
@@ -76,18 +102,15 @@
                 }
         }       
     });
+   $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataHighlight', function () {			  						
+            $('html,body').css('cursor','pointer');	  											
+    });
+    $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataUnhighlight', function () {
+        $('html,body').css('cursor','default');	  											
+    }); 	
+    $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataClick', function (ev, seriesIndex, pointIndex, data) {							
+            link = data.pop();
+            window.open(link,"_blank");
+    });
 });
 </script>
-{*[
-    [
-        ['a',25],
-        ['b',14],
-        ['c',7]
-    ]
-]
- Array [ "", "4" ]​
- 1:  Array [ "Gen X", "3" ]​
- 2: Array [ "Gen Z", "2" ]​
- 3: Array [ "Millennials", "9" ]​
- 4: Array [ "Xennials", "4" ]​
-*}

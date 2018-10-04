@@ -20,7 +20,7 @@
     <div class="clearfix"></div>
   
         {foreach item=MODEL from=$MODELS}
-              <div class="row miniListContent">
+              <div class="row miniListContent" style='padding:5px;'>
                     <div class="col-lg-5">{$MODEL['fullname']}</div>
                     <div class="col-lg-5">{$MODEL['duration']}</div>
                     <div class="col-lg-2">{$MODEL['leavestatus']} &nbsp; {$MODEL['icon']}</div>

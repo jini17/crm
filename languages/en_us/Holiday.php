@@ -24,10 +24,13 @@ $languageStrings = array(
 	'LBL_CLICK_HERE_TO_VIEW' => 'Click here to view',
 
 	//Basics
-	'LBL_NO_HOLIDAY' => 'No holiday in this month',
+	'LBL_NO_HOLIDAY' => 'No holiday in ',
 	'LBL_SELECT_ALL' => 'Select All',
 	'LBL_HOLIDAY' => 'Holiday',
 	'Holiday List'=>'Holidays List',
+                     'LBL_THIS_MONTH'=>'This Month',
+                      'LBL_THIS_WEEK' => 'This Week',
+                       'LBL_THIS_YEAR'=> 'This Year'
 
 );
 

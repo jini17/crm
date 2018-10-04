@@ -11,6 +11,7 @@
 class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
 
         public function process(Vtiger_Request $request) {
+               global $site_URL;
                 $db = PearDatabase::getInstance();
                 //$db->setDebug(true);
                 $currentUser        = Users_Record_Model::getCurrentUserModel();
@@ -24,6 +25,7 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
                 $gender              = $request->get('gender');
                 $age_group       = $request->get('age_group');
                 $chartTYPE          = $request->get('type');
+                
 //                if($chartTYPE ==''){
 //                    $chartTYPE  = 'pieChart';
 //                }
@@ -41,15 +43,15 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
                 $viewer->assign('AGE_GROUP', $age_groupList);
                 $viewer->assign('GENDER', $genderList);
                 $viewer->assign('CHART_TYPE',$chartTYPE);
-       
+               
                 $page     = $request->get('page');
                 $linkId     = $request->get('linkid');
-
+             
                 $moduleModel  = Home_Module_Model::getInstance($moduleName);
-                $empbydept       = $this->get_employee_by_dept($db,$where);
+                $empbydept       = $this->get_employee_by_dept($db,$department,$site_URL);
                 $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 
-
+  
                 $viewer->assign('WIDGET', $widget);
                 $viewer->assign('MODULE_NAME', $moduleName);
 
@@ -111,10 +113,21 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
             return $gender;
         }
         
-        public function get_employee_by_dept($db,$where){
+        /**
+         * Employee Chart By Department 
+         * @param type $db
+         * @param type $where
+         * @return type
+         */
+        public function get_employee_by_dept($db,$where,$url){
             $data = array();
-            $sql = 'SELECT department as dept,COUNT(employeeno) as total FROM vtiger_employeecontract   ';
+            $sql = 'SELECT department as dept,COUNT(employeeno) as total FROM vtiger_users   ';
+              if($where != NULL){
+                  $sql .= " WHERE department='$where' ";
+                  
+              }
             $sql .= 'group BY department';
+
            $query = $db->pquery($sql,array());
            $num_rows = $db->num_rows($query);
            if($num_rows > 0){
@@ -123,8 +136,31 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
                      $counts= $db->query_result($query,$i,'total');
                      $data['labels'][] =$dept;
                      $data['values'][] =$counts;
+                      $data['links'][] =$url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["department","e","'.$dept.'"]]]';
+                     $data['colors'][] =$this->get_dept_colors($db, $dept);
                 }
            }
+           else{
+               $data['labels'][] =0;
+                $data['values'][] ="";
+                $data['links'][] =$url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings';
+                $data['colors'][] =$this->get_dept_colors($db, $dept);
+           }
+      
            return $data;
+        }
+        
+        function get_dept_colors($db,$dept){
+                $sql = "SELECT * from vtiger_department where department = '$dept'";
+                $query = $db->pquery($sql);
+                $numrows = $db->num_rows($query);
+                if($numrows > 0){
+                    $color = $db->query_result($query,0,'color');
+                }
+                else{
+                    $color = "#fff";
+                }
+
+                return $color;
         }
 }

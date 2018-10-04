@@ -1355,7 +1355,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 				}
 				fieldElement = fieldElement.filter('[type="checkbox"]');
 			} else if(fieldType == 'reference'){				
-				ajaxEditNewValue = fieldBasicData.val(); 
+				ajaxEditNewValue = fieldBasicData.val(); alert(ajaxEditNewValue);
 				//if(ajaxEditNewValue===undefined) ajaxEditNewValue = fieldElement.attr('value');				
 				if (ajaxEditNewValue == "") ajaxEditNewValue = fieldBasicData.data('value');
 				

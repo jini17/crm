@@ -15,38 +15,43 @@
 
         <div>
         <div class='row th' style="padding:5px">
-                <div class='col-lg-5'>
+                <div class='col-lg-3'>
                 <strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
 
 
             </div>
-            <div class='col-lg-4'>
+            <div class='col-lg-3'>
                <strong>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</strong>
             </div>
             <div class='col-lg-3'>
-              <strong>{vtranslate('LBL_MC_TAKEN', $MODULE_NAME)}</strong>
+              <strong>{vtranslate('LBL_STARTDATE', $MODULE_NAME)}</strong>
             </div>
+              <div class='col-lg-3'>
+              <strong>{vtranslate('LBL_ENDDATE', $MODULE_NAME)}</strong>
+            </div>
+
           </div>
       		{foreach item=MODEL from=$MODELS}
       			<div class='row miniListContent' style="padding:5px;margin-right:-1px;margin-left:-1px;">
-      				<div class='col-lg-5'>
+      				<div class='col-lg-3'>
       					<a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$MODEL['userid']}"><strong>{$MODEL['empname']}</strong></a>
-      						<br />
-      					<!--(<i>{$MODEL['title']}</i>)-->
       				</div>
-      				<div class='col-lg-5'>
+      				<div class='col-lg-3'>
       					{$MODEL['department']}
       				</div>
-      				<div class='col-lg-2'>
-      					{$MODEL['leavecount']}
+      				<div class='col-lg-3'>
+      					<span>{$MODEL['fromdate']|date_format:" %b %e"}</span>
       				</div>
+              <div class='col-lg-3'>
+                <span>{$MODEL['todate']|date_format:" %b %e"}</span>
+              </div>
       			</div>
       			{/foreach}
      </div>
 
 {else}
         <span class="noDataMsg">
-                {vtranslate($TYPELABEL,$MODULE_NAME)} in {$VALUE}
+                {vtranslate($VALUELABEL,$MODULE_NAME)} in {$VALUE}
         </span>
 {/if}
 </div>

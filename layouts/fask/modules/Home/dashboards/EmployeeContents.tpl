@@ -13,36 +13,36 @@
 <div style='padding:5px;'>
 {if count($MODELS) > 0}
 <table class="table table-bordered listViewEntriesTable">
-	<thead>
-		<tr>
-			<th style="width:52%;">
-			<b>{vtranslate('LBL_NAME', $MODULE_NAME)}</b>
-			</th>
-			<th colspan="2">
-			<b>{vtranslate('LBL_BIRTHDATE', $MODULE_NAME)}</b>
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		{foreach item=MODEL from=$MODELS}
-			<tr class="birthdaywish" style="cursor:pointer;">
-				<td>
-				{$MODEL['fullname']}
-				</td>
-				<td>
-				{$MODEL['dateofbirth']}
-				</td>
-				<td>
-			<!--added by fadzil 27/2/15--><i class="icon-gift alignBottom" title="{vtranslate('LBL_BIRTHDAY_WISH')}"></i>
-			<input id="modulename" type="hidden" value="{$MODEL['module']}">
-			<input id="fieldname" type="hidden" value="{$MODEL['fieldname']}">
-			<input id="birthdayid" type="hidden" value="{$MODEL['id']}"></td></tr>
-		{/foreach}
-	</tbody>
+        <thead>
+                <tr>
+                        <th style="width:52%;">
+                        <b>{vtranslate('LBL_NAME', $MODULE_NAME)}</b>
+                        </th>
+                        <th colspan="2">
+                        <b>{vtranslate('LBL_BIRTHDATE', $MODULE_NAME)}</b>
+                        </th>
+                </tr>
+        </thead>
+        <tbody>
+                {foreach item=MODEL from=$MODELS}
+                        <tr class="birthdaywish" style="cursor:pointer;">
+                                <td>
+                                {$MODEL['fullname']}
+                                </td>
+                                <td>
+                                {$MODEL['dateofbirth']}
+                                </td>
+                                <td>
+                        <!--added by fadzil 27/2/15--><i class="icon-gift alignBottom" title="{vtranslate('LBL_BIRTHDAY_WISH')}"></i>
+                        <input id="modulename" type="hidden" value="{$MODEL['module']}">
+                        <input id="fieldname" type="hidden" value="{$MODEL['fieldname']}">
+                        <input id="birthdayid" type="hidden" value="{$MODEL['id']}"></td></tr>
+                {/foreach}
+        </tbody>
 </table>
 {else}
-	<span class="noDataMsg">
-		{vtranslate('LBL_NO','Home')} {vtranslate('LBL_BIRTHDAY','Home')} {vtranslate($TYPELABEL,'Home')}
-	</span>
+        <span class="noDataMsg">
+                {vtranslate('LBL_NO','Home')} {vtranslate('LBL_BIRTHDAY','Home')} {vtranslate($TYPELABEL,'Home')}
+        </span>
 {/if}
 </div>

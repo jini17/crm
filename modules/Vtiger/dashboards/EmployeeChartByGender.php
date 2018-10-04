@@ -11,6 +11,7 @@
 class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
 
         public function process(Vtiger_Request $request) {
+            global $site_URL;
                 $db = PearDatabase::getInstance();
                // $db->setDebug(true);
                 $currentUser        = Users_Record_Model::getCurrentUserModel();
@@ -18,9 +19,9 @@ class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
                 $moduleName      = $request->getModule();
                 $departmentList  = getAllPickListValues('department');
                 $age_groupList    = getAllPickListValues('age_group');
-                $genderList           = getAllPickListValues('gender');
-              
-                    $department     = $request->get('type');
+                $genderList           = getAllPickListValues('gender',array('color'));
+           
+                $department     = $request->get('type');
                 $gender              = $request->get('gender');
                 $age_group       = $request->get('age_group');
 
@@ -43,11 +44,9 @@ class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
                 $linkId     = $request->get('linkid');
 
                 $moduleModel  = Home_Module_Model::getInstance($moduleName);
-                $empbydept       = $this->get_employee_by_gender($db,$dept,$Gender);
+                $empbydept       = $this->get_employee_by_gender($db,$dept,$Gender,$site_URL);
+
                 $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
-
-           
-
                 $viewer->assign('WIDGET', $widget);
                 $viewer->assign('MODULE_NAME', $moduleName);
 
@@ -116,7 +115,9 @@ class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
          * @param type $where
          * @return type
          */
-        public function get_employee_by_gender($db,$deparment=null,$gender=null){
+
+        public function get_employee_by_gender($db,$deparment=null,$gender=null,$url,$genderList){
+
            
             $data = array();
             $sql = 'SELECT gender,COUNT(employeeno) as total FROM vtiger_users   ';
@@ -125,24 +126,56 @@ class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
            if($deparment != null){
                $sql .= "  AND department = '$deparment' ";
            }
-            if($gender != null){
-               $sql .= "  AND gender = '$gender' ";
-           }
+   
             $sql .= ' group BY gender';
 
            $query = $db->pquery($sql,array());
            $num_rows = $db->num_rows($query);
               
            if($num_rows > 0){
+
                 for($i = 0; $i < $num_rows; $i++){
                      $dept= $db->query_result($query,$i,'gender');
                      $counts= $db->query_result($query,$i,'total');
                      $data['labels'][] =$dept;
                      $data['values'][] =$counts;
+
+                     $data['links'][] =$url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["gender","e","'.$dept.'"]]]';
+                     $data['colors'][] = $this->get_gender_color($db,$dept);
+
                 }
            }
+           else{
+               $data['labels'][] = [0,0];
+               $data['values'][] = [0,0];
+           }
+           
            return $data;
         }
         
+    /**
+     * Get Gender Color
+     * 
+     * @param type $db
+     * @param type $gender
+     * @return string
+     */
+        function get_gender_color($db,$gender){
+        $sql = "SELECT gender,color FROM vtiger_gender  WHERE gender='$gender'";
+        $query = $db->pquery($sql);
+        $numrows = $db->num_rows($query);
+        if($numrows > 0){
+            $color = $db->query_result($query,0,'color');
+        }
+        else{
+            $color = "#fff";
+        }
+
+        return $color;
+    }        
+        
+
        
 }
+
+

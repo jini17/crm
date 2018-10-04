@@ -341,7 +341,11 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 				jQuery('#leave').html(data);
 			}
 		});	
-			var url = 'index.php?module=Users&view=EditLeave&record='+leaveid+'&userId='+appid+'&leavestatus=Apply&manager=true';
+		     if(leaveid ==null){
+		          var url = 'index.php?module=Users&view=EditLeave';
+		     } else {
+		          var url = 'index.php?module=Users&view=EditLeave&record='+leaveid+'&userId='+appid+'&leavestatus=Apply&manager=true';
+		      }    
 			Users_Leave_Js.editLeave(url)		
 	
 	},
@@ -388,7 +392,11 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 			var appid	= jQuery("#appid").val();
 			this.registerLeaveApproveTrigger(leaveid, appid);
 			
-		}
+
+			if(leaveid ==null && appid == null){
+			     this.registerLeaveApproveTrigger(leaveid, appid);
+			}
+		}	
 		
 	}
 });
