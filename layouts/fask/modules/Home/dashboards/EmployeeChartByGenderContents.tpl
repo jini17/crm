@@ -38,22 +38,33 @@
     $(document).ready(function(){
 
            var jData = jQuery("#widgetChart_{$WIDGET->get('id')}").val();
+           var hreflinks = [];
           var data = JSON.parse(jData);
+                 for(var i = 0; i < data.links.length ; i++){
+         hreflinks.push(data.links[i]);
+      }	
+
              var chartData = [];
                       var labelarray = [];
                       var labelobjarray = [];
          var valuearray = []; 
          for(var i = 0; i < data.labels.length ; i++){
                 var label = data.labels[i];
-                labelarray.push( data.labels[i]);
+                var links = data.links[i];
                 var value = parseInt(data.values[i]);
-                var rowData = [label, value];
+                var rowData = [label, value,links];
                 chartData.push(rowData);
                           
         }	
        
+       
         console.log(chartData);
     var plot1 = $.jqplot("widgetChartContainer_{$WIDGET->get('id')}", [chartData], {
+        grid: {
+            borderColor: 'white', 
+            shadow: false, 
+            drawBorder: true
+        },
         gridPadding: {
             top:0, 
             bottom:38,

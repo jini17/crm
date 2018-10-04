@@ -66,6 +66,11 @@
             left:0, 
             right:0
         },
+        grid: {
+            borderColor: 'white', 
+            shadow: false, 
+            drawBorder: true
+        },
           seriesDefaults:{
             renderer:$.jqplot.PieRenderer, 
             trendline:{ show:true }, 
