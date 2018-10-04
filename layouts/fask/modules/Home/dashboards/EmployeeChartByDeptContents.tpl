@@ -21,9 +21,7 @@
 
    <div class="row" style="margin:0px 10px;height:250px;width:100%;">
         <div class="col-lg-11">
-
-
-           <div class="" id="widgetChartContainer_{$WIDGET->get('id')}"></div>
+           <div class="" id="widgetChartContainer_{$WIDGET->get('id')}" style="height:250px; width:100%;"></div>
             <br>
         </div>
                 <div class="col-lg-1"></div>
@@ -61,7 +59,7 @@
        chartData.push(rowData);
 
     }	
-       
+  
     var plot1 = $.jqplot("widgetChartContainer_{$WIDGET->get('id')}", [chartData], {
         gridPadding: {
             top:0, 
