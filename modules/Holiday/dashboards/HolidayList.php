@@ -19,6 +19,7 @@ class Holiday_HolidayList_Dashboard extends Vtiger_IndexAjax_View {
 		 $type = $request->get('type');
                  
         if(empty($type)){
+
             $type = 'today';
         }
 
