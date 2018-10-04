@@ -753,7 +753,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                         $filtercond = " AND DATE_FORMAT(CURDATE(),'%m-%d') BETWEEN DATE_FORMAT(vtiger_holiday.start_date,'%m-%d') AND DATE_FORMAT(vtiger_holiday.end_date,'%m-%d')";
 
                         }elseif($type == 'thisyear'){
-                        $filtercond = " AND DATE_FORMAT(CURDATE() ,'%m')  between DATE_FORMAT(vtiger_holiday.start_date,'%m') AND DATE_FORMAT(vtiger_holiday.end_date,'%m') ";			
+                        $filtercond = " AND DATE_FORMAT(CURDATE() ,'%Y')  = DATE_FORMAT(vtiger_holiday.start_date,'%Y') OR DATE_FORMAT(CURDATE() ,'%Y')  = DATE_FORMAT(vtiger_holiday.end_date,'%Y')  ";			
 
 
                         }elseif($type == 'thisweek'){
