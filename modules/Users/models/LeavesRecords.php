@@ -752,12 +752,12 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 if($type == 'today'){
                         $filtercond = " AND DATE_FORMAT(CURDATE(),'%m-%d') BETWEEN DATE_FORMAT(vtiger_holiday.start_date,'%m-%d') AND DATE_FORMAT(vtiger_holiday.end_date,'%m-%d')";
 
-                        }elseif($type == 'tomorrow'){
-                        $filtercond = " AND DATE_FORMAT((CURDATE() + INTERVAL 1 DAY),'%m-%d')  between DATE_FORMAT(vtiger_holiday.start_date,'%m-%d') AND DATE_FORMAT(vtiger_holiday.end_date,'%m-%d') ";			
+                        }elseif($type == 'thisyear'){
+                        $filtercond = " AND DATE_FORMAT(CURDATE() ,'%m')  between DATE_FORMAT(vtiger_holiday.start_date,'%m') AND DATE_FORMAT(vtiger_holiday.end_date,'%m') ";			
 
 
                         }elseif($type == 'thisweek'){
-                        $filtercond = " AND yearweek(DATE(vtiger_holiday.start_date), 1) = yearweek(curdate(), 1)  OR  yearweek(DATE(vtiger_holiday.end_date), 1) = yearweek(curdate(), 1)  "; 
+                        $filtercond = " AND   (YEARWEEK(vtiger_holiday.start_date, 1) = YEARWEEK(CURDATE(), 1)  OR YEARWEEK(vtiger_holiday.end_date, 1) = YEARWEEK(CURDATE(), 1) )"; 
                         /*$query .= "WHERE DATE_ADD( birthday, INTERVAL YEAR( CURDATE() ) - YEAR( birthday ) YEAR )
                                         BETWEEN CURDATE()
                                         AND DATE_ADD( CURDATE() , INTERVAL 7

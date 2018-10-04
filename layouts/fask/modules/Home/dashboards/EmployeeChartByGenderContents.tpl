@@ -23,7 +23,7 @@
         <div class="col-lg-11">
 
 
-           <div class="" id="widgetChartContainer_{$WIDGET->get('id')}" style="height:200px; width:300px;"></div>
+           <div class="" id="widgetChartContainer_{$WIDGET->get('id')}" style="height:250px; width:100%;"></div>
             <br>
         </div>
                 <div class="col-lg-1"></div>
@@ -63,7 +63,22 @@
         seriesDefaults:{
             renderer:$.jqplot.PieRenderer, 
             trendline:{ show:true }, 
-            rendererOptions: { padding: 4, showDataLabels: true }
+            rendererOptions: { padding: 4, showDataLabels: true },
+             
+            trendline:{ show:true }, 
+            rendererOptions: { padding: 4, showDataLabels: true },
+            shadow: false, 
+            rendererOptions:{
+                sliceMargin: 4, 
+                // rotate the starting position of the pie around to 12 o'clock.
+                startAngle: -90,
+                showDataLabels: true
+            },
+            highlighter: {
+                show: true,
+                useAxesFormatters: false,
+                tooltipFormatString: '%d'
+              }
         },
         
         legend:{
@@ -76,7 +91,32 @@
                 }
         }       
     });
+    
+$("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataHighlight', function () {
+
+                                            $('html,body').css('cursor','pointer');	  											
+    });
+
+$("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataUnhighlight', function () {
+
+                                            $('html,body').css('cursor','default');	  											
+    }); 	
+
+$("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataClick', function (ev, seriesIndex, pointIndex, data) {
+
+                                            link = data.pop();
+                                            window.open(link,"_blank");
+
+    });
 });
+
+{* var urls = ["www.yahoo.com", "www.google.com", "www.java.com", "www.w3schools.com/js/js_obj_date.asp"];
+  $('#widgetChartContainer_{$WIDGET->get('id')}').bind('jqplotDataClick', function (ev, seriesIndex, pointIndex, data) {
+      if(seriesIndex === 0){
+          var url = urls[pointIndex];
+          window.open("http://"+url);
+      }
+  });*}
 </script>
 {*[
     [

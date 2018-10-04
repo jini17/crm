@@ -20,7 +20,7 @@ class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
                 $age_groupList    = getAllPickListValues('age_group');
                 $genderList           = getAllPickListValues('gender');
               
-                    $department     = $request->get('type');
+                $department     = $request->get('type');
                 $gender              = $request->get('gender');
                 $age_group       = $request->get('age_group');
 
@@ -125,15 +125,14 @@ class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
            if($deparment != null){
                $sql .= "  AND department = '$deparment' ";
            }
-            if($gender != null){
-               $sql .= "  AND gender = '$gender' ";
-           }
+   
             $sql .= ' group BY gender';
 
            $query = $db->pquery($sql,array());
            $num_rows = $db->num_rows($query);
               
            if($num_rows > 0){
+               if($db->query_result($query,$i,'gender') == 'Male')
                 for($i = 0; $i < $num_rows; $i++){
                      $dept= $db->query_result($query,$i,'gender');
                      $counts= $db->query_result($query,$i,'total');
@@ -141,8 +140,14 @@ class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
                      $data['values'][] =$counts;
                 }
            }
+           else{
+               $data['labels'][] = [0,0];
+               $data['values'][] = [0,0];
+           }
+           
            return $data;
         }
         
+
        
 }
