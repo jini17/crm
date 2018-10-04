@@ -139,29 +139,45 @@ class EmployeeContract extends Vtiger_CRMEntity {
 		$log->debug("Exiting from insertIntoAttachment($id,$module) method.");
 	}
 
-	function get_Entitlement_list($id){
+	/** Returns a list of the associated opportunities
+	 * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc..
+	 * All Rights Reserved..
+	 * Contributor(s): ______________________________________..
+	*/
+	function get_Entitlement_list($id, $cur_tab_id, $rel_tab_id, $actions=false) {
 
-		global $log, $adb;
-		$adb->setDebug(true);
-		$log->debug("Entering into get_Entitlement_list($id) method.");
+		
+		global $log, $singlepane_view,$currentModule,$adb;
+
+		$log->debug("Entering get_Entitlement_list(".$id.") method ...");
+		// /$adb->setDebug(true);
+		$this_module = $currentModule;
+
+        $related_module = vtlib_getModuleNameById($rel_tab_id);
+		require_once("modules/$related_module/$related_module.php");
+		$other = new $related_module();
+        vtlib_setup_modulevars($related_module, $other);
+		$singular_modname = vtlib_toSingular($related_module);
+		
+		$parenttab = getParentTab();
+
+		$button = '';
 
 		$result = $adb->pquery("SELECT job_grade FROM vtiger_employeecontract WHERE employeecontractid=?", array($id));
 		$grade_id = $adb->query_result($result, 0, 'job_grade');
-
-		$reclaim = $adb->pquery("SELECT vtiger_claimtype.claim_type FROM vtiger_claimtype 
+		$year = date('Y');
+		$query = "SELECT vtiger_claimtype.claim_type, vtiger_claimtype.claim_status FROM vtiger_claimtype 	
 			LEFT JOIN allocation_claimrel ON allocation_claimrel.claim_id=vtiger_claimtype.claimtypeid
 			LEFT JOIN allocation_list ON allocation_list.allocation_id=allocation_claimrel.allocation_id
-			WHERE allocation_claimrel.grade_id=? AND allocation_list.allocation_year=?", array($grade_id, date('Y')));
+			WHERE allocation_claimrel.grade_id='$grade_id' AND allocation_list.allocation_year='$year' LIMIT 0, 10";
 
-		$numclaim = $adb->num_rows($reclaim);
-		$output = array();
+		$return_value = GetRelatedList($this_module, $related_module, $other, $query, $button, $returnset);
 
-		for($i=0;$i<$numclaim;$i++){
-			$output[] = $adb->query_result($reclaim, 0, 'claim_type');
+		if($return_value == null) $return_value = Array();
 
-		}
-		
-		print_r($output);
+		$return_value['CUSTOM_BUTTON'] = $button;
+
 		$log->debug("Exiting from get_Entitlement_list($id) method.");
+		return $return_value;
 	}
 }
