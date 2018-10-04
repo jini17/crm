@@ -88,9 +88,10 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 		$claimtype[$i]['transactiondate'] = Vtiger_Date_UIType::getDisplayDateValue($db->query_result($result, $i, 'transactiondate'));
 		$claimtype[$i]['description'] = $db->query_result($result, $i, 'description'); 
 		$claimtype[$i]['totalamount'] = $db->query_result($result, $i, 'totalamount'); 
-		$claimtype[$i]['claim_status'] = $db->query_result($result, $i, 'claim_status'); 
+		$claimtype[$i]['claim_status'] = $db->query_result($result, $i, 'claim_status');
 		$claimtype[$i]['taxinvoice'] = $db->query_result($result, $i, 'taxinvoice'); 
 		$claimtype[$i]['attachment'] = $attachment;
+		$claimtype[$i]['approved_by'] = $db->query_result($result, $i, 'approved_by');
 		$claimtype[$i]['approved_by'] = $db->query_result($result, $i, 'approved_by');
 		$rowUsedAmount = self::getClaimTypeUsedAmount($userid, $rowdetail['claimtypeid']);
 		$balance = 0;
@@ -276,7 +277,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	public function getMyTeamClaim($userid, $year, $page, $max,$selectedmember,$selectedleavetype){
 
 		$db = PearDatabase::getInstance();
-		
+		global $current_user;
 		$teamreporttoquery = "SELECT id FROM vtiger_users WHERE reports_to_id=$userid";
 		$resulteamreport = $db->pquery($teamreporttoquery,array());
 		
@@ -350,14 +351,16 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 			$myteamleave[$i]['description'] = $db->query_result($resultgetteamleave, $i, 'description'); 
 			$myteamleave[$i]['resonforreject'] = $db->query_result($resultgetteamleave, $i, 'resonforreject'); 
 			$myteamleave[$i]['totalamount'] = $db->query_result($resultgetteamleave, $i, 'totalamount');
-			$myteamleave[$i]['claim_status'] = $db->query_result($resultgetteamleave, $i, 'claim_status'); 
+			
 			$myteamleave[$i]['taxinvoice'] = $db->query_result($resultgetteamleave, $i, 'taxinvoice'); 
 			$myteamleave[$i]['attachment'] = $attachment;
-			$myteamleave[$i]['applicantid'] = $db->query_result($resultgetteamleave, $i, 'id');  
+			$myteamleave[$i]['applicantid'] = $db->query_result($resultgetteamleave, $i, 'id');
+			$applicantid = $myteamleave[$i]['applicantid'];  
 			$myteamleave[$i]['approved_by'] = $db->query_result($resultgetteamleave, $i, 'approved_by');
 			$myteamleave[$i]['transaction_limit'] = $rowdetail['transaction_limit'];
 			$myteamleave[$i]['monthly_limit'] = $rowdetail['monthly_limit']; 
 			$myteamleave[$i]['yearly_limit'] = $rowdetail['yearly_limit'];
+			$myteamleave[$i]['claim_status'] = '<a href="index.php?module=Users&appid='.$applicantid.'&claimid='.$claimid.'&view=PreferenceDetail&record='.$current_user								->id.'&tab=leave&parent=Settings">'.$db->query_result($resultgetteamleave, $i, 'claim_status').'</a>';  
 
 			$rowdetailUsed = self::getClaimTypeUsedAmount($userid,$claimtypeid );
 			$balance = 0;
