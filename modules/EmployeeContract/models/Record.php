@@ -108,7 +108,7 @@ class EmployeeContract_Record_Model extends Vtiger_Record_Model {
 
 
                 if($filter == 'contract' || $filter==null){
-                        $query = "SELECT vtiger_employeecontract.employeecontractid as empcid,concat(vtiger_users.first_name, '', vtiger_users.last_name) as fullname,vtiger_employeecontract.department, vtiger_employeecontract.designation, DAY(contract_expiry_date) as expirydate_day, MONTH(contract_expiry_date) as expirydate_month, YEAR(contract_expiry_date) as expirydate_year FROM vtiger_employeecontract 
+                        $query = "SELECT vtiger_employeecontract.employeecontractid as empcid,concat(vtiger_users.first_name, ' ', vtiger_users.last_name) as fullname,vtiger_employeecontract.department, vtiger_employeecontract.designation, DAY(contract_expiry_date) as expirydate_day, MONTH(contract_expiry_date) as expirydate_month, YEAR(contract_expiry_date) as expirydate_year FROM vtiger_employeecontract 
                                           INNER JOIN vtiger_employeecontractcf ON vtiger_employeecontractcf.employeecontractid=vtiger_employeecontract.employeecontractid 
                                           INNER JOIN vtiger_users ON vtiger_users.id = vtiger_employeecontract.employee_id 
                                           WHERE contract_expiry_date between curdate() AND ADDDATE(curdate(), 30) LIMIT ?, ?";
@@ -139,7 +139,7 @@ class EmployeeContract_Record_Model extends Vtiger_Record_Model {
 
                 $rowdetails = array();
                 for($i=0;$i<$noOfRows;$i++){
-                        $rowdetails[$i]['empcid'] = $db->query_result($result, $i, 'fullname');
+                        $rowdetails[$i]['empcid'] = $db->query_result($result, $i, 'empcid');
                         $rowdetails[$i]['fullname'] = $db->query_result($result, $i, 'fullname');
                         $rowdetails[$i]['department'] = $db->query_result($result, $i, 'department');
                         $rowdetails[$i]['designation'] = $db->query_result($result, $i, 'designation');
