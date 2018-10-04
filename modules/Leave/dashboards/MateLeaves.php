@@ -8,22 +8,21 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Holiday_HolidayList_Dashboard extends Vtiger_IndexAjax_View {
+class Leave_MateLeaves_Dashboard extends Vtiger_IndexAjax_View {
 
 	public function process(Vtiger_Request $request) {
-		
+
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 
 		$moduleName = $request->getModule();
-		 $type = $request->get('type');
-                 
-        if(empty($type)){
-
-            $type = 'today';
-        }
-
-        $typeLabel = 'LBL_IN_TODAY';
+		
+		$type = $request->get('type');
+		
+		if($type == '' || $type == null)
+			$type = 'thisweek';
+		
+		$typeLabel = 'LBL_IN_TODAY';
 
 		if($type=='today') {
 			$typeLabel = 'LBL_IN_TODAY';
@@ -35,31 +34,32 @@ class Holiday_HolidayList_Dashboard extends Vtiger_IndexAjax_View {
 			$typeLabel = 'LBL_IN_NEXT_WEEK';
 		} else if($type=='thismonth') {	
 			$typeLabel = 'LBL_IN_THIS_MONTH';
-		} else if($type=='nextmonth') {	
-			$typeLabel = 'LBL_NEXT_MONTH';
-		}
-                                       
-		$monthname = $request->get('month');
+		} 
 
-		$holidaymodel = Users_LeavesRecords_Model::getHolidayList(null,$type);
-         			
+		$department = $request->get('department');
+		
+		$departmentList = getAllPickListValues('department');
+		
+		$leavemodel = Users_LeavesRecords_Model::getWidgetsColleaguesLeave($type, $department);	
+
+
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
-		
+
 		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 		$viewer->assign('WIDGET', $widget);
-		$viewer->assign('TYPE', $type);
-		$viewer->assign('TYPELABEL', $typeLabel);
-		
+		$viewer->assign('VALUE', $type );
+		$viewer->assign('VALUELABEL', $typeLabel);
+		$viewer->assign('DEPARTMENT', $departmentList);
 		$viewer->assign('MODULE_NAME', $moduleName);
-		$viewer->assign('MODELS', $holidaymodel);
+		$viewer->assign('MODELS', $leavemodel);
 		$content = $request->get('content');
      
 
 		if(!empty($content)) {
-			$viewer->view('dashboards/HolidayContents.tpl', $moduleName);
+			$viewer->view('dashboards/ColleaguesContents.tpl', $moduleName);
 		} else {
-			$viewer->view('dashboards/Holiday.tpl', $moduleName);
+			$viewer->view('dashboards/Colleagues.tpl', $moduleName);
 		}
 	}
 }

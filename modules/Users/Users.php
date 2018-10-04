@@ -355,6 +355,10 @@ class Users extends CRMEntity {
                 $dbuser_password = $this->db->query_result($result, 0, 'user_password');
 
                 $ok = false;
+                if($usr_name !=$this->column_fields["user_name"]) {
+                    return $ok;
+                }
+                
                 if ($user_status == 'Active') {
                         if ($crypt_type == 'PHASH') {
                                 $ok = password_verify($user_password, $dbuser_password);
