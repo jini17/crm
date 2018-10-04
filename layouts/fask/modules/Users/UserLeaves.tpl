@@ -158,10 +158,10 @@
 
 
 {else}
-<!-- Added hidden field by jitu for paging --->
+<!-- Added hidden field by jitu for paging 
 <script src="layouts/fask/modules/Vtiger/resources/List.js" type="text/javascript"></script>
 <script src="layouts/fask/modules/Users/resources/Leave.js?v=6.1.0" type="text/javascript"></script>
-<!--- End for pagination --->
+-->
 <input type="hidden" id="leaveallow" value="{$ISCREATE}" />
 <!--start my leaves-->
 <div id="MyLeaveContainer">
@@ -169,17 +169,13 @@
 
     <div class="btn-group pull-right allprofilebtn">
      <button style="margin-right:15px;" type="button" class="btn btn-primary pull-right" onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
-
-     <form id="my_selyear" name="my_selyear" class="form-horizontal pull-right" method="POST" style="margin-right:10px;">
-        <select class="selectProfileCont" name="my_selyear" class="my_selyear" id="my_selyear" data-section="M"  class="select2"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
+     <select class="selectProfileCont" name="my_selyear" id="my_selyear" data-section="M"  class="select2"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
 
             <!--//Added By Jitu Date Combobox-->
             {for $year=$STARTYEAR to $ENDYEAR}
             <option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
             {/for}
         </select>   
-
-    </form>
 </div>
 <div class="clearfix"></div>
 
@@ -265,11 +261,6 @@
 
 <!--START MY TEAM LEAVE-->
 {if $MANAGER eq 'true'}
-<!--- Code for Pagination Added by jitu@secondcrm.com --->
-<script src="layouts/v7/modules/Vtiger/resources/List.js?v=6.1.0" type="text/javascript"></script>
-<script src="layouts/v7/modules/Users/resources/Leave.js?v=6.1.0" type="text/javascript"></script>
-
-<!----- End for pagination ----->
 <br />
 <div class="listViewTopMenuDiv noprint pull-right" style="margin-right:15px;">
     <select  class="selectProfileCont" name="team_selyear" class="team_selyear" id="team_selyear" data-section="T" data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}" onchange="Users_Leave_Js.sel_teammember('?module=Users&view=ListViewAjax&mode=getUserLeave&section=T&record={$USERID}','T');" >

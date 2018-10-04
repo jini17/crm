@@ -549,6 +549,6 @@ $jsLanguageStrings = array(
 	'JS_YEARLY_LIMIT_EXCEED'=>'Yearly limit exceeded !',
 	'JS_CLAIM_NOT_EXCEED'=>'Amount claim are fine.',																
 	'JS_TRANSACTION_AMOUNT_EXCEEDED'=>'Transaction limited exceeded',
-
+	'JS_NO_CLAIMTYPE_ALLOCATE'=>'No ClaimType allocated',
 
 );

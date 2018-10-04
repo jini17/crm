@@ -100,8 +100,8 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 $myleave[$i]['leave_type']      = $db->query_result($result, $i, 'title');
                 $myleave[$i]['leavetypeid']     = $db->query_result($result, $i, 'leave_type');
                 $myleave[$i]['colorcode']       = $db->query_result($result, $i, 'colorcode');
-                $myleave[$i]['fromdate']        = $db->query_result($result, $i, 'fromdate');
-                $myleave[$i]['todate']          = $db->query_result($result, $i, 'todate');
+                $myleave[$i]['from_date']        = $db->query_result($result, $i, 'fromdate');
+                $myleave[$i]['to_date']          = $db->query_result($result, $i, 'todate');
                 $myleave[$i]['leavestatus']     = $db->query_result($result, $i, 'leavestatus');
                 $myleave[$i]['id']              = $leaveid;
                 $myleave[$i]['applicantid']     = $db->query_result($result, $i, 'employee_id'); 

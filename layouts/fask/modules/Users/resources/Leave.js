@@ -355,8 +355,9 @@ Vtiger.Class("Users_Leave_Js", {
 		
 		app.helper.showProgress();
 		if (section == 'M'){
-		my_selyear=jQuery('.my_selyear').val();
-		changeYearActionUrl=changeYearActionUrl+'&selyear='+my_selyear;
+     		var my_selyear=jQuery("#my_selyear").val();
+     		alert(my_selyear);
+     		changeYearActionUrl=changeYearActionUrl+'&selyear='+my_selyear;
 			}
 		app.request.post({url:changeYearActionUrl}).then(
 		function(err,data) { 

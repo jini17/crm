@@ -18,7 +18,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		$this->exposeMethod('saveLeave');
 		$this->exposeMethod('saveClaim');
 		$this->exposeMethod('ValidateClaimAmount');
-		
+		$this->exposeMethod('IsAnyClaimTypeAssign');
 
 	}
 
@@ -30,6 +30,26 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		}
 	}
 	
+	//Validate ClaimType Assign to User 
+	public function IsAnyClaimTypeAssign(Vtiger_Request $request){
+		global $current_user;
+
+		$userid = $current_user->id;
+		$claimTypes = Users_ClaimRecords_Model::getClaimTypeList($userid);
+		$msg = '';
+	
+		if(count($claimTypes)==0){
+			$msg = 'JS_NO_CLAIMTYPE_ALLOCATE';
+		} 
+		
+		$response = new Vtiger_Response();
+		$response->setResult($msg);
+		$response->emit();
+
+		
+		return $allow;
+	}
+
 	public function ValidateClaimAmount(Vtiger_Request $request){   //echo"<pre>";  print_r($request);die;
 		
 		$db = PearDatabase::getInstance();
@@ -61,33 +81,33 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		$SumTotalAmountYear = $db->query_result($result1);
 		$balanceYear =  $totalamount + $SumTotalAmountYear ; //echo $SumTotalAmountYear;die;
 
-///////condition of amount exceed limit transaction limit/monthly
+		///////condition of amount exceed limit transaction limit/monthly
 		if(($totalamount>$transactionLimit) && ($transactionLimit!="-1")){ 
 			 $return =1; 
 		}elseif ($transactionLimit=="-1"){
-						if(($balanceMonth>$monthly)){ 
-							$return =2; 	
+			if(($balanceMonth>$monthly)){ 
+				$return =2; 	
+			}elseif ($monthly=="-1"){
+						if(($balanceYear>$yearly) && ($yearly!="-1")){ 
+						$return =3; 	
 						}elseif ($monthly=="-1"){
-									if(($balanceYear>$yearly) && ($yearly!="-1")){ 
-									$return =3; 	
-									}elseif ($monthly=="-1"){
-										$return = 0 ;	
-									}else {
-										$return = 0;
-									}	
+							$return = 0 ;	
 						}else {
 							$return = 0;
-						}
+						}	
+			}else {
+				$return = 0;
+			}
 		} elseif (($totalamount<$transactionLimit) && ($transactionLimit!="-1"))  {
-						if (($balanceMonth<$monthly) && ($monthly!="-1")){
-								if(($balanceYear<$yearly) && ($yearly!="-1")){
-									$return = 0 ;
-								}else {
-									$return = 3;
-								}
-						}else{
-							$return = 2;
-						}
+			if (($balanceMonth<$monthly) && ($monthly!="-1")){
+					if(($balanceYear<$yearly) && ($yearly!="-1")){
+						$return = 0 ;
+					}else {
+						$return = 3;
+					}
+			}else{
+				$return = 2;
+			}
 
 		} else {
 
@@ -113,13 +133,9 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		
 		}
 
-
-
-
-
 		   // $msg    = vtranslate("Not exceed limit","Users"); 	
 		    $response->setResult($msg);
-		}catch(Exception $e){
+		} catch(Exception $e){
 		    $response->setError($e->getCode(),$e->getMessage());
 		}
 		$response->emit();
