@@ -36,7 +36,9 @@
                                 </div>
                                 <div class='col-lg-4'>
                                     {Vtiger_Util_Helper::getMonthName($MODEL['expirydate_month'])}  {$MODEL['expirydate_day']}  ,   {$MODEL['expirydate_year']} 
-                                    <a class="pull-right btn-block" style="width: 10px; margin-top:-1px;" href="index.php?module=EmployeeContract&view=Detail&record={$MODEL['empcid']}&app=MARKETING"> 
+
+                                    <a class="pull-right btn-block" style="width: 6px; margin-top:-1px;" href="index.php?module=EmployeeContract&view=Detail&record={$MODEL['empcid']}&app=MARKETING"> 
+
                                         <i class="fa fa-link"></i> 
                                     </a>
                                 </div>
