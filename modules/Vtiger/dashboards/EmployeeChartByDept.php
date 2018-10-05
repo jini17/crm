@@ -134,17 +134,17 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
                 for($i = 0; $i < $num_rows; $i++){
                      $dept= $db->query_result($query,$i,'dept');
                      $counts= $db->query_result($query,$i,'total');
-                     $data['labels'][] =$dept;
+                     $data['labels'][] ="&nbsp;".$dept;
                      $data['values'][] =$counts;
                       $data['links'][] =$url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["department","e","'.$dept.'"]]]';
                      $data['colors'][] =$this->get_dept_colors($db, $dept);
                 }
            }
            else{
-               $data['labels'][] =0;
+               $data['labels'][] ="&nbsp;";
                 $data['values'][] ="";
                 $data['links'][] =$url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings';
-                $data['colors'][] =$this->get_dept_colors($db, $dept);
+                $data['colors'][] ="";
            }
       
            return $data;

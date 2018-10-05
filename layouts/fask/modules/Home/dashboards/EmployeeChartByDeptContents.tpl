@@ -18,10 +18,11 @@
         <input type='hidden' name='widgetid' id="{$WIDGET->get('id')}" value="{$WIDGET->get('id')}" />
         <input type='hidden' name='data' value='{$DATA}' />
         <input type='hidden' name='clickthrough' value="{$CLICK_THROUGH}" />
-
    <div class="row" style="margin:0px 10px;height:250px;width:100%;">
         <div class="col-lg-11">
-           <div class="" id="widgetChartContainer_{$WIDGET->get('id')}" style="height:250px; width:100%;"></div>
+              <div class="" id="widgetChartContainer_{$WIDGET->get('id')}" style="height:250px; width:100%;"> 
+               <div style="position: absolute;z-index: 99;display: none;color: #fff;background: rgba(0,0,0,.7);bottom: 12px;left: 136px;padding: 10px;border-radius: 6px;" class="tooltipgraph">popup</div>
+           </div>
             <br>
         </div>
                 <div class="col-lg-1"></div>
@@ -118,8 +119,25 @@
         $('html,body').css('cursor','default');	  											
     }); 	
     $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataClick', function (ev, seriesIndex, pointIndex, data) {							
-            link = data.pop();
+           link = data[data.length -1];
             window.open(link,"_blank");
     });
+    previousPoint = null;
+$('#widgetChartContainer_{$WIDGET->get('id')}').bind('jqplotMouseLeave', function (ev, seriesIndex, pointIndex, data) {
+        $('#widgetChartContainer_{$WIDGET->get('id')} .tooltipgraph').text('').hide()
+});
+$('#widgetChartContainer_{$WIDGET->get('id')}').bind('jqplotDataMouseOver', function (ev, seriesIndex, pointIndex, data) { 
+    var labels = $('#widgetChartContainer_{$WIDGET->get('id')} .jqplot-data-label');
+    $('#widgetChartContainer_{$WIDGET->get('id')} .tooltipgraph').text('').show();
+            if (previousPoint != null)
+            {
+               labels[previousPoint['idx']].innerHTML = previousPoint['data'][1]+'';               
+            }
+
+            $('#widgetChartContainer_{$WIDGET->get('id')} .tooltipgraph').text(data[0] + ": " + data[1]);      
+            $( '#widgetChartContainer_{$WIDGET->get('id')} .jqplot-event-canvas').on('mouseout',function(){
+             $('#widgetChartContainer_{$WIDGET->get('id')} .tooltipgraph').text('').hide()
+            });
+      });
 });
 </script>

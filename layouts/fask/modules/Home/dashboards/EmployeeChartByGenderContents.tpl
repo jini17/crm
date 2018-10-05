@@ -110,10 +110,6 @@ $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataHighlight', func
          $('html,body').css('cursor','pointer');	  
          
     });
-$("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataHighlight,', function(ev, seriesIndex, pointIndex, data) {
-            var $this = $(this);                
-            $this.attr('title', data[0] + ": " + data[1]);  
-}); 
 
 previousPoint = null;
 $('#widgetChartContainer_{$WIDGET->get('id')}').bind('jqplotMouseLeave', function (ev, seriesIndex, pointIndex, data) {

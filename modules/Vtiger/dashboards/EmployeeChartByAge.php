@@ -131,9 +131,10 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
             $data = array();
            $sql_bbs = "SELECT count(employeeno) as total,DATE_FORMAT(birthday,'%Y') as age_range from vtiger_users WHERE DATE_FORMAT(birthday,'%Y')  >= '1946'  AND  DATE_FORMAT(birthday,'%Y')  <=   '1954' ";
            $sql_bb = "SELECT count(employeeno) as total,DATE_FORMAT(birthday,'%Y') as age_range from vtiger_users WHERE DATE_FORMAT(birthday,'%Y')  >= '1955'  AND  DATE_FORMAT(birthday,'%Y')  <=   '1965' ";
-           $sql_gez = "SELECT count(employeeno) as total,DATE_FORMAT(birthday,'%Y') as age_range from vtiger_users WHERE DATE_FORMAT(birthday,'%Y')  >= '1966'  AND  DATE_FORMAT(birthday,'%Y')  <=   '1976'  ";
-           $sql_gex = "SELECT count(employeeno) as total,DATE_FORMAT(birthday,'%Y') as age_range from vtiger_users WHERE DATE_FORMAT(birthday,'%Y')  >= '1977'  AND  DATE_FORMAT(birthday,'%Y')  <=   '1994'  ";
-           
+           $sql_x = "SELECT count(employeeno) as total,DATE_FORMAT(birthday,'%Y') as age_range from vtiger_users WHERE DATE_FORMAT(birthday,'%Y')  >= '1966'  AND  DATE_FORMAT(birthday,'%Y')  <=   '1976'  ";
+           $sql_y = "SELECT count(employeeno) as total,DATE_FORMAT(birthday,'%Y') as age_range from vtiger_users WHERE DATE_FORMAT(birthday,'%Y')  >= '1977'  AND  DATE_FORMAT(birthday,'%Y')  <=   '1994'  ";
+           $sql_z = "SELECT count(employeeno) as total,DATE_FORMAT(birthday,'%Y') as age_range from vtiger_users WHERE DATE_FORMAT(birthday,'%Y')  >= '1995'  AND  DATE_FORMAT(birthday,'%Y')  <=   '2012'  ";
+
            if($where != NULL){
                $sql .= "  AND department = '$where' ";
            }
@@ -141,29 +142,34 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
 
            $bbs_query = $db->pquery($sql_bbs.$sql,array());
             $bb_query = $db->pquery($sql_bb.$sql,array());
-            $genx_query = $db->pquery($sql_gez.$sql,array());
-            $genz_query = $db->pquery($sql_gex.$sql,array());
+            $genx_query = $db->pquery($sql_x.$sql,array());
+            $geny_query = $db->pquery($sql_y.$sql,array());
+             $genz_query = $db->pquery($sql_z.$sql,array());
 
-            $data['labels'][] =  'Baby Boomers (1946-1954)' .$db->query_result($bbs_query,0,'total') ;
-
+            $data['labels'][] =  '&nbsp;Baby Boomers (1946-1954)' ;
             $data['values'][] = $db->query_result($bbs_query,0,'total');// (empty($db->query_result($bbs_query,0,'age_range'))?$db->query_result($bbs_query,0,'age_range'): $num_rows = $db->num_rows($bbs_query) );
             $data['links'][]    = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["birthday","h","01-01-1946"]],[["birthday","m","31-12-1954"]]]&nolistcache=1';
             $data['colors'][] = $this->get_agegroup_color($db, 'Baby Boomers (1946-1954)' );
             
-            $data['labels'][] =  'Boomers (1955-1965)' ;
+            $data['labels'][] =  '&nbsp;Boomers (1955-1965)' ;
             $data['values'][] = $db->query_result($bb_query,0,'total');
             $data['links'][]    =$url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["birthday","h","01-01-1955"]],[["birthday","m","31-12-1965"]]]&nolistcache=1';
             $data['colors'][] = $this->get_agegroup_color($db, 'Boomers (1955-1965)' );
             
-            $data['labels'][] =  "Generation X (1966-1976)" ;
+            $data['labels'][] =  "&nbsp;Generation X (1966-1976)" ;
             $data['values'][] =$db->query_result($genx_query,0,'total');//(empty($db->query_result($genx_query,0,'age_range'))?$db->query_result($genx_query,0,'age_range'): $num_rows = $db->num_rows($genx_query)  ); 
             $data['links'][]    =$url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["birthday","h","01-01-1966"]],[["birthday","m","31-12-1976"]]]&nolistcache=1';
             $data['colors'][] = $this->get_agegroup_color($db, 'Generation X (1966-1976)' );
    
-            $data['labels'][] =  "Generation Y (1977-1994)" ;
-            $data['values'][] =  $db->query_result($genz_query,0,'total');//(empty($db->query_result($genz_query,0,'age_range'))?$db->query_result($genz_query,0,'age_range'): $num_rows = $db->num_rows($genz_query) ); 
+            $data['labels'][] =  "&nbsp;Generation Y (1977-1994)" ;
+            $data['values'][] =  $db->query_result($geny_query,0,'total');//(empty($db->query_result($genz_query,0,'age_range'))?$db->query_result($genz_query,0,'age_range'): $num_rows = $db->num_rows($genz_query) ); 
             $data['links'][]    = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["birthday","h","01-01-1977"]],[["birthday","m","31-12-1994"]]]&nolistcache=1';
             $data['colors'][] = $this->get_agegroup_color($db, 'Generation Y (1977-1994)' );
+            
+            $data['labels'][] =  "&nbsp;Generation Z (1995-2012)" ;
+            $data['values'][] =  $db->query_result($genz_query,0,'total');//(empty($db->query_result($genz_query,0,'age_range'))?$db->query_result($genz_query,0,'age_range'): $num_rows = $db->num_rows($genz_query) ); 
+            $data['links'][]    = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["birthday","h","01-01-1977"]],[["birthday","m","31-12-1994"]]]&nolistcache=1';
+            $data['colors'][] = $this->get_agegroup_color($db, 'Generation Z (1995-2012)' );
 
          return $data;
         }
