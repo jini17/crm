@@ -403,10 +403,6 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 			try {
 				 $wsid = vtws_getWebserviceEntityId('Leave', $leaveid);
 
-				 if(!empty($_FILES['attachment']['name'])){ 
-					$this->insertIntoAttachment($leaveid, 'Leave');
-				 }
-
 				//Edit and manager approval
 				if(($manager == 'true' || $current_user->is_admin=='on' ) && ($request->get('savetype')=='Approved' || $request->get('savetype')=='Rejected'))
 				{	
@@ -479,6 +475,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
 					$leave = vtws_revise($data, $current_usersaving);
 					$leaveIdarray = explode('x',$leave['id']);
+					
 					if(!empty($_FILES['attachment']['name'])){ 
 						$this->insertIntoAttachment($leaveIdarray[1], 'Leave');
 					}
