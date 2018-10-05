@@ -11,8 +11,21 @@ Vtiger.Class("Users_Claim_Js", {
 
 	//register click event for Add New Education button
 	addClaim : function(url) { 
-	     this.editClaim(url);
-	    
+	     var thisInstance = this;
+         	//check the anyclaimType for login user 
+    		var params = {
+				'module' 	: app.getModuleName(),
+				'action' 	: 'SaveSubModuleAjax',
+				'mode'   	: 'IsAnyClaimTypeAssign',
+     		}
+               
+             app.request.post({'data': params}).then(function (err, data) {        
+                    if(data.result !=''){
+                         app.helper.showErrorNotification({'message': app.vtranslate(data.result, 'Users')});
+                         return false;
+                    }
+             }); 
+              thisInstance.editClaim(url);
 	},
 	
 	textAreaLimitChar : function(){
@@ -29,6 +42,7 @@ Vtiger.Class("Users_Claim_Js", {
 			  	}
 			});
 	},
+	
 	editClaim : function(url) {  
 	    var aDeferred = jQuery.Deferred();
 		var thisInstance = this;
@@ -140,27 +154,7 @@ Vtiger.Class("Users_Claim_Js", {
 
 					$('#transactiondate').change(function(){ 
 
-/*
-						var today = new Date();
-						var dd = today.getDate();
-
-						var mm = today.getMonth()+1; 
-						var yyyy = today.getFullYear();
-						if(dd<10) 
-						{
-						    dd='0'+dd;
-						} 
-
-						if(mm<10) 
-						{
-						    mm='0'+mm;
-						} 
-
-						today = dd+'-'+mm+'-'+yyyy;*/
-
-
-
-						transactiondate = $("#transactiondate").val(); 
+				         var transactiondate = $("#transactiondate").val(); 
 					    var date = transactiondate.substring(0, 2);
 					    var month = transactiondate.substring(3, 5);
 					    var year = transactiondate.substring(6, 10);
@@ -168,34 +162,26 @@ Vtiger.Class("Users_Claim_Js", {
 					    var dateToCompare = new Date(year, month - 1, date);
 					    var currentDate = new Date();
 
-
-
-
 						if(dateToCompare >= currentDate){
-						app.helper.showErrorNotification({'message': app.vtranslate('JS_ERROR_TRANSACTION_DATE')});
-						$("#transactiondate").val('');
-						$("#totalamount").val('');	
-		            	e.preventDefault();
-							
-						}
-
-
-   						//$("#totalamount").val('');		
+						     app.helper.showErrorNotification({'message': app.vtranslate('JS_ERROR_TRANSACTION_DATE')});
+     						$("#transactiondate").val('');
+     						$("#totalamount").val('');	
+	    	            	          e.preventDefault();
+	          			}
 					});  
 
-
 				    $('#totalamount').focusout(function(){
-					if(	$("#category").val()=="select" ){
-						app.helper.showErrorNotification({'message': app.vtranslate('JS_SELECT_CLAIM_TYPE')});
-		            	e.preventDefault();
-		            	$("#totalamount").val('');  
-		            }
-					if(	$("#transactiondate").val()=="" ){
-						app.helper.showErrorNotification({'message': app.vtranslate('JS_SELECT_TRANSACTION_DATE')});
-		            	e.preventDefault();
-		            	$("#totalamount").val('');  
-
-		            }
+					     if(	$("#category").val()=="select" ){
+						     app.helper.showErrorNotification({'message': app.vtranslate('JS_SELECT_CLAIM_TYPE')});
+		                 	     e.preventDefault();
+		                 	     $("#totalamount").val('');  
+		                    }
+					     if(	$("#transactiondate").val()=="" ){
+                                   app.helper.showErrorNotification({'message': app.vtranslate('JS_SELECT_TRANSACTION_DATE')});
+		                 	     e.preventDefault();
+     		                 	$("#totalamount").val('');  
+                              }
+                              
 					var totalamount = $('#totalamount').val();
 					var current_user_id = $('#current_user_id').val();
 					var transactiondate = $("#transactiondate").val();
@@ -235,24 +221,24 @@ Vtiger.Class("Users_Claim_Js", {
                               var extraData = form.serializeFormData();
                             
                               thisInstance._upload(form, extraData).then(function(data) { 
-                                     app.helper.hideProgress(); 
                                      app.helper.hideModal();
-                                     app.helper.showSuccessNotification({'message': app.vtranslate(data.result.msg, 'Users')});	
+                                     app.helper.showSuccessNotification({'message': app.vtranslate(data.result, 'Users')});	
+                                    
          	                          if(manager == 'true'){
 						               		thisInstance.updateClaimGrid(user);
 						               }else{
 						               		thisInstance.updateClaimGrid(userid);
 						               }
-								                         
+							 aDeferred.resolve(data);	                         
 		                         }, function(e) {
-		                            app.helper.showErrorNotification({'message': app.vtranslate(data.result.msg, 'Users')});
+		                            app.helper.showErrorNotification({'message': app.vtranslate(data.result, 'Users')});
 	                         }); 
                              
                              }
                         };
                          form.vtValidate(params)
           		} else {
-                        aDeferred.reject(err);
+                       // aDeferred.reject(err);
                     }
 	     	});
 	     return aDeferred.promise();	
@@ -285,47 +271,36 @@ Vtiger.Class("Users_Claim_Js", {
 		return aDeferred.promise();
 	},
 
-
-	
- //use error notification
-		 ValidateClaimAmount : function(current_user_id,trans,monthly,yearly,totalamount,transactiondate,category){  
-		 	
-			var params = {
-					'module' 		  : app.getModuleName(),
-					'action' 		  : 'SaveSubModuleAjax',
-					'mode'   		  : 'ValidateClaimAmount',
-					'current_user_id' : current_user_id,
-					'trans'   		  : trans,
-					'monthly'  	      : monthly,
-					'yearly'   		  : yearly,
-					'totalamount'     : totalamount,
-					'transactiondate' : transactiondate,
-					'category'        : category,
-				
-				}
+      //use error notification
+      ValidateClaimAmount : function(current_user_id,trans,monthly,yearly,totalamount,transactiondate,category){  
+      var aDeferred = jQuery.Deferred();
+	     var params = {
+			'module' 		  : app.getModuleName(),
+			'action' 		  : 'SaveSubModuleAjax',
+			'mode'   		  : 'ValidateClaimAmount',
+			'current_user_id': current_user_id,
+			'trans'   	  : trans,
+			'monthly'  	  : monthly,
+			'yearly'   	  : yearly,
+			'totalamount'    : totalamount,
+			'transactiondate': transactiondate,
+			'category'        : category,
+			
+	     }
 
               app.request.post({'data': params}).then(function (err, data) {         
               app.helper.hideProgress(); 
                //show notification after Education details saved
                 if((data==app.vtranslate('JS_TRANSACTION_LIMIT_EXCEED')) || (data==app.vtranslate('JS_MONTHLY_LIMIT_EXCEED')) || (data==app.vtranslate('JS_YEARLY_LIMIT_EXCEED')) || (data=='undefined')){
-                app.helper.showErrorNotification({'message': data});
-                $("#totalamount").val('');
-           		 }else{ 
-           		 	e.preventDefault();
-           		 	//app.helper.showSuccessNotification({'message': data});
-           		 }
-               //Adding or update the Education details in the list
-              
+                     app.helper.showErrorNotification({'message': data});
+                     $("#totalamount").val('');
+                     return false;
+           	 }
              }
           );
-
-           return aDeferred.promise();
-				
-
-		  
-
-
-     },	
+     
+          return aDeferred.promise();
+	},	
 
 
 	 /*saveClaimDetails : function(form){   

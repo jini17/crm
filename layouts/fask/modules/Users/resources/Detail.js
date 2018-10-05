@@ -228,6 +228,47 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 	},
 	
 },{
+     //Added By jitu@secondcrm.com on 29-10-2014
+	registerDisplayDetailTabClickEvent : function(form) { 
+		var userid = jQuery('#recordId').val();
+		jQuery('li.relatedListTab').on('click',function(e) {
+			var tabIndx = $(this).index();
+			var container = $('a', this).attr('href');
+			    container = container.replace('#','');
+               if(container=='preference'){
+               		jQuery(".detailViewButtoncontainer").removeClass('hide');	
+                    window.location.href="?module=Users&view=PreferenceDetail&parent=Settings&record="+userid
+     			} else {
+     				jQuery(".detailViewButtoncontainer").addClass('hide');
+     			}
+
+			if(tabIndx !=0 && container !='') {
+			     var params = {
+					     'data' : {
+						     'module': app.getModuleName(),
+						     'view' : "ListViewAjax",
+						     'record' : userid,
+						     'mode' : 'getUser'+container.substr(0, 1).toUpperCase() + container.substr(1),
+						}
+				    };
+				
+				app.helper.showProgress(app.vtranslate('JS_PLEASE_WAIT'));
+				app.request.post(params).then(function (err, data) { 
+				if (err === null) {
+     				app.helper.hideProgress();
+     				//app.helper.showSuccessNotification({'message': data.message});
+					jQuery('.tab-pane').hide();
+					jQuery('#'+container).show();
+					jQuery('#'+container).html(data);
+				} else {
+					
+					//app.helper.showErrorNotification({'message': err.message});
+				}
+			});
+				
+			} 
+		});
+	}, 
 	registerAjaxPreSaveEvent: function () {
 		var self = this;
 		app.event.on(Vtiger_Detail_Js.PreAjaxSaveEvent, function (e, params) {
