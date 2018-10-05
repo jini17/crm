@@ -168,7 +168,7 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
             
             $data['labels'][] =  "&nbsp;Generation Z (1995-2012)" ;
             $data['values'][] =  $db->query_result($genz_query,0,'total');//(empty($db->query_result($genz_query,0,'age_range'))?$db->query_result($genz_query,0,'age_range'): $num_rows = $db->num_rows($genz_query) ); 
-            $data['links'][]    = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["birthday","h","01-01-1977"]],[["birthday","m","31-12-1994"]]]&nolistcache=1';
+            $data['links'][]    = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["birthday","h","01-01-1995"]],[["birthday","m","31-12-2012"]]]&nolistcache=1';
             $data['colors'][] = $this->get_agegroup_color($db, 'Generation Z (1995-2012)' );
 
          return $data;
