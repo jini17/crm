@@ -436,7 +436,7 @@ Vtiger.Class("Users_Claim_Js", {
 		
 		app.helper.showProgress();
 		if (section == 'M'){
-		my_selyear=jQuery('.my_selyear').val();
+		my_selyear=jQuery('#my_selyear').val();
 			changeYearActionUrl=changeYearActionUrl+'&selyear='+my_selyear;
 			}
 		app.request.post({url:changeYearActionUrl}).then(

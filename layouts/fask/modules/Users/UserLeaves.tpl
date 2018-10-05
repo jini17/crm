@@ -118,7 +118,7 @@
         <td class="medium" valign=top>{$USER_LEAVE['leavestatus']}</td>
 
         <td class="listTableRow small" valign=top>
-            <div class="pull-right actions">
+            <div class="pull-left actions">
                 <span class="actionImages">
 
 
@@ -210,7 +210,7 @@
                         <td class="medium" valign=top>{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($USER_LEAVE['to_date'])}</td>
                         <td class="medium" valign=top>{$USER_LEAVE['leavestatus']}</td>
                         <td class="medium" valign=top>
-                            <div class="pull-right actions">
+                            <div class="pull-left actions">
                                 <span class="actionImages">
 
                                     {if $USER_LEAVE['fileid'] neq ''}     
@@ -366,7 +366,7 @@
                                 <td class="medium" valign=top>{$USER_LEAVE['to_date']}</td>
                                 <td class="medium" valign=top>{$USER_LEAVE['leavestatus']}</td>
                                 <td class="medium" valign=top>
-                                    <div class="pull-right actions">
+                                    <div class="pull-left actions">
                                         <span class="actionImages">
 
                                               {if $USER_LEAVE['fileid'] neq ''}     

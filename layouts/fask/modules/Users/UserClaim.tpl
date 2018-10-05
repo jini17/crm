@@ -30,7 +30,7 @@
 						<td class="medium" valign=top>{$USER_CLAIM['totalamount']}</td>
 						<td class="medium" valign=top>
 
-							<div class="pull-right actions">
+							<div class="pull-left actions">
 								<span class="actionImages">
 								  {if $USER_CLAIM['attachment'] neq ''}     
 
@@ -43,7 +43,8 @@
 
 								{if $USER_CLAIM['claim_status'] eq 'Apply'}
 								<a class="editLeave cursorPointer editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Claim_Js.editClaim('index.php{$CREATE_CLAIM_URL}&record={$USER_CLAIM['claimid']}&userId={$USERID}&claim_status={$USER_CLAIM['claim_status']}&manager=false');"></a>{/if}&nbsp;&nbsp;
-								{/if} <input type="hidden" name="manager" id="manager" value="false" />
+								{/if} 
+								<input type="hidden" name="manager" id="manager" value="false" />
 								{if $USER_CLAIM['claim_status'] eq 'Apply'}
 								<a class="deleteLeave cursorPointer" onclick="Users_Claim_Js.deleteClaim('index.php?module=Claim&action=Delete&record={$USER_CLAIM['claimid']}');"><i class="fa fa-trash-o" title="Delete"></i></a>
 								{/if} 
@@ -146,7 +147,7 @@
 			<td class="medium" valign=top>{$USER_CLAIM['claim_status']}</td>
 
 			<td class="medium" valign=top>
-				<div class="pull-right actions">
+				<div class="pull-left actions">
 					<span class="actionImages">
 					  {if $USER_CLAIM['attachment'] neq ''}     
 	                        <a href="index.php?module=Claim&action=DownloadAttachment&record={$USER_CLAIM['claimid']}&attachmentid={$USER_CLAIM['fileid']}"><i class="fa fa-file-o" title="Documents"></i></a>    
@@ -195,7 +196,6 @@
 		<div style="float:right;margin-right:15px;margin-bottom:10px;">
 			<button style="margin-left:15px;" type="button" class="btn btn-primary pull-right"onclick="Users_Claim_Js.addClaim('{$CREATE_CLAIM_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_APPLY_CLAIM', $MODULE)}</strong>
 			</button>
-			<form  id="my_selyear" name="my_selyear" class="form-horizontal pull-right" method="POST">
 				<select class="selectProfileCont" name="my_selyear" id="my_selyear" data-section="M"  class="my_selyear" data-url="?module=Users&view=ListViewAjax&mode=getUserClaim&section=M&record={$USERID}"   onchange="Users_Claim_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserClaim&section=M&record={$USERID}','M');">
 
 					<!--//Added By Jitu Date Combobox-->
@@ -203,9 +203,6 @@
 					<option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
 					{/for}
 				</select>	
-			</form>
-
-
 		</div>
 
 
@@ -243,7 +240,7 @@
 									<td class="medium" valign=top>{$USER_CLAIM['transactiondate']}</td>
 									<td class="medium" valign=top>{$USER_CLAIM['totalamount']}</td>
 									<td class="medium" valign=top>
-										<div class="pull-right actions">
+										<div class="pull-left actions">
 											<span class="actionImages">
 
 
@@ -414,7 +411,7 @@
 			<td class="medium" valign=top>{$USER_CLAIM['claim_status']}</td>
 
 			<td class="medium" valign=top>
-				<div class="pull-right actions">
+				<div class="pull-left actions">
 					<span class="actionImages">
 
 						  {if $USER_CLAIM['attachment'] neq ''}     
