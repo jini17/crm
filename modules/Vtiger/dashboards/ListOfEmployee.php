@@ -18,28 +18,22 @@ class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
                 $viewer                   = $this->getViewer($request);
                 $moduleName      = $request->getModule();
                 $departmentList  = getAllPickListValues('department');
-                $dept                      = $this->department($department);
-                $agegroup             = $this->age_group($age_group);
-                $Gender                 = $this->gender($gender);
-                
-                $moduleModel = Home_Module_Model::getInstance($moduleName);
-                $viewer->assign('REQUEST_DEPARTMENT', $dept);
-
-                $viewer->assign('DEPARTMENT', $departmentList);
-                $viewer->assign('AGE_GROUP', $age_groupList);
-                $viewer->assign('GENDER', $genderList);
-                $viewer->assign('CHART_TYPE',$chartTYPE);
-       
+                $moduleModel    = Home_Module_Model::getInstance($moduleName);
+          
+         
                 $page     = $request->get('page');
                 $linkId     = $request->get('linkid');
 
                 $moduleModel  = Home_Module_Model::getInstance($moduleName);
                 $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
-                $users     = $this->get_employee($db, $department);
+                $users                  = $this->get_employee($db, $department);
+
+                $viewer->assign('REQUEST_DEPARTMENT', $dept);
+                $viewer->assign('DEPARTMENT', $departmentList);
                 $viewer->assign('WIDGET', $widget);
                 $viewer->assign('MODULE_NAME', $moduleName);
-
-                $viewer->assign('DATA', $empbydept);
+                $viewer->assign('DATA', $users);
+                $viewer->assign('URL',$site_URL);
 
                 $content = $request->get('content');
             
@@ -70,7 +64,7 @@ class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
    * @return string
    */
         function get_employee($db,$department){
-        $sql = "SELECT first_name,last_name FROM vtiger_users status = 'Active' ";
+        $sql = "SELECT first_name,last_name FROM vtiger_users WHERE status = 'Active' ";
         if($department != NULL){
             $sql .= "  AND  department='$department'";
         }
@@ -78,6 +72,7 @@ class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
         $numrows = $db->num_rows($query);
         $data = array();
         for($i =0; $i < $numrows; $i++ ){
+            $data['empid'] = $db->query_result($query,$i,'id');
             $data['first_name'] = $db->query_result($query,$i,'first_name');
             $data['last_name'] = $db->query_result($query,$i,'last_name');
             $data['department'] = $db->query_result($query,$i,'department');
