@@ -107,20 +107,15 @@
     });
     
 $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataHighlight', function () {
-
-                                            $('html,body').css('cursor','pointer');	  											
+         $('html,body').css('cursor','pointer');	  											
     });
 
 $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataUnhighlight', function () {
-
-                                            $('html,body').css('cursor','default');	  											
-    }); 	
-
+        $('html,body').css('cursor','default');	  											
+ }); 	
 $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataClick', function (ev, seriesIndex, pointIndex, data) {
-
-                                            link = data.pop();
-                                            window.open(link,"_blank");
-
+        link = data[data.length -1];
+        window.open(link,"_blank");
     });
 });
 
