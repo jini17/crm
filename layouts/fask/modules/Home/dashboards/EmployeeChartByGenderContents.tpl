@@ -118,7 +118,7 @@ $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataUnhighlight', fu
 
 $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataClick', function (ev, seriesIndex, pointIndex, data) {
 
-                                            link = data.pop();
+                                            link = data[data.length -1];
                                             window.open(link,"_blank");
 
     });
