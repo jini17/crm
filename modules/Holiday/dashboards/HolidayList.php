@@ -20,23 +20,24 @@ class Holiday_HolidayList_Dashboard extends Vtiger_IndexAjax_View {
                  
         if(empty($type)){
 
-            $type = 'today';
+            $type = 'thisyear';
         }
 
-        $typeLabel = 'LBL_IN_TODAY';
+        $typeLabel = 'LBL_THIS_YEAR';
 
-		if($type=='today') {
-			$typeLabel = 'LBL_IN_TODAY';
-		} else if($type=='tomorrow') {	
-			$typeLabel = 'LBL_IN_TOMORROW';
+		 if($type=='tomorrow') {	
+                                                    $typeLabel = 'LBL_IN_TOMORROW';
 		} else if($type=='thisweek') {	
-			$typeLabel = 'LBL_IN_THIS_WEEK';
+                                                    $typeLabel = 'LBL_THIS_WEEK';
 		} else if($type=='nextweek') {	
-			$typeLabel = 'LBL_IN_NEXT_WEEK';
+                                                    $typeLabel = 'LBL_NEXT_WEEK';
 		} else if($type=='thismonth') {	
-			$typeLabel = 'LBL_IN_THIS_MONTH';
+                                                    $typeLabel = 'LBL_THIS_MONTH';
 		} else if($type=='nextmonth') {	
-			$typeLabel = 'LBL_NEXT_MONTH';
+                                                    $typeLabel = 'LBL_NEXT_MONTH';
+		}
+                                         else if($type=='thisyear') {	
+                                                    $typeLabel = 'LBL_THIS_YEAR';
 		}
                                        
 		$monthname = $request->get('month');
