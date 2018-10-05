@@ -8,7 +8,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
+class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
 
         public function process(Vtiger_Request $request) {
             global $site_URL;
