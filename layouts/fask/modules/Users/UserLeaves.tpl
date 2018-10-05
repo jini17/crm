@@ -110,8 +110,7 @@
     {foreach item=USER_LEAVE from=$MYTEAMLEAVES}
     <tr data-section="T">
         <td class="medium" valign=top>{$USER_LEAVE['fullname']}</td>
-        <td class="medium" valign=top>{$USER_LEAVE['leave_reason']}</td>
-
+        <td class="medium" valign=top title="{$USER_LEAVE['leave_reason']}">{$USER_LEAVE['leave_reason']|truncate:20}</td>
         <td class="medium" valign=top><label style="background-color:{$USER_LEAVE['color_code']};float:left;margin-right:5px;width:30px;height:20px;"></label>{$USER_LEAVE['leave_type']}</td>		
 
         <td class="medium" valign=top>{$USER_LEAVE['from_date']}</td>
@@ -362,7 +361,7 @@
                             {foreach item=USER_LEAVE from=$MYTEAMLEAVES}
                             <tr data-section="T">
                                 <td class="medium" valign=top>{$USER_LEAVE['fullname']}</td>
-                                <td class="medium" valign=top>{$USER_LEAVE['leave_reason']}</td>
+                                <td class="medium" valign=top title="{$USER_LEAVE['leave_reason']}">{$USER_LEAVE['leave_reason']|truncate:30}</td>
                                 <td class="medium" valign=top><label style="background-color:{$USER_LEAVE['color_code']};float:left;margin-right:5px;width:30px;height:20px;"></label>{$USER_LEAVE['leave_type']}</td>     <td class="medium" valign=top>{$USER_LEAVE['from_date']}</td>
                                 <td class="medium" valign=top>{$USER_LEAVE['to_date']}</td>
                                 <td class="medium" valign=top>{$USER_LEAVE['leavestatus']}</td>

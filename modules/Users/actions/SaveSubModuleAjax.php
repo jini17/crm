@@ -53,8 +53,10 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 	public function ValidateClaimAmount(Vtiger_Request $request){   //echo"<pre>";  print_r($request);die;
 		
 		$db = PearDatabase::getInstance();
+		global $current_user;
+	
 		$request= $_REQUEST['form'];
-		$current_user_id= $_REQUEST['current_user_id'];
+		$current_user_id= $current_user->id;
 		$transactionLimit= $_REQUEST['trans']; 
 		$monthly = $_REQUEST['monthly']; 
 		$yearly = $_REQUEST['yearly'];
@@ -67,19 +69,21 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		$job_grade = $_SESSION["myjobgrade"] ;
 
 	
-        $query = "SELECT sum(totalamount) FROM vtiger_claim INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_claim.claimid WHERE vtiger_crmentity.deleted=0 AND vtiger_crmentity.smownerid=$current_user_id AND vtiger_claim.category=$category AND MONTH(transactiondate)=$month group by MONTH(transactiondate)";
+    
+ 		$query = "SELECT sum(totalamount) as monthamount FROM vtiger_claim INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_claim.claimid WHERE vtiger_crmentity.deleted=0 AND vtiger_crmentity.smownerid=$current_user_id AND vtiger_claim.category=$category AND MONTH(transactiondate)=$month group by MONTH(transactiondate)";
 
-        $query1 = "SELECT sum(totalamount) FROM vtiger_claim INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_claim.claimid WHERE vtiger_crmentity.deleted=0 AND vtiger_crmentity.smownerid=$current_user_id AND vtiger_claim.category=$category AND YEAR(transactiondate)=$year group by YEAR(transactiondate)";
+        $query1 = "SELECT sum(totalamount) as yearlyamount FROM vtiger_claim INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_claim.claimid WHERE vtiger_crmentity.deleted=0 AND vtiger_crmentity.smownerid=$current_user_id AND vtiger_claim.category=$category AND YEAR(transactiondate)=$year group by YEAR(transactiondate)";
 
 
 
 	 	$result = $db->pquery($query);
-		$SumTotalAmountMonth = $db->query_result($result);
+		$SumTotalAmountMonth = $db->query_result($result,0,'monthamount');
 		$balanceMonth = $totalamount+ $SumTotalAmountMonth  ; //echo $balanceMonth; echo $monthly;die;
 
 		$result1 = $db->pquery($query1);
-		$SumTotalAmountYear = $db->query_result($result1);
+		$SumTotalAmountYear = $db->query_result($result1, 0, 'yearlyamount');
 		$balanceYear =  $totalamount + $SumTotalAmountYear ; //echo $SumTotalAmountYear;die;
+
 
 		///////condition of amount exceed limit transaction limit/monthly
 		if(($totalamount>$transactionLimit) && ($transactionLimit!="-1")){ 
@@ -109,9 +113,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 				$return = 2;
 			}
 
-		} else {
-
-		}
+		} 
 
 
 		$response = new Vtiger_Response();
@@ -140,14 +142,11 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		}
 		$response->emit();
 
-
-
-		  //echo $instance;die;
-		//  return $instance;
-  	      
-		                           
+ 
+		              
 
 	}
+
 	public function saveEducation(Vtiger_Request $request) {
 		
 		$module = $request->getModule();

@@ -144,24 +144,25 @@ class Vtiger_EmployeeChartByAge_Dashboard extends Vtiger_IndexAjax_View {
             $genx_query = $db->pquery($sql_gez.$sql,array());
             $genz_query = $db->pquery($sql_gex.$sql,array());
 
-            $data['labels'][] =  'Baby Boomers (1946-1954)'  ;
+            $data['labels'][] =  'Baby Boomers (1946-1954)' .$db->query_result($bbs_query,0,'total') ;
+
             $data['values'][] = $db->query_result($bbs_query,0,'total');// (empty($db->query_result($bbs_query,0,'age_range'))?$db->query_result($bbs_query,0,'age_range'): $num_rows = $db->num_rows($bbs_query) );
-            $data['links'][]    = $url.'/index.php?module=EmployeeContract&view=List&viewname=58&search_params=[[["age_group","e","Baby Boomers+(1946-1954)"]]]&nolistcache=1';
+            $data['links'][]    = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["birthday","h","01-01-1946"]],[["birthday","m","31-12-1954"]]]&nolistcache=1';
             $data['colors'][] = $this->get_agegroup_color($db, 'Baby Boomers (1946-1954)' );
             
             $data['labels'][] =  'Boomers (1955-1965)' ;
             $data['values'][] = $db->query_result($bb_query,0,'total');
-            $data['links'][]    =$url.'/index.php?module=EmployeeContract&view=List&viewname=58&search_params=[[["age_group","e","Boomers+(1955-1965)"]]]&nolistcache=1';
+            $data['links'][]    =$url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["birthday","h","01-01-1955"]],[["birthday","m","31-12-1965"]]]&nolistcache=1';
             $data['colors'][] = $this->get_agegroup_color($db, 'Boomers (1955-1965)' );
             
             $data['labels'][] =  "Generation X (1966-1976)" ;
             $data['values'][] =$db->query_result($genx_query,0,'total');//(empty($db->query_result($genx_query,0,'age_range'))?$db->query_result($genx_query,0,'age_range'): $num_rows = $db->num_rows($genx_query)  ); 
-            $data['links'][]    =$url.'/index.php?module=EmployeeContract&view=List&viewname=58&search_params=[[["age_group","e","Boomers+(1966-1976)"]]]&nolistcache=1';
+            $data['links'][]    =$url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["birthday","h","01-01-1966"]],[["birthday","m","31-12-1976"]]]&nolistcache=1';
             $data['colors'][] = $this->get_agegroup_color($db, 'Generation X (1966-1976)' );
    
             $data['labels'][] =  "Generation Y (1977-1994)" ;
             $data['values'][] =  $db->query_result($genz_query,0,'total');//(empty($db->query_result($genz_query,0,'age_range'))?$db->query_result($genz_query,0,'age_range'): $num_rows = $db->num_rows($genz_query) ); 
-            $data['links'][]    = $url.'/index.php?module=EmployeeContract&view=List&viewname=58&search_params=[[["age_group","e","Boomers+(1977-1994)"]]]&nolistcache=1';
+            $data['links'][]    = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["birthday","h","01-01-1977"]],[["birthday","m","31-12-1994"]]]&nolistcache=1';
             $data['colors'][] = $this->get_agegroup_color($db, 'Generation Y (1977-1994)' );
 
          return $data;

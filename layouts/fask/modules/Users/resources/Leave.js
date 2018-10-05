@@ -11,10 +11,7 @@ Vtiger.Class("Users_Leave_Js", {
 
 	//register click event for Add New Education button
 	addLeave : function(url	) { 
-
-
 	     this.editLeave(url);
-	    
 	},
 	
 	textAreaLimitChar : function(){

@@ -23,10 +23,9 @@ Vtiger.Class("Users_Claim_Js", {
                     if(data.result !=''){
                          app.helper.showErrorNotification({'message': app.vtranslate(data.result, 'Users')});
                          return false;
-                    } else {
-                          thisInstance.editClaim(url);
                     }
              }); 
+              thisInstance.editClaim(url);
 	},
 	
 	textAreaLimitChar : function(){
@@ -43,6 +42,7 @@ Vtiger.Class("Users_Claim_Js", {
 			  	}
 			});
 	},
+	
 	editClaim : function(url) {  
 	    var aDeferred = jQuery.Deferred();
 		var thisInstance = this;
@@ -221,24 +221,24 @@ Vtiger.Class("Users_Claim_Js", {
                               var extraData = form.serializeFormData();
                             
                               thisInstance._upload(form, extraData).then(function(data) { 
-                                     app.helper.hideProgress(); 
                                      app.helper.hideModal();
-                                     app.helper.showSuccessNotification({'message': app.vtranslate(data.result.msg, 'Users')});	
+                                     app.helper.showSuccessNotification({'message': app.vtranslate(data.result, 'Users')});	
+                                    
          	                          if(manager == 'true'){
 						               		thisInstance.updateClaimGrid(user);
 						               }else{
 						               		thisInstance.updateClaimGrid(userid);
 						               }
-								                         
+							 aDeferred.resolve(data);	                         
 		                         }, function(e) {
-		                            app.helper.showErrorNotification({'message': app.vtranslate(data.result.msg, 'Users')});
+		                            app.helper.showErrorNotification({'message': app.vtranslate(data.result, 'Users')});
 	                         }); 
                              
                              }
                         };
                          form.vtValidate(params)
           		} else {
-                        aDeferred.reject(err);
+                       // aDeferred.reject(err);
                     }
 	     	});
 	     return aDeferred.promise();	
@@ -271,47 +271,36 @@ Vtiger.Class("Users_Claim_Js", {
 		return aDeferred.promise();
 	},
 
-
-	
- //use error notification
-		 ValidateClaimAmount : function(current_user_id,trans,monthly,yearly,totalamount,transactiondate,category){  
-		 	
-			var params = {
-					'module' 		  : app.getModuleName(),
-					'action' 		  : 'SaveSubModuleAjax',
-					'mode'   		  : 'ValidateClaimAmount',
-					'current_user_id' : current_user_id,
-					'trans'   		  : trans,
-					'monthly'  	      : monthly,
-					'yearly'   		  : yearly,
-					'totalamount'     : totalamount,
-					'transactiondate' : transactiondate,
-					'category'        : category,
-				
-				}
+      //use error notification
+      ValidateClaimAmount : function(current_user_id,trans,monthly,yearly,totalamount,transactiondate,category){  
+      var aDeferred = jQuery.Deferred();
+	     var params = {
+			'module' 		  : app.getModuleName(),
+			'action' 		  : 'SaveSubModuleAjax',
+			'mode'   		  : 'ValidateClaimAmount',
+			'current_user_id': current_user_id,
+			'trans'   	  : trans,
+			'monthly'  	  : monthly,
+			'yearly'   	  : yearly,
+			'totalamount'    : totalamount,
+			'transactiondate': transactiondate,
+			'category'        : category,
+			
+	     }
 
               app.request.post({'data': params}).then(function (err, data) {         
               app.helper.hideProgress(); 
                //show notification after Education details saved
                 if((data==app.vtranslate('JS_TRANSACTION_LIMIT_EXCEED')) || (data==app.vtranslate('JS_MONTHLY_LIMIT_EXCEED')) || (data==app.vtranslate('JS_YEARLY_LIMIT_EXCEED')) || (data=='undefined')){
-                app.helper.showErrorNotification({'message': data});
-                $("#totalamount").val('');
-           		 }else{ 
-           		 	e.preventDefault();
-           		 	//app.helper.showSuccessNotification({'message': data});
-           		 }
-               //Adding or update the Education details in the list
-              
+                     app.helper.showErrorNotification({'message': data});
+                     $("#totalamount").val('');
+                     return false;
+           	 }
              }
           );
-
-           return aDeferred.promise();
-				
-
-		  
-
-
-     },	
+     
+          return aDeferred.promise();
+	},	
 
 
 	 /*saveClaimDetails : function(form){   
