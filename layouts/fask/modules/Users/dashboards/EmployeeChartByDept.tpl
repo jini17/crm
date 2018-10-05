@@ -9,9 +9,9 @@
   *
  ********************************************************************************/
 -->*}
-EmployeeChartByDept
+
 <div class="dashboardWidgetHeader">
-        {include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
+        {include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=false}
 </div>
 
 <div class="dashboardWidgetContent">

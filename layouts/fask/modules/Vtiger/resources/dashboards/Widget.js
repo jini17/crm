@@ -891,4 +891,6 @@ Vtiger_History_Widget_Js('Vtiger_MyLeaves_Widget_Js', {}, {});
 Vtiger_History_Widget_Js('Vtiger_MyClaim_Widget_Js', {}, {});
 Vtiger_History_Widget_Js('Vtiger_MyTeamClaim_Widget_Js', {}, {});
 Vtiger_History_Widget_Js('Vtiger_MateLeaves_Widget_Js', {}, {});
+Vtiger_History_Widget_Js('Vtiger_ListOfEmployee_Widget_Js', {}, {});
+
 Vtiger_OverdueActivities_Widget_Js('Vtiger_CalendarActivities_Widget_Js', {}, {});

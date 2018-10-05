@@ -9,25 +9,24 @@
   *
  ********************************************************************************/
 -->*}
-<script src="layouts/vlayout/modules/Emails/resources/MassEdit.js?v=6.1.0" type="text/javascript"></script>
 <div style='padding:5px;'>
-    {$DATA|print_r}
+
 {if count($DATA) > 0}
     
-    <div class="row th">
-        <div class="col-md-6">{vtranslate('LBL_NAME', $MODULE_NAME)}</div>
-        <div class="col-md-6">{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</div>
+    <div class="row th" style="padding:5px;margin-right:-1px;margin-left:-1px;">
+        <div class="col-md-6"><b> {vtranslate('LBL_NAME', $MODULE_NAME)} </b></div>
+        <div class="col-md-6"> <b>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)} </b></div>
         
     </div>
-        <div class="row">
-              {foreach item=MODEL from=$DATA}
-              <div class="col-md-6 ">   {$MODEL['first_name']}  {$MODEL['last_name']} </div>
-              <div class="col-md-6 ">   
-                  {$MODEL['department']} 
-                   <a href="{$URL}/index.php?module=Users&parent=Settings&view=Detail&record={$MODEL['empid']}"><i class="fa fa-link"></i></a>
-              </div>
+        
+              {foreach item=LIST from=$DATA}
+                  <div class="row miniListContent" style="padding:5px;margin-right:-1px;margin-left:-1px;">
+                        <div class="col-md-6 ">   <b> {$LIST['first_name']}  {$LIST['last_name']} </b> </div>
+                        <div class="col-md-4">     {$LIST['department']}       </div>
+                        <div col-md-2>   <a href="{$URL}/index.php?module=Users&parent=Settings&view=Detail&record={$LIST['empid']}"><i class="fa fa-link"></i></a></div>
+                   </div>
             {/foreach}
-        </div>
+   
 
 {else}
         <span class="noDataMsg">

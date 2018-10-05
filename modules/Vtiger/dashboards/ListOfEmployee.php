@@ -14,19 +14,19 @@ class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
             global $site_URL;
                 $db = PearDatabase::getInstance();
                // $db->setDebug(true);
-                $currentUser         = Users_Record_Model::getCurrentUserModel();
-                $viewer                   = $this->getViewer($request);
-                $moduleName      = $request->getModule();
-                $departmentList  = getAllPickListValues('department');
-                $moduleModel    = Home_Module_Model::getInstance($moduleName);
-          
+                $currentUser            = Users_Record_Model::getCurrentUserModel();
+                $viewer                     = $this->getViewer($request);
+                $moduleName         = $request->getModule();
+                $departmentList     = getAllPickListValues('department');
+                $moduleModel        = Home_Module_Model::getInstance($moduleName);
+                $dept                         = $request->get('department');
          
-                $page     = $request->get('page');
-                $linkId     = $request->get('linkid');
+                $page                       = $request->get('page');
+                $linkId                      = $request->get('linkid');
 
                 $moduleModel  = Home_Module_Model::getInstance($moduleName);
                 $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
-                $users                  = $this->get_employee($db, $department);
+                $users                  = $this->get_employee($db, $dept);
 
                 $viewer->assign('REQUEST_DEPARTMENT', $dept);
                 $viewer->assign('DEPARTMENT', $departmentList);
@@ -64,7 +64,7 @@ class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
    * @return string
    */
         function get_employee($db,$department){
-        $sql = "SELECT first_name,last_name FROM vtiger_users WHERE status = 'Active' ";
+        $sql = "SELECT first_name,last_name,department FROM vtiger_users WHERE status = 'Active' ";
         if($department != NULL){
             $sql .= "  AND  department='$department'";
         }
@@ -72,10 +72,10 @@ class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
         $numrows = $db->num_rows($query);
         $data = array();
         for($i =0; $i < $numrows; $i++ ){
-            $data['empid'] = $db->query_result($query,$i,'id');
-            $data['first_name'] = $db->query_result($query,$i,'first_name');
-            $data['last_name'] = $db->query_result($query,$i,'last_name');
-            $data['department'] = $db->query_result($query,$i,'department');
+            $data[$i]['empid'] = $db->query_result($query,$i,'id');
+            $data[$i]['first_name'] = $db->query_result($query,$i,'first_name');
+            $data[$i]['last_name'] = $db->query_result($query,$i,'last_name');
+            $data[$i]['department'] = $db->query_result($query,$i,'department');
         }
         return $data;
     }        
