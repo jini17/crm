@@ -346,14 +346,14 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 			//New Create leave
 			try {	
 			
-			//print_r($current_user);
-			$starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
-			$endhalf  = $request->get('chkboxendhalf')==1?0.5:0;
-			$startdate = date('Y-m-d',strtotime($request->get('start_date')));
-			$enddate = date('Y-m-d',strtotime($request->get('end_date')));
-			$takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);	
+			
+				$starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
+				$endhalf  = $request->get('chkboxendhalf')==1?0.5:0;
+				$startdate = date('Y-m-d',strtotime($request->get('start_date')));
+				$enddate = date('Y-m-d',strtotime($request->get('end_date')));
+				$takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);	
 	
-			$data = array (
+				$data = array (
 					'leavetype' => $wsleaveType,
 					'fromdate'=> $startdate,
 					'todate'  => $enddate,
@@ -390,105 +390,111 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 				$response->setResult(array("success"=>false, "msg"=>$ex->getMessage()));
 			}
 
-		$response->emit();
+			$response->emit();
 
-		}else{ 
-		//update leave
- 		$response = new Vtiger_Response();
+		} else{ 
+
+			//update leave
+ 			$response = new Vtiger_Response();
 		
-	
 			include_once 'include/Webservices/Revise.php';
 			include_once 'modules/Leave/Leave.php';
+
 			try {
-					 $wsid = vtws_getWebserviceEntityId('Leave', $leaveid);
+				 $wsid = vtws_getWebserviceEntityId('Leave', $leaveid);
 
-					 if(!empty($_FILES['attachment']['name'])){ 
-						$this->insertIntoAttachment($leaveid, 'Leave');
-					 }
-					//Edit and manager approval
-					if($manager == 'true' || ($current_user->is_admin=='on' && $request->get('savetype')=='Approved'))
-					{	
-						$approvedate = date('Y-m-d');
-						$approveby = $current_user->first_name.' '.$current_user->last_name;	
-						$leavetype = $request->get('leave_type');
-						$starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
-						$endhalf  = $request->get('chkboxendhalf')==1?0.5:0;
-						$wsid = vtws_getWebserviceEntityId('Leave', $leaveid);
+				 if(!empty($_FILES['attachment']['name'])){ 
+					$this->insertIntoAttachment($leaveid, 'Leave');
+				 }
 
-						$data = array(
-							'id' => $wsid,
-							'leavestatus'  => $request->get('savetype'),
-							'reasonnotapprove'  => $request->get('rejectionreasontxt'),
-							'approveby'=>$approveby,
-							'approvedate'=>$approvedate,
-							);
+				//Edit and manager approval
+				if(($manager == 'true' || $current_user->is_admin=='on' ) && ($request->get('savetype')=='Approved' || $request->get('savetype')=='Rejected'))
+				{	
+					$approvedate = date('Y-m-d');
+					$approveby = $current_user->first_name.' '.$current_user->last_name;	
+					$leavetype = $request->get('leave_type');
+					$starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
+					$endhalf  = $request->get('chkboxendhalf')==1?0.5:0;
+					$wsid = vtws_getWebserviceEntityId('Leave', $leaveid);
 
-							if($request->get('savetype')=='Approved') { 
-								
-								$startdate = date('Y-m-d',strtotime($request->get('hdnstartdate')));
-								$enddate = date('Y-m-d',strtotime($request->get('hdnenddate')));
-								$takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);
-								
-								$userupdateid=$request->get('current_user_id');
-								$leavetype = $request->get('hdnleavetype');
-								$leabalq="INSERT INTO secondcrm_user_balance SET user_id=?, leave_count =?, leave_type=?, year=?";
-								$resultx = $db->pquery($leabalq,array($request->get('current_user_id'), $takenleave, $leavetype, date('Y')));
-								
-							} 
+					$data = array(
+						'id' => $wsid,
+						'leavestatus'  => $request->get('savetype'),
+						'reasonnotapprove'  => $request->get('rejectionreasontxt'),
+						'approveby'=>$approveby,
+						'approvedate'=>$approvedate,
+						);
+
+						if($request->get('savetype')=='Approved') { 
 							
-							$leave = new Leave();
-							$leave->retrieve_entity_info($leaveid, 'Leave');
-							$leave->column_fields['leavestatus'] = $data['leavestatus'];
-							$leave->column_fields['reasonnotapprove'] = $data['reasonnotapprove'];
-							$leave->column_fields['approveby'] = $data['approveby'];
-							$leave->column_fields['approvedate'] = $data['approvedate'];
-							$leave->mode='edit';
-							$leave->id= $leaveid;
-							$leave->save('Leave');
+							$startdate = date('Y-m-d',strtotime($request->get('hdnstartdate')));
+							$enddate = date('Y-m-d',strtotime($request->get('hdnenddate')));
+							$takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);
 							
-							if($request->get('savetype')=='Approved'){
-								$message = vtranslate("LBL_APPROVED","Users");
-							} else {
-								$message = vtranslate("LBL_NOT_APPROVED","Users");	
-							}
-							$response->setResult(array("success"=>true, "msg"=>$message));								
-					}else{ 
-						$starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
-						$endhalf  = $request->get('chkboxendhalf')==1?0.5:0;
-						$startdate = date('Y-m-d',strtotime($request->get('start_date')));
-						$enddate = date('Y-m-d',strtotime($request->get('end_date')));
-						$takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);	
-						$wsid = vtws_getWebserviceEntityId('Leave', $leaveid);
-
-						$data = array(
-							'id' => $wsid,
-							'leavetype' => $wsleaveType,
-							'fromdate' => $startdate,
-							'todate'  => $enddate,
-							'replaceuser_id'  => $wsUser,
-							'reasonofleave'  => $request->get('reason'),
-							'leavestatus'  => $request->get('savetype'),
-							'total_taken'  => $takenleave,
-							'starthalf'  => $request->get('starthalf'),
-							'endhalf'  => $request->get('endhalf'),
-							'assigned_user_id' =>  $wsCurrentUser,
-							'employee_id' =>  $wsCurrentUser,
-							);
-
-						$leave = vtws_revise($data, $current_usersaving);
-						if($leave != null){
-							$message = vtranslate("LBL_EDIT_SUCCESS","Users");
+							$userupdateid=$request->get('current_user_id');
+							$leavetype = $request->get('hdnleavetype');
+							$leabalq="INSERT INTO secondcrm_user_balance SET user_id=?, leave_count =?, leave_type=?, year=?";
+							$resultx = $db->pquery($leabalq,array($request->get('current_user_id'), $takenleave, $leavetype, date('Y')));
+							
+						} 
+						
+						$leave = new Leave();
+						$leave->retrieve_entity_info($leaveid, 'Leave');
+						$leave->column_fields['leavestatus'] = $data['leavestatus'];
+						$leave->column_fields['reasonnotapprove'] = $data['reasonnotapprove'];
+						$leave->column_fields['approveby'] = $data['approveby'];
+						$leave->column_fields['approvedate'] = $data['approvedate'];
+						$leave->mode='edit';
+						$leave->id= $leaveid;
+						$leave->save('Leave');
+						
+						if($request->get('savetype')=='Approved'){
+							$message = vtranslate("LBL_APPROVED","Users");
 						} else {
-							$message = vtranslate("LBL_EDIT_FAILED","Users");	
+							$message = vtranslate("LBL_NOT_APPROVED","Users");	
 						}
-						$response->setResult(array("success"=>true, "msg"=>$message));
-					}
-		    		
+						$response->setResult(array("success"=>true, "msg"=>$message));								
+				}else{ 
+					$starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
+					$endhalf  = $request->get('chkboxendhalf')==1?0.5:0;
+					$startdate = date('Y-m-d',strtotime($request->get('start_date')));
+					$enddate = date('Y-m-d',strtotime($request->get('end_date')));
+					$takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);	
+					$wsid = vtws_getWebserviceEntityId('Leave', $leaveid);
 
+					$data = array(
+						'id' => $wsid,
+						'leavetype' => $wsleaveType,
+						'fromdate' => $startdate,
+						'todate'  => $enddate,
+						'replaceuser_id'  => $wsUser,
+						'reasonofleave'  => $request->get('reason'),
+						'leavestatus'  => $request->get('savetype'),
+						'total_taken'  => $takenleave,
+						'starthalf'  => $request->get('starthalf'),
+						'endhalf'  => $request->get('endhalf'),
+						'assigned_user_id' =>  $wsCurrentUser,
+						'employee_id' =>  $wsCurrentUser,
+						);
+
+					$leave = vtws_revise($data, $current_usersaving);
+					$leaveIdarray = explode('x',$leave['id']);
+					if(!empty($_FILES['attachment']['name'])){ 
+						$this->insertIntoAttachment($leaveIdarray[1], 'Leave');
+					}
+
+					if($leave != null){
+						$message = vtranslate("LBL_EDIT_SUCCESS","Users");
+					} else {
+						$message = vtranslate("LBL_EDIT_FAILED","Users");	
+					}
+					$response->setResult(array("success"=>true, "msg"=>$message));
+				}
+		   		
 			} catch (WebServiceException $ex) {
 				$response->setResult(array("success"=>false, "msg"=>$ex->getMessage()));
 			}
-		$response->emit();
+			$response->emit();
 		}
 
 	}
@@ -582,68 +588,65 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
 	
 	public function saveClaim(Vtiger_Request $request) {  //echo"<pre>";  print_r($request);die;
+		$db = PearDatabase::getInstance();	
+  		//$request= $_REQUEST['form'];	
+	
+		$module = $request->getModule();
+	
+		//include_once 'include/Webservices/Create.php';
+		include_once 'modules/Claim/Claim.php';
+		//$db->setDebug(true);
 		
-  		
-  			//$request= $_REQUEST['form'];	
-	$module = $request->getModule();
-	$db = PearDatabase::getInstance();
-
-	//include_once 'include/Webservices/Create.php';
-	include_once 'modules/Claim/Claim.php';
-	//$db->setDebug(true);
-	$user = new Users();
-	global $current_user;
+		$user = new Users();
+		global $current_user;
 	
-    $current_usersaving = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
+    	$current_usersaving = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
 	
-	$current_user_id = $request->get('current_user_id');
-	$claimid= $request->get('record');
-	$manager = $request->get('manager'); 
+		$current_user_id = $request->get('current_user_id');
+		$claimid= $request->get('record');
+		$manager = $request->get('manager'); 
+	
+		$category= $request->get('category');
+		$approved_by = $request->get('approved_by');
 
-	$category= $request->get('category');
-	$approved_by = $request->get('approved_by');
-
-	$transactiondate = date('Y-m-d',strtotime($request->get('transactiondate')));
-	$totalamount= $request->get('totalamount'); 
-	$taxinvoice= $request->get('taxinvoice'); 
-	$claim_status= $request->get('claim_status');  
-	$description= $request->get('description'); 
-	$rejectionreasontxt= $request->get('rejectionreasontxt'); 
-	//$enddate = date('Y-m-d',strtotime($request->get('end_date')));
-
+		$transactiondate = date('Y-m-d',strtotime($request->get('transactiondate')));
+		$totalamount= $request->get('totalamount'); 
+		$taxinvoice= $request->get('taxinvoice'); 
+		$claim_status= $request->get('claim_status');  
+		$description= $request->get('description'); 
+		$rejectionreasontxt= $request->get('rejectionreasontxt'); 
+		
 
 		//Check If new record.//
 		if(empty($claimid) || $claimid==""){
 
- 		$response = new Vtiger_Response();
+ 			$response = new Vtiger_Response();
 		
-		//$total_taken = ceil(abs($end - $start) / 86400);
-		//New Create leave
+			//$total_taken = ceil(abs($end - $start) / 86400);
+			//New Create leave
 			try {	
 			
-			//print_r($current_user->id);
-			
-			$claims = new Claim();
-			$claims->column_fields['category'] 	= $category;	
-			$claims->column_fields['transactiondate'] 		= $transactiondate;	
-			$claims->column_fields['totalamount'] = $totalamount;	
-			$claims->column_fields['taxinvoice'] 			= $taxinvoice;	
-			$claims->column_fields['claim_status'] 	= $claim_status;	
-			$claims->column_fields['description'] 		= $description;	
-			$claims->column_fields['assigned_user_id'] 		= $current_user_id;
-			$claims->column_fields['employee_id'] 		= $current_user_id;
-			$claims->column_fields['approved_by'] 			= $approved_by;
-			$claims->save('Claim');
-			//$education->mode = '';
-			$return = 0;
-			
+				//print_r($current_user->id);
+				
+				$claims = new Claim();
+				$claims->column_fields['category'] 			= $category;	
+				$claims->column_fields['transactiondate'] 	= $transactiondate;	
+				$claims->column_fields['totalamount'] 		= $totalamount;	
+				$claims->column_fields['taxinvoice'] 		= $taxinvoice;	
+				$claims->column_fields['claim_status'] 		= $claim_status;	
+				$claims->column_fields['description'] 		= $description;	
+				$claims->column_fields['assigned_user_id'] 	= $current_user_id;
+				$claims->column_fields['employee_id'] 		= $current_user_id;
+				$claims->column_fields['approved_by'] 		= $approved_by;
+				$claims->save('Claim');
 				
 
 				if(!empty($_FILES['attachment']['name'])){ 
 					$this->insertIntoAttachment($claims->id, 'Claim');
 				}
+				
 				$msg    = $return=='1'? vtranslate("LBL_CREATE_FAILED","Users"):vtranslate("LBL_CLAIM_CREATE_SUCCESSFULLY","Users"); 	
-		    	$response->setResult($msg);
+			    $response->setResult($msg);
 			
 			} catch (WebServiceException $ex) {
 				echo $ex->getMessage();
@@ -657,7 +660,47 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 			if(($manager == 'true' || $current_user->is_admin=='on') && ($request->get('claim_status')=='Approved' || $request->get('claim_status')=='Rejected' ))
 			{		
 					
-					//$response = new Vtiger_Response();
+				//$response = new Vtiger_Response();
+
+				$approvedate = date('Y-m-d');
+				$approveby = $current_user->first_name.' '.$current_user->last_name;	
+				$leavetype = $request->get('leave_type');
+				$starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
+				$endhalf  = $request->get('chkboxendhalf')==1?0.5:0;
+				$wsid = vtws_getWebserviceEntityId('Leave', $leaveid);
+
+				$data = array(
+					'id' => $wsid,
+					'leavestatus'  => $request->get('savetype'),
+					'reasonnotapprove'  => $request->get('rejectionreasontxt'),
+					'approveby'=>$approveby,
+					'approvedate'=>$approvedate,
+					);
+
+					if($request->get('savetype')=='Approved') { 
+						
+						$startdate = date('Y-m-d',strtotime($request->get('hdnstartdate')));
+						$enddate = date('Y-m-d',strtotime($request->get('hdnenddate')));
+						$takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);
+						
+						$userupdateid=$request->get('current_user_id');
+						$leavetype = $request->get('hdnleavetype');
+						$leabalq="INSERT INTO secondcrm_user_balance SET user_id=?, leave_count =?, leave_type=?, year=?";
+						$resultx = $db->pquery($leabalq,array($request->get('current_user_id'), $takenleave, $leavetype, date('Y')));
+						
+					} 
+					
+					$leave = new Leave();
+					$leave->retrieve_entity_info($leaveid, 'Leave');
+					$leave->column_fields['leavestatus'] = $data['leavestatus'];
+					$leave->column_fields['reasonnotapprove'] = $data['reasonnotapprove'];
+					$leave->column_fields['approveby'] = $data['approveby'];
+					$leave->column_fields['approvedate'] = $data['approvedate'];
+					$leave->mode='edit';
+					$leave->id= $leaveid;
+					$leave->save('Leave');
+
+
 					$claims->mode = 'edit';
 					$claims->id = $claimid;
 					//$return = 0;
@@ -681,6 +724,10 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 			}else{
 					$claims->mode = 'edit';
 					$claims->id = $claimid;
+					$leaveIdarray = explode('x',$leave['id']);
+						if(!empty($_FILES['attachment']['name'])){ 
+							$this->insertIntoAttachment($leaveIdarray[1], 'Leave');
+						}
 					//$return = 0;
 					$db->pquery("UPDATE vtiger_claim SET category=?, transactiondate=?, totalamount=?, taxinvoice=?, claim_status=?,description=?, approved_by=? WHERE claimid=?", array($category, $transactiondate, $totalamount, $taxinvoice,$claim_status, $description, $approved_by, $claimid));
 
