@@ -126,11 +126,10 @@ class Vtiger_EmployeeChartByGender_Dashboard extends Vtiger_IndexAjax_View {
                 for($i = 0; $i < $num_rows; $i++){
                      $gender= $db->query_result($query,$i,'gender');
                      $counts= $db->query_result($query,$i,'total');
-                     $data['labels'][]   = $gender;
+                     $data['labels'][]   = "&nbsp;".$gender;
                      $data['values'][]  = $counts;
-                     
                      if(strlen($deparment) > 0){
-                            $data['links'][]     = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["gender","e","'.$gender.'"]],[["department","e","'.$deparment.'"]]]';
+                          $data['links'][]     = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["gender","e","'.$gender.'"]],[["department","e","'.$deparment.'"]]]';
                      }
                      else{
                           $data['links'][]     = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["gender","e","'.$gender.'"]]]';

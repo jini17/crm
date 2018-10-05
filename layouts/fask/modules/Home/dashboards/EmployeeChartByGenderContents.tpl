@@ -21,9 +21,10 @@
 
    <div class="row" style="margin:0px 10px;height:250px;width:100%;">
         <div class="col-lg-11">
-
-
-           <div class="" id="widgetChartContainer_{$WIDGET->get('id')}" style="height:250px; width:100%;"></div>
+           <div class="" id="widgetChartContainer_{$WIDGET->get('id')}" style="height:250px; width:100%;"> 
+               <div style="position: absolute;z-index: 99;display: none;color: #fff;background: rgba(0,0,0,.7);bottom: 12px;left: 136px;padding: 10px;border-radius: 6px;" class="tooltipgraph">popup</div>
+           </div>
+        </div>
             <br>
         </div>
                 <div class="col-lg-1"></div>
@@ -60,8 +61,9 @@
            chartData.push(rowData);
            ledgend_color.push(colors);
         }	
-       
+       $.jqplot.config.enablePlugins = true;
     var plot1 = $.jqplot("widgetChartContainer_{$WIDGET->get('id')}", [chartData], {
+     
         grid: {
             borderColor: 'white', 
             shadow: false, 
@@ -73,6 +75,7 @@
             left:0, 
             right:0
         },
+
         seriesColors:ledgend_color,
         seriesDefaults:{
             renderer:$.jqplot.PieRenderer, 
@@ -86,13 +89,10 @@
                 sliceMargin: 4, 
                 // rotate the starting position of the pie around to 12 o'clock.
                 startAngle: -90,
-                showDataLabels: true
+                showDataLabels: true,
+                highlightMouseOver: true
             },
-            highlighter: {
-                show: true,
-                useAxesFormatters: false,
-                tooltipFormatString: '%d'
-              }
+
         },
         
         legend:{
@@ -107,8 +107,37 @@
     });
     
 $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataHighlight', function () {
-         $('html,body').css('cursor','pointer');	  											
+         $('html,body').css('cursor','pointer');	  
+         
     });
+$("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataHighlight,', function(ev, seriesIndex, pointIndex, data) {
+            var $this = $(this);                
+            $this.attr('title', data[0] + ": " + data[1]);  
+}); 
+
+previousPoint = null;
+$('#widgetChartContainer_{$WIDGET->get('id')}').bind('jqplotMouseLeave', function (ev, seriesIndex, pointIndex, data) {
+        $('#widgetChartContainer_{$WIDGET->get('id')} .tooltipgraph').text('').hide()
+});
+$('#widgetChartContainer_{$WIDGET->get('id')}').bind('jqplotDataMouseOver', function (ev, seriesIndex, pointIndex, data) { 
+    var labels = $('#widgetChartContainer_{$WIDGET->get('id')} .jqplot-data-label');
+    $('#widgetChartContainer_{$WIDGET->get('id')} .tooltipgraph').text('').show();
+    if (previousPoint != null)
+    {
+       labels[previousPoint['idx']].innerHTML = previousPoint['data'][1]+'';               
+    }
+    
+
+        $('#widgetChartContainer_{$WIDGET->get('id')} .tooltipgraph').text(data[0] + ": " + data[1]);    
+  
+  $( '#widgetChartContainer_{$WIDGET->get('id')} .jqplot-event-canvas').on('mouseout',function(){
+   $('#widgetChartContainer_{$WIDGET->get('id')} .tooltipgraph').text('').hide()
+  });
+{*   labels[pointIndex].innerHTML = data[0] + ": " + data[1];*}
+ {*   previousPoint = {
+        'idx':pointIndex, 'data':data
+    };*}
+});
 
 $("#widgetChartContainer_{$WIDGET->get('id')}").bind('jqplotDataUnhighlight', function () {
         $('html,body').css('cursor','default');	  											
