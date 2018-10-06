@@ -95,7 +95,7 @@ print_r($currentUser);
    * @return string
    */
         function get_employee($db,$department){
-        $sql = "SELECT first_name,last_name,department FROM vtiger_users WHERE status = 'Active' ";
+        $sql = "SELECT id,first_name,last_name,department FROM vtiger_users WHERE status = 'Active' ";
         
         if($department != NULL){
             $sql .= "  AND  department='$department'";
@@ -111,6 +111,7 @@ print_r($currentUser);
             $data[$i]['last_name'] = $db->query_result($query,$i,'last_name');
             $data[$i]['department'] = $db->query_result($query,$i,'department');
         }
+        print_r();
         return $data;
     }        
         

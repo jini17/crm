@@ -66,7 +66,7 @@ class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
    * @return string
    */
         function get_employee($db,$department){
-        $sql = "SELECT first_name,last_name,department FROM vtiger_users WHERE status = 'Active' ";
+        $sql = "SELECT id,first_name,last_name,department FROM vtiger_users WHERE status = 'Active' ";
         
         if($department != NULL){
             $sql .= "  AND  department='$department'";
