@@ -101,17 +101,17 @@ print_r($currentUser);
             $sql .= "  AND  department='$department'";
         }
         
-        $query = $db->pquery($sql);
-        $numrows = $db->num_rows($query);
-        $data = array();
+        $query               = $db->pquery($sql);
+        $numrows        = $db->num_rows($query);
+        $data                 = array();
         
         for($i =0; $i < $numrows; $i++ ){
-            $data[$i]['empid'] = $db->query_result($query,$i,'id');
-            $data[$i]['first_name'] = $db->query_result($query,$i,'first_name');
-            $data[$i]['last_name'] = $db->query_result($query,$i,'last_name');
-            $data[$i]['department'] = $db->query_result($query,$i,'department');
+            $data[$i]['empid']                = $db->query_result($query,$i,'id');
+            $data[$i]['first_name']       = $db->query_result($query,$i,'first_name');
+            $data[$i]['last_name']        = $db->query_result($query,$i,'last_name');
+            $data[$i]['department']     = $db->query_result($query,$i,'department');
         }
-        print_r();
+        
         return $data;
     }        
         

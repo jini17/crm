@@ -320,7 +320,7 @@ Vtiger.Class('Vtiger_Index_Js', {
 	registerListEssentialsToggleEvent : function() {
 		jQuery('.main-container').on('click', '.essentials-toggle', function() {
 			jQuery('.sidebar-essentials').toggleClass('hide');
-			jQuery(".content-area").toggleClass("full-width");
+			jQuery(".content-area").toggleClass("full-width").css('padding-left',"0 !important").css('left',"0"),css('width','calc(100%) !important');
 			var params = {
 				'module' : 'Users',
 				'action' : 'IndexAjax',
@@ -331,9 +331,10 @@ Vtiger.Class('Vtiger_Index_Js', {
 			if(jQuery('.sidebar-essentials').hasClass('hide')) {
 				jQuery('.essentials-toggle-marker').removeClass('fa-chevron-right')
 						.addClass('fa-chevron-left');
+                                                                                    jQuery('.sidebar-essentials').hasClass('hide').css('left',"230px  !important")
 			} else {
 				jQuery('.essentials-toggle-marker').removeClass('fa-chevron-left')
-						.addClass('fa-chevron-right');
+						.addClass('fa-chevron-right').css('left',"0 !important");
 			}
 			app.event.trigger("Vtiger.Post.MenuToggle");
 		});

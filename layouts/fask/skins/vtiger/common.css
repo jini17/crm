@@ -770,7 +770,8 @@ a.menu-item:hover {
 .CalendarViewPageDiv.content-area.full-width,
 .editViewPageDiv.content-area.full-width,
 .settingsPageDiv.content-area.full-width {
-  padding-left: 42px!important;
+/*  padding-left: 42px!important;*/
+ width: calc(100%) !important;
 }
 .input-group-addon-save {
   color: #008446;
@@ -9079,13 +9080,10 @@ li> a.dropdown-icon-dashboard>i{
 ul.nav.navbar-nav>li>div.dropdown>div.dropdown-toggle>a{
   padding: 15px 5px 10px !important;
 }
-a.btn.btn-default.Help-btn{
-      padding: 5px 5px 6px 8px;
+a.btn.Help-btn{
+    padding: 5px 5px 6px 8px;
     margin: 0px;
-    border-radius: 1px;
-    border: 1px solid #c1c1c1;
-    color: #666;
-    background: #fff;
+    border-radius: 3px;
     margin-top: 5px;
     margin-right: 15px;
 }
@@ -9368,9 +9366,8 @@ row.social-wrapper > .col-sm-3 >a:hover {
   padding: 5px !important;
   }
   .SocialMedLabel {
-  
     margin-top: 10px !important;
-    margin-bottom: : 10px !important;
+    margin-bottom: 10px !important;
 }
 .form-check{
     padding-right: 1rem;
@@ -9406,7 +9403,6 @@ span.login-page-title{
     left: 0;
     text-align: center;
     position: relative;
-    //changed to relative from fixed also works if position is not there: ;
     font-size: small;
     width: 100%;
     background-color: #EFEFEF;
