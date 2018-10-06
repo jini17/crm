@@ -31,7 +31,7 @@ Vtiger.Class("Users_Leave_Js", {
 	editLeave : function(url) { 
 	    var aDeferred = jQuery.Deferred();
 		var thisInstance = this;
-		var userid = jQuery('#recordId').val();
+		var user_id = jQuery('#recordId').val();
 		
 		app.helper.showProgress();
 		app.request.post({url:url}).then(
@@ -166,10 +166,6 @@ Vtiger.Class("Users_Leave_Js", {
 					var remainchar = 300 - len;
 			    		$('#charNum_reason').text(remainchar + ' character(s) left');
 					
-					if(jQuery('#notapprove').is(':checked')){
-						$('div#rejectionreason').removeClass('hide');
-					}
-
                          form.submit(function(e) { 
                             e.preventDefault();
                          })
@@ -195,7 +191,7 @@ Vtiger.Class("Users_Leave_Js", {
                                      app.helper.hideProgress(); 
                                      app.helper.hideModal();
                                      app.helper.showSuccessNotification({'message': app.vtranslate(data.result.msg, 'Users')});	
-         	                           thisInstance.updateLeaveGrid(userid);
+         	                           thisInstance.updateLeaveGrid(user_id);
 		                         
 		                         }, function(e) {
 		                            app.helper.showErrorNotification({'message': app.vtranslate(data.result.msg, 'Users')});
@@ -353,8 +349,7 @@ Vtiger.Class("Users_Leave_Js", {
 		app.helper.showProgress();
 		if (section == 'M'){
      		var my_selyear=jQuery("#my_selyear").val();
-     		alert(my_selyear);
-     		changeYearActionUrl=changeYearActionUrl+'&selyear='+my_selyear;
+     		     changeYearActionUrl=changeYearActionUrl+'&selyear='+my_selyear;
 			}
 		app.request.post({url:changeYearActionUrl}).then(
 		function(err,data) { 
@@ -370,9 +365,7 @@ Vtiger.Class("Users_Leave_Js", {
                         	// for textarea limit
                         app.helper.showVerticalScroll(jQuery('#scrollContainer'), {setHeight:'80%'});
                     
-	 Users_Leave_Js.registerActionsTeamLeave();
-
-                         form.submit(function(e) { 
+	                    form.submit(function(e) { 
                             e.preventDefault();
                          })
 					var params = {
@@ -406,11 +399,7 @@ Vtiger.Class("Users_Leave_Js", {
 	 Popup_LeaveApprove : function(LeaveApproveUrl){
 
 	 	this.editLeave(LeaveApproveUrl);
- 		
-
-			
-		
-
+ 	
 	},
 
 	/*
@@ -441,7 +430,7 @@ Vtiger.Class("Users_Leave_Js", {
 		if(tab =='leave'){ 
 			var applicantid = $("#wapplicant").val();
 			var leaveid = $("#wleaveid").val();
-
+               
 			var registerChangeYearlUrl = "?module=Users&view=EditLeave&record="+leaveid+"&userId="+applicantid+"&leavestatus=Apply&manager=true";
 			thisInstance.editLeave(lUrl, '');
 			
@@ -490,16 +479,11 @@ Vtiger.Class("Users_Leave_Js", {
 		console.log(changePageActionUrl);
 		app.request.post({url:changePageActionUrl}).then(
 		function(err,data) { 
-		      app.helper.hideProgress();
-             
-                if(err == null){
-                	
-               $('#' + divcontainer).html(data);   
-               
-           	Users_Leave_Js.registerActionsTeamLeave();	
-          			
-          		} else {
-                        aDeferred.reject(err);
+               app.helper.hideProgress();
+                    if(err == null){
+                         $('#' + divcontainer).html(data);   
+                    } else {
+                         aDeferred.reject(err);
                     }
 	     	});
 
@@ -514,11 +498,9 @@ Vtiger.Class("Users_Leave_Js", {
 		var thisInstance = this;
 		var container = jQuery('#MyTeamLeaveContainer');
 		
-
 		
+		container.on('click','#LeaveNextPageButton', function(e) { 
 
-		jQuery('#listViewNPageButton, #userleavenextpagebutton').click(function(e) { 
-		
 		var myyearcombo = $('#team_selyear');
 		var membercombo = jQuery("#sel_teammember");
 		var leavetypecombo = jQuery("#sel_leavetype");
@@ -529,7 +511,7 @@ Vtiger.Class("Users_Leave_Js", {
 		});
 
 		//register event for my team leave paging<previous>.MYTEAMLEAVEPAGING BY SAFUAN
-		container.on('click', '#previouspage,#userleaveprevpagebutton', function(e) {
+		container.on('click', '#LeavePreviousPageButton', function(e) {	
 
 		var myyearcombo = $('#team_selyear');
 		var membercombo = jQuery("#sel_teammember");
@@ -588,11 +570,7 @@ Vtiger.Class("Users_Leave_Js", {
 	
 
 	registerEvents: function() {
-	    
-		//this._super();
-		//this.registerActions();	
-		Users_Leave_Js.registerActionsTeamLeave();	
-    	 	Users_Leave_Js.registerSetLeaveType();
+	    Users_Leave_Js.registerSetLeaveType();
 	}
 
 });

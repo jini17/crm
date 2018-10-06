@@ -257,10 +257,11 @@ Vtiger.Class("Vtiger_List_Js", {
 }, {
 	//contains the List View element.
 	listViewContainer: false,
-	_moduleName: false,
+	moduleName: false,
 	init: function () {
 		this.addComponents();
 	},
+	
 	addComponents: function () {
 		this.addModuleSpecificComponent('CustomView');
 		this.addModuleSpecificComponent('ListSidebar');
@@ -268,20 +269,24 @@ Vtiger.Class("Vtiger_List_Js", {
 		this.addComponent('Vtiger_MergeRecords_Js');
 		this.addModuleSpecificComponent('Pagination');
 		this.addComponent('Vtiger_Tag_Js');
-},
+     },
+     
 	addIndexComponent: function () {
 		this.addModuleSpecificComponent('Index', 'Vtiger', app.getParentModuleName());
 	},
+	
 	getListViewContainer: function () {
 		if (this.listViewContainer === false) {
 			this.listViewContainer = jQuery('#listViewContent');
 		}
 		return this.listViewContainer;
 	},
+	
 	setListViewContainer: function (container) {
 		this.listViewContainer = container;
 		return this;
 	},
+	
 	recordSelectTrackerInstance: false,
 	getRecordSelectTrackerInstance: function () {
 		if (this.recordSelectTrackerInstance === false) {
@@ -292,16 +297,19 @@ Vtiger.Class("Vtiger_List_Js", {
 		}
 		return this.recordSelectTrackerInstance;
 	},
+	
 	getCurrentCvId: function () {
 		var listViewContainer = this.getListViewContainer();
 		return listViewContainer.find('[name="cvid"]').val();
 	},
+	
 	getModuleName: function () {
 		if (this._moduleName != false) {
 			return this._moduleName;
 		}
 		return app.module();
 	},
+	
 	setModuleName: function (module) {
 		this._moduleName = module;
 		return this;
@@ -312,6 +320,7 @@ Vtiger.Class("Vtiger_List_Js", {
 	noRecordSelectedAlert: function () {
 		return app.helper.showAlertBox({message: app.vtranslate('JS_PLEASE_SELECT_ONE_RECORD')});
 	},
+	
 	registerRemoveListViewSort: function () {
 		var listViewContainer = this.getListViewContainer();
 		var thisInstance = this;
@@ -321,6 +330,7 @@ Vtiger.Class("Vtiger_List_Js", {
 			thisInstance.loadFilter(cvId, {'mode': 'removeSorting'});
 		});
 	},
+	
 	performMassDeleteRecords: function (url) {
 		var listInstance = this;
 		var params = {};
@@ -365,6 +375,7 @@ Vtiger.Class("Vtiger_List_Js", {
 			listInstance.noRecordSelectedAlert();
 		}
 	},
+	
 	performExportAction: function (url) {
 		var listInstance = this;
 		var listViewContainer = this.getListViewContainer();
@@ -388,6 +399,7 @@ Vtiger.Class("Vtiger_List_Js", {
 			app.helper.hideProgress();
 		});
 	},
+	
 	registerListViewSort: function () {
 		var listViewContainer = this.getListViewContainer();
 		var thisInstance = this;
@@ -405,6 +417,7 @@ Vtiger.Class("Vtiger_List_Js", {
 			thisInstance.loadListViewRecords();
 		});
 	},
+	
 	// To clear sorting information before changing Custom View
 	resetData: function () {
 		var self = this;
@@ -420,6 +433,7 @@ Vtiger.Class("Vtiger_List_Js", {
 		var recordTrackerInstance = self.getRecordSelectTrackerInstance();
 		recordTrackerInstance.clearList();
 	},
+	
 	loadFilter: function (id, loadParams) {
 		if (typeof loadParams == 'undefined')
 			loadParams = {};
@@ -432,6 +446,7 @@ Vtiger.Class("Vtiger_List_Js", {
 		params = jQuery.extend(params, loadParams);
 		this.loadListViewRecords(params);
 	},
+	
 	loadListViewRecords: function (urlParams) {
 		var self = this;
 		var aDeferred = jQuery.Deferred();
@@ -458,6 +473,7 @@ Vtiger.Class("Vtiger_List_Js", {
 		}
 		return aDeferred.promise();
 	},
+	
 	postLoadListViewRecords: function (res) {
 		var self = this;
 		self.placeListContents(res);
@@ -467,10 +483,12 @@ Vtiger.Class("Vtiger_List_Js", {
 		self.registerDynamicListHeaders();
 		self.registerPostLoadListViewActions();
 	},
+	
 	placeListContents: function (contents) {
 		var container = this.getListViewContainer();
 		container.html(contents);
 	},
+	
 	getDefaultParams: function () {
 		var container = this.getListViewContainer();
 		var pageNumber = container.find('#pageNumber').val();

@@ -235,12 +235,13 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 			var tabIndx = $(this).index();
 			var container = $('a', this).attr('href');
 			    container = container.replace('#','');
+
                if(container=='preference'){
                		jQuery(".detailViewButtoncontainer").removeClass('hide');	
                     window.location.href="?module=Users&view=PreferenceDetail&parent=Settings&record="+userid
-     			} else {
-     				jQuery(".detailViewButtoncontainer").addClass('hide');
-     			}
+    			} else {
+    				jQuery(".detailViewButtoncontainer").addClass('hide');
+    			}
 
 			if(tabIndx !=0 && container !='') {
 			     var params = {
@@ -260,9 +261,15 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 					jQuery('.tab-pane').hide();
 					jQuery('#'+container).show();
 					jQuery('#'+container).html(data);
+					if(container =='leave') {
+    			               Users_Leave_Js.registerActionsTeamLeave();
+    			          }
+    			          
+    			          if(container =='claim') {
+    			               Users_Claim_Js.registerActionsTeamClaim();
+    			          }
 				} else {
-					
-					//app.helper.showErrorNotification({'message': err.message});
+					app.helper.showErrorNotification({'message': err.message});
 				}
 			});
 				

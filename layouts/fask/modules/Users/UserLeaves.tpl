@@ -24,7 +24,7 @@
             <td class="medium" valign=top>{$USER_LEAVE['to_date']}</td>
             <td class="medium" valign=top>{$USER_LEAVE['leavestatus']}</td>
             <td class="medium" valign=top>
-                <div class="pull-right actions">
+                <div class="pull-left actions">
                     <span class="actionImages">
                         {if $USER_LEAVE['fileid'] neq ''}     
 
@@ -33,7 +33,7 @@
 
                         {if $USER_LEAVE['leavestatus'] eq 'New'} 
 
-                        <a class="editLeave cursorPointer editAction ti-pencil" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false" title="{vtranslate('LBL_EDIT', $MODULE)}"></a>&nbsp;&nbsp;
+                        <a class="editLeave cursorPointer editAction ti-pencil" data-url="{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false" title="{vtranslate('LBL_EDIT', $MODULE)}"></a>
                         {/if}
                         {if $USER_LEAVE['leavestatus'] eq 'New' OR $USER_LEAVE['leavestatus'] eq 'Apply'}
                         <a class="deleteLeave cursorPointer" data-url="?module=Users&action=DeleteSubModuleAjax&mode=deleteLeave&record={$USER_LEAVE['id']}"><i class="fa fa-trash-o" title="Delete"></i></a>
@@ -56,39 +56,45 @@
 
 <!--@@@@@@@@@@@@START PAGINATION TOOLS@@@@@@@@@@@@@@@-->
 {elseif $SECTION eq 'T'}
-<div class="listViewActionsDiv row-fluid">
-    <span class="span4 btn-toolbar" style="float:right;margin-left:0.12766%;margin-top:0;margin-bottom:9px;">
+<div class="listViewActionsDiv row-fluid">                
+    <div class="btn-group pull-right">
+            <input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
+            <input type="hidden" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" />
+            <input type="hidden" id="previousPageExist" value="{$PAGING_MODEL->isPrevPageExists()}" />
+            <input type="hidden" id="nextPageExist" value="{$PAGING_MODEL->isNextPageExists()}" />
+            <input type="hidden" id="totalCount" value="{$LISTVIEW_COUNT}" />
+            <input type="hidden" id="totalPage" value="{$PCOUNT}" />
+            
+            <input type='hidden' value="{$PAGE_NUMBER}" id='pageNumber'>
+            <input type='hidden' value="{$PAGE_LIMIT}" id='pageLimit'>
+            <input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
 
-
-
-        <input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
-        <input type="hidden" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" />
-        <input type="hidden" id="previousPageExist" value="{$PAGING_MODEL->isPrevPageExists()}" />
-        <input type="hidden" id="nextPageExist" value="{$PAGING_MODEL->isNextPageExists()}" />
-        <input type="hidden" id="totalCount" value="{$LISTVIEW_COUNT}" />
-        <input type='hidden' value="{$PAGE_NUMBER}" id='pageNumber'>
-        <input type='hidden' value="{$PAGE_LIMIT}" id='pageLimit'>
-        <input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
-
-        <div class="listViewActions pull-right {if $PCOUNT eq 0} hide{/if}">
-            <div class="pageNumbers alignTop">
-                <span>
-                    <span class="pageNumbersText" style="padding-right:5px">{if $PCOUNT>0}{$PAGING_MODEL->getRecordStartRange()} {vtranslate('LBL_to', $MODULE)} {$PAGING_MODEL->getRecordEndRange()}{else}<span>&nbsp;</span>{/if}</span>
-                    <!--<span class="icon-refresh pull-right totalNumberOfRecords cursorPointer{if !$LISTVIEW_ENTRIES_COUNT} hide{/if}"></span>-->
-                </span>
-            </div>
-            <div class="btn-group alignTop margin0px">
-                <span class="pull-right">
-                    <span class="btn-group">
-                        <button class="btn "  id="previouspage" {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if} type="button"><span class="icon-chevron-left"></span></button>
-
-                        <button class="btn" id="listViewNPageButton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="fa fa-chevron-right"></span></button>                
-                    </span>
-                </span> 
-            </div>  
-        </div>
+            <button type="button" id="LeavePreviousPageButton" class="btn btn-secondary" {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if}><i class="material-icons">chevron_left</i></button>
+          <!--  <button type="button" id="PageJump" data-toggle="dropdown" class="btn btn-secondary" aria-expanded="false">
+                <i class="material-icons icon" title="Page Jump">more_horiz</i>
+            </button>
+            
+            <ul class="listViewBasicAction dropdown-menu" id="PageJumpDropDown">
+                <li>
+                    <div class="listview-pagenum">
+                        <span>Page</span>&nbsp;
+                        <strong><span>{$PAGING_MODEL->getRecordStartRange()}</span></strong>&nbsp;
+                        <span>of</span>&nbsp;
+                        <strong><span id="totalPageCount">{$PCOUNT}</span></strong>
+                    </div>
+                    <div class="listview-pagejump">
+                        <input id="pageToJump" placeholder="Jump To" class="listViewPagingInput text-center" type="text">&nbsp;
+                        <button type="button" id="pageToJumpSubmit" class="btn btn-success listViewPagingInputSubmit text-center">GO</button>
+                    </div>    
+                </li>
+            </ul>-->
+            <button type="button" id="LeaveNextPageButton" class="btn btn-secondary" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if}><i class="material-icons">chevron_right</i></button>
+    </div>
+    <span class="pageNumbers  pull-right" style="position:relative;top:7px;">
+        <span class="pageNumbersText">{$PAGING_MODEL->getRecordStartRange()} to {$PAGING_MODEL->getRecordEndRange()}</span>
+            &nbsp;<span class="totalNumberOfRecords cursorPointer" title="Click for this list size">of {$LISTVIEW_COUNT}</span>&nbsp;&nbsp;
     </span>
-</div>
+</div>   
 <!--@@@@@@@@@@@@END PAGINATION TOOLS@@@@@@@@@@@@@@@-->
 
 <table class="table detailview-table listViewEntriesTable">
@@ -203,45 +209,42 @@
                 <tbody>
 
                     {if count($MYLEAVES) gt 0}<!--<pre>{$PAGING_MODEL|@print_r}</pre>-->
-                    {foreach item=USER_LEAVE from=$MYLEAVES}
-                    <tr data-section="M">
-                        <td class="medium" valign=top>{$USER_LEAVE['leave_reason']}</td>
-                        <td class="medium" valign=top><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['colorcode']};width:30px;height:20px;"></label><span style="float:left;" >{$USER_LEAVE['leave_type']}</span></td>      <td class="medium" valign=top>{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($USER_LEAVE['from_date'])}</td>
-                        <td class="medium" valign=top>{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($USER_LEAVE['to_date'])}</td>
-                        <td class="medium" valign=top>{$USER_LEAVE['leavestatus']}</td>
-                        <td class="medium" valign=top>
-                            <div class="pull-left actions">
-                                <span class="actionImages">
+                        {foreach item=USER_LEAVE from=$MYLEAVES}
+                            <tr data-section="M">
+                                <td class="medium" valign=top>{$USER_LEAVE['leave_reason']}</td>
+                                <td class="medium" valign=top><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['colorcode']};width:30px;height:20px;"></label><span style="float:left;" >{$USER_LEAVE['leave_type']}</span></td>      <td class="medium" valign=top>{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($USER_LEAVE['from_date'])}</td>
+                                <td class="medium" valign=top>{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($USER_LEAVE['to_date'])}</td>
+                                <td class="medium" valign=top>{$USER_LEAVE['leavestatus']}</td>
+                                <td class="medium" valign=top>
+                                    <div class="pull-left actions">
+                                        <span class="actionImages">
 
-                                    {if $USER_LEAVE['fileid'] neq ''}     
+                                            {if $USER_LEAVE['fileid'] neq ''}     
 
-                                    <a href="index.php?module=Leave&action=DownloadAttachment&record={$USER_LEAVE['id']}&attachmentid={$USER_LEAVE['fileid']}"><i class="fa fa-file-o" title="Documents"></i></a>    
-                                    {/if}
+                                            <a href="index.php?module=Leave&action=DownloadAttachment&record={$USER_LEAVE['id']}&attachmentid={$USER_LEAVE['fileid']}"><i class="fa fa-file-o" title="Documents"></i></a>    
+                                            {/if}
 
+                                            {if $USER_LEAVE['leavestatus'] eq 'New'}
+                                                <a class="editLeave cursorPointer editAction ti-pencil" data-url='index.php{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false'
+                                                title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Leave_Js.editLeave('index.php{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false');"></a>
+                                            {/if} 
+                                            <input type="hidden" name="manager" id="manager" value="false" />
 
-                                    {if $USER_LEAVE['leavestatus'] eq 'New'}
+                                            {if $USER_LEAVE['leavestatus'] eq 'New' OR $USER_LEAVE['leavestatus'] eq 'Apply'}
+                                                <a class="deleteLeave cursorPointer" onclick="Users_Leave_Js.deleteLeave('index.php?module=Leave&action=Delete&record={$USER_LEAVE['id']}');"><i class="fa fa-trash-o" title="Delete"></i></a>
+                                            {/if}
+                                            {if $USER_LEAVE['leavestatus'] eq 'Approved' && $USER_LEAVE['from_date']|strtotime gt $CurrentDate|strtotime}
+                                                <a class="cancelLeave cursorPointer" data-section='M' data-url='?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}' 
 
-
-
-                                    <a class="editLeave cursorPointer editAction ti-pencil" data-url='index.php{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false'
-                                    title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Leave_Js.editLeave('index.php{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USERID}&leavestatus={$USER_LEAVE['leavestatus']}&manager=false');"></a>&nbsp;&nbsp;
-                                    {/if} <input type="hidden" name="manager" id="manager" value="false" />
-                                    {if $USER_LEAVE['leavestatus'] eq 'New' OR $USER_LEAVE['leavestatus'] eq 'Apply'}
-                                    <a class="deleteLeave cursorPointer" onclick="Users_Leave_Js.deleteLeave('index.php?module=Leave&action=Delete&record={$USER_LEAVE['id']}');"><i class="fa fa-trash-o" title="Delete"></i></a>
-                                    {/if}
-                                    {if $USER_LEAVE['leavestatus'] eq 'Approved' && $USER_LEAVE['from_date']|strtotime gt $CurrentDate|strtotime}
-                                    <a class="cancelLeave cursorPointer" data-section='M' data-url='?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}' 
-
-                                    onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}','M');"><i class="icon-trash alignMiddle" title="Cancel"></i></a>
-
-
-                                    {/if}
-
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                    {/foreach}
+                                            onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}','M');">
+                                                <i class="icon-trash alignMiddle" title="Cancel">   </i>
+                                                </a>
+                                           {/if}
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        {/foreach}
                     {else}
                     <tr><td colspan="6"><center>{vtranslate('LBL_NO_LEAVE_FOUND', $MODULE)}</center></td></tr>
                     {/if}
@@ -290,57 +293,50 @@
 
 
             <div id="myteamleavelist">
-                <div class="listViewActionsDiv row-fluid">
-                    <span class="span4 btn-toolbar" style="float:right;margin-left:0.12766%;margin-top:0;">
-                        <!--@@@@@@@@@@@@START PAGINATION TOOLS@@@@@@@@@@@@@@@-->
-                        <input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
-                        <input type="hidden" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" />
-                        <input type="hidden" id="previousPageExist" value="{$PAGING_MODEL->isPrevPageExists()}" />
-                        <input type="hidden" id="nextPageExist" value="{$PAGING_MODEL->isNextPageExists()}" />
-                        <input type="hidden" id="totalCount" value="{$LISTVIEW_COUNT}" />
-                        <input type='hidden' value="{$PAGE_NUMBER}" id='pageNumber'>
-                        <input type='hidden' value="{$PAGE_LIMIT}" id='pageLimit'>
-                        <input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
+                <div class="listViewActionsDiv row-fluid">                
+                    <div class="btn-group pull-right">
+                            <input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
+                            <input type="hidden" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" />
+                            <input type="hidden" id="previousPageExist" value="{$PAGING_MODEL->isPrevPageExists()}" />
+                            <input type="hidden" id="nextPageExist" value="{$PAGING_MODEL->isNextPageExists()}" />
+                            <input type="hidden" id="totalCount" value="{$LISTVIEW_COUNT}" />
+                            <input type="hidden" id="totalPage" value="{$PCOUNT}" />
+                            
+                            <input type='hidden' value="{$PAGE_NUMBER}" id='pageNumber'>
+                            <input type='hidden' value="{$PAGE_LIMIT}" id='pageLimit'>
+                            <input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
 
-                        <div class="listViewActions pull-right {if $PCOUNT eq 0} hide{/if}">
-
-                            <div class="pageNumbers alignTop {if $LISTVIEW_LINKS['LISTVIEWSETTING']|@count gt 0}{else}{/if}" style="display: inline-block;    padding: 7px 12px;">
-                                <span>
-                                    <span class="pageNumbersText" style="padding-right:5px">{if $LISTVIEW_ENTRIES_COUNT}{$PAGING_MODEL->getRecordStartRange()} {vtranslate('LBL_to', $MODULE)} {$PAGING_MODEL->getRecordEndRange()}{else}<span>&nbsp;</span>{/if}</span>
-                                    <!--<span class="icon-refresh pull-right totalNumberOfRecords cursorPointer{if $PCOUNT eq 0} hide{/if}"></span>-->
-                                </span>
-                            </div>
-
-                            <div class="btn-group alignTop margin0px" style="display: inline-block;">
-                                <span class="pull-right">
-                                    <span class="btn-group">
-                                        <button class="btn"  id="userleaveprevpagebutton"  {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if} type="button"><span class="fa fa-chevron-left"></span></button>
-                                <!--<button class="btn dropdown-toggle" type="button" id="listViewPageJump" data-toggle="dropdown" {if $PAGE_COUNT eq 1} disabled {/if}>
-                                        <i class="vtGlyph vticon-pageJump" title="{vtranslate('LBL_LISTVIEW_PAGE_JUMP',$moduleName)}"></i>
-                                        </button>
-                                        <ul class="listViewBasicAction dropdown-menu" id="listViewPageJumpDropDown">
-                                                <li>
-                                                        <span class="row-fluid">
-                                                                <span class="span3 pushUpandDown2per">
-                                                                        <span class="pull-right">{vtranslate('LBL_PAGE',$moduleName)}</span>
-                                                                </span>
-                                                                <span class="span4">
-                                                                        <input type="text" id="pageToJump" class="listViewPagingInput" value="{$PAGE_NUMBER}"/>
-                                                                </span>
-                                                                <span class="span2 textAlignCenter pushUpandDown2per">
-                                                                        {vtranslate('LBL_OF',$moduleName)}&nbsp;
-                                                                </span>
-                                                                <span class="span2 pushUpandDown2per" id="totalPageCount">{$PAGE_COUNT}</span>
-                                                        </span>
-                                                </li>
-                                            </ul>-->
-                                            <button class="btn" id="userleavenextpagebutton" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if} type="button"><span class="fa fa-chevron-right"></span></button>                
-                                        </span>
-                                    </span> 
-                                </div>  
-                            </div>
-                        </span>
+                            <button type="button" id="LeavePreviousPageButton" class="btn btn-secondary" {if !$PAGING_MODEL->isPrevPageExists()} disabled {/if}><i class="material-icons">chevron_left</i></button>
+                          <!--   <button type="button" id="PageJump" data-toggle="dropdown" class="btn btn-secondary" aria-expanded="false">
+                                <i class="material-icons icon" title="Page Jump">more_horiz</i>
+                            </button>
+                            
+                           <ul class="listViewBasicAction dropdown-menu" id="PageJumpDropDown">
+                                <li>
+                                    <div class="listview-pagenum">
+                                        <span>Page</span>&nbsp;
+                                        <strong><span>{$PAGING_MODEL->getRecordStartRange()}</span></strong>&nbsp;
+                                        <span>of</span>&nbsp;
+                                        <strong><span id="totalPageCount">{$PCOUNT}</span></strong>
+                                    </div>
+                                    <div class="listview-pagejump">
+                                        <input id="pageToJump" placeholder="Jump To" class="listViewPagingInput text-center" type="text">&nbsp;
+                                        <button type="button" id="pageToJumpSubmit" class="btn btn-success listViewPagingInputSubmit text-center">GO</button>
+                                    </div>    
+                                </li>
+                            </ul>-->
+                            <button type="button" id="LeaveNextPageButton" class="btn btn-secondary" {if (!$PAGING_MODEL->isNextPageExists()) or ($PAGE_COUNT eq 1)} disabled {/if}><i class="material-icons">chevron_right</i></button>
                     </div>
+                    <span class="pageNumbers  pull-right" style="position:relative;top:7px;">
+                        <span class="pageNumbersText">{$PAGING_MODEL->getRecordStartRange()} to {$PAGING_MODEL->getRecordEndRange()}</span>
+                            &nbsp;<span class="totalNumberOfRecords cursorPointer" title="Click for this list size">of {$LISTVIEW_COUNT}</span>&nbsp;&nbsp;
+                    </span>
+                </div>    
+
+
+
+
+
                     <!--@@@@@@@@@@@@END PAGINATION TOOLS@@@@@@@@@@@@@@@-->
                     <table class="table detailview-table listViewEntriesTable">
                         <thead>
@@ -376,7 +372,7 @@
 
                                             {if $USER_LEAVE['leavestatus'] eq 'Apply'}
                                             <a class="editLeave cursorPointer editAction ti-pencil" data-url='{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true'
-                                            title="{vtranslate('LBL_EDIT', $MODULE)}"  onclick="Users_Leave_Js.Popup_LeaveApprove('{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true');"></a>&nbsp;&nbsp;
+                                            title="{vtranslate('LBL_EDIT', $MODULE)}"  onclick="Users_Leave_Js.Popup_LeaveApprove('{$CREATE_LEAVE_URL}&record={$USER_LEAVE['id']}&userId={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}&manager=true');"></a>
                                             {/if}
                                             {if $USER_LEAVE['leavestatus'] eq 'Apply' || ($USER_LEAVE['leavestatus'] eq 'Approved' && $USER_LEAVE['from_date']|strtotime gt $CurrentDate|strtotime)}
                                             <a class="cancelLeave cursorPointer" onclick="Users_Leave_Js.cancelLeave('?module=Users&action=DeleteSubModuleAjax&mode=cancelLeave&record={$USER_LEAVE['id']}&leave_type={$USER_LEAVE['leavetypeid']}&user_id={$USER_LEAVE['applicantid']}&leavestatus={$USER_LEAVE['leavestatus']}','T');"><i title="Cancel" class="fa fa-times-circle alignBottom"></i></a>              

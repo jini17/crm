@@ -99,7 +99,7 @@ class Claim extends Vtiger_CRMEntity {
 		}
  	}
 
- 	function save_module($module) {
+ 	/*function save_module($module) {
 
  		$this->insertIntoAttachment($this->id,$module);
 
@@ -133,9 +133,9 @@ class Claim extends Vtiger_CRMEntity {
 		} 
 		$db->pquery("UPDATE vtiger_claim SET totalamount=? WHERE claimid=?", array($claimamount, $this->id));
 
-	}
+	}*/
 
-	function insertIntoAttachment($id,$module)
+/*	function insertIntoAttachment($id,$module)
 	{
 		global $log, $adb;
 		//$adb->setDebug(true);
@@ -154,5 +154,5 @@ class Claim extends Vtiger_CRMEntity {
 			}
 		}
 		$log->debug("Exiting from insertIntoAttachment($id,$module) method.");
-	}
+	}*/
 }

@@ -64,7 +64,7 @@
                                                                     {foreach key=LEAVE_ID item=CLAIM_MODEL from=$CLAIMTYPELIST name=institutionIterator}		
                                                                      
                                                                     <option id="claimtype" value="{$CLAIM_MODEL.claimtypeid}" style="float:left;margin-right:5px;background-color:{$CLAIM_MODEL['color_code']};width:30px;height:20px;" data-bal="{$CLAIM_MODEL.balance}" data-transaction="{$CLAIM_MODEL.transaction_limit}" data-monthly="{$CLAIM_MODEL.monthly_limit}" data-yearly="{$CLAIM_MODEL.yearly_limit}" {if $CLAIM_DETAIL.category eq $CLAIM_MODEL.claimtypeid} selected {/if}>
-                                                                    {$CLAIM_MODEL.claimtype} {if $CLAIM_MODEL.balance ne 0} (Max: {$CLAIM_MODEL.balance}){/if}</option>
+                                                                    {$CLAIM_MODEL.claimtype}</option>
 
                                                                     {/foreach}
 
@@ -73,9 +73,6 @@
                                                                     {/if}	
 
                                                             </select>
-
-                                                           <!-- <div class="controls pull-left" id="limitlbl" style="font-size:12px;" data-transaction="" data-monthly="" data-yearly="" hidden>{vtranslate('Limit', $QUALIFIED_MODULE)}&nbsp;&nbsp;[&nbsp;&nbsp;{vtranslate('Trans:', $QUALIFIED_MODULE)}&nbsp;&nbsp;{vtranslate('Monthly:', $QUALIFIED_MODULE)}&nbsp;&nbsp;{vtranslate('Yearly:', $QUALIFIED_MODULE)}&nbsp;&nbsp;]</div>-->
-
                                                         </div>
 
                                                 </div>
@@ -143,7 +140,7 @@
                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                                 </div>			
                                                 <div class="controls date col-md-8">
-                                                         <textarea style="width:350px!important" data-rule-required = "true"  id="description" name="description" class="span11"  maxlength="300">{$CLAIM_DETAIL['description']}</textarea>
+                                                         <textarea style="width:350px!important" data-rule-required = "true" {if $MANAGER eq 'true'}disabled{/if}  id="description" name="description" class="span11"  maxlength="300">{$CLAIM_DETAIL['description']}</textarea>
                                                 </div>
                                         </div>	
                                         <div class="col-md-12" style="margin-bottom: 15px;">
@@ -171,7 +168,7 @@
                             </div>   
                         <!--start-->
                         {if $MANAGER eq 'true'}
-                            <div class="row-fluid">
+                           <!-- <div class="row-fluid">
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                     <div class="col-md-12" style="margin-bottom: 15px;">
                                         <div class="col-md-4">
@@ -190,7 +187,7 @@
                                         </div>
                                     </div>
                                 </div>
-                             </div>
+                             </div>-->
                                                 <!--end-->
 
 
@@ -200,9 +197,9 @@
                             <div class="col-md-8">
                                  <label for="approve"> 
                                         {if $CLAIM_DETAIL.claim_status == 'Approved'}
-                                                &nbsp;<input type="radio" name="claim_status" id="approve" class="pull-left" style="margin-top:7px;" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');" checked="checked">
+                                                &nbsp;<input type="radio" name="claim_status" id="approve" class="pull-left" style="margin-top:7px;" required="" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');" checked="checked">
                                                 {else}
-                                                &nbsp;<input type="radio" name="claim_status" id="approve"  class="pull-left" style="margin-top:7px;" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');">
+                                                &nbsp;<input type="radio" name="claim_status" id="approve"  class="pull-left" style="margin-top:7px;" required value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');">
                                                 {/if}
                                                 <label class="control-label fieldLabel">
                                                     {vtranslate('LBL_CLAIM_APPROVED', $QUALIFIED_MODULE)}
@@ -210,15 +207,15 @@
                                                 
                                  </label>
                                  <label for="notapprove" style="margin-left: 31px">
-                                                        {if $CLAIM_DETAIL.claim_status eq 'Rejected'}
-                                                        <input type="radio" name="claim_status"  class="pull-left" id="notapprove" style="margin-top:7px;" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');" checked="checked">
-                                                        {else}
-                                                        <input type="radio" name="claim_status"  class="pull-left" id="notapprove" style="margin-top:7px;" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');">
-                                                        {/if}
-                                                        <label class="control-label fieldLabel">
-                                                            &nbsp;{vtranslate('LBL_CLAIM_NOT_APPROVED', $QUALIFIED_MODULE)}
-                                                        </label>
-                                                        
+                                    {if $CLAIM_DETAIL.claim_status eq 'Rejected'}
+                                    <input type="radio" name="claim_status"  class="pull-left" id="notapprove" required style="margin-top:7px;" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');"  checked="checked">
+                                    {else}
+                                    <input type="radio" name="claim_status"  class="pull-left" id="notapprove" style="margin-top:7px;" required value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');">
+                                    {/if}
+                                    <label class="control-label fieldLabel">
+                                        &nbsp;{vtranslate('LBL_CLAIM_NOT_APPROVED', $QUALIFIED_MODULE)}
+                                    </label>
+                                    
                                  </label>   
                             </div>    
                                 <!--approved start-->
@@ -296,46 +293,12 @@
 
     });
 
-    $('#totalamount').on('change', function() {
-        var balance     = parseFloat(jQuery('#category').find(':selected').data('bal'));
-        var transaction = parseFloat(jQuery('#category').find(':selected').data('transaction'));
-        var monthly     = parseFloat(jQuery('#category').find(':selected').data('monthly'));
-        var yearly      = parseFloat(jQuery('#category').find(':selected').data('yearly'));
-        var useramount = parseFloat(jQuery('#totalamount').val());        
-        if( useramount > balance){
-           if(transaction != 0.00){
-                app.helper.showErrorNotification({'message': app.vtranslate('JS_TRANSACTION_AMOUNT_EXCEEDED')});
-            }else if(monthly != 0.00){
-                app.helper.showErrorNotification({'message': app.vtranslate('JS_MONTHLY_AMOUNT_EXCEEDED')});
-            }else
-                app.helper.showErrorNotification({'message': app.vtranslate('JS_YEARLY_AMOUNT_EXCEEDED')});
-
-            jQuery('#totalamount').val('');
-            
-        }else if(useramount <= 0){
-            jQuery('#totalamount').val('');
-        }
-    });
-
                                 function show1(){
                                   document.getElementById('div1').style.display ='none';
                                 }
                                 function show2(){
                                   document.getElementById('div1').style.display = 'block';
                                 }
-
-                                        jQuery('#rejectionreasontxt').keyup(function () { 
-                                var maxchar = 300;
-                                var len = jQuery(this).val().length;
-                                if (len > maxchar) {
-                                        jQuery('#chrNum').text(' you have reached the limit');
-                                        jQuery(this).val($(this).val().substring(0, len-1));
-                                } else {
-                                        var remainchar = maxchar - len;
-                                        jQuery('#chrNum').text(remainchar + ' character(s) left');
-
-                                }
-                        });
 
                                 jQuery('#description').keyup(function () { 
                                 var maxchar = 300;
@@ -367,8 +330,8 @@
         function toggleRejectionReasontxt(trigger){	
         if(trigger == 'show'){
                 var txtobj    = document.getElementById('rejectionreason');
-
                 txtobj.className = '';
+                Users_Claim_Js.textAreaLimitCharDisapprove();
                 //alert('ok'+ trigger);
         }else{
                 var txtobj    = document.getElementById('rejectionreason');
@@ -376,36 +339,6 @@
                 txtobj.className = 'hide';
         }
 
-}
-
-
-function updateBox(selectbox, txtbox){
-
-        var selectboxid = "#"+selectbox;
-
-        $(selectboxid).select2("data", {id: "0", text: "Others"}); 
-        $(selectboxid).select2("close");
-
-        var selectobj = document.getElementById(selectbox);
-        var txtobj    = document.getElementById(txtbox);
-
-        txtobj.className = '';
-}
-
-function updateSelectBox(selectbox, txtbox)
-{
-//alert(JSON.stringify(selectbox));
-        var selectobj = document.getElementById(selectbox);
-
-        var txtobj    = document.getElementById(txtbox);
-
-        if(selectobj==null || selectobj==undefined || selectobj.value=='0') {
-                if(txtbox == 'designationtxt') {
-                        txtobj.className = '';
-                } 
-        } else if(selectobj.value!=null) {
-                        txtobj.className = 'hide';
-        }
 }
 </script>
 {/literal}
