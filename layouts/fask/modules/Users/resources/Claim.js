@@ -19,13 +19,15 @@ Vtiger.Class("Users_Claim_Js", {
 				'mode'   	: 'IsAnyClaimTypeAssign',
      		}
                
-             app.request.post({'data': params}).then(function (err, data) {        
-                    if(data.result !=''){
-                         app.helper.showErrorNotification({'message': app.vtranslate(data.result, 'Users')});
+             app.request.post({'data': params}).then(function (err, data) {  
+                    if(data.length >0){
+                         app.helper.showErrorNotification({'message': app.vtranslate(data, 'Users')});
                          return false;
+                    } else{
+                          thisInstance.editClaim(url);
                     }
              }); 
-              thisInstance.editClaim(url);
+             
 	},
 	
 	textAreaLimitChar : function(){

@@ -10,8 +10,45 @@
 Vtiger.Class("Users_Leave_Js", {
 
 	//register click event for Add New Education button
-	addLeave : function(url	) { 
-	     this.editLeave(url);
+	addLeave : function(url) { 
+	     var thisInstance = this;
+	     
+	     //check the anyleaveType for login user 
+    		var params = {
+				'module' 	: app.getModuleName(),
+				'action' 	: 'SaveSubModuleAjax',
+				'mode'   	: 'IsAnyLeaveTypeAssign',
+     		}
+               
+             app.request.post({'data': params}).then(function (err, data) {  
+                    if(data.length >0){
+                         app.helper.showErrorNotification({'message': app.vtranslate(data, 'Users')});
+                         return false;
+                    } else{
+                          thisInstance.editLeave(url);
+                    }
+             }); 
+	},
+	
+	//register click event for Add New Education button
+	addClaim : function(url) { 
+	     var thisInstance = this;
+         	//check the anyclaimType for login user 
+    		var params = {
+				'module' 	: app.getModuleName(),
+				'action' 	: 'SaveSubModuleAjax',
+				'mode'   	: 'IsAnyClaimTypeAssign',
+     		}
+               
+             app.request.post({'data': params}).then(function (err, data) {  
+                    if(data.length >0){
+                         app.helper.showErrorNotification({'message': app.vtranslate(data, 'Users')});
+                         return false;
+                    } else{
+                          thisInstance.editClaim(url);
+                    }
+             }); 
+             
 	},
 	
 	textAreaLimitChar : function(){

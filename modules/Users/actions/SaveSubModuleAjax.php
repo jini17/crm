@@ -19,7 +19,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 		$this->exposeMethod('saveClaim');
 		$this->exposeMethod('ValidateClaimAmount');
 		$this->exposeMethod('IsAnyClaimTypeAssign');
-
+		$this->exposeMethod('IsAnyLeaveTypeAssign');
 	}
 
 	public function process(Vtiger_Request $request) {
@@ -41,6 +41,28 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 	
 		if(count($claimTypes)==0){
 			$msg = 'JS_NO_CLAIMTYPE_ALLOCATE';
+		} 
+		
+		$response = new Vtiger_Response();
+		$response->setResult($msg);
+		$response->emit();
+
+		
+		return $allow;
+	}
+
+	//Validate LeaveType Assign to User 
+	public function IsAnyLeaveTypeAssign(Vtiger_Request $request){
+
+		global $current_user;
+
+		$userid = $current_user->id;
+		$LeaveTypes = Users_LeavesRecords_Model::getLeaveTypeList($userid);
+		
+		$msg = '';
+	
+		if(count($LeaveTypes)==0){
+			$msg = 'JS_NO_LEAVETYPE_ALLOCATE';
 		} 
 		
 		$response = new Vtiger_Response();

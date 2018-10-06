@@ -549,7 +549,7 @@ $jsLanguageStrings = array(
 	'JS_YEARLY_LIMIT_EXCEED'=>'Yearly limit exceeded !',
 	'JS_CLAIM_NOT_EXCEED'=>'Amount claim are fine.',																
 	'JS_TRANSACTION_AMOUNT_EXCEEDED'=>'Transaction limited exceeded',
-	'JS_NO_CLAIMTYPE_ALLOCATE'=>'No ClaimType allocated',
+	'JS_NO_CLAIMTYPE_ALLOCATE'=>'No Claim Type allocated, please contact to HR/Admin.',
 	'JS_CREATE_FAILED'=>'Claim creation failed',
 	'JS_CLAIM_CREATE_SUCCESSFULLY'=>'Claim created successfully',
 	'JS_CLAIM_UPDATED'=>'Claim updated successfully',
@@ -559,4 +559,5 @@ $jsLanguageStrings = array(
 	'JS_ALREADY_CONSUMED'=>'You are already consumed',
 	'JS_TRANS_LIMIT'=>'Transaction limit is ',
 	'JS_APPLY_AMOUNT'=>'Amount should be less than or equal to ',
+	'JS_NO_LEAVETYPE_ALLOCATE'=>'No Leave Type allocated, please contact to HR/Admin.',
 );
