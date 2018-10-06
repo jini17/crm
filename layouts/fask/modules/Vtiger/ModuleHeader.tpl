@@ -157,7 +157,7 @@
                                                                         {/foreach}
                                                                 </ul>
                                         {/if}
-                                        <a class='btn btn-default Help-btn text-center'>
+                                        <a class='btn btn-danger Help-btn text-center'>
                                                 <i class="glyphicon glyphicon-question-sign"></i>&nbsp;Help
                                         </a>
 

@@ -72,6 +72,7 @@ class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
             $sql .= "  AND  department='$department'";
         }
         
+
         $query = $db->pquery($sql);
         $numrows = $db->num_rows($query);
         $data = array();
@@ -80,6 +81,7 @@ class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
             $data[$i]['first_name'] = $db->query_result($query,$i,'first_name');
             $data[$i]['last_name'] = $db->query_result($query,$i,'last_name');
             $data[$i]['department'] = $db->query_result($query,$i,'department');
+
         }
         return $data;
     }        

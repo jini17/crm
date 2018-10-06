@@ -319,7 +319,9 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 }else{
                         $row=0;
                 }
+
                 $memcondition		= " AND vtiger_leave.employee_id IN (".$allteammate.")";	
+
                 $leavetypecondtion	= '';	
                 if(!empty($selectedmember)) {
                         $memcondition = " AND vtiger_leave.employee_id = $selectedmember";
