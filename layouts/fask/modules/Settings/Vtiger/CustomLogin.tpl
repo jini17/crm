@@ -10,6 +10,10 @@
 -->*}
 
 {strip}
+               <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 0;right:0 !important ; left: 82% !important; z-index: 999 " title="Left Panel Show/Hide">
+                    <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
+            </button>  
+        <div class="clearfix"></div>
 <input type="hidden" id="supportedImageFormats" value='{ZEND_JSON::encode(Settings_Vtiger_CustomLogin_Model::$logoSupportedFormats)}' />
 <div class="padding-left1per">
 <div class="row-fluid widget_header">
@@ -76,7 +80,7 @@
                 <div class="companyLogo col-md-12" id="logoarea" style="border: 1px solid #cecece;padding: 15px;margin-bottom: 20px;">
                     <img src="{$MODULE_MODEL->getLogoPath()}" class="alignMiddle" />
                 </div>
-              
+
                 <div id="uploadclogo" class="col-sm-4" >
                     <input type="file" name="logo" id="logoFile" />&nbsp;&nbsp;
                 </div>
@@ -103,7 +107,7 @@
                         {vtranslate($FIELD,$QUALIFIED_MODULE)}
             </div>
             <div class="controls col-md-10">
-   
+
                 {if $FIELD eq 'wcmsg' || $FIELD eq 'smdetail'}
                 <textarea name="{$FIELD}" class="col-md-10" style="margin-bottom: 15px;">{$MODULE_MODEL->get($FIELD)}</textarea>
                 {else if $FIELD eq 'smicon' }

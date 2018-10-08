@@ -8,7 +8,11 @@
  ********************************************************************************/
 -->*}
 {strip}
-    <div class="listViewPageDiv" id="listViewContent">
+    <div class="listViewPageDiv" id="listViewContent" style="position:relative;">
+              <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 0;right:0 !important ; left: 82% !important; z-index: 999 " title="Left Panel Show/Hide">
+                    <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
+            </button>  
+        <div class="clearfix"></div>
         <div class="col-sm-12 col-xs-12 ">
             <div class="container-fluid" id="AnnouncementContainer">
                 <div class="widget_header">

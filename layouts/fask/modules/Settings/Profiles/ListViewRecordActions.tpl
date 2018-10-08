@@ -10,22 +10,24 @@
 <!--LIST VIEW RECORD ACTIONS-->
 
 <div class="table-actions">
-	{assign var=RECORD_LINKS value=$LISTVIEW_ENTRY->getRecordLinks()}
-	{assign var=RECORD_LINK_URL value=[]}
-	{foreach item=RECORD_LINK key=key from=$LISTVIEW_ENTRY->getRecordLinks()}
-		{$RECORD_LINK_URL.$key = $RECORD_LINK->getUrl()}
-	{/foreach}
+        {assign var=RECORD_LINKS value=$LISTVIEW_ENTRY->getRecordLinks()}
+        {assign var=RECORD_LINK_URL value=[]}
+        {foreach item=RECORD_LINK key=key from=$LISTVIEW_ENTRY->getRecordLinks()}
+                {$RECORD_LINK_URL.$key = $RECORD_LINK->getUrl()}
+        {/foreach}
 
-	<span>
-		<a href="{$RECORD_LINK_URL[1]}" title="{vtranslate('LBL_DUPLICATE', $MODULE)}"><i class="fa fa-copy"></i></a>
-	</span>
-	<span class="more dropdown action">
-		<span href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-			<i class="fa fa-ellipsis-v icon"></i></span>
-		<ul class="dropdown-menu">
-			<li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="{$RECORD_LINK_URL[0]}" title="{vtranslate('LBL_EDIT', $MODULE)}">{vtranslate('LBL_EDIT', $MODULE)}</a></li>
-			<li> <a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0)" onclick="{$RECORD_LINK_URL[2]}" title="{vtranslate('LBL_DELETE', $MODULE)}">{vtranslate('LBL_DELETE', $MODULE)}</a></li>
-		</ul>
-	</span>
+        <span>
+                <a href="{$RECORD_LINK_URL[1]}" title="{vtranslate('LBL_DUPLICATE', $MODULE)}"><i class="fa fa-copy"></i></a>
+        </span>
+        <span class="more dropdown action">
+                <span href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-ellipsis-v icon"></i></span>
+                <ul class="dropdown-menu">
+                        <li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="{$RECORD_LINK_URL[0]}" title="{vtranslate('LBL_EDIT', $MODULE)}">{vtranslate('LBL_EDIT', $MODULE)}</a></li>
+                        <li> <a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0)" onclick="{$RECORD_LINK_URL[2]}" title="{vtranslate('LBL_DELETE', $MODULE)}">{vtranslate('LBL_DELETE', $MODULE)}</a></li>
+                </ul>
+        </span>
+                        <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;right:0;" title="Left Panel Show/Hide">
+            <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>          
 </div>
 {/strip}

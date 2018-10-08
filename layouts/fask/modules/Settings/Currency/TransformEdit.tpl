@@ -9,6 +9,7 @@
 ********************************************************************************/
 -->*}
 {strip}
+    
     {assign var=CURRENCY_ID value=$RECORD_MODEL->getId()}
     <div class="currencyTransformModalContainer modal-dialog modelContainer">
         {assign var=HEADER_TITLE value={vtranslate('LBL_TRANSFER_CURRENCY', $QUALIFIED_MODULE)}}

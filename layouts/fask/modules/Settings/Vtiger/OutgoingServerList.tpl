@@ -10,7 +10,11 @@
 {strip}
 
     <div class="col-sm-12 col-xs-12 ">
-    <div id="Head">
+    <div id="Head" style="position:relative;">
+           <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 0;right:0 !important ; left: 99% !important; " title="Left Panel Show/Hide">
+                    <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
+            </button>  
+        <div class="clearfix"></div>
         <div class="widget_header row-fluid">
             <div class="span8"><h3>{vtranslate('LBL_OUTOGING SERVER', $QUALIFIED_MODULE)}</h3></div>
         </div>
@@ -23,7 +27,7 @@
         <button class="btn span10 marginLeftZero newButton" id="editItem">Edit</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">{vtranslate('LBL_DELETE_VALUE',$QUALIFIED_MODULE)}</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        
+
         <br><br>
 
         <div class="contents">

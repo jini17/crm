@@ -64,13 +64,34 @@ var Settings_CompanyNumbering_Js = {
 			});
 	        });
 	},
+                      sidebar: function(){       
+                       
+                                    jQuery('.essentials-toggle').live('click',function(){
+                                        
+                                        var $this =   $(this).closest('.main-container');
+                                         var collaspe_status = $this.find('.settingsPageDiv');
+                                         if(!collaspe_status.hasClass('full-width')){
+                                            $this.find('.height100Per ').addClass('hide');
+                                            $('.main-container').find('.settingsPageDiv').addClass('full-width')
+                                         }
+                                         else{
+                                               $this.find('.height100Per ').removeClass('hide');
+                                               $('.main-container').find('.settingsPageDiv').removeClass('full-width')
+                                         }
+                                         aler('clicked');
+                                         
+                                     });
+                      
+                      },
 	
 	registerEvents : function(){
 		this.registerOnChangeEventOfCompanyNumbering();
 		this.saveModuleCustomNumbering();
+                                           this.sidebar();
 	}
 }
 
 jQuery(document).ready(function() {
+
 	Settings_CompanyNumbering_Js.registerEvents();
 });

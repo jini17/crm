@@ -15,7 +15,8 @@ class Settings_Roles_Index_View extends Settings_Vtiger_Index_View {
 		$qualifiedModuleName = $request->getModule(false);
 		$rootRole = Settings_Roles_Record_Model::getBaseRole();
 		$allRoles = Settings_Roles_Record_Model::getAll();
-
+                                           $leftpanelhide = $request->get('leftpanelhide');
+                                           var_dump($leftpanelhide);
 		$viewer->assign('ROOT_ROLE', $rootRole);
 		$viewer->assign('ROLES', $allRoles);
 		$viewer->assign('QUALIFIED_MODULE', $qualifiedModuleName);

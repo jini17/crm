@@ -9,7 +9,12 @@
 {* modules/Settings/Roles/views/Index.php *}
 
 {strip}
-    <div class="listViewPageDiv " id="listViewContent">
+    <div class="listViewPageDiv " id="listViewContent" style="width:calc(100%); position: relative;">
+        <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;right:0;" title="Left Panel Show/Hide">
+            <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>                    
+
+
+        <div class="clearfix"></div>
         <div class="col-sm-12 col-xs-12 ">
             <br>
             <div class="clearfix treeView">
