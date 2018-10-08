@@ -80,20 +80,20 @@
                                                                         {/if}
                                                                         <li>
                                                                                 <a data-name="{$MENU}" href="{$MENU_URL}" class="menuItemLabel {if $ACTIVE_BLOCK['menu'] eq $MENU} settingsgroup-menu-color {/if}">
-                                                                                        {vtranslate($MENU_LABEL,$QUALIFIED_MODULE)}
-                                                                                        <i id="{$MENUITEM->getId()}_menuItem" data-id="{$MENUITEM->getId()}"
-                                                                                                 data-actionurl="{$MENUITEM->getPinUnpinActionUrl()}"
-                                                                                                 data-pintitle="{vtranslate('LBL_PIN',$QUALIFIED_MODULE)}"
-                                                                                                 data-unpintitle="{vtranslate('LBL_UNPIN',$QUALIFIED_MODULE)}"
-                                                                                                 data-pinimageurl="{{vimage_path('pin.png')}}"
-                                                                                                 data-unpinimageurl="{{vimage_path('unpin.png')}}"
-                                                                                                 {if $MENUITEM->isPinned()}
-                                                                                                         title="{vtranslate('LBL_UNPIN',$QUALIFIED_MODULE)}" class="pinUnpinShortCut cursorPointer pull-right ti-pin2" data-action="unpin"
-                                                                                                 {else}
-                                                                                                         title="{vtranslate('LBL_PIN',$QUALIFIED_MODULE)}" class="pinUnpinShortCut cursorPointer pull-right ti-pin-alt" data-action="pin" 
-                                                                                                 {/if} />
-                                                                                                </i>
-                                                                                </a>
+                                                <i class="material-icons module-icon">{$MENUITEM->get('iconpath')}</i>&nbsp;{vtranslate($MENU_LABEL,$QUALIFIED_MODULE)}
+                                                <i id="{$MENUITEM->getId()}_menuItem" data-id="{$MENUITEM->getId()}"
+                                                     data-actionurl="{$MENUITEM->getPinUnpinActionUrl()}"
+                                                     data-pintitle="{vtranslate('LBL_PIN',$QUALIFIED_MODULE)}"
+                                                     data-unpintitle="{vtranslate('LBL_UNPIN',$QUALIFIED_MODULE)}"
+                                                     data-pinimageurl="{{vimage_path('pin.png')}}"
+                                                     data-unpinimageurl="{{vimage_path('unpin.png')}}"
+                                                     {if $MENUITEM->isPinned()}
+                                                         title="{vtranslate('LBL_UNPIN',$QUALIFIED_MODULE)}" class="pinUnpinShortCut cursorPointer pull-right ti-pin2" data-action="unpin"
+                                                     {else}
+                                                         title="{vtranslate('LBL_PIN',$QUALIFIED_MODULE)}" class="pinUnpinShortCut cursorPointer pull-right ti-pin-alt" data-action="pin" 
+                                                     {/if} />
+                                                    </i>
+                                            </a>
                                                                         </li>
                                                                 {/foreach}
                                                         </ul>

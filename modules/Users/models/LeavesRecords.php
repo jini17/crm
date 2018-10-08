@@ -319,10 +319,12 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 }else{
                         $row=0;
                 }
-                $memcondition		= " AND vtiger_crmentity.smownerid IN (".$allteammate.")";	
+
+                $memcondition		= " AND vtiger_leave.employee_id IN (".$allteammate.")";	
+
                 $leavetypecondtion	= '';	
                 if(!empty($selectedmember)) {
-                        $memcondition = " AND vtiger_crmentity.smownerid = $selectedmember";
+                        $memcondition = " AND vtiger_leave.employee_id = $selectedmember";
                 }
                 if(!empty($selectedleavetype)) {
                         $leavetypecondtion = " AND vtiger_leave.leavetype = $selectedleavetype";
@@ -369,7 +371,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
         //Created by Safuan
         public function getLeaveDetail($leaveid){
                 $db = PearDatabase::getInstance();
-        $query = "SELECT leaveid, reasonofleave, leavetype, fromdate, todate, replaceuser_id, leavestatus,starthalf, endhalf, reasonnotapprove
+        $query = "SELECT leaveid, reasonofleave, leavetype, fromdate, todate, replaceuser_id, leavestatus,starthalf, endhalf, reasonnotapprove, attachment
                         FROM vtiger_leave 
                         INNER JOIN vtiger_crmentity
                         ON vtiger_crmentity.crmid = vtiger_leave.leaveid
@@ -388,6 +390,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 $leavedetails['starthalf'] = $db->query_result($result, 0, 'starthalf');
                 $leavedetails['endhalf'] = $db->query_result($result, 0, 'endhalf');
                 $leavedetails['reasonnotapprove'] = $db->query_result($result, 0, 'reasonnotapprove'); 
+                $leavedetails['attachment'] = $db->query_result($result, 0, 'attachment'); 
 
         return $leavedetails;
         }

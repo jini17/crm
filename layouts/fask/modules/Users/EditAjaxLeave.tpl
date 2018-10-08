@@ -10,17 +10,6 @@
 ********************************************************************************/
 -->*}
 
-{*<!--
-/*********************************************************************************
-** The contents of this file are subject to the vtiger CRM Public License Version 1.0
-* ("License"); You may not use this file except in compliance with the License
-* The Original Code is:  vtiger CRM Open Source
-* The Initial Developer of the Original Code is vtiger.
-* Portions created by vtiger are Copyright (C) vtiger.
-* All Rights Reserved.
-*
-********************************************************************************/
--->*}
 <style>
     .uploadedFileDetails{
 
@@ -146,7 +135,7 @@
                                         <i class="fa fa-laptop"></i>
                                         <span>{vtranslate('LBL_UPLOAD', $QUALIFIED_MODULE)}</span>
                                         <input id="attachment" class="fieldValue inputElement" type="file" value="{$CLAIM_DETAIL['attachment']}" name="attachment" {if $LEAVESTATUS eq 'Apply'} disabled {/if}>
-                                    </div>&nbsp;<span class="uploadedFileDetails">{$CLAIM_DETAIL['attachment']}</span>
+                                    </div>&nbsp;<span class="uploadedFileDetails">{$LEAVE_DETAIL.attachment}</span>
                                 </div>
                                 
                             </div>    
@@ -160,17 +149,17 @@
                                             <div class="col-md-8">
                                                  <label for="approve"> 
                                                         {if $LEAVE_DETAIL.leavestatus eq 'Approved'}
-                                                                &nbsp;<input type="radio" name="approval" id="approve" class="pull-left" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');" checked="checked">
+                                                                &nbsp;<input type="radio" name="approval" id="approve" class="pull-left" value="Approved" required onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');" checked="checked">
                                                                 {else}
-                                                                &nbsp;<input type="radio" name="approval" id="approve"  class="pull-left" value="Approved" onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');">
+                                                                &nbsp;<input type="radio" name="approval" id="approve"  class="pull-left" value="Approved" required onclick="document.getElementById('savetype').value='Approved';toggleRejectionReasontxt('hide');">
                                                                 {/if}
                                                                 {vtranslate('LBL_APPROVED', $QUALIFIED_MODULE)}
                                                  </label>
                                                  <label for="notapprove" style="margin-left: 31px">
                                                                         {if $LEAVE_DETAIL.leavestatus eq 'Not Approved'}
-                                                                        <input type="radio" name="approval"  class="pull-left" id="notapprove" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');" checked="checked">
+                                                                        <input type="radio" name="approval"  class="pull-left" id="notapprove" required value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');" checked="checked">
                                                                         {else}
-                                                                        <input type="radio" name="approval"  class="pull-left" id="notapprove" value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');">
+                                                                        <input type="radio" name="approval"  class="pull-left" id="notapprove" required value="Not Approved" onclick="document.getElementById('savetype').value='Not Approved';toggleRejectionReasontxt('show');">
                                                                         {/if}
                                                                         &nbsp;{vtranslate('LBL_NOT_APPROVED', $QUALIFIED_MODULE)}
                                                  </label>   
@@ -181,10 +170,10 @@
                         <div class="control-group">
                                 <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_REJECTION_REASON', $QUALIFIED_MODULE)}<span class="redColor">*</span></label>		
                                 <div class="controls  col-md-8">
-                                        <textarea style="width:350px!important" name="rejectionreasontxt" id="rejectionreasontxt" class="span11" maxlength="300">{$LEAVE_DETAIL.reasonnotapprove}</textarea>
+                                        <textarea style="width:350px!important" required name="rejectionreasontxt" id="rejectionreasontxt" class="span11" maxlength="300">{$LEAVE_DETAIL.reasonnotapprove}</textarea>
 
                                 </div>
-                                <div class="controls text-right" id="charNum_reason" style="font-size:12px; margin-right: 13px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
+                                <div class="controls text-right" id="charNum" style="font-size:12px; margin-right: 13px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                                 <label class="control-label fieldLabel">&nbsp;</label>
                               <!--  <div class="controls inputElement" id="charNum" style="font-size:12px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>-->
                         </div>
@@ -196,14 +185,13 @@
                         <div class="pull-right cancelLinkContainer" style="margin-top:0px;margin-left: 5px;">
 
                 {if $MANAGER eq 'true'}
-                        <input class="cancelLink btn btn-danger" type="button" value="{vtranslate('Cancel',$MODULE)}" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel" aria-hidden="true" data-dismiss="modal">
-
                         <input class="btn btn-success" type="submit" value="{vtranslate('Save Changes',$MODULE)}" name="savechanges" accesskey="LBL_SAVE_CHANGES_BUTTON_KEY" title="Save Changes">
-
+                         <input class="cancelLink btn btn-danger" type="button" value="{vtranslate('Cancel',$MODULE)}" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel" aria-hidden="true" data-dismiss="modal">
+                         
+                        </div>
                 {else}	
                         <input class="cancelLink btn btn-danger" type="button" value="{vtranslate('Cancel',$MODULE)}" name="button" accesskey="LBL_CANCEL_BUTTON_KEY" title="Cancel"  aria-hidden="true" data-dismiss="modal">
 
-                        </div>
                         <!--Enable or disable button-->
                         {if $LEAVESTATUS eq 'Apply' || $LEAVESTATUS eq 'Approve' || $LEAVESTATUS eq 'Not Approved' || $LEAVESTATUS eq 'Canccel'}
 
@@ -230,50 +218,17 @@
 {/strip}
 {literal}
 <script>
-
-
-
 function toggleRejectionReasontxt(trigger){	
         if(trigger == 'show'){
                 var txtobj    = document.getElementById('rejectionreason');
-
                 txtobj.className = '';
+                Users_Leave_Js.textAreaLimitCharDisapprove();
                 //alert('ok'+ trigger);
         }else{
                 var txtobj    = document.getElementById('rejectionreason');
-
                 txtobj.className = 'hide';
         }
 
-}
-
-function updateBox(selectbox, txtbox){
-
-        var selectboxid = "#"+selectbox;
-
-        $(selectboxid).select2("data", {id: "0", text: "Others"}); 
-        $(selectboxid).select2("close");
-
-        var selectobj = document.getElementById(selectbox);
-        var txtobj    = document.getElementById(txtbox);
-
-        txtobj.className = '';
-}
-
-function updateSelectBox(selectbox, txtbox)
-{
-//alert(JSON.stringify(selectbox));
-        var selectobj = document.getElementById(selectbox);
-
-        var txtobj    = document.getElementById(txtbox);
-
-        if(selectobj==null || selectobj==undefined || selectobj.value=='0') {
-                if(txtbox == 'leave_typetxt' || txtbox == 'areaofstudytxt') {
-                        txtobj.className = '';
-                } 
-        } else if(selectobj.value!=null) {
-                        txtobj.className = 'hide';
-        }
 }
 </script>
 {/literal}
