@@ -15,39 +15,78 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                 $db = PearDatabase::getInstance();
                // $db->setDebug(true);
                 $currentUser            = Users_Record_Model::getCurrentUserModel();
-                $viewer                      = $this->getViewer($request);
+                $viewer                       = $this->getViewer($request);
                 $moduleName         = $request->getModule();
                 $departmentList     = getAllPickListValues('department');
                 $moduleModel        = Home_Module_Model::getInstance($moduleName);
+                
                 $dept                         = $request->get('department');
-                $page                        = $request->get('page');
-                $linkId                         = $request->get('linkid');
-print_r($currentUser);
-                $moduleModel  = Home_Module_Model::getInstance($moduleName);
-                $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+                $page                         = $request->get('page');
+                $linkId                       = $request->get('linkid');
                 
-                $users                  = $this->get_employee($db, $dept);
-                $first_name = $currentUser->get('first_name');
-                $job_grade = $this->grade($currentUser->get('id'));
-                $designation =  $currentUser->get('designation');
-                $department = $currentUser->get('department');
-                $reportto       = "";
-                $contract_expiry = "";
+                $moduleModel       = Home_Module_Model::getInstance($moduleName);
+                $widget                    = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+                $users                       = $this->get_employee($db, $dept);
+                $first_name            = $currentUser->get('first_name');
+                $last_name            = $currentUser->get('first_name');
+                $job_grade             = $this->grade($db,$currentUser->get('grade_id'));
+           
+                $designation          =  $currentUser->get('Designation');
+                $department         = $currentUser->get('department');
+                $djt                           =    $this->get_designation_job_type($db, $currentUser->get('id'));
                 
+                $report_to             =  $this->report_to($db, $currentUser->get('reports_to_id'));
+               //$thumb                   = $this->get_image($db, $currentUser->get('id'),$currentUser->get('image_name'));
+               $thumb                   = $currentUser->getImageDetails();
+               $expire_date         = $this->get_contract_expiration_date($db, $currentUser->get('id'));
+               $curdate = date('Y-m-d');
+               $exp_date        = date('Y-m-d', strtotime($expire_date));
+               $now = time(); // or your date as well
+                $your_date = strtotime( $djt['exp_date']);
+                $datediff = $now - $your_date;
+
+                $alert_days = round($datediff / (60 * 60 * 24));
+                if($alert_days <= 45 ){
+                     $notify = "show";
+                }
+                else{
+                    $notify = "hide";
+                }
+
+                $info = array(
+                    'first_name'    =>  $currentUser->get('first_name'),
+                    'employee_id' => $currentUser->get('id'),
+                    'emp_name'   => $first_name." ".$last_name,
+                    'job_grade'     => $job_grade,
+                    'designation'  => $djt['deg'],
+                    'job_type'       => $djt['job_type'],
+                    'department' => $department,
+                    'report_to'     => $report_to,   
+                    'expire'            =>  date('M d, Y',strtotime($djt['exp_date'])),
+                    'thumb'          =>$thumb,
+                    'facebook'     => $currentUser->get('facebook'),
+                    'twitter'         => $currentUser->get('twitter'),
+                    'linkedin'       => $currentUser->get('linkedin'),
+                    'notify'           => $notify,
+                    'contract'           => $djt['contract_id'],
+                );
+
+             
+
                 $viewer->assign('REQUEST_DEPARTMENT', $dept);
                 $viewer->assign('DEPARTMENT', $departmentList);
                 $viewer->assign('WIDGET', $widget);
                 $viewer->assign('MODULE_NAME', $moduleName);
-                $viewer->assign('DATA', $users);
+                $viewer->assign('DATA', $info);
                 $viewer->assign('URL',$site_URL);
 
                 $content = $request->get('content');
              
-//                if(!empty($content)) {
-//                        $viewer->view('dashboards/MyEmploymentDetailsContents.tpl', $moduleName);
-//                } else {
-//                        $viewer->view('dashboards/MyEmploymentDetails.tpl', $moduleName);
-//                }
+                if(!empty($content)) {
+                        $viewer->view('dashboards/MyEmploymentDetailsContents.tpl', $moduleName);
+                } else {
+                        $viewer->view('dashboards/MyEmploymentDetails.tpl', $moduleName);
+                }
                 
         }
 
@@ -83,10 +122,14 @@ print_r($currentUser);
          * @return type
          */
         function report_to($db,$id){
-            $sql = "select first_name from vtiger_users WHERE id = $id"; 
-              $query = $db->pquery($sql,array());
-             $report_to = $db->query_result($query,0,'first_name');
-             return $report_to;
+           
+            $data                   = array();
+            $sql                      = "select id,first_name,last_name from vtiger_users WHERE id = $id"; 
+            $query                = $db->pquery($sql,array());
+            $report_to        = $db->query_result($query,0,'first_name');
+            $data['name']  = $report_to ." ".$db->query_result($query,0,'last_name');
+            $data['id']          = $db->query_result($query,0,'id');
+             return $data;
         }
         /**
    * 
@@ -97,24 +140,60 @@ print_r($currentUser);
         function get_employee($db,$department){
         $sql = "SELECT id,first_name,last_name,department FROM vtiger_users WHERE status = 'Active' ";
         
-        if($department != NULL){
-            $sql .= "  AND  department='$department'";
-        }
-        
+
         $query               = $db->pquery($sql);
         $numrows        = $db->num_rows($query);
         $data                 = array();
         
         for($i =0; $i < $numrows; $i++ ){
-            $data[$i]['empid']                = $db->query_result($query,$i,'id');
+            $data[$i]['empid']                = $db->query_result($query,$i,'employee_no');
             $data[$i]['first_name']       = $db->query_result($query,$i,'first_name');
             $data[$i]['last_name']        = $db->query_result($query,$i,'last_name');
+            $data[$i]['department']     = $db->query_result($query,$i,'department');
             $data[$i]['department']     = $db->query_result($query,$i,'department');
         }
         
         return $data;
     }        
+
+    /**
+     * SELECT * FROM `` 
+     * @param type $db
+     * @param type $id
+     * @return type
+     */
+    public function get_designation_job_type($db,$id){
+        $sql = "SELECT  vtiger_employeecontract.employeecontractid as employeecontractid,contract_expiry_date,designation,job_type from vtiger_employeecontract "
+                . " INNER JOIN vtiger_employeecontractcf ON vtiger_employeecontract.employeecontractid = vtiger_employeecontractcf.employeecontractid "
+                . " WHERE vtiger_employeecontract.employee_id = ".$id;
+        $query                         = $db->pquery($sql,array());
+        $djt['deg']                   = $db->query_result($query,0,'designation');
+        $djt['job_type']        = $db->query_result($query,0,'job_type');
+        $djt['contract_id']        = $db->query_result($query,0,'employeecontractid');
+          $djt['exp_date']        = $db->query_result($query,0,'contract_expiry_date');
+        return $djt;
         
+    }
+    
+    public function  get_contract_expiration_date($db,$id){
+        
+        $sql                         = "SELECT DATE_FORMAT(createdtime,'%M %d, %Y') as started_from from vtiger_crmentity WHERE `setype` LIKE '%contract%' AND `smownerid` = $id ";
+        $query                   = $db->pquery($sql,array());
+        $contract_start  = $db->query_result($query,0,'started_from');
+        return $contract_start;
+        
+    }
+    
+    public function get_image($db,$id,$name){
+        return $name;
+        $sql = "SELECT path from vtiger_attachments WHERE attachementid = $id AND name ='$name' ";
+         $query                   = $db->pquery($sql,array());
+        $path   = $db->query_result($query,0,'path');
+        return $path.$name;
+        
+        
+    }
+    
 
        
 }
