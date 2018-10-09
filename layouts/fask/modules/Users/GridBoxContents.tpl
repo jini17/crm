@@ -40,7 +40,7 @@
 
  .img-holder{
        border-radius: 50%;
-       border:3px solid #ccc;    
+       border:1px solid #ccc;    
        width: 122px;
        height: 122px;
        margin: 0 auto;

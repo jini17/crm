@@ -1154,10 +1154,11 @@ class Users_Record_Model extends Vtiger_Record_Model {
 
                                         $diff = date_diff($today, $birthdate);
                                          $difference = $diff->format("%a");
+                                         
 //                                        
 //                                            $cur_day_month = date('d-m');
 //                                            $day_month = date('d-m',strtotime($date));
-                                            if($diff >= -7 && $diff <=7){
+                                            if($difference >= -7 && $difference <=7){
                                                 $wish = '<div class="message" id="birthdaysms"  >';
                                                 $wish .= '<a class="birthday" style="font-weight: bold;" onclick="javascript:Settings_Users_List_Js.birthdayEmail('.$id.')">';
                                                 $wish .= "<i class='fa fa-gift'></i> &nbsp;";
