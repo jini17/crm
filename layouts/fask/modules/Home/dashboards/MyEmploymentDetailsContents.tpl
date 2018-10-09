@@ -19,7 +19,7 @@
      </div>
         <div class='col-md-12' style="padding:5px 0 ;"> 
             
-                <i class='ti ti-id-badge'></i>&nbsp;{$DATA['emp_name']}
+                <i class='ti ti-id-badge'></i>&nbsp;{$DATA['employee_id']}
             </div>
              <div class='col-md-12' style="padding:5px 0 ;"> 
                  <i class='ti ti-user'></i> &nbsp;{vtranslate('LBL_WORKING_AS',"Home")}  {$DATA['designation']}

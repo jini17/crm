@@ -28,7 +28,7 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                 $widget                    = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
                 $users                       = $this->get_employee($db, $dept);
                 $first_name            = $currentUser->get('first_name');
-                $last_name            = $currentUser->get('employeeno');
+                $employee_no           = $currentUser->get('employeeno');
                 $job_grade             = $this->grade($db,$currentUser->get('grade_id'));
            
                 $designation          =  $currentUser->get('Designation');
@@ -55,7 +55,7 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
 
                 $info = array(
                     'first_name'    =>  $currentUser->get('first_name'),
-                    'employee_id' => $currentUser->get('id'),
+                    'employee_id' => $employee_no,
                     'emp_name'   => $first_name." ".$last_name,
                     'job_grade'     => $job_grade,
                     'designation'  => $djt['deg'],
