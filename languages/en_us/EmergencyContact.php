@@ -13,7 +13,6 @@ $languageStrings = array(
 	'SINGLE_EmergencyContact' => 'Emergency Contact',
 	'LBL_ADD_RECORD' => 'Add Emergency Contact',
 	'LBL_RECORDS_LIST' => 'Contact List',
-
 	// Blocks
 	'LBL_EMERGENCYCONTACT_INFORMATION' => 'Emergency Contact Information',
 

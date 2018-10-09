@@ -1139,14 +1139,31 @@ class Users_Record_Model extends Vtiger_Record_Model {
                                     
 //		$module = $this->getModule();
 //		return 'index.php?module='.$this->getModuleName().'&parent=Settings&view='.$module->getDetailViewName().'&record='.$this->getId();
-                                           $cur_day_month = date('d-m');
-                                            $day_month = date('d-m',strtotime($date));
-                                            if($cur_day_month == $day_month){
+                                    
+
+                                      
+//                                        $bday = strtotime(date('md',strtotime($date)));
+//                                        //echo $paymentDate; // echos today! 
+//                                        $before = date('m-d', strtotime(date('Y-m-d'). ' +7 day'));
+//                                        $after   = date('m-d', strtotime(date('Y-m-d'). ' +7 day'));
+                                        $birthdateArray = date_parse_from_format("d-m-Y", $date);
+                                        $todayArray = date_parse_from_format("d-m-Y", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
+
+                                        $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
+                                        $today = date_create(date('d-m-Y')); //This should also be actual current date
+
+                                        $diff = date_diff($today, $birthdate);
+                                         $difference = $diff->format("%a");
+                                         
+//                                        
+//                                            $cur_day_month = date('d-m');
+//                                            $day_month = date('d-m',strtotime($date));
+                                            if($difference >= -7 && $difference <=7){
                                                 $wish = '<div class="message" id="birthdaysms"  >';
                                                 $wish .= '<a class="birthday" style="font-weight: bold;" onclick="javascript:Settings_Users_List_Js.birthdayEmail('.$id.')">';
-                                                $wish .= "<i class='fa fa-gift'></i>";
-                                                $wish .= date('d-F');
-                                                $wish .= " Say Happy Birthday";
+                                                $wish .= "<i class='fa fa-gift'></i> &nbsp;";
+                                                $wish .= date('d-F',strtotime($date));
+                                                $wish .= " <br />Say Happy Birthday";
                                                 $wish .= '</a>';
                                                 $wish .= '</div>';
                                                 return $wish;
