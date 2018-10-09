@@ -62,14 +62,13 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                     'job_type'       => $djt['job_type'],
                     'department' => $department,
                     'report_to'     => $report_to,   
-                 
                     'expire'            =>  date('M d, Y',strtotime($djt['exp_date'])),
-                    'thumb'          =>$thumb,
+                    'thumb'          => $thumb,
                     'facebook'     => $currentUser->get('facebook'),
                     'twitter'         => $currentUser->get('twitter'),
                     'linkedin'       => $currentUser->get('linkedin'),
                     'notify'           => $notify,
-                    'contract'           => $djt['contract_id'],
+                    'contract'      => $djt['contract_id'],
                 );
                     
                if($djt['job_type'] == 'Permanent'){ 

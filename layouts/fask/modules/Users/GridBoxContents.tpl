@@ -5,10 +5,10 @@
         font-weight: bold;
     }
     .box-content{
-      padding:0 10px;
+      padding:20px 10px;
       border: 1px solid #ddd;
       background: #fff;
-      min-height: 300px;
+      min-height: 360px;
       margin-top: 20px;
       margin-bottom: 20px;
     }
@@ -38,8 +38,27 @@
   padding: 10px;
 }
 
+ .img-holder{
+       border-radius: 50%;
+       border:3px solid #ccc;    
+       width: 122px;
+       height: 122px;
+       margin: 0 auto;
+       box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background: #fff;
+ 
+    margin: 0 auto;
 
-
+       overflow: hidden;
+ }
+.img-circle{
+      background: #fff;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    margin: 3px 4px !important;
+}
 
 .fa-linkedin {
   background: #007bb5;
@@ -50,7 +69,7 @@
         margin-top: 30px;
     }
     .highlight-birthday{
-       background: #b3ffff;   
+       background: #d1e3fa;   
       }
       .img-circle{
       background-color: #fff;
@@ -70,31 +89,31 @@
             {foreach  item=LISTVIEW_ENTRY from=$LISTVIEW_ENTRIES }
                     {assign var=birthday value=$LISTVIEW_ENTRY->getBirthdayWish($LISTVIEW_ENTRY->get('birthday'),$LISTVIEW_ENTRY->getId())}
                     
-                <div class="col-lg-4"   data-id='{$LISTVIEW_ENTRY->getId()}' data-recordUrl='{$LISTVIEW_ENTRY->getDetailViewUrl()}' id="{$MODULE}_listView_row_{$smarty.foreach.listview.index+1}">
+                <div class="col-lg-3"   data-id='{$LISTVIEW_ENTRY->getId()}' data-recordUrl='{$LISTVIEW_ENTRY->getDetailViewUrl()}' id="{$MODULE}_listView_row_{$smarty.foreach.listview.index+1}">
 
                            <div class="box-content {if $birthday } highlight-birthday{/if}">
                         <div class="img-holder">
                            {assign var=IMAGE_DETAILS value=$LISTVIEW_ENTRY->getImageDetails()}
                                 {foreach item=IMAGE_INFO from=$IMAGE_DETAILS}
 	                 {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
-                             <img width="120" height='120' class="img-circle"  style="display:block; margin:0 auto;"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
+                             <img width="110" height='110' class="img-circle"  style="display:block; margin:0 auto;"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
                                         {/if}
 
                                 {/foreach}
                                 {if $IMAGE_DETAILS[0]['id'] eq null}
 
-                                    <img width="120" height='120' class="img-circle"  style="display:block; margin:0 auto;" src="{vimage_path('DefaultUserIcon.png')}">
+                                    <img width="110" height='110' class="img-circle"  style="display:block; margin:0 auto;" src="{vimage_path('DefaultUserIcon.png')}">
 
                                 {/if}
                         </div>
                         <div class="user-meta text-center">
                             <h4 class="username text-center">								
                                 <a href="{$LISTVIEW_ENTRY->getDetailViewUrl()}">
-                                            {$LISTVIEW_ENTRY->get('first_name')}
+                                    <strong>    {$LISTVIEW_ENTRY->get('first_name')}</strong>
                                 </a>
                             </h4>
                                 <div class="designation_label designation">
-                                     {$LISTVIEW_ENTRY->get('title')}
+                                      {$LISTVIEW_ENTRY->get('title')}
                                 </div>   
                                 <div class="email-address">  {$LISTVIEW_ENTRY->get('email1')}</div>
                                    
