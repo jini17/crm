@@ -27,12 +27,12 @@ class Claim_MyClaim_Dashboard extends Vtiger_IndexAjax_View {
 		if($type=='claimtype') {
 			$valueLabel = $valueLabel;
 			
-		}  else if($type=='latest') {	
+		}  else if($type=='latestclaim') {	
 		
 			$valueLabel = 'LBL_LAST_5_CLAIM';
 		}
 		
-		$claimmodel = Users_ClaimRecords_Model::getMyClaim($currentUser->getId(), date('Y'),$type);	
+		$claimmodel = Users_ClaimRecords_Model::getMyWidgetsClaim($currentUser->getId(), date('Y'), $type);	
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
 

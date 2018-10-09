@@ -58,7 +58,7 @@
 					{$MODEL['category']}
 				</div>
 				<div class='col-lg-3' align="center">
-					{$MODEL['yearly_limit']}
+					{$MODEL['allocated']}
 				</div>
 				<div class='col-lg-2' align="center">
 					{$MODEL['totalamount']}

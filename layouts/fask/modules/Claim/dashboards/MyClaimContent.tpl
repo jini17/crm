@@ -43,10 +43,10 @@
 			
 			<div class='row miniListContent' style="padding:5px">
 				<div class='col-lg-3' align="center">
-					{$MODEL['yearly_limit']}
+					{$MODEL['allocated']}
 				</div>
 				<div class='col-lg-2' align="center">
-					{$MODEL['totalamount']}
+					{$MODEL['used']}
 				</div>
 				<div class='col-lg-3' align="center">
 					{$MODEL['balance']}
