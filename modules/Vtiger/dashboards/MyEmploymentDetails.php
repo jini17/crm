@@ -38,7 +38,7 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                 $report_to             =  $this->report_to($db, $currentUser->get('reports_to_id'));
                //$thumb                   = $this->get_image($db, $currentUser->get('id'),$currentUser->get('image_name'));
                $thumb                   = $currentUser->getImageDetails();
-               $expire_date         = $this->get_contract_expiration_date($db, $currentUser->get('id'));
+               $contract_start_date         = $this->get_contract_start_date($db, $currentUser->get('id'));
                $curdate = date('Y-m-d');
                $exp_date        = date('Y-m-d', strtotime($expire_date));
                $now = time(); // or your date as well
@@ -62,6 +62,7 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                     'job_type'       => $djt['job_type'],
                     'department' => $department,
                     'report_to'     => $report_to,   
+                    'contract_start'=> $contract_start_date,
                     'expire'            =>  date('M d, Y',strtotime($djt['exp_date'])),
                     'thumb'          =>$thumb,
                     'facebook'     => $currentUser->get('facebook'),
@@ -175,7 +176,7 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
         
     }
     
-    public function  get_contract_expiration_date($db,$id){
+    public function  get_contract_start_date($db,$id){
         
         $sql                         = "SELECT DATE_FORMAT(createdtime,'%M %d, %Y') as started_from from vtiger_crmentity WHERE `setype` LIKE '%contract%' AND `smownerid` = $id ";
         $query                   = $db->pquery($sql,array());

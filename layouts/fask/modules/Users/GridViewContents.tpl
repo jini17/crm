@@ -34,37 +34,38 @@
  
 </div>
     <div class="col-lg-6 pull-right">
+
       <div class="btn-group list-switcher" role="group" aria-label="Basic example">
-          <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn {$LIST} btn-white view" data-listType='List' title="List View"><i class='fa fa-list'></i> {vtranslate('List View', $MODULE)}</button>
-          <button type="button"  onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('grid','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn {$GRID} activeview" data-listType='Grid' title="Grid View"> <i class="fa fa-th-large"></i> {vtranslate('Grid View', $MODULE)}</button>
+          <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn {if $EMP_VIEW eq 'List'} btn-primary activeview {else}btn-white view{/if}" data-listType='List' title="List View"><i class='fa fa-list'></i> {vtranslate('List View', $MODULE)}</button>
+          <button type="button"  onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('grid','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn {if $EMP_VIEW eq 'grid'} btn-primary activeview {else}btn-white view{/if}" data-listType='Grid' title="Grid View"> <i class="fa fa-th-large"></i> {vtranslate('Grid View', $MODULE)}</button>
       </div>
    
-        <form class='form-inline pull-right'>
-            <div class='form-group'>
-                <input type="text" placeholder="{vtranslate('Enter Keyword',$MODULE)}" class="form-control">
-            </div>
-            <div class="form-group">
-                <button type="button" class='btn btn-primary'> Search   </button>
-            </div>
-     </form>
+      <form class='form-inline pull-right'>
+          <div class='form-group'>
+              <input type="text" placeholder="{vtranslate('Enter Keyword',$MODULE)}" class="form-control">
+          </div>
+          <div class="form-group">
+              <button type="button" class='btn btn-primary'> Search   </button>
+          </div>
+      </form>
     </div>
     <div class="clearfix" style="height: 50px;"></div>
-
+  
+    
 <!-- Alphabets -->
 <div class="col-lg-10">
    {include file="ListViewAlphabet.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
 </div>
 <!--  Filter -->
-<div class="col-lg-2">
+<div class="col-lg-2 pull-right">
+      <select class="select2 grid-filter form-control" style="width:240x !important;">
+          <option value=""> {vtranslate('Filter by',$MODULE)}</option>
+          <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
+          <option value="B"> {vtranslate('Bithdays',$MODULE)} </option>
+          <option value="G"> {vtranslate('Gender',$MODULE)} </option>
+      </select>
+  </div>
 
-    <select class="select2 grid-filter form-control pull-right">
-        <option value=""> {vtranslate('Filter by',$MODULE)}</option>
-        <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
-        <option value="B"> {vtranslate('Bithdays',$MODULE)} </option>
-        <option value="G"> {vtranslate('Gender',$MODULE)} </option>
-    </select>
-
-</div>
 <div style="min-height:450px;">
    {if $EMP_VIEW eq 'grid'}
    {include file="GridBoxContents.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}

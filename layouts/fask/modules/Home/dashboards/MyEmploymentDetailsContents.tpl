@@ -37,10 +37,13 @@
                   </a>
               </div>
               <div class='col-md-12' style="padding:5px 0 ;"> 
-                <i class='ti ti-calendar'></i> {vtranslate('LBL_CONTRACT',$MODULE_NAME)} {$DATA['job_type']} {vtranslate('LBL_SINCE','Home')} {$DATA['expire']}
+                <i class='ti ti-calendar'></i> {vtranslate('LBL_CONTRACT',$MODULE_NAME)} {$DATA['job_type']} {vtranslate('LBL_SINCE','Home')} {$DATA['contract_start']}
             
            </div>
-       
+       <div class='col-md-12' style="padding:5px 0 ;"> 
+                <i class='ti ti-calendar'></i> {vtranslate('LBL_CONTRACT_EXPIRE',$MODULE_NAME)} {$DATA['job_type']} {vtranslate('LBL_SINCE','Home')} {$DATA['expire']}
+            
+           </div>
     </div>
                 <div class="col-md-4" style='padding-left: 0;'>
                     <div class="image-holder">

@@ -36,6 +36,13 @@ class Users_List_View extends Settings_Vtiger_List_View {
 
 	public function process(Vtiger_Request $request) {
 		 //global $adb;
+	
+	global $site_URL;
+
+		$URL = $site_URL.'/index.php?module=Users&parent=Settings&view=List&block=1&fieldid=1';
+		$defaultview = $request->get('empview');	
+		$Alphabet = $request->get('Alphabet');
+
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 
 		//defaultTab : EmployeeDirectory
@@ -52,7 +59,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 		
 
 		$defaultview = $request->get('empview');	
-
+		
 		if(!$request->get('empview')){
             $defaultview = 'grid';	
 		}
@@ -67,12 +74,12 @@ class Users_List_View extends Settings_Vtiger_List_View {
                                        
 		//$viewer->view('GridViewContents.tpl', $request->getModule(false));
                 
-//		if($defaultview =='grid'){
-		//	$viewer->view('GridViewContents.tpl', $request->getModule(false));
-//		}
-//		else {
-		$viewer->view('ListViewContents.tpl', $request->getModule(false));
-//		}	
+		if($defaultview =='grid'){
+			$viewer->view('GridViewContents.tpl', $request->getModule(false));
+		}
+		else {
+			$viewer->view('ListViewContents.tpl', $request->getModule(false));
+		}	
 	}
 
 	/*
