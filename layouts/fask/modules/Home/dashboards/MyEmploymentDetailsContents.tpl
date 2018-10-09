@@ -37,13 +37,14 @@
                   </a>
               </div>
               <div class='col-md-12' style="padding:5px 0 ;"> 
-                <i class='ti ti-calendar'></i>&nbsp;{vtranslate('LBL_CONTRACT',$MODULE_NAME)} {$DATA['job_type']} {vtranslate('LBL_SINCE','Home')} {$DATA['contract_start']}
+                <i class='ti ti-calendar'></i>&nbsp;{$DATA['job_type']} {vtranslate('LBL_JOB',$MODULE_NAME)} {vtranslate('LBL_SINCE','Home')} {$DATA['contract_start']}
             
            </div>
-       <div class='col-md-12' style="padding:5px 0 ;"> 
-                <i class='ti ti-calendar'></i> {vtranslate('LBL_CONTRACT_EXPIRE',$MODULE_NAME)}  {$DATA['expire']}
-            
-           </div>
+        {if $DATA['job_type'] eq 'Contract'  }
+            <div class='col-md-12' style="padding:5px 0 ;"> 
+                         <i class='ti ti-calendar'></i>&nbsp;{vtranslate('LBL_CONTRACT_EXPIRE',$MODULE_NAME)}  {$DATA['expire']}
+            </div>
+        {/if}
     </div>
                 <div class="col-md-4" style='padding-left: 0;'>
                     <div class="image-holder">
@@ -51,7 +52,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <a href="{$URL}/index.php?module=Users&parent=Settings&view=Detail&record={$DATA['employee_id']}" class="btn btn-lg btn-block btn-primary"> {vtranslate('LBL_VIEW_PROFILE',$MODULE_NAME)}</a>
-                    <a href="{$URL}/index.php?module=EmployeeContract&view=Detail&record={$DATA['contract']}&app=MARKETING" class="btn  btn-lg btn-block btn-white">  {vtranslate('LBL_VIEW_CONTRACT',$MODULE_NAME)} </a>
+                    <a href="{$URL}/index.php?module=EmployeeContract&view=Detail&record={$DATA['contract']}&app=MARKETING" class="btn  btn-lg btn-block btn-default">  {vtranslate('LBL_VIEW_CONTRACT',$MODULE_NAME)} </a>
                     <div class="clearfix"></div>
                     <div class="social text-center" >
                         <a href="{$DATA['facebook']}"><i class="fa fa-facebook"></i></a>
@@ -61,7 +62,7 @@
                 </div>
 </div>
                     <div class="clearfix"></div>
-                    {if $DATA['notify'] eq 'show'}
+                    {if $DATA['notify'] eq 'show' AND $DATA['job_type'] eq 'Contract'  }
                     <small>
                         ** {vtranslate('LBL_CONTRACT_NOTIFICATION','Home')}
                     </small>

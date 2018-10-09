@@ -28,7 +28,7 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                 $widget                    = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
                 $users                       = $this->get_employee($db, $dept);
                 $first_name            = $currentUser->get('first_name');
-                $last_name            = $currentUser->get('first_name');
+                $last_name            = $currentUser->get('employeeno');
                 $job_grade             = $this->grade($db,$currentUser->get('grade_id'));
            
                 $designation          =  $currentUser->get('Designation');
@@ -62,7 +62,7 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                     'job_type'       => $djt['job_type'],
                     'department' => $department,
                     'report_to'     => $report_to,   
-                    'contract_start'=> $contract_start_date,
+                 
                     'expire'            =>  date('M d, Y',strtotime($djt['exp_date'])),
                     'thumb'          =>$thumb,
                     'facebook'     => $currentUser->get('facebook'),
@@ -71,9 +71,13 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                     'notify'           => $notify,
                     'contract'           => $djt['contract_id'],
                 );
-
-             
-
+                    
+               if($djt['job_type'] == 'Permanent'){ 
+                $info[ 'contract_start'] = date('M d, Y', strtotime($currentUser->get('date_joined')));
+               }
+               else{
+                   $info[ 'contract_start'] = $contract_start_date;
+               }
                 $viewer->assign('REQUEST_DEPARTMENT', $dept);
                 $viewer->assign('DEPARTMENT', $departmentList);
                 $viewer->assign('WIDGET', $widget);
