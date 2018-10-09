@@ -41,7 +41,7 @@
                                 </a>
                            </li>
                    </div>
-            <div class="clearfix" style="height:20px;"></div>
+            <!--<div class="clearfix" style="height:20px;"></div>
             <div class="row">
                 <div class="col-lg-6" style="float: left;">
                     <strong>
@@ -66,16 +66,16 @@
                         <button type="button" class='btn btn-primary'> Search   </button>
                     </div>
                 </form>
-            </div>
-            <div class="clearfix" style="height: 50px;"></div>
+            </div>-->
+         
 
             <!-- Alphabets -->
             <div class="col-lg-9">
                {include file="ListViewAlphabet.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
             </div>
-            
+               <div class="clearfix" style="height: 50px;"></div>
             <!--  Filter -->
-            <div class="col-lg-3">
+          <!--  <div class="col-lg-3">
 
                 <select class="select2 grid-filter form-control pull-right">
                     <option value=""> {vtranslate('Filter by',$MODULE)}</option>
@@ -84,7 +84,7 @@
                     <option value="G"> {vtranslate('Gender',$MODULE)} </option>
                 </select>
 
-            </div>
+            </div>-->
      
            <div class="list-content">
 {/strip}
