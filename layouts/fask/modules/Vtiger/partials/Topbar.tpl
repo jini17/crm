@@ -186,9 +186,11 @@
                             'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
                             'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
                             'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-                            'mycthemeswitcher'=>'folder', 'chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
+                            'mycthemeswitcher'=>'folder', 'training'=>'timer', 'timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
 
                             {if $APP_NAME neq 'SALES'}
+                                
+                                
                             <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> 
                                 <a class="has-arrow waves-effect waves-dark " >
                                     <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i><span class="hide-menu">{vtranslate("LBL_$APP_NAME")}</span></a>
@@ -201,12 +203,38 @@
                                         {else}
                                         {assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME"}
                                         {/if}   
-                                        <li {$APP_NAME}>
+                                             {if $moduleName eq 'Calendar'}
+                                        <li {$APP_NAME} moudel='{$moduleName}'>
+ 
+                                            <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
+                                            href="index.php?module=Calendar&view=List" >
+                                            <i class="ti ti-notepad" ></i> 
+                                            <span class="hide-menu"> {vtranslate("LBL_MEETING",'Vtiger')}</span>
+                                            </a>
+                                          
+                                        </li>
+                                        <li {$APP_NAME} moudel='{$moduleName}'>
+ 
                                             <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
                                             href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
                                             {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
-                                            <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> <span class="hide-menu"> {$translatedModuleLabel}</span></a>
+                                            <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
+                                            <span class="hide-menu"> {$translatedModuleLabel}</span>
+                                            </a>
+                                          
                                         </li>
+                                          {else}   
+                                              <li {$APP_NAME} moudel='{$moduleName}'>
+ 
+                                            <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
+                                            href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
+                                            {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
+                                            <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
+                                            <span class="hide-menu"> {$translatedModuleLabel}</span>
+                                            </a>
+                                          
+                                        </li>
+                                                {/if}
                                         {/foreach}
                                     </ul>
 
@@ -227,7 +255,10 @@
                                 {/if}
                                 {/foreach}
 
-                                <li class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> <a class="has-arrow waves-effect waves-dark "><i class="app-icon-list material-icons">more</i><span class="hide-menu"> {vtranslate("LBL_MORE")}</span></a>
+                                <li class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> 
+                                    <a class="has-arrow waves-effect waves-dark ">
+                                        <i class="app-icon-list material-icons">more</i>
+                                        <span class="hide-menu"> {vtranslate("LBL_MORE")}</span></a>
 
                                     <ul style="padding-left:6px;padding-top:10px;" >
 
@@ -253,7 +284,7 @@
 
 
 
-                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Bills&view=List"><i class="material-icons module-icon">receipt</i> <span class="hide-menu"> {vtranslate('Bills')}</span></a></li>
+                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Bills&view=List"><i class="material-icons module-icon">receipt</i> <span class="hide-menu"> {vtranslate('Office Bills','Vtiger')}</span></a></li>
 
                                         {/if}
 

@@ -13,13 +13,14 @@ class EmailTemplates_Save_Action extends Vtiger_Save_Action {
 	public function checkPermission(Vtiger_Request $request) {
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
-
+                                         $currentUser = Users_Record_Model::getCurrentUserModel();
+                                          $role = $currentUser->get('roleid');
 		$actionName = ($record) ? 'EditView' : 'CreateView';
 		if(!Users_Privileges_Model::isPermitted($moduleName, $actionName, $record)) {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
 		}
 
-		if (!Users_Privileges_Model::isPermitted($moduleName, 'Save', $record)) {
+		if (!Users_Privileges_Model::isPermitted($moduleName, 'Save', $record) || $role !='H2') {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
 		}
 	}

@@ -24,11 +24,12 @@ class EmailTemplates_MassDelete_Action extends Vtiger_Mass_Action {
 
 	public function process(Vtiger_Request $request) {
 		$moduleName = $request->getModule();
-
+                                          $currentUser = Users_Record_Model::getCurrentUserModel();
 		$recordModel = new EmailTemplates_Record_Model();
 		$recordModel->setModule($moduleName);
 		$selectedIds = $request->get('selected_ids');
 		$excludedIds = $request->get('excluded_ids');
+                                          $role = $currentUser->get('roleid');
 
 		if($selectedIds == 'all' && empty($excludedIds)){
 			$recordModel->deleteAllRecords();
@@ -36,6 +37,7 @@ class EmailTemplates_MassDelete_Action extends Vtiger_Mass_Action {
 			$recordIds = $this->getRecordsListFromRequest($request, $recordModel);
 			foreach($recordIds as $recordId) {
 				$recordModel = EmailTemplates_Record_Model::getInstanceById($recordId);
+                                
 				$recordModel->delete();
 			}
 		}

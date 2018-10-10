@@ -8,7 +8,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'Email Templates' => 'Notification Templates',
+	'Email Templates' => 'Templates',
 	'LBL_ADD_RECORD' => 'Add Notification Template',
 	'SINGLE_EmailTemplates' => 'Notification Template',
 	'LBL_EMAIL_TEMPLATES'=> 'Notification Templates',

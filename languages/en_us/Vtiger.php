@@ -223,9 +223,10 @@ $languageStrings = array(
 	'MailManager' => 'Mail Manager',
 	'Activities' => 'Activities',
 	'Portal' => 'Our Sites',
-	'Email Templates' => 'Notification Templates',
+	'Email Templates' => 'Templates',
 	'Recycle Bin' => 'Recycle Bin',
                     'LBL_SMS_MESSAGES'=>'SMS Messages',
+                    'LBL_MEETING' => 'Meeting',
 	//Basic String Translation
 	'LBL_ADD_RECORD' => 'Add Record',
 	'LBL_RECENTLY_MODIFIED' => 'Recently Modified',
@@ -352,7 +353,7 @@ $languageStrings = array(
 	'LBL_DEFAULT' => 'Default',
 	'LBL_ITEM' => 'Item',
 	'LBL_ADD_DASHBOARD' =>'Add dashboard',
-
+                     'LBL_OFFICE_BILLS'=> 'Office Bills',
 	//DetailView Actions
 	'LBL_CREATE' => 'Create',
 	'LBL_GENERATE' => 'Generate',
@@ -1221,7 +1222,7 @@ $languageStrings = array(
 
 	'LBL_SHARE_THIS_LIST' => 'Share the list',
 	'LBL_ADD_USERS_ROLES' => 'Add Users, Roles...',
-	'EmailTemplates' => 'Notification Templates',
+	'EmailTemplates' => ' Templates',
 	'LBL_BILLING' => 'Billing',
 	'LBL_ENABLED' => 'Enabled',
 
