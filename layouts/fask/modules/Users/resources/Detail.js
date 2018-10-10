@@ -390,10 +390,10 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 			}
 		});	
 		     if(leaveid ==null){
-		          var url = 'index.php?module=Users&view=EditLeave';
+		          var url = 'index.php?module=Users&view=EditLeave&userId='+userid;
 		     } else {
 		          var url = 'index.php?module=Users&view=EditLeave&record='+leaveid+'&userId='+appid+'&leavestatus=Apply&manager=true';
-		      }    
+		     }    
 			Users_Leave_Js.editLeave(url)		
 	
 	},
@@ -421,11 +421,15 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 				jQuery('#claim').html(data);
 			}
 		});	
-			var url = 'index.php?module=Users&view=EditClaim&record='+claimid+'&userId='+appid+'&claimstatus=Apply&manager=true';
+		     if(claimid ==null){
+		          var url = 'index.php?module=Users&view=EditClaim&userId='+userid;
+		     } else {
+		          var url = 'index.php?module=Users&view=EditClaim&record='+claimid+'&userId='+appid+'&claimstatus=Apply&manager=true';
+		     }    
 			Users_Claim_Js.editClaim(url)		
 	
 	},
-
+     
 	registerEvents: function () {
 		this._super();
 		var form = this.getForm();
@@ -439,11 +443,12 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 			var leaveid = jQuery("#leaveid").val();
 			var appid	= jQuery("#appid").val();
 			this.registerLeaveApproveTrigger(leaveid, appid);
-			
 
-			if(leaveid ==null && appid == null){
-			     this.registerLeaveApproveTrigger(leaveid, appid);
-			}
+		} else if(defaultTab =='claim'){
+		     jQuery(".detailViewButtoncontainer").addClass('hide');
+			var claimid = jQuery("#claimid").val();
+			var appid	= jQuery("#appid").val();
+			this.registerClaimApproveTrigger(claimid, appid);
 		}	
 		
 	}

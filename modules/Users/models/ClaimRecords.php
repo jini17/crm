@@ -167,16 +167,33 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 				$myteamclaims[$i]['balance']    = $balance;
 			}
 		} else {
-			$querygetteamclaim="SELECT CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, category, sum(totalamount) as yused, vtiger_claim.employee_id 
-						FROM vtiger_claim 
-						INNER JOIN vtiger_crmentity
-						ON vtiger_crmentity.crmid = vtiger_claim.claimid
-	                   	INNER JOIN vtiger_users
-	                    ON vtiger_claim.employee_id=vtiger_users.id AND vtiger_claim.employee_id is NOT NUlL
-						WHERE vtiger_crmentity.deleted=0 ".$memcondition." AND DATE_FORMAT(transactiondate, '%Y') = $year 
-						AND vtiger_claim.claim_status = 'Approved' group by vtiger_claim.employee_id, vtiger_claim.category";
-		}	
+			$querygetteamclaim="SELECT vtiger_claim.claimid, vtiger_claim.employee_id, CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, category, 
+						totalamount, transactiondate, claim_status FROM vtiger_claim 
+						INNER JOIN vtiger_crmentity	ON vtiger_crmentity.crmid = vtiger_claim.claimid
+	                   	INNER JOIN vtiger_users ON vtiger_claim.employee_id=vtiger_users.id AND vtiger_claim.employee_id is NOT NUlL
+						WHERE vtiger_crmentity.deleted=0 ".$memcondition." AND DATE_FORMAT(transactiondate, '%Y') = ? AND claim_status='Apply'
+						ORDER BY fullname ASC ";
 
+			$resultgetclaims = $db->pquery($querygetteamclaim,array($year));
+			$myteamclaims=array();	
+
+			for($i=0;$db->num_rows($resultgetclaims)>$i;$i++){
+				$claim_id 						= $db->query_result($resultgetclaims, $i, 'claimid'); 
+				$claimTypeid 					= $db->query_result($resultgetclaims, $i, 'category'); 
+				$employee_id 					= $db->query_result($resultgetclaims, $i, 'employee_id'); 
+				$transactiondate 				= $db->query_result($resultgetclaims, $i, 'transactiondate'); 
+				$totalamount					= $db->query_result($resultgetclaims, $i, 'totalamount'); 
+				$claim_status 					= $db->query_result($resultgetclaims, $i, 'claim_status'); 
+	            $rowdetail 						= self::getClaimType($claimTypeid);
+				$myteamclaims[$i]['fullname'] 	= $db->query_result($resultgetclaims, $i, 'fullname');
+				$myteamclaims[$i]['category'] 	= $rowdetail['claim_type'];
+				$myteamclaims[$i]['transactiondate'] = $transactiondate;
+				$myteamclaims[$i]['totalamount'] = $totalamount; 
+				 //index.php?module=Users&view=PreferenceDetail&parent=Settings&record=177
+				$myteamclaims[$i]['icon'] = "<a href='index.php?module=Users&view=PreferenceDetail&record=$current_user->id&parent=Settings&appid=$employee_id&claimid=$claim_id&tab=claim'><i class='fa fa-check' title='Action'></i></a>";
+			}			
+		}	
+		
 		return $myteamclaims;
 	}
 

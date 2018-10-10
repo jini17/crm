@@ -61,7 +61,7 @@
 					{$MODEL['allocated']}
 				</div>
 				<div class='col-lg-2' align="center">
-					{$MODEL['totalamount']}
+					{$MODEL['used']}
 				</div>
 				<div class='col-lg-2'>
 					{$MODEL['balance']}
@@ -84,7 +84,7 @@
 					{$MODEL['transactiondate']}
 				</div>
 				<div class='col-lg-2'>
-					{$MODEL['claim_status']}
+					{$MODEL['icon']}
 						
 				</div>
 			</div>
