@@ -69,6 +69,7 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                     'linkedin'       => $currentUser->get('linkedin'),
                     'notify'           => $notify,
                     'contract'      => $djt['contract_id'],
+                    'emp_id' => $currentUser->get('id')
                 );
                     
                if($djt['job_type'] == 'Permanent'){ 
