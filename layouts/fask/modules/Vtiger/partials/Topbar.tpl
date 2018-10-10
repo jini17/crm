@@ -403,11 +403,16 @@
 
                                                                                                     </a>*}
                                                                                                 </li>
-                                                                                                <li admin="" moudel="Training"><a class="waves-effect waves-dark " href=" index.php?module=Training&amp;view=List&amp;app=ADMIN ">
+                                                                                                <li admin="" moudel="Training">
+                                                                                                    <a class="dropdown-icon-dashboard" href="index.php?module=Training&amp;view=List&amp;app=ADMIN ">
                                                                                                         <i class="material-icons module-icon">book</i><span class="hide-menu"> Training</span>
                                                                                                     </a>
                                                                                                 </li>
-<li admin="" moudel="Attendance"><a class="waves-effect waves-dark " href=" index.php?module=Attendance&amp;view=List&amp;app=ADMIN "><i class="material-icons module-icon">assignment</i><span class="hide-menu"> Attendance</span></a></li>
+                                                                                            <li admin="" moudel="Attendance">
+                                                                                                <a class="dropdown-icon-dashboard" href="index.php?module=Attendance&amp;view=List&amp;app=ADMIN ">
+                                                                                                    <i class="material-icons module-icon">assignment</i><span class="hide-menu"> Attendance</span>
+                                                                                                </a>
+                                                                                            </li>
                                                                                             </ul>
                                                                                         </div>
                                                                                     </div>
