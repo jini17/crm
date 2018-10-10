@@ -18,7 +18,7 @@ class EmailTemplates_Delete_Action extends Vtiger_Delete_Action {
 		$moduleName = $request->getModule();
 		$recordId = $request->get('record');
 		$ajaxDelete = $request->get('ajaxDelete');
-		
+		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$recordModel = EmailTemplates_Record_Model::getInstanceById($recordId);
 		$moduleModel = $recordModel->getModule();
 
@@ -26,7 +26,7 @@ class EmailTemplates_Delete_Action extends Vtiger_Delete_Action {
 
 		$listViewUrl = $moduleModel->getListViewUrl();
 		$response = new Vtiger_Response();
-		if($recordModel->isSystemTemplate()) {
+		if($recordModel->isSystemTemplate() || !$currentUser->isAdminUser() ) {
 			$response->setError('502', vtranslate('LBL_NO_PERMISSIONS_TO_DELETE_SYSTEM_TEMPLATE', $moduleName));
 		} else if($ajaxDelete) {
 			$response->setResult($listViewUrl);

@@ -20,7 +20,7 @@ class EmailTemplates_Save_Action extends Vtiger_Save_Action {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
 		}
 
-		if (!Users_Privileges_Model::isPermitted($moduleName, 'Save', $record) || $role !='H2') {
+		if (!Users_Privileges_Model::isPermitted($moduleName, 'Save', $record) || !$currentUser->isAdminUser()) {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
 		}
 	}
