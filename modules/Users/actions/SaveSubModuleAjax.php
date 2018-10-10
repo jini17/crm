@@ -711,7 +711,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
 				$claims->column_fields['category'] 			= $category;	
 				$claims->column_fields['transactiondate'] 	= $transactiondate;	
-				$claims->column_fields['totalamount'] 		= $totalamount;	
+				$claims->column_fields['totalamount'] 		= $request->get('totalamount');	
 				$claims->column_fields['taxinvoice'] 		= $taxinvoice;	
 				$claims->column_fields['description'] 		= $description;	
 				

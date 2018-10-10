@@ -136,6 +136,11 @@
                                     <span class="hide-menu">   {vtranslate('LBL_MANAGE_USERS','Vtiger')}</span>
                                 </a>
                             </li>
+                            <li tools="">
+                                <a class="waves-effect waves-dark " href=" index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS ">
+                                    <i class="material-icons module-icon">delete_forever</i> <span class="hide-menu"> Recycle Bin</span>
+                                </a>
+                            </li>
 
 
                             {else}

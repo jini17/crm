@@ -8,6 +8,24 @@
 *************************************************************************************}
 
 {strip}
+    <input type="hidden" id="listViewEntriesCount" value="{$LISTVIEW_ENTRIES_COUNT}" />
+<input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
+<input type="hidden" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" />
+<input type="hidden" id="previousPageExist" value="{$PAGING_MODEL->isPrevPageExists()}" />
+<input type="hidden" id="nextPageExist" value="{$PAGING_MODEL->isNextPageExists()}" />
+<input type="hidden" id="pageNumberValue" value= "{$PAGE_NUMBER}"/>
+<input type="hidden" id="pageLimitValue" value= "{$PAGING_MODEL->getPageLimit()}" />
+<input type="hidden" id="numberOfEntries" value= "{$LISTVIEW_ENTRIES_COUNT}" />
+<input type="hidden" id="alphabetSearchKey" value= "{$MODULE_MODEL->getAlphabetSearchField()}" />
+<input type="hidden" id="Operator" value="{$OPERATOR}" />
+<input type="hidden" id="alphabetValue" value="{$ALPHABET_VALUE}" />
+<input type="hidden" id="totalCount" value="{$LISTVIEW_COUNT}" />
+<input type="hidden" name="orderBy" value="{$ORDER_BY}" id="orderBy">
+<input type="hidden" name="sortOrder" value="{$SORT_ORDER}" id="sortOrder">
+<input type='hidden' value="{$PAGE_NUMBER}" id='pageNumber'>
+<input type='hidden' value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'>
+<input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
+<input type="hidden" value="{$NO_SEARCH_PARAMS_CACHE}" id="noFilterCache" >
         <div class="listViewPageDiv" id="listViewContent" style="padding-left: 0px; width: 100%">
             <!--id="listViewContent"-->
             <div class="col-sm-12 col-xs-12 full-height">
@@ -41,7 +59,7 @@
                                 </a>
                            </li>
                    </div>
-            <!--<div class="clearfix" style="height:20px;"></div>
+            <div class="clearfix" style="height:20px;"></div>
             <div class="row">
                 <div class="col-lg-6" style="float: left;">
                     <strong>
@@ -66,25 +84,16 @@
                         <button type="button" class='btn btn-primary'> Search   </button>
                     </div>
                 </form>
-            </div>-->
-         
-
-            <!-- Alphabets -->
-            <div class="col-lg-9">
-               {include file="ListViewAlphabet.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
             </div>
-               <div class="clearfix" style="height: 50px;"></div>
-            <!--  Filter -->
-          <!--  <div class="col-lg-3">
+         <div class="col-lg-2">
+      <select class="select2 grid-filter form-control" style="width:240x !important;">
+          <option value=""> {vtranslate('Filter by',$MODULE)}</option>
+          <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
+          <option value="B"> {vtranslate('Bithdays',$MODULE)} </option>
+          <option value="G"> {vtranslate('Gender',$MODULE)} </option>
+      </select>
+  </div>
 
-                <select class="select2 grid-filter form-control pull-right">
-                    <option value=""> {vtranslate('Filter by',$MODULE)}</option>
-                    <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
-                    <option value="B"> {vtranslate('Bithdays',$MODULE)} </option>
-                    <option value="G"> {vtranslate('Gender',$MODULE)} </option>
-                </select>
-
-            </div>-->
-     
            <div class="list-content">
+               
 {/strip}
