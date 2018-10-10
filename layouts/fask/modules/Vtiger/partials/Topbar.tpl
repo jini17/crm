@@ -142,7 +142,11 @@
                                 </a>
                             </li>
 
-
+                            <li foundation="">
+                                <a class="waves-effect waves-dark " href=" index.php?module=SMSNotifier&amp;view=List&amp;app=FOUNDATION ">
+                                    <i class="material-icons module-icon">sms</i> <span class="hide-menu"> {vtranslate('LBL_SMS_MESSAGES', 'Vtiger')}</span>
+                                </a>
+                            </li>
                             {else}
 
 

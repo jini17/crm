@@ -225,7 +225,7 @@ $languageStrings = array(
 	'Portal' => 'Our Sites',
 	'Email Templates' => 'Notification Templates',
 	'Recycle Bin' => 'Recycle Bin',
-                    
+                    'LBL_SMS_MESSAGES'=>'SMS Messages',
 	//Basic String Translation
 	'LBL_ADD_RECORD' => 'Add Record',
 	'LBL_RECENTLY_MODIFIED' => 'Recently Modified',
