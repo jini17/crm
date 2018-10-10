@@ -1598,7 +1598,7 @@ $jsLanguageStrings = array(
 	//Notification message for dashboard widget delete
 	'JS_ARE_YOU_SURE_TO_DELETE_WIDGET' => 'Are you sure you want to delete widget - %s?',
 	'JS_ARE_YOU_SURE_TO_DELETE_DASHBOARDTAB' => 'Are you sure you want to delete this dashboard tab - %s?',
-	'JS_TABS_LIMIT_EXCEEDED' => 'Sorry! Can\'t add more than 10 tabs',
+	'JS_TABS_LIMIT_EXCEEDED' => 'Sorry! Can\'t add more than 50 tabs',
 	'JS_DUPLICATE_ENTRIES_FOUND_FOR_THE_VALUE' => 'Duplicate entries found for the value',
 	'JS_SELECT_RECORDS_TO_MERGE_FROM_SAME_GROUP' => 'You have to select the records in the same groups for merging',
 	'JS_SELECT_ATLEAST_TWO_RECORD_FOR_MERGING' => 'Select atleast two records for merging',

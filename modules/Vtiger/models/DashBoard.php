@@ -10,7 +10,7 @@
 
 class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
 
-	var $dashboardTabLimit = 10;
+	var $dashboardTabLimit = 50;
 	/**
 	 * Function to get Module instance
 	 * @return <Vtiger_Module_Model>
@@ -251,10 +251,10 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
 		$query = "SELECT count(*) AS count FROM vtiger_dashboard_tabs WHERE userid=?";
 		$result = $db->pquery($query, array($currentUser->getId()));
 		$count = $db->query_result($result, 0, 'count');
-		if (10000  >= $this->dashboardTabLimit) {
+		if ($count >= $this->dashboardTabLimit) {
 			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public function updateTabSequence($sequence){
