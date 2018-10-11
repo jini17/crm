@@ -56,9 +56,9 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 
 
 	//Created by Safuan for fetching current user leaves for current year//	
-	public function getMyWidgetsClaim($userid,$year, $type){ 
+	public function getMyWidgetsClaim($userid,$year, $type = false){ 
 		$db = PearDatabase::getInstance();
-		//$db->setDebug(true);
+		$db->setDebug(true);
 		//echo $type;
 		$limit = '';
 
