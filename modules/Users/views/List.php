@@ -35,40 +35,59 @@ class Users_List_View extends Settings_Vtiger_List_View {
 	}
 
 	public function process(Vtiger_Request $request) {
-		global $site_URL;
+		 //global $adb;
+	
+	global $site_URL;
+
 		$URL = $site_URL.'/index.php?module=Users&parent=Settings&view=List&block=1&fieldid=1';
-                                         $defaultview = $request->get('empview');	
-                                         $Alphabet = $request->get('Alphabet');
+		$defaultview = $request->get('empview');	
+		$Alphabet = $request->get('Alphabet');
+
+		$currentUserModel = Users_Record_Model::getCurrentUserModel();
+
+		//defaultTab : EmployeeDirectory
+		$tabType = $request->get('tabtype');
+		//$adb->setDebug(true);
+		if(!$request->get('tabtype')){
+			$tabType = 'MD';
+		}
+
+
+		if($tabType == 'MD'){
+			$request->set('search_params', array("department","c", $currentUserModel->get('department')));	
+		}
+		
+
+		$defaultview = $request->get('empview');	
+		
 		if(!$request->get('empview')){
-                                                    $defaultview = 'grid';	
-		}	
-		elseif($request->get('empview') == 'grid'){
-                                                    $defaultview = 'grid';	
-                                            }
-                                            else{
-                                                     $defaultview = 'list';
-                                            }
+            $defaultview = 'grid';	
+		}
+        
 		$viewer = $this->getViewer($request);
 		$this->initializeListViewContents($request, $viewer);
+
+		$viewer->assign('TAB_TYPE', $tabType);
 		$viewer->assign('EMP_VIEW', $defaultview);
-                                           $viewer->assign('PAGE_URL',$URL);
-                                             $viewer->assign('TEXT_FILTER',$Alphabet);
+	    $viewer->assign('PAGE_URL',$URL);
+	    $viewer->assign('TEXT_FILTER',$Alphabet);
                                        
 		//$viewer->view('GridViewContents.tpl', $request->getModule(false));
                 
-//		if($defaultview =='grid'){
+		if($defaultview =='grid'){
 			$viewer->view('GridViewContents.tpl', $request->getModule(false));
-//		}
-//		else {
-		//$viewer->view('ListViewContents.tpl', $request->getModule(false));
-//		}	
+		}
+		else {
+			$viewer->view('ListViewContents.tpl', $request->getModule(false));
+		}	
 	}
 
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
 	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
-                                global $adb;
+                           
+		//$adb->setDebug(true);
                                 
 		$moduleName = $request->getModule();
 		$cvId = $request->get('viewname');

@@ -19,6 +19,9 @@ class Claim_MyTeamClaim_Dashboard extends Vtiger_IndexAjax_View {
 		$type = $request->get('type');
 		$userModel = Users_ClaimRecords_Model::getMyTeamMembers($currentUser->getId());
 		$select_value = $request->get('employee_name');
+		if($select_value == 'All'){
+			$select_value = null;
+		}
 		
 		if($type == '' || $type == null) {
 				$type = 'claimtype';
@@ -38,7 +41,7 @@ class Claim_MyTeamClaim_Dashboard extends Vtiger_IndexAjax_View {
 			
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
-		$claimmodel = Users_ClaimRecords_Model::getMyTeamClaim($currentUser->getId(), date('Y'), 1, 1,$select_value,'');
+		$claimmodel = Users_ClaimRecords_Model::getMyTeamWidgetClaim($currentUser->getId(), date('Y'), $type, $select_value);
 		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('VALUE', $type );

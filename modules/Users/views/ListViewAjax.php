@@ -34,6 +34,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 	}
 
 	public function getUserEducation(Vtiger_Request $request){
+
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$recordId = $request->get('record');
@@ -420,15 +421,29 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 	function getHeaderScripts(Vtiger_Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		
+		$mode = $request->get('mode');
+		
 		$jsFileNames = array(
 			"~layouts/fask/modules/Vtiger/resources/List.js",
-			"~layouts/fask/modules/Users/resources/Leave.js",	
-			"~layouts/fask/modules/Users/resources/Claim.js",				
-			"~layouts/fask/modules/Users/resources/Education.js",	
-			"~layouts/fask/modules/Users/resources/WorkExp.js",	
-			"~layouts/fask/modules/Users/resources/EmployeeProjects.js",	
 		);
 
+		if($mode == 'getUserEducation'){
+			array_push($jsFileNames, "~layouts/fask/modules/Users/resources/Education.js");
+		}
+		if($mode == 'getUserWorkexp'){
+			array_push($jsFileNames, "~layouts/fask/modules/Users/resources/WorkExp.js");
+		}
+		if($mode == 'getUserProject'){
+			array_push($jsFileNames, "~layouts/fask/modules/Users/resources/EmployeeProjects.js");
+		}
+
+		if($mode == 'getUserLeave'){
+			array_push($jsFileNames, "~layouts/fask/modules/Users/resources/Leave.js");
+		}
+		if($mode == 'getUserClaim'){
+			array_push($jsFileNames, "~layouts/fask/modules/Users/resources/Claim.js");
+		}
+		
 		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
 		$headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
 		return $headerScriptInstances;

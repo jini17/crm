@@ -18,20 +18,13 @@
 
 		       if (!is_null($last_error)) { // if there has been an error at some point
 
-
 			  // do something with the error
-
-//			  // do something with the error
-
 			  print_r($last_error);
 
 		       }
+		    }
 
-
-		    }*/
-
-
-		    
+*/	    
 //Overrides GetRelatedList : used to get related query
 //TODO : Eliminate below hacking solution
 ini_set('display_errors', '0');     # don't show any errors...

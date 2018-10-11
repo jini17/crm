@@ -49,7 +49,7 @@
                                                                 {if $MENU eq 'LBL_EMPLOYEMENT_DETAILS' || $MENU eq  'LBL_PASSPORTVISA'
                                                              || $MENU eq  'LBL_PERFORMANCE' || $MENU eq  'LBL_PAYSLIP' } 
                                                                   {assign var=MENU_URL value=$USER_MODEL->getEmploymentTabURL($URL)}
-                                                              
+
                                                                 {/if}    
                                                                 <li><a href="{$MENU_URL}" class="menuItemLabel {if $ACTIVE_BLOCK['menu'] eq $MENU} settingsgroup-menu-color {/if}">{vtranslate($MENU_LABEL,$QUALIFIED_MODULE)}</a></li>
                                                         {/foreach}

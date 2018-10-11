@@ -593,6 +593,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 	 * @return <Array> - array of field values
 	 */
 	public function getFieldInfo() {
+		
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$fieldDataType = $this->getFieldDataType();
 
@@ -601,6 +602,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		$this->fieldInfo['quickcreate'] = $this->isQuickCreateEnabled();
 		$this->fieldInfo['masseditable'] = $this->isMassEditable();
 		$this->fieldInfo['defaultvalue'] = $this->hasDefaultValue();
+		$this->fieldInfo['maximumlength'] = $this->get('maximumlength');
 		$this->fieldInfo['column'] = $this->get('column');
 		$this->fieldInfo['type'] = $fieldDataType; 
 		$this->fieldInfo['name'] = $this->get('name');

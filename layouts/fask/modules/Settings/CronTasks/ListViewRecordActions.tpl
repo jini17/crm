@@ -10,7 +10,8 @@
  ********************************************************************************/
 -->*}
 {strip}
-    <div class="table-actions">
+    <div class="table-actions" style="position: relative;">
+              
         <span>
             <img src="{vimage_path('drag.png')}" class="alignTop" title="{vtranslate('LBL_DRAG',$QUALIFIED_MODULE)}" />
         </span>

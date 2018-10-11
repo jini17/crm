@@ -23,12 +23,12 @@ $block1 = $block1->getInstance($block1->label,$module);
 
 $field1 = new Vtiger_Field();
 
-$field1->name = 'employeesno';
+$field1->name = 'job_type';
 $field1->table = $module->basetable;
-$field1->label = 'Employee No.';
-$field1->column = 'employeesno';
-$field1->columntype = 'varchar(100)';
-$field1->uitype = 4;
+$field1->label = 'Job Type';
+$field1->column = 'job_type';
+$field1->columntype = 'VARCHAR(30)';
+$field1->uitype = 15;
 $field1->typeofdata = 'V~M';
 $block1->addField($field1);
 echo "NBBB";

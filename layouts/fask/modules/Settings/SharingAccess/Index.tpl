@@ -11,7 +11,12 @@
 {* START YOUR IMPLEMENTATION FROM BELOW. Use {debug} for information *}
 
 {strip}
-<div class="listViewPageDiv " id="sharingAccessContainer">
+
+<div class="listViewPageDiv " id="sharingAccessContainer" style="position: relative;">
+ <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;right:0; left: 97%;" title="Left Panel Show/Hide">
+            <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>  
+
+    <div class="clearfix" style="height:50px;"></div>
     <div class="col-sm-12 col-xs-12">
         <form name="EditSharingAccess" action="index.php" method="post" class="form-horizontal" id="EditSharingAccess">
             <input type="hidden" name="module" value="SharingAccess" />

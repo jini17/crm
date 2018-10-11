@@ -85,6 +85,7 @@ $languageStrings = array(
 	'Employee Name' => 'Nama Pekerja',
 	'Reason For Rejection' => 'Sebab Ditolak',
 	'Documents (If any)' => 'Dokumen (Jika ada)',
+	'LBL_THIS_MONTH' => 'Bulan ini',
 	
 );
 

@@ -100,8 +100,8 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 $myleave[$i]['leave_type']      = $db->query_result($result, $i, 'title');
                 $myleave[$i]['leavetypeid']     = $db->query_result($result, $i, 'leave_type');
                 $myleave[$i]['colorcode']       = $db->query_result($result, $i, 'colorcode');
-                $myleave[$i]['fromdate']        = $db->query_result($result, $i, 'fromdate');
-                $myleave[$i]['todate']          = $db->query_result($result, $i, 'todate');
+                $myleave[$i]['from_date']        = $db->query_result($result, $i, 'fromdate');
+                $myleave[$i]['to_date']          = $db->query_result($result, $i, 'todate');
                 $myleave[$i]['leavestatus']     = $db->query_result($result, $i, 'leavestatus');
                 $myleave[$i]['id']              = $leaveid;
                 $myleave[$i]['applicantid']     = $db->query_result($result, $i, 'employee_id'); 
@@ -319,10 +319,12 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 }else{
                         $row=0;
                 }
-                $memcondition		= "AND vtiger_crmentity.smownerid IN (".$allteammate.")";	
+
+                $memcondition		= " AND vtiger_leave.employee_id IN (".$allteammate.")";	
+
                 $leavetypecondtion	= '';	
                 if(!empty($selectedmember)) {
-                        $memcondition = " AND vtiger_crmentity.smownerid = $selectedmember";
+                        $memcondition = " AND vtiger_leave.employee_id = $selectedmember";
                 }
                 if(!empty($selectedleavetype)) {
                         $leavetypecondtion = " AND vtiger_leave.leavetype = $selectedleavetype";
@@ -344,8 +346,10 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 $myteamleave=array();	
 
                 for($i=0;$db->num_rows($resultgetteamleave)>$i;$i++){
+                        $leaveid                        = $db->query_result($resultgetteamleave, $i, 'leaveid');
+                        $attachment                     = self::getAttachment($leaveid);
                         $rowdetail = self::getLeaveType($db->query_result($resultgetteamleave, $i, 'leavetype'));;	
-                        $myteamleave[$i]['id'] = $db->query_result($resultgetteamleave, $i, 'leaveid');
+                        $myteamleave[$i]['id'] =  $leaveid;
                         $myteamleave[$i]['fullname'] = $db->query_result($resultgetteamleave, $i, 'fullname');
                         $myteamleave[$i]['leave_reason'] = $db->query_result($resultgetteamleave, $i, 'reasonofleave');
                         $myteamleave[$i]['leave_type'] = $rowdetail['leavetype'];
@@ -358,6 +362,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                         $myteamleave[$i]['leavestatus'] = $db->query_result($resultgetteamleave, $i, 'leavestatus');
                         $myteamleave[$i]['applicantid'] = $db->query_result($resultgetteamleave, $i, 'id'); 
                         $myteamleave[$i]['reasonnotapprove'] = $db->query_result($resultgetteamleave, $i, 'reasonnotapprove'); 
+                        $myteamleave[$i]['fileid']          = $attachment; 
                 }
 
         return $myteamleave;
@@ -366,7 +371,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
         //Created by Safuan
         public function getLeaveDetail($leaveid){
                 $db = PearDatabase::getInstance();
-        $query = "SELECT leaveid, reasonofleave, leavetype, fromdate, todate, replaceuser_id, leavestatus,starthalf, endhalf, reasonnotapprove
+        $query = "SELECT leaveid, reasonofleave, leavetype, fromdate, todate, replaceuser_id, leavestatus,starthalf, endhalf, reasonnotapprove, attachment
                         FROM vtiger_leave 
                         INNER JOIN vtiger_crmentity
                         ON vtiger_crmentity.crmid = vtiger_leave.leaveid
@@ -385,6 +390,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 $leavedetails['starthalf'] = $db->query_result($result, 0, 'starthalf');
                 $leavedetails['endhalf'] = $db->query_result($result, 0, 'endhalf');
                 $leavedetails['reasonnotapprove'] = $db->query_result($result, 0, 'reasonnotapprove'); 
+                $leavedetails['attachment'] = $db->query_result($result, 0, 'attachment'); 
 
         return $leavedetails;
         }
@@ -636,19 +642,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 global $current_user;
 
                 if($filter == 'today'){
-                        $query = " AND DATE_FORMAT(fromdate,'%m-%d') = DATE_FORMAT(NOW(),'%m-%d')
-                                             OR (
-                                                    (
-                                                        DATE_FORMAT(NOW(),'%Y') % 4 <> 0
-                                                        OR (
-                                                                DATE_FORMAT(NOW(),'%Y') % 100 = 0
-                                                                AND DATE_FORMAT(NOW(),'%Y') % 400 <> 0
-                                                            )
-                                                    )
-                                                    AND DATE_FORMAT(NOW(),'%m-%d') = '03-01'
-                                                    AND DATE_FORMAT(fromdate,'%m-%d') = '02-29'
-                                                )
-                        )";
+                        $query = " AND DATE_FORMAT(CURDATE(),'%m-%d') between DATE_FORMAT(fromdate,'%m-%d') and DATE_FORMAT(todate,'%m-%d')  ";
 
                 } elseif($filter == 'tomorrow'){
                         $query = " AND DATE_FORMAT(fromdate,'%m-%d') = DATE_FORMAT(CURDATE() + INTERVAL 1 DAY,'%m-%d') ";			
@@ -686,6 +680,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                                         WHERE vtiger_leave.employee_id IN ($allteammate)
                                         AND vtiger_crmentity.deleted=0 
                                         AND (vtiger_leave.leavestatus = 'Apply') ".$query. " ORDER BY fromdate DESC LIMIT 5";
+
 
                 $resultgetteamleave = $db->pquery($querygetteamleave,array());
                 $myteamleave=array();	
@@ -745,9 +740,9 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
         }
 
 
-        public function getHolidayList($monthname=null){
+        public function getHolidayList($monthname=null,$type = ""){
                 $db = PearDatabase::getInstance();
-                //$db->setDebug(true);
+               // $db->setDebug(true);
                 $filtercond = '';
                 if($monthname == 1|| $monthname == 2 || $monthname == 3 || $monthname == 4 || $monthname == 5 || $monthname == 6 
                         || $monthname == 7 || $monthname == 8 || $monthname == 9 || $monthname == 10 || $monthname == 11 || $monthname == 12){
@@ -757,13 +752,43 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
                 }
 
+                if($type == 'today'){
+                    $filtercond = " AND DATE_FORMAT(CURDATE(),'%m-%d') BETWEEN DATE_FORMAT(vtiger_holiday.start_date,'%m-%d') AND DATE_FORMAT(vtiger_holiday.end_date,'%m-%d')";
+
+                    }elseif($type == 'thisyear'){
+                    $filtercond = " AND (DATE_FORMAT(CURDATE() ,'%Y')  = DATE_FORMAT(vtiger_holiday.start_date,'%Y') OR DATE_FORMAT(CURDATE() ,'%Y')  = DATE_FORMAT(vtiger_holiday.end_date,'%Y') ) ";			
+
+
+                    }elseif($type == 'thisweek'){
+                    $filtercond = " AND   ((YEARWEEK(vtiger_holiday.start_date, 1) = YEARWEEK(CURDATE(), 1)  OR YEARWEEK(vtiger_holiday.end_date, 1) = YEARWEEK(CURDATE(), 1) ))"; 
+                    /*$query .= "WHERE DATE_ADD( birthday, INTERVAL YEAR( CURDATE() ) - YEAR( birthday ) YEAR )
+                                    BETWEEN CURDATE()
+                                    AND DATE_ADD( CURDATE() , INTERVAL 7
+                                    DAY ))";			
+                    */
+
+                    }elseif($type == 'nextweek'){
+                    $filtercond = "  AND  (YEARWEEK(vtiger_holiday.start_date) = YEARWEEK(NOW() + INTERVAL 1 WEEK) OR YEARWEEK(vtiger_holiday.end_date) = YEARWEEK(NOW() + INTERVAL 1 WEEK))";
+            /*	$query .= "WHERE DATE_ADD( birthday, INTERVAL YEAR( CURDATE() + INTERVAL 7 DAY ) - YEAR( birthday ) YEAR )
+                                    BETWEEN CURDATE() + INTERVAL 7 DAY
+                                    AND DATE_ADD( CURDATE() + INTERVAL 7
+                                    DAY , INTERVAL 7 DAY ))";
+            */	
+
+                    }elseif($type == 'thismonth'){
+                    $filtercond = " AND (DATE_FORMAT(vtiger_holiday.start_date,'%m') = DATE_FORMAT(CURDATE(),'%m') OR  DATE_FORMAT(vtiger_holiday.end_date,'%m') = DATE_FORMAT(CURDATE(),'%m'))";			
+
+
+                    }
+                     
                 $query = "SELECT holiday_name, DAY(start_date) AS startday, MONTH(start_date) AS startmonth, DAY(end_date) AS endday, MONTH(end_date) AS endmonth, YEAR(end_date) AS endyear FROM vtiger_holiday INNER JOIN vtiger_crmentity 
                                         ON vtiger_crmentity.crmid = vtiger_holiday.holidayid 
-                                        WHERE vtiger_crmentity.deleted=0 ".$filtercond;
-
-                $result = $db->pquery($query);
+                                        WHERE vtiger_crmentity.deleted='0' ".$filtercond;
+   
+                $result = $db->pquery($query,array());
+ 
                 $rowdetail = array();
-                for($i=0;$db->num_rows($result)>$i;$i++){
+                for($i=0; $i < $db->num_rows($result);$i++){
 
                         $rowdetail[$i]['holiday_name'] = $db->query_result($result, $i, 'holiday_name');
                         $rowdetail[$i]['start_date_day'] = $db->query_result($result, $i, 'startday');
@@ -813,6 +838,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                                         LEFT JOIN vtiger_users ON vtiger_users.id=vtiger_leave.employee_id
                                         WHERE vtiger_crmentity.deleted = 0 AND vtiger_users.deleted = 0 AND vtiger_leave.leavetype=790 ".$deptCond ." 
                                         GROUP BY vtiger_leave.employee_id ORDER BY leavecount ASC LIMIT 4";
+                
                 $result = $db->pquery($query, array());
                 $numrows = $db->num_rows($result);
                 $employeelist = array();
@@ -875,4 +901,55 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 }
                 return $month;
         }
+
+   public function getWidgetsColleaguesLeave($type, $department){
+        $db = PearDatabase::getInstance();
+
+        $deptCond = '';
+
+        if($department !=''){
+                $deptCond = " AND vtiger_users.department='$department'";
+        }
+
+        if($type == 'today'){
+            $query = " AND DATE_FORMAT(CURDATE(),'%m-%d') between DATE_FORMAT(fromdate,'%m-%d') and DATE_FORMAT(todate,'%m-%d')  ";
+
+        } elseif($type == 'tomorrow'){
+            $query = " AND DATE_FORMAT(fromdate,'%m-%d') = DATE_FORMAT(CURDATE() + INTERVAL 1 DAY,'%m-%d') ";           
+
+
+        } elseif($type == 'thisweek'){
+            $query = " AND WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(fromdate,'%m-%d'))) = WEEKOFYEAR(CURDATE())"; 
+
+
+        } elseif($type == 'nextweek'){
+                $query = " AND WEEKOFYEAR(CONCAT(YEAR(CURDATE()),'-', date_format(fromdate,'%m-%d'))) = WEEKOFYEAR(CURDATE())+1";
+
+
+        } elseif($type == 'thismonth'){
+                $query = " AND DATE_FORMAT(fromdate,'%m') = DATE_FORMAT(CURDATE(),'%m')";           
+        } 
+
+        $sql = "SELECT vtiger_users.id, CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, vtiger_users.department, 
+                                vtiger_leave.fromdate, vtiger_leave.todate                      
+                FROM vtiger_leave 
+                INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_leave.leaveid
+                LEFT JOIN vtiger_users ON vtiger_users.id=vtiger_leave.employee_id
+                WHERE vtiger_crmentity.deleted = 0 AND vtiger_users.deleted = 0 AND vtiger_leave.leavestatus='Approved' ".$deptCond . $query;
+        
+        $result = $db->pquery($sql, array());
+        $numrows = $db->num_rows($result);
+        $employeelist = array();
+
+        for($i=0;$i<$numrows;$i++){
+            $employeelist[$i]['userid'] = $db->query_result($result, $i, 'id');
+            $employeelist[$i]['empname'] = $db->query_result($result, $i, 'fullname');
+            $employeelist[$i]['department'] = $db->query_result($result, $i, 'department');
+            $employeelist[$i]['fromdate'] = $db->query_result($result, $i, 'fromdate');
+            $employeelist[$i]['todate'] = $db->query_result($result, $i, 'todate');
+        }
+
+        return $employeelist;
+
+   }     
 }

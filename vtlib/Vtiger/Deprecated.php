@@ -299,7 +299,7 @@ class Vtiger_Deprecated {
 		$sql.=" AND vtiger_users.is_admin='on' AND vtiger_users.status='Active' AND vtiger_users.deleted = 0";
 		$result = $adb->pquery($sql, array());
 		for ($i = 0; $i < $adb->num_rows($result); $i++) {
-			$announce = getUserFullName($adb->query_result($result, $i, 'creatorid')) . ' :  ' . $adb->query_result($result, $i, 'announcement') . '   ';
+			$announce =  $adb->query_result($result, $i, 'announcement') . '   '; //getUserFullName($adb->query_result($result, $i, 'creatorid')) . ' :  ' .
 			if ($adb->query_result($result, $i, 'announcement') != '')
 				$announcement.=$announce;
 		}

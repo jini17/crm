@@ -30,8 +30,6 @@ include_once 'include/Webservices/Utils.php';
 	global $adb;
 	$adb->setDebug(true);
 
-
-
 	$MODULENAME = 'Training'; //Give your module name
 	$PARENT 	= 'Support';  //Give Parent name
 	$ENTITYNAME = 'trainingno'; //Give Duplicate check field name

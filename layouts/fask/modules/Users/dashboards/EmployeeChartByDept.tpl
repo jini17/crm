@@ -9,28 +9,28 @@
   *
  ********************************************************************************/
 -->*}
-EmployeeChartByDept
+
 <div class="dashboardWidgetHeader">
-	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
+        {include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=false}
 </div>
 
 <div class="dashboardWidgetContent">
-	{include file="dashboards/EmployeeChartByDeptContents.tpl"|@vtemplate_path:$MODULE_NAME}
+        {include file="dashboards/EmployeeChartByDeptContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 
 <div class="widgeticons dashBoardWidgetFooter">
-	<div class="filterContainer">
+        <div class="filterContainer">
         <div class="row">
             <div class="col-sm-12">
                 <div class="col-lg-7">
                  {*  <select class="widgetFilter select2" id="duration" name="type" style='width:100%;'>
-						<option value="today" selected>{vtranslate('LBL_TODAY',$MODULE_NAME)}</option>
-						<option value="tomorrow" >{vtranslate('LBL_TOMORROW',$MODULE_NAME)}</option>
-						<option value="thisweek" >{vtranslate('LBL_THIS_WEEK',$MODULE_NAME)}</option>
-						<option value="nextweek" >{vtranslate('LBL_NEXT_WEEK',$MODULE_NAME)}</option>		
-						<option value="thismonth">{vtranslate('LBL_THIS_MONTH',$MODULE_NAME)}</option>
-						
-					</select>*}
+                                                <option value="today" selected>{vtranslate('LBL_TODAY',$MODULE_NAME)}</option>
+                                                <option value="tomorrow" >{vtranslate('LBL_TOMORROW',$MODULE_NAME)}</option>
+                                                <option value="thisweek" >{vtranslate('LBL_THIS_WEEK',$MODULE_NAME)}</option>
+                                                <option value="nextweek" >{vtranslate('LBL_NEXT_WEEK',$MODULE_NAME)}</option>		
+                                                <option value="thismonth">{vtranslate('LBL_THIS_MONTH',$MODULE_NAME)}</option>
+
+                                        </select>*}
                 </div>
             </div>
         </div>

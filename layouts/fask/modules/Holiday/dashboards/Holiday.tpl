@@ -14,11 +14,27 @@
 </script>
 
 <div class="dashboardWidgetHeader">
-	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
+	{*{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}*}
+            <div class="title">
+        <div class="dashboardTitle" title="{vtranslate($WIDGET->getTitle(), $MODULE_NAME)}">{vtranslate($WIDGET->getTitle())}</div>
+    </div>
+  <div class="filterContainer">
+      <div class="row">
+           
+              <div class="col-lg-12">
+                  <select class="select2 col-lg-10 widgetFilter" id="historyType" name="type">
+                    <option value="thisweek" >{vtranslate('LBL_THIS_WEEK',$MODULE_NAME)}</option>
+                    <option value="nextweek" >{vtranslate('LBL_NEXT_WEEK',$MODULE_NAME)}</option>   
+                    <option value="thismonth" selected>{vtranslate('LBL_THIS_MONTH',$MODULE_NAME)}</option> 
+                    <option value="thisyear" selected>{vtranslate('LBL_THIS_YEAR',$MODULE_NAME)}</option> 
+                 </select>
+              </div>
+          </div>
+      </div>
 </div>
 
 <div class="widgeticons dashBoardWidgetFooter">
-	<div class="filterContainer">
+	{*<div class="filterContainer">
        <div class="row">
             <div class="col-sm-12">
                 <div class="col-lg-7">
@@ -40,7 +56,7 @@
                 </div>
             </div>
         </div>
-
+*}
   </div>
 </div>
  

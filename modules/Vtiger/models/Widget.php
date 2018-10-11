@@ -290,6 +290,9 @@ class Vtiger_Widget_Model extends Vtiger_Base_Model {
 	 * @return <type>
 	 */
 	public function getDefaultWidgets() {
-		return array();
+                                       $widget = array(
+                                           'MyEmploymentDetails'
+                                       );
+		return  $widget;
 	}
 }

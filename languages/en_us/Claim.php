@@ -16,9 +16,12 @@ $languageStrings = array(
     'LBL_CLAIM_TYPE' => 'Claim Type',
     'LBL_LAST_5_CLAIM' => 'Last 5 Claims',
     'LBL_PENDING_APPROVAL' => 'Pending Approval',
+    'LBL_APPLY' => 'Apply Claim',
 
 );
 
 $jsLanguageStrings = array(
-	
+	'JS_TRANSACTION_AMOUNT_EXCEEDED' => 'The amount exceeds the transaction limit',
+	'JS_MONTHLY_AMOUNT_EXCEEDED' => 'The amount exceeds the monthly limit',
+	'JS_YEARLY_AMOUNT_EXCEEDED' => 'The amount exceeds the yearly limit',
 );

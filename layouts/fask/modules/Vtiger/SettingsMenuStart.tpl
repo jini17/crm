@@ -66,7 +66,7 @@
                     }
                 },
             };
-        
+
         })();
 
     </script>
@@ -81,7 +81,7 @@
                     {include file="modules/Settings/Vtiger/Sidebar.tpl"}
             </div>
         </div>
-            
+
 
             <div id="sidebar-essentials" class="sidebar-essentials visible-xs visible-sm" >
 

@@ -9,9 +9,13 @@
  ********************************************************************************/
 -->*}
 {strip}
-<div class="container-fluid">
+    <div class="container-fluid" style="position: relative;">
+      <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;right:0 ; left:98%" title="Left Panel Show/Hide">
+                    <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
+            </button>  
+    <div class="clearfix"></div>
     <form id="EditView" method="POST">
-	<input type="hidden" name="oldcompany" id="oldcompany" value = "{$DEFAULT_COMPANY}">	
+        <input type="hidden" name="oldcompany" id="oldcompany" value = "{$DEFAULT_COMPANY}">	
 
         <div class="row-fluid">
             <span class="widget_header row-fluid">
@@ -24,7 +28,7 @@
                 <table id="customRecordNumbering" class="table table-bordered">
                 {assign var=DEFAULT_MODULE_DATA value=$DEFAULT_MODULE_MODEL->getModuleCustomNumberingData()}
                 {assign var=DEFAULT_MODULE_NAME value=$DEFAULT_MODULE_MODEL->getName()}
-				{assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
+                                {assign var=WIDTHTYPE value=$CURRENT_USER_MODEL->get('rowheight')}
                     <thead>
                         <tr>
                             <th width="30%" class="{$WIDTHTYPE}">
@@ -39,17 +43,17 @@
                     </thead>
 
                     <tbody>
-			 <tr>
+                         <tr>
                 <td class="{$WIDTHTYPE}">
                     <label class="pull-right marginRight10px"><b>{vtranslate('LBL_SELECT_COMPANY', $QUALIFIED_MODULE)}</b></label>
                 </td>
-				<td class="fieldValue {$WIDTHTYPE}" style="border-left: none">
-					<select id="company" class="select2" name="company" data-placeholder="{vtranslate('LBL_ADD_COMPANY', $QUALIFIED_MODULE)}" data-validation-engine="validate[required]" data-old-company="{$DEFAULT_COMPANY}" >
-					{foreach from=$ALL_COMPANY item=COMPANY}
-					<option value="{$COMPANY.organizationId}" {if $COMPANY.organizationId eq $DEFAULT_COMPANY} selected="selected"{/if}>{$COMPANY.organization_title}</option>
-					{/foreach}
-					</select>
-				</td>
+                                <td class="fieldValue {$WIDTHTYPE}" style="border-left: none">
+                                        <select id="company" class="select2" name="company" data-placeholder="{vtranslate('LBL_ADD_COMPANY', $QUALIFIED_MODULE)}" data-validation-engine="validate[required]" data-old-company="{$DEFAULT_COMPANY}" >
+                                        {foreach from=$ALL_COMPANY item=COMPANY}
+                                        <option value="{$COMPANY.organizationId}" {if $COMPANY.organizationId eq $DEFAULT_COMPANY} selected="selected"{/if}>{$COMPANY.organization_title}</option>
+                                        {/foreach}
+                                        </select>
+                                </td>
 
 
                     <tr>
@@ -58,7 +62,7 @@
                         </td>
                         <td class="fieldValue {$WIDTHTYPE}" style="border-left: none">
                             <select class="select2" name="sourceModule" id="sourceModule">
-				{foreach key=index item=MODULE_MODEL from=$SUPPORTED_MODULES}
+                                {foreach key=index item=MODULE_MODEL from=$SUPPORTED_MODULES}
                                     {assign var=MODULE_NAME value=$MODULE_MODEL->get('name')}
                                     <option value={$MODULE_NAME} {if $MODULE_NAME eq $DEFAULT_MODULE_NAME} selected {/if}>
                                         {vtranslate($MODULE_NAME, $MODULE_NAME)}
@@ -102,4 +106,6 @@
         </div>
     </form>
 </div>
+
+
 {/strip}

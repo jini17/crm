@@ -21,7 +21,10 @@ $languageStrings = array(
 	'LBL_PASSPORT'=>'No Passports',
 	'LBL_VISA'=>"No Visa's",
 	'LBL_Benefits'=>'Benefits & Entitlement',
-	
+	'LBL_BENEFIT_NAME'=>'Benefit Name',
+	'LBL_BENEFIT_DESCRIPTION'=>'Benefit Description',
+                     'LBL_RECORD_DETAILS'=>'Contract Details',
+                    'Details'=> 'Contract Details'
 );
 
 $jsLanguageStrings = array(

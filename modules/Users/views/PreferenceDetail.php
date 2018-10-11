@@ -144,14 +144,20 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
 			$viewer->assign('ACTIVE_BLOCK', $activeBLock);
 			$viewer->assign('SubType',$request->get('subtype'));
 			
-			if($request->get('tab')){
+			if($request->get('tab') && $request->get('tab')=='leave'){
 				$viewer->assign('DEFAULT_TAB', 1);
 				$viewer->assign('ISACTIVE', 0);
 				$viewer->assign('TABTYPE', $request->get('tab'));
 				$viewer->assign('appid', $request->get('appid'));
 				$viewer->assign('leaveid', $request->get('leaveid'));
 
-			}				
+			} else if($request->get('tab')=='claim'){
+				$viewer->assign('DEFAULT_TAB', 1);
+				$viewer->assign('ISACTIVE', 0);
+				$viewer->assign('TABTYPE', $request->get('tab'));
+				$viewer->assign('appid', $request->get('appid'));
+				$viewer->assign('claimid', $request->get('claimid'));
+			}					
 			
 			if($display) {
 				$this->preProcessDisplay($request);

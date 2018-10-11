@@ -41,17 +41,17 @@
 		{if $VALUE eq 'claimtype'}
 			{foreach item=MODEL from=$MODELS}
 			
-			<div class='row miniListContent'>
+			<div class='row miniListContent' style="padding:5px">
 				<div class='col-lg-3' align="center">
-					{$MODEL['yearlylimit']}
+					{$MODEL['allocated']}
 				</div>
 				<div class='col-lg-2' align="center">
-					{$MODEL['totalamount']}
+					{$MODEL['used']}
 				</div>
 				<div class='col-lg-3' align="center">
-					{$MODEL['balance']}
+					{$MODEL['balance']|string_format:"%.2f"}
 				</div>
-				<div class='col-lg-4'>
+				<div class='col-lg-4'>	
 					{$MODEL['category']}
 				</div>
 			</div>

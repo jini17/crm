@@ -22,6 +22,7 @@
    <input type='hidden' value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'>
    <input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
 
+
    <div class="col-sm-12 col-xs-12 ">
         <div id="listview-actions" class="listview-actions-container">
             <div class = "row">

@@ -25,7 +25,7 @@ class Users_DeleteSubModuleAjax_Action extends Vtiger_BasicAjax_Action {
 	public function deleteSubModule($request) {
 
 		global $adb;
-		$adb->setDebug(true);
+		//$adb->setDebug(true);
 		//echo 'pre';print_r($_REQUEST);
 		$sourceModule = $request->get('sourcemodule');
 		include_once 'include/Webservices/Delete.php';

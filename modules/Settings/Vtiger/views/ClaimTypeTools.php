@@ -40,7 +40,7 @@ class Settings_Vtiger_ClaimTypeTools_View extends Settings_Vtiger_Index_View {
     public function EditClaimTypeForm($request){
         //echo "<pre>"; print_r($request); die;
         global $adb;
-        $adb->setDebug(true);
+       // $adb->setDebug(true);
         $qualifiedModuleName = $request->getModule(false);
         $values = explode(',', $request->get('values'));
 
@@ -76,7 +76,7 @@ class Settings_Vtiger_ClaimTypeTools_View extends Settings_Vtiger_Index_View {
 
     public function DeleteClaimType($request){
         global $adb;
-        $adb->setDebug(true);
+        //$adb->setDebug(true);
         $SeperatedValues = explode(',', $request->get('values'));
         $stringVal ='';
         $query = "UPDATE vtiger_crmentity SET deleted = 1 WHERE crmid IN ( ";

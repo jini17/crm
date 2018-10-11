@@ -25,7 +25,7 @@ Class Settings_Roles_Edit_View extends Settings_Roles_Index_View {
 			$recordModel = new Settings_Roles_Record_Model();
 			$recordModel->setParent(Settings_Roles_Record_Model::getInstanceById($parentRoleId));
 			$viewer->assign('MODE', '');
-            $roleDirectlyRelated = true;
+                                          $roleDirectlyRelated = true;
 		}
 		$profileId = $recordModel->getDirectlyRelatedProfileId();
 		if($profileId){
