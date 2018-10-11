@@ -48,10 +48,12 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
                 var element = jQuery(element);
                 var linkId = element.data('linkid');
                 var name = element.data('name');
-
+                
                 // After adding widget, we should remove that widget from Add Widget drop down menu from active tab
-                var activeTabId = Vtiger_DashBoard_Js.currentInstance.getActiveTabId();
-                jQuery('a[data-name="'+name+'"]',"#tab_"+activeTabId).parent().hide();
+                //var activeTabId = Vtiger_DashBoard_Js.currentInstance.getActiveTabId();
+                element.remove(); 
+                
+                jQuery('a[data-name="'+name+'"]',"moreSettings").parent().hide();
                 var widgetContainer = jQuery('<li class="new dashboardWidget loadcompleted" id="'+ linkId +'" data-name="'+name+'" data-mode="open"></li>');
                 widgetContainer.data('url', url);
                 var width = element.data('width');
@@ -487,11 +489,11 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
                                                         if (jQuery.inArray(widgetName, nonReversableWidgets) == -1) {
                                                                 var data = '<li><a onclick="Vtiger_DashBoard_Js.addWidget(this, \''+response.url+'\')" href="javascript:void(0);"';
                                                                 data += 'data-width='+width+' data-height='+height+ ' data-linkid='+response.linkid+' data-name='+response.name+'>'+response.title+'</a></li>';
-                                                                var divider = jQuery('.widgetsList .divider','#tab_'+activeTabId);
+                                                                var divider = jQuery('.widgetsList .divider','.moreSettings');
                                                                 if(divider.length) {
                                                                         jQuery(data).insertBefore(divider);
                                                                 } else {
-                                                                        jQuery(data).insertAfter(jQuery('.widgetsList li:last','#tab_'+activeTabId));
+                                                                        jQuery(data).insertAfter(jQuery('.widgetsList li:last','.moreSettings'));
                                                                 }
                                                         }
                                                 }

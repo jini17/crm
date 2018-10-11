@@ -591,7 +591,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                         //if(count($teamidreport)>0) { 
                                 $allteammate= implode(",", $teamidreport);
 
-                                $querygetleave .=" AND vtiger_crmentity.smownerid IN($allteammate) ";
+                                $querygetleave .=" AND vtiger_leave.employee_id IN($allteammate) ";
 
                                 if($filter=='today' || $filter==''){
                                         $querygetleave.= " AND fromdate = CURDATE() ";
@@ -676,7 +676,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                                         INNER JOIN vtiger_crmentity
                                         ON vtiger_crmentity.crmid = vtiger_leave.leaveid
                                         INNER JOIN vtiger_users
-                                        ON vtiger_crmentity.smownerid=vtiger_users.id
+                                        ON vtiger_leave.employee_id=vtiger_users.id
                                         WHERE vtiger_leave.employee_id IN ($allteammate)
                                         AND vtiger_crmentity.deleted=0 
                                         AND (vtiger_leave.leavestatus = 'Apply') ".$query. " ORDER BY fromdate DESC LIMIT 5";

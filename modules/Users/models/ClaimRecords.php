@@ -69,7 +69,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 				FROM vtiger_claim 
 				INNER JOIN vtiger_crmentity
 				ON vtiger_crmentity.crmid = vtiger_claim.claimid
-				WHERE vtiger_crmentity.smownerid = ?
+				WHERE vtiger_claim.employee_id = ?
 				AND vtiger_crmentity.deleted=0 AND DATE_FORMAT(transactiondate, '%Y') = ? AND claim_status ='Approved' AND vtiger_crmentity.deleted=0 ".$limit;
 
 		$result = $db->pquery($query,array($userid, $year));
@@ -208,7 +208,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 				FROM vtiger_claim 
 				INNER JOIN vtiger_crmentity
 				ON vtiger_crmentity.crmid = vtiger_claim.claimid
-				WHERE vtiger_crmentity.smownerid = ?
+				WHERE vtiger_claim.employee_id = ?
 				AND vtiger_crmentity.deleted=0 AND DATE_FORMAT(transactiondate, '%Y') = ? AND vtiger_crmentity.deleted=0 ";
 
 		$result = $db->pquery($query,array($userid, $year));
