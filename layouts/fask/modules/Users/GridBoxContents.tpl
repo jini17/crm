@@ -146,6 +146,5 @@
                
                 <div class="clearfix"></div>
     </div>
-    
-</div>
-
+  </div>
+                <div>Pagenation code start</div>

@@ -58,25 +58,16 @@ class Users_List_View extends Settings_Vtiger_List_View {
                  $viewer->assign("SEVEN_DAYS_AFTER", date('Y-m-d', strtotime("+7 day")));
 
                 //$viewer->view('GridViewContents.tpl', $request->getModule(false));
-                if( $tabType == 'ED' || $tabType == 'MD'  ){
+                if( $tabType  ==  'WAI'){
+                        $viewer->view('EmployeeTree.tpl',  $request->getModule(false));
+                } else {
                     if($defaultview =='grid'){
                             $viewer->view('GridViewContents.tpl', $request->getModule(false));
                     }
                     else {
                             $viewer->view('ListViewContents.tpl', $request->getModule(false));
                     }
-                }elseif($tabType == 'WAI'){ //https://bootsnipp.com/snippets/eN3Q8
-                    
-                    $viewer->view('EmployeeTree.tpl',  $request->getModule(false));
-                }	
-                else{
-                      if($defaultview =='grid'){
-                            $viewer->view('GridViewContents.tpl', $request->getModule(false));
-                    }
-                    else {
-                            $viewer->view('ListViewContents.tpl', $request->getModule(false));
-                    }
-                }
+                 }      
         }
 
         /*
@@ -166,6 +157,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 
             $pagingModel = new Vtiger_Paging_Model();
             $pagingModel->set('page', $pageNumber);
+            $pagingModel->set('limit',2);
 
             if(!empty($orderBy)) {
                     $listViewModel->set('orderby', $orderBy);
@@ -246,11 +238,11 @@ class Users_List_View extends Settings_Vtiger_List_View {
             $viewer->assign('LISTVIEW_HEADERS', $this->listViewHeaders);
             $viewer->assign('LISTVIEW_ENTRIES', $this->listViewEntries);
             $viewer->assign('TAB_TYPE', $tabType);
-            if (PerformancePrefs::getBoolean('LISTVIEW_COMPUTE_PAGE_COUNT', false)) {
+            if (PerformancePrefs::getBoolean('LISTVIEW_COMPUTE_PAGE_COUNT', true)) {
                     if(!$this->listViewCount){
                             $this->listViewCount = $listViewModel->getListViewCount();
                     }
-                    $totalCount = $this->listViewCount;
+                     $totalCount = $this->listViewCount;
                     $pageLimit = $pagingModel->getPageLimit();
                     $pageCount = ceil((int) $totalCount / (int) $pageLimit);
 

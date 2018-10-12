@@ -38,8 +38,8 @@
                       <option value=""> {vtranslate('Filter by',$MODULE)}</option>
                       <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
                       <option value="B"> {vtranslate('Bithdays',$MODULE)} </option>
-                      <option value="MALE"> {vtranslate('Male',$MODULE)} </option>
-                      <option value="FEMALE"> {vtranslate('Female',$MODULE)} </option>
+                      <option value="MALE"> {vtranslate('Male Employee',$MODULE)} </option>
+                      <option value="FEMALE"> {vtranslate('Female Employee',$MODULE)} </option>
                   </select>
               </div>
            
@@ -47,10 +47,8 @@
 <div style="min-height:450px;">
  {if $EMP_VIEW eq 'grid'}
    {include file="GridBoxContents.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
-   {else}
-   {include file="ListViewContents.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
-   {/if}   
-
+ {/if}   
+ 
  {if $LISTVIEW_ENTRIES_COUNT eq  0} 
                     <h4 class="text-center"> {vtranslate('NOT FOUND','Users')}</h4>
                  {/if}   

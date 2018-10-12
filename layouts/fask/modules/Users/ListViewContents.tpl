@@ -74,7 +74,7 @@
    }
 </style>
 
-<input type="hidden" id="listViewEntriesCount" value="{$LISTVIEW_ENTRIES_COUNT}" />
+<input type="text" id="listViewEntriesCount" value="{$LISTVIEW_ENTRIES_COUNT}" />
 <input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
 <input type="hidden" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" />
 <input type="hidden" id="previousPageExist" value="{$PAGING_MODEL->isPrevPageExists()}" />
@@ -85,11 +85,12 @@
 <input type="hidden" id="alphabetSearchKey" value= "{$MODULE_MODEL->getAlphabetSearchField()}" />
 <input type="hidden" id="Operator" value="{$OPERATOR}" />
 <input type="hidden" id="alphabetValue" value="{$ALPHABET_VALUE}" />
-<input type="hidden" id="totalCount" value="{$LISTVIEW_COUNT}" />
+<input type="text" id="pagecount" value="{$PAGE_COUNT}" />
+<input type="text" id="totalCount" value="{$LISTVIEW_COUNT}" />
 <input type="hidden" name="orderBy" value="{$ORDER_BY}" id="orderBy">
 <input type="hidden" name="sortOrder" value="{$SORT_ORDER}" id="sortOrder">
 <input type='hidden' value="{$PAGE_NUMBER}" id='pageNumber'>
-<input type='hidden' value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'>
+<input type='text' value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'>
 <input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
 <input type="hidden" value="{$NO_SEARCH_PARAMS_CACHE}" id="noFilterCache" >
 
@@ -263,5 +264,30 @@
     </div>
     <div id="scroller_wrapper" class="bottom-fixed-scroll">
         <div id="scroller" class="scroller-div"></div>
+    </div>
+    <div>Pagenation code start
+     <nav aria-label="Page navigation example">
+         {if $PAGE_COUNT > 1}
+            <ul class="pagination">
+              <li class="page-item {if $PAGE_NUMBER le 1}disabled{/if}">
+                   <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only {if $PAGE_NUMBER le 1}disabled{/if}">Previous</span>
+                </a>
+              </li>
+             
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+   
+    </nav>
+    
     </div>
 {/strip}

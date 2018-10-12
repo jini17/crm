@@ -22,7 +22,7 @@
       <div class="row">
            
               <div class="col-lg-12">
-                  <select class="select2 col-lg-10 widgetFilter" id="historyType" name="type">
+                  <select class="select2 col-lg-12 widgetFilter" id="historyType" name="type">
                     <option value="thisweek" >{vtranslate('LBL_THIS_WEEK',$MODULE_NAME)}</option>
                     <option value="nextweek" >{vtranslate('LBL_NEXT_WEEK',$MODULE_NAME)}</option>   
                     <option value="thismonth" selected>{vtranslate('LBL_THIS_MONTH',$MODULE_NAME)}</option> 
