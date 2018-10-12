@@ -59,6 +59,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 
                 //$viewer->view('GridViewContents.tpl', $request->getModule(false));
                 if( $tabType  ==  'WAI'){
+                  
                         $viewer->view('EmployeeTree.tpl',  $request->getModule(false));
                 } else {
                     if($defaultview =='grid'){
@@ -107,24 +108,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
                          $request->set('operator','s');
                          
                     }
-                    
 
-//                       if($searchType == 'keyword'){
-//                        $request->set('search_key','first_name');
-//                        $request->set('search_value',$currentUserModel->get('first_name'));
-//                         $request->set('operator',' c');
-//                         
-//                        $request->set('search_key','last_name');
-//                        $request->set('search_value',$currentUserModel->get('last_name'));
-//                         $request->set('operator','c ');
-//                         
-//                          $request->set('search_key','title');
-//                        $request->set('search_value',$currentUserModel->get('title'));
-//                         $request->set('operator',' c');
-//                         
-//                      
-//                    }
-//                    
          
            //  $request->set('search_params', array("department","e", $currentUserModel->get('department')));	
             $searchParams = $request->get('search_params');

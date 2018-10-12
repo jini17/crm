@@ -57,8 +57,8 @@ $languageStrings = array(
                        'LBL_CONTRACT_EXPIRE' => 'Contract expires in',
                        'LBL_SINCE' => 'since',
                        'LBL_CONTRACT_NOTIFICATION'=> 'Your Contract is expiring soon. Kindly contact your HR for further assistance',
-                       'LBL_VIEW_PROFILE'=> 'See My Profile',
-                      'LBL_VIEW_CONTRACT'=> 'See My Contract',
+                       'LBL_VIEW_PROFILE'=> 'Go to My Profile',
+                      'LBL_VIEW_CONTRACT'=> 'View My Contract',
                       'LBL_GOOD_DAY' => 'Good Day'
 	
 	                

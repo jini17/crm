@@ -68,6 +68,7 @@
                            </li>
                    </div>
             <div class="clearfix" style="height:20px;"></div>
+            {if $TAB_TYPE neq 'WAI'}
             <div class="row">
                 <div class="col-lg-6" style="float: left;">
                     <strong>
@@ -90,6 +91,8 @@
              </form>
          </div>
             </div>
+             {/if}    
+                 
                  <div class="clearfix"></div>
         
 <div class="clearfix"></div>
