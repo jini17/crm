@@ -344,11 +344,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                         listInstance.loadListViewRecords(listParams);
                 });
         },
-        ListViewSwitcher:function(){
-            
-        },
-         
-       
+
         /**
          * Function to get Page Jump Params
          */

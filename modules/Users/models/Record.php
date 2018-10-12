@@ -1172,5 +1172,22 @@ class Users_Record_Model extends Vtiger_Record_Model {
                                                 return false;
                                             }
 	}
+                                                
+        public function getNewJoinee($date,$id){
+            return $date;
+            $new_join    = date_parse_from_format("d-m-Y", $date);
+            $todayArray = date_parse_from_format("d-m-Y", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
+             $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
+              $today = date_create(date('d-m-Y')); //This should also be actual current date
+               $diff = date_diff($today, $birthdate);
+              $difference = $diff->format("%a");
+              if($difference <=30 ){
+                  $text = "New Joinee".$diff->format("%a");
+                  return $text ;
+              }
+              else{
+                  return false;
+              }
+        }
 
 }

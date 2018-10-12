@@ -350,64 +350,55 @@
                                                                                     </li>
                                                                                     {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                                                                         <li>
-                                                                                           <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&view=List">
-                                                                                            <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
-
-                                                                                        </a>
-                                                                                    </li>
-                                                                                   {* <li admin="">
-                                                                                        <a class="waves-effect waves-dark " href=" index.php?module=LeaveType&amp;view=List&amp;app=ADMIN ">
-                                                                                            <i class="material-icons module-icon">keyboard_tab</i> <span class="hide-menu"> 
-                                                                                            &nbsp;Leave Type</span></a>
-                                                                                    </li>*}
-
+                                                                                           <a class="dropdown-icon-dashboard"   title="Leave" href="index.php?module=Leave&view=List">
+                                                                                                <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
+                                                                                            </a>
+                                                                                         </li>                                                                         
                                                                                         {else}
                                                                                         <li>
-                                                                                            <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
-
+                                                                                            <a class="dropdown-icon-dashboard"  
+                                                                                               title="Leave" 
+                                                                                               href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
                                                                                                 <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
-
                                                                                             </a>
                                                                                         </li>
                                                                                         {/if}
                                                                                         <li admin="" moudel="Timesheet">
-                                                                                            <a class="waves-effect waves-dark " href=" index.php?module=Timesheet&amp;view=List&amp;app=ADMIN ">
+                                                                                            <a  class="dropdown-icon-dashboard"   href="index.php?module=Timesheet&amp;view=List&amp;app=ADMIN ">
                                                                                                 <i class="material-icons module-icon">timer</i>
                                                                                                 <span class="hide-menu"> {vtranslate('Timesheet','Home')}</span>
                                                                                             </a>
                                                                                         </li>
-                                                                                        {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
-                                                                                        <li>
-                                                                                            <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
-                                                                                                <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
+                                                                                                {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
+                                                                                                <li>
+                                                                                                    <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
+                                                                                                        <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
 
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        {else}
-                                                                                        <li>
-                                                                                            <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
-                                                                                                <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
-
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        {/if}
-                                                                                      
-                                                                                        <li>
-                                                                                            <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
-                                                                                                <i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                                                                                                
-                                                                                               {* <li>
-                                                                                                    <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_POLICY_DOCUMENT')}" href="index.php?module=Documents&view=List&type=H">
-                                                                                                        <i class="material-icons module-icon">file_download</i>&nbsp;{vtranslate('LBL_POLICY_DOCUMENT')}
-
-
-                                                                                                    </a>*}
-                                                                                                </li>
-                                                                                                <li admin="" moudel="Training"><a class="waves-effect waves-dark " href=" index.php?module=Training&amp;view=List&amp;app=ADMIN ">
-                                                                                                        <i class="material-icons module-icon">book</i><span class="hide-menu"> Training</span>
                                                                                                     </a>
                                                                                                 </li>
-<li admin="" moudel="Attendance"><a class="waves-effect waves-dark " href=" index.php?module=Attendance&amp;view=List&amp;app=ADMIN "><i class="material-icons module-icon">assignment</i><span class="hide-menu"> Attendance</span></a></li>
+                                                                                                {else}
+                                                                                                <li>
+                                                                                                    <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
+                                                                                                        <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
+
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                                {/if}
+                                                                                      
+                                                                                                <li>
+                                                                                                        <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
+                                                                                                            <i class="material-icons module-icon">timeline</i>&nbsp;Performance
+                                                                                                </li>
+                                                                                                <li admin="" moudel="Training">
+                                                                                                    <a class="dropdown-icon-dashboard" href=" index.php?module=Training&amp;view=List&amp;app=ADMIN ">
+                                                                                                        <i class="material-icons module-icon">book</i> Training
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                                <li admin="" moudel="Attendance">
+                                                                                                    <a  class="dropdown-icon-dashboard"   href=" index.php?module=Attendance&amp;view=List&amp;app=ADMIN ">
+                                                                                                        <i class="material-icons module-icon">assignment</i> Attendance
+                                                                                                    </a>
+                                                                                                </li>
                                                                                             </ul>
                                                                                         </div>
                                                                                     </div>

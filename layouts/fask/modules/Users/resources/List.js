@@ -36,14 +36,8 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
 
 
         },		
-        UserListViewSwitcher:function(Type,alphabet,url){
-           
-           var location = url+"&Alphabet="+alphabet+'&empview='+Type ;
-          
-            app.helper.showProgress();
-            window.location.href = location;
-        },
-        registerTransferOwnership : function() {
+
+        registerTransferOwnership:function() {
                 jQuery('#transferOwner').on('submit',function(e) {
                         e.preventDefault();
                         var form = jQuery(e.currentTarget);
@@ -133,7 +127,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                         }
                 );
         },
-                 
+
         triggerLogin : function(recordId){
                 var params = {
                         data : {
@@ -353,41 +347,89 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
 
                         var listInstance = new Settings_Users_List_Js;
                         var listParams = listInstance.getListViewParams();
-                        listParams['search_value'] = currentEle.data('searchvalue');
+                        listParams['search_params'] = currentEle.data('searchvalue');
                         //To clear the search params while switching between active and inactive users 
                         listParams.search_params = {};
                         listInstance.loadListViewRecords(listParams);
                 });
         },
+        registerUserViewSwitcher:function(){
+                jQuery('.main-container').on('click','.empview',function(){
+                           var viewtype = $(this).data('listtype');
+                           $(this).closest('div').find('button').removeClass('btn-primary');
+                           $(this).addClass('btn-primary')
+                           var listInstance = new Settings_Users_List_Js;
+                           var listParams = listInstance.getListViewParams();
+                        listParams['empview'] = viewtype;
+                       listInstance.loadListViewRecords(listParams);
+                });
+        },
         registerAlphabetSearch:function(){
-            jQuery('a[data-alphabet]').on('click',function(){
-                      var currentEle = jQuery(e.currentTarget);
-                    var atext = $(this).data('alphabet');
-                   app.helper.showProgress();
-                        if(currentEle.attr('id') === 'activeUsers') {
-                                jQuery('#inactiveUsers').removeClass('btn-primary');
-                        }else {
-                                jQuery('#activeUsers').removeClass('btn-primary');
-                        }
-                        currentEle.addClass('btn-primary');
-
+            jQuery('.main-container').on('click','.alphabetSearch a',function(){
+                $(this).closest('tr').find('td').removeAttr('style');
+                $(this).closest('td').css('border-bottom','1px solid #2f5597');
+                        var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');                    
+                        var atext = $(this).data('alphabet');
                         var listInstance = new Settings_Users_List_Js;
                         var listParams = listInstance.getListViewParams();
-                        listParams['search_value'] = currentEle.data('alphabet');
+                        listParams['search_params'] = [[["first_name","s",atext]]];
+                         listParams['status'] ="Active";
+                         listParams['empview'] = viewtype;
                          var params={
                                 "module" : "Users",
-                                "action" : "ShowTemplateContent",
+                                "view" : "list.php",
                                 "mode"   : "getContent",
-                                
-                             
+                                "operator" : "s",
+                                "search_param":atext,
+
                             };
                         //To clear the search params while switching between active and inactive users 
-                        listParams.search_params = {};
+                      //listParams.search_params = {};
                         listInstance.loadListViewRecords(listParams);
             });
-            
         },
-
+        registerKeySearch:function(){
+   
+              jQuery('.main-container').on('click','.keyword-search',function(){
+                 var keyword = $("#keywordsearch").val();
+                 var listInstance = new Settings_Users_List_Js;
+                 var listParams = listInstance.getListViewParams();
+                 var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');  
+                 var tabType = jQuery('#tabtype').val();  
+                listParams['search_params']  = [[["first_name","c",keyword],["last_name"," ",keyword],["email1"," ",keyword]]]
+                listParams['status'] ="Active";
+                listParams['empview'] = viewtype;
+                listParams['tabtype'] = tabType;
+                listParams['searchType'] = "keyword";
+                listInstance.loadListViewRecords(listParams);
+              })
+        },
+        registerViewFilter:function(){
+            jQuery('.main-container').on('change','.grid-filter',function(){
+                var keyword = $(this).find(":selected").val();
+               var listInstance = new Settings_Users_List_Js;
+                 var listParams = listInstance.getListViewParams();
+                 var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');  
+                 var tabType = jQuery('#tabtype').val();  
+                 
+                 if(keyword == 'N'){
+                    listParams['search_params']  = [[["date_joined","m",keyword]]]
+                 }
+                  if(keyword == 'B'){
+                    listParams['search_params']  = [[["birthday","e",keyword]]]
+                 }
+                 
+                 if(keyword == 'G'){
+                     
+                 }
+        
+                listParams['status'] ="Active";
+                listParams['empview'] = viewtype;
+                listParams['tabtype'] = tabType;
+                listParams['searchType'] = "gridfilter";
+                listInstance.loadListViewRecords(listParams);
+            })
+        },
         /**
          * Function to get Page Jump Params
          */
@@ -566,11 +608,13 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
         },
 
         registerEvents : function() {
-
                 this._super();
                 this.registerUserStatusToggleEvent();
                 this.registerListViewSearch();
                 this.registerAlphabetSearch();
+                this.registerUserViewSwitcher();
+                this.registerKeySearch();
+                this.registerViewFilter();
                 this.registerPostListLoadListener();
                 this.registerListViewSort();
                 this.registerRemoveListViewSort();
