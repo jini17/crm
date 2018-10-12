@@ -937,7 +937,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 		var dashBoardContainer = this.getDashboardContainer();
 
 		// on click of Rearrange button
-		dashBoardContainer.on("click",'button .reArrangeTabs',function(e){
+		dashBoardContainer.on("click",'button.reArrangeTabs',function(e){
 			var currentEle = jQuery(e.currentTarget);
 			dashBoardContainer.find(".dashBoardDropDown").addClass('hide');
 
