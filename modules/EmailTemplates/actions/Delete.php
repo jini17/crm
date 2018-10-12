@@ -10,9 +10,17 @@
 
 class EmailTemplates_Delete_Action extends Vtiger_Delete_Action {
 	
-	function checkPermission(Vtiger_Request $request) {
-		return true;
+	public function checkPermission(Vtiger_Request $request) {
+		$moduleName = $request->getModule();
+		$record = $request->get('record');
+        $currentUser = Users_Record_Model::getCurrentUserModel();
+		$currentUserPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
+		
+		if(!$currentUserPrivilegesModel->isPermitted($moduleName, 'Delete', $record) || !$currentUser->isAdminUser()) {
+			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
+		}
 	}
+
 
 	public function process(Vtiger_Request $request) {
 		$moduleName = $request->getModule();
@@ -20,15 +28,19 @@ class EmailTemplates_Delete_Action extends Vtiger_Delete_Action {
 		$ajaxDelete = $request->get('ajaxDelete');
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$recordModel = EmailTemplates_Record_Model::getInstanceById($recordId);
+		$response = new Vtiger_Response();
+
+		if($recordModel->isSystemTemplate() || !$currentUser->isAdminUser() ) {
+			$response->setError('502', vtranslate('LBL_NO_PERMISSIONS_TO_DELETE_SYSTEM_TEMPLATE', $moduleName));
+			return $response;
+		}	
 		$moduleModel = $recordModel->getModule();
 
 		$recordModel->delete($recordId);
 
 		$listViewUrl = $moduleModel->getListViewUrl();
-		$response = new Vtiger_Response();
-		if($recordModel->isSystemTemplate() || !$currentUser->isAdminUser() ) {
-			$response->setError('502', vtranslate('LBL_NO_PERMISSIONS_TO_DELETE_SYSTEM_TEMPLATE', $moduleName));
-		} else if($ajaxDelete) {
+		
+		if($ajaxDelete) {
 			$response->setResult($listViewUrl);
 		} else {
 			header("Location: $listViewUrl");
