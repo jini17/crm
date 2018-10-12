@@ -38,7 +38,8 @@
                       <option value=""> {vtranslate('Filter by',$MODULE)}</option>
                       <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
                       <option value="B"> {vtranslate('Bithdays',$MODULE)} </option>
-                      <option value="G"> {vtranslate('Gender',$MODULE)} </option>
+                      <option value="MALE"> {vtranslate('Male',$MODULE)} </option>
+                      <option value="FEMALE"> {vtranslate('Female',$MODULE)} </option>
                   </select>
               </div>
            

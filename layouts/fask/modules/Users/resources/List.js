@@ -424,8 +424,11 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                     listParams['search_params']  =[[["birthday","bw",day_ago]],[["birthday","bw",day_after]]]
                  }
                  
-                 if(keyword == 'G'){
-                     
+                 if(keyword == 'MALE'){
+                       listParams['search_params'] = [[["gender","e","Male"]]];
+                 }
+                 if(keyword == 'FEMALE'){
+                       listParams['search_params'] = [[["gender","e","Female"]]];
                  }
         
                 listParams['status'] ="Active";
