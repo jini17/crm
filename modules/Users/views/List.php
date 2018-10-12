@@ -157,7 +157,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 
             $pagingModel = new Vtiger_Paging_Model();
             $pagingModel->set('page', $pageNumber);
-            $pagingModel->set('limit',2);
+        
 
             if(!empty($orderBy)) {
                     $listViewModel->set('orderby', $orderBy);
