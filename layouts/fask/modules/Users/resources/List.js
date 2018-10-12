@@ -396,7 +396,8 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                  var listParams = listInstance.getListViewParams();
                  var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');  
                  var tabType = jQuery('#tabtype').val();  
-                listParams['search_params']  = [[["first_name","c",keyword],["last_name"," ",keyword],["email1"," ",keyword]]]
+                listParams['search_params']  = [[["first_name","n",keyword]],[["last_name","n",keyword]],[["email1","n",keyword]],[["phone_work","n",keyword]]]
+      
                 listParams['status'] ="Active";
                 listParams['empview'] = viewtype;
                 listParams['tabtype'] = tabType;

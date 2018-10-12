@@ -82,7 +82,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
          */
     public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
             global $adb;
-         //   $adb->setDebug(true);
+            //$adb->setDebug(true);
             $moduleName = $request->getModule();
             $cvId = $request->get('viewname');
             $pageNumber = $request->get('page');
@@ -116,22 +116,22 @@ class Users_List_View extends Settings_Vtiger_List_View {
                     }
                     
 
-                       if($searchType == 'keyword'){
-                        $request->set('search_key','first_name');
-                        $request->set('search_value',$currentUserModel->get('first_name'));
-                         $request->set('operator',' ');
-                         
-                        $request->set('search_key','last_name');
-                        $request->set('search_value',$currentUserModel->get('last_name'));
-                         $request->set('operator',' ');
-                         
-                          $request->set('search_key','email1');
-                        $request->set('search_value',$currentUserModel->get('email1'));
-                         $request->set('operator',' ');
-                         
-                      
-                    }
-                    
+//                       if($searchType == 'keyword'){
+//                        $request->set('search_key','first_name');
+//                        $request->set('search_value',$currentUserModel->get('first_name'));
+//                         $request->set('operator',' c');
+//                         
+//                        $request->set('search_key','last_name');
+//                        $request->set('search_value',$currentUserModel->get('last_name'));
+//                         $request->set('operator','c ');
+//                         
+//                          $request->set('search_key','title');
+//                        $request->set('search_value',$currentUserModel->get('title'));
+//                         $request->set('operator',' c');
+//                         
+//                      
+//                    }
+//                    
          
            //  $request->set('search_params', array("department","e", $currentUserModel->get('department')));	
             $searchParams = $request->get('search_params');
