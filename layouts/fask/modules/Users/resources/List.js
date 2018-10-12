@@ -365,11 +365,11 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                 });
         },
         registerAlphabetSearch:function(){
-            jQuery('.main-container').on('click','.alphabetSearch a',function(){
+            jQuery('.main-container').on('click','.alphabetSearch',function(){
                 $(this).closest('tr').find('td').removeAttr('style');
                 $(this).closest('td').css('border-bottom','1px solid #2f5597');
                         var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');                    
-                        var atext = $(this).data('alphabet');
+                        var atext = $(this).find('a').data('alphabet');
                         var listInstance = new Settings_Users_List_Js;
                         var listParams = listInstance.getListViewParams();
                         listParams['search_params'] = [[["first_name","s",atext]]];
@@ -397,11 +397,11 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                  var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');  
                  var tabType = jQuery('#tabtype').val();  
                 listParams['search_params']  = [[["first_name","n",keyword]],[["last_name","n",keyword]],[["email1","n",keyword]],[["phone_work","n",keyword]]]
-      
-                listParams['status'] ="Active";
-                listParams['empview'] = viewtype;
-                listParams['tabtype'] = tabType;
-                listParams['searchType'] = "keyword";
+
+                listParams['status']            ="Active";
+                listParams['empview']      = viewtype;
+                listParams['tabtype']        = tabType;
+                listParams['searchType']  = "keyword";
                 listInstance.loadListViewRecords(listParams);
               })
         },
@@ -412,12 +412,16 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                  var listParams = listInstance.getListViewParams();
                  var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');  
                  var tabType = jQuery('#tabtype').val();  
-                 
-                 if(keyword == 'N'){
-                    listParams['search_params']  = [[["date_joined","m",keyword]]]
+                 var day_ago = jQuery("#sevendaysago").val();
+                 var day_after = jQuery("#sevendaysafter").val()
+                if(keyword == 'N'){
+                     
+                    listParams['search_params']  = [[["date_joined","bw",day_ago]],[["date_joined","bw",day_after]]]
+                
                  }
                   if(keyword == 'B'){
-                    listParams['search_params']  = [[["birthday","e",keyword]]]
+                      
+                    listParams['search_params']  =[[["birthday","bw",day_ago]],[["birthday","bw",day_after]]]
                  }
                  
                  if(keyword == 'G'){

@@ -9,7 +9,7 @@
 
 {strip}
     <style>
-        li.active{
+        #tablist li.active{
           border-bottom: 2px solid #2f5597 ;
           color: #2f5597 ;
         }
@@ -37,7 +37,7 @@
             <!--id="listViewContent"-->
             <div class="col-sm-12 col-xs-12 full-height">
                  
-                   <div class="" id="">
+                   <div class="" id="tablist">
                         <ul class="nav nav-tabs tabs sortable container-fluid visible-lg">
 
                             <li class="{if $TAB_TYPE eq 'ED'}active {/if} employeeTab" data-tabname="Employee Directory">

@@ -14,8 +14,8 @@
 <input type='hidden' value="{$PAGE_NUMBER}" id='pageNumber'>
 <input type='hidden' value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'>
 <input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
-
-
+<input type="hidden" value="{$SEVEN_DAYS_AGO}" id="sevendaysago">
+<input type="hidden" value="{$SEVEN_DAYS_AFTER}" id="sevendaysafter">
 {if $EMP_VIEW eq 'grid'}
     {assign var =LIST value = 'btn-white'}
     {assign var =GRID value = 'btn-primary'}
@@ -41,11 +41,7 @@
                       <option value="G"> {vtranslate('Gender',$MODULE)} </option>
                   </select>
               </div>
-                  <div class="col-lg-3">
-                      <select class="select2 gender">
-                          
-                      </select>
-                  </div>
+           
       </div>
 <div style="min-height:450px;">
  {if $EMP_VIEW eq 'grid'}
@@ -54,4 +50,7 @@
    {include file="ListViewContents.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
    {/if}   
 
+ {if $LISTVIEW_ENTRIES_COUNT eq  0} 
+                    <h4 class="text-center"> {vtranslate('NOT FOUND','Users')}</h4>
+                 {/if}   
 </div>

@@ -54,6 +54,8 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 $viewer->assign('PAGE_URL',$URL);
                 $viewer->assign('TEXT_FILTER',$Alphabet);
                 $viewer->assign('DEPT',$currentUserModel->get('department'));
+                $viewer->assign("SEVEN_DAYS_AGO", date('Y-m-d', strtotime("-7 day")));
+                 $viewer->assign("SEVEN_DAYS_AFTER", date('Y-m-d', strtotime("+7 day")));
 
                 //$viewer->view('GridViewContents.tpl', $request->getModule(false));
                 if( $tabType == 'ED' || $tabType == 'MD'  ){
@@ -82,7 +84,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
          */
     public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
             global $adb;
-            //$adb->setDebug(true);
+           //$adb->setDebug(true);
             $moduleName = $request->getModule();
             $cvId = $request->get('viewname');
             $pageNumber = $request->get('page');
