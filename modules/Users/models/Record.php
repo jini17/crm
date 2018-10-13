@@ -1135,62 +1135,47 @@ class Users_Record_Model extends Vtiger_Record_Model {
                 return $row;
         }	//end here 
 
-                    public function getBirthdayWish($date,$id,$css="grid") {
+        public function getBirthdayWish($date,$id,$css="grid") {
+            $birthdateArray = date_parse_from_format("d-m-Y", $date);
+            $todayArray = date_parse_from_format("d-m-Y", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
+            $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
+            $today = date_create(date('d-m-Y')); //This should also be actual current date
+            $diff = date_diff($today, $birthdate);
+             $difference = $diff->format("%a");
+             
+             if($css == "grid"){
+                 $style= "font-weight: bold;";
+             }
+             else{
+                 $style = "font-size: 10px; display: block; text-align:center; padding-top: 5px;";
+             }
 
-//		$module = $this->getModule();
-//		return 'index.php?module='.$this->getModuleName().'&parent=Settings&view='.$module->getDetailViewName().'&record='.$this->getId();
-
-
-
-//                                        $bday = strtotime(date('md',strtotime($date)));
-//                                        //echo $paymentDate; // echos today! 
-//                                        $before = date('m-d', strtotime(date('Y-m-d'). ' +7 day'));
-//                                        $after   = date('m-d', strtotime(date('Y-m-d'). ' +7 day'));
-                                        $birthdateArray = date_parse_from_format("d-m-Y", $date);
-                                        $todayArray = date_parse_from_format("d-m-Y", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
-
-                                        $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
-                                        $today = date_create(date('d-m-Y')); //This should also be actual current date
-
-                                        $diff = date_diff($today, $birthdate);
-                                         $difference = $diff->format("%a");
-                                         if($css == "grid"){
-                                             $style= "font-weight: bold;";
-                                         }
-                                         else{
-                                             $style = "font-size: 10px; display: block; text-align:center; padding-top: 5px;";
-                                         }
-
-//                                        
-//                                            $cur_day_month = date('d-m');
-//                                            $day_month = date('d-m',strtotime($date));
-                                            if($difference >= -7 && $difference <=7){
-                                                $wish = '<div class="message" id="birthdaysms"  >';
-                                                $wish .= '<a class="birthday" style="'.$style.'" onclick="javascript:Settings_Users_List_Js.birthdayEmail('.$id.')">';
-                                                $wish .= "<i class='fa fa-gift'></i> &nbsp;";
-                                                $wish .= date('d-F',strtotime($date));
-                                                if($css == 'grid'){
-                                                $wish .= " <br />Say Happy Birthday";
-                                                }
-                                                $wish .= '</a>';
-                                                $wish .= '</div>';
-                                                return $wish;
-                                            }
-                                            else{
-                                                return false;
-                                            }
+            if($difference >= -7 && $difference <=7){
+                $wish = '<div class="message" id="birthdaysms"  >';
+                $wish .= '<a class="birthday" style="'.$style.'" onclick="javascript:Settings_Users_List_Js.birthdayEmail('.$id.')">';
+                $wish .= "<i class='fa fa-gift'></i> &nbsp;";
+                $wish .= date('d-F',strtotime($date));
+                if($css == 'grid'){
+                 $wish .= " <br />Say Happy Birthday";
+                }
+                $wish .= '</a>';
+                $wish .= '</div>';
+                return $wish;
+            }
+            else{
+                return false;
+            }
         }
 
         public function getNewJoinee($date,$id,$prefix = 'list'){
-         
+      
             $birthdateArray = date_parse_from_format("d-m-Y", $date);
             $todayArray = date_parse_from_format("d-m-Y", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
-
             $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
             $today = date_create(date('d-m-Y')); //This should also be actual current date
-
             $diff = date_diff($today, $birthdate);
              $difference = $diff->format("%a");
+             
             if($prefix == 'list'){
                 $show_prefix = "New Joinee";
             }
@@ -1204,6 +1189,87 @@ class Users_Record_Model extends Vtiger_Record_Model {
               else{
                   return false;
               }
+              
         }
 
+        public function MyReortingManager($db,$id){
+ 
+            $sql                    =  "select id, first_name,last_name,email1,department,title,birthday,date_joined,facebook,twitter,linkedin from vtiger_users where  id = $id";
+            $query              =  $db->pquery($sql,array());
+            $num_rows     =  $db->num_rows($query);
+            $data= array();
+            if($num_rows > 0){
+                for($i=0; $i < $num_rows; $i++){
+                    $data['id']                      = $db->query_result($query,$i,'id');
+                    $data['full_name']       = $db->query_result($query,$i,'first_name')." ".$db->query_result($query,$i,'last_name');
+                    $data['email']               = $db->query_result($query,$i,'email1');
+                    $data['designation']    = $db->query_result($query,$i,'designation');
+                    $data['department']   = $db->query_result($query,$i,'department');
+                    $data['birthday']          = $db->query_result($query,$i,'birthday');
+                    $data['facebook']        =  $db->query_result($query,$i,'facebook');;
+                    $data['twitter']            = $db->query_result($query,$i,'twitter');
+                    $data['linkedin']           =  $db->query_result($query,$i,'linkedin');     
+                    $data['image']        = Users_Record_Model::getImageDetailsByID($id);
+                }
+            }
+            else{
+                return "not found";
+            }
+            return $data;
+        }
+        
+        public function MyDepartmentEmployees($db,$department,$id){
+       
+            $sql                    =  "select  id,first_name,last_name,email1,department,title,birthday,date_joined,facebook,twitter,linkedin from vtiger_users where department='$department' AND id != $id";
+            $query              =  $db->pquery($sql,array());
+            $num_rows     =  $db->num_rows($query);
+            $data= array();
+            if($num_rows > 0){
+                for($i=0; $i < $num_rows; $i++){
+                     $data[$i]['id']                      = $db->query_result($query,$i,'id');
+                    $data[$i]['full_name']       = $db->query_result($query,$i,'first_name')." ".$db->query_result($query,$i,'last_name');;
+                    $data[$i]['email']               = $db->query_result($query,$i,'email1');;
+                    $data[$i]['designation']    = $db->query_result($query,$i,'title');;
+                    $data[$i]['department']   = $db->query_result($query,$i,'department');;
+                     $data[$i]['joindate']          = $db->query_result($query,$i,'date_joined');
+                    $data[$i]['birthday']          = $db->query_result($query,$i,'birthday');
+                    $data[$i]['facebook']        = $db->query_result($query,$i,'facebook');
+                    $data[$i]['twitter']            = $db->query_result($query,$i,'twitter');
+                    $data[$i]['linkedin']           = $db->query_result($query,$i,'linkedin');
+                    $data[$i]['image']              = Users_Record_Model::getImageDetailsByID($id);
+                }
+            }
+            return $data;
+        }
+        
+        public function getImageDetailsByID($id) {
+                $db = PearDatabase::getInstance();
+
+                $imageDetails = array();
+                $recordId = $id;
+
+                if ($recordId) {
+                        // Not a good approach to get all the fields if not required(May lead to Performance issue)
+                        $query = "SELECT vtiger_attachments.attachmentsid, vtiger_attachments.path, vtiger_attachments.name FROM vtiger_attachments
+                                  LEFT JOIN vtiger_salesmanattachmentsrel ON vtiger_salesmanattachmentsrel.attachmentsid = vtiger_attachments.attachmentsid
+                                  WHERE vtiger_salesmanattachmentsrel.smid=?";
+
+                        $result = $db->pquery($query, array($recordId));
+
+                        $imageId = $db->query_result($result, 0, 'attachmentsid');
+                        $imagePath = $db->query_result($result, 0, 'path');
+                        $imageName = $db->query_result($result, 0, 'name');
+
+                        //decode_html - added to handle UTF-8 characters in file names
+                        $imageOriginalName = urlencode(decode_html($imageName));
+
+                        $imageDetails[] = array(
+                                        'id' => $imageId,
+                                        'orgname' => $imageOriginalName,
+                                        'path' => $imagePath.$imageId,
+                                        'name' => $imageName
+                        );
+                }
+                return $imageDetails;
+        }
 }
