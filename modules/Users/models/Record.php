@@ -1135,7 +1135,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
                 return $row;
         }	//end here 
 
-                    public function getBirthdayWish($date,$id) {
+                    public function getBirthdayWish($date,$id,$css="grid") {
 
 //		$module = $this->getModule();
 //		return 'index.php?module='.$this->getModuleName().'&parent=Settings&view='.$module->getDetailViewName().'&record='.$this->getId();
@@ -1154,16 +1154,24 @@ class Users_Record_Model extends Vtiger_Record_Model {
 
                                         $diff = date_diff($today, $birthdate);
                                          $difference = $diff->format("%a");
+                                         if($css == "grid"){
+                                             $style= "font-weight: bold;";
+                                         }
+                                         else{
+                                             $style = "font-size: 10px; display: block; text-align:center; padding-top: 5px;";
+                                         }
 
 //                                        
 //                                            $cur_day_month = date('d-m');
 //                                            $day_month = date('d-m',strtotime($date));
                                             if($difference >= -7 && $difference <=7){
                                                 $wish = '<div class="message" id="birthdaysms"  >';
-                                                $wish .= '<a class="birthday" style="font-weight: bold;" onclick="javascript:Settings_Users_List_Js.birthdayEmail('.$id.')">';
+                                                $wish .= '<a class="birthday" style="'.$style.'" onclick="javascript:Settings_Users_List_Js.birthdayEmail('.$id.')">';
                                                 $wish .= "<i class='fa fa-gift'></i> &nbsp;";
                                                 $wish .= date('d-F',strtotime($date));
+                                                if($style == 'grid'){
                                                 $wish .= " <br />Say Happy Birthday";
+                                                }
                                                 $wish .= '</a>';
                                                 $wish .= '</div>';
                                                 return $wish;
@@ -1173,16 +1181,24 @@ class Users_Record_Model extends Vtiger_Record_Model {
                                             }
         }
 
-        public function getNewJoinee($date,$id){
-            return $date;
-            $new_join    = date_parse_from_format("d-m-Y", $date);
+        public function getNewJoinee($date,$id,$prefix = 'list'){
+         
+            $birthdateArray = date_parse_from_format("d-m-Y", $date);
             $todayArray = date_parse_from_format("d-m-Y", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
-             $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
-              $today = date_create(date('d-m-Y')); //This should also be actual current date
-               $diff = date_diff($today, $birthdate);
-              $difference = $diff->format("%a");
+
+            $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
+            $today = date_create(date('d-m-Y')); //This should also be actual current date
+
+            $diff = date_diff($today, $birthdate);
+             $difference = $diff->format("%a");
+            if($prefix == 'list'){
+                $show_prefix = "New Joinee";
+            }
+            else{
+                $show_prefix = "";
+            }
               if($difference <=30 ){
-                  $text = "New Joinee".$diff->format("%a");
+                  $text = "<small class='btn-block text-center'><i class='material-icons module-icon'>timer</i>&nbsp; $show_prefix ". $diff->format("%a")."Day(s) ago</small>";
                   return $text ;
               }
               else{

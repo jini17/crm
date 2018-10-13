@@ -133,7 +133,7 @@
                         <div class='clearfix'></div>
                         <div class='birthdaybox text-center'>{$birthday}</div>
                         <div class="clearfix"></div>
-                        <small >{$LISTVIEW_ENTRY->get('date_joined')}</small>
+                        <small >{$joinee}</small>
                     </div>
                              <div class="clearfix"></div>
                             </div>

@@ -56,7 +56,7 @@ $languageStrings = array(
 	'YOU_ARE_CURRENLY_VIEWING'=>'You are viewing employees of company',
 	'LBL_ATTACHMENTS'=>'Attachment (if any)',
 	'LBL_GET_IN_TOUCH'=>'Get In Touch',
-
+                     'LBL_ADDITIONAL_INFO'=> 'Addtional Info',
 
 	//MyPreference Fields
 	'Role' => 'Role',
