@@ -27,8 +27,8 @@ class Users_List_View extends Settings_Vtiger_List_View {
         public function process(Vtiger_Request $request) {
                  //global $adb;
 
-        global $site_URL;
-        $alphabet = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+                 global $site_URL;
+                $alphabet = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 
 
                 $URL = $site_URL.'/index.php?module=Users&parent=Settings&view=List&block=1&fieldid=1';

@@ -13,7 +13,7 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 
 	//static property which will store the instance of dashboard
 	currentInstance : false,
-	dashboardTabsLimit : 10,
+	dashboardTabsLimit : 1000,
                     
                         ViewMessage : function(userId){
                             var popupInstance = Vtiger_Popup_Js.getInstance();
