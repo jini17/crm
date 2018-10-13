@@ -9,7 +9,11 @@
  ************************************************************************************/
 
 class Users_List_View extends Settings_Vtiger_List_View {
-
+        private $_limit;
+        private $_page;
+        private $_query;
+        private $_total;
+        
         function checkPermission(Vtiger_Request $request) {
                 $currentUserModel = Users_Record_Model::getCurrentUserModel();
                 global $current_user;
@@ -304,16 +308,17 @@ class Users_List_View extends Settings_Vtiger_List_View {
          * @return total number of pages
          */
         function getPageCount(Vtiger_Request $request){
-                $listViewCount = $this->getListViewCount($request);
-                $pagingModel = new Vtiger_Paging_Model();
-                $pageLimit = $pagingModel->getPageLimit();
-                $pageCount = ceil((int) $listViewCount / (int) $pageLimit);
+                $listViewCount   = $this->getListViewCount($request);
+                $pagingModel    = new Vtiger_Paging_Model();
+                $pageLimit          = $pagingModel->getPageLimit();
+                $pageCount        = ceil((int) $listViewCount / (int) $pageLimit);
 
                 if($pageCount == 0){
                         $pageCount = 1;
                 }
                 $result = array();
                 $result['page'] = $pageCount;
+                $this->_total = $listViewCount;
                 $result['numberOfRecords'] = $listViewCount;
                 $response = new Vtiger_Response();
                 $response->setResult($result);
@@ -382,6 +387,44 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 $jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
                 $headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
                 return $headerScriptInstances;
+        }
+        
+        public function createLinks( $links, $list_class ) {
+            if ( $this->_limit == 'all' ) {
+                return '';
+            }
+
+            $last       = ceil( $this->_total / $this->_limit );
+
+            $start      = ( ( $this->_page - $links ) > 0 ) ? $this->_page - $links : 1;
+            $end        = ( ( $this->_page + $links ) < $last ) ? $this->_page + $links : $last;
+
+            $html       = '<ul class="' . $list_class . '">';
+
+            $class      = ( $this->_page == 1 ) ? "disabled" : "";
+            $html       .= '<li class="' . $class . '"><a href="?limit=' . $this->_limit . '&page=' . ( $this->_page - 1 ) . '">&laquo;</a></li>';
+
+            if ( $start > 1 ) {
+                $html   .= '<li><a href="?limit=' . $this->_limit . '&page=1">1</a></li>';
+                $html   .= '<li class="disabled"><span>...</span></li>';
+            }
+
+            for ( $i = $start ; $i <= $end; $i++ ) {
+                $class  = ( $this->_page == $i ) ? "active" : "";
+                $html   .= '<li class="' . $class . '"><a href="?limit=' . $this->_limit . '&page=' . $i . '">' . $i . '</a></li>';
+            }
+
+            if ( $end < $last ) {
+                $html   .= '<li class="disabled"><span>...</span></li>';
+                $html   .= '<li><a href="?limit=' . $this->_limit . '&page=' . $last . '">' . $last . '</a></li>';
+            }
+
+            $class      = ( $this->_page == $last ) ? "disabled" : "";
+            $html       .= '<li class="' . $class . '"><a href="?limit=' . $this->_limit . '&page=' . ( $this->_page + 1 ) . '">&raquo;</a></li>';
+
+            $html       .= '</ul>';
+
+            return $html;
         }
 
 }

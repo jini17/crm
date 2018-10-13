@@ -103,12 +103,13 @@
                {include file="ListViewAlphabet.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
             </div>
             <!--  Filter -->
-            <div class="col-lg-3 ">
+              <div class="col-lg-3 ">
                   <select class="select2 grid-filter pull-right">
                       <option value=""> {vtranslate('Filter by',$MODULE)}</option>
                       <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
                       <option value="B"> {vtranslate('Bithdays',$MODULE)} </option>
-                      <option value="G"> {vtranslate('Gender',$MODULE)} </option>
+                      <option value="MALE"> {vtranslate('Male Employee',$MODULE)} </option>
+                      <option value="FEMALE"> {vtranslate('Female Employee',$MODULE)} </option>
                   </select>
               </div>
       </div>
