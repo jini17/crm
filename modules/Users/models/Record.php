@@ -1169,7 +1169,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
                                                 $wish .= '<a class="birthday" style="'.$style.'" onclick="javascript:Settings_Users_List_Js.birthdayEmail('.$id.')">';
                                                 $wish .= "<i class='fa fa-gift'></i> &nbsp;";
                                                 $wish .= date('d-F',strtotime($date));
-                                                if($style == 'grid'){
+                                                if($css == 'grid'){
                                                 $wish .= " <br />Say Happy Birthday";
                                                 }
                                                 $wish .= '</a>';

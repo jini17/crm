@@ -247,7 +247,7 @@
                                                              
                                                                    {$LISTVIEW_ENTRY->getNewJoinee( $LISTVIEW_ENTRY->get('date_joined','hide'),$LISTVIEW_ENTRY->getId(),'list')}
                                                                    <div class="clearfix"></div>
-                                                                     {$LISTVIEW_ENTRY->getBirthdayWish( $LISTVIEW_ENTRY->get('birthday'),$LISTVIEW_ENTRY->getId(),'')}
+                                                                     {$LISTVIEW_ENTRY->getBirthdayWish( $LISTVIEW_ENTRY->get('birthday'),$LISTVIEW_ENTRY->getId(),'list')}
                                                             </td>
                                                             {/if}
                                                   
