@@ -85,6 +85,7 @@
 <input type="hidden" id="alphabetSearchKey" value= "{$MODULE_MODEL->getAlphabetSearchField()}" />
 <input type="hidden" id="Operator" value="{$OPERATOR}" />
 <input type="hidden" id="alphabetValue" value="{$ALPHABET_VALUE}" />
+<input type="hidden" id="pagecount" value="{$PAGE_COUNT}" />
 <input type="hidden" id="totalCount" value="{$LISTVIEW_COUNT}" />
 <input type="hidden" name="orderBy" value="{$ORDER_BY}" id="orderBy">
 <input type="hidden" name="sortOrder" value="{$SORT_ORDER}" id="sortOrder">
@@ -95,29 +96,28 @@
 
 {assign var = ALPHABETS_LABEL value = vtranslate('LBL_ALPHABETS', 'Vtiger')}
 {assign var = ALPHABETS value = ','|explode:$ALPHABETS_LABEL}
-<div class="row">
-  <div class="col-lg-6" style="float: left;">
-     <strong>
-     {vtranslate('YOU_ARE_CURRENLY_VIEWING',$MODULE)} "Soft Solvers Solutions"
-     </strong>
-  </div>
-</div>
-   <div class="col-lg-6 pull-right">
-    <div class="btn-group list-switcher" role="group" aria-label="Basic example">
-          <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn {if $EMP_VIEW eq 'List'} btn-primary activeview {else}btn-white view{/if}" data-listType='List' title="List View"><i class='fa fa-list'></i> {vtranslate('List View', $MODULE)}</button>
-          <button type="button"  onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('grid','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn {if $EMP_VIEW eq 'grid'} btn-primary activeview {else}btn-white view{/if}" data-listType='Grid' title="Grid View"> <i class="fa fa-th-large"></i> {vtranslate('Grid View', $MODULE)}</button>
+   <div class="clearfix" style="height: 20px;"></div>
+  <div class="row">
+            <div class="col-lg-9">
+       
+               {include file="ListViewAlphabet.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
+            </div>
+            <!--  Filter -->
+              <div class="col-lg-3 ">
+                  <select class="select2 grid-filter pull-right">
+                      <option value=""> {vtranslate('Filter by',$MODULE)}</option>
+                      <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
+                      <option value="B"> {vtranslate('Bithdays',$MODULE)} </option>
+                      <option value="MALE"> {vtranslate('Male Employee',$MODULE)} </option>
+                      <option value="FEMALE"> {vtranslate('Female Employee',$MODULE)} </option>
+                  </select>
+              </div>
       </div>
-   
-        <form class='form-inline pull-right'>
-            <div class='form-group'>
-                <input type="text" placeholder="{vtranslate('Enter Keyword',$MODULE)}" class="form-control">
-            </div>
-            <div class="form-group">
-                <button type="button" class='btn btn-primary'> Search   </button>
-            </div>
-     </form>
-    </div>
-    <div class="clearfix" style="height: 50px;"></div>
+                  <div class="clearfix"></div>
+<div class="row">
+
+
+    <div class="clearfix" style="height: 30px;"></div>
 
     <div id="table-content" class="table-container">
         <form name='list' id='listedit' action='' onsubmit="return false;">
@@ -265,5 +265,30 @@
     </div>
     <div id="scroller_wrapper" class="bottom-fixed-scroll">
         <div id="scroller" class="scroller-div"></div>
+    </div>
+    <div>Pagenation code start
+     <nav aria-label="Page navigation example">
+         
+            <ul class="pagination">
+              <li class="page-item {if $PAGE_NUMBER le 1}disabled{/if}">
+                   <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only {if $PAGE_NUMBER le 1}disabled{/if}">Previous</span>
+                </a>
+              </li>
+             
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+   
+    </nav>
+    
     </div>
 {/strip}

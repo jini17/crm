@@ -10,7 +10,7 @@
 
 class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
 
-        var $dashboardTabLimit = 50;
+        var $dashboardTabLimit = 1000;
         /**
          * Function to get Module instance
          * @return <Vtiger_Module_Model>
