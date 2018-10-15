@@ -49,7 +49,7 @@ Vtiger_Index_Js("Settings_Vtiger_Index_Js",{
 		});
 	},
 
-	registerPinUnpinShortCutEvent : function() {
+	registerPinUnpinShortCutEvent : function() { 
 		var thisInstance = this;
 		var widget = jQuery('#accordion');
 		widget.on('click','.pinUnpinShortCut',function(e){
@@ -161,7 +161,7 @@ Vtiger_Index_Js("Settings_Vtiger_Index_Js",{
 	},
 
 	registerAccordionClickEvent : function() {
-		function toggleChevron(e) {
+		function toggleChevron(e) { alert("working");
 			$(e.target)
 				.prev('.app-nav')
 				.find("i.indicator")
@@ -171,8 +171,32 @@ Vtiger_Index_Js("Settings_Vtiger_Index_Js",{
 		$('#accordion').on('shown.bs.collapse', toggleChevron);
 	},
 
+	// Added By Mabruk For Fask Skin
+	registerAccordionEvents : function() {
+
+		jQuery('.app-settings-accordion').click( function () {
+
+			var container 		= jQuery('#accordion_mobile');
+			var element   		= jQuery(this).find('i');
+			var links     		= container.find('a');
+			var notCollapsed 	= element.hasClass('ti-angle-right');    
+
+			links.each(function() {
+
+				jQuery(this).find('i').removeClass('ti-angle-down').addClass('ti-angle-right');				
+
+			});				
+
+			if (notCollapsed)
+				element.removeClass('ti-angle-right').addClass('ti-angle-down');
+
+		});
+
+	},
+
 	registerBasicSettingsEvents : function() {
-			this.registerAccordionClickEvent();
+			this.registerAccordionEvents();
+			this.registerAccordionClickEvent(); // By Mabruk
 			this.registerFilterSearch();
 			if(window.hasOwnProperty('Vtiger_List_Js')) {
 				var listInstance = new Vtiger_List_Js();
