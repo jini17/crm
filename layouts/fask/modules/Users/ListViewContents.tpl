@@ -85,6 +85,7 @@
 <input type="hidden" id="alphabetSearchKey" value= "{$MODULE_MODEL->getAlphabetSearchField()}" />
 <input type="hidden" id="Operator" value="{$OPERATOR}" />
 <input type="hidden" id="alphabetValue" value="{$ALPHABET_VALUE}" />
+<input type="hidden" id="pagecount" value="{$PAGE_COUNT}" />
 <input type="hidden" id="totalCount" value="{$LISTVIEW_COUNT}" />
 <input type="hidden" name="orderBy" value="{$ORDER_BY}" id="orderBy">
 <input type="hidden" name="sortOrder" value="{$SORT_ORDER}" id="sortOrder">
@@ -95,29 +96,28 @@
 
 {assign var = ALPHABETS_LABEL value = vtranslate('LBL_ALPHABETS', 'Vtiger')}
 {assign var = ALPHABETS value = ','|explode:$ALPHABETS_LABEL}
-<div class="row">
-  <div class="col-lg-6" style="float: left;">
-     <strong>
-     {vtranslate('YOU_ARE_CURRENLY_VIEWING',$MODULE)} "Soft Solvers Solutions"
-     </strong>
-  </div>
-</div>
-   <div class="col-lg-6 pull-right">
-    <div class="btn-group list-switcher" role="group" aria-label="Basic example">
-          <button type="button" onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('List','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn {if $EMP_VIEW eq 'List'} btn-primary activeview {else}btn-white view{/if}" data-listType='List' title="List View"><i class='fa fa-list'></i> {vtranslate('List View', $MODULE)}</button>
-          <button type="button"  onclick="javascript:Settings_Users_List_Js.UserListViewSwitcher('grid','{$TEXT_FILTER}','{$PAGE_URL}');" class="btn {if $EMP_VIEW eq 'grid'} btn-primary activeview {else}btn-white view{/if}" data-listType='Grid' title="Grid View"> <i class="fa fa-th-large"></i> {vtranslate('Grid View', $MODULE)}</button>
+   <div class="clearfix" style="height: 20px;"></div>
+  <div class="row">
+            <div class="col-lg-9">
+       
+               {include file="ListViewAlphabet.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
+            </div>
+            <!--  Filter -->
+              <div class="col-lg-3 ">
+                  <select class="select2 grid-filter pull-right">
+                      <option value=""> {vtranslate('Filter by',$MODULE)}</option>
+                      <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
+                      <option value="B"> {vtranslate('Bithdays',$MODULE)} </option>
+                      <option value="MALE"> {vtranslate('Male Employee',$MODULE)} </option>
+                      <option value="FEMALE"> {vtranslate('Female Employee',$MODULE)} </option>
+                  </select>
+              </div>
       </div>
-   
-        <form class='form-inline pull-right'>
-            <div class='form-group'>
-                <input type="text" placeholder="{vtranslate('Enter Keyword',$MODULE)}" class="form-control">
-            </div>
-            <div class="form-group">
-                <button type="button" class='btn btn-primary'> Search   </button>
-            </div>
-     </form>
-    </div>
-    <div class="clearfix" style="height: 50px;"></div>
+                  <div class="clearfix"></div>
+<div class="row">
+
+
+    <div class="clearfix" style="height: 30px;"></div>
 
     <div id="table-content" class="table-container">
         <form name='list' id='listedit' action='' onsubmit="return false;">
@@ -128,7 +128,7 @@
                                             {vtranslate('LBL_ACTIONS', $QUALIFIED_MODULE)} <i class="fa fa-search pull-right" onclick="jQuery('.searchRow').toggle('slow')"></i>
                                         </th>
                                         {foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
-                                                {if $LISTVIEW_HEADER->getName() neq 'last_name' and $LISTVIEW_HEADER->getName() neq 'email1' and $LISTVIEW_HEADER->getName() neq 'status'}
+                                                {if $LISTVIEW_HEADER->getName() neq 'last_name' and $LISTVIEW_HEADER->getName() neq 'email1' and $LISTVIEW_HEADER->getName() neq 'status' and $LISTVIEW_HEADER->getName() neq 'birthday'}
                                                         {if $LISTVIEW_HEADER->getName() eq 'first_name'}
                                                                 {assign var=HEADER_LABEL value='LBL_NAME_EMAIL'}
                                                         {else}
@@ -149,7 +149,8 @@
                                                                 {/if}
                                                         </th>
                                                         {else}
-                                                          <th {if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')} nowrap="nowrap" {/if} ><a href="#" class="listViewContentHeaderValues">{vtranslate('LBL_GET_IN_TOUCH', $MODULE)}</a>&nbsp;</th>
+                                                          <th {if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')} nowrap="nowrap" {/if} >
+                                                              <a href="#" class="listViewContentHeaderValues">{vtranslate('LBL_GET_IN_TOUCH', $MODULE)}</a>&nbsp;</th>
                                                         {/if}
                                                 {/if}
                                         {/foreach}
@@ -157,29 +158,30 @@
                         </thead>
                         <tbody class="overflow-y">
                                 {if $MODULE_MODEL->isQuickSearchEnabled() && !$SEARCH_MODE_RESULTS}
-                                        <tr class="searchRow">
+                                       {* <tr class="searchRow">
                                                 <th class="inline-search-btn">
                                                         <div class="table-actions">
                                                                 <button class="btn btn-success btn-sm" data-trigger="listSearch">{vtranslate("LBL_SEARCH",$MODULE)}</button>
                                                         </div>
                                                 </th>
                                                 {foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
-                                                        {if $LISTVIEW_HEADER->getName() eq 'last_name' or $LISTVIEW_HEADER->getName() eq 'email1' or $LISTVIEW_HEADER->getName() eq 'status'}
+                                                        {if $LISTVIEW_HEADER->getName() eq 'last_name' or $LISTVIEW_HEADER->getName() eq 'email1' or $LISTVIEW_HEADER->getName() eq 'status' }
                                                                 {continue}
                                                         {/if}
-                                                        {if $LISTVIEW_HEADER->getName() neq 'facebook'}
+                                                        {if $LISTVIEW_HEADER->getName() neq 'facebook'   }
                                                         <th>
                                                                 {assign var=FIELD_UI_TYPE_MODEL value=$LISTVIEW_HEADER->getUITypeModel()}
                                                                 {include file=vtemplate_path($FIELD_UI_TYPE_MODEL->getListSearchTemplateName(),$MODULE) FIELD_MODEL= $LISTVIEW_HEADER SEARCH_INFO=$SEARCH_DETAILS[$LISTVIEW_HEADER->getName()] USER_MODEL=$CURRENT_USER_MODEL}
                                                                 <input type="hidden" class="operatorValue" value="{$SEARCH_DETAILS[$LISTVIEW_HEADER->getName()]['comparator']}">
                                                         </th>
-                                                        {else}
+                                                        {elseif $LISTVIEW_HEADER->getName() neq 'birthday'  }
                                                             <th><input type="text" disabled class="listSearchContributor inputElement"/></th>
                                                        {/if} 
                                                 {/foreach}
-                                        </tr>
+                                        </tr>*}
                                 {/if}
                                 {foreach item=LISTVIEW_ENTRY from=$LISTVIEW_ENTRIES name=listview}
+                                
                                         <tr class="listViewEntries" data-id='{$LISTVIEW_ENTRY->getId()}' data-recordUrl='{$LISTVIEW_ENTRY->getDetailViewUrl()}&parentblock=LBL_USER_MANAGEMENT' id="{$MODULE}_listView_row_{$smarty.foreach.listview.index+1}">
                                                 <td class="listViewRecordActions">
                                                         {include file="ListViewRecordActions.tpl"|vtemplate_path:$MODULE}
@@ -188,7 +190,9 @@
                                                         {assign var=LISTVIEW_HEADERNAME value=$LISTVIEW_HEADER->get('name')}
                                                         {assign var=LISTVIEW_ENTRY_RAWVALUE value=$LISTVIEW_ENTRY->getRaw($LISTVIEW_HEADER->get('column'))}
                                                         {assign var=LISTVIEW_ENTRY_VALUE value=$LISTVIEW_ENTRY->get($LISTVIEW_HEADERNAME)}
+                                                  
                                                         {if $LISTVIEW_HEADER->getName() eq 'first_name'}
+                                                            
                                                                 <td data-name="{$LISTVIEW_HEADER->get('name')}" data-rawvalue="{$LISTVIEW_ENTRY_RAWVALUE}" 
                                                                     data-type="{$LISTVIEW_HEADER->getFieldDataType()}">
                                                                         <span class="fieldValue">
@@ -217,7 +221,7 @@
                                                                                 </span>
                                                                         </span>
                                                                 </td>
-                                                        {elseif $LISTVIEW_HEADER->getName() neq 'last_name' and $LISTVIEW_HEADER->getName() neq 'email1' and $LISTVIEW_HEADER->getName() neq 'status' and $LISTVIEW_HEADER->getName() neq 'facebook'}
+                                                        {elseif $LISTVIEW_HEADER->getName() neq 'last_name' and $LISTVIEW_HEADER->getName() neq 'email1' and $LISTVIEW_HEADER->getName() neq 'status' and $LISTVIEW_HEADER->getName() neq 'facebook'and $LISTVIEW_HEADER->getName() neq 'date_joined'and $LISTVIEW_HEADER->getName() neq 'birthday'}
                                                                 <td class="{$WIDTHTYPE}" nowrap>
                                                                         <span class="fieldValue">
                                                                                 <span class="value textOverflowEllipsis">
@@ -228,7 +232,7 @@
                                                         {elseif $LISTVIEW_HEADER->getName() eq 'facebook' }            
                                                             <td class="{$WIDTHTYPE}" nowrap>
                                                                  {if $LISTVIEW_ENTRY->getSocialMediaLinks('facebook',$LISTVIEW_ENTRY->getId()) neq ''}  
-                                                                <a class="facebook" target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('facebook',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"><i class="fa fa-facebook"></i></a>
+                                                                <a class="facebook" target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('facebook',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"><i class="fa fa-facebook"></i> </a>
                                                                 {/if}
                                                                 {if $LISTVIEW_ENTRY->getSocialMediaLinks('twitter',$LISTVIEW_ENTRY->getId()) neq ''}  
                                                                 <a class='twitter' target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('twitter',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"><i class='fa fa-twitter'></i></a>
@@ -238,7 +242,15 @@
                                                                 {/if}
                                                                 <a  class='email-icon' href="#"  style="margin-left:5px;" onclick="javascript:Settings_Users_List_Js.birthdayEmail({$LISTVIEW_ENTRY->getId()})"><i class='fa fa-envelope'></i></a>
                                                              </td>
-                                                        {/if}
+                                                         {elseif $LISTVIEW_HEADER->getName() eq 'date_joined'}
+                                                            <td class="{$WIDTHTYPE}" nowrap>
+                                                             
+                                                                   {$LISTVIEW_ENTRY->getNewJoinee( $LISTVIEW_ENTRY->get('date_joined','hide'),$LISTVIEW_ENTRY->getId(),'list')}
+                                                                   <div class="clearfix"></div>
+                                                                     {$LISTVIEW_ENTRY->getBirthdayWish( $LISTVIEW_ENTRY->get('birthday'),$LISTVIEW_ENTRY->getId(),'list')}
+                                                            </td>
+                                                            {/if}
+                                                  
                                                 {/foreach}
                                         </tr>
                                 {/foreach}
@@ -266,4 +278,29 @@
     <div id="scroller_wrapper" class="bottom-fixed-scroll">
         <div id="scroller" class="scroller-div"></div>
     </div>
+    {*<div>Pagenation code start
+     <nav aria-label="Page navigation example">
+         
+            <ul class="pagination">
+              <li class="page-item {if $PAGE_NUMBER le 1}disabled{/if}">
+                   <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only {if $PAGE_NUMBER le 1}disabled{/if}">Previous</span>
+                </a>
+              </li>
+             
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+   
+    </nav>
+    
+    </div>*}
 {/strip}

@@ -39,19 +39,19 @@
 }
 
  .img-holder{
-       border-radius: 50%;
-       border:1px solid #ccc;    
+{*       border-radius: 50%;
+       border:1px solid #ccc;*}    
        width: 122px;
        height: 122px;
-       margin: 0 auto;
+{*       margin: 0 auto;
        box-sizing: border-box;
     -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    background: #fff;
+    -webkit-box-sizing: border-box;*}
+{*    background: #fff;*}
  
-    margin: 0 auto;
+    margin: 0 auto !important;
 
-       overflow: hidden;
+  
  }
 .img-circle{
       background: #fff;
@@ -72,7 +72,11 @@
        background: #d1e3fa;   
       }
       .img-circle{
-      background-color: #fff;
+          padding:3px;
+          border:1px solid #ccc;  
+          background-color: #fff;
+          margin:0 auto !important;
+          display:block;
       }
       .email-icon i{
           color: #333;
@@ -87,8 +91,8 @@
    <div class="row">
         <div class="col-lg-12">
             {foreach  item=LISTVIEW_ENTRY from=$LISTVIEW_ENTRIES }
-                    {assign var=birthday value=$LISTVIEW_ENTRY->getBirthdayWish($LISTVIEW_ENTRY->get('birthday'),$LISTVIEW_ENTRY->getId())}
-                    
+                    {assign var=birthday value=$LISTVIEW_ENTRY->getBirthdayWish($LISTVIEW_ENTRY->get('birthday'),$LISTVIEW_ENTRY->getId(),'grid')}
+                     {assign var=joinee value=$LISTVIEW_ENTRY->getNewJoinee($LISTVIEW_ENTRY->get('date_joined'),$LISTVIEW_ENTRY->getId(),'grid')}
                 <div class="col-lg-3"   data-id='{$LISTVIEW_ENTRY->getId()}' data-recordUrl='{$LISTVIEW_ENTRY->getDetailViewUrl()}' id="{$MODULE}_listView_row_{$smarty.foreach.listview.index+1}">
 
                            <div class="box-content {if $birthday } highlight-birthday{/if}">
@@ -118,6 +122,7 @@
                                 <div class="email-address">  {$LISTVIEW_ENTRY->get('email1')}</div>
                                    
                         </div>
+                                
                         <div class='user-social text-center'>
                             <a href="#" class="fa fa-facebook"></a>
                             <a href="#" class="fa fa-twitter"></a>
@@ -127,6 +132,8 @@
                         </div>
                         <div class='clearfix'></div>
                         <div class='birthdaybox text-center'>{$birthday}</div>
+                        <div class="clearfix"></div>
+                        <small >{$joinee}</small>
                     </div>
                              <div class="clearfix"></div>
                             </div>
@@ -136,8 +143,8 @@
                 {/foreach}
      
         </div>
-        
+               
+                <div class="clearfix"></div>
     </div>
-    
-</div>
-
+  </div>{*
+                <div>Pagenation code start</div>*}

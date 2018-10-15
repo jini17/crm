@@ -102,6 +102,7 @@ class Users extends CRMEntity {
                         'Phone'=>Array('vtiger_users'=>'phone_work'),
                         'Birthday'=>Array('vtiger_users'=>'birthday'),
                         'LBL_GET_IN_TOUCH'=>Array('vtiger_users'=>'facebook'),
+                        'LBL_ADDITIONAL_INFO'=>Array('vtiger_users'=>'date_joined'),
         );
         var $list_fields_name = Array(
                         'Last Name'=>'last_name',
@@ -117,6 +118,7 @@ class Users extends CRMEntity {
                     'Phone'=>'phone_work',
                     'Birthday'=>'birthday',
                     'LBL_GET_IN_TOUCH'=>'facebook',  
+                    'LBL_ADDITIONAL_INFO'=>'date_joined',
         );
 
         //Default Fields for Email Templates -- Pavani

@@ -9,7 +9,9 @@
  *************************************************************************************/
 $languageStrings = array(
 	
-	"LBL_TRAINING_INFORMATION" 	 => "Training Information",
-	"LBL_CUSTOM_INFORMATION" 	 => "Description"
+	"LBL_TRAINING_INFORMATION"  => "Training Information",
+	"LBL_CUSTOM_INFORMATION" 	 => "Description",
+                       "SINGLE_Training"                            => "Training",
+                       "SINGLE_Attendance"                     =>"Attendance"
 
 );

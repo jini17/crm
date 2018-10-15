@@ -37,7 +37,7 @@ body {
   font-style: normal;
   letter-spacing: 0.008rem;
   font-kerning: normal;
-  color: #67757c;
+  color: #000 !important;
   font-weight: 300;
   background-color:#F4F6F9;
 }
@@ -333,6 +333,7 @@ body {
 }
 .module-action-bar .module-breadcrumb .module-title {
   max-width: 160px;
+  color: #000;
 }
 .module-action-bar .module-breadcrumb .list-name {
   max-width: 170px;
@@ -1330,7 +1331,7 @@ ul.unstyled {
     margin: 0px;
     border-radius: 1px;
     border: 1px solid #eee;
-    color: #666;
+    color: #000;
     background: #fff;
     margin-top: 5px;
 }
@@ -3188,7 +3189,7 @@ position: relative;
 .settingsgroup li:hover a:hover,
 .settingsgroup div.settingsgroup-accordion a:hover{color: #2f5597;}
 
-.settingsgroup div.settingsgroup-accordion a{color: #67757c;}
+.settingsgroup div.settingsgroup-accordion a{color: #000;}
 
 
 .settingsgroup div.panel-collapse {
@@ -3220,7 +3221,7 @@ position: relative;
 .settingsgroup ul li a {
   padding: 9px 8px 9px 50px;
   display: block;
-  color: #67757c;font-size: 14px;
+  color: #000;font-size: 14px;
 }
 .settingsIndexPage .settingsSummary {
   text-align: center;
@@ -4633,6 +4634,7 @@ form[name="notification_settings"] .select2-choice {
   height: 30px;
   background: transparent;
   font-size: 14px;
+  color: #000;
 }
 .dashBoardWidgetFooter .footerIcons {
   padding-right: 10px;
@@ -4688,7 +4690,7 @@ form[name="notification_settings"] .select2-choice {
 }
 
 .muted {
-  color: #6f6f6f;
+  color: #000;
 }
 .dashBoardContainer .entryIcon {
   font-size: 120%;    margin-right: 5px;
@@ -4968,6 +4970,7 @@ hr {
 .nav-tabs>li.active>a:focus,
 .nav-tabs>li>a {
   border: 0;background:transparent;
+  color: #000;
 }
 .nav>li>a:hover,
 .nav>li>a:focus {
@@ -7309,7 +7312,7 @@ input:focus:-ms-input-placeholder {
   opacity: 1;
 }
 .fieldValue .value a {
-  color: #2c3b49 !important;
+  color: #000 !important;
 }
 
 .editViewContents textarea.textAreaElement {
@@ -7522,7 +7525,7 @@ width: 120px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;displa
 
 /*Dashboard*/
 .widgetChartContainer{min-width: 220px!important;}
-.dashboardTitle{width: 100%!important;line-height: 22px;font-size: 16px;font-weight: bold; margin-left: 5px;}
+.dashboardTitle{width: 100%!important;line-height: 22px;font-size: 16px;font-weight: bold; margin-left: 5px; color:#000;}
 
 @media only screen and (max-width: 374px){
 .dashBoardContainer .dashBoardTabContents ul li{width: 280px;}
@@ -8437,8 +8440,8 @@ Text Colors
 
 ul.dropdown-user {padding: 0px;min-width: 270px;}
 ul.dropdown-user li {list-style: none;padding: 0px;margin: 0px;}
-ul.dropdown-user li a {padding: 9px 15px!important;display: block;color: #67757c!important;}
-ul.dropdown-user li a i {color:#67757c!important; vertical-align: top; line-height: 20px!important;}
+ul.dropdown-user li a {padding: 9px 15px!important;display: block;color: #000!important;}
+ul.dropdown-user li a i {color:#000!important; vertical-align: top; line-height: 20px!important;}
 ul.dropdown-user li.divider {height: 1px;
   margin: 9px 0;overflow: hidden;background-color: rgba(120, 130, 140, 0.13);}
 ul.dropdown-user li a:hover {background: #eee!important;color: #444!important;text-decoration: none;}
@@ -8899,6 +8902,7 @@ visibility: visible;top: 0;left: 60px; /*position where enlarged image should of
 
 .detailview-table .fieldValue, .detailview-table .fieldLabel{
   min-height: 38px;
+  color: #000;
 }
 .addtionalDashboardTab{
     display: inline-block;
@@ -9418,3 +9422,107 @@ width:200px !important;
 
 }
 
+/*EMPLOYEE TREE*/
+/*Now the CSS*/
+* {margin: 0; padding: 0;}
+
+.tree ul {
+    padding-top: 20px; position: relative;
+	
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+.tree li {
+	float: left; text-align: center;
+	list-style-type: none;
+	position: relative;
+	padding: 20px 5px 0 5px;
+	
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+/*We will use ::before and ::after to draw the connectors*/
+
+.tree li::before, .tree li::after{
+	content: '';
+	position: absolute; top: 0; right: 50%;
+	border-top: 1px solid #ccc;
+	width: 50%; height: 20px;
+}
+.tree li::after{
+	right: auto; left: 50%;
+	border-left: 1px solid #ccc;
+}
+
+/*We need to remove left-right connectors from elements without 
+any siblings*/
+.tree li:only-child::after, .tree li:only-child::before {
+	display: none;
+}
+
+/*Remove space from the top of single children*/
+.tree li:only-child{ padding-top: 0;}
+
+/*Remove left connector from first child and 
+right connector from last child*/
+.tree li:first-child::before, .tree li:last-child::after{
+	border: 0 none;
+}
+/*Adding back the vertical connector to the last nodes*/
+.tree li:last-child::before{
+	border-right: 1px solid #ccc;
+	border-radius: 0 5px 0 0;
+	-webkit-border-radius: 0 5px 0 0;
+	-moz-border-radius: 0 5px 0 0;
+}
+.tree li:first-child::after{
+	border-radius: 5px 0 0 0;
+	-webkit-border-radius: 5px 0 0 0;
+	-moz-border-radius: 5px 0 0 0;
+}
+
+/*Time to add downward connectors from parents*/
+.tree ul ul::before{
+	content: '';
+	position: absolute; top: 0; left: 50%;
+	border-left: 1px solid #ccc;
+	width: 0; height: 20px;
+}
+
+.tree li a{
+	border: 1px solid #ccc;
+	padding: 5px 10px;
+	text-decoration: none;
+	color: #666;
+	font-family: arial, verdana, tahoma;
+	font-size: 11px;
+	display: inline-block;
+	
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+/*Time for some hover effects*/
+/*We will apply the hover effect the the lineage of the element also*/
+.tree li a:hover, .tree li a:hover+ul li a {
+	background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
+}
+/*Connector styles on hover*/
+.tree li a:hover+ul li::after, 
+.tree li a:hover+ul li::before, 
+.tree li a:hover+ul::before, 
+.tree li a:hover+ul ul::before{
+	border-color:  #94a0b4;
+}
+
+/*Thats all. I hope you enjoyed it.
+Thanks :)*/

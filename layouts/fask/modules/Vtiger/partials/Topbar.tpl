@@ -350,69 +350,57 @@
                                                                                     </li>
                                                                                     {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                                                                         <li>
-                                                                                           <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Leave&view=List">
-                                                                                            <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
-
-                                                                                        </a>
-                                                                                    </li>
-                                                                                   {* <li admin="">
-                                                                                        <a class="waves-effect waves-dark " href=" index.php?module=LeaveType&amp;view=List&amp;app=ADMIN ">
-                                                                                            <i class="material-icons module-icon">keyboard_tab</i> <span class="hide-menu"> 
-                                                                                            &nbsp;Leave Type</span></a>
-                                                                                    </li>*}
-
+                                                                                           <a class="dropdown-icon-dashboard"   title="Leave" href="index.php?module=Leave&view=List">
+                                                                                                <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
+                                                                                            </a>
+                                                                                         </li>                                                                         
                                                                                         {else}
                                                                                         <li>
-                                                                                            <a class="dropdown-icon-dashboard"  title="Leave" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
-
+                                                                                            <a class="dropdown-icon-dashboard"  
+                                                                                               title="Leave" 
+                                                                                               href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
                                                                                                 <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
-
                                                                                             </a>
                                                                                         </li>
                                                                                         {/if}
                                                                                         <li admin="" moudel="Timesheet">
-                                                                                            <a class="waves-effect waves-dark " href=" index.php?module=Timesheet&amp;view=List&amp;app=ADMIN ">
+                                                                                            <a  class="dropdown-icon-dashboard"   href="index.php?module=Timesheet&amp;view=List&amp;app=ADMIN ">
                                                                                                 <i class="material-icons module-icon">timer</i>
                                                                                                 <span class="hide-menu"> {vtranslate('Timesheet','Home')}</span>
                                                                                             </a>
                                                                                         </li>
-                                                                                        {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
-                                                                                        <li>
-                                                                                            <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
-                                                                                                <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
+                                                                                                {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
+                                                                                                <li>
+                                                                                                    <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
+                                                                                                        <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
 
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        {else}
-                                                                                        <li>
-                                                                                            <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
-                                                                                                <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
-
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        {/if}
-                                                                                      
-                                                                                        <li>
-                                                                                            <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
-                                                                                                <i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                                                                                                
-                                                                                               {* <li>
-                                                                                                    <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_POLICY_DOCUMENT')}" href="index.php?module=Documents&view=List&type=H">
-                                                                                                        <i class="material-icons module-icon">file_download</i>&nbsp;{vtranslate('LBL_POLICY_DOCUMENT')}
-
-
-                                                                                                    </a>*}
-                                                                                                </li>
-                                                                                                <li admin="" moudel="Training">
-                                                                                                    <a class="dropdown-icon-dashboard" href="index.php?module=Training&amp;view=List&amp;app=ADMIN ">
-                                                                                                        <i class="material-icons module-icon">book</i><span class="hide-menu"> Training</span>
                                                                                                     </a>
                                                                                                 </li>
-                                                                                            <li admin="" moudel="Attendance">
-                                                                                                <a class="dropdown-icon-dashboard" href="index.php?module=Attendance&amp;view=List&amp;app=ADMIN ">
-                                                                                                    <i class="material-icons module-icon">assignment</i><span class="hide-menu"> Attendance</span>
-                                                                                                </a>
-                                                                                            </li>
+                                                                                                {else}
+                                                                                                <li>
+                                                                                                    <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
+                                                                                                        <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
+
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                                {/if}
+
+                                                                                                <li>
+                                                                                                        <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
+                                                                                                            <i class="material-icons module-icon">timeline</i>&nbsp;Performance
+                                                                                                </li>
+                                                                                                <li admin="" moudel="Training">
+
+                                                                                                    <a class="dropdown-icon-dashboard" href=" index.php?module=Training&amp;view=List&amp;app=ADMIN ">
+                                                                                                        <i class="material-icons module-icon">book</i> Training
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                                <li admin="" moudel="Attendance">
+                                                                                                    <a  class="dropdown-icon-dashboard"   href=" index.php?module=Attendance&amp;view=List&amp;app=ADMIN ">
+                                                                                                        <i class="material-icons module-icon">assignment</i> Attendance
+                                                                                                    </a>
+                                                                                                </li>
+
                                                                                             </ul>
                                                                                         </div>
                                                                                     </div>
@@ -648,13 +636,13 @@
                                                             {assign var='singularLabel' value=$moduleModel->getSingularLabelKey()}
                                                             {assign var=hideDiv value={!$moduleModel->isPermitted('CreateView') && $moduleModel->isPermitted('EditView')}}
                                                             {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
-                                                            'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
+                                                            'sales'=>'attach_money','messageboard'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
                                                             'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
                                                             'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
                                                             'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
                                                             'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
                                                             'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-                                                            'mycthemeswitcher'=>'folder', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people','claim'=>'attach_money' ,'workinghours'=>'access_time']}
+                                                            'mycthemeswitcher'=>'folder', 'timesheet'=>'timer','training'=>'book','attendance'=>'assignment','chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people','claim'=>'attach_money' ,'workinghours'=>'access_time']}
                                                             {if $quickCreateModule == '1'}
                                                             {if $count % 3 == 0}
                                                             <div class="row">
@@ -662,24 +650,29 @@
                                                                 {* Adding two links,Event and Task if module is Calendar *}
                                                                 {if $singularLabel == 'SINGLE_Calendar'}
                                                                 {assign var='singularLabel' value='LBL_TASK'}
-                                                                <div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
+                                                                <div {$moduleName} class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
                                                                     <a id="menubar_quickCreate_Events" class="quickCreateModule" data-name="Events"
-                                                                    data-url="index.php?module=Events&view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">event</i><span class="quick-create-module">{vtranslate('LBL_EVENT',$moduleName)}</span></a>
+                                                                        data-url="index.php?module=Events&view=QuickCreateAjax" href="javascript:void(0)">
+                                                                        <i class="material-icons pull-left">event</i>
+                                                                        <span class="quick-create-module">{vtranslate('LBL_EVENT',$moduleName)}</span>
+                                                                    </a>
                                                                 </div>
                                                                 {if $count % 3 == 2}
                                                             </div>
                                                             <br>
                                                             <div class="row">
                                                                 {/if}
-                                                                <div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
-                                                                    <a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModule" data-name="{$moduleModel->getName()}"
-                                                                        data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)"><i class="material-icons pull-left">card_travel</i><span class="quick-create-module">{vtranslate($singularLabel,$moduleName)}</span></a>
+                                                                <div {$moduleName} class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
+                                                                    <a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModule" 
+                                                                       data-name="{$moduleModel->getName()}"
+                                                                        data-url="{$moduleModel->getQuickCreateUrl()}" 
+                                                                        href="javascript:void(0)"><i class="material-icons pull-left">card_travel</i><span class="quick-create-module">{vtranslate($singularLabel,$moduleName)}</span></a>
                                                                     </div>
                                                                     {if !$hideDiv}
                                                                     {assign var='count' value=$count+1}
                                                                     {/if}
                                                                     {else if $singularLabel == 'SINGLE_Documents'}
-                                                                    <div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if} dropdown">
+                                                                    <div {$moduleName} class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if} dropdown">
                                                                         <a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModuleSubmenu dropdown-toggle" data-name="{$moduleModel->getName()}" data-toggle="dropdown" 
                                                                             data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)">
                                                                             <i class="material-icons pull-left">{$iconsarray[{strtolower($moduleName)}]}</i>
