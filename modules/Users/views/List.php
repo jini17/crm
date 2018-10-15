@@ -51,9 +51,9 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 //defaultTab : EmployeeDirectory
                 $tabType = $request->get('tabtype');
 
-                if($tabType == 'MD'){
-                        $request->set('search_params', array("department","c", $currentUserModel->get('department')));	
-                }
+//                if($tabType == 'MD'){
+//                        $request->set('search_params', array("department","c", $currentUserModel->get('department')));	
+//                }
 //
                 $defaultview = $request->get('empview');	
 
@@ -113,12 +113,12 @@ class Users_List_View extends Settings_Vtiger_List_View {
                     $tabType = $request->get('tabtype');
                 }  
                     $searchType = $request->get('searchType');
-                    if($tabType == 'MD'){
-                        $request->set('search_key','department');
-                        $request->set('search_value',$currentUserModel->get('department'));
-                         $request->set('operator','e');
-                    }
-                    
+//                    if($tabType == 'MD'){
+//                        $request->set('search_key','department');
+//                        $request->set('search_value',$currentUserModel->get('department'));
+//                         $request->set('operator','e');
+//                    }
+//                    
                     if($searchType == 'alphabet'){
                         $request->set('search_key','first_name');
                         $request->set('search_value',$currentUserModel->get('first_name'));
@@ -214,19 +214,15 @@ class Users_List_View extends Settings_Vtiger_List_View {
                     $this->listViewEntries = $listViewModel->getListViewEntries($pagingModel); 
             }
             $noOfEntries = count($this->listViewEntries);
-
             $viewer->assign('MODULE', $moduleName);
 
             if(!$this->listViewLinks){
                     $this->listViewLinks = $listViewModel->getListViewLinks($linkParams);
             }
             $viewer->assign('LISTVIEW_LINKS', $this->listViewLinks);
-
             $viewer->assign('LISTVIEW_MASSACTIONS', $linkModels['LISTVIEWMASSACTION']);
-
             $viewer->assign('PAGING_MODEL', $pagingModel);
             $viewer->assign('PAGE_NUMBER',$pageNumber);
-
             $viewer->assign('ORDER_BY',$orderBy);
             $viewer->assign('SORT_ORDER',$sortOrder);
             $viewer->assign('NEXT_SORT_ORDER',$nextSortOrder);
@@ -239,6 +235,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
             $viewer->assign('LISTVIEW_HEADERS', $this->listViewHeaders);
             $viewer->assign('LISTVIEW_ENTRIES', $this->listViewEntries);
             $viewer->assign('TAB_TYPE', $tabType);
+            $viewer->assign('DEPT',$currentUserModel->get('department'));
             if (PerformancePrefs::getBoolean('LISTVIEW_COMPUTE_PAGE_COUNT', true)) {
                     if(!$this->listViewCount){
                             $this->listViewCount = $listViewModel->getListViewCount();

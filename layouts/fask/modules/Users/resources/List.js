@@ -394,7 +394,14 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                  var listParams = listInstance.getListViewParams();
                  var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');  
                  var tabType = jQuery('#tabtype').val();  
-                listParams['search_params']  = [[["grade_id","n","0"]],[["last_name","c",keyword],["email1","c",keyword],["title","c",keyword],["department","c",keyword]]]
+                 var dept = jQuery('#curdepartment').val();  
+                 if(tabType == "MD"){
+                     listParams['search_params']  = [[["department","e",dept]],[["last_name","c",keyword],["email1","c",keyword],["title","c",keyword],["department","c",keyword]]]
+                 }
+                 else{
+                     listParams['search_params']  = [[["grade_id","n","0"]],[["last_name","c",keyword],["email1","c",keyword],["title","c",keyword],["department","c",keyword]]]
+                 }
+                
 
                 listParams['status']            ="Active";
                 listParams['empview']      = viewtype;
