@@ -47,9 +47,9 @@ class EmployeeContract_RelatedList_View extends Vtiger_RelatedList_View {
         
        	$viewer = $this->getViewer($request);
 
-	//	$claims = Users_ClaimRecords_Model::getMyWidgetsClaim($parentId, date('Y'));
-	//print_r($claims);die;
-//		$viewer->assign('CLAIMDETAILS', $claims);
+		$claims = Users_ClaimRecords_Model::getClaimForEmployeeContract($parentId, date('Y'));
+	
+		$viewer->assign('CLAIMDETAILS', $claims);
 		$viewer->assign('TAB_LABEL', $request->get('tab_label'));
         return $viewer->view('RelatedList.tpl', $moduleName, 'true');
 	}

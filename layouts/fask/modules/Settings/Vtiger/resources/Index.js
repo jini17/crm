@@ -161,7 +161,7 @@ Vtiger_Index_Js("Settings_Vtiger_Index_Js",{
 	},
 
 	registerAccordionClickEvent : function() {
-		function toggleChevron(e) { alert("working");
+		function toggleChevron(e) { 
 			$(e.target)
 				.prev('.app-nav')
 				.find("i.indicator")
