@@ -1136,6 +1136,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
         }	//end here 
 
         public function getBirthdayWish($date,$id,$css="grid") {
+  
             $birthdateArray = date_parse_from_format("d-m-Y", $date);
             $todayArray = date_parse_from_format("d-m-Y", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
             $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
@@ -1194,18 +1195,21 @@ class Users_Record_Model extends Vtiger_Record_Model {
 
         public function MyReortingManager($db,$id){
  
-            $sql                    =  "select id, first_name,last_name,email1,department,title,birthday,date_joined,facebook,twitter,linkedin from vtiger_users where  id = $id";
+            $sql                    =  "select id, first_name,last_name,email1,department,title,birthday,date_joined,facebook,twitter,linkedin from vtiger_users where  reports_to_id = $id";
             $query              =  $db->pquery($sql,array());
             $num_rows     =  $db->num_rows($query);
             $data= array();
             if($num_rows > 0){
                 for($i=0; $i < $num_rows; $i++){
+                    $bday = $db->query_result($query,$i,'birthday');
+                    $id       = $db->query_result($query,$i,'id');
+                    $birthday                       = $bday;//Users_Record_Model::getBirthdayWish($bday,$id,'grid')
                     $data['id']                      = $db->query_result($query,$i,'id');
                     $data['full_name']       = $db->query_result($query,$i,'first_name')." ".$db->query_result($query,$i,'last_name');
                     $data['email']               = $db->query_result($query,$i,'email1');
                     $data['designation']    = $db->query_result($query,$i,'designation');
                     $data['department']   = $db->query_result($query,$i,'department');
-                    $data['birthday']          = $db->query_result($query,$i,'birthday');
+                    $data['birthday']          = $birthday;
                     $data['facebook']        =  $db->query_result($query,$i,'facebook');;
                     $data['twitter']            = $db->query_result($query,$i,'twitter');
                     $data['linkedin']           =  $db->query_result($query,$i,'linkedin');     
@@ -1219,24 +1223,25 @@ class Users_Record_Model extends Vtiger_Record_Model {
         }
         
         public function MyDepartmentEmployees($db,$department,$id){
-       
+            //$db->setDebug(TRUE);
             $sql                    =  "select  id,first_name,last_name,email1,department,title,birthday,date_joined,facebook,twitter,linkedin from vtiger_users where department='$department' AND id != $id";
             $query              =  $db->pquery($sql,array());
             $num_rows     =  $db->num_rows($query);
-            $data= array();
+            $data                = array();
+            
             if($num_rows > 0){
                 for($i=0; $i < $num_rows; $i++){
                      $data[$i]['id']                      = $db->query_result($query,$i,'id');
-                    $data[$i]['full_name']       = $db->query_result($query,$i,'first_name')." ".$db->query_result($query,$i,'last_name');;
+                    $data[$i]['full_name']       = $db->query_result($query,$i,'first_name')." ".$db->query_result($query,$i,'last_name');
                     $data[$i]['email']               = $db->query_result($query,$i,'email1');;
-                    $data[$i]['designation']    = $db->query_result($query,$i,'title');;
+                    $data[$i]['designation']    = $db->query_result($query,$i,'title');
                     $data[$i]['department']   = $db->query_result($query,$i,'department');;
                      $data[$i]['joindate']          = $db->query_result($query,$i,'date_joined');
                     $data[$i]['birthday']          = $db->query_result($query,$i,'birthday');
                     $data[$i]['facebook']        = $db->query_result($query,$i,'facebook');
                     $data[$i]['twitter']            = $db->query_result($query,$i,'twitter');
                     $data[$i]['linkedin']           = $db->query_result($query,$i,'linkedin');
-                    $data[$i]['image']              = Users_Record_Model::getImageDetailsByID($id);
+                    $data[$i]['image']              = Users_Record_Model::getImageDetailsByID( $data[$i]['id'] );
                 }
             }
             return $data;

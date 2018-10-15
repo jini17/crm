@@ -30,32 +30,28 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 $current_user = Users_Record_Model::getCurrentUserModel();
                  global $site_URL;
                  $reportingManager = Users_Record_Model::MyReortingManager($adb,$current_user->get('id'));
-                $myDepartmnetEmployee = Users_Record_Model::MyDepartmentEmployees($adb,$current_user->get('departmnet'),$current_user->get('id'));
-                $myDetails = array();
-                $myDetails['fullname']       = $current_user->get('first_name')." ".$current_user->get('last_name');
-                $myDetails['designation']  = $current_user->get('title');
-                $myDetails['department']  = $current_user->get('department');
-                 $myDetails['email']            = $current_user->get('email1');
-                 $myDetails['date_joined'] = $current_user->get('date_joined');
-                 $myDetails['birthday']      = $current_user->get('birthday');
-                 $myDetails['facebook']     = $current_user->get('facebook');
-                 $myDetails['twitter']          = $current_user->get('twitter');
-                 $myDetails['linkedin']       = $current_user->get('linkedin');
-                 $myDetails['image']           = $current_user->getImageDetails();
+                $myDepartmnetEmployee = Users_Record_Model::MyDepartmentEmployees($adb,$current_user->get('department'),$current_user->get('id'));
+                
+                $myDetails                               = array();
+                $myDetails['fullname']          = $current_user->get('first_name')." ".$current_user->get('last_name');
+                $myDetails['designation']    = $current_user->get('title');
+                $myDetails['department']   = $current_user->get('department');
+                 $myDetails['email']              = $current_user->get('email1');
+                 $myDetails['date_joined']  = $current_user->get('date_joined');
+                 $myDetails['birthday']         = $current_user->get('birthday');
+                 $myDetails['facebook']        = $current_user->get('facebook');
+                 $myDetails['twitter']           = $current_user->get('twitter');
+                 $myDetails['linkedin']          = $current_user->get('linkedin');
+                 $myDetails['image']            = $current_user->getImageDetails();
                  
-                $alphabet = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-                $URL = $site_URL.'/index.php?module=Users&parent=Settings&view=List&block=1&fieldid=1';
-                $defaultview = $request->get('empview');	
-                $Alphabet = $request->get('Alphabet');
+                $alphabet                   = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+                $URL                            = $site_URL.'/index.php?module=Users&parent=Settings&view=List&block=1&fieldid=1';
+                $defaultview              = $request->get('empview');	
+                $Alphabet                   = $request->get('Alphabet');
                 $currentUserModel = Users_Record_Model::getCurrentUserModel();
                 //defaultTab : EmployeeDirectory
-                $tabType = $request->get('tabtype');
-
-//                if($tabType == 'MD'){
-//                        $request->set('search_params', array("department","c", $currentUserModel->get('department')));	
-//                }
-//
-                $defaultview = $request->get('empview');	
+                $tabType                    = $request->get('tabtype');
+                $defaultview             = $request->get('empview');	
 
                 if(!$request->get('empview')){
                      $defaultview = 'grid';	
@@ -75,7 +71,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 //$viewer->view('GridViewContents.tpl', $request->getModule(false));
                 if( $tabType  ==  'WAI'){
                         $viewer->assign("REPORTING_MANAGER", $reportingManager);
-                         $viewer->assign("MY_DETAILS", $myDepartmnetEmployee);
+                         $viewer->assign("MY_DETAILS", $myDetails);
                         $viewer->assign("DEPARTMENT_EMPLOYEES", $myDepartmnetEmployee);
                         $viewer->view('EmployeeTree.tpl',  $request->getModule(false));
                 } else {
@@ -113,11 +109,6 @@ class Users_List_View extends Settings_Vtiger_List_View {
                     $tabType = $request->get('tabtype');
                 }  
                     $searchType = $request->get('searchType');
-//                    if($tabType == 'MD'){
-//                        $request->set('search_key','department');
-//                        $request->set('search_value',$currentUserModel->get('department'));
-//                         $request->set('operator','e');
-//                    }
 //                    
                     if($searchType == 'alphabet'){
                         $request->set('search_key','first_name');
@@ -125,8 +116,6 @@ class Users_List_View extends Settings_Vtiger_List_View {
                          $request->set('operator','s');
                          
                     }
-
-         
            //  $request->set('search_params', array("department","e", $currentUserModel->get('department')));	
             $searchParams = $request->get('search_params');
     
@@ -148,18 +137,13 @@ class Users_List_View extends Settings_Vtiger_List_View {
             if(empty($status))
                     $status = 'Active';
 
-
-
             $listViewModel = Vtiger_ListView_Model::getInstance($moduleName, $cvId);
-
             $linkParams = array('MODULE'=>$moduleName, 'ACTION'=>$request->get('view'), 'CVID'=>$cvId);
             $linkModels = $listViewModel->getListViewMassActions($linkParams);
-                            $listViewModel->set('status', $status);
-
+            $listViewModel->set('status', $status);
             $pagingModel = new Vtiger_Paging_Model();
             $pagingModel->set('page', $pageNumber);
         
-
             if(!empty($orderBy)) {
                     $listViewModel->set('orderby', $orderBy);
                     $listViewModel->set('sortorder',$sortOrder);
