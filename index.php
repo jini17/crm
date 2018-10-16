@@ -8,7 +8,7 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-
+/*
 error_reporting(1);
 		ini_set('display_erros',1);
 		  register_shutdown_function('handleErrors');
@@ -23,7 +23,7 @@ error_reporting(1);
 
 		       }
 		    }
-
+*/
 //Overrides GetRelatedList : used to get related query
 //TODO : Eliminate below hacking solution
 ini_set('display_errors', '0');     # don't show any errors...
