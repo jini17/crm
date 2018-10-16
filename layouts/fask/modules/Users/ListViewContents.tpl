@@ -274,7 +274,13 @@
                         </tbody>
                 </table>
         </form>
+                        
     </div>
+        <div class='clearfix'>   </div>
+        <div class="col-lg-12">
+             {$PAGINATION}
+             </div>
+           <div class='clearfix'>   </div>                       
     <div id="scroller_wrapper" class="bottom-fixed-scroll">
         <div id="scroller" class="scroller-div"></div>
     </div>

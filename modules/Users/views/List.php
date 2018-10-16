@@ -239,7 +239,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
                             $pageCount = 1;
                     }
                   
-                   
+                   // Pagination
                     $pagination = $this->createLinks($totalCount, $pageLimit, $pageNumber, $pageCount, 'pagination');
                     $viewer->assign('PAGE_COUNT', $pageCount);
                     $viewer->assign('LISTVIEW_COUNT', $totalCount);
@@ -393,7 +393,15 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 $headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
                 return $headerScriptInstances;
         }
-        
+        /**
+         * Generate Pagination Link
+         * @param type $total
+         * @param type $limit
+         * @param type $page
+         * @param type $links
+         * @param type $list_class
+         * @return string
+         */
         public function createLinks( $total,$limit,$page,$links, $list_class ) {
             if ( $limit == 'all' ) {
                 return '';

@@ -145,6 +145,7 @@
                
                 <div class="clearfix"></div>
     </div>
+                <!-- Employee Pagination -->
                 <div class="col-md-12">
                     {$PAGINATION}
                 </div>
