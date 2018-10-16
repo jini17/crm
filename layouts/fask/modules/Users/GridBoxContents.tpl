@@ -8,7 +8,7 @@
       padding:20px 10px;
       border: 1px solid #ddd;
       background: #fff;
-      min-height: 360px;
+      min-height: 371px;
       margin-top: 20px;
       margin-bottom: 20px;
     }
@@ -145,5 +145,7 @@
                
                 <div class="clearfix"></div>
     </div>
-  </div>{*
-                <div>Pagenation code start</div>*}
+                <div class="col-md-12">
+                    {$PAGINATION}
+                </div>
+  </div>

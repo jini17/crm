@@ -387,7 +387,14 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
             });
         },
         registerKeySearch:function(){
-   
+        $('#txtSearchProdAssign').keypress(function (e) {
+                var key = e.which;
+                if(key == 13)  // the enter key code
+                 {
+                   jQuery('.keyword-search').click();
+                   return false;  
+                 }
+               }); 
               jQuery('.main-container').on('click','.keyword-search',function(){
                  var keyword = $("#keywordsearch").val();
                  var listInstance = new Settings_Users_List_Js;
@@ -395,6 +402,10 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                  var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');  
                  var tabType = jQuery('#tabtype').val();  
                  var dept = jQuery('#curdepartment').val();  
+                 if(keyword.length == 0){
+                       app.helper.showErrorNotification({"message":"Type your keyword please!"});
+                 }
+                 else{
                  if(tabType == "MD"){
                      listParams['search_params']  = [[["department","e",dept]],[["last_name","c",keyword],["email1","c",keyword],["title","c",keyword],["department","c",keyword]]]
                  }
@@ -408,7 +419,27 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                 listParams['tabtype']        = tabType;
                 listParams['searchType']  = "keyword";
                 listInstance.loadListViewRecords(listParams);
+                 }
               })
+        },
+        registerPagination:function(){
+            jQuery('.main-container').on('click','.pagination li',function(){
+                var page = $(this).find('a').data('page');
+                var listInstance = new Settings_Users_List_Js;
+                 var listParams = listInstance.getListViewParams();
+                 var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');  
+                 var tabType = jQuery('#tabtype').val();  
+              var dept = jQuery('#curdepartment').val();  
+              if(tabType == 'MD'){
+                      listParams['search_params'] = [[["department","e",dept]]];
+              }
+                listParams['status']            ="Active";
+                listParams['empview']      = viewtype;
+                listParams['tabtype']        = tabType;
+                listParams['searchType']  = "keyword";
+                listParams['page']  = page;
+                listInstance.loadListViewRecords(listParams);
+            });
         },
         registerViewFilter:function(){
             jQuery('.main-container').on('change','.grid-filter',function(){
@@ -626,6 +657,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                 this.registerListViewSearch();
                 this.registerAlphabetSearch();
                 this.registerUserViewSwitcher();
+                this.registerPagination();
                 this.registerKeySearch();
                 this.registerViewFilter();
                 this.registerPostListLoadListener();
