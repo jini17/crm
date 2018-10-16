@@ -55,7 +55,7 @@ class Vtiger_Birthdays_Dashboard extends Vtiger_IndexAjax_View {
 		
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('MODULE_NAME', $moduleName);
-
+                                          $viewer->assign('GROUP',$group);
 		$viewer->assign('MODELS', $birthdays); //echo "<pre>"; print_r($birthdays);die;
 	//	echo "asd";die;
 		$content = $request->get('content');

@@ -31,7 +31,10 @@ class Users_List_View extends Settings_Vtiger_List_View {
                  global $site_URL;
                  $reportingManager = Users_Record_Model::MyReortingManager($adb,$current_user->get('id'));
                 $myDepartmnetEmployee = Users_Record_Model::MyDepartmentEmployees($adb,$current_user->get('department'),$current_user->get('id'));
-                
+                $datetime1 = date_create('2009-10-11');
+$datetime2 = date_create('2009-10-13');
+$interval = date_diff($datetime1, $datetime2);
+echo $interval->format('%R%a days');
                 $myDetails                               = array();
                 $myDetails['fullname']          = $current_user->get('first_name')." ".$current_user->get('last_name');
                 $myDetails['designation']    = $current_user->get('title');

@@ -1177,8 +1177,8 @@ class Users_Record_Model extends Vtiger_Record_Model {
             $diff = date_diff($today, $birthdate);
              $difference = $diff->format("%a");
              
-            if($prefix == 'list'){
-                $show_prefix = "New Joinee";
+            if($prefix != 'list'){
+                $show_prefix = "Joined";
             }
             else{
                 $show_prefix = "";
