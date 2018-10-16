@@ -8,7 +8,7 @@
  */
 
 
-class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View {
+class Settings_Vtiger_BenefitAllocationListView_View extends Settings_Vtiger_Index_View {
 
     public function process(Vtiger_Request $request) {
         $qualifiedName = $request->getModule(false);
@@ -26,7 +26,7 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
         // Modified By Mabruk
         for($i=0;$i<$count;$i++){ 
             $allocationId = $values[$i]['checkbox'] = $adb->query_result($resultalloc, $i,'allocation_id');
-            $values[$i]['allocationtitle'] = $adb->query_result($resultalloc, $i,'allocation_title');           
+            //$values[$i]['allocationtitle'] = $adb->query_result($resultalloc, $i,'allocation_title');           
 
 
             /**** Getting the name of the leave type ******************/
@@ -34,12 +34,13 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
             $result = $adb->pquery($query,array($leavetype_id));
             $values[$i]['leavetype'] = $adb->query_result($result,0,'title');*/
 
-            
-            $leaveTypeResult = $adb->pquery("SELECT GROUP_CONCAT(title) AS titles FROM vtiger_leavetype INNER JOIN allocation_leaverel ON allocation_leaverel.leavetype_id = vtiger_leavetype.leavetypeid WHERE allocation_leaverel.allocation_id = ?", array($allocationId));
+            $values[$i]['allocationtitle'] = $adb->query_result($resultalloc, $i,'allocation_title');
+            /**** Getting the name of the claim type ******************/
+            $benefitTypeResult = $adb->pquery("SELECT GROUP_CONCAT(title) AS benefits FROM vtiger_benefittype INNER JOIN allocation_benefitrel ON allocation_benefitrel.benefit_type = vtiger_benefittype.benefittypeid WHERE allocation_benefitrel.allocation_id = ?", array($allocationId));
 
-            $values[$i]['leavetype'] = $adb->query_result($leaveTypeResult,0,'titles');
-            
+            $values[$i]['benefittype'] = $adb->query_result($benefitTypeResult,0,'benefits');
         
+
             /**** Getting the name of the grade ******************/
             $gradeResult = $adb->pquery("SELECT GROUP_CONCAT(grade) AS grade FROM vtiger_grade INNER JOIN allocation_graderel ON allocation_graderel.grade_id = vtiger_grade.gradeid WHERE allocation_graderel.allocation_id = ?", array($allocationId));
 
@@ -63,7 +64,7 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
 
         $viewer->assign('VALUES', $values);
 
-        $viewer->view('AllocationDetailView.tpl', $qualifiedName);
+        $viewer->view('BenefitAllocationDetailView.tpl', $qualifiedName);
     }
 
     function getPageTitle(Vtiger_Request $request) {

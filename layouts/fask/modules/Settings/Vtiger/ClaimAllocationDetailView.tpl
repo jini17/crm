@@ -13,22 +13,22 @@
         <div class=" col-lg-12 col-md-12 col-sm-12">
             <div id="Head">
                 <div class="widget_header row-fluid">
-                    <div class="span8"><h3>Allocation</h3></div>
+                    <div class="span8"><h3>Claim Allocation</h3></div>
                 </div>
                 <hr>
                 <br>
             </div>
 
             <div class="contents tabbable clearfix">
-                <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">Delete</button>
+                <button class="btn btn-danger span10 marginLeftZero"  id="deleteClaim">Delete</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="btn span10 marginLeftZero newButton" id="addItem">Add</button><br><br>
-                <button class="btn span10 marginLeftZero newButton" id="editItem">Edit</button><br><br>
+                <button class="btn span10 marginLeftZero newButton" id="addClaim">Add</button><br><br>
+                <button class="btn span10 marginLeftZero newButton" id="editClaim">Edit</button><br><br>
                 <div class="contents">
                     <table class="table table-bordered table-condensed themeTableColor">
                         <thead>
                         <th class="{$WIDTHTYPE}">
-                            <span class="alignMiddle">Leave Type List</span>
+                            <span class="alignMiddle">Claim Type List</span>
                         </th>
                         </thead>
                         <tbody>
@@ -40,7 +40,7 @@
                                 Allocation Title
                             </td>
                             <td>
-                                Leave Type
+                                Claim Type
                             </td>
                             <td>
                                 Grade
