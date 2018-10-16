@@ -124,11 +124,10 @@
                         </div>
                                 
                         <div class='user-social text-center'>
-                            <a href=" {$LISTVIEW_ENTRY->get('facebook')}" class="fa fa-facebook"></a>
-                            <a href=" {$LISTVIEW_ENTRY->get('twitter')}" class="fa fa-twitter"></a>
-                            <a href=" {$LISTVIEW_ENTRY->get('linkedin')}" class="fa fa-linkedin"></a>
+                            <a href="#" class="fa fa-facebook"></a>
+                            <a href="{$LISTVIEW_ENTRY->get('twitter')}" class="fa fa-twitter"></a>
+                            <a href="{$LISTVIEW_ENTRY->get('linkedin')}" class="fa fa-linkedin"></a>
                             <a href="#" onclick="javascript:Settings_Users_List_Js.birthdayEmail({$LISTVIEW_ENTRY->getId()})" class="fa fa-envelope"></a>
-                            
                         </div>
                         <div class='clearfix'></div>
                         <div class='birthdaybox text-center'>{$birthday}</div>
