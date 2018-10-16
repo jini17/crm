@@ -477,11 +477,11 @@
                                                                     </a>
                                                                 </li>-->
                                                                 {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
-                                                                <li>
+                                                                {* Khaled - Removed as Per Requirement<li>
                                                                     <a class="dropdown-icon-dashboard" title="Recycle Bin" href="index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS">
                                                                         <i class="fa fa-trash-o"></i>&nbsp;Recycle Bin
                                                                     </a>
-                                                                </li>
+                                                                </li>*}
                                                                 {/if}
                                                                 <li>
 
@@ -492,7 +492,7 @@
                                                                 </a>
 
                                                             </li>
-                                                            <li admin="">
+                                                       {*     Khaled - Removed as Per Requirement<li admin="">
                                                                 <a class="waves-effect waves-dark dropdown-icon-dashboard " href=" index.php?module=WorkingHours&amp;view=List&amp;app=ADMIN ">
                                                                     <i class="material-icons module-icon">access_time</i> <span class="hide-menu"> Working Hours</span>
                                                                 </a>
@@ -507,7 +507,7 @@
                                                                 <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=MessageBoard&amp;view=List&amp;app=ADMIN ">
                                                                     <i class="material-icons module-icon">assignment</i> <span class="hide-menu"> Message Board</span>
                                                                 </a>
-                                                            </li>
+                                                            </li>*}
                                                         </ul>
                                                     </div>
                                                 </div>

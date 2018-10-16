@@ -38,11 +38,16 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 $myDetails['designation']   = $current_user->get('title');
                 $myDetails['department']  = $current_user->get('department');
                 $myDetails['email']              = $current_user->get('email1');
-                $datetime1                            = date_create(date('Y-m-d'));
-                $datetime2                            = date_create( $current_user->get('date_joined'));
-                $interval                                  = date_diff($datetime1, $datetime2);                 
-                 $myDetails['date_joined'] = $interval->format(' %a');         
-                 $myDetails['birthday']        = $current_user->get('birthday');
+                    $date1 = new DateTime($current_user->get('date_joined'));
+                   $date2 = new DateTime(date('d-m-Y'));
+                    $diff = $date2->diff($date1)->format("%a");
+                    
+                    $barthday_start = new DateTime(date('md'));
+                  $birthday_end    = new DateTime(date('md'));
+                  $diff_birthday     = $birthday_end->diff($barthday_start)->format("%a");
+                                 
+                 $myDetails['joindate'] = $diff ;         
+                 $myDetails['birthday']        =  $diff_birthday ;
                  $myDetails['facebook']       = $current_user->get('facebook');
                  $myDetails['twitter']          = $current_user->get('twitter');
                  $myDetails['linkedin']         = $current_user->get('linkedin');

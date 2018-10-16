@@ -1157,7 +1157,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
                 $wish .= "<i class='fa fa-gift'></i> &nbsp;";
                 $wish .= date('d-F',strtotime($date));
                 if($css == 'grid'){
-                 $wish .= " <br />Say Happy Birthday";
+                 $wish .= " <br /> ". vtranslate("LBL_SAY_HAPPYBIRTH_DAY",'Users');
                 }
                 $wish .= '</a>';
                 $wish .= '</div>';
@@ -1178,7 +1178,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
              $difference = $diff->format("%a");
              
             if($prefix != 'list'){
-                $show_prefix = "Joined";
+                $show_prefix = vtranslate("LBL_JOINED",'Users');
             }
             else{
                 $show_prefix = "";
@@ -1204,22 +1204,39 @@ class Users_Record_Model extends Vtiger_Record_Model {
                     $birthday                        = $db->query_result($query,$i,'birthday');
                     $join_date                      = $db->query_result($query,$i,'date_joined');
                     $id                                    = $db->query_result($query,$i,'id');
+                    
+                    $date1 = new DateTime($join_date);
+                   $date2 = new DateTime(date('d-m-Y'));
+                   $diff = $date2->diff($date1)->format("%a");
                    
+                  $barthday_start = new DateTime(date('md'));
+                  $birthday_end    = new DateTime(date('md'));
+                  $diff_birthday     = $date2->diff($date1)->format("%a");
+                   
+                 $wish = '<div class="message" id="birthdaysms"  >';
+                $wish .= '<a class="birthday" style="'.$style.'" onclick="javascript:Settings_Users_List_Js.birthdayEmail('.$id.')">';
+                $wish .= "<i class='fa fa-gift'></i> &nbsp;";
+                $wish .= date('d-F',strtotime($birthday));             
+                $wish .= " <br /> ". vtranslate("LBL_SAY_HAPPYBIRTH_DAY",'Users');            
+                $wish .= '</a>';
+                $wish .= '</div>';
+                if($diff_birthday >= -7 && $diff_birthday <= 7){
+                    $birthday_wish = $wish;
+                }
+                else{
+                    $birthday_wish = 0;
+                }
                     $data['id']                      = $db->query_result($query,$i,'id');
                     $data['full_name']       = $db->query_result($query,$i,'first_name')." ".$db->query_result($query,$i,'last_name');
                     $data['email']               = $db->query_result($query,$i,'email1');
                     $data['designation']    = $db->query_result($query,$i,'designation');
                     $data['department']   = $db->query_result($query,$i,'department');
-                    $data['birthday']          = $birthday;
-                    
-                    $datetime1                  = date_create( $join_date." 00:00:00" );
-                    $datetime2                  = date_create(date(strtotime(date('Y-m-d H:i:s'))));
-                    $interval                       = date_diff($datetime1, $datetime2);
-                    $data['joindate']          = $join_date;
-                     $data['facebook']        =  $db->query_result($query,$i,'facebook');;
+                    $data['birthday']          = $birthday_wish;
+                    $data['joindate']          = intval($diff);  
+                    $data['facebook']        =  $db->query_result($query,$i,'facebook');;
                     $data['twitter']            = $db->query_result($query,$i,'twitter');
                     $data['linkedin']           =  $db->query_result($query,$i,'linkedin');     
-                    $data['image']        = Users_Record_Model::getImageDetailsByID($id);
+                    $data['image']              = Users_Record_Model::getImageDetailsByID($id);
                 }
             }
             else{
@@ -1237,13 +1254,39 @@ class Users_Record_Model extends Vtiger_Record_Model {
             
             if($num_rows > 0){
                 for($i=0; $i < $num_rows; $i++){
+                    $birthday                        = $db->query_result($query,$i,'birthday');
+                    $join_date                      = $db->query_result($query,$i,'date_joined');
+                    $id                                    = $db->query_result($query,$i,'id');
+                                                
+                   $date1 = new DateTime($join_date);
+                   $date2 = new DateTime(date('d-m-Y'));
+                    $diff = $date2->diff($date1)->format("%a");
+                    
+                    $barthday_start = new DateTime(date('md'));
+                  $birthday_end    = new DateTime(date('md'));
+                  $diff_birthday     = $date2->diff($date1)->format("%a");
+                   
+                 $wish = '<div class="message" id="birthdaysms"  >';
+                $wish .= '<a class="birthday" style="'.$style.'" onclick="javascript:Settings_Users_List_Js.birthdayEmail('.$id.')">';
+                $wish .= "<i class='fa fa-gift'></i> &nbsp;";
+                $wish .= date('d-F',strtotime($birthday));             
+                $wish .= " <br /> ". vtranslate("LBL_SAY_HAPPYBIRTH_DAY",'Users');            
+                $wish .= '</a>';
+                $wish .= '</div>';
+                if($diff_birthday >= -7 && $diff_birthday <= 7){
+                    $birthday_wish = $wish;
+                }
+                else{
+                    $birthday_wish = 0;
+                }
+                    
                      $data[$i]['id']                      = $db->query_result($query,$i,'id');
                     $data[$i]['full_name']       = $db->query_result($query,$i,'first_name')." ".$db->query_result($query,$i,'last_name');
                     $data[$i]['email']               = $db->query_result($query,$i,'email1');;
                     $data[$i]['designation']    = $db->query_result($query,$i,'title');
-                    $data[$i]['department']   = $db->query_result($query,$i,'department');;
-                     $data[$i]['joindate']          = $db->query_result($query,$i,'date_joined');
-                    $data[$i]['birthday']          = $db->query_result($query,$i,'birthday');
+                    $data[$i]['department']   = $db->query_result($query,$i,'department');
+                     $data[$i]['joindate']          = intval($diff);
+                    $data[$i]['birthday']          = $birthday_wish;
                     $data[$i]['facebook']        = $db->query_result($query,$i,'facebook');
                     $data[$i]['twitter']            = $db->query_result($query,$i,'twitter');
                     $data[$i]['linkedin']           = $db->query_result($query,$i,'linkedin');
@@ -1258,7 +1301,6 @@ class Users_Record_Model extends Vtiger_Record_Model {
 
                 $imageDetails = array();
                 $recordId = $id;
-
                 if ($recordId) {
                         // Not a good approach to get all the fields if not required(May lead to Performance issue)
                         $query = "SELECT vtiger_attachments.attachmentsid, vtiger_attachments.path, vtiger_attachments.name FROM vtiger_attachments
@@ -1266,7 +1308,6 @@ class Users_Record_Model extends Vtiger_Record_Model {
                                   WHERE vtiger_salesmanattachmentsrel.smid=?";
 
                         $result = $db->pquery($query, array($recordId));
-
                         $imageId = $db->query_result($result, 0, 'attachmentsid');
                         $imagePath = $db->query_result($result, 0, 'path');
                         $imageName = $db->query_result($result, 0, 'name');

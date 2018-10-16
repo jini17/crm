@@ -36,10 +36,12 @@
                                 <div class="clearfix"></div>
                                  <small> {$REPORTING_MANAGER['email'] } </small>
                                 <div class="orgbirthdaybox">
-                                    {$REPORTING_MANAGER['birthday'] }
+                                    {if $REPORTING_MANAGER['birthday'] neq 0} {$REPORTING_MANAGER['birthday']} {/if}
                                 </div>
                                 <div class="org-datejoined">
-                                        {$REPORTING_MANAGER['joindate']}
+                                    {if $REPORTING_MANAGER['joindate'] gt 0 AND $REPORTING_MANAGER['joindate'] lte 30} 
+                                        <strong> {vtranslate('LBL_JOINED','Users')}  {$REPORTING_MANAGER['joindate']} {vtranslate('LBL_DAYS_AGO','Users')}</strong> 
+                                    {/if}
                                 </div>
                              </div>
                              <div class="clearfix"></div>
@@ -68,10 +70,12 @@
                                                     <div class="clearfix"></div>
                                                      <small> {$MY_DETAILS['email'] } </small>
                                                     <div class="orgbirthdaybox">
-                                                        {$MY_DETAILS['birthday'] }
+                                                         {if $MY_DETAILS['birthday'] neq 0} {$MY_DETAILS['birthday']} {/if}
                                                     </div>
                                                     <div class="org-datejoined">
-                                                                {$emp['joindate']}
+                                                                 {if $MY_DETAILS['joindate'] gt 0 AND $MY_DETAILS['joindate'] lte 30} 
+                                                                    <strong>  {$MY_DETAILS['joindate']} </strong> 
+                                                                {/if}
                                                     </div>
                                                  </div>
                                                 <div class="clearfix"></div>
@@ -102,10 +106,12 @@
                                                             <div class="clearfix"></div>
                                                              <small> {$emp['email'] } </small>
                                                             <div class="orgbirthdaybox">
-                                                                {$emp['birthday'] }
+                                                                {if $emp['birthday'] neq 0} {$emp['birthday']} {/if}
                                                             </div>
                                                             <div class="org-datejoined">
-                                                                {$emp['joindate']}
+                                                                {if $emp['joindate'] gt 0 AND $emp['joindate'] lte 30} 
+                                                                    <strong> {vtranslate('LBL_JOINED','Users')}  {$emp['joindate']} {vtranslate('LBL_DAYS_AGO','Users')}</strong> 
+                                                                {/if}
                                                             </div>
                                                          </div>
                                                             <div class="clearfix"></div>
