@@ -31,20 +31,21 @@ class Users_List_View extends Settings_Vtiger_List_View {
                  global $site_URL;
                  $reportingManager = Users_Record_Model::MyReortingManager($adb,$current_user->get('id'));
                 $myDepartmnetEmployee = Users_Record_Model::MyDepartmentEmployees($adb,$current_user->get('department'),$current_user->get('id'));
-                $datetime1 = date_create('2009-10-11');
-$datetime2 = date_create('2009-10-13');
-$interval = date_diff($datetime1, $datetime2);
-echo $interval->format('%R%a days');
+                
+
                 $myDetails                               = array();
-                $myDetails['fullname']          = $current_user->get('first_name')." ".$current_user->get('last_name');
-                $myDetails['designation']    = $current_user->get('title');
-                $myDetails['department']   = $current_user->get('department');
-                 $myDetails['email']              = $current_user->get('email1');
-                 $myDetails['date_joined']  = $current_user->get('date_joined');
-                 $myDetails['birthday']         = $current_user->get('birthday');
-                 $myDetails['facebook']        = $current_user->get('facebook');
-                 $myDetails['twitter']           = $current_user->get('twitter');
-                 $myDetails['linkedin']          = $current_user->get('linkedin');
+                $myDetails['fullname']         = $current_user->get('first_name')." ".$current_user->get('last_name');
+                $myDetails['designation']   = $current_user->get('title');
+                $myDetails['department']  = $current_user->get('department');
+                $myDetails['email']              = $current_user->get('email1');
+                $datetime1                            = date_create(date('Y-m-d'));
+                $datetime2                            = date_create( $current_user->get('date_joined'));
+                $interval                                  = date_diff($datetime1, $datetime2);                 
+                 $myDetails['date_joined'] = $interval->format(' %a');         
+                 $myDetails['birthday']        = $current_user->get('birthday');
+                 $myDetails['facebook']       = $current_user->get('facebook');
+                 $myDetails['twitter']          = $current_user->get('twitter');
+                 $myDetails['linkedin']         = $current_user->get('linkedin');
                  $myDetails['image']            = $current_user->getImageDetails();
                  
                 $alphabet                   = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');

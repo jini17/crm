@@ -28,26 +28,30 @@
                             <table class="table detailview-table">
                                 <thead>
                                     <tr>
-                                        <th nowrap="">
+                                        <th nowrap="" style="width:10%;">
                                             <strong>{vtranslate('LBL_PROJECT_TITLE', $MODULE)}</strong>
-                                        </th>
-                                        <th nowrap=""><strong>{vtranslate('LBL_DESCRIPTION', $MODULE)}</strong></th>
-                                        <th nowrap=""><strong>{vtranslate('LBL_OCCUPATION', $MODULE)}</strong></th>
-                                        <th nowrap=""><strong>{vtranslate('LBL_DATE', $MODULE)}</strong></th>
-                                        <th nowrap=""><strong>{vtranslate('LBL_PROJECT_URL', $MODULE)}</strong></th>
-                                        <th colspan="2" class="medium" nowrap=""><strong>{vtranslate('LBL_EDUCATION_ISVIEW', $MODULE)}</strong></th>
+                                        </th>                                        
+                                        <th nowrap="" style="width:10%;"><strong>{vtranslate('LBL_OCCUPATION', $MODULE)}</strong></th>
+                                        <th nowrap="" style="width:10%;"><strong>{vtranslate('LBL_DATE', $MODULE)}</strong></th>
+                                                          
+                                        <th  class=""  nowrap="" style="width:10%;"><strong>{vtranslate('LBL_EDUCATION_ISVIEW', $MODULE)}</strong></th>
+                      
+                                        <th nowrap="" style="width:40%;"><strong>{vtranslate('LBL_DESCRIPTION', $MODULE)}</strong></th>   
+                                        <th nowrap=""style="width:10%;"><strong>{vtranslate('LBL_PROJECT_URL', $MODULE)}</strong></th>             
+                                        <th> &nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {foreach item=USER_PROJECT from=$USER_PROJECT_LIST}
                                     <tr>
-                                        <td class="medium" valign="top">{$USER_PROJECT['title']}</td>
-                                        <td class="medium" valign="top">{$USER_PROJECT['description']}</td>
-                                        <td class="medium" valign="top">{if $USER_PROJECT['relation_type'] eq 'E'}Student at {/if}{$USER_PROJECT['designation']}</td>
-                                        <td class="medium" valign="top">{$USER_PROJECT['project_start_date']}</td>
-                                        <td class="medium" valign="top">{$USER_PROJECT['project_url']}</td>
-                                        <td class="medium" valign="top">{('0'==$USER_PROJECT['isview'])?{vtranslate('LBL_NO', $MODULE)}:{vtranslate('LBL_YES', $MODULE)}}</td>
-                                        <td class="medium" width="5%" valign="top">
+                                        <td class="" valign="top" style="width:10%;">{$USER_PROJECT['title']}</td>                                     
+                                        <td class="" valign="top" style="width:10%;">{if $USER_PROJECT['relation_type'] eq 'E'}Student at {/if}{$USER_PROJECT['designation']}</td>
+                                        <td class="" valign="top" style="width:10%;">{$USER_PROJECT['project_start_date']}</td>
+                                        <td class="" valign="top" style="width:10%;">{('0'==$USER_PROJECT['isview'])?{vtranslate('LBL_NO', $MODULE)}:{vtranslate('LBL_YES', $MODULE)}}</td>
+                                       
+                                         <td class="" valign="top" style="width:40%;">{$USER_PROJECT['description']}</td>
+                                          <td class="" valign="top" style="width:10%;"><a href="{$USER_PROJECT['project_url']}" class="btn btn-success">click to visit</a></td>
+                                        <td class=""  valign="top">
                                             <div class="pull-right actions">
                                                 <span class="actionImages">
                                                 <a class="editProject editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Project_Js.editProject('index.php{$CREATE_PROJECT_URL}&record={$USER_PROJECT['employeeprojectsid']}&userId={$USERID}');"></a>

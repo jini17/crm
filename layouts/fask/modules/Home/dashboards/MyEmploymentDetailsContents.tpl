@@ -12,26 +12,26 @@
 <div style='padding:5px;'>
     <style>
         .fa-facebook {
-  background: #3B5998;
-  color: white;
-  padding: 8px;
-}
-.fa-twitter {
-  background: #55ACEE;
-  color: white;
-  padding:8px;
-}
-.fa-envelope {
-  background: #ff6600;
-  color: white;
-  padding: 8px;
-}
-.fa-linkedin {
-  background: #007bb5;
-  color: white;
-  padding: 8px;
-}
-    </style>
+          background: #3B5998;
+          color: white;
+          padding: 8px;
+        }
+        .fa-twitter {
+          background: #55ACEE;
+          color: white;
+          padding:8px;
+        }
+        .fa-envelope {
+          background: #ff6600;
+          color: white;
+          padding: 8px;
+        }
+        .fa-linkedin {
+          background: #007bb5;
+          color: white;
+          padding: 8px;
+        }
+            </style>
 
 <div class="row ">
     <div class="col-md-8" style="padding-right: 0;">

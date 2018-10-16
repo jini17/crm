@@ -1169,13 +1169,13 @@ class Users_Record_Model extends Vtiger_Record_Model {
         }
 
         public function getNewJoinee($date,$id,$prefix = 'list'){
-      
-            $birthdateArray = date_parse_from_format("d-m-Y", $date);
+                $date_convert = date('Y-m-d',strtotime($date));
+            $birthdateArray = date_parse_from_format("d-m-Y", $date_convert);
             $todayArray = date_parse_from_format("d-m-Y", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
             $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
             $today = date_create(date('d-m-Y')); //This should also be actual current date
             $diff = date_diff($today, $birthdate);
-             $difference = $diff->format("%a");
+             $difference = $diff->format("t");
              
             if($prefix != 'list'){
                 $show_prefix = "Joined";
@@ -1201,16 +1201,22 @@ class Users_Record_Model extends Vtiger_Record_Model {
             $data= array();
             if($num_rows > 0){
                 for($i=0; $i < $num_rows; $i++){
-                    $bday = $db->query_result($query,$i,'birthday');
-                    $id       = $db->query_result($query,$i,'id');
-                    $birthday                       = $bday;//Users_Record_Model::getBirthdayWish($bday,$id,'grid')
+                    $birthday                        = $db->query_result($query,$i,'birthday');
+                    $join_date                      = $db->query_result($query,$i,'date_joined');
+                    $id                                    = $db->query_result($query,$i,'id');
+                   
                     $data['id']                      = $db->query_result($query,$i,'id');
                     $data['full_name']       = $db->query_result($query,$i,'first_name')." ".$db->query_result($query,$i,'last_name');
                     $data['email']               = $db->query_result($query,$i,'email1');
                     $data['designation']    = $db->query_result($query,$i,'designation');
                     $data['department']   = $db->query_result($query,$i,'department');
                     $data['birthday']          = $birthday;
-                    $data['facebook']        =  $db->query_result($query,$i,'facebook');;
+                    
+                    $datetime1                  = date_create( $join_date." 00:00:00" );
+                    $datetime2                  = date_create(date(strtotime(date('Y-m-d H:i:s'))));
+                    $interval                       = date_diff($datetime1, $datetime2);
+                    $data['joindate']          = ($interval === true)? $interval->format('%a'):$join_date;
+                     $data['facebook']        =  $db->query_result($query,$i,'facebook');;
                     $data['twitter']            = $db->query_result($query,$i,'twitter');
                     $data['linkedin']           =  $db->query_result($query,$i,'linkedin');     
                     $data['image']        = Users_Record_Model::getImageDetailsByID($id);
@@ -1277,4 +1283,5 @@ class Users_Record_Model extends Vtiger_Record_Model {
                 }
                 return $imageDetails;
         }
+        
 }
