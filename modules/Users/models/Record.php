@@ -1169,13 +1169,13 @@ class Users_Record_Model extends Vtiger_Record_Model {
         }
 
         public function getNewJoinee($date,$id,$prefix = 'list'){
-                $date_convert = date('Y-m-d',strtotime($date));
-            $birthdateArray = date_parse_from_format("d-m-Y", $date_convert);
+                
+            $birthdateArray = date_parse_from_format("d-m-Y", $date);
             $todayArray = date_parse_from_format("d-m-Y", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
             $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
             $today = date_create(date('d-m-Y')); //This should also be actual current date
             $diff = date_diff($today, $birthdate);
-             $difference = $diff->format("t");
+             $difference = $diff->format("%a");
              
             if($prefix != 'list'){
                 $show_prefix = "Joined";
@@ -1215,7 +1215,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
                     $datetime1                  = date_create( $join_date." 00:00:00" );
                     $datetime2                  = date_create(date(strtotime(date('Y-m-d H:i:s'))));
                     $interval                       = date_diff($datetime1, $datetime2);
-                    $data['joindate']          = ($interval === true)? $interval->format('%a'):$join_date;
+                    $data['joindate']          = $join_date;
                      $data['facebook']        =  $db->query_result($query,$i,'facebook');;
                     $data['twitter']            = $db->query_result($query,$i,'twitter');
                     $data['linkedin']           =  $db->query_result($query,$i,'linkedin');     
