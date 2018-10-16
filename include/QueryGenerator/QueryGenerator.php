@@ -875,10 +875,8 @@ class QueryGenerator {
                                         $fieldSql .= " $fieldGlue ( vtiger_freetags.id " . $valueSql . ' AND '.
                                                         '( vtiger_freetagged_objects.tagger_id = ' . $this->user->id . ' OR vtiger_freetags.visibility = "public")) ';
                                 } else {
-                                        if($fieldName == 'birthday' && !$this->isRelativeSearchOperators(
-                                                        $conditionInfo['operator'])) {
-                                                $fieldSql .= "$fieldGlue DATE_FORMAT(".$field->getTableName().'.'.
-                                                $field->getColumnName().",'%m%d') ".$valueSql;
+                                        if($fieldName == 'birthday' && !$this->isRelativeSearchOperators( $conditionInfo['operator'])) {
+                                                $fieldSql .= "$fieldGlue DATE_FORMAT(".$field->getTableName().'.'. $field->getColumnName().",'%m%d') ".$valueSql;
                                         } else {
                                                 $fieldSql .= "$fieldGlue ".$field->getTableName().'.'.
                                                 $field->getColumnName().' '.$valueSql;
@@ -977,11 +975,15 @@ class QueryGenerator {
                 }
                 $sql = array();
                 if($operator == 'between' || $operator == 'bw' || $operator == 'notequal' || $operator =='last6month' || $operator =='next6month') {
-                        if($field->getFieldName() == 'birthday') {
+                        if($field->getFieldName() == 'birthday' ) {
                                 $valueArray[0] = getValidDBInsertDateTimeValue($valueArray[0]);
                                 $valueArray[1] = getValidDBInsertDateTimeValue($valueArray[1]);
-                                $sql[] = "BETWEEN DATE_FORMAT(".$db->quote($valueArray[0]).", '%m%d') AND ".
-                                                "DATE_FORMAT(".$db->quote($valueArray[1]).", '%m%d')";
+                                $sql[] = " BETWEEN ".date('md', strtotime("-7 day"))." AND ".date('md', strtotime("+7 day"))." ";
+                        } 
+                        elseif($field->getFieldName() == 'date_joined') {
+                                $valueArray[0] = getValidDBInsertDateTimeValue($valueArray[0]);
+                                $valueArray[1] = getValidDBInsertDateTimeValue($valueArray[1]);
+                                $sql[] = " BETWEEN '".date('Y-m-d', strtotime("-30 day"))."' AND '".date('Y-m-d')."' ";
                         } else {
                                 if($this->isDateType($field->getFieldDataType())) {
                                         $start = explode(' ', $valueArray[0]);
@@ -1149,8 +1151,7 @@ class QueryGenerator {
                                 $sql[] = "IS NULL";
                         }
 
-                        if( ($field->getFieldName() != 'birthday' || ($field->getFieldName() == 'birthday'
-                                                        && $this->isRelativeSearchOperators($operator)))){
+                        if( ($field->getFieldName() != 'birthday' || ($field->getFieldName() == 'birthday' && $this->isRelativeSearchOperators($operator)) || ($field->getFieldName() == 'date_joined' && $this->isRelativeSearchOperators($operator)))){
                                 $value = "'$value'";
                         }
 

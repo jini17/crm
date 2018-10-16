@@ -66,10 +66,11 @@ class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
    * @return string
    */
         function get_employee($db,$department){
-        $sql = "SELECT id,first_name,last_name,department FROM vtiger_users WHERE status = 'Active' ";
+          
+        $sql = "SELECT id,first_name,last_name,designation,vtiger_users.department as department FROM vtiger_users INNER JOIN vtiger_employeecontract ON vtiger_users.employeeno = vtiger_employeecontract.employeesno OR vtiger_users.id = vtiger_employeecontract.employee_id WHERE status = 'Active' ";
         
         if($department != NULL){
-            $sql .= "  AND  department='$department'";
+            $sql .= "  AND vtiger_users.department='$department' ";
         }
         
 
@@ -81,7 +82,7 @@ class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
             $data[$i]['first_name'] = $db->query_result($query,$i,'first_name');
             $data[$i]['last_name'] = $db->query_result($query,$i,'last_name');
             $data[$i]['department'] = $db->query_result($query,$i,'department');
-
+            $data[$i]['designation'] = $db->query_result($query,$i,'designation');
         }
         return $data;
     }        

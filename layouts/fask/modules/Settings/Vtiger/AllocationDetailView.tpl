@@ -11,7 +11,11 @@
 {strip}
     <div id="body">
         <div class=" col-lg-12 col-md-12 col-sm-12">
-            <div id="Head">
+            <div id="Head" style="position:relative;">
+                  <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 0;right:0 !important ; left: 98% !important; z-index: 999 " title="Left Panel Show/Hide">
+                    <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
+            </button>  
+        <div class="clearfix"></div>
                 <div class="widget_header row-fluid">
                     <div class="span8"><h3>Allocation</h3></div>
                 </div>

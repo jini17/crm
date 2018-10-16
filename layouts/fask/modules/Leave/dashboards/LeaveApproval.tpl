@@ -15,10 +15,10 @@
   <div class="filterContainer">
         <div class="row">
             <div class="col-lg-12">
-              <select class="widgetFilter select2 col-lg-7" id="duration" name="type">
-                  <option value="today" selected>{vtranslate('LBL_TODAY',$MODULE_NAME)}</option>
+              <select class="widgetFilter select2 col-lg-12" id="duration" name="type" width='100%'>
+                  <option value="today" >{vtranslate('LBL_TODAY',$MODULE_NAME)}</option>
                   <option value="tomorrow" >{vtranslate('LBL_TOMORROW',$MODULE_NAME)}</option>
-                  <option value="thisweek" >{vtranslate('LBL_THIS_WEEK',$MODULE_NAME)}</option>
+                  <option value="thisweek" selected>{vtranslate('LBL_THIS_WEEK',$MODULE_NAME)}</option>
                   <option value="nextweek" >{vtranslate('LBL_NEXT_WEEK',$MODULE_NAME)}</option>   
                   <option value="thismonth">{vtranslate('LBL_THIS_MONTH',$MODULE_NAME)}</option>
               </select>

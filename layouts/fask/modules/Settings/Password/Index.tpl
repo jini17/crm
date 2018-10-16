@@ -19,7 +19,11 @@
 	margin-right:10px;
 }
 </style>
-<div class="container-fluid">
+<div class="container-fluid" style="position: relative;">
+    <div class="container-fluid" style="position: relative;">
+                    <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;right:0 ; left:98%" title="Left Panel Show/Hide">
+            <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>  
+            <div class="clearfix"></div>
 	<div class="clearfix treeView">
 		<form id="PassForm" class="form-horizontal">
 			<div class="widget_header row-fluid">

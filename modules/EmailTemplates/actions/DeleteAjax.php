@@ -13,9 +13,9 @@ class EmailTemplates_DeleteAjax_Action extends Vtiger_Delete_Action {
 	public function checkPermission(Vtiger_Request $request) {
 		$moduleName = $request->getModule();
 		$record = $request->get('record');
-
+                                           $currentUser = Users_Record_Model::getCurrentUserModel();
 		$currentUserPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
-		if(!$currentUserPrivilegesModel->isPermitted($moduleName, 'Delete', $record)) {
+		if(!$currentUserPrivilegesModel->isPermitted($moduleName, 'Delete', $record) || !$currentUser->isAdminUser()) {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
 		}
 	}

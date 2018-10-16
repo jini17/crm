@@ -53,7 +53,6 @@
     </tbody>			
 </table>
 
-
 <!--@@@@@@@@@@@@START PAGINATION TOOLS@@@@@@@@@@@@@@@-->
 {elseif $SECTION eq 'T'}
 <div class="listViewActionsDiv row-fluid">                
@@ -157,21 +156,12 @@
 </tbody>			
 </table>
 
-
-
-
-
-
 {else}
-<!-- Added hidden field by jitu for paging 
-<script src="layouts/fask/modules/Vtiger/resources/List.js" type="text/javascript"></script>
-<script src="layouts/fask/modules/Users/resources/Leave.js?v=6.1.0" type="text/javascript"></script>
--->
+
 <input type="hidden" id="leaveallow" value="{$ISCREATE}" />
+
 <!--start my leaves-->
 <div id="MyLeaveContainer">
-
-
     <div class="btn-group pull-right allprofilebtn">
      <button style="margin-right:15px;" type="button" class="btn btn-primary pull-right" onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
      <select class="selectProfileCont" name="my_selyear" id="my_selyear" data-section="M"  class="select2"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
@@ -256,11 +246,6 @@
 </div>
 <!--end my leaves-->
 
-
-
-
-
-
 <!--START MY TEAM LEAVE-->
 {if $MANAGER eq 'true'}
 <br />
@@ -332,10 +317,6 @@
                             &nbsp;<span class="totalNumberOfRecords cursorPointer" title="Click for this list size">of {$LISTVIEW_COUNT}</span>&nbsp;&nbsp;
                     </span>
                 </div>    
-
-
-
-
 
                     <!--@@@@@@@@@@@@END PAGINATION TOOLS@@@@@@@@@@@@@@@-->
                     <table class="table detailview-table listViewEntriesTable">

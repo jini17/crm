@@ -21,11 +21,11 @@
 <div class="modal myModal fade"></div>
 
 {include file='JSResources.tpl'|@vtemplate_path}
-<footer>
+<!--<footer>
 	<div class="agiliuxfooter-login">
 		<p>Agiliux © Copyright {date('Y')}  <a href="http://dev7.secondcrm.com/agiliux/" target="_blank">Soft Solvers Solutions.</a>&nbsp;All rights reserved</p>
 	</div>
-</footer> 
+</footer> -->
 
 <script src="https://unpkg.com/tippy.js@3/dist/tippy.all.min.js"></script>
 

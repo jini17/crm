@@ -10,27 +10,32 @@
  ********************************************************************************/
 -->*}
 {strip}
-<div class="container-fluid">
+    <div class="container-fluid" style="position:relative;">
+           <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 0;right:0 !important ; left: 98% !important; z-index: 999 " title="Left Panel Show/Hide">
+                    <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
+            </button>  
+        <div class="clearfix"></div>
+    <div class="clearfix"></div>
        <div class="row-fluid">
             <span class="widget_header row-fluid">
                 <div class="row-fluid"><h3>{vtranslate('LBL_COMPANY_NUMBERING_SETTING', $QUALIFIED_MODULE)}</h3></div>
             </span>
         </div>
         <hr>
-				<input type="hidden" value="{$COMPANYNUMBERING}" name="hidBusiness" id="hidBusiness">
+                                <input type="hidden" value="{$COMPANYNUMBERING}" name="hidBusiness" id="hidBusiness">
         <div class="row-fluid">
             <div class="span12">
                 <table id="customRecordNumbering" class="table table-bordered">
-				{assign var=WIDTHTYPE value="200"}
-		 <tbody>
-					<tr>
+                                {assign var=WIDTHTYPE value="200"}
+                 <tbody>
+                                        <tr>
                         <td>
-			    <input type="checkbox" name="business" id="business" {if $COMPANYNUMBERING eq 1} checked {/if}/>
-			</td>
+                            <input type="checkbox" name="business" id="business" {if $COMPANYNUMBERING eq 1} checked {/if}/>
+                        </td>
                         <td class="fieldValue {$WIDTHTYPE}" style="border-left: none">
-			    <!-- add text and Payments for Payments as Inventory module -->		
+                            <!-- add text and Payments for Payments as Inventory module -->		
                             Separate numbering for Business Document (Quotes, Invoces,Sales Order, Purchase Order and Payments)
-			   <!-- End here-->	
+                           <!-- End here-->	
                         </td>
                     </tr>
                 </tbody>
@@ -48,3 +53,4 @@
         </div>
 </div>
 {/strip}
+                   

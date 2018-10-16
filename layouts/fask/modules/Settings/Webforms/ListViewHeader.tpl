@@ -13,5 +13,9 @@
    <div class="listViewPageDiv">
       <div class="col-sm-12 col-xs-12 ">
          <div id="listview-actions" class="listview-actions-container">
-            <div class="list-content row workflowListContainer" id="list-content">
+             <div class="list-content row workflowListContainer" id="list-content" style="position:relative;">
+                  <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;right:0 ; left:98%" title="Left Panel Show/Hide">
+                    <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
+            </button>  
+                <div class="clearfix" style="heigtht:50px;"></div>
             {/strip}

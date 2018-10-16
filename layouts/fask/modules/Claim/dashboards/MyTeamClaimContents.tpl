@@ -20,13 +20,13 @@
 	            <div class='col-lg-2'>
 	                <strong>{vtranslate('Claim Type', $MODULE_NAME)}</strong>
 	            </div>
-	            <div class='col-lg-3'>
+	            <div class='col-lg-2'>
 	                <strong>{vtranslate('Allocated', $MODULE_NAME)}</strong>
 	            </div>
 	            <div class='col-lg-2'>
 	                <strong>{vtranslate('Used', $MODULE_NAME)}</strong>
 	            </div>
-	            <div class='col-lg-2'>
+	            <div class='col-lg-3'>
 	                <strong>{vtranslate('Balance', $MODULE_NAME)}</strong>
 	            </div>
             {else}
@@ -57,14 +57,14 @@
 				<div class='col-lg-2' align="center">
 					{$MODEL['category']}
 				</div>
-				<div class='col-lg-3' align="center">
-					{$MODEL['yearly_limit']}
+				<div class='col-lg-2 text-center' >
+					{$MODEL['allocated']|string_format:"%.2f"}
 				</div>
 				<div class='col-lg-2' align="center">
-					{$MODEL['totalamount']}
+					{$MODEL['used']}
 				</div>
-				<div class='col-lg-2'>
-					{$MODEL['balance']}
+				<div class='col-lg-3 text-center'>
+					{$MODEL['balance']|string_format:"%.2f"}
 				</div>
 			</div>
 			{/foreach}
@@ -84,7 +84,7 @@
 					{$MODEL['transactiondate']}
 				</div>
 				<div class='col-lg-2'>
-					{$MODEL['claim_status']}
+					{$MODEL['icon']}
 						
 				</div>
 			</div>

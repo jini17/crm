@@ -148,6 +148,7 @@ $languageStrings = array(
 	'Modified Time' => 'Modified Time',
 	'Description' => 'Description',
 	'Assigned To'=>'Assigned To',
+    
 
 	//Loading Labels
 	'LBL_LOADING' => 'Loading',
@@ -222,9 +223,10 @@ $languageStrings = array(
 	'MailManager' => 'Mail Manager',
 	'Activities' => 'Activities',
 	'Portal' => 'Our Sites',
-	'Email Templates' => 'Notification Templates',
+	'Email Templates' => 'Templates',
 	'Recycle Bin' => 'Recycle Bin',
-                    
+                    'LBL_SMS_MESSAGES'=>'SMS Messages',
+                    'LBL_MEETING' => 'Meeting',
 	//Basic String Translation
 	'LBL_ADD_RECORD' => 'Add Record',
 	'LBL_RECENTLY_MODIFIED' => 'Recently Modified',
@@ -351,7 +353,7 @@ $languageStrings = array(
 	'LBL_DEFAULT' => 'Default',
 	'LBL_ITEM' => 'Item',
 	'LBL_ADD_DASHBOARD' =>'Add dashboard',
-
+                     'LBL_OFFICE_BILLS'=> 'Office Bills',
 	//DetailView Actions
 	'LBL_CREATE' => 'Create',
 	'LBL_GENERATE' => 'Generate',
@@ -1220,7 +1222,7 @@ $languageStrings = array(
 
 	'LBL_SHARE_THIS_LIST' => 'Share the list',
 	'LBL_ADD_USERS_ROLES' => 'Add Users, Roles...',
-	'EmailTemplates' => 'Notification Templates',
+	'EmailTemplates' => ' Templates',
 	'LBL_BILLING' => 'Billing',
 	'LBL_ENABLED' => 'Enabled',
 
@@ -1596,7 +1598,7 @@ $jsLanguageStrings = array(
 	//Notification message for dashboard widget delete
 	'JS_ARE_YOU_SURE_TO_DELETE_WIDGET' => 'Are you sure you want to delete widget - %s?',
 	'JS_ARE_YOU_SURE_TO_DELETE_DASHBOARDTAB' => 'Are you sure you want to delete this dashboard tab - %s?',
-	'JS_TABS_LIMIT_EXCEEDED' => 'Sorry! Can\'t add more than 10 tabs',
+	'JS_TABS_LIMIT_EXCEEDED' => 'Sorry! Can\'t add more than 50 tabs',
 	'JS_DUPLICATE_ENTRIES_FOUND_FOR_THE_VALUE' => 'Duplicate entries found for the value',
 	'JS_SELECT_RECORDS_TO_MERGE_FROM_SAME_GROUP' => 'You have to select the records in the same groups for merging',
 	'JS_SELECT_ATLEAST_TWO_RECORD_FOR_MERGING' => 'Select atleast two records for merging',

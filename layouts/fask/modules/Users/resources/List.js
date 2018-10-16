@@ -33,17 +33,9 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                 var module	 	= 'Users';
                 var fieldname 	= 'email1';
                 Vtiger_Helper_Js.getInternalMailer(userid,fieldname,module);
-
-
         },		
-        UserListViewSwitcher:function(Type,alphabet,url){
-           
-           var location = url+"&Alphabet="+alphabet+'&empview='+Type ;
-          
-            app.helper.showProgress();
-            window.location.href = location;
-        },
-        registerTransferOwnership : function() {
+
+        registerTransferOwnership:function() {
                 jQuery('#transferOwner').on('submit',function(e) {
                         e.preventDefault();
                         var form = jQuery(e.currentTarget);
@@ -133,7 +125,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                         }
                 );
         },
-                 
+
         triggerLogin : function(recordId){
                 var params = {
                         data : {
@@ -353,41 +345,104 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
 
                         var listInstance = new Settings_Users_List_Js;
                         var listParams = listInstance.getListViewParams();
-                        listParams['search_value'] = currentEle.data('searchvalue');
+                        listParams['search_params'] = currentEle.data('searchvalue');
                         //To clear the search params while switching between active and inactive users 
                         listParams.search_params = {};
                         listInstance.loadListViewRecords(listParams);
                 });
         },
+        registerUserViewSwitcher:function(){
+                jQuery('.main-container').on('click','.empview',function(){
+                           var viewtype = $(this).data('listtype');
+                           $(this).closest('div').find('button').removeClass('btn-primary');
+                           $(this).addClass('btn-primary')
+                           var listInstance = new Settings_Users_List_Js;
+                           var listParams = listInstance.getListViewParams();
+                        listParams['empview'] = viewtype;
+                       listInstance.loadListViewRecords(listParams);
+                });
+        },
         registerAlphabetSearch:function(){
-            jQuery('a[data-alphabet]').on('click',function(){
-                      var currentEle = jQuery(e.currentTarget);
-                    var atext = $(this).data('alphabet');
-                   app.helper.showProgress();
-                        if(currentEle.attr('id') === 'activeUsers') {
-                                jQuery('#inactiveUsers').removeClass('btn-primary');
-                        }else {
-                                jQuery('#activeUsers').removeClass('btn-primary');
-                        }
-                        currentEle.addClass('btn-primary');
-
+            jQuery('.main-container').on('click','.alphabetSearch',function(){
+                $(this).closest('tr').find('td').removeAttr('style');
+                $(this).closest('td').css('border-bottom','1px solid #2f5597');
+                        var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');                    
+                        var atext = $(this).find('a').data('alphabet');
                         var listInstance = new Settings_Users_List_Js;
                         var listParams = listInstance.getListViewParams();
-                        listParams['search_value'] = currentEle.data('alphabet');
+                        listParams['search_params'] = [[["first_name","s",atext]]];
+                         listParams['status'] ="Active";
+                         listParams['empview'] = viewtype;
                          var params={
                                 "module" : "Users",
-                                "action" : "ShowTemplateContent",
+                                "view" : "list.php",
                                 "mode"   : "getContent",
-                                
-                             
+                                "operator" : "s",
+                                "search_param":atext,
+
                             };
                         //To clear the search params while switching between active and inactive users 
-                        listParams.search_params = {};
+                      //listParams.search_params = {};
                         listInstance.loadListViewRecords(listParams);
             });
-            
         },
+        registerKeySearch:function(){
+   
+              jQuery('.main-container').on('click','.keyword-search',function(){
+                 var keyword = $("#keywordsearch").val();
+                 var listInstance = new Settings_Users_List_Js;
+                 var listParams = listInstance.getListViewParams();
+                 var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');  
+                 var tabType = jQuery('#tabtype').val();  
+                 var dept = jQuery('#curdepartment').val();  
+                 if(tabType == "MD"){
+                     listParams['search_params']  = [[["department","e",dept]],[["last_name","c",keyword],["email1","c",keyword],["title","c",keyword],["department","c",keyword]]]
+                 }
+                 else{
+                     listParams['search_params']  = [[["grade_id","n","0"]],[["last_name","c",keyword],["email1","c",keyword],["title","c",keyword],["department","c",keyword]]]
+                 }
+                
 
+                listParams['status']            ="Active";
+                listParams['empview']      = viewtype;
+                listParams['tabtype']        = tabType;
+                listParams['searchType']  = "keyword";
+                listInstance.loadListViewRecords(listParams);
+              })
+        },
+        registerViewFilter:function(){
+            jQuery('.main-container').on('change','.grid-filter',function(){
+                var keyword = $(this).find(":selected").val();
+               var listInstance = new Settings_Users_List_Js;
+                 var listParams = listInstance.getListViewParams();
+                 var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');  
+                 var tabType = jQuery('#tabtype').val();  
+                 var day_ago = jQuery("#sevendaysago").val();
+                 var day_after = jQuery("#sevendaysafter").val()
+                if(keyword == 'N'){
+                     
+                    listParams['search_params']  = [[["date_joined","bw",day_ago]],[["date_joined","bw",day_after]]]
+                
+                 }
+                  if(keyword == 'B'){
+                      
+                    listParams['search_params']  =[[["birthday","bw",day_ago]],[["birthday","bw",day_after]]]
+                 }
+                 
+                 if(keyword == 'MALE'){
+                       listParams['search_params'] = [[["gender","e","Male"]]];
+                 }
+                 if(keyword == 'FEMALE'){
+                       listParams['search_params'] = [[["gender","e","Female"]]];
+                 }
+        
+                listParams['status'] ="Active";
+                listParams['empview'] = viewtype;
+                listParams['tabtype'] = tabType;
+                listParams['searchType'] = "gridfilter";
+                listInstance.loadListViewRecords(listParams);
+            })
+        },
         /**
          * Function to get Page Jump Params
          */
@@ -566,11 +621,13 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
         },
 
         registerEvents : function() {
-
                 this._super();
                 this.registerUserStatusToggleEvent();
                 this.registerListViewSearch();
                 this.registerAlphabetSearch();
+                this.registerUserViewSwitcher();
+                this.registerKeySearch();
+                this.registerViewFilter();
                 this.registerPostListLoadListener();
                 this.registerListViewSort();
                 this.registerRemoveListViewSort();

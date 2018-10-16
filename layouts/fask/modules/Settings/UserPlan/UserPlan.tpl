@@ -14,7 +14,10 @@
 {strip}
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="screen" />
 
-<div class="listViewPageDiv" id="plansettingcontainer">
+<div class="listViewPageDiv" id="plansettingcontainer" style="position: relative;">
+     <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;right:0 ; left:98%" title="Left Panel Show/Hide">
+            <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>  
+            <div class="clearfix"></div>
     <div class="table-responsive col-md-8">
         <table class="table table-condensed sharingAccessDetails marginBottom50px" name="userTable" id="plan">
             <thead>
@@ -33,7 +36,7 @@
                     <td>{$USER.role}</td>
                     <td width="17%" align='center'><a class="editPlan cursorPointer" data-id="{$USER.id}" data-username="{$USER.name}" data-plantitle="{$USER.plantitle}" data-url="index.php?module=UserPlan&parent=Settings&view=UserPlanAjax"><i class="fa fa-edit" title="{vtranslate('LBL_EDIT', $MODULE)}" ></i></a></td>
                     </tr>
-                    
+
                 {/foreach}
             </tbody>
         </table>

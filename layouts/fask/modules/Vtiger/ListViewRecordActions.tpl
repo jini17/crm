@@ -22,25 +22,25 @@
     {/if}
     {if $QUICK_PREVIEW_ENABLED eq 'true'}
         <span class="quickView icon action" data-app="{$SELECTED_MENU_CATEGORY}" title="{vtranslate('LBL_QUICK_VIEW', $MODULE)}">
-		<i class="material-icons">zoom_in</i></span>
+                <i class="material-icons">zoom_in</i></span>
     {/if}
-	{if $MODULE_MODEL->isStarredEnabled()}
-		<span class="markStar icon action  " title="{if $STARRED} {vtranslate('LBL_STARRED', $MODULE)} {else} {vtranslate('LBL_NOT_STARRED', $MODULE)}{/if}">
-		<i class="material-icons">{if $STARRED}star{else}star_border{/if}</i></span> 
-	{/if}
+        {if $MODULE_MODEL->isStarredEnabled()}
+                <span class="markStar icon action  " title="{if $STARRED} {vtranslate('LBL_STARRED', $MODULE)} {else} {vtranslate('LBL_NOT_STARRED', $MODULE)}{/if}">
+                <i class="material-icons">{if $STARRED}star{else}star_border{/if}</i></span> 
+        {/if}
     <span class="more dropdown action ">
         <span href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
             <i class="material-icons icon">info_outline</i></span>
         <ul class="dropdown-menu animated fadeIn">
             <li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="{$LISTVIEW_ENTRY->getFullDetailViewUrl()}&app={$SELECTED_MENU_CATEGORY}">{vtranslate('LBL_DETAILS', $MODULE)}</a></li>
-			{if $RECORD_ACTIONS}
-				{if $RECORD_ACTIONS['edit']}
-					<li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0);" data-url="{$LISTVIEW_ENTRY->getEditViewUrl()}&app={$SELECTED_MENU_CATEGORY}" name="editlink">{vtranslate('LBL_EDIT', $MODULE)}</a></li>
-				{/if}
-				{if $RECORD_ACTIONS['delete']}
-					<li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0);" class="deleteRecordButton">{vtranslate('LBL_DELETE', $MODULE)}</a></li>
-				{/if}
-			{/if}
+                        {if $RECORD_ACTIONS}
+                                {if $RECORD_ACTIONS['edit']}
+                                        <li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0);" data-url="{$LISTVIEW_ENTRY->getEditViewUrl()}&app={$SELECTED_MENU_CATEGORY}" name="editlink">{vtranslate('LBL_EDIT', $MODULE)}</a></li>
+                                {/if}
+                                {if $RECORD_ACTIONS['delete']}
+                                        <li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0);" class="deleteRecordButton">{vtranslate('LBL_DELETE', $MODULE)}</a></li>
+                                {/if}
+                        {/if}
         </ul>
     </span>
 

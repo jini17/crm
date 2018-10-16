@@ -96,6 +96,7 @@
 </div>
 <input type="hidden" id="tabtype" value="{$TABTYPE}">
 <input type="hidden" id="leaveid" value="{$leaveid}">
+<input type="hidden" id="claimid" value="{$claimid}">
 <input type="hidden" id="appid" value="{$appid}">
 
 <div class="tab-pane" id="education"></div>

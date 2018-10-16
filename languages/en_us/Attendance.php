@@ -9,7 +9,8 @@
  *************************************************************************************/
 $languageStrings = array(
 	
-	"LBL_Attendance_Information" => "Attendance Information",
-	"LBL_CUSTOM_INFORMATION" 	 => "Description"
+	"LBL_Attendance_Information"  => "Attendance Information",
+	"LBL_CUSTOM_INFORMATION" => "Description",
+                     "SINGLE_Attendance"                   =>"Attendance"
 
 );

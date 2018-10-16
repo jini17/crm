@@ -23,7 +23,8 @@ $languageStrings = array(
 	'LBL_Benefits'=>'Benefits & Entitlement',
 	'LBL_BENEFIT_NAME'=>'Benefit Name',
 	'LBL_BENEFIT_DESCRIPTION'=>'Benefit Description',
-	
+                     'LBL_RECORD_DETAILS'=>'Contract Details',
+                    'Details'=> 'Contract Details'
 );
 
 $jsLanguageStrings = array(

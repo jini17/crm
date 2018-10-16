@@ -20,9 +20,9 @@ class Leave_LeaveApproval_Dashboard extends Vtiger_IndexAjax_View {
 	
 		
 		if($type == '' || $type == null)
-			$type = 'today';
+			$type = 'thisweek';
 		
-		$typeLabel = 'LBL_IN_TODAY';
+		$typeLabel = 'LBL_IN_THIS_WEEK';
 
 		if($type=='today') {
 			$typeLabel = 'LBL_IN_TODAY';

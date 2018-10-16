@@ -9,7 +9,11 @@
 {* modules/Settings/Picklist/views/Index.php *}
 
 {* START YOUR IMPLEMENTATION FROM BELOW. Use {debug} for information *}
-<div class="listViewPageDiv detailViewContainer " >
+<div class="listViewPageDiv detailViewContainer "  style="position: relative;">
+     <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 0;right:0 !important ; left: 98% !important; z-index: 999 " title="Left Panel Show/Hide">
+                    <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
+            </button>  
+        <div class="clearfix"></div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-horizontal" >
         <br>
         <div class="detailViewInfo">
