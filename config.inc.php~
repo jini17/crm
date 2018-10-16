@@ -43,21 +43,13 @@ $HELPDESK_SUPPORT_EMAIL_REPLY_ID = $HELPDESK_SUPPORT_EMAIL_ID;
       db_password
       db_name
 */
-/*
-$dbconfig['db_server'] = '192.168.2.66';
-$dbconfig['db_port'] = ':3306';
-$dbconfig['db_username'] = 'root';
-$dbconfig['db_password'] = 'Root123$';
-$dbconfig['db_name'] = 'ss_foundation';
-$dbconfig['db_type'] = 'mysqli';
-$dbconfig['db_status'] = 'true';
-*/
 
-$dbconfig['db_server'] = '13.229.249.148';
-$dbconfig['db_port'] = ':3306';
+$dbconfig['db_server'] = '13.251.26.243';
+$dbconfig['db_port'] = ':33060';
 $dbconfig['db_username'] = 'development';
 $dbconfig['db_password'] = 'Dev123$%^)';
-$dbconfig['db_name'] = 'agiliux_ui';
+$dbconfig['db_name'] = 'agiliuxv2';
+$dbconfig['db_cp'] = 'agiliux_cp';
 $dbconfig['db_type'] = 'mysqli';
 $dbconfig['db_status'] = 'true';
 
@@ -88,13 +80,13 @@ $dbconfigoption['ssl'] = false;
 
 $host_name = $dbconfig['db_hostname'];
 
-$site_URL = 'http://192.168.2.99/agiliux/';
+$site_URL = 'http://192.168.2.20/agiliux/';
 
 // url for customer portal (Example: http://vtiger.com/portal)
 $PORTAL_URL = $site_URL.'/customerportal';
 // root directory path
 $root_directory = '/var/www/html/agiliux/';
-$short_url = '192.168.2.99';
+$short_url = '192.168.2.20';
 
 // cache direcory path
 $cache_dir = 'cache/';
@@ -178,11 +170,17 @@ $listview_max_textlength = 40;
 $php_max_execution_time = 0;
 
 // Set the default timezone as per your preference
-$default_timezone = 'UTC';
+$default_timezone = 'Asia/Kuala_Lumpur';
 
 /** If timezone is configured, try to set it */
 if(isset($default_timezone) && function_exists('date_default_timezone_set')) {
 	@date_default_timezone_set($default_timezone);
+}
+
+
+$con = new mysqli($dbconfig['db_server'], $dbconfig['db_username'], $dbconfig['db_password'], $dbconfig['db_cp'], '33060');
+if (!$con) {
+    die('Could not connect to'.$dbconfig['db_cp'].': ' . mysql_error());
 }
 
 //Set the default layout 

@@ -810,9 +810,10 @@ class CRMEntity {
 	 * Retrieve record information of the module
 	 * @param <Integer> $record - crmid of record
 	 * @param <String> $module - module name
+	 * @param <Boolean> $isUsedAsFocusObj - To verify whether it is being used in a php script or not - Added By Mabruk
 	 */
-	function retrieve_entity_info($record, $module, $allowDeleted = false) {
-		global $adb, $log, $app_strings, $current_user;
+	function retrieve_entity_info($record, $module, $allowDeleted = false, $isUsedAsFocusObj = false) {
+		global $adb, $log, $app_strings, $current_user;		
 
 		// INNER JOIN is desirable if all dependent table has entries for the record.
 		// LEFT JOIN is desired if the dependent tables does not have entry.
@@ -883,7 +884,12 @@ class CRMEntity {
 
 				// Alias prefixed with tablename+fieldname to avoid duplicate column name across tables
 				// fieldname are always assumed to be unique for a module
-				$column_clause .=  $fieldinfo['tablename'].'.'.$fieldinfo['columnname'].' AS '.$this->createColumnAliasForField($fieldinfo).',';
+
+				// IF/ELSE conditons added by Mabruk to ignore the Starred Column if used as focused object in php script
+				if ($isUsedAsFocusObj == true && $fieldinfo['columnname'] == 'starred')
+					continue;
+				else
+					$column_clause .=  $fieldinfo['tablename'].'.'.$fieldinfo['columnname'].' AS '.$this->createColumnAliasForField($fieldinfo).',';
 			}
 			$column_clause .= 'vtiger_crmentity.deleted, vtiger_crmentity.label';
 
