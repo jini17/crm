@@ -12,14 +12,14 @@ class Users_ForgotPassword_Handler {
 
 	public function changePassword($data){
 		global $site_URL;
-        $request = new Vtiger_Request($data);
-        $viewer = Vtiger_Viewer::getInstance();
+                                            $request = new Vtiger_Request($data);
+                                            $viewer = Vtiger_Viewer::getInstance();
 		$companyModel = Vtiger_CompanyDetails_Model::getInstanceById();
-        $companyName = $companyModel->get('organizationname');
-        $organisationDetails=$companyModel->getLogo();
-        $logoTitle = $organisationDetails->get('title');
+                                           $companyName = $companyModel->get('organizationname');
+                                           $organisationDetails=$companyModel->getLogo();
+                                           $logoTitle = $organisationDetails->get('title');
 		$logoName = $organisationDetails->get('imagepath');
-        $moduleName = 'Users';
+                                           $moduleName = 'Users';
 		$viewer->assign('LOGOURL',$site_URL.$logoName);
 		$viewer->assign('TITLE',$logoTitle);
 		$viewer->assign('COMPANYNAME',$companyName);

@@ -36,7 +36,7 @@
                         {$RECORD->getName()}
                     </span>
                 </div>
-                <div class="pull-right col-md-7 detailViewButtoncontainer">
+                <div class="pull-right col-md-7 detailViewButtoncontainer hide">
                     <div class="btn-group pull-right">
                         {foreach item=DETAIL_VIEW_BASIC_LINK from=$DETAILVIEW_LINKS['DETAILVIEWBASIC']}
                             <button class="btn btn-default {if $DETAIL_VIEW_BASIC_LINK->getLabel() eq 'LBL_EDIT'}{/if}" id="{$MODULE}_detailView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_BASIC_LINK->getLabel())}"
@@ -67,6 +67,10 @@
                                 {/foreach}
                             </ul>
                         {/if}
+                    </div>
+                    <div class="module-nav clearfix settingsNav hidden-sm hidden-xs settingssidebar {$LEFTPANELHIDE}" id="modnavigator">
+                        <div class="essentials-toggle" style=" top:10px; right:0;" title="Left Panel Show/Hide">
+                        <span class="essentials-toggle-marker fa cursorPointer fa-chevron-right"></span>
                     </div>
                 </div>
             </div>

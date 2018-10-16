@@ -12,6 +12,7 @@
 
 <div class="dashboardWidgetHeader clearfix">
     {if $SHARED_USERS|@count gt 0 || $SHARED_GROUPS|@count gt 0}
+        
         {assign var="usersList" value="1"}
     {/if}
     <div class="title">
@@ -19,6 +20,7 @@
     </div>
     {if $usersList}
         <div class="userList">
+            {$USER_NOW}
             <select class="select2 widgetFilter" name="type">
                 <option value="{$CURRENTUSER->getId()}" selected>{vtranslate('LBL_MINE',$MODULE_NAME)}</option>
                 {foreach key=USER_ID from=$SHARED_USERS item=USER_NAME}

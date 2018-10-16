@@ -347,7 +347,7 @@ When click on sidebar toggler and also for tablet
 
 .app-fixed-navbar {
 	height: auto !important;
-	background-color: #a3aeb7!important;
+	background-color: #fff!important;
 	padding: 0px;
 }
 .main-container .sidebar-essentials{
@@ -503,12 +503,15 @@ When click on sidebar toggler and also for tablet
   width: 11px;
 }
 
+/**
+ TODO: THEME BUGS
+
 /* MS supports */
-@supports (-ms-overflow-style: none) {
+/*@supports (-ms-overflow-style: none) {
   .ps {
     overflow: auto !important;
   }
-}
+}*/
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .ps {

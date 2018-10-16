@@ -121,7 +121,7 @@ $languageStrings = array(
 	'LBL_TO_ADD_NEW_USER_PLEASE_CLICK_ON' => 'To add a new User, please click on ',
 	'LBL_SETTINGS_ICON' => 'Settings Icon',
 	'LBL_ADD_OR_DELETE_USERS' => 'Add/Delete Users',
-	'LBL_ADD_USER' => 'Add User',
+	'LBL_ADD_USER' => 'Add Employee',
 	'LBL_LABELS_EDITOR' => 'Labels Editor',
 	'LBL_LABELS_EDITOR_DESCRIPTION' => 'Lets you customize module names, field labels and other strings according to your business requirements',
 
@@ -435,7 +435,7 @@ $languageStrings = array(
 	'istooltip'=>'Tooltip',	//added by jitu@secondcrm.com for showhide tooltip	
 	//End here	
 	'LBL_ASSIGN_COMPANY' => 'Assign Company', //edited by siti@secondcrm on 25feb2015
-	'LBL_EMPLOYEMENT_DETAILS'=>'Employment Details',
+	'LBL_EMPLOYEMENT_DETAILS'=>'Employee Contracts',
 	'LBL_PASSPORTVISA'=>'Passport Visa',
 	'LBL_PERFORMANCE'=>'Performance',
 	'LBL_GRADE'=>'Grade',
@@ -467,9 +467,16 @@ $languageStrings = array(
 	'LBL_HOLIDAY'=>'Holiday',
 	'LBL_WORKINGHOURS'=>'Working Hours',
 	'LBL_CLAIM'=>'Apply Claim',
-	
-
-
+	'LB_CONFIG_SAVED'=>'Config detail saved!',
+	'LBL_OUTOGING SERVER'=>'Outgoing Server List',
+	'LBL_OUTGOING_SERVER_SETTINGS'=>'Outgoing Server Settings',
+	'LBL_ADDLEAVETYPE'=>'Add LeaveType',
+	'My Preferences'=>'Profile',
+	'Calendar Settings'=>'Preferences',
+	'LBL_MY_TAGS'=>'Tags',
+	'LBL_OFFICE365'=>'Office 365',
+	'LBL_MY_PREFERENCES'=>'My Profile',
+	'My Profile'=>'Profile',
 );
 
 $jsLanguageStrings = array(
@@ -505,4 +512,5 @@ $jsLanguageStrings = array(
     'JS_INVALID_URL' => 'Invalid URL',
     'JS_LBL_TAX_REGION_EXIST' => 'Region Name already exists',
     'JS_LOGO_IMAGE_DIMENSIONS_WRONG' => 'Logo Image dimensions did not match the allowed dimension. Resize your image and try again.',
+    'JS_GOOGLE_DETAILS_SAVED'=>'Google details Saved!!',
 );

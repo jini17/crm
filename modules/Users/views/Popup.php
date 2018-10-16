@@ -11,10 +11,14 @@
 class Users_Popup_View extends Vtiger_Popup_View {
     
     function checkPermission(Vtiger_Request $request) {
+		global $current_user;
         $moduleName = $request->getModule();
         $sourceModuleName = $request->get('src_module');
         $sourceFieldName = $request->get('src_field');
         if( $moduleName == 'Users' && $sourceModuleName == 'Quotes' && $sourceFieldName == 'assigned_user_id1' ) {
+            return true;
+        }
+        if( $moduleName == 'Users' && $sourceModuleName == 'EmployeeContract' && ($sourceFieldName == 'employee_id' || $sourceFieldName == 'reports_to') &&  ($current_user->roleid=='H12' || $current_user->roleid=='H13')) { 
             return true;
         }
         return parent::checkPermission($request);

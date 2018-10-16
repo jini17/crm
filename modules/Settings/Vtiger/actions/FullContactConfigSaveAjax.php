@@ -13,23 +13,16 @@
 class Settings_Vtiger_FullContactConfigSaveAjax_Action extends Settings_Vtiger_Basic_Action {
 
 	public function process(Vtiger_Request $request) {
+		global $adb;
 		$response = new Vtiger_Response();
 		$qualifiedModuleName = $request->getModule(false);
-		$updatedFields = $request->get('updatedFields'); 
-		$moduleModel = Settings_Vtiger_FullContactConfigModule_Model::getInstance();
+		$bearer = $request->get('bearer');
+		$preference = $request->get('preference');
+		$status = $request->get('status'); 
 
-		if ($updatedFields) {
-			$moduleModel->set('updatedFields', $updatedFields);
-			$status = $moduleModel->save();
-
-			if ($status === true) {
-				$response->setResult(array($status));
-			} else {
-				$response->setError(vtranslate($status, $qualifiedModuleName));
-			}
-		} else {
-			$response->setError(vtranslate('LBL_FIELDS_INFO_IS_EMPTY', $qualifiedModuleName));
-		}
+		$adb->pquery("UPDATE ss_contactenrichment SET preference = ?, bearer = ?, active = ?",array($preference, $bearer, $status));
+		
+		$response->setResult("Success");
 		$response->emit();
 	}
         

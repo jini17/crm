@@ -10,12 +10,18 @@
 $languageStrings = array(
 
 	// Footer
+	'LBL_CURRENT'=>'Current',
 	'LBL_MOM' => 'Agenda/MOM',
 	'LBL_MOM_BLOCK' => 'Minutes of Meeting(MOM)',
 	'APPTITLE' => 'Vtiger CRM',
 	'POWEREDBY'=> 'Powered by Agiliux CRM',
 	'LBL_READ_LICENSE' => 'Read License',
 	'LBL_PRIVACY_POLICY' => 'Privacy Policy',
+	'LBL_REPORT_CHART' => 'Chart Report',
+
+	'LBL_ENRICH_DATA' => 'Enrich Data',
+
+	'LBL_ENRICH_DATA_LOCKED' => 'Enrich Data', 
 
 	// Common Actions
 	'LBL_NEW' => 'New',
@@ -47,13 +53,14 @@ $languageStrings = array(
 	'LBL_STARRED_RECORD_UPDATED' => '%s updated %s',
 	'LBL_SETTINGS'=> 'Settings',
 	'LBL_ADD_COMMENT' => 'Add Comment',
-	'LBL_EDIT_FIELDS' => '%s Fields & Layout',
-	'LBL_EDIT_WORKFLOWS' => '%s Workflows',
+	'LBL_EDIT_FIELDS' => ' Fields & Layout',
+	'LBL_EDIT_WORKFLOWS' => ' Workflows',
 	'LBL_EDIT_PICKLIST_VALUES' => 'Picklists Values',
 	'LBL_EDIT_MAILSCANNER' => 'Mail Converter',
 	'LBL_RECORD_DELETE' => 'The record you are trying to view has been deleted.',
 	'LBL_RECORD_NOT_FOUND' => 'Record you are trying to access is not found',
 	'LBL_EDIT_REASON' => 'Edit reason',
+                      'WorkingHours' => 'Working Hours',
 	//'LBL_EDIT_CURRENT_FILTER' => 'Edit Current Filter',
 	//'LBL_DELETE_CURRENT_FILTER' => 'Delete Current Filter',
 	'LBL_SELECT' => 'Select',
@@ -81,7 +88,7 @@ $languageStrings = array(
 	'LBL_ADD_EVENT' => 'Add Meeting',
 	'LBL_ADD_TASK' => 'Add Task',
 	'LBL_MARKETING_AND_SALES' => 'MARKETING & SALES',
-	'LBL_TOOLS_HEADER' => 'TOOLS',
+	'LBL_TOOLS_HEADER' => 'Employee',
 	'LBL_SUPPORT' => 'SUPPORT',
 	'LBL_INVENTORY' => 'INVENTORY',
 	'LBL_FOUNDATION' => 'General',
@@ -99,6 +106,7 @@ $languageStrings = array(
 	'LBL_TODOS' => 'Tasks',
 	'LBL_LAST_VIEWED_RECORDS' => 'Last Viewed Records',
 	'LBL_DASHBOARD' => 'Dashboard',
+	'LBL_MAIL_MANAGER'=>'Mail Manager',
 	'LBL_USER_SETTINGS' => 'User Settings',
 	'LBL_MY_PREFERENCES' => 'My Profile',
 	'LBL_SIGN_OUT' => 'Sign Out',
@@ -130,7 +138,8 @@ $languageStrings = array(
 	'LBL_EDIT_TAG'=>'Edit Tag',
 	'LBL_NO_TAG_EXISTS' => 'No Tag Exists' ,
 	'LBL_RELATED_USERS' => 'Related Users',
-
+                      'LBL_LAST_SIX_MONTH' =>'Last 6 Month',
+                       'LBL_NEXT_SIX_MONTH' =>'Next 6 Month',
 	// Common Fields
 	'LBL_USER' => 'User',
 	'LBL_GROUP' => 'Group',
@@ -139,6 +148,7 @@ $languageStrings = array(
 	'Modified Time' => 'Modified Time',
 	'Description' => 'Description',
 	'Assigned To'=>'Assigned To',
+    
 
 	//Loading Labels
 	'LBL_LOADING' => 'Loading',
@@ -169,7 +179,7 @@ $languageStrings = array(
 	'LBL_PLEASE_SELECT_MODULE' => 'Please select any module to search',
 
 	//DropDown Category
-	'LBL_USERS' => 'Users',
+	'LBL_USERS' => 'Employee',
 	'LBL_GROUPS' => 'Groups',
 	'LBL_USER_PLAN_SETTING' => 'User Plan Settings',
 
@@ -213,9 +223,10 @@ $languageStrings = array(
 	'MailManager' => 'Mail Manager',
 	'Activities' => 'Activities',
 	'Portal' => 'Our Sites',
-	'Email Templates' => 'Notification Templates',
+	'Email Templates' => 'Templates',
 	'Recycle Bin' => 'Recycle Bin',
-
+                    'LBL_SMS_MESSAGES'=>'SMS Messages',
+                    'LBL_MEETING' => 'Meeting',
 	//Basic String Translation
 	'LBL_ADD_RECORD' => 'Add Record',
 	'LBL_RECENTLY_MODIFIED' => 'Recently Modified',
@@ -342,7 +353,7 @@ $languageStrings = array(
 	'LBL_DEFAULT' => 'Default',
 	'LBL_ITEM' => 'Item',
 	'LBL_ADD_DASHBOARD' =>'Add dashboard',
-
+                     'LBL_OFFICE_BILLS'=> 'Office Bills',
 	//DetailView Actions
 	'LBL_CREATE' => 'Create',
 	'LBL_GENERATE' => 'Generate',
@@ -421,7 +432,7 @@ $languageStrings = array(
 	'LBL_SHOW' => 'Show',
 	'LBL_MY' => 'My',
 	'LBL_SELECT_DATE_RANGE' => 'Select Date Range',
-
+                       'Users'=>"Employee",
 	// Basic Strings- custom view
 	'LBL_VIEW_NAME' => 'List Name',
 	'LBL_CREATE_VIEW' => 'Creating new view',
@@ -552,7 +563,8 @@ $languageStrings = array(
 	'LBL_LABELS' => 'Labels',
 	'LBL_WORKFLOWS' => 'Workflows',
 	'LBL_PICKLIST' => 'Picklists',
-
+                      ' LBL_YOU_ARE_CURRENLY_VIEWING ' => 'You are currently viewing',
+                      'LBL_Employees_OF_THE' => 'employees of the',
 	// Added Common Keys for all modules
 	'Account Name' => 'Organization Name',
 	'Add Comment' => 'Add Comment',
@@ -604,6 +616,8 @@ $languageStrings = array(
 	'Biotechnology'=>'Biotechnology',
 	'Chemicals'=>'Chemicals',
 	'Communications'=>'Communications',
+                     'Admin/Finance' => 'HRM',
+                    'Tools'=>'Communications',
 	'Construction'=>'Construction',
 	'Consulting'=>'Consulting',
 	'Education'=>'Education',
@@ -1179,9 +1193,9 @@ $languageStrings = array(
 	'LBL_ENGAGEMENT_HISTORY' => 'Engagement History',
 	'LBL_NO_ENGAGEMENTS_FOUND' => 'No related Touchpoints',
 	'LBL_MARKETING' => 'MARKETING',
-	'LBL_SALES' => 'SALES',
+	'LBL_SALES' => 'Sales',
 	'LBL_PROJECT' => 'PROJECTS',
-	'LBL_TOOLS' => 'Tools',
+	'LBL_TOOLS' => 'Communications',
 	'LBL_TAGS' => 'Tags',
 	'LBL_SHARE_TAGS' => 'Public Tags',
 	'LBL_SHARE_TAG' => 'Shared Tag(s)',
@@ -1208,7 +1222,7 @@ $languageStrings = array(
 
 	'LBL_SHARE_THIS_LIST' => 'Share the list',
 	'LBL_ADD_USERS_ROLES' => 'Add Users, Roles...',
-	'EmailTemplates' => 'Notification Templates',
+	'EmailTemplates' => ' Templates',
 	'LBL_BILLING' => 'Billing',
 	'LBL_ENABLED' => 'Enabled',
 
@@ -1330,7 +1344,7 @@ $languageStrings = array(
 	'ModTracker' => 'Updates',
 	'LBL_MAIL_SENT_SUCCESSFULLY' => 'Mail Sent Successfully',
 	'LBL_FAILED_TO_SEND' => 'Failed to Send',
-
+	'LBL_MAIL_MANAGER'=>'Mail Manager',
 	'LBL_ESSENTIALS' => 'Essentials',
 	'LBL_ALL_SETTINGS' => 'All Settings',
 	'On' => 'On',
@@ -1405,8 +1419,12 @@ $languageStrings = array(
 	'LBL_VIEW_UPDATES_IN_DETAIL' => 'Read More ...',
 	'LBL_DEFAULT_DASHBOARD_TOOLTIP'=>'Make this dashboard as default by reordering it as the first tab!',
 	'LBL_ALLOWED_IP'=>'IP Restriction',
-	'LBL_ADMIN'=>'Admin/Finance',
+	'LBL_ADMIN'=>'HRM',
 	'LBL_ALLOCATION_TYPE'=>'Allocation List',
+	'LBL_FROM_ADDRESS_SETTING'=>'From Address Setting',
+	'LBL_LAST_LOGINTIME'=>'Your last successful login was',
+	'LBL_USERIP'=>'from IP',
+	'LBL_POLICY_DOCUMENT'=>'Policy Document',
 );
 
 $jsLanguageStrings = array(
@@ -1580,7 +1598,7 @@ $jsLanguageStrings = array(
 	//Notification message for dashboard widget delete
 	'JS_ARE_YOU_SURE_TO_DELETE_WIDGET' => 'Are you sure you want to delete widget - %s?',
 	'JS_ARE_YOU_SURE_TO_DELETE_DASHBOARDTAB' => 'Are you sure you want to delete this dashboard tab - %s?',
-	'JS_TABS_LIMIT_EXCEEDED' => 'Sorry! Can\'t add more than 10 tabs',
+	'JS_TABS_LIMIT_EXCEEDED' => 'Sorry! Can\'t add more than 50 tabs',
 	'JS_DUPLICATE_ENTRIES_FOUND_FOR_THE_VALUE' => 'Duplicate entries found for the value',
 	'JS_SELECT_RECORDS_TO_MERGE_FROM_SAME_GROUP' => 'You have to select the records in the same groups for merging',
 	'JS_SELECT_ATLEAST_TWO_RECORD_FOR_MERGING' => 'Select atleast two records for merging',
@@ -1955,4 +1973,5 @@ $jsLanguageStrings = array(
 	'JS_PASSWORD_MISMATCH_ERROR' => 'Please re-enter passwords. The "new password" and "confirm password" values do not match.',
 	'LBL_LIST_DELETE_CONFIRMATION' => 'Are you sure you want to delete?',
 	'JS_WIDGET_RESIZING_WAIT_MSG' => 'Widget contents will load after resizing.',
+	'JS_MAXIMUM_LIMIT'=>'Max char',
 );

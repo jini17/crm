@@ -39,7 +39,7 @@ $languageStrings = array(
 	//Added for existing picklist entries
 	'Analyst'=>'Analyst',
 	'Competitor'=>'Competitor',
-	'Customer'=>'Customer',
+	'Customer'=>'Contacts',
 	'Integrator'=>'Integrator',
 	'Investor'=>'Investor',
 	'Press'=>'Press',

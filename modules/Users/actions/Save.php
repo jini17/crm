@@ -104,6 +104,9 @@ class Users_Save_Action extends Vtiger_Save_Action {
 			}
 		}
 
+		
+	
+		
 		$recordModel = $this->saveRecord($request);
 
 		

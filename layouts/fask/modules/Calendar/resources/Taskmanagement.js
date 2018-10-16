@@ -719,6 +719,19 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 			vtigerInstance.showQuickPreviewForId(recordId, module);
 		});
 	},
+	/*registerTabClick : function(){
+		var self = this;
+
+		jQuery(".dashboardTab").on('click', function(e){ 
+		    var tabid = element.data('tabid');
+		    alert('Jitu'+tabid);
+		    var element = jQuery(e.currentTarget);
+			var recordId = element.data('id');
+			window.location = 'index.php?module=Home&view=DashBoard&tabid='+tabid;
+			var DashboardInst = new Vtiger_Widget_Js();
+			DashboardInst.refreshWidget();
+		});
+	},*/
 
 	registerEvents : function(){
 		var thisInstance = this;
@@ -743,6 +756,7 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
         this.registerQuickEditTaskEvent();
         this.registerPostQuickCreateSaveEvent();
         this.registerQuickPreviewForTask();
+       // this.registerTabClick();
 
 		vtUtils.registerEventForDateFields(jQuery('#taskManagementContainer'));
 
@@ -756,12 +770,15 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 			 app.helper.hideProgress();
 		});
 
-        window.onbeforeunload = function() {
+        /*window.onbeforeunload = function() {
+
+        	var tabid = jQuery("#default_tab").val();
             window.setTimeout(function () {
-                window.location = 'index.php?module=Home&view=DashBoard&tabid=2';
+                window.location = 'index.php?module=Home&view=DashBoard&tabid='+tabid;
             }, 0);
+            
             window.onbeforeunload = null;
-        }
+        }*/
 	}
 
 

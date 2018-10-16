@@ -175,7 +175,9 @@ class Vtiger_Field_Model extends Vtiger_Field {
 				 $fieldDataType = 'range';		//added by jitu@5jan2017	
 			}  else if($uiType == '2002') {		//Modified Line
 				 $fieldDataType = 'multiregion';		//Modified Line added ny jitu
-			}else {
+			}else if($uiType == '3995') {		//Modified Line
+				 $fieldDataType = 'Country';		//Modified Line added ny jitu
+			} else {
 				$webserviceField = $this->getWebserviceFieldObject();
 				$fieldDataType = $webserviceField->getFieldDataType();
 			}
@@ -184,6 +186,26 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		}
 		return $this->fieldDataType;
 	}
+	
+	/**
+	* Function added by Jitu@secondcrm.com on Mar 05, 2015 for new UI Type 3995
+	* This function will retrieve all country
+	*/
+	public function getAllCountry() {
+		global $adb;
+
+		$sql="select * from secondcrm_country WHERE presence =1";
+		$result = $adb->pquery($sql, array());
+		
+		$country = array();
+	
+		for($i=0;$i<$adb->num_rows($result);$i++) {
+			$countryid 	     	 = $adb->query_result($result,$i,'countryid');
+			$country[$countryid] = $adb->query_result($result,$i,'country');
+		}
+		return $country;	
+	}
+	
 	/**
 	 * Function returns all the User Roles
 	 * @return
@@ -452,8 +474,9 @@ class Vtiger_Field_Model extends Vtiger_Field {
 	 * @return <Boolean>
 	 */
 	public function isAjaxEditable() {
-		$ajaxRestrictedFields = array('4', '72', '61', '999');
-		if(!$this->isEditable() || in_array($this->get('uitype'), $ajaxRestrictedFields)) {
+
+		$ajaxRestrictedFields = array('4', '72', '61', '999','28','3995');
+		if(!$this->isEditable() || in_array($this->get('uitype'), $ajaxRestrictedFields) || $this->get('name')=='category' || $this->get('name')=='message') {
 			return false;
 		}
 		return true;
@@ -570,6 +593,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 	 * @return <Array> - array of field values
 	 */
 	public function getFieldInfo() {
+		
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$fieldDataType = $this->getFieldDataType();
 
@@ -578,8 +602,9 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		$this->fieldInfo['quickcreate'] = $this->isQuickCreateEnabled();
 		$this->fieldInfo['masseditable'] = $this->isMassEditable();
 		$this->fieldInfo['defaultvalue'] = $this->hasDefaultValue();
+		$this->fieldInfo['maximumlength'] = $this->get('maximumlength');
 		$this->fieldInfo['column'] = $this->get('column');
-		$this->fieldInfo['type'] = $fieldDataType;
+		$this->fieldInfo['type'] = $fieldDataType; 
 		$this->fieldInfo['name'] = $this->get('name');
 		$this->fieldInfo['label'] = vtranslate($this->get('label'), $this->getModuleName());
 
@@ -669,7 +694,12 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		$lastmonth1 = date("Y-m-t", strtotime($lastmonth0));
 		$nextmonth0 = date("Y-m-d", mktime(0, 0, 0, $m + 1, "01", $y));
 		$nextmonth1 = date("Y-m-t", strtotime($nextmonth0));
-
+                        
+                                                $last6month1 = $today;
+		$last6month0 =  date("Y-m-d", mktime(0, 0, 0, $m, $d - 180, $y));
+		$next6month0 = $today;
+		$next6month1 =date("Y-m-d", mktime(0, 0, 0, $m, $d+ 180, $y));
+                
 		  // (Last Week) If Today is "Sunday" then "-2 week Sunday" will give before last week Sunday date
 		if(!$userPeferredDayOfTheWeek){
 			$userPeferredDayOfTheWeek = 'Sunday';
@@ -773,6 +803,12 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		} elseif ($type == "lastmonth") {
 			$dateValues[0] = $lastmonth0;
 			$dateValues[1] = $lastmonth1;
+		} elseif ($type == "last6month") {
+			$dateValues[0] = $last6month0;
+			$dateValues[1] = $last6month1;
+		} elseif ($type == "next6month") {
+			$dateValues[0] = $next6month0;
+			$dateValues[1] = $next6month1;
 		} elseif ($type == "nextmonth") {
 			$dateValues[0] = $nextmonth0;
 			$dateValues[1] = $nextmonth1;
@@ -862,6 +898,8 @@ class Vtiger_Field_Model extends Vtiger_Field {
 								'lastmonth' => array('label' => 'LBL_LAST_MONTH'),
 								'thismonth' => array('label' => 'LBL_CURRENT_MONTH'),
 								'nextmonth' => array('label' => 'LBL_NEXT_MONTH'),
+                                                                                                                                                                                                 'next6month' => array('label' => 'LBL_NEXT_SIX_MONTH'),
+                                                                                                                                                                                                  'last6month' => array('label' => 'LBL_LAST_SIX_MONTH'),
 								'last7days' => array('label' => 'LBL_LAST_7_DAYS'),
 								'last14days' => array('label' => 'LBL_LAST_14_DAYS'),
 								'last30days' => array('label' => 'LBL_LAST_30_DAYS'),

@@ -6,7 +6,11 @@
 * Portions created by vtiger are Copyright (C) vtiger.
 * All Rights Reserved.
 ************************************************************************************}
-<div class="col-sm-12 col-xs-12 extensionContents">
+<div class="col-sm-12 col-xs-12 extensionContents" style="position:relative;">
+      <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 0;right:0 !important ; left: 98% !important; z-index: 999 " title="Left Panel Show/Hide">
+                    <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
+            </button>  
+        <div class="clearfix"></div>
     <div class="row">
         {if !$MODAL}
             <div class="col-sm-6 col-xs-6">
@@ -36,16 +40,16 @@
                 <div class="col-sm-12 col-xs-12">
         {/if}
                 <input type="hidden" name="pageStartRange" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" /> 
-	            <input type="hidden" name="pageEndRange" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" /> 
-	            <input type="hidden" name="previousPageExist" id="previousPageExist" value="{$PAGING_MODEL->isPrevPageExists()}" /> 
-	            <input type="hidden" name="nextPageExist" id="nextPageExist" value="{$PAGING_MODEL->isNextPageExists()}" /> 
+                    <input type="hidden" name="pageEndRange" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" /> 
+                    <input type="hidden" name="previousPageExist" id="previousPageExist" value="{$PAGING_MODEL->isPrevPageExists()}" /> 
+                    <input type="hidden" name="nextPageExist" id="nextPageExist" value="{$PAGING_MODEL->isNextPageExists()}" /> 
                 <input type="hidden" name="totalCount" id="totalCount" value="{$TOTAL_RECORD_COUNT}" /> 
-	            <input type='hidden' name="pageNumber" value="{$PAGING_MODEL->get('page')}" id='pageNumber'> 
-	            <input type='hidden' name="pageLimit" value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'> 
+                    <input type='hidden' name="pageNumber" value="{$PAGING_MODEL->get('page')}" id='pageNumber'> 
+                    <input type='hidden' name="pageLimit" value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'> 
                 <input type="hidden" name="noOfEntries" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries"> 
-	            {assign var=RECORD_COUNT value=$TOTAL_RECORD_COUNT} 
-	            {assign var=PAGE_NUMBER value=$PAGING_MODEL->get('page')} 
-	            {include file="Pagination.tpl"|vtemplate_path:$MODULE SHOWPAGEJUMP=true} 
+                    {assign var=RECORD_COUNT value=$TOTAL_RECORD_COUNT} 
+                    {assign var=PAGE_NUMBER value=$PAGING_MODEL->get('page')} 
+                    {include file="Pagination.tpl"|vtemplate_path:$MODULE SHOWPAGEJUMP=true} 
             </div>
         </div>
         <br>

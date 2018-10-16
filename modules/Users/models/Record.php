@@ -65,7 +65,9 @@ class Users_Record_Model extends Vtiger_Record_Model {
 	public function getCalendarSettingsDetailViewUrl(){
 		return 'index.php?module=' .$this->getModuleName() . '&parent=Settings&view=Calendar&record='.$this->getId();
 	}
-	
+	public function getEmploymentTabURL($url){
+		return $url.'&record='.$_REQUEST['record'];
+	}
 	public function getCalendarSettingsEditViewUrl(){
 		return 'index.php?module='.$this->getModuleName() . '&parent=Settings&view=Calendar&mode=Edit&record='.$this->getId();
 	}
@@ -240,6 +242,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
 			$sql .= ' WHERE status = ?';
 			$params[] = 'Active';
 		}
+                                            
 		$result = $db->pquery($sql, $params);
 
 		$noOfUsers = $db->num_rows($result);
@@ -432,6 +435,15 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		return $imageDetails;
 	}
 
+	/**
+	 * Function to get Social Media Links to respective Users
+	 * @return <Array>
+	*/
+
+	public function getSocialMediaLinks($mediafield, $userid){
+		$userobjectModel = self::getInstanceFromPreferenceFile($userid);
+		return $userobjectModel->get($mediafield);
+	}
 
     /**
 	 * Function to get all the accessible users
@@ -1098,7 +1110,7 @@ class Users_Record_Model extends Vtiger_Record_Model {
 	}
 
 	//added by jitu@Tab permission to nonadmin user like admin settings
-	public function getTabDetails($blockid){
+	public function getTabDetails($blockid, $filtersubtab=array()){
 
 		$db  = PearDatabase::getInstance();
 		//$db->setDebug(true);
@@ -1106,7 +1118,12 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		$result = $db->pquery($query,array($blockid));
 		$blocklabel = $db->query_result($result,0, 'label');
 
-		$fieldqry = "SELECT name, linkto FROM vtiger_settings_field WHERE blockid=? ORDER BY sequence ASC";
+		$filtercond = '';
+		if(count($filtersubtab)>0){
+			$filter = implode(',',$filtersubtab);
+			$filtercond = " AND fieldid IN ($filter)";
+		}
+		$fieldqry = "SELECT name, linkto FROM vtiger_settings_field WHERE blockid=? ".$filtercond ." ORDER BY sequence ASC";
 		$fldresult = $db->pquery($fieldqry,array($blockid));
 		$row = array();
 		if($db->num_rows($fldresult)>0) {
@@ -1117,5 +1134,43 @@ class Users_Record_Model extends Vtiger_Record_Model {
 		}
 		return $row;
 	}	//end here 
+        
+                    public function getBirthdayWish($date,$id) {
+                                    
+//		$module = $this->getModule();
+//		return 'index.php?module='.$this->getModuleName().'&parent=Settings&view='.$module->getDetailViewName().'&record='.$this->getId();
+                                    
+
+                                      
+//                                        $bday = strtotime(date('md',strtotime($date)));
+//                                        //echo $paymentDate; // echos today! 
+//                                        $before = date('m-d', strtotime(date('Y-m-d'). ' +7 day'));
+//                                        $after   = date('m-d', strtotime(date('Y-m-d'). ' +7 day'));
+                                        $birthdateArray = date_parse_from_format("d-m-Y", $date);
+                                        $todayArray = date_parse_from_format("d-m-Y", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
+
+                                        $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
+                                        $today = date_create(date('d-m-Y')); //This should also be actual current date
+
+                                        $diff = date_diff($today, $birthdate);
+                                         $difference = $diff->format("%a");
+                                         
+//                                        
+//                                            $cur_day_month = date('d-m');
+//                                            $day_month = date('d-m',strtotime($date));
+                                            if($difference >= -7 && $difference <=7){
+                                                $wish = '<div class="message" id="birthdaysms"  >';
+                                                $wish .= '<a class="birthday" style="font-weight: bold;" onclick="javascript:Settings_Users_List_Js.birthdayEmail('.$id.')">';
+                                                $wish .= "<i class='fa fa-gift'></i> &nbsp;";
+                                                $wish .= date('d-F',strtotime($date));
+                                                $wish .= " <br />Say Happy Birthday";
+                                                $wish .= '</a>';
+                                                $wish .= '</div>';
+                                                return $wish;
+                                            }
+                                            else{
+                                                return false;
+                                            }
+	}
 
 }

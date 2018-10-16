@@ -55,32 +55,35 @@
         })();
     </script>
 {/if}
-<div class="main-container clearfix" style="margin-top:10px">
-		{assign var=LEFTPANELHIDE value=$USER_MODEL->get('leftpanelhide')}
+<div class="main-container clearfix" style="margin-top:10px;">
+
+                {assign var=LEFTPANELHIDE value=$USER_MODEL->get('leftpanelhide')}
+
         <div class="module-nav clearfix settingsNav hidden-sm hidden-xs" id="modnavigator">
-            <div class=" height100Per">
+
+            <div class=" height100Per sidebar-essentials">
                 {include file="modules/Settings/Vtiger/Sidebar.tpl"}
             </div>
         </div>
-        
+
 <div id="sidebar-essentials" class="sidebar-essentials visible-xs visible-sm">
         <div class="col-xs-12 text-center visible-xs visible-sm" style="margin-top: 40px;margin-bottom:20px;">
         <a class="btn btn-info" onclick="$('.sidebar-menu-u, .settingsNav').toggleClass('hidden-xs hidden-sm');  $('.settingsNav').find('.settingsgroup').toggleClass('hidden-xs hidden-sm');" style=" width: 100%">Sidebar 
         &nbsp;<span class="toggleButton"><i class="ti-angle-down"></i></span></a>
         </div>
-        <br/><div class="clearfix"></div><br/>
+        <br/><div class="clearfix"></div>
         <div class="sidebar-menu-u hidden-xs hidden-sm hide">
-			
+
 
             <div class="settingsgroup" style="overflow: scroll">
-	            <div class="col-xs-12 text-center visible-xs visible-sm" style="margin-top: 40px;margin-bottom:20px; width: 100%">
+                    <div class="col-xs-12 text-center visible-xs visible-sm" style="margin-top: 40px;margin-bottom:20px; width: 100%">
         <a class="btn btn-info" onclick="$('.sidebar-menu-u, .settingsNav').toggleClass('hidden-xs hidden-sm');  $('.settingsNav').find('.settingsgroup').toggleClass('hidden-xs hidden-sm');">Sidebar 
         &nbsp;<span class="toggleButton"><i class="ti-angle-down"></i></span></a>
         </div>
             <div>
                 <input type="text" placeholder="{vtranslate('LBL_SEARCH_FOR_SETTINGS', $QUALIFIED_MODULE)}" class="search-list col-lg-8" id='settingsMenuSearch'>
             </div>
-            <br><br>
+            <div class="clearfix"></div>
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                 {foreach item=BLOCK_MENUS from=$SETTINGS_MENUS}
                     {assign var=BLOCK_NAME value=$BLOCK_MENUS->getLabel()}

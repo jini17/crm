@@ -7,7 +7,39 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-Vtiger_Detail_Js("Reports_Detail_Js",{},{
+Vtiger_Detail_Js("Reports_Detail_Js",{
+
+	registerBringToDashboard :function(e) {
+		
+		var recordId = jQuery("#recordId").val();
+		var dtab 	 = jQuery("#dashboard_tab").val(); 
+		
+		if(dtab==''){
+			var params = {
+                              message: app.vtranslate('JS_SELECT_DASHBOARD_TAB', 'Reports')
+                       };
+                    app.helper.showErrorNotification(params);
+            e.preventDefault();     
+		}
+
+		var postData = {
+	        'record' : recordId,
+	        'action' : "BringtoDash",
+	        'module' : app.getModuleName(),
+	        'dashboardtab': dtab,
+	      };
+		app.helper.showProgress();
+		app.request.post({data:postData}).then(
+			function(error,data){
+				app.helper.hideProgress();
+				window.location.href="index.php?module=Home&view=DashBoard&tabid="+dtab;
+			}
+		);
+
+
+	},
+
+},{
 	advanceFilterInstance : false,
 	detailViewContentHolder : false,
 	HeaderContentsHolder : false, 
@@ -161,7 +193,7 @@ Vtiger_Detail_Js("Reports_Detail_Js",{},{
 			return false;
 		});
 	},
-	
+
 	registerEvents : function(){
 		this.registerSaveOrGenerateReportEvent();
         this.registerEventsForActions();

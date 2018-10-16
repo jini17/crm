@@ -10,7 +10,7 @@
 {strip}
 	<input type=hidden name="timeFormatOptions" data-value='{$DAY_STARTS}' />
 	{foreach key=BLOCK_LABEL_KEY item=FIELD_MODEL_LIST from=$RECORD_STRUCTURE}
-		{if $BLOCK_LABEL_KEY neq 'LBL_CALENDAR_SETTINGS'}
+		{if $BLOCK_LABEL_KEY neq 'LBL_CALENDAR_SETTINGS' &&  $BLOCK_LABEL_KEY neq 'LBL_CURRENCY_CONFIGURATION' && $BLOCK_LABEL_KEY neq 'Other Preferences'}
 			{assign var=BLOCK value=$BLOCK_LIST[$BLOCK_LABEL_KEY]}
 			{if $BLOCK eq null or $FIELD_MODEL_LIST|@count lte 0}{continue}{/if}
 			<div class="block block_{$BLOCK_LABEL_KEY}">
@@ -62,10 +62,10 @@
 										{/if}
 										<div class="fieldLabel  col-xs-6 col-md-3 {$WIDTHTYPE}"><span class="muted">{vtranslate({$FIELD_MODEL->get('label')},{$MODULE_NAME})}</span></div>
 										<div class="fieldValue  col-xs-6 col-md-3 {$WIDTHTYPE}">
-											<div id="imageContainer" width="300" height="200">
+											<div id="imageContainer" style="width:300px; height: auto;" >
 												{foreach key=ITER item=IMAGE_INFO from=$IMAGE_DETAILS}
 													{if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
-														<img src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}" width="300" height="200">
+														<img src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}" style="width:300px; height: auto;" >
 													{/if}
 												{/foreach}
 											</div>

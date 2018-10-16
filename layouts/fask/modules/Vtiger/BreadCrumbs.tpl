@@ -22,5 +22,6 @@
 			</li>
 			{assign var=ZINDEX value=$ZINDEX-1}
 		{/foreach}
+		
 	</ul>
 </div>

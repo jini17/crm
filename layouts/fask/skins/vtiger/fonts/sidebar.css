@@ -492,11 +492,11 @@ When click on sidebar toggler and also for tablet
 }
 
 /* MS supports */
-@supports (-ms-overflow-style: none) {
+/*@supports (-ms-overflow-style: none) {
   .ps {
     overflow: auto !important;
   }
-}
+}*/
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .ps {

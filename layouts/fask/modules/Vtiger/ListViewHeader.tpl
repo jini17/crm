@@ -11,6 +11,7 @@
 
 {strip}
 <div class="module-action-bar clearfix">
+    
     <div class="module-action-content clearfix row">
         <div class="col-lg-4 col-md-4 col-sm-4">
                 <h3 class="module-title pull-left">&nbsp;{vtranslate($MODULE, $MODULE)}&nbsp;</h3>

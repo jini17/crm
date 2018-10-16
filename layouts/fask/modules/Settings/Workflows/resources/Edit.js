@@ -324,6 +324,29 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
       });
       jQuery('#module_name').trigger('change');
    },
+
+   /**
+   * Function to Load SMS Template on SMS Text Area
+   * Added By Mabruk on 02/05/2018 
+   * for SMS Template
+   */
+   loadSMSTemplate: function() {  
+      jQuery('#smstemplate').click(function(){
+          var record = jQuery('#smstemplate :selected').val();               
+          var params = {
+                  'module' : 'EmailTemplates',
+                  'action' : 'ShowTemplateContent',
+                  'mode'   : 'getContent',
+                  'record' : record            
+              };
+
+          app.request.post({"data":params}).then(function(err,data) {           
+              var text = jQuery.trim(jQuery(data.content).text());
+              jQuery('#content').text(text);            
+          });
+      });
+   },
+   //END -- Mabruk
    
    //Workflow action related api's
    registerEditTaskEvent: function () {
@@ -336,6 +359,7 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
          app.request.get({url:url}).then(function (error, data) {
             app.helper.hideProgress();
             app.helper.loadPageContentOverlay(data).then(function(container) {
+                thisInstance.loadSMSTemplate(); 
                 var container = jQuery(container);
                 var viewPortHeight = $(window).height();
 

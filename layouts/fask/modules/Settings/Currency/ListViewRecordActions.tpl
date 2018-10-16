@@ -10,11 +10,13 @@
  ********************************************************************************/
 -->*}
 {strip}
-    <div class="table-actions">      
+
+    <div class="table-actions" style="position: relative;">     
+
             {foreach item=RECORD_LINK from=$LISTVIEW_ENTRY->getRecordLinks()}
                 <span>
                 {assign var="RECORD_LINK_URL" value=$RECORD_LINK->getUrl()}
-                
+
                 {if $RECORD_LINK->getIcon() eq 'icon-pencil' }
                       <a {if stripos($RECORD_LINK_URL, 'javascript:')===0} title='{vtranslate('LBL_EDIT', $MODULE)}' onclick="{$RECORD_LINK_URL|substr:strlen("javascript:")};if(event.stopPropagation){ldelim}event.stopPropagation();{rdelim}else{ldelim}event.cancelBubble=true;{rdelim}" {else} href='{$RECORD_LINK_URL}' {/if}>
                       <i class="fa fa-pencil" ></i>

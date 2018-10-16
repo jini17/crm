@@ -10,6 +10,7 @@
 
 Class EmailTemplates_Edit_View extends Vtiger_Index_View {
 
+	
 	public function preProcess(Vtiger_Request $request, $display = true) {
 		$record = $request->get('record');
 		if (!empty($record)) {
@@ -42,7 +43,15 @@ Class EmailTemplates_Edit_View extends Vtiger_Index_View {
 	 * @return boolean
 	 */
 	public function checkPermission(Vtiger_Request $request) {
-		return true;
+		
+		$moduleName = $request->getModule();
+		$record = $request->get('record');
+                                         $currentUser = Users_Record_Model::getCurrentUserModel();
+                                          $role = $currentUser->get('roleid');
+		$actionName = ($record) ? 'EditView' : 'CreateView';
+		if(!Users_Privileges_Model::isPermitted($moduleName, $actionName, $record) || !$currentUser->isAdminUser()) {
+			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
+		}
 	}
 
 	/**

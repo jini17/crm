@@ -13,14 +13,14 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 	function __construct() {
 	
 		parent::__construct();
-       	$this->exposeMethod('getUserEducation');
-	    $this->exposeMethod('getUserWorkexp');
-		$this->exposeMethod('getUserSkills');
-		$this->exposeMethod('getUserProject');
-		$this->exposeMethod('getUserEmergency');
-		$this->exposeMethod('getUserLanguage');
-		$this->exposeMethod('getUserLeave');
-		$this->exposeMethod('getUserClaim');
+		   	$this->exposeMethod('getUserEducation');
+			$this->exposeMethod('getUserWorkexp');
+			$this->exposeMethod('getUserSkills');
+			$this->exposeMethod('getUserProject');
+			$this->exposeMethod('getUserEmergency');
+			$this->exposeMethod('getUserLanguage');
+			$this->exposeMethod('getUserLeave');
+			$this->exposeMethod('getUserClaim');
     	}
 
 
@@ -34,6 +34,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 	}
 
 	public function getUserEducation(Vtiger_Request $request){
+
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$recordId = $request->get('record');
@@ -145,20 +146,14 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 	}
 
 	public function getUserLeave(Vtiger_Request $request) { 
+	
 		$db = PearDatabase::getInstance();
+		//$db->setDebug(true);
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$recordId = $request->get('record');
 		$currentyear = date("Y");
-
-		//if year end process run then user can apply leave for next year other wise current year
-		$sql  = "SELECT MAX(year) as year from secondcrm_user_balance LIMIT 0,1";
-		$res = $db->pquery($sql,array());
-		$currentyear = $db->query_result($res, 0, 'year');
-		if($currentyear > date("Y")) {
-			$currentyear = $currentyear;	
-		 } //end here 
-
+		
 		$selectedmember = '';
 		$selectedleavetype = '';
 
@@ -172,23 +167,20 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		if(isset($_REQUEST['selleavetype']) && $_REQUEST['selleavetype'] !='All') {
 			$selectedleavetype = $request->get('selleavetype');
 		}
-		//check leave alloted to user or not
-		$isCreate = Users_LeavesRecords_Model::hasAllocateLeave($recordId);
 		
-   		
-		//check if he/she is already apply then restrict to user
-
-         
-		$viewer->assign('ISCREATE',$isCreate);
+		//check leave alloted to user or not
+		$isCreate = count(Users_LeavesRecords_Model::getLeaveTypeList($recordId)) >0 ?true:false;
+		
+   		$viewer->assign('ISCREATE',$isCreate);
 	
 		$manager = Users_LeavesRecords_Model::checkIfManager($recordId);
 
 		$section  = $request->get('section');   
 		
 		$viewer->assign('MODULE',$moduleName);
-		$viewer->assign('CURRENTYEAR',date('Y'));//Added By Jitu Date Combobox 
-		$viewer->assign('CURYEAR',(date('Y')+1));//Added By Jitu Date Combobox
-		$viewer->assign('STARTYEAR',date('Y')-5);//Added By Jitu Date Combobox
+		$viewer->assign('STARTYEAR',date('Y'));//Added By Jitu Date Combobox 
+		$viewer->assign('ENDYEAR',(date('Y')+1));//Added By Jitu Date Combobox
+
 		$viewer->assign('CREATE_LEAVE_URL', Users_LeavesRecords_Model::getCreateLeaveURL());
 		$viewer->assign('USERID',$recordId);
 
@@ -196,8 +188,6 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		$viewer->assign('SECTION',$section);
 
 		####start Get My leave list##### 
-		//$currentyear='2019';
-
 		$myleaves = Users_LeavesRecords_Model::getMyLeaves($recordId, $currentyear); //echo $currentyear;
 		$viewer->assign('CurrentDate', date('Y-m-d'));
 		$viewer->assign('MYLEAVES', $myleaves);
@@ -278,6 +268,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 
 	public function getUserClaim(Vtiger_Request $request) { 
 		$db = PearDatabase::getInstance();
+		
 		$moduleName = $request->getModule();
 		$viewer = $this->getViewer($request);
 		$recordId = $request->get('record'); 
@@ -310,13 +301,14 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 
 		
 		//check leave alloted to user or not
-		$isCreate = Users_ClaimRecords_Model::hasAllocateLeave($recordId);
+		//$isCreate = Users_ClaimRecords_Model::hasAllocateLeave($recordId);
 		$jobgrade = Users_ClaimRecords_Model::getJobGrade($recordId); 
 		$_SESSION["myjobgrade"] = $jobgrade;
 		
    		//$_SESSION["favcolor"] = "yellow"; echo "hai"; echo $_SESSION["myjobgrade"]; echo $_SESSION["favcolor"];echo "hai";
 		//check if he/she is already apply then restrict to user
-
+		
+		$isCreate = count(Users_ClaimRecords_Model::getClaimTypeList($recordId)) >0 ?true:false;
          
 		$viewer->assign('ISCREATE',$isCreate);
 	
@@ -353,7 +345,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 		}
 
 		$pageLimit = 5;// set number of row for each page here-//Added By Safuan MyTeamLeave Pagination
-//$selectedclaimtype = '566';
+
 
 		####start Get My Team leave list##### 
 		$myteamclaims = Users_ClaimRecords_Model::getMyTeamClaim($recordId,$currentyear, $pageNumber, $pageLimit,$selectedmember,$selectedclaimtype);
@@ -421,7 +413,6 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 	}
 
 
-
 	/**
 	 * Function to get the list of Script models to be included
 	 * @param Vtiger_Request $request
@@ -430,15 +421,29 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 	function getHeaderScripts(Vtiger_Request $request) {
 		$headerScriptInstances = parent::getHeaderScripts($request);
 		
+		$mode = $request->get('mode');
+		
 		$jsFileNames = array(
-			'modules.Vtiger.resources.List',
-			'modules.Users.resources.Leave',
-			'modules.Users.resources.Claim',
-			'modules.Users.resources.Education',
-			'modules.Users.resources.WorkExp',
-			'modules.Users.resources.EmployeeProjects',
+			"~layouts/fask/modules/Vtiger/resources/List.js",
 		);
 
+		if($mode == 'getUserEducation'){
+			array_push($jsFileNames, "~layouts/fask/modules/Users/resources/Education.js");
+		}
+		if($mode == 'getUserWorkexp'){
+			array_push($jsFileNames, "~layouts/fask/modules/Users/resources/WorkExp.js");
+		}
+		if($mode == 'getUserProject'){
+			array_push($jsFileNames, "~layouts/fask/modules/Users/resources/EmployeeProjects.js");
+		}
+
+		if($mode == 'getUserLeave'){
+			array_push($jsFileNames, "~layouts/fask/modules/Users/resources/Leave.js");
+		}
+		if($mode == 'getUserClaim'){
+			array_push($jsFileNames, "~layouts/fask/modules/Users/resources/Claim.js");
+		}
+		
 		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
 		$headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
 		return $headerScriptInstances;

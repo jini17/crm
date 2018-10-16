@@ -102,7 +102,7 @@
     opacity: 0;
 }
 
-*html .wijmo-wijsplitter-vertical .ui-resizable-e
+html .wijmo-wijsplitter-vertical .ui-resizable-e
 {
     right: -4px;
 }
@@ -1364,7 +1364,7 @@ padding:0.4em;
 .wijmo-wijtooltip-arrow-tr .wijmo-wijtooltip-pointer-inner {
     border-left: 12px dashed transparent;
     border-right: 0 none;
-    +border-style:dashed;
+    border-style:dashed;
     _border-style:dashed;
     right: 2px;
 }
@@ -1372,7 +1372,7 @@ padding:0.4em;
 .wijmo-wijtooltip-arrow-tc .wijmo-wijtooltip-pointer-inner {
     border-left: 8px dashed transparent;
     border-right: 8px dashed transparent;
-    +border-style:dashed;
+    border-style:dashed;
     _border-style:dashed;
     left: -8px;
 }
@@ -1382,7 +1382,7 @@ padding:0.4em;
     border-right-style: dashed;
     border-right-color: inherit;
     border-right-width: 12px;
-    +border-style:dashed;
+    border-style:dashed;
     _border-style:dashed;
     left: 2px;
 }

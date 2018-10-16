@@ -16,7 +16,12 @@
                     <span class="recordLabel pushDown" title="{$RECORD->getName()}">
                         <span class="templatename">{$RECORD->getName()}</span>&nbsp;
                     </span>
+
                 </h4>
+               
+                                           
+                                            
+                                        
             </div>
         </div>
     </div>

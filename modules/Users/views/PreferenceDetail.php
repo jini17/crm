@@ -14,7 +14,7 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$record = $request->get('record');
 
-		if($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $record) {
+		if($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $record || $currentUserModel->get('roleid')=='H12' || $currentUserModel->get('roleid')=='H13') {
 			return true;
 		} else {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
@@ -142,7 +142,23 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
 
 			$activeBLock = Settings_Vtiger_Module_Model::getActiveBlockName($request);
 			$viewer->assign('ACTIVE_BLOCK', $activeBLock);
+			$viewer->assign('SubType',$request->get('subtype'));
+			
+			if($request->get('tab') && $request->get('tab')=='leave'){
+				$viewer->assign('DEFAULT_TAB', 1);
+				$viewer->assign('ISACTIVE', 0);
+				$viewer->assign('TABTYPE', $request->get('tab'));
+				$viewer->assign('appid', $request->get('appid'));
+				$viewer->assign('leaveid', $request->get('leaveid'));
 
+			} else if($request->get('tab')=='claim'){
+				$viewer->assign('DEFAULT_TAB', 1);
+				$viewer->assign('ISACTIVE', 0);
+				$viewer->assign('TABTYPE', $request->get('tab'));
+				$viewer->assign('appid', $request->get('appid'));
+				$viewer->assign('claimid', $request->get('claimid'));
+			}					
+			
 			if($display) {
 				$this->preProcessDisplay($request);
 			}

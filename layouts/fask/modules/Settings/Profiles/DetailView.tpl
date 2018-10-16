@@ -28,6 +28,12 @@
 				<div class="profileDetailView detailViewInfo">
 					<div class="row form-group">
 						<div class="col-lg-2 col-md-2 col-sm-2 control-label fieldLabel">
+							<label>{vtranslate('LBL_PLAN', $QUALIFIED_MODULE)}</label>
+						</div>
+						<div class="fieldValue col-lg-6 col-md-6 col-sm-12"  name="plantitle" id="plantitle" value="{$RECORD_MODEL->get('planid')}"><strong>{$RECORD_MODEL->getPlan()}</strong></div>
+					</div>
+					<div class="row form-group">
+						<div class="col-lg-2 col-md-2 col-sm-2 control-label fieldLabel">
 							<label>{vtranslate('LBL_PROFILE_NAME', $QUALIFIED_MODULE)}</label>
 						</div>
 						<div class="fieldValue col-lg-6 col-md-6 col-sm-12"  name="profilename" id="profilename" value="{$RECORD_MODEL->getName()}"><strong>{$RECORD_MODEL->getName()}</strong></div>
@@ -90,8 +96,11 @@
 									</tr>
 								</thead>
 								<tbody>
+
 									{foreach from=$RECORD_MODEL->getModulePermissions() key=TABID item=PROFILE_MODULE}
 										{assign var=IS_RESTRICTED_MODULE value=$RECORD_MODEL->isRestrictedModule($PROFILE_MODULE->getName())}
+										{assign var=IS_ALLOWED_MODULE value=$RECORD_MODEL->isAllowedModule($PROFILE_MODULE->getName(), $PLAN)}
+										{if $IS_ALLOWED_MODULE}
 										<tr>
 											{assign var=MODULE_PERMISSION value=$RECORD_MODEL->hasModulePermission($PROFILE_MODULE)}
 											<td data-module-name='{$PROFILE_MODULE->getName()}' data-module-status='{$MODULE_PERMISSION}'>
@@ -211,6 +220,7 @@
 												</div>
 											</td>
 										</tr>
+										{/if}
 									{/foreach}
 								</tbody>
 							</table>

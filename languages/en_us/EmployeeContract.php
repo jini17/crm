@@ -13,11 +13,18 @@ $languageStrings = array(
 	'SINGLE_EmployeeContract' => 'Employee Contract',
 	'LBL_ADD_RECORD' => 'Add Employee Contract',
 	'LBL_Employment_Contract_Information' => 'Employee Contract Information',
-
+	'LBL_NAME' => 'Employee',
 	// Blocks
 	'LBL_Salary_Tracking' => 'Salary Tracking',
-
-	
+	'LBL_NOT_DURATION'=>'are expiring in 30 days',
+	'LBL_EMPLOYEE_CONTRACT'=>'No employee contracts',
+	'LBL_PASSPORT'=>'No Passports',
+	'LBL_VISA'=>"No Visa's",
+	'LBL_Benefits'=>'Benefits & Entitlement',
+	'LBL_BENEFIT_NAME'=>'Benefit Name',
+	'LBL_BENEFIT_DESCRIPTION'=>'Benefit Description',
+                     'LBL_RECORD_DETAILS'=>'Contract Details',
+                    'Details'=> 'Contract Details'
 );
 
 $jsLanguageStrings = array(

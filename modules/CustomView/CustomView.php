@@ -530,8 +530,10 @@ class CustomView extends CRMEntity {
 			"thisweek" => "" . $mod_strings['Current Week'] . "",
 			"nextweek" => "" . $mod_strings['Next Week'] . "",
 			"lastmonth" => "" . $mod_strings['Last Month'] . "",
+			"last6month" => "" . $mod_strings['Last 6 Month'] . "",
 			"thismonth" => "" . $mod_strings['Current Month'] . "",
 			"nextmonth" => "" . $mod_strings['Next Month'] . "",
+			"next6month" => "" . $mod_strings['Next 6 Month'] . "",
 			"last7days" => "" . $mod_strings['Last 7 Days'] . "",
 			"last30days" => "" . $mod_strings['Last 30 Days'] . "",
 			"last60days" => "" . $mod_strings['Last 60 Days'] . "",
@@ -582,12 +584,22 @@ class CustomView extends CRMEntity {
 		$lastMonthStartDateTime = new DateTimeField($lastmonth0 . ' ' . date('H:i:s'));
 		$lastmonth1 = date("Y-m-t", strtotime("-1 Month"));
 		$lastMonthEndDateTime = new DateTimeField($lastmonth1 . ' ' . date('H:i:s'));
+		
+		$last6month0 = date("Y-m-d", mktime(0, 0, 0, date("m") - 6, "01", date("Y")));
+		$last6MonthStartDateTime = new DateTimeField($lastmonth0 . ' ' . date('H:i:s'));
+		$last6month1 = date("Y-m-t", strtotime("-6 Month"));
+		$last6MonthEndDateTime = new DateTimeField($last6month1 . ' ' . date('H:i:s'));
 
 		$nextmonth0 = date("Y-m-d", mktime(0, 0, 0, date("m") + 1, "01", date("Y")));
 		$nextMonthStartDateTime = new DateTimeField($nextmonth0 . ' ' . date('H:i:s'));
 		$nextmonth1 = date("Y-m-t", strtotime("+1 Month"));
 		$nextMonthEndDateTime = new DateTimeField($nextmonth1 . ' ' . date('H:i:s'));
-
+		
+		$next6month0 = date("Y-m-d", mktime(0, 0, 0, date("m") + 6, "01", date("Y")));
+		$next6MonthStartDateTime = new DateTimeField($nextmonth0 . ' ' . date('H:i:s'));
+		$next6month1 = date("Y-m-t", strtotime("+6 Month"));
+		$next6MonthEndDateTime = new DateTimeField($next6month1 . ' ' . date('H:i:s'));
+		
 		$lastweek0 = date("Y-m-d", strtotime("-2 week Sunday"));
 		$lastWeekStartDateTime = new DateTimeField($lastweek0 . ' ' . date('H:i:s'));
 		$lastweek1 = date("Y-m-d", strtotime("-1 week Saturday"));
@@ -757,9 +769,17 @@ class CustomView extends CRMEntity {
 					document.CustomView.startdate.value = "' . $lastMonthStartDateTime->getDisplayDate() . '";
 					document.CustomView.enddate.value = "' . $lastMonthEndDateTime->getDisplayDate() . '";
 
+				} else if( type == "last6month" ) {
+					document.CustomView.startdate.value = "' . $last6MonthStartDateTime->getDisplayDate() . '";
+					document.CustomView.enddate.value = "' . $last6MonthEndDateTime->getDisplayDate() . '";
+
 				} else if( type == "nextmonth" ) {
 					document.CustomView.startdate.value = "' . $nextMonthStartDateTime->getDisplayDate() . '";
 					document.CustomView.enddate.value = "' . $nextMonthEndDateTime->getDisplayDate() . '";
+
+				} else if( type == "next6month" ) {
+					document.CustomView.startdate.value = "' . $next6MonthStartDateTime->getDisplayDate() . '";
+					document.CustomView.enddate.value = "' . $next6MonthEndDateTime->getDisplayDate() . '";
 
 				} else if( type == "next7days" ) {
 					document.CustomView.startdate.value = "' . $todayDateTime->getDisplayDate() . '";
@@ -1608,8 +1628,16 @@ class CustomView extends CRMEntity {
 		$currentmonth1 = $date->format("Y-m-t");
 		$lastmonth0 = date("Y-m-d", mktime(0, 0, 0, $m - 1, "01", $y));
 		$lastmonth1 = date("Y-m-t", mktime(0, 0, 0, $m - 1, "01", $y));
+		
+		$last6month0 = date("Y-m-d", mktime(0, 0, 0, $m - 6, "01", $y));
+		$last6month1 = date("Y-m-t", mktime(0, 0, 0, $m - 6, "01", $y));
+		
+		$next6month0 = date("Y-m-d", mktime(0, 0, 0, $m + 6, "01", $y));
+		$next6month1 = date("Y-m-t", mktime(0, 0, 0, $m + 6, "01", $y));
+				
 		$nextmonth0 = date("Y-m-d", mktime(0, 0, 0, $m + 1, "01", $y));
 		$nextmonth1 = date("Y-m-t", mktime(0, 0, 0, $m + 1, "01", $y));
+		
 		// (Last Week) If Today is "Sunday" then "-2 week Sunday" will give before last week Sunday date
 		if($todayName == $userPeferredDayOfTheWeek)
 			$lastweek0 = date("Y-m-d",strtotime("-1 week $userPeferredDayOfTheWeek"));
@@ -1716,10 +1744,18 @@ class CustomView extends CRMEntity {
 
 			$datevalue[0] = $lastmonth0;
 			$datevalue[1] = $lastmonth1;
+		} elseif ($type == "last6month") {
+
+			$datevalue[0] = $last6month0;
+			$datevalue[1] = $last6month1;
 		} elseif ($type == "nextmonth") {
 
 			$datevalue[0] = $nextmonth0;
 			$datevalue[1] = $nextmonth1;
+		} elseif ($type == "next6month") {
+
+			$datevalue[0] = $next6month0;
+			$datevalue[1] = $next6month1;
 		} elseif ($type == "next7days") {
 
 			$datevalue[0] = $today;

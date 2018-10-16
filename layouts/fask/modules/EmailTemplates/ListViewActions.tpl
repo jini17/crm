@@ -48,8 +48,7 @@
                         <i class="ti-comment"></i>
                     </button>
                 {/if}
-                
-                
+             
 
                 {if count($LISTVIEW_MASSACTIONS_1) gt 0 or $LISTVIEW_LINKS['LISTVIEW']|@count gt 0}
                     <div class="btn-group listViewMassActions" role="group">

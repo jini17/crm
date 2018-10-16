@@ -9,6 +9,7 @@
 {* modules/Vtiger/views/DashBoard.php *}
     
 {strip}
+<input type="hidden" name="default_tab" id="default_tab" value="{$SELECTED_TAB}" />
 <div class="dashBoardContainer clearfix">
         <div class="tabContainer">
 		
@@ -18,7 +19,7 @@
                         <a data-toggle="tab" href="#tab_{$TAB_DATA["id"]}">
                             <div>
                                 <span class="name textOverflowEllipsis" value="{$TAB_DATA["tabname"]}" style="width:10%">
-                                    <strong>{$TAB_DATA["tabname"]}</strong>
+                                    <strong>{vtranslate($TAB_DATA["tabname"],'Vtiger')}</strong>
                                 </span>
                                 <span class="editTabName hide">
                                     <input type="text" name="tabName"/>
@@ -33,6 +34,55 @@
                 {/foreach}
 				
            <div class="moreSettings pull-right col-lg-2 col-md-2 col-sm-12 col-xs-12">
+               <div class="buttonGroups pull-left">
+                   {if $SELECTED_TAB neq 1}
+		<div class="btn-group"  {$SELECTED_TAB}>
+			{if $SELECTABLE_WIDGETS|count gt 0}
+				<button class='btn btn-info addButton dropdown-toggle widget-btn' data-toggle='dropdown'>
+					{vtranslate('LBL_ADD_WIDGET')}&nbsp;&nbsp;<i class="caret"></i>
+				</button>
+				
+				<ul class="dropdown-menu dropdown-menu-right widgetsList pull-right animated flipInY" style="min-width:100%;text-align:left;">
+					{assign var="MINILISTWIDGET" value=""}
+					{foreach from=$SELECTABLE_WIDGETS item=WIDGET}
+						{if $WIDGET->getName() eq 'MiniList'}
+							{assign var="MINILISTWIDGET" value=$WIDGET} {* Defer to display as a separate group *}
+						{elseif $WIDGET->getName() eq 'Notebook'}
+							{assign var="NOTEBOOKWIDGET" value=$WIDGET} {* Defer to display as a separate group *}
+						{else}
+							<li>
+								<a onclick="Vtiger_DashBoard_Js.addWidget(this, '{$WIDGET->getUrl()}')" href="javascript:void(0);"
+									data-linkid="{$WIDGET->get('linkid')}" data-name="{$WIDGET->getName()}" data-width="{$WIDGET->getWidth()}" data-height="{$WIDGET->getHeight()}">
+									{vtranslate($WIDGET->getTitle(), $MODULE_NAME)}</a>
+							</li>
+						{/if}
+					{/foreach}
+
+					{if $MINILISTWIDGET && $MODULE_NAME == 'Home'}
+						<li class="divider"></li>
+						<li>
+							<a onclick="Vtiger_DashBoard_Js.addMiniListWidget(this, '{$MINILISTWIDGET->getUrl()}')" href="javascript:void(0);"
+								data-linkid="{$MINILISTWIDGET->get('linkid')}" data-name="{$MINILISTWIDGET->getName()}" data-width="{$MINILISTWIDGET->getWidth()}" data-height="{$MINILISTWIDGET->getHeight()}">
+								{vtranslate($MINILISTWIDGET->getTitle(), $MODULE_NAME)}</a>
+						</li>
+						<li>
+							<a onclick="Vtiger_DashBoard_Js.addNoteBookWidget(this, '{$NOTEBOOKWIDGET->getUrl()}')" href="javascript:void(0);"
+								data-linkid="{$NOTEBOOKWIDGET->get('linkid')}" data-name="{$NOTEBOOKWIDGET->getName()}" data-width="{$NOTEBOOKWIDGET->getWidth()}" data-height="{$NOTEBOOKWIDGET->getHeight()}">
+								{vtranslate($NOTEBOOKWIDGET->getTitle(), $MODULE_NAME)}</a>
+						</li>
+					{/if}
+
+
+				</ul>
+			{else if $MODULE_PERMISSION}
+				<button class='btn addButton dropdown-toggle' disabled="disabled" data-toggle='dropdown'>
+					<strong>{vtranslate('LBL_ADD_WIDGET')}</strong> &nbsp;&nbsp;
+					<i class="caret"></i>
+				</button>
+			{/if}
+		</div>
+                {/if}
+	</div>
                     <div class="dropdown dashBoardDropDown pull-right">
                         <button class="btn btn-info reArrangeTabs dropdown-toggle" type="button" data-toggle="dropdown">{vtranslate('LBL_MORE',$MODULE)}
                             &nbsp;&nbsp;<span class="caret"></span></button>
@@ -44,8 +94,6 @@
                     <button class="btn-success updateSequence pull-right hide">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
                 </div>
 
-                
-                
             </ul>
 
             <!-- Related mobile -->

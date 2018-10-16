@@ -40,7 +40,7 @@ class Settings_Vtiger_LeaveTypeTools_View extends Settings_Vtiger_Index_View {
     public function EditLeaveTypeForm($request){
         //echo "<pre>"; print_r($request); die;
         global $adb;
-        $adb->setDebug(true);
+        //$adb->setDebug(true);
         $qualifiedModuleName = $request->getModule(false);
         $values = explode(',', $request->get('values'));
 

@@ -51,6 +51,10 @@ class Vtiger_ShowWidget_View extends Vtiger_IndexAjax_View {
 					$endDate = Vtiger_Date_UIType::getDBInsertedValue($createdTime['end']);
 					$dates['end'] = getValidDBInsertDateTimeValue($endDate . ' 23:59:59');
 				}
+
+				if(!empty($request->get('type'))){
+					$request->set('type', $request->get('type'));
+				}
 				$request->set('createdtime', $dates);
 				
 				$classInstance = new $className();

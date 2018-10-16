@@ -895,6 +895,7 @@ $languageStrings = array(
   'LBL_ASSIGNED_TO' => 'Assigned To',
   'LBL_LEFT_PANEL_SHOW_HIDE' => 'Left Panel Show/Hide',
   'SMSNotifier' => 'SMS Notifier',
+   
   'LBL_NO_MORE_RESULTS' => 'No more results!',
   'LBL_CLICK_TO_EDIT' => 'Click to edit',
   'LBL_SIGNATURE_BLOCK' => 'Signature',

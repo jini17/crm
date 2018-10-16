@@ -12,7 +12,10 @@ class Users_List_View extends Settings_Vtiger_List_View {
 
 	function checkPermission(Vtiger_Request $request) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
-		if(!$currentUserModel->isAdminUser()) {
+		global $current_user;
+	
+		//echo  $current_user->get('hradmin');
+		if(!$currentUserModel->isAdminUser() && $current_user->roleid !='H12' && $current_user->roleid !='H13') {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
 		}
 	}
@@ -23,8 +26,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 		$jsFileNames = array(
 			'modules.Users.resources.List',
 			"modules.Emails.resources.MassEdit",
-			"~layouts/".Vtiger_Viewer::getDefaultLayoutName()."/lib/jquery/floatThead/jquery.floatThead.js",
-			"~layouts/".Vtiger_Viewer::getDefaultLayoutName()."/lib/jquery/perfect-scrollbar/js/perfect-scrollbar.jquery.js"
+			"~layouts/".Vtiger_Viewer::getDefaultLayoutName()."/lib/jquery/floatThead/jquery.floatThead.js"
 		);
 
 		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
@@ -33,15 +35,60 @@ class Users_List_View extends Settings_Vtiger_List_View {
 	}
 
 	public function process(Vtiger_Request $request) {
+		 //global $adb;
+	
+	global $site_URL;
+
+		$URL = $site_URL.'/index.php?module=Users&parent=Settings&view=List&block=1&fieldid=1';
+		$defaultview = $request->get('empview');	
+		$Alphabet = $request->get('Alphabet');
+
+		$currentUserModel = Users_Record_Model::getCurrentUserModel();
+
+		//defaultTab : EmployeeDirectory
+		$tabType = $request->get('tabtype');
+		//$adb->setDebug(true);
+		if(!$request->get('tabtype')){
+			$tabType = 'MD';
+		}
+
+
+		if($tabType == 'MD'){
+			$request->set('search_params', array("department","c", $currentUserModel->get('department')));	
+		}
+		
+
+		$defaultview = $request->get('empview');	
+		
+		if(!$request->get('empview')){
+            $defaultview = 'grid';	
+		}
+        
 		$viewer = $this->getViewer($request);
 		$this->initializeListViewContents($request, $viewer);
-		$viewer->view('ListViewContents.tpl', $request->getModule(false));
+
+		$viewer->assign('TAB_TYPE', $tabType);
+		$viewer->assign('EMP_VIEW', $defaultview);
+	    $viewer->assign('PAGE_URL',$URL);
+	    $viewer->assign('TEXT_FILTER',$Alphabet);
+                                       
+		//$viewer->view('GridViewContents.tpl', $request->getModule(false));
+                
+		if($defaultview =='grid'){
+			$viewer->view('GridViewContents.tpl', $request->getModule(false));
+		}
+		else {
+			$viewer->view('ListViewContents.tpl', $request->getModule(false));
+		}	
 	}
 
 	/*
 	 * Function to initialize the required data in smarty to display the List View Contents
 	 */
 	public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
+                           
+		//$adb->setDebug(true);
+                                
 		$moduleName = $request->getModule();
 		$cvId = $request->get('viewname');
 		$pageNumber = $request->get('page');
@@ -65,7 +112,9 @@ class Users_List_View extends Settings_Vtiger_List_View {
 		$status = $request->get('status');
 		if(empty($status))
 			$status = 'Active';
+                                            
 
+                                           
 		$listViewModel = Vtiger_ListView_Model::getInstance($moduleName, $cvId);
 
 		$linkParams = array('MODULE'=>$moduleName, 'ACTION'=>$request->get('view'), 'CVID'=>$cvId);
@@ -126,7 +175,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 			$this->listViewHeaders = $listViewModel->getListViewHeaders();
 		}
 		if(!$this->listViewEntries){
-			$this->listViewEntries = $listViewModel->getListViewEntries($pagingModel);
+			$this->listViewEntries = $listViewModel->getListViewEntries($pagingModel); 
 		}
 		$noOfEntries = count($this->listViewEntries);
 

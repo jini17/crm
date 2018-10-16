@@ -7,6 +7,7 @@
  * All Rights Reserved.
  ************************************************************************************}
 {strip}
+
     {assign var=IS_MAILBOX_EXISTS value=$MAILBOX->exists()}
     <input type="hidden" id="isMailBoxExists" value="{if $IS_MAILBOX_EXISTS}1{else}0{/if}">
     {if !$IS_MAILBOX_EXISTS}

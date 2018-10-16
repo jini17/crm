@@ -9,8 +9,8 @@
  *************************************************************************************/
 $languageStrings = array(
 	// Basic Strings
-	'Timesheet'=>'TimeSheet',
-	'SINGLE_Timesheet' => 'TimeSheet',
+	'Timesheet'=>'Timesheet',
+	'SINGLE_Timesheet' => 'Timesheet',
 	'LBL_ADD_RECORD' => 'Add TimeSheet',
 );
 

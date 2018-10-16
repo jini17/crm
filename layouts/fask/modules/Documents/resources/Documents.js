@@ -28,8 +28,30 @@ Vtiger.Class('Documents_Index_Js', {
 		instance.detectReferenceCreateMode(referenceFieldName);
 		instance.createDocument(type,parentId,relatedModule);
 	},
+DownloadFile: function(url){
+		app.helper.showProgress();
+		app.request.get({'url':url}).then(function(e,resp) {
+			app.helper.hideProgress();
+			if(!e) {
+				if(resp =='JS_FILE_NOT_FOUND'){
+					app.helper.showErrorNotification({
+					'message' : app.vtranslate(resp,'Documents')
+					});
+				} else {
+					window.location.href=url+"&ajax=11";
+				}
+			} else {
+				console.log("error while loading tab : ",e);
+			}
+		});
+	},
 
-}, {
+},
+
+
+
+
+ {
 
 	detectReferenceCreateMode : function(referenceFieldName) {
 		if(typeof referenceFieldName !== 'undefined') {
@@ -142,9 +164,19 @@ Vtiger.Class('Documents_Index_Js', {
 			});
 			return;
 		}
-		var extraData = {
+		//Edited By Mabruk For Google Drive Integration 27/03/2018
+		//var html = jQuery("tr[name*='fileLocationType']").find('a').html(); 
+		//console.log(jQuery("input[name*='filelocationtype']").val());
+		//if (html.indexOf("Google Drive</span>") >= 0)   <-- Also Works
+		if (jQuery("select[name*='filelocationtype']").find(":selected").text() == "Google Drive")
+			var extraData = {
+			'filelocationtype' : 'G'
+			};
+		else
+			var extraData = {
 			'filelocationtype' : 'I'
-		};
+			};
+		//End Edit
 		if(file) {
 			extraData['notes_title'] = container.find('form').find('[name="notes_title"]').val();
 		}

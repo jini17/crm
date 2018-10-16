@@ -58,7 +58,7 @@ function meetingInvites($entity) {
 	$emails = array();
 	
 	global $adb;
-	$adb->setDebug(true);
+	//$adb->setDebug(true);
 	if(vtlib_isModuleActive('Contacts')){
 
 			$result = $adb->pquery("SELECT vtiger_contactdetails.contactid AS contactid, CONCAT(firstname,' ',lastname) AS name, email FROM vtiger_contactdetails LEFT JOIN vtiger_cntactivityrel ON vtiger_contactdetails.contactid = vtiger_cntactivityrel.contactid WHERE vtiger_cntactivityrel.activityid = ?", array($id));
@@ -87,7 +87,7 @@ function meetingInvites($entity) {
 					";
 						   
 				    $content = 'Dear ' . $name .'<br><br>
-				    	You are invited to the following meeting: ' . $fieldValues['subject'] . '<br>' . $accept . '&nbsp;' . $decline;
+				    	You are invited to the following meeting:<br><br><b>Subject: </b>' . $fieldValues['subject'] . '<br><b>Date: </b>' . date("d-m-Y",strtotime($fieldValues['date_start'])) . '<br><b>Time: </b>' . $fieldValues['time_start'] . '<br><b>Venue: </b>' . $fieldValues['location'] . "<br><br>" . $accept . '&nbsp;' . $decline;
 
 				    if ($send && $status != 'Accepted' && $status != 'Declined')	{
 					    $vtigerMailer->ClearAddresses();	
@@ -118,7 +118,7 @@ function meetingInvites($entity) {
 					";
 						   
 				    $content = 'Dear ' . $name .'<br><br>
-				    	You are invited to the following meeting: ' . $fieldValues['subject'] . '<br>' . $accept . '&nbsp;' . $decline;	
+				    	You are invited to the following meeting:<br><br><b>Subject: </b>' . $fieldValues['subject'] . '<br><b>Date: </b>' . date("d-m-Y",strtotime($fieldValues['date_start'])) . '<br><b>Time: </b>' . $fieldValues['time_start'] . '<br><b>Venue: </b>' . $fieldValues['location'] . "<br><br>" . $accept . '&nbsp;' . $decline;	
 
 				    if ($send && $status != 'Accepted' && $status != 'Declined')	{
 					    $vtigerMailer->ClearAddresses();	
@@ -136,7 +136,7 @@ function meetingInvites($entity) {
 			}
 
 		//Send email to External EmailAddress
-			$result2 = $adb->pquery("SELECT external_invitees.emailaddress AS name, external_invitees.emailaddres as email1, external_invitees.status FROM external_invitees WHERE external_invitees.activityid = ?", array($id));
+			$result2 = $adb->pquery("SELECT external_invitees.emailaddress AS name, external_invitees.emailaddress as email1, external_invitees.status FROM external_invitees WHERE external_invitees.activityid = ?", array($id));
 			$numOfRows2 = $adb->num_rows($result2);	
 
 			if ($numOfRows2 > 0) {
@@ -156,7 +156,7 @@ function meetingInvites($entity) {
 					";
 						   
 				    $content = 'Dear ' . $name .'<br><br>
-				    	You are invited to the following meeting: ' . $fieldValues['subject'] . '<br>' . $accept . '&nbsp;' . $decline;	
+				    	You are invited to the following meeting:<br><b>Subject: </b><br>' . $fieldValues['subject'] . '<br><b>Date: </b>' . date("d-m-Y",strtotime($fieldValues['date_start'])) . '<br><b>Time: </b>' . $fieldValues['time_start'] . "<br><b>Venue</b>" . $fieldValues['location'] . '<br><br>' . $accept . '&nbsp;' . $decline;	
 
 				    if ($send && $status != 'Accepted' && $status != 'Declined')	{
 					    $vtigerMailer->ClearAddresses();	

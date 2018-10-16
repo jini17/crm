@@ -9,11 +9,15 @@
 {* modules/Settings/Roles/views/Index.php *}
 
 {strip}
-    <div class="listViewPageDiv">
-        <div class="row">
-            <div class="col-sm-12 col-xs-12 full-height">
+    <div class="listViewPageDiv " id="listViewContent" style="width:calc(100%); position: relative;">
+        <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;right:0;" title="Left Panel Show/Hide">
+            <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>                    
+
+
+        <div class="clearfix"></div>
+        <div class="col-sm-12 col-xs-12 ">
+            <br>
             <div class="clearfix treeView">
-                <br/><br/><br/>
                 <ul>
                     <li data-role="{$ROOT_ROLE->getParentRoleString()}" data-roleid="{$ROOT_ROLE->getId()}">
                         <div class="toolbar-handle">
@@ -26,7 +30,6 @@
                         {include file=vtemplate_path("RoleTree.tpl", "Settings:Roles")}
                     </li>
                 </ul>
-            </div>
             </div>
         </div>
     </div>

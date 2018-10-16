@@ -178,7 +178,7 @@
 			background: transparent;
 		}
 
-		//Animations
+		
 		@keyframes inputHighlighter {
 			from {
 				background: #4a89dc;

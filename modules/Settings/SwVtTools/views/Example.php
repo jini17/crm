@@ -37,9 +37,7 @@ class Settings_SwVtTools_Example_View extends Settings_Vtiger_Index_View {
         );
         $lead = vtws_revise($new, $user);
 
-        echo '<pre>';
-        var_dump($wsrecord);
-        echo '</pre>';
+    
 
 	}
 

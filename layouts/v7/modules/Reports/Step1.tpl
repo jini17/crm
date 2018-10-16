@@ -66,8 +66,9 @@
             </div>
             <div class="row">
                 <div class="form-group">
-                    <label class="col-lg-3 control-label textAlignLeft">{vtranslate('LBL_SELECT_RELATED_MODULES',$MODULE)}&nbsp;({vtranslate('LBL_MAX',$MODULE)}&nbsp;2)</label>
-                    <div class="col-lg-4">
+                    <label class="col-lg-3 control-label textAlignLeft">Jitu{$REPORT_MODEL->getPrimaryModule()}
+                        {vtranslate('LBL_SELECT_RELATED_MODULES',$MODULE)}&nbsp;({vtranslate('LBL_MAX',$MODULE)}&nbsp;<span id="modulecount">2</span>)</label>
+                    <div class="col-lg-4" style="height:100px;">
                         {assign var=SECONDARY_MODULES_ARR value=explode(':',$REPORT_MODEL->getSecondaryModules())}
                         {assign var=PRIMARY_MODULE value=$REPORT_MODEL->getPrimaryModule()}
 

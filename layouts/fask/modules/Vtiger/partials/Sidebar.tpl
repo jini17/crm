@@ -19,7 +19,7 @@
 				</a>
 				<div class="app-trigger">
 					<h4 class="active-app-title">{vtranslate("LBL_$SELECTED_MENU_CATEGORY",$MODULE)}</h4>
-					<i class="fa fa-chevron-down arrow-down"></i>
+					
 				</div>
 			</div>
 		</div>

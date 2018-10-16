@@ -599,8 +599,30 @@ class EnhancedQueryGenerator extends QueryGenerator {
 
 	public function getWhereClause() {
 		global $current_user;
+		
+		$HRModules = array('EmployeeContract','PassportVisa','Performance','Payslip');
+		$baseModule = $this->getModule();
+		$ownrecsql = '';
+                                           
+                                           if(isset($_REQUEST['record'])){
+                                                $emp_id = $_REQUEST['record']; 
+                                                 $ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$emp_id;
+                                               } else {
+                                                   if ($current_user->roleid !='H2' && $current_user->is_admin !='on' && $current_user->roleid !='H12' && $current_user->roleid !='H13'){
+                                                       $ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$current_user->id;
+                                                   }
+                                                }
+                                           
+		/*if(in_array($baseModule,$HRModules)){
+			$ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$emp_id;
+		}*/
+		if($baseModule =='MessageBoard'){
+                                                $ownrecsql = ' AND ( vtiger_'.strtolower($baseModule).'.employee_id IN (SELECT id FROM vtiger_users WHERE reports_to_id='.$current_user->id.')'
+                                                        . ' OR ( vtiger_'.strtolower($baseModule).'.employee_id ='.$current_user->id.'))';
+                                           }
 		if ($this->query || $this->whereClause) {
-			return $this->whereClause;
+
+			return $this->whereClause.$ownrecsql;
 		}
 		$deletedQuery = $this->meta->getEntityDeletedQuery();
 		$sql = '';
@@ -612,7 +634,7 @@ class EnhancedQueryGenerator extends QueryGenerator {
 		} elseif (empty($deletedQuery)) {
 			$sql .= ' WHERE ';
 		}
-		$baseModule = $this->getModule();
+		
 		$moduleFieldList = $this->getModuleFields();
 		$baseTable = $this->meta->getEntityBaseTable();
 		$moduleTableIndexList = $this->meta->getEntityTableIndexList();
@@ -851,7 +873,7 @@ class EnhancedQueryGenerator extends QueryGenerator {
 			$this->conditionalWhere = $groupSql;
 			$sql .= $groupSql;
 		}
-		$sql .= " AND $baseTable.$baseTableIndex > 0";
+		$sql .= " AND $baseTable.$baseTableIndex > 0". $ownrecsql;
 		$this->whereClause = $sql;
 		return $sql;
 	}

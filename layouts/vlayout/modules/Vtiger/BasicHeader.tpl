@@ -11,7 +11,7 @@
 -->*}
 {strip}
 <div class="navbar navbar-fixed-top  navbar-inverse noprint">
-{include file='MenuBar.tpl'|@vtemplate_path}
-{include file='CommonActions.tpl'|@vtemplate_path}
+{include file='MenuBar.tpl'|@vtemplate_path:$MODULE}
+{include file='CommonActions.tpl'|@vtemplate_path:$MODULE}
 </div>
 {/strip}

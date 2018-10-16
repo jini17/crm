@@ -82,7 +82,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 			$viewer->assign('PARENT_MODULE', $request->get('parent'));
             $viewer->assign('VIEW', $request->get('view'));
 			$viewer->assign('MENUS', $menuModelsList);
-            $viewer->assign('QUICK_CREATE_MODULES', Vtiger_Menu_Model::getAllForQuickCreate());
+            //$viewer->assign('QUICK_CREATE_MODULES', Vtiger_Menu_Model::getAllForQuickCreate());
 			$viewer->assign('MENU_STRUCTURE', $menuStructure);
 			$viewer->assign('MENU_SELECTED_MODULENAME', $selectedModule);
 			$viewer->assign('MENU_TOPITEMS_LIMIT', $menuStructure->getLimit());
@@ -178,6 +178,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
         $hourFormatFeildModel = $recordStructure['LBL_CALENDAR_SETTINGS']['hour_format'];
 		$calendarSettings['LBL_CALENDAR_SETTINGS'] = $recordStructure['LBL_CALENDAR_SETTINGS'];
 		$calendarSettings['LBL_CURRENCY_CONFIGURATION'] = $recordStructure['LBL_CURRENCY_CONFIGURATION'];
+		$calendarSettings['Other Preferences'] = $recordStructure['Other Preferences'];
 		$recordModel = $detailViewModel->getRecord();
 		$moduleModel = $recordModel->getModule();
 		$viewer->assign('IS_AJAX_ENABLED', $recordModel->isEditable());
@@ -222,6 +223,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
             "modules.Users.resources.Detail",
 			"modules.Users.resources.Users",
             'modules.'.$moduleName.'.resources.PreferenceDetail',
+            "modules.Vtiger.resources.CkEditor",
 			'modules.'.$moduleName.'.resources.Calendar',
 			'modules.'.$moduleName.'.resources.PreferenceEdit',
              'modules.Settings.Vtiger.resources.Index',

@@ -49,10 +49,12 @@
 				{if $smarty.request.view eq 'Detail'}
 					<p class="current-filter-name filter-name pull-left"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a title="{$RECORD->get('label')}">&nbsp;&nbsp;{$RECORD->get('label')} &nbsp;&nbsp;</a></p>
 				{/if}
+
 			</div>
 			<div class="col-xs-12 col-lg-5 col-md-5 col-sm-5 module-breadcrumb-List">
 				<div id="appnav" class="navbar-right">
 <ul class="nav navbar-nav">
+	           	
 
 					<li class="pull-right">
 
@@ -63,9 +65,9 @@
 									<ul class="detailViewSetting dropdown-menu">
 										{foreach item=SETTING from=$MODULE_SETTING_ACTIONS}
 											{if {vtranslate($SETTING->getLabel())} eq "%s Numbering"}
-												<li id="{$MODULE_NAME}_listview_advancedAction_{$SETTING->getLabel()}"><a href={$SETTING->getUrl()}>{vtranslate($SETTING->getLabel(), $MODULE_NAME ,vtranslate($MODULE_NAME, $MODULE_NAME))}</a></li>
+												<li id="{$MODULE_NAME}_listview_advancedAction_{$SETTING->getLabel()}"><a href={$SETTING->getUrl()}>{vtranslate($SETTING->getLabel(), $MODULE_NAME)} {vtranslate("SINGLE_$MODULE_NAME", $MODULE_NAME)}</a></li>
 											{else}
-												<li id="{$MODULE_NAME}_listview_advancedAction_{$SETTING->getLabel()}"><a href={$SETTING->getUrl()}>{vtranslate($SETTING->getLabel(), $MODULE_NAME, vtranslate("SINGLE_$MODULE_NAME", $MODULE_NAME))}</a></li>
+												<li id="{$MODULE_NAME}_listview_advancedAction_{$SETTING->getLabel()}"><a href={$SETTING->getUrl()}>{vtranslate($SETTING->getLabel(), $MODULE_NAME)} {vtranslate("SINGLE_$MODULE_NAME", $MODULE_NAME)}</a></li>
 											{/if}
 										{/foreach}
 									</ul>
@@ -94,6 +96,7 @@
 							{/if}
 						{/foreach}
 					</li>
+					
 					</ul>
 				</div>
 			</div>

@@ -138,13 +138,7 @@
 							<li class="{if $MODULE eq "Documents"}active{/if}"> <a class=" waves-effect waves-dark" href="index.php?module=Documents&view=List" ><i class="app-icon-list material-icons">file_download</i><span class="hide-menu"> {vtranslate('Documents')}</span></a>
                         </li>
 						{/if}
-						{if $USER_MODEL->isAdminUser()}
-							{if vtlib_isModuleActive('ExtensionStore')}
-								
-								<li class="{if $MODULE eq "ExtensionStore"}active{/if}"> <a class=" waves-effect waves-dark" href="index.php?module=ExtensionStore&parent=Settings&view=ExtensionStore" ><i class="app-icon-list material-icons">shopping_cart</i><span class="hide-menu"> {vtranslate('LBL_EXTENSION_STORE', 'Settings:Vtiger')}</span></a>
-                        </li>
-							{/if}
-						{/if}
+						
 			                      
 			                      
 			                      
@@ -215,21 +209,7 @@
                         
 			{/if}
 			
-			
-	       
-			                      
-			                      
-			                      
-			                      
-			                      
-			                      
-			                      
-			                      
-			                      
-			                      
-			                      
-			                       
-                       
+			            
                     </ul>
                 </nav>
         </aside>
@@ -317,16 +297,6 @@
 						<span class="app-name textOverflowEllipsis"> {vtranslate('Documents')}</span>
 					</div>
 				</div>
-			{/if}
-			{if $USER_MODEL->isAdminUser()}
-				{if vtlib_isModuleActive('ExtensionStore')}
-					<div class="menu-item app-item app-item-misc" data-default-url="index.php?module=ExtensionStore&parent=Settings&view=ExtensionStore">
-						<div class="menu-items-wrapper">
-							<span class="app-icon-list"><i class="material-icons">shopping_cart</i></span>
-							<span class="app-name textOverflowEllipsis"> {vtranslate('LBL_EXTENSION_STORE', 'Settings:Vtiger')}</span>
-						</div>
-					</div>
-				{/if}
 			{/if}
 			<div class="dropdown app-modules-dropdown-container dropdown-compact">
 				{foreach item=APP_MENU_MODEL from=$APP_GROUPED_MENU.$APP_NAME}

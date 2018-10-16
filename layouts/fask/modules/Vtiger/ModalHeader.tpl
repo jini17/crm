@@ -17,6 +17,7 @@
                     <span aria-hidden="true" class='ti-close'></span>
                 </button>
             </div>
+           
             <h4 class="pull-left">
                 {$TITLE}
             </h4>

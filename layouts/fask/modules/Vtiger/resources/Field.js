@@ -73,6 +73,10 @@ jQuery.Class("Vtiger_Field_Js",{
 	getName : function() {
 		return this.get('name');
 	},
+	
+	getMaxLength : function() {
+		return this.get('maximumlength');
+	},
 
 	/**
 	 * Function to get value of the field
@@ -204,11 +208,11 @@ Vtiger_Field_Js('Vtiger_Reference_Field_Js',{},{
 		}
 		html += '/>';
 
-		if(reset){
+		/*if(reset){
 			html += '<a href="#" class="clearReferenceSelection"> X </a>';
 		}else {
 			html += '<a href="#" class="clearReferenceSelection hide"> X </a>';
-		}
+		}*/
 		//popup search element
 		html += '<span class="input-group-addon relatedPopup cursorPointer" title="'+referenceModules[0]+'">';
 		html += '<i class="fa fa-search"></i>';
@@ -530,7 +534,7 @@ Vtiger_Field_Js('Vtiger_Text_Field_Js',{},{
 	 * @return - input text field
 	 */
 	getUi : function() {
-		var html = '<textarea class="input-xxlarge form-control inputElement" name="'+ this.getName() +'" value="'+ this.getValue() + '" >'+ this.getValue() + '</textarea>';
+		var html = '<textarea class="input-xxlarge form-control inputElement" maxlength="'+this.getMaxLength()+'" name="'+ this.getName() +'" value="'+ this.getValue() + '" >'+ this.getValue() + '</textarea>'+" &nbsp;&nbsp; ("+ app.vtranslate('JS_MAXIMUM_LIMIT')+' : '+this.getMaxLength()+" )";
 		var element = jQuery(html);
 		return this.addValidationToElement(element);
 	}

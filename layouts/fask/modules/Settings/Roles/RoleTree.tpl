@@ -23,9 +23,12 @@
             {/if}
             {if $smarty.request.view != 'Popup'}
                 <div class="toolbar">
-                    &nbsp;<a href="{$CHILD_ROLE->getCreateChildUrl()}" data-url="{$CHILD_ROLE->getCreateChildUrl()}" title="{vtranslate('LBL_ADD_RECORD', $QUALIFIED_MODULE)}"><span class="ti-plus"></span></a>
-                    &nbsp;<a data-id="{$CHILD_ROLE->getId()}" href="javascript:;" data-url="{$CHILD_ROLE->getDeleteActionUrl()}" data-action="modal" title="{vtranslate('LBL_DELETE', $QUALIFIED_MODULE)}"><span class="ti-trash"></span></a>
-                </div>
+                    &nbsp;<a href="{$CHILD_ROLE->getCreateChildUrl()}" data-url="{$CHILD_ROLE->getCreateChildUrl()}" title="{vtranslate('LBL_ADD_RECORD', $QUALIFIED_MODULE)}"><span class="fa fa-plus-circle"></span></a>
+             
+		         {if $CHILD_ROLE->getId() neq 'H2' && $CHILD_ROLE->getId() neq 'H12' && $CHILD_ROLE->getId() neq 'H13' && $CHILD_ROLE->getId() neq 'H14' && $CHILD_ROLE->getId() neq 'H15'}        
+		                &nbsp;<a data-id="{$CHILD_ROLE->getId()}" href="javascript:;" data-url="{$CHILD_ROLE->getDeleteActionUrl()}" data-action="modal" title="{vtranslate('LBL_DELETE', $QUALIFIED_MODULE)}"><span class="fa fa-trash"></span></a>
+		            </div>
+		        {/if}    
             {/if}
         </div>
 

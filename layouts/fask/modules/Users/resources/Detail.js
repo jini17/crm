@@ -228,6 +228,54 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 	},
 	
 },{
+     //Added By jitu@secondcrm.com on 29-10-2014
+	registerDisplayDetailTabClickEvent : function(form) { 
+		var userid = jQuery('#recordId').val();
+		jQuery('li.relatedListTab').on('click',function(e) {
+			var tabIndx = $(this).index();
+			var container = $('a', this).attr('href');
+			    container = container.replace('#','');
+
+               if(container=='preference'){
+               		jQuery(".detailViewButtoncontainer").removeClass('hide');	
+                    window.location.href="?module=Users&view=PreferenceDetail&parent=Settings&record="+userid
+    			} else {
+    				jQuery(".detailViewButtoncontainer").addClass('hide');
+    			}
+
+			if(tabIndx !=0 && container !='') {
+			     var params = {
+					     'data' : {
+						     'module': app.getModuleName(),
+						     'view' : "ListViewAjax",
+						     'record' : userid,
+						     'mode' : 'getUser'+container.substr(0, 1).toUpperCase() + container.substr(1),
+						}
+				    };
+				
+				app.helper.showProgress(app.vtranslate('JS_PLEASE_WAIT'));
+				app.request.post(params).then(function (err, data) { 
+				if (err === null) {
+     				app.helper.hideProgress();
+     				//app.helper.showSuccessNotification({'message': data.message});
+					jQuery('.tab-pane').hide();
+					jQuery('#'+container).show();
+					jQuery('#'+container).html(data);
+					if(container =='leave') {
+    			               Users_Leave_Js.registerActionsTeamLeave();
+    			          }
+    			          
+    			          if(container =='claim') {
+    			               Users_Claim_Js.registerActionsTeamClaim();
+    			          }
+				} else {
+					app.helper.showErrorNotification({'message': err.message});
+				}
+			});
+				
+			} 
+		});
+	}, 
 	registerAjaxPreSaveEvent: function () {
 		var self = this;
 		app.event.on(Vtiger_Detail_Js.PreAjaxSaveEvent, function (e, params) {
@@ -262,43 +310,7 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 	},
 	
 	//Added By jitu@secondcrm.com on 29-10-2014
-	registerDisplayDetailTabClickEvent : function(form) { 
-		var userid = jQuery('#recordId').val();
-		jQuery('li.relatedListTab').on('click',function(e) {
-			var tabIndx = $(this).index();
-			var container = $('a', this).attr('href');
-			    container = container.replace('#','');
-               if(container=='preference'){
-                    window.location.href="?module=Users&view=PreferenceDetail&parent=Settings&record="+userid
-     		}
-
-			if(tabIndx !=0 && container !='') {
-			     var params = {
-					     'data' : {
-						     'module': app.getModuleName(),
-						     'view' : "ListViewAjax",
-						     'record' : userid,
-						     'mode' : 'getUser'+container.substr(0, 1).toUpperCase() + container.substr(1),
-						}
-				    };
-				
-				app.helper.showProgress(app.vtranslate('JS_PLEASE_WAIT'));
-				app.request.post(params).then(function (err, data) { 
-				if (err === null) {
-     				app.helper.hideProgress();
-     				//app.helper.showSuccessNotification({'message': data.message});
-					jQuery('.tab-pane').hide();
-					jQuery('#'+container).show();
-					jQuery('#'+container).html(data);
-				} else {
-					
-					//app.helper.showErrorNotification({'message': err.message});
-				}
-			});
-				
-			} 
-		});
-	}, 
+	
 	/**
 	 * Function to register Quick Create Event
 	 * @returns {undefined}
@@ -354,13 +366,91 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 			});*/
 		});
 	},
+	
+	registerLeaveApproveTrigger : function(leaveid,appid){
+		var userid = jQuery('#recordId').val();
+		
+		var params = {
+						 'data'  : {
+						 'module': 'Users',
+						 'view'  : "ListViewAjax",
+						 'record': userid,
+						 'mode'  : 'getUserLeave',
+						}
+					};
+			
+			app.helper.showProgress(app.vtranslate('JS_PLEASE_WAIT'));
+			app.request.post(params).then(function (err, data) { 
+			if (err === null) {
+ 				app.helper.hideProgress();
+ 				//app.helper.showSuccessNotification({'message': data.message});
+				jQuery('.tab-pane').hide();
+				jQuery('#leave').show();
+				jQuery('#leave').html(data);
+			}
+		});	
+		     if(leaveid ==null){
+		          var url = 'index.php?module=Users&view=EditLeave&userId='+userid;
+		     } else {
+		          var url = 'index.php?module=Users&view=EditLeave&record='+leaveid+'&userId='+appid+'&leavestatus=Apply&manager=true';
+		     }    
+			Users_Leave_Js.editLeave(url)		
+	
+	},
 
+	registerClaimApproveTrigger : function(claimid,appid){
+		
+		var userid = jQuery('#recordId').val();
+		
+		var params = {
+						 'data'  : {
+						 'module': 'Users',
+						 'view'  : "ListViewAjax",
+						 'record': userid,
+						 'mode'  : 'getUserClaim',
+						}
+					};
+			
+			app.helper.showProgress(app.vtranslate('JS_PLEASE_WAIT'));
+			app.request.post(params).then(function (err, data) { 
+			if (err === null) {
+ 				app.helper.hideProgress();
+ 				//app.helper.showSuccessNotification({'message': data.message});
+				jQuery('.tab-pane').hide();
+				jQuery('#claim').show();
+				jQuery('#claim').html(data);
+			}
+		});	
+		     if(claimid ==null){
+		          var url = 'index.php?module=Users&view=EditClaim&userId='+userid;
+		     } else {
+		          var url = 'index.php?module=Users&view=EditClaim&record='+claimid+'&userId='+appid+'&claimstatus=Apply&manager=true';
+		     }    
+			Users_Claim_Js.editClaim(url)		
+	
+	},
+     
 	registerEvents: function () {
 		this._super();
 		var form = this.getForm();
 		this.registerAjaxPreSaveEvent();
 		this.registerDisplayDetailTabClickEvent(form);	//added by jitu@secondcrm.com
 		this.registerQuickCreateEvent();
+		
+		var defaultTab = jQuery("#tabtype").val();
+		if(defaultTab =='leave'){
+			jQuery(".detailViewButtoncontainer").addClass('hide');
+			var leaveid = jQuery("#leaveid").val();
+			var appid	= jQuery("#appid").val();
+			this.registerLeaveApproveTrigger(leaveid, appid);
+
+		} else if(defaultTab =='claim'){
+		     jQuery(".detailViewButtoncontainer").addClass('hide');
+			var claimid = jQuery("#claimid").val();
+			var appid	= jQuery("#appid").val();
+			this.registerClaimApproveTrigger(claimid, appid);
+		}	
+		
 	}
 });
 

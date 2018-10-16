@@ -13,10 +13,10 @@
 	'INVENTORY' => 'vicon-inventory',
 	'PROJECT' => 'fa-briefcase'
 ]}
-<div class="col-sm-12 col-xs-12 app-indicator-icon-container app-{$SELECTED_MENU_CATEGORY}">
+<!--<div class="col-sm-12 col-xs-12 app-indicator-icon-container app-{$SELECTED_MENU_CATEGORY}">
 	<div class="row" title="{strtoupper(vtranslate("LBL_CALENDAR",$MODULE))}">
 		<span class="app-indicator-icon fa fa-calendar"></span>
 	</div>
-</div>
+</div>-->
 
 {include file="modules/Vtiger/partials/SidebarAppMenu.tpl"}

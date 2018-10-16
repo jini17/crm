@@ -203,16 +203,28 @@ class Settings_Vtiger_Module_Model extends Vtiger_Base_Model {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$myTagSettingsUrl = $currentUser->getMyTagSettingsListUrl();
 		$employmentdetails = Users_Record_Model::getTabDetails(15);
+		$UserTab			= Users_Record_Model::getTabDetails(1, array(1));
+		$HRMatters			= Users_Record_Model::getTabDetails(14);
 		$settingsMenuList = array('LBL_MY_PREFERENCES'	=> array('My Preferences'	=> '',
 																 'Calendar Settings'=> '',
 																 'LBL_MY_TAGS'		=> $myTagSettingsUrl),
-									'LBL_EXTENSIONS'	=> array('LBL_GOOGLE'		=> 'index.php?module=Contacts&parent=Settings&view=Extension&extensionModule=Google&extensionView=Index&mode=settings')
+									'LBL_EXTENSIONS'	=> array('LBL_GOOGLE'		=> 'index.php?module=Contacts&parent=Settings&view=Extension&extensionModule=Google&extensionView=Index&mode=settings', 'LBL_OFFICE365'		=> 'index.php?module=Contacts&parent=Settings&view=Extension&extensionModule=Office365&extensionView=Index&mode=settings')
 								);
-		$array = array_merge($settingsMenuList, $employmentdetails);
+
+		if($currentUser->get('roleid')=='H12' || $currentUser->get('roleid')=='H13'){
+			$array = array_merge($settingsMenuList, $UserTab, $HRMatters, $employmentdetails);
+			
+		} else{
+			$array = array_merge($settingsMenuList, $employmentdetails);
+		}
+
 		if(!vtlib_isModuleActive('Google')) {
 			unset($array['LBL_EXTENSIONS']['LBL_GOOGLE']);
 		}
-
+		if(!vtlib_isModuleActive('Office365')) {
+			unset($array['LBL_EXTENSIONS']['LBL_GOOGLE']);
+		}
+		
 		return $array;
 	}
 }

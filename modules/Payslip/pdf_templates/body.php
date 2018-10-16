@@ -11,421 +11,104 @@ $xmargin = '20';
 $ymargin = '0';
 $pdf->SetFont($default_font,'',10.5);
 
+
 /*********************Start Section A**************************/
 # Start Payments table in HTML by Haziq
-$pdf->Ln(13);
+include_once('header.php');
+$pdf->Ln(5);
 $html = <<<EOD
+<table border="0">
+  <tr>
+    <td align="center" colspan="2"><b><u><font size=15>Pay Slip</font></b></u></td>
+  </tr>
+</table>
 
-<p align="right"><b>$organization_title</b><br />$organizationname<br />$address<br />$city , $state, $country, $code<br />$phone<br />Fax : $fax<br />$website</p>
+<br/>
 
-<b align="left">
-$emp_name
-</b>
-                                                                                               
-Period($pay_month $pay_year)
-<br><br>
-<table>
+<table border="0">  
     <tr>
         <td>
-            Position : $designation
+            <b>Name             : $emp_name</b>
         </td>
         <td>
-            EPF No : $epf_no
+            <b>IC NO            : $ic_passport</b>
         </td>
-        <td rowspan="3" align="right">
-        <font color="#008b8b"><b>Net Pay  </font><br /> $net_pay</b>
+    </tr>
+    <tr>
+        <td>
+            <b>Position         : $designation</b>
         </td>
+        <td>
+            <b>Month           : $pay_month/$pay_year</b>
+        </td>
+        
     </tr>
      <tr>
-        <td>
-            Dept : $dept
+         <td>
+            <b>Department   : $department</b>
         </td>
         <td>
-            SOSCO : $socso_no
-        </td>
-    </tr>
-    <tr>
-        <td>
-            IC/Passport : $ic_passport
-        </td>
-        <td>
-            Income Tax No : $tax_no
+            <b>TAX NO        : $tax_no</b>
         </td>
     </tr>
 </table>
 
 <br>
 
+<br /><!--item list start-->
+                <table cellpadding="5" border="0">
+                    <tr><table cellpadding="5" cellspacing="0" border="1">
+                    <tr>
+                        <th align="center" bgcolor="#A4A4A4"><b>EARNING</b></th>
+                        <th align="center" bgcolor="#A4A4A4"><b>AMOUNT</b></th>
+                        <th align="center" bgcolor="#A4A4A4"><b>DEDUCTIONS</b></th>
+                        <th align="center" bgcolor="#A4A4A4"><b>AMOUNT</b></th>
+                    </tr>
+                  <tr>
+                    <td>Basic Pay<br/>Traveling Allowance</td>
+                    <td align="center">$currency_symbol $basic_sal<br/>$currency_symbol $transport_allowance</td>
+                    <td>EPF<br/>SOCSO<br/>TAX / LHDN</td>
+                    <td align="right">$currency_symbol $emp_epf<br/>$currency_symbol $emp_socso<br/>$currency_symbol $lhdn</td>
+                  </tr>
+                   <tr>
+                    <td><b>TOTAL EARNING</b></td>
+                    <td align="center"><b>$currency_symbol $total_earning</b></td>
+                    <td><b>TOTAL DEDUCTIONS</b></td>
+                    <td align="right"><b>$currency_symbol$total_deduction</b></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"></td>
+                    <td rowspan="3"><br/><br/>CLAIM</td>
+                    <td align="center" rowspan="3"><br/><br/></td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#A4A4A4"><b>EPF CONTRIBUTION</b></td>
+                    <td align="center" bgcolor="#A4A4A4"><b>SOCSO CONTRIBUTION</b></td>
+                  </tr>
+                  <tr>
+                    <td rowspan="3">By Employee                                    $currency_symbol $emp_epf<br/>By Employer                                $currency_symbol $employer_epf</td>
+                    <td rowspan="3">By Employee                                  $currency_symbol $emp_socso<br/>By Employer                              $currency_symbol $employer_socso</td>
+                  </tr>
+                  <tr>
+                    <td rowspan="2"><b>NET PAYMENT<br/><br/>TOTAL PAYMENT</b></td>
+                    <td align="center"><b>$currency_symbol$net_pay</b></td>
+                  </tr>
+                  <tr>
+                    <td align="center"><b>$currency_symbol$total_earning</b></td>
+                  </tr>
+            </table></td></tr>
 
-
-<b>
-<font color=#5f9ea0>
-Employee Earning
-<hr>
-</font></b>
-<table align="left">
-    <tr>
-        <td>
-            Basic
-        </td>
-        <td align="right">
-            $basic_sal
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Transport Allowance
-        </td>
-        <td align="right">
-            $transport_allowance
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Phone Allowance
-        </td>
-        <td align="right">
-            $ph_allowance
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Parking Allowance
-        </td>
-        <td align="right">
-            $parking_allowance
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Over Time Meal Allowance
-        </td>
-        <td align="right">
-            $ot_meal_allowance
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Other Allowance
-        </td>
-        <td align="right">
-            $oth_allowance
-        </td>
-    </tr>
-    
-</table>
-<br><br>
-<b>
-<font color=#5f9ea0>
-Employee Deduction
-</font>
-<hr>
-<table>
-    <tr>
-        <td>
-            Zakat
-        </td>
-        <td align="right">
-            $zakat
-        </td>
-    </tr>
-    <tr>
-        <td>
-            LHDN
-        </td>
-        <td align="right">
-            $lhdn
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Employee EPF
-        </td>
-        <td align="right">
-            $emp_epf
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Employee SOCSO
-        </td>
-        <td align="right">
-            $emp_socso
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Other Dedcutions
-        </td>
-        <td align="right">
-            $other_deduction
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Total Deduction
-        </td>
-        <td align="right">
-            $total_deduction
-        </td>
-    </tr>
-</table>
-<br><br>
-<b><font color="#5f9ea0">
-Company Contribution
-</font>
-<hr>
-<table>
-    <tr>
-        <td>
-            Employer EPF
-        </td>
-        <td align="right">
-            $employer_epf
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Employer SOCSO
-        </td>
-        <td align="right">
-            $employer_socso
-        </td>
-    </tr>
-        <tr>
-        <td>
-            Employer EIS
-        </td>
-        <td align="right">
-            $employer_eis
-        </td>
-    </tr>
-    <tr>
-        <td>
-            HRDF
-        </td>
-        <td align="right">
-            $hrdf
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Total Company Contribution
-        </td>
-        <td align="right">
-            $total_comp_contribution
-        </td>
-    </tr>
-</table>
-</b>
-             
-
-
-<b align="left">
-$emp_name
-</b>
-                                                                                               
-Period($pay_month $pay_year)
-<br><br>
-<table>
-    <tr>
-        <td>
-            Position : $designation
-        </td>
-        <td>
-            EPF No : $epf_no
-        </td>
-    </tr>
-     <tr>
-        <td>
-            Dept : $dept
-        </td>
-        <td>
-            SOSCO : $socso_no
-        </td>
-    </tr>
-    <tr>
-        <td>
-            IC/Passport : $ic_passport
-        </td>
-        <td>
-            Income Tax No : $tax_no
-        </td>
-    </tr>
-</table>
-
-<br>
-
-
-
-<b>
-<font color=#5f9ea0>
-Employee Earning
-<hr>
-</font></b>
-<table align="left">
-    <tr>
-        <td>
-            Basic
-        </td>
-        <td align="right">
-            $basic_sal
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Transport Allowance
-        </td>
-        <td align="right">
-            $transport_allowance
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Phone Allowance
-        </td>
-        <td align="right">
-            $ph_allowance
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Parking Allowance
-        </td>
-        <td align="right">
-            $parking_allowance
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Over Time Meal Allowance
-        </td>
-        <td align="right">
-            $ot_meal_allowance
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Other Allowance
-        </td>
-        <td align="right">
-            $oth_allowance
-        </td>
-    </tr>
-    
-</table>
-<br><br>
-<b>
-<font color=#5f9ea0>
-Employee Deduction
-</font>
-<hr>
-<table>
-    <tr>
-        <td>
-            Zakat
-        </td>
-        <td align="right">
-            $zakat
-        </td>
-    </tr>
-    <tr>
-        <td>
-            LHDN
-        </td>
-        <td align="right">
-            $lhdn
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Employee EPF
-        </td>
-        <td align="right">
-            $emp_epf
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Employee SOCSO
-        </td>
-        <td align="right">
-            $emp_socso
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Other Dedcutions
-        </td>
-        <td align="right">
-            $other_deduction
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Total Deduction
-        </td>
-        <td align="right">
-            $total_deduction
-        </td>
-    </tr>
-</table>
-<br><br>
-<b><font color="#5f9ea0">
-Company Contribution
-</font>
-<hr>
-<table>
-    <tr>
-        <td>
-            Employer EPF
-        </td>
-        <td align="right">
-            $employer_epf
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Employer SOCSO
-        </td>
-        <td align="right">
-            $employer_socso
-        </td>
-    </tr>
-        <tr>
-        <td>
-            Employer EIS
-        </td>
-        <td align="right">
-            $employer_eis
-        </td>
-    </tr>
-    <tr>
-        <td>
-            HRDF
-        </td>
-        <td align="right">
-            $hrdf
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Total Company Contribution
-        </td>
-        <td align="right">
-            $total_comp_contribution
-        </td>
-    </tr>
-</table>
-</b>
-             
-
+            <br/>
+            <br/>
 
 
 EOD;
 
 // output the HTML content
 $pdf->writeHTML($html, true, false, false, false, '');
+$pdf->Line(10.5,$pdf->GetY(), 201, $pdf->GetY());
+$pdf->Line(10.5,$pdf->GetY()+1, 201, $pdf->GetY()+1);
+$pdf->MultiCell(150, 7, "(Computer Generated No Signature Required)", 0, 'L', 0, 1, 58,$pdf->GetY());
 # End
 //End Page 2
 

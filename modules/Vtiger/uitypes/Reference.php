@@ -46,9 +46,13 @@ class Vtiger_Reference_UIType extends Vtiger_Base_UIType {
 			$referenceModuleName = $referenceModule->get('name');
 			if($referenceModuleName == 'Users') {
 				$db = PearDatabase::getInstance();
+				$fieldModel = $this->get('field');
 				$nameResult = $db->pquery('SELECT first_name, last_name FROM vtiger_users WHERE id = ?', array($value));
 				if($db->num_rows($nameResult)) {
-					return $db->query_result($nameResult, 0, 'first_name').' '.$db->query_result($nameResult, 0, 'last_name');
+					$fullname =  $db->query_result($nameResult, 0, 'first_name').' '.$db->query_result($nameResult, 0, 'last_name');
+					$linkValue = "<a href='index.php?module=$referenceModuleName&view=Detail&parent=Settings&record=$value'
+							title='".vtranslate($fieldModel->get('label'), $referenceModuleName).":". $fullname."'>".$fullname."</a>";
+						return $linkValue;	
 				}
 			} else {
 				$fieldModel = $this->get('field');
@@ -61,6 +65,7 @@ class Vtiger_Reference_UIType extends Vtiger_Base_UIType {
 		}
 		return '';
 	}
+
 
 	/**
 	 * Function to get the display value in edit view

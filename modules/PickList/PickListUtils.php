@@ -20,6 +20,7 @@ require_once 'includes/runtime/Cache.php';
  */
 function getUserFldArray($fld_module,$roleid){
 	global $adb, $log;
+                   $adb->setDebug(TRUE);
 	$user_fld = Array();
 	$tabid = getTabid($fld_module);
 
@@ -57,6 +58,7 @@ function getUserFldArray($fld_module,$roleid){
  */
 function getPickListModules(){
 	global $adb;
+                    
 	// vtlib customization: Ignore disabled modules.
 	$query = 'select distinct vtiger_field.fieldname,vtiger_field.tabid,vtiger_tab.tablabel, vtiger_tab.name as tabname,uitype from vtiger_field inner join vtiger_tab on vtiger_tab.tabid=vtiger_field.tabid where uitype IN (15,33) and vtiger_field.tabid != 29 and vtiger_tab.presence != 1 and vtiger_field.presence in (0,2) order by vtiger_field.tabid ASC';
 	// END
@@ -117,7 +119,7 @@ function getAllPickListValues($fieldName,$lang = Array() ){
 
 		$arr = array();
 		for($i=0;$i<$count;$i++){
-			$pick_val = decode_html($adb->query_result($result, $i, $fieldName));
+			$pick_val = $adb->query_result($result, $i, $fieldName);
 			if($lang[$pick_val] != ''){
 				$arr[$pick_val] = $lang[$pick_val];
 			}

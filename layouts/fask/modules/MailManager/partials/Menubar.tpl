@@ -8,6 +8,9 @@
  ************************************************************************************}
 {strip}
     <div id="modules-menu" class="modules-menu mmModulesMenu" style="width: 100%;">
+         <a class='btn btn-default pull-right' >
+                    <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; {vtranslate('Help',$MODULE)}
+                </a>
         <div><span>{$MAILBOX->username()}</span>
             <span class="pull-right">
                 <span class="cursorPointer mailbox_refresh" title="{vtranslate('LBL_Refresh', $MODULE)}">

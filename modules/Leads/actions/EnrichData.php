@@ -62,12 +62,12 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
     function enrichData(Vtiger_Request $request)
     {
 
-		require_once('modules/Leads/Leads.php');
-		require_once('modules/Users/Users.php');
+		require_once('modules/Leads/Leads.php');		
 
         global $adb,$current_user,$VTIGER_BULK_SAVE_MODE;
 
-        $VTIGER_BULK_SAVE_MODE 	= true;
+        $VTIGER_BULK_SAVE_MODE 	= true; // To turn off the workflows
+
         $message 				= "success"; //Default Value for message
         $reload 				= "no"; //Default Value for reload
 		$leadid 				= $request->get('record');
@@ -115,12 +115,22 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 				$lead->id 	= $leadid;
 				$lead->retrieve_entity_info($lead->id,'Leads',false,true); 
 				$lead->mode = 'edit';
-				
+
+				// To Track History of Updates
+				$em 			= new VTEventsManager($adb);
+				$em->initTriggerCache();					
+				$entityData 	= VTEntityData::fromCRMEntity($lead);
+				$em->triggerEvent("vtiger.entity.beforesave.modifiable", $entityData);
+				$em->triggerEvent("vtiger.entity.beforesave", $entityData);				
+				$em->triggerEvent("vtiger.entity.beforesave.final", $entityData);
+					
 				// Mapping Fields for Lead Details
 				if (!empty($personDetails['fullName'])) {
 
-					$lead->column_fields['firstname'] 	= $personDetails['details']['name']['given'] . " " . $personDetails['details']['name']['middle'];		
-					$lead->column_fields['lastname'] 	= $personDetails['details']['name']['family'];
+					$firstname = $lead->column_fields['firstname'] 	= $personDetails['details']['name']['given'] . " " . $personDetails['details']['name']['middle'];	
+
+					$lastname = $lead->column_fields['lastname'] 	= $personDetails['details']['name']['family'];
+
 				
 				}			
 
@@ -227,7 +237,15 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 					$message = "Company Website field is empty, cannot perform data enrichment for Company";
 					
 				$lead->save('Leads');
-				$reload = "yes";
+
+				$reload 	= "yes";
+
+				$entityData = VTEntityData::fromCRMEntity($lead);
+				$em->triggerEvent("vtiger.entity.aftersave", $entityData);
+				$em->triggerEvent("vtiger.entity.aftersave.final", $entityData);
+
+				$adb->pquery("UPDATE vtiger_crmentity SET label = '$firstname $lastname' WHERE crmid = ?", array($leadid));
+
 
 			}
 
@@ -237,17 +255,21 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 					$message = "Please try again later";
 				else
 					$message = $personDetails['message'];
-				
+
 			}
 		}
 
 		else 
-			$message 		 = "Primary Email field is empty, cannot perform data enrichment";
+
+			$message = "Primary Email field is empty, cannot perform data enrichment";
+
 
 
 		// Sending Response to CRM	
 		$response 	= new Vtiger_Response();
-		$response->setResult(array("message" => $message, "reload" => $reload));
+
+		$response->setResult(array("message" => $message, "reload" => $reload,"firstname" => $firstname, "lastname" => $lastname));
+
 		$response->emit();
 
     }    

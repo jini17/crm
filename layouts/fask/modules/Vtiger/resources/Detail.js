@@ -217,31 +217,10 @@ Vtiger.Class("Vtiger_Detail_Js",{
 			};
 			validateAndSubmitForm(form,params);
 		 });
+
 	},
+	
 
-
-	 /**
-     *
-     * @param massActionUrl To get the enrich data
-     */
-    triggerEnrichAPI : function(massActionUrl){
-        var thisInstance = this;
-        var params = app.convertUrlToDataParams(massActionUrl);
-        app.helper.showProgress();
-        app.request.post({data:params}).then(
-            function(error, data) {
-                app.helper.hideProgress();
-                app.helper.showModal(data);
-                var form = jQuery('form#changeOwner');
-                var isFormExists = form.length;
-                if(isFormExists){
-                    thisInstance.transferOwnershipSave(form);
-                }
-
-                window.location.reload();
-            }
-        );
-    },
 
 	/*
 	 * function to trigger send Email
@@ -450,6 +429,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 				function(err, data) {
 					if (data) {
 						app.helper.showModal(data);
+						self.loadSMSTemplate(); // Added By Mabruk for SMS
 						if (typeof callBackFunction == 'function') {
 							callBackFunction(data);
 						}
@@ -562,6 +542,15 @@ Vtiger.Class("Vtiger_Detail_Js",{
 	},
 
 	getTabContainer : function(){
+
+		//Added By Nirbhay and Mabruk for Meeting MOM on 08/06/2018
+        if (jQuery(".MOMDetails").length) {
+
+            var calinst = new Calendar_Detail_Js();
+            calinst.loadMeetingContainer();
+
+        }
+        
 		return jQuery('div.related-tabs');
 	},
 
@@ -729,7 +718,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 	 */
 	getDeleteMessageKey : function() {
 		return 'LBL_DELETE_CONFIRMATION';
-	},
+	},	
 
 	/**
 	 * Funtion to register Related List Events
@@ -1058,6 +1047,74 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		return tabContainer.find('li.active');
 	},
 
+	/*
+     * Function for Enrich Contact API
+     * Created By Mabruk
+     */     
+    registerEnrichData : function () { 
+
+    	var thisInstance 	= this;
+    	var moduleName 		= app.getModuleName();
+        var record 			= jQuery('#recordId').val(); 
+        var btn 			= jQuery('#' + moduleName + '_detailView_basicAction_LBL_ENRICH_DATA');
+        var btnLocked		= jQuery('#' + moduleName + '_detailView_basicAction_LBL_ENRICH_DATA_LOCKED');
+        var params 			= [];
+		var recordId 		= jQuery('#recordId').val();
+		params.url 			= 'index.php?module=' + moduleName + '&action=EnrichData&mode=enrichData&record=' + recordId;
+		
+		
+		if (btnLocked.length > 0) {
+
+			btnLocked.append("&ensp;<i class='fa fa-lock'></i>");
+
+			btnLocked.click( function() {
+
+				app.helper.showErrorNotification({message:"Data Enrichment feature is not active for " + moduleName + " module"});
+
+			});
+
+		}
+
+		else {
+
+	        btn.click(function () {        	       
+	        	if (confirm("This will overwrite your existing data for the selected record. Are you sure you want to continue ?")) {
+
+		            app.request.get(params).then(
+
+		                function (err, data) {
+		                	
+		                    if (data) {		                    	
+		                    		
+		                    	if (data.message == "success")
+		                			app.helper.showSuccessNotification({message:"Data updated successfully"});                    	
+
+		                    	else                    		
+		                    		app.helper.showErrorNotification({message:data.message});
+		                    	
+		                    	if (data.reload == "yes") {
+
+		                    		var detailHeader = jQuery('.detailview-header');
+		                    		detailHeader.find('.firstname').html(data.firstname.trim());
+		                    		detailHeader.find('.lastname').html(data.lastname.trim()); 
+		                    		jQuery('.tab-item.active').find('a')[0].click(); //To Reload the Detail View using Ajax                    		
+
+		                    	}  
+			                    	
+		                    }
+		                    else 
+		                    	app.helper.showErrorNotification({message:err});
+
+		                }                                        
+		            );
+
+	        	}
+	        });
+
+    	}        
+
+    }, 
+
 	/**
 	 * To Register Ajax Edit Event
 	 * @returns {undefined}
@@ -1192,7 +1249,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 				var referenceElement = jQuery('input[name="'+fieldName+'"]',editElement);
 				if(!referenceElement.attr('disabled')) {
 					referenceElement.attr('disabled','disabled');
-					editElement.find('.clearReferenceSelection').removeClass('hide')
+					//editElement.find('.clearReferenceSelection').removeClass('hide')
 				}
 			}
 		}
@@ -1271,12 +1328,25 @@ Vtiger.Class("Vtiger_Detail_Js",{
 			var fieldBasicData = jQuery('.fieldBasicData', editElement);
 			var fieldName = fieldBasicData.data('name');
 			var fieldType = fieldBasicData.data("type");
-			var previousValue = jQuery.trim(fieldBasicData.data('displayvalue'));
+			var previousValue = jQuery.trim(fieldBasicData.data('displayvalue')); 
+			var fieldElement = jQuery('[name="'+ fieldName +'"]', editElement);			
 
-			var fieldElement = jQuery('[name="'+ fieldName +'"]', editElement);
-			var ajaxEditNewValue = fieldElement.val();
+			// Added By Mabruk Legendary bug
+			fieldElement.each(function() {
+				  $.each(this.attributes, function() {
+				    // this.attributes is not a plain object, but an array
+				    // of attribute nodes, which contain both the name and value
+				    if(this.specified) {
+				      //console.log(this.name, this.value);
+				      if (this.name == "value")
+				      	fieldBasicData.val(this.value);
+				    }
+				  });
+				});	
 
-			 // ajaxEditNewValue should be taken based on field Type
+
+
+			var ajaxEditNewValue = fieldElement.val();			
 			if(fieldElement.is('input:checkbox')) {
 				if(fieldElement.is(':checked')) {
 					ajaxEditNewValue = '1';
@@ -1284,10 +1354,11 @@ Vtiger.Class("Vtiger_Detail_Js",{
 					ajaxEditNewValue = '0';
 				}
 				fieldElement = fieldElement.filter('[type="checkbox"]');
-			} else if(fieldType == 'reference'){
-				ajaxEditNewValue = fieldElement.data('value');
-				if(ajaxEditNewValue===undefined) ajaxEditNewValue = fieldElement.attr('value');
-
+			} else if(fieldType == 'reference'){				
+				ajaxEditNewValue = fieldBasicData.val(); 
+				//if(ajaxEditNewValue===undefined) ajaxEditNewValue = fieldElement.attr('value');				
+				if (ajaxEditNewValue == "") ajaxEditNewValue = fieldBasicData.data('value');
+				
 			}
 
 			// prev Value should be taken based on field Type
@@ -2726,9 +2797,43 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		});
 	},
 
+	/**
+	 * Function to Load SMS Template on SMS Text Area
+	 * Added By Mabruk on 02/05/2018 
+	 * for SMS Template
+	*/
+	 loadSMSTemplate: function() {	
+	 	jQuery('#smstemplate').click(function(){
+			var record = jQuery('#smstemplate :selected').val();							 
+			var params = {
+		            'module' : 'EmailTemplates',
+		            'action' : 'ShowTemplateContent',
+		            'mode' : 'getContent',
+		            'record' : record            
+		        };
+
+	        app.request.post({"data":params}).then(function(err,data) {	        	
+	        	var text = jQuery.trim(jQuery(data.content).text());
+	        	jQuery('#message').text(text);	        	
+			});
+		});
+	 },
+	 //END -- Mabruk
+
+	 // Added By Mabruk
+	 registerEventForCkEditorSize : function () {
+
+	 	jQuery('#Events_detailView_fieldValue_agenda').removeClass();
+	 	jQuery('#Events_detailView_fieldValue_agenda').addClass('fieldValue col-lg-9 col-lg-9');
+	 	jQuery('#Events_detailView_fieldValue_min_meeting').removeClass();
+	 	jQuery('#Events_detailView_fieldValue_min_meeting').addClass('fieldValue col-lg-9 col-lg-9');
+
+	 },
+
 
 	registerEvents : function() {
 		this._super();
+		this.registerEventForCkEditorSize();
 		this.registerEventsForRelatedList();
 		var detailContentsHolder = this.getContentHolder();
 		var self = this;
@@ -3116,10 +3221,11 @@ Vtiger.Class("Vtiger_Detail_Js",{
 
 	//Events common for DetailView and OverlayDetailView
 	registerBasicEvents: function(){
-		var self = this;
+		var self = this;	
 		this.registerAjaxEditEvent();
 		this.registerAjaxEditSaveEvent();
 		this.registerAjaxEditCancelEvent();
+		this.registerEnrichData();
 		this.recordImageRandomColors();
 		this.registerQtipevent();
 

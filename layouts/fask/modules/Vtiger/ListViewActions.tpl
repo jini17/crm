@@ -55,6 +55,9 @@
                             {vtranslate('LBL_MORE','Vtiger')}&nbsp;
                             <i class="material-icons">arrow_drop_down</i>
                         </button>
+                        
+               
+                    
                         <ul class="dropdown-menu" role="menu">
                             {foreach item=LISTVIEW_MASSACTION from=$LISTVIEW_MASSACTIONS_1 name=advancedMassActions}
                                 <li class="hide"><a id="{$MODULE}_listView_massAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($LISTVIEW_MASSACTION->getLabel())}" {if stripos($LISTVIEW_MASSACTION->getUrl(), 'javascript:')===0} href="javascript:void(0);" onclick='{$LISTVIEW_MASSACTION->getUrl()|substr:strlen("javascript:")};'{else} href='{$LISTVIEW_MASSACTION->getUrl()}' {/if}>{vtranslate($LISTVIEW_MASSACTION->getLabel(), $MODULE)}</a></li>
@@ -118,6 +121,7 @@
                                     {/if}  
                                 {/if}
                             {/foreach}
+
                         </ul>
                     </div>
                 {/if}
@@ -141,7 +145,7 @@
                             {vtranslate($CURRENT_VIEW_RECORD_MODEL->get('viewname'))}&nbsp;
                             -->
                         <button type="button" class="btn module-buttons btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" style="width: 100%">
-                            {vtranslate('LBL_LISTS',$MODULE)} | Current: <b class="listViewFilterElipsis">{vtranslate($CURRENT_VIEW_RECORD_MODEL->get('viewname'))|truncate:50:"...":true}</b >&nbsp;
+                            {vtranslate('LBL_LISTS',$MODULE)} | {vtranslate('LBL_CURRENT',$MODULE)}: <b class="listViewFilterElipsis">{vtranslate($CURRENT_VIEW_RECORD_MODEL->get('viewname'))|truncate:50:"...":true}</b >&nbsp;
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu" style="width: 100%;">

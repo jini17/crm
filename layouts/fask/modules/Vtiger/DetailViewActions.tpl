@@ -12,85 +12,10 @@
 {strip}
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 detailViewButtoncontainer">
         <div class="pull-right">
-
-            <!-- bread svv
-            <div class="module-breadcrumb module-breadcrumb-{$smarty.request.view} transitionsAllHalfSecond">
-                {assign var=MODULE_MODEL value=Vtiger_Module_Model::getInstance($MODULE)}
-                {if $MODULE_MODEL->getDefaultViewName() neq 'List'}
-                    {assign var=DEFAULT_FILTER_URL value=$MODULE_MODEL->getDefaultUrl()}
-                {else}
-                    {assign var=DEFAULT_FILTER_ID value=$MODULE_MODEL->getDefaultCustomFilter()}
-                    {if $DEFAULT_FILTER_ID}
-                        {assign var=CVURL value="&viewname="|cat:$DEFAULT_FILTER_ID}
-                        {assign var=DEFAULT_FILTER_URL value=$MODULE_MODEL->getListViewUrl()|cat:$CVURL}
-                    {else}
-                        {assign var=DEFAULT_FILTER_URL value=$MODULE_MODEL->getListViewUrlWithAllFilter()}
-                    {/if}
-                {/if}
-                <a title="{vtranslate($MODULE, $MODULE)}" href='{$DEFAULT_FILTER_URL}&app={$SELECTED_MENU_CATEGORY}'><h4 class="module-title pull-left "> {vtranslate($MODULE, $MODULE)} </h4></a>
-                {if $smarty.session.lvs.$MODULE.viewname}
-                    {assign var=VIEWID value=$smarty.session.lvs.$MODULE.viewname}
-                {/if}
-                {if $VIEWID}
-                    {foreach item=FILTER_TYPES from=$CUSTOM_VIEWS}
-                        {foreach item=FILTERS from=$FILTER_TYPES}
-                            {if $FILTERS->get('cvid') eq $VIEWID}
-                                {assign var=CVNAME value=$FILTERS->get('viewname')}
-                                {break}
-                            {/if}
-                        {/foreach}
-                    {/foreach}
-                    <p class="current-filter-name filter-name pull-left cursorPointer" title="{$CVNAME}"><span class="ti-angle-right pull-left" style="margin-left: 10px;" aria-hidden="true"></span><a href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}&app={$SELECTED_MENU_CATEGORY}'>&nbsp;&nbsp;{$CVNAME}&nbsp;&nbsp;</a> </p>
-                {/if}
-                {assign var=SINGLE_MODULE_NAME value='SINGLE_'|cat:$MODULE}
-                {if $RECORD and $smarty.request.view eq 'Edit'}
-                    <p class="current-filter-name filter-name pull-left "><span class="ti-angle-right pull-left" aria-hidden="true"></span><a title="{$RECORD->get('label')}">&nbsp;&nbsp;{vtranslate('LBL_EDITING', $MODULE)} : {$RECORD->get('label')} &nbsp;&nbsp;</a></p>
-                {else if $smarty.request.view eq 'Edit'}
-                    <p class="current-filter-name filter-name pull-left "><span class="ti-angle-right pull-left" aria-hidden="true"></span><a>&nbsp;&nbsp;{vtranslate('LBL_ADDING_NEW', $MODULE)}&nbsp;&nbsp;</a></p>
-                {/if}
-                {if $smarty.request.view eq 'Detail'}
-                    <p class="current-filter-name filter-name pull-left"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a title="{$RECORD->get('label')}">&nbsp;&nbsp;{$RECORD->get('label')} &nbsp;&nbsp;</a></p>
-                {/if}
-            </div>
-            bread svv -->
-            </div>
+        </div>
             <div class="pull-right btn-toolbar">
              
-                  <!-- svv <div class="btn-group pull-left">
-                
-                        {foreach item=BASIC_ACTION from=$MODULE_BASIC_ACTIONS}
-                            {if $BASIC_ACTION->getLabel() == 'LBL_IMPORT'}
-                                    <button tippytitle data-toggle="toolstip" data-placement="top" title="{vtranslate($BASIC_ACTION->getLabel(), $MODULE)}" id="{$MODULE}_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($BASIC_ACTION->getLabel())}" type="button" class="btn btn-primary addButton" 
-                                            {if stripos($BASIC_ACTION->getUrl(), 'javascript:')===0}  
-                                                onclick='{$BASIC_ACTION->getUrl()|substr:strlen("javascript:")};'
-                                            {else}
-                                                onclick="Vtiger_Import_Js.triggerImportAction('{$BASIC_ACTION->getUrl()}')"
-                                            {/if}>
-                                        <div aria-hidden="true"><i class="material-icons">import_export</i></div>
-                                        
-                                    </button>
-                            {else}
-                                    <button tippytitle data-toggle="toolstip" data-placement="top" title="{vtranslate($BASIC_ACTION->getLabel(), $MODULE)}" id="{$MODULE}_listView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($BASIC_ACTION->getLabel())}" type="button" class="btn btn-primary addButton" 
-                                            {if stripos($BASIC_ACTION->getUrl(), 'javascript:')===0}  
-                                                onclick='{$BASIC_ACTION->getUrl()|substr:strlen("javascript:")};'
-                                            {else} 
-                                                onclick='window.location.href = "{$BASIC_ACTION->getUrl()}&app={$SELECTED_MENU_CATEGORY}"'
-                                            {/if}>
-                                        <div aria-hidden="true"><i class="material-icons>{$BASIC_ACTION->getIcon()}</i></div>
-                                    </button>
-                            {/if}
-                        {/foreach}
-                        {if $MODULE_SETTING_ACTIONS|@count gt 0}
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-toggle="tooltisp" tippytitle data-placement="top" title="{vtranslate('LBL_CUSTOMIZE', 'Reports')}" aria-expanded="false">
-                                        <span aria-hidden="true" title="{vtranslate('LBL_SETTINGS', $MODULE)}"><i class="material-icons">settings</i></span>&nbsp; <span class="caret"></span>
-                                    </button>
-                                    <ul class="detailViewSetting dropdown-menu pull-right animated fadeIn">
-                                        {foreach item=SETTING from=$MODULE_SETTING_ACTIONS}
-                                            <li id="{$MODULE_NAME}_listview_advancedAction_{$SETTING->getLabel()}"><a href={$SETTING->getUrl()}>{vtranslate($SETTING->getLabel(), $MODULE_NAME ,vtranslate($MODULE_NAME, $MODULE_NAME))}</a></li>
-                                        {/foreach}
-                                    </ul>
-                        {/if}
-                   </div>---->
+                  
 <div class="btn-group">
             {assign var=STARRED value=$RECORD->get('starred')}
             {if $MODULE_MODEL->isStarredEnabled()}

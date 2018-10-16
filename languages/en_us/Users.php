@@ -8,16 +8,17 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'LBL_ADD_RECORD' => 'Add User',
+	'LBL_ADD_RECORD' => 'Add Employee',
 	'LBL_WELCOME_SECONDCRM'=>'Welcome Secondcrm',
 	'LBL_MANY_ATTEMPTS'=>'Your account has been blocked due too many failed login attempt. Please contact your Administrator.',
 	//MyPreference Blocks
 	'LBL_MY_PREFERENCES'  =>  'My Profile',
-	'LBL_MORE_INFORMATION'  =>  'More Information',
+                     'LBL_CLAIM_CREATE_SUCCESSFULLY'  =>  'Claim Created Successfully',
+	'LBL_MORE_INFORMATION'  =>  'User Information',
 	'LBL_USERLOGIN_ROLE'  =>  'User Login & Role',
 	'LBL_USER_IMAGE_INFORMATION' => 'User Photograph',
 	'LBL_CURRENCY_CONFIGURATION' =>  'Currency and Number Field Configuration',
-	'LBL_ADDRESS_INFORMATION' => 'User Address',
+	'LBL_ADDRESS_INFORMATION' => 'Correspondence Address',
 	'LBL_USER_ADV_OPTIONS' => 'User Advanced Options',
 	'Asterisk Configuration'  =>  'Asterisk Configuration',
 	'LBL_HOME_PAGE_COMPONENTS' => 'Home Page Components',
@@ -27,7 +28,7 @@ $languageStrings = array(
 	'LBL_USER_PROJECTS'=>'User Projects',
 	'LBL_SKILL_LANG'=>'Skill Language',
 	'LBL_LEAVE'=>'Leave',
-	'LBL_CLAIM'=>'Claim',
+	'LBL_CLAIM'=>'Claims',
 	'LBL_USER_EMERGENCY'=>'Emergency Contacts',
 	'LBL_ADD_NEW_EDUCATION'=>'Add New Education',
 	'LBL_INSTITUTION_NAME'=>'Institution Name',
@@ -52,8 +53,9 @@ $languageStrings = array(
 	'LBL_OFFICE_PH'=>'Office Phone',
 	'LBL_MOBILE'=>'Mobile',
 	'LBL_EDIT_CONTACT'=>'Edit Contact',
-
-
+	'YOU_ARE_CURRENLY_VIEWING'=>'You are viewing employees of company',
+	'LBL_ATTACHMENTS'=>'Attachment (if any)',
+	'LBL_GET_IN_TOUCH'=>'Get In Touch',
 
 
 	//MyPreference Fields
@@ -63,7 +65,8 @@ $languageStrings = array(
 	'Default Activity View' => 'Default MyCalendar View',
 	'Default Calendar View' => 'Default Calendar View',
 	'Default Lead View' => 'Default Lead View',
-	'Title' => 'Title',
+	'Title' => 'Designation',
+                   
 	'Office Phone' => 'Office Phone',
 	'Department' => 'Department',
 	'Reports To' => 'Reports To',
@@ -313,7 +316,7 @@ $languageStrings = array(
     'LBL_EDUCATION_LEVEL' => 'Education Level',
     'LBL_AREA_OF_STUDY'=>'Area of Study',
     'LBL_DESCRIPTION' => 'Description',
-    'LBL_WANT_TO_MAKE_PUBLIC' => 'Do you want to make it Public',					      	      'LBL_CANCEL_BUTTON_KEY' =>'Cancel Button',
+    'LBL_WANT_TO_MAKE_PUBLIC' => 'Public?',					      	      'LBL_CANCEL_BUTTON_KEY' =>'Cancel Button',
  'LBL_SAVE_BUTTON_KEY'=>'Save Button',
  'LBL_USER_EDUCATIONS' => 'User Educations',
  'LBL_ADD_NEW_EDUCATION' => 'Add Education',
@@ -454,7 +457,7 @@ $languageStrings = array(
 'LBL_MY_CLAIM'=>'My Claims',
 'LBL_APPLY_CLAIM'=>'Apply Claim',
 'LBL_ADD_NEW_CLAIM'=>'Add New Claim',
-'LBL_INVOICE'=>' Invoice No',
+'LBL_INVOICE'=>' Receipt No',
 'LBL_CLAIM_STATUS'=>'Claim Status',
 'LBL_APPROVED_BY'=>'Approved By',
 'LBL_EDIT_CLAIM'=>'Edit Claim',
@@ -467,7 +470,7 @@ $languageStrings = array(
 'LBL_MONTHLY_LIMIT_EXCEED'=>'Monthly limit exceeded !',
 'LBL_YEARLY_LIMIT_EXCEED'=>'Yearly limit exceeded !',
 'LBL_CLAIM_NOT_EXCEED'=>'Amount claim are fine.',	
-
+'Claim '=>'Claims',
 
 
 //End of section Claim
@@ -507,11 +510,16 @@ $languageStrings = array(
 'LBL_BLOCKED_IP'=>'Sorry!! Your IP is blocked, Please contact the admin',
 'LBL_USER_LIMIT_EXCEED'=>'User limit exceeded in this plan, please contact to Agiliux Team',
 'LBL_SELECT_ROLE'=>'Select Role',
+'birthday'=>'Date of Birth',
 //End of Contacts
 );
 
 $jsLanguageStrings = array(
-
+	'JS_CANCEL_LEAVE_CONFIRMATION'=>'Are you sure to cancel approve leave',
+	'JS_PERMISSION_LEAVE_DENIED'=>'Sorry, Either you have consumed all leaves or not assign, <br>Please contact admin',
+	'JS_PERMISSION_ClAIM_DENIED'=>'Sorry, Either you have consumed all claims or not assign, <br>Please contact admin',
+	'JS_USER_ALREADY_APPLIED'=>'User already applied leave',
+	'JS_INVALID_DATES_OR_BLANK'=>'Invalid date or empty',
 	//Curency seperator validation messages
 	'JS_ENTER_OLD_PASSWORD'=>'Please enter your old password.',
 	'JS_ENTER_NEW_PASSWORD'=>'Please enter your new password.',
@@ -540,7 +548,16 @@ $jsLanguageStrings = array(
 	'JS_MONTHLY_LIMIT_EXCEED'=>'Monthly limit exceeded !',
 	'JS_YEARLY_LIMIT_EXCEED'=>'Yearly limit exceeded !',
 	'JS_CLAIM_NOT_EXCEED'=>'Amount claim are fine.',																
-
-
-
+	'JS_TRANSACTION_AMOUNT_EXCEEDED'=>'Transaction limited exceeded',
+	'JS_NO_CLAIMTYPE_ALLOCATE'=>'No Claim Type allocated, please contact to HR/Admin.',
+	'JS_CREATE_FAILED'=>'Claim creation failed',
+	'JS_CLAIM_CREATE_SUCCESSFULLY'=>'Claim created successfully',
+	'JS_CLAIM_UPDATED'=>'Claim updated successfully',
+	'JS_CLAIM_APPROVED'=>'Claim approved !!',
+	'JS_UPDATION_FAILED'=>'Claim updation failed',
+	'JS_CLAIM_DISAPPROVED'=>'Claim is not approved',
+	'JS_ALREADY_CONSUMED'=>'You are already consumed',
+	'JS_TRANS_LIMIT'=>'Transaction limit is ',
+	'JS_APPLY_AMOUNT'=>'Amount should be less than or equal to ',
+	'JS_NO_LEAVETYPE_ALLOCATE'=>'No Leave Type allocated, please contact to HR/Admin.',
 );
