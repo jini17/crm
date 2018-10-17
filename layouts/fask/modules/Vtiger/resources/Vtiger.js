@@ -846,10 +846,10 @@ Vtiger.Class('Vtiger_Index_Js', {
                 var thisInstance = this;
                 jQuery('.search-link .keyword-input').on('keypress',function(e){
                         if(e.which == 13) {
-
+                             var module =  jQuery("#searchModuleList").val();
                                 var element = jQuery(e.currentTarget);
                                 var searchValue = element.val();
-                                var data = {};
+                                var data = {'source_module':module};
                                 data['searchValue'] = searchValue;
                                 element.trigger(thisInstance._SearchIntiatedEventName,data);
                         }
