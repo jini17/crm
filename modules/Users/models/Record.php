@@ -1123,12 +1123,12 @@ class Users_Record_Model extends Vtiger_Record_Model {
                         $filter = implode(',',$filtersubtab);
                         $filtercond = " AND fieldid IN ($filter)";
                 }
-                $fieldqry = "SELECT name, linkto FROM vtiger_settings_field WHERE blockid=? ".$filtercond ." ORDER BY sequence ASC";
+                $fieldqry = "SELECT name, linkto, iconpath FROM vtiger_settings_field WHERE blockid=? ".$filtercond ." ORDER BY sequence ASC";
                 $fldresult = $db->pquery($fieldqry,array($blockid));
                 $row = array();
                 if($db->num_rows($fldresult)>0) {
                         for($i=0;$i<$db->num_rows($fldresult);$i++){
-                                $row[$blocklabel][$db->query_result($fldresult, $i, 'name')] = $db->query_result($fldresult, $i, 'linkto');	
+                                $row[$blocklabel][$db->query_result($fldresult, $i, 'name')] = array($db->query_result($fldresult, $i, 'linkto'),$db->query_result($fldresult, $i, 'iconpath'));	
                         }
 
                 }

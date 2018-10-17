@@ -205,11 +205,17 @@ class Settings_Vtiger_Module_Model extends Vtiger_Base_Model {
 		$employmentdetails = Users_Record_Model::getTabDetails(15);
 		$UserTab			= Users_Record_Model::getTabDetails(1, array(1));
 		$HRMatters			= Users_Record_Model::getTabDetails(14);
-		$settingsMenuList = array('LBL_MY_PREFERENCES'	=> array('My Preferences'	=> '',
-																 'Calendar Settings'=> '',
-																 'LBL_MY_TAGS'		=> $myTagSettingsUrl),
-									'LBL_EXTENSIONS'	=> array('LBL_GOOGLE'		=> 'index.php?module=Contacts&parent=Settings&view=Extension&extensionModule=Google&extensionView=Index&mode=settings', 'LBL_OFFICE365'		=> 'index.php?module=Contacts&parent=Settings&view=Extension&extensionModule=Office365&extensionView=Index&mode=settings')
-								);
+		$settingsMenuList = array(
+			'LBL_MY_PREFERENCES' => array(
+					'My Preferences'	=> array('', 'face'),
+					'Calendar Settings' => array('', 'settings'),
+					'LBL_MY_TAGS'		=> array($myTagSettingsUrl,'label')
+				),
+			'LBL_EXTENSIONS' => array(
+					'LBL_GOOGLE'	=> array('index.php?module=Contacts&parent=Settings&view=Extension&extensionModule=Google&extensionView=Index&mode=settings', 'sync'),
+					'LBL_OFFICE365'	=> array(' index.php?module=Contacts&parent=Settings&view=Extension&extensionModule=Office365&extensionView=Index&mode=settings', 'cloud_queue')
+					)
+			);
 
 		if($currentUser->get('roleid')=='H12' || $currentUser->get('roleid')=='H13'){
 			$array = array_merge($settingsMenuList, $UserTab, $HRMatters, $employmentdetails);

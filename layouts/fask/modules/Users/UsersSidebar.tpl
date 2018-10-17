@@ -16,6 +16,7 @@
         <br><div class="clearfix"></div>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="settingsgroup-panel panel panel-default">
+
                         {foreach item=BLOCK_MENUS key=BLOCK_NAME from=$SETTINGS_MENU_LIST}
                                 {assign var=NUM_OF_MENU_ITEMS value= $BLOCK_MENUS|@sizeof}
                                 {if $NUM_OF_MENU_ITEMS gt 0}
@@ -23,7 +24,7 @@
                                                 <div class="app-settings-accordion">
                                                         <div class="settingsgroup-accordion">
                                                                 <a data-toggle="collapse" data-parent="#accordion" href="#{$BLOCK_NAME}">
-                                                                        <i class="ti {if $ACTIVE_BLOCK['block'] eq $BLOCK_NAME} ti-angle-down {else} ti-angle-right {/if}"></i>
+                                                                        <i class="indicator ti-angle-right ti {if $ACTIVE_BLOCK['block'] eq $BLOCK_NAME} ti-angle-down {else} ti-angle-right {/if}"></i>
                                                                         &nbsp;<span>{vtranslate($BLOCK_NAME,$QUALIFIED_MODULE)}</span>
                                                                 </a>
                                                         </div>
@@ -32,6 +33,7 @@
                                         <div id="{$BLOCK_NAME}" class="panel-collapse collapse {if $ACTIVE_BLOCK['block'] eq $BLOCK_NAME} in {/if}">
                                                 <ul class="list-group">
                                                         {foreach item=URL key=MENU from=$BLOCK_MENUS}
+                                                       
                                                                 {assign var=MENU_URL value='#'}
                                                                 {assign var=MENU_LABEL value=$MENU}
 
@@ -39,19 +41,20 @@
                                                                         {assign var=MENU_URL value=$USER_MODEL->getPreferenceDetailViewUrl()}
                                                                 {elseif $MENU eq 'Calendar Settings'}
                                                                         {assign var=MENU_URL value=$USER_MODEL->getCalendarSettingsDetailViewUrl()}
-                                                                {elseif $MENU === $URL}
+                                                                {elseif $MENU === $URL.0}
                                                                         {if $SETTINGS_MENU_ITEMS[$MENU]}
                                                                                 {assign var=MENU_URL value=$SETTINGS_MENU_ITEMS[$MENU]->getURL()}
                                                                         {/if}
-                                                                {elseif is_string($URL)}
-                                                                        {assign var=MENU_URL value=$URL}
+                                                                {elseif is_string($URL.0)}
+                                                                        {assign var=MENU_URL value=$URL.0}
                                                                 {/if}
                                                                 {if $MENU eq 'LBL_EMPLOYEMENT_DETAILS' || $MENU eq  'LBL_PASSPORTVISA'
                                                              || $MENU eq  'LBL_PERFORMANCE' || $MENU eq  'LBL_PAYSLIP' } 
-                                                                  {assign var=MENU_URL value=$USER_MODEL->getEmploymentTabURL($URL)}
+                                                                  {assign var=MENU_URL value=$USER_MODEL->getEmploymentTabURL($URL.0)}
 
                                                                 {/if}    
-                                                                <li><a href="{$MENU_URL}" class="menuItemLabel {if $ACTIVE_BLOCK['menu'] eq $MENU} settingsgroup-menu-color {/if}">{vtranslate($MENU_LABEL,$QUALIFIED_MODULE)}</a></li>
+                                                            
+                                                                <li><a href="{$MENU_URL}" class="menuItemLabel {if $ACTIVE_BLOCK['menu'] eq $MENU} settingsgroup-menu-color {/if}">&nbsp;<i class="material-icons module-icon">&nbsp;{$URL[1]}</i>{vtranslate($MENU_LABEL,$QUALIFIED_MODULE)}</a></li>
                                                         {/foreach}
                                                 </ul>
                                         </div>
@@ -75,6 +78,7 @@
 
         <div class="panel-group" id="accordion_mobile" role="tablist" aria-multiselectable="true">
                 <div class="settingsgroup-panel panel panel-default">
+                    {$SETTINGS_MENU_LIST|print_r}
                         {foreach item=BLOCK_MENUS key=BLOCK_NAME from=$SETTINGS_MENU_LIST}
                                 {assign var=NUM_OF_MENU_ITEMS value= $BLOCK_MENUS|@sizeof}
                                 {if $NUM_OF_MENU_ITEMS gt 0}
@@ -83,7 +87,7 @@
                                                 <div class="app-settings-accordion">
                                                         <div class="settingsgroup-accordion">
                                                                 <a data-toggle="collapse" data-parent="#accordion_mobile" href="#{$BLOCK_NAME}_mobile">
-                                                                        <i class="ti {if $ACTIVE_BLOCK['block'] eq $BLOCK_NAME} ti-angle-down {else} ti-angle-right {/if}"></i>
+                                                                        <i class="indicator ti  {if $ACTIVE_BLOCK['block'] eq $BLOCK_NAME} ti-angle-down {else} ti-angle-right {/if}"></i>
                                                                         &nbsp;<span>{vtranslate($BLOCK_NAME,$QUALIFIED_MODULE)}</span>
                                                                 </a>
                                                         </div>
