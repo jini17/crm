@@ -14,6 +14,11 @@
           color: #2f5597 ;
         }
     </style>
+    
+    <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 0;right:0 !important ; left: 81% !important; " title="Left Panel Show/Hide">
+        <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
+    </button>
+    
     <input type="hidden" id="listViewEntriesCount" value="{$LISTVIEW_ENTRIES_COUNT}" />
 <input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
 <input type="hidden" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" />
@@ -82,14 +87,14 @@
                     <button type="button"  class="empview btn {if $EMP_VIEW eq 'grid'} btn-primary activeview {else}btn-white view{/if}"  data-tabtype="{$TAB_TYPE}" data-listtype='grid' title="Grid View"> <i class="fa fa-th-large"></i> {vtranslate('Grid View', $MODULE)}</button>
                 </div>
 
-         <form class='form-inline pull-right' action="#">
+         <span class='form-inline pull-right' action="#">
              <div class='form-group'>
                  <input type="text" id="keywordsearch" placeholder="{vtranslate('Enter Keyword',$MODULE)}" class="form-control">
              </div>
              <div class="form-group">
                  <button type="button" class='btn btn-primary keyword-search'> Search   </button>
              </div>
-         </form>
+         </span>
      </div>
         </div>
          {/if}    
