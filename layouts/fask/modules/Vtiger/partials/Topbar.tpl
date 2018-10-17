@@ -687,6 +687,7 @@
                                                                         </ul>
                                                                     </div>
                                                                     {else}
+                                                                        
                                                                     <div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
                                                                         <a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModule" data-name="{$moduleModel->getName()}"
                                                                             data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)">
@@ -696,6 +697,7 @@
                                                                     </div>
                                                                     {/if}
                                                                     {if $count % 3 == 2}
+                                                                         
                                                                 </div>
                                                                 <br>
                                                                 {/if}
@@ -705,6 +707,32 @@
                                                                 {/if}
                                                                 {/if}
                                                                 {/foreach}
+                                                                <div class="clearfix"></div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="col-lg-4">
+                                                                        <a id="menubar_quickCreate_Users" class="quickCreateModule" data-name="Users"
+                                                                            data-url="" onclick='window.location.href="index.php?module=Users&parent=Settings&view=Edit"'>
+                                                                            <i class="material-icons pull-left">person</i>
+                                                                            <span class="quick-create-module">{vtranslate('Users','Users')}</span>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <a id="menubar_quickCreate_Users" class="quickCreateModule" data-name="Users"
+                                                                            data-url="" onclick='window.location.href = "index.php?module=Leave&view=Edit&app=ADMIN"'>
+                                                                            <i class="material-icons pull-left">exit_to_app</i>
+                                                                            <span class="quick-create-module">{vtranslate('Leave','Leave')}</span>
+                                                                        </a>
+                                                                    </div>
+                                                                        <div class="col-lg-4">
+                                                                        <a id="menubar_quickCreate_Users" class="quickCreateModule" data-name="Users"
+                                                                            data-url="" onclick='window.location.href = "index.php?module=Bills&view=Edit&app=ADMIN"'>
+                                                                            <i class="material-icons pull-left">receipt</i>
+                                                                            <span class="quick-create-module">{vtranslate('Bills','Bills')}</span>
+                                                                        </a>
+                                                                    </div>
+                                                                        </div>
+                                                                </div>
                                                             </div>
                                                         </li>
                                                     </ul>
