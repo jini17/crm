@@ -12,24 +12,24 @@ global $adb;
 $adb->setDebug(true);
 
 $module = new Vtiger_Module();
-$module->name = 'EmployeeContract';
-$module = $module->getInstance('EmployeeContract');
+$module->name = 'Contacts';
+$module = $module->getInstance('Contacts');
 
 // Create Block instance
 $block1 = new Vtiger_Block();
-$block1->label = 'LBL_Employment_Contract_Information';
+$block1->label = 'LBL_CONTACT_INFORMATION';
 
 $block1 = $block1->getInstance($block1->label,$module);
 
 $field1 = new Vtiger_Field();
 
-$field1->name = 'job_type';
+$field1->name = 'company_name';
 $field1->table = $module->basetable;
-$field1->label = 'Job Type';
-$field1->column = 'job_type';
-$field1->columntype = 'VARCHAR(30)';
-$field1->uitype = 15;
-$field1->typeofdata = 'V~M';
+$field1->label = 'Company Title';
+$field1->column = 'company_name';
+$field1->columntype = 'VARCHAR(150)';
+$field1->uitype = 2;
+$field1->typeofdata = 'V~O';
 $block1->addField($field1);
 echo "NBBB";
 //after field is created, go to vtiger_field and find the field ID.

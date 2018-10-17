@@ -345,9 +345,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 		$query = "(SELECT CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) as fullname,department,
 				birthday AS birthdate,vtiger_users.id AS 'id','Users' AS module,'email1' AS fieldname,
 				TIMESTAMPDIFF( YEAR, birthday, CURDATE( ) ) AS age
-				FROM vtiger_users 
-				
-				";
+				FROM vtiger_users ";
 
 			if($type == 'today'){
 			$query .= "WHERE DATE_FORMAT(birthday,'%m-%d') = DATE_FORMAT(NOW(),'%m-%d')
@@ -398,7 +396,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 		$query = "(SELECT DISTINCT CONCAT(vtiger_contactdetails.firstname, ' ', vtiger_contactdetails.lastname) AS fullname,		
 				vtiger_contactsubdetails.birthday AS birthdate,vtiger_contactdetails.contactid AS 'id',
 				'Accounts' AS module,'email1' AS fieldname,
-				TIMESTAMPDIFF( YEAR, vtiger_contactsubdetails.birthday, CURDATE( ) ) AS age
+				TIMESTAMPDIFF( YEAR, vtiger_contactsubdetails.birthday, CURDATE( ) ) AS age, vtiger_contactdetails.company_name as department
 				FROM vtiger_contactdetails
 				INNER JOIN vtiger_contactsubdetails
 				ON vtiger_contactdetails.contactid = vtiger_contactsubdetails.contactsubscriptionid
@@ -506,14 +504,14 @@ class Home_Module_Model extends Vtiger_Module_Model {
 				$birthdays[$i]['module'] = $db->query_result($result, $i, 'module');		
 				$birthdays[$i]['fieldname'] = $db->query_result($result, $i, 'fieldname');		
 				$birthdays[$i]['age'] = $db->query_result($result, $i, 'age');		
-                                                                                      $birthdays[$i]['department'] =$db->query_result($result, $i, 'department');		
+                $birthdays[$i]['department'] =$db->query_result($result, $i, 'department');		
 			}
 		}
 		return $birthdays;
 
 	}
 	
-	 function getDepartments(){
+	function getDepartments(){
  
  		$db = PearDatabase::getInstance();	
  		$result = $db->pquery("SELECT * from vtiger_department WHERE presence=1 ORDER BY ");
