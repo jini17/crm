@@ -16,21 +16,34 @@ class Users_List_View extends Settings_Vtiger_List_View {
         
         function checkPermission(Vtiger_Request $request) {
                 $currentUserModel = Users_Record_Model::getCurrentUserModel();
+          
                 global $current_user;
-
+             
                 //echo  $current_user->get('hradmin');
                 if(!$currentUserModel->isAdminUser() && $current_user->roleid !='H12' && $current_user->roleid !='H13') {
                         throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
                 }
         }
-
+              
         public function process(Vtiger_Request $request) {
-                 //global $adb;
-
+                 $adb = PearDatabase::getInstance();
+                $current_user = Users_Record_Model::getCurrentUserModel();
                  global $site_URL;
+                 $reportingManager = Users_Record_Model::MyReortingManager($adb,$current_user->get('id'));
+                $myDepartmnetEmployee = Users_Record_Model::MyDepartmentEmployees($adb,$current_user->get('departmnet'),$current_user->get('id'));
+                $myDetails = array();
+                $myDetails['fullname']       = $current_user->get('first_name')." ".$current_user->get('last_name');
+                $myDetails['designation']  = $current_user->get('title');
+                $myDetails['department']  = $current_user->get('department');
+                 $myDetails['email']            = $current_user->get('email1');
+                 $myDetails['date_joined'] = $current_user->get('date_joined');
+                 $myDetails['birthday']      = $current_user->get('birthday');
+                 $myDetails['facebook']     = $current_user->get('facebook');
+                 $myDetails['twitter']          = $current_user->get('twitter');
+                 $myDetails['linkedin']       = $current_user->get('linkedin');
+                 $myDetails['image']           = $current_user->getImageDetails();
+                 
                 $alphabet = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-
-
                 $URL = $site_URL.'/index.php?module=Users&parent=Settings&view=List&block=1&fieldid=1';
                 $defaultview = $request->get('empview');	
                 $Alphabet = $request->get('Alphabet');
@@ -38,9 +51,9 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 //defaultTab : EmployeeDirectory
                 $tabType = $request->get('tabtype');
 
-                if($tabType == 'MD'){
-                        $request->set('search_params', array("department","c", $currentUserModel->get('department')));	
-                }
+//                if($tabType == 'MD'){
+//                        $request->set('search_params', array("department","c", $currentUserModel->get('department')));	
+//                }
 //
                 $defaultview = $request->get('empview');	
 
@@ -48,10 +61,8 @@ class Users_List_View extends Settings_Vtiger_List_View {
                      $defaultview = 'grid';	
                 }
                 
-
                 $viewer = $this->getViewer($request);
                 $this->initializeListViewContents($request, $viewer);
-
                 $viewer->assign('TAB_TYPE', $tabType);
                 $viewer->assign('ALPHABETS', $alphabet);
                 $viewer->assign('EMP_VIEW', $defaultview);
@@ -59,11 +70,13 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 $viewer->assign('TEXT_FILTER',$Alphabet);
                 $viewer->assign('DEPT',$currentUserModel->get('department'));
                 $viewer->assign("SEVEN_DAYS_AGO", date('Y-m-d', strtotime("-7 day")));
-                 $viewer->assign("SEVEN_DAYS_AFTER", date('Y-m-d', strtotime("+7 day")));
+                $viewer->assign("SEVEN_DAYS_AFTER", date('Y-m-d', strtotime("+7 day")));
 
                 //$viewer->view('GridViewContents.tpl', $request->getModule(false));
                 if( $tabType  ==  'WAI'){
-                  
+                        $viewer->assign("REPORTING_MANAGER", $reportingManager);
+                         $viewer->assign("MY_DETAILS", $myDepartmnetEmployee);
+                        $viewer->assign("DEPARTMENT_EMPLOYEES", $myDepartmnetEmployee);
                         $viewer->view('EmployeeTree.tpl',  $request->getModule(false));
                 } else {
                     if($defaultview =='grid'){
@@ -80,7 +93,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
          */
     public function initializeListViewContents(Vtiger_Request $request, Vtiger_Viewer $viewer) {
             global $adb;
-           //$adb->setDebug(true);
+       //$adb->setDebug(true);
             $moduleName = $request->getModule();
             $cvId = $request->get('viewname');
             $pageNumber = $request->get('page');
@@ -100,12 +113,12 @@ class Users_List_View extends Settings_Vtiger_List_View {
                     $tabType = $request->get('tabtype');
                 }  
                     $searchType = $request->get('searchType');
-                    if($tabType == 'MD'){
-                        $request->set('search_key','department');
-                        $request->set('search_value',$currentUserModel->get('department'));
-                         $request->set('operator','e');
-                    }
-                    
+//                    if($tabType == 'MD'){
+//                        $request->set('search_key','department');
+//                        $request->set('search_value',$currentUserModel->get('department'));
+//                         $request->set('operator','e');
+//                    }
+//                    
                     if($searchType == 'alphabet'){
                         $request->set('search_key','first_name');
                         $request->set('search_value',$currentUserModel->get('first_name'));
@@ -201,19 +214,15 @@ class Users_List_View extends Settings_Vtiger_List_View {
                     $this->listViewEntries = $listViewModel->getListViewEntries($pagingModel); 
             }
             $noOfEntries = count($this->listViewEntries);
-
             $viewer->assign('MODULE', $moduleName);
 
             if(!$this->listViewLinks){
                     $this->listViewLinks = $listViewModel->getListViewLinks($linkParams);
             }
             $viewer->assign('LISTVIEW_LINKS', $this->listViewLinks);
-
             $viewer->assign('LISTVIEW_MASSACTIONS', $linkModels['LISTVIEWMASSACTION']);
-
             $viewer->assign('PAGING_MODEL', $pagingModel);
             $viewer->assign('PAGE_NUMBER',$pageNumber);
-
             $viewer->assign('ORDER_BY',$orderBy);
             $viewer->assign('SORT_ORDER',$sortOrder);
             $viewer->assign('NEXT_SORT_ORDER',$nextSortOrder);
@@ -226,6 +235,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
             $viewer->assign('LISTVIEW_HEADERS', $this->listViewHeaders);
             $viewer->assign('LISTVIEW_ENTRIES', $this->listViewEntries);
             $viewer->assign('TAB_TYPE', $tabType);
+            $viewer->assign('DEPT',$currentUserModel->get('department'));
             if (PerformancePrefs::getBoolean('LISTVIEW_COMPUTE_PAGE_COUNT', true)) {
                     if(!$this->listViewCount){
                             $this->listViewCount = $listViewModel->getListViewCount();

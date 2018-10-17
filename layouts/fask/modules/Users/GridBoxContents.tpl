@@ -91,8 +91,8 @@
    <div class="row">
         <div class="col-lg-12">
             {foreach  item=LISTVIEW_ENTRY from=$LISTVIEW_ENTRIES }
-                    {assign var=birthday value=$LISTVIEW_ENTRY->getBirthdayWish($LISTVIEW_ENTRY->get('birthday'),$LISTVIEW_ENTRY->getId())}
-                     {assign var=joinee value=$LISTVIEW_ENTRY->getNewJoinee($LISTVIEW_ENTRY->get('date_joined'),$LISTVIEW_ENTRY->getId())}
+                    {assign var=birthday value=$LISTVIEW_ENTRY->getBirthdayWish($LISTVIEW_ENTRY->get('birthday'),$LISTVIEW_ENTRY->getId(),'grid')}
+                     {assign var=joinee value=$LISTVIEW_ENTRY->getNewJoinee($LISTVIEW_ENTRY->get('date_joined'),$LISTVIEW_ENTRY->getId(),'grid')}
                 <div class="col-lg-3"   data-id='{$LISTVIEW_ENTRY->getId()}' data-recordUrl='{$LISTVIEW_ENTRY->getDetailViewUrl()}' id="{$MODULE}_listView_row_{$smarty.foreach.listview.index+1}">
 
                            <div class="box-content {if $birthday } highlight-birthday{/if}">
@@ -133,7 +133,7 @@
                         <div class='clearfix'></div>
                         <div class='birthdaybox text-center'>{$birthday}</div>
                         <div class="clearfix"></div>
-                        <small >{$LISTVIEW_ENTRY->get('date_joined')}</small>
+                        <small >{$joinee}</small>
                     </div>
                              <div class="clearfix"></div>
                             </div>
@@ -146,5 +146,5 @@
                
                 <div class="clearfix"></div>
     </div>
-  </div>
-                <div>Pagenation code start</div>
+  </div>{*
+                <div>Pagenation code start</div>*}

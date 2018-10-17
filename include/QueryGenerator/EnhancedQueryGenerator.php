@@ -813,9 +813,13 @@ class EnhancedQueryGenerator extends QueryGenerator {
                                         $fieldSql .= " $fieldGlue ( vtiger_freetags.id ".$valueSql.' AND ' .
                                                         '( vtiger_freetagged_objects.tagger_id = '.$this->user->id.' OR vtiger_freetags.visibility = "public")) ';
                                 } else {
-                                        if (($fieldName == 'birthday' || $fieldName == 'date_joined') && !$this->isRelativeSearchOperators($conditionInfo['operator'])) {
+                                        if ($fieldName == 'birthday' && !$this->isRelativeSearchOperators($conditionInfo['operator'])) {
                                                 $fieldSql .= "$fieldGlue DATE_FORMAT(".$tableName.'.' .
                                                                 $field->getColumnName().",'%m%d') ".$valueSql;
+                                        } 
+                                        elseif ($fieldName == 'date_joined' && !$this->isRelativeSearchOperators($conditionInfo['operator'])) {
+                                                $fieldSql .= "$fieldGlue DATE_FORMAT(".$tableName.'.' .
+                                                                $field->getColumnName().",'%Y-%m-%d') ".$valueSql;
                                         } else {
                                                 if ($conditionInfo['operator'] == 'n' && $field->getFieldDataType() == 'multipicklist') {
                                                         $specialCondition = ' OR '.$tableName.'.'.$field->getColumnName().' IS NULL ';

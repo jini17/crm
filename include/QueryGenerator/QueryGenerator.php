@@ -975,10 +975,15 @@ class QueryGenerator {
                 }
                 $sql = array();
                 if($operator == 'between' || $operator == 'bw' || $operator == 'notequal' || $operator =='last6month' || $operator =='next6month') {
-                        if($field->getFieldName() == 'birthday' || $field->getFieldName() == 'date_joined') {
+                        if($field->getFieldName() == 'birthday' ) {
                                 $valueArray[0] = getValidDBInsertDateTimeValue($valueArray[0]);
                                 $valueArray[1] = getValidDBInsertDateTimeValue($valueArray[1]);
                                 $sql[] = " BETWEEN ".date('md', strtotime("-7 day"))." AND ".date('md', strtotime("+7 day"))." ";
+                        } 
+                        elseif($field->getFieldName() == 'date_joined') {
+                                $valueArray[0] = getValidDBInsertDateTimeValue($valueArray[0]);
+                                $valueArray[1] = getValidDBInsertDateTimeValue($valueArray[1]);
+                                $sql[] = " BETWEEN '".date('Y-m-d', strtotime("-30 day"))."' AND '".date('Y-m-d')."' ";
                         } else {
                                 if($this->isDateType($field->getFieldDataType())) {
                                         $start = explode(' ', $valueArray[0]);
