@@ -98,6 +98,98 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
         });
     },
 
+    registerClaimDeleteButton : function() {
+
+
+        var thisInstance = this;
+        var aDeferred = jQuery.Deferred();
+        jQuery("#deleteClaim").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery("#deleteClaim").click(function () {
+          
+            var selectedvalues = thisInstance.getAllCheckedValues();
+        
+            if(selectedvalues < 1){
+                alert("Invalid Selection");
+                return aDeferred.reject();
+            }
+            app.helper.showProgress();
+            var params = {
+                'module' : app.getModuleName(),
+                'parent' : app.getParentModuleName(),
+                'view' : 'AllocationTools',
+                'values' : selectedvalues,
+                'mode'  : 'DeleteClaimAllocation'
+            }
+
+            AppConnector.request(params).then(
+                function() {
+                    var url = "?module=Vtiger&parent=Settings&view=ClaimAllocationListView&block=14&fieldid=49";
+                    thisInstance.loadContents(url).then(function(data){
+                        app.helper.hideProgress();
+                        jQuery(".settingsPageDiv.content-area.clearfix").html(data);
+
+                        thisInstance.registerEvents();
+                        app.helper.showSuccessNotification({"message":"Records deleted successfully"});
+                    });
+                    aDeferred.resolve();
+
+                },
+                function(error,err){
+                    aDeferred.reject();
+                }
+            );
+
+            return aDeferred.promise();
+
+        });
+    },
+
+    registerBenefitDeleteButton : function() {
+
+
+        var thisInstance = this;
+        var aDeferred = jQuery.Deferred();
+        jQuery("#deleteBenefit").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery("#deleteBenefit").click(function () {
+          
+            var selectedvalues = thisInstance.getAllCheckedValues();
+        
+            if(selectedvalues < 1){
+                alert("Invalid Selection");
+                return aDeferred.reject();
+            }
+            app.helper.showProgress();
+            var params = {
+                'module' : app.getModuleName(),
+                'parent' : app.getParentModuleName(),
+                'view' : 'AllocationTools',
+                'values' : selectedvalues,
+                'mode'  : 'DeleteBenefitAllocation'
+            }
+
+            AppConnector.request(params).then(
+                function() {
+                    var url = "?module=Vtiger&parent=Settings&view=BenefitAllocationListView&block=14&fieldid=49";
+                    thisInstance.loadContents(url).then(function(data){
+                        app.helper.hideProgress();
+                        jQuery(".settingsPageDiv.content-area.clearfix").html(data);
+
+                        thisInstance.registerEvents();
+                        app.helper.showSuccessNotification({"message":"Records deleted successfully"});
+                    });
+                    aDeferred.resolve();
+
+                },
+                function(error,err){
+                    aDeferred.reject();
+                }
+            );
+
+            return aDeferred.promise();
+
+        });
+    },
+
     /**
      * Added By Nirbhay to add a value
      */
@@ -143,6 +235,89 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
         return aDeferred.promise();
     },
 
+    registerClaimEditButton: function(){
+
+        var thisInstance = this;
+        var aDeferred = jQuery.Deferred();
+        jQuery("#editClaim").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+
+        jQuery("#editClaim").click(function () {
+            var selectedvalues = thisInstance.getAllCheckedValues();
+            if(selectedvalues < 1){
+                alert("Invalid Selection");
+                return aDeferred.promise();
+            }
+
+
+            //console.log("add item");
+            app.helper.showProgress();
+            var params = {
+                'module' : app.getModuleName(),
+                'parent' : app.getParentModuleName(),
+                'view' : 'AllocationTools',
+                'values' : selectedvalues,
+                'mode' : 'EditClaimAllocationForm'
+            }
+            AppConnector.requestPjax(params).then(
+                function(data) {
+                    //console.log("Inside pjax");
+                    app.helper.hideProgress();
+                    app.helper.showModal(data);
+                    history.pushState({}, null, window.history.back());
+                    thisInstance.saveClaimRule();
+                    thisInstance.autoAddMultipleClaimtype();
+                    //thisInstance.showLeaveTypeEditAddition();
+
+                    // var thisInstance1 = this;
+
+
+                });
+
+        });
+        return aDeferred.promise();
+    },
+
+    registerBenefitEditButton: function(){
+
+        var thisInstance = this;
+        var aDeferred = jQuery.Deferred();
+        jQuery("#editBenefit").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+
+        jQuery("#editBenefit").click(function () {
+            var selectedvalues = thisInstance.getAllCheckedValues();
+            if(selectedvalues < 1){
+                alert("Invalid Selection");
+                return aDeferred.promise();
+            }
+
+
+            //console.log("add item");
+            app.helper.showProgress();
+            var params = {
+                'module' : app.getModuleName(),
+                'parent' : app.getParentModuleName(),
+                'view' : 'AllocationTools',
+                'values' : selectedvalues,
+                'mode' : 'EditBenefitAllocationForm'
+            }
+            AppConnector.requestPjax(params).then(
+                function(data) {
+                    //console.log("Inside pjax");
+                    app.helper.hideProgress();
+                    app.helper.showModal(data);
+                    history.pushState({}, null, window.history.back());
+                    thisInstance.saveBenefitRule();
+                    thisInstance.autoAddMultipleBenefittype();
+                    //thisInstance.showLeaveTypeEditAddition();
+
+                    // var thisInstance1 = this;
+
+
+                });
+
+        });
+        return aDeferred.promise();
+    },
 
     /**
      * Added By Nirbhay to add a value
@@ -169,6 +344,66 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
                     thisInstance.saveRule();
                     thisInstance.showLeaveTypeAddition();
                     thisInstance.addMultipleLeavetype();
+                    history.pushState({}, null, window.history.back());
+                    // var thisInstance1 = this
+                });
+
+        });
+        return aDeferred.promise();
+    },
+
+    registerClaimAddButton: function(){
+
+        var thisInstance = this;
+        var aDeferred = jQuery.Deferred();
+        jQuery("#addClaim").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery("#addClaim").click(function () {
+            //console.log("add item");
+            app.helper.showProgress();
+            var params = {
+                'module' : app.getModuleName(),
+                'parent' : app.getParentModuleName(),
+                'view' : 'AllocationTools',
+                'mode' : 'AddClaimAllocationForm'
+            }
+            AppConnector.requestPjax(params).then(
+                function(data) {
+                    //console.log("Inside pjax");
+                    app.helper.hideProgress();
+                    app.helper.showModal(data);
+                    thisInstance.saveClaimRule();
+                    thisInstance.showLeaveTypeAddition();
+                    thisInstance.addMultipleClaimtype();
+                    history.pushState({}, null, window.history.back());
+                    // var thisInstance1 = this
+                });
+
+        });
+        return aDeferred.promise();
+    },
+
+    registerBenefitAddButton: function(){
+
+        var thisInstance = this;
+        var aDeferred = jQuery.Deferred();
+        jQuery("#addBenefit").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery("#addBenefit").click(function () {
+            //console.log("add item");
+            app.helper.showProgress();
+            var params = {
+                'module' : app.getModuleName(),
+                'parent' : app.getParentModuleName(),
+                'view' : 'AllocationTools',
+                'mode' : 'AddBenefitAllocationForm'
+            }
+            AppConnector.requestPjax(params).then(
+                function(data) {
+                    //console.log("Inside pjax");
+                    app.helper.hideProgress();
+                    app.helper.showModal(data);
+                    thisInstance.saveBenefitRule();
+                    //thisInstance.showLeaveTypeAddition();
+                    thisInstance.addMultipleBenefittype();
                     history.pushState({}, null, window.history.back());
                     // var thisInstance1 = this
                 });
@@ -264,6 +499,166 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
         aDeferred.promise();
     },
 
+    saveClaimRule: function(){
+        var aDeferred = jQuery.Deferred();
+        var thisInstance = this;
+
+        jQuery(document).ready(function () {
+            jQuery(document).off('click',"#saveButtonClaim"); /**Unbinded to avoid infinite loop on every register***/
+            jQuery(document).on('click', "#saveButtonClaim", function () {
+               
+                var form = jQuery('#AddClaimAllocation').serializeArray();
+
+
+                if(jQuery("#EditClaimAllocationContainer").length >0){
+                    mode = 'UpdateClaimAllocation'
+                }else{
+                    mode = 'AddClaimAllocation';
+                }
+
+                var params = {
+                    'module' : 'Vtiger',
+                    'parent' : 'Settings',
+                    'view'   : 'AllocationTools',
+                    'mode'   : mode,
+                    'form'   : form
+
+
+                };
+                app.helper.showProgress();
+
+                app.request.post({'data' : params}).then(
+                    function(err, data) {
+                        app.helper.hideProgress();
+                       // var jsonData = JSON.stringify(data); alert(jsonData);
+                        if(data.result=='success'){
+                            //console.log(data);
+
+                            var url = "?module=Vtiger&parent=Settings&view=ClaimAllocationListView&block=14&fieldid=49";
+                            thisInstance.loadContents(url).then(function(data){
+                                jQuery(".settingsPageDiv.content-area.clearfix").html(data);
+                                app.hideModalWindow();
+                                thisInstance.registerEvents();
+                                app.helper.showSuccessNotification({"message":"Successfully Added"});
+                            });
+
+                            aDeferred.resolve(data);
+                            return;
+                        }
+
+                        else if (data.result == "Missing") {
+
+                            app.helper.showErrorNotification({"message": "Empty:<br>" + data.data});
+
+                        }
+
+                        
+                        else if (data.result == "Not Allowed") { 
+//alert(JSON.stringify(data));
+
+                            var claimTypes  = JSON.stringify(data.data.claimTypes); 
+                            if (data.data.claimTypes != "") {                              
+
+                                    app.helper.showErrorNotification({"message":claimTypes.replace(/"/g , "")});
+                              
+                            }
+                        }
+                        else{ 
+                            alert(mode);
+                            console.log(data);
+                            app.hideModalWindow();
+                            app.helper.showErrorNotification({"message":err});
+                            thisInstance.registerEvents();
+                            aDeferred.reject(data);
+                            return;
+                        }
+                    });
+            });
+        });
+
+        aDeferred.promise();
+    },
+
+    saveBenefitRule: function(){
+        var aDeferred = jQuery.Deferred();
+        var thisInstance = this;
+
+        jQuery(document).ready(function () {
+            jQuery(document).off('click',"#saveButtonBenefit"); /**Unbinded to avoid infinite loop on every register***/
+            jQuery(document).on('click', "#saveButtonBenefit", function () {
+               
+                var form = jQuery('#AddBenefitAllocation').serializeArray();
+
+
+                if(jQuery("#EditBenefitAllocationContainer").length >0){
+                    mode = 'UpdateBenefitAllocation'
+                }else{
+                    mode = 'AddBenefitAllocation';
+                }
+
+                var params = {
+                    'module' : 'Vtiger',
+                    'parent' : 'Settings',
+                    'view'   : 'AllocationTools',
+                    'mode'   : mode,
+                    'form'   : form
+
+
+                };
+                app.helper.showProgress();
+
+                app.request.post({'data' : params}).then(
+                    function(err, data) {
+                        app.helper.hideProgress();
+                       // var jsonData = JSON.stringify(data); alert(jsonData);
+                        if(data.result=='success'){
+                            //console.log(data);
+
+                            var url = "?module=Vtiger&parent=Settings&view=BenefitAllocationListView&block=14&fieldid=49";
+                            thisInstance.loadContents(url).then(function(data){
+                                jQuery(".settingsPageDiv.content-area.clearfix").html(data);
+                                app.hideModalWindow();
+                                thisInstance.registerEvents();
+                                app.helper.showSuccessNotification({"message":"Successfully Added"});
+                            });
+
+                            aDeferred.resolve(data);
+                            return;
+                        }
+
+                        else if (data.result == "Missing") {
+
+                            app.helper.showErrorNotification({"message": "Empty:<br>" + data.data});
+
+                        }
+
+                        
+                        else if (data.result == "Not Allowed") { 
+//alert(JSON.stringify(data));
+
+                            var claimTypes  = JSON.stringify(data.data.claimTypes); 
+                            if (data.data.claimTypes != "") {                              
+
+                                    app.helper.showErrorNotification({"message":claimTypes.replace(/"/g , "")});
+                              
+                            }
+                        }
+                        else{ 
+                            alert(mode);
+                            console.log(data);
+                            app.hideModalWindow();
+                            app.helper.showErrorNotification({"message":err});
+                            thisInstance.registerEvents();
+                            aDeferred.reject(data);
+                            return;
+                        }
+                    });
+            });
+        });
+
+        aDeferred.promise();
+    },
+
 
     /**
      * Added By Nirbhay to show and hide leave allocation
@@ -313,13 +708,19 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
      */
     addMultipleLeavetype: function(){
         var counter=0;
+        var limit=0;
         var thisInstance = this;
-         jQuery("#AddLeavetype").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery("#AddLeavetype").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
         jQuery("#AddLeavetype").click(function () {
             counter++;
+            limit++;
             var dropdownvalues_en = jQuery("#dropdownValue").val();
             var dropdownvalues = jQuery.parseJSON(dropdownvalues_en);
 
+            if(limit >= dropdownvalues.length){
+                jQuery("#AddLeavetype").prop('disabled', true);
+
+            }
 
             var element ='<div id="Leavetypesection'+ counter +'"><div class="contents row form-group"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><div class="fieldValue col-lg-4 col-md-4 col-sm-4"><select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_leavetype'+ counter +'" name="Allocation_leavetype'+ counter +'"><option value="">Select One</option>';
 
@@ -334,6 +735,107 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
             element = element + '</div>';
 
             jQuery("#LeaveTypeAllocation").append(element);
+
+            jQuery(document).on('click', "#removeid"+ counter,function(){
+                limit--;
+                jQuery("#AddLeavetype").prop('disabled', false);
+            });
+        });
+
+    },
+
+    toggleLimit : function(e){
+        alert('ok');
+    },
+
+    addMultipleClaimtype: function(){
+        var counter=0;
+        var limit=0;
+        var thisInstance = this;
+         jQuery("#AddClaimtype").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+         jQuery("#AddClaimtype").click(function () {
+            counter++;
+            limit++;
+            
+            var dropdownvalues_en = jQuery("#dropdownValue").val();
+            var dropdownvalues = jQuery.parseJSON(dropdownvalues_en);
+
+            if(limit >= dropdownvalues.length){
+                jQuery("#AddClaimtype").prop('disabled', true);
+
+            }
+            
+
+            var element ='<div id="Claimtypesection'+ counter +'"><div class="contents row form-group"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><div class="fieldValue col-lg-4 col-md-4 col-sm-4"><select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_claimtype'+ counter +'" name="Allocation_claimtype'+ counter +'"><option value="">Select One</option>';
+
+            for(var i=0;i<dropdownvalues.length;i++){
+                    element = element + '<option value=' + dropdownvalues[i]['id'] + '>'+ dropdownvalues[i]['claimtype'] +'</option>'
+            }
+
+            element = element + '</select><button id="removeid'+ counter +'" onclick="jQuery(\'#Claimtypesection'+counter +'\').remove();">X</button></div></div></div>';
+
+            element = element + '<div class="container float-left" style="margin-left:221px;">'+
+                    '<div class="contents row form-group" style="margin-left: 30px;">'+
+                    '<label class="switch"><input onclick="'+thisInstance.toggleLimit(this)+'" class="sliderform-check-input" type="checkbox" id="trans_limit'+counter+'" value="trans_limit">Transaction Limit</input><span class="slider round"></span>'+
+                    '<input style="margin-left:15px;" id="trans_limit_input'+ counter +'" type="text" name="trans_limit'+ counter +'">'+
+                    '</div><div class="contents row form-group" style="margin-left: 30px;">'+
+                    '<label class="switch"><input onclick="'+thisInstance.toggleLimit(this)+'" class="form-check-input" type="checkbox" id="monthly_limit'+counter+'" name="">Monthly Limit</input><span class="slider round"></span>'+
+                    '<input style="margin-left:36px;" type="text" id="monthly_limit_input'+ counter +'" name="monthly_limit'+ counter +'" ></div>'+
+                    '<div class="contents row form-group" style="margin-left: 30px;">'+
+                    '<label class="switch"><input onclick="'+thisInstance.toggleLimit(this)+'" class="form-check-input" type="checkbox" id="yearly_limit'+counter+'" name="">Yearly Limit</input><span class="slider round"></span>'+
+                    '<input style="margin-left:53px;" type="text" id="yearly_limit_input'+ counter +'" name="yearly_limit'+ counter +'" >'+
+                    '</div></div></div>'
+
+            element = element + '</div>';
+
+            jQuery("#ClaimTypeAllocation").append(element);
+
+            jQuery(document).on('click', "#removeid"+ counter,function(){
+                limit--;
+                jQuery("#AddClaimtype").prop('disabled', false);
+            });
+
+        });
+
+    },
+
+    addMultipleBenefittype: function(){
+        var counter=0;
+        var limit=0;
+        var thisInstance = this;
+         jQuery("#AddBenefittype").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+         jQuery("#AddBenefittype").click(function () {
+            counter++;
+            limit++;
+            
+            var dropdownvalues_en = jQuery("#dropdownValue").val();
+            var dropdownvalues = jQuery.parseJSON(dropdownvalues_en);
+
+            if(limit >= dropdownvalues.length){
+                jQuery("#AddBenefittype").prop('disabled', true);
+
+            }
+            
+
+            var element ='<div id="Benefittypesection'+ counter +'"><div class="contents row form-group"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><div class="fieldValue col-lg-4 col-md-4 col-sm-4"><select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_benefittype'+ counter +'" name="Allocation_benefittype'+ counter +'"><option value="">Select One</option>';
+
+            for(var i=0;i<dropdownvalues.length;i++){
+                    element = element + '<option value=' + dropdownvalues[i]['id'] + '>'+ dropdownvalues[i]['benefittype'] +'</option>'
+            }
+
+            element = element + '</select><button id="removeid'+ counter +'" onclick="jQuery(\'#Benefittypesection'+counter +'\').remove();">X</button></div></div></div>';
+
+            //element = element + '<div class="container float-left" style="margin-left:221px;"><div class="contents row form-group" style="margin-left: 30px;"><input class="form-check-input" type="checkbox" id="trans_limit'+counter+'" value="trans_limit">Transaction Limit</input><input style="margin-left:15px;" id="trans_limit_input'+ counter +'" type="text" name="trans_limit'+ counter +'"> </div><div class="contents row form-group" style="margin-left: 30px;"><input class="form-check-input" type="checkbox" id="monthly_limit'+counter+'" name="">Monthly Limit</input><input style="margin-left:36px;" type="text" id="monthly_limit_input'+ counter +'" name="monthly_limit'+ counter +'" ></div><div class="contents row form-group" style="margin-left: 30px;"><input class="form-check-input" type="checkbox" id="yearly_limit'+counter+'" name="">Yearly Limit</input><input style="margin-left:53px;" type="text" id="yearly_limit_input'+ counter +'" name="yearly_limit'+ counter +'" ></div></div></div>'
+
+            element = element + '</div>';
+
+            jQuery("#BenefitTypeAllocation").append(element);
+
+            jQuery(document).on('click', "#removeid"+ counter,function(){
+                limit--;
+                jQuery("#AddBenefittype").prop('disabled', false);
+            });
+
         });
 
     },
@@ -344,6 +846,7 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
     autoAddMultipleLeavetype: function(){
         var counter=0;
         var thisInstance = this;
+        var limit=0;
 
         var exisitngvals_en = jQuery('#EditallocatedLeaveTypeValues').val();
         var exisitngvals = jQuery.parseJSON(exisitngvals_en);
@@ -376,9 +879,14 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
         jQuery("#EditAddLeavetype").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
         jQuery("#EditAddLeavetype").click(function () {
             counter++;
-
+            limit++;
             var dropdownvalues_en = jQuery("#EditdropdownValue").val();
             var dropdownvalues = jQuery.parseJSON(dropdownvalues_en);
+
+            if(limit >= dropdownvalues.length){
+                jQuery("#EditAddLeavetype").prop('disabled', true);
+
+            }
 
             var element ='<div id="Leavetypesection'+ counter +'"><div class="contents row form-group"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><div class="fieldValue col-lg-4 col-md-4 col-sm-4"><select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_leavetype'+ counter +'" name="Allocation_leavetype'+ counter +'"><option value="">Select One</option>';
 
@@ -393,6 +901,164 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
             element = element + '</div>';
 
             jQuery("#EditLeaveTypeAllocation").append(element);
+
+            jQuery(document).on('click', "#removeid"+ counter,function(){
+                limit--;
+                jQuery("#EditAddLeavetype").prop('disabled', false);
+            });
+        });
+
+    },
+
+    autoAddMultipleClaimtype: function(){
+        var counter=0;
+        var thisInstance = this;
+        var limit = 0;
+
+        var exisitngvals_en = jQuery('#EditallocatedClaimTypeValues').val();
+        var exisitngvals = jQuery.parseJSON(exisitngvals_en);
+        for(var j=0;j<exisitngvals.length;j++){
+            counter++;
+            limit++;
+            var dropdownvalues_en = jQuery("#EditdropdownValue").val();
+            var dropdownvalues = jQuery.parseJSON(dropdownvalues_en);
+
+            if(limit >= dropdownvalues.length){
+                jQuery("#EditAddClaimtype").prop('disabled', true);
+
+            }
+
+            var element ='<div id="Claimtypesection'+ counter +'"><div class="contents row form-group"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><div class="fieldValue col-lg-4 col-md-4 col-sm-4"><select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_claimtype'+ counter +'" name="Allocation_claimtype'+ counter +'"><option value="">Select One</option>';
+
+            for(var i=0;i<dropdownvalues.length;i++){
+                if(dropdownvalues[i]['id'] == exisitngvals[j]['claim_id']){
+                    element = element + '<option value=' + dropdownvalues[i]['id'] + ' selected>'+ dropdownvalues[i]['claimtype'] +'</option>';
+                }else{
+                    element = element + '<option value=' + dropdownvalues[i]['id'] + '>'+ dropdownvalues[i]['claimtype'] +'</option>';
+
+                }
+            }
+
+            element = element + '</select><button id="removeid'+ counter +'" onclick="jQuery(\'#Claimtypesection'+counter +'\').remove();">X</button></div></div></div>';
+
+            element = element + '<div class="container float-left" style="margin-left:221px;"><div class="contents row form-group" style="margin-left: 30px;"><input class="form-check-input" type="checkbox" id="trans_limit'+counter+'" value="trans_limit">Transaction Limit</input><input style="margin-left:15px;" id="trans_limit_input'+ counter +'" type="text" name="trans_limit" value='+ exisitngvals[j]['transaction_limit'] +'></input> </div><div class="contents row form-group" style="margin-left: 30px;"><input class="form-check-input" type="checkbox" id="monthly_limit'+counter+'" name="">Monthly Limit</input><input style="margin-left:36px;" type="text" id="monthly_limit_input'+ counter +'" name="monthly_limit" value='+ exisitngvals[j]['monthly_limit'] +'></input></div><div class="contents row form-group" style="margin-left: 30px;"><input class="form-check-input" type="checkbox" id="yearly_limit'+counter+'" name="">Yearly Limit</input><input style="margin-left:53px;" type="text" id="yearly_limit_input'+ counter +'" name="yearly_limit" value='+ exisitngvals[j]['yearly_limit'] +'></input></div></div></div>'
+
+            element = element + '</div>';
+
+            jQuery("#ClaimTypeAllocation").append(element);
+
+            jQuery(document).on('click', "#removeid"+ counter,function(){
+                limit--;
+                jQuery("#EditAddClaimtype").prop('disabled', false);
+            });
+        }
+
+
+        jQuery("#EditAddClaimtype").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery("#EditAddClaimtype").click(function () {
+            counter++;
+            limit++;
+
+            var dropdownvalues_en = jQuery("#EditdropdownValue").val();
+            var dropdownvalues = jQuery.parseJSON(dropdownvalues_en);
+
+            if(limit >= dropdownvalues.length){
+                jQuery("#EditAddClaimtype").prop('disabled', true);
+
+            }
+
+            var element ='<div id="Claimtypesection'+ counter +'"><div class="contents row form-group"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><div class="fieldValue col-lg-4 col-md-4 col-sm-4"><select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_claimtype'+ counter +'" name="Allocation_claimtype'+ counter +'"><option value="">Select One</option>';
+
+            for(var i=0;i<dropdownvalues.length;i++){
+                element = element + '<option value=' + dropdownvalues[i]['id'] + '>'+ dropdownvalues[i]['claimtype'] +'</option>'
+            }
+
+            element = element + '</select><button id="removeid'+ counter +'" onclick="jQuery(\'#Claimtypesection'+counter +'\').remove();">X</button></div></div></div>';
+
+            element = element + '<div class="container float-left" style="margin-left:221px;"><div class="contents row form-group" style="margin-left: 30px;"><input class="form-check-input" type="checkbox" id="trans_limit'+counter+'" value="trans_limit">Transaction Limit</input><input style="margin-left:15px;" id="trans_limit_input'+ counter +'" type="text" name="trans_limit"></input> </div><div class="contents row form-group" style="margin-left: 30px;"><input class="form-check-input" type="checkbox" id="monthly_limit'+counter+'" name="">Monthly Limit</input><input style="margin-left:36px;" type="text" id="monthly_limit_input'+ counter +'" name="monthly_limit" ></input></div><div class="contents row form-group" style="margin-left: 30px;"><input class="form-check-input" type="checkbox" id="yearly_limit'+counter+'" name="">Yearly Limit</input><input style="margin-left:53px;" type="text" id="yearly_limit_input'+ counter +'" name="yearly_limit" ></input></div></div></div>'
+
+            element = element + '</div>';
+
+            jQuery("#ClaimTypeAllocation").append(element);
+
+            jQuery(document).on('click', "#removeid"+ counter,function(){
+                limit--;
+                jQuery("#EditAddClaimtype").prop('disabled', false);
+            });
+        });
+
+    },
+
+    autoAddMultipleBenefittype: function(){
+        var counter=0;
+        var thisInstance = this;
+        var limit = 0;
+
+        var exisitngvals_en = jQuery('#EditallocatedBenefitTypeValues').val();
+        var exisitngvals = jQuery.parseJSON(exisitngvals_en);
+        for(var j=0;j<exisitngvals.length;j++){
+            counter++;
+            limit++;
+            var dropdownvalues_en = jQuery("#EditdropdownValue").val();
+            var dropdownvalues = jQuery.parseJSON(dropdownvalues_en);
+
+            if(limit >= dropdownvalues.length){
+                jQuery("#EditAddBenefittype").prop('disabled', true);
+
+            }
+
+            var element ='<div id="Benefittypesection'+ counter +'"><div class="contents row form-group"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><div class="fieldValue col-lg-4 col-md-4 col-sm-4"><select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_benefittype'+ counter +'" name="Allocation_benefittype'+ counter +'"><option value="">Select One</option>';
+
+            for(var i=0;i<dropdownvalues.length;i++){
+                if(dropdownvalues[i]['id'] == exisitngvals[j]['benefit_type']){
+                    element = element + '<option value=' + dropdownvalues[i]['id'] + ' selected>'+ dropdownvalues[i]['title'] +'</option>';
+                }else{
+                    element = element + '<option value=' + dropdownvalues[i]['id'] + '>'+ dropdownvalues[i]['title'] +'</option>';
+
+                }
+            }
+
+            element = element + '</select><button id="removeid'+ counter +'" onclick="jQuery(\'#Benefittypesection'+counter +'\').remove();">X</button></div></div></div>';
+
+            element = element + '</div>';
+
+            jQuery("#BenefitTypeAllocation").append(element);
+
+            jQuery(document).on('click', "#removeid"+ counter,function(){
+                limit--;
+                jQuery("#EditAddBenefittype").prop('disabled', false);
+            });
+        }
+
+
+        jQuery("#EditAddBenefittype").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
+        jQuery("#EditAddBenefittype").click(function () {
+            counter++;
+            limit++;
+            var dropdownvalues_en = jQuery("#EditdropdownValue").val();
+            var dropdownvalues = jQuery.parseJSON(dropdownvalues_en);
+
+            if(limit >= dropdownvalues.length){
+                jQuery("#EditAddBenefittype").prop('disabled', true);
+
+            }
+
+            var element ='<div id="Benefittypesection'+ counter +'"><div class="contents row form-group"><div class="contents row form-group"><div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"></div><div class="fieldValue col-lg-4 col-md-4 col-sm-4"><select class="select2-container select2 inputElement col-sm-6 selectModule" style="width:150px;" id="Allocation_benefittype'+ counter +'" name="Allocation_benefittype'+ counter +'"><option value="">Select One</option>';
+
+            for(var i=0;i<dropdownvalues.length;i++){
+                element = element + '<option value=' + dropdownvalues[i]['id'] + '>'+ dropdownvalues[i]['title'] +'</option>'
+            }
+
+            element = element + '</select><button id="removeid'+ counter +'" onclick="jQuery(\'#Benefittypesection'+counter +'\').remove();">X</button></div></div></div>';
+
+            element = element + '</div>';
+
+            jQuery("#BenefitTypeAllocation").append(element);
+
+            jQuery(document).on('click', "#removeid"+ counter,function(){
+                limit--;
+                jQuery("#EditAddBenefittype").prop('disabled', false);
+            });
         });
 
     },
@@ -401,8 +1067,13 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
     registerEvents: function() {
         this.registerDeleteButton();
         this.registerAddButton();
+        this.registerClaimAddButton();
         this.registerEditButton();
-
+        this.registerClaimEditButton();
+        this.registerClaimDeleteButton();
+        this.registerBenefitDeleteButton();
+        this.registerBenefitAddButton();
+        this.registerBenefitEditButton();
     }
 
 });
@@ -414,3 +1085,4 @@ jQuery(document).ready(function(e){
     tacInstance.registerEvents();
 
 })
+
