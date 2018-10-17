@@ -69,7 +69,7 @@
 <div id="sidebar-essentials" class="sidebar-essentials visible-xs visible-sm">
         <div class="col-xs-12 text-center visible-xs visible-sm" style="margin-top: 40px;margin-bottom:20px;">
         <a class="btn btn-info" onclick="$('.sidebar-menu-u, .settingsNav').toggleClass('hidden-xs hidden-sm');  $('.settingsNav').find('.settingsgroup').toggleClass('hidden-xs hidden-sm');" style=" width: 100%">Sidebar 
-        &nbsp;<span class="toggleButton"><i class="ti-angle-down"></i></span></a>
+        &nbsp;<span class="toggleButton"><i class="ti-angle-right"></i></span></a>
         </div>
         <br/><div class="clearfix"></div>
         <div class="sidebar-menu-u hidden-xs hidden-sm hide">
@@ -78,7 +78,7 @@
             <div class="settingsgroup" style="overflow: scroll">
                     <div class="col-xs-12 text-center visible-xs visible-sm" style="margin-top: 40px;margin-bottom:20px; width: 100%">
         <a class="btn btn-info" onclick="$('.sidebar-menu-u, .settingsNav').toggleClass('hidden-xs hidden-sm');  $('.settingsNav').find('.settingsgroup').toggleClass('hidden-xs hidden-sm');">Sidebar 
-        &nbsp;<span class="toggleButton"><i class="ti-angle-down"></i></span></a>
+        &nbsp;<span class="toggleButton"><i class="ti-angle-right"></i></span></a>
         </div>
             <div>
                 <input type="text" placeholder="{vtranslate('LBL_SEARCH_FOR_SETTINGS', $QUALIFIED_MODULE)}" class="search-list col-lg-8" id='settingsMenuSearch'>
@@ -94,7 +94,7 @@
                             <div id="{$BLOCK_NAME}_accordion" class="app-nav" role="tab">
                                 <div class="app-settings-accordion">
                                     <div class="settingsgroup-accordion">
-                                        <a data-toggle="collapse" data-parent="#accordion" class='collapsed' href="#{$BLOCK_NAME}">
+                                        <a data-toggle="collapse" data-parent="#accordion" class='collapsed da' href="#{$BLOCK_NAME}">
                                             <i class="indicator {if $ACTIVE_BLOCK['block'] eq $BLOCK_NAME} ti-angle-down {else} ti-angle-right {/if}"></i>
                                             &nbsp;<span>{vtranslate($BLOCK_NAME,$QUALIFIED_MODULE)}</span>
                                         </a>

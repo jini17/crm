@@ -34,12 +34,12 @@
                                 <div class='col-lg-4'>
                                            {$MODEL['department']}
                                 </div>
-                                <div class='col-lg-4'>
+                                <div class='col-lg-4' style="position:relative;">
                                     {Vtiger_Util_Helper::getMonthName($MODEL['expirydate_month'])}  {$MODEL['expirydate_day']}  ,   {$MODEL['expirydate_year']} 
 
-                                    <a class="pull-right btn-block" style="width: 6px; margin-top:-1px;" href="index.php?module=EmployeeContract&view=Detail&record={$MODEL['empcid']}&app=MARKETING"> 
+                                    <a class="pull-right btn-block" style="position: absolute;right: -106px;top: 0;"  href="index.php?module=EmployeeContract&view=Detail&record={$MODEL['empcid']}&app=MARKETING"> 
 
-                                        <i class="fa fa-link"></i> 
+                                         <i class="ti ti ti-more-alt img-circle" style="border:1px solid #000; padding:2px;"></i>
                                     </a>
                                 </div>
 

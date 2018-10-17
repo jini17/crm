@@ -74,9 +74,10 @@
                     <div class="clearfix"></div>
                     <a href="{$URL}/index.php?module=Users&parent=Settings&view=Detail&record={$DATA['emp_id']}" class="btn btn-lg btn-block btn-primary"> {vtranslate('LBL_VIEW_PROFILE',$MODULE_NAME)}</a>
                     <a href="{$URL}/index.php?module=EmployeeContract&view=Detail&record={$DATA['contract']}&app=MARKETING" class="btn  btn-lg btn-block btn-default">  {vtranslate('LBL_VIEW_CONTRACT',$MODULE_NAME)} </a>
-                    <div class="clearfix" style="heigth:5px;"></div>
                     <div class="clearfix"></div>
-                    <div class="social text-center" >
+                    <div class="clearfix" style="heigth:15px;"></div>
+                    <div class="clearfix"></div>
+                    <div class="social text-center" style="margin-top:5px;">
                           <a href="{$DATA['facebook']}" class="fa fa-facebook"></a>
                             <a href="{$DATA['twitter']}" class="fa fa-twitter"></a>
                             <a href="{$DATA['linkedin']}" class="fa fa-linkedin"></a>

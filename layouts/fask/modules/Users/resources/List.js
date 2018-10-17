@@ -406,6 +406,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                        app.helper.showErrorNotification({"message":"Type your keyword please!"});
                  }
                  else{
+                     
                  if(tabType == "MD"){
                      listParams['search_params']  = [[["department","e",dept]],[["last_name","c",keyword],["email1","c",keyword],["title","c",keyword],["department","c",keyword]]]
                  }
@@ -413,7 +414,6 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                      listParams['search_params']  = [[["grade_id","n","0"]],[["last_name","c",keyword],["email1","c",keyword],["title","c",keyword],["department","c",keyword]]]
                  }
                 
-
                 listParams['status']            ="Active";
                 listParams['empview']      = viewtype;
                 listParams['tabtype']        = tabType;
