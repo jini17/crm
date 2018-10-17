@@ -141,7 +141,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
 
             $status = $request->get('status');
             if(empty($status))
-                    $status = 'Active';
+            $status = 'Active';
 
             $listViewModel = Vtiger_ListView_Model::getInstance($moduleName, $cvId);
             $linkParams = array('MODULE'=>$moduleName, 'ACTION'=>$request->get('view'), 'CVID'=>$cvId);
@@ -149,7 +149,8 @@ class Users_List_View extends Settings_Vtiger_List_View {
             $listViewModel->set('status', $status);
             $pagingModel = new Vtiger_Paging_Model();
             $pagingModel->set('page', $pageNumber);
-             $pagingModel->set('limit',4);
+             $pagingModel->set('limit',20);
+             
             if(!empty($orderBy)) {
                     $listViewModel->set('orderby', $orderBy);
                     $listViewModel->set('sortorder',$sortOrder);
@@ -232,7 +233,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
                     }
                      $totalCount = $this->listViewCount;
                     
-                    $pageLimit = 4;//$pagingModel->getPageLimit();
+                    $pageLimit = $pagingModel->getPageLimit();
                     $pageCount = ceil((int) $totalCount / (int) $pageLimit);
                    
                     if($pageCount == 0){
@@ -415,7 +416,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
             $html       = '<ul class="' . $list_class . '">';
 
             $class      = ( $page == 1 ) ? "disabled" : "";
-            $html       .= '<li class="' . $class . '"><a href="?limit=' . $limit . '&page=' . ( $page - 1 ) . '">&laquo;</a></li>';
+            $html       .= '<li class="' . $class . '"><a data-page="'.( $page - 1 ).'">&laquo;</a></li>';
 
             if ( $start > 1 ) {
                 $html   .= '<li><a data-page="'.( $page - 1 ).'">1</a></li>';

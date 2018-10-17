@@ -68,7 +68,7 @@ $languageStrings = array(
 	'Default Calendar View' => 'Default Calendar View',
 	'Default Lead View' => 'Default Lead View',
 	'Title' => 'Designation',
-                   
+                     'LBL_ADDITIONAL_INFO'=> 'Additional Info',
 	'Office Phone' => 'Office Phone',
 	'Department' => 'Department',
 	'Reports To' => 'Reports To',
