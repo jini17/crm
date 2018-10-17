@@ -389,7 +389,7 @@ class Users_Module_Model extends Vtiger_Module_Model {
 			$settingsLinks[] = array(
 				'linktype' => 'LISTVIEW',
 				'linklabel' => 'LBL_EXPORT',
-				'linkurl' => 'index.php?module=Users&source_module=Users&action=ExportData',
+				'linkurl' => 'Settings_Users_List_Js.triggerExportAction("index.php?module=Users&source_module=Users&action=ExportData");',
 				'linkicon' => ''
 			);
 		}

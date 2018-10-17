@@ -9,11 +9,7 @@
  ************************************************************************************/
 
 class Users_List_View extends Settings_Vtiger_List_View {
-        private $_limit;
-        private $_page;
-        private $_query;
-        private $_total;
-        
+  
         function checkPermission(Vtiger_Request $request) {
                 $currentUserModel = Users_Record_Model::getCurrentUserModel();
           
@@ -26,6 +22,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
         }
               
         public function process(Vtiger_Request $request) {
+            
                  $adb = PearDatabase::getInstance();
                 $current_user = Users_Record_Model::getCurrentUserModel();
                  global $site_URL;
@@ -152,7 +149,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
             $listViewModel->set('status', $status);
             $pagingModel = new Vtiger_Paging_Model();
             $pagingModel->set('page', $pageNumber);
-        
+             $pagingModel->set('limit',4);
             if(!empty($orderBy)) {
                     $listViewModel->set('orderby', $orderBy);
                     $listViewModel->set('sortorder',$sortOrder);
@@ -234,14 +231,19 @@ class Users_List_View extends Settings_Vtiger_List_View {
                             $this->listViewCount = $listViewModel->getListViewCount();
                     }
                      $totalCount = $this->listViewCount;
-                    $pageLimit = $pagingModel->getPageLimit();
+                    
+                    $pageLimit = 4;//$pagingModel->getPageLimit();
                     $pageCount = ceil((int) $totalCount / (int) $pageLimit);
-
+                   
                     if($pageCount == 0){
                             $pageCount = 1;
                     }
+                  
+                   // Pagination
+                    $pagination = $this->createLinks($totalCount, $pageLimit, $pageNumber, $pageCount, 'pagination');
                     $viewer->assign('PAGE_COUNT', $pageCount);
                     $viewer->assign('LISTVIEW_COUNT', $totalCount);
+                    $viewer->assign('PAGINATION', $pagination);
             }
             $viewer->assign('MODULE_MODEL', $listViewModel->getModule());
             $viewer->assign('IS_MODULE_EDITABLE', $listViewModel->getModule()->isPermitted('EditView'));
@@ -321,7 +323,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 }
                 $result = array();
                 $result['page'] = $pageCount;
-                $this->_total = $listViewCount;
+      
                 $result['numberOfRecords'] = $listViewCount;
                 $response = new Vtiger_Response();
                 $response->setResult($result);
@@ -391,39 +393,47 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 $headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
                 return $headerScriptInstances;
         }
-        
-        public function createLinks( $links, $list_class ) {
-            if ( $this->_limit == 'all' ) {
+        /**
+         * Generate Pagination Link
+         * @param type $total
+         * @param type $limit
+         * @param type $page
+         * @param type $links
+         * @param type $list_class
+         * @return string
+         */
+        public function createLinks( $total,$limit,$page,$links, $list_class ) {
+            if ( $limit == 'all' ) {
                 return '';
             }
 
-            $last       = ceil( $this->_total / $this->_limit );
+            $last       = ceil( $total/ $limit );
 
-            $start      = ( ( $this->_page - $links ) > 0 ) ? $this->_page - $links : 1;
-            $end        = ( ( $this->_page + $links ) < $last ) ? $this->_page + $links : $last;
+            $start      = ( ( $page - $links ) > 0 ) ? $page  : 1;
+            $end        = ( ( $page + $links ) < $last ) ? $page + $links : $last;
 
             $html       = '<ul class="' . $list_class . '">';
 
-            $class      = ( $this->_page == 1 ) ? "disabled" : "";
-            $html       .= '<li class="' . $class . '"><a href="?limit=' . $this->_limit . '&page=' . ( $this->_page - 1 ) . '">&laquo;</a></li>';
+            $class      = ( $page == 1 ) ? "disabled" : "";
+            $html       .= '<li class="' . $class . '"><a href="?limit=' . $limit . '&page=' . ( $page - 1 ) . '">&laquo;</a></li>';
 
             if ( $start > 1 ) {
-                $html   .= '<li><a href="?limit=' . $this->_limit . '&page=1">1</a></li>';
+                $html   .= '<li><a data-page="'.( $page - 1 ).'">1</a></li>';
                 $html   .= '<li class="disabled"><span>...</span></li>';
             }
 
             for ( $i = $start ; $i <= $end; $i++ ) {
-                $class  = ( $this->_page == $i ) ? "active" : "";
-                $html   .= '<li class="' . $class . '"><a href="?limit=' . $this->_limit . '&page=' . $i . '">' . $i . '</a></li>';
+                $class  = ( $page == $i ) ? "active" : "";
+                $html   .= '<li class="' . $class . '"><a data-page="'.$i.'">' . $i . '</a></li>';
             }
 
             if ( $end < $last ) {
                 $html   .= '<li class="disabled"><span>...</span></li>';
-                $html   .= '<li><a href="?limit=' . $this->_limit . '&page=' . $last . '">' . $last . '</a></li>';
+                $html   .= '<li><a data-page="'.$last.'">' . $last . '</a></li>';
             }
 
-            $class      = ( $this->_page == $last ) ? "disabled" : "";
-            $html       .= '<li class="' . $class . '"><a href="?limit=' . $this->_limit . '&page=' . ( $this->_page + 1 ) . '">&raquo;</a></li>';
+            $class      = ( $page == $last ) ? "disabled" : "";
+            $html       .= '<li class="' . $class . '"><a data-page="'.( $page + 1 ).'">&raquo;</a></li>';
 
             $html       .= '</ul>';
 
