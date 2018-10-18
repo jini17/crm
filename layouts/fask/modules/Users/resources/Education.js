@@ -122,8 +122,9 @@ Vtiger.Class("Users_Education_Js", {
           var thisInstance = this;
           var userid = jQuery('#current_user_id').val();
           app.helper.showProgress();
-          var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
-          var chkboxstudying = $('#chkstudying').is(':checked')?'1':'0';
+          var chkboxval = $('#chkviewable:checked').val();
+
+          var chkboxstudying = chkboxval;//$('#chkstudying').is(':checked')?'1':'0';
           var formData = form.serializeFormData();
           var params = {
 				'module': 'Users',

@@ -192,7 +192,7 @@ LIMIT 3";
 	{
 		include_once('modules/Education/Education.php');
 		$db  = PearDatabase::getInstance();
-		//$db->setDebug(true);
+		$db->setDebug(true);
 		$params 	= array();
 		$userid  	= $request['current_user_id'];
 		$eduId  	= $request['record'];
@@ -209,17 +209,18 @@ LIMIT 3";
 		$majorId  	= decode_html($request['areaofstudy']);
 		$majorTxt 	= decode_html($request['majortxt']);
 		$description  	= decode_html($request['description']);
+                                           $location  	= decode_html($request['location']);
 		$isview  	= decode_html($request['isview']);	
 		
 		$insTxt 	= decode_html(trim($request['institutiontxt']));
 
 		if($insId ==0 && !empty($insTxt)) {
            	 //check the institute exist or not
-	           	 $resultcheck  = $db->pquery("SELECT institution_id FROM secondcrm_institution WHERE institution = ?",array($insTxt));
-			    if($db->num_rows($resultcheck) == 0){
-			        $resultIns = $db->pquery("INSERT INTO secondcrm_institution(institution) VALUES(?)",array($insTxt));
-			    }
-			     $insId = $insTxt;    
+                        $resultcheck  = $db->pquery("SELECT institution_id FROM secondcrm_institution WHERE institution = ?",array($insTxt));
+                           if($db->num_rows($resultcheck) == 0){
+                               $resultIns = $db->pquery("INSERT INTO secondcrm_institution(institution,location) VALUES(?,?)",array($insTxt,$location));
+                           }
+                            $insId = $insTxt;    
                 
         }
 	
@@ -234,13 +235,14 @@ LIMIT 3";
 
 			$education = new Education();
 			$education->column_fields['institution_name'] 	= $insId;	
+                                                                $education->column_fields['location']                    	= $location;	
 			$education->column_fields['start_date'] 		= $startdate;	
-			$education->column_fields['currently_studying'] = $studying;	
-			$education->column_fields['end_date'] 			= $endDate;	
+			$education->column_fields['currently_studying']                 = $studying;	
+			$education->column_fields['end_date'] 		=  $endDate;	
 			$education->column_fields['education_level'] 	= $education_level;	
 			$education->column_fields['area_of_study'] 		= $majorId;	
 			$education->column_fields['description'] 		= $description;
-			$education->column_fields['public'] 			= $isview;
+			$education->column_fields['public'] 		= $isview;
 			$education->column_fields['assigned_user_id'] 	= $userid;
 			
 		if(!empty($eduId)) {
@@ -248,13 +250,14 @@ LIMIT 3";
 			$education->mode = 'edit';
 			$education->id = $eduId;
 			$return = 1;
-			$db->pquery("UPDATE vtiger_education SET institution_name=?, start_date=?, currently_studying=?, end_date=?, education_level=?,area_of_study=?, description=?,public=? WHERE educationid=?", array($insId, $startdate, $studying, $endDate,$education_level, $majorId, $description, $isview, $eduId));
+			$db->pquery("UPDATE vtiger_education SET institution_name=?, start_date=?,education_location=?, currently_studying=?, end_date=?, education_level=?,area_of_study=?, description=?,public=? WHERE educationid=?", array($insId, $startdate, $location,$studying, $endDate,$education_level, $majorId, $description, $isview, $eduId));
 		} else {
 			$education->mode = '';
 			$return = 0;
 		}	
 	
 		$response = $education->save('Education');
+                echo "jitu";die;
 		return $return;
 	}
  }  
