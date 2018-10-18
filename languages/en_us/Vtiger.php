@@ -149,7 +149,8 @@ $languageStrings = array(
 	'Description' => 'Description',
 	'Assigned To'=>'Assigned To',
     
-
+                    'User'=>'Employee',
+                     'Bill'=> 'Office Bill',
 	//Loading Labels
 	'LBL_LOADING' => 'Loading',
 	'LBL_LOADING_WIDGET' => 'Loading Widget',

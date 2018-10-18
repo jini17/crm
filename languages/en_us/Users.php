@@ -116,7 +116,8 @@ $languageStrings = array(
 	'Other Event Duration' => 'Other Event Duration (Mins)',
 	'Calendar Hour Format' => 'Calendar Hour Format',
 	'Tag Cloud' => 'Tag Cloud',
-
+                        'Users'=>'Employee',
+                         'SINGLE_Users'=>'Employee',
 	//Time zones-Dont change any value
 	'Kwajalein'  =>  '(UTC-12:00) International Date Line West',
 	'Pacific/Midway'  =>  '(UTC-11:00) Coordinated Universal Time-11',

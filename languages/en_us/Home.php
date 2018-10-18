@@ -59,8 +59,9 @@ $languageStrings = array(
                        'LBL_CONTRACT_NOTIFICATION'=> 'Your Contract is expiring soon. Kindly contact your HR for further assistance',
                        'LBL_VIEW_PROFILE'=> 'Go to My Profile',
                       'LBL_VIEW_CONTRACT'=> 'View My Contract',
-                      'LBL_GOOD_DAY' => 'Good Day'
-	
+                      'LBL_GOOD_DAY' => 'Good Day',
+	'User'=>'Employee',
+                        'Bill'=> 'Office Bill'
 	                
    
 );

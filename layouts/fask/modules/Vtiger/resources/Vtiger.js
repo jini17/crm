@@ -851,9 +851,7 @@ Vtiger.Class('Vtiger_Index_Js', {
                                 var searchValue = element.val();
                                 var data = {};
                       
-                                data['searchValue'] = searchValue;
-                                 data['module'] = module;
-                              
+                                data['searchValue'] = searchValue;     
                                 element.trigger(thisInstance._SearchIntiatedEventName,data);
                         }
                 });

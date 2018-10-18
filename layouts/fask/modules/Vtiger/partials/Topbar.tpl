@@ -641,7 +641,7 @@
                                                             'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
                                                             'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
                                                             'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-                                                            'mycthemeswitcher'=>'folder', 'timesheet'=>'timer','training'=>'book','attendance'=>'assignment','chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people','claim'=>'attach_money' ,'workinghours'=>'access_time']}
+                                                            'mycthemeswitcher'=>'folder','users'=>'person', 'payments'=>'payment','bills'=>'receipt','timesheet'=>'timer','training'=>'book','attendance'=>'assignment','chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people','claim'=>'attach_money' ,'workinghours'=>'access_time']}
                                                             {if $quickCreateModule == '1'}
                                                             {if $count % 3 == 0}
                                                             <div class="row">
