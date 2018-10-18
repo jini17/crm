@@ -31,7 +31,12 @@
         left: 100%;
         margin-top: -1px;
     }
-
+    .searchoption a{
+            padding: 0 !important;
+            height: 33px !important;
+            margin-top: 3px !important;
+    }
+    
 </style>
 <script type="text/javascript">
     jQuery(document).ready(function(){
@@ -80,7 +85,6 @@
                         <div class="bluredBackground"></div>
                         <ul class="faskfirst">
                             <li class="nav-small-cap hide">APPS</li>
-
 
                             {assign var=USER_PRIVILEGES_MODEL value=Users_Privileges_Model::getCurrentUserPrivilegesModel()}
                             {assign var=HOME_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Home')}
@@ -321,271 +325,275 @@
 
                                     </div>
                                 </div>
-                                                            <!--top nav with lock-->
-                                                            <div class="col-lg-5 col-md-5 col-sm-4 col-xs-8 "><div class="row">
-                                                                <ul class="nav navbar-nav newtabs">
-                                                                    <li>
-                                                                        <div class="dropdownFinance">
-                                                                            <div class="addtionalDashboardTab">
-                                                                                <span aria-hidden="true">HRM</span>
+                                    <!--top nav with lock-->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <ul class="nav navbar-nav newtabs">
+                                            <li>
+                                                <div class="dropdownFinance">
+                                                    <div class="addtionalDashboardTab" style="padding: 10px 10px;">
+                                                        <span aria-hidden="true">HRM</span>
+                                                    </div>
+                                                    <div class="dropdown-content-Finance">
+                                                        <ul class="dropdownlist">
+                                                            <li>
+                                                                <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings">
+                                                                    <i class="material-icons module-icon">person</i>&nbsp;Employee
+                                                                </a>
+                                                            </li>
+                                                            {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
+                                                                <li>
+                                                                   <a class="dropdown-icon-dashboard"   title="Leave" href="index.php?module=Leave&view=List">
+                                                                        <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
+                                                                    </a>
+                                                                 </li>                                                                         
+                                                                {else}
+                                                                <li>
+                                                                    <a class="dropdown-icon-dashboard"  
+                                                                       title="Leave" 
+                                                                       href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
+                                                                        <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
+                                                                    </a>
+                                                                </li>
+                                                                {/if}
+                                                                <li admin="" moudel="Timesheet">
+                                                                    <a  class="dropdown-icon-dashboard"   href="index.php?module=Timesheet&amp;view=List&amp;app=ADMIN ">
+                                                                        <i class="material-icons module-icon">timer</i>
+                                                                        <span class="hide-menu"> {vtranslate('Timesheet','Home')}</span>
+                                                                    </a>
+                                                                </li>
+                                                                        {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
+                                                                        <li>
+                                                                            <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
+                                                                                <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
+
+                                                                            </a>
+                                                                        </li>
+                                                                        {else}
+                                                                        <li>
+                                                                            <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
+                                                                                <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
+
+                                                                            </a>
+                                                                        </li>
+                                                                        {/if}
+
+                                                                        <li>
+                                                                                <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
+                                                                                    <i class="material-icons module-icon">timeline</i>&nbsp;Performance
+                                                                        </li>
+                                                                        <li admin="" moudel="Training">
+
+                                                                            <a class="dropdown-icon-dashboard" href=" index.php?module=Training&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">book</i> Training
+                                                                            </a>
+                                                                        </li>
+                                                                        <li admin="" moudel="Attendance">
+                                                                            <a  class="dropdown-icon-dashboard"   href=" index.php?module=Attendance&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">assignment</i> Attendance
+                                                                            </a>
+                                                                        </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+
+                                                        </li>
+                                                        <li>
+                                                            <div class="dropdownSales">
+                                                             <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
+                                                                <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
+                                                            </div>
+
+
+                                                            <div class="dropdown-content-Sales">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="popup-col-4">
+                                                                            <div class="popup-col-4img" >
+                                                                                <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 85%;">
                                                                             </div>
 
-                                                                            <div class="dropdown-content-Finance">
-
-                                                                                <ul class="dropdownlist">
-                                                                                    <li>
-                                                                                        <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings">
-                                                                                            <i class="material-icons module-icon">person</i>&nbsp;Employee
-
-                                                                                        </a>
-                                                                                    </li>
-                                                                                    {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
-                                                                                        <li>
-                                                                                           <a class="dropdown-icon-dashboard"   title="Leave" href="index.php?module=Leave&view=List">
-                                                                                                <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
-                                                                                            </a>
-                                                                                         </li>                                                                         
-                                                                                        {else}
-                                                                                        <li>
-                                                                                            <a class="dropdown-icon-dashboard"  
-                                                                                               title="Leave" 
-                                                                                               href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
-                                                                                                <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        {/if}
-                                                                                        <li admin="" moudel="Timesheet">
-                                                                                            <a  class="dropdown-icon-dashboard"   href="index.php?module=Timesheet&amp;view=List&amp;app=ADMIN ">
-                                                                                                <i class="material-icons module-icon">timer</i>
-                                                                                                <span class="hide-menu"> {vtranslate('Timesheet','Home')}</span>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                                {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
-                                                                                                <li>
-                                                                                                    <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
-                                                                                                        <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
-
-                                                                                                    </a>
-                                                                                                </li>
-                                                                                                {else}
-                                                                                                <li>
-                                                                                                    <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
-                                                                                                        <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
-
-                                                                                                    </a>
-                                                                                                </li>
-                                                                                                {/if}
-
-                                                                                                <li>
-                                                                                                        <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
-                                                                                                            <i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                                                                                                </li>
-                                                                                                <li admin="" moudel="Training">
-
-                                                                                                    <a class="dropdown-icon-dashboard" href=" index.php?module=Training&amp;view=List&amp;app=ADMIN ">
-                                                                                                        <i class="material-icons module-icon">book</i> Training
-                                                                                                    </a>
-                                                                                                </li>
-                                                                                                <li admin="" moudel="Attendance">
-                                                                                                    <a  class="dropdown-icon-dashboard"   href=" index.php?module=Attendance&amp;view=List&amp;app=ADMIN ">
-                                                                                                        <i class="material-icons module-icon">assignment</i> Attendance
-                                                                                                    </a>
-                                                                                                </li>
-
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </li>
-                                                                                <li>
-                                                                                    <div class="dropdownSales">
-                                                                                     <div class="addtionalDashboardTab">
-                                                                                        <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
-                                                                                    </div>
-
-
-                                                                                    <div class="dropdown-content-Sales">
-                                                                                        <div class="row">
-                                                                                            <div class="col-md-4">
-                                                                                                <div class="popup-col-4">
-                                                                                                    <div class="popup-col-4img" >
-                                                                                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 85%;">
-                                                                                                    </div>
-
-                                                                                                    <div class="popup-col-4text">
-                                                                                                        Manage Sales Team and activities.
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-
-                                                                                            <div class="col-md-4">
-                                                                                                <div class="popup-col-4">
-                                                                                                    <div class="popup-col-4img">
-                                                                                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width:85%;">
-                                                                                                    </div>
-                                                                                                    <div class="popup-col-4text">
-                                                                                                        Google contacts, calendar and docs synchronization
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-
-                                                                                            <div class="col-md-4">
-                                                                                                <div class="popup-col-4">
-                                                                                                    <div class="popup-col-4img">
-                                                                                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
-                                                                                                    </div>
-                                                                                                    <div class="popup-col-4text">
-                                                                                                        Acquire more leads
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-md-12 row" style="padding: 10px;">
-                                                                                            <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </li>
-
-                                                                            <li>
-                                                                                <div class="dropdownTools">
-                                                                                    <div class="addtionalDashboardTab">
-                                                                                        <span aria-hidden="true">Communications</span>
-                                                                                    </div>
-                                                                                    <div class="dropdown-content-Tools">
-
-                                                                                        <ul class="dropdownlist">
-
-                                                                                            <li>
-                                                                                                <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                                                                                                    <i class="fa fa-bell-o"></i>&nbsp;Templates
-                                                                                                </a>
-                                                                                            </li>
-                                                             <!--   <li>
-                                                                    <a class="dropdown-icon-dashboard" title="Rss" href="index.php?module=Rss&amp;view=List&amp;app=TOOLS">
-                                                                            <i class="fa fa-rss"></i>&nbsp;Rss
-                                                                    </a>
-                                                                </li>-->
-                                                                {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
-                                                                {* Khaled - Removed as Per Requirement<li>
-                                                                    <a class="dropdown-icon-dashboard" title="Recycle Bin" href="index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS">
-                                                                        <i class="fa fa-trash-o"></i>&nbsp;Recycle Bin
-                                                                    </a>
-                                                                </li>*}
-                                                                {/if}
-                                                                <li>
-
-
-                                                                 <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_MAIL_MANAGER')}" href="index.php?module=MailManager&view=List">
-                                                                    <i class="material-icons module-icon">email</i>&nbsp;{vtranslate('LBL_MAIL_MANAGER')}
-
-                                                                </a>
-
-                                                            </li>
-                                                       {*     Khaled - Removed as Per Requirement<li admin="">
-                                                                <a class="waves-effect waves-dark dropdown-icon-dashboard " href=" index.php?module=WorkingHours&amp;view=List&amp;app=ADMIN ">
-                                                                    <i class="material-icons module-icon">access_time</i> <span class="hide-menu"> Working Hours</span>
-                                                                </a>
-                                                            </li>
-
-                                                            <li admin="">
-                                                                <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=Documents&amp;view=List&amp;app=ADMIN ">
-                                                                    <i class="material-icons module-icon">file_download</i> <span class="hide-menu"> Documents</span>
-                                                                </a>
-                                                            </li>
-                                                            <li admin="">
-                                                                <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=MessageBoard&amp;view=List&amp;app=ADMIN ">
-                                                                    <i class="material-icons module-icon">assignment</i> <span class="hide-menu"> Message Board</span>
-                                                                </a>
-                                                            </li>*}
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
-                                            </li>
-                                            <li>
-                                                <div class="dropdownSupport">
-                                                    <div class="addtionalDashboardTab">
-                                                        <span aria-hidden="true" >Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
-
-                                                    </div>
-
-                                                    <div class="dropdown-content-Support">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="popup-col-4">
-                                                                    <div class="popup-col-4img" >
-                                                                        <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 85%;">
+                                                                            <div class="popup-col-4text">
+                                                                                Manage Sales Team and activities.
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
 
-                                                                    <div class="popup-col-4text">
-                                                                        Sales Order, Invoice and Quotation Generator
+                                                                    <div class="col-md-4">
+                                                                        <div class="popup-col-4">
+                                                                            <div class="popup-col-4img">
+                                                                                <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width:85%;">
+                                                                            </div>
+                                                                            <div class="popup-col-4text">
+                                                                                Google contacts, calendar and docs synchronization
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-4">
+                                                                        <div class="popup-col-4">
+                                                                            <div class="popup-col-4img">
+                                                                                <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
+                                                                            </div>
+                                                                            <div class="popup-col-4text">
+                                                                                Acquire more leads
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-
-                                                            <div class="col-md-4">
-                                                                <div class="popup-col-4">
-                                                                    <div class="popup-col-4img">
-                                                                        <img src="http://www.secondcrm.com/sites/default/files/send-email-template-easier.jpg" alt="sync from google calendar" style="width:85%;">
-                                                                    </div>
-                                                                    <div class="popup-col-4text">
-                                                                        Email and SMS Marketing Service
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-4">
-                                                                <div class="popup-col-4">
-                                                                    <div class="popup-col-4img">
-                                                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/support-img1.jpg" style="width: 85%;">
-                                                                    </div>
-                                                                    <div class="popup-col-4text">
-                                                                        Auto capture requests from multiple support channels
-                                                                    </div>
+                                                                <div class="col-md-12 row" style="padding: 10px;">
+                                                                    <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-12 row" style="padding: 10px;">
-                                                            <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
-                                                        </div>
-                                                    </div>
+
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="dropdownTools">
+                                                            <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
+                                                                <span aria-hidden="true">Communications</span>
+                                                            </div>
+                                                            <div class="dropdown-content-Tools">
+
+                                                                <ul class="dropdownlist">
+
+                                                                    <li>
+                                                                        <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
+                                                                            <i class="fa fa-bell-o"></i>&nbsp;Templates
+                                                                        </a>
+                                                                    </li>
+                                     <!--   <li>
+                                            <a class="dropdown-icon-dashboard" title="Rss" href="index.php?module=Rss&amp;view=List&amp;app=TOOLS">
+                                                    <i class="fa fa-rss"></i>&nbsp;Rss
+                                            </a>
+                                        </li>-->
+                                        {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
+                                        {* Khaled - Removed as Per Requirement<li>
+                                            <a class="dropdown-icon-dashboard" title="Recycle Bin" href="index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS">
+                                                <i class="fa fa-trash-o"></i>&nbsp;Recycle Bin
+                                            </a>
+                                        </li>*}
+                                        {/if}
+                                        <li>
 
 
+                                         <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_MAIL_MANAGER')}" href="index.php?module=MailManager&view=List">
+                                            <i class="material-icons module-icon">email</i>&nbsp;{vtranslate('LBL_MAIL_MANAGER')}
 
-                                                </div>
+                                        </a>
 
-                                            </li>
+                                    </li>
+                               {*     Khaled - Removed as Per Requirement<li admin="">
+                                        <a class="waves-effect waves-dark dropdown-icon-dashboard " href=" index.php?module=WorkingHours&amp;view=List&amp;app=ADMIN ">
+                                            <i class="material-icons module-icon">access_time</i> <span class="hide-menu"> Working Hours</span>
+                                        </a>
+                                    </li>
 
+                                    <li admin="">
+                                        <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=Documents&amp;view=List&amp;app=ADMIN ">
+                                            <i class="material-icons module-icon">file_download</i> <span class="hide-menu"> Documents</span>
+                                        </a>
+                                    </li>
+                                    <li admin="">
+                                        <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=MessageBoard&amp;view=List&amp;app=ADMIN ">
+                                            <i class="material-icons module-icon">assignment</i> <span class="hide-menu"> Message Board</span>
+                                        </a>
+                                    </li>*}
+                                </ul>
+                            </div>
+                        </div>
 
+                    </li>
+                    <li>
+                        <div class="dropdownSupport">
+                            <div class="addtionalDashboardTab">
+                                <span aria-hidden="true" >Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
 
-                                            <li>
-                                                <div>
-                                                    <a class="menu-open">
-                                                        <span aria-hidden="true" style="font-size: 15px;
-                                                        color: #000;
-                                                        display: inline-block;
-                                                        height: 100%;
-                                                        width: 100%;
-                                                        /* color: #fff; */
-                                                        /* font-size: 15px; */
-                                                        padding: 10px 20px;
-                                                        text-decoration: none;">All</span>
-                                                    </a>
-                                                </div>
-                                            </li>
+                            </div>
 
-                                        </ul>
+                            <div class="dropdown-content-Support">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="popup-col-4">
+                                            <div class="popup-col-4img" >
+                                                <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 85%;">
+                                            </div>
 
+                                            <div class="popup-col-4text">
+                                                Sales Order, Invoice and Quotation Generator
+                                            </div>
+                                        </div>
                                     </div>
+
+                                    <div class="col-md-4">
+                                        <div class="popup-col-4">
+                                            <div class="popup-col-4img">
+                                                <img src="http://www.secondcrm.com/sites/default/files/send-email-template-easier.jpg" alt="sync from google calendar" style="width:85%;">
+                                            </div>
+                                            <div class="popup-col-4text">
+                                                Email and SMS Marketing Service
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="popup-col-4">
+                                            <div class="popup-col-4img">
+                                                <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/support-img1.jpg" style="width: 85%;">
+                                            </div>
+                                            <div class="popup-col-4text">
+                                                Auto capture requests from multiple support channels
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row" style="padding: 10px;">
+                                    <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </li>
+
+
+
+                    <li>
+                        <div>
+                            <a class="menu-open">
+                                <span aria-hidden="true" style="font-size: 15px;
+                                color: #000;
+                                display: inline-block;
+                                height: 100%;
+                                width: 100%;
+                                /* color: #fff; */
+                                /* font-size: 15px; */
+                                padding: 10px 0;
+                                text-decoration: none;">All</span>
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+
+                                 
                                 </div>
 
                                 <div id="navbar" class="col-sm-2 col-md-3 col-lg-3 collapse navbar-collapse navbar-right global-actions">
                                     <ul class="nav navbar-nav">
 
 
-
+                                        <li class='searchoption'>
+                                            <select class="select2 col-lg-12" id="searchModuleList" data-placeholder="{vtranslate('LBL_SELECT_MODULE')}">
+                                            <option></option>
+                                                {foreach key=MODULE_NAME item=fieldObject from=$SEARCHABLE_MODULES}
+                                                    <option value="{$MODULE_NAME}" {if $MODULE_NAME eq $SOURCE_MODULE}selected="selected"{/if}>{vtranslate($MODULE_NAME,$MODULE_NAME)}</option>
+                                                {/foreach}
+                                            </select>
+                                        </li>
 
                                         <li style="width: 250px;">
                                             <div class="search-links-container hidden-sm">
@@ -707,6 +715,7 @@
                                                                 {/if}
                                                                 {/if}
                                                                 {/foreach}
+                                                                {* Khaled --
                                                                 <div class="clearfix"></div>
                                                                 <div class="row">
                                                                     <div class="col-lg-12">
@@ -732,7 +741,7 @@
                                                                         </a>
                                                                     </div>
                                                                         </div>
-                                                                </div>
+                                                                </div>*}
                                                             </div>
                                                         </li>
                                                     </ul>
