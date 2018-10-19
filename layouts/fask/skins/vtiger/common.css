@@ -1971,7 +1971,7 @@ input[type=checkbox]:checked {
     margin: 6px 14px;
   box-shadow:0 1px 15px 1px rgba(62,57,107,.07);
 }
-.detailViewContainer .block h5{color: #1E9FF2;font-weight:bold;}
+.detailViewContainer .block h5{color: #2f5597;font-weight:bold;}
 .editViewContainer .block {
   background: #FFFFFF;
   border: 1px solid #F3F3F3;
@@ -4917,6 +4917,7 @@ hr {
 }
 .panel-collapse ul li a.settingsgroup-menu-color {
   background-color: rgba(0, 0, 0, 0.05);
+  color:#2f5597;
 }
 .calendar-sidebar-tab {
   padding: 10px;
@@ -8814,7 +8815,7 @@ html body .bg-white {  background-color: #ffffff; }
 }
 
 .editViewContents inputElement{ width: 100%; }
-.editViewContents .nameField{ width: 78% !important; }
+.editViewContents .nameField{ width: 100% !important; }
 
 .ExtensionscontentsDiv {padding: 20px;}
 .extensionWidgetContainer {padding: 20px!important;}

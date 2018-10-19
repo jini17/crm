@@ -61,6 +61,20 @@
                                                         </div>
                                                 </div>
                                         </div>
+                                        <div class="form-group">
+                                                <div class="col-md-12" style="margin-bottom: 15px;">
+                                                        <div class="col-md-4">
+                                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">{vtranslate('LBL_LOCATION',$QUALIFIED_MODULE)}</label>
+                                                        </div>
+
+                                                        <div class="controls fieldValue col-md-8" align="right">
+                                                                <span id="institution_nametxt">
+                                                                        <input class="inputElement" type="text" placeholder="Enter Street,City,Country" name="location" id="country" data-rule-required = "true" />
+                                                                </span>
+                                                            
+                                                        </div>
+                                                </div>
+                                        </div>                          
                         <!--end-->
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
@@ -94,6 +108,7 @@
                                                 </div>
                                         </div>
                                 </div>	
+                                          
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
@@ -163,8 +178,11 @@
                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_WANT_TO_MAKE_PUBLIC', $QUALIFIED_MODULE)}</label>
                                                 </div>	
                                                 <div class="controls date col-md-8">
-                                                        <input class="inputElement" type="checkbox" name="chkviewable" id="chkviewable" {if $EDUCATION_DETAIL.public eq 1} checked {/if}>
-                                                </div>	
+                                                      <label><input type="radio" {if $EDUCATION_DETAIL.public eq '0'} checked {/if} name='chkviewable' value="0" />&nbsp; {vtranslate('LBL_PUBLIC', $QUALIFIED_MODULE)} </label>&nbsp; 
+                                                     <label><input type="radio"{if $EDUCATION_DETAIL.public eq '1'} checked {/if} name='chkviewable' value="1" />&nbsp; {vtranslate('LBL_PRIVATE', $QUALIFIED_MODULE)} </label>&nbsp; 
+                                                      <label><input type="radio" {if $EDUCATION_DETAIL.public eq '2'} checked {/if} name='chkviewable' value="2" />&nbsp; {vtranslate('LBL_PROTECTED', $QUALIFIED_MODULE)} </label>
+{*                                                        <input class="inputElement" type="checkbox" name="chkviewable" id="chkviewable" {if $EDUCATION_DETAIL.public eq 1} checked {/if}>
+*}                                                </div>	
                                         </div>
                                 </div>
                         </div>
@@ -208,4 +226,61 @@ function updateSelectBox(selectbox, txtbox)
         }
 }
 </script>
+
+
+<!--*Google MAP - Khaled*} 
+              <div class="form-group">
+                                                            <div class="col-md-12" style="margin-bottom:15px">
+                                                                <div class="col-md-4">
+                                                                    <label class="conrol-label fieldLabel" style="text-align:right; float:right;">&nbsp;{vtranslate('LBL_LOCATION',$QUALIFIED_MODULE)}</label>
+                                                                </div>
+                                                                <div class="controls col-md-8">
+                                                                   <div class="pac-card" id="pac-card">
+                                                                          
+                                                                            <div id="pac-container">
+                                                                              <input id="pac-input" type="text"
+                                                                                  placeholder="Enter a location">
+                                                                            </div>
+                                                                          </div>
+                                                                          <div id="map"></div>
+                                                                          <div id="infowindow-content">
+                                                                            <img src="" width="16" height="16" id="place-icon">
+                                                                            <span id="place-name"  class="title"></span><br>
+                                                                            <span id="place-address"></span>
+                                                                          </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+-->
+
+     <script>
+           function initialize() {
+
+                var ac = new google.maps.places.Autocomplete(
+                  (document.getElementById('country')), {
+                    types: ['address']
+                  });
+
+                ac.addListener('place_changed', function() {
+
+                  var place = ac.getPlace();
+
+                  if (!place.geometry) {
+
+                       console.log('You entered: ' + place.name);
+                    return;
+                  }
+
+                  console.log('You selected: ' + place.formatted_address);
+                });
+              }
+
+
+        </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLL0rHGj4iF_ubU-M47QxkyRY-KbwEtIY&libraries=places&callback=initialize" async defer></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLL0rHGj4iF_ubU-M47QxkyRY-KbwEtIY&libraries=places&callback=initMap"  async defer></script> -->
+
+
+
 {/literal}

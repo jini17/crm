@@ -45,24 +45,24 @@ Vtiger_BasicSearch_Js("Vtiger_AdvanceSearch_Js",{
 		return jQuery('form[name="advanceFilterForm"]',this.getContainer());
 	},
     
-    isSearchShown : function() {
-        return jQuery('#advanceSearchHolder').hasClass('slideDown');
-    },
-    
-    hideSearch : function() {
-        jQuery('#advanceSearchHolder').removeClass('slideDown');
-    },
-    
-    isSearchHidden : function() {
-       var advanceSearchHolder = jQuery('#advanceSearchHolder');
-       return (advanceSearchHolder.children().length > 0 && (!advanceSearchHolder.hasClass('slideDown'))) ? true : false;
-    },
-    
-    showSearch : function() {
-         var advanceSearchHolder = jQuery('#advanceSearchHolder');
-         advanceSearchHolder.addClass('slideDown');
-    },
-    
+                    isSearchShown : function() {
+                        return jQuery('#advanceSearchHolder').hasClass('slideDown');
+                    },
+
+                    hideSearch : function() {
+                        jQuery('#advanceSearchHolder').removeClass('slideDown');
+                    },
+
+                    isSearchHidden : function() {
+                       var advanceSearchHolder = jQuery('#advanceSearchHolder');
+                       return (advanceSearchHolder.children().length > 0 && (!advanceSearchHolder.hasClass('slideDown'))) ? true : false;
+                    },
+
+                    showSearch : function() {
+                         var advanceSearchHolder = jQuery('#advanceSearchHolder');
+                         advanceSearchHolder.addClass('slideDown');
+                    },
+
 
 	/**
 	 * Function used to get the advance search ui

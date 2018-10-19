@@ -68,7 +68,7 @@ $languageStrings = array(
 	'Default Calendar View' => 'Default Calendar View',
 	'Default Lead View' => 'Default Lead View',
 	'Title' => 'Designation',
-                   
+                     'LBL_ADDITIONAL_INFO'=> 'Additional Info',
 	'Office Phone' => 'Office Phone',
 	'Department' => 'Department',
 	'Reports To' => 'Reports To',
@@ -116,7 +116,8 @@ $languageStrings = array(
 	'Other Event Duration' => 'Other Event Duration (Mins)',
 	'Calendar Hour Format' => 'Calendar Hour Format',
 	'Tag Cloud' => 'Tag Cloud',
-
+                        'Users'=>'Employee',
+                         'SINGLE_Users'=>'Employee',
 	//Time zones-Dont change any value
 	'Kwajalein'  =>  '(UTC-12:00) International Date Line West',
 	'Pacific/Midway'  =>  '(UTC-11:00) Coordinated Universal Time-11',
@@ -318,7 +319,11 @@ $languageStrings = array(
     'LBL_EDUCATION_LEVEL' => 'Education Level',
     'LBL_AREA_OF_STUDY'=>'Area of Study',
     'LBL_DESCRIPTION' => 'Description',
-    'LBL_WANT_TO_MAKE_PUBLIC' => 'Public?',					      	      'LBL_CANCEL_BUTTON_KEY' =>'Cancel Button',
+    'LBL_WANT_TO_MAKE_PUBLIC' => 'Permission',	
+    'LBL_PUBLIC'=>'Public',
+    'LBL_PRIVATE'=>'Private',
+    'LBL_PROTECTED'=>'Protected',
+    'LBL_CANCEL_BUTTON_KEY' =>'Cancel Button',
  'LBL_SAVE_BUTTON_KEY'=>'Save Button',
  'LBL_USER_EDUCATIONS' => 'User Educations',
  'LBL_ADD_NEW_EDUCATION' => 'Add Education',
@@ -382,8 +387,8 @@ $languageStrings = array(
 'LBL_PROBLEM_IN_DELETION' => 'Either record is not exist/Server Problem',
 'LBL_START_DATE'=>'Start Date',
 'LBL_END_DATE'=>'End Date',
-'LBL_TILL_NOW'=>'Till Now',
-'LBL_TO'=>'To',
+'LBL_TILL_NOW'=>'Present',
+'LBL_TO'=>'to',
 'LBL_EDIT_WORKEXP'=>'Edit Work Experience',
 'LBL_WORKEXP_UPDATE_SUCCESS' =>'Work Experience updated successfully',
 'LBL_WORKEXP_ADD_SUCCESS' =>'Work Experience added successfully',
@@ -487,15 +492,12 @@ $languageStrings = array(
 'LBL_RELATIONSHIP'=>'Relationship',
 'LBL_MOBILE'=>'Mobile',
 'LBL_OFFICE_PH'=>'Office Phone',
-'LBL_PUBLIC'=>'Public',
 'LBL_FATHER'=> 'Father',	
 'LBL_MOTHER'=> 'Mother',
 'LBL_SISTER'=> 'Sister',
 'LBL_BROTHER'=> 'Brother',
 'LBL_FRIEND'=> 'Friend',
-
 'LBL_SELECT'=>'Select anyone',
-
 //Leave Section add by jitu@secondcrm.com on 24-12-2014
 'LBL_ACTION' => 'Action',
 'LBL_LEAVE_STATUS' => 'Leave Status',

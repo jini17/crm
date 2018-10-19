@@ -21,12 +21,12 @@
     </div>
         
               {foreach item=LIST from=$DATA}
-                  <div class="row miniListContent" style="padding:5px;margin-right:-1px;margin-left:-1px;">
+                  <div class="row miniListContent" style="padding:5px;margin-right:-1px;margin-left:-1px; position: relative;">
                         <div class="col-md-4 ">   <b> {$LIST['first_name']}  {$LIST['last_name']} </b> </div>
                         <div class="col-md-4">     {$LIST['department']}       </div>
                         <div class="col-md-4">     {$LIST['designation']}   
-                            <a class="pull-right" href="{$URL}/index.php?module=Users&parent=Settings&view=Detail&record={$LIST['empid']}">
-                                <i class="fa fa-link"></i>
+                            <a class="pull-right" style="position: absolute; right:-8px; top: 0" href="{$URL}/index.php?module=Users&parent=Settings&view=Detail&record={$LIST['empid']}">
+                                <i class="ti ti ti-more-alt " style=" padding:2px;"></i>
                             </a> 
                         </div>                        
                    </div>

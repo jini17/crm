@@ -171,29 +171,6 @@ Vtiger_Index_Js("Settings_Vtiger_Index_Js",{
 		$('#accordion').on('shown.bs.collapse', toggleChevron);
 	},
 
-	// Added By Mabruk For Fask Skin
-	registerAccordionEvents : function() { 
-
-		jQuery('.settingsgroup-accordion').click( function() { 
-
-			var container 		= jQuery(jQuery(this).find('a').data('parent'));
-			var element   		= jQuery(this).find('.indicator');
-			var links     		= container.find('a');
-			var notCollapsed 	= element.hasClass('ti-angle-right');    
-
-			links.each(function() {
-
-				jQuery(this).find('.indicator').removeClass('ti-angle-down').addClass('ti-angle-right');				
-
-			});				
-
-			if (notCollapsed)
-				element.removeClass('ti-angle-right').addClass('ti-angle-down');
-
-		});
-
-	},
-
 	registerBasicSettingsEvents : function() {
 			this.registerAccordionEvents();// By Mabruk
 			this.registerAccordionClickEvent(); 
