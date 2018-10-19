@@ -11,7 +11,7 @@ Vtiger_Edit_Js("Faq_Edit_Js",{},{
 	 * Function load the ckeditor for signature field in edit view of my preference page.
 	 */
 	registerDescriptionEvent: function(){
-		var templateContentElement = jQuery("#Faq_editView_fieldName_question");
+		var templateContentElement = jQuery("#Faq_editView_fieldName_faq_answer");
 		if(templateContentElement.length > 0) {
 			var ckEditorInstance = new Vtiger_CkEditor_Js();
 			//Customized toolbar configuration for ckeditor  
