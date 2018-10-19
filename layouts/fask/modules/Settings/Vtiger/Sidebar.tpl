@@ -51,7 +51,7 @@
                                                 <div id="{$BLOCK_NAME}_accordion_mobile" class="app-nav" role="tab">
                                                         <div class="app-settings-accordion">
                                                                 <div class="settingsgroup-accordion">
-                                                                        <a data-toggle="collapse" data-parent="#accordion_mobile" class='collapsed' href="#{$BLOCK_NAME}_mobile">
+                                                                        <a data-toggle="collapse" data-parent="#accordion_mobile" class='collapsed  {if $ACTIVE_BLOCK['block'] eq $BLOCK_NAME} btn-primary text-white  {/if}' href="#{$BLOCK_NAME}_mobile">
                                                                                 <i class="indicator {if $ACTIVE_BLOCK['block'] eq $BLOCK_NAME} ti-angle-down {else} ti-angle-right {/if}"></i>
                                                                                 &nbsp;<span>{vtranslate($BLOCK_NAME,$QUALIFIED_MODULE)}</span>
                                                                         </a>

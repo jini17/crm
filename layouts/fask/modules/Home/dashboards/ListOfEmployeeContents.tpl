@@ -25,8 +25,8 @@
                         <div class="col-md-4 ">   <b> {$LIST['first_name']}  {$LIST['last_name']} </b> </div>
                         <div class="col-md-4">     {$LIST['department']}       </div>
                         <div class="col-md-4">     {$LIST['designation']}   
-                            <a class="pull-right" style="position: absolute; right:0; top: 0" href="{$URL}/index.php?module=Users&parent=Settings&view=Detail&record={$LIST['empid']}">
-                                <i class="ti ti ti-more-alt img-circle" style="border:1px solid #000; padding:2px;"></i>
+                            <a class="pull-right" style="position: absolute; right:-8px; top: 0" href="{$URL}/index.php?module=Users&parent=Settings&view=Detail&record={$LIST['empid']}">
+                                <i class="ti ti ti-more-alt " style=" padding:2px;"></i>
                             </a> 
                         </div>                        
                    </div>

@@ -68,15 +68,15 @@
                                                         </div>
 
                                                         <div class="controls fieldValue col-md-8" align="right">
-                                                                <span d="location_nametxt">
-                                                                        <input class="inputElement" type="text" place="Enter Street,City,Country" name="location" id="country" data-rule-required = "true" />
+                                                                <span id="institution_nametxt">
+                                                                        <input class="inputElement" type="text" placeholder="Enter Street,City,Country" name="location" id="country" data-rule-required = "true" />
                                                                 </span>
                                                             
                                                         </div>
                                                 </div>
                                         </div>                          
                         <!--end-->
-                                <div class="form-group" style="margin-bottom: 0px !important; position: relative;">
+                                <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)}<span class="redColor">*</span></label>
@@ -97,7 +97,7 @@
                                                 </div>
                                         </div>
                                 </div>	
-                                <div class="form-group {if $EDUCATION_DETAIL.currently_studying eq 1} hide{/if}" id="enddate_div" style="margin-bottom: 0px !important; position:relative;">
+                                <div class="form-group {if $EDUCATION_DETAIL.currently_studying eq 1} hide{/if}" id="enddate_div" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_END_DATE', $QUALIFIED_MODULE)}</label>
@@ -178,8 +178,8 @@
                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_WANT_TO_MAKE_PUBLIC', $QUALIFIED_MODULE)}</label>
                                                 </div>	
                                                 <div class="controls date col-md-8">
-                                                      <label><input type="radio" {if $EDUCATION_DETAIL.public eq '0'} checked {/if} id="chkviewable" name='chkviewable' value="0" />&nbsp; {vtranslate('LBL_PUBLIC', $QUALIFIED_MODULE)} </label>&nbsp; 
-                                                     <label><input type="radio"{if $EDUCATION_DETAIL.public eq '1'} checked {/if} id="chkviewable"  name='chkviewable' value="1" />&nbsp; {vtranslate('LBL_PRIVATE', $QUALIFIED_MODULE)} </label>&nbsp; 
+                                                      <label><input type="radio" {if $EDUCATION_DETAIL.public eq '0'} checked {/if} name='chkviewable' value="0" />&nbsp; {vtranslate('LBL_PUBLIC', $QUALIFIED_MODULE)} </label>&nbsp; 
+                                                     <label><input type="radio"{if $EDUCATION_DETAIL.public eq '1'} checked {/if} name='chkviewable' value="1" />&nbsp; {vtranslate('LBL_PRIVATE', $QUALIFIED_MODULE)} </label>&nbsp; 
                                                       <label><input type="radio" {if $EDUCATION_DETAIL.public eq '2'} checked {/if} name='chkviewable' value="2" />&nbsp; {vtranslate('LBL_PROTECTED', $QUALIFIED_MODULE)} </label>
 {*                                                        <input class="inputElement" type="checkbox" name="chkviewable" id="chkviewable" {if $EDUCATION_DETAIL.public eq 1} checked {/if}>
 *}                                                </div>	
@@ -253,98 +253,33 @@ function updateSelectBox(selectbox, txtbox)
                                                             </div>
                                                         </div>
 -->
-<script>
-    
-function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
-          zoom: 13
-        });
-        var card = document.getElementById('pac-card');
-        var input = document.getElementById('pac-input');
-        var types = document.getElementById('type-selector');
-        var strictBounds = document.getElementById('strict-bounds-selector');
 
-        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+     <script>
+           function initialize() {
 
-        var autocomplete = new google.maps.places.Autocomplete(input);
+                var ac = new google.maps.places.Autocomplete(
+                  (document.getElementById('country')), {
+                    types: ['address']
+                  });
 
-        // Bind the map's bounds (viewport) property to the autocomplete object,
-        // so that the autocomplete requests use the current map bounds for the
-        // bounds option in the request.
-        autocomplete.bindTo('bounds', map);
+                ac.addListener('place_changed', function() {
 
-        // Set the data fields to return when the user selects a place.
-        autocomplete.setFields(
-            ['address_components', 'geometry', 'icon', 'name']);
+                  var place = ac.getPlace();
 
-        var infowindow = new google.maps.InfoWindow();
-        var infowindowContent = document.getElementById('infowindow-content');
-        infowindow.setContent(infowindowContent);
-        var marker = new google.maps.Marker({
-          map: map,
-          anchorPoint: new google.maps.Point(0, -29)
-        });
+                  if (!place.geometry) {
+        
+                    console.log('You entered: ' + place.name);
+                    return;
+                  }
 
-        autocomplete.addListener('place_changed', function() {
-          infowindow.close();
-          marker.setVisible(false);
-          var place = autocomplete.getPlace();
-          if (!place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
-            window.alert("No details available for input: '" + place.name + "'");
-            return;
-          }
+                  console.log('You selected: ' + place.formatted_address);
+                });
+              }
 
-          // If the place has a geometry, then present it on a map.
-          if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-          } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);  // Why 17? Because it looks good.
-          }
-          marker.setPosition(place.geometry.location);
-          marker.setVisible(true);
 
-          var address = '';
-          if (place.address_components) {
-            address = [
-              (place.address_components[0] && place.address_components[0].short_name || ''),
-              (place.address_components[1] && place.address_components[1].short_name || ''),
-              (place.address_components[2] && place.address_components[2].short_name || '')
-            ].join(' ');
-          }
-
-          infowindowContent.children['place-icon'].src = place.icon;
-          infowindowContent.children['place-name'].textContent = place.name;
-          infowindowContent.children['place-address'].textContent = address;
-          infowindow.open(map, marker);
-        });
-
-        // Sets a listener on a radio button to change the filter type on Places
-        // Autocomplete.
-        function setupClickListener(id, types) {
-          var radioButton = document.getElementById(id);
-          radioButton.addEventListener('click', function() {
-            autocomplete.setTypes(types);
-          });
-        }
-
-        setupClickListener('changetype-all', []);
-        setupClickListener('changetype-address', ['address']);
-        setupClickListener('changetype-establishment', ['establishment']);
-        setupClickListener('changetype-geocode', ['geocode']);
-
-        document.getElementById('use-strict-bounds')
-            .addEventListener('click', function() {
-              console.log('Checkbox clicked! New state=' + this.checked);
-              autocomplete.setOptions({strictBounds: this.checked});
-            });
-      }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLL0rHGj4iF_ubU-M47QxkyRY-KbwEtIY&libraries=places&callback=initMap"
-        async defer></script>
+        </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLL0rHGj4iF_ubU-M47QxkyRY-KbwEtIY&libraries=places&callback=initialize" async defer></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLL0rHGj4iF_ubU-M47QxkyRY-KbwEtIY&libraries=places&callback=initMap"  async defer></script> -->
 
 
 

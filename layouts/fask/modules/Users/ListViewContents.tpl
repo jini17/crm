@@ -77,6 +77,7 @@
     display: block;
     line-height: 1.6;
     font-weight: normal !important;     
+    margin-left: 7px;
    }
    td .text-left .text-center{
        text-align:  left !important;
@@ -122,7 +123,7 @@
 
     <div id="table-content" class="table-container">
         <form name='list' id='listedit' action='' onsubmit="return false;">
-                <table id="listview-table" class="table table-striped table-hover {if $LISTVIEW_ENTRIES_COUNT eq '0'}listview-table-norecords {/if} listview-table">
+                <table id="listview-table" class="table table-striped table-hover {if $LISTVIEW_ENTRIES_COUNT eq '0'}listview-table-norecords {/if} ">
                         <thead>
                                 <tr class="listViewContentHeader">
                                         <th>
@@ -140,19 +141,19 @@
                                                         <th {if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')} nowrap="nowrap" {/if} >
                                                                 <a href="#" class="listViewContentHeaderValues" data-nextsortorderval="{if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')}{$NEXT_SORT_ORDER}{else}ASC{/if}" data-columnname="{$LISTVIEW_HEADER->get('name')}">
                                                                         {if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')}
-                                                                                <i class="fa fa-sort {$FASORT_IMAGE}"></i>
+                                                                              {*  <i class="fa fa-sort {$FASORT_IMAGE}"></i>*}
                                                                         {else}
-                                                                                <i class="fa fa-sort customsort"></i>
+                                                                            {*    <i class="fa fa-sort customsort"></i>*}
                                                                         {/if}
-                                                                        &nbsp;{vtranslate($HEADER_LABEL, $MODULE)}&nbsp;
+                                                                       {if $LISTVIEW_HEADER->getName() eq 'first_name' }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{/if}&nbsp;{vtranslate($HEADER_LABEL, $MODULE)}&nbsp;
                                                                 </a>
                                                                 {if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')}
-                                                                        <a href="#" class="removeSorting"><i class="ti-close"></i></a>
+                                                                    {*    <a href="#" class="removeSorting"><i class="ti-close"></i></a>*}
                                                                 {/if}
                                                         </th>
                                                         {elseif $LISTVIEW_HEADER->getName() eq 'date_joined' }
                                                              <th {if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')} nowrap="nowrap" {/if} >
-                                                              <a href="#" class="listViewContentHeaderValues">{vtranslate('LBL_ADDITIONAL_INFO', $MODULE)}</a>&nbsp;
+                                                              <a href="#" class="listViewContentHeaderValues">&nbsp;{vtranslate('LBL_ADDITIONAL_INFO', $MODULE)}</a>&nbsp;
                                                           </th>
                                                         {else}
                                                           <th {if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')} nowrap="nowrap" {/if} >

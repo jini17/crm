@@ -22,7 +22,7 @@ $languageStrings = array(
 	'LTFAQ' => 'My Recent FAQs',
 	'UA' => 'Upcoming Activities',
 	'PA' => 'Pending Activities',
-                      'Home'=> 'Dashboard',
+    'Home'=> 'Dashboard',
 	'LBL_SAVE_ORDER'=>'Save Order',
 	'LBL_ADD_NEW_DASHBOARD'=>'Add new dashboard',
 	'LBL_MAX_CHARACTERS_ALLOWED_DASHBOARD' => 'Maximum 30 characters are allowed for dashboard name.',
@@ -46,22 +46,22 @@ $languageStrings = array(
 	'LBL_IN_THIS_MONTH'=>'in this month',
 	'LBL_NAME' => 'Employee',
 	'LBL_BIRTHDATE' => 'Birthday Date',	
-                     'LBL_DEPARTMENT' => 'Department',
-                     'LBL_DESIGNATION' => 'Designation',
+    'LBL_DEPARTMENT' => 'Department',
+    'LBL_DESIGNATION' => 'Designation',
 	'LBL_LEAVE_APPROVAL'=>'My Team Leave Approval',
-                      'LBL_NOT_FOUND'       => 'Not Found',
-                      'LBL_WORKING_AS'  => 'Working as',
-                      'LBL_OF_JOB' => 'Job',
-                      'LBL_REPORTING_TO' => 'Reports to',
-                      'LBL_JOB' => 'job',
-                       'LBL_CONTRACT_EXPIRE' => 'Contract expires in',
-                       'LBL_SINCE' => 'since',
-                       'LBL_CONTRACT_NOTIFICATION'=> 'Your Contract is expiring soon. Kindly contact your HR for further assistance',
-                       'LBL_VIEW_PROFILE'=> 'Go to My Profile',
-                      'LBL_VIEW_CONTRACT'=> 'View My Contract',
-                      'LBL_GOOD_DAY' => 'Good Day'
-	
-	                
+	'LBL_NOT_FOUND'       => 'Not Found',
+	'LBL_WORKING_AS'  => 'Working as',
+	'LBL_OF_JOB' => 'Job',
+	'LBL_REPORTING_TO' => 'Reports to',
+	'LBL_JOB' => 'job',
+	'LBL_CONTRACT_EXPIRE' => 'Contract expires in',
+	'LBL_SINCE' => 'since',
+	'LBL_CONTRACT_NOTIFICATION'=> 'Your Contract is expiring soon. Kindly contact your HR for further assistance',
+	'LBL_VIEW_PROFILE'=> 'Go to My Profile',
+	'LBL_VIEW_CONTRACT'=> 'View My Contract',
+	'LBL_GOOD_DAY' => 'Good Day',
+	'User'=>'Employee',
+    'Bill'=> 'Office Bill'                
    
 );
 

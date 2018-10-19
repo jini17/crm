@@ -39,7 +39,7 @@
 
                                     <a class="pull-right btn-block" style="position: absolute;right: -106px;top: 0;"  href="index.php?module=EmployeeContract&view=Detail&record={$MODEL['empcid']}&app=MARKETING"> 
 
-                                         <i class="ti ti ti-more-alt img-circle" style="border:1px solid #000; padding:2px;"></i>
+                                         <i class=" ti-more-alt" style=" padding:2px;"></i>
                                     </a>
                                 </div>
 
