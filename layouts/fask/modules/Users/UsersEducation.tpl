@@ -52,7 +52,7 @@
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['education_level']}</td>
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['area_of_study']}</td>
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['description']}</td>
-                        <td class="listTableRow medium" valign="top">{$PERMISSION}</td>
+                        <td class="listTableRow medium" valign="top">{vtranslate($PERMISSION,$MODULE)}</td>
                         <td class="listTableRow medium" width="5%" valign="top">
                             <div class="pull-right actions">
                                 <span class="actionImages">

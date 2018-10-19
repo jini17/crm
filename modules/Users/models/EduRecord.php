@@ -175,8 +175,8 @@ LIMIT 3";
 		for($i=0;$db->num_rows($result)>$i;$i++){
 			$eduList[$i]['institution_name'] = $db->query_result($result, $i, 'institution_name');
 			$eduList[$i]['educationid'] = $db->query_result($result, $i, 'educationid');
-			$eduList[$i]['start_date'] = date('M-Y',strtotime($db->query_result($result, $i, 'start_date')));
-			$eduList[$i]['end_date'] =  date('M-Y',strtotime($db->query_result($result, $i, 'end_date')));
+			$eduList[$i]['start_date'] = date('M Y',strtotime($db->query_result($result, $i, 'start_date')));
+			$eduList[$i]['end_date'] =  date('M Y',strtotime($db->query_result($result, $i, 'end_date')));
 			$eduList[$i]['is_studying'] = $db->query_result($result, $i, 'currently_studying');
 			$eduList[$i]['education_level'] = $db->query_result($result, $i, 'education_level');
 			$eduList[$i]['area_of_study'] = $db->query_result($result, $i, 'area_of_study');
