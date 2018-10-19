@@ -404,8 +404,31 @@ Vtiger.Class('Vtiger_Index_Js', {
                 }	
 
         },
+        // Added By Mabruk For Fask Skin
+	registerAccordionEvents : function() { 
 
+		     jQuery('.settingsgroup-accordion').click( function() { 
+
+			var container 		= jQuery(jQuery(this).find('a').data('parent'));//jQuery('#accordion_mobile, #accordion');
+			var element   		= jQuery(this).find('.indicator');
+			var links     		= container.find('a');
+			    
+                        
+			links.each(function() {
+                    jQuery(this).find('.indicator').removeClass('ti-angle-down').addClass('ti-angle-right').closest('a').removeClass('btn-primary text-white');
+               });				
+               var notCollapsed 	= element.hasClass('ti-angle-right');
+			if (notCollapsed){
+                    element.closest('a').addClass('btn-primary text-white');
+                    element.removeClass('ti-angle-right').addClass('ti-angle-down');
+               } 
+
+		});
+
+	},
+        
         registerEvents: function() {
+                this.registerAccordionEvents();// By Mabruk
                 this.hideCreateDoc();
                 this.registerMenuToggle();
                 this.registerGlobalSearch();
@@ -846,11 +869,12 @@ Vtiger.Class('Vtiger_Index_Js', {
                 var thisInstance = this;
                 jQuery('.search-link .keyword-input').on('keypress',function(e){
                         if(e.which == 13) {
-                             var module =  jQuery("#searchModuleList").val();
+                             var module =  jQuery(".searchoption #searchModuleList option:selected").val();
                                 var element = jQuery(e.currentTarget);
                                 var searchValue = element.val();
-                                var data = {'source_module':module};
-                                data['searchValue'] = searchValue;
+                                var data = {};
+                      
+                                data['searchValue'] = searchValue;     
                                 element.trigger(thisInstance._SearchIntiatedEventName,data);
                         }
                 });

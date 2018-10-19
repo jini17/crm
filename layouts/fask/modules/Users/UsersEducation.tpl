@@ -39,13 +39,20 @@
                 </thead>
                 <tbody>
                     {foreach item=USER_EDUCATION from=$USER_EDUCATION_LIST}
+                        {if $USER_EDUCATION['public'] eq '0'}
+                                {assign var=PERMISSION value=LBL_PUBLIC}  
+                        {elseif $USER_EDUCATION['public'] eq '1'}
+                                {assign var=PERMISSION value=LBL_PRIVATE}  
+                        {else}
+                            {assign var=PERMISSION value='LBL_PROTECTED'}  
+                        {/if}    
                     <tr>
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['institution_name']}</td>
-                        <td class="listTableRow medium" valign="top">{$USER_EDUCATION['start_date']} {vtranslate('LBL_TO', $MODULE)} {if $USER_EDUCATION['is_studying'] eq 1}{vtranslate('LBL_TILL_NOW', $MODULE)}{else}{$USER_EDUCATION['end_date']}{/if}</td>
+                        <td class="listTableRow medium" valign="top">{$USER_EDUCATION['start_date']} - {if $USER_EDUCATION['is_studying'] eq 1}{vtranslate('LBL_TILL_NOW', $MODULE)}{else}{$USER_EDUCATION['end_date']}{/if}</td>
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['education_level']}</td>
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['area_of_study']}</td>
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['description']}</td>
-                        <td class="listTableRow medium" valign="top">{(0==$USER_EDUCATION['public'])?{vtranslate('LBL_NO', $MODULE)}:{vtranslate('LBL_YES', $MODULE)}}</td>
+                        <td class="listTableRow medium" valign="top">{$PERMISSION}</td>
                         <td class="listTableRow medium" width="5%" valign="top">
                             <div class="pull-right actions">
                                 <span class="actionImages">

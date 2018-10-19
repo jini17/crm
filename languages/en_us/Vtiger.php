@@ -149,7 +149,8 @@ $languageStrings = array(
 	'Description' => 'Description',
 	'Assigned To'=>'Assigned To',
     
-
+                    'User'=>'Employee',
+                     'Bill'=> 'Office Bill',
 	//Loading Labels
 	'LBL_LOADING' => 'Loading',
 	'LBL_LOADING_WIDGET' => 'Loading Widget',
@@ -616,8 +617,8 @@ $languageStrings = array(
 	'Biotechnology'=>'Biotechnology',
 	'Chemicals'=>'Chemicals',
 	'Communications'=>'Communications',
-                     'Admin/Finance' => 'HRM',
-                    'Tools'=>'Communications',
+	 'Admin/Finance' => 'HRM',
+	'Tools'=>'Communications',
 	'Construction'=>'Construction',
 	'Consulting'=>'Consulting',
 	'Education'=>'Education',

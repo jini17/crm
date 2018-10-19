@@ -63,19 +63,19 @@ Vtiger_List_Js("Settings_Vtiger_List_Js",{
         },
         registerAccordionClickEvent: function () {
 
-            jQuery('.settingsgroup-accordion a[data-parent="#accordion_mobile"]').on('click', function (e) {
-
-                var target = jQuery(this);
-                var closestItag = target.find('i');
-
-                if (closestItag.hasClass('fa-chevron-right')) {
-                    closestItag.removeClass('fa-chevron-right').addClass('fa-chevron-down');
-                } else {
-                    closestItag.removeClass('fa-chevron-down').addClass('fa-chevron-right');
-                }
-
-                jQuery('.settingsgroup i').not(closestItag).removeClass('fa-chevron-down').addClass('fa-chevron-right');
-            });
+//            jQuery('.settingsgroup-accordion a[data-parent="#accordion_mobile"]').on('click', function (e) {
+//
+//                var target = jQuery(this);
+//                var closestItag = target.find('i');
+//
+//                if (closestItag.hasClass('fa-chevron-right')) {
+//                    closestItag.removeClass('fa-chevron-right').addClass('fa-chevron-down');
+//                } else {
+//                    closestItag.removeClass('fa-chevron-down').addClass('fa-chevron-right');
+//                }
+//
+//                jQuery('.settingsgroup i').not(closestItag).removeClass('fa-chevron-down').addClass('fa-chevron-right');
+//            });
         },
 
         registerEvents : function() {
