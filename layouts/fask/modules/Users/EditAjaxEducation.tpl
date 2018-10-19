@@ -172,6 +172,7 @@
                                                 <div class="controls" id="charNum" style="font-size:12px;text-align: right;float:right;margin-right: 13px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                                         </div>
                                 </div>	
+                             
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
@@ -186,6 +187,7 @@
                                         </div>
                                 </div>
                         </div>
+                             
                         <div class="modal-footer" style="padding-top: 5px; padding-bottom: 5px;">
                                  {include file='ModalFooter.tpl'|@vtemplate_path:'Vtiger'}
                         </div>    	 	
@@ -267,7 +269,6 @@ function updateSelectBox(selectbox, txtbox)
                   var place = ac.getPlace();
 
                   if (!place.geometry) {
-
                        console.log('You entered: ' + place.name);
                     return;
                   }

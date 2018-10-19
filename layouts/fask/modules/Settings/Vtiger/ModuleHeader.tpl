@@ -107,19 +107,30 @@
                 <div class="col-lg-5 col-md-5 pull-right">
                         <div id="appnav" class="navbar-right">
                                 <div class="btn-group">
+                                 
                                         {foreach item=BASIC_ACTION from=$MODULE_BASIC_ACTIONS}
                                         {if $BASIC_ACTION->getLabel() == 'LBL_IMPORT'}
-                                        <button id="{$MODULE}_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($BASIC_ACTION->getLabel())}" type="button" class="btn addButton module-buttons" 
+                                     
+                                        <button id="{$MODULE}_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($BASIC_ACTION->getLabel())}" 
+                                                type="button" class="btn addButton {if $MODULE eq 'Users'} btn-primary text-white {else} module-buttons  {/if}" 
+                                                {if $MODULE eq 'Users' AND  $BASIC_ACTION->getLabel() eq 'LBL_IMPORT'} style="margin-right:5px; margin-top:5px;"  {/if}
                                                 {if stripos($BASIC_ACTION->getUrl(), 'javascript:')===0}
                                                 onclick='{$BASIC_ACTION->getUrl()|substr:strlen("javascript:")};'
                                                 {else} 
                                                 onclick="Vtiger_Import_Js.triggerImportAction('{$BASIC_ACTION->getUrl()}')"
                                                 {/if}>
-                                                <div class="fa {$BASIC_ACTION->getIcon()}" aria-hidden="true"></div>&nbsp;&nbsp;
+                                            <!-- Added by Khaled -->
+                                            {if $BASIC_ACTION->getLabel() eq 'LBL_IMPORT'}
+                                                 <i class="ti ti-upload" aria-hidden="true"></i>&nbsp;&nbsp;
+                                            {else}    
+                                                <i class="fa {$BASIC_ACTION->getIcon()}" aria-hidden="true"></i>&nbsp;&nbsp;
+                                             {/if}   
                                                 {vtranslate($BASIC_ACTION->getLabel(), $MODULE)}
                                         </button>
                                         {else}
-                                        <button type="button" class="btn addButton module-buttons" 
+                                            
+                                        <button type="button" class="btn addButton  {if $MODULE eq 'Users'} btn-primary text-white {else} module-buttons {/if}" 
+                                                {if $MODULE eq 'Users'} style="margin-right:5px; margin-top: 5px; "  {/if}
                                         id="{$MODULE}_listView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($BASIC_ACTION->getLabel())}"
                                         {if stripos($BASIC_ACTION->getUrl(), 'javascript:')===0}
                                         onclick='{$BASIC_ACTION->getUrl()|substr:strlen("javascript:")};'
@@ -135,16 +146,39 @@
                                 {if empty($QUALIFIEDMODULE)} 
                                 {assign var=QUALIFIEDMODULE value=$MODULE}
                                 {/if}
-                                <div class="settingsIcon">
-                                        <button type="button" class="btn module-buttons dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                <span class="ti-settings" aria-hidden="true" title="{vtranslate('LBL_SETTINGS', $MODULE)}"></span>&nbsp; <span class="caret"></span>
-                                        </button>
-                                        <ul class="detailViewSetting dropdown-menu animated flipInY">
-                                                {foreach item=SETTING from=$LISTVIEW_LINKS['LISTVIEWSETTING']}
-                                                <li id="{$MODULE}_setings_lisview_advancedAction_{$SETTING->getLabel()}"><a href="javascript:void(0);" onclick="{$SETTING->getUrl()};">{vtranslate($SETTING->getLabel(), $QUALIFIEDMODULE)}</a></li>
-                                                {/foreach}
-                                        </ul>
-                                </div>
+                                <!-- Added BY khaled -->
+                                       {if $MODULE neq 'Users'}
+                                            <div class="settingsIcon">
+                                                    <button type="button" class="btn module-buttons dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                            <span class="ti-settings" aria-hidden="true" title="{vtranslate('LBL_SETTINGS', $MODULE)}"></span>&nbsp; <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="detailViewSetting dropdown-menu animated flipInY">
+                                                            {foreach item=SETTING from=$LISTVIEW_LINKS['LISTVIEWSETTING']}
+                                                            <li id="{$MODULE}_setings_lisview_advancedAction_{$SETTING->getLabel()}">
+                                                                <a href="javascript:void(0);" onclick="{$SETTING->getUrl()};">{vtranslate($SETTING->getLabel(), $QUALIFIEDMODULE)}</a>
+                                                            </li>
+                                                            {/foreach}
+                                                    </ul>
+                                            </div>
+                                        {else}
+                                              {foreach item=SETTING from=$LISTVIEW_LINKS['LISTVIEWSETTING']}
+                                               {*     <li id="{$MODULE}_setings_lisview_advancedAction_{$SETTING->getLabel()}">*}
+                                               <!-- Khaled Note :
+                                                    Change Owner will be placed to somewhere else. For Now it is Hidden
+                                               -->
+                                               <a  class="btn  {if $MODULE eq 'Users'} btn-primary text-white {else} module-buttons {/if} {if $SETTING->getLabel() eq 'LBL_CHANGE_OWNER'} hide {/if}" 
+                                                    {if $MODULE eq 'Users'} style="margin-right:5px; margin-top:5px;"  {/if}
+                                                   href="javascript:void(0);" onclick="{$SETTING->getUrl()};">
+                                                   {if $SETTING->getLabel() eq 'LBL_CHANGE_OWNER'} 
+                                                       <i class="material-icons module-icon" style="font-weight:bold;">person</i>&nbsp;
+                                                   {elseif $SETTING->getLabel() eq 'LBL_EXPORT'} 
+                                                       <i class="ti ti-download" style="font-weight:bold;"></i>&nbsp;
+                                                   {/if}                                                
+                                                       {vtranslate($SETTING->getLabel(), $QUALIFIEDMODULE)}
+                                                   </a>
+                                                   {* </li>*}
+                                            {/foreach}
+                                        {/if}
                                 {/if}
 
                                 {assign var=RESTRICTED_MODULE_LIST value=['Users', 'EmailTemplates']}

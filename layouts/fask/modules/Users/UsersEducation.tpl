@@ -30,6 +30,7 @@
                 <thead>
                     <tr>
                         <th class="medium"><strong>{vtranslate('LBL_INSTITUTION_NAME', $MODULE)}</strong></th>
+                        <th class="medium"><strong>{vtranslate('LBL_LOCATION', $MODULE)}</strong></th>
                         <th class="medium"><strong>{vtranslate('LBL_DURATION', $MODULE)}</strong></th>
                         <th class="medium"><strong>{vtranslate('LBL_EDUCATION_LEVEL', $MODULE)}</strong></th>
                         <th class="medium"><strong>{vtranslate('LBL_AREA_OF_STUDY', $MODULE)}</strong></th>
@@ -48,11 +49,12 @@
                         {/if}    
                     <tr>
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['institution_name']}</td>
+                        <td class="listTableRow medium" valign="top">{$USER_EDUCATION['education_location']}</td>
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['start_date']} - {if $USER_EDUCATION['is_studying'] eq 1}{vtranslate('LBL_TILL_NOW', $MODULE)}{else}{$USER_EDUCATION['end_date']}{/if}</td>
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['education_level']}</td>
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['area_of_study']}</td>
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['description']}</td>
-                        <td class="listTableRow medium" valign="top">{$PERMISSION}</td>
+                        <td class="listTableRow medium" valign="top">{vtranslate($PERMISSION,$MODULE)}</td>
                         <td class="listTableRow medium" width="5%" valign="top">
                             <div class="pull-right actions">
                                 <span class="actionImages">

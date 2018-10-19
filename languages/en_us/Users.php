@@ -307,7 +307,7 @@ $languageStrings = array(
 	//Added By jitu@secondcrm.com onm 20-10-2014 
     'LBL_MAX_CHAR_TXTAREA'=>'Maximum Limit 300 character',
     'LBL_ADD_NEW_EDUCATION'=>'Add Education',
-    'LBL_EDUCATION_ISVIEW' => 'Public?',
+    'LBL_EDUCATION_ISVIEW' => 'Permission',
     'LBL_EDUCATION'=> 'Education', 	
     'LBL_EDIT_EDUCATION' =>'Edit Education',	
     'LBL_INSTITUTION_NAME' => 'Institution Name',
