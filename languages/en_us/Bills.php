@@ -10,7 +10,7 @@
 $languageStrings = array(
 	'LBL_BILLS_INFORMATION' => 'Billing Information',
 	'LBL_REMARKS_DESCRIPTION' => 'Remarks Information',
-	'SINGLE_Bills' =>'Bill',
+	'SINGLE_Bills' =>'Bills',
 	'LBL_ADD_RECORD'=>'Create Bill',
 	
 );

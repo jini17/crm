@@ -64,12 +64,13 @@
                                         <div class="form-group">
                                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                                         <div class="col-md-4">
-                                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">{vtranslate('LBL_LOCATION',$QUALIFIED_MODULE)}</label>
+                                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">
+                                                                            {vtranslate('LBL_LOCATION',$QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                                         </div>
 
                                                         <div class="controls fieldValue col-md-8" align="right">
                                                                 <span id="institution_nametxt">
-                                                                        <input class="inputElement" type="text" placeholder="Enter Street,City,Country" name="location" id="country" data-rule-required = "true" />
+                                                                        <input class="inputElement" type="text" value="{$EDUCATION_DETAIL.education_location}" placeholder="Enter Street,City,Country" name="location" id="country" data-rule-required = "true" />
                                                                 </span>
                                                             
                                                         </div>
@@ -79,7 +80,7 @@
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
-                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)}<span class="redColor">*</span></label>
+                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp; {vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)}<span class="redColor">*</span></label>
                                                 </div>
                                                 <div class="controls date col-md-8">
                                                         <input id="start_date" type="text" class="dateField inputElement" type="text" value="{$EDUCATION_DETAIL.start_date}" data-rule-required = "true" name="start_date" data-date-format="dd-mm-yyyy">	
@@ -169,10 +170,26 @@
                                                 <div class="col-md-4">
                                                         <label class="control-label fieldLabel" style="text-align: right;float:right;">&nbsp;</label>
                                                 </div>	
-                                                <div class="controls" id="charNum" style="font-size:12px;text-align: right;float:right;margin-right: 13px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
+                                                <div class="controls" id="charNum" style="font-size:12px;text-align: right;float:right;margin-right: 13px;">
+                                                    {vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}
+                                                </div>
                                         </div>
                                 </div>	
-                             
+                                <div class="col-md-12" style="margin-bottom: 15px;">
+                                        <div class="col-md-4">
+                                                                <label class="control-label fieldLabel" style="text-align: right;float: right;">
+                                                                        &nbsp;{vtranslate('LBL_EDUCATION_TYPE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
+                                                                </label>
+                                                        </div>
+                                                        <div class="controls fieldValue col-md-8">
+                                                                <select class="select2 inputElement" name="edu_type" 
+                                                                        id="education_type" data-rule-required = "true">
+                                                                    
+                                                                <option value="0">{vtranslate('LBL_PART_TIME', $QUALIFIED_MODULE)}</option> 	
+                                                                <option value="1">{vtranslate('LBL_FULL_TIME', $QUALIFIED_MODULE)}</option> 	
+                                                                </select>
+                                                        </div>
+                                                </div>
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">

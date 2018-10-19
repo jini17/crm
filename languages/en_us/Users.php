@@ -12,6 +12,9 @@ $languageStrings = array(
 	'LBL_WELCOME_SECONDCRM'=>'Welcome Secondcrm',
 	'LBL_MANY_ATTEMPTS'=>'Your account has been blocked due too many failed login attempt. Please contact your Administrator.',
 	//MyPreference Blocks
+                     'LBL_PART_TIME'=> 'Part-Time',
+                     'LBL_FULL_TIME'=> 'Full-Time',
+                      'LBL_EDUCATION_TYPE' => 'Type',
 	'LBL_MY_PREFERENCES'  =>  'My Profile',
                      'LBL_CLAIM_CREATE_SUCCESSFULLY'  =>  'Claim Created Successfully',
 	'LBL_MORE_INFORMATION'  =>  'User Information',
@@ -221,7 +224,7 @@ $languageStrings = array(
 	'Summary' => 'Summary',
 	'Detail' => 'Detail',
 	'LBL_USER_LIST_DETAILS' => 'Details',
-
+                      'LBL_EDUCATION_TYPE'=> 'Type',
 	'LBL_OLD_PASSWORD' => 'Old Password',
 	'LBL_CHANGE_PASSWORD' => 'Change Password',
 	'LBL_NEW_PASSWORD' => 'New Password',

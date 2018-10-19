@@ -10,50 +10,53 @@
 
 class Users_EditEducation_View extends Vtiger_Index_View {
 
-	public function process(Vtiger_Request $request) {
-		$moduleName = $request->getModule();
-		$edu_id = $request->get('record');
-		$userId = $request->get('userId');
-		$userRecordModel = Users_EduRecord_Model::getCurrentUserModel();
-		
-		$viewer = $this->getViewer($request);
-		$InstutionList = $userRecordModel->getAllInstituionlist();
-		$MajorList = $userRecordModel->getAllAreaOfStudylist();
-		if(!empty($edu_id)) {	
-			$educationdetailmodel = $userRecordModel->getEducationDetail($edu_id); 
-		}
-		$startDateField = array(	"mandatory"=>true,
-						"presence"=>true,
-						"quickcreate"=>false,
-						"masseditable"=>false,
-						"defaultvalue"=>false,
-						"type"=>"date",
-						"name"=>"start_date",
-						"label"=>"Start Date",
-						"date-format"=>"dd-mm-yyyy"	);
-		$endDateField = array(	"mandatory"=>true,
-						"presence"=>true,
-						"quickcreate"=>false,
-						"masseditable"=>false,
-						"defaultvalue"=>false,
-						"type"=>"date",
-						"name"=>"end_date",
-						"label"=>"End Date",
-						"date-format"=>"dd-mm-yyyy"	);
+        public function process(Vtiger_Request $request) {
+                $moduleName = $request->getModule();
+                $edu_id = $request->get('record');
+                $userId = $request->get('userId');
+                $userRecordModel = Users_EduRecord_Model::getCurrentUserModel();
 
-		$validator= '[{"name":"greaterThanDependentField","params":["start_date"]}]';
-		$viewer->assign('MODULE', $moduleName);
-		$viewer->assign('QUALIFIED_MODULE', $moduleName);
-		$viewer->assign('USERID', $userId);
-		$viewer->assign('EDU_ID', $edu_id);
-		$viewer->assign('INSTITUTION_LIST', $InstutionList);
-		$viewer->assign('MAJOR_LIST', $MajorList);
-		$viewer->assign('CURRENT_USER_MODEL', $userRecordModel);
-		$viewer->assign('CURRENTYEAR', date('Y'));
-		$viewer->assign('STARTDATEFIELD', $startDateField);
-		$viewer->assign('ENDDATEFIELD', $endDateField);
-		$viewer->assign('VALIDATOR', $validator);
-		$viewer->assign('EDUCATION_DETAIL', $educationdetailmodel);
-		$viewer->view('EditAjaxEducation.tpl', $moduleName);
-	}
+                $viewer = $this->getViewer($request);
+                $InstutionList = $userRecordModel->getAllInstituionlist();
+                $MajorList = $userRecordModel->getAllAreaOfStudylist();
+                if(!empty($edu_id)) {	
+                    $educationdetailmodel = $userRecordModel->getEducationDetail($edu_id); 
+                }
+    
+                $educationtype = $userRecordModel->
+                $startDateField = array(	"mandatory"=>true,
+                                                "presence"=>true,
+                                                "quickcreate"=>false,
+                                                "masseditable"=>false,
+                                                "defaultvalue"=>false,
+                                                "type"=>"date",
+                                                "name"=>"start_date",
+                                                "label"=>"Start Date",
+                                                "date-format"=>"dd-mm-yyyy"	);
+                $endDateField = array(	"mandatory"=>true,
+                                                "presence"=>true,
+                                                "quickcreate"=>false,
+                                                "masseditable"=>false,
+                                                "defaultvalue"=>false,
+                                                "type"=>"date",
+                                                "name"=>"end_date",
+                                                "label"=>"End Date",
+                                                "date-format"=>"dd-mm-yyyy"	);
+
+                $validator= '[{"name":"greaterThanDependentField","params":["start_date"]}]';
+                $viewer->assign('MODULE', $moduleName);
+                $viewer->assign('QUALIFIED_MODULE', $moduleName);
+                $viewer->assign('USERID', $userId);
+                $viewer->assign('EDU_ID', $edu_id);
+                $viewer->assign('INSTITUTION_LIST', $InstutionList);
+                $viewer->assign('MAJOR_LIST', $MajorList);
+                $viewer->assign('CURRENT_USER_MODEL', $userRecordModel);
+                $viewer->assign('CURRENTYEAR', date('Y'));
+                $viewer->assign('STARTDATEFIELD', $startDateField);
+                $viewer->assign('ENDDATEFIELD', $endDateField);
+                $viewer->assign('VALIDATOR', $validator);
+              
+                $viewer->assign('EDUCATION_DETAIL', $educationdetailmodel);
+                $viewer->view('EditAjaxEducation.tpl', $moduleName);
+        }
 }

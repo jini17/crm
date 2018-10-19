@@ -47,29 +47,29 @@ Vtiger.Class("Users_Education_Js", {
                         	// for textarea limit
                         app.helper.showVerticalScroll(jQuery('#scrollContainer'), {setHeight:'80%'});
                         $("#institution_name").select2({formatNoMatches: function() {
-						var concatselboxNtxtbox = '"institution_name","institution_nametxt"';
-						return "<span>"+app.vtranslate('JS_NO_MATCH_FOUND')+"<a href='#' onclick=updateBox(" +concatselboxNtxtbox+ ")>"+app.vtranslate('JS_ADD_NEW')+"</a></span>";} 
-						});
+                                var concatselboxNtxtbox = '"institution_name","institution_nametxt"';
+                                return "<span>"+app.vtranslate('JS_NO_MATCH_FOUND')+"<a href='#' onclick=updateBox(" +concatselboxNtxtbox+ ")>"+app.vtranslate('JS_ADD_NEW')+"</a></span>";} 
+                                });
 
-					$("#areaofstudy").select2({formatNoMatches: function() {
-						var concatselboxNtxtbox = '"areaofstudy","areaofstudytxt"';
-						return "<span>"+app.vtranslate('JS_NO_MATCH_FOUND')+"<a href='#' onclick=updateBox(" +concatselboxNtxtbox+ ")>"+app.vtranslate('JS_ADD_NEW')+"</a></span>";} 
-						});
-					
-					var currentstudycheck =  form.find('.currentstudying');
-					currentstudycheck.on('change',function(e){ 
-						var elem = jQuery(e.currentTarget);
-						if(elem.is(':checked')) {
-							jQuery('#enddate_div').addClass('hide');
-						}else{
-							jQuery('#enddate_div').removeClass('hide').show();
-						}
-					});
+                        $("#areaofstudy").select2({formatNoMatches: function() {
+                                var concatselboxNtxtbox = '"areaofstudy","areaofstudytxt"';
+                                return "<span>"+app.vtranslate('JS_NO_MATCH_FOUND')+"<a href='#' onclick=updateBox(" +concatselboxNtxtbox+ ")>"+app.vtranslate('JS_ADD_NEW')+"</a></span>";} 
+                                });
+
+                        var currentstudycheck =  form.find('.currentstudying');
+                        currentstudycheck.on('change',function(e){ 
+                                var elem = jQuery(e.currentTarget);
+                                if(elem.is(':checked')) {
+                                        jQuery('#enddate_div').addClass('hide');
+                                }else{
+                                        jQuery('#enddate_div').removeClass('hide').show();
+                                }
+                        });
 
                          form.submit(function(e) { 
                             e.preventDefault();
                          })
-					var params = {
+    var params = {
                             submitHandler : function(form){
                                 var form = jQuery('#editEducation');   
                                 thisInstance.saveEducationDetails(form);
@@ -83,37 +83,37 @@ Vtiger.Class("Users_Education_Js", {
 	     return aDeferred.promise();	
 	},
      updateEducationGrid : function(userid) { 
-			var params = {
-					'module' : app.getModuleName(),
-					'view'   : 'ListViewAjax',
-					'record' : userid,		
-					'mode'   : 'getUserEducation',
-				}
-				app.request.post({'data':params}).then(
-					function(err, data) {
-						jQuery('#education').html(data);
-					},
-					
-					function(error,err){
-						aDeferred.reject();
-					}
-				);
+                    var params = {
+                                    'module' : app.getModuleName(),
+                                    'view'   : 'ListViewAjax',
+                                    'record' : userid,		
+                                    'mode'   : 'getUserEducation',
+                            }
+                            app.request.post({'data':params}).then(
+                                    function(err, data) {
+                                            jQuery('#education').html(data);
+                                    },
+
+                                    function(error,err){
+                                            aDeferred.reject();
+                                    }
+                            );
 	},
 	
-	deleteEducation : function(deleteRecordActionUrl) { 
-		var message = app.vtranslate('JS_DELETE_EDUCATION_CONFIRMATION');
-		var thisInstance = this;
-		var userid = jQuery('#recordId').val();
-		app.helper.showConfirmationBox({'message' : message}).then(function(e) {
-		
-          	app.request.post({url:deleteRecordActionUrl}).then(
-          	     function(data){
-				      app.helper.showSuccessNotification({'message': 'Record deleted successfully'});
-				     //delete the Education details in the list
-				     thisInstance.updateEducationGrid(userid);
-			     }
-		     );
-	     });
+    deleteEducation : function(deleteRecordActionUrl) { 
+            var message = app.vtranslate('JS_DELETE_EDUCATION_CONFIRMATION');
+            var thisInstance = this;
+            var userid = jQuery('#recordId').val();
+            app.helper.showConfirmationBox({'message' : message}).then(function(e) {
+
+            app.request.post({url:deleteRecordActionUrl}).then(
+                 function(data){
+                                  app.helper.showSuccessNotification({'message': 'Record deleted successfully'});
+                                 //delete the Education details in the list
+                                 thisInstance.updateEducationGrid(userid);
+                         }
+                 );
+         });
      },
 
      saveEducationDetails : function(form){

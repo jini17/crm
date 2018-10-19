@@ -31,16 +31,49 @@
         left: 100%;
         margin-top: -1px;
     }
-    .searchoption a{
+  .searchoption a{
             padding: 0 !important;
             height: 33px !important;
-            margin-top: 3px !important;
+            margin-top: 4px !important;
+           background-color: #2f5597 !important;
+            color: #fff !important;
+            border-radius: 3px !important;
+            border: 0 !important;
     }
+      .searchoption .select2-container .select2-choice .select2-arrow {
+        color: #fff !important;
+      }
     
+     .searchoption .select2-highlighted{
+       background-color: #2f5597 !important;
+     }
+    .select2-container .select2-choice .select2-arrow {
+{*    background-image: -khtml-gradient(linear, left top, left bottom, from(#424242), to(#030303));
+    background-image: -moz-linear-gradient(top, #424242, #030303);
+    background-image: -ms-linear-gradient(top, #424242, #030303);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #424242), color-stop(100%, #030303));
+    background-image: -webkit-linear-gradient(top, #424242, #030303);
+    background-image: -o-linear-gradient(top, #424242, #030303);
+    background-image: linear-gradient(#424242, #030303);*}
+    width: 40px;
+    color: #fff;
+    font-size: 1.3em;
+    padding: 4px 12px;
+}
+.select2-container .select2-choice {
+    height: 41px; /* Jobsy form controls have 37px total height */
+    border: 2px solid #bdc3c7;
+    border-radius: 6px;
+    outline: none;
+   
+color: #34495e;
+}
+
 </style>
 <script type="text/javascript">
     jQuery(document).ready(function(){
-
+$('.searchoption #s2id_searchModuleList').find('.select2-choice').find('.select2-arrow').find('b').remove();
+$('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !important;"></i>');
         jQuery('.menu-open').on('hover',function(){
 
          jQuery('.app-navigator-container').find('.dropdown-menu.fask').css('display','block');

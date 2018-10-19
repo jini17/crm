@@ -11,7 +11,7 @@ $languageStrings = array(
 	'LBL_PAYMENTS_INFORMATION' => 'Payment Information',
 	'LBL_BILLING_INFORMATION' => 'Billing Information',
 	'LBL_REMARKS_DESCRIPTION' => 'Remark Information',
-	'SINGLE_Payments' =>'Payment',
+	'SINGLE_Payments' =>'Payments',
 
 	'Select Bill' => 'Select Bill',
 	'Payment Ref' => 'Payment Ref',

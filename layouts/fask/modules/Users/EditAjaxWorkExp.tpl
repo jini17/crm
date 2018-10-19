@@ -177,8 +177,8 @@
                                                 </div>	
                                                 <div class="controls date col-md-8">
                                                           <label><input type="radio" {if $WORKEXP_DETAIL.isview eq '0'} checked {/if} name='chkviewable' value="0" />{$WORKEXP_DETAIL.isview}&nbsp; {vtranslate('LBL_PUBLIC', $QUALIFIED_MODULE)} </label>&nbsp; 
-                                                     <label><input type="radio"{if $WORKEXP_DETAIL.isview eq 1} checked {/if} name='chkviewable' value="1" />&nbsp; {vtranslate('LBL_PRIVATE', $QUALIFIED_MODULE)} </label>&nbsp; 
-                                                      <label><input type="radio" {if $WORKEXP_DETAIL.isview eq 2} checked {/if} name='chkviewable' value="2" />&nbsp; {vtranslate('LBL_PROTECTED', $QUALIFIED_MODULE)} </label>
+                                                     <label><input type="radio"{if $WORKEXP_DETAIL.isview eq '1'} checked {/if} name='chkviewable' value="1" />&nbsp; {vtranslate('LBL_PRIVATE', $QUALIFIED_MODULE)} </label>&nbsp; 
+                                                      <label><input type="radio" {if $WORKEXP_DETAIL.isview eq '2'} checked {/if} name='chkviewable' value="2" />&nbsp; {vtranslate('LBL_PROTECTED', $QUALIFIED_MODULE)} </label>
 {*                                                          <input type="checkbox" {(''==$UW_ID)?'checked':''} name="chkviewable" id="chkviewable" {if $WORKEXP_DETAIL.isview eq 1} checked {/if}>
 *}                                                </div>	
                                         </div>
