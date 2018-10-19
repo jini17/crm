@@ -49,6 +49,7 @@ $languageStrings = array(
     'LBL_DEPARTMENT' => 'Department',
     'LBL_DESIGNATION' => 'Designation',
 	'LBL_LEAVE_APPROVAL'=>'My Team Leave Approval',
+
 	'LBL_NOT_FOUND'       => 'Not Found',
 	'LBL_WORKING_AS'  => 'Working as',
 	'LBL_OF_JOB' => 'Job',
@@ -62,7 +63,7 @@ $languageStrings = array(
 	'LBL_GOOD_DAY' => 'Good Day',
 	'User'=>'Employee',
     'Bill'=> 'Office Bill'                
-   
+ 
 );
 
 $jsLanguageStrings = array(
