@@ -31,7 +31,7 @@ $CALENDAR_DISPLAY = 'true';
 $USE_RTE = 'true';
 
 // helpdesk support email id and support name (Example: 'support@vtiger.com' and 'vtiger support')
-$HELPDESK_SUPPORT_EMAIL_ID = 'jitu@seconcrm.com';
+$HELPDESK_SUPPORT_EMAIL_ID = '_USER_SUPPORT_EMAIL_';
 $HELPDESK_SUPPORT_NAME = 'your-support name';
 $HELPDESK_SUPPORT_EMAIL_REPLY_ID = $HELPDESK_SUPPORT_EMAIL_ID;
 
@@ -44,18 +44,13 @@ $HELPDESK_SUPPORT_EMAIL_REPLY_ID = $HELPDESK_SUPPORT_EMAIL_ID;
       db_name
 */
 
-$dbconfig['db_server'] = '13.251.26.243';
-$dbconfig['db_port'] = ':33060';
-$dbconfig['db_username'] = 'development';
-$dbconfig['db_password'] = 'Dev123$%^)';
-$dbconfig['db_name'] = 'agiliuxv2';
-$dbconfig['db_cp'] = 'agiliux_cp';
-<<<<<<< HEAD
-$dbconfig['db_type'] = 'mysqli';
-=======
-$dbconfig['db_type'] = 'mysql';
->>>>>>> 42c184ee4dfc60c433d9470dd4563f558d4ebcfc
-$dbconfig['db_status'] = 'true';
+$dbconfig['db_server'] = '_DBC_SERVER_';
+$dbconfig['db_port'] = ':_DBC_PORT_';
+$dbconfig['db_username'] = '_DBC_USER_';
+$dbconfig['db_password'] = '_DBC_PASS_';
+$dbconfig['db_name'] = '_DBC_NAME_';
+$dbconfig['db_type'] = '_DBC_TYPE_';
+$dbconfig['db_status'] = '_DB_STAT_';
 
 // TODO: test if port is empty
 // TODO: set db_hostname dependending on db_type
@@ -84,25 +79,24 @@ $dbconfigoption['ssl'] = false;
 
 $host_name = $dbconfig['db_hostname'];
 
-$site_URL = 'http://192.168.2.20/agiliux/';
+$site_URL = '_SITE_URL_';
 
 // url for customer portal (Example: http://vtiger.com/portal)
 $PORTAL_URL = $site_URL.'/customerportal';
 // root directory path
-$root_directory = '/var/www/html/agiliux/';
-$short_url = '192.168.2.20';
+$root_directory = '_VT_ROOTDIR_';
 
 // cache direcory path
-$cache_dir = 'cache/';
+$cache_dir = '_VT_CACHEDIR_';
 
 // tmp_dir default value prepended by cache_dir = images/
-$tmp_dir = 'cache/images/';
+$tmp_dir = '_VT_TMPDIR_';
 
 // import_dir default value prepended by cache_dir = import/
 $import_dir = 'cache/import/';
 
 // upload_dir default value prepended by cache_dir = upload/
-$upload_dir = 'cache/upload/';
+$upload_dir = '_VT_UPLOADDIR_';
 
 // maximum file size for uploaded files in bytes also used when uploading import files
 // upload_maxsize default value = 3000000
@@ -148,15 +142,15 @@ $default_password = '';
 $create_default_user = false;
 
 //Master currency name
-$currency_name = 'USA, Dollars';
+$currency_name = '_MASTER_CURRENCY_';
 
 // default charset
 // default charset default value = 'UTF-8' or 'ISO-8859-1'
-$default_charset = 'UTF-8';
+$default_charset = '_VT_CHARSET_';
 
 // default language
 // default_language default value = en_us
-$default_language = 'en_us';
+$default_language = '_VT_DEFAULT_LANGUAGE_';
 
 //Option to hide empty home blocks if no entries.
 $display_empty_home_blocks = false;
@@ -165,7 +159,7 @@ $display_empty_home_blocks = false;
 $disable_stats_tracking = false;
 
 // Generating Unique Application Key
-$application_unique_key = '79d54e9634a2d41fabba5061394472d0';
+$application_unique_key = '_VT_APP_UNIQKEY_';
 
 // trim descriptions, titles in listviews to this value
 $listview_max_textlength = 40;
@@ -174,21 +168,15 @@ $listview_max_textlength = 40;
 $php_max_execution_time = 0;
 
 // Set the default timezone as per your preference
-$default_timezone = 'Asia/Kuala_Lumpur';
+$default_timezone = 'UTC';
 
 /** If timezone is configured, try to set it */
 if(isset($default_timezone) && function_exists('date_default_timezone_set')) {
 	@date_default_timezone_set($default_timezone);
 }
 
-
-$con = new mysqli($dbconfig['db_server'], $dbconfig['db_username'], $dbconfig['db_password'], $dbconfig['db_cp'], '33060');
-if (!$con) {
-    die('Could not connect to'.$dbconfig['db_cp'].': ' . mysql_error());
-}
-
 //Set the default layout 
-$default_layout = 'v7';
+$default_layout = 'flask';
 
 include_once 'config.security.php';
 ?>

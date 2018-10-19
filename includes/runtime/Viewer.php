@@ -12,7 +12,7 @@ vimport ('~/libraries/Smarty/libs/SmartyBC.class.php');
 
 class Vtiger_Viewer extends SmartyBC {
 
-	const DEFAULTLAYOUT = 'fask';
+	const DEFAULTLAYOUT = 'v7';
 	const DEFAULTTHEME  = 'softed';
 	static $currentLayout;
 	

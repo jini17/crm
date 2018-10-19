@@ -8,6 +8,13 @@
  * All Rights Reserved.
  ************************************************************************************/
 
+<<<<<<< HEAD
+
+/*
+error_reporting(1);
+		ini_set('display_erros',1);
+=======
+>>>>>>> 42c184ee4dfc60c433d9470dd4563f558d4ebcfc
 
 /*error_reporting(1);
 		ini_set('display_erros',1);
@@ -23,8 +30,12 @@
 
 		       }
 
+<<<<<<< HEAD
+		    } */
+=======
 		    }
 */
+>>>>>>> 42c184ee4dfc60c433d9470dd4563f558d4ebcfc
 //Overrides GetRelatedList : used to get related query
 //TODO : Eliminate below hacking solution
 ini_set('display_errors', '0');     # don't show any errors...
