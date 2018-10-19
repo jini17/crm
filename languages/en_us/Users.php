@@ -387,7 +387,7 @@ $languageStrings = array(
 'LBL_PROBLEM_IN_DELETION' => 'Either record is not exist/Server Problem',
 'LBL_START_DATE'=>'Start Date',
 'LBL_END_DATE'=>'End Date',
-'LBL_TILL_NOW'=>'Till Now',
+'LBL_TILL_NOW'=>'Present',
 'LBL_TO'=>'to',
 'LBL_EDIT_WORKEXP'=>'Edit Work Experience',
 'LBL_WORKEXP_UPDATE_SUCCESS' =>'Work Experience updated successfully',
@@ -492,15 +492,12 @@ $languageStrings = array(
 'LBL_RELATIONSHIP'=>'Relationship',
 'LBL_MOBILE'=>'Mobile',
 'LBL_OFFICE_PH'=>'Office Phone',
-'LBL_PUBLIC'=>'Public',
 'LBL_FATHER'=> 'Father',	
 'LBL_MOTHER'=> 'Mother',
 'LBL_SISTER'=> 'Sister',
 'LBL_BROTHER'=> 'Brother',
 'LBL_FRIEND'=> 'Friend',
-
 'LBL_SELECT'=>'Select anyone',
-
 //Leave Section add by jitu@secondcrm.com on 24-12-2014
 'LBL_ACTION' => 'Action',
 'LBL_LEAVE_STATUS' => 'Leave Status',

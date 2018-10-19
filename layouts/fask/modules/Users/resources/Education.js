@@ -127,14 +127,14 @@ Vtiger.Class("Users_Education_Js", {
           var chkboxstudying = chkboxval;//$('#chkstudying').is(':checked')?'1':'0';
           var formData = form.serializeFormData();
           var params = {
-				'module': 'Users',
-				'action': "SaveSubModuleAjax",
-				'mode'  : 'saveEducation',
-				'form' : formData,
-				'isview' : chkboxval,
-				'is_studying':chkboxstudying
-			};	
-				
+                        'module': 'Users',
+                        'action': "SaveSubModuleAjax",
+                        'mode'  : 'saveEducation',
+                        'form' : formData,
+                        'isview' : chkboxval,
+                        'is_studying':chkboxstudying
+                };	
+
          app.request.post({'data': params}).then(function (err, data) {     
               app.helper.hideProgress();
                //show notification after Education details saved
