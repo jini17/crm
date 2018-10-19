@@ -31,19 +31,19 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 
 
                 $myDetails                               = array();
-                $myDetails['fullname']         = $current_user->get('first_name')." ".$current_user->get('last_name');
-                $myDetails['designation']   = $current_user->get('title');
-                $myDetails['department']  = $current_user->get('department');
-                $myDetails['email']              = $current_user->get('email1');
-                    $date1 = new DateTime($current_user->get('date_joined'));
-                   $date2 = new DateTime(date('d-m-Y'));
-                    $diff = $date2->diff($date1)->format("%a");
+                $myDetails['fullname']          = $current_user->get('first_name')." ".$current_user->get('last_name');
+                $myDetails['designation']     = $current_user->get('title');
+                $myDetails['department']    = $current_user->get('department');
+                $myDetails['email']                = $current_user->get('email1');
+                $date1                                      = new DateTime($current_user->get('date_joined'));
+                $date2                                      = new DateTime(date('d-m-Y'));
+                 $diff                                          = $date2->diff($date1)->format("%a");
                     
-                    $barthday_start = new DateTime(date('md'));
-                  $birthday_end    = new DateTime(date('md'));
-                  $diff_birthday     = $birthday_end->diff($barthday_start)->format("%a");
+                    $barthday_start  = new DateTime(date('md'));
+                  $birthday_end       = new DateTime(date('md'));
+                  $diff_birthday        = $birthday_end->diff($barthday_start)->format("%a");
                                  
-                 $myDetails['joindate'] = $diff ;         
+                 $myDetails['joindate']         = $diff ;         
                  $myDetails['birthday']        =  $diff_birthday ;
                  $myDetails['facebook']       = $current_user->get('facebook');
                  $myDetails['twitter']          = $current_user->get('twitter');
