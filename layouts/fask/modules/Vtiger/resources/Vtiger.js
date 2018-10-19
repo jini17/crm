@@ -412,18 +412,16 @@ Vtiger.Class('Vtiger_Index_Js', {
 			var container 		= jQuery(jQuery(this).find('a').data('parent'));//jQuery('#accordion_mobile, #accordion');
 			var element   		= jQuery(this).find('.indicator');
 			var links     		= container.find('a');
-			var notCollapsed 	= element.hasClass('ti-angle-right');    
-                                                             
-                                                            
-                         
+			    
+                        
 			links.each(function() {
-                                                                    jQuery(this).find('.indicator').removeClass('ti-angle-down').addClass('ti-angle-right').closest('a').removeClass('btn-primary text-white');
-                                                             });				
-
+                    jQuery(this).find('.indicator').removeClass('ti-angle-down').addClass('ti-angle-right').closest('a').removeClass('btn-primary text-white');
+               });				
+               var notCollapsed 	= element.hasClass('ti-angle-right');
 			if (notCollapsed){
-                                                                        element.closest('a').addClass('btn-primary text-white');
-                                                                        element.removeClass('ti-angle-right').addClass('ti-angle-down');
-                                                                } 
+                    element.closest('a').addClass('btn-primary text-white');
+                    element.removeClass('ti-angle-right').addClass('ti-angle-down');
+               } 
 
 		});
 
