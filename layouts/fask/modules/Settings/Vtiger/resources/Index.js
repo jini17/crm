@@ -174,9 +174,9 @@ Vtiger_Index_Js("Settings_Vtiger_Index_Js",{
 	// Added By Mabruk For Fask Skin
 	registerAccordionEvents : function() { 
 
-		     jQuery('.settingsgroup-accordion').click( function() { 
+		jQuery('.settingsgroup-accordion').click( function() { 
 
-			var container 		= jQuery(jQuery(this).find('a').data('parent'));//jQuery('#accordion_mobile, #accordion');
+			var container 		= jQuery(jQuery(this).find('a').data('parent'));
 			var element   		= jQuery(this).find('.indicator');
 			var links     		= container.find('a');
 			var notCollapsed 	= element.hasClass('ti-angle-right');    
