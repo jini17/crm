@@ -202,6 +202,13 @@ class Vtiger_Import_View extends Vtiger_Index_View {
 			$moduleMeta = $moduleModel->getModuleMeta();
 
 			$mandatoryFields = $moduleMeta->getMandatoryFields($moduleName);
+
+			//skip password / confirm password field 
+			if($moduleName=='Users') {
+				unset($mandatoryFields['user_password']);
+				unset($mandatoryFields['confirm_password']);
+			} //end here
+			
 			$inventoryModules = getInventoryModules();
 			if($moduleName == 'Calendar' && !array_key_exists('activitytype', $mandatoryFields)){
 				$mandatoryFields['activitytype'] = vtranslate('Activity Type',$moduleName);
