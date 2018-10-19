@@ -381,8 +381,8 @@ Vtiger.Class('Vtiger_Index_Js', {
                                 if(err === null){ 
                                         app.helper.loadPageOverlay(data,{'ignoreScroll' : false,'backdrop': 'static'}).then(function(){
                                                 app.helper.hideProgress();
-                                        //	jQuery('div[name="contents"]').find('.data').css('height','50vh');
-                                        //	var taskManagementPageOffset = jQuery('div[name="contents"]').offset();
+                                        //  jQuery('div[name="contents"]').find('.data').css('height','50vh');
+                                        //  var taskManagementPageOffset = jQuery('div[name="contents"]').offset();
                                                 //$('#overlayPage').find(".arrow").css("left",taskManagementPageOffset.left+13);
                                                 //$('#overlayPage').find(".arrow").addClass("show");
                                         });
@@ -392,7 +392,7 @@ Vtiger.Class('Vtiger_Index_Js', {
                                 }
 
                         });
-                });				
+                });             
         }, //end 
 
         // Function to hide Create new Document Mabruk
@@ -400,32 +400,38 @@ Vtiger.Class('Vtiger_Index_Js', {
 
                 if (app.getModuleName() == "Documents") {
                         jQuery('#createDocument').prev().hide();
-                        jQuery('#createDocument').hide();			
-                }	
+                        jQuery('#createDocument').hide();           
+                }   
 
         },
         // Added By Mabruk For Fask Skin
-	registerAccordionEvents : function() { 
+        registerAccordionEvents : function() { 
 
-		     jQuery('.settingsgroup-accordion').click( function() { 
+            jQuery('.settingsgroup-accordion').click( function() { 
 
-			var container 		= jQuery(jQuery(this).find('a').data('parent'));//jQuery('#accordion_mobile, #accordion');
-			var element   		= jQuery(this).find('.indicator');
-			var links     		= container.find('a');
-			    
+            var container       = jQuery(jQuery(this).find('a').data('parent'));
+            var element         = jQuery(this).find('.indicator');
+            var links           = container.find('a');
+                
                         
-			links.each(function() {
-                    jQuery(this).find('.indicator').removeClass('ti-angle-down').addClass('ti-angle-right').closest('a').removeClass('btn-primary text-white');
-               });				
-               var notCollapsed 	= element.hasClass('ti-angle-right');
-			if (notCollapsed){
+            links.each(function() {
+
+                jQuery(this).find('.indicator').removeClass('ti-angle-down').addClass('ti-angle-right').closest('a').removeClass('btn-primary text-white');
+
+            });             
+
+            var notCollapsed    = element.hasClass('ti-angle-right');
+
+            if (notCollapsed){
+
                     element.closest('a').addClass('btn-primary text-white');
                     element.removeClass('ti-angle-right').addClass('ti-angle-down');
-               } 
 
-		});
+            } 
 
-	},
+        });
+
+    },
         
         registerEvents: function() {
                 this.registerAccordionEvents();// By Mabruk
@@ -444,7 +450,7 @@ Vtiger.Class('Vtiger_Index_Js', {
                 this.registerMultiUpload();
                 this.registerHoverEventOnAttachment();
                 //this.addBodyScroll();
-                this.triggerGetHelp();	//added by jitu@salespeer for Context Help	
+                this.triggerGetHelp();  //added by jitu@salespeer for Context Help  
 
                 this.mentionerCallBack();
                 this.modulesMenuScrollbar();
@@ -733,9 +739,9 @@ Vtiger.Class('Vtiger_Index_Js', {
                         var appMenu = jQuery('.app-menu');
                         var appNav = jQuery('.app-nav');
 
-                        $('.dropdown').removeClass('open');	
+                        $('.dropdown').removeClass('open'); 
                         $('.app-item').removeClass('active-app-item');
-                        $(".menu-items-wrapper .app-name").show();	
+                        $(".menu-items-wrapper .app-name").show();  
 
                         currentApp = false;
 
@@ -804,7 +810,7 @@ Vtiger.Class('Vtiger_Index_Js', {
 
                 jQuery('.app-item').on('click', function(e) {
 
-                        var url = jQuery(this).data('defaultUrl');			
+                        var url = jQuery(this).data('defaultUrl');          
                         var dropdownContainer = jQuery(e.currentTarget);
                         var targetApp = jQuery(this).data("app-name");
 
@@ -812,21 +818,21 @@ Vtiger.Class('Vtiger_Index_Js', {
                         if(url && ((window.innerWidth>=500 && !isTouch)||(dropdownContainer.data("toggle")!="dropdown" && currentApp===false))) {
                                 window.location.href = url;
                         }
-                        else {	
+                        else {  
 
-                                $('.dropdown').removeClass('open');	
+                                $('.dropdown').removeClass('open'); 
                                 $('.app-item').removeClass('active-app-item');
-                                $(".menu-items-wrapper .app-name").show();					
+                                $(".menu-items-wrapper .app-name").show();                  
 
                                 if(currentApp && (targetApp==currentApp||dropdownContainer.data("toggle")!="dropdown")){
                                         currentApp = false;
                                         e.preventDefault();
-                                        e.stopPropagation();					
+                                        e.stopPropagation();                    
                                         return;
-                                }				
+                                }               
                                 else{
                                         if(dropdownContainer.length) {
-                                                dropdownContainer.addClass('open').find('.app-item').addClass('active-app-item');						
+                                                dropdownContainer.addClass('open').find('.app-item').addClass('active-app-item');                       
                                                 currentApp=targetApp;
                                         }
                                 }
@@ -884,9 +890,9 @@ Vtiger.Class('Vtiger_Index_Js', {
                 jQuery('#adv-search').on('click',function(e){
                         var advanceSearchInstance = new Vtiger_AdvanceSearch_Js();
                         advanceSearchInstance.advanceSearchTriggerIntiatorHandler();
-//			advanceSearchInstance.initiateSearch().then(function() {
-//				advanceSearchInstance.selectBasicSearchValue();
-//			});
+//          advanceSearchInstance.initiateSearch().then(function() {
+//              advanceSearchInstance.selectBasicSearchValue();
+//          });
                 });
         },
 
@@ -917,7 +923,7 @@ Vtiger.Class('Vtiger_Index_Js', {
                                                                 jQuery(inputElement).val('');
                                                                 serverDataFormat = new Array({
                                                                                 'label' : 'No Results Found',
-                                                                                'type'	: 'no results'
+                                                                                'type'  : 'no results'
                                                                 });
                                                 }
                                                 for(var id in serverDataFormat){
@@ -930,7 +936,7 @@ Vtiger.Class('Vtiger_Index_Js', {
                                         jQuery(inputElement).val('');
                                         serverDataFormat = new Array({
                                                 'label' : 'No Results Found',
-                                                'type'	: 'no results'
+                                                'type'  : 'no results'
                                         });
                                         response(serverDataFormat);
                                 }
@@ -1063,12 +1069,12 @@ Vtiger.Class('Vtiger_Index_Js', {
                                 for(var valuekey in value){
                                         if(valuekey == 'name') continue;
                                         if(typeof valuekey == 'object') continue;
-//					var referenceModule = value[valuekey].module;
-//					if(typeof referenceModule == "undefined") {
-//						referenceModule = value.module;
-//					}
-//					if(parentElem.find('[name="popupReferenceModule"]').val() != referenceModule) continue;
-//					
+//                  var referenceModule = value[valuekey].module;
+//                  if(typeof referenceModule == "undefined") {
+//                      referenceModule = value.module;
+//                  }
+//                  if(parentElem.find('[name="popupReferenceModule"]').val() != referenceModule) continue;
+//                  
                                         var data = {
                                                 'name' : value.name,
                                                 'id' : key
@@ -1698,7 +1704,7 @@ Vtiger.Class('Vtiger_Index_Js', {
                                                                                 if(jQuery.inArray(datavalue[key].module, completedValues) === -1) {
                                                                                         completedValues.push(datavalue[key].module);
                                                                                         thisInstance.confirmAndFillDetails(referenceContainer[key], dataList, message);
-                                                                                }		 
+                                                                                }        
                                                                 } else {
                                                                                 thisInstance.setReferenceFieldValue(referenceContainer[key], dataList);
                                                                 }
@@ -1766,7 +1772,7 @@ $(function(){
                 }
                 else{
                         $(this).attr("aria-expanded",true);
-                        $(this).parent().addClass("open");			
+                        $(this).parent().addClass("open");          
                         $(".main-container, .dashBoardContainer").addClass("blurredContent");
                 }
 
@@ -1912,7 +1918,7 @@ function mycOpenLeftSidebar(){
 
         if(window.innerWidth<=900){
                 $(".left-sidebar").css("width","220px");
-                $("#appnavigator").css("left","220px");		
+                $("#appnavigator").css("left","220px");     
                 //$(".left-sidebar").animate({ "width": "220px" }, "fast" );
         }
         else{
@@ -1922,7 +1928,7 @@ function mycOpenLeftSidebar(){
         }
         //$("#page, .app-fixed-navbar").css("margin-left","240px");
         $(".with-childs").find("ul").css("padding-left","0px");
-        $("#appnavigator").css("position","fixed");	
+        $("#appnavigator").css("position","fixed"); 
         $("#appnavigator").css("z-index","99");
         $(".app-navigator").css("padding","5px");
 

@@ -1793,11 +1793,15 @@ class Users extends CRMEntity {
 
         function createRecords($obj) {
                 $adb = PearDatabase::getInstance();
-                $moduleName = $obj->module;
-                $createdRecords = array();
 
+               // $adb->setDebug(true);
+                $moduleName = $obj->module;
+                $moduleInstance = Vtiger_Module_Model::getInstance($moduleName);
+                $createdRecords = array();
                 $tableName = Import_Utils_Helper::getDbTableName($obj->user);
+               
                 $sql = 'SELECT * FROM '.$tableName.' WHERE status = '.Import_Data_Action::$IMPORT_RECORD_NONE;
+               
                 $result = $adb->query($sql);
                 $numberOfRecords = $adb->num_rows($result);
                 if($numberOfRecords <= 0) {
@@ -1807,6 +1811,7 @@ class Users extends CRMEntity {
                 $fieldMapping = $obj->fieldMapping;
                 $moduleModel = Vtiger_Module_Model::getInstance($moduleName);
                 $fieldInstances = Vtiger_Field_Model::getAllForModule($moduleModel);
+                
                 $allRoles = Settings_Roles_Record_Model::getAll();
                 $allCurrency = Settings_Currency_Record_Model::getAll();
                 $allLanguages = Vtiger_Language_Handler::getAllLanguages();
@@ -1827,7 +1832,7 @@ class Users extends CRMEntity {
                         $userModuleModel = Users_Module_Model::getCleanInstance('Users');
                         $status = $userModuleModel->checkDuplicateUser($importUserName);
                         if($status) {
-                                $mandatoryFlag = false;
+                            $mandatoryFlag = false;
                         }
 
                         $defaultValues = $obj->defaultValues;
@@ -1847,24 +1852,20 @@ class Users extends CRMEntity {
                                         if($fieldInstance->isMandatory()) {
                                                 $mandatoryFields[] = $fieldName;
                                         }
+
                                         if($fieldName == 'status') {
                                                 $fieldValue = 'Active';
                                         } else if($fieldName == 'theme') {
                                                 $fieldValue = 'softed';
-                                        } else if($fieldName == 'confirm_password') {
-                                                if($fieldValue != $data['user_password']) {
-                                                        $mandatoryFlag = false;
-                                                }
                                         } else if($fieldName == 'roleid') {
-                                                foreach($allRoles as $role) {							
-                                                        if(strtolower($fieldValue) == trim(strtolower($role->getName()))) {
-                                                                echo "here";
-                                                                $roleId = $role->getId();
-                                                                break;
-                                                        }
+                                                foreach($allRoles as $role) {                           
+                                                    if(strtolower($fieldValue) == trim(strtolower($role->getName()))) {
+                                                            $roleId = $role->getId();
+                                                            break;
+                                                    }
                                                 }
                                                 if(empty($roleId)) {
-                                                        $mandatoryFlag = false;
+                                                   $mandatoryFlag = false;
                                                 }
                                                 $fieldValue = $roleId;
                                                 unset($roleId);
@@ -1924,6 +1925,9 @@ class Users extends CRMEntity {
                                                 }
                                                 $fieldValue = $selectedValue;
                                                 unset($selectedValue);
+                                        } else if($fieldName == 'user_password') {
+                                             $userpassword = makeRandomPassword();
+                                             $fieldValue = $userpassword; 
                                         } else if($dataType == 'boolean') {
                                                 if(strtolower($fieldValue) == 'on' || strtolower($fieldValue) == 'yes' || $fieldValue == 1) {
                                                         if($fieldName == 'is_admin') {
@@ -1941,6 +1945,7 @@ class Users extends CRMEntity {
                                         } else if($dataType == 'email' && !empty ($fieldValue)) {
                                                 $pattern = "/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/";
                                                 if(!preg_match($pattern, $fieldValue)) {
+                                                        echo "Email pattern wrong";
                                                         $mandatoryFlag = false;
                                                 }
                                         }
@@ -1948,43 +1953,51 @@ class Users extends CRMEntity {
                                         $record[$fieldName] = $fieldValue;
                                 }
                         }
-
+                        $record['confirm_password'] = $userpassword;
+                        
                         foreach($mandatoryFields as $mandatoryField) {
                                 if(empty($record[$mandatoryField])) {
-                                        $mandatoryFlag = false;
-                                        break;
+                                    $mandatoryFlag = false;
+                                    break;
                                 }
                         }
+                            
+                           
+                        if($mandatoryFlag) { 
+                            
+                            $recordModel = Vtiger_Record_Model::getCleanInstance($moduleName);
+                            $modelData = $recordModel->getData();
+                            $recordModel->set('mode', '');
+                            foreach($modelData as $fieldName => $fieldValue) {
+                                    $recordModel->set($fieldName, $record[$fieldName]);
+                            }
+                            $recordModel->save();
+                            $plainPasswords[$recordModel->getId()] = $userpassword;
+                            $recordId = $recordModel->getId();
+                        } 
 
-                        if($mandatoryFlag) {
-                                $recordModel = Vtiger_Record_Model::getCleanInstance($moduleName);
-                                $modelData = $recordModel->getData();
-                                $recordModel->set('mode', '');
-                                foreach($modelData as $fieldName => $fieldValue) {
-                                        $recordModel->set($fieldName, $record[$fieldName]);
-                                }
-                                $recordModel->save();
-                                $plainPasswords[$recordModel->getId()] = $record['user_password'];
-                                $recordId = $recordModel->getId();
-                        }
                         if($recordId) {
                                 $createRecord = true;
                                 $createdRecords[] = $recordId;
                         }
+                   
                         $entityId = vtws_getWebserviceEntityId($moduleName, $recordId);
                         unset($recordId);
+
+
                         if($createRecord) {
-                                $entityInfo['id'] = $entityId;
-                                $entityInfo['status'] = Import_Data_Action::$IMPORT_RECORD_CREATED;
+                            $entityInfo['id'] = $entityId;
+                            $entityInfo['status'] = Import_Data_Action::$IMPORT_RECORD_CREATED;
                         } else {
-                                $entityInfo = array('id' => null, 'status' => Import_Data_Action::$IMPORT_RECORD_FAILED);
+                            $entityInfo = array('id' => null, 'status' => Import_Data_Action::$IMPORT_RECORD_FAILED);
                         }
+
 
                         $obj->importedRecordInfo[$rowId] = $entityInfo;
                         $obj->updateImportStatus($rowId, $entityInfo);
                 }
 
-                if(!empty($createdRecords)) {
+                if(count($createdRecords)>0) {
                         $recordModels = Vtiger_Record_Model::getInstancesFromIds($createdRecords, $moduleName);
                         $entityInfos = array();
                         foreach ($recordModels as $recordModel) {
@@ -1997,14 +2010,66 @@ class Users extends CRMEntity {
                         $obj->entitydata = array_merge($obj->entitydata, $entityInfos);
                 }
 
+
                 //Triggering post save events
                 if($obj->entitydata) {
+                        //send Email to all users for login details 
+                        $this->SendLoginDetails($obj->entitydata);
+
                         $entity = new VTEventsManager($adb);
                         $entity->triggerEvent('vtiger.batchevent.save', $obj->entitydata);
                 }
+
                 $obj->entitydata = null;
                 $result = null;
                 return true;
+        }
+
+        function SendLoginDetails($entityData){
+
+            global $current_user, $short_url, $short_name;
+          
+           //fetch Email Template Details
+            $template   = EmailTemplates_Record_Model::getInstanceById(40, 'Users');
+            $subject    =  $template->get('subject');
+
+            
+            $from_name  = 'New User Details';
+            $from_email = 'hr@email.com';
+            
+            $cc         = 'jitu@secondcrm.com'; 
+            $subject   = str_replace('$INSTANCENAME$', $short_name, $subject);
+            require_once 'vtlib/Vtiger/Mailer.php';
+            
+            for($i=0;$i<count($entityData);$i++){
+                $contents   =  $template->get('body');
+                $entity     = $entityData[$i];
+                $password   = $entity->focus->column_fields['user_password_plain'];
+                $user_name  = $entity->focus->column_fields['user_name'];
+                $first_name = $entity->focus->column_fields['first_name'];
+                $last_name  = $entity->focus->column_fields['last_name'];
+                $email1     = $entity->focus->column_fields['email1'];
+
+                $contents   = str_replace('$INSTANCE$', $short_name, $contents);
+                $contents   = str_replace('$users-first_name$', $first_name, $contents);
+                $contents   = str_replace('$users-last_name$', $last_name, $contents);
+                $contents   = str_replace('$INSTANCEURL$', $short_url.'/'.$short_name, $contents);
+                $contents   = str_replace('$users-user_name$', $user_name, $contents);
+                $contents   = decode_html(str_replace('$users-user_password_custom$', $password, $contents));
+                           
+                $mail = new Vtiger_Mailer();
+                $mail->IsHTML();
+                $mail->Body = $contents;
+                $mail->Subject = $subject;
+                $mail->AddAddress($email1);
+                $mail->AddAddress($cc);
+                $mail->From = 'no-reply@'.$short_name.'.com';
+                $mail->FromName = $from_name;
+                $mail->SMTPDebug =0;
+                $status = $mail->Send(true);
+                unset($mail);
+            }    
+
         }
 }
 
