@@ -171,8 +171,6 @@ Vtiger_Index_Js("Settings_Vtiger_Index_Js",{
 		$('#accordion').on('shown.bs.collapse', toggleChevron);
 	},
 
-	
-
 	registerBasicSettingsEvents : function() {
 			this.registerAccordionEvents();// By Mabruk
 			this.registerAccordionClickEvent(); 

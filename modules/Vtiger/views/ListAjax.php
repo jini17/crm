@@ -99,6 +99,8 @@ class Vtiger_ListAjax_View extends Vtiger_List_View {
 	}
 
 	public function searchAll(Vtiger_Request $request) {
+		global $adb;
+		
 		$moduleName = $request->getModule();
 		$searchValue = $request->get('value');
 		$searchModule = $request->get('searchModule');
@@ -113,13 +115,25 @@ class Vtiger_ListAjax_View extends Vtiger_List_View {
 
 		$searchableModules = Vtiger_Module_Model::getSearchableModules();
 		$matchingRecords = array();
-		foreach ($searchableModules as $searchModule => $searchModuleModel) {
+
+		//modified by jitu@search in individual module
+		if($searchModule){
 			$searchedRecords = Vtiger_Record_Model::getSearchResult($searchValue, $searchModule);
 			if ($searchedRecords[$searchModule]) {
 				$matchingRecords[$searchModule] = $searchedRecords[$searchModule];
 			}
-		}
+		}else {
+			foreach ($searchableModules as $searchModule => $searchModuleModel) {
+				$searchedRecords = Vtiger_Record_Model::getSearchResult($searchValue, $searchModule);
+				if ($searchedRecords[$searchModule]) {
+					$matchingRecords[$searchModule] = $searchedRecords[$searchModule];
+				}
+			}
 
+		}
+		//end here
+		
+		
 		$matchingRecordsList = array();
 		foreach ($matchingRecords as $module => $recordModelsList) {
 			$recordsCount = count($recordModelsList);

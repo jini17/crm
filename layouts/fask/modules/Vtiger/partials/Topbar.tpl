@@ -593,6 +593,7 @@
                                                     <option value="{$MODULE_NAME}" {if $MODULE_NAME eq $SOURCE_MODULE}selected="selected"{/if}>{vtranslate($MODULE_NAME,$MODULE_NAME)}</option>
                                                 {/foreach}
                                             </select>
+                                            &nbsp;&nbsp;&nbsp;
                                         </li>
 
                                         <li style="width: 250px;">

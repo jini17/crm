@@ -6,15 +6,12 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  *************************************************************************************/
-
-Settings_Users_PreferenceDetail_Js("Settings_Users_Calendar_Js",{},{
-    
-    
-    /**
+Vtiger_Edit_Js("Faq_Edit_Js",{},{
+/**
 	 * Function load the ckeditor for signature field in edit view of my preference page.
 	 */
-	registerSignatureEvent: function(){
-		var templateContentElement = jQuery("#Users_editView_fieldName_signature");
+	registerDescriptionEvent: function(){
+		var templateContentElement = jQuery("#Faq_editView_fieldName_faq_answer");
 		if(templateContentElement.length > 0) {
 			var ckEditorInstance = new Vtiger_CkEditor_Js();
 			//Customized toolbar configuration for ckeditor  
@@ -29,14 +26,9 @@ Settings_Users_PreferenceDetail_Js("Settings_Users_Calendar_Js",{},{
 		}
 	},
 	
-    
-	/**
-	 * register Events for my preference
-	 */
-	registerEvents : function(){
-		this._super();
-		this.registerSignatureEvent();
-		Settings_Users_PreferenceEdit_Js.registerChangeEventForCurrencySeparator();
-		Settings_Users_PreferenceEdit_Js.registerNameFieldChangeEvent();
+	
+	
+	registerEvents : function() {
+	     this.registerDescriptionEvent();
 	}
 });

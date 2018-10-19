@@ -267,8 +267,7 @@ function updateSelectBox(selectbox, txtbox)
                   var place = ac.getPlace();
 
                   if (!place.geometry) {
-        
-                    console.log('You entered: ' + place.name);
+                       console.log('You entered: ' + place.name);
                     return;
                   }
 
