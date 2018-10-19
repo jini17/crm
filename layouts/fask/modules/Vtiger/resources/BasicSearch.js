@@ -131,7 +131,11 @@ Vtiger.Class('Vtiger_BasicSearch_Js',{},{
         addSearchListener : function () {
                 jQuery('.search-link .keyword-input').on('VT_SEARCH_INTIATED',function(e,args){
                         var val = args.searchValue;
-                        var url = '?module=Vtiger&view=ListAjax&mode=searchAll&value='+encodeURIComponent(val);
+                        //added by jitu@search by module 
+                        var searchmodule = jQuery("#searchModuleList").val();
+                        var url = '?module=Vtiger&view=ListAjax&mode=searchAll&searchModule='+searchmodule+'&value='+encodeURIComponent(val);
+                        //end here
+                        
                         app.helper.showProgress();
                         app.request.get({'url': url}).then(function (error, data) {
                                 if (error == null) {

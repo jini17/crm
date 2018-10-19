@@ -9,6 +9,10 @@
 
 Settings_Vtiger_List_Js("Settings_Users_List_Js",{
 
+        triggerExportAction: function (exportActionUrl) {
+		window.location.href=exportActionUrl;
+	   },   
+	   
         showTransferOwnershipForm : function() {
                 var thisInstance = this;
                 app.helper.showProgress();
