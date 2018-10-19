@@ -72,6 +72,15 @@
    .activeview{
        
    }
+ #birthdaysms  .birthday{
+    font-size: 11px !important;
+    display: block;
+    line-height: 1.6;
+    font-weight: normal !important;     
+   }
+   td .text-left .text-center{
+       text-align:  left !important;
+   }
 </style>
 
 <input type="hidden" id="listViewEntriesCount" value="{$LISTVIEW_ENTRIES_COUNT}" />
@@ -98,20 +107,12 @@
 {assign var = ALPHABETS value = ','|explode:$ALPHABETS_LABEL}
    <div class="clearfix" style="height: 20px;"></div>
   <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-12">
        
                {include file="ListViewAlphabet.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
             </div>
             <!--  Filter -->
-              <div class="col-lg-3 ">
-                  <select class="select2 grid-filter pull-right">
-                      <option value=""> {vtranslate('Filter by',$MODULE)}</option>
-                      <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
-                      <option value="B"> {vtranslate('Bithdays',$MODULE)} </option>
-                      <option value="MALE"> {vtranslate('Male Employee',$MODULE)} </option>
-                      <option value="FEMALE"> {vtranslate('Female Employee',$MODULE)} </option>
-                  </select>
-              </div>
+           
       </div>
                   <div class="clearfix"></div>
 <div class="row">
@@ -125,16 +126,17 @@
                         <thead>
                                 <tr class="listViewContentHeader">
                                         <th>
-                                            {vtranslate('LBL_ACTIONS', $QUALIFIED_MODULE)} <i class="fa fa-search pull-right" onclick="jQuery('.searchRow').toggle('slow')"></i>
+                                            {vtranslate('LBL_ACTIONS', $QUALIFIED_MODULE)}
                                         </th>
                                         {foreach item=LISTVIEW_HEADER from=$LISTVIEW_HEADERS}
+         
                                                 {if $LISTVIEW_HEADER->getName() neq 'last_name' and $LISTVIEW_HEADER->getName() neq 'email1' and $LISTVIEW_HEADER->getName() neq 'status' and $LISTVIEW_HEADER->getName() neq 'birthday'}
                                                         {if $LISTVIEW_HEADER->getName() eq 'first_name'}
                                                                 {assign var=HEADER_LABEL value='LBL_NAME_EMAIL'}
                                                         {else}
                                                                 {assign var=HEADER_LABEL value=$LISTVIEW_HEADER->get('label')}
                                                         {/if}
-                                                         {if $LISTVIEW_HEADER->getName() neq 'facebook'}
+                                                         {if $LISTVIEW_HEADER->getName() neq 'facebook' AND $LISTVIEW_HEADER->getName() neq 'date_joined'}
                                                         <th {if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')} nowrap="nowrap" {/if} >
                                                                 <a href="#" class="listViewContentHeaderValues" data-nextsortorderval="{if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')}{$NEXT_SORT_ORDER}{else}ASC{/if}" data-columnname="{$LISTVIEW_HEADER->get('name')}">
                                                                         {if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')}
@@ -148,9 +150,14 @@
                                                                         <a href="#" class="removeSorting"><i class="ti-close"></i></a>
                                                                 {/if}
                                                         </th>
+                                                        {elseif $LISTVIEW_HEADER->getName() eq 'date_joined' }
+                                                             <th {if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')} nowrap="nowrap" {/if} >
+                                                              <a href="#" class="listViewContentHeaderValues">{vtranslate('LBL_ADDITIONAL_INFO', $MODULE)}</a>&nbsp;
+                                                          </th>
                                                         {else}
                                                           <th {if $COLUMN_NAME eq $LISTVIEW_HEADER->get('name')} nowrap="nowrap" {/if} >
-                                                              <a href="#" class="listViewContentHeaderValues">{vtranslate('LBL_GET_IN_TOUCH', $MODULE)}</a>&nbsp;</th>
+                                                              <a href="#" class="listViewContentHeaderValues">{vtranslate('LBL_GET_IN_TOUCH', $MODULE)}</a>&nbsp;
+                                                          </th>
                                                         {/if}
                                                 {/if}
                                         {/foreach}
@@ -214,6 +221,7 @@
                                                                                                 <div class="usersinfo col-lg-9 textOverflowEllipsis" title="{$LISTVIEW_ENTRY->get('last_name')}">
                                                                                                         <a href="{$LISTVIEW_ENTRY->getDetailViewUrl()}">{$LISTVIEW_ENTRY->get($LISTVIEW_HEADERNAME)} {$LISTVIEW_ENTRY->get('last_name')}</a>
                                                                                                 </div>
+                                                                                                <div class="clearfix" style="height:20px;"></div>
                                                                                                 <div class="usersinfo col-lg-9 textOverflowEllipsis">
                                                                                                         {$LISTVIEW_ENTRY->get('email1')}
                                                                                                 </div>
@@ -230,24 +238,24 @@
                                                                         </span>
                                                                 </td>
                                                         {elseif $LISTVIEW_HEADER->getName() eq 'facebook' }            
-                                                            <td class="{$WIDTHTYPE}" nowrap>
+                                                            <td class="{$WIDTHTYPE} user-social" nowrap>
                                                                  {if $LISTVIEW_ENTRY->getSocialMediaLinks('facebook',$LISTVIEW_ENTRY->getId()) neq ''}  
-                                                                <a class="facebook" target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('facebook',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"><i class="fa fa-facebook"></i> </a>
+                                                                <a class="fa fa-facebook" target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('facebook',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"> </a>
                                                                 {/if}
                                                                 {if $LISTVIEW_ENTRY->getSocialMediaLinks('twitter',$LISTVIEW_ENTRY->getId()) neq ''}  
-                                                                <a class='twitter' target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('twitter',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"><i class='fa fa-twitter'></i></a>
+                                                                <a class='fa fa-twitter' target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('twitter',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"> </a>
                                                                 {/if}
                                                                  {if $LISTVIEW_ENTRY->getSocialMediaLinks('linkedin',$LISTVIEW_ENTRY->getId()) neq ''}  
-                                                                <a  class='linkedin' target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('linkedin',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"><i class='fa fa-linkedin'></i></a>
+                                                                <a  class='fa fa-linkedin' target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('linkedin',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"></a>
                                                                 {/if}
-                                                                <a  class='email-icon' href="#"  style="margin-left:5px;" onclick="javascript:Settings_Users_List_Js.birthdayEmail({$LISTVIEW_ENTRY->getId()})"><i class='fa fa-envelope'></i></a>
+                                                                <a  class='fa fa-envelope' href="#"  style="margin-left:5px;" onclick="javascript:Settings_Users_List_Js.birthdayEmail({$LISTVIEW_ENTRY->getId()})"></a>
                                                              </td>
                                                          {elseif $LISTVIEW_HEADER->getName() eq 'date_joined'}
-                                                            <td class="{$WIDTHTYPE}" nowrap>
+                                                            <td class="{$WIDTHTYPE} text-left" nowrap>
                                                              
-                                                                   {$LISTVIEW_ENTRY->getNewJoinee( $LISTVIEW_ENTRY->get('date_joined','hide'),$LISTVIEW_ENTRY->getId(),'list')}
-                                                                   <div class="clearfix"></div>
-                                                                     {$LISTVIEW_ENTRY->getBirthdayWish( $LISTVIEW_ENTRY->get('birthday'),$LISTVIEW_ENTRY->getId(),'list')}
+                                                                   {$LISTVIEW_ENTRY->getNewJoinee( $LISTVIEW_ENTRY->get('date_joined','hide'),$LISTVIEW_ENTRY->getId(),'grid')}
+                                                                   <div class="clearfix" style="height:10px;"></div>
+                                                                     {$LISTVIEW_ENTRY->getBirthdayWish( $LISTVIEW_ENTRY->get('birthday'),$LISTVIEW_ENTRY->getId(),'grid')}
                                                             </td>
                                                             {/if}
                                                   
@@ -274,7 +282,12 @@
                         </tbody>
                 </table>
         </form>
+                        
     </div>
+                        <div class='clearfix'>   </div>
+                        <div class="col-lg-12 text-center">
+                             {$PAGINATION}
+                          
     <div id="scroller_wrapper" class="bottom-fixed-scroll">
         <div id="scroller" class="scroller-div"></div>
     </div>

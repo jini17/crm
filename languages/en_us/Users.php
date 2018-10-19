@@ -57,7 +57,9 @@ $languageStrings = array(
 	'LBL_ATTACHMENTS'=>'Attachment (if any)',
 	'LBL_GET_IN_TOUCH'=>'Get In Touch',
                      'LBL_ADDITIONAL_INFO'=> 'Addtional Info',
-
+                      'LBL_JOINED' =>'Joined',
+                      'LBL_DAYS_AGO' => "Day(s) ago",
+                      'LBL_SAY_HAPPYBIRTH_DAY' => 'Say Happy Birthday',
 	//MyPreference Fields
 	'Role' => 'Role',
 	'Admin' => 'Admin',
@@ -66,7 +68,7 @@ $languageStrings = array(
 	'Default Calendar View' => 'Default Calendar View',
 	'Default Lead View' => 'Default Lead View',
 	'Title' => 'Designation',
-                   
+                     'LBL_ADDITIONAL_INFO'=> 'Additional Info',
 	'Office Phone' => 'Office Phone',
 	'Department' => 'Department',
 	'Reports To' => 'Reports To',

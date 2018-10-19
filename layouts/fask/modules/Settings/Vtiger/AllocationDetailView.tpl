@@ -47,9 +47,6 @@
                                 Leave Type
                             </td>
                             <td>
-                                Claim Type
-                            </td>
-                            <td>
                                 Grade
                             </td>
                             <td>

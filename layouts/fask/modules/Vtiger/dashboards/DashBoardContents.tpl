@@ -34,18 +34,18 @@
                 {/foreach}
 
            <div class="moreSettings pull-right col-lg-4 col-md-2 col-sm-12 col-xs-12">
-               <div class="buttonGroups pull-left">
+               <div class="buttonGroups pull-right">
                    {if $SELECTED_TAB neq 1}
-                <div class="btn-group"  {$SELECTED_TAB}>
+                <div class="btn-group pull-right"  {$SELECTED_TAB}>
                       <button class = "addNewDashBoard btn-primary btn pull-left" style='margin-right: 5px;'><i class="fa fa-edit"></i>&nbsp;{vtranslate('LBL_ADD_NEW_DASHBOARD',$MODULE)}</button> &nbsp;
                        <button class="btn btn-success updateSequence pull-right hide">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
-                      <button class = "reArrangeTabs btn-primary btn pull-right" style='margin-right: 10px;'>{vtranslate('LBL_REARRANGE_DASHBOARD_TABS',$MODULE)}</button>
+                      <button class = "reArrangeTabs btn-primary btn pull-right" style='margin-right: 0'>{vtranslate('LBL_REARRANGE_DASHBOARD_TABS',$MODULE)}</button>
                       {if $SELECTABLE_WIDGETS|count gt 0}
                                 <button class='btn btn-info addButton dropdown-toggle widget-btn' data-toggle='dropdown'>
                                         {vtranslate('LBL_ADD_WIDGET')}&nbsp;&nbsp;<i class="caret"></i>
                                 </button>
 
-                                <ul class="dropdown-menu dropdown-menu-right widgetsList pull-right animated flipInY" style="min-width:100%;text-align:left;">
+                                <ul class="dropdown-menu dropdown-menu-right widgetsList pull-right animated flipInY" style="min-width:58%;text-align:left;">
                                         {assign var="MINILISTWIDGET" value=""}
                                         {foreach from=$SELECTABLE_WIDGETS item=WIDGET}
                                                 {if $WIDGET->getName() eq 'MiniList'}
@@ -55,8 +55,10 @@
                                                 {else}
                                                         <li>
                                                                 <a onclick="Vtiger_DashBoard_Js.addWidget(this, '{$WIDGET->getUrl()}')" href="javascript:void(0);"
-                                                                        data-linkid="{$WIDGET->get('linkid')}" data-name="{$WIDGET->getName()}" data-width="{$WIDGET->getWidth()}" data-height="{$WIDGET->getHeight()}">
-                                                                        {vtranslate($WIDGET->getTitle(), $MODULE_NAME)}</a>
+                                                                        data-linkid="{$WIDGET->get('linkid')}" data-name="{$WIDGET->getName()}" data-width="{$WIDGET->getWidth()}" 
+                                                                        data-height="{$WIDGET->getHeight()}">
+                                                                        {vtranslate($WIDGET->getTitle(), $MODULE_NAME)}
+                                                                </a>
                                                         </li>
                                                 {/if}
                                         {/foreach}

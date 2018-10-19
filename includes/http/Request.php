@@ -197,13 +197,14 @@ class Vtiger_Request {
 	
 	function validateWriteAccess($skipRequestTypeCheck = false) {
         if(!$skipRequestTypeCheck) {
-            if ($_SERVER['REQUEST_METHOD'] != 'POST') throw new Exception('Invalid request');
+        	if ($_SERVER['REQUEST_METHOD'] != 'POST' && ($this->get('module') !='Users' && $this->get('action') !='ExportData')) throw new Exception('Invalid request');
         }
+
 		$this->validateReadAccess();
 		$this->validateCSRF();
 		return true;
 	}
-
+	
 	protected function validateReferer() {
         $user=  vglobal('current_user');
 		// Referer check if present - to over come 

@@ -386,7 +386,9 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 		allocation_claimrel.monthly_limit,allocation_claimrel.yearly_limit from vtiger_claimtype INNER JOIN vtiger_crmentity ON vtiger_claimtype.claimtypeid=vtiger_crmentity.crmid 
 		LEFT JOIN allocation_claimrel ON allocation_claimrel.claim_id = vtiger_claimtype.claimtypeid
 		LEFT JOIN allocation_list ON allocation_list.allocation_id = allocation_claimrel.allocation_id
-		WHERE vtiger_crmentity.deleted=0 AND allocation_list.status ='on'AND allocation_claimrel.grade_id=? AND allocation_list.allocation_year=?";
+		LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id = allocation_list.allocation_id
+		WHERE vtiger_crmentity.deleted=0 AND allocation_list.status ='on' AND allocation_graderel.grade_id=?
+		 AND allocation_list.allocation_year=?";
 
 		$result = $db->pquery($query,array($grade_id, $year));
 

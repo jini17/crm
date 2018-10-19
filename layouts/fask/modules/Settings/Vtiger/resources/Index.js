@@ -172,18 +172,31 @@ Vtiger_Index_Js("Settings_Vtiger_Index_Js",{
 	},
 
 	// Added By Mabruk For Fask Skin
+<<<<<<< HEAD
 	registerAccordionEvents : function() {
 
 		jQuery('.app-settings-accordion').click( function () {
 
 			var container 		= jQuery('#accordion_mobile');
 			var element   		= jQuery(this).find('i');
+=======
+	registerAccordionEvents : function() { 
+
+		     jQuery('.settingsgroup-accordion').click( function() { 
+
+			var container 		= jQuery(jQuery(this).find('a').data('parent'));//jQuery('#accordion_mobile, #accordion');
+			var element   		= jQuery(this).find('.indicator');
+>>>>>>> d48b33c146a8e0c05937e0b6f270e445c7f99e1e
 			var links     		= container.find('a');
 			var notCollapsed 	= element.hasClass('ti-angle-right');    
 
 			links.each(function() {
 
+<<<<<<< HEAD
 				jQuery(this).find('i').removeClass('ti-angle-down').addClass('ti-angle-right');				
+=======
+				jQuery(this).find('.indicator').removeClass('ti-angle-down').addClass('ti-angle-right');				
+>>>>>>> d48b33c146a8e0c05937e0b6f270e445c7f99e1e
 
 			});				
 
@@ -195,8 +208,13 @@ Vtiger_Index_Js("Settings_Vtiger_Index_Js",{
 	},
 
 	registerBasicSettingsEvents : function() {
+<<<<<<< HEAD
 			this.registerAccordionEvents();
 			this.registerAccordionClickEvent(); // By Mabruk
+=======
+			this.registerAccordionEvents();// By Mabruk
+			this.registerAccordionClickEvent(); 
+>>>>>>> d48b33c146a8e0c05937e0b6f270e445c7f99e1e
 			this.registerFilterSearch();
 			if(window.hasOwnProperty('Vtiger_List_Js')) {
 				var listInstance = new Vtiger_List_Js();

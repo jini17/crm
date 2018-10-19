@@ -14,12 +14,18 @@
   <div class="row entry clearfix">
         <div class='row th' style="padding:5px;margin-right:-1px;margin-left:-1px;font-size:12px;">
           <div class='col-lg-5'>
-              <strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
-
-
+              {if $GROUP neq 'customer'}
+                    <strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
+               {else}
+                    <strong>{vtranslate('LBL_CUSTOMER', $MODULE_NAME)}</strong>
+              {/if}
             </div>
              <div class='col-lg-3'>
-              <strong>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</strong>
+                   {if $GROUP neq 'customer'}
+                      <strong>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</strong>
+                {else}
+                     <strong>{vtranslate('LBL_COMPANY', $MODULE_NAME)}</strong>
+                 {/if}   
             </div>
             <div class='col-lg-4'>
                <strong>{vtranslate('LBL_BIRTHDATE', $MODULE_NAME)}</strong>

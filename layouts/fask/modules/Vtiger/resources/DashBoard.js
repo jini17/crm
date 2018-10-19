@@ -959,12 +959,14 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 		dashBoardContainer.find(".updateSequence").on("click",function(e){
 			var reArrangedList = {};
 			var currEle = jQuery(e.currentTarget);
-			jQuery(".sortable li").each(function(i,el){
+			jQuery("ul.sortable li").each(function(i,el){
 				var el = jQuery(el);
 				var tabid = el.data("tabid");
-				reArrangedList[tabid] = ++i;
+                    if(tabid !='undefined')
+     				reArrangedList[tabid] = ++i;
+     				
 			});
-
+               
 			var data = {
 				"module"   : "Vtiger",
 				"action"   : "DashBoardTab",

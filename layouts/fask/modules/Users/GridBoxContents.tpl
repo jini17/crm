@@ -8,7 +8,7 @@
       padding:20px 10px;
       border: 1px solid #ddd;
       background: #fff;
-      min-height: 360px;
+      min-height: 371px;
       margin-top: 20px;
       margin-bottom: 20px;
     }
@@ -89,7 +89,7 @@
 <div style="min-height:450px;">
  
    <div class="row">
-        <div class="col-lg-12">
+       <div class="col-lg-12" style="padding:0;">
             {foreach  item=LISTVIEW_ENTRY from=$LISTVIEW_ENTRIES }
                     {assign var=birthday value=$LISTVIEW_ENTRY->getBirthdayWish($LISTVIEW_ENTRY->get('birthday'),$LISTVIEW_ENTRY->getId(),'grid')}
                      {assign var=joinee value=$LISTVIEW_ENTRY->getNewJoinee($LISTVIEW_ENTRY->get('date_joined'),$LISTVIEW_ENTRY->getId(),'grid')}
@@ -100,15 +100,13 @@
                            {assign var=IMAGE_DETAILS value=$LISTVIEW_ENTRY->getImageDetails()}
                                 {foreach item=IMAGE_INFO from=$IMAGE_DETAILS}
 	                 {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
-                             <img width="110" height='110' class="img-circle"  style="display:block; margin:0 auto;"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
-                                        {/if}
+                                             <img width="110" height='110' class="img-circle"  style="display:block; margin:0 auto;"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
+                                       {/if}
 
                                 {/foreach}
-                                {if $IMAGE_DETAILS[0]['id'] eq null}
-
-                                    <img width="110" height='110' class="img-circle"  style="display:block; margin:0 auto;" src="{vimage_path('DefaultUserIcon.png')}">
-
-                                {/if}
+                                        {if $IMAGE_DETAILS[0]['id'] eq null}
+                                            <img width="110" height='110' class="img-circle"  style="display:block; margin:0 auto;" src="{vimage_path('DefaultUserIcon.png')}">
+                                        {/if}
                         </div>
                         <div class="user-meta text-center">
                             <h4 class="username text-center">								
@@ -125,10 +123,9 @@
                                 
                         <div class='user-social text-center'>
                             <a href="#" class="fa fa-facebook"></a>
-                            <a href="#" class="fa fa-twitter"></a>
-                            <a href="#" class="fa fa-linkedin"></a>
+                            <a href="{$LISTVIEW_ENTRY->get('twitter')}" class="fa fa-twitter"></a>
+                            <a href="{$LISTVIEW_ENTRY->get('linkedin')}" class="fa fa-linkedin"></a>
                             <a href="#" onclick="javascript:Settings_Users_List_Js.birthdayEmail({$LISTVIEW_ENTRY->getId()})" class="fa fa-envelope"></a>
-                            
                         </div>
                         <div class='clearfix'></div>
                         <div class='birthdaybox text-center'>{$birthday}</div>
@@ -141,10 +138,31 @@
             
                 
                 {/foreach}
-     
+     {if $LISTVIEW_ENTRIES_COUNT eq '0'}
+            <table>
+                <tr class="emptyRecordsDiv">
+                        {assign var=COLSPAN_WIDTH value={count($LISTVIEW_HEADERS)}}
+                        <td colspan="{$COLSPAN_WIDTH}">
+                                <div class="emptyRecordsContent">
+                                        <center>
+                                                {if $SEARCH_VALUE eq 'Active'}
+                                                        {assign var=SINGLE_MODULE value="SINGLE_$MODULE"}
+                                                        {vtranslate('LBL_NO')} {vtranslate($MODULE, $MODULE)} {vtranslate('LBL_FOUND')},{if $IS_MODULE_EDITABLE} <a style="color:blue" href="{$MODULE_MODEL->getCreateRecordUrl()}"> {vtranslate('LBL_CREATE_USER',$MODULE)}</a>{/if}
+                                                {else}
+                                                        {vtranslate('LBL_NO')} {vtranslate($MODULE, $MODULE)} {vtranslate('LBL_FOUND')}
+                                                {/if}
+                                        </center>
+                                </div>
+                        </td>
+                </tr>
+            </table>
+      {/if}
         </div>
                
                 <div class="clearfix"></div>
     </div>
-  </div>{*
-                <div>Pagenation code start</div>*}
+                <!-- Employee Pagination -->
+                <div class="col-md-12  text-center">
+                    {$PAGINATION}
+                </div>
+  </div>

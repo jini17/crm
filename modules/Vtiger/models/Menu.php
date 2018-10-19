@@ -22,7 +22,7 @@ class Vtiger_Menu_Model extends Vtiger_Module_Model {
 	public static function getAll($sequenced = false) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$userPrivModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
-		$restrictedModulesList = array('Emails', 'ProjectMilestone', 'ProjectTask', 'ModComments', 'Integration', 'PBXManager', 'Dashboard', 'Home');
+		$restrictedModulesList = array('Emails', 'ProjectMilestone','Leads', 'ProjectTask', 'ModComments', 'Integration', 'PBXManager', 'Dashboard', 'Home');
 
 		$allModules = parent::getAll(array('0','2'));
 		$menuModels = array();

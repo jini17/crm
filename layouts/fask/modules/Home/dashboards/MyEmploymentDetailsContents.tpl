@@ -10,7 +10,28 @@
  ********************************************************************************/
 -->*}
 <div style='padding:5px;'>
-    
+    <style>
+        .fa-facebook {
+          background: #3B5998;
+          color: white;
+          padding: 8px;
+        }
+        .fa-twitter {
+          background: #55ACEE;
+          color: white;
+          padding:8px;
+        }
+        .fa-envelope {
+          background: #ff6600;
+          color: white;
+          padding: 8px;
+        }
+        .fa-linkedin {
+          background: #007bb5;
+          color: white;
+          padding: 8px;
+        }
+            </style>
 
 <div class="row ">
     <div class="col-md-8" style="padding-right: 0;">
@@ -54,10 +75,14 @@
                     <a href="{$URL}/index.php?module=Users&parent=Settings&view=Detail&record={$DATA['emp_id']}" class="btn btn-lg btn-block btn-primary"> {vtranslate('LBL_VIEW_PROFILE',$MODULE_NAME)}</a>
                     <a href="{$URL}/index.php?module=EmployeeContract&view=Detail&record={$DATA['contract']}&app=MARKETING" class="btn  btn-lg btn-block btn-default">  {vtranslate('LBL_VIEW_CONTRACT',$MODULE_NAME)} </a>
                     <div class="clearfix"></div>
-                    <div class="social text-center" >
-                        <a href="{$DATA['facebook']}"><i class="fa fa-facebook"></i></a>
-                        <a href="{$DATA['twitter']}"><i class="fa fa-twitter"></i></a>
-                        <a href="{$DATA['linkedin']}"><i class="fa fa-linkedin"></i></a>
+                    <div class="clearfix" style="heigth:15px;"></div>
+                    <div class="clearfix"></div>
+                    <div class="social text-center" style="margin-top:5px;">
+                          <a href="{$DATA['facebook']}" class="fa fa-facebook"></a>
+                            <a href="{$DATA['twitter']}" class="fa fa-twitter"></a>
+                            <a href="{$DATA['linkedin']}" class="fa fa-linkedin"></a>
+                            <a href="#" onclick="javascript:Vtiger_Helper_Js.getInternalMailer({$DATA['emp_id']},'email','Users');" class="fa fa-envelope"></a>
+                     
                     </div>
                 </div>
 </div>

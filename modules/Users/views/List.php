@@ -9,11 +9,7 @@
  ************************************************************************************/
 
 class Users_List_View extends Settings_Vtiger_List_View {
-        private $_limit;
-        private $_page;
-        private $_query;
-        private $_total;
-        
+  
         function checkPermission(Vtiger_Request $request) {
                 $currentUserModel = Users_Record_Model::getCurrentUserModel();
           
@@ -26,36 +22,42 @@ class Users_List_View extends Settings_Vtiger_List_View {
         }
               
         public function process(Vtiger_Request $request) {
+            
                  $adb = PearDatabase::getInstance();
                 $current_user = Users_Record_Model::getCurrentUserModel();
                  global $site_URL;
                  $reportingManager = Users_Record_Model::MyReortingManager($adb,$current_user->get('id'));
-                $myDepartmnetEmployee = Users_Record_Model::MyDepartmentEmployees($adb,$current_user->get('departmnet'),$current_user->get('id'));
-                $myDetails = array();
-                $myDetails['fullname']       = $current_user->get('first_name')." ".$current_user->get('last_name');
-                $myDetails['designation']  = $current_user->get('title');
+                $myDepartmnetEmployee = Users_Record_Model::MyDepartmentEmployees($adb,$current_user->get('department'),$current_user->get('id'));
+                
+
+                $myDetails                               = array();
+                $myDetails['fullname']         = $current_user->get('first_name')." ".$current_user->get('last_name');
+                $myDetails['designation']   = $current_user->get('title');
                 $myDetails['department']  = $current_user->get('department');
-                 $myDetails['email']            = $current_user->get('email1');
-                 $myDetails['date_joined'] = $current_user->get('date_joined');
-                 $myDetails['birthday']      = $current_user->get('birthday');
-                 $myDetails['facebook']     = $current_user->get('facebook');
+                $myDetails['email']              = $current_user->get('email1');
+                    $date1 = new DateTime($current_user->get('date_joined'));
+                   $date2 = new DateTime(date('d-m-Y'));
+                    $diff = $date2->diff($date1)->format("%a");
+                    
+                    $barthday_start = new DateTime(date('md'));
+                  $birthday_end    = new DateTime(date('md'));
+                  $diff_birthday     = $birthday_end->diff($barthday_start)->format("%a");
+                                 
+                 $myDetails['joindate'] = $diff ;         
+                 $myDetails['birthday']        =  $diff_birthday ;
+                 $myDetails['facebook']       = $current_user->get('facebook');
                  $myDetails['twitter']          = $current_user->get('twitter');
-                 $myDetails['linkedin']       = $current_user->get('linkedin');
-                 $myDetails['image']           = $current_user->getImageDetails();
+                 $myDetails['linkedin']         = $current_user->get('linkedin');
+                 $myDetails['image']            = $current_user->getImageDetails();
                  
-                $alphabet = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-                $URL = $site_URL.'/index.php?module=Users&parent=Settings&view=List&block=1&fieldid=1';
-                $defaultview = $request->get('empview');	
-                $Alphabet = $request->get('Alphabet');
+                $alphabet                   = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+                $URL                            = $site_URL.'/index.php?module=Users&parent=Settings&view=List&block=1&fieldid=1';
+                $defaultview              = $request->get('empview');	
+                $Alphabet                   = $request->get('Alphabet');
                 $currentUserModel = Users_Record_Model::getCurrentUserModel();
                 //defaultTab : EmployeeDirectory
-                $tabType = $request->get('tabtype');
-
-//                if($tabType == 'MD'){
-//                        $request->set('search_params', array("department","c", $currentUserModel->get('department')));	
-//                }
-//
-                $defaultview = $request->get('empview');	
+                $tabType                    = $request->get('tabtype');
+                $defaultview             = $request->get('empview');	
 
                 if(!$request->get('empview')){
                      $defaultview = 'grid';	
@@ -75,7 +77,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 //$viewer->view('GridViewContents.tpl', $request->getModule(false));
                 if( $tabType  ==  'WAI'){
                         $viewer->assign("REPORTING_MANAGER", $reportingManager);
-                         $viewer->assign("MY_DETAILS", $myDepartmnetEmployee);
+                         $viewer->assign("MY_DETAILS", $myDetails);
                         $viewer->assign("DEPARTMENT_EMPLOYEES", $myDepartmnetEmployee);
                         $viewer->view('EmployeeTree.tpl',  $request->getModule(false));
                 } else {
@@ -113,11 +115,6 @@ class Users_List_View extends Settings_Vtiger_List_View {
                     $tabType = $request->get('tabtype');
                 }  
                     $searchType = $request->get('searchType');
-//                    if($tabType == 'MD'){
-//                        $request->set('search_key','department');
-//                        $request->set('search_value',$currentUserModel->get('department'));
-//                         $request->set('operator','e');
-//                    }
 //                    
                     if($searchType == 'alphabet'){
                         $request->set('search_key','first_name');
@@ -125,8 +122,6 @@ class Users_List_View extends Settings_Vtiger_List_View {
                          $request->set('operator','s');
                          
                     }
-
-         
            //  $request->set('search_params', array("department","e", $currentUserModel->get('department')));	
             $searchParams = $request->get('search_params');
     
@@ -146,20 +141,16 @@ class Users_List_View extends Settings_Vtiger_List_View {
 
             $status = $request->get('status');
             if(empty($status))
-                    $status = 'Active';
-
-
+            $status = 'Active';
 
             $listViewModel = Vtiger_ListView_Model::getInstance($moduleName, $cvId);
-
             $linkParams = array('MODULE'=>$moduleName, 'ACTION'=>$request->get('view'), 'CVID'=>$cvId);
             $linkModels = $listViewModel->getListViewMassActions($linkParams);
-                            $listViewModel->set('status', $status);
-
+            $listViewModel->set('status', $status);
             $pagingModel = new Vtiger_Paging_Model();
             $pagingModel->set('page', $pageNumber);
-        
-
+             $pagingModel->set('limit',20);
+             
             if(!empty($orderBy)) {
                     $listViewModel->set('orderby', $orderBy);
                     $listViewModel->set('sortorder',$sortOrder);
@@ -241,14 +232,19 @@ class Users_List_View extends Settings_Vtiger_List_View {
                             $this->listViewCount = $listViewModel->getListViewCount();
                     }
                      $totalCount = $this->listViewCount;
+                    
                     $pageLimit = $pagingModel->getPageLimit();
                     $pageCount = ceil((int) $totalCount / (int) $pageLimit);
-
+                   
                     if($pageCount == 0){
                             $pageCount = 1;
                     }
+                  
+                   // Pagination
+                    $pagination = $this->createLinks($totalCount, $pageLimit, $pageNumber, $pageCount, 'pagination');
                     $viewer->assign('PAGE_COUNT', $pageCount);
                     $viewer->assign('LISTVIEW_COUNT', $totalCount);
+                    $viewer->assign('PAGINATION', $pagination);
             }
             $viewer->assign('MODULE_MODEL', $listViewModel->getModule());
             $viewer->assign('IS_MODULE_EDITABLE', $listViewModel->getModule()->isPermitted('EditView'));
@@ -328,7 +324,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 }
                 $result = array();
                 $result['page'] = $pageCount;
-                $this->_total = $listViewCount;
+      
                 $result['numberOfRecords'] = $listViewCount;
                 $response = new Vtiger_Response();
                 $response->setResult($result);
@@ -398,39 +394,47 @@ class Users_List_View extends Settings_Vtiger_List_View {
                 $headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
                 return $headerScriptInstances;
         }
-        
-        public function createLinks( $links, $list_class ) {
-            if ( $this->_limit == 'all' ) {
+        /**
+         * Generate Pagination Link
+         * @param type $total
+         * @param type $limit
+         * @param type $page
+         * @param type $links
+         * @param type $list_class
+         * @return string
+         */
+        public function createLinks( $total,$limit,$page,$links, $list_class ) {
+            if ( $limit == 'all' ) {
                 return '';
             }
 
-            $last       = ceil( $this->_total / $this->_limit );
+            $last       = ceil( $total/ $limit );
 
-            $start      = ( ( $this->_page - $links ) > 0 ) ? $this->_page - $links : 1;
-            $end        = ( ( $this->_page + $links ) < $last ) ? $this->_page + $links : $last;
+            $start      = ( ( $page - $links ) > 0 ) ? $page  : 1;
+            $end        = ( ( $page + $links ) < $last ) ? $page + $links : $last;
 
             $html       = '<ul class="' . $list_class . '">';
 
-            $class      = ( $this->_page == 1 ) ? "disabled" : "";
-            $html       .= '<li class="' . $class . '"><a href="?limit=' . $this->_limit . '&page=' . ( $this->_page - 1 ) . '">&laquo;</a></li>';
+            $class      = ( $page == 1 ) ? "disabled" : "";
+            $html       .= '<li class="' . $class . '"><a data-page="'.( $page - 1 ).'">&laquo;</a></li>';
 
             if ( $start > 1 ) {
-                $html   .= '<li><a href="?limit=' . $this->_limit . '&page=1">1</a></li>';
+                $html   .= '<li><a data-page="'.( $page - 1 ).'">1</a></li>';
                 $html   .= '<li class="disabled"><span>...</span></li>';
             }
 
             for ( $i = $start ; $i <= $end; $i++ ) {
-                $class  = ( $this->_page == $i ) ? "active" : "";
-                $html   .= '<li class="' . $class . '"><a href="?limit=' . $this->_limit . '&page=' . $i . '">' . $i . '</a></li>';
+                $class  = ( $page == $i ) ? "active" : "";
+                $html   .= '<li class="' . $class . '"><a data-page="'.$i.'">' . $i . '</a></li>';
             }
 
             if ( $end < $last ) {
                 $html   .= '<li class="disabled"><span>...</span></li>';
-                $html   .= '<li><a href="?limit=' . $this->_limit . '&page=' . $last . '">' . $last . '</a></li>';
+                $html   .= '<li><a data-page="'.$last.'">' . $last . '</a></li>';
             }
 
-            $class      = ( $this->_page == $last ) ? "disabled" : "";
-            $html       .= '<li class="' . $class . '"><a href="?limit=' . $this->_limit . '&page=' . ( $this->_page + 1 ) . '">&raquo;</a></li>';
+            $class      = ( $page == $last ) ? "disabled" : "";
+            $html       .= '<li class="' . $class . '"><a data-page="'.( $page + 1 ).'">&raquo;</a></li>';
 
             $html       .= '</ul>';
 

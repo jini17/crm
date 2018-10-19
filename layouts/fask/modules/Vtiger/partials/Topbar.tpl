@@ -288,48 +288,39 @@
 
                                     {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('WorkingHours')}
                                     {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
+                                                <!-- <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=WorkingHours&view=List"><i class="material-icons module-icon">access_time</i> <span class="hide-menu"> {vtranslate('WorkingHours')}</span></a></li>
+                                                -->        
+                                                {/if}
 
+                                        {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Payments')}
+                                        {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
+                                        <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Payments&view=List"><i class="material-icons module-icon">payment</i> <span class="hide-menu"> {vtranslate('Payments')}</span></a></li>
 
+                                        {/if}
+      {*                                  {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('LeaveType')}
+                                        {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
+                                         <!--<li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=LeaveType&view=List"><i class="material-icons module-icon">keyboard_tab</i> <span class="hide-menu"> {vtranslate('LeaveType')}</span></a></li>
+                                         -->
+                                         {/if}*}
+                                     </ul>
+                                 </li>
 
-                                                                                   <!-- <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=WorkingHours&view=List"><i class="material-icons module-icon">access_time</i> <span class="hide-menu"> {vtranslate('WorkingHours')}</span></a></li>
-                                                                                   -->        
-                                                                                   {/if}
+                                        {/if}
 
-                                                                                   {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Payments')}
-                                                                                   {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
-
-
-
-                                                                                   <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Payments&view=List"><i class="material-icons module-icon">payment</i> <span class="hide-menu"> {vtranslate('Payments')}</span></a></li>
-
-                                                                                   {/if}
-                                                 {*                                  {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('LeaveType')}
-                                                                                   {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
-
-
-
-                                                                                    <!--<li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=LeaveType&view=List"><i class="material-icons module-icon">keyboard_tab</i> <span class="hide-menu"> {vtranslate('LeaveType')}</span></a></li>
-                                                                                    -->
-                                                                                    {/if}*}
-                                                                                </ul>
-                                                                            </li>
-
-{/if}
-
-                                                                        </div>
-                                                                    </div>
+                                    </div>
+                                </div>
                                                                     <!--fine menu-->
 
-                                                                    <div class="logo-container col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                                        <div class="row">
-                                                                            <a href="index.php" class="company-logo">
-                                                                                <img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
+                                        <div class="logo-container col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                            <div class="row">
+                                                <a href="index.php" class="company-logo">
+                                                    <img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>
+                                                </a>
+                                            </div>
+                                        </div>
 
-                                                                </div>
-                                                            </div>
+                                    </div>
+                                </div>
                                                             <!--top nav with lock-->
                                                             <div class="col-lg-5 col-md-5 col-sm-4 col-xs-8 "><div class="row">
                                                                 <ul class="nav navbar-nav newtabs">
@@ -468,7 +459,7 @@
 
                                                                                             <li>
                                                                                                 <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                                                                                                    <i class="fa fa-bell-o"></i>&nbsp;Notification Templates
+                                                                                                    <i class="fa fa-bell-o"></i>&nbsp;Templates
                                                                                                 </a>
                                                                                             </li>
                                                              <!--   <li>
@@ -477,11 +468,11 @@
                                                                     </a>
                                                                 </li>-->
                                                                 {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
-                                                                <li>
+                                                                {* Khaled - Removed as Per Requirement<li>
                                                                     <a class="dropdown-icon-dashboard" title="Recycle Bin" href="index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS">
                                                                         <i class="fa fa-trash-o"></i>&nbsp;Recycle Bin
                                                                     </a>
-                                                                </li>
+                                                                </li>*}
                                                                 {/if}
                                                                 <li>
 
@@ -492,7 +483,7 @@
                                                                 </a>
 
                                                             </li>
-                                                            <li admin="">
+                                                       {*     Khaled - Removed as Per Requirement<li admin="">
                                                                 <a class="waves-effect waves-dark dropdown-icon-dashboard " href=" index.php?module=WorkingHours&amp;view=List&amp;app=ADMIN ">
                                                                     <i class="material-icons module-icon">access_time</i> <span class="hide-menu"> Working Hours</span>
                                                                 </a>
@@ -507,7 +498,7 @@
                                                                 <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=MessageBoard&amp;view=List&amp;app=ADMIN ">
                                                                     <i class="material-icons module-icon">assignment</i> <span class="hide-menu"> Message Board</span>
                                                                 </a>
-                                                            </li>
+                                                            </li>*}
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -696,6 +687,7 @@
                                                                         </ul>
                                                                     </div>
                                                                     {else}
+                                                                        
                                                                     <div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
                                                                         <a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModule" data-name="{$moduleModel->getName()}"
                                                                             data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)">
@@ -705,6 +697,7 @@
                                                                     </div>
                                                                     {/if}
                                                                     {if $count % 3 == 2}
+                                                                         
                                                                 </div>
                                                                 <br>
                                                                 {/if}
@@ -714,6 +707,32 @@
                                                                 {/if}
                                                                 {/if}
                                                                 {/foreach}
+                                                                <div class="clearfix"></div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="col-lg-4">
+                                                                        <a id="menubar_quickCreate_Users" class="quickCreateModule" data-name="Users"
+                                                                            data-url="" onclick='window.location.href="index.php?module=Users&parent=Settings&view=Edit"'>
+                                                                            <i class="material-icons pull-left">person</i>
+                                                                            <span class="quick-create-module">{vtranslate('Users','Users')}</span>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <a id="menubar_quickCreate_Users" class="quickCreateModule" data-name="Users"
+                                                                            data-url="" onclick='window.location.href = "index.php?module=Leave&view=Edit&app=ADMIN"'>
+                                                                            <i class="material-icons pull-left">exit_to_app</i>
+                                                                            <span class="quick-create-module">{vtranslate('Leave','Leave')}</span>
+                                                                        </a>
+                                                                    </div>
+                                                                        <div class="col-lg-4">
+                                                                        <a id="menubar_quickCreate_Users" class="quickCreateModule" data-name="Users"
+                                                                            data-url="" onclick='window.location.href = "index.php?module=Bills&view=Edit&app=ADMIN"'>
+                                                                            <i class="material-icons pull-left">receipt</i>
+                                                                            <span class="quick-create-module">{vtranslate('Bills','Bills')}</span>
+                                                                        </a>
+                                                                    </div>
+                                                                        </div>
+                                                                </div>
                                                             </div>
                                                         </li>
                                                     </ul>

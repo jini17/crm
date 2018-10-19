@@ -38,13 +38,8 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
             $leaveTypeResult = $adb->pquery("SELECT GROUP_CONCAT(title) AS titles FROM vtiger_leavetype INNER JOIN allocation_leaverel ON allocation_leaverel.leavetype_id = vtiger_leavetype.leavetypeid WHERE allocation_leaverel.allocation_id = ?", array($allocationId));
 
             $values[$i]['leavetype'] = $adb->query_result($leaveTypeResult,0,'titles');
-
-            /**** Getting the name of the claim type ******************/
-            $claimTypeResult = $adb->pquery("SELECT GROUP_CONCAT(claim_type) AS claims FROM vtiger_claimtype INNER JOIN allocation_claimrel ON allocation_claimrel.claim_id = vtiger_claimtype.claimtypeid WHERE allocation_claimrel.allocation_id = ?", array($allocationId));
-
-            $values[$i]['claimtype'] = $adb->query_result($claimTypeResult,0,'claims');
+            
         
-
             /**** Getting the name of the grade ******************/
             $gradeResult = $adb->pquery("SELECT GROUP_CONCAT(grade) AS grade FROM vtiger_grade INNER JOIN allocation_graderel ON allocation_graderel.grade_id = vtiger_grade.gradeid WHERE allocation_graderel.allocation_id = ?", array($allocationId));
 

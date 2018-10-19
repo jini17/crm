@@ -9,11 +9,45 @@
 
 {strip}
     <style>
-        #tablist li.active{
+        #tablist li.active,
+        .pagination li.active{
           border-bottom: 2px solid #2f5597 ;
           color: #2f5597 ;
         }
+          .pagination li.active{
+              background:  #2f5597 ;
+              color: #fff;
+          }
+        .pagination li.active a{
+            color: #fff;
+            background:  #2f5597 ;
+        }
+        .fa-facebook {
+            background: #3B5998;
+            color: #fff;
+            padding: 8px;
+        }
+        .fa-twitter {
+            background: #55ACEE;
+            color: #fff;
+            padding:8px;
+        }
+        .fa-envelope {
+            background: #ff6600;
+            color: #fff;
+            padding: 8px;
+        }
+        .fa-linkedin {
+          background: #007bb5;
+          color: #fff;
+          padding: 8px;
+        }
     </style>
+    
+    <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 0;right:0 !important ; left: 81% !important; " title="Left Panel Show/Hide">
+        <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
+    </button>
+    
     <input type="hidden" id="listViewEntriesCount" value="{$LISTVIEW_ENTRIES_COUNT}" />
 <input type="hidden" id="pageStartRange" value="{$PAGING_MODEL->getRecordStartRange()}" />
 <input type="hidden" id="pageEndRange" value="{$PAGING_MODEL->getRecordEndRange()}" />
@@ -71,26 +105,34 @@
         <div class="clearfix" style="height:20px;"></div>
         {if $TAB_TYPE neq 'WAI'}
         <div class="row">
-            <div class="col-lg-6" style="float: left;">
-                <strong>
-                    {vtranslate('YOU_ARE_CURRENLY_VIEWING',$MODULE)} "Soft Solvers Solutions"
-                </strong>
-            </div>                 
-            <div class="col-lg-6">
-                <div class="btn-group list-switcher" role="group" aria-label="Basic example">
-                    <button type="button" class="empview btn {if $EMP_VIEW eq 'List'} btn-primary activeview {else}btn-white view{/if}" data-tabtype="{$TAB_TYPE}" data-listtype='list' title="List View"><i class='fa fa-list'></i> {vtranslate('List View', $MODULE)}</button>
-                    <button type="button"  class="empview btn {if $EMP_VIEW eq 'grid'} btn-primary activeview {else}btn-white view{/if}"  data-tabtype="{$TAB_TYPE}" data-listtype='grid' title="Grid View"> <i class="fa fa-th-large"></i> {vtranslate('Grid View', $MODULE)}</button>
+                           
+            <div class="col-lg-9">
+                
+                    <div class='form-group  col-lg-7' style="padding:0">
+                        <input type="text" id="keywordsearch" placeholder="{vtranslate('Search for Name, Designation, Email, Department',$MODULE)} " class="form-control" style="width:100%; padding: 16px 8px;">
+                    </div>
+                    <div class="form-group  col-lg-1" style="padding:0;">
+                        <button type="button" class='btn btn-primary keyword-search'> Search   </button>
+                    </div>
+                
+                              
+            </div>
+            <div class="col-lg-3">
+                  <div class="btn-group list-switcher pull-right" role="group" aria-label="Basic example">
+                    <button type="button" class="empview btn {if $EMP_VIEW eq 'List'} btn-primary activeview {else}btn-white view{/if}" data-tabtype="{$TAB_TYPE}" data-listtype='list' title="List View"><i class='fa fa-list'></i> </button>
+                    <button type="button"  class="empview btn {if $EMP_VIEW eq 'grid'} btn-primary activeview {else}btn-white view{/if}"  data-tabtype="{$TAB_TYPE}" data-listtype='grid' title="Grid View"> <i class="fa fa-th-large"></i> </button>
                 </div>
-
-         <form class='form-inline pull-right' action="#">
-             <div class='form-group'>
-                 <input type="text" id="keywordsearch" placeholder="{vtranslate('Enter Keyword',$MODULE)}" class="form-control">
-             </div>
-             <div class="form-group">
-                 <button type="button" class='btn btn-primary keyword-search'> Search   </button>
-             </div>
-         </form>
-     </div>
+                <select class="select2 grid-filter pull-left" style="width: 60%;">
+                    <option value=""> {vtranslate('Filter by',$MODULE)}</option>
+                    <option value="all">All</option>
+                    <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
+                    <option value="B"> {vtranslate('Bithdays',$MODULE)} </option>
+                    <option value="MALE"> {vtranslate('Male Employee',$MODULE)} </option>
+                    <option value="FEMALE"> {vtranslate('Female Employee',$MODULE)} </option>
+                </select>
+              
+            </div>
+                <div class="clearfix"></div>
         </div>
          {/if}    
 
