@@ -174,6 +174,7 @@ LIMIT 3";
 	
 		for($i=0;$db->num_rows($result)>$i;$i++){
 			$eduList[$i]['institution_name'] = $db->query_result($result, $i, 'institution_name');
+                                                                $eduList[$i]['education_location'] = $db->query_result($result, $i, 'education_location');
 			$eduList[$i]['educationid'] = $db->query_result($result, $i, 'educationid');
 			$eduList[$i]['start_date'] = date('M Y',strtotime($db->query_result($result, $i, 'start_date')));
 			$eduList[$i]['end_date'] =  date('M Y',strtotime($db->query_result($result, $i, 'end_date')));
@@ -192,7 +193,7 @@ LIMIT 3";
 	{
 		include_once('modules/Education/Education.php');
 		$db  = PearDatabase::getInstance();
-		$db->setDebug(true);
+		//$db->setDebug(true);
 		$params 	= array();
 		$userid  	= $request['current_user_id'];
 		$eduId  	= $request['record'];
@@ -201,14 +202,14 @@ LIMIT 3";
 		$studying  	= $request['is_studying'];	
 		
 		if($studying ==0){
-			$endDate	= date('Y-m-d',strtotime($request['end_date']));
+                                                $endDate = date('Y-m-d',strtotime($request['end_date']));
 		} else{
-			$endDate	='';
+                                                $endDate ='';
 		}	
 		$education_level= decode_html($request['education_level']);
 		$majorId  	= decode_html($request['areaofstudy']);
 		$majorTxt 	= decode_html($request['majortxt']);
-		$description  	= decode_html($request['description']);
+		$description  = decode_html($request['description']);
                                            $location  	= decode_html($request['location']);
 		$isview  	= decode_html($request['isview']);	
 		
