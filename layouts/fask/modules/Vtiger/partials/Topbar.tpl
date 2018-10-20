@@ -31,6 +31,16 @@
         left: 100%;
         margin-top: -1px;
     }
+    .searchoption{
+        position:relative
+    }
+    .searchoption .fa.fa-angle-down{
+        position: absolute !important;
+        left: 85%;
+        top: 10px;
+        color: #fff;
+        z-index: 1;
+    }
   .searchoption a{
             padding: 0 !important;
             height: 33px !important;
@@ -622,6 +632,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
 
 
                                         <li class='searchoption'>
+                                            <i class="fa fa-angle-down"></i>
                                             <select class="select2 col-lg-12" id="searchModuleList" data-placeholder="{vtranslate('LBL_SELECT_MODULE')}">
                                             <option></option>
                                                 {foreach key=MODULE_NAME item=fieldObject from=$SEARCHABLE_MODULES}
