@@ -196,7 +196,7 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 
 	public function getALLSkills($userId) {
 		$db  = PearDatabase::getInstance();
-		$sql = "SELECT * FROM secondcrm_skillmaster WHERE skill_id NOT IN (SELECT skill_id FROM secondcrm_skills WHERE user_id = ?)"; 
+		$sql = "SELECT secondcrm_skillmaster.skill_id,secondcrm_skillmaster.skill_title FROM secondcrm_skillmaster WHERE skill_id NOT IN (SELECT skill_id FROM secondcrm_skills WHERE user_id = ?)"; 
 		$params = array($userId);
 		$result = $db->pquery($sql,$params);
 			
@@ -213,7 +213,7 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 	public function getUserSkillCloud($userId) {
 			
 		$db  = PearDatabase::getInstance();
-		$sql = "SELECT tblSCS.skill_id, tblSCSM.skill_title, tblSCS.endorsement
+		$sql = "SELECT tblSCS.skill_id, tblSCSM.skill_title, tblSCS.endorsement, tblSCS.skill_label
                                 FROM secondcrm_skills tblSCS 
 				LEFT JOIN secondcrm_skillmaster tblSCSM ON tblSCSM.skill_id = tblSCS.skill_id
 				WHERE tblSCS.user_id=?";
@@ -226,6 +226,7 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 			  	$UserSkillCloud[$i]['skill_id'] = $db->query_result($result, $i, 'skill_id');
 				$UserSkillCloud[$i]['skill_title'] = $db->query_result($result, $i, 'skill_title');
 				$UserSkillCloud[$i]['endorsement'] = $db->query_result($result, $i, 'endorsement');
+                                                                                      $UserSkillCloud[$i]['skill_label'] = $db->query_result($result, $i, 'skill_label');
 			}
 		}
 		return $UserSkillCloud;		
@@ -240,7 +241,7 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 		$userid  	= $request['current_user_id'];
 		$skill_id  	= decode_html($request['skill']);
 		$skillTxt 	= decode_html($request['skilltxt']);
-		
+		$skillLabel  = decode_html($request['skill_label']);
 		if($skill_id==0 && !empty($skillTxt)) {
 			//check the skill exist or not
            	 	$resultcheck  = $db->pquery("SELECT skill_id FROM secondcrm_skillmaster WHERE skill_title = ?",array($skillTxt));
@@ -257,8 +258,8 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 			}
                 
 		} else {
-			$params = array($skill_id, $userid);
-			$result = $db->pquery("INSERT INTO secondcrm_skills SET skill_id = ?, user_id = ?", array($params));	
+			$params = array($skill_id, $skillLabel,$userid);
+			$result = $db->pquery("INSERT INTO secondcrm_skills SET skill_id = ?,skill_label=?, user_id = ?", array($params));	
 			$return = 0;
 		}
 		return $return;	

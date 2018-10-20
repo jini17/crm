@@ -9,81 +9,71 @@
 
 Vtiger.Class("Users_Emergency_Js", {
 
-	//register click event for Add New emergencycontact button
-	addEmergency : function(url) { 
-	     this.editEmergency(url);
-	    
-	},
-	
-	editEmergency : function(url) { 
+        //register click event for Add New emergencycontact button
+        addEmergency : function(url) { 
+             this.editEmergency(url);
 
-	    var aDeferred = jQuery.Deferred();
-		var thisInstance = this;
-		var userid = jQuery('#recordId').val();
+        },
 
-		
-		app.helper.showProgress();
-		app.request.post({url:url}).then(
-		function(err,data) { 
-		      app.helper.hideProgress();
-              
+        editEmergency : function(url) { 
+
+            var aDeferred = jQuery.Deferred();
+                var thisInstance = this;
+                var userid = jQuery('#recordId').val();
+                app.helper.showProgress();
+                app.request.post({url:url}).then(
+                function(err,data) { 
+                      app.helper.hideProgress();
                 if(err == null){
                     app.helper.showModal(data);
                     var form = jQuery('#editEmergency');
-
-     
-                      
-                        	// for textarea limit
+                                // for textarea limit
                         app.helper.showVerticalScroll(jQuery('#scrollContainer'), {setHeight:'80%'});
-                       
-				
-
                          form.submit(function(e) { 
                             e.preventDefault();
                          })
+                                                jQuery('#home_phone,#office_phone,#mobile').keyup(function(event){
+                                                          var $this = $(this);
+                                                  var input = $this.val();
+                                                  var input = input.replace(/[\D\s\._\-]+/g, "");
 
-						jQuery('#home_phone,#office_phone,#mobile').keyup(function(event){
-							  var $this = $(this);
-					          var input = $this.val();
-					          var input = input.replace(/[\D\s\._\-]+/g, "");
-					                   
-					                
-					           $this.val( function() {
-					                return ( input === 0 ) ? "" : input.replace();
-					           });
-						});
+
+                                                   $this.val( function() {
+                                                        return ( input === 0 ) ? "" : input.replace();
+                                                   });
+                                                });
                            // console.log(form);
-					var params = {
+                                        var params = {
                             submitHandler : function(form){
                                 var form = jQuery('#editEmergency');   
                                 thisInstance.saveEmergencyDetails(form);
                             }
                         };
                          form.vtValidate(params)
-          		} else {
+                        } else {
                         aDeferred.reject(err);
                     }
-	     	});
-	     return aDeferred.promise();	
-	},
+                });
+             return aDeferred.promise();	
+        },
      updateEmergencyGrid : function(userid) { 
-			var params = {
-					'module' : app.getModuleName(),
-					'view'   : 'ListViewAjax',
-					'record' : userid,		
-					'mode'   : 'getUserEmergency',
-				}
-				app.request.post({'data':params}).then(
-					function(err, data) {
-						jQuery('#UserEmergencyContainer').html(data);
-					},
-					
-					function(error,err){
-						aDeferred.reject();
-					}
-				);
-	},
-	
+                        var params = {
+                                        'module' : app.getModuleName(),
+                                        'view'   : 'ListViewAjax',
+                                        'record' : userid,		
+                                        'mode'   : 'getUserEmergency',
+                                }
+                                app.request.post({'data':params}).then(
+                                        function(err, data) {
+                                                jQuery('#UserEmergencyContainer').html(data);
+                                        },
+
+                                        function(error,err){
+                                                aDeferred.reject();
+                                        }
+                                );
+        },
+
 
 
      saveEmergencyDetails : function(form){
@@ -97,14 +87,14 @@ Vtiger.Class("Users_Emergency_Js", {
           var formData = form.serializeFormData();
           //console.log(formData);
           var params = {
-				'module': 'Users',
-				'action': "SaveSubModuleAjax",
-				'mode'  : 'saveEmergencyContact',
-				'form' : formData,
-				'isview' : chkboxval,
-				
-			};	
-				
+                                'module': 'Users',
+                                'action': "SaveSubModuleAjax",
+                                'mode'  : 'saveEmergencyContact',
+                                'form' : formData,
+                                'isview' : chkboxval,
+
+                        };	
+
          app.request.post({'data': params}).then(function (err, data) {     
               app.helper.hideProgress();
                //show notification after Education details saved
@@ -116,19 +106,19 @@ Vtiger.Class("Users_Emergency_Js", {
            return aDeferred.promise();
      },	
 
-	
-},{
-	//constructor
-	init : function() {
-		
-		Users_Emergency_Js.emeInstance = this;
-	},
-	
 
-	
-	registerEvents: function(emeInstance) {
-		
-		emeInstance.registerActions();
-	}
+},{
+        //constructor
+        init : function() {
+
+                Users_Emergency_Js.emeInstance = this;
+        },
+
+
+
+        registerEvents: function(emeInstance) {
+
+                emeInstance.registerActions();
+        }
 
 });

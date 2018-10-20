@@ -15,9 +15,9 @@ Vtiger.Class("Users_Leave_Js", {
 	     
 	     //check the anyleaveType for login user 
     		var params = {
-				'module' 	: app.getModuleName(),
-				'action' 	: 'SaveSubModuleAjax',
-				'mode'   	: 'IsAnyLeaveTypeAssign',
+                                                'module' 	: app.getModuleName(),
+                                                'action' 	: 'SaveSubModuleAjax',
+                                                'mode'   	: 'IsAnyLeaveTypeAssign',
      		}
                
              app.request.post({'data': params}).then(function (err, data) {  
@@ -35,9 +35,9 @@ Vtiger.Class("Users_Leave_Js", {
 	     var thisInstance = this;
          	//check the anyclaimType for login user 
     		var params = {
-				'module' 	: app.getModuleName(),
-				'action' 	: 'SaveSubModuleAjax',
-				'mode'   	: 'IsAnyClaimTypeAssign',
+                                                'module' : app.getModuleName(),
+                                                'action' 	: 'SaveSubModuleAjax',
+                                                'mode'   	: 'IsAnyClaimTypeAssign',
      		}
                
              app.request.post({'data': params}).then(function (err, data) {  
