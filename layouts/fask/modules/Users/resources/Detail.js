@@ -389,9 +389,9 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 				jQuery('#leave').html(data);
 			}
 		});	
-		     if(leaveid ==null){
+		     if(leaveid ==null || leaveid ==''){
 		          var url = 'index.php?module=Users&view=EditLeave&userId='+userid;
-		     } else {
+		     } else { 
 		          var url = 'index.php?module=Users&view=EditLeave&record='+leaveid+'&userId='+appid+'&leavestatus=Apply&manager=true';
 		     }    
 			Users_Leave_Js.editLeave(url)		
@@ -421,7 +421,7 @@ Vtiger_Detail_Js("Users_Detail_Js",{
 				jQuery('#claim').html(data);
 			}
 		});	
-		     if(claimid ==null){
+		     if(claimid ==null || claimid ==''){
 		          var url = 'index.php?module=Users&view=EditClaim&userId='+userid;
 		     } else {
 		          var url = 'index.php?module=Users&view=EditClaim&record='+claimid+'&userId='+appid+'&claimstatus=Apply&manager=true';
