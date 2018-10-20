@@ -113,7 +113,6 @@
                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">
                                                         </label>
                                                 </div>
-
                                                 <div class="controls fieldValue col-md-8" align="right">
                                                         <span class="hide" id="loctxt">
                                                                 <input  style="width:100%;" type="text" name="locatxt" id="locatxt" data-rule-required = "true"/>
@@ -137,7 +136,6 @@
                                                 <div class="col-md-4">
                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;"> &nbsp;{vtranslate('LBL_CURRENTLY_WORKING', $QUALIFIED_MODULE)} &nbsp; <span class="redColor">*</span></label>
                                                 </div>	
-
                                                 <div class="controls date col-md-8">
                                                          <input type="checkbox" class="currentworking inputElement" name="chkcurrently" id="chkcurrently" {if $WORKEXP_DETAIL.currentlyworking eq 1} checked {/if}>
                                                 </div>		
@@ -169,14 +167,25 @@
                                                 </div>	
                                                 <div class="controls pull-right" id="charNum" style="font-size:12px;margin-right: 13px;">{vtranslate('LBL_MAX_CHAR_TXTAREA', $QUALIFIED_MODULE)}</div>
                                         </div>
-                                </div>	
+                                </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12" style='margin-bottom: 15px;'>
+                                                <div class="col-md-4"><label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_JOB_TYPE', $QUALIFIED_MODULE)}</label></div>
+                                                <div class="col-md-8">
+                                                    <select name="job_type" class="select2 col-md-12">
+                                                        <option value="0" {if $WORKEXP_DETAIL.job_type eq '0'} selected{/if}> {vtranslate('LBL_PART_TIME',$QUALIFIED_MODULE)}</option>
+                                                        <option value="1" {if $WORKEXP_DETAIL.job_type eq '1'} selected{/if}>{vtranslate('LBL_FULL_TIME',$QUALIFIED_MODULE)}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_WANT_TO_MAKE_PUBLIC', $QUALIFIED_MODULE)}</label>
                                                 </div>	
                                                 <div class="controls date col-md-8">
-                                                          <label><input type="radio" {if $WORKEXP_DETAIL.isview eq '0'} checked {/if} name='chkviewable' value="0" />{$WORKEXP_DETAIL.isview}&nbsp; {vtranslate('LBL_PUBLIC', $QUALIFIED_MODULE)} </label>&nbsp; 
+                                                      <label><input type="radio" {if $WORKEXP_DETAIL.isview eq '0'} checked {/if} name='chkviewable' value="0" /> {vtranslate('LBL_PUBLIC', $QUALIFIED_MODULE)} </label>&nbsp; 
                                                      <label><input type="radio"{if $WORKEXP_DETAIL.isview eq '1'} checked {/if} name='chkviewable' value="1" />&nbsp; {vtranslate('LBL_PRIVATE', $QUALIFIED_MODULE)} </label>&nbsp; 
                                                       <label><input type="radio" {if $WORKEXP_DETAIL.isview eq '2'} checked {/if} name='chkviewable' value="2" />&nbsp; {vtranslate('LBL_PROTECTED', $QUALIFIED_MODULE)} </label>
 {*                                                          <input type="checkbox" {(''==$UW_ID)?'checked':''} name="chkviewable" id="chkviewable" {if $WORKEXP_DETAIL.isview eq 1} checked {/if}>

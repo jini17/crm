@@ -54,7 +54,7 @@
                                         <td class="" valign="top" style="width:10%;">{$USER_PROJECT['title']}</td>                                     
                                         <td class="" valign="top" style="width:10%;">{if $USER_PROJECT['relation_type'] eq 'E'}Student at {/if}{$USER_PROJECT['designation']}</td>
                                         <td class="" valign="top" style="width:10%;">{$USER_PROJECT['project_start_date']}</td>
-                                        <td class="" valign="top" style="width:10%;">{$PERMISSION}</td>
+                                        <td class="" valign="top" style="width:10%;">{vtranslate($PERMISSION,$MODULE)}</td>
                                        
                                          <td class="" valign="top" style="width:40%;">{$USER_PROJECT['description']}</td>
                                           <td class="" valign="top" style="width:10%;"><a href="{$USER_PROJECT['project_url']}" class="btn btn-success">click to visit</a></td>

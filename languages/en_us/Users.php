@@ -14,7 +14,7 @@ $languageStrings = array(
 	//MyPreference Blocks
                      'LBL_PART_TIME'=> 'Part-Time',
                      'LBL_FULL_TIME'=> 'Full-Time',
-                      'LBL_EDUCATION_TYPE' => 'Type',
+                      'LBL_EDUCATION_TYPE' => 'Type of Course',
 	'LBL_MY_PREFERENCES'  =>  'My Profile',
                      'LBL_CLAIM_CREATE_SUCCESSFULLY'  =>  'Claim Created Successfully',
 	'LBL_MORE_INFORMATION'  =>  'User Information',
@@ -32,6 +32,7 @@ $languageStrings = array(
 	'LBL_SKILL_LANG'=>'Skill Language',
 	'LBL_LEAVE'=>'Leave',
 	'LBL_CLAIM'=>'Claims',
+                      'LBL_JOB_TYPE' => 'Job Type',
 	'LBL_USER_EMERGENCY'=>'Emergency Contacts',
 	'LBL_ADD_NEW_EDUCATION'=>'Add New Education',
 	'LBL_INSTITUTION_NAME'=>'Institution Name',

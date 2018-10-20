@@ -123,8 +123,8 @@ Vtiger.Class("Users_WorkExp_Js", {
           var thisInstance = this;
           var userid = jQuery('#current_user_id').val();
           app.helper.showProgress();
-          var chkboxval = $('#chkviewable').is(':checked')?'1':'0';
-          var chkcurrently = $('#chkcurrently').is(':checked')?'1':'0';
+          var chkboxval = $('input[name=chkviewable]:checked').val();
+          var chkcurrently = chkboxval;
           var formData = form.serializeFormData();
           var params = {
                                 'module': 'Users',

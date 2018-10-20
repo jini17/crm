@@ -36,18 +36,34 @@
                                         <th><strong>{vtranslate('LBL_LOCATION', $MODULE)}</strong></th>
                                         <th><strong>{vtranslate('LBL_TIMEPERIOD', $MODULE)}</strong></th>
                                         <th><strong>{vtranslate('LBL_DESCRIPTION', $MODULE)}</strong></th>
+                                        <th><strong>{vtranslate('LBL_JOB_TYPE', $MODULE)}</strong></th>
                                         <th colspan="2" class="medium" ><strong>{vtranslate('LBL_EDUCATION_ISVIEW', $MODULE)}</strong></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {foreach item=USER_WORKEXP from=$USER_WORKEXP_LIST}
+                                            {if $USER_WORKEXP['isview'] eq '0'}
+                                                  {assign var=PERMISSION value=LBL_PUBLIC}  
+                                            {elseif $USER_WORKEXP['isview'] eq '1'}
+                                                {assign var=PERMISSION value=LBL_PRIVATE}  
+                                            {else}
+                                                {assign var=PERMISSION value='LBL_PROTECTED'}  
+                                             {/if}    
+                                               {if $USER_WORKEXP['job_type'] eq '0'}
+                                                  {assign var=JOB_TYPE value=LBL_PART_TIME}  
+                                              {else}
+                                                      {assign var=JOB_TYPE  value=LBL_FULL_TIME}  
+                                               {/if}       
+                                             
                                     <tr>
                                         <td class="medium" valign="top">{$USER_WORKEXP['company_title']}</td>
                                         <td class="medium" valign="top">{$USER_WORKEXP['designation']}</td>
                                         <td class="medium" valign="top">{$USER_WORKEXP['location']}</td>
-                                        <td class="medium" valign="top">{$USER_WORKEXP['start_date']} {vtranslate('LBL_TO', $MODULE)} {if $USER_WORKEXP['end_date'] eq ''}{vtranslate('LBL_TILL_NOW', $MODULE)}{else}{$USER_WORKEXP['end_date']}{/if}</td>
+                           
+                                        <td class="medium" valign="top">{$USER_WORKEXP['start_date']}  {if $USER_WORKEXP['end_date'] eq ''} - {vtranslate('LBL_TILL_NOW', $MODULE)}{else}-{$USER_WORKEXP['end_date']}{/if}</td>
                                         <td class="medium" valign="top">{$USER_WORKEXP['description']}</td>
-                                        <td class="medium" valign="top">{('0'==$USER_WORKEXP['isview'])?{vtranslate('LBL_NO', $MODULE)}:{vtranslate('LBL_YES', $MODULE)}}</td>
+                                         <td class="medium" valign="top">{vtranslate($JOB_TYPE,$MODULE)}</td>
+                                        <td class="medium" valign="top">{vtranslate($PERMISSION,$MODULE)}</td>
                                         <td class="medium" width="5%" valign="top">
                                             <div class="pull-right actions">
                                                 <span class="actionImages">
