@@ -22,8 +22,7 @@ class Users_EditEducation_View extends Vtiger_Index_View {
                 if(!empty($edu_id)) {	
                     $educationdetailmodel = $userRecordModel->getEducationDetail($edu_id); 
                 }
-    
-                $educationtype = $userRecordModel->
+                $educationtype =  $userRecordModel->get_education_types();
                 $startDateField = array(	"mandatory"=>true,
                                                 "presence"=>true,
                                                 "quickcreate"=>false,
@@ -55,6 +54,7 @@ class Users_EditEducation_View extends Vtiger_Index_View {
                 $viewer->assign('STARTDATEFIELD', $startDateField);
                 $viewer->assign('ENDDATEFIELD', $endDateField);
                 $viewer->assign('VALIDATOR', $validator);
+                $viewer->assign('EDU_TYPE',$educationtype);
               
                 $viewer->assign('EDUCATION_DETAIL', $educationdetailmodel);
                 $viewer->view('EditAjaxEducation.tpl', $moduleName);

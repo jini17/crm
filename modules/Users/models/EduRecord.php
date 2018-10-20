@@ -115,7 +115,8 @@ class Users_EduRecord_Model extends Users_Record_Model {
                 $educationDetail['institution_name'] = $db->query_result($result, 0, 'institution_name');      
                 $educationDetail['educationid'] = $db->query_result($result, 0, 'educationid');
                 $educationDetail['currently_studying'] = $db->query_result($result, 0, 'currently_studying');	
-                                           $educationDetail['education_location'] = $db->query_result($result, 0, 'education_location');
+                $educationDetail['education_location'] = $db->query_result($result, 0, 'education_location');
+                $educationDetail['education_type'] = $db->query_result($result, 0, 'education_type');
                 $educationDetail['start_date'] = date('d-m-Y',strtotime($db->query_result($result, 0, 'start_date')));
                 $enddate = $db->query_result($result, 0, 'end_date');
 
@@ -146,12 +147,14 @@ LIMIT 3";
                 $userEducationList = array();
                 if($db->num_rows($result) > 0) {
                         for($i=0;$i<$db->num_rows($result);$i++) {
-                                $userEducationList[$i]['institution_id'] = $db->query_result($result, $i, 'institution_id');		$userEducationList[$i]['institution'] = $db->query_result($result, $i, 'institution');
+                                $userEducationList[$i]['institution_id'] = $db->query_result($result, $i, 'institution_id');		
+                                $userEducationList[$i]['institution'] = $db->query_result($result, $i, 'institution');
                                 $userEducationList[$i]['edu_id'] = $db->query_result($result, $i, 'edu_id');
                                 $userEducationList[$i]['start_date'] = $db->query_result($result, $i, 'start_date');
                                 $userEducationList[$i]['is_studying'] = $db->query_result($result, $i, 'is_studying');
                                 $userEducationList[$i]['end_date'] = $db->query_result($result, $i, 'end_date');
                                 $userEducationList[$i]['education_level'] = $db->query_result($result, $i, 'education_level');
+                                 $userEducationList[$i]['education_type'] = $db->query_result($result, $i, 'education_type');
                                 $userEducationList[$i]['major_id'] = $db->query_result($result, $i, 'major_id');
                                 $userEducationList[$i]['major'] = $db->query_result($result, $i, 'major');
                                 $userEducationList[$i]['description'] = $db->query_result($result, $i, 'description');
@@ -175,7 +178,8 @@ LIMIT 3";
 
                 for($i=0;$db->num_rows($result)>$i;$i++){
                         $eduList[$i]['institution_name'] = $db->query_result($result, $i, 'institution_name');
-                                                                $eduList[$i]['education_location'] = $db->query_result($result, $i, 'education_location');
+                        $eduList[$i]['education_location'] = $db->query_result($result, $i, 'education_location');
+                        $eduList[$i]['education_type'] = $db->query_result($result, $i, 'education_type');
                         $eduList[$i]['educationid'] = $db->query_result($result, $i, 'educationid');
                         $eduList[$i]['start_date'] = date('M Y',strtotime($db->query_result($result, $i, 'start_date')));
                         $eduList[$i]['end_date'] =  date('M Y',strtotime($db->query_result($result, $i, 'end_date')));
@@ -252,7 +256,7 @@ LIMIT 3";
                 }	
                         $education->column_fields['institution_name'] 	= $insId;	
                         $education->column_fields['education_location']             = $location;
-                        $education->column_fields['education_type']                   = $edu_type;	
+                       $education->column_fields['education_type']                   = $edu_type;	
                         $education->column_fields['start_date'] 		= $startdate;	
                         $education->column_fields['currently_studying']              = $studying;	
                         $education->column_fields['end_date'] 		=  $endDate;	
@@ -271,7 +275,8 @@ LIMIT 3";
          */
         function get_education_types(){
             $db = PearDatabase::getInstance();
-            $sql= "SELECT * FROM `vtiger_education_type ";
+           // $db->setDebug(true);
+            $sql= "SELECT * FROM vtiger_education_type ";
             $query = $db->query($sql,array());
             $num_rows = $db->num_rows($query);
             $data = array();

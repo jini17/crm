@@ -184,9 +184,11 @@
                                                         <div class="controls fieldValue col-md-8">
                                                                 <select class="select2 inputElement" name="edu_type" 
                                                                         id="education_type" data-rule-required = "true">
-                                                                    
-                                                                <option value="0">{vtranslate('LBL_PART_TIME', $QUALIFIED_MODULE)}</option> 	
-                                                                <option value="1">{vtranslate('LBL_FULL_TIME', $QUALIFIED_MODULE)}</option> 	
+                                                                    {foreach item=EDU from=$EDU_TYPE}
+                                                                        <option value='{$EDU}'>{$EDU}</option>
+                                                                     {/foreach}   
+                                                              {*  <option value="0">{vtranslate('LBL_PART_TIME', $QUALIFIED_MODULE)}</option> 	
+                                                                <option value="1">{vtranslate('LBL_FULL_TIME', $QUALIFIED_MODULE)}</option> *}	
                                                                 </select>
                                                         </div>
                                                 </div>
