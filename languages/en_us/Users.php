@@ -221,7 +221,10 @@ $languageStrings = array(
 	'Pacific/Auckland'  =>  '(UTC+12:00) Auckland',
 	'Asia/Magadan'  =>  '(UTC+12:00) Magadan',
 	'Pacific/Tongatapu'  =>  '(UTC+13:00) Nukualofa',
-
+                      'LBL_BEGINNER_LABEL'=>'Beginner',
+                      'LBL_INTERMEDIATE_LABEL'=>'Intermediate',
+                      'LBL_EXPERT_LABEL'=>'Expert',
+    
 	'Summary' => 'Summary',
 	'Detail' => 'Detail',
 	'LBL_USER_LIST_DETAILS' => 'Details',
@@ -398,7 +401,7 @@ $languageStrings = array(
 'LBL_WORKEXP_ADD_SUCCESS' =>'Work Experience added successfully',
 'LBL_WORKEXP_DELETED_SUCCESSFULLY'=>'Work Experience deleted successfuly',
 //End of WorkExperience
-
+'LBL_SKILL'=> 'Skills',
 //Start Language/Skills
 'LBL_SKILL_LANG'=>'Language &amp; Skills',
 'LBL_SLECTED_LANGUAGE'=>'Language Set',

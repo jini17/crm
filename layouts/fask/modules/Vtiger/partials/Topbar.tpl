@@ -47,6 +47,7 @@
      .searchoption .select2-highlighted{
        background-color: #2f5597 !important;
      }
+        .select2-container .select2-choice .select2-arrow b{ display: none; }
     .select2-container .select2-choice .select2-arrow {
 {*    background-image: -khtml-gradient(linear, left top, left bottom, from(#424242), to(#030303));
     background-image: -moz-linear-gradient(top, #424242, #030303);
@@ -59,6 +60,7 @@
     color: #fff;
     font-size: 1.3em;
     padding: 4px 12px;
+    
 }
 .select2-container .select2-choice {
     height: 41px; /* Jobsy form controls have 37px total height */
@@ -648,7 +650,63 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                         </li>
                                         <!--END-textheader-->
                                         <li>
-                                            <div class="dropdown">
+                                            <!-- ADDED BY KHALED -->
+                                            
+
+<div class="dropdown ">
+   <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><a aria-hidden="true" href="#" id="menubar_quickCreate" class="qc-button rightside-icon-dashboard" title="Quick Create"><i class="fa fa-plus"></i></a></div>
+   <ul class="dropdown-menu animated fadeIn" role="menu" aria-labelledby="dropdownMenu1" style="width:650px;">
+      <li class="title" style="padding: 5px 0 0 15px;">
+         <h4><strong>Quick Create</strong></h4>
+      </li>
+      <hr>
+      <li id="quickCreateModules" style="padding: 0 5px;">
+         <div class="col-lg-12" style="padding-bottom:15px;">
+            <div class="row">
+               <div class="col-lg-4"><a id="menubar_quickCreate_Users" class="quickCreateModule" data-name="Users" data-url="index.php?module=Users&parent=Settings&view=Edit" href="javascript:void(0)"><i class="material-icons pull-left">person</i><span class="quick-create-module">Employee</span></a></div>
+               <div class="col-lg-4"><a id="menubar_quickCreate_Leav" class="quickCreateModule" data-name="Leave" data-url="index.php?module=Leave&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">exit_to_app</i><span class="quick-create-module">Leave</span></a></div>
+               <div class="col-lg-4"><a id="menubar_quickCreate_Timesheet" class="quickCreateModule" data-name="Timesheet" data-url="index.php?module=Timesheet&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">timer</i><span class="quick-create-module">Timesheet</span></a></div>
+            </div>
+            <br>
+            <div class="row">
+               <div class="col-lg-4"><a id="menubar_quickCreate_Claim" class="quickCreateModule" data-name="Claim" data-url="index.php?module=Claim&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">attach_money</i><span class="quick-create-module">Claim</span></a></div>
+               <div class="col-lg-4"><a id="menubar_quickCreate_WorkingHours" class="quickCreateModule" data-name="WorkingHours" data-url="index.php?module=WorkingHours&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">access_time</i><span class="quick-create-module">Working Hours</span></a></div>
+               <div class="col-lg-4"><a id="menubar_quickCreate_Training" class="quickCreateModule" data-name="Training" data-url="index.php?module=Training&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">book</i><span class="quick-create-module">Training</span></a></div>
+            </div>
+            <br>
+            <div class="row">
+               <div class="col-lg-4"><a id="menubar_quickCreate_Attendance" class="quickCreateModule" data-name="Attendance" data-url="index.php?module=Attendance&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">assignment</i><span class="quick-create-module">Attendance</span></a></div>
+               <div class="col-lg-4"><a id="menubar_quickCreate_Payments" class="quickCreateModule" data-name="Payments" data-url="index.php?module=Payments&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">payment</i><span class="quick-create-module">Payments</span></a></div>
+               <div class="col-lg-4"><a id="menubar_quickCreate_Bills" class="quickCreateModule" data-name="Bills" data-url="index.php?module=Bills&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">receipt</i><span class="quick-create-module">Office Bills</span></a></div>
+            </div>
+            <br>
+            <div class="row">
+               <div class="col-lg-4"><a id="menubar_quickCreate_MessageBoard" class="quickCreateModule" data-name="MessageBoard" data-url="index.php?module=MessageBoard&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">sms</i><span class="quick-create-module">Message</span></a></div>
+               <div class="col-lg-4"><a id="menubar_quickCreate_Contacts" class="quickCreateModule" data-name="Contacts" data-url="index.php?module=Contacts&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">contacts</i><span class="quick-create-module">Contact</span></a></div>
+               <div calendar="" class="col-lg-4"><a id="menubar_quickCreate_Events" class="quickCreateModule" data-name="Events" data-url="index.php?module=Events&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">event</i><span class="quick-create-module">Meeting</span></a></div>
+            </div>
+            <br>
+            <div class="row">
+               <div calendar="" class="col-lg-4"><a id="menubar_quickCreate_Calendar" class="quickCreateModule" data-name="Calendar" data-url="index.php?module=Calendar&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">card_travel</i><span class="quick-create-module">Task</span></a></div>
+               <div documents="" class="col-lg-4 dropdown">
+                  <a id="menubar_quickCreate_Documents" class="quickCreateModuleSubmenu dropdown-toggle" data-name="Documents" data-toggle="dropdown" data-url="index.php?module=Documents&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">file_download</i><span class="quick-create-module">Document<i class="fa fa-caret-down quickcreateMoreDropdownAction"></i></span></a>
+                  <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_Documents">
+                     <li class="dropdown-header"><i class="material-icons">file_upload</i> File Upload</li>
+                     <li id="VtigerAction"><a href="javascript:Documents_Index_Js.uploadTo('Vtiger')"><img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">To Agiliux</a></li>
+                     <li class="dropdown-header"><i class="ti-link"></i> Link External Document</li>
+                     <li id="shareDocument"><a href="javascript:Documents_Index_Js.createDocument('E')">&nbsp;<i class="material-icons">link</i>&nbsp;&nbsp; From File Url</a></li>
+                     <li role="separator" class="divider"></li>
+                     <li id="createDocument"><a href="javascript:Documents_Index_Js.createDocument('W')"><i class="ti-file"></i> Create New Document</a></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </li>
+   </ul>
+</div>
+
+
+                                           {* <div class="dropdown">
                                                 <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 
 
@@ -681,7 +739,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                             <div class="row">
                                                                 {/if}
                                                                 {* Adding two links,Event and Task if module is Calendar *}
-                                                                {if $singularLabel == 'SINGLE_Calendar'}
+                                                             {*   {if $singularLabel == 'SINGLE_Calendar'}
                                                                 {assign var='singularLabel' value='LBL_TASK'}
                                                                 <div {$moduleName} class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
                                                                     <a id="menubar_quickCreate_Events" class="quickCreateModule" data-name="Events"
@@ -748,7 +806,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                 {/if}
                                                                 {/if}
                                                                 {/if}
-                                                                {/foreach}
+                                                                {/foreach}*}
                                                                 {* Khaled --
                                                                 <div class="clearfix"></div>
                                                                 <div class="row">
@@ -776,10 +834,10 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                     </div>
                                                                         </div>
                                                                 </div>*}
-                                                            </div>
+                                                            {*</div>
                                                         </li>
                                                     </ul>
-                                                </div>
+                                                </div>*}*}
                                             </li>
 
                                             <li>

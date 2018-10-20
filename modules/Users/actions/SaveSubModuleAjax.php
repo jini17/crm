@@ -245,8 +245,9 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
         public function saveEmergencyContact(Vtiger_Request $request) {
 
                 $module = $request->getModule();
-                $request= $_REQUEST['form'];
-                $request['isview']= $_REQUEST['isview'];
+                $request                                = $_REQUEST['form'];
+                $request['isview']               = $_REQUEST['isview'];
+              
 
                 $response = new Vtiger_Response();
                 try{
@@ -260,6 +261,25 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                 $response->emit();
 
         }
+        /**
+         * Delete Contact Ajax
+         * @param Vtiger_Request $request
+         */
+        public function deleteEmergencyDetails(Vtiger_Request $request){
+            $module = $request->getModule();
+             $request                                = $_REQUEST['contact_id'];
+               $response = new Vtiger_Response();
+               try{
+                    $return = Users_EmergencyRecord_Model::deleteContactDetails($request);
+                    $msg    = $return=='1'? vtranslate("LBL_CONTACT_UPDATE_SUCCESS","Users"):vtranslate("LBL_CONTACT_ADD_SUCCESS","Users"); 		
+
+                    $response->setResult($msg);
+                }catch(Exception $e){
+                    $response->setError($e->getCode(),$e->getMessage());
+                }
+                $response->emit();
+        }
+
         public function saveSkill(Vtiger_Request $request) {
 
                 $module = $request->getModule();

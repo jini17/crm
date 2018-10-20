@@ -9,25 +9,27 @@
  *************************************************************************************/
 
 class Users_EmergencyModule_Model extends Vtiger_Base_Model{
-    
+
     const tableName = 'secondcrm_emergencycontact';
-	
+
    public function getEditEmergencyUrl() {
-	return '?module=Users&view=EditEmergency';
+        return '?module=Users&view=EditEmergency';
     }
-	
-     
+
+
     public static function getInstance($id=null) {
+
         $db = PearDatabase::getInstance();
-		$emeregencyRecordModel=array();
-   
-		$query = 'SELECT * FROM '.self::tableName.' WHERE user_id=?';
-        	$result = $db->pquery($query,array($id));
-        	$emeregencyRecordModel = new self();
-        	if($db->num_rows($result) > 0) {
-        	    $row = $db->query_result_rowdata($result,0);
-        	    $emeregencyRecordModel->setData($row)->setType($type);
-        	}
+                $emeregencyRecordModel=array();
+                $query = 'SELECT * FROM '.self::tableName.' WHERE user_id=?';
+                $result = $db->pquery($query,array($id));
+                $emeregencyRecordModel = new self();
+                
+                if($db->num_rows($result) > 0) {
+                    $row = $db->query_result_rowdata($result,0);
+                    $emeregencyRecordModel->setData($row)->setType($type);
+                }
+                
         return $emeregencyRecordModel;
     }
 }

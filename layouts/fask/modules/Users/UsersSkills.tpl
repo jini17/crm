@@ -9,16 +9,44 @@
  ********************************************************************************/
 -->*}
 {strip}
+    <style>
+    .tooltip{ 
+  position:relative;
+  float:right;
+}
+.tooltip > .tooltip-inner {
+    padding:5px 15px;
+    font-weight:bold; font-size:13px;
+
+}
+.popOver + .tooltip > .tooltip-arrow {	
+    border-left: 5px solid transparent; 
+    border-right: 5px solid transparent;
+    border-top: 5px solid #eebf3f;
+}
+
+
+.progress{
+  border-radius:0;
+  overflow:visible;
+}
+.progress-bar{
+  -webkit-transition: width 1.5s ease-in-out;
+  transition: width 1.5s ease-in-out;
+}
+    </style>
 <div id="skill">
 <div id="LanguageContainer">
 {assign var=CREATE_LANGUAGE_URL value=$LANGUAGE_RECORD_MODEL->getCreateLanguageUrl()}
 {assign var=CREATE_SKILL_URL value=$LANGUAGE_RECORD_MODEL->getCreateSkillUrl()}
 {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
         <div class="btn-group pull-right allprofilebtn">
-            <button type="button" class="btn btn-primary" onclick="Users_Skills_Js.addLanguage('{$CREATE_LANGUAGE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_LANGUAGE', $MODULE)}</strong></button>
+            <button type="button" class="btn btn-primary" onclick="Users_Skills_Js.addLanguage('{$CREATE_LANGUAGE_URL}&userId={$USERID}');">
+                <i class="fa fa-plus"></i>&nbsp;&nbsp;
+                <strong>{vtranslate('LBL_ADD_LANGUAGE', $MODULE)}</strong>
+            </button>
         </div>
         <div class="clearfix"></div>
-
                     <div class="block listViewContentDiv" id="listViewContents" >
                         <div class="listViewEntriesDiv contents-bottomscroll " style="padding-top: 5px;">
                             <div class="bottomscroll-div"><div>
@@ -36,9 +64,25 @@
                                 </thead>
                                 <tbody>
                                     {foreach item=USER_LANGUAGE from=$USER_SOFTSKILL_LIST}
+                                        {if $USER_LANGUAGE['proficiency'] eq 'Elementary'}
+                                           {assign var=ACCURACY value="25%"}
+                                        {elseif $USER_LANGUAGE['proficiency'] eq 'Limited Working'}    
+                                              {assign var=ACCURACY value="50%"}
+                                        {elseif $USER_LANGUAGE['proficiency'] eq 'Professional Working'}    
+                                              {assign var=ACCURACY value="75%"}
+                                        {elseif $USER_LANGUAGE['proficiency'] eq 'Full Professional'}    
+                                              {assign var=ACCURACY value="85%"}
+                                         {elseif $USER_LANGUAGE['proficiency'] eq 'Native or Bilingual'}
+                                               {assign var=ACCURACY value="100%"}
+                                        {/if}    
                                     <tr>
                                         <td class="medium" valign="top">{$USER_LANGUAGE['language']}</td>
-                                        <td class="medium" valign="top">{$USER_LANGUAGE['proficiency']}</td>
+                                        <td class="medium" valign="top">
+                                         <div class="progress" >
+                                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {$ACCURACY}" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                                     <span  class="popOver" data-toggle="tooltip" data-placement="top" title="{$USER_LANGUAGE['proficiency']}"> </span>  
+                                            </div>
+                                        </td>
                                         <td class="medium" width="5%" valign="top">
                                             <div class="pull-right actions">
                                                 <span class="actionImages">
@@ -69,18 +113,43 @@
         <div class="listViewEntriesDiv contents-bottomscroll " style="padding-top: 5px;">
             <div class="bottomscroll-div">
                 <div>
-
-                    <div  style="width: 100%;    padding: 10px 0px; ">
-                        <div class="select2-container select2-container-multi select2 span12" id="allskillslist"  style="width: 100%;">
-                            <ul class="select2-choices ui-sortable" style="    border: none !important;">
+                    <table class="table detailview-table">
+                        <tr>
+                        <th> {vtranslate('LBL_SKILL',$MODULE)} </th>
+                        <th> </th> 
+                        <th></th>
+                        </tr>
                                 {foreach item=SKILL from=$USER_SKILL_CLOUD}
-                                <li class="select2-search-choice" style="cursor:default;" data-id="54" data-item-name="SQL">
-                                    <div class="pull-left" style="padding-right:25px;">{$SKILL['skill_title']}</div>
-                                    <a class="deleteSkill select2-search-choice-close" onclick="Users_Skills_Js.deleteSkill('{$SKILL['skill_id']}')" title="Delete"></a>
-                                    <div class="pull-right skillnum">{$SKILL['endorsement']}</div>
-                                </li>   
+                                    {assign var=LABEL value =$SKILL['skill_label']}
+                                    {if $LABEL eq 'LBL_BEGINNER_LABEL'}
+                                         {assign var=ACCURACY value= "40%"}
+                                    {elseif $LABEL eq 'LBL_INTERMEDIATE_LABEL'}
+                                         {assign var=ACCURACY value= "70%"}
+                                    {elseif $LABEL eq 'LBL_EXPERT_LABEL'}
+                                         {assign var=ACCURACY value= "70%"}     
+                                    {else}
+                                          {assign var=ACCURACY value= "0%"}
+                                    {/if}
+                                    <tr>
+                                        <td>
+                                        {$SKILL['skill_title']}
+                                        </td>
+                                        <td> 
+                                            <div class="progress" >
+                                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {$ACCURACY}" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                                     <span  class="popOver" data-toggle="tooltip" data-placement="top" title="{vtranslate($LABEL,$MODULE)}"> </span>  
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a class="deleteSkills" onclick="Users_Skills_Js.deleteSkill('{$SKILL['skill_id']}')" title="Delete">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                            {*<div class="pull-right skillnum">{$SKILL['endorsement']}</div>*}
+                                        </td>
+                                    </tr>
+                                    
                                 {/foreach}
-                            </ul>
+                           </table>
                         </div>
                     </div>
                 </div>
@@ -89,6 +158,14 @@
     </div>        
 </div>
 </div>
+<script>
+$(function() {
+  $('[data-toggle="tooltip"]').tooltip({
+    trigger: 'manual'
+  }).tooltip('show');
+});
+</script>
+
 {/strip}
 
 

@@ -119,7 +119,7 @@ class Users_ProjectRecord_Model extends Users_Record_Model {
                 $db  = PearDatabase::getInstance();
                 //$db->setDebug(true);
                 $params = array($userId);
-                $result2 = $db->pquery("SELECT employeeprojectsid,project_title,occupation, project_url, project_description,ispublic , date_FORMAT(project_start_date,'%M-%Y') as project_start_date FROM vtiger_employeeprojects
+                $result2 = $db->pquery("SELECT employeeprojectsid,project_title,occupation, project_url, project_description,ispublic , date_FORMAT(project_start_date,'%b %Y') as project_start_date FROM vtiger_employeeprojects
                                          INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_employeeprojects.employeeprojectsid
                                         WHERE vtiger_crmentity.deleted = 0  AND vtiger_crmentity.smownerid = ?", $params);
                 $userWEProjectList = array();
