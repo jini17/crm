@@ -1325,4 +1325,30 @@ class Users_Record_Model extends Vtiger_Record_Model {
                 return $imageDetails;
         }
         
+        /**
+         * Added By Khaled
+         * Record Permssion 
+         * @param type $role
+         * @param type $record_user_id
+         * @param type $current_user_id
+         * @param type $permission
+         * @return boolean
+         */
+        public function recordPermission($role,$record_user_id,$current_user_id,$permission){
+            $system_roles = array('H1',"H12","H13","H14","H15","H16");
+            if($permission == 0){
+                return true;
+            }
+            elseif($permission == 1 && in_array($role, $system_roles)){
+                return true;
+            }
+            elseif($permission == 2 && $record_user_id == $current_user_id){
+                return true;
+            }
+            else{
+                return false;
+            }
+            
+            
+        }
 }

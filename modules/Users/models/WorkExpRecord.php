@@ -152,7 +152,9 @@ class Users_WorkExpRecord_Model extends Users_Record_Model {
         }
 
         public function getUserWorkExpList($userId) {
-
+              $currentUserModel = Users_Record_Model::getCurrentUserModel();
+              $current_user_id = $currentUserModel->get('id');
+              $role                        = $currentUserModel->get('roleid');
                 $db  = PearDatabase::getInstance();
                 $sql = "SELECT tblSCW.uw_id, tblSCW.company_id,tblSCC.company_title, 
                                 tblSCD.designation,
@@ -169,7 +171,10 @@ class Users_WorkExpRecord_Model extends Users_Record_Model {
                 $userWorkExpList = array();
                 if($db->num_rows($result) > 0) {
                         for($i=0;$i<$db->num_rows($result);$i++) {
-                                $userWorkExpList[$i]['company_id'] = $db->query_result($result, $i, 'company');
+                            
+                              $permission = Users_Record_Model::recordPermission($role,$db->query_result($result, $i, 'company_id'),$current_user_id,$db->query_result($result, $i, 'isview'));
+                              if($permission){
+                              $userWorkExpList[$i]['company_id'] = $db->query_result($result, $i, 'company');
                                 $userWorkExpList[$i]['company_title'] = $db->query_result($result, $i, 'company_title');
                                 $userWorkExpList[$i]['uw_id'] = $db->query_result($result, $i, 'uw_id');
                                 $userWorkExpList[$i]['designation'] = $db->query_result($result, $i, 'designation');
@@ -179,6 +184,7 @@ class Users_WorkExpRecord_Model extends Users_Record_Model {
                                 $userWorkExpList[$i]['end_date'] = $db->query_result($result,$i, 'end_date');
                                 $userWorkExpList[$i]['description'] = $db->query_result($result, $i, 'description');
                                 $userWorkExpList[$i]['isview'] = $db->query_result($result, $i, 'isview');
+                              }
                         }
                 }
                 return $userWorkExpList;		

@@ -116,6 +116,10 @@ class Users_ProjectRecord_Model extends Users_Record_Model {
         }
 
         public function getUserProjectList($userId) {
+             $currentUserModel = Users_Record_Model::getCurrentUserModel();
+              $current_user_id = $currentUserModel->get('id');
+              $role                        = $currentUserModel->get('roleid');
+              
                 $db  = PearDatabase::getInstance();
                 //$db->setDebug(true);
                 $params = array($userId);
@@ -125,6 +129,9 @@ class Users_ProjectRecord_Model extends Users_Record_Model {
                 $userWEProjectList = array();
                 if($db->num_rows($result2) > 0) {
                         for($j=0;$j<$db->num_rows($result2);$j++) {
+                            
+                        $permission = Users_Record_Model::recordPermission($role,$db->query_result($result2, $j, 'employeeprojectsid'),$current_user_id,$db->query_result($result2, $i, 'ispublic'));
+                             if($permission){
                                 $userWEProjectList[$j]['employeeprojectsid'] = $db->query_result($result2, $j, 'employeeprojectsid');			
                                 $userWEProjectList[$j]['title'] = $db->query_result($result2, $j, 'project_title');
                                 $userWEProjectList[$j]['designation'] = $db->query_result($result2, $j, 'occupation');
@@ -132,6 +139,7 @@ class Users_ProjectRecord_Model extends Users_Record_Model {
                                 $userWEProjectList[$j]['project_url'] = $db->query_result($result2, $j, 'project_url');
                                 $userWEProjectList[$j]['description'] = $db->query_result($result2, $j, 'project_description');
                                 $userWEProjectList[$j]['isview'] = $db->query_result($result2, $j, 'ispublic');
+                             }
                         }
                 }
 

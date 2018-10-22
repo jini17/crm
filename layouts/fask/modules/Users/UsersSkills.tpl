@@ -18,17 +18,27 @@
     padding:5px 15px;
     font-weight:bold; font-size:13px;
 
+
 }
 .popOver + .tooltip > .tooltip-arrow {	
     border-left: 5px solid transparent; 
     border-right: 5px solid transparent;
     border-top: 5px solid #eebf3f;
 }
+.tooltip.top{
+margin: 15px;
+}
+.tooltip-arrow{
+display: none;
+}
 
 
 .progress{
   border-radius:0;
   overflow:visible;
+  height: 35px;
+  border: none;
+  position: relative;
 }
 .progress-bar{
   -webkit-transition: width 1.5s ease-in-out;
@@ -57,7 +67,7 @@
                                 <thead>
                                     <tr>
                                         <th nowrap="">
-                                            <strong>{vtranslate('LBL_LANGUAGE', $MODULE)}</strong>
+                                          {*  <strong>{vtranslate('LBL_LANGUAGE', $MODULE)}</strong>*}
                                         </th>
                                         <th colspan="2" class="medium" nowrap=""><strong>{vtranslate('LBL_PROFICIENCY', $MODULE)}</strong></th>
                                     </tr>

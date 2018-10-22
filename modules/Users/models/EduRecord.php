@@ -165,7 +165,10 @@ LIMIT 3";
         }
 
         public function getUserEducationList($userId) {
-
+              $currentUserModel = Users_Record_Model::getCurrentUserModel();
+              $current_user_id = $currentUserModel->get('id');
+              $role                        = $currentUserModel->get('roleid');
+              
                 $db = PearDatabase::getInstance();
 
                 $query = "SELECT vtiger_education.* FROM vtiger_education
@@ -177,6 +180,8 @@ LIMIT 3";
                 $eduList=array();	
 
                 for($i=0;$db->num_rows($result)>$i;$i++){
+                    $permission = Users_Record_Model::recordPermission($role,$db->query_result($result, $i, 'educationid'),$current_user_id,$db->query_result($result, $i, 'public'));
+                  if($permission){
                         $eduList[$i]['institution_name'] = $db->query_result($result, $i, 'institution_name');
                         $eduList[$i]['education_location'] = $db->query_result($result, $i, 'education_location');
                         $eduList[$i]['education_type'] = $db->query_result($result, $i, 'education_type');
@@ -188,6 +193,7 @@ LIMIT 3";
                         $eduList[$i]['area_of_study'] = $db->query_result($result, $i, 'area_of_study');
                         $eduList[$i]['description'] = $db->query_result($result, $i, 'description');
                         $eduList[$i]['public'] = $db->query_result($result, $i, 'public');
+                  }
                 }
 
                 return $eduList;
