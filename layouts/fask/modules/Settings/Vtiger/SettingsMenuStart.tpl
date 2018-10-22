@@ -60,6 +60,7 @@
                 {assign var=LEFTPANELHIDE value=$USER_MODEL->get('leftpanelhide')}
 
         <div class="module-nav clearfix settingsNav hidden-sm hidden-xs" id="modnavigator">
+    <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 15px;left:0; z-index: 999" title="Left Panel Show/Hide"><span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>
 
             <div class=" height100Per sidebar-essentials">
                 {include file="modules/Settings/Vtiger/Sidebar.tpl"}
