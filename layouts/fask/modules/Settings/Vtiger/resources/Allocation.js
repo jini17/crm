@@ -270,6 +270,12 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
 
                     // var thisInstance1 = this;
 
+                    jQuery('#monthly_limit3').on('change', function() {
+
+                        alert('changed');
+
+                    })
+
 
                 });
 
@@ -748,7 +754,7 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
         alert('ok');
     },
 
-    addMultipleClaimtype: function(){
+    addMultipleClaimtype: function(){ 
         var counter=0;
         var limit=0;
         var thisInstance = this;
@@ -776,24 +782,35 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
 
             element = element + '<div class="container float-left" style="margin-left:221px;">'+
                     '<div class="contents row form-group" style="margin-left: 30px;">'+
-                    '<label class="switch"><input onclick="'+thisInstance.toggleLimit(this)+'" class="sliderform-check-input" type="checkbox" id="trans_limit'+counter+'" value="trans_limit">Transaction Limit</input><span class="slider round"></span>'+
-                    '<input style="margin-left:15px;" id="trans_limit_input'+ counter +'" type="text" name="trans_limit'+ counter +'">'+
+                    '<label class="switch"><input class="sliderform-check-input" type="checkbox" id="trans_limit'+counter+'" data-child="#trans_limit_input'+ counter +'">Transaction Limit</input><span class="slider round"></span>'+
+                    '<input style="margin-left:15px;" id="trans_limit_input'+ counter +'" type="text" name="trans_limit'+ counter +'" hidden>'+
                     '</div><div class="contents row form-group" style="margin-left: 30px;">'+
-                    '<label class="switch"><input onclick="'+thisInstance.toggleLimit(this)+'" class="form-check-input" type="checkbox" id="monthly_limit'+counter+'" name="">Monthly Limit</input><span class="slider round"></span>'+
-                    '<input style="margin-left:36px;" type="text" id="monthly_limit_input'+ counter +'" name="monthly_limit'+ counter +'" ></div>'+
+                    '<label class="switch"><input class="sliderform-check-input" type="checkbox" id="monthly_limit'+counter+'" data-child="#monthly_limit_input'+ counter +'">Monthly Limit</input><span class="slider round"></span>'+
+                    '<input style="margin-left:36px;" type="text" id="monthly_limit_input'+ counter +'" name="monthly_limit'+ counter +'" hidden></div>'+
                     '<div class="contents row form-group" style="margin-left: 30px;">'+
-                    '<label class="switch"><input onclick="'+thisInstance.toggleLimit(this)+'" class="form-check-input" type="checkbox" id="yearly_limit'+counter+'" name="">Yearly Limit</input><span class="slider round"></span>'+
-                    '<input style="margin-left:53px;" type="text" id="yearly_limit_input'+ counter +'" name="yearly_limit'+ counter +'" >'+
+                    '<label class="switch"><input class="sliderform-check-input" type="checkbox" id="yearly_limit'+counter+'" data-child="#yearly_limit_input'+ counter +'">Yearly Limit</input><span class="slider round"></span>'+
+                    '<input style="margin-left:53px;" type="text" id="yearly_limit_input'+ counter +'" name="yearly_limit'+ counter +'" hidden>'+
                     '</div></div></div>'
 
             element = element + '</div>';
 
             jQuery("#ClaimTypeAllocation").append(element);
 
-            jQuery(document).on('click', "#removeid"+ counter,function(){
+            jQuery(document).on('click', "#removeid" + counter,function(){
                 limit--;
                 jQuery("#AddClaimtype").prop('disabled', false);
             });
+
+            // Added By Mabruk
+            jQuery('.sliderform-check-input').change(function(){ 
+                
+                input = jQuery(jQuery(this).data('child')); 
+                if (input.is(':hidden'))
+                    input.show();
+                else
+                    input.hide();    
+
+            });           
 
         });
 

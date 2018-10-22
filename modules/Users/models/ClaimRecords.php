@@ -55,7 +55,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 	}
 
 	// Added By Mabruk
-	public function getClaimForEmployeeContract($id,$year){
+	public function getClaimForEmployeeContract($id,$year){ 
 
 		$db 	= PearDatabase::getInstance(); //$db->setDebug(true); 
 		
@@ -93,7 +93,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 			
 			$myclaims[$i]['category']   = $rowdetail['claim_type'];	
 		}
-		
+		//print_r($myclaims);die;
 		return $myclaims;
 
 	}	
@@ -133,7 +133,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 				$yearlylimit 	= $rowdetail['yearly_limit'];
 				if($yearlylimit !='' && $yearlylimit != '0.00'){
 					$allocated = $yearlylimit;
-					$balance = $allocated-$used ;
+					$balance = $allocated-$used;
 				} else {
 					$allocated = 'No Limit';
 					$balance = 'No Limit';
