@@ -13,13 +13,15 @@
     .tooltip{ 
   position:relative;
   float:right;
+  top: -13px;
 }
 .tooltip > .tooltip-inner {
-    padding:5px 15px;
+    padding:5px 5px;
     font-weight:bold; font-size:13px;
-
+     position: absolute;
 
 }
+
 .popOver + .tooltip > .tooltip-arrow {	
     border-left: 5px solid transparent; 
     border-right: 5px solid transparent;
@@ -36,7 +38,8 @@ display: none;
 .progress{
   border-radius:0;
   overflow:visible;
-  height: 35px;
+  margin: 0;
+
   border: none;
   position: relative;
 }
@@ -75,23 +78,25 @@ display: none;
                                 <tbody>
                                     {foreach item=USER_LANGUAGE from=$USER_SOFTSKILL_LIST}
                                         {if $USER_LANGUAGE['proficiency'] eq 'Elementary'}
-                                           {assign var=ACCURACY value="25%"}
+                                           {assign var=ACCURACY value="25"}
                                         {elseif $USER_LANGUAGE['proficiency'] eq 'Limited Working'}    
-                                              {assign var=ACCURACY value="50%"}
+                                              {assign var=ACCURACY value="50"}
                                         {elseif $USER_LANGUAGE['proficiency'] eq 'Professional Working'}    
-                                              {assign var=ACCURACY value="75%"}
+                                              {assign var=ACCURACY value="75"}
                                         {elseif $USER_LANGUAGE['proficiency'] eq 'Full Professional'}    
-                                              {assign var=ACCURACY value="85%"}
+                                              {assign var=ACCURACY value="85"}
                                          {elseif $USER_LANGUAGE['proficiency'] eq 'Native or Bilingual'}
-                                               {assign var=ACCURACY value="100%"}
+                                               {assign var=ACCURACY value="100"}
                                         {/if}    
                                     <tr>
                                         <td class="medium" valign="top">{$USER_LANGUAGE['language']}</td>
-                                        <td class="medium" valign="top">
-                                         <div class="progress" >
-                                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {$ACCURACY}" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                                     <span  class="popOver" data-toggle="tooltip" data-placement="top" title="{$USER_LANGUAGE['proficiency']}"> </span>  
-                                            </div>
+                                        <td class="medium" valign="top">                                  
+                                                <div class="progress">
+                                                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar"
+                                                aria-valuenow="{$ACCURACY}" aria-valuemin="0" aria-valuemax="100" style="width:{$ACCURACY}%">
+                                                         {$USER_LANGUAGE['proficiency']}
+                                                </div>
+                                              </div>
                                         </td>
                                         <td class="medium" width="5%" valign="top">
                                             <div class="pull-right actions">
@@ -132,23 +137,26 @@ display: none;
                                 {foreach item=SKILL from=$USER_SKILL_CLOUD}
                                     {assign var=LABEL value =$SKILL['skill_label']}
                                     {if $LABEL eq 'LBL_BEGINNER_LABEL'}
-                                         {assign var=ACCURACY value= "40%"}
+                                         {assign var=ACCURACY value= "40"}
                                     {elseif $LABEL eq 'LBL_INTERMEDIATE_LABEL'}
-                                         {assign var=ACCURACY value= "70%"}
+                                         {assign var=ACCURACY value= "70"}
                                     {elseif $LABEL eq 'LBL_EXPERT_LABEL'}
-                                         {assign var=ACCURACY value= "70%"}     
+                                         {assign var=ACCURACY value= "70"}     
                                     {else}
-                                          {assign var=ACCURACY value= "0%"}
+                                          {assign var=ACCURACY value= "0"}
                                     {/if}
                                     <tr>
                                         <td>
                                         {$SKILL['skill_title']}
                                         </td>
                                         <td> 
-                                            <div class="progress" >
-                                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {$ACCURACY}" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                                     <span  class="popOver" data-toggle="tooltip" data-placement="top" title="{vtranslate($LABEL,$MODULE)}"> </span>  
-                                            </div>
+                                          
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar"
+                                                aria-valuenow="{$ACCURACY}" aria-valuemin="0" aria-valuemax="100" style="width:{$ACCURACY}%">
+                                                                     {vtranslate($LABEL,$MODULE)}
+                                                </div>
+                                              </div>
                                         </td>
                                         <td>
                                             <a class="deleteSkills" onclick="Users_Skills_Js.deleteSkill('{$SKILL['skill_id']}')" title="Delete">

@@ -11,6 +11,8 @@ Vtiger.Class("Users_Emergency_Js", {
 
         //register click event for Add New emergencycontact button
         addEmergency : function(url) { 
+            jQuery('input').val('');
+              $('#select2-results-4').prop('selectedIndex',0);
              this.editEmergency(url);
 
         },

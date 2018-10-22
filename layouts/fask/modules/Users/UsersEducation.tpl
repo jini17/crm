@@ -31,8 +31,8 @@
                     <tr>
                         <th class="medium"><strong>{vtranslate('LBL_INSTITUTION_NAME', $MODULE)}</strong></th>
                         <th class="medium"><strong>{vtranslate('LBL_LOCATION', $MODULE)}</strong></th>
-                           <th class="medium"><strong>{vtranslate('LBL_EDUCATION_TYPE', $MODULE)}</strong></th>
-                        <th class="medium"><strong>{vtranslate('LBL_DURATION', $MODULE)}</strong></th>
+                        <th class="medium"><strong>{vtranslate('LBL_EDUCATION_TYPE', $MODULE)}</strong></th>
+                        <th style='width:15%' class="medium"><strong>{vtranslate('LBL_DURATION', $MODULE)}</strong></th>
                         <th class="medium"><strong>{vtranslate('LBL_EDUCATION_LEVEL', $MODULE)}</strong></th>
                         <th class="medium"><strong>{vtranslate('LBL_AREA_OF_STUDY', $MODULE)}</strong></th>
                         <th class="medium"><strong>{vtranslate('LBL_DESCRIPTION', $MODULE)}</strong></th>

@@ -693,14 +693,14 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
             <br>
             <div class="row">
                <div class="col-lg-4"><a id="menubar_quickCreate_MessageBoard" class="quickCreateModule" data-name="MessageBoard" data-url="index.php?module=MessageBoard&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">sms</i><span class="quick-create-module">Message</span></a></div>
-               <div class="col-lg-4"><a id="menubar_quickCreate_Contacts" class="quickCreateModule" data-name="Contacts" data-url="index.php?module=Contacts&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">contacts</i><span class="quick-create-module">Contact</span></a></div>
+               <div class="col-lg-4"><a id="menubar_quickCreate_Contacts" class="quickCreateModule" data-name="Contacts" data-url="index.php?module=Contacts&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">contacts</i><span class="quick-create-module">Contacts</span></a></div>
                <div calendar="" class="col-lg-4"><a id="menubar_quickCreate_Events" class="quickCreateModule" data-name="Events" data-url="index.php?module=Events&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">event</i><span class="quick-create-module">Meeting</span></a></div>
             </div>
             <br>
             <div class="row">
-               <div calendar="" class="col-lg-4"><a id="menubar_quickCreate_Calendar" class="quickCreateModule" data-name="Calendar" data-url="index.php?module=Calendar&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">card_travel</i><span class="quick-create-module">Task</span></a></div>
+               <div calendar="" class="col-lg-4"><a id="menubar_quickCreate_Calendar" class="quickCreateModule" data-name="Calendar" data-url="index.php?module=Calendar&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">card_travel</i><span class="quick-create-module">Tasks</span></a></div>
                <div documents="" class="col-lg-4 dropdown">
-                  <a id="menubar_quickCreate_Documents" class="quickCreateModuleSubmenu dropdown-toggle" data-name="Documents" data-toggle="dropdown" data-url="index.php?module=Documents&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">file_download</i><span class="quick-create-module">Document<i class="fa fa-caret-down quickcreateMoreDropdownAction"></i></span></a>
+                  <a id="menubar_quickCreate_Documents" class="quickCreateModuleSubmenu dropdown-toggle" data-name="Documents" data-toggle="dropdown" data-url="index.php?module=Documents&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">file_download</i><span class="quick-create-module">Documents<i class="fa fa-caret-down quickcreateMoreDropdownAction"></i></span></a>
                   <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_Documents">
                      <li class="dropdown-header"><i class="material-icons">file_upload</i> File Upload</li>
                      <li id="VtigerAction"><a href="javascript:Documents_Index_Js.uploadTo('Vtiger')"><img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">To Agiliux</a></li>

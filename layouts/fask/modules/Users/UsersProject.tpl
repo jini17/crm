@@ -25,6 +25,7 @@
                                 <h5>{vtranslate('User Projects', $MODULE)}</h5>
                             </div>
                             <hr>
+                            
                             <table class="table detailview-table">
                                 <thead>
                                     <tr>
@@ -43,12 +44,15 @@
                                 </thead>
                                 <tbody>
                                     {foreach item=USER_PROJECT from=$USER_PROJECT_LIST}
-                                         {if $USER_PROJEC['public'] eq '0'}
+                                        
+                                         {if $USER_PROJECT['isview'] eq '0'}
                                                {assign var=PERMISSION value=LBL_PUBLIC}  
-                                        {elseif $USER_PROJECT['public'] eq '1'}
+                                        {elseif $USER_PROJECT['isview'] eq '1'}
                                                 {assign var=PERMISSION value=LBL_PRIVATE}  
-                                        {else}
+                                        {elseif  $USER_PROJECT['isview'] eq '2'}
                                                 {assign var=PERMISSION value='LBL_PROTECTED'}  
+                                         {else}
+                                        
                                         {/if}    
                                     <tr>
                                         <td class="" valign="top" style="width:10%;">{$USER_PROJECT['title']}</td>                                     

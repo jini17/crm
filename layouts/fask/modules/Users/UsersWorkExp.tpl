@@ -34,7 +34,7 @@
                                         </th>
                                         <th><strong>{vtranslate('LBL_DESIGNATION', $MODULE)}</strong></th>
                                         <th><strong>{vtranslate('LBL_LOCATION', $MODULE)}</strong></th>
-                                        <th><strong>{vtranslate('LBL_TIMEPERIOD', $MODULE)}</strong></th>
+                                        <th style="width: 15%"><strong>{vtranslate('LBL_TIMEPERIOD', $MODULE)}</strong></th>
                                         <th><strong>{vtranslate('LBL_DESCRIPTION', $MODULE)}</strong></th>
                                         <th><strong>{vtranslate('LBL_JOB_TYPE', $MODULE)}</strong></th>
                                         <th colspan="2" class="medium" ><strong>{vtranslate('LBL_EDUCATION_ISVIEW', $MODULE)}</strong></th>

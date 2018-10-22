@@ -7,7 +7,9 @@
                                                                 </button>
 		</div>
         <div class="clearfix"></div>
-{foreach item=contact from=$USER_EMERGENCY_CONTACTS}
+        {assign var=total value=$USER_EMERGENCY_CONTACTS|@count}
+
+{foreach item=contact key=k from=$USER_EMERGENCY_CONTACTS}
         <div class="block block_LBL_USER_EMERGENCY">
                             <div>
                                 <div class="col-md-6">
@@ -15,9 +17,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <span class="pull-right">
-                                        <a href="#" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}');"><li class="fa fa-plus-circle"></li></a> &nbsp;
+                                      {if $total lt '5'}  <a href="#" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId=0&record_id=0');"><li class="fa fa-plus-circle"></li></a> &nbsp; {/if}
                                         <a href="#" onclick="Users_Emergency_Js.editEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}&record_id={$contact['id']}');"><li class="fa fa-pencil"></li></a> &nbsp;
-                                        <a href="#" onclick="Users_Emergency_Js.deleteEmergerncyContact('{$EDIT_EMERGENCY_URL}&userId={$USERID}&delete_id={$contact['id']}','{$USERID}');"><li class="fa fa-trash-o"></li></a> &nbsp;
+                                      {if $k neq '0'}  <a href="#" onclick="Users_Emergency_Js.deleteEmergerncyContact('{$EDIT_EMERGENCY_URL}&userId={$USERID}&delete_id={$contact['id']}','{$USERID}');"><li class="fa fa-trash-o"></li></a> &nbsp;{/if}
                                     </span>
                                 </div>
                                 <div class="clearfix"></div>
