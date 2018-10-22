@@ -57,8 +57,8 @@
      .searchoption .select2-highlighted{
        background-color: #2f5597 !important;
      }
-        .select2-container .select2-choice .select2-arrow b{ display: none; }
-    .select2-container .select2-choice .select2-arrow {
+       .searchoption  .select2-container .select2-choice .select2-arrow b{ display: none; }
+  .searchoption   .select2-container .select2-choice .select2-arrow {
 {*    background-image: -khtml-gradient(linear, left top, left bottom, from(#424242), to(#030303));
     background-image: -moz-linear-gradient(top, #424242, #030303);
     background-image: -ms-linear-gradient(top, #424242, #030303);
@@ -72,7 +72,7 @@
     padding: 4px 12px;
     
 }
-.select2-container .select2-choice {
+ .searchoption .select2-container .select2-choice {
     height: 41px; /* Jobsy form controls have 37px total height */
     border: 2px solid #bdc3c7;
     border-radius: 6px;
