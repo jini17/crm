@@ -19,6 +19,11 @@
    width: 100% !important;
    display: block !important;
    }
+   .imageDelete{
+        position: absolute;
+         top: -79px;
+         left: -972%;
+   }
 </style>
 {if !empty($PICKIST_DEPENDENCY_DATASOURCE)}
 <input type="hidden" name="picklistDependency" value='{Vtiger_Util_Helper::toSafeHTML($PICKIST_DEPENDENCY_DATASOURCE)}' />
@@ -105,6 +110,7 @@
                {vtranslate($FIELD_MODEL->get('label'), $MODULE)}
             </div>
             <div class="fieldValue col-xs-9 col-md-9">
+                
                {include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
             </div>
             {/foreach}    

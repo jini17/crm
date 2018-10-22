@@ -35,18 +35,18 @@
                                                     {else if $MOD_NAME eq "Calendar"}
                                                             {assign var=VT_ICON value="Task"}
                                                     {/if}
-                                                    {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
+                                                    {assign var=iconsarray value=['potentials'=>'attach_money','education'=>'book','claim'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
                                                                     'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
                                                                     'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
                                                                     'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
                                                                     'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
                                                                     'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
                                                                     'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-                                                                    'mycthemeswitcher'=>'folder', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people' ]}
+                                                                    'mycthemeswitcher'=>'folder','contacts'=>'contacts','workinghours'=>'access_time','messageboard '=>'sms','holiday'=>'cloud','claimtype'=>'attach_money', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people' ,'task'=>'card_travel','leave'=>'exit_to_app','employeecontract'=>'person']}
 
 
                                                         {*<span><i class="material-icons entryIcon" title={$TRANSLATED_MODULE_NAME}>{$iconsarray[{strtolower($VT_ICON)}]}</i></span>&nbsp;&nbsp;*}
-                                                                                                    <i class="fa fa-envelope" title="{$TRANSLATED_MODULE_NAME}"></i>&nbsp;&nbsp;
+                                                                             {$VT_ICON} <i class="material-icons entryIcon" title={$TRANSLATED_MODULE_NAME}>{$iconsarray[{strtolower($VT_ICON)}]}</i> &nbsp;&nbsp;
 
 
                                             </div>
@@ -62,7 +62,7 @@
                                                                             {if $INDEX lt 2}
                                                                                     {if $FIELD && $FIELD->getFieldInstance() && $FIELD->getFieldInstance()->isViewableInDetailView()}
                                                                                             <div>
-                                                                                                    <i>{vtranslate($FIELD->getName(), $FIELD->getModuleName())}</i>
+                                                                                                  {$FIELD->getName()}  <i>{vtranslate($FIELD->getName(), $FIELD->getModuleName())}</i>
                                                                                                     {if $FIELD->get('prevalue') neq '' && $FIELD->get('postvalue') neq '' && !($FIELD->getFieldInstance()->getFieldDataType() eq 'reference' && ($FIELD->get('postvalue') eq '0' || $FIELD->get('prevalue') eq '0'))}
                                                                                                             &nbsp;{vtranslate('LBL_FROM')} <b>{Vtiger_Util_Helper::toVtiger6SafeHTML($FIELD->getDisplayValue(decode_html($FIELD->get('prevalue'))))}</b>
                                                                                                     {else if $FIELD->get('postvalue') eq '' || ($FIELD->getFieldInstance()->getFieldDataType() eq 'reference' && $FIELD->get('postvalue') eq '0')}
@@ -133,7 +133,7 @@
                             <div class="row">
                                     <div class="col-lg-1 col-xs-3 pull-left">
                                         {*<span><i class="material-icons entryIcon" title={$TRANSLATED_MODULE_NAME}>chat</i></span>*}
-                                        <i class="fa fa-envelope"  title="{$TRANSLATED_MODULE_NAME}"></i>
+                                     <i class="fa fa-comments" title={$TRANSLATED_MODULE_NAME}></i>
                                     </div>
                                     <div class="col-lg-11 col-xs-9 pull-right" style="margin-top:5px;">
                                             {assign var=COMMENT_TIME value=$HISTORY->getCommentedTime()}

@@ -49,6 +49,8 @@
             color: #fff !important;
             border-radius: 3px !important;
             border: 0 !important;
+            box-shadow:none !important;
+            text-shadow: none !important;
     }
       .searchoption .select2-container .select2-choice .select2-arrow {
         color: #fff !important;
@@ -848,7 +850,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                             {*</div>
                                                         </li>
                                                     </ul>
-                                                </div>*}*}
+                                                </div>*}
                                             </li>
 
                                             <li>
