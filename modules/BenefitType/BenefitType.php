@@ -38,12 +38,12 @@ class BenefitType extends Vtiger_CRMEntity {
 	var $list_fields = Array (
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'BenefitType' => Array('benefittype', 'benefit_type'),
+		'Benefit Type' => Array('benefittype', 'benefit_type'),
 		'Assigned To' => Array('crmentity','smownerid')
 	);
 	var $list_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'BenefitType' => 'benefit_type',
+		'Benefit Type' => 'benefit_type',
 		'Assigned To' => 'assigned_user_id',
 	);
 
@@ -54,12 +54,12 @@ class BenefitType extends Vtiger_CRMEntity {
 	var $search_fields = Array(
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'BenefitType' => Array('benefittype', 'benefit_type'),
+		'Benefit Type' => Array('benefittype', 'benefit_type'),
 		'Assigned To' => Array('vtiger_crmentity','assigned_user_id'),
 	);
 	var $search_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'BenefitType' => 'benefit_type',
+		'Benefit Type' => 'benefit_type',
 		'Assigned To' => 'assigned_user_id',
 	);
 

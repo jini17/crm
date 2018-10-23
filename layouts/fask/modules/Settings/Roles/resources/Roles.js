@@ -634,7 +634,7 @@ var Settings_Roles_Js = {
                                                                 app.request.post({'data' : formData}).then(function(err, data){
                                                                         app.helper.hideProgress();
                                                                         if(err === null ){
-                                                                                window.history.back();
+                                                                               // window.history.back();
                                                                         }else {
 
                                                                         }
