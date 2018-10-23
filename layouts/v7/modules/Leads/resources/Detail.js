@@ -142,7 +142,9 @@ Vtiger_Detail_Js("Leads_Detail_Js", {
         if (referenceField.length > 0) {
             jQuery('#AccountsModule').attr('readonly', 'readonly');
         }
-    },
+    },   
+
+
     /*
      * function to register Convert Lead Events
      */
@@ -244,7 +246,7 @@ Vtiger_Detail_Js("Leads_Detail_Js", {
         }
         formElement.vtValidate(params);
     },
-    registerForDisableCheckEvent: function () {
+    registerForDisableCheckEvent: function () {        
         var container = this.getConvertLeadContainer();
         var oppAccMandatory = jQuery('#oppAccMandatory').val();
         var oppConMandatory = jQuery('#oppConMandatory').val();

@@ -23,9 +23,12 @@
                     <h4 class="col-xs-8">{vtranslate({$BLOCK_LABEL_KEY},{$MODULE_NAME})}</h4>
                     <div class="col-xs-4 marginTop5px">
                         <div class=" pull-right detailViewButtoncontainer">
+                            <!--Added By Mabruk-->
+                            {if $BLOCK_LABEL_KEY eq "LBL_CALENDAR_SETTINGS"}
                             <div class="btn-group  pull-right">
-                                <a class="btn btn-default" href="{$RECORD->getCalendarSettingsEditViewUrl()}">Edit</a>
+                                <a class="btn btn-primary" href="{$RECORD->getCalendarSettingsEditViewUrl()}">Edit</a>
                             </div>  
+                            {/if}
                         </div>
                     </div>
                 </div>
@@ -123,7 +126,8 @@
                                                         <input type="hidden" class="fieldBasicData" data-name='{$FIELD_MODEL->get('name')}' data-type="{$fieldDataType}" data-displayvalue='{$FIELD_DISPLAY_VALUE}' data-value="{$FIELD_VALUE}" />
                                                     {/if}
                                                 </div>
-                                                <span class="action pull-right"><a href="#" onclick="return false;" class="editAction ti-pencil"></a></span>
+                                                <!--Removed By Mabruk-->
+                                                <!--<span class="action pull-right"><a href="#" onclick="return false;" class="editAction ti-pencil"></a></span>-->
                                                 {/if}
                                         </div>
                                     {/if}
