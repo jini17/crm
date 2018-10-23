@@ -433,7 +433,7 @@ Vtiger.Class('Vtiger_Index_Js', {
 
             } 
 
-        });
+        );
 
     },
         

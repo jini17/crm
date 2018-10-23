@@ -136,34 +136,34 @@
 					<div>
 
 						<div class='row th' style="padding:5px">
-				              <div class='col-lg-3' align="center">
+				              <div class='col-lg-4' align="center">
 				                  <strong>{vtranslate('Benefit Code', $MODULE_NAME)}</strong>
 				              </div>
-				              <div class='col-lg-2' align="center">
+				              <div class='col-lg-4' align="center">
 				                  <strong>{vtranslate('Title', $MODULE_NAME)}</strong>
 				              </div>
-				              <div class='col-lg-3' align="center">
+				              <div class='col-lg-4' align="center">
 				                  <strong>{vtranslate('Benefit Type', $MODULE_NAME)}</strong>
 				              </div>
-				              <div class='col-lg-4' align="center">
+				              <!--<div class='col-lg-4' align="center">
 				                  <strong>{vtranslate('Status', $MODULE_NAME)}</strong>
-				              </div>
+				              </div>-->
 				        </div>
 							{foreach item=BENEFITDETAIL from=$BENEFITDETAILS}
 							
 							<div class='row miniListContent' style="padding:5px;">
-								<div class='col-lg-3' align="center">
+								<div class='col-lg-4' align="center">
 									{$BENEFITDETAIL['benefit_code']}
 								</div>
-								<div class='col-lg-2' align="center">
+								<div class='col-lg-4' align="center">
 									{$BENEFITDETAIL['title']}
 								</div>
-								<div class='col-lg-3' align="center">
+								<div class='col-lg-4' align="center">
 									{$BENEFITDETAIL['benefit_type']}
 								</div>
-								<div class='col-lg-4' align="center">
+								<!--<div class='col-lg-4' align="center">
 									{$BENEFITDETAIL['status']}
-								</div>
+								</div>-->
 							</div>
 
 							{/foreach}
