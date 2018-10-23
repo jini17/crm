@@ -3137,6 +3137,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
             app.request.get(params).then(
 
                 function (err, data) {
+
                     if (data) {
 
                     	if (confirm("This will overwrite your existing data for the selected record. Are you sure you want to continue ?")) {
@@ -3160,6 +3161,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 
                     else 
                     	app.helper.showErrorNotification({message:err});	
+
                 }                                        
             );
         });
