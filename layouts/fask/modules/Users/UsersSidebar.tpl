@@ -23,8 +23,8 @@
                                         <div id="{$BLOCK_NAME}_accordion" class="app-nav hidden-sm hidden-xs" role="tab">
                                                 <div class="app-settings-accordion">
                                                         <div class="settingsgroup-accordion">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#{$BLOCK_NAME}">
-                                                                        <i class="indicator ti-angle-right ti {if $ACTIVE_BLOCK['block'] eq $BLOCK_NAME} ti-angle-down {else} ti-angle-right {/if}"></i>
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#{$BLOCK_NAME}" {if $ACTIVE_BLOCK['block'] eq $BLOCK_NAME} class="btn-primary text-white"{/if}>
+                                                                        <i class="indicator ti {if $ACTIVE_BLOCK['block'] eq $BLOCK_NAME} ti-angle-down {else} ti-angle-right {/if}"></i>
                                                                         &nbsp;<span>{vtranslate($BLOCK_NAME,$QUALIFIED_MODULE)}</span>
                                                                 </a>
                                                         </div>
@@ -58,8 +58,6 @@
                                                         {/foreach}
                                                 </ul>
                                         </div>
-
-
                                 {/if}
                         {/foreach}
                 </div>

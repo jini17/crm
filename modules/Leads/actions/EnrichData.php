@@ -67,6 +67,7 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
         global $adb,$current_user,$VTIGER_BULK_SAVE_MODE;
 
         $VTIGER_BULK_SAVE_MODE 	= true; // To turn off the workflows
+
         $message 				= "success"; //Default Value for message
         $reload 				= "no"; //Default Value for reload
 		$leadid 				= $request->get('record');
@@ -129,6 +130,7 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 					$firstname = $lead->column_fields['firstname'] 	= $personDetails['details']['name']['given'] . " " . $personDetails['details']['name']['middle'];	
 
 					$lastname = $lead->column_fields['lastname'] 	= $personDetails['details']['name']['family'];
+
 				
 				}			
 
@@ -235,6 +237,7 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 					$message = "Company Website field is empty, cannot perform data enrichment for Company";
 					
 				$lead->save('Leads');
+
 				$reload 	= "yes";
 
 				$entityData = VTEntityData::fromCRMEntity($lead);
@@ -242,6 +245,7 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 				$em->triggerEvent("vtiger.entity.aftersave.final", $entityData);
 
 				$adb->pquery("UPDATE vtiger_crmentity SET label = '$firstname $lastname' WHERE crmid = ?", array($leadid));
+
 
 			}
 
@@ -256,12 +260,16 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 		}
 
 		else 
+
 			$message = "Primary Email field is empty, cannot perform data enrichment";
+
 
 
 		// Sending Response to CRM	
 		$response 	= new Vtiger_Response();
+
 		$response->setResult(array("message" => $message, "reload" => $reload,"firstname" => $firstname, "lastname" => $lastname));
+
 		$response->emit();
 
     }    
