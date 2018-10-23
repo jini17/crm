@@ -42,9 +42,10 @@
 					<li class="tab-item {if (trim($RELATED_LINK->getLabel())== trim($SELECTED_TAB_LABEL)) && ($RELATED_LINK->getId() == $SELECTED_RELATION_ID)}active{/if}"  data-url="{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" data-label-key="{$RELATED_LINK->getLabel()}"
 						data-module="{$RELATEDMODULENAME}" data-relation-id="{$RELATED_LINK->getId()}" {if $RELATEDMODULENAME eq "ModComments"} title {else} title="{$DETAILVIEWRELATEDLINKLBL}"{/if} {if $RELATEDFIELDNAME}data-relatedfield ="{$RELATEDFIELDNAME}"{/if} >
 						<a href="index.php?{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" class="textOverflowEllipsis" displaylabel="{$DETAILVIEWRELATEDLINKLBL}" recordsCount="" title="{$DETAILVIEWRELATEDLINKLBL}" {if $RELATEDMODULENAME neq "ModComments"}tippytitle{/if}>
-							{if $RELATEDMODULENAME eq "ModComments"}
+							<!-- ClaimType Added By Mabruk -->
+							{if $RELATEDMODULENAME eq "ModComments" || $RELATEDMODULENAME eq 'ClaimType'}
 								<span class="tab-label" >{$DETAILVIEWRELATEDLINKLBL}</span>&nbsp;
-									{else}
+							{else}
 								<span class="tab-icon">
 									{assign var=RELATED_MODULE_MODEL value=Vtiger_Module_Model::getInstance($RELATEDMODULENAME)}  
 									{assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
@@ -54,11 +55,16 @@
 									'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
 									'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
 									'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-									'mycthemeswitcher'=>'folder', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people','claimtype'=>'list_alt' ]}
+									'mycthemeswitcher'=>'folder', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people']}
+									
 									<i class="material-icons" >{$iconsarray[{strtolower($RELATEDMODULENAME)}]}</i>
+			
 								</span>
 							{/if}
-							<span class="numberCircle disabled" >0</span>
+							<!-- Condition Added By Mabruk -->
+							{if $RELATEDMODULENAME neq 'ClaimType'}							
+								<span class="numberCircle disabled" >0</span>
+							{/if}	
 						</a>
 					</li>
 					{if ($RELATED_LINK->getId() == {$smarty.request.relationId})}
