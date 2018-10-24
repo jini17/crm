@@ -10,6 +10,11 @@
 ********************************************************************************/
 -->*}
 {strip}
+    <style>
+        #Users_detailView_fieldLabel_signature{
+            height: 48px;
+        }
+    </style>
     <form id="detailView" data-name-fields='{ZEND_JSON::encode($MODULE_MODEL->getNameFields())}' method="POST">
         <div class="contents">
             {foreach key=BLOCK_LABEL_KEY item=FIELD_MODEL_LIST from=$RECORD_STRUCTURE}
@@ -34,7 +39,8 @@
                 </div>
                 <hr>
                 <div class=" row">
-                    <div class="table detailview-table">
+                    <div class='col-md-12'>
+                        <div class="table detailview-table" style="width: 97%;margin: 0 auto;">
                             {assign var=COUNTER value=0}
                             <div class="row">
                                 {foreach item=FIELD_MODEL key=FIELD_NAME from=$FIELD_MODEL_LIST}
@@ -111,9 +117,12 @@
                                     {/foreach}
                                     {* adding additional column for odd number of fields in a block *}
                                     {if $FIELD_MODEL_LIST|@end eq true and $FIELD_MODEL_LIST|@count neq 1 and $COUNTER eq 1}
-                                     </div><div class="row"><div class="col-lg-6 fieldLabel {$WIDTHTYPE}"></div><div class="col-lg-6 {$WIDTHTYPE}"></div></div>
+                                     </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 fieldLabel {$WIDTHTYPE}"></div><div class="col-lg-6 {$WIDTHTYPE}"></div></div>
                                     {/if}
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
