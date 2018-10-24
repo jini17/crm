@@ -31,3 +31,6 @@ Email: khaled@softsolvers.com.my
      margin-right: 5px;
      color: #fff;
 }
+.blockData .table.detailview-table .row{
+    display:block !important; 
+}
