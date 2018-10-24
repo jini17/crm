@@ -14,11 +14,13 @@
         .detailview-table .col-adjust {
             height: 50px;
         }
+
         .Signature {
            width: 100%;
         }
         .Signature.text-left{
         text-align: left !important}
+
     </style>
     {if !empty($PICKIST_DEPENDENCY_DATASOURCE)}
         <input type="hidden" name="picklistDependency" value='{Vtiger_Util_Helper::toSafeHTML($PICKIST_DEPENDENCY_DATASOURCE)}' />
@@ -27,7 +29,9 @@
         {foreach key=BLOCK_LABEL item=BLOCK_FIELDS from=$RECORD_STRUCTURE name=blockIterator}
             {if $BLOCK_FIELDS|@count gt 0}
                 <div class='fieldBlockContainer block'>
+
                     <h5 class='fieldBlockHeader' style="margin: 0;">{vtranslate($BLOCK_LABEL, $MODULE)}</h5>
+
                     <div class="clearfix"></div>
                     <hr>
                     <div class="table detailview-table">
@@ -55,8 +59,10 @@
                                     {else}
                                         {assign var=COUNTER value=$COUNTER+1}
                                     {/if}
+
                                     
                                     <div class="fieldLabel col-xs-12 col-md-3 col-adjust {if $FIELD_MODEL->get('label') eq 'Signature'} Signature full-width text-left {/if} alignMiddle">
+
                                         {if $isReferenceField eq "reference"}
                                             {if $refrenceListCount > 1}
                                                 <select style="width: 140px;" class="select2 referenceModulesList">

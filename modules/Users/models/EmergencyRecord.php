@@ -69,7 +69,7 @@ class Users_EmergencyRecord_Model extends Users_Record_Model {
                 return $userModel->setData($userObject->column_fields)->setModule('Users')->setEntity($userObject);
         }
 
-        public function getUserEmergencyContact($userId,$record_id) {
+        public function getUserEmergencyContact($userId,$record_id=null) {
                 $db  = PearDatabase::getInstance();
                 
                 if($record_id != null){ 
