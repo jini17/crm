@@ -33,7 +33,7 @@ Class Settings_Roles_Edit_View extends Settings_Roles_Index_View {
 			$roleDirectlyRelated = true;
 		}
 		$plan = $recordModel->get('planid')==''?1:$recordModel->get('planid');
-
+		
 		$viewer->assign('PLAN', $plan);
 		$viewer->assign('PROFILE_DIRECTLY_RELATED_TO_ROLE',$roleDirectlyRelated);
 		$viewer->assign('ALL_PROFILES', Settings_Profiles_Record_Model::getAll());

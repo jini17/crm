@@ -54,9 +54,53 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 
 	}
 
+	// Added By Mabruk
+	public function getClaimForEmployeeContract($id,$year){ 
+
+		$db 	= PearDatabase::getInstance(); //$db->setDebug(true); 
+		
+		$query 	= "SELECT claimid, claimno, category, transactiondate, vtiger_claim.description, totalamount, claim_status, taxinvoice, attachment,approved_by
+				FROM vtiger_claim 
+				LEFT JOIN vtiger_crmentity
+				ON vtiger_crmentity.crmid = vtiger_claim.claimid
+				LEFT JOIN vtiger_employeecontract
+				ON vtiger_employeecontract.employee_id = vtiger_claim.employee_id
+				WHERE vtiger_employeecontract.employeecontractid = ? 
+				AND vtiger_crmentity.deleted=0 AND DATE_FORMAT(transactiondate, '%Y') = ? AND vtiger_crmentity.deleted=0";
+		$result = $db->pquery($query, array($id,$year));
+
+		$myclaims=array();
+
+		for($i=0;$db->num_rows($result)>$i;$i++){ 
+
+		        $rowdetail = self::getClaimType($db->query_result($result, $i, 'category'));
+				$transactiondate = $db->query_result($result, $i, 'transactiondate');
+				$rowUsedAmount 	= self::getClaimTypeUsedAmount($userid, $rowdetail['claimtypeid'],$transactiondate);		
+			
+				$used 			= $rowUsedAmount['yused'];
+				$yearlylimit 	= $rowdetail['yearly_limit'];
+				if($yearlylimit !='' && $yearlylimit != '0.00'){
+					$allocated = $yearlylimit;
+					$balance = $allocated-$used;
+				} else {
+					$allocated = 'No Limit';
+					$balance = 'No Limit';
+				}
+				$myclaims[$i]['allocated']  = $allocated;
+				$myclaims[$i]['used'] 		= $used;
+				$myclaims[$i]['balance']    = $balance;
+				
+			
+			$myclaims[$i]['category']   = $rowdetail['claim_type'];	
+		}
+		//print_r($myclaims);die;
+		return $myclaims;
+
+	}	
+
 
 	//Created by Safuan for fetching current user leaves for current year//	
-	public function getMyWidgetsClaim($userid,$year, $type){ 
+	public function getMyWidgetsClaim($userid,$year, $type = false){ 
 		$db = PearDatabase::getInstance();
 		//$db->setDebug(true);
 		//echo $type;
@@ -89,7 +133,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 				$yearlylimit 	= $rowdetail['yearly_limit'];
 				if($yearlylimit !='' && $yearlylimit != '0.00'){
 					$allocated = $yearlylimit;
-					$balance = $allocated-$used ;
+					$balance = $allocated-$used;
 				} else {
 					$allocated = 'No Limit';
 					$balance = 'No Limit';

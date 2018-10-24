@@ -2054,4 +2054,39 @@ class Vtiger_Module_Model extends Vtiger_Module {
                 $moduleModel = Vtiger_Module_Model::getInstance($moduleName);
                 return $moduleModel->getModuleIcon();
         }
+
+        // Added By Mabruk
+        public function getRelatedBenefits($employeeid, $year) {
+
+                $db = PearDatabase::getInstance();
+
+                //$db->setDebug(true);
+                $result         = $db->pquery("SELECT job_grade FROM vtiger_employeecontract tblVTEC 
+                                                                INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
+                                                                INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
+                                                                WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTC.createdtime DESC LIMIT 0, 1", array($employeeid));
+                $grade_id       = $db->query_result($result, 0, 'job_grade');
+
+                $benefitResult  = $db->pquery("SELECT vtiger_benefittype.benefit_code, vtiger_benefittype.title, vtiger_benefittype.benefit_type
+                                                FROM allocation_benefitrel
+                                                LEFT JOIN allocation_list ON allocation_list.allocation_id = allocation_benefitrel.allocation_id
+                                                LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id = allocation_list.allocation_id
+                                                LEFT JOIN vtiger_benefittype ON vtiger_benefittype.benefittypeid = allocation_benefitrel.benefittypeid
+                                                WHERE allocation_graderel.grade_id=? AND allocation_list.allocation_year=? AND vtiger_benefittype.status='on'", array($grade_id, $year));
+
+                $numOfRows       = $db->num_rows($benefitResult);
+
+                for ($i = 0; $i < $numOfRows; $i++) {
+
+                        $data[$i]['benefit_code'] = $db->query_result($benefitResult, $i, 'benefit_code');
+                        $data[$i]['title']        = $db->query_result($benefitResult, $i, 'title');
+                        $data[$i]['benefit_type'] = $db->query_result($benefitResult, $i, 'benefit_type');
+                       // $data[$i]['status']       = $db->query_result($benefitResult, $i, 'status');
+
+                }
+
+                return $data;
+
+        }
+
 }
