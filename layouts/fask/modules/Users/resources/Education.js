@@ -39,8 +39,9 @@ Vtiger.Class("Users_Education_Js", {
                         var startDate = jQuery('#start_date').val().replace(/-/g,'/');
                         var endDate = jQuery('#end_date').val().replace(/-/g,'/');
                    
-                        if(endDate.length > 0 && startDate < endDate){
+                        if(endDate.length > 0 && startDate > endDate){
                                   app.helper.showSuccessNotification({'message': 'End Date must be greater than start date'});
+                                  jQuery('#end_date').val('');
                             //return false;
                            // do your stuff here...
                         }

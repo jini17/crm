@@ -349,7 +349,7 @@ $languageStrings = array(
    'LBL_INSTITUTION_UPDATE_SUCCESS' =>'Institution updated successfully',
    'LBL_NO' =>'No',
    'LBL_YES'=>'Yes',
-   'LBL_CURRENTLY_STUDYING' => 'Curently studying?',
+   'LBL_CURRENTLY_STUDYING' => 'Currently studying?',
    'LBL_RANDOM_EDUCATION'=>'Random User Education',
    'LBL_USER_PREFERENCES'=>'User Preferences',	
 

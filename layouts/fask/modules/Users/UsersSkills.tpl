@@ -42,6 +42,13 @@ display: none;
 
   border: none;
   position: relative;
+  height: 20px;
+margin-bottom: 20px;
+overflow: hidden;
+background-color: #f5f5f5;
+border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 }
 .progress-bar{
   -webkit-transition: width 1.5s ease-in-out;
