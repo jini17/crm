@@ -14,6 +14,9 @@
         #Users_detailView_fieldLabel_signature{
             height: 48px;
         }
+        .detailViewContainer .block{
+            padding-bottom: 15px;
+        }
     </style>
     <form id="detailView" data-name-fields='{ZEND_JSON::encode($MODULE_MODEL->getNameFields())}' method="POST">
         <div class="contents">
@@ -40,7 +43,7 @@
                 <hr>
                 <div class=" row">
                     <div class='col-md-12'>
-                        <div class="table detailview-table" style="width: 97%;margin: 0 auto;">
+                        <div class="table detailview-table" style="width: 100%;margin: 0 auto;">
                             {assign var=COUNTER value=0}
                             <div class="row">
                                 {foreach item=FIELD_MODEL key=FIELD_NAME from=$FIELD_MODEL_LIST}
@@ -121,7 +124,9 @@
                                         <div class="row">
                                             <div class="col-lg-6 fieldLabel {$WIDTHTYPE}"></div><div class="col-lg-6 {$WIDTHTYPE}"></div></div>
                                     {/if}
+                                    <div class="clearfix"></div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
