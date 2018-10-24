@@ -26,6 +26,7 @@
                 <h5>{vtranslate('Education', $MODULE)}</h5>
             </div>
             <hr>
+            
             <table class="table detailview-table">
                 <thead>
                     <tr>
@@ -40,6 +41,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
                     {foreach item=USER_EDUCATION from=$USER_EDUCATION_LIST}
                         {if $USER_EDUCATION['public'] eq '0'}
                                 {assign var=PERMISSION value=LBL_PUBLIC}  

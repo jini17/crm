@@ -31,6 +31,7 @@
 
         <link type='text/css' rel='stylesheet' href='layouts/fask/skins/vtiger/common.css'>
         <link type='text/css' rel='stylesheet' href='layouts/fask/skins/vtiger/sidebar.css'>
+        <link type='text/css' rel='stylesheet' href='layouts/fask/skins/vtiger/agiliux-blue.css'>
         <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
         <link rel="stylesheet" href="layouts/fask/skins/vtiger/themify-icons.css">
 		<link rel="stylesheet" href="layouts/fask/skins/vtiger/material-icons.css">

@@ -531,6 +531,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                         </a>
 
                                     </li>
+                                  
                                {*     Khaled - Removed as Per Requirement<li admin="">
                                         <a class="waves-effect waves-dark dropdown-icon-dashboard " href=" index.php?module=WorkingHours&amp;view=List&amp;app=ADMIN ">
                                             <i class="material-icons module-icon">access_time</i> <span class="hide-menu"> Working Hours</span>

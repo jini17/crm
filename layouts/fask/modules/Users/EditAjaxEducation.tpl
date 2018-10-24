@@ -20,7 +20,6 @@
 
         <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
                 <form id="editEducation" class="form-horizontal" method="POST">
                         <input type="hidden" name="record" value="{$EDU_ID}" />
                         <!--<input type="hidden" value="Users" name="module">
@@ -72,7 +71,7 @@
                                                                 <span id="institution_nametxt">
                                                                         <input class="inputElement" type="text" value="{$EDUCATION_DETAIL.education_location}" placeholder="Enter Street,City,Country" name="location" id="country" data-rule-required = "true" />
                                                                 </span>
-                                                            
+
                                                         </div>
                                                 </div>
                                         </div>                          
@@ -109,7 +108,7 @@
                                                 </div>
                                         </div>
                                 </div>	
-                                          
+
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
@@ -160,10 +159,10 @@
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
-                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)}</label>
+                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_DESCRIPTION', $QUALIFIED_MODULE)} <span class="redColor">*</span></label> 
                                                 </div>			
                                                 <div class="controls date col-md-8">
-                                                        <textarea style="width:350px!important" name="description" id="description" class="span11" maxlength="300" data-rule-required = "true" >{$EDUCATION_DETAIL.description}</textarea>	
+                                                        <textarea style="width:350px!important" name="description" id="description" class="span11" maxlength="300" data-rule-required = "true" >{$EDUCATION_DETAIL['description']}</textarea>	
                                                 </div>
                                         </div>	
                                         <div class="col-md-12" style="margin-bottom: 15px;">
@@ -195,7 +194,9 @@
                                 <div class="form-group" style="margin-bottom: 0px !important;">
                                         <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
-                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_WANT_TO_MAKE_PUBLIC', $QUALIFIED_MODULE)}</label>
+                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">
+                                                            &nbsp;{vtranslate('LBL_WANT_TO_MAKE_PUBLIC', $QUALIFIED_MODULE)}
+                                                        </label>
                                                 </div>	
                                                 <div class="controls date col-md-8">
                                                       <label><input type="radio" {if $EDUCATION_DETAIL.public eq '0'} checked {/if} name='chkviewable' value="0" />&nbsp; {vtranslate('LBL_PUBLIC', $QUALIFIED_MODULE)} </label>&nbsp; 
@@ -206,7 +207,7 @@
                                         </div>
                                 </div>
                         </div>
-                             
+
                         <div class="modal-footer" style="padding-top: 5px; padding-bottom: 5px;">
                                  {include file='ModalFooter.tpl'|@vtemplate_path:'Vtiger'}
                         </div>    	 	
@@ -257,7 +258,7 @@ function updateSelectBox(selectbox, txtbox)
                                                                 </div>
                                                                 <div class="controls col-md-8">
                                                                    <div class="pac-card" id="pac-card">
-                                                                          
+
                                                                             <div id="pac-container">
                                                                               <input id="pac-input" type="text"
                                                                                   placeholder="Enter a location">
@@ -276,7 +277,7 @@ function updateSelectBox(selectbox, txtbox)
 -->
 
      <script>
-           function initialize() {
+         /*function initialize() {
 
                 var ac = new google.maps.places.Autocomplete(
                   (document.getElementById('country')), {
@@ -295,6 +296,7 @@ function updateSelectBox(selectbox, txtbox)
                   console.log('You selected: ' + place.formatted_address);
                 });
               }
+              */
 
 
         </script>

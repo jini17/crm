@@ -404,6 +404,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
          * @return string
          */
         public function createLinks( $total,$limit,$page,$links, $list_class ) {
+        
             if ( $limit == 'all' ) {
                 return '';
             }
