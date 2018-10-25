@@ -79,7 +79,7 @@
 
 						<div class='row th' style="padding:5px">
 				              <div class='col-lg-3' align="center">
-				                  <strong>{vtranslate('Allocates', $MODULE_NAME)}</strong>
+				                  <strong>{vtranslate('Allocated', $MODULE_NAME)}</strong>
 				              </div>
 				              <div class='col-lg-2' align="center">
 				                  <strong>{vtranslate('Used', $MODULE_NAME)}</strong>
