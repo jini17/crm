@@ -34,3 +34,99 @@ Email: khaled@softsolvers.com.my
 .blockData .table.detailview-table .row{
     display:block !important; 
 }
+a.btn.btn-gettingStarted,
+a.btn.btn-gettingStarted:hover{
+    padding: 5px 5px 6px 8px !important;
+    margin-right: 5px;
+    margin-top:5px;
+    color: #000;
+    background: #ccc;
+}
+a.btn.btn-gettingStarted i{
+    color: #2f5597
+}
+
+/*===============
+    Help Slider
+================*/
+#myCarousel{
+    padding: 0 !important;
+    
+}
+#myCarousel .item.slide1,
+#myCarousel .item.slide2,
+#myCarousel .item.slide3{
+  height: 427px;
+  overflow: hidden;
+}
+#myCarousel .item.slide1 img{
+    display: block;
+    width: 100%;
+    heigth: 200px !important;
+}
+#myModal .modal-title{
+    text-align:  center;
+    width: 100%;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+}
+#myModal .slide3 .carousel-caption.heading h1{
+    color: #000;
+    font-size: 18px;
+    margin: 0;
+}
+#myModal .carousel-caption.heading{
+    top: 0;
+    background: rgba(255,255,255,0) !important;
+}
+#myModal .carousel-caption.content{
+    background: rgba(255,255,255,.8) !important;
+    color: #000 !important;
+    text-align: left;
+    font-size: 12px;
+}
+#myModal .modal-header{
+    border: 0;
+}
+#myModal  .carousel-indicators li {
+    background-color: #fff;
+    border: 1px solid #c2c2c2;
+}
+
+#myModal  .carousel-indicators .active {
+    background-color: #2f5597 !important;
+    border: 1px solid #444;
+}
+#myModal  .item.slide2 .col-md-6{
+    width: 50% !important;
+    float: left !important;
+    padding: 0;
+}
+#myModal .modal-header .close{
+    margin-top: -7px;
+}
+#myModal  .item.slide2 p,
+#myModal  .item.slide2 ul{
+    padding:0 20px;
+    font-size: 12px;
+}
+#myModal  .item.slide2 ul{
+        padding-left: 40px;
+}
+#myModal  .item.slide3 .left a{
+    margin-right: 18%;
+}
+#myModal  .item.slide3 .right a{
+     margin-right: 17%;
+}
+#myModal .slide-footer{
+    margin-top: 30px;
+}
+#myModal .slide-footer,
+#myModal .slide-footer a{
+    font-size: 9px !important;
+}
+#myModal .slide-footer i{
+    margin-right: 20px;
+}

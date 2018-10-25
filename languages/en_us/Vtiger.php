@@ -61,6 +61,7 @@ $languageStrings = array(
 	'LBL_RECORD_NOT_FOUND' => 'Record you are trying to access is not found',
 	'LBL_EDIT_REASON' => 'Edit reason',
                       'WorkingHours' => 'Working Hours',
+                      'LBL_GETTING_STARTED' => 'Getting Started',
 	//'LBL_EDIT_CURRENT_FILTER' => 'Edit Current Filter',
 	//'LBL_DELETE_CURRENT_FILTER' => 'Delete Current Filter',
 	'LBL_SELECT' => 'Select',
