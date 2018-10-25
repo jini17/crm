@@ -314,7 +314,7 @@ Vtiger.Class("Users_Claim_Js", {
      updateClaimGrid : function(userid) { 
         alert
         var params = {
-                        'module' : 'Users'
+                        'module' : 'Users',
                         'view'   : 'ListViewAjax',
                         'record' : userid,		
                         'mode'   : 'getUserClaim',

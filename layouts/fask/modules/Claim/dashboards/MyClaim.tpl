@@ -30,7 +30,7 @@
             <div class='clearfix'></div>
       </div>    
    </div>
-<div class="dashboardWidgetContent mCustomScrollbar _mCS_5">
+<div class="dashboardWidgetContent">
   {include file="dashboards/MyClaimContent.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 
