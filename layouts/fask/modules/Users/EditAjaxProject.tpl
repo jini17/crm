@@ -129,9 +129,9 @@
                                                         <label class="control-label fieldLabel pull-right">&nbsp;{vtranslate('LBL_WANT_TO_MAKE_PUBLIC', $QUALIFIED_MODULE)}</label>
                                                 </div>	
                                                 <div class="controls date col-md-8">
-                                                          <label><input type="radio" {if $PROJECT_DETAIL.isview eq '0'} checked {/if} name='chkviewable' value="0" />{$WORKEXP_DETAIL.isview}&nbsp; {vtranslate('LBL_PUBLIC', $QUALIFIED_MODULE)} </label>&nbsp; 
-                                                     <label><input type="radio"{if $PROJECT_DETAIL.isview eq 1} checked {/if} name='chkviewable' value="1" />&nbsp; {vtranslate('LBL_PRIVATE', $QUALIFIED_MODULE)} </label>&nbsp; 
-                                                      <label><input type="radio" {if $PROJECT_DETAIL.isview eq 2} checked {/if} name='chkviewable' value="2" />&nbsp; {vtranslate('LBL_PROTECTED', $QUALIFIED_MODULE)} </label>
+                                                          <label  title=" Visible to all Employee"><input type="radio" {if $PROJECT_DETAIL.isview eq '0'} checked {/if} name='chkviewable' value="0" />{$WORKEXP_DETAIL.isview}&nbsp; {vtranslate('LBL_PUBLIC', $QUALIFIED_MODULE)} </label>&nbsp; 
+                                                     <label  title=" Visible to Admin and HR"><input type="radio"{if $PROJECT_DETAIL.isview eq '1'} checked {/if} name='chkviewable' value="1" />&nbsp; {vtranslate('LBL_PRIVATE', $QUALIFIED_MODULE)} </label>&nbsp; 
+                                                      <label title="Visible to you only"><input type="radio" {if $PROJECT_DETAIL.isview eq '2'} checked {/if}      {if $PROJECT_ID eq ''} checked {/if} name='chkviewable' value="2" />&nbsp; {vtranslate('LBL_PROTECTED', $QUALIFIED_MODULE)} </label>
 {*                                                        <input class="inputElement" type="checkbox" name="chkviewable" id="chkviewable" {if $PROJECT_DETAIL.isview eq 1} checked {/if}>
 *}                                                </div>
                                         </div>

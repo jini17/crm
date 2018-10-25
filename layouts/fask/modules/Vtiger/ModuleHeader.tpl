@@ -157,6 +157,12 @@
                                                                         {/foreach}
                                                                 </ul>
                                         {/if}
+                                        <!-- Added By Khaled  -->
+                                        <a class='btn btn-default btn-gettingStarted text-center'>
+                                                <i class="fa fa-rocket"  aria-hidden="true"></i>&nbsp;Getting Started
+                                                <!-- HELP POP UP-->
+                                
+                                        </a>
                                         <a class='btn btn-danger Help-btn text-center'>
                                                 <i class="glyphicon glyphicon-question-sign"></i>&nbsp;Help
                                         </a>
@@ -165,10 +171,135 @@
                                 </div>
                         </div>
                 </div>
+                                        
         </div>
+<!-- HELP POP UP - Added By Khaled-->
+<div id="myModal" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
 
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+       
+        </div>
+        <div class="modal-body">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#myCarousel" data-slide-to="1"></li>
+                  <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                  <div class="item active slide1">
+                       <div class="carousel-caption d-none d-md-block heading">
+                         <h4 class="modal-title">Welcome to Agiliux..! <br /> Making Business Agile by Enhancing Office Productivity..! </h4>
+                       </div>
+                    <img src="test/logo/help-slide-1st.jpg" alt="Los Angeles">
+                    <div class="carousel-caption d-none d-md-block content">
+                        <p>
+                           Key concept of Agiliux is around enhancing office productivity. Agiliux makes businesses agile, which means can do things faster and digital transformation is the keyhole here.
+                        </p>
+                        <ul class="list-inline pull-right">
+                            <li>
+                                <button class="btn btn-primary pull-right" data-dismiss="modal" > Skip  </button>
+                            </li>
+                            <li>
+                                    <button class="btn btn-primary pull-right"> Getting Started </button>
+                            </li>
+                        </ul>
+                      </div>
+                  </div>
+
+                 <div class="item slide2">
+                     <div class="col-md-6"style="height: 341px; overflow:hidden;">
+                            <img src="test/logo/help-slide-2.png" height="400" class="btn-block" alt="Chicago">
+                     </div>
+                     <div class="col-md-6">
+                         <p>
+                            Agiliux offers full spectrum of solutions –from setting up a
+                            foundation to advance digital automation, ensuring seamless transformation journey (End to end)    </p>
+                         <div class="clearfix" style="height: 30px;"></div>
+                         <ul>
+                             <li> Consulting </li>
+                             <li> Software</li>
+                             <li> Hosting, Implementation </li>
+                             <li> Data Migration </li>
+                             <li> Training and Ongoing Support </li>
+                         </ul>
+                             <div class="clearfix" style="height: 30px;"></div>
+                         <p>
+                                <strong>Features of Agiliux: </strong>
+                               High level – there are 3 main areas that we focus on
+                         </p>
+                         <div class="clearfix"style="height: 30px;">
+                            <ul>
+                                <li> Employee Management </li>
+                                <li> Office Automation </li>
+                                <li> Employee Productivity </li>
+                            </ul>  
+                     </div>   
+                         <div class="clearfix" style="height: 50px;"></div>
+                     <ul class="list-inline pull-right">
+                            <li>
+                                <button class="btn btn-primary pull-right" data-dismiss="modal" > Skip  </button>
+                            </li>
+                            <li>
+                                    <button class="btn btn-primary pull-right" data-slide="next"> Next </button>
+                            </li>
+                        </ul>
+                  </div>
+                 </div>
+                  <div class="item slide3">
+                      <div class="carousel-caption d-none d-md-block heading">
+                         <h4 class="modal-title">Hi..!  Happy to have you on-board </h4>
+                         <h1 class="text-center"> Are you new to use a CRM system?</h1>
+                       </div>
+                      <div class="clearfix" style="height: 80px;"></div>
+                      <div class="col-md-6 left">
+                          <img src="test/logo/doubts2.png" style="height:221px;" class="img-responsive" alt="Chicago">
+                          <div class="clearfix"></div>
+                          <a href="#" class="btn btn-primary pull-right"> Go to Help</a>
+                      </div>    
+                    <div class="col-md-6 right">
+                            <img src="test/logo/expert2.png" class="img-responsive" alt="Chicago">
+                            <div class="clearfix"></div>
+                            <a href="#" class="btn btn-primary pull-right" data-dismiss="modal">  Go to Home</a>
+                      </div> 
+                      <div class="clearfix" style="height: 50px;"></div>
+                      <div class="col-md-6 slide-footer"> 
+                          <i class="fa fa-question img-circle pull-left" style="border: 1px solid #ccc; padding: 5px; 15px; width:30px; height: 30px; text-align:center"> </i>
+                          <strong> Have some more question to ask? </strong> Write to us <br />
+                          <a href="#" class="text-primary" style="padding: 10px; font-size: 18px;"> support@agiliux.com</a>
+                      </div>
+                      <div class="col-md-6 slide-footer"> 
+                          <i class="fa fa-file-word-o  img-circle pull-left"  style="border: 1px solid #ccc; padding: 5px; 15px; width:30px; height: 30px;"> </i> &nbsp;&nbsp;
+                          <strong> Want to know more about CRM? </strong> Checkout our articals here<br />
+                          <a href="#" class="text-primary" style="padding: 10px; font-size: 18px;"> support@agiliux.com</a>
+                      </div>
+                      <div class="clearfix"></div>
+                  </div>
+              </div>
+        </div>
+      {*  <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>*}
+      </div>
+
+    </div>
+  </div>
         {if $FIELDS_INFO neq null}
                 <script type="text/javascript">
+                    jQuery(document).ready(function() {
+                        jQuery('#myModal').modal('show');
+                        $('button[data-dismiss="modal"]').click(function() {
+                                $('#myModal').modal('hide');
+                         });
+                      });
+                      
                         var uimeta = (function () {
                                 var fieldInfo = {$FIELDS_INFO};
                                 return {

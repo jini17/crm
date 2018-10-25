@@ -11,6 +11,7 @@
 {strip}
 <div class="tab-pane" id="UserEducationContainer">
     <div class="contents row-fluid">
+      
         {assign var=CREATE_EDUCATION_URL value=$EDUCATION_RECORD_MODEL->getCreateEducationUrl()}
         {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}  
 
@@ -26,6 +27,7 @@
                 <h5>{vtranslate('Education', $MODULE)}</h5>
             </div>
             <hr>
+            
             <table class="table detailview-table">
                 <thead>
                     <tr>
@@ -40,12 +42,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
                     {foreach item=USER_EDUCATION from=$USER_EDUCATION_LIST}
                         {if $USER_EDUCATION['public'] eq '0'}
                                 {assign var=PERMISSION value=LBL_PUBLIC}  
                         {elseif $USER_EDUCATION['public'] eq '1'}
                                 {assign var=PERMISSION value=LBL_PRIVATE}  
-                        {else}
+                        {elseif $USER_EDUCATION['public'] eq '2'}
                             {assign var=PERMISSION value='LBL_PROTECTED'}  
                         {/if}    
                     <tr>
@@ -62,7 +65,7 @@
                                 <span class="actionImages">
                                     <a class="editEducation editAction ti-pencil" title="Edit" onclick="Users_Education_Js.editEducation('index.php?module=Users&amp;view=EditEducation&amp;record={$USER_EDUCATION['educationid']}&amp;userId={$USERID}');"></a>
                                     &nbsp;&nbsp;
-                                    <a class="cursorPointer" onclick="Users_Education_Js.deleteEducation('index.php?module=Education&amp;action=Delete&amp;record={$USER_EDUCATION['educationid']}}');"><i class="fa fa-trash-o" title="Delete"></i></a>
+                                    <a class="cursorPointer" onclick="Users_Education_Js.deleteEducation('index.php?module=Education&amp;action=Delete&amp;record={$USER_EDUCATION['educationid']}');"><i class="fa fa-trash-o" title="Delete"></i></a>
                                 </span>
                             </div>
                         </td>    

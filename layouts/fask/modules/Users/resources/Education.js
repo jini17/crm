@@ -9,42 +9,61 @@
 
 Vtiger.Class("Users_Education_Js", {
 
-	//register click event for Add New Education button
-	addEducation : function(url) { 
-	     this.editEducation(url);
-	    
-	},
-	
-	textAreaLimitChar : function(){
-			jQuery('#description').keyup(function () { 
-				var maxchar = 300;
-				var len = jQuery(this).val().length;
-			 	if (len > maxchar) {
-			    		jQuery('#charNum').text(' you have reached the limit');
-					jQuery(this).val($(this).val().substring(0, len-1));
-			  	} else {
-			    		var remainchar = maxchar - len;
-			    		jQuery('#charNum').text(remainchar + ' character(s) left');
-					
-			  	}
-			});
-	},
-	editEducation : function(url) { 
-	    var aDeferred = jQuery.Deferred();
-		var thisInstance = this;
-		var userid = jQuery('#recordId').val();
-		
-		app.helper.showProgress();
-		app.request.post({url:url}).then(
-		function(err,data) { 
-		      app.helper.hideProgress();
-              
+        //register click event for Add New Education button
+        addEducation : function(url) { 
+             this.editEducation(url);
+
+        },
+
+        textAreaLimitChar : function(){
+                        jQuery('#description').keyup(function () { 
+                                var maxchar = 300;
+                                var len = jQuery(this).val().length;
+                                if (len > maxchar) {
+                                        jQuery('#charNum').text(' you have reached the limit');
+                                        jQuery(this).val($(this).val().substring(0, len-1));
+                                } else {
+                                        var remainchar = maxchar - len;
+                                        jQuery('#charNum').text(remainchar + ' character(s) left');
+
+                                }
+                        });
+        },
+        /**
+             * Date Vlidation By Khaled
+             * @type type
+        */
+        dateVidation:function(){
+        
+            jQuery('#end_date').on('change',function(){                      
+                        var startDate = jQuery('#start_date').val().replace(/-/g,'/');
+                        var endDate = jQuery('#end_date').val().replace(/-/g,'/');
+                   
+                        if(endDate.length > 0 && startDate > endDate){
+                                  app.helper.showSuccessNotification({'message': 'End Date must be greater than start date'});
+                                  jQuery('#end_date').val('');
+                            //return false;
+                           // do your stuff here...
+                        }
+                });
+        },
+        editEducation : function(url) { 
+                    var aDeferred = jQuery.Deferred();
+                var thisInstance = this;
+                var userid = jQuery('#recordId').val();
+
+                app.helper.showProgress();
+                app.request.post({url:url}).then(
+                function(err,data) { 
+                      app.helper.hideProgress();
+
                 if(err == null){
                     app.helper.showModal(data);
                     var form = jQuery('#editEducation');
                         thisInstance.textAreaLimitChar();	
-                      
-                        	// for textarea limit
+                        thisInstance.dateVidation();
+
+                                // for textarea limit
                         app.helper.showVerticalScroll(jQuery('#scrollContainer'), {setHeight:'80%'});
                         $("#institution_name").select2({formatNoMatches: function() {
                                 var concatselboxNtxtbox = '"institution_name","institution_nametxt"';
@@ -76,12 +95,12 @@ Vtiger.Class("Users_Education_Js", {
                             }
                         };
                          form.vtValidate(params)
-          		} else {
+                        } else {
                         aDeferred.reject(err);
                     }
-	     	});
-	     return aDeferred.promise();	
-	},
+                });
+             return aDeferred.promise();	
+        },
      updateEducationGrid : function(userid) { 
                     var params = {
                                     'module' : app.getModuleName(),
@@ -98,8 +117,8 @@ Vtiger.Class("Users_Education_Js", {
                                             aDeferred.reject();
                                     }
                             );
-	},
-	
+        },
+
     deleteEducation : function(deleteRecordActionUrl) { 
             var message = app.vtranslate('JS_DELETE_EDUCATION_CONFIRMATION');
             var thisInstance = this;
@@ -122,8 +141,8 @@ Vtiger.Class("Users_Education_Js", {
           var thisInstance = this;
           var userid = jQuery('#current_user_id').val();
           app.helper.showProgress();
-          var chkboxval = $('input[name=chkviewable]:checked').val();        
-          var chkboxstudying = chkboxval;//$('#chkstudying').is(':checked')?'1':'0';
+          var chkboxval = $('input[name=chkviewable]:checked').val();                
+          var chkboxstudying = $('#chkstudying').is(':checked')?'1':'0';
           var formData = form.serializeFormData();
           var params = {
                         'module': 'Users',
@@ -144,17 +163,17 @@ Vtiger.Class("Users_Education_Js", {
           );
            return aDeferred.promise();
      },	
-	
-},{
-	//constructor
-	init : function() {
-		Users_Education_Js.eduInstance = this;
-	},
-	
 
-	
-	registerEvents: function(eduinstance) {
-		eduinstance.registerActions();
-	}
+},{
+        //constructor
+        init : function() {
+                Users_Education_Js.eduInstance = this;
+        },
+
+
+
+        registerEvents: function(eduinstance) {
+                eduinstance.registerActions();
+        }
 
 });

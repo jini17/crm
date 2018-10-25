@@ -227,7 +227,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
             $viewer->assign('LISTVIEW_ENTRIES', $this->listViewEntries);
             $viewer->assign('TAB_TYPE', $tabType);
             $viewer->assign('DEPT',$currentUserModel->get('department'));
-            if (PerformancePrefs::getBoolean('LISTVIEW_COMPUTE_PAGE_COUNT', true)) {
+           // if (PerformancePrefs::getBoolean('LISTVIEW_COMPUTE_PAGE_COUNT', true)) {
                     if(!$this->listViewCount){
                             $this->listViewCount = $listViewModel->getListViewCount();
                     }
@@ -245,7 +245,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
                     $viewer->assign('PAGE_COUNT', $pageCount);
                     $viewer->assign('LISTVIEW_COUNT', $totalCount);
                     $viewer->assign('PAGINATION', $pagination);
-            }
+           // }
             $viewer->assign('MODULE_MODEL', $listViewModel->getModule());
             $viewer->assign('IS_MODULE_EDITABLE', $listViewModel->getModule()->isPermitted('EditView'));
             $viewer->assign('IS_MODULE_DELETABLE', $listViewModel->getModule()->isPermitted('Delete'));
@@ -404,6 +404,7 @@ class Users_List_View extends Settings_Vtiger_List_View {
          * @return string
          */
         public function createLinks( $total,$limit,$page,$links, $list_class ) {
+        
             if ( $limit == 'all' ) {
                 return '';
             }

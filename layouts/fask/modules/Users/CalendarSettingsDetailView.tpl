@@ -10,6 +10,14 @@
 ********************************************************************************/
 -->*}
 {strip}
+    <style>
+        #Users_detailView_fieldLabel_signature{
+            height: 48px;
+        }
+        .detailViewContainer .block{
+            padding-bottom: 15px;
+        }
+    </style>
     <form id="detailView" data-name-fields='{ZEND_JSON::encode($MODULE_MODEL->getNameFields())}' method="POST">
         <div class="contents">
             {foreach key=BLOCK_LABEL_KEY item=FIELD_MODEL_LIST from=$RECORD_STRUCTURE}
@@ -20,8 +28,8 @@
                 {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
                 <input type=hidden name="timeFormatOptions" data-value='{$DAY_STARTS}' />
                 <div class="row">
-                    <h4 class="col-xs-8">{vtranslate({$BLOCK_LABEL_KEY},{$MODULE_NAME})}</h4>
-                    <div class="col-xs-4 marginTop5px">
+                    <h5 class="col-xs-8">{vtranslate({$BLOCK_LABEL_KEY},{$MODULE_NAME})}</h4>
+                    <div class="col-xs-4 ">
                         <div class=" pull-right detailViewButtoncontainer">
                             <!--Added By Mabruk-->
                             {if $BLOCK_LABEL_KEY eq "LBL_CALENDAR_SETTINGS"}
@@ -33,8 +41,9 @@
                     </div>
                 </div>
                 <hr>
-                <div class="blockData row">
-                    <div class="">
+                <div class=" row">
+                    <div class='col-md-12'>
+                        <div class="table detailview-table" style="width: 100%;margin: 0 auto;">
                             {assign var=COUNTER value=0}
                             <div class="row">
                                 {foreach item=FIELD_MODEL key=FIELD_NAME from=$FIELD_MODEL_LIST}
@@ -42,18 +51,19 @@
                                     {if !$FIELD_MODEL->isViewableInDetailView()}
                                         {continue}
                                     {/if}
-                                    {if $FIELD_MODEL->get('uitype') eq "83"}
+                                
                                         {foreach item=tax key=count from=$TAXCLASS_DETAILS}
                                             {if $COUNTER eq 1}
-                                            </div><div class="row">
+                            </div>
+                                <div class="row">
                                                 {assign var="COUNTER" value=1}
                                             {else}
                                                 {assign var="COUNTER" value=$COUNTER+1}
                                             {/if}
-                                            <div class="col-lg-6 fieldLabel {$WIDTHTYPE}">
+                                            <div class="col-lg-3 fieldLabel {$WIDTHTYPE}">
                                                 <span class='muted'>{vtranslate($tax.taxlabel, $MODULE)}(%)</span>
                                             </div>
-                                            <div class="col-lg-6 fieldValue {$WIDTHTYPE}">
+                                            <div class="col-lg-3 fieldValue {$WIDTHTYPE}">
                                                 <span class="value textOverflowEllipsis" data-field-type="{$FIELD_MODEL->getFieldDataType()}" >
                                                     {if $tax.check_value eq 1}
                                                         {$tax.percentage}
@@ -62,39 +72,11 @@
                                                     {/if} 
                                                 </span>
                                             </div>
-                                        {/foreach}
-                                    {else if $FIELD_MODEL->get('uitype') eq "69" || $FIELD_MODEL->get('uitype') eq "105"}
-                                        {if $COUNTER neq 0}
-                                            {if $COUNTER eq 1}
-                                            </div><div class="row">
-                                                {assign var=COUNTER value=0}
-                                            {/if}
-                                        {/if}
-                                        <div class="col-lg-6 fieldLabel {$WIDTHTYPE}"><span class="muted">{vtranslate({$FIELD_MODEL->get('label')},{$MODULE_NAME})}</span></div>
-                                        <div class="col-lg-6 fieldValue {$WIDTHTYPE}">
-                                            <div id="imageContainer" width="300" height="200">
-                                                {foreach key=ITER item=IMAGE_INFO from=$IMAGE_DETAILS}
-                                                    {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
-                                                        <img src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}" width="300" height="200">
-                                                    {/if}
-                                                {/foreach}
-                                            </div>
-                                        </div>
-                                        {assign var=COUNTER value=$COUNTER+1}
-                                    {else}
-                                        {if $FIELD_MODEL->get('uitype') eq "20" or $FIELD_MODEL->get('uitype') eq "19" or $fieldDataType eq 'reminder' or $fieldDataType eq 'recurrence'}
-                                            {if $COUNTER eq '1'}
-                                                <div class="col-lg-6 fieldLabel {$WIDTHTYPE}"></div><div class="col-lg-6 {$WIDTHTYPE}"></div></div><div class="row">
-                                                    {assign var=COUNTER value=0}
-                                                {/if}
-                                            {/if}
-                                            {if $COUNTER eq 1}
-                                        </div><div class="row">
-                                            {assign var=COUNTER value=1}
-                                        {else}
-                                            {assign var=COUNTER value=$COUNTER+1}
-                                        {/if}
-                                        <div class="col-lg-6 fieldLabel textOverflowEllipsis {$WIDTHTYPE}" id="{$MODULE_NAME}_detailView_fieldLabel_{$FIELD_MODEL->getName()}" {if $FIELD_MODEL->getName() eq 'description' or $FIELD_MODEL->get('uitype') eq '69'} style='width:8%'{/if}>
+                                        {/foreach}                                                                 
+                                        
+                                      
+                            
+                                        <div class="col-lg-3 fieldLabel textOverflowEllipsis {$WIDTHTYPE}" id="{$MODULE_NAME}_detailView_fieldLabel_{$FIELD_MODEL->getName()}" {if $FIELD_MODEL->getName() eq 'description' or $FIELD_MODEL->get('uitype') eq '69'} style='width:8%'{/if}>
                                             <span class="muted">
                                                 {if $MODULE_NAME eq 'Documents' && $FIELD_MODEL->get('label') eq "File Name" && $RECORD->get('filelocationtype') eq 'E'}
                                                     {vtranslate("LBL_FILE_URL",{$MODULE_NAME})}
@@ -106,7 +88,7 @@
                                                 {/if}
                                             </span>
                                         </div>
-                                        <div class="col-lg-6 fieldValue {$WIDTHTYPE}" id="{$MODULE_NAME}_detailView_fieldValue_{$FIELD_MODEL->getName()}" {if $FIELD_MODEL->get('uitype') eq '19' or $FIELD_MODEL->get('uitype') eq '20' or $fieldDataType eq 'reminder' or $fieldDataType eq 'recurrence'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
+                                        <div class="col-lg-3 fieldValue {$WIDTHTYPE}" id="{$MODULE_NAME}_detailView_fieldValue_{$FIELD_MODEL->getName()}" {if $FIELD_MODEL->get('uitype') eq '19' or $FIELD_MODEL->get('uitype') eq '20' or $fieldDataType eq 'reminder' or $fieldDataType eq 'recurrence'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
 
                                             {assign var=FIELD_VALUE value=$FIELD_MODEL->get('fieldvalue')}
                                             {if $fieldDataType eq 'multipicklist'}
@@ -130,7 +112,7 @@
                                                 <!--<span class="action pull-right"><a href="#" onclick="return false;" class="editAction ti-pencil"></a></span>-->
                                                 {/if}
                                         </div>
-                                    {/if}
+                               
 
                                     {if $FIELD_MODEL_LIST|@count eq 1 and $FIELD_MODEL->get('uitype') neq "19" and $FIELD_MODEL->get('uitype') neq "20" and $FIELD_MODEL->get('uitype') neq "30" and $FIELD_MODEL->get('name') neq "recurringtype" and $FIELD_MODEL->get('uitype') neq "69" and $FIELD_MODEL->get('uitype') neq "105"}
                                         </div><div class="row"><div class="col-lg-6 fieldLabel {$WIDTHTYPE}"></div><div class="col-lg-6 {$WIDTHTYPE}"></div></div>
@@ -138,12 +120,18 @@
                                     {/foreach}
                                     {* adding additional column for odd number of fields in a block *}
                                     {if $FIELD_MODEL_LIST|@end eq true and $FIELD_MODEL_LIST|@count neq 1 and $COUNTER eq 1}
-                                     </div><div class="row"><div class="col-lg-6 fieldLabel {$WIDTHTYPE}"></div><div class="col-lg-6 {$WIDTHTYPE}"></div></div>
+                                     </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 fieldLabel {$WIDTHTYPE}"></div><div class="col-lg-6 {$WIDTHTYPE}"></div></div>
                                     {/if}
+                                    <div class="clearfix"></div>
                             </div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
             <br>
         {/foreach}
+     
     {/strip}

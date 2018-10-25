@@ -43,6 +43,23 @@
   <!--decode html for texteditor by jitu-->
   {decode_html($FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'), $RECORD->getId(), $RECORD))}
   <!--End here-->
+ {else if $FIELD_MODEL->get('name') eq 'company_details'}
+
+    {assign var=COMPANYDETAILS value=Vtiger_Util_Helper::getCompanyTitle($FIELD_MODEL->get('fieldvalue'))}
+
+    
+
+    {$FIELD_MODEL->getDisplayValue($COMPANYDETAILS[0]['organization_title'],$RECORD->getId(), $RECORD)}
+<!--- Added By Jitu@secondcrm.com on 24 Sep 2014--> 
+{elseif $FIELD_MODEL->get('name') eq 'terms_conditions'}
+    {$id = $FIELD_MODEL->get('fieldvalue')}
+    {assign var=TNCDETAILS value=$FIELD_MODEL->getTermConditionTitle($id)}
+    {foreach key=labelval1 item=selTnCDetails from=$TNCDETAILS}
+            
+        {$title = $selTnCDetails.title}
+                                
+    {/foreach}
+   {$FIELD_MODEL->getDisplayValue($title,$RECORD->getId(), $RECORD)}
 {else}
     {decode_html($FIELD_MODEL->getDisplayValue($FIELD_MODEL->get('fieldvalue'), $RECORD->getId(), $RECORD))}
 {/if}

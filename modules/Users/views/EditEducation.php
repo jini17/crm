@@ -23,7 +23,8 @@ class Users_EditEducation_View extends Vtiger_Index_View {
                     $educationdetailmodel = $userRecordModel->getEducationDetail($edu_id); 
                 }
                 $educationtype =  $userRecordModel->get_education_types();
-                $startDateField = array(	"mandatory"=>true,
+                $startDateField = array(	
+                                                "mandatory"=>true,
                                                 "presence"=>true,
                                                 "quickcreate"=>false,
                                                 "masseditable"=>false,

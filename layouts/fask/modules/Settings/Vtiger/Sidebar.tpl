@@ -7,6 +7,7 @@
 * All Rights Reserved.
 ************************************************************************************}
 {strip}
+
         {if $USER_MODEL->isAdminUser()   
                 AND 
                  (  $smarty.get.view eq 'List' OR 
@@ -29,7 +30,7 @@
                 {assign var=SETTINGS_MODULE_MODEL value= Settings_Vtiger_Module_Model::getInstance()}
                 {assign var=SETTINGS_MENUS value=$SETTINGS_MODULE_MODEL->getMenus()}
                 <div class="settingsgroup hidden-sm hidden-xs " style='padding-top:0; margin-top:0;'> 
-
+                    
 
         <div class="col-xs-12 text-center visible-xs visible-sm">
             <a class="btn btn-default" onclick="$('.sidebar-menu-u, .settingsNav').toggleClass('hidden-xs hidden-sm'); $('.settingsNav').find('.settingsgroup').toggleClass('hidden-xs hidden-sm');" style="width: 100%">Sidebar 
@@ -105,8 +106,8 @@
                 <div class="clearfix"></div>
                 <br><br>
                 </div>
-           
-     
+
+
 
                 {else}
                         {include file='layouts/fask/modules/Users/UsersSidebar.tpl'}

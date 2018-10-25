@@ -59,10 +59,15 @@ class Vtiger_Util_Helper {
                 $currentUser = Users_Record_Model::getCurrentUserModel();
                 $userid      = $currentUser->id;
                 $params = array();
-                $Where = '';
+                $Where = 'WHERE 1 ';
+
                 if(!$currentUser->isAdminUser()) {
-                        $Where  = " WHERE tblSCUAC.userid = ?";
+                        $Where  = " AND tblSCUAC.userid = ?";
                         $params = array($userid); 	
+                }
+                
+                if($id !=''){
+                   $Where .= " AND tblVTOD.organization_id='$id'";     
                 }
 
                 $aCompanyTitle = array();
@@ -79,10 +84,11 @@ class Vtiger_Util_Helper {
                 for($iK=0;$iK<$iMaxCompany;$iK++)
                 {   
                         if($db->query_result($result, $iK, "organization_id") > 0){
+                        
+                            $aCompanyTitle[$iOptionIndex]['organization_id'] = $db->query_result($result,$iK,'organization_id', 'selected');
+                            $aCompanyTitle[$iOptionIndex]['organization_title'] = $db->query_result($result,$iK,'organization_title', 'selected');
+                            $aCompanyTitle[$iOptionIndex]['organizationname'] = $db->query_result($result,$iK,'organizationname', 'selected');
                         $iOptionIndex++;
-                        $aCompanyTitle[$iOptionIndex]['organization_id'] = $db->query_result($result,$iK,'organization_id', 'selected');
-                        $aCompanyTitle[$iOptionIndex]['organization_title'] = $db->query_result($result,$iK,'organization_title', 'selected');
-                        $aCompanyTitle[$iOptionIndex]['organizationname'] = $db->query_result($result,$iK,'organizationname', 'selected');
                         }    
                 }
 

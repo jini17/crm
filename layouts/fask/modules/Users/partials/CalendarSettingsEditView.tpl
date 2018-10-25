@@ -10,16 +10,31 @@
 ********************************************************************************/
 -->*}
 {strip}
+    <style>
+        .detailview-table .col-adjust {
+            height: 50px;
+        }
+
+        .Signature {
+           width: 100%;
+        }
+        .Signature.text-left{
+        text-align: left !important}
+
+    </style>
     {if !empty($PICKIST_DEPENDENCY_DATASOURCE)}
         <input type="hidden" name="picklistDependency" value='{Vtiger_Util_Helper::toSafeHTML($PICKIST_DEPENDENCY_DATASOURCE)}' />
     {/if}
-    <div name='editContent'>
+    <div name='editContent' class="detailViewContainer">
         {foreach key=BLOCK_LABEL item=BLOCK_FIELDS from=$RECORD_STRUCTURE name=blockIterator}
             {if $BLOCK_FIELDS|@count gt 0}
-                <div class='fieldBlockContainer'>
-                    <h4 class='fieldBlockHeader' >{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
+                <div class='fieldBlockContainer block'>
+
+                    <h5 class='fieldBlockHeader' style="margin: 0;">{vtranslate($BLOCK_LABEL, $MODULE)}</h5>
+
+                    <div class="clearfix"></div>
                     <hr>
-                    <div class="table table-borderless">
+                    <div class="table detailview-table">
                         <div class="row">
                             {assign var=COUNTER value=0}
                             {foreach key=FIELD_NAME item=FIELD_MODEL from=$BLOCK_FIELDS name=blockfields}
@@ -29,17 +44,25 @@
                                 {if $FIELD_MODEL->isEditable() eq true}
                                     {if $FIELD_MODEL->get('uitype') eq "19"}
                                         {if $COUNTER eq '1'}
-                                            <div class="col-xs-12 col-md-3 "></div><div class="col-xs-12 col-md-3"></div></div><div class="row">
+                                            <div class="col-xs-12 col-md-3 "></div>
+                                            <div class="col-xs-12 col-md-3"></div>
+                                                
+                                        </div>
+                                            <div class="row">
                                             {assign var=COUNTER value=0}
                                         {/if}
                                     {/if}
                                     {if $COUNTER eq 2}
-                                    </div><div class="row">
+                                    </div>
+                                    <div class="row">
                                         {assign var=COUNTER value=1}
                                     {else}
                                         {assign var=COUNTER value=$COUNTER+1}
                                     {/if}
-                                    <div class="fieldLabel col-xs-12 col-md-3 alignMiddle">
+
+                                    
+                                    <div class="fieldLabel col-xs-12 col-md-3 col-adjust {if $FIELD_MODEL->get('label') eq 'Signature'} Signature full-width text-left {/if} alignMiddle">
+
                                         {if $isReferenceField eq "reference"}
                                             {if $refrenceListCount > 1}
                                                 <select style="width: 140px;" class="select2 referenceModulesList">
@@ -55,12 +78,14 @@
                                         {/if}
                                         &nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}
                                     </div>
-                                    <div class="fieldValue col-xs-12 col-md-3" {if $FIELD_MODEL->getFieldDataType() eq 'boolean'} style="width:25%" {/if} {if $FIELD_MODEL->get('uitype') eq '19'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
+                                        {assign var =TYPE value=$FIELD_MODEL->getUITypeModel()->getTemplateName()}
+                                    <div class="fieldValue col-xs-12 col-md-3 {$FIELD_MODEL->get('label')} {if $TYPE neq 'uitypes/Text.tpl'}col-adjust {else} full-width{/if}" {if $FIELD_MODEL->getFieldDataType() eq 'boolean'} style="width:25%" {/if} {if $FIELD_MODEL->get('uitype') eq '19'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
                                         {if $FIELD_MODEL->getFieldDataType() eq 'image' || $FIELD_MODEL->getFieldDataType() eq 'file'}
                                             <div class='col-lg-4 col-md-4 redColor'>
                                                 {vtranslate('LBL_NOTE_EXISTING_ATTACHMENTS_WILL_BE_REPLACED', $MODULE)}
                                             </div>
                                         {/if}
+                                    
                                         {include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
                                     </div>
                                 {/if}
@@ -77,3 +102,11 @@
             {/if}
         {/foreach}
     </div> 
+    <script>
+        jQuery(document).ready(function(){
+            var mydiv = jQuery('.table')
+            mydiv.find('.Signature.text-left').appendTo(mydiv)
+            mydiv.find('.Signature').appendTo(mydiv)
+        })
+        
+    </script>    
