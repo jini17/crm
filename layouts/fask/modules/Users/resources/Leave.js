@@ -15,7 +15,7 @@ Vtiger.Class("Users_Leave_Js", {
 	     
 	     //check the anyleaveType for login user 
     		var params = {
-                                                'module' 	: app.getModuleName(),
+                                                'module' 	: 'Users',
                                                 'action' 	: 'SaveSubModuleAjax',
                                                 'mode'   	: 'IsAnyLeaveTypeAssign',
      		}
@@ -35,7 +35,7 @@ Vtiger.Class("Users_Leave_Js", {
 	     var thisInstance = this;
          	//check the anyclaimType for login user 
     		var params = {
-                                                'module' : app.getModuleName(),
+                                                'module' : 'Users',
                                                 'action' 	: 'SaveSubModuleAjax',
                                                 'mode'   	: 'IsAnyClaimTypeAssign',
      		}
@@ -303,7 +303,7 @@ Vtiger.Class("Users_Leave_Js", {
 	},
      updateLeaveGrid : function(userid) {  
 			var params = {
-					'module' : app.getModuleName(),
+					'module' : 'Users',
 					'view'   : 'ListViewAjax',
 					'record' : userid,		
 					'mode'   : 'getUserLeave',
@@ -321,7 +321,7 @@ Vtiger.Class("Users_Leave_Js", {
 
 	 checkApplyLeave : function(userid) {  
 			var params = {
-					'module' :  app.getModuleName(),
+					'module' :  'Users',
 					'view'   : 'ListViewAjax',
 					'mode'   : 'checkApplyLeave',
 					'record' :userid,
