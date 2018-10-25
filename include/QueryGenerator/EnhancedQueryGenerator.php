@@ -603,20 +603,21 @@ class EnhancedQueryGenerator extends QueryGenerator {
                 $HRModules = array('EmployeeContract','PassportVisa','Performance','Payslip');
                 $baseModule = $this->getModule();
                 $ownrecsql = '';
-
-                                           if(isset($_REQUEST['record'])){
-                                                $emp_id = $_REQUEST['record']; 
-                                                 $ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$emp_id;
-                                               } else {
-                                                   if ($current_user->roleid !='H2' && $current_user->is_admin !='on' && $current_user->roleid !='H12' && $current_user->roleid !='H13'){
-                                                       $ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$current_user->id;
-                                                   }
+                
+                                if(in_array($baseModule, $HRModules)){
+                                        if(isset($_REQUEST['record'])){
+                                             $emp_id = $_REQUEST['record']; 
+                                              $ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$emp_id;
+                                            } else { 
+                                                if ($current_user->roleid !='H2' && $current_user->is_admin !='on' && $current_user->roleid !='H12' && $current_user->roleid !='H13'){
+                                                    $ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$current_user->id;
                                                 }
-
+                                             }
+                               } 
                 /*if(in_array($baseModule,$HRModules)){
                         $ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$emp_id;
                 }*/
-                if($baseModule =='MessageBoard'){
+                if($baseModule =='MessageBoard'){ 
                                                 $ownrecsql = ' AND ( vtiger_'.strtolower($baseModule).'.employee_id IN (SELECT id FROM vtiger_users WHERE reports_to_id='.$current_user->id.')'
                                                         . ' OR ( vtiger_'.strtolower($baseModule).'.employee_id ='.$current_user->id.'))';
                                            }

@@ -174,6 +174,7 @@
                                         
         </div>
 <!-- HELP POP UP - Added By Khaled-->
+ {if $MODULE eq 'Home'  AND   $LOGGED_NOW == 'in' }
 <div id="myModal" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
 
@@ -203,14 +204,7 @@
                         <p>
                            Key concept of Agiliux is around enhancing office productivity. Agiliux makes businesses agile, which means can do things faster and digital transformation is the keyhole here.
                         </p>
-                        <ul class="list-inline pull-right">
-                            <li>
-                                <button class="btn btn-primary pull-right" data-dismiss="modal" > Skip  </button>
-                            </li>
-                            <li>
-                                    <button class="btn btn-primary pull-right"> Getting Started </button>
-                            </li>
-                        </ul>
+                       
                       </div>
                   </div>
 
@@ -222,7 +216,7 @@
                          <p>
                             Agiliux offers full spectrum of solutions –from setting up a
                             foundation to advance digital automation, ensuring seamless transformation journey (End to end)    </p>
-                         <div class="clearfix" style="height: 30px;"></div>
+                         <div class="clearfix" style="height: 10px;"></div>
                          <ul>
                              <li> Consulting </li>
                              <li> Software</li>
@@ -230,12 +224,12 @@
                              <li> Data Migration </li>
                              <li> Training and Ongoing Support </li>
                          </ul>
-                             <div class="clearfix" style="height: 30px;"></div>
+                             <div class="clearfix" style="height: 10px;"></div>
                          <p>
                                 <strong>Features of Agiliux: </strong>
                                High level – there are 3 main areas that we focus on
                          </p>
-                         <div class="clearfix"style="height: 30px;">
+                         <div class="clearfix"style="height: 10px;">
                             <ul>
                                 <li> Employee Management </li>
                                 <li> Office Automation </li>
@@ -243,19 +237,13 @@
                             </ul>  
                      </div>   
                          <div class="clearfix" style="height: 50px;"></div>
-                     <ul class="list-inline pull-right">
-                            <li>
-                                <button class="btn btn-primary pull-right" data-dismiss="modal" > Skip  </button>
-                            </li>
-                            <li>
-                                    <button class="btn btn-primary pull-right" data-slide="next"> Next </button>
-                            </li>
-                        </ul>
+                     
                   </div>
                  </div>
                   <div class="item slide3">
                       <div class="carousel-caption d-none d-md-block heading">
                          <h4 class="modal-title">Hi..!  Happy to have you on-board </h4>
+                         <div class="clearfix" style="height: 10px"></div>
                          <h1 class="text-center"> Are you new to use a CRM system?</h1>
                        </div>
                       <div class="clearfix" style="height: 80px;"></div>
@@ -271,18 +259,27 @@
                       </div> 
                       <div class="clearfix" style="height: 50px;"></div>
                       <div class="col-md-6 slide-footer"> 
-                          <i class="fa fa-question img-circle pull-left" style="border: 1px solid #ccc; padding: 5px; 15px; width:30px; height: 30px; text-align:center"> </i>
-                          <strong> Have some more question to ask? </strong> Write to us <br />
-                          <a href="#" class="text-primary" style="padding: 10px; font-size: 18px;"> support@agiliux.com</a>
+                          <i class="fa fa-question img-circle pull-left text-center" style="border: 1px solid #ccc; padding: 5px 15px; width:30px; height: 30px; text-align:center"> </i>
+                          <strong>Have some more question to ask? </strong> <br /> Write to us <br />
+                          <a href="#" class="text-primary text-left" style="padding: 0; font-size: 18px;"> support@agiliux.com</a>
                       </div>
                       <div class="col-md-6 slide-footer"> 
-                          <i class="fa fa-file-word-o  img-circle pull-left"  style="border: 1px solid #ccc; padding: 5px; 15px; width:30px; height: 30px;"> </i> &nbsp;&nbsp;
-                          <strong> Want to know more about CRM? </strong> Checkout our articals here<br />
-                          <a href="#" class="text-primary" style="padding: 10px; font-size: 18px;"> support@agiliux.com</a>
+                          <i class="fa fa-file-word-o  img-circle pull-left text-center"  style="border: 1px solid #ccc; padding: 5px 15px; width:30px; height: 30px;"> </i>
+                          <strong>Want to know more about CRM? </strong><br /> Checkout our articles here<br />
+                          <a href="#" class="text-primary text-left" style="padding: 0; font-size: 18px;"> support@agiliux.com</a>
                       </div>
                       <div class="clearfix"></div>
                   </div>
               </div>
+                 <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
         </div>
       {*  <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -291,8 +288,11 @@
 
     </div>
   </div>
+      {/if}
+      
         {if $FIELDS_INFO neq null}
                 <script type="text/javascript">
+                    
                     jQuery(document).ready(function() {
                         jQuery('#myModal').modal('show');
                         $('button[data-dismiss="modal"]').click(function() {

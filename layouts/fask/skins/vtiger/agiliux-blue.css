@@ -85,6 +85,7 @@ a.btn.btn-gettingStarted i{
     color: #000 !important;
     text-align: left;
     font-size: 12px;
+    bottom: 24px;
 }
 #myModal .modal-header{
     border: 0;
@@ -120,6 +121,9 @@ a.btn.btn-gettingStarted i{
 #myModal  .item.slide3 .right a{
      margin-right: 17%;
 }
+#MyModal .slide3 .modal-title{
+    padding-bottom: 20px;
+}
 #myModal .slide-footer{
     margin-top: 30px;
 }
@@ -129,4 +133,23 @@ a.btn.btn-gettingStarted i{
 }
 #myModal .slide-footer i{
     margin-right: 20px;
+}
+
+.carousel-inner{
+    background: #fff;
+}
+.tree .box{
+    background: #fff !important;
+}
+.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+
+    margin-left: -56px;
+    color: #2f5597;
+
+}
+.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
+
+    margin-right: -53px;
+     color: #2f5597;
+
 }
