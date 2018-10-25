@@ -135,7 +135,7 @@
                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;">&nbsp;{vtranslate('LBL_AREA_OF_STUDY', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
                                                 </div>	
                                                 <div class="controls date col-md-8">
-                                                        <select class="select2 inputElement" onchange="updateSelectBox('areaofstudy','areaofstudytxt');" name="areaofstudy" 	id ="areaofstudy" data-rule-required = "true">	
+                                                        <select class="select2 inputElement" onchange="updateSelectBox('areaofstudy','areaofstudytxt');" name="areaofstudy" id ="areaofstudy" data-rule-required = "true">	
                                                                 {foreach key=MAJOR_ID item=MAJOR_MODEL from=$MAJOR_LIST name=majorIterator}
                                                                 <option value="{$MAJOR_MODEL.major}" {if $EDUCATION_DETAIL.areaofstudy eq $MAJOR_MODEL.major} selected {/if}>
                                                                 ({$MAJOR_MODEL.major})</option>

@@ -11,6 +11,7 @@
 {strip}
 <div class="tab-pane" id="UserEducationContainer">
     <div class="contents row-fluid">
+      
         {assign var=CREATE_EDUCATION_URL value=$EDUCATION_RECORD_MODEL->getCreateEducationUrl()}
         {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}  
 
@@ -47,7 +48,7 @@
                                 {assign var=PERMISSION value=LBL_PUBLIC}  
                         {elseif $USER_EDUCATION['public'] eq '1'}
                                 {assign var=PERMISSION value=LBL_PRIVATE}  
-                        {else}
+                        {elseif $USER_EDUCATION['public'] eq '2'}
                             {assign var=PERMISSION value='LBL_PROTECTED'}  
                         {/if}    
                     <tr>
