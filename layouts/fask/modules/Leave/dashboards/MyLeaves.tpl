@@ -27,7 +27,7 @@
              </div>
 
              {if $MODELS['balance'] gt 0}
-               <div class="col-md-4 pull-right"  style="padding:5px;"><input type="button" class="btn btn-primary" onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USERID}&tab=leave'" name="applyleave" value="{vtranslate('LBL_APPLY', $MODULE_NAME)}">
+               <div class="col-md-4 pull-right"  style="padding:5px;"><input type="button" class="btn btn-primary" onclick="Users_Leave_Js.addLeave('?module=Users&view=EditLeave&userId={$USERID}');" name="applyleave" value="{vtranslate('LBL_APPLY', $MODULE_NAME)}">
                </div>
              {/if}
             <div class='clearfix'></div>
