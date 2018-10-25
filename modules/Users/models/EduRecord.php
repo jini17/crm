@@ -173,7 +173,7 @@ LIMIT 3";
               
                 $db = PearDatabase::getInstance();
 
-                $query = "SELECT vtiger_education.* FROM vtiger_education
+                $query = "SELECT vtiger_education.*, vtiger_crmentity.smownerid FROM vtiger_education
                         INNER JOIN vtiger_crmentity
                         ON vtiger_crmentity.crmid = vtiger_education.educationid
                         WHERE vtiger_crmentity.smownerid = ? AND vtiger_crmentity.deleted=0";
@@ -182,7 +182,7 @@ LIMIT 3";
                 $eduList=array();	
 
                 for($i=0;$db->num_rows($result)>$i;$i++){
-                    $permission = Users_Record_Model::recordPermission($role,$db->query_result($result, $i, 'educationid'),$current_user_id,$db->query_result($result, $i, 'public'));
+                    $permission = Users_Record_Model::recordPermission($role,$db->query_result($result, $i, 'smownerid'),$current_user_id,$db->query_result($result, $i, 'public'));
                   if($permission){
                         $eduList[$i]['institution_name'] = $db->query_result($result, $i, 'institution_name');
                         $eduList[$i]['education_location'] = $db->query_result($result, $i, 'education_location');

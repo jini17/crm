@@ -123,14 +123,14 @@ class Users_ProjectRecord_Model extends Users_Record_Model {
                 $db  = PearDatabase::getInstance();
                 //$db->setDebug(true);
                 $params = array($userId);
-                $result2 = $db->pquery("SELECT employeeprojectsid,project_title,occupation, project_url, project_description,ispublic , date_FORMAT(project_start_date,'%b %Y') as project_start_date FROM vtiger_employeeprojects
+                $result2 = $db->pquery("SELECT employeeprojectsid,project_title,occupation, project_url, project_description,ispublic , date_FORMAT(project_start_date,'%b %Y') as project_start_date,vtiger_crmentity.smownerid FROM vtiger_employeeprojects
                                          INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_employeeprojects.employeeprojectsid
                                         WHERE vtiger_crmentity.deleted = 0  AND vtiger_crmentity.smownerid = ?", $params);
                 $userWEProjectList = array();
                 if($db->num_rows($result2) > 0) {
                         for($j=0;$j<$db->num_rows($result2);$j++) {
                             
-                        $permission = Users_Record_Model::recordPermission($role,$db->query_result($result2, $j, 'employeeprojectsid'),$current_user_id,$db->query_result($result2, $i, 'ispublic'));
+                        $permission = Users_Record_Model::recordPermission($role,$db->query_result($result2, $j, 'smownerid'),$current_user_id,$db->query_result($result2, $i, 'ispublic'));
                              if($permission){
                                 $userWEProjectList[$j]['employeeprojectsid'] = $db->query_result($result2, $j, 'employeeprojectsid');			
                                 $userWEProjectList[$j]['title'] = $db->query_result($result2, $j, 'project_title');

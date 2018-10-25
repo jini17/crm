@@ -160,7 +160,7 @@ class Users_WorkExpRecord_Model extends Users_Record_Model {
                                 tblSCD.designation,
                                 tblSCL.location,
                                                                                      tblSCW.job_type,
-                                DATE_FORMAT(tblSCW.start_date,'%b %Y') AS start_date, DATE_FORMAT(tblSCW.end_date,'%b %Y') AS end_date, tblSCW.description, tblSCW.IsView AS isview
+                                DATE_FORMAT(tblSCW.start_date,'%b %Y') AS start_date, DATE_FORMAT(tblSCW.end_date,'%b %Y') AS end_date, tblSCW.description, tblSCW.IsView AS isview, tblSCW.user_id
                                 FROM secondcrm_userworkexp tblSCW 
                                 LEFT JOIN secondcrm_company tblSCC ON tblSCC.company_id	= tblSCW.company_id
                                 LEFT JOIN secondcrm_designation tblSCD ON tblSCD.designation_id = tblSCW.designation_id
@@ -172,7 +172,7 @@ class Users_WorkExpRecord_Model extends Users_Record_Model {
                 if($db->num_rows($result) > 0) {
                         for($i=0;$i<$db->num_rows($result);$i++) {
                             
-                              $permission = Users_Record_Model::recordPermission($role,$db->query_result($result, $i, 'company_id'),$current_user_id,$db->query_result($result, $i, 'isview'));
+                              $permission = Users_Record_Model::recordPermission($role,$db->query_result($result, $i, 'user_id'),$current_user_id,$db->query_result($result, $i, 'isview'));
                               if($permission){
                               $userWorkExpList[$i]['company_id'] = $db->query_result($result, $i, 'company');
                                 $userWorkExpList[$i]['company_title'] = $db->query_result($result, $i, 'company_title');
