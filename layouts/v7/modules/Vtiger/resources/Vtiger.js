@@ -614,6 +614,7 @@ Vtiger.Class('Vtiger_Index_Js', {
                                                 var message = typeof formData.record !== 'undefined' ? app.vtranslate('JS_RECORD_UPDATED'):app.vtranslate('JS_RECORD_CREATED');
                                                 app.helper.showSuccessNotification({"message":message},{delay:4000});
                                                 invokeParams.callbackFunction(data, err);
+                                              jQuery('li[data-name=MessageBoard]').find('a[name=drefresh]').trigger('click');
                                                 //To unregister onbefore unload event registered for quickcreate
                                                 window.onbeforeunload = null;
                                         }else{

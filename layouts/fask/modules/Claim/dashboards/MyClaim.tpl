@@ -15,8 +15,8 @@
   <div class="filterContainer">
         
         <div class="row" style="margin-left:3px;">
-               <div class="col-lg-8">
-                <label class="radio-group cursorPointer" style="font-size:13px; padding:5px;"> 
+            <div class="col-lg-8" style="padding-left: 9px;">
+                <label class="radio-group cursorPointer" style="font-size:13px; padding:13px 0px 0 0;"> 
                     <input type="radio" id="myclaimtype" name="type" class="widgetFilter reloadOnChange cursorPointer" value="claimtype" checked="true" />&nbsp;&nbsp; {vtranslate('LBL_CLAIM_TYPE', $MODULE_NAME)}
                 </label>&nbsp;&nbsp;
                <label class="radio-group cursorPointer" style="font-size:13px; padding:5px;">

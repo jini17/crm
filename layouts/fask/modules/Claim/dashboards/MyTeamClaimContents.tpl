@@ -15,7 +15,7 @@
 	  <div class='row th' style="padding:5px">
         	{if $VALUE eq 'claimtype'}
 	            <div class='col-lg-3'>
-	                <strong>{vtranslate('Employee Name', $MODULE_NAME)}</strong>
+	                <strong>{vtranslate('Employee', $MODULE_NAME)}</strong>
 	            </div>
 	            <div class='col-lg-2'>
 	                <strong>{vtranslate('Claim Type', $MODULE_NAME)}</strong>

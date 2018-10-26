@@ -28,7 +28,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-              <select class="widgetFilter select2 col-lg-7" id="employee_name" name="employee_name">
+              <select class="widgetFilter select2 col-lg-12" id="employee_name" name="employee_name">
                 <option value="All" selected>{vtranslate('All', $MODULE_NAME)}</option>
                 {foreach item = USERMODEL from = $USERMODELS }
                   <option value="{$USERMODEL['id']}">{$USERMODEL['fullname']}</option>

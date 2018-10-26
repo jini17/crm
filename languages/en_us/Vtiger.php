@@ -18,7 +18,7 @@ $languageStrings = array(
 	'LBL_READ_LICENSE' => 'Read License',
 	'LBL_PRIVACY_POLICY' => 'Privacy Policy',
 	'LBL_REPORT_CHART' => 'Chart Report',
-
+                    'LBL_VIEW_MORE'=>'View More',
 	'LBL_ENRICH_DATA' => 'Enrich Data',
 
 	'LBL_ENRICH_DATA_LOCKED' => 'Enrich Data', 

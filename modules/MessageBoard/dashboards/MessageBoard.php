@@ -117,4 +117,23 @@ class MessageBoard_MessageBoard_Dashboard extends Vtiger_IndexAjax_View {
             if (!$full) $string = array_slice($string, 0, 1);
             return $string ? implode(', ', $string) . ' ago' : 'just now';
         }
+         /**
+         * Function to get the list of Script models to be included
+         * @param Vtiger_Request $request
+         * @return <Array> - List of Vtiger_JsScript_Model instances
+         */
+        public function getHeaderScripts(Vtiger_Request $request) {
+                $headerScriptInstances = parent::getHeaderScripts($request);
+                $moduleName = $request->getModule();
+
+                $jsFileNames = array(
+                        'modules.Vtiger.resources.dashboards.Widget',
+                     
+                );
+
+                $jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
+                $headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
+                return $headerScriptInstances;
+        }
+        
 }

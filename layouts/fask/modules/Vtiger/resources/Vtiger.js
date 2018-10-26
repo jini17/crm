@@ -676,6 +676,7 @@ Vtiger.Class('Vtiger_Index_Js', {
          * @returns {undefined}
          */
         quickCreateSave : function(form,invokeParams){
+                console.log('saving...');
                 var params = {
                         submitHandler: function(form) {
                                 // to Prevent submit if already submitted

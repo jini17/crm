@@ -29,22 +29,24 @@
             </div>
 
           </div>
-      		{foreach item=MODEL from=$MODELS}
-      			<div class='row miniListContent' style="padding:5px;margin-right:-1px;margin-left:-1px;">
-      				<div class='col-lg-3'>
-      					<a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$MODEL['userid']}"><strong>{$MODEL['empname']}</strong></a>
-      				</div>
-      				<div class='col-lg-3'>
-      					{$MODEL['department']}
-      				</div>
-      				<div class='col-lg-3'>
-      					<span>{$MODEL['fromdate']|date_format:" %b %e"}</span>
-      				</div>
+                {foreach item=MODEL from=$MODELS}
+                        <div class='row miniListContent' style="padding:5px;margin-right:-1px;margin-left:-1px;">
+                                <div class='col-lg-3'>
+                                        <a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$MODEL['userid']}"><strong>{$MODEL['empname']}</strong></a>
+                                </div>
+                                <div class='col-lg-3'>
+                                        {$MODEL['department']}
+                                </div>
+                                <div class='col-lg-3'>
+                                        <span>{$MODEL['fromdate']|date_format:" %b %e"}</span>
+                                </div>
               <div class='col-lg-3'>
                 <span>{$MODEL['todate']|date_format:" %b %e"}</span>
               </div>
-      			</div>
-      			{/foreach}
+                        </div>
+                        {/foreach}
+                         <div class="clearfix"></div>
+                        <a href="index.php?module=Claim&view=List" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
      </div>
 
 {else}
