@@ -10,9 +10,10 @@
 
 {strip}
 <input type="hidden" name="default_tab" id="default_tab" value="{$SELECTED_TAB}" />
+
 <div class="dashBoardContainer clearfix">
         <div class="tabContainer">
-
+            
                  <ul class="nav nav-tabs tabs sortable container-fluid visible-lg">
                 {foreach key=index item=TAB_DATA from=$DASHBOARD_TABS}
                     <li class="{if $TAB_DATA["id"] eq $SELECTED_TAB}active{/if} dashboardTab" data-tabid="{$TAB_DATA["id"]}" data-tabname="{$TAB_DATA["tabname"]}">
@@ -131,10 +132,9 @@
                         </a>
                     </li>
                 {/foreach}
-
-
   </ul>
-</div></div></div>
+</div></div>
+</div>
     <!-- / Related mobile -->
 
             <div class="tab-content">
@@ -145,7 +145,20 @@
                         {/if}
                     </div>
                 {/foreach}
+                
             </div>
         </div>
+                <div class="clearfix"></div>
+                <a class="strolltotop pull-right">
+                    <i class="fa fa-angle-up"></i>
+                </a>
 </div>
 {/strip}
+<script>
+{*   jQuery(document).ready(function(){
+        jQuery('html').on('click','.strolltotop',function(){          
+          jQuery('.gridster_2.ready ul li').scrollIntoView(true);
+
+    });    
+   });*}
+</script>

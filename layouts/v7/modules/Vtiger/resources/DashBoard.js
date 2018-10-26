@@ -520,20 +520,20 @@ Vtiger.Class("Vtiger_DashBoard_Js",{
 	},
 
 	registerLazyLoadWidgets : function() {
-		var thisInstance = this;
-		jQuery(window).bind("scroll", function() {
-			var widgetList = jQuery('.dashboardWidget').not('.loadcompleted');
-			if(!widgetList[0]){
-				// We shouldn't unbind as we might have widgets in another tab
-				//jQuery(window).unbind('scroll');
-			}
-			widgetList.each(function(index,widgetContainerELement){
-				if(thisInstance.isScrolledIntoView(widgetContainerELement)){
-					thisInstance.loadWidget(jQuery(widgetContainerELement));
-					jQuery(widgetContainerELement).addClass('loadcompleted');
-				}
-			});
-		});
+                    var thisInstance = this;
+                    jQuery(window).bind("scroll", function() {
+                            var widgetList = jQuery('.dashboardWidget').not('.loadcompleted');
+                            if(!widgetList[0]){
+                                    // We shouldn't unbind as we might have widgets in another tab
+                                    //jQuery(window).unbind('scroll');
+                            }
+                            widgetList.each(function(index,widgetContainerELement){
+                                    if(thisInstance.isScrolledIntoView(widgetContainerELement)){
+                                            thisInstance.loadWidget(jQuery(widgetContainerELement));
+                                            jQuery(widgetContainerELement).addClass('loadcompleted');
+                                    }
+                            });
+                    });
 	},
 
 	registerWidgetFullScreenView : function() {

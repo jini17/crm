@@ -42,7 +42,7 @@
                                                                     'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
                                                                     'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
                                                                     'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-                                                                    'mycthemeswitcher'=>'folder','contacts'=>'contacts','payslip'=>'receipt','performance'=>'timeline','passportvisa'=>'visa','workinghours'=>'access_time','messageboard '=>'sms','holiday'=>'cloud','claimtype'=>'attach_money', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people' ,'task'=>'card_travel','leave'=>'exit_to_app','employeecontract'=>'person']}
+                                                                    'mycthemeswitcher'=>'folder','message'=>'sms','contacts'=>'contacts','payslip'=>'receipt','performance'=>'timeline','passportvisa'=>'visa','workinghours'=>'access_time','messageboard '=>'sms','board'=>'sms','holiday'=>'cloud','claimtype'=>'attach_money', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people' ,'task'=>'card_travel','leave'=>'exit_to_app','employeecontract'=>'person']}
 
 
                                                         {*<span><i class="material-icons entryIcon" title={$TRANSLATED_MODULE_NAME}>{$iconsarray[{strtolower($VT_ICON)}]}</i></span>&nbsp;&nbsp;*}

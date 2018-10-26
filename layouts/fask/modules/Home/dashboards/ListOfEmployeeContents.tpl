@@ -31,7 +31,8 @@
                         </div>                        
                    </div>
             {/foreach}
-   
+   <div class="clearfix"></div>
+                        <a href="index.php?module=Users&view=List" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
 
 {else}
         <span class="noDataMsg">

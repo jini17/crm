@@ -189,9 +189,8 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                 <i class="material-icons module-icon">delete_forever</i> <span class="hide-menu"> Recycle Bin</span>
                             </a>
                         </li>
-
                         <li foundation="">
-                            <a class="waves-effect waves-dark " href=" index.php?module=SMSNotifier&amp;view=List&amp;app=FOUNDATION ">
+                            <a class="waves-effect waves-dark " href="index.php?module=SMSNotifier&amp;view=List&amp;app=FOUNDATION ">
                                 <i class="material-icons module-icon">sms</i> <span class="hide-menu"> {vtranslate('LBL_SMS_MESSAGES', 'Vtiger')}</span>
                             </a>
                         </li>

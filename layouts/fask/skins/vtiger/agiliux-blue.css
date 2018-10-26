@@ -153,3 +153,21 @@ a.btn.btn-gettingStarted i{
      color: #2f5597;
 
 }
+/**=============
+    Widget CSS
+================*/
+.gridster_2 .mCSB_dragger{
+    right:-4px !important;
+}
+
+.filterContainer .radio-group.cursorPointer{
+    padding-top: 12px 0 !important;
+}
+.dashboardWidgetContent.mCustomScrollbar{
+    padding-top: 0;
+}
+.btn-widget-view-more{
+    color: #2f5597;
+    float: right;
+    padding-top: 10px;
+}

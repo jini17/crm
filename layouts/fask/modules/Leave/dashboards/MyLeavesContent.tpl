@@ -72,6 +72,8 @@
 			</div>
 			{/foreach}
 		{/if}
+                 <div class="clearfix"></div>
+                        <a href="index.php?module=leave&view=List" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
 	</div>		
 {else}
 	<span class="noDataMsg">

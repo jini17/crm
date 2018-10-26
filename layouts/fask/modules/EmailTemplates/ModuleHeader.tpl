@@ -48,7 +48,7 @@
                                                         </li>
                                                 {/foreach}
                                                 <li>
-                                                    <a href='#' class="btn btn-getting-started btn-default"> {vtranslate('Getting Started','Vtiger'} </a>
+                                              
                                                         <button class='btn btn-danger Help-btn' >
                                                                 <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; {vtranslate('Help',$MODULE)}
                                                         </button>
