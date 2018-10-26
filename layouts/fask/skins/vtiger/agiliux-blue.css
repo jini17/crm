@@ -31,6 +31,10 @@ Email: khaled@softsolvers.com.my
      margin-right: 5px;
      color: #fff;
 }
+#appnav button i{
+    font-size: 12px !important;
+    color: #fff;
+}
 .blockData .table.detailview-table .row{
     display:block !important; 
 }
@@ -153,6 +157,7 @@ a.btn.btn-gettingStarted i{
      color: #2f5597;
 
 }
+
 /**=============
     Widget CSS
 ================*/
