@@ -362,6 +362,61 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                        listInstance.loadListViewRecords(listParams);
                 });
         },
+        registerAdvanceFilterToggle:function(){
+            jQuery('.main-container').on('click','.accordion-toggle',function(){
+                   $(".accordion-toggle").each(function(){
+                        $(this).find('i').removeClass('fa-minus').addClass('fa-plus');
+                  });
+                var id = jQuery(this).attr('href');
+                var classname = jQuery(id)
+                 if( jQuery(this).find('i').hasClass('.fa-minus')){
+                        jQuery(this).find('i').removeClass('fa-minus').addClass('fa-plus')     
+                    }
+                    else{
+                             jQuery(this).find('i').removeClass('fa-plus').addClass('fa-minus')     
+                    }                
+            })
+            
+        },
+        registerAdvancedEmployeeDirectorySearch:function(){
+             jQuery('.main-container .panel-filter').on('click','.panel-body input',function(){
+                 var inputs =jQuery('#accordion').find('input:checked')
+                  var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');              
+                   var tabType = jQuery('#tabtype').val();
+                var array = [[["grade_id","n","0"]]]
+             
+                  var inputarray = [];
+                 $(inputs).each(function () {            
+                   
+                     var $this = jQuery(this) 
+                     var fieldname = $this.attr('name');
+                     if(fieldname == 'gender'){
+                        
+                             var sThisVal = [fieldname,'e',$this.val()]
+                     }
+                     else if(fieldname == 'birthday'){
+                          var sThisVal = [fieldname,$this.val(),'']
+                     }                 
+                     else{
+                           var sThisVal = [fieldname,'e',$this.val()]
+                     }
+                    inputarray.push(sThisVal);
+                   //     array.push(inputarray)
+                });
+                array.push(inputarray)
+//                var newarray = [[["grade_id","n","0"]],[["first_name","c","keyword"],["last_name","c","keyword"],["email1","c","keyword"],["title","c","keyword"],["department","c","keyword"]]];
+//                console.log(array)
+              
+              var listInstance = new Settings_Users_List_Js;
+               var listParams = listInstance.getListViewParams();
+                listParams['search_params'] = array;
+                listParams['status'] ="Active";
+                listParams['empview'] = viewtype;
+                listParams['tabtype'] = tabType;
+                listParams['searchType'] = "gridfilter";
+                listInstance.loadListViewRecords(listParams);
+            });
+        },
         registerAlphabetSearch:function(){
             jQuery('.main-container').on('click','.alphabetSearch',function(){
                 $(this).closest('tr').find('td').removeAttr('style');
@@ -431,6 +486,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                  var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');  
                  var tabType = jQuery('#tabtype').val();  
               var dept = jQuery('#curdepartment').val();  
+              
               if(tabType == 'MD'){
                       listParams['search_params'] = [[["department","e",dept]]];
               }
@@ -658,6 +714,8 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js",{
                 this.registerUserStatusToggleEvent();
                 this.registerListViewSearch();
                 this.registerAlphabetSearch();
+                this.registerAdvancedEmployeeDirectorySearch();
+                this.registerAdvanceFilterToggle();
                 this.registerUserViewSwitcher();
                 this.registerPagination();
                 this.registerKeySearch();

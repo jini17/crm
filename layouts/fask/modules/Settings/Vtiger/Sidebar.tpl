@@ -30,8 +30,67 @@
                 {assign var=SETTINGS_MODULE_MODEL value= Settings_Vtiger_Module_Model::getInstance()}
                 {assign var=SETTINGS_MENUS value=$SETTINGS_MODULE_MODEL->getMenus()}
                 <div class="settingsgroup hidden-sm hidden-xs " style='padding-top:0; margin-top:0;'> 
-                    
+               
+                    <div class='clearfix'></div>
+                    <div class='col-xs-12'>
+                             <h4> Filter </h4>
+                             <!-- Latest compiled and minified Bootstrap CSS -->
+                                <div class="panel-group panel-filter" id="accordion">
+                                <div class="panel panel-default">
+                                  <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                          Gender <i class="fa fa-minus pull-right"></i>
+                                      </a>
+                                    </h4>
+                                  </div>
+                                  <div id="collapseOne" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <ul class='gender list-unstyled'>
+                                            <li> <input type="checkbox" name="gender" value="Male"/>&nbsp;Male</li>
+                                            <li> <input type="checkbox" name="gender" value="Female"/> &nbsp;Female</li>
+                                        </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="panel panel-default">
+                                  <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                        Birthday <i class="fa fa-plus pull-right"></i>
+                                      </a>
+                                    </h4>
+                                  </div>
+                                  <div id="collapseTwo" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                      <ul class='gender list-unstyled'>
+                                          <li> <input type="checkbox" name="birthday" value="thisweek">&nbsp;This Week</li>
+                                          <li> <input type="checkbox" name="birthday" value="thismonth"/> &nbsp;This Month </li>
+                                        </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="panel panel-default">
+                                  <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                          Department<i class="fa fa-plus pull-right"></i>
+                                      </a>
+                                    </h4>
+                                  </div>
+                                  <div id="collapseThree" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                      <ul class='department list-unstyled'>
+                                          <li> <input type="checkbox" name="department" checked="" value="HRM"/> HRM</li>
+                                             <li> <input type="checkbox" name="department" value="Technical"/> Technical</li>
+                                        </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                    </div>
 
+                    <div class="clearfix"></div>
         <div class="col-xs-12 text-center visible-xs visible-sm">
             <a class="btn btn-default" onclick="$('.sidebar-menu-u, .settingsNav').toggleClass('hidden-xs hidden-sm'); $('.settingsNav').find('.settingsgroup').toggleClass('hidden-xs hidden-sm');" style="width: 100%">Sidebar 
                       &nbsp;<span class="toggleButton"><i class="ti-angle-down"></i></span>

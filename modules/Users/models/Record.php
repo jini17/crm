@@ -1346,4 +1346,16 @@ class Users_Record_Model extends Vtiger_Record_Model {
             
             return $flag;
         }
+        
+        public function get_department(){
+            $db = PearDatabase::getInstance();
+            $sql = "SELECT department from vtiger_department";
+            $query = $db->pquery($sql,array());
+            $num_rows = $db->num_rows($query);
+            $data = array();
+            for($i = 0; $i < $num_rows; $i++){
+                $data[$i]['department']=$db->query_result($query,$i,'department');
+            }
+            return $data;
+        }
 }
