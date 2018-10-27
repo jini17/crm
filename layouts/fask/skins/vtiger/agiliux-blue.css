@@ -176,3 +176,25 @@ a.btn.btn-gettingStarted i{
     float: right;
     padding-top: 10px;
 }
+
+/**=========================
+  Employee Directory Sidebar filter 
+============================*/
+.panel-filter{
+    background: #ffff;
+}
+.panel-filter .panel-title > a:before {
+    float: right !important;
+    font-family: FontAwesome;
+    content:"";
+    padding-right: 5px;
+}
+.panel-filter .panel-title > a.collapsed:before {
+    float: right !important;
+    content:"";
+}
+.panel-filter .panel-title > a:hover, 
+.panel-filter .panel-title > a:active, 
+.panel-filter .panel-title > a:focus  {
+    text-decoration:none;
+}

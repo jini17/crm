@@ -818,9 +818,20 @@ class EnhancedQueryGenerator extends QueryGenerator {
                                                 $fieldSql .= "$fieldGlue DATE_FORMAT(".$tableName.'.' .
                                                                 $field->getColumnName().",'%m%d') ".$valueSql;
                                         } 
+                                         elseif ($fieldName == 'birthday' && $conditionInfo['operator'] == 'thisweek') {
+                                              $fieldSql .= "DATE(birthday + INTERVAL (YEAR(NOW()) - YEAR(birthday)) YEAR)
+                                                                        BETWEEN
+                                                                        DATE(NOW() - INTERVAL WEEKDAY(NOW()) DAY)
+                                                                        AND
+                                                                        DATE(NOW() + INTERVAL 6 - WEEKDAY(NOW()) DAY)";
+                                         }
+                                         elseif($fieldName == 'birthday' && $conditionInfo['operator'] == 'thismonth'){
+                                                 $fieldSql .= " MONTH(STR_TO_DATE(birthday, '%d/%m/%Y')) = MONTH(NOW())";
+                                         }
                                         elseif ($fieldName == 'date_joined' && !$this->isRelativeSearchOperators($conditionInfo['operator'])) {
                                                 $fieldSql .= "$fieldGlue DATE_FORMAT(".$tableName.'.' .
                                                                 $field->getColumnName().",'%Y-%m-%d') ".$valueSql;
+                                                
                                         } else {
                                                 if ($conditionInfo['operator'] == 'n' && $field->getFieldDataType() == 'multipicklist') {
                                                         $specialCondition = ' OR '.$tableName.'.'.$field->getColumnName().' IS NULL ';

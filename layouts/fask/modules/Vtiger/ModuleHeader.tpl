@@ -259,12 +259,12 @@
                       </div> 
                       <div class="clearfix" style="height: 50px;"></div>
                       <div class="col-md-6 slide-footer"> 
-                          <i class="fa fa-question img-circle pull-left text-center" style="border: 1px solid #ccc; padding: 5px 15px; width:30px; height: 30px; text-align:center"> </i>
+                          <i class="fa fa-question img-circle pull-left text-center" style=" padding: 5px 15px; width:30px; height: 30px; text-align:center"> </i>
                           <strong>Have some more question to ask? </strong> <br /> Write to us <br />
                           <a href="#" class="text-primary text-left" style="padding: 0; font-size: 18px;"> support@agiliux.com</a>
                       </div>
                       <div class="col-md-6 slide-footer"> 
-                          <i class="fa fa-file-word-o  img-circle pull-left text-center"  style="border: 1px solid #ccc; padding: 5px 15px; width:30px; height: 30px;"> </i>
+                          <i class="fa fa-file-word-o  img-circle pull-left text-center"  style=" padding: 5px 15px; width:30px; height: 30px;"> </i>
                           <strong>Want to know more about CRM? </strong><br /> Checkout our articles here<br />
                           <a href="#" class="text-primary text-left" style="padding: 0; font-size: 18px;"> support@agiliux.com</a>
                       </div>
