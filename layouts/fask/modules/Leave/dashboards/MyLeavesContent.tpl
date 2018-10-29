@@ -73,7 +73,8 @@
 			{/foreach}
 		{/if}
                  <div class="clearfix"></div>
-                        <a href="index.php?module=leave&view=List" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
+        <div class="clearfix"></div>
+        <a  onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USERID}&tab=leave' class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
 	</div>		
 {else}
 	<span class="noDataMsg">

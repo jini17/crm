@@ -198,3 +198,22 @@ a.btn.btn-gettingStarted i{
 .panel-filter .panel-title > a:focus  {
     text-decoration:none;
 }
+#taskManagementContainer button.active{
+    border: 1px solid #2f5597 !important;
+    background: #2f5597 !important;;
+}
+#task-input-background{
+    z-index:0;
+    background:white;
+    display:block;
+    min-height:50%;
+    min-width:50%;
+    color:#000;
+    position:absolute;
+    top:5px;
+    left: 25px;
+
+}
+#taskManagementOtherFilters .select2-choices{
+  background: none;
+}
