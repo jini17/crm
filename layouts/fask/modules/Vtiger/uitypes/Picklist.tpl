@@ -21,7 +21,10 @@
 	{if $FIELD_MODEL->isEmptyPicklistOptionAllowed()}<option value="">{vtranslate('LBL_SELECT_OPTION','Vtiger')}</option>{/if}
 	{foreach item=PICKLIST_VALUE key=PICKLIST_NAME from=$PICKLIST_VALUES}
 		{assign var=CLASS_NAME value="picklistColor_{$FIELD_MODEL->getFieldName()}_{$PICKLIST_NAME|replace:' ':'_'}"}
-		<option value="{Vtiger_Util_Helper::toSafeHTML($PICKLIST_NAME)}" {if $PICKLIST_COLORS[$PICKLIST_NAME]}class="{$CLASS_NAME}"{/if} {if trim(decode_html($FIELD_MODEL->get('fieldvalue'))) eq trim($PICKLIST_NAME)} selected {/if}>{$PICKLIST_VALUE}</option>
+		<!-- PICKLIST DROPDOWN COLOR REMOVED BY KHALED
+		{*{if $PICKLIST_COLORS[$PICKLIST_NAME]}class="{$CLASS_NAME}"{/if}*}
+		-->
+		<option value="{Vtiger_Util_Helper::toSafeHTML($PICKLIST_NAME)}"  {if trim(decode_html($FIELD_MODEL->get('fieldvalue'))) eq trim($PICKLIST_NAME)} selected {/if}>{$PICKLIST_VALUE}</option>
 	{/foreach}
 </select>
 {if $PICKLIST_COLORS}

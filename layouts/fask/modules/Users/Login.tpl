@@ -147,7 +147,7 @@
                                           </div>
                                        </div>
                                     </div>
-                                    
+                                 </form>
                                     <!--<div class="sc-media">
                                        added by jitu@Demo for different edition -
                                        <div class="col-sm-9" style="display:inline;">
@@ -164,10 +164,27 @@
                                               </div>
                                        </div>
                                        end here -->
+                                     <div class="form-check">
+                                         <a class="forgotPasswordLink pull-right">Forgot password?</a>
+                                     </div>
                               </div>
-                              <div class="form-check">
-                              <a class="forgotPasswordLink pull-right">Forgot password?</a>
-                              </div> 
+
+                               <div id="forgotPasswordDiv" class="hide">
+                                   <form  action="forgotPassword.php" method="POST" id="forgetform">
+                                       <div class="control-group">
+                                           <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                                           <input type="text" class="input-group p-3" id="username" placeholder="Username" name="username">
+                                       </div>
+                                       <div class="control-group">
+                                           <label class="sr-only" for="inlineFormInputGroup">Email</label>
+                                           <input type="email" class="input-group p-3" id="emailId" placeholder="Email" name="emailId">
+                                       </div>
+                                       <div class="control-group ">
+                                           <button type="button" class="button btn btn-primary forgot-submit-btn">Submit</button>
+                                       </div>
+                                       <a class="purple forgotPasswordLink pull-right">Back</a>
+                                   </form>
+                               </div>
                             
                               <div id="social">
   <div id="container">
@@ -202,24 +219,9 @@
                                     
                                        <!-- Start Social Media Link --> 
                                     </div>   
-                              </form>
+
                            </div>
-                           <div id="forgotPasswordDiv" class="hide">
-                              <form  action="forgotPassword.php" method="POST" id="forgetform">
-                                 <div class="form-group">
-                                    <label class="sr-only" for="inlineFormInputGroup">Username</label>
-                                    <input type="text" class="form-control" id="username" placeholder="Username" name="username">
-                                 </div>
-                                 <div class="form-group">
-                                    <label class="sr-only" for="inlineFormInputGroup">Email</label>
-                                    <input type="email" class="form-control" id="emailId" placeholder="Email" name="emailId">
-                                 </div>
-                                 <div class="text-center">
-                                    <button type="button" class="button buttonPurple forgot-submit-btn">Submit</button>
-                                 </div>
-                                 <a class="purple forgotPasswordLink pull-right">Back</a>
-                              </form>
-                           </div>
+
                         </div>
                      </div>
                   </div>
@@ -232,37 +234,26 @@
 <br /><br />
 <script>
    jQuery(document).ready(function(){
-       scrollx = jQuery(window).outerWidth();
-       window.scrollTo(scrollx,0);
-       slider = jQuery('.bxslider').bxSlider({
-           auto: true,
-           pause: 4000,
-           randomStart : true,
-           autoHover: true
-       });
-   
-       jQuery('.bx-prev, .bx-next, .bx-pager-item').live('click',function(){ slider.startAuto(); });
-   
-   
+
        var validationMessage = jQuery('#validationMessage');
        var forgotPasswordDiv = jQuery('#forgotPasswordDiv');
    
        var loginFormDiv = jQuery('#loginFormDiv');
        loginFormDiv.find('#password').focus();
-   
-       loginFormDiv.find('a').click(function () { 
+
+       loginFormDiv.on('click','.forgotPasswordLink',function () {
            loginFormDiv.toggleClass('hide');
            forgotPasswordDiv.toggleClass('hide');
            validationMessage.addClass('hide');
        });
-   
-       forgotPasswordDiv.find('a').click(function () {
+
+       forgotPasswordDiv.on('click','.forgotPasswordLink',function () {
            loginFormDiv.toggleClass('hide');
            forgotPasswordDiv.toggleClass('hide');
            validationMessage.addClass('hide');
        });
-   
-       loginFormDiv.find('button').on('click', function () {
+
+       loginFormDiv.on('click','button', function () {
            var username = loginFormDiv.find('#username').val();
            var password = jQuery('#password').val();
            var result = true;
@@ -279,18 +270,18 @@
            }
            return result;
        });
-   
-       forgotPasswordDiv.find('button').on('click', function () { 
+
+       forgotPasswordDiv.on('click','.forgot-submit-btn', function () {
            var username = jQuery('#forgotPasswordDiv #username').val();
            var email = jQuery('#emailId').val();
-   
+
            var email1 = email.replace(/^\s+/, '').replace(/\s+$/, '');
            var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
            var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
-   
+
            var result = true;
            var errorMessage = '';
-           if (username === '') { 
+           if (username === '') {
                errorMessage = 'Please enter valid username';
                result = false;
            } else if (!emailFilter.test(email1) || email == '') {
@@ -307,6 +298,7 @@
            }
            return result;
        });
+
        jQuery('input').blur(function (e) {
            var currentElement = jQuery(e.currentTarget);
            if (currentElement.val()) {
