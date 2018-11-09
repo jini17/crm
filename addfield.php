@@ -25,7 +25,7 @@ $field1 = new Vtiger_Field();
 
 $field1->name = 'employee_id';
 $field1->table = $module->basetable;
-$field1->label = 'Employee Name';
+$field1->label = 'Assigned By';
 $field1->column = 'employee_id';
 $field1->columntype = 'int(11)';
 $field1->uitype = 101;

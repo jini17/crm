@@ -1275,10 +1275,10 @@ class Users_Record_Model extends Vtiger_Record_Model
 
     }
 
-    public function MyReortingManager($db, $id)
+    public function MyReortingManager($id)
     {
-
-        $sql = "select id, first_name,last_name,email1,department,title,birthday,date_joined,facebook,twitter,linkedin from vtiger_users where  reports_to_id = $id";
+        $db=PearDatabase::getInstance();
+        $sql = "select id, first_name,last_name,email1,department,title,birthday,date_joined,facebook,twitter,linkedin from vtiger_users where  id = $id";
         $query = $db->pquery($sql, array());
         $num_rows = $db->num_rows($query);
         $data = array();
@@ -1292,9 +1292,10 @@ class Users_Record_Model extends Vtiger_Record_Model
                 $date2 = new DateTime(date('d-m-Y'));
                 $diff = $date2->diff($date1)->format("%a");
 
-                $barthday_start = new DateTime(date('md'));
-                $birthday_end = new DateTime(date('md'));
-                $diff_birthday = $date2->diff($date1)->format("%a");
+                $bday_current_year = date( 'd-m', strtotime($birthday) ).'-'. date( 'Y' );
+                $barthday_start = new DateTime($bday_current_year);
+                $birthday_end = new DateTime(date('d-m-Y'));
+                $diff_birthday = $birthday_end->diff($barthday_start)->format("%a");
 
                 $wish = '<div class="message" id="birthdaysms"  >';
                 $wish .= '<a class="birthday" style="' . $style . '" onclick="javascript:Settings_Users_List_Js.birthdayEmail(' . $id . ')">';
@@ -1306,7 +1307,7 @@ class Users_Record_Model extends Vtiger_Record_Model
                 if ($diff_birthday >= -7 && $diff_birthday <= 7) {
                     $birthday_wish = $wish;
                 } else {
-                    $birthday_wish = 0;
+                    $birthday_wish ="";
                 }
                 $data['id'] = $db->query_result($query, $i, 'id');
                 $data['full_name'] = $db->query_result($query, $i, 'first_name') . " " . $db->query_result($query, $i, 'last_name');
@@ -1326,10 +1327,18 @@ class Users_Record_Model extends Vtiger_Record_Model
         return $data;
     }
 
-    public function MyDepartmentEmployees($db, $department, $id)
+    /**
+     * Added By Khaled
+     * @param $department
+     * @param $id
+     * @return array
+     */
+    public function MyDepartmentEmployees( $department, $id,$user_user)
     {
+        $db = PearDatabase::getInstance();
         //$db->setDebug(TRUE);
-        $sql = "select  id,first_name,last_name,email1,department,title,birthday,date_joined,facebook,twitter,linkedin from vtiger_users where department='$department' AND id != $id";
+        $sql = "select  id,first_name,last_name,email1,department,title,birthday,date_joined,
+                facebook,twitter,linkedin from vtiger_users where reports_to_id =$user_user";
         $query = $db->pquery($sql, array());
         $num_rows = $db->num_rows($query);
         $data = array();
@@ -1343,10 +1352,10 @@ class Users_Record_Model extends Vtiger_Record_Model
                 $date1 = new DateTime($join_date);
                 $date2 = new DateTime(date('d-m-Y'));
                 $diff = $date2->diff($date1)->format("%a");
-
-                $barthday_start = new DateTime(date('md'));
-                $birthday_end = new DateTime(date('md'));
-                $diff_birthday = $date2->diff($date1)->format("%a");
+                $bday_current_year = date( 'd-m', strtotime($birthday) ).'-'. date( 'Y' );
+                $barthday_start = new DateTime($bday_current_year);
+                $birthday_end = new DateTime(date('d-m-Y'));
+                $diff_birthday = $birthday_end->diff($barthday_start)->format("%a");
 
                 $wish = '<div class="message" id="birthdaysms"  >';
                 $wish .= '<a class="birthday" style="' . $style . '" onclick="javascript:Settings_Users_List_Js.birthdayEmail(' . $id . ')">';
@@ -1358,7 +1367,7 @@ class Users_Record_Model extends Vtiger_Record_Model
                 if ($diff_birthday >= -7 && $diff_birthday <= 7) {
                     $birthday_wish = $wish;
                 } else {
-                    $birthday_wish = 0;
+                    $birthday_wish = "";
                 }
 
                 $data[$i]['id'] = $db->query_result($query, $i, 'id');
@@ -1448,5 +1457,44 @@ class Users_Record_Model extends Vtiger_Record_Model
         }
 
         return $data;
+    }
+
+    /**
+     * Added By Khaled
+     * @param $id
+     * @return int|mixed|string
+     */
+    public static function getDepartmetByemployeeID($id){
+        $db = PearDatabase::getInstance();
+        $sql = "SELECT designation, department from  vtiger_employeecontract WHERE employee_id = ?";
+        $query = $db->pquery($sql,array($id));
+        $num_rows = $db->num_rows($query);
+        if($num_rows > 0){
+            return $db->query_result($query,0,'department');
+        }
+        else{
+            return 0;
+        }
+    }
+
+    /**
+     * Added By khaled
+     * Get Designation
+     * @param $id
+     * @return int|mixed|string
+     *
+     */
+    public static function getDesignationByEmployeeID($id){
+        $db = PearDatabase::getInstance();
+        //$db->setDebug(true);
+        $sql = "SELECT designation from  vtiger_employeecontract WHERE employee_id = ?";
+        $query = $db->pquery($sql,array($id));
+        $num_rows = $db->num_rows($query);
+        if($num_rows > 0){
+            return $db->query_result($query,0,'designation');
+        }
+        else{
+            return 0;
+        }
     }
 }

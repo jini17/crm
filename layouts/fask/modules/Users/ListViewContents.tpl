@@ -20,9 +20,9 @@
    padding:5px 10px;
    border: 1px solid #ddd;
    background: #fff;
-   min-height: 300px;
+   min-height: 390px;
    margin-top: 20px;
-   marign-bottom: 20px;
+   margin-bottom: 9px;
    }
    .user-social{
    margin-top: 15px;

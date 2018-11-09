@@ -155,10 +155,10 @@
 </div>
 {/strip}
 <script>
-{*   jQuery(document).ready(function(){
-        jQuery('html').on('click','.strolltotop',function(){          
-          jQuery('.gridster_2.ready ul li').scrollIntoView(true);
+ jQuery(document).ready(function(){
+        jQuery('html').on('click','.strolltotop',function(){
+            $('body, html').animate({ scrollTop: $(".gridster_2.ready ul").offset().top }, 1000);
 
-    });    
-   });*}
+    });
+   });
 </script>
