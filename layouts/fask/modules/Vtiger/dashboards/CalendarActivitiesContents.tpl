@@ -60,10 +60,10 @@
 
                 <div class="clearfix"></div>
             {if $smarty.request.name eq 'OverdueActivities'}
-                    <a href='index.php?module=Calendar&parent=&page=1&view=List&viewname=19&orderby=&sortorder=&app=FOUNDATION&search_params=[[["date_start","bw","28-10-2018,28-10-2018"],["due_date","bw","28-10-2018,28-10-2018"]]]&tag_params=[]&nolistcache=0&list_headers=["taskstatus","activitytype","subject","parent_id","date_start","due_date","assigned_user_id","modifiedby","modifiedtime"]&tag=' class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
+                    <a href='index.php?module=Calendar&parent=&page=1&view=List&viewname=19&orderby=&sortorder=&app=FOUNDATION&search_params=[[["date_start","l","{$smarty.now|date_format:"d-m-Y"}"]]]' class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
 
             {else}
-                    <a href='index.php?module=Calendar&parent=&page=1&view=List&viewname=19&orderby=&sortorder=&app=FOUNDATION&search_params=[[["date_start","bw","28-10-2018,28-10-2018"],["due_date","bw","28-10-2018,28-10-2018"]]]&tag_params=[]&nolistcache=0&list_headers=["taskstatus","activitytype","subject","parent_id","date_start","due_date","assigned_user_id","modifiedby","modifiedtime"]&tag=' class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
+                    <a href='index.php?module=Calendar&parent=&page=1&view=List&viewname=19&orderby=&sortorder=&app=FOUNDATION&search_params=[[["date_start","g","{$smarty.now|date_format:"d-m-Y"}"]]]' class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
 
             {/if}
 
