@@ -27,11 +27,11 @@ class Users_List_View extends Settings_Vtiger_List_View
     public function process(Vtiger_Request $request)
     {
 
-        $adb = PearDatabase::getInstance();
+
         $current_user = Users_Record_Model::getCurrentUserModel();
         global $site_URL;
-        $reportingManager = Users_Record_Model::MyReortingManager($adb, $current_user->get('id'));
-        $myDepartmnetEmployee = Users_Record_Model::MyDepartmentEmployees($adb, $current_user->get('department'), $current_user->get('id'));
+        $reportingManager = Users_Record_Model::MyReortingManager($current_user->get('reports_to_id'));
+        $myDepartmnetEmployee = Users_Record_Model::MyDepartmentEmployees( $current_user->get('department'), $current_user->get('reports_to_id'),$current_user->get('id'));
         $departmnet_list = Users_Record_Model::get_department();
 
         $myDetails = array();
@@ -43,12 +43,24 @@ class Users_List_View extends Settings_Vtiger_List_View
         $date2 = new DateTime(date('d-m-Y'));
         $diff = $date2->diff($date1)->format("%a");
 
-        $barthday_start = new DateTime(date('md'));
-        $birthday_end = new DateTime(date('md'));
+        $bday_current_year = date( 'd-m', strtotime($current_user->get('birthday')) ).'-'. date( 'Y' );
+        $barthday_start = new DateTime($bday_current_year);
+        $birthday_end = new DateTime(date('d-m-Y'));
         $diff_birthday = $birthday_end->diff($barthday_start)->format("%a");
-
+        $wish = '<div class="message" id="birthdaysms"  >';
+        $wish .= '<a class="birthday" style="' . $style . '" onclick="javascript:Settings_Users_List_Js.birthdayEmail(' . $current_user->get('id') . ')">';
+        $wish .= "<i class='fa fa-gift'></i> &nbsp;";
+        $wish .= date('d-F', strtotime($current_user->get('birthday')));
+        $wish .= " <br /> " . vtranslate("LBL_SAY_HAPPYBIRTH_DAY", 'Users');
+        $wish .= '</a>';
+        $wish .= '</div>';
+        if ($diff_birthday >= -7 && $diff_birthday <= 7) {
+            $birthday_wish = $wish;
+        } else {
+            $birthday_wish ="";
+        }
         $myDetails['joindate'] = $diff;
-        $myDetails['birthday'] = $diff_birthday;
+        $myDetails['birthday'] = $birthday_wish;
         $myDetails['facebook'] = $current_user->get('facebook');
         $myDetails['twitter'] = $current_user->get('twitter');
         $myDetails['linkedin'] = $current_user->get('linkedin');

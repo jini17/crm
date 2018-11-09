@@ -99,6 +99,7 @@ class Users extends CRMEntity {
                         'Admin'=>Array('vtiger_users'=>'is_admin'),
 
                         'Designation'=>Array('vtiger_users'=>'title'),
+                        'department'=>Array('vtiger_users'=>'department'),
                         'Phone'=>Array('vtiger_users'=>'phone_work'),
                         'Birthday'=>Array('vtiger_users'=>'birthday'),
                         'LBL_GET_IN_TOUCH'=>Array('vtiger_users'=>'facebook'),
@@ -119,6 +120,7 @@ class Users extends CRMEntity {
                     'Birthday'=>'birthday',
                     'LBL_GET_IN_TOUCH'=>'facebook',  
                     'LBL_ADDITIONAL_INFO'=>'date_joined',
+            'department'=>Array('vtiger_users'=>'department'),
         );
 
         //Default Fields for Email Templates -- Pavani

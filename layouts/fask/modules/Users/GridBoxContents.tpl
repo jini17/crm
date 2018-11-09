@@ -8,9 +8,9 @@
       padding:20px 10px;
       border: 1px solid #ddd;
       background: #fff;
-      min-height: 371px;
-      margin-top: 20px;
-      margin-bottom: 20px;
+        min-height: 390px;
+        margin-top: 20px;
+        margin-bottom: 9px;
     }
     .user-social{
         margin-top: 15px;
@@ -87,7 +87,7 @@
 {$LISTVIEW_ENTRIES|print_r}*}
 
 <div style="min-height:450px;">
- 
+
    <div class="row">
        <div class="col-lg-12" style="padding:0;">
             {foreach  item=LISTVIEW_ENTRY from=$LISTVIEW_ENTRIES }
@@ -115,9 +115,14 @@
                                 </a>
                             </h4>
                                 <div class="designation_label designation">
-                                      {$LISTVIEW_ENTRY->get('title')}
-                                </div>   
-                                <div class="email-address">  {$LISTVIEW_ENTRY->get('email1')}</div>
+                                    {assign var=designation value=$LISTVIEW_ENTRY->getDepartmetByemployeeID($LISTVIEW_ENTRY->get('id'))}
+                                      {if $designation neq '0'} {$designation} {/if}
+                                </div>
+                            <div class="designation_label designation">
+                                {assign var=department value=$LISTVIEW_ENTRY->getDesignationByEmployeeID($LISTVIEW_ENTRY->get('id'))}
+                                {if $department neq '0'} {$department} {/if}
+                            </div>
+                            <div class="email-address">  {$LISTVIEW_ENTRY->get('email1')}</div>
                                    
                         </div>
                                 

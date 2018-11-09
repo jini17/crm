@@ -217,3 +217,13 @@ a.btn.btn-gettingStarted i{
 #taskManagementOtherFilters .select2-choices{
   background: none;
 }
+
+
+
+.dashBoardContainer .dashBoardTabContents ul li{
+    border-radius: 0 !important;
+    border-top:  2px solid #2f5597 !important;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
