@@ -156,15 +156,13 @@
                                         {/if}
                                         <!-- Added By Khaled  -->
                                         <a class='btn btn-default btn-gettingStarted text-center'>
-                                                <i class="fa fa-rocket"  aria-hidden="true"></i>&nbsp;Getting Started
+                                                <i class="fa fa-rocket"  aria-hidden="true"></i>&nbsp;Getting Started {$MULTI_LOGIN}
                                                 <!-- HELP POP UP-->
                                 
                                         </a>
                                         <a class='btn btn-danger Help-btn text-center'>
                                                 <i class="glyphicon glyphicon-question-sign"></i>&nbsp;Help
                                         </a>
-
-
                                 </div>
                         </div>
                 </div>
@@ -286,15 +284,45 @@
     </div>
   </div>
       {/if}
+      {if $MULTI_LOGIN eq 'yes'}
+      <div id="multilogin" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4><i class="fa fa-power-off"></i> Previous login session auto logout.</h4>
+                <button type="button" class="close" data-dismiss="modal" style="margin-top: -29px;">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <h5>Additional information:</h5>
+                <ul style="margin-left: 20px;">           
+                    <li> You may receive this message if there are currently multiple sessions logged in with this username & password. </li>
+                    <li> Someone has logged in as this user from a different computer or browser window. Only one user session is allowed.</li>
+                    <li> As a consequence, the other session has been terminated.</li>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/if}
       
         {if $FIELDS_INFO neq null}
                 <script type="text/javascript">
                     
                     jQuery(document).ready(function() {
+                        {if $LOGGED_FIRST_TIME eq 'yes' }
                         jQuery('#myModal').modal('show');
                         $('button[data-dismiss="modal"]').click(function() {
                                 $('#myModal').modal('hide');
                          });
+                         {/if}
+                         {if $MULTI_LOGIN = "yes"}
+                           jQuery('#multilogin').modal('show');
+                        $('#multilogin button[data-dismiss="modal"]').click(function() {
+                                $('#multilogin').modal('hide');
+                         });
+                         {/if}
                       });
                       
                         var uimeta = (function () {

@@ -227,3 +227,16 @@ a.btn.btn-gettingStarted i{
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
+.fieldBlockHeader{
+        color: #2f5597;
+        padding-left: 0;
+ 
+}
+#ExitDetails_editView_fieldName_description,
+.textAreaElement{
+    margin-bottom: 20px;
+}
+#ExitDetails_editView_fieldName_submit_date + .inputElement,
+#ExitDetails_editView_fieldName_review_date + .inputElement{
+    margin-top: 20px;
+}

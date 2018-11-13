@@ -233,7 +233,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                         'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
                         'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
                         'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-                        'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
+                        'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
 
                         {if $APP_NAME neq 'SALES'}
 
@@ -438,7 +438,16 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                                 <i class="material-icons module-icon">assignment</i> Attendance
                                                                             </a>
                                                                         </li>
-
+                                                                        <li admin="" moudel="ExitDetails">
+                                                                            <a  class="dropdown-icon-dashboard"   href=" index.php?module=Resignation&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">assignment</i> Resignation
+                                                                            </a>
+                                                                        </li>
+                                                                        <li admin="" moudel="ExitInterView">
+                                                                            <a  class="dropdown-icon-dashboard"   href=" index.php?module=ExitInterView&amp;view=List&amp;app=ADMIN ">
+                                                                                <i class="material-icons module-icon">assignment</i> Exit Interview
+                                                                            </a>
+                                                                        </li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
