@@ -46,7 +46,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer->assign("LAST_LOGIN_TIME", $sLastLoginTime);
                 $viewer->assign("LAST_USER_IP", $sLastUserIP);
                 //End here
- 
+
 
                  if($_SESSION['loggedin_now'] === false){
                
@@ -56,7 +56,22 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                  else{
                         $viewer->assign("LOGGED_NOW",'out');
                  }
-
+            
+                 if($_SESSION['multi_login'] == "yes"){
+                       $viewer->assign("MULTI_LOGIN",'yes');
+                     $_SESSION['multi_login'] = "no";
+                 }
+                 else{
+                       $viewer->assign("MULTI_LOGIN",'no');
+                 }
+                 
+                 if($_SESSION['first_time_login'] == 'yes'){
+                      $_SESSION['first_time_login'] = "no";
+                     $viewer->assign("LOGGED_FIRST_TIME",'no');
+                 }
+                 else{
+                     $viewer->assign("LOGGED_FIRST_TIME",'no');
+                 }
 
                 $dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
                 //check profile permissions for Dashboards
@@ -91,6 +106,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
         }
 
         function process(Vtiger_Request $request) {
+        
                 $viewer = $this->getViewer($request);
                 $moduleName = $request->getModule();
 

@@ -24,6 +24,57 @@ class Users_Login_Action extends Vtiger_Action_Controller {
                 //$adb->setDebug(true);
                 $username = $request->get('username');
                 $password = $request->getRaw('password');
+                
+                //echo $allowedipres;die;
+                //$allowedipres = true;
+  /** 
+                       * Added By Khaled
+                       * Kill Multi Login Session
+                       */
+                    
+                      $adb = PearDatabase::getInstance();
+
+    
+    $result 	= $adb->pquery("SELECT login_id,session_id FROM vtiger_loginhistory WHERE DATE(login_time) = CURDATE() AND user_name = ? AND status = ? ORDER BY login_id ASC", array($username, 'Signed in'));
+    $num_rows = $adb->num_rows($result);
+         
+         
+    if($num_rows > 0){
+
+        for ($i = 0; $i < $num_rows; $i++) {
+                $sessionID = $adb->query_result($result, $i, 'session_id');
+                $loginid = $adb->query_result($result, $i, 'login_id');
+                if ($sessionID) {
+               session_id($sessionID);            
+           
+                  session_destroy();
+               
+                    $time    = date("Y/m/d H:i:s");
+                    $userIP = $_SERVER['REMOTE_ADDR'];          
+                     // update the user login info.
+                     $query = "Update vtiger_loginhistory set logout_time =?, status=? where login_id =  ?";
+                     $result1 = $adb->pquery($query, array($username, 'Signed off', $loginid));
+                 
+                    
+                 
+                }
+     
+        }
+                  session_start();
+                    $_SESSION['multi_login'] =  "yes"; 
+    }
+    else{
+          session_start();
+           $_SESSION['multi_login'] = "no";
+        }
+             
+
+                   /** 
+                       * Added By Khaled
+                       * Get First Time Login
+                       */
+                      $first_time_login = first_time_loggedin($username);
+              
                 //echo $username;
                 //echo "<br><br>".$password;die;
                 $user = CRMEntity::getInstance('Users');
@@ -50,15 +101,12 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 
                 $allowedipres = $this->AllowedIp($usip,$username);
 
-                //echo $allowedipres;die;
-                //$allowedipres = true;
-
                 if ($user->doLogin($password) && $allowedipres==true) {
                         session_regenerate_id(true); // to overcome session id reuse.
 
                         $userid = $user->retrieve_user_id($username);
                         Vtiger_Session::set('AUTHUSERID', $userid);
-
+        
                         //setCookie 
                         if($request->get('keepcheck')=='on'){
                                 setcookie('agiliuxuser', $username, time() + (86400 * 30), "/");
@@ -90,17 +138,23 @@ class Users_Login_Action extends Vtiger_Action_Controller {
                         $_SESSION['KCFINDER']['deniedExts'] = $deniedExts;
 
                         // End
-
-                        //Track the login History
-                        $browser = Settings_MaxLogin_Module_Model::browserDetect();	
-                        $moduleModel = Users_Module_Model::getInstance('Users');
-                        $moduleModel->saveLoginHistory($user->column_fields['user_name'],'Signed in', $browser, $usip);
-
+       
                 //	$moduleModel = Users_Module_Model::getInstance('Users');
                 //	$moduleModel->saveLoginHistory($user->column_fields['user_name']);
                         //End
+                        //Track the login History
+                        $browser = Settings_MaxLogin_Module_Model::browserDetect();	
+                        $moduleModel = Users_Module_Model::getInstance('Users');
+                       $login_id= $moduleModel->saveLoginHistory($user->column_fields['user_name'],'Signed in', $browser, $usip);
 
+ 
+                  
+                
                         if(isset($_SESSION['return_params'])) {
+              
+                             
+                
+                      
                                 $return_params = urldecode($_SESSION['return_params']);
                                                                      $_SESSION['logged_status'] = true;
                                                                      $_SESSION['loggedin_now'] = true;
@@ -115,6 +169,8 @@ class Users_Login_Action extends Vtiger_Action_Controller {
                 } 
                 else if($allowedipres==false) {
                     $moduleModel->saveLoginHistory($username, 'Failed login', $browser, $usip);
+                    
+                      
                     header('Location: index.php?module=Users&parent=Settings&view=Login&error=9');
 
 

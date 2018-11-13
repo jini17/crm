@@ -156,7 +156,7 @@
                                         {/if}
                                         <!-- Added By Khaled  -->
                                         <a class='btn btn-default btn-gettingStarted text-center'>
-                                                <i class="fa fa-rocket"  aria-hidden="true"></i>&nbsp;Getting Started
+                                                <i class="fa fa-rocket"  aria-hidden="true"></i>&nbsp;Getting Started {$MULTI_LOGIN}
                                                 <!-- HELP POP UP-->
                                 
                                         </a>
@@ -171,7 +171,7 @@
                                         
         </div>
 <!-- HELP POP UP - Added By Khaled-->
- {if $MODULE eq 'Home'  AND   $LOGGED_NOW == 'in' }
+ {if $MODULE eq 'Home'  AND   $first_time_login == 'yes' }
 <div id="myModal" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
 
@@ -286,15 +286,44 @@
     </div>
   </div>
       {/if}
+      {if $MULTI_LOGIN eq 'yes'}
+      <div id="multilogin" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4><i class="fa fa-power-off"></i> Previous login session auto logout.</h4>
+                <button type="button" class="close" data-dismiss="modal" style="margin-top: -29px;">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <h5>Additional information:</h5>
+                <ul style="margin-left: 20px;">           
+                    <li> You may receive this message if there are currently multiple sessions logged in with this username & password. </li>
+                    <li> Someone has logged in as this user from a different computer or browser window. Only one user session is allowed.</li>
+                    <li> As a consequence, the other session has been terminated.</li>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/if}
       
         {if $FIELDS_INFO neq null}
                 <script type="text/javascript">
                     
                     jQuery(document).ready(function() {
+                        
                         jQuery('#myModal').modal('show');
                         $('button[data-dismiss="modal"]').click(function() {
                                 $('#myModal').modal('hide');
                          });
+                        
+                           jQuery('#multilogin').modal('show');
+                        $('#multilogin button[data-dismiss="modal"]').click(function() {
+                                $('#multilogin').modal('hide');
+                         });
+                     
                       });
                       
                         var uimeta = (function () {
