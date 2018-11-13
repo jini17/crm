@@ -163,13 +163,15 @@
                                         <a class='btn btn-danger Help-btn text-center'>
                                                 <i class="glyphicon glyphicon-question-sign"></i>&nbsp;Help
                                         </a>
+
+
                                 </div>
                         </div>
                 </div>
                                         
         </div>
 <!-- HELP POP UP - Added By Khaled-->
- {if $MODULE eq 'Home'  AND   $LOGGED_NOW == 'in' }
+ {if $MODULE eq 'Home'  AND   $first_time_login == 'yes' }
 <div id="myModal" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
 
@@ -311,18 +313,17 @@
                 <script type="text/javascript">
                     
                     jQuery(document).ready(function() {
-                        {if $LOGGED_FIRST_TIME eq 'yes' }
+                        
                         jQuery('#myModal').modal('show');
                         $('button[data-dismiss="modal"]').click(function() {
                                 $('#myModal').modal('hide');
                          });
-                         {/if}
-                         {if $MULTI_LOGIN = "yes"}
+                        
                            jQuery('#multilogin').modal('show');
                         $('#multilogin button[data-dismiss="modal"]').click(function() {
                                 $('#multilogin').modal('hide');
                          });
-                         {/if}
+                     
                       });
                       
                         var uimeta = (function () {

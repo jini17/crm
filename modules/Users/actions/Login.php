@@ -46,7 +46,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
                 $loginid = $adb->query_result($result, $i, 'login_id');
                 if ($sessionID) {
                session_id($sessionID);            
-               session_unset();
+           
                   session_destroy();
                
                     $time    = date("Y/m/d H:i:s");
@@ -73,7 +73,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
                        * Added By Khaled
                        * Get First Time Login
                        */
-//                      $first_time_login = first_time_loggedin($username);
+                      $first_time_login = first_time_loggedin($username);
               
                 //echo $username;
                 //echo "<br><br>".$password;die;
