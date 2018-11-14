@@ -131,11 +131,12 @@ Vtiger.Class('Vtiger_BasicSearch_Js',{},{
         addSearchListener : function () {
                 jQuery('.search-link .keyword-input').on('VT_SEARCH_INTIATED',function(e,args){
                         var val = args.searchValue;
-                        //added by jitu@search by module search_params	[[["employee_id","c","John+Smith"]]]
+                        //added by jitu@search by module search_params	[[["employee_id","c","John+Smith"]]]search_key
                         var searchmodule = jQuery("#searchModuleList").val();
                   
                          if(searchmodule == 'EmployeeContract'){
-                             var url = '?module=EmployeeContract&view=List&search_params=[[["employee_id","c","'+encodeURIComponent(val)+'"]]]'
+                             var url = '?module=Vtiger&view=ListAjax&mode=searchAll&searchModule='+searchmodule+'&value='+encodeURIComponent(val);
+                            // var url = '?module=Vtiger&view=ListAjax&mode=searchAll&searchModule='+searchmodule+'&search_key=employee_id&value='+encodeURIComponent(val);
                          }
                          else{
                              var url = '?module=Vtiger&view=ListAjax&mode=searchAll&searchModule='+searchmodule+'&value='+encodeURIComponent(val);
