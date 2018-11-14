@@ -20,7 +20,7 @@ class Users_List_View extends Settings_Vtiger_List_View
 
         //echo  $current_user->get('hradmin');
         if (!$currentUserModel->isAdminUser() && $current_user->roleid != 'H12' && $current_user->roleid != 'H13') {
-            throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
+           // throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
         }
     }
 

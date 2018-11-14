@@ -161,7 +161,6 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             }
             if (typeof fields != 'object') fields = [fields];
             data['fields'] = fields;
-
             url += '&filterid=' + filterid + '&data=' + JSON.stringify(data);
             var linkId = element.data('linkid');
             var name = element.data('name');
