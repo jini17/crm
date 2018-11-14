@@ -388,11 +388,9 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         app.request.post({"data": params}).then(function (err, data) {
         });
     },
-
     getDashboardWidgets: function () {
         return jQuery('.dashboardWidget', jQuery('.tab-pane.active'));
     },
-
     loadWidgets: function () {
         var thisInstance = this;
         var widgetList = thisInstance.getDashboardWidgets();
@@ -401,7 +399,6 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             jQuery(widgetContainerELement).addClass('loadcompleted');
         });
     },
-
     isScrolledIntoView: function (elem) {
         var viewportWidth = jQuery(window).width(),
             viewportHeight = jQuery(window).height(),
@@ -426,7 +423,6 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             return false;
         }
     },
-
     loadWidget: function (widgetContainer) {
         var thisInstance = this;
         var urlParams = widgetContainer.data('url');
@@ -446,7 +442,6 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         } else {
         }
     },
-
     registerRefreshWidget: function () {
         var thisInstance = this;
         this.getContainer().on('click', 'a[name="drefresh"]', function (e) {
@@ -457,7 +452,6 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             return;
         });
     },
-
     removeWidget: function () {
         this.getContainer().on('click', 'li a[name="dclose"]', function (e) {
             var element = $(e.currentTarget);
@@ -477,9 +471,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                 app.request.post({"url": url}).then(
                     function (err, response) {
                         if (err == null) {
-
                             var nonReversableWidgets = ['MiniList', 'Notebook', 'ChartReportWidget']
-
                             parent.fadeOut('slow', function () {
                                 Vtiger_DashBoard_Js.gridster.remove_widget(parent);
                                 parent.remove();

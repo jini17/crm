@@ -240,3 +240,104 @@ a.btn.btn-gettingStarted i{
 #ExitDetails_editView_fieldName_review_date + .inputElement{
     margin-top: 20px;
 }
+
+/*=========================
+    Getting Started Widget
+==========================*/
+
+.dashBoardContainer .dashBoardTabContents ul li[data-name="GettingStarted"]{
+    width: 100%;
+    min-height: 850px;
+    height: 100vh;
+    border-top: 1px solid #fff !important;
+
+    position: relative;
+    background:  #ebf0f9;
+}
+.need-more-help-container{
+    width: 400px;
+    float: right;
+    position: relative;
+    
+}
+.help-form-container{
+      position: absolute;
+    top:15%;
+    border: 1px solid #ccc;
+    border-radius: 5px;   
+    background: #fff;
+    z-index: 1;
+}
+.help-form-container .form h4{
+    background:   #2f5597 ;
+    color: #fff;
+    padding: 10px 0;
+    margin-top: -10px;
+    
+}
+.help-form-container .form form{
+    padding: 10px;
+}
+.help-form-container .form .form-group{
+    margin-bottom: 10px;
+}
+.need-more-help-btn{
+      -webkit-transform: rotate(-90deg); 
+    -moz-transform: rotate(-90deg); 
+    position: fixed;
+    top: 50%;
+    right: -3%;
+     z-index:1;
+}
+
+.help-list {
+        border-left: 4px solid  #2f5597 !important;
+        background: #fff;
+}
+.help-list-item a{
+    display: block;
+    width: 100%;
+    list-style-type: circle;
+    list-style: linear-gradient !important;
+    min-height:  auto !important;
+    margin-bottom: 10px;
+    color: #2f5597;
+}
+.help-list-item fa{
+    float: left;
+    margin-right: 20px;
+}
+.help-heading{
+    padding-bottom: 10px;
+    font-weight: bold;
+    background: #D3D3D3;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+.close-help-btn{
+    width: 20px;
+    height: 20px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 10px
+}
+.close-help-btn i{
+    display: block;
+    margin-top: -5px;
+    margin-left: -3px;
+}
+.blink {
+  animation: blink-animation 1s steps(5, start) infinite;
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}

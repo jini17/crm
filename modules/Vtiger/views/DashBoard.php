@@ -232,10 +232,10 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
     public function getColor($priority) {
         $color = '';
         switch ($priority) {
-            case 'High'		:	$color = '#FF5555';	break;
-            case 'Medium'	:	$color = '#03C04A';	break;
-            case 'Low'		:	$color = '#54A7F5';	break;
-            default			:	$color = '#'.dechex(rand(0x000000, 0xFFFFFF));
+            case 'High':$color = '#FF5555';	break;
+            case 'Medium':$color = '#03C04A';	break;
+            case 'Low':$color = '#54A7F5';	break;
+            default:	$color = '#'.dechex(rand(0x000000, 0xFFFFFF));
                 break;
         }
         return $color;
