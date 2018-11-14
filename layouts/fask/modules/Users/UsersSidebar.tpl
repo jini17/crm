@@ -95,7 +95,7 @@
 
 
         <br><div class="clearfix"></div>
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel-group {if $smarty.get.module eq 'Users'}hide{/if}" id="accordion" role="tablist"  {$smarty.get.module} aria-multiselectable="true" >
                 <div class="settingsgroup-panel panel panel-default">
 
                         {foreach item=BLOCK_MENUS key=BLOCK_NAME from=$SETTINGS_MENU_LIST}
@@ -145,7 +145,7 @@
         </div>
 </div>
 
-<div id="ssidebar-essentials" class="sidebar-essentials visible-xs visible-sm">
+<div id="ssidebar-essentials" class="sidebar-essentials visible-xs visible-sm {if $smarty.get.module eq 'Users'}hide{/if}">
         <div class="col-xs-12 text-center visible-xs visible-sm" style="margin-top: 20px;margin-bottom:20px;">
         <a class="btn btn-default" onclick="$('.sidebar-menu-u, .settingsNav').toggleClass('hidden-xs hidden-sm'); $('.settingsNav').find('.settingsgroup').toggleClass('hidden-xs hidden-sm');">Sidebar
         &nbsp;<span class="toggleButton"><i class="ti-angle-down"></i></span></a>

@@ -1448,7 +1448,7 @@ class Users_Record_Model extends Vtiger_Record_Model
     {
         $db = PearDatabase::getInstance();
        // $db->setDebug(true);
-        $sql = "SELECT department from vtiger_department";
+        $sql = "SELECT department from vtiger_department group by department";
         $query = $db->pquery($sql, array());
         $num_rows = $db->num_rows($query);
         $data = array();

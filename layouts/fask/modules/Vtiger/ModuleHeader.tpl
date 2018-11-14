@@ -145,14 +145,14 @@
                                                 {/if}
                                         {/foreach}
                                         {if $MODULE_SETTING_ACTIONS|@count gt 0}
-                                                                <button type="button" class="btn module-buttons dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                        <span class="hidden-xs hidden-sm" aria-hidden="true" title="{vtranslate('LBL_SETTINGS', $MODULE)}">&nbsp;{vtranslate('LBL_CUSTOMIZE', 'Reports')}</span><i class="material-icons">settings</i> 
-                                                                </button>
-                                                                <ul class="detailViewSetting dropdown-menu pull-right animated fadeIn">
-                                                                        {foreach item=SETTING from=$MODULE_SETTING_ACTIONS}
-                                                                                <li id="{$MODULE_NAME}_listview_advancedAction_{$SETTING->getLabel()}"><a href={$SETTING->getUrl()}>{vtranslate($MODULE_NAME, $MODULE_NAME)} {vtranslate($SETTING->getLabel(), $MODULE_NAME)}</a></li>
-                                                                        {/foreach}
-                                                                </ul>
+                                                <button type="button" class="btn module-buttons dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                        <span class="hidden-xs hidden-sm" aria-hidden="true" title="{vtranslate('LBL_SETTINGS', $MODULE)}">&nbsp;{vtranslate('LBL_CUSTOMIZE', 'Reports')}</span><i class="material-icons">settings</i> 
+                                                </button>
+                                                <ul class="detailViewSetting dropdown-menu pull-right animated fadeIn">
+                                                        {foreach item=SETTING from=$MODULE_SETTING_ACTIONS}
+                                                                <li id="{$MODULE_NAME}_listview_advancedAction_{$SETTING->getLabel()}"><a href={$SETTING->getUrl()}>{vtranslate($MODULE_NAME, $MODULE_NAME)} {vtranslate($SETTING->getLabel(), $MODULE_NAME)}</a></li>
+                                                        {/foreach}
+                                                </ul>
                                         {/if}
                                         <!-- Added By Khaled  -->
                                
