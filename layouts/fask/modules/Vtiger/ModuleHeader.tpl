@@ -155,11 +155,7 @@
                                                                 </ul>
                                         {/if}
                                         <!-- Added By Khaled  -->
-                                        <a class='btn btn-default btn-gettingStarted text-center'>
-                                                <i class="fa fa-rocket"  aria-hidden="true"></i>&nbsp;Getting Started {$MULTI_LOGIN}
-                                                <!-- HELP POP UP-->
-                                
-                                        </a>
+                               
                                         <a class='btn btn-danger Help-btn text-center'>
                                                 <i class="glyphicon glyphicon-question-sign"></i>&nbsp;Help
                                         </a>
@@ -211,8 +207,7 @@
                      </div>
                      <div class="col-md-6">
                          <p>
-                            Agiliux offers full spectrum of solutions –from setting up a
-                            foundation to advance digital automation, ensuring seamless transformation journey (End to end)    </p>
+                            Agiliux offers full spectrum of solutions –from setting up a  foundation to advance digital automation, ensuring seamless transformation journey (End to end)    </p>
                          <div class="clearfix" style="height: 10px;"></div>
                          <ul>
                              <li> Consulting </li>
