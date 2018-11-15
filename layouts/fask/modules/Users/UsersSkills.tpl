@@ -97,11 +97,16 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                         {/if}    
                                     <tr>
                                         <td class="medium" valign="top">{$USER_LANGUAGE['language']}</td>
-                                        <td class="medium" valign="top">                                  
-                                                <div class="progress">
-                                                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar"
+                                        <td class="medium" valign="top">      
+                                            <style>
+                                                .progress-bar-color-{$USER_LANGUAGE['proficiency']|replace:' ':'_'}{
+                                                    background-color:   {$USER_LANGUAGE['color']}  !important;
+                                                }
+                                            </style>
+                                                <div class="progress" s>
+                                                <div class="progress-bar progress-bar-color-{$USER_LANGUAGE['proficiency']|replace:' ':'_'} progress-bar-striped"  role="progressbar" 
                                                 aria-valuenow="{$ACCURACY}" aria-valuemin="0" aria-valuemax="100" style="width:{$ACCURACY}%">
-                                                         {$USER_LANGUAGE['proficiency']}
+                                                         {$USER_LANGUAGE['proficiency']}   
                                                 </div>
                                               </div>
                                         </td>
@@ -157,9 +162,13 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                         {$SKILL['skill_title']}
                                         </td>
                                         <td> 
-                                          
+                                          <style>
+                                                .progress-bar-color-{$SKILL['skill_label']}{
+                                                    background-color:   {$SKILL['color']}  !important;
+                                                }
+                                            </style>
                                             <div class="progress">
-                                                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar"
+                                                <div class="progress-bar progress-bar-color-{$SKILL['skill_label']} progress-bar-striped" role="progressbar"
                                                 aria-valuenow="{$ACCURACY}" aria-valuemin="0" aria-valuemax="100" style="width:{$ACCURACY}%">
                                                                      {vtranslate($LABEL,$MODULE)}
                                                 </div>

@@ -223,7 +223,7 @@ $languageStrings = array(
 	'Pacific/Tongatapu'  =>  '(UTC+13:00) Nukualofa',
                       'LBL_BEGINNER_LABEL'=>'Beginner',
                       'LBL_INTERMEDIATE_LABEL'=>'Intermediate',
-                      'LBL_EXPERT_LABEL'=>'Expert',
+                      'LBL_EXPERT_LABEL'=>"Expert",
     
 	'Summary' => 'Summary',
 	'Detail' => 'Detail',

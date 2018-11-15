@@ -12,5 +12,7 @@ $languageStrings = array(
 	'SINGLE_MessageBoard' =>'Message',
 	'LBL_ADD_RECORD'=>'Create Message',
 	'MessageBoard'=>'Message Board',
+                     'LBL_DEPARTMENT'=>'Visible to Department',
+                      'LBL_EMPLOYEE'=>'Visible to Employee',
 	
 );
