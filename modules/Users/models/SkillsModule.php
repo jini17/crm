@@ -35,10 +35,11 @@ class Users_SkillsModule_Model extends Vtiger_Base_Model{
 
     public static function getSkillInstance($id=null) {
         $db = PearDatabase::getInstance();
-	$SkillRecordModel=array();
-	$query = 'SELECT * FROM '.self::tableSkillName.' WHERE skill_id=?';
+        $SkillRecordModel=array();
+        $query = 'SELECT * FROM '.self::tableSkillName.' WHERE skill_id=?';
         $result = $db->pquery($query,array($id));
         $SkillRecordModel = new self();
+        
         if($db->num_rows($result) > 0) {
             $row = $db->query_result_rowdata($result,0);
             $SkillRecordModel->setData($row)->setType();

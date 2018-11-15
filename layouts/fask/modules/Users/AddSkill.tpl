@@ -58,7 +58,7 @@
                                                                 <select class="select2 inputElement" onchange="updateSelectBox('institution_name','institution_nametxt');" name="skill_label" id="institution_name" data-rule-required = "true">
                                                                         <option value="LBL_BEGINNER_LABEL">{vtranslate('LBL_BEGINNER_LABEL',$QUALIFIED_MODULE)}</option>
                                                                         <option value="LBL_INTERMEDIATE_LABEL">{vtranslate('LBL_INTERMEDIATE_LABEL',$QUALIFIED_MODULE)}</option>
-                                                                         <option value="'LBL_EXPERT_LABEL">{vtranslate('LBL_EXPERT_LABEL',$QUALIFIED_MODULE)}</option>
+                                                                         <option value="LBL_EXPERT_LABEL">{vtranslate('LBL_EXPERT_LABEL',$QUALIFIED_MODULE)}</option>
                                                                 <option value="0">{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> 	
                                                                 </select>
                                                         </div>

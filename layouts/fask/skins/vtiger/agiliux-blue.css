@@ -341,3 +341,17 @@ a.btn.btn-gettingStarted i{
     visibility: hidden;
   }
 }
+#s2id_MessageBoard_Edit_fieldName_department ~ div{
+    width: 100%;
+}
+#s2id_MessageBoard_Edit_fieldName_department .select2-choices,
+#MessageBoard_editView_fieldName_title{
+    width: 80vh;
+}
+.select2-results li{
+    background: none !important;
+    color: #000 !important;
+}
+.select2-results li:hover{
+    background: #ccc !important;
+}

@@ -39,7 +39,7 @@
             <div class="form-group">
                 <label class="col-md-4">Contact no</label>
                 <div class="col-md-8">
-                    <input type="email" name="email" placeholder="Email Address">
+                    <input type="email" name="email" placeholder="Contact no">
                 </div>                   
                        <div class="clearfix"></div>
             </div>
@@ -48,7 +48,7 @@
             <div class="form-group">
                 <label class="col-md-4">Company</label>
                 <div class="col-md-8">
-                    <input type="email" name="email" placeholder="Email Address">
+                    <input type="email" name="email" placeholder="Company">
                 </div>                   
                        <div class="clearfix"></div>
             </div>
