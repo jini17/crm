@@ -754,7 +754,12 @@ class Vtiger_Util_Helper {
                                 'concrete' =>  '#95A5A6',
                                 'abestos' =>  '#95A5A6',
                                 'sherpa' =>   '#4A6A77',
-                                'metalslate' =>  '#435E6F'
+                                'metalslate' =>  '#435E6F',
+                                'purple' =>  '#d971ae',
+                                'yellow' =>  '#f6bb43',
+                                'blue' =>"#2f5597",
+                                "green"=> "#3bbd9b"    
+            
             );
 
                 /*'alphagrey' => '#666666',	'softed'	=> '#1560BD',	'bluelagoon'=> '#204E81',
