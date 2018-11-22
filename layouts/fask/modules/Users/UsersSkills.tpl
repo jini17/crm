@@ -153,7 +153,7 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                     {elseif $LABEL eq 'LBL_INTERMEDIATE_LABEL'}
                                          {assign var=ACCURACY value= "70"}
                                     {elseif $LABEL eq 'LBL_EXPERT_LABEL'}
-                                         {assign var=ACCURACY value= "70"}     
+                                         {assign var=ACCURACY value= "100"}     
                                     {else}
                                           {assign var=ACCURACY value= "0"}
                                     {/if}

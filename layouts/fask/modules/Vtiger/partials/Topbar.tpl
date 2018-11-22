@@ -55,7 +55,7 @@
       .searchoption .select2-container .select2-choice .select2-arrow {
         color: #fff !important;
       }
-    
+
      .searchoption .select2-highlighted{
        background-color: #2f5597 !important;
      }
@@ -72,14 +72,14 @@
     color: #fff;
     font-size: 1.3em;
     padding: 4px 12px;
-    
+
 }
  .searchoption .select2-container .select2-choice {
     height: 41px; /* Jobsy form controls have 37px total height */
     border: 2px solid #bdc3c7;
     border-radius: 6px;
     outline: none;
-   
+
 color: #34495e;
 }
 
@@ -438,7 +438,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                                 <i class="material-icons module-icon">assignment</i> Attendance
                                                                             </a>
                                                                         </li>
-                                                                        <li admin="" moudel="ExitDetails">
+                                                                       {* <li admin="" moudel="ExitDetails">
                                                                             <a  class="dropdown-icon-dashboard"   href=" index.php?module=Resignation&amp;view=List&amp;app=ADMIN ">
                                                                                 <i class="material-icons module-icon">assignment</i> Resignation
                                                                             </a>
@@ -447,7 +447,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                             <a  class="dropdown-icon-dashboard"   href=" index.php?module=ExitInterView&amp;view=List&amp;app=ADMIN ">
                                                                                 <i class="material-icons module-icon">assignment</i> Exit Interview
                                                                             </a>
-                                                                        </li>
+                                                                        </li>*}
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -539,7 +539,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                         </a>
 
                                     </li>
-                                  
+
                                {*     Khaled - Removed as Per Requirement<li admin="">
                                         <a class="waves-effect waves-dark dropdown-icon-dashboard " href=" index.php?module=WorkingHours&amp;view=List&amp;app=ADMIN ">
                                             <i class="material-icons module-icon">access_time</i> <span class="hide-menu"> Working Hours</span>
@@ -635,7 +635,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
 
                 </ul>
 
-                                 
+
                                 </div>
 
                                 <div id="navbar" class="col-sm-2 col-md-3 col-lg-3 collapse navbar-collapse navbar-right global-actions">
@@ -673,7 +673,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                         <!--END-textheader-->
                                         <li>
                                             <!-- ADDED BY KHALED -->
-                                            
+
 
 <div class="dropdown ">
    <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><a aria-hidden="true" href="#" id="menubar_quickCreate" class="qc-button rightside-icon-dashboard" title="Quick Create"><i class="fa fa-plus"></i></a></div>
@@ -809,7 +809,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                         </ul>
                                                                     </div>
                                                                     {else}
-                                                                        
+
                                                                     <div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
                                                                         <a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModule" data-name="{$moduleModel->getName()}"
                                                                             data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)">
@@ -819,7 +819,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                     </div>
                                                                     {/if}
                                                                     {if $count % 3 == 2}
-                                                                         
+
                                                                 </div>
                                                                 <br>
                                                                 {/if}
@@ -948,49 +948,76 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                         {/if}
                                                         {/foreach}
                                                         {/if}
-
-
-
-                                                        <div class="dropdown-menu logout-content animated flipInY" role="menu">
+                                                        <div class="dropdown-menu logout-content animated fadeInRight profile-tool-box" role="menu">
                                                             <div class="row">
 
                                                                 <div class="col-lg-12 col-sm-12" style="padding:10px;">
-                                                                    <div class="profile-container col-lg-5 col-sm-5">
+                                                                    <div class="profile-container col-lg-12 col-sm-13">
                                                                         {assign var=IMAGE_DETAILS value=$USER_MODEL->getImageDetails()}
+                                                                        <input type="hidden" name="user_id" id="current_user_id" value="{$USER_MODEL->get('id')}" />
                                                                         {if $IMAGE_DETAILS neq '' && $IMAGE_DETAILS[0] neq '' && $IMAGE_DETAILS[0].path eq ''}
                                                                         <i class='material-icons'>perm_identity</i>
                                                                         {else}
                                                                         {foreach item=IMAGE_INFO from=$IMAGE_DETAILS}
                                                                         {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
-                                                                        <img src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
+                                                                        <img class="user-profile-pic img-circle" src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
                                                                         {/if}
                                                                         {/foreach}
                                                                         {/if}
                                                                     </div>
-                                                                    <div class="col-lg-7 col-sm-7">
-                                                                        <h5>{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}</h5>
-                                                                        <h6 class="textOverflowEllipsis" title='{$USER_MODEL->get('user_name')}'>{$USER_MODEL->get('user_name')} | {$USER_MODEL->getUserRoleName()}</h6>
+                                                                    <div class="col-lg-12 col-sm-12">
+                                                                        <h5 class=" text-center user-first-n-last-name text-bold">{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}</h5>
+                                                                        <h6 class="textOverflowEllipsis text-center" title='{$USER_MODEL->get('user_name')}'>{$USER_MODEL->get('user_name')} | {$USER_MODEL->getUserRoleName()}</h6>
                                                                         {assign var=useremail value=$USER_MODEL->get('email1')}
-                                                                        <h6 class="textOverflowEllipsis" title='{$USER_MODEL->get('email')}'>{$useremail}</h6>
+                                                                        <h6 class="textOverflowEllipsis text-center" title='{$USER_MODEL->get('email')}'>{$useremail}</h6>
                                                                     </div>
                                                                     <hr style="margin: 10px 0 !important">
-                                                                    <div class="col-lg-12 col-sm-12">
-                                                                        <ul class="dropdown-user">
+                                                                    <div class="col-lg-12 col-sm-12 text-center">
+                                                                        <ul class="dropdown-user list-inline ">
                                                                             <li role="separator" class="divider"></li>
                                                                             <li>
 
-                                                                                <a id="menubar_item_right_LBL_MY_PREFERENCES" href="{$USER_MODEL->getPreferenceDetailViewUrl()}">
+                                                                                <a id="menubar_item_right_LBL_MY_PREFERENCES" class="btn btn-primary" href="{$USER_MODEL->getPreferenceDetailViewUrl()}">
                                                                                     <i class="material-icons">settings</i> {vtranslate('LBL_MY_PREFERENCES')}</a>
                                                                                 </li>
+                                                                                       <li role="separator" class="divider"></li>
                                                                                 <li>
-
-                                                                                    <a id="menubar_item_right_LBL_SIGN_OUT" href="index.php?module=Users&action=Logout">
+                                                                                    <a id="menubar_item_right_LBL_SIGN_OUT" class="btn btn-danger" href="index.php?module=Users&action=Logout">
                                                                                         <i class="material-icons">power_settings_new</i> {vtranslate('LBL_SIGN_OUT')}</a>
                                                                                     </li>
                                                                                 </ul>
-                                                                            </div>
-                                                                        </div>
                                                                     </div>
+                                                                    <div class="clearfix"></div>
+                                                                    <hr>
+                                                                    <div class="clearfix"></div>
+                                                                    <div class="col-md-12 col-lg-12 col-xs-12">
+                                                                        <h5 class="text-bold">Themes</h5>                                                                                                                                   
+                                                                    </div>
+                                                                     <div class="clearfix"></div>
+                                                                    <hr />
+                                                                    <div class="clearfix"></div>          
+                                                                    <div class="col-md-3">Colors</div>
+                                                                    <div class="col-md-9">
+                                                                        <ul class="color-list list-inline pull-right">
+                                                                            <li><a class="btn color-box color-blue themeElement" data-skinName="blue"><i class="fa fa-check"></i></a></li>
+                                                                            <li><a class="btn color-box color-purple themeElement" data-skinName="purple"><i class="fa fa-check"></i></a></li>
+                                                                            <li><a class="btn color-box color-yellow themeElement" data-skinName="yellow"><i class="fa fa-check"></i></a></li>
+                                                                            <li><a class="btn color-box color-green themeElement" data-skinName="green"><i class="fa fa-check"></i></a></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                    <hr />
+                                                                    <div class="clearfix"></div>
+                                                                    <div class="col-md-12">
+                                                                        <ul class="profile-list list-unstyled">
+                                                                            <li> <a class=""><i class='fa fa-rocket'></i> Getting Started</a></li>
+                                                                            <li> <a class=""><i class='fa fa-life-ring'></i> Help</a></li>
+                                                                            <li> <a class=""><i class='fa fa-at'></i> Contact Support</a></li>
+                                                                            <li> <a class=""><i class='fa fa-paper-plane'></i> What's new?</a></li>
+                                                                        </ul>    
+                                                                    </div>    
+                                                                </div>
+                                                            </div>
 
                                                                 </div>
                                                             </div>
