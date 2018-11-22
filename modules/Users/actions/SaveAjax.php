@@ -39,7 +39,8 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 	}
 
 	public function process(Vtiger_Request $request) {
-		
+		global $adb;
+                                       //   $adb->setDebug(TRUE);
 		$mode = $request->get('mode');
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -55,8 +56,11 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 			$value = date('Y-m-d',strtotime($request->get('value')));
 			$request->set($request->get('field'),$value);	
 		}//end here	
-		
+		elseif($request->get('field')=='theme'){                 
+                                              $request->set($request->get('field'),$request->get('value'));	
+                                            }
 
+                                     
 		$recordModel = $this->saveRecord($request);
 
 		$fieldModelList = $recordModel->getModule()->getFields();
