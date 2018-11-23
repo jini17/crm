@@ -469,23 +469,25 @@ Vtiger.Class('Vtiger_Index_Js', {
        changeSkin : function() {
             jQuery('.themeElement').on('click', function(e) {
                        var $this = jQuery(this);
+                       app.helper.showProgress();
                     //currentElement.closest('#themeContainer').hide();                 
                     var skinname = $this.attr('data-skinName');
                     var record_id = jQuery('#current_user_id').val();
                   
-                app.helper.showProgress();
+                
                     var params = {
                             'module' : 'Users',
                             'action' : 'SaveAjax',
                             'record' : record_id,
-                            'field'	 : 'theme',
-                            'value'	 : skinname,
-                            'mod'      : "edit"
+                            'field'  : 'theme',
+                            'value'  : skinname,
+                            'mod'    : "edit"
                     }
                   app.request.post({"data":params}).then(function(err,data){
-                      console.log(data);
-                          app.helper.hideProgress();
-                         window.location.reload();
+                     // console.log(data);
+                         if(err==null)
+                              window.location.href='index.php';
+//                         app.helper.hideProgress();
                     },
                     function(error,err){
                     });

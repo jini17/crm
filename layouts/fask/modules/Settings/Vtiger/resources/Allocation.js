@@ -1079,8 +1079,34 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
         });
 
     },
+     
+     registerYearEndProcess:function(){
+          var aDeferred = jQuery.Deferred();
+          jQuery(".checkleavestatus").on('click', function(){
+               app.helper.showProgress();
 
+               var params = {
+                'module' : 'Users',
+                'view'   : 'ListViewAjax',
+                'mode'   : 'getUsersLeaveStatus'
+               }
 
+            app.request.post({'data' : params}).then(
+                 function(err, data) { 
+                    //console.log("Inside pjax");
+                   app.helper.hideProgress();
+                   jQuery('#myModal').modal('show');
+                   jQuery(".checkleavestatus").html('System checking...');
+                   jQuery(".checkleavestatus").attr('disabled',true);
+                   alert(data);
+                   jQuery(".modal-body").html(data);
+                    //history.pushState({}, null, window.history.back());
+                });
+
+        });
+        return aDeferred.promise();
+     },
+     
     registerEvents: function() {
         this.registerDeleteButton();
         this.registerAddButton();
@@ -1091,6 +1117,8 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
         this.registerBenefitDeleteButton();
         this.registerBenefitAddButton();
         this.registerBenefitEditButton();
+        this.registerYearEndProcess();
+        
     }
 
 });

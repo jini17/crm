@@ -60,6 +60,9 @@ class Settings_Vtiger_AllocationListView_View extends Settings_Vtiger_Index_View
         }
 
        //echo "<pre>"; print_r($values); die;
+        $user_model = Users_Record_Model::getCurrentUserModel();
+        $isYNP = $user_model->UsersLeaveStatus(true);
+        $viewer->assign('YNP',$isYNP);
 
         $viewer->assign('VALUES', $values);
 
