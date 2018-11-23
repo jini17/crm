@@ -999,10 +999,10 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                     <div class="col-md-3">Colors</div>
                                                                     <div class="col-md-9">
                                                                         <ul class="color-list list-inline pull-right">
-                                                                            <li><a class="btn color-box color-blue themeElement" data-skinName="blue"><i class="fa fa-check"></i></a></li>
-                                                                            <li><a class="btn color-box color-purple themeElement" data-skinName="purple"><i class="fa fa-check"></i></a></li>
-                                                                            <li><a class="btn color-box color-yellow themeElement" data-skinName="yellow"><i class="fa fa-check"></i></a></li>
-                                                                            <li><a class="btn color-box color-green themeElement" data-skinName="green"><i class="fa fa-check"></i></a></li>
+                                                                            <li><a class="btn color-box color-blue themeElement" data-skinName="blue"><i class="fa {if $USER_MODEL->get('theme') eq 'blue'}  fa-check {/if}"  ></i></a></li>
+                                                                            <li><a class="btn color-box color-purple themeElement" data-skinName="purple"><i class="fa {if $USER_MODEL->get('theme') eq 'purple'} fa-check  {/if}"></i></a></li>
+                                                                            <li><a class="btn color-box color-yellow themeElement" data-skinName="yellow"><i class="fa  {if $USER_MODEL->get('theme') eq 'yellow'} fa-check {/if}"></i></a></li>
+                                                                            <li><a class="btn color-box color-green themeElement" data-skinName="green"><i class="fa {if $USER_MODEL->get('theme') eq 'green'}  fa-check  {/if}"></i></a></li>
                                                                         </ul>
                                                                     </div>
                                                                     <div class="clearfix"></div>

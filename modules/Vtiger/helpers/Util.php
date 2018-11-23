@@ -743,7 +743,8 @@ class Vtiger_Util_Helper {
 
         /*start edited by fadzil 19/9/14*/
     public static function getAllSkins(){
-        return array('curiousblue'          => '#3498DB',
+        return array(  'blue' =>"#2f5597",
+                                'curiousblue'          => '#3498DB',
                                 'mariner'        => '#2980B9',
                                 'turquoise'     => '#1ABC9C',
                                 'mountainmeadow' =>  '#16A085',
@@ -756,8 +757,7 @@ class Vtiger_Util_Helper {
                                 'sherpa' =>   '#4A6A77',
                                 'metalslate' =>  '#435E6F',
                                 'purple' =>  '#d971ae',
-                                'yellow' =>  '#f6bb43',
-                                'blue' =>"#2f5597",
+                                'yellow' =>  '#f6bb43',                              
                                 "green"=> "#3bbd9b"    
             
             );
