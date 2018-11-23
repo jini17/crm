@@ -24,6 +24,9 @@
             </div>
 
             <div class="contents tabbable clearfix">
+                {if $YNP eq 0}
+                    <div class="pull-right"><button class="btn btn-success checkleavestatus">Year End Process</button></div>
+                {/if}    
                 <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">Delete</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button class="btn span10 marginLeftZero newButton" id="addItem">Add</button><br><br>
@@ -76,4 +79,16 @@
             </div>
         </div>
     </div>
+<div id="myModal" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body"></div>  
+     </div>
+    </div>
+</div>  
 {/strip}
