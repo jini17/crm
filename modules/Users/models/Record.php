@@ -1222,8 +1222,8 @@ class Users_Record_Model extends Vtiger_Record_Model
     public function getBirthdayWish($date, $id, $css = "grid")
     {
 
-        $birthdateArray = date_parse_from_format("d-m-Y", $date);
-        $todayArray = date_parse_from_format("d-m-Y", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
+        $birthdateArray = date_parse_from_format("Y-m-d", $date);
+        $todayArray = date_parse_from_format("Y-m-d", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
         $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
         $today = date_create(date('d-m-Y')); //This should also be actual current date
         $diff = date_diff($today, $birthdate);
@@ -1254,8 +1254,8 @@ class Users_Record_Model extends Vtiger_Record_Model
     public function getNewJoinee($date, $id, $prefix = 'list')
     {
 
-        $birthdateArray = date_parse_from_format("d-m-Y", $date);
-        $todayArray = date_parse_from_format("d-m-Y", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
+        $birthdateArray = date_parse_from_format("Y-m-d", $date);
+        $todayArray = date_parse_from_format("Y-m-d", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
         $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
         $today = date_create(date('d-m-Y')); //This should also be actual current date
         $diff = date_diff($today, $birthdate);
