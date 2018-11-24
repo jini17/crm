@@ -4,4 +4,5 @@ $languageStrings = array(
 'Technical'	=>	'Technical',
 'Support'	=>	'Support',
 'Marketing'	=>	'Marketing',
+'Administrator'	=>	'Administrator',
 );

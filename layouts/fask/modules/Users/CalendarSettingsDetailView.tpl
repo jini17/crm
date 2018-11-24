@@ -18,8 +18,50 @@
             padding-bottom: 15px;
         }
     </style>
+     <div class="contents">
+            <div class="block">
+                <div class="row">
+                    <div class="col-xs-12"><h5>{vtranslate('LBL_CHANGE_PASSWORD','Users')} </h5>
+                        <div class='clearfix'></div>
+                        <hr>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-xs-12'>
+                        <form class="form-horizontal" id="changePassword" name="changePassword" method="post" action="index.php" novalidate="novalidate">
+                            <input type="hidden" name="__vtrftk" value="sid:fe329e04a69675cb4c85e8737687ca187f65a1e2,1543035448">
+                            <input type="hidden" name="module" value="Users">
+                            <input type="hidden" name="userid" value="1">
+                            <div name="massEditContent">   
+                                <div class="form-group">
+                                    <label class="control-label fieldLabel col-sm-5">New Password&nbsp;<span class="redColor">*</span></label>
+                                    <div class="controls col-xs-6">
+                                        <input type="password" class="form-control inputElement" name="new_password" data-rule-required="true" autofocus="autofocus" aria-required="true">
+                                    </div>
+                                </div>
+                                <div class='clearfix'></div>
+                                <div class='clearfix' style='height: 10px;'></div>
+                                <div class="form-group">
+                                    <label class="control-label fieldLabel col-sm-5">Confirm Password&nbsp;<span class="redColor">*</span></label>
+                                    <div class="controls col-xs-6">
+                                        <input type="password" class="form-control inputElement" name="confirm_password" data-rule-required="true" aria-required="true">
+                                    </div>
+                                </div>
+                                <div class="form-group"> 
+                                         <div class="controls col-xs-12 pull-right">
+                                             <button class="btn btn-success pull-right"  onclick="Users_Detail_Js.triggerUpdatePassword()"type="button" name="saveButton">
+                                                <strong>Save</strong>
+                                            </button>
+                                         </div>
+                                </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        <div class="clearfix"></div>
     <form id="detailView" data-name-fields='{ZEND_JSON::encode($MODULE_MODEL->getNameFields())}' method="POST">
-        <div class="contents">
+            <div class="contents">
             {foreach key=BLOCK_LABEL_KEY item=FIELD_MODEL_LIST from=$RECORD_STRUCTURE}
                 <div class="block block_{$BLOCK_LABEL_KEY}">
                     {assign var=BLOCK value=$BLOCK_LIST[$BLOCK_LABEL_KEY]}
@@ -43,6 +85,7 @@
                 <hr>
                 <div class=" row">
                     <div class='col-md-12'>
+                     
                         <div class="table detailview-table" style="width: 100%;margin: 0 auto;">
                             {assign var=COUNTER value=0}
                             <div class="row">

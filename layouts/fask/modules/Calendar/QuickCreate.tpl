@@ -92,7 +92,7 @@
 
 
 
-                                                <table class="massEditTable table no-border">
+                                                <table class="massEditTable table no-border Hello">
                                                         <tr>
                                                                 {foreach key=FIELD_NAME item=FIELD_MODEL from=$RECORD_STRUCTURE name=blockfields}
                                                                 {if $FIELD_NAME eq 'subject' || $FIELD_NAME eq 'date_start' || $FIELD_NAME eq 'due_date'}
@@ -110,8 +110,13 @@
                                                         </tr><tr>
                                                                 <td class="col-lg-4">
                                                                         {if $isReferenceField neq "reference"}
-                                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;">
-
+                                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;" {$FIELD_NAME}>
+                                                                                    {if $FIELD_NAME eq 'assigned_user_id'}
+                                                                                        <i class="fa fa-info-circle pull-right" title="To whom this task is assigned"></i>
+                                                                                     {/if}   
+                                                                                     {if $FIELD_NAME eq 'employee_id'}
+                                                                                        <i class="fa fa-info-circle pull-right" title="The person assigning task"></i>
+                                                                                     {/if}  
                                                                         {/if}
                                                                                 {if $isReferenceField eq "reference"}
                                                                                 {if $referenceListCount > 1}
@@ -128,7 +133,7 @@
                                                                                         </select>
                                                                                 </span>
                                                                                 {else}
-                                                                                <label class="muted pull-right">{vtranslate($FIELD_MODEL->get('label'), $MODULE)} &nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}</label>
+                                                                                <label class="muted pull-right" {$FIELD_MODEL->get('label')}>{vtranslate($FIELD_MODEL->get('label'), $MODULE)} &nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}</label>
                                                                                 {/if}
                                                                                 {else}
                                                                                 {vtranslate($FIELD_MODEL->get('label'), $MODULE)}&nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}

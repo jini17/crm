@@ -469,6 +469,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                 app.helper.showProgress();
                 app.request.post({"url": url}).then(
                     function (err, response) {
+                        console.log(response)
                         if (err == null) {
                             var nonReversableWidgets = ['MiniList', 'Notebook', 'ChartReportWidget']
                             parent.fadeOut('slow', function () {
@@ -498,19 +499,19 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                             'tabid': activeTabId
                         }
 
-                        app.request.post({"data": data}).then(function (err, data) {
-                            if (err === null) {
-                                var dashBoardModuleName = jQuery("#tab_" + activeTabId, ".tab-content").html(data_widget).find('[name="dashBoardModuleName"]').val();
-                                if (typeof dashBoardModuleName != 'undefined' && dashBoardModuleName.length > 0) {
-                                    var dashBoardInstanceClassName = app.getModuleSpecificViewClass(app.view(), dashBoardModuleName);
-                                    if (dashBoardInstanceClassName != null) {
-                                        var dashBoardInstance = new window[dashBoardInstanceClassName]();
-                                    }
-                                }
-                                app.event.trigger("post.DashBoardTab.load", dashBoardInstance);
-                                window.location = 'index.php?module=Home&view=DashBoard&tabid=' + activeTabId;
-                            }
-                        });
+//                        app.request.post({"data": data_widget}).then(function (err, data) {
+//                            if (err === null) {
+//                                var dashBoardModuleName = jQuery("#tab_" + activeTabId, ".tab-content").html(data_widget).find('[name="dashBoardModuleName"]').val();
+//                                if (typeof dashBoardModuleName != 'undefined' && dashBoardModuleName.length > 0) {
+//                                    var dashBoardInstanceClassName = app.getModuleSpecificViewClass(app.view(), dashBoardModuleName);
+//                                    if (dashBoardInstanceClassName != null) {
+//                                        var dashBoardInstance = new window[dashBoardInstanceClassName]();
+//                                    }
+//                                }
+//                                app.event.trigger("post.DashBoardTab.load", dashBoardInstance);
+//                                window.location = 'index.php?module=Home&view=DashBoard&tabid=' + activeTabId;
+//                            }
+//                        });
                         app.helper.hideProgress();
                     }
                 );

@@ -9,6 +9,44 @@
 
 Vtiger_Detail_Js("Users_Detail_Js",{
 
+     triggerUpdatePassword:function(){
+       var form = jQuery('#changePassword');
+        var new_password = form.find('[name="new_password"]');
+        
+        var confirm_password = form.find('[name="confirm_password"]');
+        var old_password = form.find('[name="old_password"]');
+        var userid = form.find('[name="userid"]').val();
+
+        if (new_password.val() === confirm_password.val()) {
+            var params = {
+                'data': {
+                    'module': app.getModuleName(),
+                    'action': "SaveAjax",
+                    'mode': 'savePassword',
+                    'old_password': old_password.val(),
+                    'new_password': new_password.val(),
+                    'userid': userid
+                }
+            };
+
+            app.request.post(params).then(
+                function (err, data) {
+                    if (err == null) {
+                        app.helper.hideModal();
+                        var successMessage = app.vtranslate(data.message);
+                        app.helper.showSuccessNotification({"message": successMessage});
+                    } else {
+                        app.helper.showErrorNotification({"message": err});
+                        return false;
+                    }
+                }
+            );
+        } else {
+            var errorMessage = app.vtranslate('JS_PASSWORD_MISMATCH_ERROR');
+            app.helper.showErrorNotification({"message": errorMessage});
+            return false;
+        }
+  },
         triggerChangePassword : function (url, module){
                 app.request.get({'url' :url}).then(
                         function(err, data) {
