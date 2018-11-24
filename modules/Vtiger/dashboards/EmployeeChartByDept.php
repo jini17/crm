@@ -120,13 +120,14 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
          * @return type
          */
         public function get_employee_by_dept($db,$where,$url){
+            //$db->setDebug(TRUE);
             $data = array();
-            $sql = 'SELECT department as dept,COUNT(employeeno) as total FROM vtiger_users   ';
+            $sql = 'SELECT vtiger_employeecontract.department as dept,COUNT(*) as total FROM vtiger_employeecontract   INNER JOIN vtiger_department ON vtiger_employeecontract.department = vtiger_department.department WHERE color !="" ';
               if($where != NULL){
-                  $sql .= " WHERE department='$where' ";
-                  
+                  $sql .= " AND vtiger_employeecontract.department='$where' ";                  
               }
-            $sql .= 'group BY department';
+              
+            $sql .= ' group BY vtiger_employeecontract.department';
 
            $query = $db->pquery($sql,array());
            $num_rows = $db->num_rows($query);
