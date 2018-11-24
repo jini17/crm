@@ -39,7 +39,7 @@
                         </li>
                 <!--Added by jitu@secondcrm.com on 24-12-2014 
                         added by jitu@secondcrm.com for Leave approval widget link-->
-                        {if $ISACTIVE eq 0 && $VIEW eq 'PreferenceDetail'} 
+                        {if $VIEW eq 'PreferenceDetail' && $LEAVECLAIM_SHOW} 
                         <li class="{if $DEFAULT_TAB neq '' && $TABTYPE eq 'leave'}active{else}relatedListTab{/if}">
                                 <a data-toggle="tab" href="#leave"><strong>{vtranslate('LBL_LEAVE', $MODULE_NAME)}</strong></a>
                         </li>	

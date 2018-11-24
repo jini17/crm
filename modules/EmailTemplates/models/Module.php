@@ -356,14 +356,18 @@ class EmailTemplates_Module_Model extends Vtiger_Module_Model {
 	public function getModuleBasicLinks(){
 		$createPermission = Users_Privileges_Model::isPermitted($this->getName(), 'CreateView');
 		$moduleName = $this->getName();
-		if($createPermission) {
+		
+		//Modified by jitu@Permission 
+		$currentUserModel = Users_Record_Model::getCurrentUserModel();
+		
+		if($createPermission && $currentUserModel->isAdminUser()) {
 			$basicLinks[] = array(
 				'linktype' => 'BASIC',
 				'linklabel' => 'LBL_ADD_RECORD',
 				'linkurl' => $this->getCreateRecordUrl(),
 				'linkicon' => 'fa-plus'
 			);
-		}
+		} //end here 
 
 		return $basicLinks;
 	}

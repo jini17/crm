@@ -26,13 +26,19 @@ class EmailTemplates_DetailView_Model extends Vtiger_DetailView_Model {
 
 		$detailViewLink = array();
 
-		$detailViewLinks[] = array(
-				'linktype' => 'DETAILVIEWBASIC',
-				'linklabel' => 'LBL_EDIT',
-				'linkurl' => $recordModel->getEditViewUrl(),
-				'linkicon' => ''
-		);
+       $currentUserModel = Users_Record_Model::getCurrentUserModel();
 
+       //Modified by jitu@Permission 
+       if ($currentUserModel->isAdminUser()) { 
+
+			$detailViewLinks[] = array(
+					'linktype' => 'DETAILVIEWBASIC',
+					'linklabel' => 'LBL_EDIT',
+					'linkurl' => $recordModel->getEditViewUrl(),
+					'linkicon' => ''
+			);
+		} //end here
+			
 		$linkModelList = array();
 		foreach ($detailViewLinks as $detailViewLink) {
 			$linkModelList['DETAILVIEWBASIC'][] = Vtiger_Link_Model::getInstanceFromValues($detailViewLink);
@@ -42,12 +48,15 @@ class EmailTemplates_DetailView_Model extends Vtiger_DetailView_Model {
 		$detailViewBasiclinks = $linkModelListDetails['DETAILVIEWBASIC'];
 		unset($linkModelListDetails['DETAILVIEWBASIC']);
 
+		//Modified by jitu@Permission 
+		if ($currentUserModel->isAdminUser()) { 
 			$deletelinkModel = array(
 					'linktype' => 'DETAILVIEW',
 					'linklabel' => 'LBL_DELETE',
 					'linkurl' => 'javascript:EmailTemplates_Detail_Js.deleteRecord("'.$recordModel->getDeleteUrl().'")',
 					'linkicon' => ''
 			);
+
 			$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($deletelinkModel);
 			$duplicateLinkModel = array(
 						'linktype' => 'DETAILVIEWBASIC',
@@ -56,6 +65,8 @@ class EmailTemplates_DetailView_Model extends Vtiger_DetailView_Model {
 						'linkicon' => ''
 				);
 			$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($duplicateLinkModel);
+		} //end here
+			
 		if(!empty($detailViewBasiclinks)) {
 			foreach($detailViewBasiclinks as $linkModel) {
 				$linkModelList['DETAILVIEW'][] = $linkModel;
