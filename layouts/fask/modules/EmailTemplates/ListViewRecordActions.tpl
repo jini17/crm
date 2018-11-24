@@ -15,14 +15,23 @@
         <input type="checkbox" value="{$LISTVIEW_ENTRY->getId()}" class="listViewEntriesCheckBox"/>
     </span>
     {/if}
+     {if $CURRENT_USER_MODEL->isAdminUser()}
     <span class="more dropdown action">
-        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="ti-info-alt icon"></i></a>
-        <ul class="dropdown-menu">
+       
+       
+         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="ti-info-alt icon"></i></a>
+            <ul class="dropdown-menu">
             <li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="{$LISTVIEW_ENTRY->getFullDetailViewUrl()}">{vtranslate('LBL_DETAILS', $MODULE)}</a></li>
+            
             <li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0);" data-url="{$LISTVIEW_ENTRY->getEditViewUrl()}" name="editlink">{vtranslate('LBL_EDIT', $MODULE)}</a></li>
             <li><a data-id="{$LISTVIEW_ENTRY->getId()}" class="deleteRecordButton">{vtranslate('LBL_DELETE', $MODULE)}</a></li>
+            
         </ul>
     </span>
+    
+    {else}
+     &nbsp;&nbsp; <a href="{$LISTVIEW_ENTRY->getFullDetailViewUrl()}" data-id="{$LISTVIEW_ENTRY->getId()}"><i class="ti-info-alt icon"></i></a>
+    {/if}
             
     <div class="btn-group inline-save hide">
         <button class="button btn-success btn-small save" name="save"><i class="fa fa-check"></i></button>

@@ -14,11 +14,11 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
                 $currentUserModel = Users_Record_Model::getCurrentUserModel();
                 $record = $request->get('record');
 
-                if($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $record || $currentUserModel->get('roleid')=='H12' || $currentUserModel->get('roleid')=='H13') {
+                //if($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $record || $currentUserModel->get('roleid')=='H12' || $currentUserModel->get('roleid')=='H13') {
                         return true;
-                } else {
-                        throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
-                }
+              //  } else {
+              //          throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
+               // }
         }
 
         /**
@@ -51,13 +51,26 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
                         $detailViewLinkParams = array('MODULE'=>$moduleName,'RECORD'=>$recordId);
                         $detailViewLinks = $detailViewModel->getDetailViewLinks($detailViewLinkParams);
 
+                        //check permision added by jitu@Permission
+                        if($currentUser->isAdminUser() == true || $currentUser->get('id') == $recordId || $currentUser->get('roleid')=='H12' || $currentUser->get('roleid')=='H13') {
+                               $IS_EDITABLE = true;
+                              
+
+                        } 
+                        if($currentUser->get('id') == $recordId){
+                             $LEAVE_CLAIM_ALLOW = true;
+                        }   
+
+                        //emd here
+                                
                         $viewer = $this->getViewer($request);
                         $viewer->assign('RECORD', $recordModel);
 
                         $viewer->assign('MODULE_MODEL', $detailViewModel->getModule());
                         $viewer->assign('DETAILVIEW_LINKS', $detailViewLinks);
 
-                        $viewer->assign('IS_EDITABLE', $detailViewModel->getRecord()->isEditable($moduleName));
+                        $viewer->assign('IS_EDITABLE', $IS_EDITABLE); //modified by jitu@Permission 
+                        $viewer->assign('LEAVECLAIM_SHOW', $LEAVE_CLAIM_ALLOW); //Added by jitu@Permission
                         $viewer->assign('IS_DELETABLE', $detailViewModel->getRecord()->isDeletable($moduleName));
 
                         $linkParams = array('MODULE'=>$moduleName, 'ACTION'=>$request->get('view'));

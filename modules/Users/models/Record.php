@@ -1221,14 +1221,7 @@ class Users_Record_Model extends Vtiger_Record_Model
 
     public function getBirthdayWish($date, $id, $css = "grid")
     {
-                        
-      
-//        $birthdateArray = date_parse_from_format("d-m-Y", $date);
-//        $todayArray = date_parse_from_format("d-m-Y", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
-//        $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
-//        $today = date_create(date('d-m-Y')); //This should also be actual current date
-//        $diff = date_diff($today, $birthdate);
-//        $difference = $diff->format("%a");
+
                         if(empty($date)){
                             return false;
                         }
@@ -1236,7 +1229,7 @@ class Users_Record_Model extends Vtiger_Record_Model
         $barthday_start = new DateTime($bday_current_year);
         $birthday_end = new DateTime(date('d-m-Y'));        
         $difference = $birthday_end->diff($barthday_start)->format("%a");
-        
+
         if ($css == "grid") {
             $style = "font-weight: bold;";
         } else {
@@ -1262,6 +1255,7 @@ class Users_Record_Model extends Vtiger_Record_Model
     public function getNewJoinee($date, $id, $prefix = 'list')
     {
 
+
          if(empty($date)){
                             return false;
                         }
@@ -1269,6 +1263,7 @@ class Users_Record_Model extends Vtiger_Record_Model
         $barthday_start = new DateTime($bday_current_year);
         $birthday_end = new DateTime(date('d-m-Y'));        
         $difference = $birthday_end->diff($barthday_start)->format("%a");
+
 
         if ($prefix != 'list') {
             $show_prefix = vtranslate("LBL_JOINED", 'Users');
@@ -1504,6 +1499,48 @@ class Users_Record_Model extends Vtiger_Record_Model
         }
         else{
             return 0;
+        }
+    }
+
+    public function UsersLeaveStatus($isallocate=false) {
+        $db = PearDatabase::getInstance();
+        $curryear =  date('Y')-1;
+        
+        if($isallocate)
+          $curryear =  date('Y');
+
+        $sql = "SELECT vtiger_leavetype.title, vtiger_leavetype.carryforward, concat(vtiger_users.first_name,' ', vtiger_users.last_name) as username, 
+                  vtiger_leaverolemapping.leavetype, vtiger_leaverolemapping.userid, vtiger_leaverolemapping.allocation, vtiger_leaverolemapping.used 
+                FROM vtiger_leaverolemapping
+                LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = vtiger_leaverolemapping.leavetype
+                LEFT JOIN vtiger_users ON vtiger_users.id=vtiger_leaverolemapping.userid
+
+                WHERE alloc_year=?";
+        $result = $db->pquery($sql,array($curryear));
+        $num_rows = $db->num_rows($result);
+        if($num_rows > 0){
+            
+            $leavemap = array(); 
+            for($i=0;$i < $num_rows;$i++){
+              $userid     = $db->query_result($result, $i, 'userid');
+              $leavetype  = $db->query_result($result, $i, 'title');
+              $allocated  = $db->query_result($result, $i, 'allocation');
+              $used       = $db->query_result($result, $i, 'used');
+              $username   = $db->query_result($result, $i, 'username');
+              $carryfwd   = $db->query_result($result, $i, 'carryforward');
+
+              if($carryfwd=='on'){
+                $isLapse = 'No';
+              } else {
+                $isLapse = 'Yes';
+              }
+              if($allocation != $used) {
+                  $leavemap[$username][$leavetype] = array($allocated, $used, $isLapse);
+              }    
+            }
+              return $leavemap;
+          } else {
+           return 0;
         }
     }
 }
