@@ -142,24 +142,24 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
                 }
            }
            else{
-               $data['labels'][] ="&nbsp;";
-                $data['values'][] ="";
-                $data['links'][] =$url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings';
-                $data['colors'][] ="";
+               $data['labels'][]    = "&nbsp;";
+                $data['values'][]  = "";
+                $data['links'][]      = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings';
+                $data['colors'][]   = "";
            }
       
            return $data;
         }
         
         function get_dept_colors($db,$dept){
-                $sql = "SELECT * from vtiger_department where department = '$dept'";
-                $query = $db->pquery($sql);
-                $numrows = $db->num_rows($query);
+                $sql                = "SELECT * from vtiger_department where department = '$dept'";
+                $query          = $db->pquery($sql);
+                $numrows   = $db->num_rows($query);
                 if($numrows > 0){
-                    $color = $db->query_result($query,0,'color');
+                    $color      = $db->query_result($query,0,'color');
                 }
                 else{
-                    $color = "#fff";
+                    $color      = "#fff";
                 }
 
                 return $color;

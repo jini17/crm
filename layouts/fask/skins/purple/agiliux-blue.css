@@ -361,13 +361,13 @@ a.btn.btn-gettingStarted i{
 #MessageBoard_editView_fieldName_title{
     width: 80vh;
 }
-.select2-results li{
+/*.select2-results li{
     background: none !important;
     color: #000 !important;
 }
 .select2-results li:hover{
     background: #ccc !important;
-}
+}*/
 .profile-tool-box{
     top: 0;
    height: 500px;

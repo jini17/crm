@@ -7,10 +7,8 @@
 * All Rights Reserved.
 ************************************************************************************}
 {strip}
-
-    {if $USER_MODEL->isAdminUser()
-    AND
-    (  $smarty.get.view neq 'List' OR
+ {* AND
+    (  $smarty.get.view eq 'List' OR
     $smarty.get.view eq 'PreferenceDetail'  OR
     $smarty.get.module eq 'Roles'     OR
     $smarty.get.module eq 'SharingAccess'     OR
@@ -26,7 +24,26 @@
     $smarty.get.module eq 'MenuEditor'     OR
     $smarty.get.view eq 'Calendar'     OR
     $smarty.get.view eq 'Extension'     OR
-    $smarty.get.view eq $USER_MODEL->get('id'))  }
+    $smarty.get.view eq $USER_MODEL->get('id'))  *}
+     
+    {if $USER_MODEL->isAdminUser() 
+            AND ($smarty.get.view eq 'PreferenceDetail'  OR
+                $smarty.get.module eq 'Roles'     OR
+                $smarty.get.module eq 'SharingAccess'     OR
+                $smarty.get.module eq 'UserPlan'     OR
+                $smarty.get.module eq 'AssignCompany'     OR
+                $smarty.get.module eq 'Password'     OR
+                $smarty.get.module eq 'MaxLogin'     OR
+                $smarty.get.module eq 'LayoutEditor'     OR
+                $smarty.get.module eq 'CompanyNumbering'     OR
+                $smarty.get.module eq 'Vtiger'     OR
+                $smarty.get.module eq 'Picklist'     OR
+                $smarty.get.module eq 'MenuEditor'     OR
+                $smarty.get.module eq 'MenuEditor'     OR
+                $smarty.get.view eq 'Calendar'     OR
+                $smarty.get.view eq 'Extension'  
+                OR $smarty.get.record neq $USER_MODEL->get('id')   )
+          }
         {assign var=SETTINGS_MODULE_MODEL value= Settings_Vtiger_Module_Model::getInstance()}
         {assign var=SETTINGS_MENUS value=$SETTINGS_MODULE_MODEL->getMenus()}
         {assign var=DEPT_LIST value=Users_Record_Model::get_department()}

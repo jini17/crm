@@ -27,7 +27,7 @@
                 <input type="hidden" name="action" value="SaveTask">
                 <div class="quickCreateContent">
                     <div class="modal-body">
-                        <table class="massEditTable table no-border">
+                        <table class="massEditTable table no-border ">
                             <tr>
                                 {assign var=COUNTER value=0}
                                 {foreach key=FIELD_NAME item=FIELD_MODEL from=$RECORD_STRUCTURE name=blockfields}

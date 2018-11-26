@@ -7,18 +7,18 @@
 * All Rights Reserved.
 ************************************************************************************}
 {* modules/Vtiger/views/QuickCreateAjax.php *}
-    
+
 {strip}
     {foreach key=index item=jsModel from=$SCRIPTS}
         <script type="{$jsModel->getType()}" src="{$jsModel->getSrc()}"></script>
     {/foreach}
-    
+
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form class="form-horizontal recordEditView" id="QuickCreate" name="QuickCreate" method="post" action="index.php">
                 {assign var=HEADER_TITLE value={vtranslate('LBL_QUICK_CREATE', $MODULE)}|cat:" "|cat:{vtranslate($SINGLE_MODULE, $MODULE)}}
                 {include file="ModalHeader.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
-                    
+
                 <div class="modal-body">
                     {if !empty($PICKIST_DEPENDENCY_DATASOURCE)}
                         <input type="hidden" name="picklistDependency" value='{Vtiger_Util_Helper::toSafeHTML($PICKIST_DEPENDENCY_DATASOURCE)}' />
@@ -36,7 +36,7 @@
                     {/if}
                     <input type="hidden" name="action" value="SaveAjax">
                     <div class="quickCreateContent">
-                        <table class="massEditTable table no-border">
+                        <table class="massEditTable table no-border ">
                             <tr>
                                 {assign var=COUNTER value=0}
                                 {foreach key=FIELD_NAME item=FIELD_MODEL from=$RECORD_STRUCTURE name=blockfields}
@@ -50,7 +50,8 @@
                                         {/if}
                                     {/if}
                                     {if $COUNTER eq 2}
-                                    </tr><tr>
+                                    </tr>
+                                    <tr>
                                         {assign var=COUNTER value=1}
                                     {else}
                                         {assign var=COUNTER value=$COUNTER+1}
@@ -75,17 +76,15 @@
                                                     <label class="muted pull-right">{vtranslate($FIELD_MODEL->get('label'), $MODULE)}&nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}</label>
                                                 {/if}
                                             {else if $FIELD_MODEL->get('uitype') eq '83'}
-												{include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE) COUNTER=$COUNTER MODULE=$MODULE PULL_RIGHT=true}
-												{if $TAXCLASS_DETAILS}
-                                                    {assign 'taxCount' count($TAXCLASS_DETAILS)%2}
-													{if $taxCount eq 0}
+                                                {include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE) COUNTER=$COUNTER MODULE=$MODULE PULL_RIGHT=true}
+                                                {if $TAXCLASS_DETAILS}
+                                                    {assign 'taxCount' count($TAXCLASS_DETAILS)%2}													{if $taxCount eq 0}
                                                         {if $COUNTER eq 2}
                                                             {assign var=COUNTER value=1}
                                                         {else}
                                                             {assign var=COUNTER value=2}
-                                                        {/if}
-													{/if}
-												{/if}
+                                                        {/if}													{/if}
+                                                {/if}
                                             {else}
                                                 {vtranslate($FIELD_MODEL->get('label'), $MODULE)}&nbsp;{if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}
                                             {/if}

@@ -9,9 +9,9 @@
 {strip}
 {assign var=SETTINGS_MENU_LIST value=Settings_Vtiger_Module_Model::getSettingsMenuListForNonAdmin()}
 {assign var=DEPT_LIST value=Users_Record_Model::get_department()}
-<div class="settingsgroup hidden-sm hidden-xs" style="overflow: scroll">
+<div class="settingsgroup hidden-sm hidden-xs" style="overflow: scroll; margin-top:0; padding-top:0">
     <div class='clearfix'></div>
-    <div class='col-xs-12'>
+   <div class='col-xs-12  {if  $smarty.get.view neq 'List'   }hide{/if}'>
         <h4> Filter </h4>
         <!-- Latest compiled and minified Bootstrap CSS -->
         <div class="panel-group panel-filter" id="accordion">
@@ -63,7 +63,6 @@
                 <div id="collapseThree" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class='department list-unstyled'>
-
                             {foreach item=DEPT from=$DEPT_LIST}
                                 <li><input type="checkbox" name="department" value="{$DEPT}"/> {$DEPT}</li>
                             {/foreach}
@@ -94,8 +93,8 @@
     </div>
 
 
-        <br><div class="clearfix"></div>
-        <div class="panel-group {if $smarty.get.module eq 'Users'}hide{/if}" id="accordion" role="tablist"  {$smarty.get.module} aria-multiselectable="true" >
+        <br  class='{if $smarty.get.module eq 'users' AND  $smarty.get.view eq 'list' }hide{/if}'><div class="clearfix"></div>
+        <div class="panel-group  {if $smarty.get.view eq 'List'  }hide{/if}" id="accordion" role="tablist"  {$smarty.get.module} {$smarty.get.view} aria-multiselectable="true" >
                 <div class="settingsgroup-panel panel panel-default">
 
                         {foreach item=BLOCK_MENUS key=BLOCK_NAME from=$SETTINGS_MENU_LIST}

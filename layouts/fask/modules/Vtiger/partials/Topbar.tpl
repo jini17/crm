@@ -890,18 +890,15 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                             {assign var=USER_PRIVILEGES_MODEL value=Users_Privileges_Model::getCurrentUserPrivilegesModel()}
                                             {assign var=CALENDAR_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Calendar')}
                                             {if $USER_PRIVILEGES_MODEL->hasModulePermission($CALENDAR_MODULE_MODEL->getId())}
-                                            <li>
+                                                <li>
+                                                    <div>
+                                                        <a class="rightside-icon-dashboard" href="index.php?module=Calendar&view={$CALENDAR_MODULE_MODEL->getDefaultViewName()}" title="{vtranslate('Calendar','Calendar')}" aria-hidden="true">
+                                                            <i class="fa fa-calendar-o"></i>
 
-                                                <div>
-                                                    <a class="rightside-icon-dashboard" href="index.php?module=Calendar&view={$CALENDAR_MODULE_MODEL->getDefaultViewName()}" title="{vtranslate('Calendar','Calendar')}" aria-hidden="true">
-                                                        <i class="fa fa-calendar-o"></i>
-
-                                                    </a>
-                                                </div>
-                                            </li>
+                                                        </a>
+                                                    </div>
+                                                </li>
                                             {/if}
-
-
                                             {assign var=REPORTS_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Reports')}
                                             {if $USER_PRIVILEGES_MODEL->hasModulePermission($REPORTS_MODULE_MODEL->getId())}
                                             <li>
@@ -1010,8 +1007,9 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                     <div class="clearfix"></div>
                                                                     <div class="col-md-12">
                                                                         <ul class="profile-list list-unstyled">
-                                                                            <li> <a class=""><i class='fa fa-rocket'></i> Getting Started</a></li>
-                                                                            <li> <a class=""><i class='fa fa-life-ring'></i> Help</a></li>
+                                                                            <li> <a class="" href="index.php?module=Users&parent=Settings&view=Calendar&record={$USER_MODEL->get('id') }"><i class='fa fa-gear'></i> Settings </a></li>
+                                                                            <li> <a class="" href="index.php?module=Home&view=DashBoard&tabid=1298"><i class='fa fa-rocket'></i> Getting Started</a></li>
+                                                                            <li> <a class="" href="http://dev7.secondcrm.com/agiliux/help.php"><i class='fa fa-life-ring'></i> Help</a></li>
                                                                             <li> <a class=""><i class='fa fa-at'></i> Contact Support</a></li>
                                                                             <li> <a class=""><i class='fa fa-paper-plane'></i> What's new?</a></li>
                                                                         </ul>    

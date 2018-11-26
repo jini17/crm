@@ -179,7 +179,8 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
             );
         });
     },
-
+  
+ 
     triggerChangePassword: function (url, module) {
         app.request.get({'url': url}).then(
             function (err, data) {

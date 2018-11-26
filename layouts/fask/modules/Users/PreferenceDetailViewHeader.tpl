@@ -43,8 +43,8 @@
                 <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
             </div>*}
 
-            <button  class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 15px;left:93%;" title="Left Panel Show/Hide">
-             <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
+            <button  class="essentials-toggle hidden-sm hidden-xs pull-right {if $RECORD->get('roleid') eq 'H15' AND $smarty.get.view eq 'PreferenceDetail'} hide {/if}" style="top: 15px;left:93%;" title="Left Panel Show/Hide">
+             <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span> 
          </button>
      </div>
  </div>

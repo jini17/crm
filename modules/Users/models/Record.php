@@ -1222,12 +1222,13 @@ class Users_Record_Model extends Vtiger_Record_Model
     public function getBirthdayWish($date, $id, $css = "grid")
     {
 
-        $birthdateArray = date_parse_from_format("Y-m-d", $date);
-        $todayArray = date_parse_from_format("Y-m-d", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
-        $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
-        $today = date_create(date('d-m-Y')); //This should also be actual current date
-        $diff = date_diff($today, $birthdate);
-        $difference = $diff->format("%a");
+                        if(empty($date)){
+                            return false;
+                        }
+        $bday_current_year = date( 'd-m', strtotime($date)).'-'. date( 'Y' );
+        $barthday_start = new DateTime($bday_current_year);
+        $birthday_end = new DateTime(date('d-m-Y'));        
+        $difference = $birthday_end->diff($barthday_start)->format("%a");
 
         if ($css == "grid") {
             $style = "font-weight: bold;";
@@ -1254,12 +1255,15 @@ class Users_Record_Model extends Vtiger_Record_Model
     public function getNewJoinee($date, $id, $prefix = 'list')
     {
 
-        $birthdateArray = date_parse_from_format("Y-m-d", $date);
-        $todayArray = date_parse_from_format("Y-m-d", date('d-m-Y')); //In the real thing, this should instead grab the actual current date
-        $birthdate = date_create($todayArray["year"] . "-" . $birthdateArray["month"] . "-" . $birthdateArray["day"]);
-        $today = date_create(date('d-m-Y')); //This should also be actual current date
-        $diff = date_diff($today, $birthdate);
-        $difference = $diff->format("%a");
+
+         if(empty($date)){
+                            return false;
+                        }
+        $bday_current_year = date( 'd-m', strtotime($date)).'-'. date( 'Y' );
+        $barthday_start = new DateTime($bday_current_year);
+        $birthday_end = new DateTime(date('d-m-Y'));        
+        $difference = $birthday_end->diff($barthday_start)->format("%a");
+
 
         if ($prefix != 'list') {
             $show_prefix = vtranslate("LBL_JOINED", 'Users');
@@ -1267,7 +1271,7 @@ class Users_Record_Model extends Vtiger_Record_Model
             $show_prefix = "";
         }
         if ($difference <= 30) {
-            $text = "<small class='btn-block text-center'><i class='material-icons module-icon'>timer</i>&nbsp; $show_prefix " . $diff->format("%a") . "Day(s) ago</small>";
+            $text = "<small class='btn-block text-center'><i class='material-icons module-icon'>timer</i>&nbsp; $show_prefix " . $difference . "Day(s) ago</small>";
             return $text;
         } else {
             return false;
