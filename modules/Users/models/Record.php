@@ -1432,7 +1432,7 @@ class Users_Record_Model extends Vtiger_Record_Model
     public function recordPermission($role, $record_user_id, $current_user_id, $permission)
     {
 
-        $system_roles = array('H2', "H12", "H13", "H15", "H16");
+        $system_roles = array('H2', "H12", "H13", "H16");
 
         $flag = false;
 

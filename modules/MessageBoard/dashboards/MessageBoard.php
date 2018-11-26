@@ -67,6 +67,16 @@ class MessageBoard_MessageBoard_Dashboard extends Vtiger_IndexAjax_View
 
         }
 
+        //Permission To create Message Board
+        $moduleName = 'MessageBoard';
+        $actionName = 'CreateView';
+        $allowcreate = true;
+        if(!Users_Privileges_Model::isPermitted($moduleName, $actionName, $record)) {
+            $allowcreate = false;               
+        } 
+        $viewer->assign('ALLOWCREATE', $allowcreate);
+        //end here
+
 
         $viewer->assign('ANNOUNCEMENTS', $messages);
 

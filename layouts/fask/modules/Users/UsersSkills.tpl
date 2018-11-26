@@ -61,10 +61,12 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 {assign var=CREATE_SKILL_URL value=$LANGUAGE_RECORD_MODEL->getCreateSkillUrl()}
 {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
         <div class="btn-group pull-right allprofilebtn">
+          {if $USER_MODEL->get('id') eq $USERID}
             <button type="button" class="btn btn-primary" onclick="Users_Skills_Js.addLanguage('{$CREATE_LANGUAGE_URL}&userId={$USERID}');">
                 <i class="fa fa-plus"></i>&nbsp;&nbsp;
                 <strong>{vtranslate('LBL_ADD_LANGUAGE', $MODULE)}</strong>
             </button>
+           {/if} 
         </div>
         <div class="clearfix"></div>
                     <div class="block listViewContentDiv" id="listViewContents" >
@@ -110,6 +112,7 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                                 </div>
                                               </div>
                                         </td>
+                                        {if $USER_MODEL->get('id') eq $USERID}
                                         <td class="medium" width="5%" valign="top">
                                             <div class="pull-right actions">
                                                 <span class="actionImages">
@@ -119,7 +122,8 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                                     </a>
                                                 </span>
                                             </div>
-                                        </td>    
+                                        </td> 
+                                        {/if}   
                                     </tr>
                                     {/foreach}
                                 </tbody>
@@ -132,8 +136,9 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 <!--- Start of Skill Container-->
 <div id="SkillContainer" >
     <div class="btn-group pull-right allprofilebtn">
-
+      {if $USER_MODEL->get('id') eq $USERID}
         <button type="button" class="btn btn-primary pull-right" onclick="Users_Skills_Js.addSkill('{$CREATE_SKILL_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_SKILL', $MODULE)}</strong></button>
+     {/if}   
     </div>
     <div class="clearfix"></div>
     <div class="block listViewContentDiv" id="listViewContents" >
