@@ -47,6 +47,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
                 $eduList = $eduUserModel->getUserEducationList($recordId);
                 $viewer->assign('EDUCATION_RECORD_MODEL',$EducationModuleModel);
                 $viewer->assign('USERID',$recordId);
+
                 $viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
                 $viewer->assign('USER_EDUCATION_LIST',$eduList);
 
@@ -93,7 +94,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
             $user_model = Users_Record_Model::getCurrentUserModel();
                 $moduleName = $request->getModule();
                 $viewer = $this->getViewer($request);
-                $userid = $user_model->get('id');
+                $userid = $request->get('record');
       
                 $EmergencyModuleModel= Users_EmergencyModule_Model::getInstance();
 
@@ -101,7 +102,6 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
                 $viewer->assign('MODULE',$moduleName);	
                 $viewer->assign('EMERGENCY_RECORD_MODEL',$EmergencyModuleModel);
                 $viewer->assign('USERID',$userid);
-                 $viewer->assign('REC_ID',$userid);
                 $viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
                 $viewer->assign('USER_EMERGENCY_CONTACTS',$emergencyUserModel->getUserEmergencyContact($userid));
                 echo $viewer->view('UsersEmergency.tpl',$moduleName,true);
