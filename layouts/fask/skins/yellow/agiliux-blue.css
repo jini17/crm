@@ -9,7 +9,9 @@ Email: khaled@softsolvers.com.my
     Created on : Oct 24, 2018, 10:14:19 AM
     Author     : Softsolvers
 */
-
+#Contacts_editView_fieldName_firstname{
+    width: 80% !important;
+}
 .related-tabs .nav-tabs>li.active,
 /*.related-tabs .nav-tabs>li:hover,*/
 .related-tabs .nav-tabs>li.active:focus,
@@ -25,9 +27,29 @@ Email: khaled@softsolvers.com.my
 .btn-primary,
 .btn-info, 
 .btn-info.disabled,
-.nav li.searchoption a{
+.nav li.searchoption a,
+.btn-success, 
+.btn-success.disabled{
     background: #f6bb43 !important;
     border: 1px solid #f6bb43 !important;
+}
+
+.vt-info-callout,
+.vt-default-callout.vt-info-callout span{
+    border-left-color: #f6bb43;
+}
+.vt-info-callout .vt-callout-header{
+    color: #f6bb43;
+}
+#saveSettings{
+    float: none;
+    margin: 0 40%;
+}
+.extensionContents .extensionLink{
+    color: #f6bb43;
+}
+input[type="checkbox"]:checked::after, #checkgreen {
+    color: #f6bb43;
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus,

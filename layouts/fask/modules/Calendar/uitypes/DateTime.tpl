@@ -39,4 +39,5 @@
 	{include file=vtemplate_path('uitypes/Time.tpl',$MODULE) BLOCK_FIELDS=$BLOCK_FIELDS FIELD_MODEL=$TIME_FIELD FIELD_NAME=$TIME_FIELD->getFieldName()}
 </div>
 {/if}
+
 {/strip}

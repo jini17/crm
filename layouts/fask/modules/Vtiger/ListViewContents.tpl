@@ -65,6 +65,7 @@
                                                         </span>
                                                 </div>
                                                 {if $MODULE_MODEL->isFilterColumnEnabled()}
+                                                     {if $CURRENT_CV_MODEL|count_characters:true gt 0}
                                                         <div id="listColumnFilterContainer">
                                                                 <div class="listColumnFilter {if $CURRENT_CV_MODEL and !($CURRENT_CV_MODEL->isCvEditable())}disabled{/if}"  
                                                                          {if $CURRENT_CV_MODEL->isCvEditable()}
@@ -85,6 +86,7 @@
                                                                         <i class="ti-layout-column3-alt"></i>
                                                                 </div>
                                                         </div>
+                                                    {/if}
                                                 {/if}
                                         </div>
                                 {elseif $SEARCH_MODE_RESULTS}
