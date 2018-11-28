@@ -15,10 +15,13 @@
                 {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}  
 
                         <!--<a id="menubar_quickCreate_Education" class="quickCreateModule" data-name="Education" data-url="index.php?module=Education&view=QuickCreateAjax" href="javascript:void(0)">Add Education</a>-->
+                        
                         <div class="btn-group pull-right allprofilebtn">
+                            {if $USER_MODEL->get('id') eq $USERID}
                             <button type="button" class="btn btn-primary" onclick="Users_WorkExp_Js.addWorkExp('{$CREATE_WORKEXP_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_WORKEXP', $MODULE)}</strong></button>
+                            {/if}
                         </div>
-
+                        
                     <div class="clearfix"></div>
                     <div class="block listViewContentDiv" id="listViewContents">
                         <div class="listViewEntriesDiv contents-bottomscroll " style="padding-top: 5px;">
@@ -64,13 +67,15 @@
                                         <td class="medium" valign="top">{$USER_WORKEXP['description']}</td>
                                          <td class="medium" valign="top">{vtranslate($JOB_TYPE,$MODULE)}</td>
                                         <td class="medium" valign="top">{vtranslate($PERMISSION,$MODULE)}</td>
+                                        {if $USER_MODEL->get('id') eq $USERID}
                                         <td class="medium" width="5%" valign="top">
                                             <div class="pull-right actions">
                                                 <span class="actionImages">
                                                 <a class="editWorkExp editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_WorkExp_Js.editWorkExp('index.php{$CREATE_WORKEXP_URL}&record={$USER_WORKEXP['uw_id']}&userId={$USERID}');"></a>&nbsp;&nbsp;<a class="cursorPointer" onclick="Users_WorkExp_Js.deleteWorkExp('index.php?module=Users&action=DeleteSubModuleAjax&mode=deleteWorkExp&record={$USER_WORKEXP['uw_id']}');"><i class="fa fa-trash-o" title="Delete"></i></a>
                                             </span>
                                             </div>
-                                        </td>    
+                                        </td> 
+                                       {/if}    
                                     </tr>
                                     {/foreach}
                                 </tbody>
