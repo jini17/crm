@@ -9,7 +9,9 @@ Email: khaled@softsolvers.com.my
     Created on : Oct 24, 2018, 10:14:19 AM
     Author     : Softsolvers
 */
-
+#Contacts_editView_fieldName_firstname{
+    width: 80% !important;
+}
 .related-tabs .nav-tabs>li.active,
 /*.related-tabs .nav-tabs>li:hover,*/
 .related-tabs .nav-tabs>li.active:focus,
@@ -18,14 +20,25 @@ Email: khaled@softsolvers.com.my
 .dashBoardContainer .nav-tabs>li.active:focus,
 .contents.tabbable .nav-tabs>li.active,
 /*.contents.tabbable .nav-tabs>li:hover,*/
-.contents.tabbable .nav-tabs>li.active:focus {
+.contents.tabbable .nav-tabs>li.active:focus{
   border: none;
   border-bottom: 5px solid #2f5597 !important;
+}
+.fc-button.fc-state-default{
+     
+     color: #2f5597 !important;
+}
+.fc-button.fc-state-default:hover,
+.fc-button.fc-state-active{
+    background-color:  #2f5597 !important;
+     border: 1px solid #2f5597 !important;
+     color: #fff !important;
 }
 .record-header .recordBasicInfo h4{
     margin-top: 30px;
 }
-#appnav button{
+#appnav button
+{
     background-color:  #2f5597;
     border: 1px solid #2f5597;
      margin-right: 5px;
@@ -245,7 +258,7 @@ a.btn.btn-gettingStarted i{
     Getting Started Widget
 ==========================*/
 
-.dashBoardContainer .dashBoardTabContents ul li[data-name="GettingStarted"]{
+/*.dashBoardContainer .dashBoardTabContents ul li[data-name="GettingStarted"]{
     width: 100%;
     min-height: 850px;
     height: 100vh;
@@ -253,7 +266,7 @@ a.btn.btn-gettingStarted i{
 
     position: relative;
     background:  #ebf0f9;
-}
+}*/
 .need-more-help-container{
     width: 400px;
     float: right;
@@ -444,3 +457,18 @@ a.btn.btn-gettingStarted i{
     float: left;
 
 }
+ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard,
+#menubar_quickCreate{
+      padding: 9px 7px 7px !important;
+      background: #2f5597;
+      border-radius: 5px;
+     margin-left: 2px;
+margin-right: 2px;
+}
+a.rightside-icon-dashboard > i.fa{
+    color: #fff !important;
+}
+.wbox .links,
+.wbox h5{
+           color: #2f5597;
+             }

@@ -9,7 +9,9 @@ Email: khaled@softsolvers.com.my
     Created on : Oct 24, 2018, 10:14:19 AM
     Author     : Softsolvers
 */
-
+#Contacts_editView_fieldName_firstname{
+    width: 80% !important;
+}
 .related-tabs .nav-tabs>li.active,
 /*.related-tabs .nav-tabs>li:hover,*/
 .related-tabs .nav-tabs>li.active:focus,
@@ -25,10 +27,31 @@ Email: khaled@softsolvers.com.my
 .btn-primary,
 .btn-info, 
 .btn-info.disabled,
-.nav li.searchoption a{
+.nav li.searchoption a,
+.btn-success, 
+.btn-success.disabled{
     background: #3bbd9b !important;
     border: 1px solid #3bbd9b !important;
 }
+
+.vt-info-callout,
+.vt-default-callout.vt-info-callout span{
+    border-left-color: #3bbd9b;
+}
+.vt-info-callout .vt-callout-header{
+    color: #3bbd9b;
+}
+#saveSettings{
+    float: none;
+    margin: 0 40%;
+}
+.extensionContents .extensionLink{
+    color: #3bbd9b;
+}
+input[type="checkbox"]:checked::after, #checkgreen {
+    color: #3bbd9b;
+}
+
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus,
 .text-info
@@ -258,15 +281,7 @@ a.btn.btn-gettingStarted i{
     Getting Started Widget
 ==========================*/
 
-.dashBoardContainer .dashBoardTabContents ul li[data-name="GettingStarted"]{
-    width: 100%;
-    min-height: 850px;
-    height: 100vh;
-    border-top: 1px solid #fff !important;
 
-    position: relative;
-    background:  #ebf0f9;
-}
 .need-more-help-container{
     width: 400px;
     float: right;
@@ -458,3 +473,19 @@ a.btn.btn-gettingStarted i{
     float: left;
 
 }
+ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard,
+#menubar_quickCreate{
+      padding: 9px 7px 7px !important;
+      background: #3bbd9b;
+      border-radius: 5px;
+     margin-left: 2px;
+margin-right: 2px;
+}
+a.rightside-icon-dashboard > i.fa{
+    color: #fff !important;
+}
+
+.wbox .links,
+.wbox h5{
+           color: #3bbd9b;
+             }

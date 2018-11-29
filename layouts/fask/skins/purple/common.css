@@ -9082,9 +9082,7 @@ li> a.dropdown-icon-dashboard>i{
         height: auto;
     }
 }
-ul.nav.navbar-nav>li>div.dropdown>div.dropdown-toggle>a{
-  padding: 15px 5px 10px !important;
-}
+
 a.btn.Help-btn{
     padding: 5px 5px 6px 8px;
     margin: 0px;
@@ -9143,9 +9141,7 @@ div#prefernces.tab-pane {
 span.actionImages>a{
   padding: 0px 5px;
 }
-ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard{
-      padding: 15px 5px 10px !important;
-}
+
 table.table.table-bordered.listViewEntriesTable{
   background-color: #fff !important;
 }
