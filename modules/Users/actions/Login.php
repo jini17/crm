@@ -40,25 +40,18 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 
 
     if($num_rows > 0){
-
         for ($i = 0; $i < $num_rows; $i++) {
                 $sessionID = $adb->query_result($result, $i, 'session_id');
                 $loginid = $adb->query_result($result, $i, 'login_id');
                 if ($sessionID) {
-               session_id($sessionID);            
-
+                    session_id($sessionID);            
                   session_destroy();
-
                     $time    = date("Y/m/d H:i:s");
                     $userIP = $_SERVER['REMOTE_ADDR'];          
                      // update the user login info.
                      $query = "Update vtiger_loginhistory set logout_time =?, status=? where login_id =  ?";
                      $result1 = $adb->pquery($query, array($username, 'Signed off', $loginid));
-
-
-
                 }
-
         }
                   session_start();
                     $_SESSION['multi_login'] =  "yes"; 
@@ -151,13 +144,9 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 
 
                         if(isset($_SESSION['return_params'])) {
-
-
-
-
                                 $return_params = urldecode($_SESSION['return_params']);
-                                                                     $_SESSION['logged_status'] = true;
-                                                                     $_SESSION['loggedin_now'] = true;
+                                $_SESSION['logged_status'] = true;
+                                $_SESSION['loggedin_now'] = true;
                                 header("Location: index.php?$return_params");
                                 exit();
                         } else {

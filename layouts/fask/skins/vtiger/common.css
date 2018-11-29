@@ -9143,9 +9143,7 @@ div#prefernces.tab-pane {
 span.actionImages>a{
   padding: 0px 5px;
 }
-ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard{
-      padding: 15px 5px 10px !important;
-}
+
 table.table.table-bordered.listViewEntriesTable{
   background-color: #fff !important;
 }
@@ -9533,7 +9531,26 @@ right connector from last child*/
     float: right;
 }
 
+.wbox{
+   padding-left: 10px;
+   padding-right: 10px;
+}
+.wbox{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.wbox h5{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+     border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    padding-top: 5px;
+        font-size: 13px;
+}
+.wbox .links{
+    margin-top: 10px;
 
-/*Thats all. I hope you enjoyed it.
-Thanks :)*/
+}
 

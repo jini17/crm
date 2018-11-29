@@ -279,15 +279,7 @@ a.btn.btn-gettingStarted i{
     Getting Started Widget
 ==========================*/
 
-.dashBoardContainer .dashBoardTabContents ul li[data-name="GettingStarted"]{
-    width: 100%;
-    min-height: 850px;
-    height: 100vh;
-    border-top: 1px solid #fff !important;
 
-    position: relative;
-    background:  #ebf0f9;
-}
 .need-more-help-container{
     width: 400px;
     float: right;
@@ -478,3 +470,19 @@ a.btn.btn-gettingStarted i{
     float: left;
 
 }
+
+ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard,
+#menubar_quickCreate{
+      padding: 9px 7px 7px !important;
+      background: #d971ae;
+      border-radius: 5px;
+      margin-left: 2px;
+      margin-right: 2px;
+}
+a.rightside-icon-dashboard > i.fa{
+    color: #fff !important;
+}
+.wbox .links,
+.wbox h5{
+           color: #d971ae;
+             }

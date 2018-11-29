@@ -360,7 +360,12 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         jQuery.each(items, function (i, e) {
             var item = $(this);
             var columns = parseInt(item.attr("data-sizex")) > cols ? cols : parseInt(item.attr("data-sizex"));
+            var id = item.attr("id");
             var rows = parseInt(item.attr("data-sizey"));
+            if(id == 'widget_id_152'){
+                rows = 2;
+            }          
+       
             if (item.attr("data-position") == "false") {
                 Vtiger_DashBoard_Js.gridster.add_widget(item, columns, rows);
             } else {
