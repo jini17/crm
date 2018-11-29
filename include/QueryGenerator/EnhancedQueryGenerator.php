@@ -609,7 +609,7 @@ class EnhancedQueryGenerator extends QueryGenerator
     public function getWhereClause()
     {
         global $current_user;
-
+      
         $HRModules = array('EmployeeContract', 'PassportVisa', 'Performance', 'Payslip');
         $baseModule = $this->getModule();
         $ownrecsql = '';
@@ -624,13 +624,27 @@ class EnhancedQueryGenerator extends QueryGenerator
                 }
             }
         }
+
         /*if(in_array($baseModule,$HRModules)){
                 $ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$emp_id;
         }*/
+
         if ($baseModule == 'MessageBoard') {
             $ownrecsql = ' AND ( vtiger_' . strtolower($baseModule) . '.employee_id IN (SELECT id FROM vtiger_users WHERE reports_to_id=' . $current_user->id . ')'
                 . ' OR ( vtiger_' . strtolower($baseModule) . '.employee_id =' . $current_user->id . '))';
         }
+
+        if($baseModule == 'Documents'){
+            //get Record Details 
+            if(in_array($current_user->roleid, array('H2','H12','H13','H16'))) {
+                
+                $ownrecsql = " AND ( vtiger_notes.visibility_identifier IN ('Protected','Public') OR  (vtiger_crmentity.smownerid=$current_user->id AND vtiger_notes.visibility_identifier = 'Private'))";
+                
+            } else {
+                $ownrecsql = " AND ( vtiger_notes.visibility_identifier ='Public' OR  (vtiger_crmentity.smownerid=$current_user->id AND vtiger_notes.visibility_identifier = 'Private'))"; 
+            }
+        }
+
         if ($this->query || $this->whereClause) {
 
             return $this->whereClause . $ownrecsql;

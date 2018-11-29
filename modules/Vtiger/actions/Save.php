@@ -36,6 +36,7 @@ class Vtiger_Save_Action extends Vtiger_Action_Controller {
 	}
 
 	public function process(Vtiger_Request $request) {
+		
 		try {
 			$recordModel = $this->saveRecord($request);
 			if ($request->get('returntab_label')){

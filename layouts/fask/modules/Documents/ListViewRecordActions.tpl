@@ -27,20 +27,20 @@
         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons icon">info_outline</i></a>
         <ul class="dropdown-menu animated fadeIn" style="min-height:120px!important;height:120px!important;">
             <li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="{$LISTVIEW_ENTRY->getFullDetailViewUrl()}">{vtranslate('LBL_DETAILS', $MODULE)}</a></li>
-            {if $RECORD_ACTIONS}
-				{if $RECORD_ACTIONS['edit']}
+            
+				{if $IS_MODULE_EDITABLE}
 					<li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0);" data-url="{$LISTVIEW_ENTRY->getEditViewUrl()}" name="editlink">{vtranslate('LBL_EDIT', $MODULE)}</a></li>
 				{/if}
-				{if $RECORD_ACTIONS['delete']}
+				{if $IS_MODULE_DELETABLE}
 					<li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0);" class="deleteRecordButton">{vtranslate('LBL_DELETE', $MODULE)}</a></li>
 				{/if}
-			{/if}
+			
             {assign var=RECORD_ID value=$LISTVIEW_ENTRY->getId()}
             {assign var="DOCUMENT_RECORD_MODEL" value=Vtiger_Record_Model::getInstanceById($RECORD_ID)}
             {if $DOCUMENT_RECORD_MODEL->get('filename') && $DOCUMENT_RECORD_MODEL->get('filestatus')}
                 <li><a style="width: 100%;" data-id="{$LISTVIEW_ENTRY->getId()}" name="viewfile" href="javascript:void(0)" data-filelocationtype="{$DOCUMENT_RECORD_MODEL->get('filelocationtype')}" data-filename="{$DOCUMENT_RECORD_MODEL->get('filename')}" onclick="Vtiger_Header_Js.previewFile(event)">File Preview</a></li>
             {/if}
-            {if $DOCUMENT_RECORD_MODEL->get('filename') && $DOCUMENT_RECORD_MODEL->get('filestatus') && ($DOCUMENT_RECORD_MODEL->get('filelocationtype') eq 'I' || $DOCUMENT_RECORD_MODEL->get('filelocationtype') eq 'G')}
+            {if $DOCUMENT_RECORD_MODEL->get('filename') && $DOCUMENT_RECORD_MODEL->get('filestatus') && ($DOCUMENT_RECORD_MODEL->get('filelocationtype') eq 'I' || $DOCUMENT_RECORD_MODEL->get('filelocationtype') eq 'G') && $IS_DOWNLOADABLE}
                 <li><a style="width: 100%;" data-id="{$LISTVIEW_ENTRY->getId()}" name="downloadfile" href="{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}">Download</a></li>
             {/if}
            
