@@ -1935,6 +1935,7 @@ Vtiger.Class("Calendar_Calendar_Js", {
                                 var currentDate = moment(this.intervalStart);
                                 thisInstance.fetchAgendaEvents(currentDate).then(function (agendaEvents) {
 //cleanup before render
+
                                         jQuery('.agendaListViewBody').empty();
                                         for (var key in agendaEvents) {
                                                 var container = jQuery('[data-date="' + key + '"]');
@@ -2007,3 +2008,4 @@ Vtiger.Class("Calendar_Calendar_Js", {
                 this.registerPostQuickCreateSaveEvent();
         }
 });
+

@@ -262,10 +262,17 @@ class Users_List_View extends Settings_Vtiger_List_View
         $viewer->assign('LISTVIEW_COUNT', $totalCount);
         $viewer->assign('PAGINATION', $pagination);
         // }
+
+        //check permision added by jitu@Permission
+        $IS_EDITABLE = false;
+        if($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $recordId || $currentUserModel->get('roleid')=='H12' || $currentUserModel->get('roleid')=='H13') {
+               $IS_EDITABLE = true;
+        } 
+
         $viewer->assign('MODULE_MODEL', $listViewModel->getModule());
-        $viewer->assign('IS_MODULE_EDITABLE', $listViewModel->getModule()->isPermitted('EditView'));
-        $viewer->assign('IS_MODULE_DELETABLE', $listViewModel->getModule()->isPermitted('Delete'));
-        $viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
+        $viewer->assign('IS_MODULE_EDITABLE', $IS_EDITABLE);
+        $viewer->assign('IS_MODULE_DELETABLE', $IS_EDITABLE);
+        $viewer->assign('USER_MODEL',$currentUserModel);
         $viewer->assign('SEARCH_VALUE', $searchValue);
         $viewer->assign('SEARCH_DETAILS', $searchParams);
     }

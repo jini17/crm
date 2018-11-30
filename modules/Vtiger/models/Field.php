@@ -175,8 +175,10 @@ class Vtiger_Field_Model extends Vtiger_Field {
 				 $fieldDataType = 'range';		//added by jitu@5jan2017	
 			}  else if($uiType == '2002') {		//Modified Line
 				 $fieldDataType = 'multiregion';		//Modified Line added ny jitu
-			}else if($uiType == '3995') {		//Modified Line
-				 $fieldDataType = 'Country';		//Modified Line added ny jitu
+			} else if($uiType == '3995') {		//Modified Line
+				 $fieldDataType = 'Country';	//Modified Line added ny jitu
+			} else if($uiType == '1270') {		//Added Radio Button Uitype
+				 $fieldDataType = 'radio';	//Modified Line added ny jitu
 			} else {
 				$webserviceField = $this->getWebserviceFieldObject();
 				$fieldDataType = $webserviceField->getFieldDataType();
@@ -338,7 +340,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 
 		if($fieldName == 'hdnTaxType' || ($fieldName == 'region_id' && $this->get('displaytype') == 5)) return null;
 
-		if($fieldDataType == 'picklist' || $fieldDataType == 'multipicklist') {
+		if($fieldDataType == 'picklist' || $fieldDataType == 'multipicklist' || $fieldDataType == 'radio') {
 			$fieldPickListValues = array();
 			$currentUser = Users_Record_Model::getCurrentUserModel();
 			if($this->isRoleBased()) {
@@ -608,7 +610,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		$this->fieldInfo['name'] = $this->get('name');
 		$this->fieldInfo['label'] = vtranslate($this->get('label'), $this->getModuleName());
 
-		if($fieldDataType == 'picklist' || $fieldDataType == 'multipicklist' || $fieldDataType == 'multiowner') {
+		if($fieldDataType == 'picklist' || $fieldDataType == 'multipicklist' || $fieldDataType == 'multiowner' || $fieldDataType == 'radio') {
 			$pickListValues = $this->getPicklistValues();
 			if(!empty($pickListValues)) {
 				$this->fieldInfo['picklistvalues'] = $pickListValues;
