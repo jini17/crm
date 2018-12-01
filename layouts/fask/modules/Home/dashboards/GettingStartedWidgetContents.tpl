@@ -10,59 +10,58 @@
  ********************************************************************************/
 -->*}
 
-<div class="gettingstartedWidget">
+<div class="gettingstartedWidget" style="height: 650px; overflow: scroll;">
     <div class="wbox">
-        <h5><i class="fa fa-user"></i> Employee </h5>
+        <h5><span><i class="fa fa-user"></i> Employee  &nbsp; &nbsp; </span></h5>
         <div class="clearfix"></div>
             <div class='short-text text-justify'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                Employee represent people that will be able to log into Agiliux and access records according to the permissions defined to them.
             </div>
         <div class='clearfix'></div>
-             <div class="links text-center"> <a href="index.php?module=Users&parent=Settings&view=Edit">Add</a> | <a href="">Import</a></div>
+             <div class="links text-center"> <a href="index.php?module=Users&parent=Settings&view=Edit">Add</a> | <a href="index.php?module=Users&view=Import">Import</a></div>
     </div>
     <div class="wbox">
-        <h5><i class="material-icons module-icon">contacts</i> Contact </h5>
+        <h5><span><i class="material-icons module-icon">contacts</i> Contact &nbsp;</span> </h5>
         <div class="clearfix"></div>
             <div class='short-text text-justify'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            </div>
+Contacts represent the people that are conducting business with you. Contacts is where you can keep all relevant person information, or the information of people who are related to you.            </div>
         <div class='clearfix'></div>
-             <div class="links text-center"> <a href="index.php?module=Contacts&view=Edit">Add</a> | <a href="">Import</a></div>
+             <div class="links text-center"> <a href="index.php?module=Contacts&view=Edit">Add</a> | <a href="index.php?module=Contacts&view=Import">Import</a></div>
     </div>
     <div class="wbox">
-        <h5><i class="material-icons module-icon">exit_to_app</i> Leave </h5>
+        <h5><span><i class="material-icons module-icon">exit_to_app</i> Leave &nbsp;</span> </h5>
         <div class="clearfix"></div>
             <div class='short-text text-justify'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                    Leave management smoothens the leave approval process between the employees and HR.
             </div>
         <div class='clearfix'></div>
-             <div class="links text-center"> <a href="index.php?module=Leave&view=List">Add</a> | <a href="">Import</a></div>
+             <div class="links text-center"> <a href="index.php?module=Leave&view=List">Add</a> | <a href="index.php?module=Leave&view=Import">Import</a></div>
     </div>
     <div class="wbox">
-        <h5><i class="material-icons module-icon">attach_money</i> Claim </h5>
+        <h5><span><i class="material-icons module-icon">attach_money</i> Claim &nbsp;</span> </h5>
         <div class="clearfix"></div>
             <div class='short-text text-justify'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+               Claim management smoothens the claim process between the employees and HR
             </div>
         <div class='clearfix'></div>
-             <div class="links text-center"> <a href="index.php?module=Claim&view=Edit">Add</a> | <a href="">Import</a></div>
+             <div class="links text-center"> <a href="index.php?module=Claim&view=Edit">Add</a> | <a href="index.php?module=Claim&view=Import">Import</a></div>
     </div>
     <div class="wbox">
-        <h5><i class="material-icons module-icon">receipt</i> Office Bill </h5>
+        <h5><span><i class="material-icons module-icon">receipt</i> Office Bill &nbsp;</span> </h5>
         <div class="clearfix"></div>
             <div class='short-text text-justify'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+             Office Bills module is a single access point to viewing real ­time billing information
             </div>
         <div class='clearfix'></div>
-             <div class="links text-center"> <a href="index.php?module=Bills&view=Edit">Add</a> | <a href="">Import</a></div>
+             <div class="links text-center"> <a href="index.php?module=Bills&view=Edit">Add</a> | <a href="index.php?module=Bills&view=Import">Import</a></div>
     </div>
     <div class="wbox">
-        <h5><i class="material-icons module-icon">payment</i>  Payment </h5>
+        <h5><span><i class="material-icons module-icon">payment</i>  Payment &nbsp;</span> </h5>
         <div class="clearfix"></div>
             <div class='short-text text-justify'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                The Payments module is used to track your incoming and outgoing payments.
             </div>
         <div class='clearfix'></div>
-             <div class="links text-center"> <a href="index.php?module=Payments&view=List">Add</a> | <a href="">Import</a></div>
+             <div class="links text-center"> <a href="index.php?module=Payments&view=List">Add</a> | <a href="index.php?module=Payments&view=Import">Import</a></div>
     </div>
 </div>

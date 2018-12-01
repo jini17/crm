@@ -12,8 +12,36 @@ abstract class Vtiger_Header_View extends Vtiger_View_Controller {
 
         function __construct() {
                 parent::__construct();
+                    $killed = $this->kil_user();
+                    if($killed){
+                        $param = "?parallel_logout=logout";
+                                header ('Location: index.php'.$param);
+                    }
+                  
         }
+    
+           /**
+         * Added by Khaled
+         * Check User is logged of for Multilogin
+         * @return boolean
+         */
+        public  function  kil_user(){
+            $db = PearDatabase::getInstance();
+            //$db->setDebug(true);
+            $sql = "SELECT session_id FROM `vtiger_loginhistory` WHERE `login_id` = ? AND status ='Signed off'";
+            $query = $db->pquery($sql,array($_SESSION['login_id']));
+            $num_rows = $db->num_rows($query);
+            if($num_rows > 0){
+                $session_id = $db->query_result($query, 0,"session_id");
+                  session_id($session_id);            
+                  session_destroy();
+                  return $num_rows;
+            }
+            else{
+                return $num_rows;
+            }
 
+        }
         //Note : To get the right hook for immediate parent in PHP,
         // specially in case of deep hierarchy
         /*function preProcessParentTplName(Vtiger_Request $request) {

@@ -24,42 +24,37 @@ class Users_Login_Action extends Vtiger_Action_Controller {
                 //$adb->setDebug(true);
                 $username = $request->get('username');
                 $password = $request->getRaw('password');
-
                 //echo $allowedipres;die;
                 //$allowedipres = true;
-  /** 
+                /** 
                        * Added By Khaled
                        * Kill Multi Login Session
                        */
 
-                      $adb = PearDatabase::getInstance();
-
-
-    $result 	= $adb->pquery("SELECT login_id,session_id FROM vtiger_loginhistory WHERE DATE(login_time) = CURDATE() AND user_name = ? AND status = ? ORDER BY login_id ASC", array($username, 'Signed in'));
-    $num_rows = $adb->num_rows($result);
-
-
-    if($num_rows > 0){
-        for ($i = 0; $i < $num_rows; $i++) {
-                $sessionID = $adb->query_result($result, $i, 'session_id');
-                $loginid = $adb->query_result($result, $i, 'login_id');
-                if ($sessionID) {
-                    session_id($sessionID);            
-                  session_destroy();
-                    $time    = date("Y/m/d H:i:s");
-                    $userIP = $_SERVER['REMOTE_ADDR'];          
-                     // update the user login info.
-                     $query = "Update vtiger_loginhistory set logout_time =?, status=? where login_id =  ?";
-                     $result1 = $adb->pquery($query, array($username, 'Signed off', $loginid));
+                $adb                = PearDatabase::getInstance();
+                $result            = $adb->pquery("SELECT login_id,session_id FROM vtiger_loginhistory WHERE DATE(login_time) = CURDATE() AND user_name = ? AND status = ? ORDER BY login_id ASC", array($username, 'Signed in'));
+                $num_rows   = $adb->num_rows($result);
+                if($num_rows > 0){
+                    for ($i = 0; $i < $num_rows; $i++) {
+                            $sessionID = $adb->query_result($result, $i, 'session_id');
+                            $loginid = $adb->query_result($result, $i, 'login_id');
+                            if ($sessionID) {
+                              //  session_id($sessionID);            
+                             // session_destroy();
+                                $time    = date("Y/m/d H:i:s");
+                                $userIP = $_SERVER['REMOTE_ADDR'];          
+                                 // update the user login info.
+                                 $query = "Update vtiger_loginhistory set logout_time =?, status=? where login_id =  ?";
+                                 $result1 = $adb->pquery($query, array($username, 'Signed off', $loginid));
+                            }
+                    }
+                              session_start();
+                                $_SESSION['multi_login'] =  "yes"; 
                 }
-        }
-                  session_start();
-                    $_SESSION['multi_login'] =  "yes"; 
-    }
-    else{
-          session_start();
-           $_SESSION['multi_login'] = "no";
-        }
+                else{
+                      session_start();
+                       $_SESSION['multi_login'] = "no";
+                    }
 
 
                    /** 
@@ -91,12 +86,9 @@ class Users_Login_Action extends Vtiger_Action_Controller {
 
 
                 $allowedipres = false;
-
                 $allowedipres = $this->AllowedIp($usip,$username);
-
                 if ($user->doLogin($password) && $allowedipres==true) {
                         session_regenerate_id(true); // to overcome session id reuse.
-
                         $userid = $user->retrieve_user_id($username);
                         Vtiger_Session::set('AUTHUSERID', $userid);
 
@@ -139,35 +131,30 @@ class Users_Login_Action extends Vtiger_Action_Controller {
                         $browser = Settings_MaxLogin_Module_Model::browserDetect();	
                         $moduleModel = Users_Module_Model::getInstance('Users');
                        $login_id= $moduleModel->saveLoginHistory($user->column_fields['user_name'],'Signed in', $browser, $usip);
-
+                       $_SESSION['login_id'] = $login_id;
 
 
 
                         if(isset($_SESSION['return_params'])) {
+
                                 $return_params = urldecode($_SESSION['return_params']);
                                 $_SESSION['logged_status'] = true;
                                 $_SESSION['loggedin_now'] = true;
                                 header("Location: index.php?$return_params");
                                 exit();
                         } else {
-                                                                    $_SESSION['loggedin_now'] = FALSE;
+                                $_SESSION['loggedin_now'] = FALSE;
                                 header("Location: index.php");
                                 exit();
                         }
-
                 } 
                 else if($allowedipres==false) {
                     $moduleModel->saveLoginHistory($username, 'Failed login', $browser, $usip);
-
-
                     header('Location: index.php?module=Users&parent=Settings&view=Login&error=9');
-
-
         }else{
                    //Track the login History by jitu@10-04-2015
                         $moduleModel->saveLoginHistory($username, 'Failed login', $browser, $usip);
                         header('Location: index.php?module=Users&parent=Settings&view=Login&error=1');
-
                 //	header ('Location: index.php?module=Users&parent=Settings&view=Login&error=login');
                         exit;
                 }
@@ -191,7 +178,6 @@ class Users_Login_Action extends Vtiger_Action_Controller {
             $iprest_type = $adb->query_result($result, 0, 'iprestriction_type');
 
             $usernames = explode(',', $user_name);
-
             for ($i = 0; $i<count($usernames); $i++) {
                 if (($usernames[$i] == $username || $usernames[$i] == 'All Users') && $iprest_type == 'notallowed') {
                     return false;
@@ -212,15 +198,11 @@ class Users_Login_Action extends Vtiger_Action_Controller {
                 $range .= $rangeip[$i];
         }
         $query = "SELECT ip_id,user_name,iprestriction_type FROM allowed_ip WHERE ip LIKE ? AND type = 'Range'";
-
         $result = $adb->pquery($query,array($range));
         $count = $adb->num_rows($result);
-
         $user_name = $adb->query_result($result, 0,'user_name');
         $iprest_type = $adb->query_result($result, 0, 'iprestriction_type');
-
         $usernames = explode(',', $user_name);
-
        //echo "<pre>"; print_r($iprest_type); die;
         for ($i = 0;$i< count($usernames); $i++) {
             if (($usernames[$i] == $username || $usernames[$i] == 'All Users') && $iprest_type == 'notallowed') {
@@ -231,10 +213,8 @@ class Users_Login_Action extends Vtiger_Action_Controller {
         }
 
         $querydefault = "SELECT * FROM allowed_ip_default ";
-
         $resultdefault = $adb->pquery($querydefault,array());
         $count = $adb->num_rows($resultdefault);
-
        // echo
         if($count > 0){
             $defaultvalue = $adb->query_result($resultdefault,0,'defaultvalue');

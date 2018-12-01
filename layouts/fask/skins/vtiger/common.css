@@ -9543,11 +9543,19 @@ right connector from last child*/
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px;
-     border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    
+        font-size: 13px;
+}
+.wbox h5 span{
+    
+    border-bottom: 2px solid #ccc;
     padding-bottom: 5px;
     padding-top: 5px;
-        font-size: 13px;
+}
+.wbox h5 span i{
+    padding-left: 0 !important;
+    padding-right: 5px !important;
+    font-size: 15px !important;
 }
 .wbox .links{
     margin-top: 10px;

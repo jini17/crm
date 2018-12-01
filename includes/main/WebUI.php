@@ -16,259 +16,264 @@ vimport ('includes.runtime.EntryPoint');
 
 class Vtiger_WebUI extends Vtiger_EntryPoint {
 
-	/**
-	 * Function to check if the User has logged in
-	 * @param Vtiger_Request $request
-	 * @throws AppException
-	 */
-	protected function checkLogin (Vtiger_Request $request) {
-		if (!$this->hasLogin()) {
-			$return_params = $_SERVER['QUERY_STRING'];
-			if($return_params && !$_SESSION['return_params']) {
-				//Take the url that user would like to redirect after they have successfully logged in.
-				$return_params = urlencode($return_params);
-				Vtiger_Session::set('return_params', $return_params);
-			}
-			header ('Location: index.php');
-			throw new AppException('Login is required');
-		}
-	}
+        /**
+         * Function to check if the User has logged in
+         * @param Vtiger_Request $request
+         * @throws AppException
+         */
+        protected function checkLogin (Vtiger_Request $request) {
+                               
+                               
+                if (!$this->hasLogin()) {
+                        $return_params = $_SERVER['QUERY_STRING'];
+                        if($return_params && !$_SESSION['return_params']) {
+                                                                    //Take the url that user would like to redirect after they have successfully logged in.
+                                                                    $return_params = urlencode($return_params);
+                                                                    Vtiger_Session::set('return_params', $return_params);
 
-	/**
-	 * Function to get the instance of the logged in User
-	 * @return Users object
-	 */
-	function getLogin() {
-		$user = parent::getLogin();
-		if (!$user && isset($_SESSION['authenticated_user_id'])) {
-			$userid = Vtiger_Session::get('AUTHUSERID', $_SESSION['authenticated_user_id']);
-			if ($userid && vglobal('application_unique_key')==$_SESSION['app_unique_key']) {
-				$user = CRMEntity::getInstance('Users');
-				$user->retrieveCurrentUserInfoFromFile($userid);
-				$this->setLogin($user);
-			}
-		}
-		return $user;
-	}
+                        }
+                                                            
+                        header ('Location: index.php');
+                        //throw new AppException('Login is required');
+                }
+        }
 
-	protected function triggerCheckPermission($handler, $request) {
-		$moduleName = $request->getModule();
-		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
+     
+        /**
+         * Function to get the instance of the logged in User
+         * @return Users object
+         */
+        function getLogin() {
+                $user = parent::getLogin();
+                if (!$user && isset($_SESSION['authenticated_user_id'])) {
+                        $userid = Vtiger_Session::get('AUTHUSERID', $_SESSION['authenticated_user_id']);
+                        if ($userid && vglobal('application_unique_key')==$_SESSION['app_unique_key']) {
+                                $user = CRMEntity::getInstance('Users');
+                                $user->retrieveCurrentUserInfoFromFile($userid);
+                                $this->setLogin($user);
+                        }
+                }
+                return $user;
+        }
 
-		if (empty($moduleModel)) {
-			throw new AppException(vtranslate('LBL_HANDLER_NOT_FOUND'));
-		}
+        protected function triggerCheckPermission($handler, $request) {
+                $moduleName = $request->getModule();
+                $moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 
-		$userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
-		$permission = $userPrivilegesModel->hasModulePermission($moduleModel->getId());
+                if (empty($moduleModel)) {
+                        throw new AppException(vtranslate('LBL_HANDLER_NOT_FOUND'));
+                }
 
-		if ($permission) {
-			$handler->checkPermission($request);
-			return;
-		}
-		throw new AppException(vtranslate($moduleName, $moduleName).' '.vtranslate('LBL_NOT_ACCESSIBLE'));
-	}
+                $userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
+                $permission = $userPrivilegesModel->hasModulePermission($moduleModel->getId());
 
-	protected function triggerPreProcess($handler, $request) {
-		if($request->isAjax()){
-			return true;
-		}
-		$handler->preProcess($request);
-	}
+                if ($permission) {
+                        $handler->checkPermission($request);
+                        return;
+                }
+                throw new AppException(vtranslate($moduleName, $moduleName).' '.vtranslate('LBL_NOT_ACCESSIBLE'));
+        }
 
-	protected function triggerPostProcess($handler, $request) {
-		if($request->isAjax()){
-			return true;
-		}
-		$handler->postProcess($request);
-	}
+        protected function triggerPreProcess($handler, $request) {
+                if($request->isAjax()){
+                        return true;
+                }
+                $handler->preProcess($request);
+        }
 
-	function isInstalled() {
-		global $dbconfig;
-		if (empty($dbconfig) || empty($dbconfig['db_name']) || $dbconfig['db_name'] == '_DBC_TYPE_') {
-			return false;
-		}
-		return true;
-	}
+        protected function triggerPostProcess($handler, $request) {
+                if($request->isAjax()){
+                        return true;
+                }
+                $handler->postProcess($request);
+        }
 
-	function process (Vtiger_Request $request) {
-		Vtiger_Session::init();
-		global $site_URL, $adb;
+        function isInstalled() {
+                global $dbconfig;
+                if (empty($dbconfig) || empty($dbconfig['db_name']) || $dbconfig['db_name'] == '_DBC_TYPE_') {
+                        return false;
+                }
+                return true;
+        }
+
+        function process (Vtiger_Request $request) {
+                Vtiger_Session::init();
+                global $site_URL, $adb;
 
 
-		//Added by jitu to stop multiple access . at a time only one can access in same browser.
-		global $application_unique_key;
-		if(isset($_SESSION["authenticated_user_id"]) 
-				&& $_SESSION["app_unique_key"] != $application_unique_key){ 
-			Vtiger_Session::destroy();
-			header("location:index.php");
-		}
-		//End here 
-		
-		//added by jitu@secondcrm for session inactivity handling		
-		$timein			= Vtiger_Session::get('timein');	
-		$maxstay 		= $_SESSION['sessionout']*60;
+                //Added by jitu to stop multiple access . at a time only one can access in same browser.
+                global $application_unique_key;
+                if(isset($_SESSION["authenticated_user_id"]) 
+                                && $_SESSION["app_unique_key"] != $application_unique_key){ 
+                        Vtiger_Session::destroy();
+                        header("location:index.php");
+                }
+                //End here 
 
-		if($maxstay =='' || $maxstay==0){
-			$maxstay = 15*60;
-		}	
+                //added by jitu@secondcrm for session inactivity handling		
+                $timein			= Vtiger_Session::get('timein');	
+                $maxstay 		= $_SESSION['sessionout']*60;
 
-		//$stayduration = $_SESSION['sessionout']];		
-		$session_life = time() - $timein;		
-			
-		if($session_life > $maxstay && $timein!='') { 
-			//$adb->setDebug(true); 
-			$moduleModel = Users_Module_Model::getInstance('Users');
-			$moduleModel->saveLogoutHistory();		
-		    Vtiger_Session::destroy();	
-		    header("location:".$site_URL."/index.php?module=Users&parent=Settings&view=Login&error=7"); 
-		    exit;		
-  		}		
-		Vtiger_Session::set('timein', time());		
-		//end here		
-	
+                if($maxstay =='' || $maxstay==0){
+                        $maxstay = 15*60;
+                }	
 
-		// Better place this here as session get initiated
-		//skipping the csrf checking for the forgot(reset) password 
-		if($request->get('mode') != 'reset' && $request->get('action') != 'Login' && $request->get('mode') != 'fromMig')
-			require_once 'libraries/csrf-magic/csrf-magic.php';
+                //$stayduration = $_SESSION['sessionout']];		
+                $session_life = time() - $timein;		
 
-		// TODO - Get rid of global variable $current_user
-		// common utils api called, depend on this variable right now
-		$currentUser = $this->getLogin();
-		vglobal('current_user', $currentUser);
-		
-		// Check we are being connected to on the right host and protocol
-		global $site_URL;
-		$request_URL = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on')? 'https': 'http')."://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-		if ($site_URL && stripos($request_URL, $site_URL) !== 0){
-			header("Location: $site_URL",TRUE,301);
-			exit;
-		}
+                if($session_life > $maxstay && $timein!='') { 
+                        //$adb->setDebug(true); 
+                        $moduleModel = Users_Module_Model::getInstance('Users');
+                        $moduleModel->saveLogoutHistory();		
+                    Vtiger_Session::destroy();	
+                    header("location:".$site_URL."/index.php?module=Users&parent=Settings&view=Login&error=7"); 
+                    exit;		
+                }		
+                Vtiger_Session::set('timein', time());		
+                //end here		
 
-		global $default_language;
-		vglobal('default_language', $default_language);
-		$currentLanguage = Vtiger_Language_Handler::getLanguage();
-		vglobal('current_language',$currentLanguage);
-		$module = $request->getModule();
-		$qualifiedModuleName = $request->getModule(false);
 
-		if ($currentUser && $qualifiedModuleName) {
-			$moduleLanguageStrings = Vtiger_Language_Handler::getModuleStringsFromFile($currentLanguage,$qualifiedModuleName);
-			if(isset($moduleLanguageStrings['languageStrings'])){
-				vglobal('mod_strings', $moduleLanguageStrings['languageStrings']);
-			}
-		}
+                // Better place this here as session get initiated
+                //skipping the csrf checking for the forgot(reset) password 
+                if($request->get('mode') != 'reset' && $request->get('action') != 'Login' && $request->get('mode') != 'fromMig')
+                        require_once 'libraries/csrf-magic/csrf-magic.php';
 
-		if ($currentUser) {
-			$moduleLanguageStrings = Vtiger_Language_Handler::getModuleStringsFromFile($currentLanguage);
-			if(isset($moduleLanguageStrings['languageStrings'])){
-				vglobal('app_strings', $moduleLanguageStrings['languageStrings']);
-			}
-		}
+                // TODO - Get rid of global variable $current_user
+                // common utils api called, depend on this variable right now
+                $currentUser = $this->getLogin();
+                vglobal('current_user', $currentUser);
 
-		$view = $request->get('view');
-		$action = $request->get('action');
-		$response = false;
+                // Check we are being connected to on the right host and protocol
+                global $site_URL;
+                $request_URL = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on')? 'https': 'http')."://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+                if ($site_URL && stripos($request_URL, $site_URL) !== 0){
+                        header("Location: $site_URL",TRUE,301);
+                        exit;
+                }
 
-		//Not able to open other pages when heavy duty view is open.
-		//heavy duty report views are open and to navigate to other module list view / detail view the page loading almost freezes page.
-		if ($module == 'Reports' && !$view) {
-			Vtiger_Session::readonly();
-		}
+                global $default_language;
+                vglobal('default_language', $default_language);
+                $currentLanguage = Vtiger_Language_Handler::getLanguage();
+                vglobal('current_language',$currentLanguage);
+                $module = $request->getModule();
+                $qualifiedModuleName = $request->getModule(false);
 
-		try {
-			if($this->isInstalled() === false && $module != 'Install') {
-				header('Location:index.php?module=Install&view=Index');
-				exit;
-			}
+                if ($currentUser && $qualifiedModuleName) {
+                        $moduleLanguageStrings = Vtiger_Language_Handler::getModuleStringsFromFile($currentLanguage,$qualifiedModuleName);
+                        if(isset($moduleLanguageStrings['languageStrings'])){
+                                vglobal('mod_strings', $moduleLanguageStrings['languageStrings']);
+                        }
+                }
 
-			if(empty($module)) {
-				if ($this->hasLogin()) {
-					$defaultModule = vglobal('default_module');
-					$moduleModel = Vtiger_Module_Model::getInstance($defaultModule);
-					if(!empty($defaultModule) && $defaultModule != 'Home' && $moduleModel && $moduleModel->isActive()) {
-						$module = $defaultModule; $qualifiedModuleName = $defaultModule; $view = 'List';
-						if($module == 'Calendar') { 
-							// To load MyCalendar instead of list view for calendar
-							//TODO: see if it has to enhanced and get the default view from module model
-							$view = 'Calendar';
-						}
-					} else {
-						$module = 'Home'; $qualifiedModuleName = 'Home'; $view = 'DashBoard';
-					}
-				} else {
-					$module = 'Users'; $qualifiedModuleName = 'Settings:Users'; $view = 'Login';
-				}
-				$request->set('module', $module);
-				$request->set('view', $view);
-			}
+                if ($currentUser) {
+                        $moduleLanguageStrings = Vtiger_Language_Handler::getModuleStringsFromFile($currentLanguage);
+                        if(isset($moduleLanguageStrings['languageStrings'])){
+                                vglobal('app_strings', $moduleLanguageStrings['languageStrings']);
+                        }
+                }
 
-			if (!empty($action)) {
-				$componentType = 'Action';
-				$componentName = $action;
-			} else {
-				$componentType = 'View';
-				if(empty($view)) {
-					$view = 'Index';
-				}
-				$componentName = $view;
-			}
-			$handlerClass = Vtiger_Loader::getComponentClassName($componentType, $componentName, $qualifiedModuleName);
-			$handler = new $handlerClass();
+                $view = $request->get('view');
+                $action = $request->get('action');
+                $response = false;
 
-			if ($handler) {
-				vglobal('currentModule', $module);
+                //Not able to open other pages when heavy duty view is open.
+                //heavy duty report views are open and to navigate to other module list view / detail view the page loading almost freezes page.
+                if ($module == 'Reports' && !$view) {
+                        Vtiger_Session::readonly();
+                }
 
-				// Ensure handler validates the request
-				$handler->validateRequest($request);
+                try {
+                        if($this->isInstalled() === false && $module != 'Install') {
+                                header('Location:index.php?module=Install&view=Index');
+                                exit;
+                        }
 
-				if ($handler->loginRequired()) {
-					$this->checkLogin ($request);
-				}
+                        if(empty($module)) {
+                                if ($this->hasLogin()) {
+                                        $defaultModule = vglobal('default_module');
+                                        $moduleModel = Vtiger_Module_Model::getInstance($defaultModule);
+                                        if(!empty($defaultModule) && $defaultModule != 'Home' && $moduleModel && $moduleModel->isActive()) {
+                                                $module = $defaultModule; $qualifiedModuleName = $defaultModule; $view = 'List';
+                                                if($module == 'Calendar') { 
+                                                        // To load MyCalendar instead of list view for calendar
+                                                        //TODO: see if it has to enhanced and get the default view from module model
+                                                        $view = 'Calendar';
+                                                }
+                                        } else {
+                                                $module = 'Home'; $qualifiedModuleName = 'Home'; $view = 'DashBoard';
+                                        }
+                                } else {
+                                        $module = 'Users'; $qualifiedModuleName = 'Settings:Users'; $view = 'Login';
+                                }
+                                $request->set('module', $module);
+                                $request->set('view', $view);
+                        }
 
-				//TODO : Need to review the design as there can potential security threat
-				$skipList = array('Users', 'Home', 'CustomView', 'Import', 'Export', 'Inventory', 'Vtiger', 'PriceBooks', 'Migration', 'Install','ExtensionStore');
+                        if (!empty($action)) {
+                                $componentType = 'Action';
+                                $componentName = $action;
+                        } else {
+                                $componentType = 'View';
+                                if(empty($view)) {
+                                        $view = 'Index';
+                                }
+                                $componentName = $view;
+                        }
+                        $handlerClass = Vtiger_Loader::getComponentClassName($componentType, $componentName, $qualifiedModuleName);
+                        $handler = new $handlerClass();
 
-				if(!in_array($module, $skipList) && stripos($qualifiedModuleName, 'Settings') === false) {
-					$this->triggerCheckPermission($handler, $request);
-				}
+                        if ($handler) {
+                                vglobal('currentModule', $module);
 
-				// Every settings page handler should implement this method
-				if(stripos($qualifiedModuleName, 'Settings') === 0 || ($module == 'Users')) {
-					$handler->checkPermission($request);
-				}
+                                // Ensure handler validates the request
+                                $handler->validateRequest($request);
 
-				$notPermittedModules = array('ModComments','Integration','DashBoard');
+                                if ($handler->loginRequired()) {
+                                        $this->checkLogin ($request);
+                                }
 
-				if(in_array($module, $notPermittedModules) && $view == 'List'){
-					header('Location:index.php?module=Home&view=DashBoard');
-				}
+                                //TODO : Need to review the design as there can potential security threat
+                                $skipList = array('Users', 'Home', 'CustomView', 'Import', 'Export', 'Inventory', 'Vtiger', 'PriceBooks', 'Migration', 'Install','ExtensionStore');
 
-				$this->triggerPreProcess($handler, $request);
-				$response = $handler->process($request);
-				$this->triggerPostProcess($handler, $request);
-			} else {
-				throw new AppException(vtranslate('LBL_HANDLER_NOT_FOUND'));
-			}
-		} catch(Exception $e) {
-			if ($view) {
-				// log for development
-				global $log;
-				$log->debug($e->getMessage().":".$e->getTraceAsString());
+                                if(!in_array($module, $skipList) && stripos($qualifiedModuleName, 'Settings') === false) {
+                                        $this->triggerCheckPermission($handler, $request);
+                                }
 
-				$viewer = new Vtiger_Viewer();
-				$viewer->assign('MESSAGE', $e->getMessage());
-				$viewer->view('OperationNotPermitted.tpl', 'Vtiger');
-			} else {
-				$response = new Vtiger_Response();
-				$response->setEmitType(Vtiger_Response::$EMIT_JSON);
-				$response->setError($e->getMessage());
-			}
-		}
+                                // Every settings page handler should implement this method
+                                if(stripos($qualifiedModuleName, 'Settings') === 0 || ($module == 'Users')) {
+                                        $handler->checkPermission($request);
+                                }
 
-		if ($response) {
-			$response->emit();
-		}
-	}
+                                $notPermittedModules = array('ModComments','Integration','DashBoard');
+
+                                if(in_array($module, $notPermittedModules) && $view == 'List'){
+                                        header('Location:index.php?module=Home&view=DashBoard');
+                                }
+
+                                $this->triggerPreProcess($handler, $request);
+                                $response = $handler->process($request);
+                                $this->triggerPostProcess($handler, $request);
+                        } else {
+                                throw new AppException(vtranslate('LBL_HANDLER_NOT_FOUND'));
+                        }
+                } catch(Exception $e) {
+                        if ($view) {
+                                // log for development
+                                global $log;
+                                $log->debug($e->getMessage().":".$e->getTraceAsString());
+
+                                $viewer = new Vtiger_Viewer();
+                                $viewer->assign('MESSAGE', $e->getMessage());
+                                $viewer->view('OperationNotPermitted.tpl', 'Vtiger');
+                        } else {
+                                $response = new Vtiger_Response();
+                                $response->setEmitType(Vtiger_Response::$EMIT_JSON);
+                                $response->setError($e->getMessage());
+                        }
+                }
+
+                if ($response) {
+                        $response->emit();
+                }
+        }
 }
