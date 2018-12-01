@@ -645,7 +645,14 @@ class Vtiger_Util_Helper {
                                                 }
                         $groupConditionInfo = array();
                         $groupColumnsInfo = array();
+
                         $groupConditionGlue = $glueOrder[$groupIterator];
+
+                        //added by jitu@Search by multiple conditions
+                        if($glueOrder[$groupIterator]==''){
+                           $groupConditionGlue = 'OR';     
+                        } //end here
+                                                
                         foreach($groupInfo as $fieldSearchInfo){
                                    $advFilterFieldInfoFormat = array();
                                    $fieldName = $fieldSearchInfo[0];

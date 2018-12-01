@@ -86,8 +86,21 @@ class Users_Detail_View extends Users_PreferenceDetail_View {
 
         public function process(Vtiger_Request $request) {
                 $viewer = $this->getViewer($request);
-                $viewer->assign('CURRENT_USER_MODEL', Users_Record_Model::getCurrentUserModel());
+                $currentUserModel = Users_Record_Model::getCurrentUserModel();
+                
+                $viewer->assign('CURRENT_USER_MODEL', $currentUserModel);
                 $viewer->view('UserViewHeader.tpl', $request->getModule());
+
+                //check permision added by jitu@Permission
+                $recordId = $request->get('record');
+                $IS_EDITABLE = false;
+                if($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $recordId || in_array($currentUserModel->get('roleid'), array('H12','H13','H16','H2'))) {
+                       $IS_EDITABLE = true;
+                      
+                }
+                
+                $viewer->assign('IS_EDITABLE', $IS_EDITABLE);
+				$viewer->assign('IS_DELETABLE', $IS_EDITABLE);
                 parent::process($request);
         }
 

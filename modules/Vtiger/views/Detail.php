@@ -87,7 +87,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 					if($record == $recordId) {
 						$found = true;
 					}
-					//If record not found then we are assiging previousRecordId
+					//If record not found then we are assigning previousRecordId
 					//assuming next record will get matched
 					if(!$found) {
 						$prevRecordId = $record;
