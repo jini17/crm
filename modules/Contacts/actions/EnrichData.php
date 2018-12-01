@@ -128,7 +128,7 @@ class Contacts_EnrichData_Action extends Vtiger_Action_Controller
 					$lastname = $personDetails['details']['name']['family'];
 					
 					if (!empty($lastname = $personDetails['details']['name']['family']))
-						$contact->column_fields['lastname']; 
+						$contact->column_fields['lastname'] = $lastname; 
 				
 				}			
 
