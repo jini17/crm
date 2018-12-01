@@ -61,10 +61,10 @@ class Contacts_EnrichData_Action extends Vtiger_Action_Controller
      */
     function enrichData(Vtiger_Request $request)
     {
-
+       
 		require_once('modules/Contacts/Contacts.php');						
 
-        global $adb,$current_user,$VTIGER_BULK_SAVE_MODE;
+        global $adb,$current_user,$VTIGER_BULK_SAVE_MODE, $root_directory;
 
         $VTIGER_BULK_SAVE_MODE 	= true;
         $message 				= "success"; //Default Value for message
@@ -125,7 +125,10 @@ class Contacts_EnrichData_Action extends Vtiger_Action_Controller
 
 					$firstname = $contact->column_fields['firstname'] 	= $personDetails['details']['name']['given'] . " " . $personDetails['details']['name']['middle'];	
 
-					$lastname = $contact->column_fields['lastname'] 	= $personDetails['details']['name']['family'];
+					$lastname = $personDetails['details']['name']['family'];
+					
+					if (!empty($lastname = $personDetails['details']['name']['family']))
+						$contact->column_fields['lastname']; 
 				
 				}			
 
@@ -174,6 +177,14 @@ class Contacts_EnrichData_Action extends Vtiger_Action_Controller
 
 				$adb->pquery("UPDATE vtiger_crmentity SET label = '$firstname $lastname' WHERE crmid = ?", array($contactid));
 
+				$file  = "Response: \n\n";
+				$file .= print_r($personDetails, true); 
+
+				$file .= "\n\nCRM MAPPING: \n\n";
+				$file .= print_r($contact->column_fields, true); 
+
+				file_put_contents($root_directory . "/Enrichment Logs/" . $contactid . '_' . date("d.m.Y H:i:s") . '.log', $file);
+
 			}
 
 			else {				
@@ -199,5 +210,6 @@ class Contacts_EnrichData_Action extends Vtiger_Action_Controller
 }
 
 ?>
+
 
 
