@@ -44,6 +44,35 @@
    margin-bottom: 0px !important;
    border: 1px solid transparent !important;
    }
+   #multilogin {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 999; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-box-modal-dialog{
+    width: 30%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    
+}
+.modal-box-header h4{
+    font-size: 15px;
+}
+.modal-box-body h5{
+    font-size: 13px;
+}
+.modal-box-body {
+    font-size: 12px;
+}
 </style>
 <div style="    background-color: #fff;
    display: block;
@@ -77,6 +106,28 @@
                      <div class="box-wrapper">
                         <div class="login-box-container">
                            <div class="right-bar">
+                               {if $smarty.get.parallel_logout eq "logout" }
+                                     <div id="multilogin" class="modal-box">
+                                    <div class="modal-box-modal-dialog">
+                                      <!-- Modal content-->
+                                      <div class="modal-box-content">
+                                        <div class="modal-box-header">
+                                            <h4><i class="fa fa-power-off"></i> Previous login session auto logout.</h4>
+                                            <button type="button" class="close" data-dismiss="modal" style="margin-top: -29px;">&times;</button>
+
+                                        </div>
+                                        <div class="modal-box-body">
+                                            <h5>Additional information:</h5>
+                                            <ul style="margin-left: 20px;">           
+                                                <li> You may receive this message if there are currently multiple sessions logged in with this username & password. </li>
+                                                <li> Someone has logged in as this user from a different computer or browser window. Only one user session is allowed.</li>
+                                                <li> As a consequence, the other session has been terminated.</li>
+                                            </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                     {/if}
                               <span class="login-page-title">
                               {if $LOGINPAGE['wcmsg'] eq ''}{vtranslate('LBL_WELCOME_SECONDCRM',$MODULE)}{else}{$LOGINPAGE['wcmsg']}{/if}
                               </span>
@@ -234,7 +285,9 @@
 <br /><br />
 <script>
    jQuery(document).ready(function(){
-
+jQuery("button.close").on("click",function(){
+    jQuery("#multilogin").addClass("hide")
+});
        var validationMessage = jQuery('#validationMessage');
        var forgotPasswordDiv = jQuery('#forgotPasswordDiv');
    
