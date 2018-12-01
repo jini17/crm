@@ -52,11 +52,12 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
                         $detailViewLinks = $detailViewModel->getDetailViewLinks($detailViewLinkParams);
 
                         //check permision added by jitu@Permission
-                        if($currentUser->isAdminUser() == true || $currentUser->get('id') == $recordId || $currentUser->get('roleid')=='H12' || $currentUser->get('roleid')=='H13') {
+                        $IS_EDITABLE = false;
+                        if($currentUser->isAdminUser() == true || $currentUser->get('id') == $recordId || in_array($currentUser->get('roleid'), array('H12','H13','H16','H2'))) {
                                $IS_EDITABLE = true;
                               
+                        }
 
-                        } 
                         if($currentUser->get('id') == $recordId){
                              $LEAVE_CLAIM_ALLOW = true;
                         }   
