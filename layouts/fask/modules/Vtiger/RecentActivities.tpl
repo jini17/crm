@@ -97,7 +97,7 @@
                                             {/if}
                                             {if $FIELDMODEL->get('postvalue') neq '' && !($FIELDMODEL->getFieldInstance()->getFieldDataType() eq 'reference' && $FIELDMODEL->get('postvalue') eq '0')}
                                                 <div class="update-to"><span class="field-name">{vtranslate('LBL_TO')}</span>&nbsp;<em style="white-space:pre-line;">{Vtiger_Util_Helper::toVtiger6SafeHTML($FIELDMODEL->getDisplayValue(decode_html($FIELDMODEL->get('postvalue'))))}</em>
-                                            z    </div>z
+                                               </div>
                                             {/if}
                                             </div>
                                         {/if}

@@ -200,7 +200,6 @@ class Contacts_EnrichData_Action extends Vtiger_Action_Controller
 		else 
 			$message = "Primary Email field is empty, cannot perform data enrichment";
 
-
 		// Sending Response to CRM	
 		$response 	= new Vtiger_Response();
 		$response->setResult(array("message" => $message, "reload" => $reload,"firstname" => $firstname, "lastname" => $lastname));

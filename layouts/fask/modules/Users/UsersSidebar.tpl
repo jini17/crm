@@ -11,90 +11,9 @@
 {assign var=DEPT_LIST value=Users_Record_Model::get_department()}
 <div class="settingsgroup hidden-sm hidden-xs" style="overflow: scroll; margin-top:0; padding-top:0">
     <div class='clearfix'></div>
-   <div class='col-xs-12  {if  $smarty.get.view neq 'List'   }hide{/if}'>
-        <h4> Filter </h4>
-        <!-- Latest compiled and minified Bootstrap CSS -->
-        <div class="panel-group panel-filter" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseOne">
-                            Gender <i class="fa fa-minus pull-right"></i>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <ul class='gender list-unstyled'>
-                            <li><input type="checkbox" name="gender" value="Male"/>&nbsp;Male</li>
-                            <li><input type="checkbox" name="gender" value="Female"/> Female</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseTwo">
-                            Birthday <i class="fa fa-plus pull-right"></i>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <ul class='gender list-unstyled'>
-                            <li><input type="checkbox" name="birthday" value="thisweek">&nbsp;This Week</li>
-                            <li><input type="checkbox" name="birthday" value="thismonth"/> This Month</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseThree">
-                            Department<i class="fa fa-plus pull-right"></i>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <ul class='department list-unstyled'>
-                            {foreach item=DEPT from=$DEPT_LIST}
-                                <li><input type="checkbox" name="department" value="{$DEPT}"/> {$DEPT}</li>
-                            {/foreach}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseFour">
-                            New Joinee <i class="fa fa-plus pull-right"></i>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <ul class='gender list-unstyled'>
-                            <li><input type="checkbox" name="date_joined" value="thisweek">&nbsp;This Week</li>
-                            <li><input type="checkbox" name="date_joined" value="thismonth"/> &nbsp;This Month
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-        <br  class='{if $smarty.get.module eq 'users' AND  $smarty.get.view eq 'list' }hide{/if}'><div class="clearfix"></div>
-        <div class="panel-group  {if $smarty.get.view eq 'List'  }hide{/if}" id="accordion" role="tablist"  {$smarty.get.module} {$smarty.get.view} aria-multiselectable="true" >
+   
+        <br  class='{if  $smarty.get.view eq 'list' }hide{/if}'><div class="clearfix"></div>
+        <div class="panel-group  {$smarty.get.view} {if $smarty.get.view eq 'List'  }hide{/if}" id="accordion" role="tablist"  {$smarty.get.module} {$smarty.get.view} aria-multiselectable="true" >
                 <div class="settingsgroup-panel panel panel-default">
 
                         {foreach item=BLOCK_MENUS key=BLOCK_NAME from=$SETTINGS_MENU_LIST}
@@ -176,7 +95,6 @@
                                                         {foreach item=URL key=MENU from=$BLOCK_MENUS}
                                                                 {assign var=MENU_URL value='#'}
                                                                 {assign var=MENU_LABEL value=$MENU}
-
                                                                 {if $MENU eq 'My Preferences'}
                                                                         {assign var=MENU_URL value=$USER_MODEL->getPreferenceDetailViewUrl()}
                                                                 {elseif $MENU eq 'Calendar Settings'}
@@ -188,7 +106,6 @@
                                                                 {elseif is_string($URL)}
                                                                         {assign var=MENU_URL value=$URL}
                                                                 {/if}
-
                                                                 <li><a href="{$MENU_URL}" class="menuItemLabel {if $ACTIVE_BLOCK['menu'] eq $MENU} settingsgroup-menu-color {/if}">{vtranslate($MENU_LABEL,$QUALIFIED_MODULE)}</a></li>
                                                         {/foreach}
                                                 </ul>

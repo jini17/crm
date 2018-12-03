@@ -123,7 +123,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
                 $viewer->assign('LANGUAGE_RECORD_MODEL',$LangModuleModel);
                 $viewer->assign('SKILL_RECORD_MODEL',$SkillModuleModel);
                 $viewer->assign('USERID',$recordId);
-                $viewer->assign('USER_MODEL', Users_SkillsRecord_Model::getCurrentUserModel());
+                $viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
                 $viewer->assign('USER_SOFTSKILL_LIST',$LangUserModel->getUserSoftSkillList($recordId));
                 $viewer->assign('USER_SKILL_CLOUD',$SkillUserModel->getUserSkillCloud($recordId));
                 $viewer->assign('SKILL_LIST',$SkillUserModel->getALLSKills($recordId));
