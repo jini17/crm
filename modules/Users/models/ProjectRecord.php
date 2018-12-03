@@ -136,7 +136,11 @@ class Users_ProjectRecord_Model extends Users_Record_Model {
                                 $userWEProjectList[$j]['title'] = $db->query_result($result2, $j, 'project_title');
                                 $userWEProjectList[$j]['designation'] = $db->query_result($result2, $j, 'occupation');
                                 $userWEProjectList[$j]['project_start_date'] = $db->query_result($result2, $j, 'project_start_date');
-                                $userWEProjectList[$j]['project_url'] = $db->query_result($result2, $j, 'project_url');
+                                $projectUrl = $db->query_result($result2, $j, 'project_url');
+                                if(stripos($projectUrl,'http://') ===false){
+                                    $projectUrl = 'http://'.$projectUrl;
+                                }
+                                $userWEProjectList[$j]['project_url'] = $projectUrl;
                                 $userWEProjectList[$j]['description'] = $db->query_result($result2, $j, 'project_description');
                                 $userWEProjectList[$j]['isview'] = $db->query_result($result2, $j, 'ispublic');
                              }

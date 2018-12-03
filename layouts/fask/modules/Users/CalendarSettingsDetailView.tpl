@@ -31,7 +31,7 @@
                         <form class="form-horizontal" id="changePassword" name="changePassword" method="post" action="index.php" novalidate="novalidate">
                             <input type="hidden" name="__vtrftk" value="sid:fe329e04a69675cb4c85e8737687ca187f65a1e2,1543035448">
                             <input type="hidden" name="module" value="Users">
-                            <input type="hidden" name="userid" value="1">
+                            <input type="hidden" name="userid" value="{$USER_MODEL->get('id')}">
                             <div name="massEditContent">   
                                 <div class="form-group">
                                     <label class="control-label fieldLabel col-sm-5">New Password&nbsp;<span class="redColor">*</span></label>
