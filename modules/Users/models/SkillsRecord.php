@@ -253,8 +253,8 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
                                 $resultskill = $db->pquery("INSERT INTO secondcrm_skillmaster(skill_title) VALUES(?)",array($skillTxt));
                                 $resultskillID =  $db->pquery("SELECT LAST_INSERT_ID() AS 'skill_id'");
                                 $skill_id = $db->query_result($resultskillID, 0, 'skill_id');
-                                $params = array($skill_id, $userid);
-                                $result = $db->pquery("INSERT INTO secondcrm_skills SET skill_id = ?, user_id = ?", array($params));				
+                                $params = array($skill_id, $userid, $skillLabel);
+                                $result = $db->pquery("INSERT INTO secondcrm_skills SET skill_id = ?, user_id = ?, skill_label=?", array($params));				
                                 $return = 1;
                         } else {
                                 $return = 3;
