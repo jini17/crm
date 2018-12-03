@@ -18,7 +18,7 @@
         <!--<a id="menubar_quickCreate_Education" class="quickCreateModule" data-name="Education" data-url="index.php?module=Education&view=QuickCreateAjax" href="javascript:void(0)">Add Education</a>-->
         
         <div class="btn-group pull-right allprofilebtn">
-            {if $USER_MODEL->get('id') eq $USERID}
+                    {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13" OR $USER_MODEL->isAdminUser() }
             <button type="button" class="btn btn-primary"onclick="Users_Education_Js.addEducation('{$CREATE_EDUCATION_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_EDUCATION', $MODULE)}</strong></button>
             {/if}
         </div>
@@ -63,7 +63,7 @@
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['area_of_study']}</td>
                         <td class="listTableRow medium" valign="top">{$USER_EDUCATION['description']}</td>
                         <td class="listTableRow medium" valign="top">{vtranslate($PERMISSION,$MODULE)}</td>
-                        {if $USER_MODEL->get('id') eq $USERID}
+                                 {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13" OR $USER_MODEL->isAdminUser() }
                             <td class="listTableRow medium" width="5%" valign="top">
                                 <div class="pull-right actions">
                                     <span class="actionImages">

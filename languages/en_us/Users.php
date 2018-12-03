@@ -32,6 +32,7 @@ $languageStrings = array(
 	'LBL_SKILL_LANG'=>'Skill Language',
 	'LBL_LEAVE'=>'Leave',
 	'LBL_CLAIM'=>'Claims',
+	'LBL_ADD_CONTACT'=>'Add Contact',
                       'LBL_JOB_TYPE' => 'Job Type',
 	'LBL_USER_EMERGENCY'=>'Emergency Contacts',
 	'LBL_ADD_NEW_EDUCATION'=>'Add New Education',

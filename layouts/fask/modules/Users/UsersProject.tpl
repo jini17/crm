@@ -15,7 +15,7 @@
         {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}  
 
         <div class="btn-group pull-right allprofilebtn">
-            {if $USER_MODEL->get('id') eq $USERID}
+                     {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13" OR $USER_MODEL->isAdminUser() }
             <button type="button" class="btn btn-primary" onclick="Users_Project_Js.addProject('{$CREATE_PROJECT_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_NEW_PROJECT', $MODULE)}</strong></button>
             {/if}
         </div>
@@ -64,7 +64,7 @@
                                        
                                          <td class="" valign="top" style="width:40%;">{$USER_PROJECT['description']}</td>
                                           <td class="" valign="top" style="width:10%;"><a href="{$USER_PROJECT['project_url']}" class="btn btn-success">click to visit</a></td>
-                                          {if $USER_MODEL->get('id') eq $USERID}
+                                                  {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13" OR $USER_MODEL->isAdminUser() }
                                         <td class=""  valign="top">
                                             <div class="pull-right actions">
                                                 <span class="actionImages">
