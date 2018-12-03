@@ -45,7 +45,8 @@ $languageStrings = array(
 	'LBL_TIMEPERIOD'=>'Time Duration',
 	'LBL_DESIGNATION'=>'Designation',
 	'LBL_PROJECT_TITLE'=>'Project Title',
-	'LBL_OCCUPATION'=>'Occupation',
+	'LBL_OCCUPATION'=>'Designation',
+	'LBL_PLS_SELECT'=>'Please Select Designation',
 	'LBL_PROJECT_URL'=>'Project URL',
 	'LBL_PROFICIENCY'=>'Proficiency',
 	'LBL_ADD_SKILL'=>'Add Skill',
@@ -312,7 +313,7 @@ $languageStrings = array(
 	
 
 	//Added By jitu@secondcrm.com onm 20-10-2014 
-    'LBL_MAX_CHAR_TXTAREA'=>'Maximum Limit 300 character',
+    'LBL_MAX_CHAR_TXTAREA'=>'Maximum Limit 300 characters',
     'LBL_ADD_NEW_EDUCATION'=>'Add Education',
     'LBL_EDUCATION_ISVIEW' => 'Permission',
     'LBL_EDUCATION'=> 'Education', 	
@@ -363,7 +364,7 @@ $languageStrings = array(
 'LBL_USER_PROJECTS' => 'Projects',
 'LBL_ADD_NEW_PROJECT'=> 'Add Project',
 'LBL_PROJECT_TITLE' =>'Project Title',
-'LBL_OCCUPATION'=> 'Occupation',
+
 'LBL_DATE'=>'Date',
 'LBL_PROJECT_MONTH'=>'Month',
 'LBL_PROJECT_YEAR'=>'Year',

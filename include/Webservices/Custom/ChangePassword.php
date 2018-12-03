@@ -29,7 +29,8 @@ function vtws_changePassword($id, $oldPassword, $newPassword, $confirmPassword, 
 	if($idComponents[1] == $user->id || is_admin($user)) {
 		$newUser = new Users();
 		$newUser->retrieve_entity_info($idComponents[1], 'Users');
-		if(!is_admin($user)) {
+		//As Required per UI in Calendar Settings Under User Profile
+		/*if(!is_admin($user)) {
 			if(empty($oldPassword)) {
 				throw new WebServiceException(WebServiceErrorCode::$INVALIDOLDPASSWORD, 
 					vtws_getWebserviceTranslatedString('LBL_'.
@@ -40,7 +41,7 @@ function vtws_changePassword($id, $oldPassword, $newPassword, $confirmPassword, 
 					vtws_getWebserviceTranslatedString('LBL_'.
 							WebServiceErrorCode::$INVALIDOLDPASSWORD));
 			}
-		}
+		}*/
 		if(strcmp($newPassword, $confirmPassword) === 0) {
 			$db = PearDatabase::getInstance();
 			$db->dieOnError = true;
