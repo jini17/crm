@@ -25,8 +25,9 @@
     $smarty.get.view eq 'Calendar'     OR
     $smarty.get.view eq 'Extension'     OR
     $smarty.get.view eq $USER_MODEL->get('id'))  *}
-     
+    {assign var=DEPT_LIST value=Users_Record_Model::get_department()}
     {if $USER_MODEL->isAdminUser() 
+           AND   $smarty.get.view neq 'List' 
             AND ($smarty.get.view eq 'PreferenceDetail'  OR
                 $smarty.get.module eq 'Roles'     OR
                 $smarty.get.module eq 'SharingAccess'     OR
@@ -42,11 +43,13 @@
                 $smarty.get.module eq 'MenuEditor'     OR
                 $smarty.get.view eq 'Calendar'     OR
                 $smarty.get.view eq 'Extension'  
-                OR $smarty.get.record neq $USER_MODEL->get('id')   )
+                OR $smarty.get.record neq $USER_MODEL->get('id')  
+               
+                 )
           }
         {assign var=SETTINGS_MODULE_MODEL value= Settings_Vtiger_Module_Model::getInstance()}
         {assign var=SETTINGS_MENUS value=$SETTINGS_MODULE_MODEL->getMenus()}
-        {assign var=DEPT_LIST value=Users_Record_Model::get_department()}
+    
         <div class="settingsgroup hidden-sm hidden-xs " style='padding-top:0; margin-top:0;'>
 
 
@@ -133,6 +136,7 @@
             <br><br>
         </div>
     {else}
+           {include file='layouts/fask/modules/Settings/Vtiger/SidebarFilter.tpl'}
         {include file='layouts/fask/modules/Users/UsersSidebar.tpl'}
     {/if}
 {/strip}

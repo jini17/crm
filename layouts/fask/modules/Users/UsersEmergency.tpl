@@ -1,24 +1,24 @@
 {strip}
+  {assign var=total value=$USER_EMERGENCY_CONTACTS|@count}
 
 {assign var=EDIT_EMERGENCY_URL value=$EMERGENCY_RECORD_MODEL->getEditEmergencyUrl()}
 <div id="UserEmergencyContainer">
 	<div class="btn-group pull-right allprofilebtn">
-        {if $USER_MODEL->get('id') eq $USERID}
-			<button type="button" class="btn btn-primary hide" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}');">
-                                                                            <i class="fa fa-pencil"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_EDIT_CONTACT', $MODULE)}</strong>
+                 {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13" OR $USER_MODEL->isAdminUser() }
+			<button type="button" class="btn btn-primary {if $total neq 0}hide{/if}" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}');">
+                                                                            <i class="fa fa-pencil"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_CONTACT', $MODULE)}</strong>
                                                                 </button>
         {/if}                                                        
 		</div>
         <div class="clearfix"></div>
-        {assign var=total value=$USER_EMERGENCY_CONTACTS|@count}
-
+      
 {foreach item=contact key=k from=$USER_EMERGENCY_CONTACTS}
         <div class="block block_LBL_USER_EMERGENCY">
                             <div>
                                 <div class="col-md-6">
                                 <h5>{vtranslate('Emergency Contacts', $MODULE)}</h5>
                                 </div>
-                            {if $USER_MODEL->get('id') eq $USERID}
+                                     {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13" OR $USER_MODEL->isAdminUser() }
                                 <div class="col-md-6">
                                     <span class="pull-right">
                                       {if $total lt '5'}  <a href="#" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}');"><li class="fa fa-plus-circle"></li></a> &nbsp; {/if}

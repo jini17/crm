@@ -48,23 +48,7 @@
                                                                 </select>
                                                         </div>
                                                 </div>
-                                <div class="col-md-12" style="margin-bottom: 15px;">
-                                        <div class="col-md-4">
-                                                                <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                                        <span class="redColor">*</span>&nbsp;{vtranslate('LBL_PROFICIENCY', $QUALIFIED_MODULE)}
-                                                                </label>
-                                                        </div>
-                                                        <div class="controls fieldValue col-md-8">
-                                                                <select class="select2 inputElement" onchange="updateSelectBox('institution_name','institution_nametxt');" name="skill_label" id="institution_name" data-rule-required = "true">
-                                                                        <option value="LBL_BEGINNER_LABEL">{vtranslate('LBL_BEGINNER_LABEL',$QUALIFIED_MODULE)}</option>
-                                                                        <option value="LBL_INTERMEDIATE_LABEL">{vtranslate('LBL_INTERMEDIATE_LABEL',$QUALIFIED_MODULE)}</option>
-                                                                         <option value="LBL_EXPERT_LABEL">{vtranslate('LBL_EXPERT_LABEL',$QUALIFIED_MODULE)}</option>
-                                                                <option value="0">{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> 	
-                                                                </select>
-                                                        </div>
-                                                </div>
-
-                                                <div class="col-md-12" style="margin-bottom: 15px;">
+                                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                                         <div class="col-md-4">
                                                                         <label class="control-label fieldLabel" style="text-align: right;float: right;"></label>
                                                         </div>
@@ -75,6 +59,23 @@
                                                                 </span>
                                                         </div>
                                                 </div>
+                                        <div class="col-md-12" style="margin-bottom: 15px;">
+                                                <div class="col-md-4">
+                                                                <label class="control-label fieldLabel" style="text-align: right;float: right;">
+                                                                        <span class="redColor">*</span>&nbsp;{vtranslate('LBL_PROFICIENCY', $QUALIFIED_MODULE)}
+                                                                </label>
+                                                        </div>
+                                                        <div class="controls fieldValue col-md-8">
+                                                                <select class="select2 inputElement" onchange="updateSelectBox('institution_name','institution_nametxt');" name="skill_label" id="institution_name" data-rule-required = "true">
+                                                                        <option value="LBL_BEGINNER_LABEL">{vtranslate('LBL_BEGINNER_LABEL',$QUALIFIED_MODULE)}</option>
+                                                                        <option value="LBL_INTERMEDIATE_LABEL">{vtranslate('LBL_INTERMEDIATE_LABEL',$QUALIFIED_MODULE)}</option>
+                                                                         <option value="LBL_EXPERT_LABEL">{vtranslate('LBL_EXPERT_LABEL',$QUALIFIED_MODULE)}</option>
+                                                              <!--  <option value="0">{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> -->
+                                                                </select>
+                                                        </div>
+                                                </div>
+
+                                               
                                         </div>
                         <!--end-->
 
