@@ -44,6 +44,35 @@
    margin-bottom: 0px !important;
    border: 1px solid transparent !important;
    }
+   #multilogin {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 999; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-box-modal-dialog{
+    width: 30%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    
+}
+.modal-box-header h4{
+    font-size: 15px;
+}
+.modal-box-body h5{
+    font-size: 13px;
+}
+.modal-box-body {
+    font-size: 12px;
+}
 </style>
 <div style="    background-color: #fff;
    display: block;
@@ -77,6 +106,28 @@
                      <div class="box-wrapper">
                         <div class="login-box-container">
                            <div class="right-bar">
+                               {if $smarty.get.parallel_logout eq "logout" }
+                                     <div id="multilogin" class="modal-box">
+                                    <div class="modal-box-modal-dialog">
+                                      <!-- Modal content-->
+                                      <div class="modal-box-content">
+                                        <div class="modal-box-header">
+                                            <h4><i class="fa fa-power-off"></i> Previous login session auto logout.</h4>
+                                            <button type="button" class="close" data-dismiss="modal" style="margin-top: -29px;">&times;</button>
+
+                                        </div>
+                                        <div class="modal-box-body">
+                                            <h5>Additional information:</h5>
+                                            <ul style="margin-left: 20px;">           
+                                                <li> You may receive this message if there are currently multiple sessions logged in with this username & password. </li>
+                                                <li> Someone has logged in as this user from a different computer or browser window. Only one user session is allowed.</li>
+                                                <li> As a consequence, the other session has been terminated.</li>
+                                            </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                     {/if}
                               <span class="login-page-title">
                               {if $LOGINPAGE['wcmsg'] eq ''}{vtranslate('LBL_WELCOME_SECONDCRM',$MODULE)}{else}{$LOGINPAGE['wcmsg']}{/if}
                               </span>
@@ -147,7 +198,7 @@
                                           </div>
                                        </div>
                                     </div>
-                                    
+                                 </form>
                                     <!--<div class="sc-media">
                                        added by jitu@Demo for different edition -
                                        <div class="col-sm-9" style="display:inline;">
@@ -164,10 +215,27 @@
                                               </div>
                                        </div>
                                        end here -->
+                                     <div class="form-check">
+                                         <a class="forgotPasswordLink pull-right">Forgot password?</a>
+                                     </div>
                               </div>
-                              <div class="form-check">
-                              <a class="forgotPasswordLink pull-right">Forgot password?</a>
-                              </div> 
+
+                               <div id="forgotPasswordDiv" class="hide">
+                                   <form  action="forgotPassword.php" method="POST" id="forgetform">
+                                       <div class="control-group">
+                                           <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                                           <input type="text" class="input-group p-3" id="username" placeholder="Username" name="username">
+                                       </div>
+                                       <div class="control-group">
+                                           <label class="sr-only" for="inlineFormInputGroup">Email</label>
+                                           <input type="email" class="input-group p-3" id="emailId" placeholder="Email" name="emailId">
+                                       </div>
+                                       <div class="control-group ">
+                                           <button type="button" class="button btn btn-primary forgot-submit-btn">Submit</button>
+                                       </div>
+                                       <a class="purple forgotPasswordLink pull-right">Back</a>
+                                   </form>
+                               </div>
                             
                               <div id="social">
   <div id="container">
@@ -202,24 +270,9 @@
                                     
                                        <!-- Start Social Media Link --> 
                                     </div>   
-                              </form>
+
                            </div>
-                           <div id="forgotPasswordDiv" class="hide">
-                              <form  action="forgotPassword.php" method="POST" id="forgetform">
-                                 <div class="form-group">
-                                    <label class="sr-only" for="inlineFormInputGroup">Username</label>
-                                    <input type="text" class="form-control" id="username" placeholder="Username" name="username">
-                                 </div>
-                                 <div class="form-group">
-                                    <label class="sr-only" for="inlineFormInputGroup">Email</label>
-                                    <input type="email" class="form-control" id="emailId" placeholder="Email" name="emailId">
-                                 </div>
-                                 <div class="text-center">
-                                    <button type="button" class="button buttonPurple forgot-submit-btn">Submit</button>
-                                 </div>
-                                 <a class="purple forgotPasswordLink pull-right">Back</a>
-                              </form>
-                           </div>
+
                         </div>
                      </div>
                   </div>
@@ -232,37 +285,28 @@
 <br /><br />
 <script>
    jQuery(document).ready(function(){
-       scrollx = jQuery(window).outerWidth();
-       window.scrollTo(scrollx,0);
-       slider = jQuery('.bxslider').bxSlider({
-           auto: true,
-           pause: 4000,
-           randomStart : true,
-           autoHover: true
-       });
-   
-       jQuery('.bx-prev, .bx-next, .bx-pager-item').live('click',function(){ slider.startAuto(); });
-   
-   
+jQuery("button.close").on("click",function(){
+    jQuery("#multilogin").addClass("hide")
+});
        var validationMessage = jQuery('#validationMessage');
        var forgotPasswordDiv = jQuery('#forgotPasswordDiv');
    
        var loginFormDiv = jQuery('#loginFormDiv');
        loginFormDiv.find('#password').focus();
-   
-       loginFormDiv.find('a').click(function () { 
+
+       loginFormDiv.on('click','.forgotPasswordLink',function () {
            loginFormDiv.toggleClass('hide');
            forgotPasswordDiv.toggleClass('hide');
            validationMessage.addClass('hide');
        });
-   
-       forgotPasswordDiv.find('a').click(function () {
+
+       forgotPasswordDiv.on('click','.forgotPasswordLink',function () {
            loginFormDiv.toggleClass('hide');
            forgotPasswordDiv.toggleClass('hide');
            validationMessage.addClass('hide');
        });
-   
-       loginFormDiv.find('button').on('click', function () {
+
+       loginFormDiv.on('click','button', function () {
            var username = loginFormDiv.find('#username').val();
            var password = jQuery('#password').val();
            var result = true;
@@ -279,18 +323,18 @@
            }
            return result;
        });
-   
-       forgotPasswordDiv.find('button').on('click', function () { 
+
+       forgotPasswordDiv.on('click','.forgot-submit-btn', function () {
            var username = jQuery('#forgotPasswordDiv #username').val();
            var email = jQuery('#emailId').val();
-   
+
            var email1 = email.replace(/^\s+/, '').replace(/\s+$/, '');
            var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/;
            var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/;
-   
+
            var result = true;
            var errorMessage = '';
-           if (username === '') { 
+           if (username === '') {
                errorMessage = 'Please enter valid username';
                result = false;
            } else if (!emailFilter.test(email1) || email == '') {
@@ -307,6 +351,7 @@
            }
            return result;
        });
+
        jQuery('input').blur(function (e) {
            var currentElement = jQuery(e.currentTarget);
            if (currentElement.val()) {

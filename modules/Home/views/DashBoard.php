@@ -20,10 +20,11 @@ class Home_DashBoard_View extends Vtiger_DashBoard_View {
                 $moduleName = $request->getModule();
 
                 $jsFileNames = array(
-                        "modules.Users.resources.Leave",
                         "modules.Users.resources.Claim",
+                        "modules.Users.resources.Leave",
+                        
                 );
-
+                
                 $jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
                 $headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
                 return $headerScriptInstances;

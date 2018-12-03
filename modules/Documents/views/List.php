@@ -265,9 +265,23 @@ class Documents_List_View extends Vtiger_List_View {
 			$viewer->assign('LISTVIEW_COUNT', $totalCount);
 		}
 
+		 //check permision added by jitu@Permission
+        $IS_EDITABLE = true;
+        $IS_DELETEABLE = true;
+        $IS_DOWNLOAD = true;
+        $currentUserModel = Users_Record_Model::getCurrentUserModel();
+        if(!$currentUserModel->isAdminUser() || $currentUserModel->get('id') != $recordId || !in_array($currentUserModel->get('roleid'), array('H12','H13','H2'))) {
+               $IS_EDITABLE = false;
+               $IS_DOWNLOAD = false;
+        } 
+        if(!$currentUserModel->isAdminUser() || $currentUserModel->get('id') != $recordId) {
+               $IS_DELETEABLE = false;
+        } 
+
 		$viewer->assign('IS_CREATE_PERMITTED', $listViewModel->getModule()->isPermitted('CreateView'));
-		$viewer->assign('IS_MODULE_EDITABLE', $listViewModel->getModule()->isPermitted('EditView'));
-		$viewer->assign('IS_MODULE_DELETABLE', $listViewModel->getModule()->isPermitted('Delete'));
+		$viewer->assign('IS_MODULE_EDITABLE', $IS_EDITABLE);
+		$viewer->assign('IS_MODULE_DELETABLE', $IS_DELETEABLE);
+		$viewer->assign('IS_DOWNLOAD', $IS_DOWNLOAD);
 		$viewer->assign('SEARCH_DETAILS', $searchParams);
 		$viewer->assign('LIST_VIEW_MODEL', $listViewModel);
 		$viewer->assign('NO_SEARCH_PARAMS_CACHE', $request->get('nolistcache'));

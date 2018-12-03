@@ -71,9 +71,6 @@
                         {else}
                                 <p class="current-filter-name filter-name pull-left cursorPointer {if $smarty.request.view eq 'Edit' or $RECORD}hidden-xs{/if}" title="{$CVNAME}"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}&app={$SELECTED_MENU_CATEGORY}'>&nbsp;&nbsp;{vtranslate($CVNAME,'Vtiger')}&nbsp;&nbsp;</a> </p>
                         {/if}
-
-
-
                         {/if}
                         {assign var=SINGLE_MODULE_NAME value='SINGLE_'|cat:$MODULE}
                         {if $RECORD and $smarty.request.view eq 'Edit'}
@@ -106,7 +103,7 @@
 
                                 <div class="col-xs-12">
                                         <!-- added by jitu@28Dec2016-->
-                                        <div style="text-align:center;display:block;width:100%;margin:0 auto;padding:2px;">
+                                        <div style="text-align:center;display:block;width:100%;margin:0 auto;padding-top:10px;">
                                             {vtranslate('LBL_LAST_LOGINTIME')} {$LAST_LOGIN_TIME} {vtranslate('LBL_USERIP')} {$LAST_USER_IP}
                                         </div>
                                         <!--end here -->
@@ -148,21 +145,17 @@
                                                 {/if}
                                         {/foreach}
                                         {if $MODULE_SETTING_ACTIONS|@count gt 0}
-                                                                <button type="button" class="btn module-buttons dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                        <span class="hidden-xs hidden-sm" aria-hidden="true" title="{vtranslate('LBL_SETTINGS', $MODULE)}">&nbsp;{vtranslate('LBL_CUSTOMIZE', 'Reports')}</span><i class="material-icons">settings</i> 
-                                                                </button>
-                                                                <ul class="detailViewSetting dropdown-menu pull-right animated fadeIn">
-                                                                        {foreach item=SETTING from=$MODULE_SETTING_ACTIONS}
-                                                                                <li id="{$MODULE_NAME}_listview_advancedAction_{$SETTING->getLabel()}"><a href={$SETTING->getUrl()}>{vtranslate($MODULE_NAME, $MODULE_NAME)} {vtranslate($SETTING->getLabel(), $MODULE_NAME)}</a></li>
-                                                                        {/foreach}
-                                                                </ul>
+                                                <button type="button" class="btn module-buttons dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                        <span class="hidden-xs hidden-sm" aria-hidden="true" title="{vtranslate('LBL_SETTINGS', $MODULE)}">&nbsp;{vtranslate('LBL_CUSTOMIZE', 'Reports')}</span><i class="material-icons">settings</i> 
+                                                </button>
+                                                <ul class="detailViewSetting dropdown-menu pull-right animated fadeIn">
+                                                        {foreach item=SETTING from=$MODULE_SETTING_ACTIONS}
+                                                                <li id="{$MODULE_NAME}_listview_advancedAction_{$SETTING->getLabel()}"><a href={$SETTING->getUrl()}>{vtranslate($MODULE_NAME, $MODULE_NAME)} {vtranslate($SETTING->getLabel(), $MODULE_NAME)}</a></li>
+                                                        {/foreach}
+                                                </ul>
                                         {/if}
                                         <!-- Added By Khaled  -->
-                                        <a class='btn btn-default btn-gettingStarted text-center'>
-                                                <i class="fa fa-rocket"  aria-hidden="true"></i>&nbsp;Getting Started
-                                                <!-- HELP POP UP-->
-                                
-                                        </a>
+                               
                                         <a class='btn btn-danger Help-btn text-center'>
                                                 <i class="glyphicon glyphicon-question-sign"></i>&nbsp;Help
                                         </a>
@@ -174,6 +167,7 @@
                                         
         </div>
 <!-- HELP POP UP - Added By Khaled-->
+ {if $MODULE eq 'Home'  AND   $first_time_login == 'yes' }
 <div id="myModal" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
 
@@ -203,14 +197,7 @@
                         <p>
                            Key concept of Agiliux is around enhancing office productivity. Agiliux makes businesses agile, which means can do things faster and digital transformation is the keyhole here.
                         </p>
-                        <ul class="list-inline pull-right">
-                            <li>
-                                <button class="btn btn-primary pull-right" data-dismiss="modal" > Skip  </button>
-                            </li>
-                            <li>
-                                    <button class="btn btn-primary pull-right"> Getting Started </button>
-                            </li>
-                        </ul>
+                       
                       </div>
                   </div>
 
@@ -220,9 +207,8 @@
                      </div>
                      <div class="col-md-6">
                          <p>
-                            Agiliux offers full spectrum of solutions –from setting up a
-                            foundation to advance digital automation, ensuring seamless transformation journey (End to end)    </p>
-                         <div class="clearfix" style="height: 30px;"></div>
+                            Agiliux offers full spectrum of solutions –from setting up a  foundation to advance digital automation, ensuring seamless transformation journey (End to end)    </p>
+                         <div class="clearfix" style="height: 10px;"></div>
                          <ul>
                              <li> Consulting </li>
                              <li> Software</li>
@@ -230,12 +216,12 @@
                              <li> Data Migration </li>
                              <li> Training and Ongoing Support </li>
                          </ul>
-                             <div class="clearfix" style="height: 30px;"></div>
+                             <div class="clearfix" style="height: 10px;"></div>
                          <p>
                                 <strong>Features of Agiliux: </strong>
                                High level – there are 3 main areas that we focus on
                          </p>
-                         <div class="clearfix"style="height: 30px;">
+                         <div class="clearfix"style="height: 10px;">
                             <ul>
                                 <li> Employee Management </li>
                                 <li> Office Automation </li>
@@ -243,19 +229,13 @@
                             </ul>  
                      </div>   
                          <div class="clearfix" style="height: 50px;"></div>
-                     <ul class="list-inline pull-right">
-                            <li>
-                                <button class="btn btn-primary pull-right" data-dismiss="modal" > Skip  </button>
-                            </li>
-                            <li>
-                                    <button class="btn btn-primary pull-right" data-slide="next"> Next </button>
-                            </li>
-                        </ul>
+                     
                   </div>
                  </div>
                   <div class="item slide3">
                       <div class="carousel-caption d-none d-md-block heading">
                          <h4 class="modal-title">Hi..!  Happy to have you on-board </h4>
+                         <div class="clearfix" style="height: 10px"></div>
                          <h1 class="text-center"> Are you new to use a CRM system?</h1>
                        </div>
                       <div class="clearfix" style="height: 80px;"></div>
@@ -271,18 +251,27 @@
                       </div> 
                       <div class="clearfix" style="height: 50px;"></div>
                       <div class="col-md-6 slide-footer"> 
-                          <i class="fa fa-question img-circle pull-left" style="border: 1px solid #ccc; padding: 5px; 15px; width:30px; height: 30px; text-align:center"> </i>
-                          <strong> Have some more question to ask? </strong> Write to us <br />
-                          <a href="#" class="text-primary" style="padding: 10px; font-size: 18px;"> support@agiliux.com</a>
+                          <i class="fa fa-question img-circle pull-left text-center" style=" padding: 5px 15px; width:30px; height: 30px; text-align:center"> </i>
+                          <strong>Have some more question to ask? </strong> <br /> Write to us <br />
+                          <a href="#" class="text-primary text-left" style="padding: 0; font-size: 18px;"> support@agiliux.com</a>
                       </div>
                       <div class="col-md-6 slide-footer"> 
-                          <i class="fa fa-file-word-o  img-circle pull-left"  style="border: 1px solid #ccc; padding: 5px; 15px; width:30px; height: 30px;"> </i> &nbsp;&nbsp;
-                          <strong> Want to know more about CRM? </strong> Checkout our articals here<br />
-                          <a href="#" class="text-primary" style="padding: 10px; font-size: 18px;"> support@agiliux.com</a>
+                          <i class="fa fa-file-word-o  img-circle pull-left text-center"  style=" padding: 5px 15px; width:30px; height: 30px;"> </i>
+                          <strong>Want to know more about CRM? </strong><br /> Checkout our articles here<br />
+                          <a href="#" class="text-primary text-left" style="padding: 0; font-size: 18px;"> support@agiliux.com</a>
                       </div>
                       <div class="clearfix"></div>
                   </div>
               </div>
+                 <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
         </div>
       {*  <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -291,13 +280,45 @@
 
     </div>
   </div>
+      {/if}
+      {if $MULTI_LOGIN eq 'yes'}
+      <div id="multilogin" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4><i class="fa fa-power-off"></i> Previous login session auto logout.</h4>
+                <button type="button" class="close" data-dismiss="modal" style="margin-top: -29px;">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <h5>Additional information:</h5>
+                <ul style="margin-left: 20px;">           
+                    <li> You may receive this message if there are currently multiple sessions logged in with this username & password. </li>
+                    <li> Someone has logged in as this user from a different computer or browser window. Only one user session is allowed.</li>
+                    <li> As a consequence, the other session has been terminated.</li>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/if}
+      
         {if $FIELDS_INFO neq null}
                 <script type="text/javascript">
+                    
                     jQuery(document).ready(function() {
+                        
                         jQuery('#myModal').modal('show');
                         $('button[data-dismiss="modal"]').click(function() {
                                 $('#myModal').modal('hide');
                          });
+                        
+                           jQuery('#multilogin').modal('show');
+                        $('#multilogin button[data-dismiss="modal"]').click(function() {
+                                $('#multilogin').modal('hide');
+                         });
+                     
                       });
                       
                         var uimeta = (function () {

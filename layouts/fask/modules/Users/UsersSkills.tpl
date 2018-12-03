@@ -61,10 +61,12 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 {assign var=CREATE_SKILL_URL value=$LANGUAGE_RECORD_MODEL->getCreateSkillUrl()}
 {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
         <div class="btn-group pull-right allprofilebtn">
+          {if $USER_MODEL->get('id') eq $USERID}
             <button type="button" class="btn btn-primary" onclick="Users_Skills_Js.addLanguage('{$CREATE_LANGUAGE_URL}&userId={$USERID}');">
                 <i class="fa fa-plus"></i>&nbsp;&nbsp;
                 <strong>{vtranslate('LBL_ADD_LANGUAGE', $MODULE)}</strong>
             </button>
+           {/if} 
         </div>
         <div class="clearfix"></div>
                     <div class="block listViewContentDiv" id="listViewContents" >
@@ -97,14 +99,20 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                         {/if}    
                                     <tr>
                                         <td class="medium" valign="top">{$USER_LANGUAGE['language']}</td>
-                                        <td class="medium" valign="top">                                  
-                                                <div class="progress">
-                                                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar"
+                                        <td class="medium" valign="top">      
+                                            <style>
+                                                .progress-bar-color-{$USER_LANGUAGE['proficiency']|replace:' ':'_'}{
+                                                    background-color:   {$USER_LANGUAGE['color']}  !important;
+                                                }
+                                            </style>
+                                                <div class="progress" s>
+                                                <div class="progress-bar progress-bar-color-{$USER_LANGUAGE['proficiency']|replace:' ':'_'} progress-bar-striped"  role="progressbar" 
                                                 aria-valuenow="{$ACCURACY}" aria-valuemin="0" aria-valuemax="100" style="width:{$ACCURACY}%">
-                                                         {$USER_LANGUAGE['proficiency']}
+                                                         {$USER_LANGUAGE['proficiency']}   
                                                 </div>
                                               </div>
                                         </td>
+                                        {if $USER_MODEL->get('id') eq $USERID}
                                         <td class="medium" width="5%" valign="top">
                                             <div class="pull-right actions">
                                                 <span class="actionImages">
@@ -114,7 +122,8 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                                     </a>
                                                 </span>
                                             </div>
-                                        </td>    
+                                        </td> 
+                                        {/if}   
                                     </tr>
                                     {/foreach}
                                 </tbody>
@@ -127,8 +136,9 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 <!--- Start of Skill Container-->
 <div id="SkillContainer" >
     <div class="btn-group pull-right allprofilebtn">
-
+      {if $USER_MODEL->get('id') eq $USERID}
         <button type="button" class="btn btn-primary pull-right" onclick="Users_Skills_Js.addSkill('{$CREATE_SKILL_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_SKILL', $MODULE)}</strong></button>
+     {/if}   
     </div>
     <div class="clearfix"></div>
     <div class="block listViewContentDiv" id="listViewContents" >
@@ -148,7 +158,7 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                     {elseif $LABEL eq 'LBL_INTERMEDIATE_LABEL'}
                                          {assign var=ACCURACY value= "70"}
                                     {elseif $LABEL eq 'LBL_EXPERT_LABEL'}
-                                         {assign var=ACCURACY value= "70"}     
+                                         {assign var=ACCURACY value= "100"}     
                                     {else}
                                           {assign var=ACCURACY value= "0"}
                                     {/if}
@@ -157,9 +167,13 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                         {$SKILL['skill_title']}
                                         </td>
                                         <td> 
-                                          
+                                          <style>
+                                                .progress-bar-color-{$SKILL['skill_label']}{
+                                                    background-color:   {$SKILL['color']}  !important;
+                                                }
+                                            </style>
                                             <div class="progress">
-                                                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar"
+                                                <div class="progress-bar progress-bar-color-{$SKILL['skill_label']} progress-bar-striped" role="progressbar"
                                                 aria-valuenow="{$ACCURACY}" aria-valuemin="0" aria-valuemax="100" style="width:{$ACCURACY}%">
                                                                      {vtranslate($LABEL,$MODULE)}
                                                 </div>

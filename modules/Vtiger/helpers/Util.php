@@ -645,7 +645,14 @@ class Vtiger_Util_Helper {
                                                 }
                         $groupConditionInfo = array();
                         $groupColumnsInfo = array();
+
                         $groupConditionGlue = $glueOrder[$groupIterator];
+
+                        //added by jitu@Search by multiple conditions
+                        if($glueOrder[$groupIterator]==''){
+                           $groupConditionGlue = 'OR';     
+                        } //end here
+                                                
                         foreach($groupInfo as $fieldSearchInfo){
                                    $advFilterFieldInfoFormat = array();
                                    $fieldName = $fieldSearchInfo[0];
@@ -743,7 +750,8 @@ class Vtiger_Util_Helper {
 
         /*start edited by fadzil 19/9/14*/
     public static function getAllSkins(){
-        return array('curiousblue'          => '#3498DB',
+        return array(  'blue' =>"#2f5597",
+                                'curiousblue'          => '#3498DB',
                                 'mariner'        => '#2980B9',
                                 'turquoise'     => '#1ABC9C',
                                 'mountainmeadow' =>  '#16A085',
@@ -754,7 +762,11 @@ class Vtiger_Util_Helper {
                                 'concrete' =>  '#95A5A6',
                                 'abestos' =>  '#95A5A6',
                                 'sherpa' =>   '#4A6A77',
-                                'metalslate' =>  '#435E6F'
+                                'metalslate' =>  '#435E6F',
+                                'purple' =>  '#d971ae',
+                                'yellow' =>  '#f6bb43',                              
+                                "green"=> "#3bbd9b"    
+            
             );
 
                 /*'alphagrey' => '#666666',	'softed'	=> '#1560BD',	'bluelagoon'=> '#204E81',

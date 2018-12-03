@@ -32,7 +32,7 @@ class VtigerWebserviceObject{
 	private static $_fromNameCache = array();
 		
 	static function fromName($adb,$entityName){
-		
+	  
 		$rowData = false;
 		
 		// If the information not available in cache?

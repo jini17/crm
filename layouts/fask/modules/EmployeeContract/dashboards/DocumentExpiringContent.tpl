@@ -45,7 +45,8 @@
 
                         </div>
                 {/foreach}
-
+<div class="clearfix"></div>
+                        <a href="index.php?module=EmployeeContract&view=List&block=15&fieldid=53" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
 
 <br /><br />
 {else}

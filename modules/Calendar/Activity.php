@@ -38,7 +38,7 @@ class Activity extends CRMEntity {
 	var $sortby_fields = Array('subject','due_date','date_start','smownerid','activitytype','lastname');	//Sorting is added for due date and start date
 
 	// This is used to retrieve related vtiger_fields from form posts.
-	var $additional_column_fields = Array('assigned_user_name', 'assigned_user_id', 'contactname', 'contact_phone', 'contact_email', 'parent_name');
+	var $additional_column_fields = Array('assigned_user_name', 'assigned_user_id','employee_id','first_name', 'contactname', 'contact_phone', 'contact_email', 'parent_name');
 
 	/**
 	 * Mandatory table for supporting custom fields.
@@ -57,6 +57,7 @@ class Activity extends CRMEntity {
 	   'End Time'=>Array('activity','time_end'),
 	   'Recurring Type'=>Array('recurringevents'=>'recurringtype'),
 	   'Assigned To'=>Array('crmentity'=>'smownerid'),
+		'Assigned By'=>Array('crmentity'=>'employee_id'),
 	   'Contact Name'=>Array('contactdetails'=>'lastname')
 	   );
 
@@ -86,10 +87,12 @@ class Activity extends CRMEntity {
 	   'Start Date & Time'=>'date_start',
 	   'End Date & Time'=>'due_date',
 	   'Recurring Type'=>'recurringtype',
+	   'Assigned By'=>'employee_id',
 	   'Assigned To'=>'assigned_user_id',
 	   'Start Date'=>'date_start',
 	   'Start Time'=>'time_start',
 	   'End Date'=>'due_date',
+
 	   'End Time'=>'time_end');
 
 	   var $list_link_field= 'subject';

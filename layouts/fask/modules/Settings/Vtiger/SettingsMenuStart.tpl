@@ -62,12 +62,12 @@
         <div class="module-nav clearfix settingsNav hidden-sm hidden-xs" id="modnavigator">
     <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 15px;left:0; z-index: 999" title="Left Panel Show/Hide"><span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>
 
-            <div class=" height100Per sidebar-essentials">
+            <div class=" height100Per sidebar-essentials {if ($smarty.get.view eq 'PreferenceDetail' OR  $smarty.get.view eq 'Detail') AND $USER_MODEL->get('roleid') eq 'H15'} hide {/if}">
                 {include file="modules/Settings/Vtiger/Sidebar.tpl"}
             </div>
         </div>
 
-<div id="sidebar-essentials" class="sidebar-essentials visible-xs visible-sm">
+<div id="sidebar-essentials" class="sidebar-essentials visible-xs visible-sm {if $smarty.get.view eq 'PreferenceDetail' AND $USER_MODEL->get('roleid') eq 'H15'} hide {/if}">
         <div class="col-xs-12 text-center visible-xs visible-sm" style="margin-top: 40px;margin-bottom:20px;">
         <a class="btn btn-info" onclick="$('.sidebar-menu-u, .settingsNav').toggleClass('hidden-xs hidden-sm');  $('.settingsNav').find('.settingsgroup').toggleClass('hidden-xs hidden-sm');" style=" width: 100%">Sidebar 
         &nbsp;<span class="toggleButton"><i class="ti-angle-right"></i></span></a>
@@ -148,4 +148,4 @@
         </div>
     </div></div>
 
-        <div class="settingsPageDiv content-area clearfix">
+        <div class="settingsPageDiv content-area clearfix {if ($smarty.get.view eq 'PreferenceDetail' OR  $smarty.get.view eq 'Detail') AND $USER_MODEL->get('roleid') eq 'H15'} full-width {/if}">

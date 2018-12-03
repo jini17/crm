@@ -8,13 +8,93 @@
 ************************************************************************************}
 {strip}
 {assign var=SETTINGS_MENU_LIST value=Settings_Vtiger_Module_Model::getSettingsMenuListForNonAdmin()}
-
-<div class="settingsgroup hidden-sm hidden-xs" style="overflow: scroll">
-         <div class="col-xs-12 text-center visible-xs visible-sm" style="margin-top: 20px;margin-bottom:20px;">
-
+{assign var=DEPT_LIST value=Users_Record_Model::get_department()}
+<div class="settingsgroup hidden-sm hidden-xs" style="overflow: scroll; margin-top:0; padding-top:0">
+    <div class='clearfix'></div>
+   <div class='col-xs-12  {if  $smarty.get.view neq 'List'   }hide{/if}'>
+        <h4> Filter </h4>
+        <!-- Latest compiled and minified Bootstrap CSS -->
+        <div class="panel-group panel-filter" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseOne">
+                            Gender <i class="fa fa-minus pull-right"></i>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <ul class='gender list-unstyled'>
+                            <li><input type="checkbox" name="gender" value="Male"/>&nbsp;Male</li>
+                            <li><input type="checkbox" name="gender" value="Female"/> Female</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseTwo">
+                            Birthday <i class="fa fa-plus pull-right"></i>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul class='gender list-unstyled'>
+                            <li><input type="checkbox" name="birthday" value="thisweek">&nbsp;This Week</li>
+                            <li><input type="checkbox" name="birthday" value="thismonth"/> This Month</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseThree">
+                            Department<i class="fa fa-plus pull-right"></i>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul class='department list-unstyled'>
+                            {foreach item=DEPT from=$DEPT_LIST}
+                                <li><input type="checkbox" name="department" value="{$DEPT}"/> {$DEPT}</li>
+                            {/foreach}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseFour">
+                            New Joinee <i class="fa fa-plus pull-right"></i>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul class='gender list-unstyled'>
+                            <li><input type="checkbox" name="date_joined" value="thisweek">&nbsp;This Week</li>
+                            <li><input type="checkbox" name="date_joined" value="thismonth"/> &nbsp;This Month
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <br><div class="clearfix"></div>
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    </div>
+
+
+        <br  class='{if $smarty.get.module eq 'users' AND  $smarty.get.view eq 'list' }hide{/if}'><div class="clearfix"></div>
+        <div class="panel-group  {if $smarty.get.view eq 'List'  }hide{/if}" id="accordion" role="tablist"  {$smarty.get.module} {$smarty.get.view} aria-multiselectable="true" >
                 <div class="settingsgroup-panel panel panel-default">
 
                         {foreach item=BLOCK_MENUS key=BLOCK_NAME from=$SETTINGS_MENU_LIST}
@@ -29,11 +109,11 @@
                                                                 </a>
                                                         </div>
                                                 </div>
-                                        </div>  
+                                        </div>
                                         <div id="{$BLOCK_NAME}" class="panel-collapse collapse {if $ACTIVE_BLOCK['block'] eq $BLOCK_NAME} in {/if}">
                                                 <ul class="list-group">
                                                         {foreach item=URL key=MENU from=$BLOCK_MENUS}
-                                                       
+
                                                                 {assign var=MENU_URL value='#'}
                                                                 {assign var=MENU_LABEL value=$MENU}
 
@@ -49,11 +129,11 @@
                                                                         {assign var=MENU_URL value=$URL.0}
                                                                 {/if}
                                                                 {if $MENU eq 'LBL_EMPLOYEMENT_DETAILS' || $MENU eq  'LBL_PASSPORTVISA'
-                                                             || $MENU eq  'LBL_PERFORMANCE' || $MENU eq  'LBL_PAYSLIP' } 
+                                                             || $MENU eq  'LBL_PERFORMANCE' || $MENU eq  'LBL_PAYSLIP' }
                                                                   {assign var=MENU_URL value=$USER_MODEL->getEmploymentTabURL($URL.0)}
 
-                                                                {/if}    
-                                                            
+                                                                {/if}
+
                                                                 <li><a href="{$MENU_URL}" class="menuItemLabel {if $ACTIVE_BLOCK['menu'] eq $MENU} settingsgroup-menu-color {/if}">&nbsp;<i class="material-icons module-icon">&nbsp;{$URL[1]}</i>{vtranslate($MENU_LABEL,$QUALIFIED_MODULE)}</a></li>
                                                         {/foreach}
                                                 </ul>
@@ -64,9 +144,9 @@
         </div>
 </div>
 
-<div id="ssidebar-essentials" class="sidebar-essentials visible-xs visible-sm">
+<div id="ssidebar-essentials" class="sidebar-essentials visible-xs visible-sm {if $smarty.get.module eq 'Users'}hide{/if}">
         <div class="col-xs-12 text-center visible-xs visible-sm" style="margin-top: 20px;margin-bottom:20px;">
-        <a class="btn btn-default" onclick="$('.sidebar-menu-u, .settingsNav').toggleClass('hidden-xs hidden-sm'); $('.settingsNav').find('.settingsgroup').toggleClass('hidden-xs hidden-sm');">Sidebar 
+        <a class="btn btn-default" onclick="$('.sidebar-menu-u, .settingsNav').toggleClass('hidden-xs hidden-sm'); $('.settingsNav').find('.settingsgroup').toggleClass('hidden-xs hidden-sm');">Sidebar
         &nbsp;<span class="toggleButton"><i class="ti-angle-down"></i></span></a>
         </div>
         <br/><div class="clearfix"></div><br/>
@@ -90,7 +170,7 @@
                                                                 </a>
                                                         </div>
                                                 </div>
-                                        </div>  
+                                        </div>
                                         <div id="{$BLOCK_NAME}_mobile" class="panel-collapse collapse {if $ACTIVE_BLOCK['block'] eq $BLOCK_NAME} in {/if}">
                                                 <ul class="list-group">
                                                         {foreach item=URL key=MENU from=$BLOCK_MENUS}

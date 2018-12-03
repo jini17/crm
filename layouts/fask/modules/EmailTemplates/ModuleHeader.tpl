@@ -36,20 +36,20 @@
                                         <ul class="nav navbar-nav">
                                                 {foreach item=BASIC_ACTION from=$MODULE_BASIC_ACTIONS}
                                                         <li>
-                                                                <button id="{$MODULE}_listView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($BASIC_ACTION->getLabel())}" type="button" class="btn addButton btn-default module-buttons" 
+                                                                <button id="{$MODULE}_listView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($BASIC_ACTION->getLabel())}" type="button" class="btn addButton module-buttons" 
                                                                                 {if stripos($BASIC_ACTION->getUrl(), 'javascript:')===0}  
                                                                                         onclick='{$BASIC_ACTION->getUrl()|substr:strlen("javascript:")};'
                                                                                 {else} 
                                                                                         onclick='window.location.href = "{$BASIC_ACTION->getUrl()}&app={$SELECTED_MENU_CATEGORY}"'
                                                                                 {/if}>
-                                                                        <div class="fa {$BASIC_ACTION->getIcon()}" aria-hidden="true"></div>&nbsp;&nbsp;
+                                                                        <i class="fa {$BASIC_ACTION->getIcon()}" aria-hidden="true"></i>&nbsp;&nbsp;
                                                                         {vtranslate($BASIC_ACTION->getLabel(), $MODULE)}
                                                                 </button>
                                                         </li>
                                                 {/foreach}
                                                 <li>
-                                                    <a href='#' class="btn btn-getting-started btn-default"> {vtranslate('Getting Started','Vtiger'} </a>
-                                                        <button class='btn btn-danger Help-btn' >
+                                              
+                                                        <button class='btn btn-danger Help-btn  module-buttons' >
                                                                 <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; {vtranslate('Help',$MODULE)}
                                                         </button>
                                                 </li>

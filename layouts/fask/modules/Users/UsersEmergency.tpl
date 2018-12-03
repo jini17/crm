@@ -1,10 +1,13 @@
 {strip}
+
 {assign var=EDIT_EMERGENCY_URL value=$EMERGENCY_RECORD_MODEL->getEditEmergencyUrl()}
 <div id="UserEmergencyContainer">
 	<div class="btn-group pull-right allprofilebtn">
+        {if $USER_MODEL->get('id') eq $USERID}
 			<button type="button" class="btn btn-primary hide" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}');">
                                                                             <i class="fa fa-pencil"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_EDIT_CONTACT', $MODULE)}</strong>
                                                                 </button>
+        {/if}                                                        
 		</div>
         <div class="clearfix"></div>
         {assign var=total value=$USER_EMERGENCY_CONTACTS|@count}
@@ -15,6 +18,7 @@
                                 <div class="col-md-6">
                                 <h5>{vtranslate('Emergency Contacts', $MODULE)}</h5>
                                 </div>
+                            {if $USER_MODEL->get('id') eq $USERID}
                                 <div class="col-md-6">
                                     <span class="pull-right">
                                       {if $total lt '5'}  <a href="#" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}');"><li class="fa fa-plus-circle"></li></a> &nbsp; {/if}
@@ -22,6 +26,7 @@
                                       {if $k neq '0'}  <a href="#" onclick="Users_Emergency_Js.deleteEmergerncyContact('{$EDIT_EMERGENCY_URL}&userId={$USERID}&delete_id={$contact['id']}','{$USERID}');"><li class="fa fa-trash-o"></li></a> &nbsp;{/if}
                                     </span>
                                 </div>
+                              {/if}  
                                 <div class="clearfix"></div>
                                
                                 <hr>

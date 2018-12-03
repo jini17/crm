@@ -122,7 +122,7 @@ abstract class Vtiger_View_Controller extends Vtiger_Action_Controller {
 			$viewer->assign('APPTITLE', getTranslatedString('APPTITLE'));
 			$viewer->assign('VTIGER_VERSION', $vtiger_current_version);
 			$viewer->assign('VTIGER_DISPLAY_VERSION', $vtiger_display_version);
-            $viewer->assign('ONLY_V7_INSTANCE', $onlyV7Instance);
+                                                               $viewer->assign('ONLY_V7_INSTANCE', $onlyV7Instance);
 			$this->viewer = $viewer;
 		}
 		return $this->viewer;

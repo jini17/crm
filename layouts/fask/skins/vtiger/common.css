@@ -9143,9 +9143,7 @@ div#prefernces.tab-pane {
 span.actionImages>a{
   padding: 0px 5px;
 }
-ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard{
-      padding: 15px 5px 10px !important;
-}
+
 table.table.table-bordered.listViewEntriesTable{
   background-color: #fff !important;
 }
@@ -9250,7 +9248,7 @@ color: #2f5597 !important;
 
 /*START-header moving text*/
 .headertext{
-  width: 100%;
+  width: 101%;
     display: block;
     height: auto;
     text-align: right;
@@ -9533,7 +9531,34 @@ right connector from last child*/
     float: right;
 }
 
+.wbox{
+   padding-left: 10px;
+   padding-right: 10px;
+}
+.wbox{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.wbox h5{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    
+        font-size: 13px;
+}
+.wbox h5 span{
+    
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.wbox h5 span i{
+    padding-left: 0 !important;
+    padding-right: 5px !important;
+    font-size: 15px !important;
+}
+.wbox .links{
+    margin-top: 10px;
 
-/*Thats all. I hope you enjoyed it.
-Thanks :)*/
+}
 

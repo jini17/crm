@@ -455,7 +455,7 @@ Vtiger.Class('Vtiger_Index_Js', {
                 this.registerHoverEventOnAttachment();
                 //this.addBodyScroll();
                 this.triggerGetHelp();  //added by jitu@salespeer for Context Help  
-
+                this.changeSkin();
                 this.mentionerCallBack();
                 this.modulesMenuScrollbar();
                 Vtiger_Index_Js.registerActivityReminder();
@@ -466,7 +466,33 @@ Vtiger.Class('Vtiger_Index_Js', {
                 $(".content-area").attr("style","min-height:"+minHeight+"px !important");
 
         },
-
+       changeSkin : function() {
+            jQuery('.themeElement').on('click', function(e) {
+                       var $this = jQuery(this);
+                       app.helper.showProgress();
+                    //currentElement.closest('#themeContainer').hide();                 
+                    var skinname = $this.attr('data-skinName');
+                    var record_id = jQuery('#current_user_id').val();
+                  
+                
+                    var params = {
+                            'module' : 'Users',
+                            'action' : 'SaveAjax',
+                            'record' : record_id,
+                            'field'  : 'theme',
+                            'value'  : skinname,
+                            'mod'    : "edit"
+                    }
+                  app.request.post({"data":params}).then(function(err,data){
+                     // console.log(data);
+                         if(err==null)
+                              window.location.href='index.php';
+//                         app.helper.hideProgress();
+                    },
+                    function(error,err){
+                    });
+            })
+	},
         addBodyScroll: function () {
                 app.helper.showVerticalScroll(
                                 $("body"),
@@ -676,6 +702,7 @@ Vtiger.Class('Vtiger_Index_Js', {
          * @returns {undefined}
          */
         quickCreateSave : function(form,invokeParams){
+                console.log('saving...');
                 var params = {
                         submitHandler: function(form) {
                                 // to Prevent submit if already submitted

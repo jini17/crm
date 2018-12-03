@@ -46,10 +46,10 @@ if($focus->is_authenticated()) {
 	$intime=date("Y/m/d H:i:s");
 	$loghistory=new LoginHistory();
 	$Signin = $loghistory->user_login($focus->column_fields["user_name"],$usip,$intime);
-
+                    
 	//Security related entries start
 	require_once('include/utils/UserInfoUtil.php');
-
+                     
 	createUserPrivilegesfile($focus->id);
 
 	//Security related entries end
@@ -69,7 +69,10 @@ if($focus->is_authenticated()) {
 	$_SESSION['KCFINDER']['uploadDir'] = "/test/upload";
 	$deniedExts = implode(" ", $upload_badext);
 	$_SESSION['KCFINDER']['deniedExts'] = $deniedExts;
+                     $_SESSION["REMOTE_"] = 1;
 
+                        
+                     
 	// store the user's theme in the session
 	if(!empty($focus->column_fields["theme"])) {
 		$authenticated_user_theme = $focus->column_fields["theme"];

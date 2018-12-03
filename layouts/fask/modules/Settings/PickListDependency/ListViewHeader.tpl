@@ -32,7 +32,6 @@
                                 {/foreach}
                             </select>
                         </span>
-<button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;left: 96%;" title="Left Panel Show/Hide"><span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>                    </div>
                 </div>
             </div>
             <br>

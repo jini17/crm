@@ -15,26 +15,25 @@ Vtiger_List_Js("Settings_Vtiger_List_Js",{
         }
 },{
 
-        /*
-         * Function to register the list view delete record click event
-         */
-        DeleteRecord: function(url){
-                var thisInstance = this;
-                var css = jQuery.extend({'text-align' : 'left'},css);
-                app.helper.showProgress();
-                app.request.get({'url' : url}).then(
-                        function(err, data) {
-                app.helper.hideProgress();
-                                if(err === null) {
-                                        var params = {};
-                                        params.cb = function(container){
-                                                thisInstance.postDeleteAction(container);
-                                        };
-
-                                        app.helper.showModal(data, params);
-                                }
-                });
-        },
+/*
+ * Function to register the list view delete record click event
+ */
+DeleteRecord: function(url){
+        var thisInstance = this;
+        var css = jQuery.extend({'text-align' : 'left'},css);
+        app.helper.showProgress();
+        app.request.get({'url' : url}).then(
+function(err, data) {
+        app.helper.hideProgress();
+            if(err === null) {
+                    var params = {};
+                    params.cb = function(container){
+                            thisInstance.postDeleteAction(container);
+                    };
+                    app.helper.showModal(data, params);
+            }
+        });
+},
 
         /**
          * Function to load list view after deletion of record from list view

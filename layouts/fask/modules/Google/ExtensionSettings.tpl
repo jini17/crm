@@ -144,7 +144,7 @@
                                 </div>
                         </div>
                 </div>
-                <div style="margin-top: 8%;">
+                <div >
                         <div>
                                 <button id="saveSettings" type="submit" class="btn btn-success saveButton">{vtranslate('LBL_SAVE_SETTINGS', $MODULENAME)}</button>
                                 {if $PARENT neq 'Settings'}

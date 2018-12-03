@@ -14,9 +14,9 @@
 </div>
   <div class="filterContainer">
         <div class="row" style="margin-left:3px;">
-               <div class="col-md-8">
+               <div class="col-md-8" style="padding-left: 9px">
                 
-                <label class="radio-group cursorPointer" style="font-size:13px; padding:5px;">
+                <label class="radio-group cursorPointer" style="font-size:13px; padding:13px 0px 0 0;">
                     <input style="vertical-align:middle;" type="radio" id="myleavetype" name="type" class="widgetFilter reloadOnChange cursorPointer" value="leavetype" checked="checked" / >&nbsp;&nbsp;{vtranslate('LBL_LEAVE_TYPE', $MODULE_NAME)}
                 </label>&nbsp;&nbsp;
                 

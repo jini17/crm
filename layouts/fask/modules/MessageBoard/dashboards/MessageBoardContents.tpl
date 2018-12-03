@@ -29,10 +29,12 @@
                          </span>
                      </div>
               <div class="col-lg-4">{$MODEL['messagetime']}</div>
+               <div class="clearfix"></div>
         </div>
 
     {/foreach}
- 
+                         <a href="index.php?module=MessageBoard&view=List" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
+
 
 {else}
     <span class="noDataMsg">
@@ -40,3 +42,8 @@
     </span>
 {/if}
 </div>
+<script>
+      jQuery("#quickCreateMessage").on('click', '.quickCreateModule',function(){
+                    $( "#menubar_quickCreate_MessageBoard" ).trigger( "click" );
+                })
+    </script>

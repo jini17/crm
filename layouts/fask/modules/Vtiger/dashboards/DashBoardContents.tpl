@@ -10,9 +10,10 @@
 
 {strip}
 <input type="hidden" name="default_tab" id="default_tab" value="{$SELECTED_TAB}" />
+
 <div class="dashBoardContainer clearfix">
         <div class="tabContainer">
-
+            
                  <ul class="nav nav-tabs tabs sortable container-fluid visible-lg">
                 {foreach key=index item=TAB_DATA from=$DASHBOARD_TABS}
                     <li class="{if $TAB_DATA["id"] eq $SELECTED_TAB}active{/if} dashboardTab" data-tabid="{$TAB_DATA["id"]}" data-tabname="{$TAB_DATA["tabname"]}">
@@ -35,7 +36,7 @@
 
            <div class="moreSettings pull-right col-lg-4 col-md-2 col-sm-12 col-xs-12">
                <div class="buttonGroups pull-right">
-                   {if $SELECTED_TAB neq 1}
+                   {if $SELECTED_TAB neq 1 AND $SELECTED_TAB neq 1298}
                 <div class="btn-group pull-right"  {$SELECTED_TAB}>
                       <button class = "addNewDashBoard btn-primary btn pull-left" style='margin-right: 5px;'><i class="fa fa-edit"></i>&nbsp;{vtranslate('LBL_ADD_NEW_DASHBOARD',$MODULE)}</button> &nbsp;
                        <button class="btn btn-success updateSequence pull-right hide">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
@@ -131,10 +132,9 @@
                         </a>
                     </li>
                 {/foreach}
-
-
   </ul>
-</div></div></div>
+</div></div>
+</div>
     <!-- / Related mobile -->
 
             <div class="tab-content">
@@ -145,7 +145,20 @@
                         {/if}
                     </div>
                 {/foreach}
+                
             </div>
         </div>
+                <div class="clearfix"></div>
+                <a class="strolltotop pull-right">
+                    <i class="fa fa-angle-up"></i>
+                </a>
 </div>
 {/strip}
+<script>
+ jQuery(document).ready(function(){
+        jQuery('html').on('click','.strolltotop',function(){
+            $('body, html').animate({ scrollTop: $(".gridster_2.ready ul").offset().top }, 1000);
+
+    });
+   });
+</script>

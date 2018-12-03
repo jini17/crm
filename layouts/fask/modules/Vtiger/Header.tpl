@@ -29,12 +29,12 @@
         <link type='text/css' rel='stylesheet' href='layouts/v7/lib/jquery/jquery.qtip.custom/jquery.qtip.css'>
         <link type='text/css' rel='stylesheet' href='layouts/v7/lib/jquery/daterangepicker/daterangepicker.css'>
 
-        <link type='text/css' rel='stylesheet' href='layouts/fask/skins/vtiger/common.css'>
-        <link type='text/css' rel='stylesheet' href='layouts/fask/skins/vtiger/sidebar.css'>
-        <link type='text/css' rel='stylesheet' href='layouts/fask/skins/vtiger/agiliux-blue.css'>
+        <link type='text/css' rel='stylesheet' href='{$SKIN_PATH}/common.css'>
+        <link type='text/css' rel='stylesheet' href='{$SKIN_PATH}/sidebar.css'>
+        <link type='text/css' rel='stylesheet' href='{$SKIN_PATH}/agiliux-blue.css'>
         <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-        <link rel="stylesheet" href="layouts/fask/skins/vtiger/themify-icons.css">
-		<link rel="stylesheet" href="layouts/fask/skins/vtiger/material-icons.css">
+        <link rel="stylesheet" href="{$SKIN_PATH}/themify-icons.css">
+		<link rel="stylesheet" href="{$SKIN_PATH}/material-icons.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
         <input type="hidden" id="inventoryModules" value={ZEND_JSON::encode($INVENTORY_MODULES)}>
