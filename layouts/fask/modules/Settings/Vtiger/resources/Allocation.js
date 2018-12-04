@@ -1096,8 +1096,8 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
                     //console.log("Inside pjax");
                    app.helper.hideProgress();
                    jQuery('#myModal').modal('show');
-                   jQuery(".checkleavestatus").html('System checking...');
-                   jQuery(".checkleavestatus").attr('disabled',true);
+               //    jQuery(".checkleavestatus").html('System checking...');
+                //   jQuery(".checkleavestatus").attr('disabled',true);
                    jQuery(".modal-body").html(data);
                     //history.pushState({}, null, window.history.back());
                 });
