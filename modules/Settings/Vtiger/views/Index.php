@@ -16,7 +16,7 @@ class Settings_Vtiger_Index_View extends Vtiger_Basic_View {
 
 	function checkPermission(Vtiger_Request $request) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
-		if(!$currentUserModel->isAdminUser() && $currentUserModel->hradmin !=1) {
+		if(!$currentUserModel->isAdminUser() && !in_array($currentUserModel->get('roleid'), array('H2','H12','H13'))) {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
 		}
 	}
