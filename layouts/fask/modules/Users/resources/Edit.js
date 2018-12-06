@@ -18,6 +18,26 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 	 */
 	registerRecordPreSaveEvent : function(form){
 		var thisInstance = this;
+                              
+                              jQuery("#Users_editView_fieldName_date_joined").on("change",function(){
+                                  ;
+                                  var date_joined = jQuery(this).val();                                 
+                                          if(date_joined.length > 0){
+                                               var expireDateArr = date_joined.split("-");                               
+                                                var expireDate = new Date(expireDateArr[2]+"-"+expireDateArr[1]+"-"+ expireDateArr[0]);          
+                                                var curdate = new Date();
+                                                var after_years = new Date(expireDate.getFullYear()+1,expireDate.expireDate(),expireDate.getDay());
+                                                alert(after_years);
+                                                if(expireDate > after_years){
+                                                         app.helper.showErrorNotification({message :app.vtranslate('Join Date should not be greater than 1 year')});
+                                                          date_joined.val("")
+                                                         return false;
+                                                }
+                                                
+                                          }
+                              })
+                                          
+                              
 		app.event.on(Vtiger_Edit_Js.recordPresaveEvent, function(e, data) {
 			var userName = jQuery('input[name="user_name"]').val();
 			var newPassword = jQuery('input[name="user_password"]').val();

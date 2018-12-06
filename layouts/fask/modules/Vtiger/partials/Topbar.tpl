@@ -350,12 +350,12 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                         </a>
                                     </li>
                                     {/if}
-                                    <li admin="" moudel="Timesheet">
+                                    {*<li admin="" moudel="Timesheet">
                                         <a  class="dropdown-icon-dashboard"   href="index.php?module=Timesheet&amp;view=List&amp;app=ADMIN ">
                                             <i class="material-icons module-icon">timer</i>
                                             <span class="hide-menu"> {vtranslate('Timesheet','Home')}</span>
                                         </a>
-                                    </li>
+                                    </li>*}
                                             {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                             <li>
                                                 <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
@@ -371,11 +371,11 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                 </a>
                                             </li>
                                             {/if}
-
+{*
                                             <li>
                                                     <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
                                                         <i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                                            </li>
+                                            </li>*}
                                             <li admin="" moudel="Training">
 
                                                 <a class="dropdown-icon-dashboard" href=" index.php?module=Training&amp;view=List&amp;app=ADMIN ">
@@ -452,6 +452,11 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                 <li>
                                     <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_MAIL_MANAGER')}" href="index.php?module=MailManager&view=List">
                                        <i class="material-icons module-icon">email</i>&nbsp;{vtranslate('LBL_MAIL_MANAGER')}
+                                   </a>
+                                </li>
+                                 <li>
+                                    <a class="dropdown-icon-dashboard"  title="{vtranslate('Message Board')}" href="index.php?module=MessageBoard&view=List">
+                                       <i class="material-icons module-icon">email</i>&nbsp;{vtranslate('Message Board')}
                                    </a>
                                 </li>
                         </ul>
@@ -571,8 +576,8 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                     <div class="row">
                                                        <div class="col-lg-4"><a id="menubar_quickCreate_Users" class="quickCreateModule" data-name="Users" data-url="index.php?module=Users&parent=Settings&view=Edit" href="javascript:void(0)"><i class="material-icons pull-left">person</i><span class="quick-create-module">Employee</span></a></div>
                                                        <div class="col-lg-4"><a id="menubar_quickCreate_Leav" class="quickCreateModule" data-name="Leave" data-url="index.php?module=Leave&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">exit_to_app</i><span class="quick-create-module">Leave</span></a></div>
-                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Timesheet" class="quickCreateModule" data-name="Timesheet" data-url="index.php?module=Timesheet&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">timer</i><span class="quick-create-module">Timesheet</span></a></div>
-                                                    </div>
+{*                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Timesheet" class="quickCreateModule" data-name="Timesheet" data-url="index.php?module=Timesheet&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">timer</i><span class="quick-create-module">Timesheet</span></a></div>
+*}                                                    </div>
                                                     <br>
                                                     <div class="row">
                                                        <div class="col-lg-4"><a id="menubar_quickCreate_Claim" class="quickCreateModule" data-name="Claim" data-url="index.php?module=Claim&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">attach_money</i><span class="quick-create-module">Claim</span></a></div>
@@ -1547,16 +1552,16 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                         </li>
                                                                         {/if}
 
-                                                                        <li>
+                                                                   {*     <li>
                                                                                 <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
                                                                                     <i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                                                                        </li>
-                                                                        <li admin="" moudel="Training">
+                                                                        </li>*}
+                                                               {*         <li admin="" moudel="Training">
 
                                                                             <a class="dropdown-icon-dashboard" href=" index.php?module=Training&amp;view=List&amp;app=ADMIN ">
                                                                                 <i class="material-icons module-icon">book</i> Training
                                                                             </a>
-                                                                        </li>
+                                                                        </li>*}
                                                                         <li admin="" moudel="Attendance">
                                                                             <a  class="dropdown-icon-dashboard"   href=" index.php?module=Attendance&amp;view=List&amp;app=ADMIN ">
                                                                                 <i class="material-icons module-icon">assignment</i> Attendance
@@ -1817,8 +1822,8 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                     <div class="row">
                                                        <div class="col-lg-4"><a id="menubar_quickCreate_Claim" class="quickCreateModule" data-name="Claim" data-url="index.php?module=Claim&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">attach_money</i><span class="quick-create-module">Claim</span></a></div>
                                                        <div class="col-lg-4"><a id="menubar_quickCreate_WorkingHours" class="quickCreateModule" data-name="WorkingHours" data-url="index.php?module=WorkingHours&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">access_time</i><span class="quick-create-module">Working Hours</span></a></div>
-                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Training" class="quickCreateModule" data-name="Training" data-url="index.php?module=Training&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">book</i><span class="quick-create-module">Training</span></a></div>
-                                                    </div>
+{*                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Training" class="quickCreateModule" data-name="Training" data-url="index.php?module=Training&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">book</i><span class="quick-create-module">Training</span></a></div>
+*}                                                    </div>
                                                     <br>
                                                     <div class="row">
                                                        <div class="col-lg-4"><a id="menubar_quickCreate_Attendance" class="quickCreateModule" data-name="Attendance" data-url="index.php?module=Attendance&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">assignment</i><span class="quick-create-module">Attendance</span></a></div>
