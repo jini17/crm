@@ -8,41 +8,7 @@
 *************************************************************************************}
 
 {strip}
-    <style>
-        #tablist li.active,
-        .pagination li.active{
-          border-bottom: 2px solid #2f5597 ;
-          color: #2f5597 ;
-        }
-          .pagination li.active{
-              background:  #2f5597 ;
-              color: #fff;
-          }
-        .pagination li.active a{
-            color: #fff;
-            background:  #2f5597 ;
-        }
-        .fa-facebook {
-            background: #3B5998;
-            color: #fff;
-            padding: 8px;
-        }
-        .fa-twitter {
-            background: #55ACEE;
-            color: #fff;
-            padding:8px;
-        }
-        .fa-envelope {
-            background: #ff6600;
-            color: #fff;
-            padding: 8px;
-        }
-        .fa-linkedin {
-          background: #007bb5;
-          color: #fff;
-          padding: 8px;
-        }
-    </style>
+
     
     <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 0;right:0 !important ; left: 81% !important; " title="Left Panel Show/Hide">
         <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>

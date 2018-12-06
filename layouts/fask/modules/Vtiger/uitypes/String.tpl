@@ -29,5 +29,12 @@
 		{if count($FIELD_INFO['validator'])}
 			data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
 		{/if}
-		   />
+
+		<!--added by jitu to make username as email -->
+		{if $FIELD_MODEL->get('uitype') eq '106'}
+			data-rule-email="true"
+		{/if}
+
+		 />
+		
 {/strip}

@@ -680,9 +680,12 @@ Vtiger_List_Js("MailManager_List_Js", {}, {
 		var self = this;
 		var container = self.getContainer();
 		container.find('.mmfolderMails').click(function(e) {
+                                                                   
 			var emailElement = jQuery(e.currentTarget);
 			var parentEle = emailElement.closest('.mailEntry');
 			var msgNo = emailElement.find('.msgNo').val();
+                                                                var checkBoxes = emailElement.closest('.mailEntry').find('.mailCheckBox');
+                                                                 checkBoxes.prop("checked", !checkBoxes.prop("checked"));
 			var params = {
 				'module' : 'MailManager',
 				'view' : 'Index',
@@ -1043,6 +1046,9 @@ Vtiger_List_Js("MailManager_List_Js", {}, {
 
 		app.request.post({data : params}).then(function(err, data) {
 			container.find('#relationBlock').html(data.ui);
+                                                            console.log(data.RelatedModuleLink.Contacts[0].label);
+                                                            var relationlink = "This email was sent from your contact <a href=index.php?module=Contacts&view=Detail&record='"+data.RelatedModuleLink.Contacts[0].id+"'>"+data.RelatedModuleLink.Contacts[0].label+"</a>";
+                                                              jQuery("#RelatedModuleLink").html(relationlink);
 			self.handleRelationActions();
 			app.helper.showVerticalScroll(container.find('#relationBlock .recordScroll'), {autoHideScrollbar: true});
 			var iframeHeight = jQuery('#mails_container').height() - (200 + jQuery('#mailManagerActions').height());

@@ -19,15 +19,27 @@
                 {assign var="SPECIAL_VALIDATOR" value=$FIELD_MODEL->getValidator()}
                 {assign var="FIELD_INFO" value=$FIELD_MODEL->getFieldInfo()}
                 <div class="fileUploadContainer text-left">
-                        <div class="fileUploadBtn btn btn-primary">
-                                <span><i class="fa fa-laptop"></i> {vtranslate('LBL_UPLOAD', $MODULE)}</span>
+                        <div class="fileUploadBtn">
+                                <span class="btn btn-primary"><i class="fa fa-laptop"></i> {vtranslate('LBL_UPLOAD', $MODULE)}</span>
                                 <input type="file" class="inputElement {if $MODULE eq 'Products'}multi max-6{/if} {if $FIELD_MODEL->get('fieldvalue') and $FIELD_INFO["mandatory"] eq true} ignore-validation {/if}" name="{$FIELD_MODEL->getFieldName()}[]" value="{$FIELD_MODEL->get('fieldvalue')}"
                                         {if !empty($SPECIAL_VALIDATOR)}data-validator="{Zend_Json::encode($SPECIAL_VALIDATOR)}"{/if} 
                                         {if $FIELD_INFO["mandatory"] eq true} data-rule-required="true" {/if}
                                         {if count($FIELD_INFO['validator'])} 
                                                 data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
                                         {/if} />
+                                {if $FIELD_MODEL->getFieldDataType() eq 'image' || $FIELD_MODEL->getFieldDataType() eq 'file'}
+                                    {if $MODULE neq 'Products'}
+                                        
+                                        <span class='redColor float'>
+                                            &nbsp;&nbsp;{vtranslate('LBL_NOTE_EXISTING_ATTACHMENTS_WILL_BE_REPLACED', $MODULE)}
+                                        </span>
+                                        <br />({vtranslate('LBL_MAX_UPLOAD_SIZE',$MODULE)} {$MAX_UPLOAD_LIMIT_MB}&nbsp;MB)
+                                    {/if}
+                                {/if}    
+                                    <span class="maxUploadSize" data-value="{$MAX_UPLOAD_LIMIT_BYTES}"></span>
+                              
                         </div>
+                        
 
                         <div class="uploadedFileDetails {if $IS_EXTERNAL_LOCATION_TYPE}hide{/if}">
                                 <div class="uploadedFileSize"></div>
@@ -38,13 +50,7 @@
                                 </div>
                         </div>
                 </div>
-                {if $FIELD_MODEL->getFieldDataType() eq 'image' || $FIELD_MODEL->getFieldDataType() eq 'file'}
-                        {if $MODULE neq 'Products'}
-                            <div class='redColor'>
-                                {vtranslate('LBL_NOTE_EXISTING_ATTACHMENTS_WILL_BE_REPLACED', $MODULE)}
-                            </div>
-                        {/if}
-                {/if}
+                
                 {if $MODULE eq 'Products'}<div id="MultiFile1_wrap_list" class="MultiFile-list"></div>{/if}
 
                 {foreach key=ITER item=IMAGE_INFO from=$IMAGE_DETAILS}
@@ -53,7 +59,7 @@
                                         <span class="col-lg-6" name="existingImages">
                                             <img src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}" data-image-id="{$IMAGE_INFO.id}" width="400" height="250" >
                                         </span>
-                                        <span class="col-lg-3">
+                                        <span class="col-lg-5">
                                                 <span class="row">
                                                         <span class="col-lg-11">[{$IMAGE_INFO.name}]</span>
                                                         <!-- Style ADDED by Khaled -->

@@ -598,7 +598,10 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                           <a id="menubar_quickCreate_Documents" class="quickCreateModuleSubmenu dropdown-toggle" data-name="Documents" data-toggle="dropdown" data-url="index.php?module=Documents&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">file_download</i><span class="quick-create-module">Documents<i class="fa fa-caret-down quickcreateMoreDropdownAction"></i></span></a>
                                                           <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_Documents">
                                                              <li class="dropdown-header"><i class="material-icons">file_upload</i> File Upload</li>
-                                                             <li id="VtigerAction"><a href="javascript:Documents_Index_Js.uploadTo('Vtiger')"><img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">To Agiliux</a></li>
+                                                             <li id="VtigerAction"><a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
+                                                                                                                                                                                                                                                         <img width="15" hieght="15" style="  margin-top: -3px;margin-right: 4%;" title="Agiliux" alt="Agiliux" src="layouts/v7/skins/images/favicon.ico">
+
+                                                                     To Agiliux</a></li>
                                                              <li class="dropdown-header"><i class="ti-link"></i> Link External Document</li>
                                                              <li id="shareDocument"><a href="javascript:Documents_Index_Js.createDocument('E')">&nbsp;<i class="material-icons">link</i>&nbsp;&nbsp; From File Url</a></li>
                                                              <li role="separator" class="divider"></li>
@@ -964,7 +967,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                                         <li class="dropdown-header"><i class="ti-upload"></i> {vtranslate('LBL_FILE_UPLOAD', $moduleName)}</li>
                                                                                         <li id="VtigerAction">
                                                                                             <a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
-                                                                                                <img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">
+                                                                                                                                                                                    <img width="15" hieght="15" style="  margin-top: -3px;margin-right: 4%;" title="Agiliux" alt="Agiliux" src="layouts/v7/skins/images/favicon.ico">
                                                                                                 {vtranslate('LBL_TO_SERVICE', $moduleName, {vtranslate('LBL_VTIGER', $moduleName)})}
                                                                                             </a>
                                                                                         </li>
@@ -1835,7 +1838,11 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                           <a id="menubar_quickCreate_Documents" class="quickCreateModuleSubmenu dropdown-toggle" data-name="Documents" data-toggle="dropdown" data-url="index.php?module=Documents&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">file_download</i><span class="quick-create-module">Documents<i class="fa fa-caret-down quickcreateMoreDropdownAction"></i></span></a>
                                                           <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_Documents">
                                                              <li class="dropdown-header"><i class="material-icons">file_upload</i> File Upload</li>
-                                                             <li id="VtigerAction"><a href="javascript:Documents_Index_Js.uploadTo('Vtiger')"><img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">To Agiliux</a></li>
+                                                             <li id="VtigerAction"><a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
+                                                                                                                                                                                                                                                         <img width="15" hieght="15" style="  margin-top: -3px;margin-right: 4%;" title="Agiliux" alt="Agiliux" src="layouts/v7/skins/images/favicon.ico">
+
+                                                                     To Agiliux</a>
+                                                             </li>
                                                              <li class="dropdown-header"><i class="ti-link"></i> Link External Document</li>
                                                              <li id="shareDocument"><a href="javascript:Documents_Index_Js.createDocument('E')">&nbsp;<i class="material-icons">link</i>&nbsp;&nbsp; From File Url</a></li>
                                                              <li role="separator" class="divider"></li>
@@ -2201,7 +2208,8 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                                         <li class="dropdown-header"><i class="ti-upload"></i> {vtranslate('LBL_FILE_UPLOAD', $moduleName)}</li>
                                                                                         <li id="VtigerAction">
                                                                                             <a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
-                                                                                                <img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">
+                                                                                                                                                                                                                                                                                    <img width="15" hieght="15" style="  margin-top: -3px;margin-right: 4%;" title="Agiliux" alt="Agiliux" src="layouts/v7/skins/images/favicon.ico">
+
                                                                                                 {vtranslate('LBL_TO_SERVICE', $moduleName, {vtranslate('LBL_VTIGER', $moduleName)})}
                                                                                             </a>
                                                                                         </li>
