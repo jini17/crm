@@ -9,7 +9,7 @@
 {strip}
 {assign var=SETTINGS_MENU_LIST value=Settings_Vtiger_Module_Model::getSettingsMenuListForNonAdmin()}
 {assign var=DEPT_LIST value=Users_Record_Model::get_department()}
-<div class="settingsgroup hidden-sm hidden-xs" style="overflow: scroll; margin-top:0; padding-top:0">
+
     <div class='clearfix'></div>
    
         <br  class='{if  $smarty.get.view eq 'list' }hide{/if}'><div class="clearfix"></div>
@@ -117,7 +117,7 @@
 </div>
 
 </div>
-</div>
+
 
 
 {/strip}

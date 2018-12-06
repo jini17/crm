@@ -199,8 +199,8 @@
                                                         </label>
                                                 </div>	
                                                 <div class="controls date col-md-8">
-                                                    <label title=" Visible to all Employee"><input type="radio" {if $EDUCATION_DETAIL.public eq '0'} checked {/if} name='chkviewable' value="0" />&nbsp; {vtranslate('LBL_PUBLIC', $QUALIFIED_MODULE)} </label>&nbsp; 
-                                                     <label title=" Visible to Admin and HR"><input type="radio"{if $EDUCATION_DETAIL.public eq '1'} checked {/if} name='chkviewable' value="1" />&nbsp; {vtranslate('LBL_PRIVATE', $QUALIFIED_MODULE)} </label>&nbsp; 
+                                                    <label title=" Visible to all Employee"><input type="radio" {if $EDUCATION_DETAIL.public eq '0'} checked {/if} name='chkviewable' value="0" />&nbsp; {vtranslate('LBL_PUBLIC', $QUALIFIED_MODULE)} &nbsp; &nbsp; </label>&nbsp; 
+                                                     <label title=" Visible to Admin and HR"><input type="radio"{if $EDUCATION_DETAIL.public eq '1'} checked {/if} name='chkviewable' value="1" />&nbsp; {vtranslate('LBL_PRIVATE', $QUALIFIED_MODULE)} &nbsp; &nbsp; </label>&nbsp; 
                                                      <label title="Visible to you only"><input type="radio" {if $EDUCATION_DETAIL.public eq '2'} checked {/if}   {if $EDU_ID eq ''} checked {/if} name='chkviewable' value="2" />&nbsp; {vtranslate('LBL_PROTECTED', $QUALIFIED_MODULE)} </label>
 {*                                                        <input class="inputElement" type="checkbox" name="chkviewable" id="chkviewable" {if $EDUCATION_DETAIL.public eq 1} checked {/if}>
 *}                                                </div>	
