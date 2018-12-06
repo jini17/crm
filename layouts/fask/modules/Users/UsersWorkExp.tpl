@@ -39,8 +39,8 @@
                                         <th><strong>{vtranslate('LBL_DESIGNATION', $MODULE)}</strong></th>
                                         <th><strong>{vtranslate('LBL_LOCATION', $MODULE)}</strong></th>
                                         <th style="width: 15%"><strong>{vtranslate('LBL_TIMEPERIOD', $MODULE)}</strong></th>
-                                        <th><strong>{vtranslate('LBL_DESCRIPTION', $MODULE)}</strong></th>
                                         <th><strong>{vtranslate('LBL_JOB_TYPE', $MODULE)}</strong></th>
+                                        <th><strong>{vtranslate('LBL_DESCRIPTION', $MODULE)}</strong></th>
                                         <th colspan="2" class="medium" ><strong>{vtranslate('LBL_EDUCATION_ISVIEW', $MODULE)}</strong></th>
                                     </tr>
                                 </thead>
@@ -65,8 +65,8 @@
                                         <td class="medium" valign="top">{$USER_WORKEXP['location']}</td>
                            
                                         <td class="medium" valign="top">{$USER_WORKEXP['start_date']}  {if $USER_WORKEXP['end_date'] eq ''} - {vtranslate('LBL_TILL_NOW', $MODULE)}{else}-{$USER_WORKEXP['end_date']}{/if}</td>
+                                        <td class="medium" valign="top">{vtranslate($JOB_TYPE,$MODULE)}</td>
                                         <td class="medium" valign="top">{$USER_WORKEXP['description']}</td>
-                                         <td class="medium" valign="top">{vtranslate($JOB_TYPE,$MODULE)}</td>
                                         <td class="medium" valign="top">{vtranslate($PERMISSION,$MODULE)}</td>
                                               {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13" OR $USER_MODEL->isAdminUser() }
 

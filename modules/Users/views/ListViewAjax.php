@@ -428,6 +428,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
                 $viewer = $this->getViewer($request);
                 $usersleavestatus = $user_model->UsersLeaveStatus();
                 $viewer->assign('USERS_LEAVESTATUS',$usersleavestatus);
+                $viewer->assign("LEAVETYPES",Users_LeavesRecords_Model::getAllLeaveTypeList());
                 $viewer = $this->getViewer($request);
               echo  $viewer->view('CheckUserLeaveStatus.tpl',$moduleName,true);
 

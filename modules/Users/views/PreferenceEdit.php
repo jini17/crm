@@ -20,7 +20,7 @@ Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 				throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
 			}
 		}
-		if(($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $record)) {
+		if($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $record || in_array($currentUserModel->get('roleid'), array('H2','H12','H13'))) {
 			return true;
 		} else {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));

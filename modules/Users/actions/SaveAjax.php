@@ -143,10 +143,10 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		$checkPassword = Settings_Password_Record_Model::checkPassword($newPassword);
 		$validity = Settings_Password_Record_Model::PasswordValidity('pwd_reuse',$request->get('userid'), $newPassword);
 		if(!$checkPassword){
-				if($validity !=1) {
-					$wsUserId = vtws_getWebserviceEntityId($module, $request->get('userid'));
-					$wsStatus = vtws_changePassword($wsUserId, $oldPassword, $newPassword, $newPassword, $userModel);		
-					}
+			if($validity !=1) {
+				$wsUserId = vtws_getWebserviceEntityId($module, $request->get('userid'));
+				$wsStatus = vtws_changePassword($wsUserId, $oldPassword, $newPassword, $newPassword, $userModel);		
+			}
 		} 
 		
 		$response = new Vtiger_Response();

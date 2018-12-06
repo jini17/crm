@@ -1504,10 +1504,10 @@ class Users_Record_Model extends Vtiger_Record_Model
 
     public function UsersLeaveStatus($isallocate=false) {
         $db = PearDatabase::getInstance();
-        $curryear =  date('Y')-1;
+        $curryear =  date('Y');
         
         if($isallocate)
-          $curryear =  date('Y');
+          $curryear =  date('Y')+1;
 
         $sql = "SELECT vtiger_leavetype.title, vtiger_leavetype.carryforward, concat(vtiger_users.first_name,' ', vtiger_users.last_name) as username, 
                   vtiger_leaverolemapping.leavetype, vtiger_leaverolemapping.userid, vtiger_leaverolemapping.allocation, vtiger_leaverolemapping.used 
@@ -1518,10 +1518,13 @@ class Users_Record_Model extends Vtiger_Record_Model
                 WHERE alloc_year=?";
         $result = $db->pquery($sql,array($curryear));
         $num_rows = $db->num_rows($result);
+        //fetch all Leave Type
+
         if($num_rows > 0){
             
             $leavemap = array(); 
             for($i=0;$i < $num_rows;$i++){
+              
               $userid     = $db->query_result($result, $i, 'userid');
               $leavetype  = $db->query_result($result, $i, 'title');
               $allocated  = $db->query_result($result, $i, 'allocation');
@@ -1529,16 +1532,10 @@ class Users_Record_Model extends Vtiger_Record_Model
               $username   = $db->query_result($result, $i, 'username');
               $carryfwd   = $db->query_result($result, $i, 'carryforward');
 
-              if($carryfwd=='on'){
-                $isLapse = 'No';
-              } else {
-                $isLapse = 'Yes';
-              }
-              if($allocation != $used) {
-                  $leavemap[$username][$leavetype] = array($allocated, $used, $isLapse);
-              }    
-            }
-              return $leavemap;
+             
+              $leavemap[$username][$leavetype] = array("Allocation"=>$allocated, "Used"=>$used, "Carry Forward"=>$carryfwd);
+            }      
+             return $leavemap;
           } else {
            return 0;
         }

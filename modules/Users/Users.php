@@ -477,8 +477,8 @@ class Users extends CRMEntity {
                         $this->error_string = $mod_strings['ERR_PASSWORD_CHANGE_FAILED_1'].$user_name.$mod_strings['ERR_PASSWORD_CHANGE_FAILED_2'];
                         return false;
                 }
-
-                if (!is_admin($current_user)) {
+                //As Required per UI in Calendar Settings Under User Profile
+               /* if (!is_admin($current_user)) {
                         $this->db->startTransaction();
                         $verified = $this->verifyPassword($user_password);
                         $this->db->completeTransaction();
@@ -494,7 +494,7 @@ class Users extends CRMEntity {
                                 }
                                 return false;
                         }
-                }
+                }*/
 
                 //to make entity delta available for aftersave handlers
                 $this->triggerBeforeSaveEventHandlers();
