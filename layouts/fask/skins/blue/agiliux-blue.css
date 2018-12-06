@@ -9,6 +9,15 @@ Email: khaled@softsolvers.com.my
     Created on : Oct 24, 2018, 10:14:19 AM
     Author     : Softsolvers
 */
+
+.nav li.searchoption a{
+        background: #eee !important;
+    border: 1px solid #eee !important;
+    color: #000 !important;
+}
+.nav li.searchoption i{
+    color: #000 !important;
+}
 #Contacts_editView_fieldName_firstname{
     width: 80% !important;
 }
@@ -460,15 +469,186 @@ a.btn.btn-gettingStarted i{
 ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard,
 #menubar_quickCreate{
       padding: 9px 7px 7px !important;
-      background: #2f5597;
+      background: #eee;
       border-radius: 5px;
      margin-left: 2px;
-margin-right: 2px;
+        margin-right: 2px;
 }
 a.rightside-icon-dashboard > i.fa{
-    color: #fff !important;
+    color: #000 !important;
 }
 .wbox .links,
 .wbox h5{
            color: #2f5597;
              }
+/*     .app-nav .module-action-bar{
+           border-bottom: 2px solid #2f5597 !important;
+           padding-bottom: 5px;
+     }*/
+     
+     /** =======================
+     Calender Settings
+     ===========================*/
+     .settingsIndexPage h4{
+         color: #2f5597;
+     }
+    .settingsIndexPage h4,
+    .settingsIndexPage .settingsSummary .summaryCount{
+         color: #2f5597;
+     }
+     #settingsShortCutsContainer  .moduleBlock{
+         width: 23.44% !important;
+         
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header{
+         display: block;
+         width: 100%
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header i{
+         margin-top: 3px;
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header b{
+         margin-left: 10px;
+         margin-top: -15px;
+     }
+     .settingsIndexPage #setttingsShortCutsContainer .themeTextColor{
+         float:right;
+         
+     }
+     .settingsIndexPage #settingsShortCutsContainer.fa.pull-left{
+         margin-top: 10px !important;
+         margin-right: 10px !important;
+     }
+     #settingsShortCutsContainer .moduleBlock:hover{
+          background-color: #2f5597 !important;
+          color: #fff;
+     }
+     .settingsIndexPage .settingsSummary .summaryCount{
+         padding: 0;
+     }
+
+     
+/**=================
+    Employee Directory
+=====================*/
+#tablist li.active {
+    border-bottom: 2px solid  #3B5998;
+    color: #fff;
+    padding: 8px;
+}
+
+.pagination li.active{
+  border-bottom: 2px solid #3B5998 ;
+  color: #2f5597 ;
+}
+
+.pagination li.active a{
+    color: #fff;
+    background:  #3B5998 ;
+}
+.alphabetSorting table .alphabetSearch a{
+color: #2f5597 !important;
+}
+.global-nav{
+          border-bottom: 2px solid  #2f5597;
+}
+
+/**==================
+    Mail Manager
+=====================*/
+
+#mailmanagerContainer .material-icons,
+#mailmanagerContainer .material-icons .fa,
+#mmModulesMenu  .material-icons,
+#mailmanagerContainer  #NextPageButton,
+#mailmanagerContainer  #PreviousPageButton,
+#mailmanagerContainer  button.mailPagination,
+#mailmanagerContainer  .pageInfo,
+#mailmanagerContainer .mmDetailAction{
+      color: #2f5597;
+}
+
+#mailmanagerContainer  #NextPageButton:hover,
+#mailmanagerContainer  #PreviousPageButton:hover,
+#mailmanagerContainer  button.mailPagination:hover,
+#mailmanagerContainer .mmFirstNameChar,
+#mailmanagerContainer .highLightMail,
+#mailmanagerContainer div[data-read="0"].highLightMail{
+    color: #fff;
+     background: #2f5597;
+}
+
+#mailmanagerContainer .mailEntry{
+    border-left: 3px solid #ccc;
+}
+#mailmanagerContainer div[data-read="0"]{
+     border-left: 3px solid #2f5597;
+     color: #2f5597;
+}
+#mailmanagerContainer div[data-read="0"].highLightMail{
+    
+}
+#mailmanagerContainer input[type="checkbox"]:checked::after, #checkgreen {
+    background: #fff;
+    width: 13px;
+    height: 13px;
+    line-height: 13px;
+    font-size: 12px;
+    color: #2f5597;
+    font-weight: bold;
+    top: 1px;
+}
+#mailmanagerContainer ._mCS_9{
+    display: none;
+}
+.mmModulesMenu .mmUnreadCountBadge{
+    background: #2f5597 none !important;
+    border: 1px solid #2f5597 !important;
+}
+#mailmanagerContainer #RelatedModuleLink{
+    display: block;
+    width: 100%;
+    font-size: 10px;
+    color: #000;
+}
+#mailmanagerContainer #RelatedModuleLink a{
+    color: #2f5597;
+    font-weight: bold;
+    
+}
+
+#mailmanagerContainer #RelatedModuleLink input{
+  display:none
+}
+#mailmanagerContainer #RelatedModuleLink label{
+  padding:0 6px;
+  border:1px solid #eee
+}
+#mailmanagerContainer #RelatedModuleLink input:checked + label {
+ background:#000;
+ color:#fff
+}
+.mail-all-checked{
+    position: relative;
+}
+.miniux-icon{
+    background: #2f5597;
+    color: #fff;
+    font-size: 11px;
+    text-align: center;
+    padding-left: 3px;
+    padding-right: 3px;
+    top: 8px;
+    position: absolute;
+    left: 4px;
+    z-index: 1;
+    display: none;
+  }
+#mainCheckBox:checked{
+    display: none;
+}
+#mainCheckBox:checked ~ .miniux-icon{
+    display: block;
+    top: 5px;
+  
+}

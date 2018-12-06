@@ -101,7 +101,7 @@ class MailManager_Relation_View extends MailManager_Abstract_View {
 			$viewer->assign('MSGNO', $request->get('_msgno'));
 			$viewer->assign('FOLDER', $request->get('_folder'));
 
-			$response->setResult( array( 'ui' => $viewer->view( 'Relationship.tpl', 'MailManager', true ) ) );
+			$response->setResult( array( 'ui' => $viewer->view( 'Relationship.tpl', 'MailManager', true ), 'RelatedModuleLink'=>$results) );
 
 		} else if ('link' == $this->getOperationArg($request)) {
 

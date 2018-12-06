@@ -27,11 +27,18 @@ Email: khaled@softsolvers.com.my
 .btn-primary,
 .btn-info, 
 .btn-info.disabled,
-.nav li.searchoption a,
 .btn-success, 
 .btn-success.disabled{
     background: #f6bb43 !important;
     border: 1px solid #f6bb43 !important;
+}
+.nav li.searchoption a{
+        background: #eee !important;
+    border: 1px solid #eee !important;
+    color: #000 !important;
+}
+.nav li.searchoption i{
+    color: #000 !important;
 }
 
 .vt-info-callout,
@@ -474,15 +481,82 @@ a.btn.btn-gettingStarted i{
 ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard,
 #menubar_quickCreate{
       padding: 9px 7px 7px !important;
-      background: #f6bb43;
+      background: #eee;
       border-radius: 5px;
-      margin-left: 2px;
-      margin-right: 2px;
+     margin-left: 2px;
+        margin-right: 2px;
 }
 a.rightside-icon-dashboard > i.fa{
-    color: #fff !important;
+    color: #000 !important;
 }
 .wbox .links,
 .wbox h5{
            color: #f6bb43;
              }
+/*                    .global-nav{
+                 border-bottom: 2px solid #f6bb43;
+                 padding-bottom: 2px;
+             }            */
+             
+                 /** =======================
+     Calender Settings
+     ===========================*/
+     .settingsIndexPage h4{
+         color: #f6bb43;
+     }
+    .settingsIndexPage h4,
+    .settingsIndexPage .settingsSummary .summaryCount{
+         color: #f6bb43;
+     }
+     
+     .settingsIndexPage #settingsShortCutsContainer span.header{
+         display: block;
+         width: 100%
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header i{
+         margin-top: 3px;
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header b{
+         margin-left: 10px;
+         margin-top: -15px;
+     }
+     .settingsIndexPage #setttingsShortCutsContainer .themeTextColor{
+         float:right;
+         
+     }
+     .settingsIndexPage #settingsShortCutsContainer.fa.pull-left{
+         margin-top: 10px !important;
+         margin-right: 10px !important;
+     }
+     #settingsShortCutsContainer .moduleBlock:hover{
+          background-color: #f6bb43 !important;
+          color: #fff;
+     }
+     .settingsIndexPage .settingsSummary .summaryCount{
+         padding: 0;
+     }
+           
+     /**=================
+    Employee Directory
+=====================*/
+#tablist li.active {
+            border-bottom: 2px solid  #f6bb43;
+            color: #fff;
+            padding: 8px;
+        }
+      
+        .pagination li.active{
+          border-bottom: 2px solid #f6bb43 ;
+          color: #2f5597 ;
+        }
+
+        .pagination li.active a{
+            color: #fff;
+            background:  #f6bb43 ;
+        }
+             .alphabetSorting table .alphabetSearch a{
+            color: #f6bb43 !important;
+            }
+            .global-nav{
+                      border-bottom: 2px solid  #f6bb43;
+            }
