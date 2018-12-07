@@ -75,7 +75,7 @@
                                     <div class="update_info">
                                         <div> 
                                             <h5>
-                                                <span class="field-name">{$RECENT_ACTIVITY->getModifiedBy()->getDisplayName()} </span> {vtranslate('LBL_UPDATED', $MODULE_NAME)}
+                                                <span class="field-name">{$RECENT_ACTIVITY->getModifiedBy()->getDisplayName()} </span> {vtranslate('LBL_UPDATED', $MODULE_NAME)} {if ($RECENT_ACTIVITY->get('is_enriched') eq 'yes')} (<strong>Data Enrichment</strong>){/if}
                                             </h5>
                                         </div>
                                         {foreach item=FIELDMODEL from=$RECENT_ACTIVITY->getFieldInstances()}
@@ -91,7 +91,7 @@
                                                     {else if $FIELDMODEL->get('postvalue') eq '' || ($FIELDMODEL->getFieldInstance()->getFieldDataType() eq 'reference' && $FIELDMODEL->get('postvalue') eq '0')}
                                                         &nbsp;(<del>{Vtiger_Util_Helper::toVtiger6SafeHTML($FIELDMODEL->getDisplayValue(decode_html($FIELDMODEL->get('prevalue'))))}</del> ) {vtranslate('LBL_IS_REMOVED')}</div>
                                                     {else if $FIELDMODEL->get('postvalue') neq '' && !($FIELDMODEL->getFieldInstance()->getFieldDataType() eq 'reference' && $FIELDMODEL->get('postvalue') eq '0')}
-                                                    &nbsp;{vtranslate('LBL_UPDATED')}</div>
+                                                    &nbsp;{vtranslate('LBL_UPDATED')} {if ($RECENT_ACTIVITY->get('is_enriched') eq 'yes')} (<strong>Data Enrichment</strong>){/if}</div>
                                                 {else}
                                                 &nbsp;{vtranslate('LBL_CHANGED')}</div>
                                             {/if}
@@ -102,6 +102,9 @@
                                             </div>
                                         {/if}
                                     {/foreach}
+                                    <div>                                    
+                                    Modified Time: {date('d-m-Y H:i:s', strtotime($RECENT_ACTIVITY->get('changedon')))}
+                                    </div>
                                     </div>
                                 </li>
 

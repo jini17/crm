@@ -1095,9 +1095,11 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		                    	if (data.reload == "yes") {
 
 		                    		var detailHeader = jQuery('.detailview-header');
-		                    		detailHeader.find('.firstname').html(data.firstname.trim());
-		                    		detailHeader.find('.lastname').html(data.lastname.trim()); 
 		                    		jQuery('.tab-item.active').find('a')[0].click(); //To Reload the Detail View using Ajax                    		
+		                    		if (data.firstname)
+		                    			detailHeader.find('.firstname').html(data.firstname.trim());
+		                    		if (data.lastname)
+		                    			detailHeader.find('.lastname').html(data.lastname.trim()); 	                    		
 
 		                    	}  
 			                    	
