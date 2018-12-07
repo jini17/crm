@@ -107,7 +107,8 @@
                         <div class="login-box-container">
                            <div class="right-bar">
                                {if $smarty.get.parallel_logout eq "logout" }
-                                     <div id="multilogin" class="modal-box">
+                                   <!-- Commented for future Use
+                                 {*    <div id="multilogin" class="modal-box">
                                     <div class="modal-box-modal-dialog">
                                       <!-- Modal content-->
                                       <div class="modal-box-content">
@@ -126,7 +127,7 @@
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
+                                  </div>*}
                                      {/if}
                               <span class="login-page-title">
                               {if $LOGINPAGE['wcmsg'] eq ''}{vtranslate('LBL_WELCOME_SECONDCRM',$MODULE)}{else}{$LOGINPAGE['wcmsg']}{/if}

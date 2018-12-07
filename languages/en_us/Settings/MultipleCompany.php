@@ -1,6 +1,6 @@
 <?php
 $languageStrings = array(
-'LBL_ORGANIZATION_TITLE' => 'Company Title',
+'LBL_ORGANIZATION_TITLE' => 'Company Name',
         'LBL_ORGANIZATION_NAME' => 'Company Name',
         'LBL_ORGANIZATION_WEBSITE' => 'Website',
 	'LBL_VATID'=>'GST / VAT ID',
@@ -28,7 +28,7 @@ $languageStrings = array(
 	'LBL_DUPLICATES_EXIST' => 'Company Name already Exists',
 	'LBL_INVALID_IMAGE'	=> 'Invalid File::Use JPEG, PNG, JPG, PJPEG and X-PNG file only',
 );
-$jsLanguageStrings = array('JS_LBL_COMPANY_TITLE_CANT_BLNK' => 'Company title can not be blank',
+$jsLanguageStrings = array('JS_LBL_COMPANY_TITLE_CANT_BLNK' => 'Company Name can not be blank',
 			   'JS_LBL_COMPANY_NAME_CANT_BLNK' =>'Company name can not be blank',
 			    'JS_LBL_LOGO_CANT_BLNK' => 'Company Logo cant blank',
                             'SELECT_ATLEAST_ONE' => 'Please select at least one record',                   //added by jitu@Tar for MultipleCompany Msg 

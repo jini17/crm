@@ -281,28 +281,7 @@
     </div>
   </div>
       {/if}
-      {if $MULTI_LOGIN eq 'yes'}
-      <div id="multilogin" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-                <h4><i class="fa fa-power-off"></i> Previous login session auto logout.</h4>
-                <button type="button" class="close" data-dismiss="modal" style="margin-top: -29px;">&times;</button>
-
-            </div>
-            <div class="modal-body">
-                <h5>Additional information:</h5>
-                <ul style="margin-left: 20px;">           
-                    <li> You may receive this message if there are currently multiple sessions logged in with this username & password. </li>
-                    <li> Someone has logged in as this user from a different computer or browser window. Only one user session is allowed.</li>
-                    <li> As a consequence, the other session has been terminated.</li>
-                </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/if}
+     
       
         {if $FIELDS_INFO neq null}
                 <script type="text/javascript">

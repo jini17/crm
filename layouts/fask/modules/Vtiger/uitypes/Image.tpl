@@ -63,8 +63,8 @@
                                                 <span class="row">
                                                         <span class="col-lg-11">[{$IMAGE_INFO.name}]</span>
                                                         <!-- Style ADDED by Khaled -->
-                                                        
-                                                        <span class="col-lg-1"><input type="button" id="file_{$ITER}" value="{vtranslate('LBL_DELETE','Vtiger')}" class="imageDelete btn btn-danger"> </span>
+                                             <span class="col-lg-1"><input type="button" id="file_{$ITER}" value="{vtranslate('LBL_DELETE','Vtiger')}" class="imageDelete btn btn-danger" {if $MODULE eq 'Users'} style='position: absolute;top: -78px;   left: -972%;'{/if}> </span>
+
                                                 </span>
                                         </span>
                                 {/if}

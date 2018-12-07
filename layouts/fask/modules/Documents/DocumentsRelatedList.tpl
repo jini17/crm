@@ -28,7 +28,7 @@
                 <div class="row">
                     {foreach item=RELATED_LINK from=$RELATED_LIST_LINKS['LISTVIEWBASIC']}
 
-						{if $RELATED_LINK->get('linkmodule') eq 'Documents'}
+                                                {if $RELATED_LINK->get('linkmodule') eq 'Documents'}
                             <div class="col-sm-3">
                                 {assign var=IS_SELECT_BUTTON value={$RELATED_LINK->get('_selectRelation')}}
                                 {* setting button module attribute to Events or Calendar based on link label *}
@@ -48,33 +48,33 @@
                                 {if $IS_SELECT_BUTTON neq true}name="addButton"{/if}>{if $IS_SELECT_BUTTON eq false}<i class="icon-plus icon-white"></i>{/if}&nbsp;{$RELATED_LINK->getLabel()}</button>
                             </div>
                             {/if}
-                            
+
                             {if $RELATED_LINK->getLabel() eq 'Vtiger'}
-								{if $IS_CREATE_PERMITTED}
-									<div class="col-sm-3">
-										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-												<span title="{vtranslate('LBL_NEW_DOCUMENT', $MODULE)}"><i class="material-icons">add</i></span>&nbsp;{vtranslate('LBL_NEW_DOCUMENT', $RELATED_MODULE_NAME)}&nbsp; <span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu">
-												<li class="dropdown-header"><i class="material-icons">file_upload</i> {vtranslate('LBL_FILE_UPLOAD', $RELATED_MODULE_NAME)}</li>
-												<li id="VtigerAction">
-													<a href="javascript:Documents_Index_Js.uploadTo('Vtiger',{$PARENT_ID},'{$MODULE}')">
-														<img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">
-														{vtranslate('LBL_TO_SERVICE', $RELATED_MODULE_NAME, {vtranslate('LBL_VTIGER', $RELATED_MODULE_NAME)})}
-													</a>
-												</li>
-												<li role="separator" class="divider"></li>
-												<li class="dropdown-header"><i class="material-icons">link</i> {vtranslate('LBL_LINK_EXTERNAL_DOCUMENT', $RELATED_MODULE_NAME)}</li>
-												<li id="shareDocument"><a href="javascript:Documents_Index_Js.createDocument('E',{$PARENT_ID},'{$MODULE}')">&nbsp;<i class="material-icons">share</i>&nbsp;&nbsp; {vtranslate('LBL_FROM_SERVICE', $RELATED_MODULE_NAME, {vtranslate('LBL_FILE_URL', $RELATED_MODULE_NAME)})}</a></li>
-												<li role="separator" class="divider"></li>
-												<li id="createDocument"><a href="javascript:Documents_Index_Js.createDocument('W',{$PARENT_ID},'{$MODULE}')"><i class="material-icons">file_upload</i> {vtranslate('LBL_CREATE_NEW', $RELATED_MODULE_NAME, {vtranslate('SINGLE_Documents', $RELATED_MODULE_NAME)})}</a></li>
-											</ul>
-										</div>
-									</div>
-								{/if}
+                                                                {if $IS_CREATE_PERMITTED}
+                                                                        <div class="col-sm-3">
+                                                                                <div class="dropdown">
+                                                                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                                                                <span title="{vtranslate('LBL_NEW_DOCUMENT', $MODULE)}"><i class="material-icons">add</i></span>&nbsp;{vtranslate('LBL_NEW_DOCUMENT', $RELATED_MODULE_NAME)}&nbsp; <span class="caret"></span>
+                                                                                        </button>
+                                                                                        <ul class="dropdown-menu">
+                                                                                                <li class="dropdown-header"><i class="material-icons">file_upload</i> {vtranslate('LBL_FILE_UPLOAD', $RELATED_MODULE_NAME)}</li>
+                                                                                                <li id="VtigerAction">
+                                                                                                        <a href="javascript:Documents_Index_Js.uploadTo('Vtiger',{$PARENT_ID},'{$MODULE}')">
+                                                                                                                                                                                    <img width="15" hieght="15" style="  margin-top: -3px;margin-right: 4%;" title="Agiliux" alt="Agiliux" src="layouts/v7/skins/images/favicon.ico">
+                                                                                                                {vtranslate('LBL_TO_SERVICE', $RELATED_MODULE_NAME, {vtranslate('LBL_VTIGER', $RELATED_MODULE_NAME)})}
+                                                                                                        </a>
+                                                                                                </li>
+                                                                                                <li role="separator" class="divider"></li>
+                                                                                                <li class="dropdown-header"><i class="material-icons">link</i> {vtranslate('LBL_LINK_EXTERNAL_DOCUMENT', $RELATED_MODULE_NAME)}</li>
+                                                                                                <li id="shareDocument"><a href="javascript:Documents_Index_Js.createDocument('E',{$PARENT_ID},'{$MODULE}')">&nbsp;<i class="material-icons">share</i>&nbsp;&nbsp; {vtranslate('LBL_FROM_SERVICE', $RELATED_MODULE_NAME, {vtranslate('LBL_FILE_URL', $RELATED_MODULE_NAME)})}</a></li>
+                                                                                                <li role="separator" class="divider"></li>
+                                                                                                <li id="createDocument"><a href="javascript:Documents_Index_Js.createDocument('W',{$PARENT_ID},'{$MODULE}')"><i class="material-icons">file_upload</i> {vtranslate('LBL_CREATE_NEW', $RELATED_MODULE_NAME, {vtranslate('SINGLE_Documents', $RELATED_MODULE_NAME)})}</a></li>
+                                                                                        </ul>
+                                                                                </div>
+                                                                        </div>
+                                                                {/if}
                             {/if}
-                            
+
                     {/foreach}
                 </div>&nbsp;
             </div>
@@ -96,7 +96,7 @@
             <label class="showBundlesInInventory checkbox"><input type="checkbox" {if $IS_VIEWABLE}checked{/if} value="{$IS_VIEWABLE}">&nbsp;&nbsp;{vtranslate('LBL_SHOW_BUNDLE_IN_INVENTORY', $MODULE)}</label>
         </div>
     {/if}
-    
+
     <div class="relatedContents col-lg-12 col-md-12 col-sm-12 table-container">
     <div class="bottomscroll-div">
         {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
@@ -152,7 +152,7 @@
             {foreach item=RELATED_RECORD from=$RELATED_RECORDS}
                 <tr class="listViewEntries" data-id='{$RELATED_RECORD->getId()}' 
                                         {if $RELATED_MODULE_NAME eq 'Calendar'}
-						data-recurring-enabled='{$RELATED_RECORD->isRecurringEnabled()}'
+                                                data-recurring-enabled='{$RELATED_RECORD->isRecurringEnabled()}'
                                             {assign var=DETAILVIEWPERMITTED value=isPermitted($RELATED_MODULE->get('name'), 'DetailView', $RELATED_RECORD->getId())}
                                             {if $DETAILVIEWPERMITTED eq 'yes'}
                             data-recordUrl='{$RELATED_RECORD->getDetailViewUrl()}'
@@ -175,7 +175,7 @@
                                 <a name="downloadfile" href="{$DOCUMENT_RECORD_MODEL->getDownloadFileURL()}" onclick="event.stopImmediatePropagation();"><i title="{vtranslate('LBL_DOWNLOAD_FILE', $RELATED_MODULE_NAME)}" class="material-icons alignMiddle">file_upload</i></a>
                             {/if}
                         </span>
-                        
+
                     </td>
                     {foreach item=HEADER_FIELD from=$RELATED_HEADERS}
                         {assign var=RELATED_HEADERNAME value=$HEADER_FIELD->get('name')}
@@ -188,7 +188,7 @@
                         {/if}
                        <td class="{$WIDTHTYPE} relatedListEntryValues " data-field-type="{$HEADER_FIELD->getFieldDataType()}" nowrap style="width:inherit;">
                             {if $RELATED_MODULE->get('name') eq 'Documents' && $RELATED_HEADERNAME eq 'document_source'}
-								<center>{$RELATED_RECORD->get($RELATED_HEADERNAME)}</center>
+                                                                <center>{$RELATED_RECORD->get($RELATED_HEADERNAME)}</center>
                             {else}
                             <span class= "value textOverflowEllipsis">
                                 {if $HEADER_FIELD->isNameField() eq true or $HEADER_FIELD->get('uitype') eq '4'}
