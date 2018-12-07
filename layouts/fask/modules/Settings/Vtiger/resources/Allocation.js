@@ -7,7 +7,38 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
+Vtiger.Class("Settings_Vtiger_Allocation_Js",{
+
+     registerExecuteYND : function(){
+        var aDeferred = jQuery.Deferred();
+        
+        app.helper.showProgress();
+            var params = {
+                'module' : app.getModuleName(),
+                'parent' : app.getParentModuleName(),
+                'action' : 'RunYndProcess',
+            }
+          AppConnector.request(params).then(
+                function() {
+                    var url = "?module=Vtiger&parent=Settings&view=AllocationListView&block=14&fieldid=49";
+                    thisInstance.loadContents(url).then(function(data){
+                        app.helper.hideProgress();
+                        jQuery(".settingsPageDiv.content-area.clearfix").html(data);
+
+                        thisInstance.registerEvents();
+                        app.helper.showSuccessNotification({"message":"Records deleted successfully"});
+                    });
+                    aDeferred.resolve();
+
+                },
+                function(error,err){
+                    aDeferred.reject();
+                }
+            );
+
+         return aDeferred.promise();
+     }, 
+},{
 
 
     /**
@@ -1096,15 +1127,18 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
                     //console.log("Inside pjax");
                    app.helper.hideProgress();
                    jQuery('#myModal').modal('show');
-               //    jQuery(".checkleavestatus").html('System checking...');
-                //   jQuery(".checkleavestatus").attr('disabled',true);
+                   jQuery(".checkleavestatus").html('System checking...');
+                   jQuery(".checkleavestatus").attr('disabled',true);
                    jQuery(".modal-body").html(data);
+                  // jQuery("#btnyearendprocess").trigger('click');
                     //history.pushState({}, null, window.history.back());
                 });
 
         });
         return aDeferred.promise();
      },
+     
+    
      
     registerEvents: function() {
         this.registerDeleteButton();
@@ -1117,7 +1151,7 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{},{
         this.registerBenefitAddButton();
         this.registerBenefitEditButton();
         this.registerYearEndProcess();
-        
+    
     }
 
 });

@@ -19,7 +19,7 @@
 				<input type="hidden" name="userid" value="{$USERID}" />
 				<div name='massEditContent'>
 					<div class="modal-body ">
-						<div class="form-group">
+						{*<div class="form-group">
 							{if !$CURRENT_USER_MODEL->isAdminUser()}
 								<label class="control-label fieldLabel col-sm-5">
 									{vtranslate('LBL_OLD_PASSWORD', $MODULE)}&nbsp;
@@ -29,7 +29,7 @@
 									<input type="password" name="old_password" class="form-control inputElement" data-rule-required="true"/>
 								</div>
 							{/if}
-						</div>
+						</div>*}
 
 						<div class="form-group">
 							<label class="control-label fieldLabel col-sm-5">

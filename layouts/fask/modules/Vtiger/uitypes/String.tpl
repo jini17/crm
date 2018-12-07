@@ -30,7 +30,6 @@
 			data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
 		{/if}
 
-
 		{if $FIELD_MODEL->get('uitype') eq '106'}
 			data-rule-email="true"
 		{/if}

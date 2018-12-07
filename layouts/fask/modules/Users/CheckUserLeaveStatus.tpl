@@ -1,45 +1,39 @@
-<!--<div class="contents" style="    overflow: scroll;">
-  <table class="table table-bordered table-condensed marginBottom50px" style="width: 100%;">
-    <thead>
-      <tr class="blockHeader">
-        <th>{vtranslate('Employee Name', $MODULE)}</th>
-        {foreach from=$LEAVETYPES item=LEAVETYPE}
-             <th >{$LEAVETYPE['title']}</th>
-        {/foreach}
-        <th nowrap="nowrap">Advanced Sharing Rules</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</div>      
--->
-<table class="table table-bordered ">
+<div>
+  <div></div>
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th rowspan="2">
-        <td>Employee Name</td>
+      <th class="btn-primary">
+     &nbsp;
       </th>  
-      <th  colspan="3">Medical Leave</th>    
-      <th colspan="3"> Annual</th>  
-      <th colspan="3"> Study Leave </th>  
+        <th colspan="3" class="btn-primary text-white text-center">{vtranslate('Annual Leave', $MODULE)}</th>    
     </tr>
-   
-  </thead>
-  <head>
-     <tr>
-      <td></td>
-      <td>&Allocation;</td>
-      <td>Allocation</td>
-      <td>Used</td>
-      <td>Carry Forward?</td>
+    
+       <tr>
+      <th>
+       {vtranslate('Employee Name', $MODULE)}
+      </th>
+       <th>{vtranslate('Allocated',$MODULE)}</th>
+       <th>{vtranslate('Used',$MODULE)}</th>
+       <th>{vtranslate('Carry Forward',$MODULE)}</th>
     </tr>  
-  </head>
+    </thead>
+
   <tbody>
-  <tbody>  
-  
+   {foreach from=$USERS_LEAVESTATUS item=UserLeave key=EMPNAME}
+    <tr>
+     <td>{$EMPNAME}</td>
+     <td>{$UserLeave['Allocation']}</td>
+     <td>{$UserLeave['Used']}</td>
+     <td>{$UserLeave['Carry Forward']}</td>
+   </tr>
+   {/foreach}
+  </tbody>  
 </table>  
+
+  <div>
+      <span>{vtranslate('Above no of leaves would not be carry farward, Still do you want to continue? ',$MODULE)}</span>
+      <input class=" btn btn-primary pull-right" type="button" name="continue" onclick="Settings_Vtiger_Allocation_Js.registerExecuteYND();" value="Continue">
+  </div>
+  <div class="clearfix"></div>
+</div>

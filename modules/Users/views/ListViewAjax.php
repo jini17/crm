@@ -21,7 +21,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
                         $this->exposeMethod('getUserLanguage');
                         $this->exposeMethod('getUserLeave');
                         $this->exposeMethod('getUserClaim');
-                        $this->exposeMethod('getUsersLeaveStatus');
+                      //  $this->exposeMethod('getUsersLeaveStatus');
         }
 
 
@@ -415,7 +415,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
                 echo $viewer->view('UserClaim.tpl',$moduleName,true);
         }
 
-        public function getUsersLeaveStatus(Vtiger_Request $request) { 
+      /*  public function getUsersLeaveStatus(Vtiger_Request $request) { 
                 $db = PearDatabase::getInstance();
 
                 $moduleName = $request->getModule();
@@ -428,11 +428,11 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
                 $viewer = $this->getViewer($request);
                 $usersleavestatus = $user_model->UsersLeaveStatus();
                 $viewer->assign('USERS_LEAVESTATUS',$usersleavestatus);
-                $viewer->assign("LEAVETYPES",Users_LeavesRecords_Model::getAllLeaveTypeList());
+                $viewer->assign('MODULE',$moduleName);
                 $viewer = $this->getViewer($request);
               echo  $viewer->view('CheckUserLeaveStatus.tpl',$moduleName,true);
 
-        }
+        }*/
 
 
         /**

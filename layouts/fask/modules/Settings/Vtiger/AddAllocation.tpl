@@ -15,7 +15,7 @@
     <div class="allocationModalContainer modal-dialog modal-lg" id="AddLeaveTypeContainer">
         <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position:absolute;top:-5px;left:97%"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span><div></div></button>
-                Add Allocation
+                {vtranslate('Add',$MODULE)} {vtranslate('Allocation',$MODULE)}
         </div>
         <div class="modal-content">            
             <form id="AddAllocation" class="form-horizontal" method="POST">

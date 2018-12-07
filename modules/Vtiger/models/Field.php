@@ -167,8 +167,10 @@ class Vtiger_Field_Model extends Vtiger_Field {
 				$fieldDataType = 'salutation';
             } else if($uiType == '55' && stripos($this->getName(), 'roundrobin_userid') !== false) {
                 $fieldDataType = 'multiowner';
-            } else if($uiType == '3993') {		//Modified Line
+            } else if($uiType == '3993' || $uiType == '3996') {		//Modified Line
 				 $fieldDataType = 'companyDetails';	//Modified Line
+			} else if($uiType == '3994') {		//Modified Line
+				 $fieldDataType = 'multicompany';	//Modified Line
 			} else if($uiType == '998') {		//Modified Line
 				 $fieldDataType = 'userRole';	//Modified Line
 			} else if($uiType == '999') {		//added by jitu@5jan2017

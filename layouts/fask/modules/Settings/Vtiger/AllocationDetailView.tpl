@@ -25,7 +25,7 @@
 
             <div class="contents tabbable clearfix">
                 {if $YNP eq 0}
-                    <div class="pull-right"><button class="btn btn-success checkleavestatus">Year End Process</button></div>
+                    <div class="pull-right"><a class="btn btn-success" href="index.php?module=Vtiger&parent=Settings&view=YearEndProcess">Year End Process</a></div>
                 {/if}    
                 <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">Delete</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

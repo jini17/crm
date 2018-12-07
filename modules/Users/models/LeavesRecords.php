@@ -46,13 +46,14 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
         public function getAllLeaveTypeList(){
         $db = PearDatabase::getInstance();
-        $query = "SELECT * FROM vtiger_leavetype";
+        $query = "SELECT * FROM vtiger_leavetype INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_leavetype.leavetypeid WHERE vtiger_crmentity.deleted=0";
 
         $result = $db->pquery($query);
         $rowdetail = array();
         for($i=0;$db->num_rows($result)>$i;$i++){
 
                 $rowdetail[$i]['title'] = $db->query_result($result, $i, 'title');
+                $rowdetail[$i]['leavetypeid'] = $db->query_result($result, $i, 'leavetypeid');
                 $rowdetail[$i]['colorcode'] = $db->query_result($result, $i, 'colorcode');
         }
 

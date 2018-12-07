@@ -10,18 +10,18 @@
 {* modules/Settings/UserPlan/views/UserPlanAjax.php *}
 
 {strip}
-
+Jitu{$MODULE}
     <div class="allocationModalContainer modal-dialog modal-lg" id="EditAllocationContainer">
         <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position:absolute;top:-5px;left:97%"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span><div></div></button>
-                Edit Allocation
+                {vtranslate('Edit',$MODULE)} {vtranslate('Allocation',$MODULE)}
         </div>
         <div class="modal-content">            
             <form id="AddAllocation" class="form-horizontal" method="POST">
                 <div class="modal-body" id="scrollContainer" name="test">
                     <div class="container float-left">
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Allocation Title :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Allocation',$MODULE)} {vtranslate('Title',$MODULE)} :</label></div>
                             <div class="fieldValue col-lg-4 col-md-4">
                                 <input class="inputElement col-sm-9" type="text" placeholder="New Joiners" id="AllocationTitle" name="AllocationTitle" value="{$VALUES['allocationtitle']}">
                             </div>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="container float-left">
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Allocation Code :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Allocation',$MODULE)} {vtranslate('Code',$MODULE)} :</label></div>
                             <div class="fieldValue col-lg-4 col-md-4">
                                 <input class="inputElement col-sm-9" type="text" placeholder="A01" id="AllocationCode" name="AllocationCode" value="{$VALUES['allocation_code']}">
                             </div>
@@ -38,7 +38,7 @@
                     <div class="container float-left">
 
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Status :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Status',$MODULE)} :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-6 ">
                                 {if $VALUES['status'] eq 'on'}
@@ -53,7 +53,7 @@
                     <div class="container float-left">
 
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Description :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Description',$MODULE)} :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-6 ">
                                 <textarea class="inputElement col-sm-9" style="width: 359px; height: 111px;" id="Allocation_Desc" name="Allocation_Desc">{$VALUES['allocation_desc']}</textarea>
@@ -63,7 +63,7 @@
                     <div class="container float-left">
 
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Grade Allocation :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Grade',$MODULE)} {vtranslate('Allocation',$MODULE)} :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-6 ">
                                 <select class="select2-container select2 inputElement col-sm-6 selectModule" multiple style="width:359px;" id="Allocation_grade" name="Allocation_grade">
@@ -83,7 +83,7 @@
                     <div class="container float-left">
 
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Show LeaveType :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Show LeaveType',$MODULE)}  :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-6 ">
                                 <input class="inputElement nameField" type="checkbox" id="EditAllocateLeave" name="EditAllocateLeave">
@@ -114,7 +114,7 @@
                     <div class="container float-left">
 
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Claim Allocation :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Claim',$MODULE)} {vtranslate('Claim',$MODULE)} :</label></div>
 		
                             <div class="fieldValue col-lg-4 col-md-6 col-sm-6 ">
                                 <select class="select2-container select2 inputElement col-sm-6 selectModule" multiple style="width:359px;" id="Allocation_claimtype" name="Allocation_claimtype">
