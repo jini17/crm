@@ -26,6 +26,34 @@
 <script src="libraries/jquery/boxslider/jqueryBxslider.js"></script>
 <script src="libraries/jquery/boxslider/respond.min.js"></script>
 <style>
+   .login-page-title{
+       font-size: 14px;
+       padding: 5px;
+   }
+  #login-checkbox,
+   .p-3.align-self-stretch,
+   .forgotPasswordLink {
+       font-size: 14px !important;
+   }
+   .login-wrapper{
+    width: 400px;
+}
+#page {
+    min-height: 100%;
+    padding-top: 45px !important;
+}
+#usernameloginpg,
+#passwordloginpg,
+.align-self-stretch{
+    padding: 10px !important;
+}
+.input-group > .form-control, .input-group > .custom-select, .input-group > .custom-file{
+  
+}
+.control-group{
+  margin-bottom: 5px !important;
+        font-size: 14px;
+}
    .failureMessage {
    color: red;
    display: block;
