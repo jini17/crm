@@ -84,8 +84,8 @@
 										{else}
 											{assign var=COUNTER value=$COUNTER+1}
 										{/if}
-										
-										<div class="fieldLabel col-xs-6 textOverflowEllipsis  {if $FIELD_MODEL->getName() eq 'description' or $FIELD_MODEL->get('uitype') eq '69'}col-xs-6{else} col-md-3{/if} {$WIDTHTYPE}" id="{$MODULE_NAME}_detailView_fieldLabel_{$FIELD_MODEL->getName()}" >	
+									
+										<div class="fieldLabel col-xs-6 textOverflowEllipsis {if $FIELD_MODEL->getName() eq 'description' or $FIELD_MODEL->get('uitype') eq '69'}col-xs-6{else} col-md-3{/if} {$WIDTHTYPE}" style="display:{if $FIELD_MODEL->getName() eq 'status' && !$USER_MODEL->isAdminUser() && $FIELD_MODEL->get('uitype') eq 16}none{/if};" id="{$MODULE_NAME}_detailView_fieldLabel_{$FIELD_MODEL->getName()}" >	
 											<span class="muted">
 												{if $MODULE_NAME eq 'Documents' && $FIELD_MODEL->get('label') eq "File Name" && $RECORD->get('filelocationtype') eq 'E'}
 													{vtranslate("LBL_FILE_URL",{$MODULE_NAME})}
@@ -97,7 +97,7 @@
 												{/if}
 											</span>
 										</div>
-										<div class="fieldValue  col-xs-6 col-md-3 {$WIDTHTYPE}" id="{$MODULE_NAME}_detailView_fieldValue_{$FIELD_MODEL->getName()}" {if $FIELD_MODEL->get('uitype') eq '19' or $FIELD_MODEL->get('uitype') eq '20' or $fieldDataType eq 'reminder' or $fieldDataType eq 'recurrence'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
+										<div class="fieldValue  col-xs-6 col-md-3 {$WIDTHTYPE}" style="display:{if $FIELD_MODEL->getName() eq 'status' && !$USER_MODEL->isAdminUser()}none{/if};" id="{$MODULE_NAME}_detailView_fieldValue_{$FIELD_MODEL->getName()}" {if $FIELD_MODEL->get('uitype') eq '19' or $FIELD_MODEL->get('uitype') eq '20' or $fieldDataType eq 'reminder' or $fieldDataType eq 'recurrence'} colspan="3" {assign var=COUNTER value=$COUNTER+1} {/if}>
 
 											{assign var=FIELD_VALUE value=$FIELD_MODEL->get('fieldvalue')}
 											{if $fieldDataType eq 'multipicklist'}

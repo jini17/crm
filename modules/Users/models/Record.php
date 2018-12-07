@@ -1509,35 +1509,41 @@ class Users_Record_Model extends Vtiger_Record_Model
         if($isallocate)
           $curryear =  date('Y')+1;
 
-        $sql = "SELECT vtiger_leavetype.title, vtiger_leavetype.carryforward, concat(vtiger_users.first_name,' ', vtiger_users.last_name) as username, 
+        $sql = "SELECT vtiger_grade.grade,  concat(vtiger_users.first_name,' ', vtiger_users.last_name) as username, vtiger_leavetype.title, vtiger_leavetype.carryforward,
                   vtiger_leaverolemapping.leavetype, vtiger_leaverolemapping.userid, vtiger_leaverolemapping.allocation, vtiger_leaverolemapping.used 
-                FROM vtiger_leaverolemapping
-                LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = vtiger_leaverolemapping.leavetype
+                FROM vtiger_leaverolemapping LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = vtiger_leaverolemapping.leavetype
                 LEFT JOIN vtiger_users ON vtiger_users.id=vtiger_leaverolemapping.userid
+                LEFT JOIN vtiger_grade ON vtiger_grade.gradeid =  vtiger_users.grade_id
+                WHERE vtiger_leaverolemapping.alloc_year=? ORDER BY vtiger_leaverolemapping.userid";
 
-                WHERE alloc_year=?";
         $result = $db->pquery($sql,array($curryear));
         $num_rows = $db->num_rows($result);
+
         //fetch all Leave Type
 
         if($num_rows > 0){
             
             $leavemap = array(); 
             for($i=0;$i < $num_rows;$i++){
-              
+
+              $grade     = $db->query_result($result, $i, 'grade');
+
               $userid     = $db->query_result($result, $i, 'userid');
               $leavetype  = $db->query_result($result, $i, 'title');
               $allocated  = $db->query_result($result, $i, 'allocation');
               $used       = $db->query_result($result, $i, 'used');
               $username   = $db->query_result($result, $i, 'username');
-              $carryfwd   = $db->query_result($result, $i, 'carryforward');
-
+              $carryfwd   = $db->query_result($result, $i, 'carryforward')=='on'?'Carry Forwarded':'Forfeit';
+              $balance = $allocated - $used;
              
-              $leavemap[$username][$leavetype] = array("Allocation"=>$allocated, "Used"=>$used, "Carry Forward"=>$carryfwd);
+              $leavemap[] = array("Grade"=>$grade, "Username"=>$username, "LeaveType"=>$leavetype, "Allocation"=>$allocated, "Used"=>$used, "Balance"=>$balance, "Status"=>$carryfwd);
             }      
              return $leavemap;
+
           } else {
+
            return 0;
+
         }
     }
 }

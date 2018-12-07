@@ -12,27 +12,38 @@ global $adb;
 $adb->setDebug(true);
 
 $module = new Vtiger_Module();
-$module->name = 'Documents';
-$module = $module->getInstance('Documents');
+$module->name = 'Users';
+$module = $module->getInstance('Users');
 
 // Create Block instance
-$block1 = new Vtiger_Block();
-$block1->label = 'LBL_NOTE_INFORMATION';
 
-$block1 = $block1->getInstance($block1->label,$module);
+$block = new Vtiger_Block();
+$block->label = 'LBL_EMPLOYEE_LOCATION_INFORMATION';
+$module->addBlock($block);
 
 
 $field1 = new Vtiger_Field();
-	$field1->name = 'visibility_identifier';
-	$field1->label = 'LBL_PERMISSION';
-	$field1->table = $module->basetable;
-	$field1->column = 'visibility_identifier';
-	$field1->columntype = 'varchar(10)';
-	$field1->uitype = 16;
-	$field1->displaytype = 1;
-	$field1->typeofdata = 'V~O'; // varchar~Mandatory
-	$field1->setPicklistValues( Array ('Public', 'Private','Protected') );
-	$block1->addField($field1); /** table and column are automatically set */
+$field1->name = 'user_company';
+$field1->label = 'Select Company';
+$field1->table = $module->basetable;
+$field1->column = 'user_company';
+$field1->columntype = 'varchar(10)';
+$field1->uitype = 399;
+$field1->displaytype = 1;
+$field1->typeofdata = 'V~O'; // varchar~Mandatory
+$block->addField($field1); /** table and column are automatically set */
+
+
+$field1 = new Vtiger_Field();
+$field1->name = 'user_location';
+$field1->label = 'Select Location';
+$field1->table = $module->basetable;
+$field1->column = 'user_location';
+$field1->columntype = 'varchar(10)';
+$field1->uitype = 3996;
+$field1->displaytype = 1;
+$field1->typeofdata = 'V~O'; // varchar~Mandatory
+$block->addField($field1); /** table and column are automatically set */
 
 echo "NBBB";
 //after field is created, go to vtiger_field and find the field ID.

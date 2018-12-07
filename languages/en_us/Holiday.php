@@ -22,7 +22,7 @@ $languageStrings = array(
 	'LBL_NOVEMBER' => 'November',
 	'LBL_DECEMBER' => 'December',
 	'LBL_CLICK_HERE_TO_VIEW' => 'Click here to view',
-
+	'LBL_HOLIDAY_INFORMATION'=>'Holiday Information',
 	//Basics
 	'LBL_NO_HOLIDAY' => 'No holiday in ',
 	'LBL_SELECT_ALL' => 'Select All',

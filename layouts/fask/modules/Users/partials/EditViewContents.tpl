@@ -65,7 +65,7 @@
             {else}
             {assign var=COUNTER value=$COUNTER+1}
             {/if}
-            <div class="{$FIELD_MODEL->get('label')} fieldLabel col-xs-6 col-md-3 text-right" style="min-height: 53px;padding-bottom:10px;">
+            <div class="{$FIELD_MODEL->get('label')} {if $FIELD_MODEL->getName() eq 'status' && !$USER_MODEL->isAdminUser()} hide {/if}  fieldLabel col-xs-6 col-md-3 text-right" style="min-height: 53px;padding-bottom:{if $FIELD_MODEL->getName() eq 'date_joined'}4px{else}10px{/if};">
                {if $isReferenceField eq "reference"}
                {if $refrenceListCount > 1}
                <select style="width: 140px;" class="select2 referenceModulesList form-control">
@@ -81,7 +81,7 @@
                {/if}
                &nbsp; {if $FIELD_MODEL->isMandatory() eq true} <span class="redColor">*</span> {/if}
             </div>
-            <div class="{$FIELD_MODEL->get('label')}  fieldValue col-xs-6 col-md-3 {if $FIELD_MODEL->getFieldDataType() eq 'boolean'} col-xs-6 {/if} {if $FIELD_MODEL->get('uitype') eq '19'} col-xs-6 {assign var=COUNTER value=$COUNTER+1} {/if}" style="padding-bottom:10px;">
+            <div class="{$FIELD_MODEL->get('label')} {if $FIELD_MODEL->getName() eq 'status' && !$USER_MODEL->isAdminUser()} hide {/if} fieldValue col-xs-6 col-md-3 {if $FIELD_MODEL->getFieldDataType() eq 'boolean'} col-xs-6 {/if} {if $FIELD_MODEL->get('uitype') eq '19'} col-xs-6 {assign var=COUNTER value=$COUNTER+1} {/if}" style="padding-bottom:{if $FIELD_MODEL->getName() eq 'date_joined'}4px{else}10px{/if};">
                {include file=vtemplate_path($FIELD_MODEL->getUITypeModel()->getTemplateName(),$MODULE)}
             </div>
             {/if}
