@@ -10,7 +10,7 @@
 {strip}
  <div class="col-sm-12 col-xs-12 module-action-bar clearfix coloredBorderTop">
         <div class="module-action-content clearfix {$MODULE}-module-action-content">
-                <div class="col-xs-{if $smarty.request.view eq 'Edit'}12{else}3{/if} {if $MODULE eq 'Home'  AND   $LOGGED_NOW == 'in' }col-lg-3{else} col-lg-6 {/if} module-breadcrumb module-breadcrumb-{$smarty.request.view} transitionsAllHalfSecond">
+                <div class="col-xs-{if $smarty.request.view eq 'Edit'}12{else}3{/if} {if $MODULE eq 'Home'  AND   $LOGGED_NOW == 'in' }col-lg-3 col-md-3 col-xs-3{else} col-lg-6 col-md-6 {/if} module-breadcrumb module-breadcrumb-{$smarty.request.view} transitionsAllHalfSecond">
                         {assign var=MODULE_MODEL value=Vtiger_Module_Model::getInstance($MODULE)}
                         {if $MODULE_MODEL->getDefaultViewName() neq 'List'}
                                 {assign var=DEFAULT_FILTER_URL value=$MODULE_MODEL->getDefaultUrl()}
@@ -97,11 +97,11 @@
                         {/if}
                 </div> 
                     {if $MODULE eq 'Home'  AND     $LOGGED_NOW == 'in' }
-                <div class="col-xs-5 col-lg-5 col-md-5 col-sm-5">
+                <div class="col-xs-5 col-lg-5 col-md-6 col-sm-5">
                     
                         <div class="clearfix">
 
-                                <div class="col-xs-12">
+                                <div class="col-xs-12 login-ip">
                                         <!-- added by jitu@28Dec2016-->
                                         <div style="text-align:center;display:block;width:100%;margin:0 auto;padding-top:10px;">
                                             {vtranslate('LBL_LAST_LOGINTIME')} {$LAST_LOGIN_TIME} {vtranslate('LBL_USERIP')} {$LAST_USER_IP}
