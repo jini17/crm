@@ -2,10 +2,10 @@
 <div class="contents" style="margin:10px;padding:10px !important;">
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-    <h4>{vtranslate('Year End Process', $MODULE)}</h4>
+    <h4>{vtranslate('Employee Leave Status', $MODULE)}</h4>
     <div class="pull-right">
       <!--<span>{vtranslate('Above no of leaves would not be carry farward, Still do you want to continue? ',$MODULE)}</span>-->
-      <input class=" btn btn-primary" type="button" name="continue" onclick="Settings_Vtiger_Allocation_Js.registerExecuteYND();" value="Execute Process">
+      <input class=" btn btn-primary" type="button" name="continue" onclick="Settings_Vtiger_Allocation_Js.registerExecuteYND();" value="Year End Process">
     </div>
     <div class="clearfix"></div>
     

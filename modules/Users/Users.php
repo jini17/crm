@@ -835,7 +835,7 @@ class Users extends CRMEntity {
                                                 $fldvalue = $this->column_fields[$fieldname];
                                         }
                                 }
-                                elseif($uitype == 33) {
+                                elseif($uitype == 33 || $uitype == 3994) {
                                         if(is_array($this->column_fields[$fieldname])) {
                                                 $field_list = implode(' |##| ',$this->column_fields[$fieldname]);
                                         }else {

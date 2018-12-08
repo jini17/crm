@@ -525,6 +525,7 @@ $languageStrings = array(
 'LBL_SELECT_ROLE'=>'Select Role',
 'birthday'=>'Date of Birth',
 //End of Contacts
+'LBL_EMPLOYEE_LOCATION_INFORMATION'=>'Employee Location Information',
 );
 
 $jsLanguageStrings = array(

@@ -28,7 +28,7 @@ $field1->label = 'Select Company';
 $field1->table = $module->basetable;
 $field1->column = 'user_company';
 $field1->columntype = 'varchar(10)';
-$field1->uitype = 399;
+$field1->uitype = 3994;
 $field1->displaytype = 1;
 $field1->typeofdata = 'V~O'; // varchar~Mandatory
 $block->addField($field1); /** table and column are automatically set */
