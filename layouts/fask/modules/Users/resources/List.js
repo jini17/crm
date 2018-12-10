@@ -353,7 +353,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
         });
     },
     registerUserViewSwitcher: function () {
-        jQuery('.main-container').on('click', '.empview', function () {
+        jQuery('.empview').on('click', function () {
             var viewtype = $(this).data('listtype');
             $(this).closest('div').find('button').removeClass('btn-primary');
             $(this).addClass('btn-primary')
@@ -458,15 +458,38 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
         });
     },
     registerKeySearch: function () {
-        $('#txtSearchProdAssign').keypress(function (e) {
+        $('#keywordsearch').on("keypress",function (e) {
             var key = e.which;
             if (key == 13)  // the enter key code
             {
-                jQuery('.keyword-search').click();
-                return false;
+              var keyword = $("#keywordsearch").val();
+            var listInstance = new Settings_Users_List_Js;
+            var listParams = listInstance.getListViewParams();
+            var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+            var tabType = jQuery('#tabtype').val();
+            var dept = jQuery('#curdepartment').val();
+
+            if (keyword.length == 0) {
+                app.helper.showErrorNotification({"message": "Type your keyword please!"});
+            }
+            else {
+
+                if (tabType == "MD") {
+                    listParams['search_params'] = [[["department", "e", dept]], [["first_name", "c", keyword], ["last_name", "c", keyword], ["email1", "c", keyword], ["title", "c", keyword], ["department", "c", keyword]]]
+                }
+                else {
+                    listParams['search_params'] = [[["grade_id", "n", "0"]], [["first_name", "c", keyword], ["last_name", "c", keyword], ["email1", "c", keyword], ["title", "c", keyword], ["department", "c", keyword]]]
+                }
+
+                listParams['status'] = "Active";
+                listParams['empview'] = viewtype;
+                listParams['tabtype'] = tabType;
+                listParams['searchType'] = "keyword";
+                listInstance.loadListViewRecords(listParams);
+            }
             }
         });
-        jQuery('.main-container').on('click', '.keyword-search', function () {
+        jQuery('.keyword-search').on('click', function () {
             var keyword = $("#keywordsearch").val();
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();
@@ -495,7 +518,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
         })
     },
     registerPagination: function () {
-        jQuery('.main-container').on('click', '.pagination li', function () {
+        jQuery('.pagination li').on('click',  function () {
             var page = $(this).find('a').data('page');
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();

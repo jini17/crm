@@ -1445,6 +1445,63 @@ class Users_Record_Model extends Vtiger_Record_Model
 
     /**
      * Added By Khaled
+     * Sidebar View Based on User role
+     * @param type $modulename
+     */
+    public function UserSidebarPermission($userInstance,$request){
+    $data = array();
+                  if($request->get("module") == "Users" && $request->get("view") == "List" && $userInstance->get("roleid") == "H15"){
+                          $data['filterview'] = "filterview";
+                          $data['adminview'] = "hide AdminSidebar";
+                          $data['userview'] = "hide UserSidebar";
+                   }
+                  else  if($request->get("module") == "Users" && $request->get("view") == "List" && ($userInstance->get("roleid") == "H13" || $userInstance->get("roleid") == "H12")){
+                          $data['filterview'] = "filterview";
+                          $data['adminview'] = "hide AdminSidebar";
+                          $data['userview'] = " UserSidebar";
+                   }
+                   else  if($request->get("module") == "Users" && $request->get("view") == "List" && $userInstance->isAdminUser()){
+                    $data['filterview'] = " filterview";
+                    $data['adminview'] = "hide AdminSidebar";
+                    $data['userview'] = "hide UserSidebar";
+                }
+                else  if($request->get("module") == "Users" && $request->get("view") == "PreferenceDetail" && ($userInstance->isAdminUser() && $userInstance->get("id") == $request->get("record"))){
+                    $data['filterview'] = "hide filterview";
+                    $data['adminview'] = " AdminSidebar";
+                    $data['userview'] = "hide UserSidebar";
+                }
+                 else  if($request->get("module") == "Users" && $request->get("view") == "PreferenceDetail" && $userInstance->isAdminUser() && $userInstance->get("id") != $request->get("record")){
+                    $data['filterview'] = "hide filterview";
+                    $data['adminview'] = "hide AdminSidebar";
+                    $data['userview'] = " UserSidebar";
+                }
+                 else  if($request->get("module") != "Users"  ){
+                    $data['filterview'] = "hide filterview";
+                    $data['adminview'] = " AdminSidebar";
+                    $data['userview'] = "hide UserSidebar";
+                }
+                
+                   else {
+                             $data['filterview'] = "hide filterview";
+                          $data['adminview'] =" hide AdminSidebar";
+                          $data['userview'] = " UserSidebar";
+                   }
+                   
+//                   elseif($modulename == "Users" && $request->get("view") == "List" ){
+//                       $data['filterview'] = "filterview";
+//                       $data['adminview'] = "hide AdminSidebar";
+//                       $data['adminview'] = "hide UserSidebar";
+//                   }
+//                   else{
+//                       
+//                   }
+
+        
+        return $data;
+    }
+
+    /**
+     * Added By Khaled
      * List of department
      * @return array
      */

@@ -281,11 +281,12 @@ When click on sidebar toggler and also for tablet
 }
 .module-nav.settingsNav{
   display: block;
-  position: fixed;
+/*  position: fixed;*/
   right: 0;
   top: 100px;
   bottom: 0;
-  background-color: white;    border-left: 1px solid #ddd;
+  background-color: white;    
+  border-left: 1px solid #ddd;
 }
 
 .settingsPageDiv{

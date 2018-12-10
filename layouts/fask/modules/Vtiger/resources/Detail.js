@@ -1216,10 +1216,11 @@ Vtiger.Class("Vtiger_Detail_Js",{
 			fieldName = multiPicklistFieldName[0];
 		}
 
-		var customHandlingFields = ['owner','ownergroup','picklist','multipicklist','reference','currencyList','text'];
+		var customHandlingFields = ['owner','ownergroup','picklist','multipicklist','reference','currencyList','text','Multicompany','companydetails'];
 		if(jQuery.inArray(fieldType, customHandlingFields) !== -1){
 			value = rawValue;
 		}
+
 		if(jQuery('.editElement',editElement).length === 0){
 			var fieldInfo;
 			if(self.getOverlayDetailMode() == true){

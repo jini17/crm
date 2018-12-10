@@ -73,10 +73,10 @@
 {/if}
 <div class="main-container clearfix" style="margin-top:10px">
                 {assign var=LEFTPANELHIDE value=$USER_MODEL->get('leftpanelhide')}
-        <div class="module-nav clearfix settingsNav hidden-sm hidden-xs settingssidebar {$LEFTPANELHIDE}" id="modnavigator">
+        <{*div class="module-nav clearfix settingsNav hidden-sm hidden-xs settingssidebar {$LEFTPANELHIDE}" id="modnavigator">
             <div class="essentials-toggle" style=" top:10px;; left: -15px;" title="Left Panel Show/Hide">
             <span class="essentials-toggle-marker fa cursorPointer fa-chevron-right"></span>
-        </div>
+        </div>*}
        <div class=" height100Per"> 
                     {include file="modules/Settings/Vtiger/Sidebar.tpl"}
             </div>
