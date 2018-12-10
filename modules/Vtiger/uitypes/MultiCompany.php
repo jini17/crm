@@ -8,7 +8,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class Vtiger_Multicompany_UIType extends Vtiger_Base_UIType {
+class Vtiger_MultiCompany_UIType extends Vtiger_Base_UIType {
 
 	/**
 	 * Function to get the Template name for the current UI Type object
@@ -24,28 +24,17 @@ class Vtiger_Multicompany_UIType extends Vtiger_Base_UIType {
 	 * @return <Object>
 	 */
 	public function getDisplayValue($values) {
+        
         if($values == NULL && !is_array($values)) return;
-        foreach($values as $value){
-            if (self::getOwnerType($value) === 'User') {
-                $userModel = Users_Record_Model::getCleanInstance('Users');
-                $userModel->set('id', $value);
-                $detailViewUrl = $userModel->getDetailViewUrl();
-                $currentUser = Users_Record_Model::getCurrentUserModel();
-                if(!$currentUser->isAdminUser()){
-                    return getOwnerName($value);
-                }
-            } else {
-                $currentUser = Users_Record_Model::getCurrentUserModel();
-                if(!$currentUser->isAdminUser()){
-                    return getOwnerName($value);
-                }
-                $recordModel = new Settings_Groups_Record_Model();
-                $recordModel->set('groupid',$value);
-                $detailViewUrl = $recordModel->getDetailViewUrl();
-            }
-            $displayvalue[] = "<a href=" .$detailViewUrl. ">" .getOwnerName($value). "</a>&nbsp";
-        }
-        $displayvalue = implode(',',$displayvalue);
+        	$values = explode(' |##| ', $values);
+        	foreach($values as $value){
+	            $companyModel = Vtiger_Util_Helper::getCompanyTitle($value);
+	            $displayvalue[] = $companyModel[0]['organization_title'];
+        	}
+    	$displayvalue = implode(',&nbsp;',$displayvalue);
         return $displayvalue;
 	}
+	 public function getListSearchTemplateName() {
+        return 'uitypes/MultiCompanySearchView.tpl';
+    }
 }

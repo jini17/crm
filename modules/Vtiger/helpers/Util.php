@@ -61,22 +61,14 @@ class Vtiger_Util_Helper {
                 $params = array();
                 $Where = 'WHERE 1 ';
 
-                if(!$currentUser->isAdminUser()) {
-                        $Where  = " AND tblSCUAC.userid = ?";
-                        $params = array($userid); 	
-                }
-                
                 if($id !=''){
                    $Where .= " AND tblVTOD.organization_id='$id'";     
                 }
 
                 $aCompanyTitle = array();
-                $iOptionIndex = 0;
-
-                $query = "SELECT DISTINCT tblVTOD.organization_id,tblVTOD.`organizationname`, tblVTOD.organization_title 
+                
+                $query = "SELECT DISTINCT tblVTOD.organization_id,tblVTOD.`organizationname`, tblVTOD.organization_title, tblVTOD.city
                         FROM vtiger_organizationdetails tblVTOD
-                   LEFT JOIN secondcrm_users_assigncompany tblSCUAC 
-                        ON tblSCUAC.organization_id = tblVTOD.organization_id 
                         ".$Where."
                         ORDER BY tblVTOD.organization_title";
                 $result = $db->pquery($query, $params);
@@ -85,10 +77,10 @@ class Vtiger_Util_Helper {
                 {   
                         if($db->query_result($result, $iK, "organization_id") > 0){
                         
-                            $aCompanyTitle[$iOptionIndex]['organization_id'] = $db->query_result($result,$iK,'organization_id', 'selected');
-                            $aCompanyTitle[$iOptionIndex]['organization_title'] = $db->query_result($result,$iK,'organization_title', 'selected');
-                            $aCompanyTitle[$iOptionIndex]['organizationname'] = $db->query_result($result,$iK,'organizationname', 'selected');
-                        $iOptionIndex++;
+                            $aCompanyTitle[$iK]['organization_id'] = $db->query_result($result,$iK,'organization_id');
+                            $aCompanyTitle[$iK]['organization_title'] = $db->query_result($result,$iK,'organization_title');
+                            $aCompanyTitle[$iK]['organizationname'] = $db->query_result($result,$iK,'organizationname');
+                            $aCompanyTitle[$iK]['city'] = $db->query_result($result,$iK,'city');
                         }    
                 }
 
