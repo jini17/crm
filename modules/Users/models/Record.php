@@ -1219,6 +1219,43 @@ class Users_Record_Model extends Vtiger_Record_Model
         return $row;
     }    //end here
 
+    /**
+     * Get Trial Expire Information
+     * Added By Khaled
+     * @return boolean
+     */
+     public function trial_expire(){
+            $db = PearDatabase::getInstance();
+            $query = $db->pquery("SELECT * FROM secondcrm_plan LIMIT 1");
+            $num_rows = $db->num_rows($query);
+            if($num_rows > 0){           
+                $start_date = $db->query_result($query, 0,'createdtime');
+                $end_date = $db->query_result($query, 0,'expiredate');
+                
+                $dmy = date( 'd-m-Y', strtotime($start_date));
+                $_start = new DateTime($dmy);
+                $_end = new DateTime($end_date);        
+                $difference = $_end->diff($_start)->format("%a");
+                return $difference;
+                
+            }
+            else{
+                return false;
+            }
+        }
+//        public function GET_CRM_ENTITY_STATUS(){
+//           $db = PearDatabase::getInstance();
+//           $query = "SELECT count(*) from "
+//        }
+
+        /**
+         * Added by Khaled
+         * Birthday Wish
+         * @param type $date
+         * @param type $id
+         * @param type $css
+         * @return boolean|string
+         */
     public function getBirthdayWish($date, $id, $css = "grid")
     {
 
@@ -1252,10 +1289,16 @@ class Users_Record_Model extends Vtiger_Record_Model
         }
     }
 
+    /**
+     * Added by Khaled
+     * GEt New Joinee
+     * @param type $date
+     * @param type $id
+     * @param type $prefix
+     * @return boolean|string
+     */
     public function getNewJoinee($date, $id, $prefix = 'list')
     {
-
-
          if(empty($date)){
                             return false;
                         }
@@ -1279,6 +1322,12 @@ class Users_Record_Model extends Vtiger_Record_Model
 
     }
 
+    /**
+     * Added by Khaled
+     * Get Current Reporting Manager 
+     * @param type $id
+     * @return string
+     */
     public function MyReortingManager($id)
     {
         $db=PearDatabase::getInstance();
@@ -1390,6 +1439,12 @@ class Users_Record_Model extends Vtiger_Record_Model
         return $data;
     }
 
+    /**
+     * Added By Khaled
+     * Get Image Information by ID
+     * @param type $id
+     * @return type
+     */
     public function getImageDetailsByID($id)
     {
         $db = PearDatabase::getInstance();

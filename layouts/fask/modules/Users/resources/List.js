@@ -434,7 +434,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
         });
     },
     registerAlphabetSearch: function () {
-        jQuery('.main-container').on('click', '.alphabetSearch', function () {
+        jQuery('.alphabetSearch').on('click', function () {
             $(this).closest('tr').find('td').removeAttr('style');
             $(this).closest('td').css('border-bottom', '1px solid #2f5597');
             var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');

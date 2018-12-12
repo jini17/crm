@@ -46,8 +46,10 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer->assign("LAST_LOGIN_TIME", $sLastLoginTime);
                 $viewer->assign("LAST_USER_IP", $sLastUserIP);
                 //End here
-
-
+                 
+                $Trial_expire = Users_Record_Model::trial_expire();
+                
+                $viewer->assign("TRIAL_INFO",$Trial_expire);
                  if($_SESSION['loggedin_now'] === false){
                
                             $viewer->assign("LOGGED_NOW",'in');
@@ -75,10 +77,10 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                  
                 $crm_record_no = $this->CRM_ENTITY_CHECKER();
                if($crm_record_no){
-                   $viewer->assign("DATA_RESET","YES");
+                   $viewer->assign("DATA_RESET","Yes");
                }
                else{
-                    $viewer->assign("DATA_RESET","NO");
+                    $viewer->assign("DATA_RESET","No");
                }
                         
                         
@@ -159,14 +161,16 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 parent::postProcess($request);
         }
 
+       
+
         /**
          * Added By Khaled
          * @return boolean
          */
         public function CRM_ENTITY_CHECKER(){
             $db = PearDatabase::getInstance();
-            $query = $db->pquery("SELECT count(*) FROM   vtiger_crmentity");
-            if($db->num_rows($query) > 0){
+            $query = $db->pquery("SELECT count(*) as total_rows FROM   vtiger_crmentity ");
+            if($db->query_result($query,0,'total_rows') > 0){
                 return true;
             }
             else{

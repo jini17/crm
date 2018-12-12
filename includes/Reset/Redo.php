@@ -11,6 +11,6 @@
   extract($dbconfig);
  
  $port = str_replace(":","", $db_port);
-echo  $sql = "sudo mysql -h $db_server -P $port -u $db_username -p '$db_password' $db_name < /var/www/html/agiliux_cp/golden60/agiliuxsql/ReloadData.sql";
+echo  $sql = "sudo mysql -h $db_server -P $port -u $db_username -p'$db_password' $db_name < /var/www/html/ag_cp/golden60/agiliuxsql/ReloadData.sql";
 echo	$res = exec($sql,$output);
 //        echo $sql;

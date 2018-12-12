@@ -539,7 +539,7 @@ a.rightside-icon-dashboard > i.fa{
      /**=================
     Employee Directory
 =====================*/
-#tablist li.active {
+.active.employeeTab{
             border-bottom: 2px solid  #f6bb43;
             color: #fff;
             padding: 8px;
@@ -560,3 +560,97 @@ a.rightside-icon-dashboard > i.fa{
             .global-nav{
                       border-bottom: 2px solid  #f6bb43;
             }
+            active.employeeTab{
+    border-bottom: 2px solid  #3B5998;
+    
+}
+
+.pagination li.active{
+  border-bottom: 2px solid #3B5998 ;
+  color: #2f5597 ;
+}
+
+.pagination li.active a{
+    color: #fff;
+    background:  #3B5998 ;
+}
+.alphabetSorting table .alphabetSearch a{
+color: #2f5597 !important;
+}
+.global-nav{
+          border-bottom: 2px solid  #2f5597;
+}
+  .alphabetSearch a{
+        color: #307fe8;
+        font-weight: bold;
+    }
+    .box-content{
+      padding:20px 10px;
+      border: 1px solid #ddd;
+      background: #fff;
+        min-height: 390px;
+        margin-top: 20px;
+        margin-bottom: 9px;
+    }
+    .user-social{
+        margin-top: 15px;
+    }
+    .username{
+    margin-bottom: 5px;
+    }
+    .user-social a{
+        color: #fff;
+    }
+
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+  padding: 10px;
+}.fa-twitter {
+  background: #55ACEE;
+  color: white;
+  padding: 10px;
+}
+.fa-envelope {
+  background: #ff6600;
+  color: white;
+  padding: 10px;
+}
+
+ .img-holder{
+
+       width: 122px;
+       height: 122px;
+       margin: 0 auto !important;
+
+  
+ }
+.img-circle{
+      background: #fff;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+     margin: 3px 4px !important;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+  padding: 10px;
+}
+    .birthdaybox{
+        margin-top: 30px;
+    }
+    .highlight-birthday{
+       background: #d1e3fa;   
+      }
+      .img-circle{
+          padding:3px;
+          border:1px solid #ccc;  
+          background-color: #fff;
+          margin:0 auto !important;
+          display:block;
+      }
+      .email-icon i{
+          color: #333;
+      }
