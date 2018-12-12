@@ -72,6 +72,17 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                  else{
                      $viewer->assign("LOGGED_FIRST_TIME",'no');
                  }
+                 
+                $crm_record_no = $this->CRM_ENTITY_CHECKER();
+               if($crm_record_no){
+                   $viewer->assign("DATA_RESET","YES");
+               }
+               else{
+                    $viewer->assign("DATA_RESET","NO");
+               }
+                        
+                        
+                
 
                 $dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
                 //check profile permissions for Dashboards
@@ -148,6 +159,21 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 parent::postProcess($request);
         }
 
+        /**
+         * Added By Khaled
+         * @return boolean
+         */
+        public function CRM_ENTITY_CHECKER(){
+            $db = PearDatabase::getInstance();
+            $query = $db->pquery("SELECT count(*) FROM   vtiger_crmentity");
+            if($db->num_rows($query) > 0){
+                return true;
+            }
+            else{
+                 return false;
+            }
+            
+        }
         /**
          * Function to get the list of Script models to be included
          * @param Vtiger_Request $request

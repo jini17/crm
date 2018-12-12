@@ -1,4 +1,9 @@
 <?php
-
-$sql = "mysql -h 13.229.249.148 -P 3306 -u development -p'Dev123$%^)' testuser < /var/www/html/agiliux_cp/golden60/agiliuxsql/DataReset.sql";
-	$res = exec($sql,$output);
+  require_once '/var/www/html/ag_dev/config.inc.php';
+  global $dbconfig;
+  extract($dbconfig);
+ 
+ $port = str_replace(":","", $db_port);
+echo  $sql = "mysql -h $db_server -P $port -u $db_username -p '$db_password' $db_name < /var/www/html/agiliux_cp/golden60/agiliuxsql/DataReset.sql";
+echo	$res = exec($sql,$output);
+//        echo $sql;

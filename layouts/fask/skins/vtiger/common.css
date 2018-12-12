@@ -9085,12 +9085,17 @@ li> a.dropdown-icon-dashboard>i{
 ul.nav.navbar-nav>li>div.dropdown>div.dropdown-toggle>a{
   padding: 15px 5px 10px !important;
 }
-a.btn.Help-btn{
-    padding: 5px 5px 6px 8px;
+a.btn.Help-btn,
+a.btn.btn-reset{
+    padding:4px 15px 5px 10px !important;
     margin: 0px;
     border-radius: 3px;
     margin-top: 5px;
     margin-right: 15px;
+}
+a.btn.btn-reset{
+    background: #fff;
+    color: #ef5350;
 }
 .popup-col-4{
   border-radius: 10px;

@@ -677,7 +677,34 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             });
         });
     },
-
+    /**
+     * Added By Khaled
+     * Reset Data
+     * @returns {undefined}
+     */
+    registerDataReset:function(){
+        jQuery(".btn-reset").on("click",function(){
+            var type = $(this).data("reset")
+            var url =  "includes/Reset/"+type+".php";
+          app.helper.showProgress();
+               $.ajax({
+                    type        : "POST",
+                    url           : url,
+                    data       : {
+                        type:type
+                    },                   
+                    success : function( response ){
+                        
+                              window.location.reload();
+                        console.log( response );            
+                    },
+                    error: function(error){
+                        console.log(error)
+                    }
+                });
+             
+        });
+    },
     registerAddDashboardTab: function () {
         var self = this;
         var dashBoardContainer = this.getDashboardContainer();
@@ -1156,7 +1183,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         this.registerDashBoardTabRename();
         this.registerDeleteDashboardTab();
         this.registerRearrangeTabsEvent();
-
+        this.registerDataReset();
         this.searchWidgetButton();
         /***************ADDED@05122014***************/
         this.searchWidgets();
