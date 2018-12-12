@@ -485,8 +485,9 @@ Vtiger.Class('Vtiger_Index_Js', {
                     }
                   app.request.post({"data":params}).then(function(err,data){
                      // console.log(data);
-                         if(err==null)
+                         if(err==null){
                               window.location.href='index.php';
+                          }
 //                         app.helper.hideProgress();
                     },
                     function(error,err){

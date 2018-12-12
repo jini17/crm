@@ -578,7 +578,7 @@ a.rightside-icon-dashboard > i.fa{
 color: #2f5597 !important;
 }
 .global-nav{
-          border-bottom: 2px solid  #2f5597;
+          border-bottom: 2px solid  #3B5998;
 }
   .alphabetSearch a{
         color: #307fe8;
@@ -654,3 +654,26 @@ color: #2f5597 !important;
       .email-icon i{
           color: #333;
       }
+      /**=================
+ Mail Manager
+=======================*/
+#mm_searchButton {
+    height: 30px !important;
+    background-color: #3B5998 !important;
+    border: 1px solid #fff !important;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #fff;
+}
+#searchType{
+    background: #3B5998;
+    color:#fff;
+}
+.mUserName i{
+    color: #3B5998;
+}
+.mmbtn .btn{
+    font-size: 12px;
+    padding:5px;
+    color: #3B5998;
+}

@@ -9715,10 +9715,7 @@ right connector from last child*/
     top: 14px;
     color: #fff;
 }
-#searchType{
-    background: #2f5597;
-    color:#fff;
-}
+
 .mmsearchbox {
     width: 50%;
     float: left;
@@ -9733,31 +9730,18 @@ right connector from last child*/
     margin-top: 0;
     height: 30px !important;
 }
-#mm_searchButton {
-    height: 30px;
-    background-color: #2f5597;
-    border: 1px solid #fff;
-    padding-left: 5px;
-    padding-right: 5px;
-    color: #fff;
-}
+
 #mailManagerActions .recordScroll{
     display: none;
 }
 .mUserName{
     font-weight: bold
 }
-.mUserName i{
-    color: #2f5597;
-}
+
 .mmbtn{
     margin-left: 10%;
 }
-.mmbtn .btn{
-    font-size: 12px;
-    padding:5px;
-    color: #2f5597;
-}
+
         .nav > li > a{
             padding: 10px 10px !important;
         }
