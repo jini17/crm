@@ -155,7 +155,11 @@
                                                 </ul>
                                         {/if}
                                         <!-- Added By Khaled  -->
-                               
+                                   {if $TRIAL neq "0" }
+                                       <a class='btn btn-warning Help-btn trial text-center'>
+                                                <i class="fa fa-rocket"></i>&nbsp; Trial {$TRIAL} Days Left
+                                        </a>
+                                   {/if}    
                                         <a class='btn btn-danger Help-btn text-center'>
                                                 <i class="glyphicon glyphicon-question-sign"></i>&nbsp;Help
                                         </a>
