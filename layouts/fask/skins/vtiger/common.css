@@ -9085,12 +9085,30 @@ li> a.dropdown-icon-dashboard>i{
 ul.nav.navbar-nav>li>div.dropdown>div.dropdown-toggle>a{
   padding: 15px 5px 10px !important;
 }
-a.btn.Help-btn{
-    padding: 5px 5px 6px 8px;
+a.btn.Help-btn,
+a.trial-info-btn{
+    padding: 5px 15px 6px 10px !important;
     margin: 0px;
     border-radius: 3px;
-    margin-top: 5px;
+    margin-top: 5px !important;
     margin-right: 15px;
+}
+a.btn.Help-btn i,
+a.trial-info-btn i{
+    float: left;
+    margin-top: 2px;
+    margin-right: 2px;
+
+}
+.cleardata-btn{
+    background: #fff !important;
+    border: 1px solid #ef5350 !important;
+    color: #ef5350 !important;
+}
+.reset-data-btn{
+    background: #fff !important;
+    border: 1px solid #FF9149 !important;
+    color: #FF9149 !important;
 }
 .popup-col-4{
   border-radius: 10px;
@@ -9752,3 +9770,164 @@ right connector from last child*/
         .nav > li > a{
             padding: 10px 10px !important;
         }
+        .alphabetSearch a{
+        color: #307fe8;
+        font-weight: bold;
+    }
+    .box-content{
+      padding:20px 10px;
+      border: 1px solid #ddd;
+      background: #fff;
+        min-height: 390px;
+        margin-top: 20px;
+        margin-bottom: 9px;
+    }
+    .user-social{
+        margin-top: 15px;
+    }
+    .username{
+    margin-bottom: 5px;
+    }
+    .user-social a{
+        color: #fff;
+    }
+
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+  padding: 10px;
+}.fa-twitter {
+  background: #55ACEE;
+  color: white;
+  padding: 10px;
+}
+.fa-envelope {
+  background: #ff6600;
+  color: white;
+  padding: 10px;
+}
+
+ .img-holder{
+       width: 122px;
+       height: 122px;
+        margin: 0 auto !important;
+ }
+ 
+.img-circle{
+      background: #fff;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    margin: 3px 4px !important;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+  padding: 10px;
+}
+    .birthdaybox{
+        margin-top: 30px;
+    }
+    .highlight-birthday{
+       background: #d1e3fa;   
+      }
+      .img-circle{
+          padding:3px;
+          border:1px solid #ccc;  
+          background-color: #fff;
+          margin:0 auto !important;
+          display:block;
+      }
+      .email-icon i{
+          color: #333;
+      }  
+      
+           /** =======================
+     Calender Settings
+     ===========================*/
+     .settingsIndexPage h4{
+         color: #2f5597;
+     }
+    .settingsIndexPage h4,
+    .settingsIndexPage .settingsSummary .summaryCount{
+         color: #2f5597;
+     }
+     #settingsShortCutsContainer  .moduleBlock{
+         width: 23.44% !important;
+         
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header{
+         display: block;
+         width: 100%
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header i{
+         margin-top: 3px;
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header b{
+         margin-left: 10px;
+         margin-top: -15px;
+     }
+     .settingsIndexPage #setttingsShortCutsContainer .themeTextColor{
+         float:right;
+         
+     }
+     .settingsIndexPage #settingsShortCutsContainer.fa.pull-left{
+         margin-top: 10px !important;
+         margin-right: 10px !important;
+     }
+     #settingsShortCutsContainer .moduleBlock:hover{
+          background-color: #2f5597 !important;
+          color: #fff;
+     }
+     .settingsIndexPage .settingsSummary .summaryCount{
+         padding: 0;
+     }
+
+     
+/**=================
+    Employee Directory
+=====================*/
+.active.employeeTab{
+    border-bottom: 2px solid  #3B5998 !important;
+    
+}
+
+.pagination li.active{
+  border-bottom: 2px solid #3B5998 ;
+  color: #2f5597 ;
+}
+
+.pagination li.active a{
+    color: #fff;
+    background:  #3B5998 ;
+}
+.alphabetSorting table .alphabetSearch a{
+color: #2f5597 !important;
+}
+.global-nav{
+          border-bottom: 2px solid  #2f5597;
+}
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+    padding: 10px;
+}
+.fa-twitter {
+    background: #55ACEE;
+    color: #fff;
+    padding: 10px;
+}
+.fa-linkedin {
+    background: #007bb5;
+    color: #fff;
+    padding: 10px;
+}
+.fa-envelope {
+    background: #ff6600;
+    color: #fff;
+    padding: 10px;
+}
+.user-meta{
+    min-height: 84px;
+}

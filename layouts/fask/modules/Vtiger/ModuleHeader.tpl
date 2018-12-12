@@ -155,7 +155,10 @@
                                                 </ul>
                                         {/if}
                                         <!-- Added By Khaled  -->
-                               
+                                        <a class="btn btn-info  trial-info-btn cleardata-btn text-center"><i class="fa fa-recycle"></i>&nbsp; Clear Data </a>
+                                        <a class="btn btn-info trial-info-btn reset-data-btn  text-center"><i class="fa fa-undo"></i>&nbsp;  Reset Data </a>
+                                        <a class="btn btn-warning pull-lef trial-info-btn  text-center"><i class="fa fa-rocket"></i>&nbsp; Trial Period: {$TRIAL_INFO}  Days Left</a>
+                                        
                                         <a class='btn btn-danger Help-btn text-center'>
                                                 <i class="glyphicon glyphicon-question-sign"></i>&nbsp;Help
                                         </a>

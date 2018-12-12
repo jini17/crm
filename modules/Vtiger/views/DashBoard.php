@@ -46,8 +46,10 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer->assign("LAST_LOGIN_TIME", $sLastLoginTime);
                 $viewer->assign("LAST_USER_IP", $sLastUserIP);
                 //End here
-
-
+                 
+                $Trial_expire = Users_Record_Model::trial_expire();
+                
+                $viewer->assign("TRIAL_INFO",$Trial_expire);
                  if($_SESSION['loggedin_now'] === false){
                
                             $viewer->assign("LOGGED_NOW",'in');
@@ -147,6 +149,8 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
         public function postProcess(Vtiger_Request $request) {
                 parent::postProcess($request);
         }
+
+       
 
         /**
          * Function to get the list of Script models to be included
