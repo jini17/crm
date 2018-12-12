@@ -698,7 +698,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                               
                         console.log( response );       
                      if(response.length > 0){
-                         //window.location.reload();
+                         window.location.reload();
                      }
                     },
                     error: function(error){
