@@ -207,6 +207,15 @@ jQuery.Class('Settings_CustomRecordNumbering_Js', {}, {
 			jQuery('.saveButton').removeAttr('disabled');
 		})
 	},
+
+	/**
+	 * Function to Handle Picklist Depedency of the Companies
+	 */
+	registerPicklistEvents : function() {
+		
+				
+
+	}, 
 	
 	/**
 	 * Function to register events
@@ -218,6 +227,7 @@ jQuery.Class('Settings_CustomRecordNumbering_Js', {}, {
 		this.registerOnChangeEventOfSourceModule();
 		this.registerEventToUpdateRecordsWithSequenceNumber();
 		this.registerChangeEventForPrefixAndSequenceNumber();
+		this.registerPicklistEvents();
 		this.saveModuleCustomNumbering();
 		
 	}

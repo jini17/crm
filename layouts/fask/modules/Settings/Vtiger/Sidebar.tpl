@@ -38,12 +38,12 @@
 
         <div class="{if $smarty.get.module eq 'Users'}
             {if $smarty.get.view eq 'List'}
-               holder  hide
+               holder  
           {else}
               holder
            {/if}   
       {else}
-         holder hide
+         holder 
       {/if}">
             <div class="clearfix"></div>
             <div class="col-xs-12 text-center visible-xs visible-sm">

@@ -95,6 +95,27 @@
                 </table>
             </div>
         </div>
+        <!-- Added By Mabruk Custom Numbering -->
+        <div class="row-fluid">
+            <div class="span12">
+                <table id="customRecordNumbering" class="table table-bordered">
+                                {assign var=WIDTHTYPE value="200"}
+                 <tbody>
+                                        <tr>
+                        <td>
+                            <input type="checkbox" name="business" id="business" {if $COMPANYNUMBERING eq 1} checked {/if}/>
+                        </td>
+                        <td class="fieldValue {$WIDTHTYPE}" style="border-left: none">
+                            <!-- add text and Payments for Payments as Inventory module -->     
+                            Separate numbering for Business Document (Quotes, Invoces,Sales Order, Purchase Order and Payments)
+                           <!-- End here--> 
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END -->
         <br>
         <div class="row-fluid">
             <div class="span12 pull-right">
