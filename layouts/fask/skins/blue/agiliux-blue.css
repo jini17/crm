@@ -486,55 +486,9 @@ a.rightside-icon-dashboard > i.fa{
            padding-bottom: 5px;
      }*/
      
-     /** =======================
-     Calender Settings
-     ===========================*/
-     .settingsIndexPage h4{
-         color: #2f5597;
-     }
-    .settingsIndexPage h4,
-    .settingsIndexPage .settingsSummary .summaryCount{
-         color: #2f5597;
-     }
-     #settingsShortCutsContainer  .moduleBlock{
-         width: 23.44% !important;
-         
-     }
-     .settingsIndexPage #settingsShortCutsContainer span.header{
-         display: block;
-         width: 100%
-     }
-     .settingsIndexPage #settingsShortCutsContainer span.header i{
-         margin-top: 3px;
-     }
-     .settingsIndexPage #settingsShortCutsContainer span.header b{
-         margin-left: 10px;
-         margin-top: -15px;
-     }
-     .settingsIndexPage #setttingsShortCutsContainer .themeTextColor{
-         float:right;
-         
-     }
-     .settingsIndexPage #settingsShortCutsContainer.fa.pull-left{
-         margin-top: 10px !important;
-         margin-right: 10px !important;
-     }
-     #settingsShortCutsContainer .moduleBlock:hover{
-          background-color: #2f5597 !important;
-          color: #fff;
-     }
-     .settingsIndexPage .settingsSummary .summaryCount{
-         padding: 0;
-     }
-
-     
-/**=================
-    Employee Directory
-=====================*/
-#tablist li.active {
+active.employeeTab{
     border-bottom: 2px solid  #3B5998;
-    color: #fff;
-    padding: 8px;
+    
 }
 
 .pagination li.active{
@@ -552,103 +506,65 @@ color: #2f5597 !important;
 .global-nav{
           border-bottom: 2px solid  #2f5597;
 }
-
-/**==================
-    Mail Manager
-=====================*/
-
-#mailmanagerContainer .material-icons,
-#mailmanagerContainer .material-icons .fa,
-#mmModulesMenu  .material-icons,
-#mailmanagerContainer  #NextPageButton,
-#mailmanagerContainer  #PreviousPageButton,
-#mailmanagerContainer  button.mailPagination,
-#mailmanagerContainer  .pageInfo,
-#mailmanagerContainer .mmDetailAction{
-      color: #2f5597;
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+    padding: 10px;
 }
-
-#mailmanagerContainer  #NextPageButton:hover,
-#mailmanagerContainer  #PreviousPageButton:hover,
-#mailmanagerContainer  button.mailPagination:hover,
-#mailmanagerContainer .mmFirstNameChar,
-#mailmanagerContainer .highLightMail,
-#mailmanagerContainer div[data-read="0"].highLightMail{
+.fa-twitter {
+    background: #55ACEE;
     color: #fff;
-     background: #2f5597;
+    padding: 10px;
+}
+.fa-linkedin {
+    background: #007bb5;
+    color: #fff;
+    padding: 10px;
+}
+.fa-envelope {
+    background: #ff6600;
+    color: #fff;
+    padding: 10px;
+}
+.user-meta{
+    min-height: 84px;
+}
+.active.employeeTab{
+    border-bottom: 2px solid  #3B5998 !important;
 }
 
-#mailmanagerContainer .mailEntry{
-    border-left: 3px solid #ccc;
-}
-#mailmanagerContainer div[data-read="0"]{
-     border-left: 3px solid #2f5597;
-     color: #2f5597;
-}
-#mailmanagerContainer div[data-read="0"].highLightMail{
-    
-}
-#mailmanagerContainer input[type="checkbox"]:checked::after, #checkgreen {
-    background: #fff;
-    width: 13px;
-    height: 13px;
-    line-height: 13px;
-    font-size: 12px;
-    color: #2f5597;
-    font-weight: bold;
-    top: 1px;
-}
-#mailmanagerContainer ._mCS_9{
-    display: none;
-}
-.mmModulesMenu .mmUnreadCountBadge{
-    background: #2f5597 none !important;
-    border: 1px solid #2f5597 !important;
-}
-#mailmanagerContainer #RelatedModuleLink{
-    display: block;
-    width: 100%;
-    font-size: 10px;
-    color: #000;
-}
-#mailmanagerContainer #RelatedModuleLink a{
-    color: #2f5597;
-    font-weight: bold;
-    
+.pagination li.active{
+  border-bottom: 2px solid #3B5998 ;
+  color: #2f5597 ;
 }
 
-#mailmanagerContainer #RelatedModuleLink input{
-  display:none
+.pagination li.active a{
+    color: #fff;
+    background:  #3B5998 ;
 }
-#mailmanagerContainer #RelatedModuleLink label{
-  padding:0 6px;
-  border:1px solid #eee
+.alphabetSorting table .alphabetSearch a{
+color: #2f5597 !important;
 }
-#mailmanagerContainer #RelatedModuleLink input:checked + label {
- background:#000;
- color:#fff
+/**=================
+ Mail Manager
+=======================*/
+#mm_searchButton {
+    height: 30px !important;
+    background-color: #2f5597 !important;
+    border: 1px solid #fff !important;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #fff;
 }
-.mail-all-checked{
-    position: relative;
-}
-.miniux-icon{
+#searchType{
     background: #2f5597;
-    color: #fff;
-    font-size: 11px;
-    text-align: center;
-    padding-left: 3px;
-    padding-right: 3px;
-    top: 8px;
-    position: absolute;
-    left: 4px;
-    z-index: 1;
-    display: none;
-  }
-#mainCheckBox:checked{
-    display: none;
+    color:#fff;
 }
-#mainCheckBox:checked ~ .miniux-icon{
-    display: block;
-    top: 5px;
-  
+.mUserName i{
+    color: #2f5597;
+}
+.mmbtn .btn{
+    font-size: 12px;
+    padding:5px;
+    color: #2f5597;
 }

@@ -5608,8 +5608,8 @@ hr {
   padding-top: 1px;
 }
 .mmSearchDropDown {
-  margin-top: -30px;
-  margin-left: 66%;
+/*  margin-top: -30px;
+  margin-left: 66%;*/
 }
 .mmMoveDropdownArrow {
   color: #FFFFFF;
@@ -9085,12 +9085,21 @@ li> a.dropdown-icon-dashboard>i{
 ul.nav.navbar-nav>li>div.dropdown>div.dropdown-toggle>a{
   padding: 15px 5px 10px !important;
 }
-a.btn.Help-btn{
-    padding: 5px 5px 6px 8px;
+a.btn.Help-btn,
+a.btn.btn-reset,
+a.trial-info-btn{
+    padding: 5px 15px 6px 10px !important;
+
     margin: 0px;
     border-radius: 3px;
-    margin-top: 5px;
+    margin-top: 5px !important;
     margin-right: 15px;
+}
+
+a.btn.btn-reset{
+    background: #fff;
+    color: #ef5350;
+
 }
 .popup-col-4{
   border-radius: 10px;
@@ -9562,3 +9571,338 @@ right connector from last child*/
 
 }
 
+.logo-container.pull-left{
+    padding: 0 !important;
+    
+}
+.newtabs{
+    position: absolute;
+    top: 0;
+    left: 150px;
+}
+.global-nav .global-actions{
+    position: absolute;
+    right: 3px;
+    width: 650px;
+}
+.global-nav .navbar-nav > li div a{
+    font-size: 14px !important;
+}
+#navbar .nav{
+    width: 102% !important;
+}
+
+.fasksecond li.with-childs a,
+.faskfirst  li.with-childs a{
+    font-size: 14px;
+}
+.search-link{
+    border: 1px solid #eee !important;
+}
+.nav li.searchoption a{
+    border-radius: 0 !important;
+    padding-bottom: 1px;
+}
+
+      
+/**==================
+    Mail Manager
+=====================*/
+
+#mailmanagerContainer .material-icons,
+#mailmanagerContainer .material-icons .fa,
+#mmModulesMenu  .material-icons,
+#mailmanagerContainer  #NextPageButton,
+#mailmanagerContainer  #PreviousPageButton,
+#mailmanagerContainer  button.mailPagination,
+#mailmanagerContainer  .pageInfo,
+#mailmanagerContainer .mmDetailAction,
+.fa.fa-book{
+      color: #2f5597;
+}
+
+#mailmanagerContainer  #NextPageButton:hover,
+#mailmanagerContainer  #PreviousPageButton:hover,
+#mailmanagerContainer  button.mailPagination:hover,
+#mailmanagerContainer .mmFirstNameChar,
+#mailmanagerContainer .highLightMail,
+#mailmanagerContainer div[data-read="0"].highLightMail{
+    color: #fff;
+     background: #2f5597;
+}
+
+#mailmanagerContainer .mailEntry{
+    border-left: 3px solid #ccc;
+}
+#mailmanagerContainer div[data-read="0"]{
+     border-left: 3px solid #2f5597;
+     color: #2f5597;
+}
+#mailmanagerContainer div[data-read="0"].highLightMail{
+    
+}
+#mailmanagerContainer input[type="checkbox"]:checked::after, #checkgreen {
+    background: #fff;
+    width: 13px;
+    height: 13px;
+    line-height: 13px;
+    font-size: 12px;
+    color: #2f5597;
+    font-weight: bold;
+    top: 1px;
+}
+#mailmanagerContainer ._mCS_9{
+    display: none;
+}
+.mmModulesMenu .mmUnreadCountBadge{
+    background: #2f5597 none !important;
+    border: 1px solid #2f5597 !important;
+}
+#mailmanagerContainer #RelatedModuleLink{
+    display: block;
+    width: 100%;
+    font-size: 10px;
+    color: #000;
+}
+#mailmanagerContainer #RelatedModuleLink a{
+    color: #2f5597;
+    font-weight: bold;
+    
+}
+
+#mailmanagerContainer #RelatedModuleLink input{
+  display:none
+}
+#mailmanagerContainer #RelatedModuleLink label{
+  padding:0 6px;
+  border:1px solid #eee
+}
+#mailmanagerContainer #RelatedModuleLink input:checked + label {
+ background:#000;
+ color:#fff
+}
+.mail-all-checked .fa-minus{
+    display: none;
+}
+
+.login-ip{
+    font-size: 13px;
+}
+/*.mail-filter-container{
+    position: relative;
+}
+.mmSearchDropDown{
+    width: 10%;
+    background: #2f5597;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.mmsearchbox{
+    width: 40% ;
+    
+}*/
+
+.mmSearchDropDown{
+    width: 15%;
+    float: left;
+    margin-left:  0 !important;
+     margin-right:  0 !important;
+}
+.mmSearchDropDown .caret{
+    position: absolute;
+    z-index: 1;
+    right: -11px;
+    top: 14px;
+    color: #fff;
+}
+
+.mmsearchbox {
+    width: 50%;
+    float: left;
+
+    margin-left: 3% !important;
+}
+#mmSearchButtonContainer {
+    width: 10%;
+    float: left;
+    margin-left: 1% !important;
+    padding: 0;
+    margin-top: 0;
+    height: 30px !important;
+}
+
+#mailManagerActions .recordScroll{
+    display: none;
+}
+.mUserName{
+    font-weight: bold
+}
+
+.mmbtn{
+    margin-left: 10%;
+}
+
+        .nav > li > a{
+            padding: 10px 10px !important;
+        }
+        .alphabetSearch a{
+        color: #307fe8;
+        font-weight: bold;
+    }
+    .box-content{
+      padding:20px 10px;
+      border: 1px solid #ddd;
+      background: #fff;
+        min-height: 390px;
+        margin-top: 20px;
+        margin-bottom: 9px;
+    }
+    .user-social{
+        margin-top: 15px;
+    }
+    .username{
+    margin-bottom: 5px;
+    }
+    .user-social a{
+        color: #fff;
+    }
+
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+  padding: 10px;
+}.fa-twitter {
+  background: #55ACEE;
+  color: white;
+  padding: 10px;
+}
+.fa-envelope {
+  background: #ff6600;
+  color: white;
+  padding: 10px;
+}
+
+ .img-holder{
+       width: 122px;
+       height: 122px;
+        margin: 0 auto !important;
+ }
+ 
+.img-circle{
+      background: #fff;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    margin: 3px 4px !important;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+  padding: 10px;
+}
+    .birthdaybox{
+        margin-top: 30px;
+    }
+    .highlight-birthday{
+       background: #d1e3fa;   
+      }
+      .img-circle{
+          padding:3px;
+          border:1px solid #ccc;  
+          background-color: #fff;
+          margin:0 auto !important;
+          display:block;
+      }
+      .email-icon i{
+          color: #333;
+      }  
+      
+           /** =======================
+     Calender Settings
+     ===========================*/
+     .settingsIndexPage h4{
+         color: #2f5597;
+     }
+    .settingsIndexPage h4,
+    .settingsIndexPage .settingsSummary .summaryCount{
+         color: #2f5597;
+     }
+     #settingsShortCutsContainer  .moduleBlock{
+         width: 23.44% !important;
+         
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header{
+         display: block;
+         width: 100%
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header i{
+         margin-top: 3px;
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header b{
+         margin-left: 10px;
+         margin-top: -15px;
+     }
+     .settingsIndexPage #setttingsShortCutsContainer .themeTextColor{
+         float:right;
+         
+     }
+     .settingsIndexPage #settingsShortCutsContainer.fa.pull-left{
+         margin-top: 10px !important;
+         margin-right: 10px !important;
+     }
+     #settingsShortCutsContainer .moduleBlock:hover{
+          background-color: #2f5597 !important;
+          color: #fff;
+     }
+     .settingsIndexPage .settingsSummary .summaryCount{
+         padding: 0;
+     }
+
+     
+/**=================
+    Employee Directory
+=====================*/
+.active.employeeTab{
+    border-bottom: 2px solid  #3B5998 !important;
+    
+}
+
+.pagination li.active{
+  border-bottom: 2px solid #3B5998 ;
+  color: #2f5597 ;
+}
+
+.pagination li.active a{
+    color: #fff;
+    background:  #3B5998 ;
+}
+.alphabetSorting table .alphabetSearch a{
+color: #2f5597 !important;
+}
+.global-nav{
+          border-bottom: 2px solid  #2f5597;
+}
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+    padding: 10px;
+}
+.fa-twitter {
+    background: #55ACEE;
+    color: #fff;
+    padding: 10px;
+}
+.fa-linkedin {
+    background: #007bb5;
+    color: #fff;
+    padding: 10px;
+}
+.fa-envelope {
+    background: #ff6600;
+    color: #fff;
+    padding: 10px;
+}
+.user-meta{
+    min-height: 84px;
+}

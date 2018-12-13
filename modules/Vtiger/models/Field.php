@@ -170,7 +170,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
             } else if($uiType == '3993' || $uiType == '3996') {		//Modified Line
 				 $fieldDataType = 'companyDetails';	//Modified Line
 			} else if($uiType == '3994') {		//Modified Line
-				 $fieldDataType = 'multicompany';	//Modified Line
+				 $fieldDataType = 'MultiCompany';	//Modified Line
 			} else if($uiType == '998') {		//Modified Line
 				 $fieldDataType = 'userRole';	//Modified Line
 			} else if($uiType == '999') {		//added by jitu@5jan2017
@@ -479,7 +479,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 	 */
 	public function isAjaxEditable() {
 
-		$ajaxRestrictedFields = array('4', '72', '61', '999','28','3995','3993','3994');
+		$ajaxRestrictedFields = array('4', '72', '61', '999','28','3995','3993','3994', '3996');
 		if(!$this->isEditable() || in_array($this->get('uitype'), $ajaxRestrictedFields) || $this->get('name')=='category' || $this->get('name')=='message') {
 			return false;
 		}

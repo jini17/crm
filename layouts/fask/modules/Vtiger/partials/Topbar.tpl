@@ -376,18 +376,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                     <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
                                                         <i class="material-icons module-icon">timeline</i>&nbsp;Performance
                                             </li>*}
-                                            <li admin="" moudel="Training">
-
-                                                <a class="dropdown-icon-dashboard" href=" index.php?module=Training&amp;view=List&amp;app=ADMIN ">
-                                                    <i class="material-icons module-icon">book</i> Training
-                                                </a>
-                                            </li>
-                                            <li admin="" moudel="Attendance">
-                                                <a  class="dropdown-icon-dashboard"   href=" index.php?module=Attendance&amp;view=List&amp;app=ADMIN ">
-                                                    <i class="material-icons module-icon">assignment</i> Attendance
-                                                </a>
-                                            </li>
-
+                                            
                                         </ul>
                         </div>
                     </div>
@@ -456,7 +445,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                 </li>
                                  <li>
                                     <a class="dropdown-icon-dashboard"  title="{vtranslate('Message Board')}" href="index.php?module=MessageBoard&view=List">
-                                       <i class="material-icons module-icon">email</i>&nbsp;{vtranslate('Message Board')}
+                                       <i class="material-icons module-icon">sms</i>&nbsp;{vtranslate('Message Board')}
                                    </a>
                                 </li>
                         </ul>
@@ -518,7 +507,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                         width: 100%;
                         /* color: #fff; */
                         /* font-size: 15px; */
-                        padding: 10px 0;
+                        padding: 12px 0;
                         text-decoration: none;">All</span>
                     </a>
                 </div>
@@ -1476,11 +1465,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                         <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Payments&view=List"><i class="material-icons module-icon">payment</i> <span class="hide-menu"> {vtranslate('Payments')}</span></a></li>
 
                                         {/if}
-      {*                                  {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('LeaveType')}
-                                        {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
-                                         <!--<li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=LeaveType&view=List"><i class="material-icons module-icon">keyboard_tab</i> <span class="hide-menu"> {vtranslate('LeaveType')}</span></a></li>
-                                         -->
-                                         {/if}*}
+
                                      </ul>
                                  </li>
 
@@ -1552,31 +1537,6 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                         </li>
                                                                         {/if}
 
-                                                                   {*     <li>
-                                                                                <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
-                                                                                    <i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                                                                        </li>*}
-                                                               {*         <li admin="" moudel="Training">
-
-                                                                            <a class="dropdown-icon-dashboard" href=" index.php?module=Training&amp;view=List&amp;app=ADMIN ">
-                                                                                <i class="material-icons module-icon">book</i> Training
-                                                                            </a>
-                                                                        </li>*}
-                                                                        <li admin="" moudel="Attendance">
-                                                                            <a  class="dropdown-icon-dashboard"   href=" index.php?module=Attendance&amp;view=List&amp;app=ADMIN ">
-                                                                                <i class="material-icons module-icon">assignment</i> Attendance
-                                                                            </a>
-                                                                        </li>
-                                                                       {* <li admin="" moudel="ExitDetails">
-                                                                            <a  class="dropdown-icon-dashboard"   href=" index.php?module=Resignation&amp;view=List&amp;app=ADMIN ">
-                                                                                <i class="material-icons module-icon">assignment</i> Resignation
-                                                                            </a>
-                                                                        </li>
-                                                                        <li admin="" moudel="ExitInterView">
-                                                                            <a  class="dropdown-icon-dashboard"   href=" index.php?module=ExitInterView&amp;view=List&amp;app=ADMIN ">
-                                                                                <i class="material-icons module-icon">assignment</i> Exit Interview
-                                                                            </a>
-                                                                        </li>*}
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -1669,22 +1629,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
 
                                     </li>
 
-                               {*     Khaled - Removed as Per Requirement<li admin="">
-                                        <a class="waves-effect waves-dark dropdown-icon-dashboard " href=" index.php?module=WorkingHours&amp;view=List&amp;app=ADMIN ">
-                                            <i class="material-icons module-icon">access_time</i> <span class="hide-menu"> Working Hours</span>
-                                        </a>
-                                    </li>
-
-                                    <li admin="">
-                                        <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=Documents&amp;view=List&amp;app=ADMIN ">
-                                            <i class="material-icons module-icon">file_download</i> <span class="hide-menu"> Documents</span>
-                                        </a>
-                                    </li>
-                                    <li admin="">
-                                        <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=MessageBoard&amp;view=List&amp;app=ADMIN ">
-                                            <i class="material-icons module-icon">assignment</i> <span class="hide-menu"> Message Board</span>
-                                        </a>
-                                    </li>*}
+                      
                                 </ul>
                             </div>
                         </div>
@@ -1756,7 +1701,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                 width: 100%;
                                 /* color: #fff; */
                                 /* font-size: 15px; */
-                                padding: 10px 0;
+                                padding: 12px 0;
                                 text-decoration: none;">All</span>
                             </a>
                         </div>
@@ -1826,8 +1771,8 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
 *}                                                    </div>
                                                     <br>
                                                     <div class="row">
-                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Attendance" class="quickCreateModule" data-name="Attendance" data-url="index.php?module=Attendance&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">assignment</i><span class="quick-create-module">Attendance</span></a></div>
-                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Payments" class="quickCreateModule" data-name="Payments" data-url="index.php?module=Payments&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">payment</i><span class="quick-create-module">Payments</span></a></div>
+{*                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Attendance" class="quickCreateModule" data-name="Attendance" data-url="index.php?module=Attendance&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">assignment</i><span class="quick-create-module">Attendance</span></a></div>
+*}                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Payments" class="quickCreateModule" data-name="Payments" data-url="index.php?module=Payments&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">payment</i><span class="quick-create-module">Payments</span></a></div>
                                                        <div class="col-lg-4"><a id="menubar_quickCreate_Bills" class="quickCreateModule" data-name="Bills" data-url="index.php?module=Bills&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">receipt</i><span class="quick-create-module">Office Bills</span></a></div>
                                                     </div>
                                                     <br>

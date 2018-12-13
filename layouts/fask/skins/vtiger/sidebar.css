@@ -267,7 +267,7 @@ When click on sidebar toggler and also for tablet
 
 
 .main-container .sidebar-essentials{
-  position: fixed !important;
+  position: relative !important;
   overflow-x: scroll; 
   left: auto !important;
   right: 0;
@@ -281,7 +281,7 @@ When click on sidebar toggler and also for tablet
 }
 .module-nav.settingsNav{
   display: block;
-  position: fixed;
+/*  position: fixed;*/
   right: 0;
   top: 100px;
   bottom: 0;

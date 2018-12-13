@@ -6,7 +6,7 @@
  */
 
 
-class Settings_Vtiger_YearEndProcess_View extends Settings_Vtiger_Index_View {
+class Settings_Vtiger_BalanceLeave_View extends Settings_Vtiger_Index_View {
 
     public function process(Vtiger_Request $request) {
         $qualifiedName = $request->getModule(false);
