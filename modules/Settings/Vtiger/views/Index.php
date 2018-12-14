@@ -118,7 +118,8 @@ class Settings_Vtiger_Index_View extends Vtiger_Basic_View {
                 $activeWorkFlows = Settings_Workflows_Module_Model::getActiveWorkflowCount();
                 $activeModules = Settings_ModuleManager_Module_Model::getModulesCount(true);
                 $pinnedSettingsShortcuts = Settings_Vtiger_MenuItem_Model::getPinnedItems();
-                $sidebar = Users_Record_Model::UserSidebarPermission();
+                $currentUser = Users_Record_Model::getCurrentUserModel();
+                $sidebar = Users_Record_Model::UserSidebarPermission($currentUser,$request);
 
               $viewer->assign('FILTERVIEW',$sidebar['filterview']);
               $viewer->assign('ADMINVIEW',$sidebar['adminview']);
