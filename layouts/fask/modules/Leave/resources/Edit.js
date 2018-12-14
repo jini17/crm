@@ -2,10 +2,10 @@ Vtiger_Edit_Js("Leave_Edit_Js",{
         file : false
 },{
 
-        registerChangeRadionButton:function(container) {
+        registerChangeRadionButton:function() {
                 var thisInstance = this;
 
-                container.on('change', 'input[name="type"]', function(e){
+                jQuery(".filterContainer").on('change', 'input[name="type"]', function(e){
 
                         var typeElement = container.find('input[name="type"]');
                         var typeValue = typeElement.val();
@@ -20,9 +20,9 @@ Vtiger_Edit_Js("Leave_Edit_Js",{
 
         },
 
-        registerEvents : function(container) {
-        this._super(container);
-                this.registerChangeRadionButton(container);
+        registerEvents : function() {
+               // this._super(container);
+                this.registerChangeRadionButton();
         }
         
 });

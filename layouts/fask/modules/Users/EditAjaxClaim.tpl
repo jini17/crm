@@ -55,7 +55,7 @@
                         <div class="form-group" style="margin-bottom: 0px !important;">
                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                         <div class="col-md-4">
-                                                                <label class="control-label fieldLabel" style="text-align: right;float: right;">sdf
+                                                                <label class="control-label fieldLabel" style="text-align: right;float: right;">
                                                                         &nbsp;{vtranslate('LBL_CLAIM_TYPE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
                                                                 </label>
                                                         </div>
