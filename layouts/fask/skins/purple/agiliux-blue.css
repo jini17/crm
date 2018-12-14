@@ -537,10 +537,9 @@ a.rightside-icon-dashboard > i.fa{
 /**=================
     Employee Directory
 =====================*/
-#tablist li.active {
+.active.employeeTab{
             border-bottom: 2px solid  #d971ae;
-            color: #fff;
-            padding: 8px;
+
         }
       
         .pagination li.active{
@@ -559,3 +558,70 @@ a.rightside-icon-dashboard > i.fa{
             .global-nav{
                       border-bottom: 2px solid  #d971ae;
             }
+            active.employeeTab{
+    border-bottom: 2px solid  #3bbd9b;
+    
+}
+
+.pagination li.active{
+  border-bottom: 2px solid #3B5998 ;
+  color: #3B5998 ;
+}
+
+.pagination li.active a{
+    color: #fff;
+    background:  #3B5998 ;
+}
+.alphabetSorting table .alphabetSearch a{
+color: #2f5597 !important;
+}
+.global-nav{
+          border-bottom: 2px solid  #2f5597;
+}
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+    padding: 10px;
+}
+.fa-twitter {
+    background: #55ACEE;
+    color: #fff;
+    padding: 10px;
+}
+.fa-linkedin {
+    background: #007bb5;
+    color: #fff;
+    padding: 10px;
+}
+.fa-envelope {
+    background: #ff6600;
+    color: #fff;
+    padding: 10px;
+}
+.user-meta{
+    min-height: 84px;
+}
+
+/**=================
+ Mail Manager
+=======================*/
+#mm_searchButton {
+    height: 30px !important;
+    background-color: #3B5998 !important;
+    border: 1px solid #fff !important;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #fff;
+}
+#searchType{
+    background: #3B5998;
+    color:#fff;
+}
+.mUserName i{
+    color: #3B5998;
+}
+.mmbtn .btn{
+    font-size: 12px;
+    padding:5px;
+    color: #3B5998;
+}

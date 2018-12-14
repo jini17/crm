@@ -17,35 +17,36 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                 $currentUser            = Users_Record_Model::getCurrentUserModel();
                 $viewer                       = $this->getViewer($request);
                 $moduleName         = $request->getModule();
-                $departmentList     = getAllPickListValues('department');
                 $moduleModel        = Home_Module_Model::getInstance($moduleName);
                 
                 $dept                         = $request->get('department');
                 $page                         = $request->get('page');
                 $linkId                       = $request->get('linkid');
                 
-                $moduleModel       = Home_Module_Model::getInstance($moduleName);
-                $widget                    = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
-                $users                       = $this->get_employee($db, $dept);
-                $first_name            = $currentUser->get('first_name');
-                $employee_no           = $currentUser->get('employeeno');
-                $job_grade             = $this->grade($db,$currentUser->get('grade_id'));
+                 $moduleModel       = Home_Module_Model::getInstance($moduleName);
+                 $widget                    = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+                 $users                       = $this->get_employee($db, $dept);
+                 $first_name            = $currentUser->get('first_name');
+                 $last_name            = $currentUser->get('last_name');
+                 $employee_no           = $currentUser->get('employeeno');
+                $job_grade             = (strlen($currentUser->get('grade_id'))> 0)?$this->grade($db,$currentUser->get('grade_id')):"";
            
                 $designation          =  $currentUser->get('Designation');
                 $department         = $currentUser->get('department');
-                $djt                           =    $this->get_designation_job_type($db, $currentUser->get('id'));
+               $djt                           =    $this->get_designation_job_type($db, $currentUser->get('id'));
                 
-                $report_to             =  $this->report_to($db, $currentUser->get('reports_to_id'));
+                $report_to             =  (strlen($currentUser->get('reports_to_id'))> 0)?$this->report_to($db, $currentUser->get('reports_to_id')):"";
                //$thumb                   = $this->get_image($db, $currentUser->get('id'),$currentUser->get('image_name'));
-               $thumb                   = $currentUser->getImageDetails();
+                $thumb                   = $currentUser->getImageDetails();
+
                $contract_start_date         = $this->get_contract_start_date($db, $currentUser->get('id'));
                $curdate = date('Y-m-d');
-               $exp_date        = date('Y-m-d', strtotime($expire_date));
+               $exp_date        = (strlen($djt['exp_date']) > 0)?date('Y-m-d', strtotime($djt['exp_date'])):"";
                $now = time(); // or your date as well
-                $your_date = strtotime( $djt['exp_date']);
-                $datediff = $now - $your_date;
+               $your_date = (strlen($djt['exp_date'])>0)?strtotime( $djt['exp_date']):"0";
+               $datediff = (strlen($your_date)>0)?$now - $your_date:"";
 
-                $alert_days = round($datediff / (60 * 60 * 24));
+               $alert_days = (strlen($datediff) > 0)? round($datediff / (60 * 60 * 24)):"";
                 if($alert_days <= 45 ){
                      $notify = "show";
                 }
@@ -62,7 +63,7 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                     'job_type'       => $djt['job_type'],
                     'department' => $department,
                     'report_to'     => $report_to,   
-                    'expire'            =>  date('M d, Y',strtotime($djt['exp_date'])),
+                    'expire'            =>  (strlen($djt['exp_date']) >0)?date('M d, Y',strtotime($djt['exp_date'])):"",
                     'thumb'          => $thumb,
                     'facebook'     => $currentUser->get('facebook'),
                     'twitter'         => $currentUser->get('twitter'),
@@ -71,9 +72,10 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                     'contract'      => $djt['contract_id'],
                     'emp_id' => $currentUser->get('id')
                 );
-                    
+               //    print_r($info);
+               //  exit();
                if($djt['job_type'] == 'Permanent'){ 
-                $info[ 'contract_start'] = date('M d, Y', strtotime($currentUser->get('date_joined')));
+                $info[ 'contract_start'] = (strlen($currentUser->get('date_joined'))> 0)?date('M d, Y', strtotime($currentUser->get('date_joined'))):"";
                }
                else{
                    $info[ 'contract_start'] = $contract_start_date;
@@ -82,6 +84,7 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                 $viewer->assign('DEPARTMENT', $departmentList);
                 $viewer->assign('WIDGET', $widget);
                 $viewer->assign('MODULE_NAME', $moduleName);
+               
                 $viewer->assign('DATA', $info);
                 $viewer->assign('URL',$site_URL);
 
@@ -90,7 +93,7 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                 if(!empty($content)) {
                         $viewer->view('dashboards/MyEmploymentDetailsContents.tpl', $moduleName);
                 } else {
-                        $viewer->view('dashboards/MyEmploymentDetails.tpl', $moduleName);
+                       $viewer->view('dashboards/MyEmploymentDetails.tpl', $moduleName);
                 }
                 
         }
@@ -117,7 +120,12 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
              $sql = "SELECT grade from vtiger_grade WHERE gradeid = $id ";
              $query = $db->pquery($sql,array());
              $grade = $db->query_result($query,0,'grade');
-             return $grade;
+             if (!empty($grade)) {
+             	 return $grade;
+             }
+             else{
+             	return false;
+             }
         }
         
         /**
@@ -132,8 +140,16 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
             $sql                      = "select id,first_name,last_name from vtiger_users WHERE id = $id"; 
             $query                = $db->pquery($sql,array());
             $report_to        = $db->query_result($query,0,'first_name');
-            $data['name']  = $report_to ." ".$db->query_result($query,0,'last_name');
-            $data['id']          = $db->query_result($query,0,'id');
+            $num_rows       = $db->num_rows($query);
+            if($num_rows > 0){
+                 $data['name']  = $report_to ." ".$db->query_result($query,0,'last_name');
+                $data['id']          = $db->query_result($query,0,'id');
+            }
+            else{
+                  $data['name']  = "";
+                  $data['id']   = 0;
+            }
+           
              return $data;
         }
         /**
@@ -143,21 +159,27 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
    * @return string
    */
         function get_employee($db,$department){
-        $sql = "SELECT id,first_name,last_name,department FROM vtiger_users WHERE status = 'Active' ";
-        
-
+        $sql = "SELECT employeeno,first_name,last_name,department FROM vtiger_users WHERE status = 'Active' ";
         $query               = $db->pquery($sql);
         $numrows        = $db->num_rows($query);
         $data                 = array();
         
-        for($i =0; $i < $numrows; $i++ ){
-            $data[$i]['empid']                = $db->query_result($query,$i,'employee_no');
-            $data[$i]['first_name']       = $db->query_result($query,$i,'first_name');
-            $data[$i]['last_name']        = $db->query_result($query,$i,'last_name');
-            $data[$i]['department']     = $db->query_result($query,$i,'department');
-            $data[$i]['department']     = $db->query_result($query,$i,'department');
+        if($numrows > 0){            
+            for($i =0; $i < $numrows; $i++ ){
+                $data[$i]['empid']                = $db->query_result($query,$i,'employeeno');
+                $data[$i]['first_name']       = $db->query_result($query,$i,'first_name');
+                $data[$i]['last_name']        = $db->query_result($query,$i,'last_name');
+                $data[$i]['department']     = $db->query_result($query,$i,'department');
+
+            }
         }
+        else{
+            $data[0]['empid']               = 0;
+            $data[0]['first_name']       = "";
+            $data[0]['last_name']        = "";
+            $data[0]['department']     =  "";
         
+        }
         return $data;
     }        
 
@@ -172,14 +194,29 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                 . " INNER JOIN vtiger_employeecontractcf ON vtiger_employeecontract.employeecontractid = vtiger_employeecontractcf.employeecontractid "
                 . " WHERE vtiger_employeecontract.employee_id = ".$id;
         $query                         = $db->pquery($sql,array());
-        $djt['deg']                   = $db->query_result($query,0,'designation');
-        $djt['job_type']        = $db->query_result($query,0,'job_type');
-        $djt['contract_id']        = $db->query_result($query,0,'employeecontractid');
-          $djt['exp_date']        = $db->query_result($query,0,'contract_expiry_date');
+        $numrows = $db->num_rows($query);
+        if($numrows > 0){
+            $djt['deg']                   = $db->query_result($query,0,'designation');
+            $djt['job_type']        = $db->query_result($query,0,'job_type');
+            $djt['contract_id']        = $db->query_result($query,0,'employeecontractid');
+            $djt['exp_date']        = $db->query_result($query,0,'contract_expiry_date');
+        }
+          else{
+              $djt['deg']               = "";
+            $djt['job_type']        = "";
+            $djt['contract_id']   = 0;
+            $djt['exp_date']       = "";
+          }
         return $djt;
         
     }
     
+    /**
+     * Get User Contract Start Date
+     * @param type $db
+     * @param type $id
+     * @return type
+     */
     public function  get_contract_start_date($db,$id){
         
         $sql                         = "SELECT DATE_FORMAT(createdtime,'%M %d, %Y') as started_from from vtiger_crmentity WHERE `setype` LIKE '%contract%' AND `smownerid` = $id ";
@@ -188,19 +225,21 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
         return $contract_start;
         
     }
-    
+    /**
+     * Get User Image
+     * @param type $db - DB Connection
+     * @param type $id - Attachment ID
+     * @param type $name - Image Name
+     * @return type
+     */
     public function get_image($db,$id,$name){
         return $name;
         $sql = "SELECT path from vtiger_attachments WHERE attachementid = $id AND name ='$name' ";
          $query                   = $db->pquery($sql,array());
         $path   = $db->query_result($query,0,'path');
-        return $path.$name;
+        return $path.$name;      
         
-        
-    }
-    
-
-       
+    }  
 }
 
 
