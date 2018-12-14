@@ -1,0 +1,62 @@
+
+
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<form id="__vtigerWebForm" name="Create New Contact" action="http://dev7.secondcrm.com/agiliuxv2/modules/Webforms/capture.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+   <input name="__vtrftk" value="sid:bf14a1646a12dadd6b8be11771c1a5f61138c192,1544669312" type="hidden"><input name="publicid" value="9a0c9b2cda7b709fa949d97b3790fa93" type="hidden"><input name="urlencodeenable" value="1" type="hidden"><input name="name" value="Create New Contact" type="hidden">
+   <table>
+      <tbody>
+         <tr>
+            <td><label>Last Name*</label></td>
+            <td><input name="lastname" data-label="" value="" required="" type="text"></td>
+         </tr>
+         <tr>
+            <td><label>Company Name*</label></td>
+            <td><input name="company_name" data-label="" value="" required="" type="text"></td>
+         </tr>
+         <tr>
+            <td><label>Office Phone*</label></td>
+            <td><input name="phone" data-label="" value="" required="" type="text"></td>
+         </tr>
+         <tr>
+            <td><label>Mobile Phone</label></td>
+            <td><input name="mobile" data-label="" value="" type="text"></td>
+         </tr>
+         <tr>
+            <td><label>Primary Email*</label></td>
+            <td><input name="email" data-label="" value="" required="" type="email"></td>
+         </tr>
+         <tr>
+            <td>
+               <select name="leadsource" data-label="leadsource" required="" hidden="">
+                  <option value="">Select Value</option>
+                  <option value="Cold Call">Cold Call</option>
+                  <option value="Existing Customer">Existing Customer</option>
+                  <option value="Self Generated">Self Generated</option>
+                  <option value="Employee">Employee</option>
+                  <option value="Partner">Partner</option>
+                  <option value="Public Relations">Public Relations</option>
+                  <option value="Direct Mail">Direct Mail</option>
+                  <option value="Conference">Conference</option>
+                  <option value="Trade Show">Trade Show</option>
+                  <option value="Web Site" selected="">Web Site</option>
+                  <option value="Word of mouth">Word of mouth</option>
+                  <option value="Other">Other</option>
+                  <option value="need to make it a very long values so that it will not disturb the page layout and suppose to be fixed to some extent for the width of the page">need to make it a very long values so that it will not disturb the page layout and suppose to be fixed to some extent for the width of the page</option>
+               </select>
+            </td>
+         </tr>
+         <tr>
+            <td><label>Documents (If any) </label></td>
+            <td><input name="file_2_1" type="file"></td>
+         </tr>
+      </tbody>
+   </table>
+   <script type="text/javascript">var RecaptchaOptions = { theme : "Dark" };</script>
+   <div class="g-recaptcha" data-sitekey="6Ldb8oAUAAAAAMf9m1YLhMYBN-Q1UwyeSjhJaGgo"></div>
+   <input id="captchaUrl" value="http://dev7.secondcrm.com/agiliuxv2/modules/Settings/Webforms/actions/CheckCaptcha.php" type="hidden">
+   <input id="recaptcha_validation_value" type="hidden"><input value="Submit" type="submit">
+</form>
+<script  type="text/javascript">window.onload = function() { var N=navigator.appName, ua=navigator.userAgent, tem;var M=ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];M=M? [M[1], M[2]]: [N, navigator.appVersion, "-?"];var browserName = M[0];var form = document.getElementById("__vtigerWebForm"), inputs = form.elements; form.onsubmit = function() { var required = [], att, val; for (var i = 0; i < inputs.length; i++) { att = inputs[i].getAttribute("required"); val = inputs[i].value; type = inputs[i].type; if(type == "email") {if(val != "") {var elemLabel = inputs[i].getAttribute("label");var emailFilter = /^[_/a-zA-Z0-9]+([!"#$%&()*+,./:;<=>?\^_`{|}~-]?[a-zA-Z0-9/_/-])*@[a-zA-Z0-9]+([\_\-\.]?[a-zA-Z0-9]+)*\.([\-\_]?[a-zA-Z0-9])+(\.?[a-zA-Z0-9]+)?$/;var illegalChars= /[\(\)\<\>\,\;\:\"\[\]]/ ;if (!emailFilter.test(val)) {alert("For "+ elemLabel +" field please enter valid email address"); return false;} else if (val.match(illegalChars)) {alert(elemLabel +" field contains illegal characters");return false;}}}if (att != null) { if (val.replace(/^\s+|\s+$/g, "") == "") { required.push(inputs[i].getAttribute("label")); } } } if (required.length > 0) { alert("The following fields are required: " + required.join()); return false; } var numberTypeInputs = document.querySelectorAll("input[type=number]");for (var i = 0; i < numberTypeInputs.length; i++) { val = numberTypeInputs[i].value;var elemLabel = numberTypeInputs[i].getAttribute("label");var elemDataType = numberTypeInputs[i].getAttribute("datatype");if(val != "") {if(elemDataType == "double") {var numRegex = /^[+-]?\d+(\.\d+)?$/;}else{var numRegex = /^[+-]?\d+$/;}if (!numRegex.test(val)) {alert("For "+ elemLabel +" field please enter valid number"); return false;}}}var dateTypeInputs = document.querySelectorAll("input[type=date]");for (var i = 0; i < dateTypeInputs.length; i++) {dateVal = dateTypeInputs[i].value;var elemLabel = dateTypeInputs[i].getAttribute("label");if(dateVal != "") {var dateRegex = /^[1-9][0-9]{3}-(0[1-9]|1[0-2]|[1-9]{1})-(0[1-9]|[1-2][0-9]|3[0-1]|[1-9]{1})$/;if(!dateRegex.test(dateVal)) {alert("For "+ elemLabel +" field please enter valid date in required format"); return false;}}}var inputElems = document.getElementsByTagName("input");var totalFileSize = 0;for(var i = 0; i < inputElems.length; i++) {if(inputElems[i].type.toLowerCase() === "file") {var file = inputElems[i].files[0];if(typeof file !== "undefined") {var totalFileSize = totalFileSize + file.size;}}}if(totalFileSize > 52428800) {alert("Maximum allowed file size including all files is 50MB.");return false;}var recaptchaValidationValue = document.getElementById("recaptcha_validation_value").value;if (recaptchaValidationValue!= true){var recaptchaResponseElement = document.getElementsByName("recaptcha_response_field")[0].value;var recaptchaChallengeElement = document.getElementsByName("recaptcha_challenge_field")[0].value;var captchaUrl = document.getElementById("captchaUrl").value;var url = captchaUrl+"?recaptcha_response_field="+recaptchaResponseElement;url = url + "&recaptcha_challenge_field="+recaptchaChallengeElement+"&callback=JSONPCallback";jsonp.fetch(url);return false;}}; };var jsonp = {callbackCounter: 0,fetch: function(url) {url = url +"&callId="+this.callbackCounter;var scriptTag = document.createElement("SCRIPT");scriptTag.src = url;scriptTag.async = true;scriptTag.id = "JSONPCallback_"+this.callbackCounter;scriptTag.type = "text/javascript";document.getElementsByTagName("HEAD")[0].appendChild(scriptTag);this.callbackCounter++;}};function JSONPCallback(data) {if(data.result.success == true) {document.getElementById("recaptcha_validation_value").value = true;var form = document.getElementById("__vtigerWebForm");form.submit();} else {document.getElementById("recaptcha_reload").click();alert("you entered wrong captcha");}var element = document.getElementById("JSONPCallback_"+data.result.callId);element.parentNode.removeChild(element);}</script>
+
+
