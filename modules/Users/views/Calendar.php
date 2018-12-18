@@ -37,6 +37,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 	}
 
 	public function preProcess(Vtiger_Request $request, $display=true) {
+                                            global $currentUser;
 		if($this->checkPermission($request)) {
 			$qualifiedModuleName = $request->getModule(false);
 			$currentUser = Users_Record_Model::getCurrentUserModel();
@@ -44,7 +45,10 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 			$moduleName = $request->getModule();
 			$detailViewModel = Vtiger_DetailView_Model::getInstance($moduleName, $recordId);
 			$recordModel = $detailViewModel->getRecord();
-
+                                                                 if($currentUser->isAdminUser() && $currentUser->get("id")  == $request->get("record") && ($request->get("view") == "PreferenceDetail" ||$request->get("view") == "Calendar" )){
+                                                                    $adminview = "hide MegaMenu ";
+                                                                      $userview = "UserMenu";
+                                                                }
 			$detailViewLinkParams = array('MODULE'=>$moduleName,'RECORD'=>$recordId);
 			$detailViewLinks = $detailViewModel->getDetailViewLinks($detailViewLinkParams);
 
@@ -60,6 +64,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 
 			$linkParams = array('MODULE'=>$moduleName, 'ACTION'=>$request->get('view'));
 			$linkModels = $detailViewModel->getSideBarLinks($linkParams);
+                                                                $viewer->assign('ADMINVIEW',$adminview);
 			$viewer->assign('QUICK_LINKS', $linkModels);
 			$viewer->assign('PAGETITLE', $this->getPageTitle($request));
 			$viewer->assign('SCRIPTS',$this->getHeaderScripts($request));
@@ -195,7 +200,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 		$viewer->assign('RECORD_ID', $recordId);
 		
 		$viewer->assign('SHAREDTYPE', $sharedType);
-        $viewer->assign('HOUR_FORMAT_VALUE', $hourFormatFeildModel->get('fieldvalue'));
+                                            $viewer->assign('HOUR_FORMAT_VALUE', $hourFormatFeildModel->get('fieldvalue'));
 	}
 	
 	

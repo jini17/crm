@@ -48,11 +48,13 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         var element = jQuery(element);
         var linkId = element.data('linkid');
         var name = element.data('name');
+        var group = element.data('group');
 
 // After adding widget, we should remove that widget from Add Widget drop down menu from active tab
         var activeTabId = Vtiger_DashBoard_Js.currentInstance.getActiveTabId();
         jQuery('a[data-name="' + name + '"]', "#tab_" + activeTabId).parent().hide();
-        var widgetContainer = jQuery('<li class="new dashboardWidget loadcompleted" id="' + linkId + '" data-name="' + name + '" data-mode="open"></li>');
+        element.closest("li").remove();
+        var widgetContainer = jQuery('<li class="new dashboardWidget loadcompleted" data-group="'+group+'" id="' + linkId + '" data-name="' + name + '" data-mode="open"></li>');
         widgetContainer.data('url', url);
         var width = element.data('width');
         var height = element.data('height');
@@ -458,12 +460,13 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
     },
     removeWidget: function () {
         this.getContainer().on('click', 'li a[name="dclose"]', function (e) {
+            var container = this.closest("ul");
             var element = $(e.currentTarget);
             var listItem = jQuery(element).parents('li');
             var width = listItem.attr('data-sizex');
             var height = listItem.attr('data-sizey');
-
             var url = element.data('url');
+            var group = element.closest("li").data('group');
             var parent = element.closest('.dashBoardWidgetFooter').parent();
             var widgetName = parent.data('name');
             var widgetTitle = parent.find('.dashboardTitle').attr('title');
@@ -482,13 +485,15 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                                 parent.remove();
                             });
                             if (jQuery.inArray(widgetName, nonReversableWidgets) == -1) {
-                                var data = '<li><a onclick="Vtiger_DashBoard_Js.addWidget(this, \'' + response.url + '\')" href="javascript:void(0);"';
+                                var data = '<li><a style="padding-left:10px;" onclick="Vtiger_DashBoard_Js.addWidget(this, \'' + response.url + '\')" href="javascript:void(0);"';
                                 data += 'data-width=' + width + ' data-height=' + height + ' data-linkid=' + response.linkid + ' data-name=' + response.name + '>' + response.title + '</a></li>';
                                 var divider = jQuery('.widgetsList .divider', '#tab_' + activeTabId);
-                                if (divider.length) {
+                                if (divider.length) {                                                                     
                                     jQuery(data).insertBefore(divider);
                                 } else {
-                                    jQuery(data).insertAfter(jQuery('.widgetsList li:last', '#tab_' + activeTabId));
+                                  jQuery(".widgetsList ").find("."+group).find("ul").append(data)
+                         
+                                  // jQuery(data).insertAfter(jQuery('.widgetsList li:last', '#tab_' + activeTabId));
                                 }
                             }
                         }
@@ -677,7 +682,37 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             });
         });
     },
-
+    /**
+     * Added By Khaled
+     * Reset Data
+     * @returns {undefined}
+     */
+    registerDataReset:function(){
+        jQuery(".btn-reset").on("click",function(){
+            var type = $(this).data("reset")
+            var url =  "includes/Reset/"+type+".php";
+          app.helper.showProgress();
+               $.ajax({
+                    type        : "POST",
+                    url           : url,
+                    data       : {
+                        type:type
+                    },                   
+                    success : function( response ){
+                        
+                              
+                        console.log( response );       
+                     if(response.length > 0){
+                         window.location.reload();
+                     }
+                    },
+                    error: function(error){
+                        console.log(error)
+                    }
+                });
+             
+        });
+    },
     registerAddDashboardTab: function () {
         var self = this;
         var dashBoardContainer = this.getDashboardContainer();
@@ -1156,7 +1191,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         this.registerDashBoardTabRename();
         this.registerDeleteDashboardTab();
         this.registerRearrangeTabsEvent();
-
+        this.registerDataReset();
         this.searchWidgetButton();
         /***************ADDED@05122014***************/
         this.searchWidgets();

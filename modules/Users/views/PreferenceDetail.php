@@ -105,7 +105,7 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
                         $viewer->assign('MENU_TOPITEMS_LIMIT', $menuStructure->getLimit());
                         $viewer->assign('COMPANY_LOGO',$companyLogo);
                         $viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
-
+                       
                         $homeModuleModel = Vtiger_Module_Model::getInstance('Home');
                         $viewer->assign('HOME_MODULE_MODEL', $homeModuleModel);
                         $viewer->assign('HEADER_LINKS',$this->getHeaderLinks());
@@ -115,7 +115,11 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
                         $viewer->assign('CURRENT_USER_MODEL', $currentUser);
                         $viewer->assign('LANGUAGE', $currentUser->get('language'));
                         $viewer->assign('COMPANY_DETAILS_SETTINGS',new Settings_Vtiger_CompanyDetails_Model());
-
+                        $currentUser =  Users_Record_Model::getCurrentUserModel();
+                        $sidebar = $currentUser->UserSidebarPermission($currentUser,$request); // Display Sidebar based on role &                      
+                        $viewer->assign('FILTERVIEW',$sidebar['filterview']);
+                        $viewer->assign('ADMINVIEW',$sidebar['adminview']);
+                        $viewer->assign('USERVIEW',$sidebar['userview']);
                         $settingsModel = Settings_Vtiger_Module_Model::getInstance(); 
                         $menuModels = $settingsModel->getMenus(); 
 

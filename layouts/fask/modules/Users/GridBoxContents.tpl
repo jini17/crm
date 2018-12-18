@@ -39,16 +39,9 @@
 }
 
  .img-holder{
-{*       border-radius: 50%;
-       border:1px solid #ccc;*}    
-       width: 122px;
-       height: 122px;
-{*       margin: 0 auto;
-       box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;*}
-{*    background: #fff;*}
- 
+
+    width: 122px;
+    height: 122px;
     margin: 0 auto !important;
 
   
@@ -100,12 +93,16 @@
                            {assign var=IMAGE_DETAILS value=$LISTVIEW_ENTRY->getImageDetails()}
                                 {foreach item=IMAGE_INFO from=$IMAGE_DETAILS}
 	                 {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
-                                             <img width="110" height='110' class="img-circle"  style="display:block; margin:0 auto;"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
+                             <a href="{$LISTVIEW_ENTRY->getDetailViewUrl()}">
+                                 <img width="110" height='110' class="img-circle"  style="display:block; margin:0 auto;"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
+                                 </a>   
                                        {/if}
 
                                 {/foreach}
                                         {if $IMAGE_DETAILS[0]['id'] eq null}
+                                            <a href="{$LISTVIEW_ENTRY->getDetailViewUrl()}">
                                             <img width="110" height='110' class="img-circle"  style="display:block; margin:0 auto;" src="{vimage_path('DefaultUserIcon.png')}">
+                                            </a>
                                         {/if}
                         </div>
                         <div class="user-meta text-center">
@@ -152,7 +149,12 @@
                                         <center>
                                                 {if $SEARCH_VALUE eq 'Active'}
                                                         {assign var=SINGLE_MODULE value="SINGLE_$MODULE"}
-                                                        {vtranslate('LBL_NO')} {vtranslate($MODULE, $MODULE)} {vtranslate('LBL_FOUND')},{if $IS_MODULE_EDITABLE} <a style="color:blue" href="{$MODULE_MODEL->getCreateRecordUrl()}"> {vtranslate('LBL_CREATE_USER',$MODULE)}</a>{/if}
+                                                        {vtranslate('LBL_NO')} {vtranslate($MODULE, $MODULE)}
+                                                        {vtranslate('LBL_FOUND')},{if $IS_MODULE_EDITABLE} 
+                                                            <a style="color:blue" href="{$MODULE_MODEL->getCreateRecordUrl()}">
+                                                                {vtranslate('LBL_CREATE_USER',$MODULE)}
+                                                            </a>
+                                                        {/if}
                                                 {else}
                                                         {vtranslate('LBL_NO')} {vtranslate($MODULE, $MODULE)} {vtranslate('LBL_FOUND')}
                                                 {/if}

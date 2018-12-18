@@ -46,8 +46,10 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer->assign("LAST_LOGIN_TIME", $sLastLoginTime);
                 $viewer->assign("LAST_USER_IP", $sLastUserIP);
                 //End here
-
-
+                 
+                $Trial_expire = Users_Record_Model::trial_expire();
+                
+                $viewer->assign("TRIAL_INFO",$Trial_expire);
                  if($_SESSION['loggedin_now'] === false){
                
                             $viewer->assign("LOGGED_NOW",'in');
@@ -72,6 +74,17 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                  else{
                      $viewer->assign("LOGGED_FIRST_TIME",'no');
                  }
+                 
+                $crm_record_no = $this->CRM_ENTITY_CHECKER();
+               if($crm_record_no){
+                   $viewer->assign("DATA_RESET","Yes");
+               }
+               else{
+                    $viewer->assign("DATA_RESET","No");
+               }
+                        
+                        
+                
 
                 $dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
                 //check profile permissions for Dashboards
@@ -136,9 +149,17 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer->assign('DASHBOARD_TABS', $dashboardTabs);
                 $viewer->assign('DASHBOARD_TABS_LIMIT', $dashBoardModel->dashboardTabLimit);
                 $viewer->assign('SELECTED_TAB',$tabid);
-        if (self::$selectable_dashboards) {
+                
+            if (self::$selectable_dashboards) {
+                        
+                        $widget_group   = $this->Widget_Group(self::$selectable_dashboards,$moduleName);
                         $viewer->assign('SELECTABLE_WIDGETS', self::$selectable_dashboards);
-                }
+                        $viewer->assign("EMPLOYEE_GROUP", $widget_group['employee']);
+                        $viewer->assign("CHART_GROUP", $widget_group['chart']);
+                        $viewer->assign("LEAVECLAIM_GROUP", $widget_group['leaveclaim']);
+                        $viewer->assign("GENERAL_GROUP", $widget_group['general']);
+            }
+            
                 $viewer->assign('CURRENT_USER', Users_Record_Model::getCurrentUserModel());
                 $viewer->assign('TABID',$tabid);
                 $viewer->view('dashboards/DashBoardContents.tpl', $moduleName);
@@ -147,7 +168,56 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
         public function postProcess(Vtiger_Request $request) {
                 parent::postProcess($request);
         }
+        
+        public function Widget_Group($groups,$modulename){
+            $groupData = array();
+       
+  
+            foreach ($groups as $group){
+               
+            $list['URL'] =$group->getUrl();
+            $list['linkid'] = $group->get('linkid');
+            $list['name'] = $group->getName();
+            $list['width'] = $group->getWidth();        
+            $list['height'] = $group->getHeight();  
+            $list['title'] = vtranslate($group->getTitle(), $modulename);  
 
+               if($group->get("widgetgroup") == "employee"){
+                   $groupData['employee'][]=$list;
+               } 
+              elseif($group->get("widgetgroup") == "leave" || $group->get("widgetgroup") == "claim"){
+                   $groupData['leaveclaim'][]=$list;
+               }
+              elseif($group->get("widgetgroup") == "chart"){
+                   $groupData['chart'][]=$list;
+               }
+               elseif($group->get("widgetgroup") == "general"){
+                   $groupData['general'][]=$list;
+               }
+            }
+            
+            return $groupData;
+            
+        }
+
+        
+
+
+        /**
+         * Added By Khaled
+         * @return boolean
+         */
+        public function CRM_ENTITY_CHECKER(){
+            $db = PearDatabase::getInstance();
+            $query = $db->pquery("SELECT count(*) as total_rows FROM   vtiger_crmentity ");
+            if($db->query_result($query,0,'total_rows') > 0){
+                return true;
+            }
+            else{
+                 return false;
+            }
+            
+        }
         /**
          * Function to get the list of Script models to be included
          * @param Vtiger_Request $request
