@@ -9906,3 +9906,7 @@ color: #2f5597 !important;
 .user-meta{
     min-height: 84px;
 }
+#widget_id_131 .img-holder{
+    width: auto !important;
+    height: auto !important;
+}

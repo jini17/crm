@@ -888,7 +888,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                     <div class="clearfix"></div>
                                                                     <div class="col-md-12">
                                                                         <ul class="profile-list list-unstyled">
-                                                                            <li> <a class="" href="index.php?module=Users&parent=Settings&view=Calendar&record={$USER_MODEL->get('id') }"><i class='fa fa-gear'></i> Settings </a></li>
+                                                                            <li> <a class="" href="index.php?module=Users&parent=Settings&view=Calendar&record={$USER_MODEL->get('id') }"><i class='fa fa-gear'></i>  Preferences </a></li>
                                                                             <li> <a class="" href="index.php?module=Home&view=DashBoard&tabid=1298"><i class='fa fa-rocket'></i> Getting Started</a></li>
                                                                             <li> <a class="" href="http://dev7.secondcrm.com/agiliux/help.php"><i class='fa fa-life-ring'></i> Help</a></li>
                                                                             <li> <a class=""><i class='fa fa-at'></i> Contact Support</a></li>
