@@ -224,41 +224,42 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{
     /**
      * Added By Nirbhay to add a value
      */
-    registerEditButton: function(){
+    registerEditButton: function(){ 
 
         var thisInstance = this;
         var aDeferred = jQuery.Deferred();
         jQuery("#editItem").unbind('click'); /**Unbinded to avoid infinite loop on every register***/
 
-        jQuery("#editItem").click(function () {
-            var selectedvalues = thisInstance.getAllCheckedValues();
-            if(selectedvalues < 1){
+        jQuery("#editItem").click(function () { 
+            var selectedvalues = thisInstance.getAllCheckedValues(); 
+            // Added By Mabruk
+            var array = selectedvalues.split(",")            
+
+            if(array.length != 1 || selectedvalues == ""){
                 alert("Invalid Selection");
                 return aDeferred.promise();
-            }
+            }            
 
 
             //console.log("add item");
-            app.helper.showProgress();
+            
             var params = {
                 'module' : app.getModuleName(),
                 'parent' : app.getParentModuleName(),
-                'view' : 'AllocationTools',
+                'view'   : 'AllocationTools',
                 'values' : selectedvalues,
-                'mode' : 'EditAllocationForm'
+                'mode'   : 'EditAllocationForm'
             }
             AppConnector.requestPjax(params).then(
                 function(data) {
                     //console.log("Inside pjax");
-                    app.helper.hideProgress();
+            
                     app.helper.showModal(data);
-                    history.pushState({}, null, window.history.back());
+                    //history.pushState({}, null, window.history.back());
                     thisInstance.saveRule();
                     thisInstance.autoAddMultipleLeavetype();
                     thisInstance.showLeaveTypeEditAddition();
-
-                    // var thisInstance1 = this;
-
+                                      // var thisInstance1 = this;
 
                 });
 

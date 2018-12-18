@@ -77,6 +77,40 @@ jQuery.Class('Settings_CustomRecordNumbering_Js', {}, {
 			})
 		})
 	},
+
+	toggleMultipleNumbering : function(){ 
+		jQuery('#saveNumbering').on('click',function(e) { 
+		e.preventDefault();			
+		var params = {}		
+		params = {
+			 module  : app.getModuleName(),
+			 parent  : app.getParentModuleName(),
+			 action  : "SaveAjax",
+			 mode	 : "saveCompanyNumberingSetting", 	
+			 business: jQuery("#business").val()
+		}
+		
+		AppConnector.request(params).then(
+			function(data){
+				var params;
+				var successfullSaveMessage = app.vtranslate('JS_RECORD_NUMBERING_UPDATED_SUCCESSFULLY');
+				if(data.success == true){
+					jQuery(e.currentTarget).attr('disabled','disabled');
+					params = {
+						text: successfullSaveMessage
+					};
+					Settings_Vtiger_Index_Js.showMessage(params);
+				}else{
+					var errorMessage = app.vtranslate(data.error.message);
+					params = {
+						text: errorMessage,
+						type: 'error'
+					};
+					Settings_Vtiger_Index_Js.showMessage(params);
+				}
+			});
+	        });
+	},
 	
 	/**
 	 * Function to register event for saving module custom numbering
@@ -209,11 +243,33 @@ jQuery.Class('Settings_CustomRecordNumbering_Js', {}, {
 	},
 
 	/**
-	 * Function to Handle Picklist Depedency of the Companies
+	 * Function to Handle Picklist Depedency of the Companies By Mabruk
 	 */
 	registerPicklistEvents : function() {
-		
+
+		var picklistParent = jQuery('#sourceModule');
+		var selectedValue  = jQuery('#s2id_sourceModule').find('.select2-chosen');
+
+		var allOptions = jQuery('#sourceModule').html();
+		var altOptions = '<option value="Invoice" selected>Invoice</options>' +
+			'<option value="Quotes">Quotes</options>' +
+			'<option value="PurchaseOrder">Purchase Order</options>' +
+			'<option value="SalesOrder">Sales Order</options>'; 
+
+		jQuery('#company').change(function(){ 
+			if (jQuery(this).val() != "1") {
+				picklistParent.html(altOptions);
+				selectedValue.html("Invoice");
+				jQuery(this).val("Invoice");
+			}
+			else{
+				picklistParent.html(allOptions);
+				selectedValue.html("Contacts");	
+				jQuery(this).val("Contacts");
+			}	
 				
+		})		
+			
 
 	}, 
 	
@@ -228,7 +284,8 @@ jQuery.Class('Settings_CustomRecordNumbering_Js', {}, {
 		this.registerEventToUpdateRecordsWithSequenceNumber();
 		this.registerChangeEventForPrefixAndSequenceNumber();
 		this.registerPicklistEvents();
-		this.saveModuleCustomNumbering();
+		this.saveModuleCustomNumbering();		
+		//this.toggleMultipleNumbering();
 		
 	}
 })
