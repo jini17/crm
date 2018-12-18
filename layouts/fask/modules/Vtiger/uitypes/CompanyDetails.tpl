@@ -1,18 +1,16 @@
 {*<!--
-/* Function added by ZULHISYAM on Jun 23, 2014 for new UI Type 3993
-    This function will retrieve terms details */
 /*********************************************************************************
   ** The contents of this file are subject to the vtiger CRM Public License Version 1.0
    * ("License"); You may not use this file except in compliance with the License
-   * The Original Code is:  vtiger CRM Open Source
+   * The Original Code is: vtiger CRM Open Source
    * The Initial Developer of the Original Code is vtiger.
    * Portions created by vtiger are Copyright (C) vtiger.
    * All Rights Reserved.
   *
  ********************************************************************************/
 -->*}
-
 {strip}
+
 {assign var="FIELD_INFO" value=Zend_Json::encode($FIELD_MODEL->getFieldInfo())}
 {assign var=COMPANYDETAILS value=$FIELD_MODEL->getCompanyDetails($id)}
 {assign var="SPECIAL_VALIDATOR" value=$FIELD_MODEL->getValidator()}
@@ -49,3 +47,4 @@
 </select>
 {/if}
 {/strip}
+>>>>>>> ad3b71034325ed6f7f677cd4e7e7d19728136be0
