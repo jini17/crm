@@ -149,9 +149,17 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer->assign('DASHBOARD_TABS', $dashboardTabs);
                 $viewer->assign('DASHBOARD_TABS_LIMIT', $dashBoardModel->dashboardTabLimit);
                 $viewer->assign('SELECTED_TAB',$tabid);
-        if (self::$selectable_dashboards) {
+                
+            if (self::$selectable_dashboards) {
+                        
+                        $widget_group   = $this->Widget_Group(self::$selectable_dashboards,$moduleName);
                         $viewer->assign('SELECTABLE_WIDGETS', self::$selectable_dashboards);
-                }
+                        $viewer->assign("EMPLOYEE_GROUP", $widget_group['employee']);
+                        $viewer->assign("CHART_GROUP", $widget_group['chart']);
+                        $viewer->assign("LEAVECLAIM_GROUP", $widget_group['leaveclaim']);
+                        $viewer->assign("GENERAL_GROUP", $widget_group['general']);
+            }
+            
                 $viewer->assign('CURRENT_USER', Users_Record_Model::getCurrentUserModel());
                 $viewer->assign('TABID',$tabid);
                 $viewer->view('dashboards/DashBoardContents.tpl', $moduleName);
@@ -160,8 +168,40 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
         public function postProcess(Vtiger_Request $request) {
                 parent::postProcess($request);
         }
-
+        
+        public function Widget_Group($groups,$modulename){
+            $groupData = array();
        
+  
+            foreach ($groups as $group){
+               
+            $list['URL'] =$group->getUrl();
+            $list['linkid'] = $group->get('linkid');
+            $list['name'] = $group->getName();
+            $list['width'] = $group->getWidth();        
+            $list['height'] = $group->getHeight();  
+            $list['title'] = vtranslate($group->getTitle(), $modulename);  
+
+               if($group->get("widgetgroup") == "employee"){
+                   $groupData['employee'][]=$list;
+               } 
+              elseif($group->get("widgetgroup") == "leave" || $group->get("widgetgroup") == "claim"){
+                   $groupData['leaveclaim'][]=$list;
+               }
+              elseif($group->get("widgetgroup") == "chart"){
+                   $groupData['chart'][]=$list;
+               }
+               elseif($group->get("widgetgroup") == "general"){
+                   $groupData['general'][]=$list;
+               }
+            }
+            
+            return $groupData;
+            
+        }
+
+        
+
 
         /**
          * Added By Khaled

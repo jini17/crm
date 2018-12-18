@@ -70,12 +70,13 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
                 $sql .= ' UNION SELECT * FROM vtiger_links WHERE linklabel in (?,?) order by linklabel asc' ;
                 $params[] = 'Mini List';
                 $params[] = 'Notebook';
+                
                 $result = $db->pquery($sql, $params);
 
                 $widgets = array();
                 for($i=0; $i<$db->num_rows($result); $i++) {
                         $row = $db->query_result_rowdata($result, $i);
-
+                        
                         if($row['linklabel'] == 'Tag Cloud') {
                                 $isTagCloudExists = getTagCloudView($currentUser->getId());
                                 if($isTagCloudExists == 'false') {

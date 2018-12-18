@@ -14,10 +14,9 @@
                 <div class="dashBoardTabContents clearfix">
                         <div class="gridster_{$TABID}">
                             {if $TABID eq 1298} 
-                               
-                                       
-                                        {include file="dashboards/GettingStartedContents.tpl"|vtemplate_path:$MODULE_NAME DASHBOARDHEADER_TITLE=vtranslate($MODULE, $MODULE)}
-                                
+                              
+                                {include file="dashboards/GettingStartedContents.tpl"|vtemplate_path:$MODULE_NAME DASHBOARDHEADER_TITLE=vtranslate($MODULE, $MODULE)}
+                       
                             {/if}
                                 <ul style="width:100vw!important;padding-left: 0px;" {if $TABID eq 1298} class='hide' {/if}>
                                         {assign var=COLUMNS value=2}
@@ -31,7 +30,7 @@
                                                         {assign var=WIDGETDOMID value=$WIDGET->get('linkid')|cat:'-':$WIDGET->get('widgetid')}
                                                 {/if}
                                                 {if $WIDGETDOMID neq 119}
-                                                        <li id="widget_id_{$WIDGETDOMID}" {if $smarty.foreach.count.index % $COLUMNS == 0 and $smarty.foreach.count.index != 0} {assign var=ROWCOUNT value=$ROW+1} data-row="{$WIDGET->getPositionRow($ROWCOUNT)}" {else} data-row="{$WIDGET->getPositionRow($ROW)}" {/if}
+                                                        <li id="widget_id_{$WIDGETDOMID}" data-group="{$WIDGET->get('widgetgroup')}" {if $smarty.foreach.count.index % $COLUMNS == 0 and $smarty.foreach.count.index != 0} {assign var=ROWCOUNT value=$ROW+1} data-row="{$WIDGET->getPositionRow($ROWCOUNT)}" {else} data-row="{$WIDGET->getPositionRow($ROW)}" {/if}
                                                                 {assign var=COLCOUNT value=($smarty.foreach.count.index % $COLUMNS)+1} data-col="{$WIDGET->getPositionCol($COLCOUNT)}" data-sizex="{$WIDGET->getWidth()}" data-sizey="{$WIDGET->getHeight()}" {if $WIDGET->get('position') eq ""} data-position="false"{/if}
                                                                 class="dashboardWidget dashboardWidget_{$smarty.foreach.count.index}" data-url="{$WIDGET->getUrl()}" data-mode="open" data-name="{$WIDGET->getName()}">
                                                         </li>
