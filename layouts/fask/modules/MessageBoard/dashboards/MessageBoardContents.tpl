@@ -23,10 +23,12 @@
 *}
                      <div class="col-lg-7">
                     {*     <span class="relatedPopup" onclick="Vtiger_DashBoard_Js.ViewMessage({$MODEL['user_id']})">*}
-                    <a href="index.php?module=MessageBoard&view=Detail&record={$MODEL['record_id']}">  <span>
+                    <a href="index.php?module=MessageBoard&view=Detail&record={$MODEL['record_id']}">  
+                        <span>
                               {$MODEL['title']}
                            {*  <a href="index.php?module=MessageBoard&view=Popup"> {$MODEL['message']} </a>*}
                          </span>
+                    </a>
                      </div>
               <div class="col-lg-4">{$MODEL['messagetime']}</div>
                <div class="clearfix"></div>
