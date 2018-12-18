@@ -24,9 +24,9 @@
             </div>
 
             <div class="contents tabbable clearfix">
-                {if $YNP eq 0}
-                    <div class="pull-right"><a class="btn btn-success" href="index.php?module=Vtiger&parent=Settings&view=BalanceLeave">{vtranslate('Employee Leave Status', $MODULE)}</a></div>
-                {/if}    
+              
+                    <div class="pull-right"><a class="btn btn-success" href="index.php?module=Vtiger&parent=Settings&view=BalanceLeave&mode=ShowBalanceLeave">{vtranslate('Employee Leave Status', $MODULE)}</a></div>
+              
                 <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">{vtranslate('Delete', $MODULE)}</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button class="btn span10 marginLeftZero newButton" id="addItem">{vtranslate('Add', $MODULE)}</button><br><br>
@@ -79,16 +79,4 @@
             </div>
         </div>
     </div>
-<div id="myModal" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body"></div>  
-     </div>
-    </div>
-</div>  
 {/strip}

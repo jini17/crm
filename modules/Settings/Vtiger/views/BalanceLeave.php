@@ -8,7 +8,39 @@
 
 class Settings_Vtiger_BalanceLeave_View extends Settings_Vtiger_Index_View {
 
+
+ function __construct() {
+        parent::__construct();
+        $this->exposeMethod('filterLeaveStatus');
+        $this->exposeMethod('ShowBalanceLeave');
+    }
+
     public function process(Vtiger_Request $request) {
+        $mode = $request->get('mode');
+        if(!empty($mode)) {
+            $this->invokeExposedMethod($mode, $request);
+            return;
+        }
+   }
+
+   public function filterLeaveStatus(Vtiger_Request $request) {
+        global $adb;
+        //$adb->setDebug(true);
+        $viewer = $this->getViewer($request);
+        $qualifiedName = $request->getModule(false);
+        $user_model = Users_Record_Model::getCurrentUserModel();
+        $grade  = $request->get('grade');
+        $emp    = $request->get('emp');
+        $leave  = $request->get('leave');
+        $forfit = $request->get('forfit');
+        $usersleavestatus = $user_model->UsersLeaveStatus(array("grade"=>$grade, "emp"=>$emp, "leave"=>$leave, "forfit"=>$forfit));
+        
+        $viewer->assign('USERS_LEAVESTATUS',$usersleavestatus);
+        $viewer->view('FilterLeaveStatus.tpl',$qualifiedName);
+   }
+
+    public function ShowBalanceLeave(Vtiger_Request $request) {
+       
         $qualifiedName = $request->getModule(false);
         $viewer = $this->getViewer($request);
         
@@ -35,7 +67,7 @@ class Settings_Vtiger_BalanceLeave_View extends Settings_Vtiger_Index_View {
         $viewer->assign('Grades', $grades);
         $viewer->assign('MODULE',$moduleName);
         $viewer = $this->getViewer($request);
-        $viewer->view('CheckUserLeaveStatus.tpl',$qualifiedName);
+       echo $viewer->view('CheckUserLeaveStatus.tpl',$qualifiedName, true);
     }
 
     function getPageTitle(Vtiger_Request $request) {

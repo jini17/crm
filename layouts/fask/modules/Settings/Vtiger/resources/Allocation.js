@@ -9,37 +9,106 @@
 
 Vtiger.Class("Settings_Vtiger_Allocation_Js",{
 
-     registerExecuteYND : function(){
+     checkContractStatus : function(){ 
         var aDeferred = jQuery.Deferred();
         
         app.helper.showProgress();
-            var params = {
-                'module' : app.getModuleName(),
+        //first check the how many employee missing active contract  
+          var checkparams = {
+                'module' : 'Vtiger',
                 'parent' : app.getParentModuleName(),
-                'action' : 'RunYndProcess',
+                'view'   : 'AllocationTools',
+                'mode'   : 'CheckEmployeeContracts'
             }
-          AppConnector.request(params).then(
-                function() {
-                    var url = "?module=Vtiger&parent=Settings&view=AllocationListView&block=14&fieldid=49";
-                    thisInstance.loadContents(url).then(function(data){
-                        app.helper.hideProgress();
-                        jQuery(".settingsPageDiv.content-area.clearfix").html(data);
+          app.request.post({'data' : checkparams}).then(
+                 function(err, data) { 
+                    //console.log("Inside pjax");
+                   app.helper.hideProgress();
+                   jQuery('#myModal').modal('show');
+                   jQuery(".checkleavestatus").html('System checking...');
+                   jQuery(".checkleavestatus").attr('disabled',true);
+                   jQuery(".modal-body").html(data);
+                });
 
-                        thisInstance.registerEvents();
-                        app.helper.showSuccessNotification({"message":"Records deleted successfully"});
-                    });
-                    aDeferred.resolve();
+        return aDeferred.promise();
+      },
+      
+      registerExecuteYND : function(){
+          var thisInstance = this;
+          var aDeferred = jQuery.Deferred();
+          var module = app.getModuleName();
+          app.helper.showProgress();
+          var params = {
+               'module' : app.getModuleName(),
+               'parent' : app.getParentModuleName(),
+               'action' : 'RunYndProcess'
+           }
+           
+           app.request.post({'data' : params}).then(
+                 function(err, data) { 
+                   jQuery('#myModal').modal('hide');
+                   app.helper.hideProgress();
+                   app.helper.showSuccessNotification({"message":"Leave allocation done successfully!!"});
+                    
+                    //Refresh the grid after allocation
+                    var forfit = 0;
+                    if(jQuery('#forfit').is(':checked')){
+                        forfit = 1;
+                    }
+                    var checkparams = {
+                          'module' : 'Vtiger',
+                          'parent' : app.getParentModuleName(),
+                          'view'   : 'BalanceLeave',
+                          'mode'   : 'filterLeaveStatus',
+                          'grade'  : jQuery("#grade_status").val(),
+                          'emp'    : jQuery("#emp_name").val(),
+                          'leave'  : jQuery("#leave_type").val(),
+                          'forfit' : forfit
+                      }
+                      
+                    app.request.post({'data' : checkparams}).then(
+                      function(err, loaddata) {
+                        jQuery("#searchresult").html(loaddata);
+                     });
+                });
 
-                },
-                function(error,err){
-                    aDeferred.reject();
-                }
-            );
-
-         return aDeferred.promise();
-     }, 
+        return aDeferred.promise();
+     },
+   
+     
 },{
+     
+     filterLeaveStatus : function(){ 
+      
+           jQuery(".searchFilter").click(function(){
+                  var aDeferred = jQuery.Deferred();
+                  app.helper.showProgress();
+                  
+                   var forfit = 0;
+                    if(jQuery('#forfit').is(':checked')){
+                       forfit = 1;
+                     }
+                  //first check the how many employee missing active contract  
+                    var checkparams = {
+                          'module' : 'Vtiger',
+                          'parent' : app.getParentModuleName(),
+                          'view'   : 'BalanceLeave',
+                          'mode'   : 'filterLeaveStatus',
+                          'grade'  : jQuery("#grade_status").val(),
+                          'emp'    : jQuery("#emp_name").val(),
+                          'leave'  : jQuery("#leave_type").val(),
+                          'forfit' : forfit
+                      }
+                    app.request.post({'data' : checkparams}).then(
+                           function(err, data) {
+                            jQuery("#searchresult").html('');
+                             app.helper.hideProgress();
+                             jQuery("#searchresult").html(data);
+                          });
 
+                // return aDeferred.promise();
+              });   
+      },
 
     /**
      * Function to load the contents from the url through pjax
@@ -232,9 +301,11 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{
 
         jQuery("#editItem").click(function () {
             var selectedvalues = thisInstance.getAllCheckedValues();
-            if(selectedvalues < 1){
+            var array = selectedvalues.split(",");
+            
+            if(array.length != 1 || selectedvalues==""){
                 alert("Invalid Selection");
-                return aDeferred.promise();
+                return aDeferred.reject();
             }
 
 
@@ -1151,6 +1222,7 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{
         this.registerBenefitAddButton();
         this.registerBenefitEditButton();
         this.registerYearEndProcess();
+        this.filterLeaveStatus();
     
     }
 

@@ -25,6 +25,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         $this->exposeMethod('UpdateAllocation');
         $this->exposeMethod('UpdateClaimAllocation');
         $this->exposeMethod('UpdateBenefitAllocation');
+        $this->exposeMethod('CheckEmployeeContracts');
     }
 
     public function process(Vtiger_Request $request) {
@@ -33,9 +34,31 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             $this->invokeExposedMethod($mode, $request);
             return;
         }
+   }
 
+   public function CheckEmployeeContracts(Vtiger_Request $request){
 
+        //get All active Users
+        $moduleName = $request->getModule(false);
+        $db = PearDatabase::getInstance();
+        $result = $db->pquery("SELECT id, user_name, concat(first_name,' ',last_name) as fullname, department from vtiger_users WHERE status ='Active' and deleted=0", array());
+        $numrows = $db->num_rows($result);
+        $k = 0;
+        for($i=0;$i < $numrows; $i++){
+            $userid = $db->query_result($result, $i, 'id');
+            $gradeid = Users_LeavesRecords_Model::checkActiveContract($userid);
+         
+            if($gradeid ==0){
 
+                $statusUsers[$k]['empname'] = $db->query_result($result, $i, 'fullname');
+                $statusUsers[$k]['department'] = $db->query_result($result, $i, 'department');
+                $k++;
+            }
+        }
+        $viewer = $this->getViewer($request);
+        $viewer->assign('ContractStatus', $statusUsers);
+        $viewer->assign('MODULE',$moduleName);  
+       echo $viewer->view('EmployeeContractStatus.tpl',$moduleName,true);
     }
 
     public function AddAllocationForm($request){

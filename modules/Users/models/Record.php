@@ -1502,21 +1502,43 @@ class Users_Record_Model extends Vtiger_Record_Model
         }
     }
 
-    public function UsersLeaveStatus($isallocate=false) {
+    public function UsersLeaveStatus($search_param=array()) {
         $db = PearDatabase::getInstance();
-        $curryear =  date('Y');
-        
-        if($isallocate)
-          $curryear =  date('Y')+1;
+        $where = '';
+        if(count($search_param)>0){
+            if($search_param['grade'] !='')
+                $where  .= " AND vtiger_users.grade_id=$search_param[grade]"; 
 
-        $sql = "SELECT vtiger_grade.grade,  concat(vtiger_users.first_name,' ', vtiger_users.last_name) as username, vtiger_leavetype.title, vtiger_leavetype.carryforward,
+            if($search_param['emp'] !='')
+                $where  .= " AND vtiger_users.id=$search_param[emp]";   
+
+            if($search_param['leave'] !='')
+              $where  .= " AND vtiger_leaverolemapping.leavetype=$search_param[leave]";   
+
+             if($search_param['forfit'] ==1)
+              $where  .= " AND vtiger_leavetype.carryforward IN ('off', '0')";
+
+              $sql = "SELECT vtiger_grade.grade,  concat(vtiger_users.first_name,' ', vtiger_users.last_name) as username, vtiger_leavetype.title, vtiger_leavetype.carryforward,
                   vtiger_leaverolemapping.leavetype, vtiger_leaverolemapping.userid, vtiger_leaverolemapping.allocation, vtiger_leaverolemapping.used 
-                FROM vtiger_leaverolemapping LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = vtiger_leaverolemapping.leavetype
-                LEFT JOIN vtiger_users ON vtiger_users.id=vtiger_leaverolemapping.userid
+                FROM vtiger_users 
+                LEFT OUTER JOIN vtiger_leaverolemapping ON vtiger_users.id=vtiger_leaverolemapping.userid
+                LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = vtiger_leaverolemapping.leavetype
                 LEFT JOIN vtiger_grade ON vtiger_grade.gradeid =  vtiger_users.grade_id
-                WHERE vtiger_leaverolemapping.alloc_year=? ORDER BY vtiger_leaverolemapping.userid";
+                WHERE vtiger_users.deleted =0  $where ORDER BY vtiger_users.id";
 
-        $result = $db->pquery($sql,array($curryear));
+        } else {
+            $sql = "SELECT vtiger_grade.grade,  concat(vtiger_users.first_name,' ', vtiger_users.last_name) as username, vtiger_leavetype.title, vtiger_leavetype.carryforward,
+                  vtiger_leaverolemapping.leavetype, vtiger_leaverolemapping.userid, vtiger_leaverolemapping.allocation, vtiger_leaverolemapping.used 
+                FROM vtiger_users 
+                LEFT OUTER JOIN vtiger_leaverolemapping ON vtiger_users.id=vtiger_leaverolemapping.userid
+                LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = vtiger_leaverolemapping.leavetype
+                LEFT JOIN vtiger_grade ON vtiger_grade.gradeid =  vtiger_users.grade_id
+                WHERE vtiger_users.deleted =0 ORDER BY vtiger_users.id";
+        }
+
+      
+
+        $result = $db->pquery($sql,array());
         $num_rows = $db->num_rows($result);
 
         //fetch all Leave Type
@@ -1546,4 +1568,82 @@ class Users_Record_Model extends Vtiger_Record_Model
 
         }
     }
+
+    public function SetUpLeaveAllocation(){
+
+      $db = PearDatabase::getInstance();
+    //  $db->setDebug(true);
+
+      //First take backup of vtiger_leaverolemapping data into vtiger_roleleavehistory
+      $year = date('Y')+1;
+      $backupresult = $db->pquery("INSERT INTO vtiger_roleleavehistory SELECT * FROM vtiger_leaverolemapping",array());
+    
+
+      // New Allocation based on key in from Allocation UI
+      $newAllocationGradewiseSql = "SELECT allocation_graderel.grade_id, allocation_leaverel.ageleave,allocation_leaverel.leavetype_id,  
+                      allocation_leaverel.numberofleavesmore, allocation_leaverel.numberofleavesless
+                      FROM allocation_leaverel
+                      LEFT JOIN allocation_list ON allocation_list.allocation_id=allocation_leaverel.allocation_id
+                      LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocation_list.allocation_id
+                      LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = allocation_leaverel.leavetype_id GROUP by allocation_graderel.grade_id, allocation_leaverel.leavetype_id ORDER BY allocation_graderel.grade_id DESC "; 
+
+        $result = $db->pquery($newAllocationGradewiseSql,array());
+        $gradeLeaveType=array(); 
+       
+        for($i=0;$db->num_rows($result)>$i;$i++){
+              $conditionage = $db->query_result($result, $i, 'ageleave'); 
+              $leavemore    = $db->query_result($result, $i, 'numberofleavesmore');
+              $leaveless    = $db->query_result($result, $i, 'numberofleavesless');
+              $leavetype    = $db->query_result($result, $i, 'leavetype_id');
+              $grade_id     = $db->query_result($result, $i, 'grade_id');
+              $gradeLeaveType[$grade_id][]  = array($leavetype, $conditionage, $leavemore, $leaveless);
+        } //end here       
+      
+       //get All Active Contract Users Leave Allocation and merge with remaining balance leave of previous year 
+      $activecontractsql = "SELECT job_grade, tblVTEC.employee_id FROM vtiger_employeecontract tblVTEC 
+                        INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
+                        INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
+                        WHERE tblVTC.deleted=0 AND UNIX_TIMESTAMP(tblVTECF.contract_expiry_date) >= UNIX_TIMESTAMP(curdate()) ORDER BY UNIX_TIMESTAMP(tblVTECF.contract_expiry_date) DESC";
+      $activeresult = $db->pquery($activecontractsql, array());                  
+      
+      $balanceleavedetails = array();
+      $numUsers = $db->num_rows($activeresult);
+      for($i=0;$i<$numUsers;$i++){
+
+        //get All balance leavetype userwise 
+        $userid = $db->query_result($activeresult, $i, 'employee_id');
+        $job_grade = $db->query_result($activeresult, $i, 'job_grade');
+        $balanceleavedetails = Users_LeavesRecords_Model::getLeaveTypeList($userid);
+      
+        //get each employee time duration 
+        $recordModel = Users_Record_Model::getInstanceById($userid, 'Users');
+        $now = time(); // or your date as well
+        $joindate  = strtotime($recordModel->get('date_joined'));
+        $datediff = $now - $joindate;
+        $workingperiod =  round($datediff / (60 * 60 * 24));
+       
+        $numleave = 0;
+        //print_r($gradeLeaveType[$job_grade]);
+        if(isset($gradeLeaveType[$job_grade])){
+            foreach($gradeLeaveType[$job_grade] as $detail){
+
+                if($workingperiod > $detail[1]) {
+                    $numleave = $detail[2];
+
+                } else {
+                    $numleave = $detail[3];
+                }
+
+                foreach($balanceleavedetails as $baldetails) {
+                    if($detail[0]==$baldetails['leavetypeid'] && ($baldetails['halfday']=='on' || $baldetails['halfday']==1)){
+                        $numleave +=$baldetails['balance'];
+                    }                
+                }
+                $db->pquery("DELETE from  vtiger_leaverolemapping where userid=? AND leavetype=?", array($userid, $detail[0]));
+                $insertqueryres = $db->pquery("INSERT INTO vtiger_leaverolemapping VALUES(?,?,?,?,?,?)", array($userid, $detail[0], $numleave, 0, $year, NULL));
+            }
+        }    
+      }  //end for loop
+
+   }
 }

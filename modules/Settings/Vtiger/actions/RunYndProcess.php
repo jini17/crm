@@ -14,10 +14,8 @@ class Settings_Vtiger_RunYndProcess_Action extends Settings_Vtiger_Basic_Action 
     public function process(Vtiger_Request $request) {
        
         $currentUser = Users_Record_Model::getCurrentUserModel();
-       
-        $annoucementModel = Settings_Vtiger_Record_Model::getInstance();
-        
-        $annoucementModel->save();
+                
+        $currentUser->SetUpLeaveAllocation();
         $responce = new Vtiger_Response();
         $responce->setResult(array('success'=>true));
         $responce->emit();

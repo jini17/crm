@@ -144,54 +144,25 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
 
                 $db = PearDatabase::getInstance();
 
-                //$db->setDebug(true);
-                $result = $db->pquery("SELECT job_grade FROM vtiger_employeecontract tblVTEC 
-                                                                INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
-                                                                INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
-                                                                WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTC.createdtime DESC LIMIT 0, 1", array($userid));
+               if($filtertype =='leavetype'){
 
-                $userModel = Vtiger_Record_Model::getInstanceById($userid, 'Users');					
-                $dateofJoining = $userModel->get('date_joined');
+                        $query = "SELECT tblVTLT.title, tblVTLT.leavetypeid, tblVTLRM.allocation, tblVTLRM.used
+                                    FROM vtiger_leaverolemapping tblVTLRM
+                                    LEFT JOIN vtiger_leavetype tblVTLT ON tblVTLT.leavetypeid=tblVTLRM.leavetype
+                                    INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTLT.leavetypeid
+                                    WHERE tblVTC.deleted=0 AND tblVTLRM.userid=?";	
 
-                $grade_id	   = $db->query_result($result, 0, 'job_grade');	
-                $datediff = time() - strtotime($dateofJoining);				 
-                $earneddays = round($datediff / (60 * 60 * 24));
-                $curr_year	   = date('Y');	
-
-                if($filtertype =='leavetype'){
-
-                        $query = "SELECT vtiger_leavetype.leavetypeid, vtiger_leavetype.title, allocation_leaverel.ageleave, allocation_leaverel.numberofleavesmore, allocation_leaverel.numberofleavesless
-                                                FROM allocation_leaverel
-                                                LEFT JOIN allocation_list ON allocation_list.allocation_id=allocation_leaverel.allocation_id
-                                                LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocation_list.allocation_id
-                                                LEFT JOIN vtiger_leavetype ON vtiger_leavetype.leavetypeid = allocation_leaverel.leavetype_id
-                                                WHERE allocation_graderel.grade_id=? AND allocation_list.allocation_year=?";	
-
-                        $result = $db->pquery($query,array($grade_id, $year));
+                        $result = $db->pquery($query,array($userid));
                         $myleave=array();	
                         $balance = 0;
                         for($i=0;$db->num_rows($result)>$i;$i++){
-                                $conditionage = $db->query_result($result, $i, 'ageleave');	
-                                $leavemore	  = $db->query_result($result, $i, 'numberofleavesmore');
-                                $leaveless 	  = $db->query_result($result, $i, 'numberofleavesless');
-                                $title	   	  = $db->query_result($result, $i, 'title');		
-                                $leavetype	  = $db->query_result($result, $i, 'leavetype');
-                                $takenleave   = self::getLeaveTypeDetail($userid, $leavetype);
-                                if($takenleave=='' || $takenleave ==null)
-                                        $takenleave = 0;
+                                $allocateleave = $db->query_result($result, $i, 'allocation');	
+                                $used	  = $db->query_result($result, $i, 'used');
+                                $balanceleave =$allocateleave-$used;
+                                $title = $db->query_result($result, $i, 'title');
 
-                                if($earneddays > $conditionage){
-                                        $allocateleave = $leavemore;
-                                } else {
-                                        $allocateleave = $leaveless;
-                                }
-                                $balanceleave = $allocateleave-$takenleave;
-
-                                if($balanceleave > 0) {
-                                        $balance++;
-                                }
                                 $myleave['display'][$i]['allocateleaves'] 	= $allocateleave;
-                                $myleave['display'][$i]['takenleave'] 		= $takenleave;
+                                $myleave['display'][$i]['takenleave'] 		= $used;
                                 $myleave['display'][$i]['balanceleave'] 	= $balanceleave;	
                                 $myleave['display'][$i]['leavetype'] 		= $title;
 
@@ -215,80 +186,73 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                 return $myleave;
         }
 
-        //Created by Safuan for fetching leave types//	
+        public function checkActiveContract($employeeid){
+
+            $db = PearDatabase::getInstance();
+            $result = $db->pquery("SELECT job_grade FROM vtiger_employeecontract tblVTEC 
+                        INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
+                        INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
+                        WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? AND UNIX_TIMESTAMP(tblVTECF.contract_expiry_date) >= UNIX_TIMESTAMP(curdate()) ORDER BY UNIX_TIMESTAMP(tblVTECF.contract_expiry_date) DESC ", array($employeeid));
+            $rows = $db->num_rows($result);
+
+            if($rows == 0) {
+                return 0;
+            } else {
+                return $db->query_result($result, 0, 'job_grade');
+            }
+
+        }
+
         //modified by jitu for concate color and balance in dropdown 
         public function getLeaveTypeList($userid){ 
 
                 $db = PearDatabase::getInstance();
-
-                $result = $db->pquery("SELECT job_grade FROM vtiger_employeecontract tblVTEC 
-                                                        INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTEC.employeecontractid
-                                                        INNER JOIN vtiger_employeecontractcf tblVTECF ON tblVTECF.employeecontractid = tblVTEC.employeecontractid
-                                                        WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTC.createdtime DESC LIMIT 0, 1", array($userid));
-
-                $userModel = Vtiger_Record_Model::getInstanceById($userid, 'Users');					
-                $dateofJoining = $userModel->get('date_joined');
-
-                $grade_id	   = $db->query_result($result, 0, 'job_grade');	
-                $datediff = time() - strtotime($dateofJoining);				 
-                $earneddays = round($datediff / (60 * 60 * 24));
-                $curr_year	   = date('Y');	
-
+                $data   = array();
+                
                 //Get all leavetypes with balance for which leave to be apply
-                $leavers = $db->pquery("SELECT distinct tblVTLT.title, tblVTLT.leavetypeid, allocleaverel.ageleave, allocleaverel.numberofleavesmore, 
-                                        allocleaverel.numberofleavesless FROM vtiger_leavetype tblVTLT 
-                                        INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTLT.leavetypeid
-                                        LEFT JOIN allocation_leaverel allocleaverel ON allocleaverel.leavetype_id = tblVTLT.leavetypeid 
-                                        LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocleaverel.allocation_id
-                                        LEFT JOIN allocation_list alloclist ON alloclist.allocation_id=allocleaverel.allocation_id AND alloclist.status='on'			
-                                        WHERE tblVTC.deleted=0 AND alloclist.allocation_year=? AND allocation_graderel.grade_id=? 
-                                        ", array($curr_year, $grade_id));			
+                $leavers = $db->pquery("SELECT tblVTLT.title, tblVTLT.leavetypeid, tblVTLRM.allocation, tblVTLRM.used, tblVTLT.colorcode, tblVTLT.halfdayallowed
+                                    FROM vtiger_leaverolemapping tblVTLRM
+                                    LEFT JOIN vtiger_leavetype tblVTLT ON tblVTLT.leavetypeid=tblVTLRM.leavetype
+                                    INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVTLT.leavetypeid
+                                    WHERE tblVTC.deleted=0 AND tblVTLRM.userid=?", array($userid));			
 
                 $norows = $db->num_rows($leavers);
-                $data	= array();
+                
 
                 //check LeaveType balance with Earned days
                 if($norows > 0){
 
-                        for($i=0;$i<$norows;$i++){
-                                $leavetype		= $db->query_result($leavers,$i, 'title');
-                                $leavetypeid	= $db->query_result($leavers,$i, 'leavetypeid');
-                                //get all taken leaves against to leavetype
-                                $rstaken 		= $db->pquery("SELECT SUM(leave_count) as takenleave FROM secondcrm_user_balance WHERE user_id=? AND leave_type=? AND year=?",
-                                         array($userid, $leavetypeid, $curr_year));
-                                $takenleave 	= $db->query_result($rstaken,0, 'takenleave');
-                                $leavetypeid 	= $db->query_result($leavers,$i, 'leavetypeid');
-                                $ageleave	 	= $db->query_result($leavers,$i, 'ageleave');
-                                $nummoreleave 	= $db->query_result($leavers,$i, 'numberofleavesmore');
-                                $numlessleave 	= $db->query_result($leavers,$i, 'numberofleavesless');
-
-                                if($earneddays > $ageleave){
-                                        $balance_leave = $nummoreleave - $takenleave;
-                                } else {
-                                        $balance_leave = $numlessleave - $takenleave;
-                                }
-                                if($balance_leave>0) {
-                                        $data[$i]['leavetypeid'] 	= $leavetypeid;			
-                                        $data[$i]['leavetype'] 	 	= $leavetype;
-                                        $data[$i]['leave_remain']	= $balance_leave;
-                                        $data[$i]['leave_used']		= $takenleave;
-                                } 	
-                        }	
+                    for($i=0;$i<$norows;$i++){
+                        $leavetype		            = $db->query_result($leavers,$i, 'title');
+                        $leavetypeid	            = $db->query_result($leavers,$i, 'leavetypeid');
+                        $allocation 	            = $db->query_result($leavers,$i, 'allocation');
+                        $used 	                    = $db->query_result($leavers,$i, 'used');
+                        $color                      = $db->query_result($leavers,$i, 'colorcode');
+                        $halfday                    = $db->query_result($leavers,$i, 'halfdayallowed');
+                        $balance_leave              = $allocation-$used;
+                        $data[$i]['leavetypeid'] 	= $leavetypeid;			
+                        $data[$i]['leavetype'] 	 	= $leavetype.'@'.$color.'@'.$balance_leave.'@'.$halfday;
+                        $data[$i]['balance']	    = $balance_leave;
+                        $data[$i]['used']		    = $used;
+                        $data[$i]['color']          = $color;
+                        $data[$i]['halfday']        = $halfday;
+                    }	
                 }	
                 return $data;
         }
 
 
-        //Created by Safuan for fetching leave types//	
+        
         //modified by jitu for concate color and balance in dropdown 
         public function getTotaLeaveTypeList($userid,$leaveid){
-        $db = PearDatabase::getInstance();
-        global $current_user;	
+        
+            $db = PearDatabase::getInstance();
+            global $current_user;	
 
-        $query = "SELECT tblVTLT.leavetypeid, tblVTLT.title, tblVTLT.colorcode 
-        FROM vtiger_leavetype tblVTLT
-        INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLT.leavetypeid
-         WHERE tblVTC.deleted=0 ";
+            $query = "SELECT tblVTLT.leavetypeid, tblVTLT.title, tblVTLT.colorcode 
+            FROM vtiger_leavetype tblVTLT
+            INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid = tblVTLT.leavetypeid
+             WHERE tblVTC.deleted=0 ";
 
         $result = $db->pquery($query,array());
         $leavetype=array();	

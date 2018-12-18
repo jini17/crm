@@ -20,6 +20,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                 $this->exposeMethod('ValidateClaimAmount');
                 $this->exposeMethod('IsAnyClaimTypeAssign');
                 $this->exposeMethod('IsAnyLeaveTypeAssign');
+                $this->exposeMethod('CheckEmployeeContract');
+                $this->exposeMethod('checkDateValidation');
         }
 
         public function process(Vtiger_Request $request) {
@@ -53,24 +55,53 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
         //Validate LeaveType Assign to User 
         public function IsAnyLeaveTypeAssign(Vtiger_Request $request){
-
+          
                 global $current_user;
-
+                
                 $userid = $current_user->id;
-                $LeaveTypes = Users_LeavesRecords_Model::getLeaveTypeList($userid);
 
-                $msg = '';
+                $flag = Users_LeavesRecords_Model::checkActiveContract($userid);
 
-                if(count($LeaveTypes)==0){
-                        $msg = 'JS_NO_LEAVETYPE_ALLOCATE';
-                } 
+                if($flag == 0){
+                    $msg = "JS_NO_ACTIVE_CONTRACT_FOUND";
+                } else {
+                    $LeaveTypes = Users_LeavesRecords_Model::getLeaveTypeList($userid);
+                    if(count($LeaveTypes)==0){
+                       $msg = "JS_NO_LEAVE_TYPE_ASSIGNED";     
+                    } else {
+                        $msg = 1;
+                    }
+                }
 
                 $response = new Vtiger_Response();
                 $response->setResult($msg);
                 $response->emit();
+        }
 
-
-                return $allow;
+        //validate date duration on selected dates for leave apply
+        public function checkDateValidation(Vtiger_Request $request){
+               $starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
+               $endhalf  = $request->get('chkboxendhalf')==1?0.5:0;  
+              $startdate = date('Y-m-d',strtotime($request->get('startdate')));
+              $enddate   = date('Y-m-d',strtotime($request->get('enddate')));
+              $balance   = $request->get('balance');
+              $takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);
+              $msg = true;
+              
+              if($takenleave > $balance)
+                $msg = false;
+             
+             $response = new Vtiger_Response();
+             $response->setResult($msg);
+             $response->emit();   
+        }
+        //Validate LeaveType Assign to User 
+        public function CheckEmployeeContract($userid){
+                
+                $flag = Users_LeavesRecords_Model:: checkActiveContract($userid);
+                $response = new Vtiger_Response();
+                $response->setResult($flag);
+                $response->emit();
         }
 
         public function ValidateClaimAmount(Vtiger_Request $request){   //echo"<pre>";  print_r($request);die;
@@ -463,8 +494,8 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
                                                         $userupdateid=$request->get('current_user_id');
                                                         $leavetype = $request->get('hdnleavetype');
-                                                        $leabalq="INSERT INTO secondcrm_user_balance SET user_id=?, leave_count =?, leave_type=?, year=?";
-                                                        $resultx = $db->pquery($leabalq,array($request->get('current_user_id'), $takenleave, $leavetype, date('Y')));
+                                                        $leabalq="UPDATE vtiger_leaverolemapping SET used=used+? WHERE userid=? AND leavetype=?";
+                                                        $resultx = $db->pquery($leabalq, array($takenleave, $request->get('current_user_id'), $leavetype));
 
                                                 } 
 

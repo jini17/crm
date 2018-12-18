@@ -10,7 +10,6 @@
 {* modules/Settings/UserPlan/views/UserPlanAjax.php *}
 
 {strip}
-Jitu{$MODULE}
     <div class="allocationModalContainer modal-dialog modal-lg" id="EditAllocationContainer">
         <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position:absolute;top:-5px;left:97%"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span><div></div></button>
@@ -111,7 +110,7 @@ Jitu{$MODULE}
                     <input type="hidden" id="EditallocatedLeaveTypeValues" value='{$LEAVETYPEVALUES}'>
 
 
-                    <div class="container float-left">
+                  {*  <div class="container float-left">
 
                         <div class="contents row form-group">
                             <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Claim',$MODULE)} {vtranslate('Claim',$MODULE)} :</label></div>
@@ -129,7 +128,7 @@ Jitu{$MODULE}
                             </div>
                         </div>
                     </div>
-
+                    *}
                     <input type="hidden" id="allocation_id" name="allocation_id" value="{$VALUES['allocation_id']}">
 
                 </div>
