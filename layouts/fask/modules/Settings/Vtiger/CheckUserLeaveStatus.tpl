@@ -3,10 +3,12 @@
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
     <h4>{vtranslate('Employee Leave Status', $MODULE)}</h4>
-    <div class="pull-right">
+    {if $YND}
+    <div class="pull-right ynd">
       <!--<span>{vtranslate('Above no of leaves would not be carry farward, Still do you want to continue? ',$MODULE)}</span>-->
       <input class=" btn btn-primary" type="button" name="continue" onclick="Settings_Vtiger_Allocation_Js.checkContractStatus();" value="Year End Process">
     </div>
+    {/if}
     <div class="clearfix"></div>
     
     <table class="table table-bordered table-striped">

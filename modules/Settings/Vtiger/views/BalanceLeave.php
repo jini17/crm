@@ -60,11 +60,19 @@ class Settings_Vtiger_BalanceLeave_View extends Settings_Vtiger_Index_View {
         $leavetypes = Users_LeavesRecords_Model::getAllLeaveTypeList();
         $viewer = $this->getViewer($request);
         $usersleavestatus = $user_model->UsersLeaveStatus();
+        $year = date('Y') + 1;
+        $query = $db->pquery("SELECT * from vtiger_leaverolemapping WHERE alloc_year=?", array($year));
+        $isYearEndprocess = true;
+        if($db->num_rows($query)>0){
+            $isYearEndprocess = false;    
+        }
+        
 
         $viewer->assign('USERS_LEAVESTATUS',$usersleavestatus);
         $viewer->assign('LEAVETYPES',$leavetypes);
         $viewer->assign('UsersList',$userList);
         $viewer->assign('Grades', $grades);
+        $viewer->assign('YND', $isYearEndprocess);
         $viewer->assign('MODULE',$moduleName);
         $viewer = $this->getViewer($request);
        echo $viewer->view('CheckUserLeaveStatus.tpl',$qualifiedName, true);

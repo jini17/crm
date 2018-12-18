@@ -36,6 +36,7 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{
       registerExecuteYND : function(){
           var thisInstance = this;
           var aDeferred = jQuery.Deferred();
+          jQuery(".ynd").hide();
           var module = app.getModuleName();
           app.helper.showProgress();
           var params = {
