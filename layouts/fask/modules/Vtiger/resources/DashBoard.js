@@ -478,6 +478,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                 app.request.post({"url": url}).then(
                     function (err, response) {
                         console.log(response)
+                        app.helper.hideProgress();
                         if (err == null) {
                             var nonReversableWidgets = ['MiniList', 'Notebook', 'ChartReportWidget']
                             parent.fadeOut('slow', function () {
@@ -497,32 +498,8 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                                 }
                             }
                         }
-                        /**
-                         * Added by Khaled
-                         * On delete reload widgets
-                         * @type {{module: string, view: string, mode: string, tabid}}
-                         */
-                        var data_widget = {
-                            'module': 'Home',
-                            'view': 'DashBoardTab',
-                            'mode': 'getTabContents',
-                            'tabid': activeTabId
-                        }
-
-//                        app.request.post({"data": data_widget}).then(function (err, data) {
-//                            if (err === null) {
-//                                var dashBoardModuleName = jQuery("#tab_" + activeTabId, ".tab-content").html(data_widget).find('[name="dashBoardModuleName"]').val();
-//                                if (typeof dashBoardModuleName != 'undefined' && dashBoardModuleName.length > 0) {
-//                                    var dashBoardInstanceClassName = app.getModuleSpecificViewClass(app.view(), dashBoardModuleName);
-//                                    if (dashBoardInstanceClassName != null) {
-//                                        var dashBoardInstance = new window[dashBoardInstanceClassName]();
-//                                    }
-//                                }
-//                                app.event.trigger("post.DashBoardTab.load", dashBoardInstance);
-//                                window.location = 'index.php?module=Home&view=DashBoard&tabid=' + activeTabId;
-//                            }
-//                        });
-                        app.helper.hideProgress();
+                                           
+                        
                     }
                 );
             });
