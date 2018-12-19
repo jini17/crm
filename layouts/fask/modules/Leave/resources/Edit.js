@@ -11,17 +11,16 @@ Vtiger_Edit_Js("Leave_Edit_Js",{
                         var typeValue = typeElement.val();
 
                         if(typeElement.val() == 'LeaveType'){
-
-                                $("div.row").removeAttr("hidden");
+                            $("div.row").removeAttr("hidden");
                         }else if(typeElement.val() == 'lastleaves'){
-                                $("div.row").attr("hidden");
+                            $("div.row").attr("hidden");
                         }
                 });
 
         },
 
         registerEvents : function() {
-                this._super(container);
+                this._super();
                 this.registerChangeRadionButton();
         }
         
