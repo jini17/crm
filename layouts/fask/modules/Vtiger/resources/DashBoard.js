@@ -478,7 +478,6 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                 app.request.post({"url": url}).then(
                     function (err, response) {
                         console.log(response)
-                        app.helper.hideProgress();
                         if (err == null) {
                             var nonReversableWidgets = ['MiniList', 'Notebook', 'ChartReportWidget']
                             parent.fadeOut('slow', function () {
@@ -489,17 +488,19 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                                 var data = '<li><a style="padding-left:10px;" onclick="Vtiger_DashBoard_Js.addWidget(this, \'' + response.url + '\')" href="javascript:void(0);"';
                                 data += 'data-width=' + width + ' data-height=' + height + ' data-linkid=' + response.linkid + ' data-name=' + response.name + '>' + response.title + '</a></li>';
                                 var divider = jQuery('.widgetsList .divider', '#tab_' + activeTabId);
+                               
                                 if (divider.length) {                                                                     
                                     jQuery(data).insertBefore(divider);
+                                        app.helper.hideProgress();
                                 } else {
                                   jQuery(".widgetsList ").find("."+group).find("ul").append(data)
-                         
+                             app.helper.hideProgress();
                                   // jQuery(data).insertAfter(jQuery('.widgetsList li:last', '#tab_' + activeTabId));
                                 }
                             }
                         }
-                                           
-                        
+                      
+
                     }
                 );
             });
@@ -1037,19 +1038,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
 
         });
     },
-    /**
-     * Added By Khaled
-     * Dashboard Scroll To Top
-     * @returns {undefined}
-     */
-    dashboardScrollToTop: function () {
-        var thisInstance = this;
-        this.getContainer().on('click', function () {
 
-            jQuery(document).scrollTop();
-        })
-
-    },
     birthdayEmail: function () {
         var thisInstance = this;
         this.getContainer().on('click', 'div.birthdaywish', function (e) {
@@ -1176,7 +1165,6 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         this.searchWidgetPressEnter();
         this.buttonemail();
         this.birthdayEmail();
-        this.dashboardScrollToTop();
 
         this.registerQtipMessage();
         app.event.off("post.DashBoardTab.load");

@@ -66,7 +66,9 @@
                                          
                                         <li class="group-heading employee" style="position:relative;">
                                              <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Employee </a>
-                                            <ul class="widget-group-item hide list-unstyled" style="position: absolute; left: -200px; background:#fff; z-index: -1; min-height: 300px; padding: 15px;">
+                                             
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
+                                             {if count($EMPLOYEE_GROUP) gt 0}
                                                 {foreach item="emp" from=$EMPLOYEE_GROUP }      
                                                        <li class="emp-widget">
                                                            <a style="padding-left: 10px;" data-group="employee" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$emp['URL']}')" href="javascript:void(0);"
@@ -78,28 +80,38 @@
                                                            </a>
                                                        </li>
                                                {/foreach}
+                                               {else}
+                                                   <li> All widgets are in use</li>
+                                               {/if}
                                             </ul>
+                                            
                                         </li>
                                                                   
                                         <li  class="group-heading charts" style="">
                                              <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Charts </a> 
-                                            <ul class="widget-group-item hide list-unstyled" style="position: absolute; left: -200px; background:#fff; z-index: -1;  min-height: 300px; padding: 15px;">
-                                                 {foreach item="chart" from=$CHART_GROUP}
+                                             
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
+                                                 {if count($CHART_GROUP) gt 0}
+                                                {foreach item="chart" from=$CHART_GROUP}
                                                     <li class="chart-widget">
                                                        <a  style="padding-left: 10px;"  data-group="charts" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$chart['URL']}')" href="javascript:void(0);"
                                                                data-linkid="{$chart['linkid']}" data-name="{$chart['name']}" data-width="{$chart['width']}" 
                                                                data-height="{$chart['height']}">
-                                                              {$emp['title']}
+                                                              {$chart['title']}
                                                        </a>
                                                    </li>
                                                {/foreach}
+                                                  {else}
+                                                   <li> All widgets are in use</li>
+                                               {/if}
                                             </ul>
                                         </li>                                      
                                          <li  class="group-heading leaveclaim" >
                                        
                                                  <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Leaves & Claims </a>
                                             
-                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
+                                                  {if count($LEAVECLAIM_GROUP) gt 0}
                                                 {foreach item="leaveclaim" from=$LEAVECLAIM_GROUP }
                                                    <li class="leaveclaim-widget">
                                                        <a  style="padding-left: 5px;" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$leaveclaim['URL']}')" href="javascript:void(0);"
@@ -109,21 +121,28 @@
                                                        </a>
                                                    </li>
                                                 {/foreach}
+                                                {else}
+                                                   <li> All widgets are in use</li>
+                                               {/if}
                                             </ul>
                                         </li>                                     
                                         
                                         <li class='general'>
                                             <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp;  General </a>
-                                            <ul class="widget-group-item hide list-unstyled" style="  position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
-                                                {foreach item="general" from=$GENERAL_GROUP}
-                                                    <li  class="general-widget">
-                                                        <a style="padding-left: 10px;" data-group="general" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$general['URL']}')" href="javascript:void(0);"
-                                                                data-linkid="{$general['linkid']}" data-name="{$general['name']}" data-width="{$general['width']}" 
-                                                                data-height="{$general['height']}">
-                                                               {$general['title']}
-                                                        </a>
-                                                   </li>
-                                                {/foreach}
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
+                                                 {if count($GENERAL_GROUP) gt 0}
+                                                    {foreach item="general" from=$GENERAL_GROUP}
+                                                        <li  class="general-widget">
+                                                            <a style="padding-left: 10px;" data-group="general" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$general['URL']}')" href="javascript:void(0);"
+                                                                    data-linkid="{$general['linkid']}" data-name="{$general['name']}" data-width="{$general['width']}" 
+                                                                    data-height="{$general['height']}">
+                                                                   {$general['title']}
+                                                            </a>
+                                                       </li>
+                                                    {/foreach}
+                                                 {else}
+                                                   <li> All widgets are in use</li>
+                                               {/if}
                                             </ul>
                                         </li>
                                         
@@ -222,15 +241,12 @@
 {/strip}
 <script>
  jQuery(document).ready(function(){
-            jQuery("a.widget-heading").on("hover",function(){
+            jQuery(".widget-heading").on("hover",function(){ 
+            
             var $this = jQuery(this);
             jQuery(".widget-group-item").addClass("hide")
-            $this.closest("li ").find(".widget-group-item").removeClass("hide");
+            $this.closest("li").find(".widget-group-item").removeClass("hide");
         })
-        jQuery('html').on('click','.strolltotop',function(){
-            $('body, html').animate({ scrollTop: $(".gridster_2.ready ul").offset().top }, 1000);
-       
+          });
 
-    });
-   });
 </script>
