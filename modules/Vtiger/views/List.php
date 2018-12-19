@@ -399,7 +399,7 @@ class Vtiger_List_View extends Vtiger_Index_View {
 		if(!empty($appName)){
 			$viewer->assign('SELECTED_MENU_CATEGORY',$appName);
 		}
-		if (PerformancePrefs::getBoolean('LISTVIEW_COMPUTE_PAGE_COUNT', false)) {
+		//if (PerformancePrefs::getBoolean('LISTVIEW_COMPUTE_PAGE_COUNT', false)) {
 			if(!$this->listViewCount){
 				$this->listViewCount = $listViewModel->getListViewCount();
 			}
@@ -412,7 +412,7 @@ class Vtiger_List_View extends Vtiger_Index_View {
 			}
 			$viewer->assign('PAGE_COUNT', $pageCount);
 			$viewer->assign('LISTVIEW_COUNT', $totalCount);
-		}
+		//}
 		$viewer->assign('LIST_VIEW_MODEL', $listViewModel);
 		$viewer->assign('GROUPS_IDS', Vtiger_Util_Helper::getGroupsIdsForUsers($currentUser->getId()));
 		$viewer->assign('IS_CREATE_PERMITTED', $listViewModel->getModule()->isPermitted('CreateView'));
