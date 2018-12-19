@@ -24,7 +24,7 @@
 </table>  
 
   <div>
-      <span>{vtranslate('No leave will allocate for above employee, Still do you want to continue? ',$MODULE)}</span>
+      <span>{vtranslate('No leave will assign to above employee, Still do you want to continue? ',$MODULE)}</span>
       <input class=" btn btn-primary pull-right" type="button" name="continue" onclick="Settings_Vtiger_Allocation_Js.registerExecuteYND();" value="Continue">
   </div>
   <div class="clearfix"></div>

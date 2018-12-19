@@ -67,7 +67,7 @@
         </tr>
        {/foreach}
       {else}
-          <tr><td colspan="9">{vtranslate('No Allocation done', $MODULE)}</td></tr>
+          <tr><td colspan="9">{vtranslate('No Leave Policy Found', $MODULE)}</td></tr>
       {/if} 
     </tbody>
     </table>  

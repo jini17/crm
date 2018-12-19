@@ -13,14 +13,14 @@
     <div class="allocationModalContainer modal-dialog modal-lg" id="EditAllocationContainer">
         <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position:absolute;top:-5px;left:97%"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span><div></div></button>
-                {vtranslate('Edit',$MODULE)} {vtranslate('Allocation',$MODULE)}
+                {vtranslate('Edit',$MODULE)} {vtranslate('Leave Policy',$MODULE)}
         </div>
         <div class="modal-content">            
             <form id="AddAllocation" class="form-horizontal" method="POST">
                 <div class="modal-body" id="scrollContainer" name="test">
                     <div class="container float-left">
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Allocation',$MODULE)} {vtranslate('Title',$MODULE)} :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Leave Policy',$MODULE)} {vtranslate('Title',$MODULE)} :</label></div>
                             <div class="fieldValue col-lg-4 col-md-4">
                                 <input class="inputElement col-sm-9" type="text" placeholder="New Joiners" id="AllocationTitle" name="AllocationTitle" value="{$VALUES['allocationtitle']}">
                             </div>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="container float-left">
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Allocation',$MODULE)} {vtranslate('Code',$MODULE)} :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Leave Policy',$MODULE)} {vtranslate('Code',$MODULE)} :</label></div>
                             <div class="fieldValue col-lg-4 col-md-4">
                                 <input class="inputElement col-sm-9" type="text" placeholder="A01" id="AllocationCode" name="AllocationCode" value="{$VALUES['allocation_code']}">
                             </div>
@@ -62,7 +62,7 @@
                     <div class="container float-left">
 
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Grade',$MODULE)} {vtranslate('Allocation',$MODULE)} :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>{vtranslate('Grade',$MODULE)} {vtranslate('Leave Policy',$MODULE)} :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-6 ">
                                 <select class="select2-container select2 inputElement col-sm-6 selectModule" multiple style="width:359px;" id="Allocation_grade" name="Allocation_grade">

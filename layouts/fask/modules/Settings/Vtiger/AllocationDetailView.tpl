@@ -17,7 +17,7 @@
             </button>  
         <div class="clearfix"></div>
                 <div class="widget_header row-fluid">
-                    <div class="span8"><h3>{vtranslate('Allocation', $MODULE)}</h3></div>
+                    <div class="span8"><h3>{vtranslate('Leave Policy', $MODULE)}</h3></div>
                 </div>
                 <hr>
                 <br>
@@ -44,7 +44,7 @@
                                 {vtranslate('Select', $MODULE)}
                             </td>
                             <td>
-                               {vtranslate('Allocation Title', $MODULE)} 
+                               {vtranslate('Leave Policy Title', $MODULE)} 
                             </td>
                             <td>
                                {vtranslate('Leave Type', $MODULE)} 
