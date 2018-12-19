@@ -69,4 +69,5 @@ $languageStrings = array(
 $jsLanguageStrings = array(
 	'JS_TAB_NAME_SHOULD_NOT_BE_EMPTY' => 'Dashboard name cannot not be empty',
 	'JS_NO_DATA_AVAILABLE' => 'No data available',
+	'JS_NO_CLAIMTYPE_ALLOCATE'=>'No claim policy done yet!!',
 );
