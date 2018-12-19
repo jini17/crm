@@ -86,6 +86,12 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                         
                 
 
+                 $trial = $this->trial();
+              
+          
+                     $viewer->assign("TRIAL",$trial);
+           
+               
                 $dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
                 //check profile permissions for Dashboards
                 $moduleModel = Vtiger_Module_Model::getInstance('Dashboard');
@@ -117,14 +123,34 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
         function preProcessTplName(Vtiger_Request $request) {
                 return 'dashboards/DashBoardPreProcess.tpl';
         }
-
+        /**
+         * 
+         */
+        public  function trial(){
+           
+            $db = PearDatabase::getInstance();
+           // $db->setDebug(TRUE);
+            $query = "SELECT * FROM secondcrm_plan WHERE type = 'Trial' ";
+            $sql = $db->pquery($query,array());
+            $rum_rows = $db->num_rows($sql);
+            if($rum_rows > 0){
+                $createdtime =$db->query_result($sql,0,'createdtime');
+                $expire =$db->query_result($sql,0,'expiredate');// date("d-m-Y", strtotime($db->query_result($sql,0,'expiredate')));
+                $_start = new DateTime(date("d-m-Y", strtotime($createdtime)));
+                $_end = new DateTime(date("d-m-Y", strtotime($expire)));        
+                $difference = $_end->diff($_start)->format("%a");
+                return $difference;
+            }
+            else{
+                return 0;
+            }
+        }
+                
         function process(Vtiger_Request $request) {
         
                 $viewer = $this->getViewer($request);
                 $moduleName = $request->getModule();
-
                 $dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
-
                 //check profile permissions for Dashboards
                 $moduleModel = Vtiger_Module_Model::getInstance('Dashboard');
                 $userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
