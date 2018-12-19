@@ -111,6 +111,7 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
                 function(data) {
                     app.helper.hideProgress();
                     app.helper.showModal(data);
+                    history.pushState({}, null, window.history.back());
                     thisInstance.saveRule();
                     jQuery('#TypeOfOutgoing').unbind('click');
                     jQuery("#TypeOfOutgoing").click(function () {
@@ -155,6 +156,7 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
                     function(data) {
                         //app.helper.hideProgress();
                         app.helper.showModal(data);
+                        history.pushState({}, null, window.history.back());
                         thisInstance.saveRule(true,checkedData);
                         jQuery('#TypeOfOutgoing').unbind('click');
                         jQuery("#TypeOfOutgoing").click(function () {
@@ -196,6 +198,7 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
                 function(data) {
                     app.helper.hideProgress();
                     app.helper.showModal(data);
+                    history.pushState({}, null, window.history.back());
                     thisInstance.fromMailAddressFeatures(serverId);
                     thisInstance.registerDeleteButton()
                 });
