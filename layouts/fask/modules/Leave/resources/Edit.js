@@ -21,7 +21,7 @@ Vtiger_Edit_Js("Leave_Edit_Js",{
         },
 
         registerEvents : function() {
-               // this._super(container);
+                this._super(container);
                 this.registerChangeRadionButton();
         }
         
