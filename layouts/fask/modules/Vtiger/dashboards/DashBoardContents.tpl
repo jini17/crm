@@ -225,12 +225,15 @@
             jQuery("a.widget-heading").on("hover",function(){
             var $this = jQuery(this);
             jQuery(".widget-group-item").addClass("hide")
-            $this.closest("li ").find(".widget-group-item").removeClass("hide");
+            $this.closest("li").find(".widget-group-item").removeClass("hide");
         })
-        jQuery('html').on('click','.strolltotop',function(){
-            $('body, html').animate({ scrollTop: $(".gridster_2.ready ul").offset().top }, 1000);
-       
-
-    });
+{*        jQuery('body,html').on('click','.strolltotop',function(){          
+            alert();
+          $('.tabContainer').animate({
+     scrollTop: $('.gridster_2 ul li:nth-child(14)').position().top
+}, 'slow');
+         *}
+          });
+         
    });
 </script>
