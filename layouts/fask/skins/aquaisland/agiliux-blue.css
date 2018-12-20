@@ -568,3 +568,41 @@ color: #AFDFDF !important;
     padding:5px;
     color: #AFDFDF;
 }
+   #settingsShortCutsContainer .moduleBlock:hover{
+          background-color: #AFDFDF !important;
+          color: #fff;
+     }
+     .settingsIndexPage .settingsSummary .summaryCount{
+         padding: 0;
+     }
+
+     
+/**=================
+    Employee Directory
+=====================*/
+.active.employeeTab{
+    border-bottom: 2px solid  #AFDFDF !important;    
+}
+
+.pagination li.active{
+  border-bottom: 2px solid #AFDFDF ;
+  color: #AFDFDF ;
+}
+
+.pagination li.active a{
+    color: #fff;
+    background:  #AFDFDF ;
+}
+.alphabetSorting table .alphabetSearch a{
+    color: #AFDFDF !important;
+}
+.global-nav{
+     border-bottom: 2px solid  #AFDFDF !important;
+}
+.btn-primary, .btn-info, .btn-info.disabled, .btn-success, .btn-success.disabled {
+    background: #AFDFDF !important;
+    border: 1px solid #AFDFDF !important;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    color: #AFDFDF !important;
+}
