@@ -9818,8 +9818,8 @@ right connector from last child*/
           color: #333;
       }  
       
-           /** =======================
-     Calender Settings
+      /** =======================
+        Calender Settings
      ===========================*/
      .settingsIndexPage h4{
          color: #2f5597;
@@ -9829,9 +9829,9 @@ right connector from last child*/
          color: #2f5597;
      }
      #settingsShortCutsContainer  .moduleBlock{
-         width: 23.44% !important;
-         
+         width: 23.44% !important;       
      }
+     
      .settingsIndexPage #settingsShortCutsContainer span.header{
          display: block;
          width: 100%
@@ -9881,21 +9881,19 @@ right connector from last child*/
         * Dashboard Scroll to Top
         * TODO: Gridster
         *======================*/
-        .strolltotop{
+        .strolltotop,.strolltotop:hover{           
             padding            : 10px;
             font-size           : 25px;
             font-weight     : bold;
             position             : absolute;
-            width                 : 50px;
-            height                : 50px;
-            border-radius   : 50%;
-            bottom              : 10%;
-            right                   : 1%;
-            background      : #333;
-            text-align          : center;
-            color: #fff;
-            display: none;
-            
+            width                : 55px;
+            height               : 56px;
+            border-radius  : 50%;
+            bottom             : 10%;
+            right                  : 1%;
+            background     : #333;
+            text-align         : center;
+            color                 : #fff;                       
         }
 /*        .gridster_2{
             height: 720px;

@@ -241,12 +241,18 @@
 {/strip}
 <script>
  jQuery(document).ready(function(){
+     //Widget Drop Down
             jQuery(".widget-heading").on("hover",function(){ 
             
             var $this = jQuery(this);
             jQuery(".widget-group-item").addClass("hide")
             $this.closest("li").find(".widget-group-item").removeClass("hide");
         })
+        
+        jQuery(".strolltotop").on("click",function () {
+                     $("#page").animate({ scrollTop: 0 }, "slow"); 
+                     return false;
+            });
           });
 
 </script>
