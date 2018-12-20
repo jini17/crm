@@ -742,23 +742,35 @@ class Vtiger_Util_Helper {
 
         /*start edited by fadzil 19/9/14*/
     public static function getAllSkins(){
-        return array(  'blue' =>"#2f5597",
-                                'curiousblue'          => '#3498DB',
-                                'mariner'        => '#2980B9',
-                                'turquoise'     => '#1ABC9C',
+        return array( 
+                                'blue'                           =>"#2f5597",
+                                'darkblue'                   =>"#2f5597",
+                                'curiousblue'               => '#3498DB',
+                                'mariner'                     => '#2980B9',
+                                'turquoise'                  => '#1ABC9C',
                                 'mountainmeadow' =>  '#16A085',
-                                'wisteria' =>  '#9B59B6',
-                                'amethyst' =>   '#8E44AD',
-                                'alizarin' =>    '#E74C3C',
-                                'pomegranate' =>   '#C0392B',
-                                'concrete' =>  '#95A5A6',
-                                'abestos' =>  '#95A5A6',
-                                'sherpa' =>   '#4A6A77',
-                                'metalslate' =>  '#435E6F',
-                                'purple' =>  '#d971ae',
-                                'yellow' =>  '#f6bb43',                              
-                                "green"=> "#3bbd9b"    
-            
+                                'wisteria'                    =>  '#9B59B6',
+                                'amethyst'                  =>   '#8E44AD',
+                                'alizarin'                      =>    '#E74C3C',
+                                'pomegranate'          =>   '#C0392B',
+                                'concrete'                  =>  '#95A5A6',
+                                'abestos'                    =>  '#95A5A6',
+                                'sherpa'                      =>   '#4A6A77',
+                                'metalslate'               =>  '#435E6F',
+                                'purple'                       =>  '#d971ae',
+                                'yellow'                       =>  '#f6bb43',                              
+                                "green"                      => "#3bbd9b" ,   
+                                "shipcove"                 => "#6783B3",
+                                "lilacbush"                 => "#997CCD",
+                                "energyyellow"       => "#FAD852",
+                                "downy"                    => "#67D0AF",
+                                "lily"                           => "#CBA7C1",
+                                "danube"                 => "#77A1D3",
+                                "selectiveyellow"   => "#F7B301",
+                                "sandybrown"        => "#F4967A",
+                                "mandy"                  => "#EC5C64",
+                                "aquaisland"           => "#AFDFDF",
+                                "red"                        => "#AFDFDF"
             );
 
                 /*'alphagrey' => '#666666',	'softed'	=> '#1560BD',	'bluelagoon'=> '#204E81',

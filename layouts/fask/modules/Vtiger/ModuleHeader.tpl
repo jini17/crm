@@ -156,11 +156,11 @@
                                         {/if}
                                         <!-- Added By Khaled  -->
 
-                                          {if $DATA_RESET eq "Yes"}
+                                          {*{if $DATA_RESET eq "Yes"}
                                               <a class="btn btn-danger btn-reset" data-reset="Undo"><i class="fa fa-undo"></i>&nbsp; Clean Data </a>
                                            {else}   
                                                 <a class="btn btn-danger btn-reset" data-reset="Redo"><i class="fa fa-undo"></i>&nbsp; Reset Data </a>
-                                          {/if}    
+                                          {/if}    *}
 
                                         <a class='btn btn-danger Help-btn text-center'>
                                                 <i class="glyphicon glyphicon-question-sign"></i>&nbsp;Help

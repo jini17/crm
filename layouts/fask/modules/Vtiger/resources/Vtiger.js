@@ -456,6 +456,7 @@ Vtiger.Class('Vtiger_Index_Js', {
                 //this.addBodyScroll();
                 this.triggerGetHelp();  //added by jitu@salespeer for Context Help  
                 this.changeSkin();
+                this.changeDarkSkin();
                 this.mentionerCallBack();
                 this.modulesMenuScrollbar();
                 Vtiger_Index_Js.registerActivityReminder();
@@ -472,9 +473,44 @@ Vtiger.Class('Vtiger_Index_Js', {
                        app.helper.showProgress();
                     //currentElement.closest('#themeContainer').hide();                 
                     var skinname = $this.attr('data-skinName');
+                    var darkskin = "dark"+skinname;
                     var record_id = jQuery('#current_user_id').val();
-                  
-                
+                    jQuery("input[name=darkTheme]").val(darkskin);
+                    var params = {
+                            'module' : 'Users',
+                            'action' : 'SaveAjax',
+                            'record' : record_id,
+                            'field'  : 'theme',
+                            'value'  : skinname,
+                            'mod'    : "edit"
+                    }
+                  app.request.post({"data":params}).then(function(err,data){
+                     // console.log(data);
+                         if(err==null){
+                              window.location.href='index.php';
+                          }
+//                         app.helper.hideProgress();
+                    },
+                    function(error,err){
+                    });
+            })
+	},
+        changeDarkSkin : function() {
+            jQuery('input[name=darkTheme]').on('click', function(e) {
+               
+                       var $this = jQuery(this);
+                       if($this.is('checked')){
+                                         var theme = $this.val().replace("dark");           
+                       }
+                       else{
+                            var theme = $this.val();    
+                       
+                       }
+                       app.helper.showProgress();
+                    //currentElement.closest('#themeContainer').hide();                 
+                    var skinname = theme;                   
+                    var record_id = jQuery('#current_user_id').val();
+               
                     var params = {
                             'module' : 'Users',
                             'action' : 'SaveAjax',

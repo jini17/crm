@@ -488,41 +488,19 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                                 var data = '<li><a style="padding-left:10px;" onclick="Vtiger_DashBoard_Js.addWidget(this, \'' + response.url + '\')" href="javascript:void(0);"';
                                 data += 'data-width=' + width + ' data-height=' + height + ' data-linkid=' + response.linkid + ' data-name=' + response.name + '>' + response.title + '</a></li>';
                                 var divider = jQuery('.widgetsList .divider', '#tab_' + activeTabId);
+                               
                                 if (divider.length) {                                                                     
                                     jQuery(data).insertBefore(divider);
+                                        app.helper.hideProgress();
                                 } else {
                                   jQuery(".widgetsList ").find("."+group).find("ul").append(data)
-                         
+                             app.helper.hideProgress();
                                   // jQuery(data).insertAfter(jQuery('.widgetsList li:last', '#tab_' + activeTabId));
                                 }
                             }
                         }
-                        /**
-                         * Added by Khaled
-                         * On delete reload widgets
-                         * @type {{module: string, view: string, mode: string, tabid}}
-                         */
-                        var data_widget = {
-                            'module': 'Home',
-                            'view': 'DashBoardTab',
-                            'mode': 'getTabContents',
-                            'tabid': activeTabId
-                        }
+                      
 
-//                        app.request.post({"data": data_widget}).then(function (err, data) {
-//                            if (err === null) {
-//                                var dashBoardModuleName = jQuery("#tab_" + activeTabId, ".tab-content").html(data_widget).find('[name="dashBoardModuleName"]').val();
-//                                if (typeof dashBoardModuleName != 'undefined' && dashBoardModuleName.length > 0) {
-//                                    var dashBoardInstanceClassName = app.getModuleSpecificViewClass(app.view(), dashBoardModuleName);
-//                                    if (dashBoardInstanceClassName != null) {
-//                                        var dashBoardInstance = new window[dashBoardInstanceClassName]();
-//                                    }
-//                                }
-//                                app.event.trigger("post.DashBoardTab.load", dashBoardInstance);
-//                                window.location = 'index.php?module=Home&view=DashBoard&tabid=' + activeTabId;
-//                            }
-//                        });
-                        app.helper.hideProgress();
                     }
                 );
             });
@@ -1060,19 +1038,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
 
         });
     },
-    /**
-     * Added By Khaled
-     * Dashboard Scroll To Top
-     * @returns {undefined}
-     */
-    dashboardScrollToTop: function () {
-        var thisInstance = this;
-        this.getContainer().on('click', function () {
 
-            jQuery(document).scrollTop();
-        })
-
-    },
     birthdayEmail: function () {
         var thisInstance = this;
         this.getContainer().on('click', 'div.birthdaywish', function (e) {
@@ -1199,7 +1165,6 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         this.searchWidgetPressEnter();
         this.buttonemail();
         this.birthdayEmail();
-        this.dashboardScrollToTop();
 
         this.registerQtipMessage();
         app.event.off("post.DashBoardTab.load");
