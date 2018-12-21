@@ -561,27 +561,25 @@ a.rightside-icon-dashboard > i.fa{
                       border-bottom: 2px solid  #f6bb43;
             }
             active.employeeTab{
-    border-bottom: 2px solid  #3B5998;
+    border-bottom: 2px solid  #f6bb43;
     
 }
 
 .pagination li.active{
-  border-bottom: 2px solid #3B5998 ;
-  color: #2f5597 ;
+  border-bottom: 2px solid #f6bb43 ;
+  color: #f6bb43 ;
 }
 
 .pagination li.active a{
     color: #fff;
-    background:  #3B5998 ;
+    background:  #f6bb43 ;
 }
 .alphabetSorting table .alphabetSearch a{
-color: #2f5597 !important;
+color: #f6bb43 !important;
 }
-.global-nav{
-          border-bottom: 2px solid  #3B5998;
-}
+
   .alphabetSearch a{
-        color: #307fe8;
+        color: #f6bb43;
         font-weight: bold;
     }
     .box-content{

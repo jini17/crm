@@ -568,3 +568,10 @@ color: #67D0AF !important;
     padding:5px;
     color: #67D0AF;
 }
+.btn-primary, .btn-info, .btn-info.disabled, .btn-success, .btn-success.disabled {
+    background: #67D0AF !important;
+    border: 1px solid #67D0AF !important;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    color: #67D0AF !important;
+}

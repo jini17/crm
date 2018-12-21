@@ -31,16 +31,16 @@ Email: khaled@softsolvers.com.my
 /*.contents.tabbable .nav-tabs>li:hover,*/
 .contents.tabbable .nav-tabs>li.active:focus{
   border: none;
-  border-bottom: 5px solid #77A1D3 !important;
+  border-bottom: 5px solid #F4967A !important;
 }
 .fc-button.fc-state-default{
      
-     color: #77A1D3 !important;
+     color: #F4967A !important;
 }
 .fc-button.fc-state-default:hover,
 .fc-button.fc-state-active{
-    background-color:  #77A1D3 !important;
-     border: 1px solid #77A1D3 !important;
+    background-color:  #F4967A !important;
+     border: 1px solid #F4967A !important;
      color: #fff !important;
 }
 .record-header .recordBasicInfo h4{
@@ -48,8 +48,8 @@ Email: khaled@softsolvers.com.my
 }
 #appnav button
 {
-    background-color:  #77A1D3;
-    border: 1px solid #77A1D3;
+    background-color:  #F4967A;
+    border: 1px solid #F4967A;
      margin-right: 5px;
      color: #fff;
 }
@@ -69,7 +69,7 @@ a.btn.btn-gettingStarted:hover{
     background: #ccc;
 }
 a.btn.btn-gettingStarted i{
-    color: #77A1D3
+    color: #F4967A
 }
 
 /*===============
@@ -122,7 +122,7 @@ a.btn.btn-gettingStarted i{
 }
 
 #myModal  .carousel-indicators .active {
-    background-color: #77A1D3 !important;
+    background-color: #F4967A !important;
     border: 1px solid #444;
 }
 #myModal  .item.slide2 .col-md-6{
@@ -170,13 +170,13 @@ a.btn.btn-gettingStarted i{
 .carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
 
     margin-left: -56px;
-    color: #77A1D3;
+    color: #F4967A;
 
 }
 .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
 
     margin-right: -53px;
-     color: #77A1D3;
+     color: #F4967A;
 
 }
 
@@ -194,7 +194,7 @@ a.btn.btn-gettingStarted i{
     padding-top: 0;
 }
 .btn-widget-view-more{
-    color: #77A1D3;
+    color: #F4967A;
     float: right;
     padding-top: 10px;
 }
@@ -221,8 +221,8 @@ a.btn.btn-gettingStarted i{
     text-decoration:none;
 }
 #taskManagementContainer button.active{
-    border: 1px solid #77A1D3 !important;
-    background: #77A1D3 !important;;
+    border: 1px solid #F4967A !important;
+    background: #F4967A !important;;
 }
 #task-input-background{
     z-index:0;
@@ -244,13 +244,13 @@ a.btn.btn-gettingStarted i{
 
 .dashBoardContainer .dashBoardTabContents ul li{
     border-radius: 0 !important;
-    border-top:  2px solid #77A1D3 !important;
+    border-top:  2px solid #F4967A !important;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
 .fieldBlockHeader{
-        color: #77A1D3;
+        color: #F4967A;
         padding-left: 0;
  
 }
@@ -291,7 +291,7 @@ a.btn.btn-gettingStarted i{
     z-index: 1;
 }
 .help-form-container .form h4{
-    background:   #77A1D3 ;
+    background:   #F4967A ;
     color: #fff;
     padding: 10px 0;
     margin-top: -10px;
@@ -313,7 +313,7 @@ a.btn.btn-gettingStarted i{
 }
 
 .help-list {
-        border-left: 4px solid  #77A1D3 !important;
+        border-left: 4px solid  #F4967A !important;
         background: #fff;
 }
 .help-list-item a{
@@ -323,7 +323,7 @@ a.btn.btn-gettingStarted i{
     list-style: linear-gradient !important;
     min-height:  auto !important;
     margin-bottom: 10px;
-    color: #77A1D3;
+    color: #F4967A;
 }
 .help-list-item fa{
     float: left;
@@ -396,7 +396,7 @@ a.btn.btn-gettingStarted i{
     font-weight: bold;
 }
 .btn-profile{
-    background: #77A1D3 !important;
+    background: #F4967A !important;
     color: #fff !important;
 }
 #menubar_item_right_LBL_SIGN_OUT{
@@ -411,7 +411,7 @@ a.btn.btn-gettingStarted i{
 #menubar_item_right_LBL_MY_PREFERENCES:hover,
 #menubar_item_right_LBL_MY_PREFERENCES:hover i
 {
-    color: #77A1D3  !important;
+    color: #F4967A  !important;
 }
 #menubar_item_right_LBL_SIGN_OUT:hover,
 #menubar_item_right_LBL_SIGN_OUT:hover i{
@@ -428,7 +428,7 @@ a.btn.btn-gettingStarted i{
 
 .color-blue,
 .color-blue:hover{
-    background: #77A1D3;    
+    background: #F4967A;    
     color: #fff;
 }
 .color-purple,
@@ -479,21 +479,21 @@ a.rightside-icon-dashboard > i.fa{
 }
 .wbox .links,
 .wbox h5{
-           color: #77A1D3;
+           color: #F4967A;
              }
 /*     .app-nav .module-action-bar{
-           border-bottom: 2px solid #77A1D3 !important;
+           border-bottom: 2px solid #F4967A !important;
            padding-bottom: 5px;
      }*/
      
 active.employeeTab{
-    border-bottom: 2px solid  #3B5998;
+    border-bottom: 2px solid  #F4967A;
     
 }
 
 .pagination li.active{
   border-bottom: 2px solid #3B5998 ;
-  color: #77A1D3 ;
+  color: #F4967A ;
 }
 
 .pagination li.active a{
@@ -501,10 +501,10 @@ active.employeeTab{
     background:  #3B5998 ;
 }
 .alphabetSorting table .alphabetSearch a{
-color: #77A1D3 !important;
+color: #F4967A !important;
 }
 .global-nav{
-          border-bottom: 2px solid  #77A1D3;
+          border-bottom: 2px solid  #F4967A;
 }
 .fa-facebook {
     background: #3B5998;
@@ -535,7 +535,7 @@ color: #77A1D3 !important;
 
 .pagination li.active{
   border-bottom: 2px solid #3B5998 ;
-  color: #77A1D3 ;
+  color: #F4967A ;
 }
 
 .pagination li.active a{
@@ -543,28 +543,35 @@ color: #77A1D3 !important;
     background:  #3B5998 ;
 }
 .alphabetSorting table .alphabetSearch a{
-color: #77A1D3 !important;
+color: #F4967A !important;
 }
 /**=================
  Mail Manager
 =======================*/
 #mm_searchButton {
     height: 30px !important;
-    background-color: #77A1D3 !important;
+    background-color: #F4967A !important;
     border: 1px solid #fff !important;
     padding-left: 5px;
     padding-right: 5px;
     color: #fff;
 }
 #searchType{
-    background: #77A1D3;
+    background: #F4967A;
     color:#fff;
 }
 .mUserName i{
-    color: #77A1D3;
+    color: #F4967A;
 }
 .mmbtn .btn{
     font-size: 12px;
     padding:5px;
-    color: #77A1D3;
+    color: #F4967A;
+}
+.btn-primary, .btn-info, .btn-info.disabled, .btn-success, .btn-success.disabled {
+    background: #F4967A !important;
+    border: 1px solid #F4967A !important;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    color: #F4967A !important;
 }

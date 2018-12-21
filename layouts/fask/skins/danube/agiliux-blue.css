@@ -540,7 +540,7 @@ color: #77A1D3 !important;
 
 .pagination li.active a{
     color: #fff;
-    background:  #3B5998 ;
+    background:  #77A1D3 ;
 }
 .alphabetSorting table .alphabetSearch a{
 color: #77A1D3 !important;
@@ -567,4 +567,43 @@ color: #77A1D3 !important;
     font-size: 12px;
     padding:5px;
     color: #77A1D3;
+}
+#settingsShortCutsContainer .moduleBlock:hover{
+          background-color: #77A1D3 !important;
+          color: #fff;
+     }
+     .settingsIndexPage .settingsSummary .summaryCount{
+         padding: 0;
+     }
+
+     
+/**=================
+    Employee Directory
+=====================*/
+.active.employeeTab{
+    border-bottom: 2px solid  #77A1D3 !important;
+    
+}
+
+.pagination li.active{
+  border-bottom: 2px solid #77A1D3 ;
+  color: #77A1D3 ;
+}
+
+.pagination li.active a{
+    color: #fff;
+    background:  #77A1D3 ;
+}
+.alphabetSorting table .alphabetSearch a{
+color: #77A1D3 !important;
+}
+.global-nav{
+          border-bottom: 2px solid  #77A1D3 !important;
+}
+.btn-primary, .btn-info, .btn-info.disabled, .btn-success, .btn-success.disabled {
+    background: #77A1D3 !important;
+    border: 1px solid #77A1D3 !important;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    color: #77A1D3 !important;
 }

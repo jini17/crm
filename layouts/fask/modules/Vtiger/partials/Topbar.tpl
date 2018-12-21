@@ -71,8 +71,7 @@
     border: 2px solid #bdc3c7;
     border-radius: 6px;
     outline: none;
-
-color: #34495e;
+    color: #34495e;
 }
 
 </style>
@@ -880,16 +879,16 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                             <li><a class="btn color-box color-purple themeElement" data-skinName="purple"><i class="fa {if $USER_MODEL->get('theme') eq 'purple'} fa-check  {/if}"></i></a></li>
                                                                             <li><a class="btn color-box color-yellow themeElement" data-skinName="yellow"><i class="fa  {if $USER_MODEL->get('theme') eq 'yellow'} fa-check {/if}"></i></a></li>
                                                                             <li><a class="btn color-box color-green themeElement" data-skinName="green"><i class="fa {if $USER_MODEL->get('theme') eq 'green'}  fa-check  {/if}"></i></a></li>
-                                                                            <li><a class="btn color-box color-green themeElement" data-skinName="shipcove"><i class="fa {if $USER_MODEL->get('theme') eq 'shipcove'}  fa-check  {/if}"></i></a></li>
-                                                                            <li><a class="btn color-box color-green themeElement" data-skinName="lilacbush"><i class="fa {if $USER_MODEL->get('theme') eq 'lilacbush'}  fa-check  {/if}"></i></a></li>
-                                                                             <li><a class="btn color-box color-green themeElement" data-skinName="energyyellow"><i class="fa {if $USER_MODEL->get('theme') eq 'energyyellow'}  fa-check  {/if}"></i></a></li>
-                                                                             <li><a class="btn color-box color-green themeElement" data-skinName="downy"><i class="fa {if $USER_MODEL->get('theme') eq 'downy'}  fa-check  {/if}"></i></a></li>
-                                                                              <li><a class="btn color-box color-green themeElement" data-skinName="lily"><i class="fa {if $USER_MODEL->get('theme') eq 'lily'}  fa-check  {/if}"></i></a></li>
-                                                                              <li><a class="btn color-box color-green themeElement" data-skinName="danube"><i class="fa {if $USER_MODEL->get('theme') eq 'danube'}  fa-check  {/if}"></i></a></li>
-                                                                              <li><a class="btn color-box color-green themeElement" data-skinName="selectiveyellow"><i class="fa {if $USER_MODEL->get('theme') eq 'selectiveyellow'}  fa-check  {/if}"></i></a></li>
-                                                                              <li><a class="btn color-box color-green themeElement" data-skinName="sandybrown"><i class="fa {if $USER_MODEL->get('theme') eq 'sandybrown'}  fa-check  {/if}"></i></a></li>
-                                                                              <li><a class="btn color-box color-green themeElement" data-skinName="mandy"><i class="fa {if $USER_MODEL->get('theme') eq 'mandy'}  fa-check  {/if}"></i></a></li>
-                                                                              <li><a class="btn color-box color-green themeElement" data-skinName="aquaisland"><i class="fa {if $USER_MODEL->get('theme') eq 'aquaisland'}  fa-check  {/if}"></i></a></li>
+                                                                            <li><a class="btn color-box color-shipcove themeElement" data-skinName="shipcove"><i class="fa {if $USER_MODEL->get('theme') eq 'shipcove'}  fa-check  {/if}"></i></a></li>
+                                                                            <li><a class="btn color-box color-lilacbush themeElement" data-skinName="lilacbush"><i class="fa {if $USER_MODEL->get('theme') eq 'lilacbush'}  fa-check  {/if}"></i></a></li>
+                                                                             <li><a class="btn color-box color-energyyellow themeElement" data-skinName="energyyellow"><i class="fa {if $USER_MODEL->get('theme') eq 'energyyellow'}  fa-check  {/if}"></i></a></li>
+                                                                             <li><a class="btn color-box color-downy themeElement" data-skinName="downy"><i class="fa {if $USER_MODEL->get('theme') eq 'downy'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-lily themeElement" data-skinName="lily"><i class="fa {if $USER_MODEL->get('theme') eq 'lily'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-danube themeElement" data-skinName="danube"><i class="fa {if $USER_MODEL->get('theme') eq 'danube'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-selectiveyellow themeElement" data-skinName="selectiveyellow"><i class="fa {if $USER_MODEL->get('theme') eq 'selectiveyellow'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-sandybrown themeElement" data-skinName="sandybrown"><i class="fa {if $USER_MODEL->get('theme') eq 'sandybrown'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-mandy themeElement" data-skinName="mandy"><i class="fa {if $USER_MODEL->get('theme') eq 'mandy'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-aquaisland themeElement" data-skinName="aquaisland"><i class="fa {if $USER_MODEL->get('theme') eq 'aquaisland'}  fa-check  {/if}"></i></a></li>
 
                                                                         </ul>
                                                                         <div class="clarfix"></div>
@@ -2266,10 +2265,8 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
             if (x.style.display === "none") 
             {
                 x.style.display = "block";
-
             } else {
                 x.style.display = "none";
-
             }
         }
     </script>

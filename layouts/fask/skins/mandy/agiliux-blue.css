@@ -530,11 +530,11 @@ color: #EC5C64 !important;
     min-height: 84px;
 }
 .active.employeeTab{
-    border-bottom: 2px solid  #3B5998 !important;
+    border-bottom: 2px solid  #EC5C64 !important;
 }
 
 .pagination li.active{
-  border-bottom: 2px solid #3B5998 ;
+  border-bottom: 2px solid #EC5C64 ;
   color: #EC5C64 ;
 }
 
@@ -567,4 +567,11 @@ color: #EC5C64 !important;
     font-size: 12px;
     padding:5px;
     color: #EC5C64;
+}
+.btn-primary, .btn-info, .btn-info.disabled, .btn-success, .btn-success.disabled {
+    background: #EC5C64 !important;
+    border: 1px solid #EC5C64 !important;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    color: #EC5C64 !important;
 }

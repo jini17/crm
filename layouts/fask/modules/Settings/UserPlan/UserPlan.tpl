@@ -15,6 +15,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="screen" />
 
 <div class="listViewPageDiv" id="plansettingcontainer" style="position: relative;">
+    <div class="clearfix"></div>
      <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 1px;right:0 ; left:98%" title="Left Panel Show/Hide">
             <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>  
             <div class="clearfix"></div>
@@ -78,6 +79,7 @@
             </tbody>
         </table>
     </div>
+            <div class="clearfix"></div>
 </div>
 <script>
 jQuery(document).ready( function () {
