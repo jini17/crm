@@ -12,27 +12,26 @@ global $adb;
 $adb->setDebug(true);
 
 $module = new Vtiger_Module();
-$module->name = 'Documents';
-$module = $module->getInstance('Documents');
+$module->name = 'OrganizationDetails';
+$module = $module->getInstance('OrganizationDetails');
 
 // Create Block instance
-$block1 = new Vtiger_Block();
-$block1->label = 'LBL_NOTE_INFORMATION';
 
-$block1 = $block1->getInstance($block1->label,$module);
+$block = new Vtiger_Block();
+$block->label = 'LBL_ORGANIZATIONDETAILS_INFORMATION';
+$block = $block->getInstance($block->label,$module);
 
 
 $field1 = new Vtiger_Field();
-	$field1->name = 'visibility_identifier';
-	$field1->label = 'LBL_PERMISSION';
-	$field1->table = $module->basetable;
-	$field1->column = 'visibility_identifier';
-	$field1->columntype = 'varchar(10)';
-	$field1->uitype = 16;
-	$field1->displaytype = 1;
-	$field1->typeofdata = 'V~O'; // varchar~Mandatory
-	$field1->setPicklistValues( Array ('Public', 'Private','Protected') );
-	$block1->addField($field1); /** table and column are automatically set */
+$field1->name = 'isdefault';
+$field1->label = 'Default Company';
+$field1->table = $module->basetable;
+$field1->column = 'isdefault';
+$field1->columntype = 'varchar(1)';
+$field1->uitype = 56;
+$field1->displaytype = 1;
+$field1->typeofdata = 'V~O'; // varchar~Mandatory
+$block->addField($field1); /** table and column are automatically set */
 
 echo "NBBB";
 //after field is created, go to vtiger_field and find the field ID.
