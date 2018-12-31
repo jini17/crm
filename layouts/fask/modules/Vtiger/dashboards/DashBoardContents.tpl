@@ -235,7 +235,7 @@
         </div>
                 <div class="clearfix"></div>
                 <a class="strolltotop pull-right">
-                    <i class="fa fa fa-arrow-up"></i>
+                    <i class="fa fa-arrow-up"></i>
                 </a>
 </div>
 {/strip}
