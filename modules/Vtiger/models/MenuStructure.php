@@ -236,11 +236,11 @@ class Vtiger_MenuStructure_Model extends Vtiger_Base_Model {
                 $noOfRows = $db->num_rows($result);
 
 
-                for($i=0; $i<$noOfRows; ++$i) {
+                for($i=0; $i<$noOfRows; $i++) {
                         $row = $db->query_result_rowdata($result, $i);
                                 $parentlist[] = $row['parenttab'];
-
                 }	
+                
                 return $parentlist;//array('MARKETING','SALES','INVENTORY','SUPPORT','PROJECT','TOOLS');
         }
 
