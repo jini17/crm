@@ -64,7 +64,7 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 
 		require_once('modules/Leads/Leads.php');		
 
-        global $adb,$current_user,$VTIGER_BULK_SAVE_MODE;
+        global $adb,$current_user,$root_directory,$VTIGER_BULK_SAVE_MODE;
 
         $VTIGER_BULK_SAVE_MODE 	= true; // To turn off the workflows
 
@@ -246,6 +246,17 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 
 				$adb->pquery("UPDATE vtiger_crmentity SET label = '$firstname $lastname' WHERE crmid = ?", array($leadid));
 
+				$file  = "Response(Person Details): \n\n";
+				$file .= print_r($personDetails, true); 
+
+				$file .= "\n\nResponse(Company Details): \n\n";
+				$file .= print_r($companyDetails, true); 
+
+				$file .= "\n\nCRM MAPPING: \n\n";
+				$file .= print_r($lead->column_fields, true); 
+
+				file_put_contents($root_directory . "/Enrichment Logs/" . $leadid . '_' . date("d.m.Y H:i:s") . '.log', $file);
+
 
 			}
 
@@ -260,7 +271,6 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 		}
 
 		else 
-
 			$message = "Primary Email field is empty, cannot perform data enrichment";
 
 
