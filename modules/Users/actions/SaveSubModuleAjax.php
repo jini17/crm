@@ -347,9 +347,9 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                 //$db->setDebug(true);
                 include_once 'include/Webservices/Create.php';
                 $user = new Users();
-                global $current_user;
+                $currentUserModel = Users_Record_Model::getCurrentUserModel();
 
-            $current_usersaving = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
+                $current_usersaving = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
 
                 $applicant_id = $request->get('current_user_id');
                 $leaveid= $request->get('record'); 
@@ -357,7 +357,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                 $wsleaveType    = vtws_getWebserviceEntityId('LeaveType', $request->get('leave_type'));
                 //echo $wsleaveType;die;
                 $wsUser		= vtws_getWebserviceEntityId('Users', $request->get('replaceuser'));
-                $wsCurrentUser	= vtws_getWebserviceEntityId('Users', $current_user->id);	
+                $wsCurrentUser	= vtws_getWebserviceEntityId('Users', $currentUserModel->id);	
                 $manager= $request->get('manager');
 
                 $startdate = date('Y-m-d',strtotime($request->get('start_date')));
@@ -384,13 +384,13 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
                         $resultleave = $db->pquery("SELECT vtiger_leave.leaveid FROM vtiger_leave 
                                 INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leave.leaveid 
-                                WHERE ((fromdate between ? AND ?) OR (todate between ? AND ?)) AND vtiger_leave.leavestatus IN ('Apply','Approved','New') AND vtiger_crmentity.smcreatorid = ? AND vtiger_crmentity.deleted=0",	array($startdate, $enddate, $startdate, $enddate, $current_user->id));
+                                WHERE ((fromdate between ? AND ?) OR (todate between ? AND ?)) AND vtiger_leave.leavestatus IN ('Apply','Approved','New') AND vtiger_crmentity.smcreatorid = ? AND vtiger_crmentity.deleted=0",	array($startdate, $enddate, $startdate, $enddate, $currentUserModel->id));
                 }		
                 else { 
                         $resultleave = $db->pquery("SELECT vtiger_leave.leaveid FROM vtiger_leave 
                                 INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leave.leaveid 
                                 WHERE ((fromdate between ? AND ?) OR (todate between ? AND ?)) AND vtiger_leave.leavestatus IN ('Apply','Approved') AND vtiger_crmentity.smcreatorid = ? AND vtiger_crmentity.deleted=0",
-                        array($startdate, $enddate, $startdate, $enddate, $current_user->id));
+                        array($startdate, $enddate, $startdate, $enddate, $currentUserModel->id));
                 }
 
                 if($db->num_rows($resultleave) > 0) { 
@@ -448,6 +448,20 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                         $this->insertIntoAttachment($leaveIdarray[1], 'Leave');
                                 }
 
+                                //Leave Applied
+                                if($request->get('savetype')=='Apply'){
+
+                                    $activitydetails = array();
+                                    $notifyUsers = NotificationPeople('H13');
+                                    array_push($notifyUsers, $currentUserModel->reports_to_id, $applicant_id);
+                                    $activitydetails['notifyto']        =   $notifyUsers;
+                                    $activitydetails['actionperform']   =   'Applied';
+                                    $activitydetails['relatedto']       =   $leaveIdarray[1];
+                                    addUserNotification($activitydetails);
+                                }    
+                                //end activity
+
+
                         $response->setResult(array("success"=>$success, "msg"=>$msg));
 
                         } catch (WebServiceException $ex) {
@@ -469,10 +483,10 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                  $wsid = vtws_getWebserviceEntityId('Leave', $leaveid);
 
                                 //Edit and manager approval
-                                if(($manager == 'true' || $current_user->is_admin=='on' ) && ($request->get('savetype')=='Approved' || $request->get('savetype')=='Not Approved'))
+                                if(($manager == 'true' || $currentUserModel->is_admin=='on' ) && ($request->get('savetype')=='Approved' || $request->get('savetype')=='Not Approved'))
                                 {	
                                         $approvedate = date('Y-m-d');
-                                        $approveby = $current_user->first_name.' '.$current_user->last_name;	
+                                        $approveby = $currentUserModel->first_name.' '.$currentUserModel->last_name;	
                                         $leavetype = $request->get('leave_type');
                                         $starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
                                         $endhalf  = $request->get('chkboxendhalf')==1?0.5:0;
@@ -503,11 +517,22 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                                 $leave->retrieve_entity_info($leaveid, 'Leave');
                                                 $leave->column_fields['leavestatus'] = $data['leavestatus'];
                                                 $leave->column_fields['reasonnotapprove'] = $data['reasonnotapprove'];
-                                                $leave->column_fields['approveby'] = $data['approveby'];
+                                                $leave->column_fields['approveby']  = $data['approveby'];
                                                 $leave->column_fields['approvedate'] = $data['approvedate'];
                                                 $leave->mode='edit';
                                                 $leave->id= $leaveid;
                                                 $leave->save('Leave');
+
+                                                //Leave Approved or Rejected
+                                                $activitydetails = array();
+                                                $notifyUsers = NotificationPeople('H13','H2', 'H12');
+                                                array_push($notifyUsers, $currentUserModel->reports_to_id, $applicant_id);
+                                                $activitydetails['notifyto']        =   $notifyUsers;
+                                               // $activitydetails['notifyby']        =   $data['approveby'];
+                                                $activitydetails['actionperform']   =   $request->get('savetype');
+                                                $activitydetails['relatedto']       =   $leaveid;
+                                                addUserNotification($activitydetails);
+                                                //end activity
 
                                                 if($request->get('savetype')=='Approved'){
                                                         $message = vtranslate("LBL_APPROVED","Users");
@@ -515,7 +540,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                                         $message = vtranslate("LBL_NOT_APPROVED","Users");	
                                                 }
                                                 $response->setResult(array("success"=>true, "msg"=>$message));								
-                                }else{ 
+                                } else{ 
                                         $starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
                                         $endhalf  = $request->get('chkboxendhalf')==1?0.5:0;
                                         $startdate = date('Y-m-d',strtotime($request->get('start_date')));
@@ -546,10 +571,26 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                         }
 
                                         if($leave != null){
-                                                $message = vtranslate("LBL_EDIT_SUCCESS","Users");
+
+                                            $message = vtranslate("LBL_EDIT_SUCCESS","Users");
+                                            //Leave Applied
+                                            if($request->get('savetype')=='Apply'){
+
+                                                $activitydetails = array();
+                                                $notifyUsers = NotificationPeople('H13');
+                                                array_push($notifyUsers, $currentUserModel->reports_to_id, $applicant_id);
+                                                $activitydetails['notifyto']        =   $notifyUsers;
+                                               // $activitydetails['notifyby']      =   $data['approveby'];
+                                                $activitydetails['actionperform']   =   'Applied';
+                                                $activitydetails['relatedto']       =   $leaveid;
+                                                addUserNotification($activitydetails);
+                                            }    
+                                            //end activity
+
                                         } else {
                                                 $message = vtranslate("LBL_EDIT_FAILED","Users");	
                                         }
+
                                         $response->setResult(array("success"=>true, "msg"=>$message));
                                 }
 
@@ -658,12 +699,15 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                 include_once 'modules/Claim/Claim.php';
 
                 $user = new Users();
-                global $current_user;
+                $currentUserModel = Users_Record_Model::getCurrentUserModel();
 
-        $current_usersaving = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
+                $current_usersaving = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
 
                 $current_user_id = $request->get('current_user_id');
-
+                $reporting = new Users();
+                $reportingManager = $reporting->retrieveCurrentUserInfoFromFile($current_user_id);
+                $current_user_id."Reporting Manager";
+              
                 $claimid= $request->get('record');
                 $manager = $request->get('manager'); 
 
@@ -703,8 +747,19 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                         }
                                         $return  = 1;
                                 }
-                                $msg    = $return==0? vtranslate("JS_CREATE_FAILED","Users"):vtranslate("JS_CLAIM_CREATE_SUCCESSFULLY","Users"); 	
+                                $msg    = $return==0? vtranslate("JS_CREATE_FAILED","Users"):vtranslate("JS_CLAIM_CREATE_SUCCESSFULLY","Users"); 
 
+                                //Claim Applied
+                                $activitydetails = array();
+                                $claimIdComponents = explode('x', $claims->id);
+                                $notifyUsers = NotificationPeople('H13');
+                                array_push($notifyUsers, $currentUserModel->reports_to_id, $current_user_id);
+                                $activitydetails['notifyto']        =   $notifyUsers;
+                                $activitydetails['actionperform']   =   'Applied';
+                                $activitydetails['relatedto']       =   $claimIdComponents[1];
+                                addUserNotification($activitydetails);
+                                
+                                //end activity
 
                         } catch (WebServiceException $ex) {
                                 $msg = $ex->getMessage();
@@ -713,7 +768,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                 } else{  
 
 
-                        if(($manager == 'true' || $current_user->is_admin=='on') && ($claim_status=='Approved' || $claim_status=='Not Approved' ))
+                        if(($manager == 'true' || $currentUserModel->is_admin=='on') && ($claim_status=='Approved' || $claim_status=='Not Approved' ))
                         {		
 
                                 $response = new Vtiger_Response();
@@ -750,6 +805,18 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                         } else {
                                                 $message = 'JS_CLAIM_APPROVED';
                                         }
+
+                                         //Claim Approved or disapproved
+                                        $activitydetails = array();
+                                        $claimIdComponents = explode('x', $claims->id);
+                                        $notifyUsers = NotificationPeople('H13','H2','H12');
+                                        array_push($notifyUsers, $reportingManager->reports_to_id, $current_user_id);
+                                        $activitydetails['notifyto']        =   $notifyUsers;
+                                        $activitydetails['actionperform']   =   $claim_status;
+                                        $activitydetails['relatedto']       =   $claims->id;
+                                        addUserNotification($activitydetails);
+                                
+                                //end activity
                                         $msg = $return==0? vtranslate("JS_UPDATION_FAILED","Users"):vtranslate($message ,"Users"); 	
 
                                 } catch (WebServiceException $ex) {

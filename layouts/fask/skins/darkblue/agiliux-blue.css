@@ -569,6 +569,35 @@ color: #2f5597 !important;
     color: #2f5597;
 }
 
-.tabContainer{
-    background-color: #333 !important;
+.tabContainer,
+.tabContainer, .tabContainer .nav, .listViewPageDiv{
+    background-color: #4B4C51 !important;
+}
+.widgeticons.dashBoardWidgetFooter {
+    background-color: #7f8c8d;
+    padding-top: 10px;
+    padding-bottom: 36px;
+    margin-top: -13px;
+}
+.dashboardWidgetHeader .title {
+position: absolute;
+z-index: 9;
+color: #fff;
+top: 6px;
+}
+.dashboardTitle{
+    color: #fff !important;
+}
+.dashboardWidget{
+padding-top:30px;
+    background:  #CCC !important;
+}
+.filterContainer{
+    margin-top: 30px;
+}
+.gettingstartedWidget{
+    margin-top: 30px;
+}
+.dashboardWidgetHeader{
+    margin-top: 33px;
 }

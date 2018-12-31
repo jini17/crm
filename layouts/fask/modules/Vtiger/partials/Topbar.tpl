@@ -37,8 +37,8 @@
             padding: 0 !important;
             height: 33px !important;
             margin-top: 4px !important;
-           background-color: #2f5597 !important;
-            color: #fff !important;
+           background-color: #fff;
+            color: #000 ;
             border-radius: 3px !important;
             border: 0 !important;
             box-shadow:none !important;
@@ -73,12 +73,72 @@
     outline: none;
     color: #34495e;
 }
+.notifications{
+    position:relative;
+}
+.notification-list{
+    position:absolute;
+    z-index:10000;
+    width:250px;
+    height:200px;
+    background-color: #fff !important;
+    color: #000 !important;
+    left:-200px;
+}
+
+.notifications-heading{
+    padding:5px;
+    font-size:10px !important;
+    font-weight: bold;
+    background-color: #2f5597 !important;
+    color:#fff !important;
+    padding:10px;
+    margin:0;
+    border-radius: 5px;
+}
+.notifications-heading i{
+    margin-right:10px !important;
+    color:#fff !important;
+
+}
+
+.notification-list::before {
+    position: absolute;
+    top: -7px;
+    right: 26px;
+    display: inline-block;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    border-left: 7px solid transparent;
+    border-bottom-color: rgba(0,0,0,0.2);
+    content: '';
+}
+
+.notification-container .img-holder{
+    width:40px;
+    height:40px;
+    float:left;
+}
+
+.notification-container{
+    padding:10px;
+    border:1px solid #ccc;
+}
+
+.notification-container .notification-title{
+    width:200px;
+    float:right;
+}
+
+.notification-container .notification-time{
+
+ }   
 
 </style>
 <script type="text/javascript">
 
-    jQuery(document).ready(function(){
-$('.searchoption #s2id_searchModuleList').find('.select2-choice').find('.select2-arrow').find('b').remove();
+jQuery(document).ready(function(){
+    $('.searchoption #s2id_searchModuleList').find('.select2-choice').find('.select2-arrow').find('b').remove();
 
 $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !important;"></i>');
         jQuery('.menu-open').on('hover',function(){
@@ -743,9 +803,28 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
 
                                             <li>
                                                 <div>
-                                                    <a class="rightside-icon-dashboard" href="index.php?module=SMSNotifier&view=List&app=FOUNDATION" title="Notifications" aria-hidden="true">
+                                                    <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" title="Notifications" aria-hidden="true">
                                                         <i class="fa fa-bell-o"></i>
                                                     </a>
+
+                                                    <ul class="hide notification-list list-unstyled" onmouseleave="Vtiger_Header_Js.hideNotification()">
+                                                        <li>
+                                                            <h6 class="text-left notifications-heading">Notifications<i class="fa fa-gear pull-right"></i></h6>
+
+                                                        </li>
+                                                        <li>
+                                                            <div class="notification-container unread">
+                                                                <div class="img-holder"><img src="" class="img-circle" height="30" width="30"></div>
+                                                                <div class="notification-title">
+                                                                    <a>
+                                                                        <strong>Khaled approved leave</strong>
+                                                                    </a>  
+                                                                   <span class="notification-time">2 hr</span> 
+                                                                </div> 
+                                                            </div>
+                                                           <div class="clearfix"></div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </li>
 

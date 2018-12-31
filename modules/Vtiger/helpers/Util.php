@@ -56,6 +56,7 @@ class Vtiger_Util_Helper {
 
         public static function getCompanyTitle($id){
                 $db = PearDatabase::getInstance();
+                //$db->setDebug(true);
                 $currentUser = Users_Record_Model::getCurrentUserModel();
                 $userid      = $currentUser->id;
                 $params = array();
