@@ -117,58 +117,161 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 				$lead->mode = 'edit';
 
 				// To Track History of Updates
-				$em 			= new VTEventsManager($adb);
+				/*$em 			= new VTEventsManager($adb);
 				$em->initTriggerCache();					
 				$entityData 	= VTEntityData::fromCRMEntity($lead);
 				$em->triggerEvent("vtiger.entity.beforesave.modifiable", $entityData);
 				$em->triggerEvent("vtiger.entity.beforesave", $entityData);				
-				$em->triggerEvent("vtiger.entity.beforesave.final", $entityData);
-					
-				// Mapping Fields for Lead Details
+				$em->triggerEvent("vtiger.entity.beforesave.final", $entityData);*/
+
+				$trackerData = array();
+				$counter     = 0;				
+
+				// Mapping Fields for contact Details
 				if (!empty($personDetails['fullName'])) {
 
-					$firstname = $lead->column_fields['firstname'] 	= $personDetails['details']['name']['given'] . " " . $personDetails['details']['name']['middle'];	
+					if (!empty($personDetails['details']['name']['given'])) {
 
-					$lastname = $lead->column_fields['lastname'] 	= $personDetails['details']['name']['family'];
+					$trackerData [$counter]['fieldname']  = "firstname";
+					$trackerData [$counter]['prevalue']   = $lead->column_fields['firstname']; 	
+					$firstname = $lead->column_fields['firstname'] = $personDetails['details']['name']['given'] . " " . $personDetails['details']['name']['middle'];					
+					$trackerData [$counter]['postvalue']  = $lead->column_fields['firstname']; 
+					$counter++;	
 
+					}					
+					
+					if (!empty($personDetails['details']['name']['family'])) {
+
+						$trackerData [$counter]['fieldname']  = "lastname";
+						$trackerData [$counter]['prevalue']   = $lead->column_fields['lastname']; 
+						$lastname = $personDetails['details']['name']['family'];
+						$lead->column_fields['lastname'] = $lastname; 
+						$trackerData [$counter]['postvalue']  = $lead->column_fields['lastname']; 
+						$counter++;
+
+					}
 				
-				}			
+				}				
 
-				if (!empty($personDetails['details'][0]['value']))
-					$lead->column_fields['phone'] 		= $personDetails['details'][0]['value'];
+				if (!empty($personDetails['details'][0]['value'])) {
 
-				if (!empty($personDetails['ageRange']))
+					$trackerData [$counter]['fieldname']  = "phone";
+					$trackerData [$counter]['prevalue']   = $lead->column_fields['phone']; 
+					$lead->column_fields['phone'] 		  = $personDetails['details'][0]['value'];
+					$trackerData [$counter]['postvalue']  = $lead->column_fields['phone']; 
+					$counter++;
+
+				}
+
+				if (!empty($personDetails['ageRange'])) {
+
+					$trackerData [$counter]['fieldname']  = "age_range";
+					$trackerData [$counter]['prevalue']   = $lead->column_fields['age_range']; 
 					$lead->column_fields['age_range'] 	= $personDetails['ageRange'];
+					$trackerData [$counter]['postvalue']  = $lead->column_fields['age_range']; 
+					$counter++;
 
-				if (!empty($personDetails['gender']))
+				}
+
+				if (!empty($personDetails['gender'])){
+
+					$trackerData [$counter]['fieldname']  = "gender";
+					$trackerData [$counter]['prevalue']   = $lead->column_fields['gender']; 
 					$lead->column_fields['gender'] 		= $personDetails['gender'];
+					$trackerData [$counter]['postvalue']  = $lead->column_fields['gender']; 
+					$counter++;
 
-				if (!empty($personDetails['location']))
+				}
+
+				if (!empty($personDetails['location'])) {
+
+					$trackerData [$counter]['fieldname']  = "location";
+					$trackerData [$counter]['prevalue']   = $lead->column_fields['location']; 
 					$lead->column_fields['location'] 	= $personDetails['location'];
+					$trackerData [$counter]['postvalue']  = $lead->column_fields['location']; 
+					$counter++;
 
-				if (!empty($personDetails['organization']))
+				}
+
+				if (!empty($personDetails['organization'])) {
+
+					$trackerData [$counter]['fieldname']  = "company";
+					$trackerData [$counter]['prevalue']   = $lead->column_fields['company']; 
 					$lead->column_fields['company'] 	= $personDetails['organization'];
+					$trackerData [$counter]['postvalue']  = $lead->column_fields['company']; 
+					$counter++;
 
-				if (!empty($personDetails['title']))
+				}
+
+				if (!empty($personDetails['title'])) {
+
+					$trackerData [$counter]['fieldname']  = "designation";
+					$trackerData [$counter]['prevalue']   = $lead->column_fields['designation']; 
 					$lead->column_fields['designation'] = $personDetails['title'];
+					$trackerData [$counter]['postvalue']  = $lead->column_fields['designation']; 
+					$counter++;
 
-				if (!empty($personDetails['twitter']))
+				}
+
+				if (!empty($personDetails['twitter'])) {
+
+					$trackerData [$counter]['fieldname']  = "twitter";
+					$trackerData [$counter]['prevalue']   = $lead->column_fields['twitter']; 
 					$lead->column_fields['twitter'] 	= $personDetails['twitter'];
+					$trackerData [$counter]['postvalue']  = $lead->column_fields['twitter']; 
+					$counter++;
 
-				if (!empty($personDetails['facebook']))
+				}
+
+				if (!empty($personDetails['facebook'])) {
+
+					$trackerData [$counter]['fieldname']  = "facebook";
+					$trackerData [$counter]['prevalue']   = $lead->column_fields['facebook']; 
 					$lead->column_fields['facebook'] 	= $personDetails['facebook'];
+					$trackerData [$counter]['postvalue']  = $lead->column_fields['facebook']; 
+					$counter++;					
 
-				if (!empty($personDetails['linkedin']))
+				}
+
+				if (!empty($personDetails['linkedin'])) {
+
+					$trackerData [$counter]['fieldname']  = "linkedin";
+					$trackerData [$counter]['prevalue']   = $lead->column_fields['linkedin']; 
 					$lead->column_fields['linkedin'] 	= $personDetails['linkedin'];
+					$trackerData [$counter]['postvalue']  = $lead->column_fields['linkedin']; 
+					$counter++;					
 
-				if (!empty($personDetails['avatar']))
+				}
+
+				if (!empty($personDetails['avatar'])) {
+
+					$trackerData [$counter]['fieldname']  = "avatar";
+					$trackerData [$counter]['prevalue']   = $lead->column_fields['avatar']; 
 					$lead->column_fields['avatar'] 		= $personDetails['avatar'];
+					$trackerData [$counter]['postvalue']  = $lead->column_fields['avatar']; 
+					$counter++;					
 
-				if (!empty($personDetails['bio']))
+				}
+
+				if (!empty($personDetails['bio'])) {
+
+					$trackerData [$counter]['fieldname']  = "bio";
+					$trackerData [$counter]['prevalue']   = $lead->column_fields['bio']; 
 					$lead->column_fields['bio'] 		= $personDetails['bio'];
+					$trackerData [$counter]['postvalue']  = $lead->column_fields['bio']; 
+					$counter++;					
 
-				if (!empty($personDetails['website']))
+				}
+
+				if (!empty($personDetails['website'])) {
+
+					$trackerData [$counter]['fieldname']  = "website";
+					$trackerData [$counter]['prevalue']   = $lead->column_fields['website']; 
 					$lead->column_fields['website'] 	= $personDetails['website'];
+					$trackerData [$counter]['postvalue']  = $lead->column_fields['website']; 
+					$counter++;					
+
+				}
 
 				if ($companyWebsite != '' && $companyWebsite != null) {
 				
@@ -193,32 +296,95 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 					if (!isset($companyDetails['message'])) {
 
 						// Mapping Fields for Company/Organization Details in Lead Module
-						if (!empty($companyDetails['twitter']))
+						if (!empty($companyDetails['twitter'])) {
+
+							$trackerData [$counter]['fieldname']  = "company_twitter";
+							$trackerData [$counter]['prevalue']   = $lead->column_fields['company_twitter']; 
 							$lead->column_fields['company_twitter'] 	= $companyDetails['twitter'];
+							$trackerData [$counter]['postvalue']  = $lead->column_fields['company_twitter']; 
+							$counter++;					
 
-						if (!empty($companyDetails['linkedin']))
+						}
+
+						if (!empty($companyDetails['linkedin'])) {
+
+							$trackerData [$counter]['fieldname']  = "company_linkedin";
+							$trackerData [$counter]['prevalue']   = $lead->column_fields['company_linkedin']; 
 							$lead->column_fields['company_linkedin'] 	= $companyDetails['linkedin'];
+							$trackerData [$counter]['postvalue']  = $lead->column_fields['company_linkedin']; 
+							$counter++;					
 
-						if (!empty($companyDetails['bio']))
+						}
+
+						if (!empty($companyDetails['bio'])) {
+
+							$trackerData [$counter]['fieldname']  = "company_bio";
+							$trackerData [$counter]['prevalue']   = $lead->column_fields['company_bio'];
 							$lead->column_fields['company_bio'] 		= $companyDetails['bio'];
+							$trackerData [$counter]['postvalue']  = $lead->column_fields['company_bio']; 
+							$counter++;					
 
-						if (!empty($companyDetails['logo']))
+						}
+
+						if (!empty($companyDetails['logo'])) {
+
+							$trackerData [$counter]['fieldname']  = "company_logo";
+							$trackerData [$counter]['prevalue']   = $lead->column_fields['company_logo'];	
 							$lead->column_fields['company_logo'] 		= $companyDetails['logo'];
+							$trackerData [$counter]['postvalue']  = $lead->column_fields['company_logo']; 
+							$counter++;					
 
-						if (!empty($companyDetails['founded']))
+						}
+
+						if (!empty($companyDetails['founded'])) {
+
+							$trackerData [$counter]['fieldname']  = "company_founded";
+							$trackerData [$counter]['prevalue']   = $lead->column_fields['company_founded'];	
 							$lead->column_fields['company_founded'] 	= $companyDetails['founded'];
+							$trackerData [$counter]['postvalue']  = $lead->column_fields['company_founded']; 
+							$counter++;					
 
-						if (!empty($companyDetails['category']))
+						}
+
+						if (!empty($companyDetails['category'])) {
+
+							$trackerData [$counter]['fieldname']  = "company_category";
+							$trackerData [$counter]['prevalue']   = $lead->column_fields['company_category'];	
 							$lead->column_fields['company_category'] 	= $companyDetails['category'];
+							$trackerData [$counter]['postvalue']  = $lead->column_fields['company_category']; 
+							$counter++;					
 
-						if (!empty($companyDetails['facebook']))
+						}
+
+						if (!empty($companyDetails['facebook'])) {
+
+							$trackerData [$counter]['fieldname']  = "company_facebook";
+							$trackerData [$counter]['prevalue']   = $lead->column_fields['company_facebook'];	
 							$lead->column_fields['company_facebook'] 	= $companyDetails['facebook'];
+							$trackerData [$counter]['postvalue']  = $lead->column_fields['company_facebook']; 
+							$counter++;					
 
-						if (!empty($companyDetails['location']))
+						}
+
+						if (!empty($companyDetails['location'])) {
+
+							$trackerData [$counter]['fieldname']  = "company_location";
+							$trackerData [$counter]['prevalue']   = $lead->column_fields['company_location'];	
 							$lead->column_fields['company_location'] 	= $companyDetails['location'];
+							$trackerData [$counter]['postvalue']  = $lead->column_fields['company_location']; 
+							$counter++;					
 
-						if (!empty($companyDetails['locale']))
+						}
+
+						if (!empty($companyDetails['locale'])) {
+
+							$trackerData [$counter]['fieldname']  = "locale";
+							$trackerData [$counter]['prevalue']   = $lead->column_fields['locale'];	
 							$lead->column_fields['locale'] 				= $companyDetails['locale'];
+							$trackerData [$counter]['postvalue']  = $lead->column_fields['locale']; 
+							$counter++;					
+
+						}
 
 					}
 
@@ -240,9 +406,21 @@ class Leads_EnrichData_Action extends Vtiger_Action_Controller
 
 				$reload 	= "yes";
 
-				$entityData = VTEntityData::fromCRMEntity($lead);
-				$em->triggerEvent("vtiger.entity.aftersave", $entityData);
-				$em->triggerEvent("vtiger.entity.aftersave.final", $entityData);
+				//$entityData = VTEntityData::fromCRMEntity($lead);
+				//$em->triggerEvent("vtiger.entity.aftersave", $entityData);
+				//$em->triggerEvent("vtiger.entity.aftersave.final", $entityData);
+
+				$tableId   = $adb->getUniqueId("vtiger_modtracker_basic"); 
+				$date      = date("Y-m-d H:i:s");
+				$sessionId = $_SESSION['session_id'];				
+
+				$adb->pquery("INSERT INTO  vtiger_modtracker_basic VALUES (?,?,?,?,?,?,?,?)", array($tableId, $leadid, "Leads", 1, $date, 0, $sessionId, 'yes'));
+
+				foreach ($trackerData as $data) {
+
+					$adb->pquery("INSERT INTO vtiger_modtracker_detail VALUES (?,?,?,?)", array($tableId, $data['fieldname'], $data['prevalue'], $data['postvalue']));
+
+				}				
 
 				$adb->pquery("UPDATE vtiger_crmentity SET label = '$firstname $lastname' WHERE crmid = ?", array($leadid));
 
