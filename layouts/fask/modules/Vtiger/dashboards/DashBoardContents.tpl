@@ -68,7 +68,8 @@
                                              <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Employee </a>
                                              
                                             <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
-                                             {if count($EMPLOYEE_GROUP) gt 0}
+                                            {$EMPLOYEE_GROUP|print_r}
+                                                {if count($EMPLOYEE_GROUP) gt 0}
                                                 {foreach item="emp" from=$EMPLOYEE_GROUP }      
                                                        <li class="emp-widget">
                                                            <a style="padding-left: 10px;" data-group="employee" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$emp['URL']}')" href="javascript:void(0);"
