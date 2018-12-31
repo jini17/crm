@@ -153,6 +153,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
             if (self::$selectable_dashboards) {
                         
                         $widget_group   = $this->Widget_Group(self::$selectable_dashboards,$moduleName);
+                     
                         $viewer->assign('SELECTABLE_WIDGETS', self::$selectable_dashboards);
                         $viewer->assign("EMPLOYEE_GROUP", $widget_group['employee']);
                         $viewer->assign("CHART_GROUP", $widget_group['chart']);
@@ -172,32 +173,63 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
         public function Widget_Group($groups,$modulename){
             $groupData = array();
        
-  
-            foreach ($groups as $group){
-               
-            $list['URL'] =$group->getUrl();
-            $list['linkid'] = $group->get('linkid');
-            $list['name'] = $group->getName();
-            $list['width'] = $group->getWidth();        
-            $list['height'] = $group->getHeight();  
-            $list['title'] = vtranslate($group->getTitle(), $modulename);  
+  $widgets = $this->GetWidgetList();
+       
+            foreach ($widgets as $group){
+      
+               $data['URL'] = $group['URL'];
+                $data['linkid'] =$group['linkid'];
+                $data['name'] = $group['name']; 
+                $data['width'] = $group['width'] ;
+                $data['height'] = $group['height'];
+                $data['title'] = $group['title'];
+                $data['widgetgroup'] =$group['widgetgroup'];
 
-               if($group->get("widgetgroup") == "employee"){
-                   $groupData['employee'][]=$list;
+               if($group["widgetgroup"]  == "employee"){
+                   $groupData['employee'][]=$data;
                } 
-              elseif($group->get("widgetgroup") == "leave" || $group->get("widgetgroup") == "claim"){
-                   $groupData['leaveclaim'][]=$list;
+              elseif($group["widgetgroup"] == "leaveclaim" ){
+                   $groupData['leaveclaim'][]=$data;
                }
-              elseif($group->get("widgetgroup") == "chart"){
-                   $groupData['chart'][]=$list;
+              elseif($group["widgetgroup"]  == "chart"){
+                   $groupData['chart'][]=$data;
                }
-               elseif($group->get("widgetgroup") == "general"){
-                   $groupData['general'][]=$list;
+               elseif($group["widgetgroup"] == "general"){
+                   $groupData['general'][]=$data;
                }
             }
             
             return $groupData;
             
+        }
+        
+        public function GetWidgetList(){
+            $db = PearDatabase::getInstance();
+            //$db->setDebug(true);
+            $groups = array('employee',"chart","leaveclaim","general");
+            $query  = 'SELECT * from vtiger_links LEFT JOIN vtiger_role2widget on vtiger_role2widget.linkid = vtiger_role2widget.linkid WHERE vtiger_role2widget.roleid = "H2" AND linktype = "DASHBOARDWIDGET" AND widgetgroup != "" group by vtiger_role2widget.linkid';
+            $qry = $db->pquery($query,array());
+            $num_rows = $db->num_rows($qry);
+            $data = array();
+            if($num_rows > 0){
+                for($i=0; $i < $num_rows; $i++){
+                $parts = parse_url($url);
+                parse_str($parts['q'], $q);
+                
+                $name = $q['name'];
+                $data[$i]['URL'] = $db->query_result($qry,$i,'linkurl');
+                $data[$i]['linkid'] = $db->query_result($qry,$i,'linkid');
+                $data[$i]['name'] = $name; 
+                $data[$i]['width'] = 1;
+                $data[$i]['height'] = 1;
+                $data[$i]['title'] = $db->query_result($qry,$i,'linklabel');
+                $data[$i]['widgetgroup'] = $db->query_result($qry,$i,'widgetgroup');
+                }
+            }
+            else{
+                return $data;
+            }
+            return $data;
         }
 
         
