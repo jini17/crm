@@ -854,7 +854,7 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{
     },
 
     toggleLimit : function(e){
-        alert('ok');
+       
     },
 
     addMultipleClaimtype: function(){ 

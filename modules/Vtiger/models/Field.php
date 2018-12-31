@@ -165,7 +165,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 				$fieldDataType = 'picklist';
 			} else if($uiType == '55' && stripos($this->getName(), 'firstname') !== false) {
 				$fieldDataType = 'salutation';
-            } else if($uiType == '55' && stripos($this->getName(), 'roundrobin_userid') !== false) {
+            } else if($uiType == '55' && stripos($this->getName(), 'notifyto') !== false) {
                 $fieldDataType = 'multiowner';
             } else if($uiType == '3993' || $uiType == '3996') {		//Modified Line
 				 $fieldDataType = 'companyDetails';	//Modified Line
@@ -479,7 +479,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 	 */
 	public function isAjaxEditable() {
 
-		$ajaxRestrictedFields = array('4', '72', '61', '999','28','3995','3993','3994', '3996');
+		$ajaxRestrictedFields = array('4', '72', '61', '999','28','3995','3993','3994', '3996','55');
 		if(!$this->isEditable() || in_array($this->get('uitype'), $ajaxRestrictedFields) || $this->get('name')=='category' || $this->get('name')=='message') {
 			return false;
 		}

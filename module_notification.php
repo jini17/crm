@@ -79,7 +79,7 @@ $adb->setDebug(true);
 
 	
 
-	$field51 = new Vtiger_Field();
+	/*$field51 = new Vtiger_Field();
 	$field51->name = 'notifyby';
 	$field51->label = 'Notify By';
 	$field51->table = $module->basetable;
@@ -89,7 +89,7 @@ $adb->setDebug(true);
 	$field51->displaytype = 3;
 	$field51->typeofdata = 'NN~M'; // varchar~Mandatory
 	$blockNotification->addField($field51); /** table and column are automatically set */
-
+	
 	
 	/** Create required fields and add to the block */
 	$field7 = new Vtiger_Field();
@@ -146,6 +146,17 @@ $adb->setDebug(true);
 	$field3->typeofdata = 'T~O';
 	$field3->displaytype= 2;
 	$blockNotification->addField($field3);
+
+	$field4 = new Vtiger_Field();
+	$field4->name = 'modifiedtime';
+	$field4->label= 'Modified Time';
+	$field4->table = 'vtiger_crmentity';
+	$field4->column = 'modifiedtime';
+	$field4->uitype = 70;
+	$field4->typeofdata = 'T~O';
+	$field4->displaytype= 2;
+	$field4->iscustom	= 0;
+	$blockNotification->addField($field4);
 
 	// Create default custom filter (mandatory)
 	$filter1 = new Vtiger_Filter();
