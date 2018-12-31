@@ -1079,7 +1079,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 
 	        btn.click(function () {        	       
 	        	if (confirm("This will overwrite your existing data for the selected record. Are you sure you want to continue ?")) {
-
+	        		app.helper.showProgress();
 		            app.request.get(params).then(
 
 		                function (err, data) {
@@ -1095,15 +1095,33 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		                    	if (data.reload == "yes") {
 
 		                    		var detailHeader = jQuery('.detailview-header');
-		                    		detailHeader.find('.firstname').html(data.firstname.trim());
-		                    		detailHeader.find('.lastname').html(data.lastname.trim()); 
-		                    		jQuery('.tab-item.active').find('a')[0].click(); //To Reload the Detail View using Ajax                    		
+
+		                    		jQuery('.tab-item.active').find('a')[0].click(); //To Reload the Detail View using Ajax  
+
+		                    		if (moduleName == "Accounts") {                 		
+
+		                    			if (data.accountname)
+		                    				detailHeader.find('.accountname').html(data.accountname.trim());
+
+		                    		}	
+		                    		else {
+
+			                    		if (data.firstname)
+			                    			detailHeader.find('.firstname').html(data.firstname.trim());
+			                    		if (data.lastname)			                    			
+			                    			detailHeader.find('.lastname').html(data.lastname.trim());
+
+		                    		}
 
 		                    	}  
-			                    	
+			                  	app.helper.showProgress();	  	
 		                    }
-		                    else 
+		                    else {
+
 		                    	app.helper.showErrorNotification({message:err});
+		                    	app.helper.showProgress();
+		                    	
+		                    }
 
 		                }                                        
 		            );
