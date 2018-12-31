@@ -145,7 +145,7 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
                $data['labels'][]    = "&nbsp;";
                 $data['values'][]  = "";
                 $data['links'][]      = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["department","e","'.$dept.'"]]]';
-                $data['colors'][]   = "#fffff";
+                $data['colors'][]   = "#ffffff";
            }
       
            return $data;
