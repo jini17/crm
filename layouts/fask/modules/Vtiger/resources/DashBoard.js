@@ -271,7 +271,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         }
         return this.instancesCache[id];
     },
-
+/**
+ * Get Active Tab ID
+ * Commented By Khaled
+ * @returns {Object}
+ */
     getActiveTabId: function () {
         return jQuery(".tab-pane.active").data("tabid");
     },
@@ -298,6 +302,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         return gridWidth;
     },
 
+/**
+ * Initialize Gridster
+ * Commented By Khaled
+ * @returns {undefined}
+ */
     registerGridster: function () {
         var thisInstance = this;
         var widgetMargin = 5;
@@ -334,6 +343,10 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                     widget.trigger(Vtiger_Widget_Js.widgetPostResizeEvent);
                 }
             },
+            /**
+             * Drag Widget 
+             * Commented By Khaled
+             */
             draggable: {
                 'stop': function (event, ui) {
                     thisInstance.savePositions(activeGridster.find('.dashboardWidget'));
@@ -377,7 +390,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
 //used when after gridster is loaded
         thisInstance.savePositions(activeGridster.find('.dashboardWidget'));
     },
-
+/**
+ * Save Widget Position Commented by Khlaed
+ * @param {type} widgets
+ * @returns {undefined}
+ */
     savePositions: function (widgets) {
         var widgetRowColPositions = {}
         for (var index = 0, len = widgets.length; index < len; ++index) {
@@ -394,9 +411,17 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         app.request.post({"data": params}).then(function (err, data) {
         });
     },
+    /**
+     * Get Dashboard Widget Commented by Khaled
+     * @returns {jQuery}
+     */
     getDashboardWidgets: function () {
         return jQuery('.dashboardWidget', jQuery('.tab-pane.active'));
     },
+    /**
+     * Load Widget Commented by Khaled
+     * @returns {undefined}
+     */
     loadWidgets: function () {
         var thisInstance = this;
         var widgetList = thisInstance.getDashboardWidgets();
@@ -405,6 +430,12 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             jQuery(widgetContainerELement).addClass('loadcompleted');
         });
     },
+    /**
+     * Widget Scoll 
+     * Commented By Khaled
+     * @param {type} elem
+     * @returns {Boolean}
+     */
     isScrolledIntoView: function (elem) {
         var viewportWidth = jQuery(window).width(),
             viewportHeight = jQuery(window).height(),
@@ -429,6 +460,12 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             return false;
         }
     },
+    /**
+     * Load Widget 
+     * Commented by Khaled
+     * @param {type} widgetContainer
+     * @returns {undefined}
+     */
     loadWidget: function (widgetContainer) {
         var thisInstance = this;
         var urlParams = widgetContainer.data('url');
@@ -448,6 +485,10 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         } else {
         }
     },
+    /**
+     * Refresh Widget Commented by Khaled
+     * @returns {undefined}
+     */
     registerRefreshWidget: function () {
         var thisInstance = this;
         this.getContainer().on('click', 'a[name="drefresh"]', function (e) {
@@ -458,6 +499,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             return;
         });
     },
+    /**
+     * Remove Widget
+     * Commented by Khaled
+     * @returns {undefined}
+     */
     removeWidget: function () {
         this.getContainer().on('click', 'li a[name="dclose"]', function (e) {
             var container = this.closest("ul");
@@ -466,7 +512,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             var width = listItem.attr('data-sizex');
             var height = listItem.attr('data-sizey');
             var url = element.data('url');
-            var group = element.closest("li").data('group');
+//            var group = element.closest("li").data('group');
             var parent = element.closest('.dashBoardWidgetFooter').parent();
             var widgetName = parent.data('name');
             var widgetTitle = parent.find('.dashboardTitle').attr('title');
@@ -493,7 +539,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                                     jQuery(data).insertBefore(divider);
                                         app.helper.hideProgress();
                                 } else {
-                                  jQuery(".widgetsList ").find("."+group).find("ul").append(data)
+                               //   jQuery(".widgetsList ").find("."+group).find("ul").append(data)
                              app.helper.hideProgress();
                                   // jQuery(data).insertAfter(jQuery('.widgetsList li:last', '#tab_' + activeTabId));
                                 }
@@ -506,7 +552,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             });
         });
     },
-
+/**
+ * Widget Lazy Loading
+ * Commented by Khaled
+ * @returns {undefined}
+ */
     registerLazyLoadWidgets: function () {
         var thisInstance = this;
         jQuery(window).bind("scroll", function () {
@@ -523,7 +573,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             });
         });
     },
-
+/**
+ * Widget Full Screen View
+ * Commented by Khaled
+ * @returns {undefined}
+ */
     registerWidgetFullScreenView: function () {
         var thisInstance = this;
         this.getContainer().on('click', 'a[name="widgetFullScreen"]', function (e) {
@@ -589,7 +643,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             app.helper.showModal(fullscreenview, {"cb": callback});
         });
     },
-
+/**
+ * Widget Filter 
+ * Commented by Khaled
+ * @returns {undefined}
+ */
     registerFilterInitiater: function () {
         var container = this.getContainer();
         container.on('click', 'a[name="dfilter"]', function (e) {
@@ -609,7 +667,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             return false;
         })
     },
-
+/**
+ * Delete Dashboard Tab
+ * Commented by Khaled
+ * @returns {undefined}
+ */
     registerDeleteDashboardTab: function () {
         var self = this;
         var dashBoardContainer = this.getDashboardContainer();
@@ -645,8 +707,6 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                             var firstTab = jQuery('.dashboardTab').get(0);
                             jQuery(firstTab).find('a').click();
                         }
-
-
                         app.helper.showSuccessNotification({"message": ''});
                         if (jQuery('.dashboardTab').length < Vtiger_DashBoard_Js.dashboardTabsLimit) {
                             var element = dashBoardContainer.find('li.disabled');
@@ -691,6 +751,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
              
         });
     },
+    /**
+     * Add Dashboard Tab
+     * Commented by Khaled
+     * @returns {undefined}
+     */
     registerAddDashboardTab: function () {
         var self = this;
         var dashBoardContainer = this.getDashboardContainer();
@@ -781,7 +846,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         jQuery(element).qtip("destroy");
         element.removeClass('disabled');
     },
-
+/**
+ * Floating Message
+ * Commented by Khaled
+ * @returns {undefined}
+ */
     registerQtipMessage: function () {
         var dashBoardContainer = this.getDashboardContainer();
         var element = dashBoardContainer.find('li.disabled');
@@ -804,6 +873,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             }
         });
     },
+    /**
+     * Rename Dashboard Tab
+     * Commented by Khaled
+     * @returns {undefined}
+     */
     registerDashBoardTabRename: function () {
         var container = this.getContainer();
         var dashBoardContainer = jQuery(container).closest(".dashBoardContainer");
@@ -882,7 +956,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             })
         });
     },
-
+/**
+ * Dashboard Tab Click Event
+ * Registered by Khaled
+ * @returns {undefined}
+ */
     registerDashBoardTabClick: function () {
         var thisInstance = this;
         var container = this.getContainer();
@@ -967,7 +1045,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             }
         });
     },
-
+/**
+ * Rearrange Dashboard Tab
+ * Commented by Khaled
+ * @returns {undefined}
+ */
     registerRearrangeTabsEvent: function () {
         var dashBoardContainer = this.getDashboardContainer();
 
@@ -1029,6 +1111,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         });
 
     },
+    /**
+     * Email Button click Event
+     * Commented by Khaled
+     * @returns {undefined}
+     */
     buttonemail: function () {
         var thisInstance = this;
 
@@ -1038,7 +1125,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
 
         });
     },
-
+/**
+ * Birthday Email
+ * Commented by Khaled
+ * @returns {undefined}
+ */
     birthdayEmail: function () {
         var thisInstance = this;
         this.getContainer().on('click', 'div.birthdaywish', function (e) {
@@ -1050,6 +1141,12 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
 
         });
     },
+    /**
+     * Detail Tab View
+     * Commented by Khaled
+     * @param {type} form
+     * @returns {undefined}
+     */
     registerDisplayDetailTabClickEvent: function (form) {
         var userid = jQuery('#selectUserfilter').val();
         var module = app.getModuleName();
@@ -1093,6 +1190,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             }
         });
     },
+    /**
+     * Search Keyboard Button Press Filter
+     * Commented by Khaled
+     * @returns {undefined}
+     */
     searchWidgetPressEnter: function () {
         var thisInstance = this;
 
@@ -1115,6 +1217,10 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             }
         });
     },
+    /**
+     * Widget Search 
+     * @returns {undefined}
+     */
     searchWidgets: function () {
         var thisInstance = this;
 
@@ -1131,6 +1237,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                 });
         });
     },
+    /**
+     * Widget Search button Event
+     * Commented by Khaled
+     * @returns {undefined}
+     */
     searchWidgetButton: function () {
         var thisInstance = this;
 
@@ -1149,6 +1260,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         });
     },
 
+/**
+ * register all methods
+ * Commented by Khaled
+ * @returns {undefined}
+ */
     registerEvents: function () {
         var thisInstance = this;
         this.registerLazyLoadWidgets();

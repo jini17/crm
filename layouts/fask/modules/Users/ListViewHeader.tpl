@@ -36,7 +36,7 @@
 <input type="hidden" value="{$DEPT}" id="curdepartment" />
     <div class="listViewPageDiv" id="listViewContent" style="padding-left: 0px; width: 100%">
         <!--id="listViewContent"-->
-        <div class="col-sm-12 col-xs-12 full-height">
+        <div class="col-sm-12 col-xs-12 col-md-10 full-height">
 
                <div class="" id="tablist">
                     <ul class="nav nav-tabs tabs sortable container-fluid visible-lg">

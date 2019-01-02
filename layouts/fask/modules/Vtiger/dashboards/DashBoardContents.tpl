@@ -65,7 +65,7 @@
                                         {/foreach}
                                          
                                         <li class="group-heading employee" style="position:relative;">
-                                             <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Employee </a>
+                                             <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Employee <i class="fa fa-users pull-right"></i></a>
                                              
                                             <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
                                              {if count($EMPLOYEE_GROUP) gt 0}
@@ -88,7 +88,7 @@
                                         </li>
                                                                   
                                         <li  class="group-heading charts" style="">
-                                             <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Charts </a> 
+                                            <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Charts <i class="fa fa-pie-chart pull-right"></i></a> 
                                              
                                             <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
                                                  {if count($CHART_GROUP) gt 0}
@@ -108,7 +108,7 @@
                                         </li>                                      
                                          <li  class="group-heading leaveclaim" >
                                        
-                                                 <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Leaves & Claims </a>
+                                             <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Leaves & Claims <i class="fa fa-clipboard pull-right"></i></a>
                                             
                                             <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
                                                   {if count($LEAVECLAIM_GROUP) gt 0}
@@ -128,7 +128,7 @@
                                         </li>                                     
                                         
                                         <li class='general'>
-                                            <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp;  General </a>
+                                            <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp;  General <i class="fa fa-windows pull-right"></i></a>
                                             <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
                                                  {if count($GENERAL_GROUP) gt 0}
                                                     {foreach item="general" from=$GENERAL_GROUP}
@@ -154,12 +154,14 @@
                                                     <a onclick="Vtiger_DashBoard_Js.addMiniListWidget(this, '{$MINILISTWIDGET->getUrl()}')" href="javascript:void(0);"
                                                             data-linkid="{$MINILISTWIDGET->get('linkid')}" data-name="{$MINILISTWIDGET->getName()}" data-width="{$MINILISTWIDGET->getWidth()}" data-height="{$MINILISTWIDGET->getHeight()}">
                                                             {vtranslate($MINILISTWIDGET->getTitle(), $MODULE_NAME)}
+                                                            <i class="fa fa-list pull-right"></i>
                                                     </a>
                                                 </li>
-                                                <li>
+                                                <li data-group='chart'>
                                                     <a onclick="Vtiger_DashBoard_Js.addNoteBookWidget(this, '{$NOTEBOOKWIDGET->getUrl()}')" href="javascript:void(0);"
                                                             data-linkid="{$NOTEBOOKWIDGET->get('linkid')}" data-name="{$NOTEBOOKWIDGET->getName()}" data-width="{$NOTEBOOKWIDGET->getWidth()}" data-height="{$NOTEBOOKWIDGET->getHeight()}">
                                                             {vtranslate($NOTEBOOKWIDGET->getTitle(), $MODULE_NAME)}
+                                                            <i class="fa fa fa-sticky-note pull-right"></i>
                                                     </a>
                                                 </li>
                                         {/if}
