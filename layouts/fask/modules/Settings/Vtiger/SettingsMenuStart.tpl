@@ -60,8 +60,8 @@
                 {assign var=LEFTPANELHIDE value=$USER_MODEL->get('leftpanelhide')}
 
         <div class="module-nav clearfix settingsNav hidden-sm hidden-xs" id="modnavigator">
-    <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 15px;left:0; z-index: 999" title="Left Panel Show/Hide"><span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>
-
+{*    <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 15px;left:0; z-index: 999" title="Left Panel Show/Hide"><span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span></button>
+*}
             <div class=" height100Per sidebar-essentials {if ($smarty.get.view eq 'PreferenceDetail' OR  $smarty.get.view eq 'Detail') AND $USER_MODEL->get('roleid') eq 'H15'} hide {/if}">
                 {include file="modules/Settings/Vtiger/Sidebar.tpl"}
             </div>

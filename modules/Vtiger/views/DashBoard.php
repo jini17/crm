@@ -46,8 +46,10 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer->assign("LAST_LOGIN_TIME", $sLastLoginTime);
                 $viewer->assign("LAST_USER_IP", $sLastUserIP);
                 //End here
-
-
+                 
+                $Trial_expire = Users_Record_Model::trial_expire();
+                
+                $viewer->assign("TRIAL_INFO",$Trial_expire);
                  if($_SESSION['loggedin_now'] === false){
                
                             $viewer->assign("LOGGED_NOW",'in');
@@ -72,6 +74,17 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                  else{
                      $viewer->assign("LOGGED_FIRST_TIME",'no');
                  }
+                 
+                $crm_record_no = $this->CRM_ENTITY_CHECKER();
+               if($crm_record_no){
+                   $viewer->assign("DATA_RESET","Yes");
+               }
+               else{
+                    $viewer->assign("DATA_RESET","No");
+               }
+                        
+                        
+                
 
                 $dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
                 //check profile permissions for Dashboards
@@ -136,9 +149,18 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer->assign('DASHBOARD_TABS', $dashboardTabs);
                 $viewer->assign('DASHBOARD_TABS_LIMIT', $dashBoardModel->dashboardTabLimit);
                 $viewer->assign('SELECTED_TAB',$tabid);
-        if (self::$selectable_dashboards) {
+                
+            if (self::$selectable_dashboards) {
+                        
+                        $widget_group   = $this->Widget_Group(self::$selectable_dashboards,$moduleName);
+                     
                         $viewer->assign('SELECTABLE_WIDGETS', self::$selectable_dashboards);
-                }
+                        $viewer->assign("EMPLOYEE_GROUP", $widget_group['employee']);
+                        $viewer->assign("CHART_GROUP", $widget_group['chart']);
+                        $viewer->assign("LEAVECLAIM_GROUP", $widget_group['leaveclaim']);
+                        $viewer->assign("GENERAL_GROUP", $widget_group['general']);
+            }
+            
                 $viewer->assign('CURRENT_USER', Users_Record_Model::getCurrentUserModel());
                 $viewer->assign('TABID',$tabid);
                 $viewer->view('dashboards/DashBoardContents.tpl', $moduleName);
@@ -147,7 +169,87 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
         public function postProcess(Vtiger_Request $request) {
                 parent::postProcess($request);
         }
+        
+        public function Widget_Group($groups,$modulename){
+            $groupData = array();
+       
+  $widgets = $this->GetWidgetList();
+       
+            foreach ($widgets as $group){
+      
+               $data['URL'] = $group['URL'];
+                $data['linkid'] =$group['linkid'];
+                $data['name'] = $group['name']; 
+                $data['width'] = $group['width'] ;
+                $data['height'] = $group['height'];
+                $data['title'] = $group['title'];
+                $data['widgetgroup'] =$group['widgetgroup'];
 
+               if($group["widgetgroup"]  == "employee"){
+                   $groupData['employee'][]=$data;
+               } 
+              elseif($group["widgetgroup"] == "leaveclaim" ){
+                   $groupData['leaveclaim'][]=$data;
+               }
+              elseif($group["widgetgroup"]  == "chart"){
+                   $groupData['chart'][]=$data;
+               }
+               elseif($group["widgetgroup"] == "general"){
+                   $groupData['general'][]=$data;
+               }
+            }
+            
+            return $groupData;
+            
+        }
+        
+        public function GetWidgetList(){
+            $db = PearDatabase::getInstance();
+            //$db->setDebug(true);
+            $groups = array('employee',"chart","leaveclaim","general");
+            $query  = 'SELECT * from vtiger_links LEFT JOIN vtiger_role2widget on vtiger_role2widget.linkid = vtiger_role2widget.linkid WHERE vtiger_role2widget.roleid = "H2" AND linktype = "DASHBOARDWIDGET" AND widgetgroup != "" group by vtiger_role2widget.linkid';
+            $qry = $db->pquery($query,array());
+            $num_rows = $db->num_rows($qry);
+            $data = array();
+            if($num_rows > 0){
+                for($i=0; $i < $num_rows; $i++){
+                $parts = parse_url($url);
+                parse_str($parts['q'], $q);
+                
+                $name = $q['name'];
+                $data[$i]['URL'] = $db->query_result($qry,$i,'linkurl');
+                $data[$i]['linkid'] = $db->query_result($qry,$i,'linkid');
+                $data[$i]['name'] = $name; 
+                $data[$i]['width'] = 1;
+                $data[$i]['height'] = 1;
+                $data[$i]['title'] = $db->query_result($qry,$i,'linklabel');
+                $data[$i]['widgetgroup'] = $db->query_result($qry,$i,'widgetgroup');
+                }
+            }
+            else{
+                return $data;
+            }
+            return $data;
+        }
+
+        
+
+
+        /**
+         * Added By Khaled
+         * @return boolean
+         */
+        public function CRM_ENTITY_CHECKER(){
+            $db = PearDatabase::getInstance();
+            $query = $db->pquery("SELECT count(*) as total_rows FROM   vtiger_crmentity ");
+            if($db->query_result($query,0,'total_rows') > 0){
+                return true;
+            }
+            else{
+                 return false;
+            }
+            
+        }
         /**
          * Function to get the list of Script models to be included
          * @param Vtiger_Request $request

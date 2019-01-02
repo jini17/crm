@@ -13,6 +13,7 @@ $languageStrings = array(
 	'LBL_ADD_RECORD' => 'Add Working Hours',
 	'SINGLE_WorkingHours' => 'Working Hours',
 	'WorkingHours'=>'Working Hours',
+	'Status' =>'Is Active',
 );
 
 $jsLanguageStrings = array(

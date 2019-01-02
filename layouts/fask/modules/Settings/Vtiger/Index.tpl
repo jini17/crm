@@ -15,18 +15,21 @@
 		<div class="row">
 			<span class="col-lg-4 col-md-4 col-sm-4 col-xs-12 settingsSummary">
 				<a href="index.php?module=Users&parent=Settings&view=List">
+                                    <span class="summaryCount"><i class="fa fa-users"></i></span> 
 					<span class="summaryCount">{$USERS_COUNT}</span> 
 					<p class="summaryText" style="margin-top:20px;">{vtranslate('LBL_ACTIVE_USERS',$MODULE)}</p> 
 				</a>
 			</span>
 			<span class="col-lg-4 col-md-4 col-sm-4 col-xs-12 settingsSummary">
 				<a href="index.php?module=Workflows&parent=Settings&view=List&parentblock=LBL_AUTOMATION">
+                                                                                                        <span class="summaryCount"><i class="fa fa-balance-scale"></i></span> 
 					<span class="summaryCount">{$ACTIVE_WORKFLOWS}</span> 
 					<p class="summaryText" style="margin-top:20px;">{vtranslate('LBL_WORKFLOWS_ACTIVE',$MODULE)}</p> 
 				</a>
 			</span>
 			<span class="col-lg-4 col-md-4 col-sm-4 col-xs-12 settingsSummary">
 				<a href="index.php?module=ModuleManager&parent=Settings&view=List">
+                                                                                                        <span class="summaryCount"><i class="fa fa-gears"></i></span> 
 					<span class="summaryCount">{$ACTIVE_MODULES}</span> 
 					<p class="summaryText" style="margin-top:20px;">{vtranslate('LBL_MODULES',$MODULE)}</p>
 				</a>
@@ -39,12 +42,13 @@
 			<div class="col-lg-12">
 				{assign var=COUNTER value=0}
 				{foreach item=SETTINGS_SHORTCUT from=$SETTINGS_SHORTCUTS name=shortcuts}
-					{if $COUNTER eq 3}
+					{if $COUNTER eq 4}
 						</div><div class="col-lg-12">
 						{assign var=COUNTER value=1}
 					{else}
 						{assign var=COUNTER value=$COUNTER+1}
 					{/if}
+                                        
 					{include file='SettingsShortCut.tpl'|@vtemplate_path:$MODULE}
 				{/foreach}
 			</div>

@@ -11,6 +11,18 @@ Vtiger.Class("Users_Education_Js", {
 
         //register click event for Add New Education button
         addEducation : function(url) { 
+             jQuery('#end_date').on('change',function(){                      
+                        var startDate = jQuery('#start_date').val().replace(/-/g,'/');
+                        var endDate = jQuery('#end_date').val().replace(/-/g,'/');
+                   
+                        if(endDate.length > 0 && startDate > endDate){
+                                  app.helper.showSuccessNotification({'error': 'End Date must be greater than start date'});
+                                  jQuery('#end_date').val('');
+                            //return false;
+                           // do your stuff here...
+                        }
+                        return false;
+                });
              this.editEducation(url);
 
         },
@@ -34,11 +46,11 @@ Vtiger.Class("Users_Education_Js", {
              * @type type
         */
         dateVidation:function(){
-        
+
             jQuery('#end_date').on('change',function(){                      
                         var startDate = jQuery('#start_date').val().replace(/-/g,'/');
                         var endDate = jQuery('#end_date').val().replace(/-/g,'/');
-                   
+
                         if(endDate.length > 0 && startDate > endDate){
                                   app.helper.showSuccessNotification({'message': 'End Date must be greater than start date'});
                                   jQuery('#end_date').val('');

@@ -410,7 +410,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 			$pagingModel->set('limit', $limit);
 		}
 
-		$recentActivities = ModTracker_Record_Model::getUpdates($parentRecordId, $pagingModel,$moduleName);
+		$recentActivities = ModTracker_Record_Model::getUpdates($parentRecordId, $pagingModel,$moduleName); 
 		$pagingModel->calculatePageRange($recentActivities);
 
 		if($pagingModel->getCurrentPage() == ModTracker_Record_Model::getTotalRecordCount($parentRecordId)/$pagingModel->getPageLimit()) {

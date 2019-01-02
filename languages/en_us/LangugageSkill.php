@@ -9,7 +9,7 @@
  *************************************************************************************/
 $languageStrings = array(
 	// Basic Strings
-	'LangugageSkill'=>'Langugage Skill',
+	'LangugageSkill'=>'Language Skill',
 	'SINGLE_LangugageSkill' => 'Language Skill',
 	'LBL_ADD_RECORD' => 'Add Language Skill',
 	'LBL_RECORDS_LIST' => 'Educations List',

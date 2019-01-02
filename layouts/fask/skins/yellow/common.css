@@ -3209,7 +3209,7 @@ position: relative;
 }
 .settingsgroup {
   background: rgba(0, 0, 0, 0.02);border-right: 1px solid rgba(120, 130, 140, 0.13);
-  height: 100%;
+    height: 82%;
 }
 .settingsgroup .panel-group .panel {
       background-color: #fff;
@@ -9235,9 +9235,7 @@ float: right;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-l
 background-color: #fff;
 
 }
-.alphabetSorting table .alphabetSearch a{
-color: #2f5597 !important;
-}
+
 
 .alphabetSearch a:active , .alphabetSearch a:focus{
   background-color: #b2b7c0;
@@ -9530,6 +9528,106 @@ right connector from last child*/
 }
 
 
-/*Thats all. I hope you enjoyed it.
-Thanks :)*/
+.color-box{
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 5px !important;
+    border: 1px solid #ccc;
+    border-radius: 50% !important;
+    position: relative;
+}
+.color-box i{
+    position: absolute;
+    left: 2%;
+    top: 5%;
+    font-size: 10px;
+}
+.text-bold{
+    margin: 0 !important;
+}
+.color-blue,
+.color-blue:hover{
+    background: #6783B3;    
+    color: #fff;
+}
+.color-purple,
+.color-purple:hover{
+    background: #d971ae;    
+     color: #fff;
+}
+.color-yellow,
+.color-yellow:hover{
+    background: #f6bb43;
+     color: #fff;
+}
+.color-green,
+.color-green:hover{
+    background: #3bbd9b;
+     color: #fff;
+}
+.color-list li i{
+    color: #fff !important;
+}
 
+.color-shipcove,
+.color-shipcove:hover{
+    background: #6783B3;
+     color: #fff;
+}
+
+.color-lilacbush,
+.color-lilacbush:hover{
+    background: #997CCD;
+     color: #fff;
+}
+
+.color-energyyellow,
+.color-lilacbush:hover{
+    background: #FAD852;
+     color: #fff;
+}
+
+.color-downy,
+.color-downy:hover{
+    background: #67D0AF;
+     color: #fff;
+}
+
+.color-lily,
+.color-lily:hover{
+    background: #CBA7C1;
+     color: #fff;
+}
+
+
+.color-danube,
+.color-danube:hover{
+    background: #77A1D3;
+     color: #fff;
+}
+
+.color-selectiveyellow,
+.color-selectiveyellow:hover{
+    background: #F7B301;
+     color: #fff;
+}
+
+.color-sandybrown,
+.color-sandybrown:hover{
+    background: #F4967A;
+     color: #fff;
+}
+
+.color-mandy,
+.color-mandy:hover{
+    background: #EC5C64;
+     color: #fff;
+}
+
+.color-aquaisland,
+.color-aquaisland:hover{
+    background: #AFDFDF;
+     color: #fff;
+     padding: 5px;
+}

@@ -446,3 +446,41 @@ a.btn.btn-gettingStarted i{
     float: left;
 
 }
+/**=================
+    Employee Directory
+=====================*/
+#tablist li.active,
+        
+        .fa-facebook {
+            background: #3B5998;
+            color: #fff;
+            padding: 8px;
+        }
+        .fa-twitter {
+            background: #55ACEE;
+            color: #fff;
+            padding:8px;
+        }
+        .fa-envelope {
+            background: #ff6600;
+            color: #fff;
+            padding: 8px;
+        }
+        .fa-linkedin {
+          background: #007bb5;
+          color: #fff;
+          padding: 8px;
+        }
+  
+        .pagination li.active{
+          border-bottom: 2px solid #2f5597 ;
+          color: #2f5597 ;
+        }
+          .pagination li.active{
+              background:  #2f5597 ;
+              color: #fff;
+          }
+        .pagination li.active a{
+            color: #fff;
+            background:  #2f5597 ;
+        }

@@ -12,6 +12,7 @@
 <div class="editViewPageDiv viewContent">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="editViewHeader">
+            
                 {if $RECORD_MODEL->getId()}
                     <h4>
                         {vtranslate('LBL_EDIT_ROLE', $QUALIFIED_MODULE)}
@@ -24,6 +25,7 @@
             </div>
             <hr>
         <form class="form-horizontal" id="EditView" name="EditRole" method="post" action="index.php" enctype="multipart/form-data">
+            
             <div class="editViewBody">
                 <div class="editViewContents">
                     <input type="hidden" name="module" value="Roles">

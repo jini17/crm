@@ -73,10 +73,10 @@
 {/if}
 <div class="main-container clearfix" style="margin-top:10px">
                 {assign var=LEFTPANELHIDE value=$USER_MODEL->get('leftpanelhide')}
-        <div class="module-nav clearfix settingsNav hidden-sm hidden-xs settingssidebar {$LEFTPANELHIDE}" id="modnavigator">
+        <{*div class="module-nav clearfix settingsNav hidden-sm hidden-xs settingssidebar {$LEFTPANELHIDE}" id="modnavigator">
             <div class="essentials-toggle" style=" top:10px;; left: -15px;" title="Left Panel Show/Hide">
             <span class="essentials-toggle-marker fa cursorPointer fa-chevron-right"></span>
-        </div>
+        </div>*}
        <div class=" height100Per"> 
                     {include file="modules/Settings/Vtiger/Sidebar.tpl"}
             </div>
@@ -97,7 +97,8 @@
             <div class="settingsgroup" style="overflow: scroll; padding-top: 0; margin-top: 0;">
                     <div class="col-xs-12 text-center visible-xs visible-sm" style="margin-top: 40px;margin-bottom:20px; width: 100%">
         <a class="btn btn-info" onclick="$('.sidebar-menu-u, .settingsNav').toggleClass('hidden-xs hidden-sm');  $('.settingsNav').find('.settingsgroup').toggleClass('hidden-xs hidden-sm');">Sidebar 
-        &nbsp;<span class="toggleButton"><i class="ti-angle-down"></i></span></a>
+        &nbsp;<span class="toggleButton"><i class="ti-angle-down"></i></span>
+        </a>
         </div>
             <div>
                 <input type="text" placeholder="{vtranslate('LBL_SEARCH_FOR_SETTINGS', $QUALIFIED_MODULE)}" class="search-list col-lg-8" id='settingsMenuSearch'>

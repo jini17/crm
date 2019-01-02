@@ -298,6 +298,17 @@ Vtiger_Index_Js("Vtiger_Edit_Js",{
                 var uploadFileSizeHolder = element.closest('.fileUploadContainer').find('.uploadedFileSize');
                 var fileSize = e.target.files[0].size;
                 var fileName = e.target.files[0].name;
+                //added by jitu@ image upload in Users / Contacts
+                if(moduleName=='Contacts' || moduleName =='Users'){
+                     var fileExtension = ['jpeg', 'jpg', 'png'];
+                       if (jQuery.inArray(fileName.split('.').pop().toLowerCase(), fileExtension) == -1) {
+                           uploadFileSizeHolder.text('');
+                           element.val('');
+                           alert(app.vtranslate("Only formats are allowed : "+fileExtension.join(', ')));
+                           return false;
+                       }
+                } //end here
+                
                 var maxFileSize = thisInstance.getMaxiumFileUploadingSize(container);
                 if(fileSize > maxFileSize) {
                     alert(app.vtranslate('JS_EXCEEDS_MAX_UPLOAD_SIZE'));

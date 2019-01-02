@@ -25,7 +25,8 @@
 
 
     <div class='col-lg-12 col-xs-12 padding0px'>
-        <span class="col-lg-1 paddingLeft5px">
+        <span class="col-lg-1 paddingLeft5px mail-all-checked">
+            <span class="miniux-icon"><i class="fa fa-minus"></i></span>
             <input type='checkbox' id='mainCheckBox' class="pull-left">
         </span>
         <span class="col-lg-5 padding0px">
@@ -33,8 +34,10 @@
                 <!--<img src="layouts/v7/skins/images/envelope-open.png" id="mmEnvelopeOpenIcon">-->
                 <i class="material-icons">email</i>
             </span>
-            <span class="btn btn-secondary cursorPointer mmActionIcon btn-sm" id="mmMarkAsUnread" data-folder="{$FOLDER->name()}" title="{vtranslate('LBL_Mark_As_Unread', $MODULE)}">
-                <i class="materal-icons text-danger">email</i>
+            <span class="btn btn-secondary cursorPointer mmActionIcon btn-sm"
+                  id="mmMarkAsUnread" data-folder="{$FOLDER->name()}" 
+                  title="{vtranslate('LBL_Mark_As_Unread', $MODULE)}">       
+                  <i class="fa fa-book"></i>
             </span>
             <span class="btn btn-secondary cursorPointer mmActionIcon btn-sm" id="mmDeleteMail" data-folder="{$FOLDER->name()}" title="{vtranslate('LBL_Delete', $MODULE)}">
                 <i class="material-icons">delete</i>
@@ -73,24 +76,27 @@
         </span>
     </div>
 
-    <div class='col-lg-12  col-xs-12 padding0px'>
-        <div class="col-lg-10 col-md-6 col-sm-6 col-xs-12 mmSearchContainerOther">
-            <div>
-                <div class="input-group col-lg-8  col-xs-8 padding0px">
+    <div class='col-lg-12  col-xs-12 padding0px mail-filter-container'>
+        
+        <div class=" mmSearchContainerOther"  style="position:relative">
+            <div class=" mmSearchDropDown" style="position:relative">
+                     <span class="caret"></span>
+                     <select id="searchType">
+                         {foreach item=arr key=option from=$SEARCHOPTIONS}
+                             <option value="{$arr}" {if $arr eq $TYPE}selected{/if}>{vtranslate($option, $MODULE)}</option>
+                         {/foreach}
+                     </select>
+                 </div>
+                 <div class="padding0px mmsearchbox">
                     <input type="text" class="form-control" id="mailManagerSearchbox" aria-describedby="basic-addon2" value="{$QUERY}" data-foldername='{$FOLDER->name()}' placeholder="{vtranslate('LBL_TYPE_TO_SEARCH', $MODULE)}">
                 </div>
-                <div class="col-lg-4  col-xs-4 padding0px mmSearchDropDown">
-                    <select id="searchType" style="background: #DDDDDD url('layouts/v7/skins/images/arrowdown.png') no-repeat 95% 40%; padding-left: 9px;">
-                        {foreach item=arr key=option from=$SEARCHOPTIONS}
-                            <option value="{$arr}" {if $arr eq $TYPE}selected{/if}>{vtranslate($option, $MODULE)}</option>
-                        {/foreach}
-                    </select>
+                <div class='' id="mmSearchButtonContainer">
+                    <button id='mm_searchButton' class="pull-right">{vtranslate('LBL_Search', $MODULE)}</button>
                 </div>
+            
             </div>
-        </div>
-        <div class='col-lg-2 col-md-6 col-sm-6 col-xs-12' id="mmSearchButtonContainer">
-            <button id='mm_searchButton' class="pull-right">{vtranslate('LBL_Search', $MODULE)}</button>
-        </div>
+
+      
     </div>
    {if $FOLDER->mails()}
         <div class="col-lg-12  col-xs-12 mmEmailContainerDiv padding0px" id='emailListDiv' style="margin-top:10px">

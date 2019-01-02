@@ -54,34 +54,120 @@
                                                 {elseif $WIDGET->getName() eq 'Notebook'}
                                                         {assign var="NOTEBOOKWIDGET" value=$WIDGET} {* Defer to display as a separate group *}
                                                 {else}
-                                                        <li>
+                                                      {* <li>
                                                                 <a onclick="Vtiger_DashBoard_Js.addWidget(this, '{$WIDGET->getUrl()}')" href="javascript:void(0);"
                                                                         data-linkid="{$WIDGET->get('linkid')}" data-name="{$WIDGET->getName()}" data-width="{$WIDGET->getWidth()}" 
                                                                         data-height="{$WIDGET->getHeight()}">
                                                                         {vtranslate($WIDGET->getTitle(), $MODULE_NAME)}
                                                                 </a>
-                                                        </li>
+                                                        </li>*}
                                                 {/if}
                                         {/foreach}
-
+                                         
+                                        <li class="group-heading employee" style="position:relative;">
+                                             <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Employee </a>
+                                             
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
+                                            {$EMPLOYEE_GROUP|print_r}
+                                                {if count($EMPLOYEE_GROUP) gt 0}
+                                                {foreach item="emp" from=$EMPLOYEE_GROUP }      
+                                                       <li class="emp-widget">
+                                                           <a style="padding-left: 10px;" data-group="employee" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$emp['URL']}')" href="javascript:void(0);"
+                                                                   data-linkid="{$emp['linkid']}" 
+                                                                   data-name="{$emp['name']}" 
+                                                                   data-width="{$emp['width']}" 
+                                                                   data-height="{$emp['height']}">
+                                                                  {$emp['title']}
+                                                           </a>
+                                                       </li>
+                                               {/foreach}
+                                               {else}
+                                                   <li> All widgets are in use</li>
+                                               {/if}
+                                            </ul>
+                                            
+                                        </li>
+                                                                  
+                                        <li  class="group-heading charts" style="">
+                                             <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Charts </a> 
+                                             
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
+                                                 {if count($CHART_GROUP) gt 0}
+                                                {foreach item="chart" from=$CHART_GROUP}
+                                                    <li class="chart-widget">
+                                                       <a  style="padding-left: 10px;"  data-group="charts" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$chart['URL']}')" href="javascript:void(0);"
+                                                               data-linkid="{$chart['linkid']}" data-name="{$chart['name']}" data-width="{$chart['width']}" 
+                                                               data-height="{$chart['height']}">
+                                                              {$chart['title']}
+                                                       </a>
+                                                   </li>
+                                               {/foreach}
+                                                  {else}
+                                                   <li> All widgets are in use</li>
+                                               {/if}
+                                            </ul>
+                                        </li>                                      
+                                         <li  class="group-heading leaveclaim" >
+                                       
+                                                 <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Leaves & Claims </a>
+                                            
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
+                                                  {if count($LEAVECLAIM_GROUP) gt 0}
+                                                {foreach item="leaveclaim" from=$LEAVECLAIM_GROUP }
+                                                   <li class="leaveclaim-widget">
+                                                       <a  style="padding-left: 5px;" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$leaveclaim['URL']}')" href="javascript:void(0);"
+                                                               data-linkid="{$leaveclaim['linkid']}"  data-group="leaveclaim" data-name="{$leaveclaim['name']}" data-width="{$leaveclaim['width']}" 
+                                                               data-height="{$leaveclaim['height']}">
+                                                              {$leaveclaim['title']}
+                                                       </a>
+                                                   </li>
+                                                {/foreach}
+                                                {else}
+                                                   <li> All widgets are in use</li>
+                                               {/if}
+                                            </ul>
+                                        </li>                                     
+                                        
+                                        <li class='general'>
+                                            <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp;  General </a>
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -200px; background:#fff;  z-index: -1;  min-height: 300px; padding: 15px;">
+                                                 {if count($GENERAL_GROUP) gt 0}
+                                                    {foreach item="general" from=$GENERAL_GROUP}
+                                                        <li  class="general-widget">
+                                                            <a style="padding-left: 10px;" data-group="general" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$general['URL']}')" href="javascript:void(0);"
+                                                                    data-linkid="{$general['linkid']}" data-name="{$general['name']}" data-width="{$general['width']}" 
+                                                                    data-height="{$general['height']}">
+                                                                   {$general['title']}
+                                                            </a>
+                                                       </li>
+                                                    {/foreach}
+                                                 {else}
+                                                   <li> All widgets are in use</li>
+                                               {/if}
+                                            </ul>
+                                        </li>
+                                        
+                                        
+                                        
                                         {if $MINILISTWIDGET && $MODULE_NAME == 'Home'}
                                                 <li class="divider"></li>
                                                 <li>
-                                                        <a onclick="Vtiger_DashBoard_Js.addMiniListWidget(this, '{$MINILISTWIDGET->getUrl()}')" href="javascript:void(0);"
-                                                                data-linkid="{$MINILISTWIDGET->get('linkid')}" data-name="{$MINILISTWIDGET->getName()}" data-width="{$MINILISTWIDGET->getWidth()}" data-height="{$MINILISTWIDGET->getHeight()}">
-                                                                {vtranslate($MINILISTWIDGET->getTitle(), $MODULE_NAME)}</a>
+                                                    <a onclick="Vtiger_DashBoard_Js.addMiniListWidget(this, '{$MINILISTWIDGET->getUrl()}')" href="javascript:void(0);"
+                                                            data-linkid="{$MINILISTWIDGET->get('linkid')}" data-name="{$MINILISTWIDGET->getName()}" data-width="{$MINILISTWIDGET->getWidth()}" data-height="{$MINILISTWIDGET->getHeight()}">
+                                                            {vtranslate($MINILISTWIDGET->getTitle(), $MODULE_NAME)}
+                                                    </a>
                                                 </li>
                                                 <li>
-                                                        <a onclick="Vtiger_DashBoard_Js.addNoteBookWidget(this, '{$NOTEBOOKWIDGET->getUrl()}')" href="javascript:void(0);"
-                                                                data-linkid="{$NOTEBOOKWIDGET->get('linkid')}" data-name="{$NOTEBOOKWIDGET->getName()}" data-width="{$NOTEBOOKWIDGET->getWidth()}" data-height="{$NOTEBOOKWIDGET->getHeight()}">
-                                                                {vtranslate($NOTEBOOKWIDGET->getTitle(), $MODULE_NAME)}</a>
+                                                    <a onclick="Vtiger_DashBoard_Js.addNoteBookWidget(this, '{$NOTEBOOKWIDGET->getUrl()}')" href="javascript:void(0);"
+                                                            data-linkid="{$NOTEBOOKWIDGET->get('linkid')}" data-name="{$NOTEBOOKWIDGET->getName()}" data-width="{$NOTEBOOKWIDGET->getWidth()}" data-height="{$NOTEBOOKWIDGET->getHeight()}">
+                                                            {vtranslate($NOTEBOOKWIDGET->getTitle(), $MODULE_NAME)}
+                                                    </a>
                                                 </li>
                                         {/if}
 
 
                                 </ul>
-                        {else if $MODULE_PERMISSION}
-                            
+                        {else if $MODULE_PERMISSION}                            
                                 <button class='btn addButton dropdown-toggle' disabled="disabled" data-toggle='dropdown'>
                                         <strong>{vtranslate('LBL_ADD_WIDGET')}</strong> &nbsp;&nbsp;
                                         <i class="caret"></i>
@@ -156,9 +242,18 @@
 {/strip}
 <script>
  jQuery(document).ready(function(){
-        jQuery('html').on('click','.strolltotop',function(){
-            $('body, html').animate({ scrollTop: $(".gridster_2.ready ul").offset().top }, 1000);
+     //Widget Drop Down
+            jQuery(".widget-heading").on("hover",function(){ 
+            
+            var $this = jQuery(this);
+            jQuery(".widget-group-item").addClass("hide")
+            $this.closest("li").find(".widget-group-item").removeClass("hide");
+        })
+        
+        jQuery(".strolltotop").on("click",function () {
+                     $("#page").animate({ scrollTop: 0 }, "slow"); 
+                     return false;
+            });
+          });
 
-    });
-   });
 </script>

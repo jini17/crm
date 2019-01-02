@@ -27,13 +27,19 @@ Email: khaled@softsolvers.com.my
 .btn-primary,
 .btn-info, 
 .btn-info.disabled,
-.nav li.searchoption a,
 .btn-success, 
 .btn-success.disabled{
     background: #3bbd9b !important;
     border: 1px solid #3bbd9b !important;
 }
-
+.nav li.searchoption a{
+        background: #eee !important;
+    border: 1px solid #eee !important;
+    color: #000 !important;
+}
+.nav li.searchoption i{
+    color: #000 !important;
+}
 .vt-info-callout,
 .vt-default-callout.vt-info-callout span{
     border-left-color: #3bbd9b;
@@ -476,16 +482,248 @@ a.btn.btn-gettingStarted i{
 ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard,
 #menubar_quickCreate{
       padding: 9px 7px 7px !important;
-      background: #3bbd9b;
+      background: #eee;
       border-radius: 5px;
      margin-left: 2px;
-margin-right: 2px;
+        margin-right: 2px;
 }
 a.rightside-icon-dashboard > i.fa{
-    color: #fff !important;
+    color: #000 !important;
 }
-
 .wbox .links,
 .wbox h5{
            color: #3bbd9b;
              }
+             
+/*             .app-nav .module-action-bar{
+                 border-bottom: 2px solid #3bbd9b;
+             }            
+             */
+     /** =======================
+     Calender Settings
+     ===========================*/
+     .settingsIndexPage h4{
+         color: #3bbd9b;
+     }
+    .settingsIndexPage h4,
+    .settingsIndexPage .settingsSummary .summaryCount{
+         color: #3bbd9b;
+     }
+     
+     .settingsIndexPage #settingsShortCutsContainer span.header{
+         display: block;
+         width: 100%
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header i{
+         margin-top: 3px;
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header b{
+         margin-left: 10px;
+         margin-top: -15px;
+     }
+     .settingsIndexPage #setttingsShortCutsContainer .themeTextColor{
+         float:right;
+         
+     }
+     .settingsIndexPage #settingsShortCutsContainer.fa.pull-left{
+         margin-top: 10px !important;
+         margin-right: 10px !important;
+     }
+     #settingsShortCutsContainer .moduleBlock:hover{
+          background-color: #3bbd9b !important;
+          color: #fff;
+     }
+     .settingsIndexPage .settingsSummary .summaryCount{
+         padding: 0;
+     }
+    
+     /**=================
+    Employee Directory
+=====================*/
+.active.employeeTab{
+            border-bottom: 2px solid  #3bbd9b;
+        }
+      
+        .pagination li.active{
+          border-bottom: 2px solid #3bbd9b ;
+          color: #3bbd9b ;
+        }
+
+        .pagination li.active a{
+            color: #fff;
+            background:  #3bbd9b ;
+        }
+     
+        .alphabetSorting table .alphabetSearch a{
+            color: #3bbd9b !important;
+            }
+            .global-nav{
+                      border-bottom: 2px solid  #3bbd9b;
+            }
+            active.employeeTab{
+    border-bottom: 2px solid  #3bbd9b;
+    
+}
+
+.pagination li.active{
+  border-bottom: 2px solid #3bbd9b ;
+  color: #2f5597 ;
+}
+
+.pagination li.active a{
+    color: #fff;
+    background:  #3bbd9b ;
+}
+.alphabetSorting table .alphabetSearch a{
+color: #3bbd9b !important;
+}
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+    padding: 10px;
+}
+.fa-twitter {
+    background: #55ACEE;
+    color: #fff;
+    padding: 10px;
+}
+.fa-linkedin {
+    background: #007bb5;
+    color: #fff;
+    padding: 10px;
+}
+.fa-envelope {
+    background: #ff6600;
+    color: #fff;
+    padding: 10px;
+}
+.user-meta{
+    min-height: 84px;
+}
+/**=================
+ Mail Manager
+=======================*/
+#mm_searchButton {
+    height: 30px !important;
+    background-color: #3bbd9b !important;
+    border: 1px solid #fff !important;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #fff;
+}
+#searchType{
+    background: #3bbd9b;
+    color:#fff;
+}
+.mUserName i{
+    color: #3bbd9b;
+}
+.mmbtn .btn{
+    font-size: 12px;
+    padding:5px;
+    color: #3bbd9b;
+}
+.color-box{
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 5px !important;
+    border: 1px solid #ccc;
+    border-radius: 50% !important;
+    position: relative;
+}
+.color-box i{
+    position: absolute;
+    left: 2%;
+    top: 5%;
+    font-size: 10px;
+}
+.text-bold{
+    margin: 0 !important;
+}
+.color-blue,
+.color-blue:hover{
+    background: #6783B3;    
+    color: #fff;
+}
+.color-purple,
+.color-purple:hover{
+    background: #d971ae;    
+     color: #fff;
+}
+.color-yellow,
+.color-yellow:hover{
+    background: #f6bb43;
+     color: #fff;
+}
+.color-green,
+.color-green:hover{
+    background: #3bbd9b;
+     color: #fff;
+}
+.color-list li i{
+    color: #fff !important;
+}
+
+.color-shipcove,
+.color-shipcove:hover{
+    background: #6783B3;
+     color: #fff;
+}
+
+.color-lilacbush,
+.color-lilacbush:hover{
+    background: #997CCD;
+     color: #fff;
+}
+
+.color-energyyellow,
+.color-lilacbush:hover{
+    background: #FAD852;
+     color: #fff;
+}
+
+.color-downy,
+.color-downy:hover{
+    background: #67D0AF;
+     color: #fff;
+}
+
+.color-lily,
+.color-lily:hover{
+    background: #CBA7C1;
+     color: #fff;
+}
+
+
+.color-danube,
+.color-danube:hover{
+    background: #77A1D3;
+     color: #fff;
+}
+
+.color-selectiveyellow,
+.color-selectiveyellow:hover{
+    background: #F7B301;
+     color: #fff;
+}
+
+.color-sandybrown,
+.color-sandybrown:hover{
+    background: #F4967A;
+     color: #fff;
+}
+
+.color-mandy,
+.color-mandy:hover{
+    background: #EC5C64;
+     color: #fff;
+}
+
+.color-aquaisland,
+.color-aquaisland:hover{
+    background: #AFDFDF;
+     color: #fff;
+     padding: 5px;
+}

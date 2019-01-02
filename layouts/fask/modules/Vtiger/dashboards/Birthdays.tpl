@@ -39,8 +39,6 @@
 </div>
 
 <div class="widgeticons dashBoardWidgetFooter">
-
-
   <div class="footerIcons pull-right">
         {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=false}
   </div>

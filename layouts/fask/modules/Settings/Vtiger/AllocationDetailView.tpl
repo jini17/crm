@@ -17,43 +17,43 @@
             </button>  
         <div class="clearfix"></div>
                 <div class="widget_header row-fluid">
-                    <div class="span8"><h3>Allocation</h3></div>
+                    <div class="span8"><h3>{vtranslate('Leave Policy', $MODULE)}</h3></div>
                 </div>
                 <hr>
                 <br>
             </div>
 
             <div class="contents tabbable clearfix">
-                {if $YNP eq 0}
-                    <div class="pull-right"><button class="btn btn-success checkleavestatus">Year End Process</button></div>
-                {/if}    
-                <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">Delete</button>
+              
+                    <div class="pull-right"><a class="btn btn-success" href="index.php?module=Vtiger&parent=Settings&view=BalanceLeave&mode=ShowBalanceLeave">{vtranslate('Employee Leave Status', $MODULE)}</a></div>
+              
+                <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">{vtranslate('Delete', $MODULE)}</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="btn span10 marginLeftZero newButton" id="addItem">Add</button><br><br>
-                <button class="btn span10 marginLeftZero newButton" id="editItem">Edit</button><br><br>
+                <button class="btn span10 marginLeftZero newButton" id="addItem">{vtranslate('Add', $MODULE)}</button><br><br>
+                <button class="btn span10 marginLeftZero newButton" id="editItem">{vtranslate('Edit', $MODULE)}</button><br><br>
                 <div class="contents">
                     <table class="table table-bordered table-condensed themeTableColor">
                         <thead>
                         <th class="{$WIDTHTYPE}">
-                            <span class="alignMiddle">Leave Type List</span>
+                            <span class="alignMiddle">{vtranslate('Leave Type List', $MODULE)}</span>
                         </th>
                         </thead>
                         <tbody>
                         <tr>
                             <td>
-                                Select
+                                {vtranslate('Select', $MODULE)}
                             </td>
                             <td>
-                                Allocation Title
+                               {vtranslate('Leave Policy Title', $MODULE)} 
                             </td>
                             <td>
-                                Leave Type
+                               {vtranslate('Leave Type', $MODULE)} 
                             </td>
                             <td>
-                                Grade
+                                {vtranslate('Grade', $MODULE)}
                             </td>
                             <td>
-                                Status
+                               {vtranslate('Status', $MODULE)} 
                             </td>
                         </tr>
                         {foreach item=SPLITVALUE from=$VALUES}
@@ -79,16 +79,4 @@
             </div>
         </div>
     </div>
-<div id="myModal" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body"></div>  
-     </div>
-    </div>
-</div>  
 {/strip}
