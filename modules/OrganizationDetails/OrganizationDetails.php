@@ -12,12 +12,12 @@ include_once 'modules/Vtiger/CRMEntity.php';
 
 class OrganizationDetails extends Vtiger_CRMEntity {
 	var $table_name = 'vtiger_organizationdetails';
-	var $table_index= 'organization_id';
+	var $table_index= 'organizationdetailsid';
 
 	/**
 	 * Mandatory table for supporting custom fields.
 	 */
-	var $customFieldTable = Array('vtiger_organizationdetailscf', 'organization_id');
+	var $customFieldTable = Array('vtiger_organizationdetailscf', 'organizationdetailsid');
 
 	/**
 	 * Mandatory for Saving, Include tables related to this module.
@@ -29,8 +29,8 @@ class OrganizationDetails extends Vtiger_CRMEntity {
 	 */
 	var $tab_name_index = Array(
 		'vtiger_crmentity' => 'crmid',
-		'vtiger_organizationdetails' => 'organization_id',
-		'vtiger_organizationdetailscf'=>'organization_id');
+		'vtiger_organizationdetails' => 'organizationdetailsid',
+		'vtiger_organizationdetailscf'=>'organizationdetailsid');
 
 	/**
 	 * Mandatory for Listing (Related listview)

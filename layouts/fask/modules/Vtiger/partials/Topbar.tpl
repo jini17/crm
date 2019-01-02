@@ -1230,7 +1230,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                         'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
                         'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
 
-                        {if $APP_NAME neq 'SALES'}
+                        
                         <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> 
                             <a class="has-arrow waves-effect waves-dark " >
                                 <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i>
@@ -1273,7 +1273,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                     {/foreach}
                                 </ul>
                             </li>
-                            {/if}
+                          
                             {/if}
                             {/foreach}
                             <li class="nav-small-cap hide">TOOLS & SETTINGS</li>
