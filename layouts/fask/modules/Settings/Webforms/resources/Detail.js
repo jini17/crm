@@ -184,17 +184,12 @@ Settings_Vtiger_Detail_Js('Settings_Webforms_Detail_Js', {
         'var RecaptchaOptions = { theme : "clean" };' +
         '</script>'+
         '<script type="text/javascript"'+
-        'src="http://www.google.com/recaptcha/api/challenge?k=6Lchg-wSAAAAAIkV51_LSksz6fFdD2vgy59jwa38">'+
-        '</script>'+
-        '<noscript>'+
-            '<iframe src="http://www.google.com/recaptcha/api/noscript?k=6Lchg-wSAAAAAIkV51_LSksz6fFdD2vgy59jwa38"'+
-                'height="300" width="500" frameborder="0"></iframe><br>'+
-            '<textarea name="recaptcha_challenge_field" rows="3" cols="40">'+
-            '</textarea>'+
-            '<input type="hidden" name="recaptcha_response_field" value="manual_challenge">'+
-        '</noscript>';
+        'src="https://www.google.com/recaptcha/api.js">'+
+        '</script>';
+        
         showFormContents = showFormContents.replace('<div id="captchaField"></div>',captchaContents);
-        showFormContents = showFormContents +
+        showFormContents = showFormContents.appendChild('<div class="g-recaptcha" data-sitekey="6Ldb8oAUAAAAAMf9m1YLhMYBN-Q1UwyeSjhJaGgo"></div>');
+       /* showFormContents = showFormContents +
                 'var recaptchaValidationValue = document.getElementById("recaptcha_validation_value").value;'+
                 'if (recaptchaValidationValue!= true){'+
                     'var recaptchaResponseElement = document.getElementsByName("recaptcha_response_field")[0].value;'+
@@ -205,6 +200,7 @@ Settings_Vtiger_Detail_Js('Settings_Webforms_Detail_Js', {
                     'jsonp.fetch(url);'+
                     'return false;'+
                 '}'+
+           */     
             '}; '+
         '};'+
         'var jsonp = {' +

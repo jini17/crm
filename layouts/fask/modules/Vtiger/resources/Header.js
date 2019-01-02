@@ -36,6 +36,14 @@ jQuery.Class("Vtiger_Header_Js", {
             var win = window.open(fileName, '_blank');
             win.focus();
         }
+    },
+   
+    showNotification : function(){
+          jQuery('.notification-list').removeClass('hide');
+    }, 
+    
+    hideNotification : function(){
+        jQuery('.notification-list').addClass('hide');  
     }
 },{
 });

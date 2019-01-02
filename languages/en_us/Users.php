@@ -447,7 +447,7 @@ $languageStrings = array(
 	'LBL_LEAVE_TYPE'=>'Leave Type',
 	'LBL_LEAVE_DESC'=>'Leave Description',
 	'LBL_FULLNAME'=>'Applicant Name',
-	'LBL_REPLACE_USER'=>'Duties taken over by',
+	'LBL_REPLACE_USER'=>'Duties taken by',
 	'LBL_REASON'=>'Reason for leave',
 	'LBL_ADD_NEW_LEAVE'=>'Add New Leave',
 	'LBL_EDIT_SUCCESS' => 'Leave updated successfully',
@@ -525,9 +525,12 @@ $languageStrings = array(
 'LBL_SELECT_ROLE'=>'Select Role',
 'birthday'=>'Date of Birth',
 //End of Contacts
+'LBL_EMPLOYEE_LOCATION_INFORMATION'=>'Employee Location Information',
 );
 
 $jsLanguageStrings = array(
+	'JS_NO_LEAVE_TYPE_ASSIGNED'=>'Leave allocation is pending',
+	'JS_MORE_LEAVE_TAKEN'=>'Duration can\'t be more than balance leave',
 	'JS_CANCEL_LEAVE_CONFIRMATION'=>'Are you sure to cancel approve leave',
 	'JS_PERMISSION_LEAVE_DENIED'=>'Sorry, Either you have consumed all leaves or not assign, <br>Please contact admin',
 	'JS_PERMISSION_ClAIM_DENIED'=>'Sorry, Either you have consumed all claims or not assign, <br>Please contact admin',

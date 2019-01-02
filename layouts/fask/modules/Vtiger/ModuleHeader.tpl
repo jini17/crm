@@ -10,7 +10,7 @@
 {strip}
  <div class="col-sm-12 col-xs-12 module-action-bar clearfix coloredBorderTop">
         <div class="module-action-content clearfix {$MODULE}-module-action-content">
-                <div class="col-xs-{if $smarty.request.view eq 'Edit'}12{else}3{/if} {if $MODULE eq 'Home'  AND   $LOGGED_NOW == 'in' }col-lg-3{else} col-lg-6 {/if} module-breadcrumb module-breadcrumb-{$smarty.request.view} transitionsAllHalfSecond">
+                <div class="col-xs-{if $smarty.request.view eq 'Edit'}12{else}3{/if} {if $MODULE eq 'Home'  AND   $LOGGED_NOW == 'in' }col-lg-3 col-md-3 col-xs-3{else} col-lg-6 col-md-6 {/if} module-breadcrumb module-breadcrumb-{$smarty.request.view} transitionsAllHalfSecond">
                         {assign var=MODULE_MODEL value=Vtiger_Module_Model::getInstance($MODULE)}
                         {if $MODULE_MODEL->getDefaultViewName() neq 'List'}
                                 {assign var=DEFAULT_FILTER_URL value=$MODULE_MODEL->getDefaultUrl()}
@@ -97,11 +97,11 @@
                         {/if}
                 </div> 
                     {if $MODULE eq 'Home'  AND     $LOGGED_NOW == 'in' }
-                <div class="col-xs-5 col-lg-5 col-md-5 col-sm-5">
+                <div class="col-xs-5 col-lg-5 col-md-6 col-sm-5">
                     
                         <div class="clearfix">
 
-                                <div class="col-xs-12">
+                                <div class="col-xs-12 login-ip">
                                         <!-- added by jitu@28Dec2016-->
                                         <div style="text-align:center;display:block;width:100%;margin:0 auto;padding-top:10px;">
                                             {vtranslate('LBL_LAST_LOGINTIME')} {$LAST_LOGIN_TIME} {vtranslate('LBL_USERIP')} {$LAST_USER_IP}
@@ -155,7 +155,13 @@
                                                 </ul>
                                         {/if}
                                         <!-- Added By Khaled  -->
-                               
+
+                                          {*{if $DATA_RESET eq "Yes"}
+                                              <a class="btn btn-danger btn-reset" data-reset="Undo"><i class="fa fa-undo"></i>&nbsp; Clean Data </a>
+                                           {else}   
+                                                <a class="btn btn-danger btn-reset" data-reset="Redo"><i class="fa fa-undo"></i>&nbsp; Reset Data </a>
+                                          {/if}    *}
+
                                         <a class='btn btn-danger Help-btn text-center'>
                                                 <i class="glyphicon glyphicon-question-sign"></i>&nbsp;Help
                                         </a>
@@ -281,28 +287,7 @@
     </div>
   </div>
       {/if}
-      {if $MULTI_LOGIN eq 'yes'}
-      <div id="multilogin" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-                <h4><i class="fa fa-power-off"></i> Previous login session auto logout.</h4>
-                <button type="button" class="close" data-dismiss="modal" style="margin-top: -29px;">&times;</button>
-
-            </div>
-            <div class="modal-body">
-                <h5>Additional information:</h5>
-                <ul style="margin-left: 20px;">           
-                    <li> You may receive this message if there are currently multiple sessions logged in with this username & password. </li>
-                    <li> Someone has logged in as this user from a different computer or browser window. Only one user session is allowed.</li>
-                    <li> As a consequence, the other session has been terminated.</li>
-                </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/if}
+     
       
         {if $FIELDS_INFO neq null}
                 <script type="text/javascript">

@@ -15,14 +15,14 @@
     <div class="allocationModalContainer modal-dialog modal-lg" id="AddLeaveTypeContainer">
         <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position:absolute;top:-5px;left:97%"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span><div></div></button>
-                Add Allocation
+                {vtranslate('Add',$MODULE)} {vtranslate('Leave Policy',$MODULE)}
         </div>
         <div class="modal-content">            
             <form id="AddAllocation" class="form-horizontal" method="POST">
                 <div class="modal-body" id="scrollContainer" name="test">
                     <div class="container float-left">
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Allocation Title :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Leave Policy Title :</label></div>
                             <div class="fieldValue col-lg-4 col-md-4">
                                 <input class="inputElement col-sm-9" type="text" placeholder="New Joiners" id="AllocationTitle" name="AllocationTitle">
                             </div>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="container float-left">
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Allocation Code :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Leave Policy Code :</label></div>
                             <div class="fieldValue col-lg-4 col-md-4">
                                 <input class="inputElement col-sm-9" type="text" placeholder="A01" id="AllocationCode" name="AllocationCode">
                             </div>
@@ -76,7 +76,7 @@
                     <div class="container float-left">
 
                         <div class="contents row form-group">
-                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Allocate LeaveType :</label></div>
+                            <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-2 control-label fieldLabel"><label>Leave Type :</label></div>
 
                             <div class="fieldValue col-lg-4 col-md-4 col-sm-4 ">
                                 <input type="checkbox" id="AllocateLeave" name="AllocateLeave">

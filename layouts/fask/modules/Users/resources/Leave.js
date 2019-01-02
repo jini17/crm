@@ -15,18 +15,19 @@ Vtiger.Class("Users_Leave_Js", {
             
              //check the anyleaveType for login user 
                 var params = {
-                                                'module' 	: 'Users',
-                                                'action' 	: 'SaveSubModuleAjax',
-                                                'mode'   	: 'IsAnyLeaveTypeAssign',
+                       'module' 	: 'Users',
+                       'action' 	: 'SaveSubModuleAjax',
+                       'mode'   	: 'IsAnyLeaveTypeAssign',
                 }
 
              app.request.post({'data': params}).then(function (err, data) {  
-                    if(data.length >0){
-                         app.helper.showErrorNotification({'message': app.vtranslate(data, 'Users')});
-                         return false;
-                    } else{
-                          thisInstance.editLeave(url);
-                    }
+                  if(data ==1){
+                      thisInstance.editLeave(url);
+                   } else{
+                       app.helper.showErrorNotification({'message': app.vtranslate(data, 'Users')});
+                       return false;
+                                   
+                   }
              }); 
         },
 
@@ -35,7 +36,7 @@ Vtiger.Class("Users_Leave_Js", {
              var thisInstance = this;
                 //check the anyclaimType for login user 
                 var params = {
-                                                'module' : 'Users',
+                                                'module'    : 'Users',
                                                 'action' 	: 'SaveSubModuleAjax',
                                                 'mode'   	: 'IsAnyClaimTypeAssign',
                 }
@@ -65,6 +66,17 @@ Vtiger.Class("Users_Leave_Js", {
                                 }
                         });
         },
+        
+        convertDBFormat : function(inputdate){
+               var datearr = inputdate.split('-');
+  /*             var date    = new Date(inputdate);
+               var yr      = date.getFullYear();
+               var month   = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth();
+               var day     = date.getDate()  < 10 ? '0' + date.getDate()  : date.getDate();
+           */    
+               var outputdate = datearr[2] + '-' + datearr[1] + '-' + datearr[0]; 
+               return outputdate;
+        },
         editLeave : function(url) { 
             var aDeferred = jQuery.Deferred();
                 var thisInstance = this;
@@ -91,6 +103,44 @@ Vtiger.Class("Users_Leave_Js", {
                                       app.helper.showErrorNotification({'message': "Start Date must be greater than today's date"});
                                     return false;
                                 }
+                                
+                                 if($("#hdnhalfday").val()==1 || $("#hdnhalfday").val()=='on') {
+                                    $("#end_date").val($("#start_date").val());
+                                    $('#starthalf').prop('checked',true);
+                                    $("#endhalfcheck").addClass('hide');
+                                    $("#endhalf").addClass('hide');
+
+                                 } else {
+                                    $("#endhalfcheck").addClass('hide');
+                                    $("#endhalf").addClass('hide');
+                                    $('#endhalf').prop('checked',false);
+                                    $("#starthalf").prop('checked',false);
+                                    $("#starthalfcheck").addClass('hide');
+                                    $("#starthalf").addClass('hide');
+                                 }
+                                
+                               //check the anyleaveType for login user 
+                               var enddate    = jQuery("#end_date").val();
+                               if(enddate !='' && enddate !='undefined' && enddate !='Null'){
+                                    var balleave = jQuery("#leave_type").find(':selected').data('balance');
+                                    var params = {
+                                           'module' 	: 'Users',
+                                           'action' 	: 'SaveSubModuleAjax',
+                                           'mode'   	: 'checkDateValidation',
+                                           'startdate' : selectedDate,
+                                           'enddate'    : enddate,
+                                           'balance'   : balleave
+                                         }
+
+                                      app.request.post({'data': params}).then(function (err, data) { 
+                                      
+                                             if(data.result ==false){
+                                                  app.helper.showErrorNotification({'message': app.vtranslate('JS_MORE_LEAVE_TAKEN', 'Users')});
+                                                  jQuery("#end_date").val('');
+                                             }
+                                      });  
+                                } //end here
+                                
                             });
                             
                             $('#end_date').change(function() { 
@@ -110,17 +160,56 @@ Vtiger.Class("Users_Leave_Js", {
                                 var todayDate = new Date();
                          
                                 if(expireDate < SDate){
-                                           $(this).val("")
+                                
+                                      $(this).val("")
                                       app.helper.showErrorNotification({'message': "End Date must be greater than Start date"});
-                                    return false;
+                                      return false;
+                                    
                                 }
-                              
+                                
+                                if($("#hdnhalfday").val()==1 || $("#hdnhalfday").val()=='on') {
+                                    if($("#end_date").val() != $("#start_date").val()) {
+                                            $("#endhalfcheck").removeClass('hide');
+                                            $("#endhalf").removeClass('hide');
+                                    } else {
+                                            $("#endhalfcheck").addClass('hide');
+                                            $("#endhalf").addClass('hide');
+                                    }
+                                 } else {
+                                         $("#endhalfcheck").addClass('hide');
+                                         $("#endhalf").addClass('hide');
+                                         $('#endhalf').prop('checked',false);
+                                         $("#starthalf").prop('checked',false);
+                                         $("#starthalfcheck").addClass('hide');
+                                         $("#starthalf").addClass('hide');
+                                 }
+                                
+                                   //check the anyleaveType for login user 
+                                    var startdate    = jQuery("#start_date").val();
+                                    if(startdate !='' && startdate !='undefined' && startdate !='Null'){
+                                         var balleave = jQuery("#leave_type").find(':selected').data('balance');
+                                         var params = {
+                                                'module' 	: 'Users',
+                                                'action' 	: 'SaveSubModuleAjax',
+                                                'mode'   	: 'checkDateValidation',
+                                                'startdate' : startdate,
+                                                'enddate'    : selectedDate,
+                                                'balance'   : balleave
+                                              }
 
+                                           app.request.post({'data': params}).then(function (err, data) { 
+                                                  if(data.result ==false){
+                                                       jQuery("#start_date").val('');
+                                                       app.helper.showErrorNotification({'message': app.vtranslate('JS_MORE_LEAVE_TAKEN', 'Users')});
+                                                  }
+                                           });  
+                                     } //end here
+     
                             });
 
 
                                 // for textarea limit
-                                        $("#start_date").on("change", function(){ 
+                                   /*     $("#start_date").on("change", function(){ 
                                                 if($("#hdnhalfday").val()==1) {
                                                         $("#end_date").val($("#start_date").val());
                                                         $('#starthalf').prop('checked',true);
@@ -135,6 +224,8 @@ Vtiger.Class("Users_Leave_Js", {
                                                         $("#starthalfcheck").addClass('hide');
                                                         $("#starthalf").addClass('hide');
                                                 }
+                                            
+                                                
                                         });
                                         $("#end_date").on("change", function(){
                                                 if($("#hdnhalfday").val()==1) {
@@ -152,9 +243,11 @@ Vtiger.Class("Users_Leave_Js", {
                                                         $("#starthalf").prop('checked',false);
                                                         $("#starthalfcheck").addClass('hide');
                                                         $("#starthalf").addClass('hide');
-                                                }	
+                                                }
+                                                
+                                           
                                         });
-
+                                        */
                                         $("#starthalf").on("click", function(){	
                                                 if($("#start_date").val() == $("#end_date").val()) {
                                                 //	$('#starthalf').prop('checked',true);
@@ -171,18 +264,18 @@ Vtiger.Class("Users_Leave_Js", {
                                         $("#leave_type").select2(
                                                 {
                                                 formatResult: function(item, container) { 
-                                                                        var originalOption = item.id;
-                                                                        var originalText = (item.text).split('@');
-                                                                        var color = originalText[1];
-                                                                        var balance = originalText[2];
-                                                                        var title = originalText[0];
+                                                  var originalOption = item.id;
+                                                  var originalText = (item.text).split('@');
+                                                  var color = originalText[1];
+                                                  var balance = originalText[2];
+                                                  var title = originalText[0];
 
-                                                                if(typeof balance === "undefined") {
-                                                                        balance = '';	
-                                                                } else {
-                                                                        balance = '<strong>['+balance+']</strong>';
-                                                                }	
-                                                                return '<div title="' + title + '">'+'<span class="empty_fill" style="background-color:'+color+';"></span>' + title+balance+'</div>';	
+                                                 if(typeof balance === "undefined") {
+                                                         balance = '';	
+                                                 } else {
+                                                         balance = '&nbsp;<strong>['+balance+']</strong>';
+                                                 }	
+                                                 return '<div title="' + title + '">'+'<span class="empty_fill" style="background-color:'+color+';height:15px;margin-top:2px;margin-right:10px; width:20px;float:left;"></span>' + title+balance+'</div>';	
 
                                                 },
 
@@ -198,9 +291,9 @@ Vtiger.Class("Users_Leave_Js", {
                                                                         if(typeof balance === "undefined") {
                                                                                 balance = '';	
                                                                         } else {
-                                                                                balance = '<strong>['+balance+']</strong>';
+                                                                                balance = '&nbsp;<strong>['+balance+']</strong>';
                                                                         }	
-                                                                if(halfday ==0) {
+                                                                if(halfday ==0 || halfday=='off') {
                                                                         $("#starthalfcheck").addClass('hide');
                                                                         $("#endhalfcheck").addClass('hide');
                                                                         $("#starthalf").addClass('hide');
@@ -213,7 +306,7 @@ Vtiger.Class("Users_Leave_Js", {
                                                                 }	
                                                         //return color
 
-                                                                return '<span class="empty_fill" style="background-color:'+color+';margin-right:10px;"></span>'+ title +balance+'</strong>';
+                                                                return '<span class="empty_fill" style="background-color:'+color+';height:15px;margin-top:2px;margin-right:10px; width:20px;float:left;"></span>'+ title +balance+'</strong>';
                                                 }
                                         });
 
@@ -240,6 +333,8 @@ Vtiger.Class("Users_Leave_Js", {
                                         var len = $("#reason").val().length;
                                         var remainchar = 300 - len;
                                         $('#charNum_reason').text(remainchar + ' character(s) left');
+                                        
+                         
 
                          form.submit(function(e) { 
                             e.preventDefault();
@@ -324,7 +419,7 @@ Vtiger.Class("Users_Leave_Js", {
                                         var color = originalText[1];
                                         var balance = originalText[2];
                                         var title = originalText[0];	
-                                        return '<div title="' + title + '">'+'<span class="empty_fill" style="background-color:'+color+';"></span>' + title+'</div>';
+                                        return '<div title="' + title + '">'+'<span class="empty_fill" style="background-color:'+color+';height:15px;margin-top:2px;margin-right:10px; width:20px;float:left;"></span>' + title+'</div>';
                                 },
                                 formatSelection: function(item, container) { 
                                         var originalOption = item.id;
@@ -333,7 +428,7 @@ Vtiger.Class("Users_Leave_Js", {
                                         var balance = originalText[2];
                                         var title = originalText[0];	
                                 //return color
-                                return '<span class="empty_fill" style="background-color:'+color+';margin-right:10px;"></span>'+ title;
+                                return '<span class="empty_fill" style="background-color:'+color+';height:15px;margin-top:2px;margin-right:10px; width:20px;float:left;"></span>'+ title;
                                 }
                         }
                 );

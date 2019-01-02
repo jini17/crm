@@ -37,8 +37,8 @@
             padding: 0 !important;
             height: 33px !important;
             margin-top: 4px !important;
-           background-color: #2f5597 !important;
-            color: #fff !important;
+           background-color: #fff;
+            color: #000 ;
             border-radius: 3px !important;
             border: 0 !important;
             box-shadow:none !important;
@@ -71,15 +71,74 @@
     border: 2px solid #bdc3c7;
     border-radius: 6px;
     outline: none;
-
-color: #34495e;
+    color: #34495e;
 }
+.notifications{
+    position:relative;
+}
+.notification-list{
+    position:absolute;
+    z-index:10000;
+    width:250px;
+    height:200px;
+    background-color: #fff !important;
+    color: #000 !important;
+    left:-200px;
+}
+
+.notifications-heading{
+    padding:5px;
+    font-size:10px !important;
+    font-weight: bold;
+    background-color: #2f5597 !important;
+    color:#fff !important;
+    padding:10px;
+    margin:0;
+    border-radius: 5px;
+}
+.notifications-heading i{
+    margin-right:10px !important;
+    color:#fff !important;
+
+}
+
+.notification-list::before {
+    position: absolute;
+    top: -7px;
+    right: 26px;
+    display: inline-block;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    border-left: 7px solid transparent;
+    border-bottom-color: rgba(0,0,0,0.2);
+    content: '';
+}
+
+.notification-container .img-holder{
+    width:40px;
+    height:40px;
+    float:left;
+}
+
+.notification-container{
+    padding:10px;
+    border:1px solid #ccc;
+}
+
+.notification-container .notification-title{
+    width:200px;
+    float:right;
+}
+
+.notification-container .notification-time{
+
+ }   
 
 </style>
 <script type="text/javascript">
 
-    jQuery(document).ready(function(){
-$('.searchoption #s2id_searchModuleList').find('.select2-choice').find('.select2-arrow').find('b').remove();
+jQuery(document).ready(function(){
+    $('.searchoption #s2id_searchModuleList').find('.select2-choice').find('.select2-arrow').find('b').remove();
 
 $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !important;"></i>');
         jQuery('.menu-open').on('hover',function(){
@@ -307,7 +366,6 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                             </a>
                                         </li>
                                     {/if}
-
                                      </ul>
                                  </li>
 
@@ -318,7 +376,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                 </div>
                 <!--fine menu-->
                 <div class="logo-container pull-left">
-                        <a href="index.php" class="company-logo ">
+                        <a href="index.php" class="company-logo">
                             <img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>
                         </a>
                 </div>
@@ -350,12 +408,12 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                         </a>
                                     </li>
                                     {/if}
-                                    <li admin="" moudel="Timesheet">
+                                    {*<li admin="" moudel="Timesheet">
                                         <a  class="dropdown-icon-dashboard"   href="index.php?module=Timesheet&amp;view=List&amp;app=ADMIN ">
                                             <i class="material-icons module-icon">timer</i>
                                             <span class="hide-menu"> {vtranslate('Timesheet','Home')}</span>
                                         </a>
-                                    </li>
+                                    </li>*}
                                             {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                                             <li>
                                                 <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
@@ -371,23 +429,12 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                 </a>
                                             </li>
                                             {/if}
-
+{*
                                             <li>
                                                     <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
                                                         <i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                                            </li>
-                                            <li admin="" moudel="Training">
-
-                                                <a class="dropdown-icon-dashboard" href=" index.php?module=Training&amp;view=List&amp;app=ADMIN ">
-                                                    <i class="material-icons module-icon">book</i> Training
-                                                </a>
-                                            </li>
-                                            <li admin="" moudel="Attendance">
-                                                <a  class="dropdown-icon-dashboard"   href=" index.php?module=Attendance&amp;view=List&amp;app=ADMIN ">
-                                                    <i class="material-icons module-icon">assignment</i> Attendance
-                                                </a>
-                                            </li>
-
+                                            </li>*}
+                                            
                                         </ul>
                         </div>
                     </div>
@@ -454,6 +501,11 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                        <i class="material-icons module-icon">email</i>&nbsp;{vtranslate('LBL_MAIL_MANAGER')}
                                    </a>
                                 </li>
+                                 <li>
+                                    <a class="dropdown-icon-dashboard"  title="{vtranslate('Message Board')}" href="index.php?module=MessageBoard&view=List">
+                                       <i class="material-icons module-icon">sms</i>&nbsp;{vtranslate('Message Board')}
+                                   </a>
+                                </li>
                         </ul>
                     </div>
             </div>
@@ -513,7 +565,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                         width: 100%;
                         /* color: #fff; */
                         /* font-size: 15px; */
-                        padding: 10px 0;
+                        padding: 12px 0;
                         text-decoration: none;">All</span>
                     </a>
                 </div>
@@ -571,8 +623,8 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                     <div class="row">
                                                        <div class="col-lg-4"><a id="menubar_quickCreate_Users" class="quickCreateModule" data-name="Users" data-url="index.php?module=Users&parent=Settings&view=Edit" href="javascript:void(0)"><i class="material-icons pull-left">person</i><span class="quick-create-module">Employee</span></a></div>
                                                        <div class="col-lg-4"><a id="menubar_quickCreate_Leav" class="quickCreateModule" data-name="Leave" data-url="index.php?module=Leave&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">exit_to_app</i><span class="quick-create-module">Leave</span></a></div>
-                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Timesheet" class="quickCreateModule" data-name="Timesheet" data-url="index.php?module=Timesheet&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">timer</i><span class="quick-create-module">Timesheet</span></a></div>
-                                                    </div>
+{*                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Timesheet" class="quickCreateModule" data-name="Timesheet" data-url="index.php?module=Timesheet&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">timer</i><span class="quick-create-module">Timesheet</span></a></div>
+*}                                                    </div>
                                                     <br>
                                                     <div class="row">
                                                        <div class="col-lg-4"><a id="menubar_quickCreate_Claim" class="quickCreateModule" data-name="Claim" data-url="index.php?module=Claim&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">attach_money</i><span class="quick-create-module">Claim</span></a></div>
@@ -598,7 +650,10 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                           <a id="menubar_quickCreate_Documents" class="quickCreateModuleSubmenu dropdown-toggle" data-name="Documents" data-toggle="dropdown" data-url="index.php?module=Documents&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">file_download</i><span class="quick-create-module">Documents<i class="fa fa-caret-down quickcreateMoreDropdownAction"></i></span></a>
                                                           <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_Documents">
                                                              <li class="dropdown-header"><i class="material-icons">file_upload</i> File Upload</li>
-                                                             <li id="VtigerAction"><a href="javascript:Documents_Index_Js.uploadTo('Vtiger')"><img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">To Agiliux</a></li>
+                                                             <li id="VtigerAction"><a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
+                                                                                                                                                                                                                                                         <img width="15" hieght="15" style="  margin-top: -3px;margin-right: 4%;" title="Agiliux" alt="Agiliux" src="layouts/v7/skins/images/favicon.ico">
+
+                                                                     To Agiliux</a></li>
                                                              <li class="dropdown-header"><i class="ti-link"></i> Link External Document</li>
                                                              <li id="shareDocument"><a href="javascript:Documents_Index_Js.createDocument('E')">&nbsp;<i class="material-icons">link</i>&nbsp;&nbsp; From File Url</a></li>
                                                              <li role="separator" class="divider"></li>
@@ -748,9 +803,28 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
 
                                             <li>
                                                 <div>
-                                                    <a class="rightside-icon-dashboard" href="index.php?module=SMSNotifier&view=List&app=FOUNDATION" title="Notifications" aria-hidden="true">
+                                                    <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" title="Notifications" aria-hidden="true">
                                                         <i class="fa fa-bell-o"></i>
                                                     </a>
+
+                                                    <ul class="hide notification-list list-unstyled" onmouseleave="Vtiger_Header_Js.hideNotification()">
+                                                        <li>
+                                                            <h6 class="text-left notifications-heading">Notifications<i class="fa fa-gear pull-right"></i></h6>
+
+                                                        </li>
+                                                        <li>
+                                                            <div class="notification-container unread">
+                                                                <div class="img-holder"><img src="" class="img-circle" height="30" width="30"></div>
+                                                                <div class="notification-title">
+                                                                    <a>
+                                                                        <strong>Khaled approved leave</strong>
+                                                                    </a>  
+                                                                   <span class="notification-time">2 hr</span> 
+                                                                </div> 
+                                                            </div>
+                                                           <div class="clearfix"></div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </li>
 
@@ -884,14 +958,39 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                             <li><a class="btn color-box color-purple themeElement" data-skinName="purple"><i class="fa {if $USER_MODEL->get('theme') eq 'purple'} fa-check  {/if}"></i></a></li>
                                                                             <li><a class="btn color-box color-yellow themeElement" data-skinName="yellow"><i class="fa  {if $USER_MODEL->get('theme') eq 'yellow'} fa-check {/if}"></i></a></li>
                                                                             <li><a class="btn color-box color-green themeElement" data-skinName="green"><i class="fa {if $USER_MODEL->get('theme') eq 'green'}  fa-check  {/if}"></i></a></li>
+                                                                            <li><a class="btn color-box color-shipcove themeElement" data-skinName="shipcove"><i class="fa {if $USER_MODEL->get('theme') eq 'shipcove'}  fa-check  {/if}"></i></a></li>
+                                                                            <li><a class="btn color-box color-lilacbush themeElement" data-skinName="lilacbush"><i class="fa {if $USER_MODEL->get('theme') eq 'lilacbush'}  fa-check  {/if}"></i></a></li>
+                                                                             <li><a class="btn color-box color-energyyellow themeElement" data-skinName="energyyellow"><i class="fa {if $USER_MODEL->get('theme') eq 'energyyellow'}  fa-check  {/if}"></i></a></li>
+                                                                             <li><a class="btn color-box color-downy themeElement" data-skinName="downy"><i class="fa {if $USER_MODEL->get('theme') eq 'downy'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-lily themeElement" data-skinName="lily"><i class="fa {if $USER_MODEL->get('theme') eq 'lily'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-danube themeElement" data-skinName="danube"><i class="fa {if $USER_MODEL->get('theme') eq 'danube'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-selectiveyellow themeElement" data-skinName="selectiveyellow"><i class="fa {if $USER_MODEL->get('theme') eq 'selectiveyellow'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-sandybrown themeElement" data-skinName="sandybrown"><i class="fa {if $USER_MODEL->get('theme') eq 'sandybrown'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-mandy themeElement" data-skinName="mandy"><i class="fa {if $USER_MODEL->get('theme') eq 'mandy'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-aquaisland themeElement" data-skinName="aquaisland"><i class="fa {if $USER_MODEL->get('theme') eq 'aquaisland'}  fa-check  {/if}"></i></a></li>
+
                                                                         </ul>
+                                                                        <div class="clarfix"></div>
+                                                                        
                                                                     </div>
+                                                                        <div class="col-md-12 col-sm-12">
+                                                                            <div class="clearfix"></div>
+                                                                            <div class="dark-theme">
+                                                                                <strong class="pull-left" style="padding-top:6px; margin-right: 10px;"> Dark Theme</strong>
+                                                                            <!-- Rounded switch -->
+                                                                                    <label class="switch pull-left">
+                                                                                      
+                                                                                        <input type="checkbox" name="darkTheme" value="darkblue">
+                                                                                      <span class="slider round"></span>
+                                                                                    </label>
+                                                                        </div>
+                                                                        </div>
                                                                     <div class="clearfix"></div>
                                                                     <hr />
                                                                     <div class="clearfix"></div>
                                                                     <div class="col-md-12">
                                                                         <ul class="profile-list list-unstyled">
-                                                                            <li> <a class="" href="index.php?module=Users&parent=Settings&view=Calendar&record={$USER_MODEL->get('id') }"><i class='fa fa-gear'></i> Settings </a></li>
+                                                                            <li> <a class="" href="index.php?module=Users&parent=Settings&view=Calendar&record={$USER_MODEL->get('id') }"><i class='fa fa-gear'></i>  Preferences </a></li>
                                                                             <li> <a class="" href="index.php?module=Home&view=DashBoard&tabid=1298"><i class='fa fa-rocket'></i> Getting Started</a></li>
                                                                             <li> <a class="" href="http://dev7.secondcrm.com/agiliux/help.php"><i class='fa fa-life-ring'></i> Help</a></li>
                                                                             <li> <a class=""><i class='fa fa-at'></i> Contact Support</a></li>
@@ -964,7 +1063,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                                         <li class="dropdown-header"><i class="ti-upload"></i> {vtranslate('LBL_FILE_UPLOAD', $moduleName)}</li>
                                                                                         <li id="VtigerAction">
                                                                                             <a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
-                                                                                                <img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">
+                                                                                                                                                                                    <img width="15" hieght="15" style="  margin-top: -3px;margin-right: 4%;" title="Agiliux" alt="Agiliux" src="layouts/v7/skins/images/favicon.ico">
                                                                                                 {vtranslate('LBL_TO_SERVICE', $moduleName, {vtranslate('LBL_VTIGER', $moduleName)})}
                                                                                             </a>
                                                                                         </li>
@@ -1468,11 +1567,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                         <li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Payments&view=List"><i class="material-icons module-icon">payment</i> <span class="hide-menu"> {vtranslate('Payments')}</span></a></li>
 
                                         {/if}
-      {*                                  {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('LeaveType')}
-                                        {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
-                                         <!--<li><a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=LeaveType&view=List"><i class="material-icons module-icon">keyboard_tab</i> <span class="hide-menu"> {vtranslate('LeaveType')}</span></a></li>
-                                         -->
-                                         {/if}*}
+
                                      </ul>
                                  </li>
 
@@ -1544,31 +1639,6 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                         </li>
                                                                         {/if}
 
-                                                                        <li>
-                                                                                <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
-                                                                                    <i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                                                                        </li>
-                                                                        <li admin="" moudel="Training">
-
-                                                                            <a class="dropdown-icon-dashboard" href=" index.php?module=Training&amp;view=List&amp;app=ADMIN ">
-                                                                                <i class="material-icons module-icon">book</i> Training
-                                                                            </a>
-                                                                        </li>
-                                                                        <li admin="" moudel="Attendance">
-                                                                            <a  class="dropdown-icon-dashboard"   href=" index.php?module=Attendance&amp;view=List&amp;app=ADMIN ">
-                                                                                <i class="material-icons module-icon">assignment</i> Attendance
-                                                                            </a>
-                                                                        </li>
-                                                                       {* <li admin="" moudel="ExitDetails">
-                                                                            <a  class="dropdown-icon-dashboard"   href=" index.php?module=Resignation&amp;view=List&amp;app=ADMIN ">
-                                                                                <i class="material-icons module-icon">assignment</i> Resignation
-                                                                            </a>
-                                                                        </li>
-                                                                        <li admin="" moudel="ExitInterView">
-                                                                            <a  class="dropdown-icon-dashboard"   href=" index.php?module=ExitInterView&amp;view=List&amp;app=ADMIN ">
-                                                                                <i class="material-icons module-icon">assignment</i> Exit Interview
-                                                                            </a>
-                                                                        </li>*}
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -1661,22 +1731,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
 
                                     </li>
 
-                               {*     Khaled - Removed as Per Requirement<li admin="">
-                                        <a class="waves-effect waves-dark dropdown-icon-dashboard " href=" index.php?module=WorkingHours&amp;view=List&amp;app=ADMIN ">
-                                            <i class="material-icons module-icon">access_time</i> <span class="hide-menu"> Working Hours</span>
-                                        </a>
-                                    </li>
-
-                                    <li admin="">
-                                        <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=Documents&amp;view=List&amp;app=ADMIN ">
-                                            <i class="material-icons module-icon">file_download</i> <span class="hide-menu"> Documents</span>
-                                        </a>
-                                    </li>
-                                    <li admin="">
-                                        <a class="waves-effect waves-dark dropdown-icon-dashboard" href=" index.php?module=MessageBoard&amp;view=List&amp;app=ADMIN ">
-                                            <i class="material-icons module-icon">assignment</i> <span class="hide-menu"> Message Board</span>
-                                        </a>
-                                    </li>*}
+                      
                                 </ul>
                             </div>
                         </div>
@@ -1748,7 +1803,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                 width: 100%;
                                 /* color: #fff; */
                                 /* font-size: 15px; */
-                                padding: 10px 0;
+                                padding: 12px 0;
                                 text-decoration: none;">All</span>
                             </a>
                         </div>
@@ -1814,12 +1869,12 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                     <div class="row">
                                                        <div class="col-lg-4"><a id="menubar_quickCreate_Claim" class="quickCreateModule" data-name="Claim" data-url="index.php?module=Claim&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">attach_money</i><span class="quick-create-module">Claim</span></a></div>
                                                        <div class="col-lg-4"><a id="menubar_quickCreate_WorkingHours" class="quickCreateModule" data-name="WorkingHours" data-url="index.php?module=WorkingHours&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">access_time</i><span class="quick-create-module">Working Hours</span></a></div>
-                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Training" class="quickCreateModule" data-name="Training" data-url="index.php?module=Training&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">book</i><span class="quick-create-module">Training</span></a></div>
-                                                    </div>
+{*                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Training" class="quickCreateModule" data-name="Training" data-url="index.php?module=Training&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">book</i><span class="quick-create-module">Training</span></a></div>
+*}                                                    </div>
                                                     <br>
                                                     <div class="row">
-                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Attendance" class="quickCreateModule" data-name="Attendance" data-url="index.php?module=Attendance&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">assignment</i><span class="quick-create-module">Attendance</span></a></div>
-                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Payments" class="quickCreateModule" data-name="Payments" data-url="index.php?module=Payments&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">payment</i><span class="quick-create-module">Payments</span></a></div>
+{*                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Attendance" class="quickCreateModule" data-name="Attendance" data-url="index.php?module=Attendance&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">assignment</i><span class="quick-create-module">Attendance</span></a></div>
+*}                                                       <div class="col-lg-4"><a id="menubar_quickCreate_Payments" class="quickCreateModule" data-name="Payments" data-url="index.php?module=Payments&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">payment</i><span class="quick-create-module">Payments</span></a></div>
                                                        <div class="col-lg-4"><a id="menubar_quickCreate_Bills" class="quickCreateModule" data-name="Bills" data-url="index.php?module=Bills&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">receipt</i><span class="quick-create-module">Office Bills</span></a></div>
                                                     </div>
                                                     <br>
@@ -1835,7 +1890,11 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                           <a id="menubar_quickCreate_Documents" class="quickCreateModuleSubmenu dropdown-toggle" data-name="Documents" data-toggle="dropdown" data-url="index.php?module=Documents&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">file_download</i><span class="quick-create-module">Documents<i class="fa fa-caret-down quickcreateMoreDropdownAction"></i></span></a>
                                                           <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_Documents">
                                                              <li class="dropdown-header"><i class="material-icons">file_upload</i> File Upload</li>
-                                                             <li id="VtigerAction"><a href="javascript:Documents_Index_Js.uploadTo('Vtiger')"><img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">To Agiliux</a></li>
+                                                             <li id="VtigerAction"><a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
+                                                                                                                                                                                                                                                         <img width="15" hieght="15" style="  margin-top: -3px;margin-right: 4%;" title="Agiliux" alt="Agiliux" src="layouts/v7/skins/images/favicon.ico">
+
+                                                                     To Agiliux</a>
+                                                             </li>
                                                              <li class="dropdown-header"><i class="ti-link"></i> Link External Document</li>
                                                              <li id="shareDocument"><a href="javascript:Documents_Index_Js.createDocument('E')">&nbsp;<i class="material-icons">link</i>&nbsp;&nbsp; From File Url</a></li>
                                                              <li role="separator" class="divider"></li>
@@ -2201,7 +2260,8 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                                         <li class="dropdown-header"><i class="ti-upload"></i> {vtranslate('LBL_FILE_UPLOAD', $moduleName)}</li>
                                                                                         <li id="VtigerAction">
                                                                                             <a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
-                                                                                                <img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">
+                                                                                                                                                                                                                                                                                    <img width="15" hieght="15" style="  margin-top: -3px;margin-right: 4%;" title="Agiliux" alt="Agiliux" src="layouts/v7/skins/images/favicon.ico">
+
                                                                                                 {vtranslate('LBL_TO_SERVICE', $moduleName, {vtranslate('LBL_VTIGER', $moduleName)})}
                                                                                             </a>
                                                                                         </li>
@@ -2284,10 +2344,8 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
             if (x.style.display === "none") 
             {
                 x.style.display = "block";
-
             } else {
                 x.style.display = "none";
-
             }
         }
     </script>

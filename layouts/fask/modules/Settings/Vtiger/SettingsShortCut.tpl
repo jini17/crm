@@ -9,9 +9,19 @@
  ********************************************************************************/
 -->*}
 {strip}
-	<span id="shortcut_{$SETTINGS_SHORTCUT->getId()}" data-actionurl="{$SETTINGS_SHORTCUT->getPinUnpinActionUrl()}" class="col-xs-12 col-sm-6 col-md-3 col-lg-3 contentsBackground well cursorPointer moduleBlock" data-url="{$SETTINGS_SHORTCUT->getUrl()}" style="min-height: 130px; ">
+	<span id="shortcut_{$SETTINGS_SHORTCUT->getId()}" data-actionurl="{$SETTINGS_SHORTCUT->getPinUnpinActionUrl()}"
+                                class="col-xs-12 col-sm-6 col-md-2 col-lg-2 contentsBackground well cursorPointer moduleBlock" data-url="{$SETTINGS_SHORTCUT->getUrl()}" style="min-height: 130px; ">
 		<div>
-			<span>
+                    <span class="header">
+                                                                           {if vtranslate($SETTINGS_SHORTCUT->get('name'),$MODULE) eq 'Employee'}
+                                                                               <i class='fa fa-user pull-left'></i>
+                                                                          {elseif vtranslate($SETTINGS_SHORTCUT->get('name'),$MODULE) eq 'Roles'}
+                                                                              <i class='fa fa-eye pull-left'></i>
+                                                                              {elseif vtranslate($SETTINGS_SHORTCUT->get('name'),$MODULE) eq 'Profiles'}
+                                                                                    <i class='material-icons module-icon pull-left'>face</i>
+                                                                                       {elseif vtranslate($SETTINGS_SHORTCUT->get('name'),$MODULE) eq 'Performance'}
+                                                                                            <i class='material-icons module-icon pull-left'>timeline</i>
+                                                                           {/if}
 				<b class="themeTextColor">{vtranslate($SETTINGS_SHORTCUT->get('name'),$MODULE)}</b>
 			</span>
 			<span class="pull-right">

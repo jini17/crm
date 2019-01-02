@@ -46,17 +46,18 @@ var Settings_CompanyNumbering_Js = {
 		AppConnector.request(params).then(
 			function(data){
 				var params;
-				var successfullSaveMessage = app.vtranslate('JS_RECORD_NUMBERING_UPDATED_SUCCESSFULLY');
+				var successfullSaveMessage = app.vtranslate('JS_RECORD_NUMBERING_UPDATED_SUCCESSFULLY'); 
 				if(data.success == true){
 					jQuery(e.currentTarget).attr('disabled','disabled');
 					params = {
-						text: successfullSaveMessage
-					};
+						title: successfullSaveMessage,
+						type: 'success'
+					}					
 					Settings_Vtiger_Index_Js.showMessage(params);
 				}else{
 					var errorMessage = app.vtranslate(data.error.message);
 					params = {
-						text: errorMessage,
+						title: errorMessage,
 						type: 'error'
 					};
 					Settings_Vtiger_Index_Js.showMessage(params);
@@ -64,30 +65,30 @@ var Settings_CompanyNumbering_Js = {
 			});
 	        });
 	},
-                      sidebar: function(){       
-                       
-                                    jQuery('.essentials-toggle').live('click',function(){
-                                        
-                                        var $this =   $(this).closest('.main-container');
-                                         var collaspe_status = $this.find('.settingsPageDiv');
-                                         if(!collaspe_status.hasClass('full-width')){
-                                            $this.find('.height100Per ').addClass('hide');
-                                            $('.main-container').find('.settingsPageDiv').addClass('full-width')
-                                         }
-                                         else{
-                                               $this.find('.height100Per ').removeClass('hide');
-                                               $('.main-container').find('.settingsPageDiv').removeClass('full-width')
-                                         }
-                                         aler('clicked');
-                                         
-                                     });
-                      
-                      },
+      sidebar: function(){       
+       
+                    jQuery('.essentials-toggle').live('click',function(){
+                        
+                        var $this =   $(this).closest('.main-container');
+                         var collaspe_status = $this.find('.settingsPageDiv');
+                         if(!collaspe_status.hasClass('full-width')){
+                            $this.find('.height100Per ').addClass('hide');
+                            $('.main-container').find('.settingsPageDiv').addClass('full-width')
+                         }
+                         else{
+                               $this.find('.height100Per ').removeClass('hide');
+                               $('.main-container').find('.settingsPageDiv').removeClass('full-width')
+                         }
+                         
+                         
+                     });
+      
+      },
 	
 	registerEvents : function(){
 		this.registerOnChangeEventOfCompanyNumbering();
 		this.saveModuleCustomNumbering();
-                                           this.sidebar();
+        this.sidebar();
 	}
 }
 

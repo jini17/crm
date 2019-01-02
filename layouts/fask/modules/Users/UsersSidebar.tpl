@@ -9,11 +9,11 @@
 {strip}
 {assign var=SETTINGS_MENU_LIST value=Settings_Vtiger_Module_Model::getSettingsMenuListForNonAdmin()}
 {assign var=DEPT_LIST value=Users_Record_Model::get_department()}
-<div class="settingsgroup hidden-sm hidden-xs" style="overflow: scroll; margin-top:0; padding-top:0">
+
     <div class='clearfix'></div>
    
         <br  class='{if  $smarty.get.view eq 'list' }hide{/if}'><div class="clearfix"></div>
-        <div class="panel-group  {$smarty.get.view} {if $smarty.get.view eq 'List'  }hide{/if}" id="accordion" role="tablist"  {$smarty.get.module} {$smarty.get.view} aria-multiselectable="true" >
+        <div class="panel-group  {$USERVIEW}" id="accordion" role="tablist"  {$smarty.get.module} {$smarty.get.view} aria-multiselectable="true" >
                 <div class="settingsgroup-panel panel panel-default">
 
                         {foreach item=BLOCK_MENUS key=BLOCK_NAME from=$SETTINGS_MENU_LIST}
@@ -75,7 +75,7 @@
 
         <div class="panel-group" id="accordion_mobile" role="tablist" aria-multiselectable="true">
                 <div class="settingsgroup-panel panel panel-default">
-                    {$SETTINGS_MENU_LIST|print_r}
+             
                         {foreach item=BLOCK_MENUS key=BLOCK_NAME from=$SETTINGS_MENU_LIST}
                                 {assign var=NUM_OF_MENU_ITEMS value= $BLOCK_MENUS|@sizeof}
                                 {if $NUM_OF_MENU_ITEMS gt 0}
@@ -117,7 +117,7 @@
 </div>
 
 </div>
-</div>
+
 
 
 {/strip}

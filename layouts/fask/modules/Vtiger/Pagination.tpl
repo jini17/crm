@@ -44,6 +44,6 @@
             {if $RECORD_COUNT}{$PAGING_MODEL->getRecordStartRange()} {vtranslate('LBL_to', $MODULE)} {$PAGING_MODEL->getRecordEndRange()}{else}
             {/if}
         </span>
-        &nbsp;<span class="totalNumberOfRecords cursorPointer{if !$RECORD_COUNT} hide{/if}" title="{vtranslate('LBL_SHOW_TOTAL_NUMBER_OF_RECORDS', $MODULE)}">{vtranslate('LBL_OF', $MODULE)} <i class="ti-help showTotalCountIcon"></i></span>&nbsp;&nbsp;
+        &nbsp;<span class="totalNumberOfRecords cursorPointer{if !$RECORD_COUNT} hide{/if}" title="{vtranslate('LBL_SHOW_TOTAL_NUMBER_OF_RECORDS', $MODULE)}">{vtranslate('LBL_OF', $MODULE)} {$LISTVIEW_COUNT} <!--<i class="ti-help showTotalCountIcon"></i>--></span>&nbsp;&nbsp;
     </span>
 </div>

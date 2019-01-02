@@ -90,6 +90,9 @@
                 <span class="pull-left mmDetailDate">
                     {Vtiger_Util_Helper::formatDateTimeIntoDayString($MAIL->date(), true)}
                 </span>
+                    <span class="col-lg-11 padding0px mmRelatedRecordDesc textOverflowEllipsis" id="RelatedModuleLink">
+                      &nbsp;&nbsp;{$LINKEDTO.detailviewlink}&nbsp;&nbsp;
+                  </span>
             </div>
             <div class="col-lg-4">
                  <div class="clearfix">

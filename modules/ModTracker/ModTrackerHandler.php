@@ -19,6 +19,10 @@ class ModTrackerHandler extends VTEventHandler {
 		if(!$isTrackingEnabled) {
 			return;
 		}
+		$session = $_SESSION['session_id'];
+        if(!isset($_SESSION['session_id']) OR $_SESSION['session_id']==''){
+        	$session  = 'Webservice/Webform';
+        }
 		if($eventName == 'vtiger.entity.aftersave.final') {
 			$recordId = $data->getId();
 			$columnFields = $data->getData();
@@ -47,7 +51,7 @@ class ModTrackerHandler extends VTEventHandler {
 							}
 							$adb->pquery('INSERT INTO vtiger_modtracker_basic(id, crmid, module, whodid, changedon, status, session_id)
 										VALUES(?,?,?,?,?,?,?)', Array($this->id, $recordId, $moduleName,
-										$current_user->id, $changedOn, $status, $_SESSION['session_id'])); //Session_id Added By Mabruk Requested By Jitu
+										$current_user->id, $changedOn, $status, $session)); //Session_id Added By Mabruk Requested By Jitu
 							$inserted = true;
 						}
 						$adb->pquery('INSERT INTO vtiger_modtracker_detail(id,fieldname,prevalue,postvalue) VALUES(?,?,?,?)',
@@ -57,13 +61,14 @@ class ModTrackerHandler extends VTEventHandler {
 			}
 		}
 
+
 		if($eventName == 'vtiger.entity.beforedelete') {
 			$recordId = $data->getId();
 			$columnFields = $data->getData();
 			$id = $adb->getUniqueId('vtiger_modtracker_basic');
 			//Session_id Added By Mabruk Requested By Jitu
 			$adb->pquery('INSERT INTO vtiger_modtracker_basic(id, crmid, module, whodid, changedon, status, session_id)
-				VALUES(?,?,?,?,?,?,?)', Array($id, $recordId, $moduleName, $current_user->id, date('Y-m-d H:i:s',time()), ModTracker::$DELETED, $_SESSION['session_id'])); 
+				VALUES(?,?,?,?,?,?,?)', Array($id, $recordId, $moduleName, $current_user->id, date('Y-m-d H:i:s',time()), ModTracker::$DELETED, $session)); 
 		}
 
 		if($eventName == 'vtiger.entity.afterrestore') {
@@ -72,7 +77,7 @@ class ModTrackerHandler extends VTEventHandler {
 			$id = $adb->getUniqueId('vtiger_modtracker_basic');
 			//Session_id Added By Mabruk Requested By Jitu
 			$adb->pquery('INSERT INTO vtiger_modtracker_basic(id, crmid, module, whodid, changedon, status, session_id)
-				VALUES(?,?,?,?,?,?,?)', Array($id, $recordId, $moduleName, $current_user->id, date('Y-m-d H:i:s',time()), ModTracker::$RESTORED, $_SESSION['session_id']));
+				VALUES(?,?,?,?,?,?,?)', Array($id, $recordId, $moduleName, $current_user->id, date('Y-m-d H:i:s',time()), ModTracker::$RESTORED, $session));
 		}
 	}
 }

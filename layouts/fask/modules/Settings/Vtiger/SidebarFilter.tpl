@@ -1,4 +1,14 @@
-<div class='col-xs-12  {if  $smarty.get.view neq 'List'   }hide{/if}'>
+
+<div class='col-xs-12 
+     {if $smarty.get.module eq 'Users'}
+         {if $smarty.get.view eq 'List'}
+             
+          {else}
+              hide
+           {/if}   
+      {else}
+          hide
+      {/if}'>
         <h4> Filter </h4>
         <!-- Latest compiled and minified Bootstrap CSS -->
         <div class="panel-group panel-filter" id="accordion">
@@ -50,7 +60,7 @@
                 <div id="collapseThree" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class='department list-unstyled'>
-                            {$DEPT_L}
+                       
                             {foreach item=DEPT from=$DEPT_LIST}
                                 <li><input type="checkbox" name="department" value="{$DEPT}"/> {$DEPT}</li>
                             {/foreach}
@@ -79,3 +89,4 @@
             </div>
         </div>
     </div>
+ 

@@ -77,9 +77,7 @@
                                                         </span>
                                                 {/if}
                                         {/foreach}
-                                        <a class='btn btn-danger Help-btn' >
-                                                                <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; {vtranslate('Gettings Started', $MODULE)}
-                                                        </a>
+                                   
                                                          <a class='btn btn-danger Help-btn' >
                                                                 <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; {vtranslate('Help', $MODULE)}
                                                         </a>
