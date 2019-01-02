@@ -68,7 +68,7 @@ class Settings_Currency_Record_Model extends Settings_Vtiger_Record_Model{
     }
     
     public function save() {
-        $db = PearDatabase::getInstance();
+        $db = PearDatabase::getInstance(); //$db->setDebug(true);
         $id = $this->getId();
         $tableName = Settings_Currency_Module_Model::tableName;
         if(!empty($id)) {
@@ -81,14 +81,14 @@ class Settings_Currency_Record_Model extends Settings_Vtiger_Record_Model{
             );
         }else {
             $id = $db->getUniqueID($tableName);
-            $query = 'INSERT INTO '. $tableName .' VALUES(?,?,?,?,?,?,?,?)';
+            $query = 'INSERT INTO '. $tableName .' VALUES(?,?,?,?,?,?,?,?,?)';
             $params = array(
                 $id , $this->get('currency_name'), $this->get('currency_code'),
                 $this->get('currency_symbol'), $this->get('conversion_rate'), 
-                $this->get('currency_status'),0, 0
+                $this->get('currency_status'),0, 0, $id 
             );
         }
-        $db->pquery($query,$params);
+        $db->pquery($query,$params);        
         return $id;
     }
 

@@ -1,3 +1,10 @@
+<script>
+	var startDate = Date.parse("01-12-2018");
+    var endDate = Date.parse("25-12-2018");
+    var timeDiff = endDate - startDate;
+    daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+   document.write(daysDiff);
+</script>
 <?php
 /*+*******************************************************************************
  * The contents of this file are subject to the vtiger CRM Public License Version 1.0
@@ -8,10 +15,14 @@
  * All Rights Reserved.
  ********************************************************************************/
 
+
+
 /**
  * Start the cron services configured.
  */
 /*
+
+
 error_reporting(1);
 		ini_set('display_erros',1);
 

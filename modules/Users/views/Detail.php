@@ -62,8 +62,7 @@ class Users_Detail_View extends Users_PreferenceDetail_View {
         foreach($moduleFields as $fieldName => $fieldModel){
             $fieldsInfo[$fieldName] = $fieldModel->getFieldInfo();
         }
-        $viewer->assign('FIELDS_INFO', json_encode($fieldsInfo));
-
+      
                 $viewer->assign('SELECTED_FIELDID',$fieldId);
                 $viewer->assign('SELECTED_MENU', $selectedMenu);
                 $viewer->assign('SETTINGS_MENUS', $menuModels);

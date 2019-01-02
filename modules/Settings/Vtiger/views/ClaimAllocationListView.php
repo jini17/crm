@@ -14,8 +14,8 @@ class Settings_Vtiger_ClaimAllocationListView_View extends Settings_Vtiger_Index
         $qualifiedName = $request->getModule(false);
         $viewer = $this->getViewer($request);
         global $adb;
-        //$adb->setDebug(true);
-        $query = "SELECT * FROM allocation_list";
+       // $adb->setDebug(true);
+        $query = "SELECT * FROM allocation_list Where type='C'";
         $resultalloc = $adb->pquery($query,array());
         $count = $adb->num_rows($resultalloc);
 
@@ -36,13 +36,17 @@ class Settings_Vtiger_ClaimAllocationListView_View extends Settings_Vtiger_Index
 
             $values[$i]['allocationtitle'] = $adb->query_result($resultalloc, $i,'allocation_title');
             /**** Getting the name of the claim type ******************/
-            $claimTypeResult = $adb->pquery("SELECT GROUP_CONCAT(claim_type) AS claims FROM vtiger_claimtype INNER JOIN allocation_claimrel ON allocation_claimrel.claim_id = vtiger_claimtype.claimtypeid WHERE allocation_claimrel.allocation_id = ?", array($allocationId));
+            $claimTypeResult = $adb->pquery("SELECT GROUP_CONCAT(claim_type) AS claims FROM vtiger_claimtype 
+                                    INNER JOIN allocation_claimrel ON allocation_claimrel.claim_id = vtiger_claimtype.claimtypeid 
+                                    WHERE allocation_claimrel.allocation_id = ?", array($allocationId));
 
             $values[$i]['claimtype'] = $adb->query_result($claimTypeResult,0,'claims');
         
 
             /**** Getting the name of the grade ******************/
-            $gradeResult = $adb->pquery("SELECT GROUP_CONCAT(grade) AS grade FROM vtiger_grade INNER JOIN allocation_graderel ON allocation_graderel.grade_id = vtiger_grade.gradeid WHERE allocation_graderel.allocation_id = ?", array($allocationId));
+            $gradeResult = $adb->pquery("SELECT GROUP_CONCAT(grade) AS grade FROM vtiger_grade 
+                            INNER JOIN allocation_graderel ON allocation_graderel.grade_id = vtiger_grade.gradeid 
+                            WHERE allocation_graderel.allocation_id = ?", array($allocationId));
 
             $values[$i]['grade'] = $adb->query_result($gradeResult,0,'grade');
 

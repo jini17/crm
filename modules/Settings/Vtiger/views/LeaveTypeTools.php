@@ -61,7 +61,7 @@ class Settings_Vtiger_LeaveTypeTools_View extends Settings_Vtiger_Index_View {
             $leave_type['leave_type_description'] = $adb->query_result($result, 0,'description');
             $leave_type['leave_type_midyearallocation'] = $adb->query_result($result, 0,'midyearallocation');
             $leave_type['leave_type_leavefrequency'] = $adb->query_result($result, 0,'leavefrequency');
-            $leave_type['leave_type_status'] = $adb->query_result($result, 0,'leavetype_status');
+            $leave_type['leave_type_status'] = $adb->query_result($result, 0,'leavetypestatus');
             $leave_type['leave_type_carryforward'] = $adb->query_result($result, 0,'carryforward');
             $leave_type['leave_type_halfdayallowed'] = $adb->query_result($result, 0,'halfdayallowed');
             $leave_type['leave_type_id'] = $adb->query_result($result, 0,'leavetypeid');
@@ -135,7 +135,7 @@ class Settings_Vtiger_LeaveTypeTools_View extends Settings_Vtiger_Index_View {
         $crmentityinsertresult = $adb->pquery($crmentityinsertquery,array($params));
 
         if($crmentityinsertresult){
-            $query = "INSERT INTO `vtiger_leavetype` (`leavetypeid`, `title`, `leavecode`,`leaveType_status`,`description`,`midyearallocation`,`halfdayallowed`,`carryforward`,`leavefrequency`) VALUES (?,?,?,?,?,?,?,?,?)";
+            $query = "INSERT INTO `vtiger_leavetype` (`leavetypeid`, `title`, `leavecode`,`leavetypestatus`,`description`,`midyearallocation`,`halfdayallowed`,`carryforward`,`leavefrequency`) VALUES (?,?,?,?,?,?,?,?,?)";
             $result = $adb->pquery($query,array($leavetypeid,$leavetype['LeaveTypeTitle'],$leavetype['LeaveTypeCode'],$leavetype['status'],$leavetype['LeaveType_Desc
 '],$leavetype['LeaveType_MidYearAllcoation'],$leavetype['LeaveType_HalfdayAllowed'],$leavetype['LeaveType_CarryForward'],$leavetype['LeaveType_LeaveFrequency']));
 
@@ -183,7 +183,7 @@ class Settings_Vtiger_LeaveTypeTools_View extends Settings_Vtiger_Index_View {
             $leavetype['LeaveType_CarryForward']= 'off';
         }
 
-        $query = "UPDATE `vtiger_leavetype` SET `title`=?, `leavecode`=?, `leaveType_status`=?, `description`=?, `midyearallocation`=?, halfdayallowed=?,`carryforward`=?, `leavefrequency`=? WHERE leavetypeid=?";
+        $query = "UPDATE `vtiger_leavetype` SET `title`=?, `leavecode`=?, `leavetypestatus`=?, `description`=?, `midyearallocation`=?, halfdayallowed=?,`carryforward`=?, `leavefrequency`=? WHERE leavetypeid=?";
         $result = $adb->pquery($query,array($leavetype['LeaveTypeTitle'],$leavetype['LeaveTypeCode'],$leavetype['status'],$leavetype['LeaveType_Desc
 '],$leavetype['LeaveType_MidYearAllcoation'],$leavetype['LeaveType_HalfdayAllowed'],$leavetype['LeaveType_CarryForward'],$leavetype['LeaveType_LeaveFrequency'],$leavetype['LeaveTypeId']));
 

@@ -363,8 +363,7 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 
 	}
 
-	//Created by Safuan for fetching leave types//	
-	//modified by jitu for concate color and balance in dropdown 
+	//added by jitu for concat color and balance in dropdown 
 	public function getClaimTypeList($userid){  
 
 		$db = PearDatabase::getInstance();

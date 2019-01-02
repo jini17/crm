@@ -29,6 +29,7 @@ class Users_Login_Action extends Vtiger_Action_Controller {
                 /** 
                        * Added By Khaled
                        * Kill Multi Login Session
+                      * 
                        */
 
                 $adb                = PearDatabase::getInstance();
@@ -45,11 +46,16 @@ class Users_Login_Action extends Vtiger_Action_Controller {
                                 $userIP = $_SERVER['REMOTE_ADDR'];          
                                  // update the user login info.
                                  $query = "Update vtiger_loginhistory set logout_time =?, status=? where login_id =  ?";
-                                 $result1 = $adb->pquery($query, array($username, 'Signed off', $loginid));
+                                 /**============
+                                  * Disabled temporary
+                                  */
+                                 //$result1 = $adb->pquery($query, array($username, 'Signed off', $loginid));
+                                 
+                                 
                             }
                     }
                               session_start();
-                                $_SESSION['multi_login'] =  "yes"; 
+                                $_SESSION['multi_login'] =  "no";  //  Original Value yes Disabled for certain period of time
                 }
                 else{
                       session_start();

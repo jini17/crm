@@ -26,11 +26,11 @@ class Settings_Vtiger_LeaveTypeListView_View extends Settings_Vtiger_Index_View 
             $values[$i]['checkbox'] = $adb->query_result($result, $i,'leavetypeid');
             $values[$i]['leavetype_type'] = $adb->query_result($result, $i,'title');
             $values[$i]['leavetype_code'] = $adb->query_result($result, $i,'leavecode');
-            $values[$i]['leavetype_status'] = $adb->query_result($result, $i,'leavetype_status');
-            if($values[$i]['leavetype_status'] == 'on'){
-                $values[$i]['leavetype_status'] = 'Active';
+            $values[$i]['leavetypestatus'] = $adb->query_result($result, $i,'leavetypestatus');
+            if($values[$i]['leavetypestatus'] == 'on'){
+                $values[$i]['leavetypestatus'] = 'Active';
             }else{
-                $values[$i]['leavetype_status'] = 'Inactive';
+                $values[$i]['leavetypestatus'] = 'Inactive';
             }
 
         }
