@@ -9,6 +9,7 @@
  * ***********************************************************************************/
 
 Class Office365_Config_Connector {
+
 	static $clientId = 'c743e95f-7eae-4e82-9a3f-e7819b2c93dd';
 	static $clientSecret = 'wkieWV579$+$kpzBVTUI97]';
 
