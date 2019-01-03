@@ -62,7 +62,10 @@ $languageStrings = array(
 	'LBL_VIEW_CONTRACT'=> 'View My Contract',
 	'LBL_GOOD_DAY' => 'Good Day',
 	'User'=>'Employee',
-    'Bill'=> 'Office Bill'                
+    'Bill'=> 'Office Bill',
+    'LBL_PLAN'=>'Plan',
+    'LBL_DURATION'=>'Plan Duration',
+    'LBL_NO_USERS'=>'No of Users',                
  
 );
 

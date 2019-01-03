@@ -13,21 +13,21 @@
  */
 class Vtiger_CompanyDetails_Model extends Vtiger_Base_Model {
 
-	/**
-	 * Function to get the Company Logo
-	 * @return Vtiger_Image_Model instance
-	 */
-	public function getLogo(){
-		$logoName = decode_html($this->get('logoname'));
-		$logoModel = new Vtiger_Image_Model();
-		if(!empty($logoName)) {
-			$companyLogo = array();
-			$companyLogo['imagepath'] = "test/logo/$logoName";
-			$companyLogo['alt'] = $companyLogo['title'] = $companyLogo['imagename'] = $logoName;
-			$logoModel->setData($companyLogo);
-		}
-		return $logoModel;
-	}
+    /**
+     * Function to get the Company Logo
+     * @return Vtiger_Image_Model instance
+     */
+    public function getLogo(){
+        $logoName = decode_html($this->get('logoname'));
+        $logoModel = new Vtiger_Image_Model();
+        if(!empty($logoName)) {
+            $companyLogo = array();
+            $companyLogo['imagepath'] = "test/logo/$logoName";
+            $companyLogo['alt'] = $companyLogo['title'] = $companyLogo['imagename'] = $logoName;
+            $logoModel->setData($companyLogo);
+        }
+        return $logoModel;
+    }
 
     /**
      * Function to get the instance of the CompanyDetails model for a given organization id
