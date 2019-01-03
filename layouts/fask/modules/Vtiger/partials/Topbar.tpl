@@ -826,7 +826,6 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                         {/if}
                                                         <div class="dropdown-menu logout-content animated fadeInRight profile-tool-box" role="menu">
                                                             <div class="row">
-
                                                                 <div class="col-lg-12 col-sm-12" style="padding:10px;">
                                                                     <div class="profile-container col-lg-12 col-sm-13">
                                                                         {assign var=IMAGE_DETAILS value=$USER_MODEL->getImageDetails()}

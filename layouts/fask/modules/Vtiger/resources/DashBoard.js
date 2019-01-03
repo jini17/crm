@@ -49,11 +49,16 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         var linkId = element.data('linkid');
         var name = element.data('name');
         var group = element.data('group');
-
+  
+  if(element.attr("disabled").length > 0){
+   
+        app.helper.showErrorNotification({"message": 'Widget already in use'});
+      return false;
+  }
 // After adding widget, we should remove that widget from Add Widget drop down menu from active tab
         var activeTabId = Vtiger_DashBoard_Js.currentInstance.getActiveTabId();
-        jQuery('a[data-name="' + name + '"]', "#tab_" + activeTabId).parent().hide();
-        element.closest("li").remove();
+      //  jQuery('a[data-name="' + name + '"]', "#tab_" + activeTabId).parent().hide();
+        element.attr("disabled","disabled");
         var widgetContainer = jQuery('<li class="new dashboardWidget loadcompleted" data-group="'+group+'" id="' + linkId + '" data-name="' + name + '" data-mode="open"></li>');
         widgetContainer.data('url', url);
         var width = element.data('width');
@@ -539,6 +544,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                                     jQuery(data).insertBefore(divider);
                                         app.helper.hideProgress();
                                 } else {
+                                    alert(jQuery(".widgetList").find("data-linkid='"+ response.linkid + "'").attr("class"))
                                //   jQuery(".widgetsList ").find("."+group).find("ul").append(data)
                              app.helper.hideProgress();
                                   // jQuery(data).insertAfter(jQuery('.widgetsList li:last', '#tab_' + activeTabId));
@@ -699,8 +705,8 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                 app.request.post({"data": data}).then(function (err, data) {
                     app.helper.hideProgress();
                     if (err == null) {
-                        jQuery('li[data-tabid="' + tabId + '"]').remove();
-                        jQuery('.tab-content #tab_' + tabId).remove();
+//                        jQuery('li[data-tabid="' + tabId + '"]').remove();
+//                        jQuery('.tab-content #tab_' + tabId).remove();
 
                         if (jQuery('.dashboardTab.active').length <= 0) {
 // click the first tab if none of the tabs are active
