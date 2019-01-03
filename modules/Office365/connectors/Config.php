@@ -9,8 +9,8 @@
  * ***********************************************************************************/
 
 Class Office365_Config_Connector {
-	static $clientId = '9ded2727-fcaf-44ad-9e75-b5b8c376e5eb';
-	static $clientSecret = '';
+	static $clientId = 'e30075a9-6802-4e9e-b9b1-f089d606adb4';
+	static $clientSecret = 'mbfenTH5{;ntKXAJX9529}+';
 
 	static function getRedirectUrl() {
 
