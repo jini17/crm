@@ -4693,7 +4693,7 @@ form[name="notification_settings"] .select2-choice {
   color: #000;
 }
 .dashBoardContainer .entryIcon {
-  font-size: 120%;    margin-right: 5px;
+  font-size: 120%;    margin-right: 5px; margin-top: -15px;
 }
 .dashBoardContainer .addDashboardTab {
   padding-bottom: 3px;
