@@ -36,6 +36,7 @@ class Vtiger_List_View extends Vtiger_Index_View {
 
 		$moduleName = $request->getModule();
 		$customView = new CustomView();
+		
 		if($customView->isPermittedCustomView($request->get('viewname'), 'List', $moduleName) != 'yes') {
 			$viewName = $customView->getViewIdByName('All', $moduleName);
 			$request->set('viewname', $viewName);

@@ -291,40 +291,17 @@ class Home_Module_Model extends Vtiger_Module_Model {
 
     function getSubscriptionDetail(){
     	$db = PearDatabase::getInstance();
-
     	$result = $db->pquery("SELECT * FROM secondcrm_plan WHERE isactive=1", array());
     	$numOfRows = $db->num_rows($result);
     	$plandetail = array();
     	for($i=0; $i<$numOfRows; $i++) {
     		$plan = $db->query_result($result, $i, 'plantitle');
+    		$planid = $db->query_result($result, $i, 'planid');
     		$nousers = $db->query_result($result, $i, 'nousers');
-    		$plandetail[$plan] = $nousers;
+    		$startdate = $db->query_result($result, $i, 'createdtime');
+    		$enddate = $db->query_result($result, $i, 'expiredate');
+    		$plandetail[$plan] = array($nousers, date('jS M Y', strtotime($startdate)), date('jS M Y', strtotime($enddate)));
     	}
-    	
-    	global $dbconfig;
-	
-		$con = new mysqli($dbconfig['db_server'], $dbconfig['db_username'], $dbconfig['db_password'], $dbconfig['db_cp'], str_replace(':','',$dbconfig['db_port']));
-
-		if (!$con) {
-			die('Could not connect to'.$dbconfig['db_cp'].': ' . mysqli_error($con));
-		}
-
-    	$select_subscription = "SELECT FROM_DATE, TO_DATE FROM  SUBSCRIPTION INNER JOIN ACCOUNT ON ACCOUNT.ACCOUNT_ID=SUBSCRIPTION.ACCOUNT_ID
-    				WHERE ACCOUNT.SHORT_NAME='$dbconfig[db_name]' ORDER BY SUBSCRIPTION.CREATED_BY DESC LIMIT 0,1";
-       $result =  $con->query($select_subscription) or die("Select data failed. SUBSCRIPTION ERROR::". $con->error);
-        $row = $result->fetch_array();
-        $startdate = $row['FROM_DATE'];
-        $enddate = $row['TO_DATE'];
-        $con->close();
-        $plandetail['startdate'] = date('jS M Y', strtotime($startdate));
-        $plandetail['enddate'] = date('jS M Y', strtotime($enddate));
-        $diff = round(strtotime($enddate)-strtotime($startdate)/3600);
-        $plandetail['btnrenew'] = 0;
-        if($diff < 20) {
-
-        	 $plandetail['others']['btnrenew'] = 1;
-        }
-       
         return $plandetail;
     }
     

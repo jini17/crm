@@ -58,7 +58,7 @@ $languageStrings = array(
 	'LBL_CONTRACT_EXPIRE' => 'Contract expires in',
 	'LBL_SINCE' => 'since',
 	'LBL_CONTRACT_NOTIFICATION'=> 'Your Contract is expiring soon. Kindly contact your HR for further assistance',
-	'LBL_VIEW_PROFILE'=> 'Go to My Profile',
+	'LBL_VIEW_PROFILE'=> 'Go to  Profile',
 	'LBL_VIEW_CONTRACT'=> 'View My Contract',
 	'LBL_GOOD_DAY' => 'Good Day',
 	'User'=>'Employee',
@@ -69,5 +69,4 @@ $languageStrings = array(
 $jsLanguageStrings = array(
 	'JS_TAB_NAME_SHOULD_NOT_BE_EMPTY' => 'Dashboard name cannot not be empty',
 	'JS_NO_DATA_AVAILABLE' => 'No data available',
-	'JS_NO_CLAIMTYPE_ALLOCATE'=>'No claim policy done yet!!',
 );

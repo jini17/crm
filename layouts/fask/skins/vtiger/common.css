@@ -4693,7 +4693,13 @@ form[name="notification_settings"] .select2-choice {
   color: #000;
 }
 .dashBoardContainer .entryIcon {
-  font-size: 120%;    margin-right: 5px;
+<<<<<<< HEAD
+  font-size: 120%;    
+  margin-right: 5px; 
+  margin-top: -15px;
+=======
+  font-size: 120%;    margin-right: 5px; margin-top: -15px;
+>>>>>>> 5831d178c7e8f37d5f1c02558efc5da99985fefa
 }
 .dashBoardContainer .addDashboardTab {
   padding-bottom: 3px;
@@ -9818,8 +9824,8 @@ right connector from last child*/
           color: #333;
       }  
       
-           /** =======================
-     Calender Settings
+      /** =======================
+        Calender Settings
      ===========================*/
      .settingsIndexPage h4{
          color: #2f5597;
@@ -9829,9 +9835,9 @@ right connector from last child*/
          color: #2f5597;
      }
      #settingsShortCutsContainer  .moduleBlock{
-         width: 23.44% !important;
-         
+         width: 23.44% !important;       
      }
+     
      .settingsIndexPage #settingsShortCutsContainer span.header{
          display: block;
          width: 100%
@@ -9851,38 +9857,7 @@ right connector from last child*/
          margin-top: 10px !important;
          margin-right: 10px !important;
      }
-     #settingsShortCutsContainer .moduleBlock:hover{
-          background-color: #2f5597 !important;
-          color: #fff;
-     }
-     .settingsIndexPage .settingsSummary .summaryCount{
-         padding: 0;
-     }
-
-     
-/**=================
-    Employee Directory
-=====================*/
-.active.employeeTab{
-    border-bottom: 2px solid  #3B5998 !important;
-    
-}
-
-.pagination li.active{
-  border-bottom: 2px solid #3B5998 ;
-  color: #2f5597 ;
-}
-
-.pagination li.active a{
-    color: #fff;
-    background:  #3B5998 ;
-}
-.alphabetSorting table .alphabetSearch a{
-color: #2f5597 !important;
-}
-.global-nav{
-          border-bottom: 2px solid  #2f5597;
-}
+  
 .fa-facebook {
     background: #3B5998;
     color: white;
@@ -9906,7 +9881,201 @@ color: #2f5597 !important;
 .user-meta{
     min-height: 84px;
 }
-#widget_id_131 .img-holder{
-    width: auto !important;
-    height: auto !important;
+
+        /**===================
+        * Dashboard Scroll to Top
+        * TODO: Gridster
+        *======================*/
+        .strolltotop,.strolltotop:hover{           
+            padding            : 10px;
+            font-size           : 25px;
+            font-weight     : bold;
+            position             : absolute;
+            width                : 55px;
+            height               : 56px;
+            border-radius  : 50%;
+            bottom             : 10%;
+            right                  : 1%;
+            background     : #333;
+            text-align         : center;
+            color                 : #fff;                       
+        }
+/*        .gridster_2{
+            height: 720px;
+            overflow-y: scroll;
+        }*/
+
+ /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+#menubar_item_right_LBL_MY_PREFERENCES
+, #menubar_item_right_LBL_SIGN_OUT {
+    padding: 5px 10px !important
+    font-size: 12px !important;
+}
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+} 
+.color-box{
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 5px !important;
+    border: 1px solid #ccc;
+    border-radius: 50% !important;
+    position: relative;
+}
+.color-box i{
+    position: absolute;
+    left: 2%;
+    top: 5%;
+    font-size: 10px;
+}
+.text-bold{
+    margin: 0 !important;
+}
+.color-blue,
+.color-blue:hover{
+    background: #6783B3;    
+    color: #fff;
+}
+.color-purple,
+.color-purple:hover{
+    background: #d971ae;    
+     color: #fff;
+}
+.color-yellow,
+.color-yellow:hover{
+    background: #f6bb43;
+     color: #fff;
+}
+.color-green,
+.color-green:hover{
+    background: #3bbd9b;
+     color: #fff;
+}
+.color-list li i{
+    color: #fff !important;
+}
+
+.color-shipcove,
+.color-shipcove:hover{
+    background: #6783B3;
+     color: #fff;
+}
+
+.color-lilacbush,
+.color-lilacbush:hover{
+    background: #997CCD;
+     color: #fff;
+}
+
+.color-energyyellow,
+.color-lilacbush:hover{
+    background: #FAD852;
+     color: #fff;
+}
+
+.color-downy,
+.color-downy:hover{
+    background: #67D0AF;
+     color: #fff;
+}
+
+.color-lily,
+.color-lily:hover{
+    background: #CBA7C1;
+     color: #fff;
+}
+
+
+.color-danube,
+.color-danube:hover{
+    background: #77A1D3;
+     color: #fff;
+}
+
+.color-selectiveyellow,
+.color-selectiveyellow:hover{
+    background: #F7B301;
+     color: #fff;
+}
+
+.color-sandybrown,
+.color-sandybrown:hover{
+    background: #F4967A;
+     color: #fff;
+}
+
+.color-mandy,
+.color-mandy:hover{
+    background: #EC5C64;
+     color: #fff;
+}
+
+.color-aquaisland,
+.color-aquaisland:hover{
+    background: #AFDFDF;
+     color: #fff;
+     padding: 5px;
+}
+
+.miniListContent .img-holder{
+    width: auto;
+    height: auto;
 }

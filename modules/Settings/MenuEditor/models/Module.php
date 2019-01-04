@@ -73,7 +73,7 @@ class Settings_MenuEditor_Module_Model extends Settings_Vtiger_Module_Model {
                                 $sequence = $db->query_result($result, $i, 'sequence');
                                 $appname = $db->query_result($result, $i, 'appname');
                                 $moduleModel->set('app2tab_sequence', $sequence);
-                                if (($userPrivModel->isAdminUser() || $current_user->roleid=='H12' ||
+                                if (($userPrivModel->isAdminUser() || in_array($current_user->roleid, array('H12','H2','H13')) ||
                                                 $userPrivModel->hasGlobalReadPermission() ||
                                                 $userPrivModel->hasModulePermission($moduleModel->getId())) && in_array($moduleModel->get('presence'), $presence)) {
                                         $modules[$appname][$moduleName] = $moduleModel;
