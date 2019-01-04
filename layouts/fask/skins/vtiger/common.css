@@ -4693,7 +4693,13 @@ form[name="notification_settings"] .select2-choice {
   color: #000;
 }
 .dashBoardContainer .entryIcon {
-  font-size: 120%;    margin-right: 5px;
+<<<<<<< HEAD
+  font-size: 120%;    
+  margin-right: 5px; 
+  margin-top: -15px;
+=======
+  font-size: 120%;    margin-right: 5px; margin-top: -15px;
+>>>>>>> 5831d178c7e8f37d5f1c02558efc5da99985fefa
 }
 .dashBoardContainer .addDashboardTab {
   padding-bottom: 3px;
@@ -10007,8 +10013,6 @@ input:checked + .slider:before {
     color: #fff !important;
 }
 
-<<<<<<< HEAD
-=======
 .color-shipcove,
 .color-shipcove:hover{
     background: #6783B3;
@@ -10075,4 +10079,3 @@ input:checked + .slider:before {
     width: auto;
     height: auto;
 }
->>>>>>> 0619125494ad72b1f2731f240e16abfa538bf857
