@@ -49,7 +49,9 @@ $languageStrings = array(
     'LBL_DEPARTMENT' => 'Department',
     'LBL_DESIGNATION' => 'Designation',
 	'LBL_LEAVE_APPROVAL'=>'My Team Leave Approval',
-
+	'LBL_PLAN'=>'Plan',
+	'LBL_NO_USERS'=>'No of Users',
+	'LBL_DURATION'=>'Subscription Duration', 
 	'LBL_NOT_FOUND'       => 'Not Found',
 	'LBL_WORKING_AS'  => 'Working as',
 	'LBL_OF_JOB' => 'Job',
