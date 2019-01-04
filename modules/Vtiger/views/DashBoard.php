@@ -117,7 +117,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer = $this->getViewer($request);
                 $moduleName = $request->getModule();
                 $dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
-
+                $current_user = 
                 //check profile permissions for Dashboards
                 $moduleModel = Vtiger_Module_Model::getInstance('Dashboard');
                 $userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
@@ -142,15 +142,15 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer->assign('DASHBOARD_TABS', $dashboardTabs);
                 $viewer->assign('DASHBOARD_TABS_LIMIT', $dashBoardModel->dashboardTabLimit);
                 $viewer->assign('SELECTED_TAB',$tabid);
-                
+                $current_user = Users_Record_Model::getCurrentUserModel();
             if (self::$selectable_dashboards) {
             
                         $widget_group   = $this->Widget_Group(self::$selectable_dashboards,$moduleName);
                         $viewer->assign('SELECTABLE_WIDGETS', self::$selectable_dashboards);
-                        $viewer->assign("EMPLOYEE_GROUP", $this->get_widgets_by_group("employee", $modulename));
-                        $viewer->assign("CHART_GROUP", $this->get_widgets_by_group("chart", $modulename));
-                        $viewer->assign("LEAVECLAIM_GROUP",  $this->get_widgets_by_group("leaveclaim", $modulename));
-                        $viewer->assign("GENERAL_GROUP",  $this->get_widgets_by_group("general", $modulename));
+                        $viewer->assign("EMPLOYEE_GROUP", $this->get_widgets_by_group("employee", $modulename,$current_user->get("id"),$tabid));
+                        $viewer->assign("CHART_GROUP", $this->get_widgets_by_group("chart", $modulename,$current_user->get("id"),$tab_id));
+                        $viewer->assign("LEAVECLAIM_GROUP",  $this->get_widgets_by_group("leaveclaim", $modulename,$current_user->get("id"),$tabid));
+                        $viewer->assign("GENERAL_GROUP",  $this->get_widgets_by_group("general", $modulename,$current_user->get("id"),$tabid));
             }
             
                 $viewer->assign('CURRENT_USER', Users_Record_Model::getCurrentUserModel());
@@ -198,11 +198,11 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
      * @param type $group
      * @param type $modulename
      */
-        public function get_widgets_by_group($group,$modulename){
+        public function get_widgets_by_group($group,$modulename,$userid,$tab_id){
             $data = array();
             $db = PearDatabase::getInstance();
           //  $db->setDebug(true);
-            $sql = "SELECT * from vtiger_links WHERE linktype = 'DASHBOARDWIDGET' AND widgetgroup = '$group'";
+            $sql = "SELECT * from vtiger_links WHERE linktype = 'DASHBOARDWIDGET' AND widgetgroup = '$group' ";
             $query = $db->pquery($sql,array());
             $num_rows =  $db->num_rows($query);
             if($num_rows > 0){
@@ -211,12 +211,24 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                     $data[$i]['linkid']        = $db->query_result($query, $i,'linkid');
                     $data[$i]['name']       = $db->query_result($query, $i,'linklabel');
                     $data[$i]['title']          = vtranslate($db->query_result($query, $i,'linklabel'), $modulename);  
-                    $data[$i]['is_closed'] = $db->query_result($query, $i,'is_closed'); 
+                    $data[$i]['is_closed'] =  $db->query_result($query, $i,'is_closed'); 
                     $data[$i]['width']       = 1;
-                    $data[$i]['height']      =1;
+                    $data[$i]['height']      = 1;
                 }
             }
+            
             return $data;
+        }
+
+        public function is_widget_used($user_id,$tab_id,$linkid){
+            $db = PearDatabase::getInstance();
+            $sql = "SELECT * from vtiger_module_dashboard_widgets WHERE userid=$userid AND dashboardtabid = '$tab_id' AND linkid = '$linkid'";
+            $query = $db->pquery($sql,array());
+            $num_rows = $db->num_rows($query);
+            if($num_rows > 0){
+                return 1;
+            }
+            return 0;
         }
 
         /**

@@ -50,15 +50,16 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         var name = element.data('name');
         var group = element.data('group');
   
-  if(element.attr("disabled").length > 0){
+  if(typeof element.attr("disabled") !== typeof undefined ){
    
         app.helper.showErrorNotification({"message": 'Widget already in use'});
       return false;
   }
+  element.attr("disabled","disabled")
 // After adding widget, we should remove that widget from Add Widget drop down menu from active tab
         var activeTabId = Vtiger_DashBoard_Js.currentInstance.getActiveTabId();
       //  jQuery('a[data-name="' + name + '"]', "#tab_" + activeTabId).parent().hide();
-        element.attr("disabled","disabled");
+
         var widgetContainer = jQuery('<li class="new dashboardWidget loadcompleted" data-group="'+group+'" id="' + linkId + '" data-name="' + name + '" data-mode="open"></li>');
         widgetContainer.data('url', url);
         var width = element.data('width');
@@ -544,7 +545,8 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                                     jQuery(data).insertBefore(divider);
                                         app.helper.hideProgress();
                                 } else {
-                                    alert(jQuery(".widgetList").find("data-linkid='"+ response.linkid + "'").attr("class"))
+                                jQuery(".widget-item a[data-linkid='"+ response.linkid + "']").removeAttr("disabled")
+                               
                                //   jQuery(".widgetsList ").find("."+group).find("ul").append(data)
                              app.helper.hideProgress();
                                   // jQuery(data).insertAfter(jQuery('.widgetsList li:last', '#tab_' + activeTabId));
@@ -701,7 +703,6 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                     'mode': 'deleteTab',
                     'tabid': tabId
                 }
-
                 app.request.post({"data": data}).then(function (err, data) {
                     app.helper.hideProgress();
                     if (err == null) {
@@ -726,6 +727,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             });
         });
     },
+    
     /**
      * Added By Khaled
      * Reset Data

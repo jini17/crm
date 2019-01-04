@@ -718,3 +718,11 @@ color: #2f5597 !important;
      color: #fff;
      padding: 5px;
 }
+
+.widgetsList a:hover{
+    background: #2f5597 !important;
+    color: #fff !important;
+}
+.widgetsList a{
+     padding: 5px !important;
+}
