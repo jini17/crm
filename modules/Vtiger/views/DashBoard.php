@@ -145,8 +145,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $current_user = Users_Record_Model::getCurrentUserModel();
             if (self::$selectable_dashboards) {
             
-                        $widget_group   = $this->Widget_Group(self::$selectable_dashboards,$moduleName);
-                     
+                      
                         $viewer->assign('SELECTABLE_WIDGETS', self::$selectable_dashboards);
                         $viewer->assign("EMPLOYEE_GROUP", $this->get_widgets_by_group("employee", $modulename,$current_user->get("id"),$tabid));
                         $viewer->assign("CHART_GROUP", $this->get_widgets_by_group("chart", $modulename,$current_user->get("id"),$tab_id));
@@ -163,40 +162,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 parent::postProcess($request);
         }
         
-        public function Widget_Group($groups,$modulename){
-            $groupData = array();
-       
-  $widgets = $this->GetWidgetList();
-       
-            foreach ($widgets as $group){
-      
-               $data['URL'] = $group['URL'];
-                $data['linkid'] =$group['linkid'];
-                $data['name'] = $group['name']; 
-                $data['width'] = $group['width'] ;
-                $data['height'] = $group['height'];
-                $data['title'] = $group['title'];
-                $data['widgetgroup'] =$group['widgetgroup'];
-
-               if($group["widgetgroup"]  == "employee"){
-                   $groupData['employee'][]=$data;
-               } 
-              elseif($group["widgetgroup"] == "leaveclaim" ){
-                   $groupData['leaveclaim'][]=$data;
-               }
-              elseif($group["widgetgroup"]  == "chart"){
-                   $groupData['chart'][]=$data;
-               }
-               elseif($group["widgetgroup"] == "general"){
-                   $groupData['general'][]=$data;
-               }
-            }
-            
-            return $groupData;
-            
-        }
-
-        
+         
     /**
      * GET tabs  by group
      * @param type $group
