@@ -101,6 +101,11 @@
 .modal-box-body {
     font-size: 12px;
 }
+#fieldsize1,
+#fieldsize2{
+    width: 100%;
+}
+
 </style>
 <div style="    background-color: #fff;
    display: block;
@@ -267,9 +272,10 @@
                                </div>
                             
                               <div id="social">
-  <div id="container">
+                                  <div id="container text-center" class="text-center">
      <label class="SocialMedLabel">Connect with us</label>
-     <ul style="margin: 0;">
+     <div class="clearfix"></div>
+     <ul style="margin:0 auto" class="list-unstyled list-inline text-center">
         <li>
            <a class="socialiconnew" href="https://www.facebook.com/secondcrm" title="facebook" target="_blank">
               <i class="icon-sc icon-sc-facebook2"></i>
@@ -296,6 +302,7 @@
      </ul>
   </div>
 </div>
+                                              <div class="clearfix"></div>
                                     
                                        <!-- Start Social Media Link --> 
                                     </div>   

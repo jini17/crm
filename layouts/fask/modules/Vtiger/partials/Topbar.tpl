@@ -905,7 +905,6 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                         {/if}
                                                         <div class="dropdown-menu logout-content animated fadeInRight profile-tool-box" role="menu">
                                                             <div class="row">
-
                                                                 <div class="col-lg-12 col-sm-12" style="padding:10px;">
                                                                     <div class="profile-container col-lg-12 col-sm-13">
                                                                         {assign var=IMAGE_DETAILS value=$USER_MODEL->getImageDetails()}
@@ -999,7 +998,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                     </div>    
                                                                 </div>
                                                             </div>
-
+                                                                            <div class="clearfix"></div>
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -2148,7 +2147,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                         {assign var=useremail value=$USER_MODEL->get('email1')}
                                                                         <h6 class="textOverflowEllipsis text-center" title='{$USER_MODEL->get('email')}'>{$useremail}</h6>
                                                                     </div>
-                                                                    <hr style="margin: 10px 0 !important">
+                                                                    <hr style="margin: 0 !important">
                                                                     <div class="col-lg-12 col-sm-12 text-center">
                                                                         <ul class="dropdown-user list-inline ">
                                                                             <li role="separator" class="divider"></li>
@@ -2165,7 +2164,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                                 </ul>
                                                                     </div>
                                                                     <div class="clearfix"></div>
-                                                                    <hr>
+                                                                    <hr style='margin: 0;'>
                                                                     <div class="clearfix"></div>
                                                                     <div class="col-md-12 col-lg-12 col-xs-12">
                                                                         <h5 class="text-bold">Themes</h5>                                                                                                                                   
@@ -2195,6 +2194,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                         </ul>    
                                                                     </div>    
                                                                 </div>
+                                                                            <div class="clearfix"></div>
                                                             </div>
 
                                                                 </div>

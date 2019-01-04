@@ -51,7 +51,7 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
                 $empbydept       = $this->get_employee_by_dept($db,$department,$site_URL);
                 $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 
-  
+                //print_r($empbydept);
                 $viewer->assign('WIDGET', $widget);
                 $viewer->assign('MODULE_NAME', $moduleName);
 
@@ -120,7 +120,7 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
          * @return type
          */
         public function get_employee_by_dept($db,$where,$url){
-            //$db->setDebug(TRUE);
+           //$db->setDebug(TRUE);
             $data = array();
             $sql = 'SELECT vtiger_employeecontract.department as dept,COUNT(*) as total FROM vtiger_employeecontract   INNER JOIN vtiger_department ON vtiger_employeecontract.department = vtiger_department.department WHERE color !="" ';
               if($where != NULL){
@@ -144,8 +144,8 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
            else{
                $data['labels'][]    = "&nbsp;";
                 $data['values'][]  = "";
-                $data['links'][]      = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings';
-                $data['colors'][]   = "";
+                $data['links'][]      = $url.'/index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings&search_params=[[["department","e","'.$dept.'"]]]';
+                $data['colors'][]   = "#ffffff";
            }
       
            return $data;
