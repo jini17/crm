@@ -11,8 +11,8 @@
 Class Google_Config_Connector {
 
 
-	static $clientId = '949973452984-u9snksbvv6gcnhp5oebhlkpoh39p85rt.apps.googleusercontent.com';
-	static $clientSecret = 'ABChDJmzI17a92XUL3P7xXYM';
+	static $clientId = '822496829912-bvnhe5embvssrk0f8ugviq4jeajh6j4f.apps.googleusercontent.com';
+	static $clientSecret = 'Xi-8PBCq2gmCKmnRacGaHjob';
 
 
 

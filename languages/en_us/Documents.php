@@ -18,7 +18,7 @@ $languageStrings = array(
 	'LBL_NOTE_INFORMATION' => 'Basic Information',
 	'LBL_FILE_INFORMATION' => 'File Details',
 	'LBL_DESCRIPTION' => 'Description',
-
+                     'Is HR Document?' => 'Policy Document',
 	//Field Labels
 	'Title' => 'Title',
 	'File Name' => 'File Name',
