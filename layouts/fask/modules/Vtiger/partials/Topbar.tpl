@@ -37,8 +37,8 @@
             padding: 0 !important;
             height: 33px !important;
             margin-top: 4px !important;
-           background-color: #2f5597 !important;
-            color: #fff !important;
+           background-color: #fff;
+            color: #000 ;
             border-radius: 3px !important;
             border: 0 !important;
             box-shadow:none !important;
@@ -71,15 +71,74 @@
     border: 2px solid #bdc3c7;
     border-radius: 6px;
     outline: none;
-
-color: #34495e;
+    color: #34495e;
 }
+.notifications{
+    position:relative;
+}
+.notification-list{
+    position:absolute;
+    z-index:10000;
+    width:250px;
+    height:200px;
+    background-color: #fff !important;
+    color: #000 !important;
+    left:-200px;
+}
+
+.notifications-heading{
+    padding:5px;
+    font-size:10px !important;
+    font-weight: bold;
+    background-color: #2f5597 !important;
+    color:#fff !important;
+    padding:10px;
+    margin:0;
+    border-radius: 5px;
+}
+.notifications-heading i{
+    margin-right:10px !important;
+    color:#fff !important;
+
+}
+
+.notification-list::before {
+    position: absolute;
+    top: -7px;
+    right: 26px;
+    display: inline-block;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    border-left: 7px solid transparent;
+    border-bottom-color: rgba(0,0,0,0.2);
+    content: '';
+}
+
+.notification-container .img-holder{
+    width:40px;
+    height:40px;
+    float:left;
+}
+
+.notification-container{
+    padding:10px;
+    border:1px solid #ccc;
+}
+
+.notification-container .notification-title{
+    width:200px;
+    float:right;
+}
+
+.notification-container .notification-time{
+
+ }   
 
 </style>
 <script type="text/javascript">
 
-    jQuery(document).ready(function(){
-$('.searchoption #s2id_searchModuleList').find('.select2-choice').find('.select2-arrow').find('b').remove();
+jQuery(document).ready(function(){
+    $('.searchoption #s2id_searchModuleList').find('.select2-choice').find('.select2-arrow').find('b').remove();
 
 $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !important;"></i>');
         jQuery('.menu-open').on('hover',function(){
@@ -307,7 +366,6 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                             </a>
                                         </li>
                                     {/if}
-
                                      </ul>
                                  </li>
 
@@ -318,7 +376,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                 </div>
                 <!--fine menu-->
                 <div class="logo-container pull-left">
-                        <a href="index.php" class="company-logo ">
+                        <a href="index.php" class="company-logo">
                             <img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>
                         </a>
                 </div>
@@ -745,9 +803,28 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
 
                                             <li>
                                                 <div>
-                                                    <a class="rightside-icon-dashboard" href="index.php?module=SMSNotifier&view=List&app=FOUNDATION" title="Notifications" aria-hidden="true">
+                                                    <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" title="Notifications" aria-hidden="true">
                                                         <i class="fa fa-bell-o"></i>
                                                     </a>
+
+                                                    <ul class="hide notification-list list-unstyled" onmouseleave="Vtiger_Header_Js.hideNotification()">
+                                                        <li>
+                                                            <h6 class="text-left notifications-heading">Notifications<i class="fa fa-gear pull-right"></i></h6>
+
+                                                        </li>
+                                                        <li>
+                                                            <div class="notification-container unread">
+                                                                <div class="img-holder"><img src="" class="img-circle" height="30" width="30"></div>
+                                                                <div class="notification-title">
+                                                                    <a>
+                                                                        <strong>Khaled approved leave</strong>
+                                                                    </a>  
+                                                                   <span class="notification-time">2 hr</span> 
+                                                                </div> 
+                                                            </div>
+                                                           <div class="clearfix"></div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </li>
 
@@ -881,8 +958,33 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                             <li><a class="btn color-box color-purple themeElement" data-skinName="purple"><i class="fa {if $USER_MODEL->get('theme') eq 'purple'} fa-check  {/if}"></i></a></li>
                                                                             <li><a class="btn color-box color-yellow themeElement" data-skinName="yellow"><i class="fa  {if $USER_MODEL->get('theme') eq 'yellow'} fa-check {/if}"></i></a></li>
                                                                             <li><a class="btn color-box color-green themeElement" data-skinName="green"><i class="fa {if $USER_MODEL->get('theme') eq 'green'}  fa-check  {/if}"></i></a></li>
+                                                                            <li><a class="btn color-box color-shipcove themeElement" data-skinName="shipcove"><i class="fa {if $USER_MODEL->get('theme') eq 'shipcove'}  fa-check  {/if}"></i></a></li>
+                                                                            <li><a class="btn color-box color-lilacbush themeElement" data-skinName="lilacbush"><i class="fa {if $USER_MODEL->get('theme') eq 'lilacbush'}  fa-check  {/if}"></i></a></li>
+                                                                             <li><a class="btn color-box color-energyyellow themeElement" data-skinName="energyyellow"><i class="fa {if $USER_MODEL->get('theme') eq 'energyyellow'}  fa-check  {/if}"></i></a></li>
+                                                                             <li><a class="btn color-box color-downy themeElement" data-skinName="downy"><i class="fa {if $USER_MODEL->get('theme') eq 'downy'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-lily themeElement" data-skinName="lily"><i class="fa {if $USER_MODEL->get('theme') eq 'lily'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-danube themeElement" data-skinName="danube"><i class="fa {if $USER_MODEL->get('theme') eq 'danube'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-selectiveyellow themeElement" data-skinName="selectiveyellow"><i class="fa {if $USER_MODEL->get('theme') eq 'selectiveyellow'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-sandybrown themeElement" data-skinName="sandybrown"><i class="fa {if $USER_MODEL->get('theme') eq 'sandybrown'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-mandy themeElement" data-skinName="mandy"><i class="fa {if $USER_MODEL->get('theme') eq 'mandy'}  fa-check  {/if}"></i></a></li>
+                                                                              <li><a class="btn color-box color-aquaisland themeElement" data-skinName="aquaisland"><i class="fa {if $USER_MODEL->get('theme') eq 'aquaisland'}  fa-check  {/if}"></i></a></li>
+
                                                                         </ul>
+                                                                        <div class="clarfix"></div>
+                                                                        
                                                                     </div>
+                                                                        <div class="col-md-12 col-sm-12">
+                                                                            <div class="clearfix"></div>
+                                                                            <div class="dark-theme">
+                                                                                <strong class="pull-left" style="padding-top:6px; margin-right: 10px;"> Dark Theme</strong>
+                                                                            <!-- Rounded switch -->
+                                                                                    <label class="switch pull-left">
+                                                                                      
+                                                                                        <input type="checkbox" name="darkTheme" value="darkblue">
+                                                                                      <span class="slider round"></span>
+                                                                                    </label>
+                                                                        </div>
+                                                                        </div>
                                                                     <div class="clearfix"></div>
                                                                     <hr />
                                                                     <div class="clearfix"></div>
@@ -1128,7 +1230,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                         'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
                         'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
 
-                        {if $APP_NAME neq 'SALES'}
+                        
                         <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> 
                             <a class="has-arrow waves-effect waves-dark " >
                                 <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i>
@@ -1171,7 +1273,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                     {/foreach}
                                 </ul>
                             </li>
-                            {/if}
+                          
                             {/if}
                             {/foreach}
                             <li class="nav-small-cap hide">TOOLS & SETTINGS</li>
@@ -2242,10 +2344,8 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
             if (x.style.display === "none") 
             {
                 x.style.display = "block";
-
             } else {
                 x.style.display = "none";
-
             }
         }
     </script>

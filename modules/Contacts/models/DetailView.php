@@ -93,36 +93,6 @@ class Contacts_DetailView_Model extends Vtiger_DetailView_Model {
             $linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($basicLink);
         }
 
-
-        /**
-         ** Added by Danial Enrich Contact 09/04/2018
-         **/
-        
-        $result = Vtiger_Module_Model::getEnrichDetails();
-        $preference = $result['preference'];
-        $active = $result['active'];
-
-        // Modified By Mabruk
-        if ($active == "1" && ($preference == "both" || $preference == "person")) {
-            $basicActionLinkEnrich = array(
-                'linktype' => 'DETAILVIEWBASIC',
-                'linklabel' => 'LBL_ENRICH_DATA',
-                //'linkurl' => '',
-                'linkicon' => ''
-            );
-        }
-        
-        else {
-            $basicActionLinkEnrich = array(
-                'linktype' => 'DETAILVIEWBASIC',
-                'linklabel' => 'LBL_ENRICH_DATA_LOCKED',
-                'linkurl' => 'https://www.fullcontact.com/',
-                'linkicon' => ''
-            );
-        }    
-        $linkModelList['DETAILVIEWBASIC'][] = Vtiger_Link_Model::getInstanceFromValues($basicActionLinkEnrich);
-
-
         return $linkModelList;
     }
 }

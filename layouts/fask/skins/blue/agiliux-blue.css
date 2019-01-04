@@ -568,3 +568,153 @@ color: #2f5597 !important;
     padding:5px;
     color: #2f5597;
 }
+/**==============================
+* ROLE PAGE
+*================================*/
+.UserRole{
+  
+    padding-bottom: 30px;
+}
+.UserRole .treeView{
+      padding-left: 15px !important;
+     padding-right:  15px !important;
+      background: #fff;
+      margin-left: 15px !important;
+    margin-right:  15px !important;    
+    margin-top:  15px !important;    
+}
+.UserRole .treeView > ul{
+    margin-top: 15px;
+}
+.UserRole .treeView li{
+    padding-top: 25px;
+    margin-left: 50px;
+}
+
+/**=============================
+* Sharing Role Page
+*===============================*/
+#EditSharingAccess{
+    background-color: #fff;
+    padding:10px;
+}
+#EditSharingAccess .blockHeader{
+    background: #2f5597;
+    color: #fff;
+}
+#settings_wrapper{
+    padding: 15px;
+    background-color: #fff;
+}
+#plansettingcontainer{
+    margin: 20px;
+    background-color: #fff;
+    padding: 10px;
+}
+.blockHeader.userplantable{
+    background-color: #2f5597 !important;
+}
+
+.color-box{
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 5px !important;
+    border: 1px solid #ccc;
+    border-radius: 50% !important;
+    position: relative;
+}
+.color-box i{
+    position: absolute;
+    left: 2%;
+    top: 5%;
+    font-size: 10px;
+}
+.text-bold{
+    margin: 0 !important;
+}
+.color-blue,
+.color-blue:hover{
+    background: #6783B3;    
+    color: #fff;
+}
+.color-purple,
+.color-purple:hover{
+    background: #d971ae;    
+     color: #fff;
+}
+.color-yellow,
+.color-yellow:hover{
+    background: #f6bb43;
+     color: #fff;
+}
+.color-green,
+.color-green:hover{
+    background: #3bbd9b;
+     color: #fff;
+}
+.color-list li i{
+    color: #fff !important;
+}
+
+.color-shipcove,
+.color-shipcove:hover{
+    background: #6783B3;
+     color: #fff;
+}
+
+.color-lilacbush,
+.color-lilacbush:hover{
+    background: #997CCD;
+     color: #fff;
+}
+
+.color-energyyellow,
+.color-lilacbush:hover{
+    background: #FAD852;
+     color: #fff;
+}
+
+.color-downy,
+.color-downy:hover{
+    background: #67D0AF;
+     color: #fff;
+}
+
+.color-lily,
+.color-lily:hover{
+    background: #CBA7C1;
+     color: #fff;
+}
+
+
+.color-danube,
+.color-danube:hover{
+    background: #77A1D3;
+     color: #fff;
+}
+
+.color-selectiveyellow,
+.color-selectiveyellow:hover{
+    background: #F7B301;
+     color: #fff;
+}
+
+.color-sandybrown,
+.color-sandybrown:hover{
+    background: #F4967A;
+     color: #fff;
+}
+
+.color-mandy,
+.color-mandy:hover{
+    background: #EC5C64;
+     color: #fff;
+}
+
+.color-aquaisland,
+.color-aquaisland:hover{
+    background: #AFDFDF;
+     color: #fff;
+     padding: 5px;
+}

@@ -93,21 +93,7 @@ class Leads_DetailView_Model extends Vtiger_DetailView_Model {
 			);
 			$linkModelList['DETAILVIEWBASIC'][] = Vtiger_Link_Model::getInstanceFromValues($basicActionLink);
 		}
-
-        /**
-         ** Added by Danial Enrich Contact 09/04/2018
-         **/
-
-        $basicActionLinkEnrich = array(
-            'linktype' => 'DETAILVIEWBASIC',
-            'linklabel' => 'LBL_ENRICH_DATA',
-            //'linkurl' => $recordModel->getEnrichUrl(),
-            'linkicon' => ''
-        );
-
-        $linkModelList['DETAILVIEWBASIC'][] = Vtiger_Link_Model::getInstanceFromValues($basicActionLinkEnrich);
-
-
+		
         return $linkModelList;
 	}
 	

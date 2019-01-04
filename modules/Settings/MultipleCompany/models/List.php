@@ -116,7 +116,6 @@ class Settings_MultipleCompany_List_Model extends Settings_Vtiger_Module_Model {
             $templatearray['organization_fax'] = $db->query_result($result, $cnt, 'fax');
             $templatearray['organization_website'] = $db->query_result($result, $cnt, 'website');
             //Handle for allowed organation logo/logoname likes UTF-8 Character
-            $templatearray['organization_logo'] = decode_html($db->query_result($result, $cnt, 'logo'));
             $templatearray['organization_logoname'] = decode_html($db->query_result($result, $cnt, 'logoname'));
             $return_data[$cnt] = $templatearray;
             $cnt++;
