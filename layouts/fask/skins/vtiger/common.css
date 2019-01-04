@@ -10078,3 +10078,15 @@ input:checked + .slider:before {
     width: auto;
     height: auto;
 }
+
+.widget-icon{
+    margin-top: -15px;
+}
+.widget-item a{
+    width: 100%;
+    display: block;
+}
+.widget-item a[disabled="disabled"]{
+    color: #ccc;
+}
+

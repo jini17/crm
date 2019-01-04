@@ -36,7 +36,7 @@
 <input type="hidden" value="{$DEPT}" id="curdepartment" />
     <div class="listViewPageDiv" id="listViewContent" style="padding-left: 0px; width: 100%">
         <!--id="listViewContent"-->
-        <div class="col-sm-12 col-xs-12 full-height">
+        <div class="col-sm-12 col-xs-12 col-md-12 full-height">
 
                <div class="" id="tablist">
                     <ul class="nav nav-tabs tabs sortable container-fluid visible-lg">
@@ -49,7 +49,7 @@
                                     </div>
                             </a>
                         </li>
-                        <li class="{if $TAB_TYPE eq 'MD'}active {/if} employeeTab" data-tabname="My Department">
+                        <li class="{if $TAB_TYPE eq 'MD'} active {/if} employeeTab" data-tabname="My Department">
                             <a href='index.php?module=Users&view=List&block=15&fieldid=53&tabtype=MD&parent=Settings&search_params=[[["department","e","{$DEPT}"]]]' class="">
                                     <div><span class="name textOverflowEllipsis" value="Tasks" style="width:10%">
                                         <strong>{vtranslate('My Department',$MODULE)}</strong></span><span class="editTabName hide">
