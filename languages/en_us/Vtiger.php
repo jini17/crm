@@ -20,8 +20,6 @@ $languageStrings = array(
 	'LBL_REPORT_CHART' => 'Chart Report',
                     'LBL_VIEW_MORE'=>'View More',
 	'LBL_ENRICH_DATA' => 'Enrich Data',
-	'LeaveType' => 'Leave Type',
-	'BenefitType' => 'Benefit Type',
 
 	'LBL_ENRICH_DATA_LOCKED' => 'Enrich Data', 
 
@@ -111,7 +109,7 @@ $languageStrings = array(
 	'LBL_DASHBOARD' => 'Dashboard',
 	'LBL_MAIL_MANAGER'=>'Mail Manager',
 	'LBL_USER_SETTINGS' => 'User Settings',
-	'LBL_MY_PREFERENCES' => 'My Profile',
+	'LBL_MY_PREFERENCES' => ' Profile',
 	'LBL_SIGN_OUT' => 'Sign Out',
 	'LBL_HELP' => 'Help',
 	'LBL_DOCUMENTATION' => 'Documentation',

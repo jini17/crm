@@ -9,7 +9,6 @@
  *************************************************************************************/
 $languageStrings = array(
 	//Months
-	'SINGLE_Holiday'=>'Holiday',
 	'LBL_JANUARY' => 'January',
 	'LBL_FEBRUARY' => 'February',
 	'LBL_MARCH' => 'March',
