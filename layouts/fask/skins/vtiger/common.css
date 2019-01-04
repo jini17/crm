@@ -10078,6 +10078,7 @@ input:checked + .slider:before {
     width: auto;
     height: auto;
 }
+
 .widget-icon{
     margin-top: -15px;
 }

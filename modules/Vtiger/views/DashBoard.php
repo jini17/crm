@@ -162,7 +162,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 parent::postProcess($request);
         }
         
-         
+        
     /**
      * GET tabs  by group
      * @param type $group
