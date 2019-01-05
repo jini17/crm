@@ -18,6 +18,8 @@ $languageStrings = array(
 	'LBL_ADD_RECORD' => 'Add Quote',
 	'LBL_RECORDS_LIST' => 'Quotes List',
 
+	'Account Name'=>'Account Name',
+	'Potential Name'=>'Potential Name',
 	// Blocks
 	'LBL_QUOTE_INFORMATION' => 'Quote Details',
 
