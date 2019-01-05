@@ -122,18 +122,18 @@ dateVidation:function(){
              });
      },
      textAreaLimitChar : function(){ 
-                        $('#description').keyup(function () {
-                                var maxchar = 300;
-                                var len = $(this).val().length;
-                                if (len > maxchar) {
-                                        $('#charNum').text(' you have reached the limit');
-                                        $(this).val($(this).val().substring(0, len-1));
-                                } else {
-                                        var remainchar = maxchar - len;
-                                        $('#charNum').text(remainchar + ' character(s) left');
+            $('#description').keyup(function () {
+                    var maxchar = 300;
+                    var len = $(this).val().length;
+                    if (len > maxchar) {
+                            $('#charNum').text(' you have reached the limit');
+                            $(this).val($(this).val().substring(0, len-1));
+                    } else {
+                            var remainchar = maxchar - len;
+                            $('#charNum').text(remainchar + ' character(s) left');
 
-                                }
-                        });
+                    }
+            });
         },	
      saveWorkExpDetails : function(form){
           var aDeferred = jQuery.Deferred();

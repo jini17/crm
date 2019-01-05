@@ -522,7 +522,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
             var page = $(this).find('a').data('page');
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();
-            var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+            var viewtype = jQuery('body').find('.list-switcher').find('.btn-primary').data('listtype');
             var tabType = jQuery('#tabtype').val();
             var dept = jQuery('#curdepartment').val();
 
@@ -542,7 +542,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
             var keyword = $(this).find(":selected").val();
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();
-            var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+            var viewtype = jQuery('body').find('.list-switcher').find('.btn-primary').data('listtype');
             var tabType = jQuery('#tabtype').val();
             var day_ago = jQuery("#sevendaysago").val();
             var day_after = jQuery("#sevendaysafter").val()
@@ -568,6 +568,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
             listParams['empview'] = viewtype;
             listParams['tabtype'] = tabType;
             listParams['searchType'] = "gridfilter";
+           
             listInstance.loadListViewRecords(listParams);
         })
     },

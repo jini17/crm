@@ -18,24 +18,7 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 	 */
 	registerRecordPreSaveEvent : function(form){
 		var thisInstance = this;
-                              
-                              jQuery("#Users_editView_fieldName_date_joined").on("change",function(){
-                                  ;
-                                  var date_joined = jQuery(this).val();                                 
-                                          if(date_joined.length > 0){
-                                               var expireDateArr = date_joined.split("-");                               
-                                                var expireDate = new Date(expireDateArr[2]+"-"+expireDateArr[1]+"-"+ expireDateArr[0]);          
-                                                var curdate = new Date();
-                                                var after_years = new Date(expireDate.getFullYear()+1,expireDate.expireDate(),expireDate.getDay());
-                                                alert(after_years);
-                                                if(expireDate > after_years){
-                                                         app.helper.showErrorNotification({message :app.vtranslate('Join Date should not be greater than 1 year')});
-                                                          date_joined.val("")
-                                                         return false;
-                                                }
-                                                
-                                          }
-                              })
+  
                                           
                               
 		app.event.on(Vtiger_Edit_Js.recordPresaveEvent, function(e, data) {
@@ -129,7 +112,37 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 			ckEditorInstance.loadCkEditor(templateContentElement,customConfig);
 		}
 	},
-	
+	/**===================
+	  added by khaled
+	  Join Date Validation
+	================*/
+	registerJoinDateValidation: function(){		
+
+          jQuery("#Users_editView_fieldName_date_joined").on("change",function(){
+            
+              var date_joined = jQuery(this).val();  
+
+                      if(date_joined.length > 0){
+                      	var expireDateArr = date_joined.split("-");                               
+                        var expireDate = new Date(expireDateArr[2]+"-"+expireDateArr[1]+"-"+ expireDateArr[0]);     
+                      	var now = new Date();
+					    var past = new Date(expireDate);
+					    var nowYear = now.getFullYear();
+					    var pastYear = past.getFullYear();
+					    var joined =     pastYear - nowYear;
+					    var diff = past.getTime() - now.getTime();
+   					    var years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25)); 	
+
+                        if(parseInt(years) > 1){
+                        	
+                        	 app.helper.showErrorNotification({message :app.vtranslate('Join Date should not be greater than 1 year')});
+                                      jQuery(this).val("");
+                                     return false;
+                        }   
+                            
+                      }
+          })
+	},
 	
 	
 	registerEvents : function() {
@@ -139,7 +152,7 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
         this.registerSignatureEvent();
         Settings_Users_PreferenceEdit_Js.registerCopyPermanentAddress();
         Settings_Users_PreferenceEdit_Js.registerChangeEventForCurrencySeparator();
-        
+        this.registerJoinDateValidation();
         var instance = new Settings_Vtiger_Index_Js(); 
         instance.registerBasicSettingsEvents();
 	}

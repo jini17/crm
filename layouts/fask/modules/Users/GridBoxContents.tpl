@@ -8,7 +8,7 @@
       padding:20px 10px;
       border: 1px solid #ddd;
       background: #fff;
-        min-height: 390px;
+        min-height: 391px;
         margin-top: 20px;
         margin-bottom: 9px;
     }
