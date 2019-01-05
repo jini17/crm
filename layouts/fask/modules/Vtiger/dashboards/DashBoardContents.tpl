@@ -54,13 +54,13 @@
                                                 {elseif $WIDGET->getName() eq 'Notebook'}
                                                         {assign var="NOTEBOOKWIDGET" value=$WIDGET} {* Defer to display as a separate group *}
                                                 {else}
-                                                      <li>
+                                                     <!--  <li>
                                                                 <a onclick="Vtiger_DashBoard_Js.addWidget(this, '{$WIDGET->getUrl()}')" href="javascript:void(0);"
                                                                         data-linkid="{$WIDGET->get('linkid')}" data-name="{$WIDGET->getName()}" data-width="{$WIDGET->getWidth()}" 
                                                                         data-height="{$WIDGET->getHeight()}">
                                                                         {vtranslate($WIDGET->getTitle(), $MODULE_NAME)}
                                                                 </a>
-                                                        </li>
+                                                        </li> -->
                                                 {/if}
                                         {/foreach}
                                          
