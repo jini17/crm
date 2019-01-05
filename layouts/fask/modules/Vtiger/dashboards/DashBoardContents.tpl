@@ -146,9 +146,7 @@
                                                {/if}
                                             </ul>
                                         </li>
-
-                                        
-                                        
+                                       
                                         
                                         {if $MINILISTWIDGET && $MODULE_NAME == 'Home'}
                                                 <li class="divider"></li>
