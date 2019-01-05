@@ -112,19 +112,34 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 			ckEditorInstance.loadCkEditor(templateContentElement,customConfig);
 		}
 	},
+	
+	registerDateManipulation : function(date_joined, dateFormat){
+     	if(dateFormat =='yyyy-mm-dd'){
+     	     return date_joined;
+     	} else if(dateFormat == 'dd-mm-yyyy') {
+                var expireDateArr  = date_joined.split("-");
+                return expireDateArr[2]+"-"+expireDateArr[1]+"-"+ expireDateArr[0]
+          } else if(dateFormat == 'mm-dd-yyyy') {
+               var expireDateArr  = date_joined.split("-");
+               return expireDateArr[2]+"-"+expireDateArr[0]+"-"+ expireDateArr[0]
+          }
+	},
 	/**===================
 	  added by khaled
 	  Join Date Validation
+	  modified by jitu
 	================*/
 	registerJoinDateValidation: function(){		
-
+          var instance = this;
           jQuery("#Users_editView_fieldName_date_joined").on("change",function(){
+          
+            var dateFormat = app.getDateFormat();
             
-              var date_joined = jQuery(this).val();  
+              var date_joined = instance.registerDateManipulation(jQuery(this).val(), dateFormat);  
 
                       if(date_joined.length > 0){
-                      	var expireDateArr = date_joined.split("-");                               
-                        var expireDate = new Date(expireDateArr[2]+"-"+expireDateArr[1]+"-"+ expireDateArr[0]);     
+                      	                               
+                        var expireDate = new Date(date_joined);     
                       	var now = new Date();
 					    var past = new Date(expireDate);
 					    var nowYear = now.getFullYear();

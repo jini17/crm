@@ -512,11 +512,12 @@ Vtiger_Detail_Js("Users_Detail_Js",{
                     Users_Claim_Js.editClaim(url)		
 
     },
-
+   
     registerEvents: function () {
             this._super();
             var form = this.getForm();
             this.registerAjaxPreSaveEvent();
+          //  this.registerJoinDateValidation();
             this.registerDisplayDetailTabClickEvent(form);	//added by jitu@secondcrm.com
             this.registerQuickCreateEvent();
 
