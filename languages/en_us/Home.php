@@ -49,7 +49,9 @@ $languageStrings = array(
     'LBL_DEPARTMENT' => 'Department',
     'LBL_DESIGNATION' => 'Designation',
 	'LBL_LEAVE_APPROVAL'=>'My Team Leave Approval',
-
+	'LBL_PLAN'=>'Plan',
+	'LBL_NO_USERS'=>'No of Users',
+	'LBL_DURATION'=>'Subscription Duration', 
 	'LBL_NOT_FOUND'       => 'Not Found',
 	'LBL_WORKING_AS'  => 'Working as',
 	'LBL_OF_JOB' => 'Job',
@@ -58,19 +60,15 @@ $languageStrings = array(
 	'LBL_CONTRACT_EXPIRE' => 'Contract expires in',
 	'LBL_SINCE' => 'since',
 	'LBL_CONTRACT_NOTIFICATION'=> 'Your Contract is expiring soon. Kindly contact your HR for further assistance',
-	'LBL_VIEW_PROFILE'=> 'Go to My Profile',
+	'LBL_VIEW_PROFILE'=> 'Go to  Profile',
 	'LBL_VIEW_CONTRACT'=> 'View My Contract',
 	'LBL_GOOD_DAY' => 'Good Day',
 	'User'=>'Employee',
-    'Bill'=> 'Office Bill',
-    'LBL_PLAN'=>'Plan',
-    'LBL_DURATION'=>'Plan Duration',
-    'LBL_NO_USERS'=>'No of Users',                
+    'Bill'=> 'Office Bill'                
  
 );
 
 $jsLanguageStrings = array(
 	'JS_TAB_NAME_SHOULD_NOT_BE_EMPTY' => 'Dashboard name cannot not be empty',
 	'JS_NO_DATA_AVAILABLE' => 'No data available',
-	'JS_NO_CLAIMTYPE_ALLOCATE'=>'No claim policy done yet!!',
 );

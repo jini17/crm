@@ -199,6 +199,17 @@ a.btn.btn-gettingStarted i{
     padding-top: 10px;
 }
 
+a.widget-heading:hover,
+a.widget-item:hover,
+a.minilist-widget:hover,
+a.notebook-widget:hover{
+    background: #2f5597 !important;
+    color: #fff !important;
+}
+.widget-group-item a{
+    display: block;
+    width: 100%
+}
 /**=========================
   Employee Directory Sidebar filter 
 ============================*/
@@ -569,35 +580,19 @@ color: #2f5597 !important;
     color: #2f5597;
 }
 
-.tabContainer,
-.tabContainer, .tabContainer .nav, .listViewPageDiv{
-    background-color: #4B4C51 !important;
+
+.tabContainer{
+    background-color: #333 !important;
 }
-.widgeticons.dashBoardWidgetFooter {
-    background-color: #7f8c8d;
-    padding-top: 10px;
-    padding-bottom: 36px;
-    margin-top: -13px;
+
+.profile-list,
+.profile-tool-box{
+    background: #fff;
 }
-.dashboardWidgetHeader .title {
-position: absolute;
-z-index: 9;
-color: #fff;
-top: 6px;
-}
-.dashboardTitle{
-    color: #fff !important;
-}
-.dashboardWidget{
-padding-top:30px;
-    background:  #CCC !important;
-}
-.filterContainer{
-    margin-top: 30px;
-}
-.gettingstartedWidget{
-    margin-top: 30px;
-}
-.dashboardWidgetHeader{
-    margin-top: 33px;
+.profile-list a{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    font-size: 12px !important;
+    
+
 }

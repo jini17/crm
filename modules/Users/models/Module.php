@@ -357,7 +357,7 @@ class Users_Module_Model extends Vtiger_Module_Model {
 		$moduleName = $this->getName();
 
 		$currentUser = Users_Record_Model::getCurrentUserModel();
-		if ($currentUser->isAdminUser() && Users_Privileges_Model::isPermitted($moduleName, 'CreateView')) {
+		if ($currentUser->isAdminUser() || in_array($currentUser->roleid, array('H2','H12','H13'))) {
 			$basicLinks[] = array(
 				'linktype' => 'BASIC',
 				'linklabel' => 'LBL_ADD_RECORD',
@@ -365,7 +365,7 @@ class Users_Module_Model extends Vtiger_Module_Model {
 				'linkicon' => 'fa-plus'
 			);
 	
-			if (Users_Privileges_Model::isPermitted($moduleName, 'Import')) {
+			if (Users_Privileges_Model::isPermitted($moduleName, 'Import') || in_array($currentUser->roleid, array('H2','H12','H13'))) {
 				$basicLinks[] = array(
 					'linktype' => 'BASIC',
 					'linklabel' => 'LBL_IMPORT',

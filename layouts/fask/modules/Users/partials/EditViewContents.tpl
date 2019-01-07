@@ -65,7 +65,7 @@
             {else}
             {assign var=COUNTER value=$COUNTER+1}
             {/if}
-            <div class="{$FIELD_MODEL->get('label')} {if $FIELD_MODEL->getName() eq 'status' && !$USER_MODEL->isAdminUser()} hide {/if}  fieldLabel col-xs-6 col-md-3 text-right" style="min-height: 53px;padding-bottom:{if $FIELD_MODEL->getName() eq 'date_joined'}4px{else}10px{/if};">
+            <div class="{$FIELD_MODEL->get('label')} {if $FIELD_MODEL->getName() eq 'status' && !$USER_MODEL->isAdminUser()} hide {/if}  fieldLabel col-xs-6 col-md-3 text-right" style="min-height:53px;padding-bottom:{if $FIELD_MODEL->getName() eq 'date_joined'}4px{else}10px{/if};">
                {if $isReferenceField eq "reference"}
                {if $refrenceListCount > 1}
                <select style="width: 140px;" class="select2 referenceModulesList form-control">

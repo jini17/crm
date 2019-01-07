@@ -434,7 +434,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
         });
     },
     registerAlphabetSearch: function () {
-        jQuery('.alphabetSearch').on('click', function () {
+        jQuery('body').on('click','.alphabetSearch', function () {
             $(this).closest('tr').find('td').removeAttr('style');
             $(this).closest('td').css('border-bottom', '1px solid #2f5597');
             var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
@@ -518,11 +518,11 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
         })
     },
     registerPagination: function () {
-        jQuery('.pagination li').on('click',  function () {
+        jQuery('body').on('click', '.pagination li', function () {
             var page = $(this).find('a').data('page');
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();
-            var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+            var viewtype = jQuery('body').find('.list-switcher').find('.btn-primary').data('listtype');
             var tabType = jQuery('#tabtype').val();
             var dept = jQuery('#curdepartment').val();
 
@@ -538,11 +538,11 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
         });
     },
     registerViewFilter: function () {
-        jQuery('.main-container').on('change', '.grid-filter', function () {
+        jQuery('body').on('change', '.grid-filter', function () {
             var keyword = $(this).find(":selected").val();
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();
-            var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+            var viewtype = jQuery('body').find('.list-switcher').find('.btn-primary').data('listtype');
             var tabType = jQuery('#tabtype').val();
             var day_ago = jQuery("#sevendaysago").val();
             var day_after = jQuery("#sevendaysafter").val()
@@ -568,6 +568,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
             listParams['empview'] = viewtype;
             listParams['tabtype'] = tabType;
             listParams['searchType'] = "gridfilter";
+           
             listInstance.loadListViewRecords(listParams);
         })
     },
