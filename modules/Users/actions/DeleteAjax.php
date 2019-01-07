@@ -13,10 +13,9 @@ class Users_DeleteAjax_Action extends Vtiger_Delete_Action {
 
 	public function checkPermission(Vtiger_Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
-		 $ownerId = $request->get('userid');
-		if(!$currentUser->isAdminUser()) {
-			throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
-		} else if($currentUser->isAdminUser() && ($currentUser->getId() == $ownerId)) {
+		
+        $ownerId = $request->get('userid');
+		if(!$currentUser->isAdminUser() && !in_array($currentUser->roleid, array('H2','H12','H13'))) {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
 		}
 	}
