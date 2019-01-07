@@ -360,7 +360,7 @@ Vtiger_Index_Js("Vtiger_Edit_Js",{
       Join Date Validation
     ================*/
     registerJoinDateValidation: function(){     
-             alert();
+             
       
     },
     registerEvents: function(callParent) {
