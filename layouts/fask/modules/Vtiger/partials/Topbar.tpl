@@ -667,167 +667,77 @@
                     </li>
                     <hr>
                     <li id="quickCreateModules" style="padding: 0 5px;">
-                      <div class="col-lg-12" style="padding-bottom:15px;">
-                        <div class="row">
-                          <div class="col-lg-4">
-                            <a id="menubar_quickCreate_Users" class="quickCreateModule" data-name="Users" data-url="index.php?module=Users&parent=Settings&view=Edit" href="javascript:void(0)">
-                              <i class="material-icons pull-left">person
-                              </i>
-                              <span class="quick-create-module">Employee
-                              </span>
-                            </a>
-                          </div>
-                          <div class="col-lg-4">
-                            <a id="menubar_quickCreate_Leav" class="quickCreateModule" data-name="Leave" data-url="index.php?module=Leave&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                              <i class="material-icons pull-left">exit_to_app
-                              </i>
-                              <span class="quick-create-module">Leave
-                              </span>
-                            </a>
-                          </div>
-                          {*                                                       
-                          <div class="col-lg-4">
-                            <a id="menubar_quickCreate_Timesheet" class="quickCreateModule" data-name="Timesheet" data-url="index.php?module=Timesheet&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                              <i class="material-icons pull-left">timer
-                              </i>
-                              <span class="quick-create-module">Timesheet
-                              </span>
-                            </a>
-                          </div>
-                          *}                                                    
+                      <div class="col-lg-12" style="padding-bottom:15px;"> 
+                        <!-- MABRUK -->
+                        {foreach from = $QUICK_CREATE_MOD_ICONS key = i item = MODULE}
+
+                            {if $i == 0}
+                                <div class="row">
+                            {else if $i % 3 == 0}                                
+                                </div>
+                                <br>
+                                <div class="row">    
+                            {/if}
+
+                            {if $MODULE['moduleName'] == 'Users'}
+                                {assign var=URL value="index.php?module=Users&parent=Settings&view=Edit"}
+                            {else}    
+                                {assign var=URL value="index.php?module={$MODULE['moduleName']}&amp;view=QuickCreateAjax"}
+                            {/if}
+
+                            {if $MODULE['moduleName'] == 'Documents'}
+                                <div documents="" class="col-lg-4 dropdown">
+                                    <a id="menubar_quickCreate_Documents" class="quickCreateModuleSubmenu dropdown-toggle" data-name="Documents" data-toggle="dropdown" data-url="index.php?module=Documents&amp;view=QuickCreateAjax" href="javascript:void(0)">
+                                      <i class="material-icons pull-left">file_download
+                                      </i>
+                                      <span class="quick-create-module">Documents
+                                        <i class="fa fa-caret-down quickcreateMoreDropdownAction">
+                                        </i>
+                                      </span>
+                                    </a>
+                                    <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_Documents">
+                                      <li class="dropdown-header">
+                                        <i class="material-icons">file_upload
+                                        </i> File Upload
+                                      </li>
+                                      <li id="VtigerAction">
+                                        <a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
+                                          <img width="15" hieght="15" style="  margin-top: -3px;margin-right: 4%;" title="Agiliux" alt="Agiliux" src="layouts/v7/skins/images/favicon.ico">
+                                          To Agiliux
+                                        </a>
+                                      </li>
+                                      <li class="dropdown-header">
+                                        <i class="ti-link">
+                                        </i> Link External Document
+                                      </li>
+                                      <li id="shareDocument">
+                                        <a href="javascript:Documents_Index_Js.createDocument('E')">&nbsp;
+                                          <i class="material-icons">link
+                                          </i>&nbsp;&nbsp; From File Url
+                                        </a>
+                                      </li>
+                                      <li role="separator" class="divider">
+                                      </li>
+                                      <li id="createDocument">
+                                        <a href="javascript:Documents_Index_Js.createDocument('W')">
+                                          <i class="ti-file">
+                                          </i> Create New Document
+                                        </a>
+                                      </li>
+                                    </ul>
+                                </div>
+                            {else}
+                                <div class="col-lg-4">
+                                  <a id="menubar_quickCreate_{$MODULE['moduleName']}" class="quickCreateModule" data-name="{$MODULE['moduleName']}" {if $MODULE['moduleName'] eq 'Users'}href={$URL}{else}data-url={$URL} href="javascript:void(0)"{/if}>
+                                      <i class="material-icons pull-left">{$MODULE['moduleIcon']}</i>
+                                      <span class="quick-create-module">{$MODULE['moduleName']}</span>
+                                  </a>
+                                </div>    
+                            {/if}    
+                                        
+                        {/foreach}
                         </div>
-                        <br>
-                        <div class="row">
-                          <div class="col-lg-4">
-                            <a id="menubar_quickCreate_Claim" class="quickCreateModule" data-name="Claim" data-url="index.php?module=Claim&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                              <i class="material-icons pull-left">attach_money
-                              </i>
-                              <span class="quick-create-module">Claim
-                              </span>
-                            </a>
-                          </div>
-                          <div class="col-lg-4">
-                            <a id="menubar_quickCreate_WorkingHours" class="quickCreateModule" data-name="WorkingHours" data-url="index.php?module=WorkingHours&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                              <i class="material-icons pull-left">access_time
-                              </i>
-                              <span class="quick-create-module">Working Hours
-                              </span>
-                            </a>
-                          </div>
-                          <div class="col-lg-4">
-                            <a id="menubar_quickCreate_Training" class="quickCreateModule" data-name="Training" data-url="index.php?module=Training&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                              <i class="material-icons pull-left">book
-                              </i>
-                              <span class="quick-create-module">Training
-                              </span>
-                            </a>
-                          </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                          <div class="col-lg-4">
-                            <a id="menubar_quickCreate_Attendance" class="quickCreateModule" data-name="Attendance" data-url="index.php?module=Attendance&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                              <i class="material-icons pull-left">assignment
-                              </i>
-                              <span class="quick-create-module">Attendance
-                              </span>
-                            </a>
-                          </div>
-                          <div class="col-lg-4">
-                            <a id="menubar_quickCreate_Payments" class="quickCreateModule" data-name="Payments" data-url="index.php?module=Payments&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                              <i class="material-icons pull-left">payment
-                              </i>
-                              <span class="quick-create-module">Payments
-                              </span>
-                            </a>
-                          </div>
-                          <div class="col-lg-4">
-                            <a id="menubar_quickCreate_Bills" class="quickCreateModule" data-name="Bills" data-url="index.php?module=Bills&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                              <i class="material-icons pull-left">receipt
-                              </i>
-                              <span class="quick-create-module">Office Bills
-                              </span>
-                            </a>
-                          </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                          <div class="col-lg-4">
-                            <a id="menubar_quickCreate_MessageBoard" class="quickCreateModule" data-name="MessageBoard" data-url="index.php?module=MessageBoard&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                              <i class="material-icons pull-left">sms
-                              </i>
-                              <span class="quick-create-module">Message
-                              </span>
-                            </a>
-                          </div>
-                          <div class="col-lg-4">
-                            <a id="menubar_quickCreate_Contacts" class="quickCreateModule" data-name="Contacts" data-url="index.php?module=Contacts&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                              <i class="material-icons pull-left">contacts
-                              </i>
-                              <span class="quick-create-module">Contacts
-                              </span>
-                            </a>
-                          </div>
-                          <div calendar="" class="col-lg-4">
-                            <a id="menubar_quickCreate_Events" class="quickCreateModule" data-name="Events" data-url="index.php?module=Events&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                              <i class="material-icons pull-left">event
-                              </i>
-                              <span class="quick-create-module">Meeting
-                              </span>
-                            </a>
-                          </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                          <div calendar="" class="col-lg-4">
-                            <a id="menubar_quickCreate_Calendar" class="quickCreateModule" data-name="Calendar" data-url="index.php?module=Calendar&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                              <i class="material-icons pull-left">card_travel
-                              </i>
-                              <span class="quick-create-module">Tasks
-                              </span>
-                            </a>
-                          </div>
-                          <div documents="" class="col-lg-4 dropdown">
-                            <a id="menubar_quickCreate_Documents" class="quickCreateModuleSubmenu dropdown-toggle" data-name="Documents" data-toggle="dropdown" data-url="index.php?module=Documents&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                              <i class="material-icons pull-left">file_download
-                              </i>
-                              <span class="quick-create-module">Documents
-                                <i class="fa fa-caret-down quickcreateMoreDropdownAction">
-                                </i>
-                              </span>
-                            </a>
-                            <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_Documents">
-                              <li class="dropdown-header">
-                                <i class="material-icons">file_upload
-                                </i> File Upload
-                              </li>
-                              <li id="VtigerAction">
-                                <a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
-                                  <img width="15" hieght="15" style="  margin-top: -3px;margin-right: 4%;" title="Agiliux" alt="Agiliux" src="layouts/v7/skins/images/favicon.ico">
-                                  To Agiliux
-                                </a>
-                              </li>
-                              <li class="dropdown-header">
-                                <i class="ti-link">
-                                </i> Link External Document
-                              </li>
-                              <li id="shareDocument">
-                                <a href="javascript:Documents_Index_Js.createDocument('E')">&nbsp;
-                                  <i class="material-icons">link
-                                  </i>&nbsp;&nbsp; From File Url
-                                </a>
-                              </li>
-                              <li role="separator" class="divider">
-                              </li>
-                              <li id="createDocument">
-                                <a href="javascript:Documents_Index_Js.createDocument('W')">
-                                  <i class="ti-file">
-                                  </i> Create New Document
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
+                        <!-- END -->
                       </div>
                     </li>
                   </ul>
