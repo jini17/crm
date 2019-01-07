@@ -196,12 +196,12 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                             {assign var=MAILMANAGER_MODULE_MODEL value=Vtiger_Module_Model::getInstance('MailManager')}                           
                             {assign var=DOCUMENTS_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Documents')}
                             {if $USER_PRIVILEGES_MODEL->hasModulePermission($DOCUMENTS_MODULE_MODEL->getId())}
-                            <li class="{if $MODULE eq "Documents"}active{/if}"> 
-                                <a class=" waves-effect waves-dark" href="index.php?module=Documents&view=List" >
-                                    <i class="app-icon-list material-icons">insert_drive_file</i><span class="hide-menu"> 
-                                    {vtranslate('Documents')}</span>
-                                </a>
-                            </li>
+                                <li class="{if $MODULE eq "Documents"}active{/if}"> 
+                                    <a class=" waves-effect waves-dark" href="index.php?module=Documents&view=List" >
+                                        <i class="app-icon-list material-icons">insert_drive_file</i><span class="hide-menu"> 
+                                        {vtranslate('Documents')}</span>
+                                    </a>
+                                </li>
                             {/if}
                             <hr/>
                             {if $USER_MODEL->isAdminUser()}

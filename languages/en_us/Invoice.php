@@ -21,7 +21,8 @@ $languageStrings = array(
 
 	// Blocks
 	'LBL_INVOICE_INFORMATION' => 'Invoice Details',
-
+	'LBL_TERMSCONDITION'=>'Terms & Condition',
+	
 	//Field labels
 	'Sales Order' => 'Sales Order',
 	'Customer No' => 'Customer No',

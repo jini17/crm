@@ -22,7 +22,7 @@ $languageStrings = array(
 	'Potential Name'=>'Potential Name',
 	// Blocks
 	'LBL_QUOTE_INFORMATION' => 'Quote Details',
-
+	'LBL_TERMSCONDITION'=>'Terms & Condition',
 	//Field Labels
 	'Quote No'=>'Quote Number',
 	'Quote Stage'=>'Quote Stage',
