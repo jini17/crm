@@ -993,7 +993,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                             <li> <a class="" href="index.php?module=Home&view=DashBoard&tabid=1298"><i class='fa fa-rocket'></i> Getting Started</a></li>
                                                                             <li> <a class="" href="http://dev7.secondcrm.com/agiliux/help.php"><i class='fa fa-life-ring'></i> Help</a></li>
                                                                             <li> <a class=""><i class='fa fa-at'></i> Contact Support</a></li>
-                                                                            <li> <a class=""><i class='fa fa-paper-plane'></i> What's new?</a></li>
+                                                                            <!--<li> <a class=""><i class='fa fa-paper-plane'></i> What's new?</a></li>-->
                                                                         </ul>    
                                                                     </div>    
                                                                 </div>

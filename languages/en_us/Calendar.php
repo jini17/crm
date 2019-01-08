@@ -58,7 +58,7 @@ $languageStrings = array(
 	'Call' => 'Call',
 	'Meeting' => 'Meeting',
 	'Task' => 'Task',
-
+	'Calendar'=>'Meeting',
 	//Status picklist values
 	'Planned' => 'Planned',
 	'Completed' => 'Completed',
