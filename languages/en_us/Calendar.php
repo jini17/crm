@@ -9,7 +9,7 @@
  *************************************************************************************/
 $languageStrings = array(
     // Basic Strings
-	'Calendar'=>'Calendar',
+	
 	'SINGLE_Calendar' => 'Task',
 	'SINGLE_Events' => 'Meeting',
 	'LBL_ADD_TASK' => 'Add Task',
@@ -58,7 +58,7 @@ $languageStrings = array(
 	'Call' => 'Call',
 	'Meeting' => 'Meeting',
 	'Task' => 'Task',
-	'Calendar'=>'Meeting',
+	
 	//Status picklist values
 	'Planned' => 'Planned',
 	'Completed' => 'Completed',
