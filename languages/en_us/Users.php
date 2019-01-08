@@ -574,4 +574,5 @@ $jsLanguageStrings = array(
 	'JS_TRANS_LIMIT'=>'Transaction limit is ',
 	'JS_APPLY_AMOUNT'=>'Amount should be less than or equal to ',
 	'JS_NO_LEAVETYPE_ALLOCATE'=>'No Leave Type allocated, please contact to HR/Admin.',
+	'JS_DELETE_CONTACT_CONFIRMATION'=>'Are you confirm to delete the record',
 );
