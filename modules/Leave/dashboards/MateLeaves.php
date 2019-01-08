@@ -45,7 +45,7 @@ class Leave_MateLeaves_Dashboard extends Vtiger_IndexAjax_View {
 
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
-
+		
 		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('VALUE', $type );
@@ -53,6 +53,7 @@ class Leave_MateLeaves_Dashboard extends Vtiger_IndexAjax_View {
 		$viewer->assign('DEPARTMENT', $departmentList);
 		$viewer->assign('MODULE_NAME', $moduleName);
 		$viewer->assign('MODELS', $leavemodel);
+		$viewer->assign('LOGINID', $currentUser->id);
 		$content = $request->get('content');
      
 

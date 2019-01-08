@@ -51,7 +51,7 @@
                                                 </label>
                                         </div>
                                         <div class="controls fieldValue col-md-8">
-                                            <input id="home_phone" class="input-large inputElement nameField" type="text"  value="{if !empty($REC_ID)} {$EMERGENCY_DETAIL[0]['home_phone']}{/if}" name="home_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($HOMEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
+                                            <input id="home_phone" class="input-large inputElement nameField" type="text"  value="{if !empty($REC_ID)} {$EMERGENCY_DETAIL[0]['home_phone']}{/if}" name="home_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($HOMEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true" maxlength="15">
                                         </div>
                                 </div>
 
@@ -65,7 +65,7 @@
                                                 </label>
                                         </div>
                                         <div class="controls fieldValue col-md-8">
-                                            <input id="office_phone" class="input-large inputElement nameField" type="text" value="{if !empty($REC_ID)} {$EMERGENCY_DETAIL[0]['office_phone']}{/if}" name="office_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($OFFICEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
+                                            <input id="office_phone" class="input-large inputElement nameField" type="text" value="{if !empty($REC_ID)} {$EMERGENCY_DETAIL[0]['office_phone']}{/if}" name="office_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($OFFICEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true" maxlength="15">
                                         </div>
                                 </div>
 
@@ -79,7 +79,7 @@
                                                 </label>
                                         </div>
                                         <div class="controls fieldValue col-md-8">
-                                            <input id="mobile" class="input-large inputElement nameField" type="text"  value="{if !empty($REC_ID)} {$EMERGENCY_DETAIL[0]['mobile']}{/if}" name="mobile" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($MOBILEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
+                                            <input id="mobile" class="input-large inputElement nameField" type="text"  value="{if !empty($REC_ID)} {$EMERGENCY_DETAIL[0]['mobile']}{/if}" name="mobile" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($MOBILEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true" maxlength="15">
                                         </div>
                                 </div>
                         </div>

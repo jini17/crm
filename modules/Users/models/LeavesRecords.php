@@ -155,10 +155,12 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                         $result = $db->pquery($query,array($userid));
                         $myleave=array();	
                         $balance = 0;
+                        $balanceleave = 0;
                         for($i=0;$db->num_rows($result)>$i;$i++){
                                 $allocateleave = $db->query_result($result, $i, 'allocation');	
                                 $used	  = $db->query_result($result, $i, 'used');
                                 $balanceleave =$allocateleave-$used;
+                                $balance +=$balanceleave;
                                 $title = $db->query_result($result, $i, 'title');
 
                                 $myleave['display'][$i]['allocateleaves'] 	= $allocateleave;
@@ -166,7 +168,7 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                                 $myleave['display'][$i]['balanceleave'] 	= $balanceleave;	
                                 $myleave['display'][$i]['leavetype'] 		= $title;
 
-                        }				
+                        }		
                         $myleave['balance'] = $balance;				
                 } else {
                         $result = $db->pquery("SELECT vtiger_leavetype.title, vtiger_leave.fromdate, vtiger_leave.leavestatus FROM vtiger_leave

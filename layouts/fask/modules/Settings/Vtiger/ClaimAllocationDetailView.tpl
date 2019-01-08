@@ -13,7 +13,7 @@
         <div class=" col-lg-12 col-md-12 col-sm-12">
             <div id="Head">
                 <div class="widget_header row-fluid">
-                    <div class="span8"><h3>Claim Allocation</h3></div>
+                    <div class="span8"><h3>Claim Policy</h3></div>
                 </div>
                 <hr>
                 <br>
@@ -37,7 +37,7 @@
                                 Select
                             </td>
                             <td>
-                                Allocation Title
+                                Policy Title
                             </td>
                             <td>
                                 Claim Type

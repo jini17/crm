@@ -897,8 +897,8 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                         {foreach item=IMAGE_INFO from=$IMAGE_DETAILS}
                                                         {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
                                                         <a href="#" class="userName dropdown-toggle" data-toggle="dropdown" role="button" title="{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}
-                                                            ({$USER_MODEL->get('user_name')})"><img style="width: 30px;border-radius: 50%;
-                                                            padding: 7px 0px;" src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
+                                                            ({$USER_MODEL->get('user_name')})">
+                                                            <img height="30" width="30"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
                                                         </a>
                                                         {/if}
                                                         {/foreach}
@@ -993,7 +993,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                             <li> <a class="" href="index.php?module=Home&view=DashBoard&tabid=1298"><i class='fa fa-rocket'></i> Getting Started</a></li>
                                                                             <li> <a class="" href="http://dev7.secondcrm.com/agiliux/help.php"><i class='fa fa-life-ring'></i> Help</a></li>
                                                                             <li> <a class=""><i class='fa fa-at'></i> Contact Support</a></li>
-                                                                            <li> <a class=""><i class='fa fa-paper-plane'></i> What's new?</a></li>
+                                                                            <!--<li> <a class=""><i class='fa fa-paper-plane'></i> What's new?</a></li>-->
                                                                         </ul>    
                                                                     </div>    
                                                                 </div>

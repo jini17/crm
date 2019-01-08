@@ -608,22 +608,22 @@ class EnhancedQueryGenerator extends QueryGenerator
 
     public function getWhereClause()
     {
-        global $current_user;
-      
+        global $current_user, $adb;
+       // $adb->setDebug(true);
         $HRModules = array('EmployeeContract', 'PassportVisa', 'Performance', 'Payslip');
         $baseModule = $this->getModule();
         $ownrecsql = '';
 
         if (in_array($baseModule, $HRModules)) {
-            if (isset($_REQUEST['record'])) {
-                $emp_id = $_REQUEST['record'];
-                $ownrecsql = ' AND vtiger_' . strtolower($baseModule) . '.employee_id=' . $emp_id;
-            } else {
-                if ($current_user->roleid != 'H2' && $current_user->is_admin != 'on' && $current_user->roleid != 'H12' && $current_user->roleid != 'H13') {
-                    $ownrecsql = ' AND vtiger_' . strtolower($baseModule) . '.employee_id=' . $current_user->id;
-                }
+
+            if(!in_array($current_user->roleid, array('H2','H12','H13'))  &&  !$current_user->isAdminUser() ) {
+                
+                if (isset($_REQUEST['record'])) {
+                    $emp_id = $_REQUEST['record'];
+                    $ownrecsql .= ' AND vtiger_' . strtolower($baseModule) . '.employee_id=' . $emp_id;
+                } 
             }
-        }
+        }    
 
         /*if(in_array($baseModule,$HRModules)){
                 $ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$emp_id;
