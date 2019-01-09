@@ -530,7 +530,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
                 listParams['search_params'] = [[["department", "e", dept]]];
             }
             listParams['status'] = "Active";
-            listParams['empview'] = viewtype; alert(viewtype);
+            listParams['empview'] = viewtype; 
             listParams['tabtype'] = tabType;
             listParams['searchType'] = "keyword";
             listParams['page'] = page;

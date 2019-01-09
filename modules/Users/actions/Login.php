@@ -201,8 +201,7 @@ class Users_Login_Action extends Vtiger_Action_Controller
                                 WHERE vtiger_users.user_name = ?", array($user));
 
         $expiryDate = strtotime(date('d-m-Y',strtotime($adb->query_result($result,0,'expiredate'))));
-        $today      = strtotime(date('d-m-Y'));
-        
+        $today      = strtotime(date('d-m-Y'));       
 
         if ($expiryDate >= $today)
             return true;
@@ -259,7 +258,7 @@ class Users_Login_Action extends Vtiger_Action_Controller
         $user_name   = $adb->query_result($result, 0, 'user_name');
         $iprest_type = $adb->query_result($result, 0, 'iprestriction_type');
         $usernames   = explode(',', $user_name);
-        //echo "<pre>"; print_r($iprest_type); die;
+        
         for ($i = 0; $i < count($usernames); $i++) {
             if (($usernames[$i] == $username || $usernames[$i] == 'All Users') && $iprest_type == 'notallowed') {
                 return false;
@@ -271,7 +270,7 @@ class Users_Login_Action extends Vtiger_Action_Controller
         $querydefault  = "SELECT * FROM allowed_ip_default ";
         $resultdefault = $adb->pquery($querydefault, array());
         $count         = $adb->num_rows($resultdefault);
-        // echo
+        
         if ($count > 0) {
             $defaultvalue = $adb->query_result($resultdefault, 0, 'defaultvalue');
             if ($defaultvalue == 'allowed') {

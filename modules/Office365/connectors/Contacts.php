@@ -305,7 +305,7 @@ Class Office365_Contacts_Connector extends WSAPP_TargetConnector {
 		$query = array(
 			'max-results' => $this->maxResults,
 			'start-index' => 1,
-			'orderby' => 'lastmodified',
+			'orderby' => 'LastModifiedDateTime',
 			'sortorder' => 'ascending',
 		);
 		if(!isset($this->selectedGroup))
