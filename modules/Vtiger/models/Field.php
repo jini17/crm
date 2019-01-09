@@ -165,7 +165,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 				$fieldDataType = 'picklist';
 			} else if($uiType == '55' && stripos($this->getName(), 'firstname') !== false) {
 				$fieldDataType = 'salutation';
-            } else if($uiType == '55' && stripos($this->getName(), 'notifyto') !== false) {
+            } else if($uiType == '55' && (stripos($this->getName(), 'notifyto') !== false || stripos($this->getName(), 'roundrobin_userid') !== false)) {
                 $fieldDataType = 'multiowner';
             } else if($uiType == '3993' || $uiType == '3996') {		//Modified Line
 				 $fieldDataType = 'companyDetails';	//Modified Line

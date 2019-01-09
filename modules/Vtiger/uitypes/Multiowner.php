@@ -24,8 +24,15 @@ class Vtiger_Multiowner_UIType extends Vtiger_Base_UIType {
 	 * @return <Object>
 	 */
 	public function getDisplayValue($ids) {
-		$values = explode('|##|', $ids);
+		
+		if(!is_array($ids)){
+			$values = explode('|##|', $ids);	
+		} else {
+			$values = $ids;
+		}
+		
         if($values == NULL && !is_array($values)) return;
+        $k = 0;
         foreach($values as $value){
             if (self::getOwnerType($value) === 'User') {
                 $userModel = Users_Record_Model::getCleanInstance('Users');
@@ -44,7 +51,12 @@ class Vtiger_Multiowner_UIType extends Vtiger_Base_UIType {
                 $recordModel->set('groupid',$value);
                 $detailViewUrl = $recordModel->getDetailViewUrl();
             }
-            $displayvalue[] = "&nbsp;<a href=" .$detailViewUrl. ">" .getOwnerName($value). "</a>";
+            if($k%2==0 && $k !=0){
+            	$displayvalue[] = "&nbsp;<a href=" .$detailViewUrl. ">" .getOwnerName($value). "</a>"."<br />";	
+             } else {
+            	$displayvalue[] = "&nbsp;<a href=" .$detailViewUrl. ">" .getOwnerName($value). "</a>";
+            }	
+            $k++;
         }
         $displayvalue = implode(',',$displayvalue);
         return $displayvalue;
