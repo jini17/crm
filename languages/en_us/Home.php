@@ -71,4 +71,7 @@ $languageStrings = array(
 $jsLanguageStrings = array(
 	'JS_TAB_NAME_SHOULD_NOT_BE_EMPTY' => 'Dashboard name cannot not be empty',
 	'JS_NO_DATA_AVAILABLE' => 'No data available',
+	'JS_TRANS_LIMIT'=>'Transaction limit is ',
+	'JS_ERROR_TRANSACTION_DATE'=>'Transsaction date should be less than or equal to current date',
+	'JS_APPLY_AMOUNT'=>'Amount cant more than this',
 );

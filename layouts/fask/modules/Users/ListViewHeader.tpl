@@ -75,7 +75,7 @@
             <div class="col-lg-9">
                 
                     <div class='form-group  col-lg-7' style="padding:0">
-                        <input type="text" id="keywordsearch" placeholder="{vtranslate('Search for Name, Designation, Email, Department',$MODULE)} " class="form-control" style="width:100%; padding: 16px 8px;">
+                        <input type="text" id="keywordsearch" placeholder="{vtranslate('Search for Name, Designation, Email, Department',$MODULE)} " class="form-control" style="width:100%;">
                     </div>
                     <div class="form-group  col-lg-1" style="padding:0;">
                         <button type="button" class='btn btn-primary keyword-search'> Search   </button>

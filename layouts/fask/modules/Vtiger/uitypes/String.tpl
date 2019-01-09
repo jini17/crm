@@ -34,6 +34,6 @@
 			data-rule-email="true"
 		{/if}
 
-		 />
+		  {if $FIELD_MODEL->get('maximumlength') neq '' && $FIELD_MODEL->get('maximumlength') neq 0} maxlength="{$FIELD_MODEL->get('maximumlength')}" {/if} />
 		
 {/strip}
