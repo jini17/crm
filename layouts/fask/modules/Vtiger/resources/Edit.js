@@ -380,28 +380,4 @@ Vtiger_Index_Js("Vtiger_Edit_Js",{
 		this.registerPageLeaveEvents();
     }
 });
-jQuery("#Attendance_editView_fieldName_attendancedate").val("")
-    // jQuery("input[name^='date_joined']").on("change",function(){
-    //         alert("date")
-    //           var date_joined = jQuery(this).val();  
-
-    //                   if(date_joined.length > 0){
-    //                     var expireDateArr = date_joined.split("-");                               
-    //                     var expireDate = new Date(expireDateArr[2]+"-"+expireDateArr[1]+"-"+ expireDateArr[0]);     
-    //                     var now = new Date();
-    //                     var past = new Date(expireDate);
-    //                     var nowYear = now.getFullYear();
-    //                     var pastYear = past.getFullYear();
-    //                     var joined =     pastYear - nowYear;
-    //                     var diff = past.getTime() - now.getTime();
-    //                     var years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));  
-
-    //                     if(parseInt(years) > 1){
-                            
-    //                          app.helper.showErrorNotification({message :app.vtranslate('Join Date should not be greater than 1 year')});
-    //                                   jQuery(this).val("");
-    //                                  return false;
-    //                     }   
-                            
-    //                   }
-    //       })
+jQuery("#Attendance_editView_fieldName_attendancedate").val("");
