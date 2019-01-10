@@ -55,6 +55,7 @@ class Vtiger_Menu_Model extends Vtiger_Module_Model {
 	 * @return <Array> - List of Vtiger_Menu_Model instances
 	 */
 	public static function getAllForQuickCreate() {
+		global $adb;
 		$userPrivModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
 		$restrictedModulesList = array('Emails', 'ModComments', 'Integration', 'PBXManager', 'Dashboard', 'Home');
 		$allModules = parent::getAll(array('0', '2'));
@@ -69,5 +70,42 @@ class Vtiger_Menu_Model extends Vtiger_Module_Model {
 		uksort($menuModels, array('Vtiger_MenuStructure_Model', 'sortMenuItemsByProcess'));
 		return $menuModels;
 	}
+
+	/**
+	 * Static Function to get all the accessible module model for Quick Create
+	 * Added By Mabruk
+	 * @return <Array> - List of Vtiger_Menu_Model instances
+	 */
+	public static function getQuickCreateModulesAndIcons() {
+
+		global $adb;		
+		$menuModels  = array();
+		$currentUser = Users_Record_Model::getCurrentUserModel();
+
+
+		$result 	= $adb->pquery("SELECT vtiger_tab.name, vtiger_tab.moduleicon 
+								FROM `vtiger_tab`
+								LEFT JOIN secondcrm_planpermission 
+								ON secondcrm_planpermission.tabid = vtiger_tab.tabid
+								WHERE quickcreate = 1
+								AND secondcrm_planpermission.visible = 1 
+								AND secondcrm_planpermission.planid = ?", array($_SESSION['plan']));
+		$numOfRows 	= $adb->num_rows($result);
+		
+		for ($i = 0; $i < $numOfRows; $i++) {
+
+			$moduleName = $adb->query_result($result, $i, 'name');
+
+			if(!in_array($currentUser->roleid, array('H2', 'H12', 'H13')) && $moduleName == 'Users') 
+				continue;			
+			
+			$menuModels[$i]['moduleName'] = $moduleName;
+			$menuModels[$i]['moduleIcon'] = $adb->query_result($result, $i, 'moduleicon');
+
+		}
+
+		return array_values(array_filter($menuModels));
+
+	}	
 
 }

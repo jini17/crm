@@ -69,7 +69,7 @@ if($focus->is_authenticated()) {
 	$_SESSION['KCFINDER']['uploadDir'] = "/test/upload";
 	$deniedExts = implode(" ", $upload_badext);
 	$_SESSION['KCFINDER']['deniedExts'] = $deniedExts;
-                     $_SESSION["REMOTE_"] = 1;
+    $_SESSION["REMOTE_"] = 1;
 
                         
                      

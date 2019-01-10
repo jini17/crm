@@ -19,7 +19,7 @@
 			<div class="addCommentBlock">
 				<div class="row">
 					<div class=" col-lg-12">
-						<div class="commentTextArea ">
+						<div class="commentTextArea">
 							<textarea name="commentcontent" class="commentcontent form-control mention_listener" placeholder="{vtranslate('LBL_POST_YOUR_COMMENT_HERE', $MODULE_NAME)}" rows="{$COMMENT_TEXTAREA_DEFAULT_ROWS}"></textarea>
 						</div>
 					</div>
@@ -223,7 +223,8 @@
 
 	<div class="hide basicAddCommentBlock container-fluid">
 		<div class="commentTextArea row">
-			<textarea name="commentcontent" class="commentcontent" placeholder="{vtranslate('LBL_ADD_YOUR_COMMENT_HERE', $MODULE_NAME)}" rows="{$COMMENT_TEXTAREA_DEFAULT_ROWS}"></textarea>
+			<textarea name="commentcontent" class="commentcontent" placeholder="{vtranslate('LBL_ADD_YOUR_COMMENT_HERE', $MODULE_NAME)}" rows="{$COMMENT_TEXTAREA_DEFAULT_ROWS}" style="width:100%"></textarea>
+			<input type="hidden" name="numberOfComments" value={$NOOFCOMMENTS}>
 		</div>
 		<div class="pull-right row">
 			{if in_array($MODULE_NAME, $PRIVATE_COMMENT_MODULES)}

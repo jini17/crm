@@ -530,7 +530,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
                 listParams['search_params'] = [[["department", "e", dept]]];
             }
             listParams['status'] = "Active";
-            listParams['empview'] = viewtype;
+            listParams['empview'] = viewtype; alert(viewtype);
             listParams['tabtype'] = tabType;
             listParams['searchType'] = "keyword";
             
@@ -655,6 +655,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
             thisInstance.updatePagination();
             app.event.trigger('post.listViewFilter.click', container.find('.searchRow'));
             thisInstance.registerDynamicDropdownPosition('table-actions', 'listview-table');
+            thisInstance.registerPagination(); // Added By Mabruk So Next Page Function Works on All pages/After page load
             app.helper.hideProgress();
         });
         return aDeferred.promise();
