@@ -9,6 +9,44 @@
  *************************************************************************************/
 
 class Vtiger_Util_Helper {
+
+
+
+    /*Codes added for multiple companies and terms&conditions*/
+    /* Function added by Jitu on Jun 23, 2014 for new UI Type 3997
+    This function will retrieve terms title */
+    
+    public static function getTermTitle(){
+        $db = PearDatabase::getInstance();
+        $currentUser = Users_Record_Model::getCurrentUserModel();
+        $userid      = $currentUser->id;
+        $params = array();
+        $Where = '';
+
+        if(!$currentUser->isAdminUser()) {
+            $Where  = " WHERE tblSCUAC.userid = ?";
+            $params = array($userid);   
+        }
+
+        $aTermCondition = array();
+        $iOptionIndex = 0;
+        $query = "SELECT DISTINCT tblVtTNC.termsconditionid, tblVtTNC.title FROM  vtiger_termscondition tblVtTNC 
+                    INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVtTNC.termsconditionid
+                    LEFT JOIN secondcrm_users_assigncompany tblSCUAC ON tblSCUAC.organization_id = tblVtTNC.organization_id 
+                    ".$Where." AND tblVTC.deleted=0 ORDER BY tblVtTNC.title";
+
+        $result = $db->pquery($query, $params);
+        $iMaxTerm = $db->num_rows($result);
+        for($iK=0;$iK<$iMaxTerm;$iK++)
+        {
+            $iOptionIndex++;
+            $aTermCondition[$iOptionIndex]['title'] = $db->query_result($result,$iK,'title');
+            $aTermCondition[$iOptionIndex]['id'] = $db->query_result($result,$iK,'termsconditionid');;
+        }
+        return $aTermCondition;
+    }   
+
+
         /**
          * Function used to transform mulitiple uploaded file information into useful format.
          * @param array $_files - ex: array( 'file' => array('name'=> array(0=>'name1',1=>'name2'),
@@ -48,6 +86,55 @@ class Vtiger_Util_Helper {
                 self::$_transformedFile = true;
                 return $files;
         }
+
+    /* Function added by Jitu on Aug 26, 2014 for new UI Type 3993
+    This function will retrieve Terms&Condition title for view the details in a module */
+    public static function getTnCTitle($id){
+        $db = PearDatabase::getInstance();
+
+        $aTnCTitle = array();
+        $iOptionIndex = 0;
+        $query = 'SELECT title FROM vtiger_termscondition WHERE termsconditionid='.$id;
+        $result = $db->pquery($query, array());
+        $aTnCTitle[$iOptionIndex]['title'] = $db->query_result($result,0,'title');
+        return $aTnCTitle;
+    }
+
+    /**
+    Function added by Jitu on 11 Aug 2014 
+    for getting all termsncondition for particular company record
+  **/       
+    public static function getAllCompanyTermsConditions($company_Id){
+        
+         $db = PearDatabase::getInstance();
+         $currentUser = Users_Record_Model::getCurrentUserModel();
+             $userid      = $currentUser->id;
+        
+        if(!$currentUser->isAdminUser()) {
+            $Where  = " AND tblSCUAC.userid = '".$userid."'";
+        }   
+         $aTermsConditionArray = array();
+         $iOptionIndex = 0;
+
+         $query = "SELECT DISTINCT tblVtTNC.termsconditionid, tblVtTNC.title, tblVtTNC.tandc FROM  vtiger_termscondition tblVtTNC 
+                    INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVtTNC.termsconditionid
+                    LEFT JOIN secondcrm_users_assigncompany tblSCUAC ON tblSCUAC.organization_id = tblVtTNC.organization_id 
+                    ".$Where." AND tblVTC.deleted=0 AND tblVtTNC.organization_id = ? ORDER BY tblVtTNC.title";
+
+         $result = $db->pquery($query, array($company_Id));
+         $iTnC = $db->num_rows($result);
+        for($iK=0;$iK<$iTnC;$iK++)
+        {   
+                        $aTermsConditionArray[$iOptionIndex]['id'] = $db->query_result($result,$iK,'termsconditionid', 'selected');
+                        $aTermsConditionArray[$iOptionIndex]['title'] = $db->query_result($result,$iK,'title', 'selected');
+                        $aTermsConditionArray[$iOptionIndex]['tandc'] = $db->query_result($result,$iK,'tandc', 'selected');
+            $iOptionIndex++;
+                       
+        }
+        //print_r( $aTermsConditionArray);
+      return $aTermsConditionArray;
+    }
+
 
         /** Function added by ZUL@Secondcrm.com on Jun 23, 2014 for new UI Type 3993
         *  Modified By jitu@secondcrm.com    	

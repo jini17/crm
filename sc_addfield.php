@@ -39,7 +39,19 @@ $field1->uitype = 10;
 $field1->displaytype = 1;
 $field1->typeofdata = 'V~O'; // varchar~Mandatory
 $block->addField($field1); /** table and column are automatically set */
-$field1->setRelatedModules(Array('Products','Services'));
+$field1->setRelatedModules(Array('Products'));
+
+$field12 = new Vtiger_Field();
+$field12->name = 'serviceid';
+$field12->label = 'Service Name';
+$field12->table = $module->basetable;
+$field12->column = 'serviceid';
+$field12->columntype = 'int(11)';
+$field12->uitype = 10;
+$field12->displaytype = 1;
+$field12->typeofdata = 'V~O'; // varchar~Mandatory
+$block->addField($field1); /** table and column are automatically set */
+$field12->setRelatedModules(Array('Services'));
 
 $field2 = new Vtiger_Field();
 $field2->name = 'serialno';
@@ -53,15 +65,15 @@ $field2->typeofdata = 'V~O'; // varchar~Mandatory
 $block->addField($field2); /** table and column are automatically set */
 
 
-$field3-> = new Vtiger_Field();
-$field3->->name = 'reg_date';
-$field3->->label = 'Registration date';
-$field3->->table = $module->basetable;
-$field3->->column = 'reg_date';
-$field3->->columntype = 'DATE';
-$field3->->uitype = 5;
-$field3->->displaytype = 1;
-$field3->->typeofdata = 'D~O'; // varchar~Mandatory
+$field3 = new Vtiger_Field();
+$field3->name = 'reg_date';
+$field3->label = 'Registration date';
+$field3->table = $module->basetable;
+$field3->column = 'reg_date';
+$field3->columntype = 'DATE';
+$field3->uitype = 5;
+$field3->displaytype = 1;
+$field3->typeofdata = 'D~O'; // varchar~Mandatory
 $block->addField($field3); /** table and column are automatically set */
 
 

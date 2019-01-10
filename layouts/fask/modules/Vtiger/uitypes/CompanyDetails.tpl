@@ -16,7 +16,7 @@
 {assign var="SPECIAL_VALIDATOR" value=$FIELD_MODEL->getValidator()}
 
 {if $FIELD_MODEL->get('uitype') eq '3993'}
-<select class="inputElement select2 {if $OCCUPY_COMPLETE_WIDTH} row {/if} id="{$FIELD_MODEL->getFieldName()}" name="{$FIELD_MODEL->getFieldName()}" data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-fieldinfo='{$FIELD_INFO|escape}' {if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if} data-selected-value='{$FIELD_MODEL->get('fieldvalue')}'>
+<select class="inputElement select2 {if $OCCUPY_COMPLETE_WIDTH} row {/if}"  id="{$FIELD_MODEL->getFieldName()}" name="{$FIELD_MODEL->getFieldName()}" data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-fieldinfo='{$FIELD_INFO|escape}' {if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if} data-selected-value='{$FIELD_MODEL->get('fieldvalue')}'>
 		{if $FIELD_MODEL->isEmptyPicklistOptionAllowed()}<option value="">{vtranslate('LBL_SELECT_OPTION','Vtiger')}</option>{/if}
 	{foreach key=labelval1 item=selCompanyDetails from=$COMPANYDETAILS}
             
@@ -32,7 +32,7 @@
 </select>
 <input type="hidden" name="hdnCompanyId" id="hdnCompanyId" value="{$FIELD_MODEL->get('fieldvalue')}">
 {else}
-  <select class="inputElement select2 {if $OCCUPY_COMPLETE_WIDTH} row {/if} id="{$FIELD_MODEL->getFieldName()}" name="{$FIELD_MODEL->getFieldName()}" data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-fieldinfo='{$FIELD_INFO|escape}' {if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if} data-selected-value='{$FIELD_MODEL->get('fieldvalue')}'>
+  <select class="inputElement select2 {if $OCCUPY_COMPLETE_WIDTH} row {/if}" id="{$FIELD_MODEL->getFieldName()}" name="{$FIELD_MODEL->getFieldName()}" data-validation-engine="validate[{if $FIELD_MODEL->isMandatory() eq true} required,{/if}funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-fieldinfo='{$FIELD_INFO|escape}' {if !empty($SPECIAL_VALIDATOR)}data-validator='{Zend_Json::encode($SPECIAL_VALIDATOR)}'{/if} data-selected-value='{$FIELD_MODEL->get('fieldvalue')}'>
     {if $FIELD_MODEL->isEmptyPicklistOptionAllowed()}<option value="">{vtranslate('LBL_SELECT_OPTION','Vtiger')}</option>{/if}
   {foreach key=labelval1 item=selCompanyDetails from=$COMPANYDETAILS}
             
