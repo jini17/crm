@@ -613,7 +613,7 @@
           </ul>
         </div>
         <div class='col-md-6 col-sm-12 col-xs-12'>
-<<<<<<< HEAD
+
           <div id="navbar" class="col-sm-2 col-md-3 col-lg-3 collapse navbar-collapse navbar-right global-actions">
             <ul class="nav navbar-nav">
               <li class='searchoption'>
@@ -696,7 +696,7 @@
                                         </i>
                                       </span>
                                     </a>
-                                    <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_Documents">
+                                    <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_Documents" style="width:100%">
                                       <li class="dropdown-header">
                                         <i class="material-icons">file_upload
                                         </i> File Upload
