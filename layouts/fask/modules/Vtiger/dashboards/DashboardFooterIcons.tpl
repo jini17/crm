@@ -28,9 +28,11 @@
 	<i class="material-icons" hspace="2" border="0" align="absmiddle" title="{vtranslate('LBL_CUSTOMIZE',$MODULE)}" alt="{vtranslate('LBL_CUSTOMIZE',$MODULE)}">create</i>
 </a>
 {/if}
+{if $WIDGET->get('linkid') neq 152}
 <a href="javascript:void(0);" name="drefresh" data-url="{$WIDGET->getUrl()}&linkid={$WIDGET->get('linkid')}&content=data">
 	<i class="material-icons" hspace="2" border="0" align="absmiddle" title="{vtranslate('LBL_REFRESH')}" alt="{vtranslate('LBL_REFRESH')}">refresh</i>
 </a>
+{/if}
 {if !$WIDGET->isDefault()}
 	<a name="dclose" class="widget" data-url="{$WIDGET->getDeleteUrl()}">
 		<i class="material-icons" hspace="2" border="0" align="absmiddle" title="{vtranslate('LBL_REMOVE')}" alt="{vtranslate('LBL_REMOVE')}">close</i>

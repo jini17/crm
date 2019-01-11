@@ -24,7 +24,7 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View {
                 $linkId                       = $request->get('linkid');
                 
                  $moduleModel       = Home_Module_Model::getInstance($moduleName);
-                 $widget                    = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+                 $widget                    = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
                  $users                       = $this->get_employee($db, $dept);
                  $first_name            = $currentUser->get('first_name');
                  $last_name            = $currentUser->get('last_name');

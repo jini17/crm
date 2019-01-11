@@ -35,7 +35,7 @@ class Reports_ChartReportWidget_Dashboard extends Vtiger_IndexAjax_View {
         $data = json_encode($data, JSON_HEX_APOS);
 		$viewer->assign('DATA', $data);
         $currentUser = Users_Record_Model::getCurrentUserModel();
-        $widget = Vtiger_Widget_Model::getInstanceWithReportId($record, $currentUser->getId());
+        $widget = Vtiger_Widget_Model::getInstanceWithReportId($record, $currentUser->getId(), $request->get('tab'));
         $widget->set('title',$reportModel->getName().' ('.vtranslate($primaryModule, $primaryModule).')');
 		$viewer->assign('WIDGET', $widget);
 

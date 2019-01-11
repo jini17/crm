@@ -30,7 +30,7 @@ class Vtiger_MiniList_Dashboard extends Vtiger_IndexAjax_View {
                         $widgetId = $request->get('widgetid');
                 }
 
-                $widget = Vtiger_Widget_Model::getInstanceWithWidgetId($widgetId, $currentUser->getId());
+                $widget = Vtiger_Widget_Model::getInstanceWithWidgetId($widgetId, $currentUser->getId(), $request->get('tab'));
 
                 $minilistWidgetModel = new Vtiger_MiniList_Model();
                 $minilistWidgetModel->setWidgetModel($widget);

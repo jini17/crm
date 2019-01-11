@@ -33,7 +33,7 @@ class Leave_MembersLeaves_Dashboard extends Vtiger_IndexAjax_View {
 		
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('MODULE_NAME', $moduleName);
 		$viewer->assign('TIME_LABEL', $timeLabel);
