@@ -1456,4 +1456,17 @@ class Vtiger_Util_Helper {
                 }
                 return $month;
         }
+
+        /* Function added by Jitu on Aug 26, 2014 for new UI Type 3993
+    This function will retrieve Terms&Condition title for view the details in a module */
+    public static function getTnCDescription($id){
+        $db = PearDatabase::getInstance();
+
+        $iOptionIndex = 0;
+        $query = "SELECT tandc FROM vtiger_termscondition WHERE termsconditionid=?";
+        $result = $db->pquery($query, array($id));
+        $aTnCDescription = $db->query_result($result,0,'tandc');
+        return $aTnCDescription;
+    }
+
 }

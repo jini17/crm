@@ -190,7 +190,8 @@ class Users_Login_Action extends Vtiger_Action_Controller
      */
     function checkSubExpDate($user) {
 
-        global $adb;$adb->setDebug(true);
+        global $adb;
+        //$adb->setDebug(true);
 
         $result     = $adb->pquery("SELECT secondcrm_plan.expiredate
                                 FROM secondcrm_plan 
