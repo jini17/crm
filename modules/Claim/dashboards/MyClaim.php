@@ -37,7 +37,7 @@ class Claim_MyClaim_Dashboard extends Vtiger_IndexAjax_View {
 		$linkId = $request->get('linkid');
 
 		
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('VALUE', $type );
 		$viewer->assign('VALUELABEL', $valueLabel);

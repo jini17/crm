@@ -22,7 +22,7 @@ class Reports_ReportChart_Dashboard extends Reports_ChartDetail_View {
 		$record = self::getreportid($widgetId);
 		$reportModel = Reports_Record_Model::getInstanceById($record);
 		$reportChartModel = Reports_Chart_Model::getInstanceById($reportModel);
-		$widget = Vtiger_Widget_Model::getInstanceWithWidgetId($widgetId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstanceWithWidgetId($widgetId, $currentUser->getId(), $request->get('tab'));
 
         $data = $reportChartModel->getData();
 

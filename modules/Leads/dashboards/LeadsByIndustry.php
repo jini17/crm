@@ -41,7 +41,7 @@ class Leads_LeadsByIndustry_Dashboard extends Vtiger_IndexAjax_View {
             $data[$i]["links"] = $listViewUrl.$this->getSearchParams($data[$i][2],$request->get('smownerid'), $request->get('dateFilter')).'&nolistcache=1';
         }
 
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 
 		//Include special script and css needed for this widget
 

@@ -88,7 +88,7 @@ class Vtiger_Widget_Model extends Vtiger_Base_Model {
                 if($this->get('reportid')){
                         $chartReportLinkUrl = "index.php?module=Reports&view=ShowWidget&name=ChartReportWidget&reportid=".$this->get('reportid');
                         $url = decode_html($chartReportLinkUrl);
-                }	
+                }   
                 $widgetid = $this->has('widgetid')? $this->get('widgetid') : $this->get('id');
                 if ($widgetid) $url .= '&widgetid=' . $widgetid;
                 return $url;
@@ -129,11 +129,12 @@ class Vtiger_Widget_Model extends Vtiger_Base_Model {
                 return $self;
         }
 
-        public static function getInstance($linkId, $userId) {
+        // Parameter tabid added By Mabruk
+        public static function getInstance($linkId, $userId , $tabid) {
                 $db = PearDatabase::getInstance();
                 $result = $db->pquery('SELECT * FROM vtiger_module_dashboard_widgets
                         INNER JOIN vtiger_links ON vtiger_links.linkid = vtiger_module_dashboard_widgets.linkid
-                        WHERE linktype = ? AND vtiger_links.linkid = ? AND userid = ?', array('DASHBOARDWIDGET', $linkId, $userId));
+                        WHERE linktype = ? AND vtiger_links.linkid = ? AND userid = ? AND dashboardtabid = ?', array('DASHBOARDWIDGET', $linkId, $userId, $tabid));
 
                 $self = new self();
                 if($db->num_rows($result)) {
@@ -225,19 +226,25 @@ class Vtiger_Widget_Model extends Vtiger_Base_Model {
                 }
 
                 $result = $db->pquery($sql, $params);
-
+                // is_closed condition Added By Mabruk
                 if(!$db->num_rows($result)) {
-                        $db->pquery('INSERT INTO vtiger_module_dashboard_widgets(linkid, userid, filterid, title, data,dashboardtabid) VALUES(?,?,?,?,?,?)',
-                                        array($this->get('linkid'), $this->get('userid'), $this->get('filterid'), $this->get('title'), Zend_Json::encode($this->get('data')),$tabid));
+                        $db->pquery('INSERT INTO vtiger_module_dashboard_widgets(linkid, userid, filterid, title, data,dashboardtabid, is_closed) VALUES(?,?,?,?,?,?,?)',
+                                        array($this->get('linkid'), $this->get('userid'), $this->get('filterid'), $this->get('title'), Zend_Json::encode($this->get('data')),$tabid, 0));
                         $this->set('id', $db->getLastInsertID());
                 } else if($this->has('data')){
-                        $db->pquery('INSERT INTO vtiger_module_dashboard_widgets(linkid, userid, filterid, title, data,dashboardtabid) VALUES(?,?,?,?,?,?)',
-                                        array($this->get('linkid'), $this->get('userid'), $this->get('filterid'), $this->get('title'), Zend_Json::encode($this->get('data')),$tabid));
+                        $db->pquery('INSERT INTO vtiger_module_dashboard_widgets(linkid, userid, filterid, title, data,dashboardtabid, is_closed) VALUES(?,?,?,?,?,?,?)',
+                                        array($this->get('linkid'), $this->get('userid'), $this->get('filterid'), $this->get('title'), Zend_Json::encode($this->get('data')),$tabid, 0));
                         $this->set('id', $db->getLastInsertID());
                         }
-                else {
+                else { 
+                        $db->pquery('UPDATE vtiger_module_dashboard_widgets 
+                                     SET is_closed = 0 
+                                     WHERE linkid = ? 
+                                     AND userid = ? 
+                                     AND dashboardtabid = ?', array($this->get('linkid'), $this->get('userid'), $this->get('tabid')));
                         $this->set('id', $db->query_result($result, 0, 'id'));
                 }
+                
         }
 
         /**
@@ -245,8 +252,12 @@ class Vtiger_Widget_Model extends Vtiger_Base_Model {
          */
         public function remove() {
                 $db = PearDatabase::getInstance();
-                $db->pquery('DELETE FROM vtiger_module_dashboard_widgets WHERE id = ? AND userid = ?',
-                                array($this->get('id'), $this->get('userid')));
+                /*$db->pquery('DELETE FROM vtiger_module_dashboard_widgets WHERE id = ? AND userid = ?',
+                                array($this->get('id'), $this->get('userid')));*/
+                // Added By Mabruk                
+                $db->pquery('UPDATE vtiger_module_dashboard_widgets SET is_closed = 1 WHERE id = ? AND userid = ?',
+                                array($this->get('id'), $this->get('userid')));                                
+
         }
 
         /**

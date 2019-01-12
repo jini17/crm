@@ -49,7 +49,7 @@ class Vtiger_EmployeeChartByDept_Dashboard extends Vtiger_IndexAjax_View {
              
                 $moduleModel  = Home_Module_Model::getInstance($moduleName);
                 $empbydept       = $this->get_employee_by_dept($db,$department,$site_URL);
-                $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+                $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 
                 //print_r($empbydept);
                 $viewer->assign('WIDGET', $widget);

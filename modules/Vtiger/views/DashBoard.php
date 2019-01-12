@@ -170,20 +170,29 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
      */
         public function get_widgets_by_group($group,$modulename,$userid,$tab_id){
             $data = array();
-            $db = PearDatabase::getInstance();
-          //  $db->setDebug(true);
-            $sql = "SELECT * from vtiger_links WHERE linktype = 'DASHBOARDWIDGET' AND widgetgroup = '$group' ";
+            $db   = PearDatabase::getInstance();
+            //$db->setDebug(true);
+            // Update By Mabruk
+            $sql = "SELECT * from vtiger_links 
+                    INNER JOIN vtiger_module_dashboard_widgets ON vtiger_module_dashboard_widgets.linkid = vtiger_links.linkid
+                    WHERE linktype = 'DASHBOARDWIDGET' 
+                    AND widgetgroup = '$group'
+                    AND userid = '$userid'
+                    AND dashboardtabid = '$tab_id'";
+
             $query = $db->pquery($sql,array());
             $num_rows =  $db->num_rows($query);
             if($num_rows > 0){
                 for($i =0; $i < $num_rows; $i++){
+
                     $data[$i]["URL"]        = $db->query_result($query, $i,'linkurl')."&linkid=".$db->query_result($query, $i,'linkid');
-                    $data[$i]['linkid']        = $db->query_result($query, $i,'linkid');
+                    $data[$i]['linkid']     = $db->query_result($query, $i,'linkid');
                     $data[$i]['name']       = $db->query_result($query, $i,'linklabel');
-                    $data[$i]['title']          = vtranslate($db->query_result($query, $i,'linklabel'), $modulename);  
-                    $data[$i]['is_closed'] =  $db->query_result($query, $i,'is_closed'); 
-                    $data[$i]['width']       = 1;
-                    $data[$i]['height']      = 1;
+                    $data[$i]['title']      = vtranslate($db->query_result($query, $i,'linklabel'), $modulename);  
+                    $data[$i]['is_closed']  =  $db->query_result($query, $i,'is_closed'); 
+                    $data[$i]['width']      = 1;
+                    $data[$i]['height']     = 1;
+                    
                 }
             }
             

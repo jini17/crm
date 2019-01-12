@@ -42,7 +42,7 @@ class Claim_MyTeamClaim_Dashboard extends Vtiger_IndexAjax_View {
 		$page = $request->get('page');
 		$linkId = $request->get('linkid');
 		$claimmodel = Users_ClaimRecords_Model::getMyTeamWidgetClaim($currentUser->getId(), date('Y'), $type, $select_value);
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('VALUE', $type );
 		$viewer->assign('VALUELABEL', $valueLabel);
