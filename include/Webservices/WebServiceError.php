@@ -14,7 +14,7 @@
 		public $code;
 		public $message;
 		
-		function WebServiceException($errCode,$msg){
+		function WebServiceException($errCode,$msg){ 
 			$this->code = $errCode;
 			$this->message = $msg;
 		}

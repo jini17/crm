@@ -149,7 +149,7 @@ abstract class WSAPP_SynchronizeController {
         $syncStateModel = $this->getSyncStateModel($this->targetConnector);
         $targetRecords = $this->targetConnector->pull($syncStateModel, $this->user);
 
-        print_r($targetRecords);die;
+        
 
         foreach($targetRecords as $record){
             $record->setSyncIdentificationKey(uniqid());
@@ -212,10 +212,10 @@ abstract class WSAPP_SynchronizeController {
         $records['ExtensionModule'] = $this->getSourceType();
         $records['user'] = $user->id;
 
-        if ($pullTargetFirst) {
+        if ($pullTargetFirst) { echo "Here";die;
             if($push) $records['push'] = $this->synchronizePush($moduleName);
             if($pull) $records['pull'] = $this->synchronizePull($moduleName);
-        } else {
+        } else { echo "Here2";die;
             if($pull) $records['pull'] = $this->synchronizePull($moduleName);
             if($push) $records['push'] = $this->synchronizePush($moduleName);
         }
