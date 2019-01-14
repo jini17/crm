@@ -9,31 +9,31 @@
  *************************************************************************************/
 $languageStrings = array(
 	// Basic Strings
-	'Accounts' => 'Organizations',
-	'SINGLE_Accounts' => 'Organization',
-	'LBL_ADD_RECORD' => 'Add Organization',
-	'LBL_RECORDS_LIST' => 'Organization List',
+	'Accounts' => 'Accounts',
+	'SINGLE_Accounts' => 'Account',
+	'LBL_ADD_RECORD' => 'Add Account',
+	'LBL_RECORDS_LIST' => 'Account List',
 
 	// Blocks
-	'LBL_ACCOUNT_INFORMATION' => 'Organization Details',
+	'LBL_ACCOUNT_INFORMATION' => 'Account Details',
 
 	// Mass Action
-	'LBL_SHOW_ACCOUNT_HIERARCHY' => 'Organization Hierarchy',
+	'LBL_SHOW_ACCOUNT_HIERARCHY' => 'Account Hierarchy',
 
 	//Field Labels
 	'industry' => 'Industry',
-	'Account Name' => 'Organization Name',
-	'Account No' => 'Organization Number',
+	'Account Name' => 'Account Name',
+	'Account No' => 'Account Number',
 	'Website' => 'Website',
 	'Ticker Symbol' => 'Ticker Symbol',
 	'Member Of' => 'Member Of',
 	'Employees' => 'Employees',
 	'Ownership' => 'Ownership',
-	'SIC Code' => 'SIC Code',
-	'Other Email' => 'Secondary Email',
-	'Other Phone' => 'Secondary Phone',
-	'Phone' => 'Primary Phone',
-	'Email' => 'Primary Email',
+	'SIC Code' => 'Company Registration No',
+	'Other Email' => 'Other Email',
+	'Other Phone' => 'Other Phone',
+	'Phone' => 'Phone',
+	'Email' => 'Email',
 	'Type' => 'Type',
 
 	//Added for existing picklist entries
@@ -49,16 +49,16 @@ $languageStrings = array(
 	'LBL_END_DATE' => 'End Date',
 
 	//Duplication error message
-	'LBL_DUPLICATES_EXIST' => 'Organization Name already exists',
+	'LBL_DUPLICATES_EXIST' => 'Account Name already exists',
 	'LBL_COPY_SHIPPING_ADDRESS' => 'Copy Shipping Address',
 	'LBL_COPY_BILLING_ADDRESS' => 'Copy Billing Address',
 	'LBL_IMAGE_INFORMATION' => 'Profile Picture',
-	'Organization Image' => 'Organization Image',
+	'Organization Image' => 'Account Image',
 );
 
 $jsLanguageStrings = array(
 	'LBL_RELATED_RECORD_DELETE_CONFIRMATION' => 'Are you sure you want to delete?',
-	'LBL_DELETE_CONFIRMATION' => 'Deleting this Organization will remove its related Opportunities & Quotes. Are you sure you want to delete this Organization?',
-	'LBL_MASS_DELETE_CONFIRMATION' => 'Deleting this Organization(s) will remove its related Opportunities & Quotes. Are you sure you want to delete the selected records?',
-	'JS_DUPLICATE_CREATION_CONFIRMATION' => 'Organization Name already Exists.Do you want to create a duplicate record?'
+	'LBL_DELETE_CONFIRMATION' => 'Deleting this Account will remove its related Opportunities & Quotes. Are you sure you want to delete this Account?',
+	'LBL_MASS_DELETE_CONFIRMATION' => 'Deleting this Account(s) will remove its related Opportunities & Quotes. Are you sure you want to delete the selected records?',
+	'JS_DUPLICATE_CREATION_CONFIRMATION' => 'Account Name already Exists.Do you want to create a duplicate record?'
 );

@@ -12,12 +12,12 @@ include_once 'modules/Vtiger/CRMEntity.php';
 
 class OrganizationDetails extends Vtiger_CRMEntity {
 	var $table_name = 'vtiger_organizationdetails';
-	var $table_index= 'organizationdetailsid';
+	var $table_index= 'organization_id';
 
 	/**
 	 * Mandatory table for supporting custom fields.
 	 */
-	var $customFieldTable = Array('vtiger_organizationdetailscf', 'organizationdetailsid');
+	var $customFieldTable = Array('vtiger_organizationdetailscf', 'organization_id');
 
 	/**
 	 * Mandatory for Saving, Include tables related to this module.
@@ -29,8 +29,8 @@ class OrganizationDetails extends Vtiger_CRMEntity {
 	 */
 	var $tab_name_index = Array(
 		'vtiger_crmentity' => 'crmid',
-		'vtiger_organizationdetails' => 'organizationdetailsid',
-		'vtiger_organizationdetailscf'=>'organizationdetailsid');
+		'vtiger_organizationdetails' => 'organization_id',
+		'vtiger_organizationdetailscf'=>'organization_id');
 
 	/**
 	 * Mandatory for Listing (Related listview)
@@ -38,45 +38,45 @@ class OrganizationDetails extends Vtiger_CRMEntity {
 	var $list_fields = Array (
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Organization No' => Array('organizationdetails', 'organization_no'),
+		'Organization No' => Array('organizationdetails', 'organization_title'),
 		'Assigned To' => Array('crmentity','smownerid')
 	);
 	var $list_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'Organization No' => 'organization_no',
+		'Organization No' => 'organization_title',
 		'Assigned To' => 'assigned_user_id',
 	);
 
 	// Make the field link to detail view
-	var $list_link_field = 'organization_no';
+	var $list_link_field = 'organization_title';
 
 	// For Popup listview and UI type support
 	var $search_fields = Array(
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Organization No' => Array('organizationdetails', 'organization_no'),
+		'Organization No' => Array('organizationdetails', 'organization_title'),
 		'Assigned To' => Array('vtiger_crmentity','assigned_user_id'),
 	);
 	var $search_fields_name = Array (
 		/* Format: Field Label => fieldname */
-		'Organization No' => 'organization_no',
+		'Organization No' => 'organization_title',
 		'Assigned To' => 'assigned_user_id',
 	);
 
 	// For Popup window record selection
-	var $popup_fields = Array ('organization_no');
+	var $popup_fields = Array ('organization_title');
 
 	// For Alphabetical search
-	var $def_basicsearch_col = 'organization_no';
+	var $def_basicsearch_col = 'organization_title';
 
 	// Column value to use on detail view record text display
-	var $def_detailview_recname = 'organization_no';
+	var $def_detailview_recname = 'organization_title';
 
 	// Used when enabling/disabling the mandatory fields for the module.
 	// Refers to vtiger_field.fieldname values.
-	var $mandatory_fields = Array('organization_no','assigned_user_id');
+	var $mandatory_fields = Array('organization_title','assigned_user_id');
 
-	var $default_order_by = 'organization_no';
+	var $default_order_by = 'organization_title';
 	var $default_sort_order='ASC';
 
 	/**

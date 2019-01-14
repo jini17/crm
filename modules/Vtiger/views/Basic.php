@@ -70,9 +70,9 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
                 //If module is not found in any category we need to show the module itself 
                 //Eg : Home->DashBoard view we ned to show Home 
                 if($moduleFound) {
-                        $selectedMenuCategoryLabel = vtranslate('LBL_'.$selectedModuleMenuCategory, $selectedModule);
+                    $selectedMenuCategoryLabel = vtranslate('LBL_'.$selectedModuleMenuCategory, $selectedModule);
                 }else{
-                        $selectedMenuCategoryLabel = vtranslate($selectedModule, $selectedModule);
+                    $selectedMenuCategoryLabel = vtranslate($selectedModule, $selectedModule);
                 }
 
                 $viewer->assign('SELECTED_MENU_CATEGORY',$selectedModuleMenuCategory);
@@ -86,7 +86,7 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
                 $viewer->assign('MENU_TOPITEMS_LIMIT', $menuStructure->getLimit());
                 $viewer->assign('COMPANY_LOGO',$companyLogo);
                 $viewer->assign('COMPANY_DETAILS_SETTINGS',new Settings_Vtiger_CompanyDetails_Model());
-                $viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
+                $viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel()); 
 
                 $homeModuleModel = Vtiger_Module_Model::getInstance('Home');
                 $viewer->assign('HOME_MODULE_MODEL', $homeModuleModel);
@@ -97,7 +97,7 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
                 $inventoryModules = getInventoryModules();
                 $viewer->assign('INVENTORY_MODULES',  $inventoryModules);
                 if($display) {
-                        $this->preProcessDisplay($request);
+                    $this->preProcessDisplay($request);
                 }
         }
 

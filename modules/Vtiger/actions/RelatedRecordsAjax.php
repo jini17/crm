@@ -42,7 +42,7 @@ class Vtiger_RelatedRecordsAjax_Action extends Vtiger_Action_Controller {
 			$relationId = $relation->getId();
 			$relatedModuleName = $relation->get('relatedModuleName');
 			if($relatedModuleName =='ClaimType'){ 
-					$db = PearDatabase::getInstance();
+					$db = PearDatabase::getInstance(); 
 					$result = $db->pquery("SELECT job_grade FROM vtiger_employeecontract WHERE employeecontractid=?", array($parentRecordId));
 					$grade_id = $db->query_result($result, 0, 'job_grade');
 					$year = date('Y');
@@ -50,7 +50,8 @@ class Vtiger_RelatedRecordsAjax_Action extends Vtiger_Action_Controller {
 					$relationQuery = "SELECT count(vtiger_claimtype.claim_type) as 'count' FROM vtiger_claimtype 	
 					LEFT JOIN allocation_claimrel ON allocation_claimrel.claim_id=vtiger_claimtype.claimtypeid
 					LEFT JOIN allocation_list ON allocation_list.allocation_id=allocation_claimrel.allocation_id
-					WHERE allocation_claimrel.grade_id='$grade_id' AND allocation_list.allocation_year='$year'";
+					LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id=allocation_claimrel.allocation_id
+					WHERE allocation_graderel.grade_id='$grade_id' AND allocation_list.allocation_year='$year'";
 					$result = $db->pquery($relationQuery, array());
 					$relatedRecordsCount[$relationId] = $db->query_result($result, 0, 'count');
 

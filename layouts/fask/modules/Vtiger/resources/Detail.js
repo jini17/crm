@@ -2250,6 +2250,11 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		var self = this;
 		var recordId = self.getRecordId();
 		var moduleName = app.getModuleName();
+
+		// Added By Mabruk
+		//if (moduleName == "EmployeeContract")
+
+
 		self.getRelatedRecordsCount(recordId, moduleName).then(function(data){
 			jQuery.each(data, function(key, value){
 				var element = new Object(jQuery("a","li[data-relation-id="+key+"]"));
@@ -2261,7 +2266,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 				} else{
 					//numberEle.addClass('hide');
 				}
-				element.attr("recordscount",value);
+				element.attr("recordscount",value); 
 			});
 		});
 	},

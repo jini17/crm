@@ -187,6 +187,10 @@
                               <div class="alert alert-error">
                                  <p>{vtranslate('LBL_SESSION_EXPIRED',$MODULE)}</p>
                               </div>
+                              {else if $smarty.request.error eq 13}              
+                              <div class="alert alert-error">
+                                 <p>{vtranslate('LBL_SUBSCRIPTION_EXPIRED',$MODULE)}</p>
+                              </div>                             
                               {/if}
                               {/if}
                               {if isset($smarty.request.fpError)}

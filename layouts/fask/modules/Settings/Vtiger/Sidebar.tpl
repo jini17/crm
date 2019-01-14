@@ -16,6 +16,8 @@
         {assign var=SETTINGS_MENUS value=$SETTINGS_MODULE_MODEL->getMenus()}
 
         <div class="{$ADMINVIEW}">
+
+
             <div class="clearfix"></div>
             <div class="col-xs-12 text-center visible-xs visible-sm">
                 <a class="btn btn-default"
