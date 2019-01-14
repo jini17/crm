@@ -80,6 +80,7 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
                 $viewer->assign('SELECTED_CATEGORY_MENU_LIST',$menuGroupedByParent[$selectedModuleMenuCategory]);
                 $viewer->assign('MENUS', $menuModelsList);
                 $viewer->assign('QUICK_CREATE_MODULES', Vtiger_Menu_Model::getAllForQuickCreate());
+                $viewer->assign('QUICK_CREATE_MOD_ICONS', Vtiger_Menu_Model::getQuickCreateModulesAndIcons()); // Added By Mabruk
                 $viewer->assign('MENU_STRUCTURE', $menuStructure);
                 $viewer->assign('MENU_SELECTED_MODULENAME', $selectedModule);
                 $viewer->assign('MENU_TOPITEMS_LIMIT', $menuStructure->getLimit());
