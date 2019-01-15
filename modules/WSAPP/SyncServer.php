@@ -275,7 +275,7 @@ class SyncServer {
 
 			foreach ($element as $el) {
 
-				$result = $db->pquery("SELECT * FROM vtiger_wsapp_recordmapping clientid = ?", array($el['values']['id']));
+				$result = $db->pquery("SELECT * FROM vtiger_contactdetails INNER JOIN vtiger_crmentity ON contactid = crmid WHERE deleted = 0 AND firstname = ? AND lastname = ? AND email = ?", array($el['values']['firstname'], $el['values']['lastname'], $el['values']['email']));
 
 				if ($db->num_rows($result) == 0) {
 
@@ -286,7 +286,7 @@ class SyncServer {
 				}	
 				else {
 					
-					$cRecordId = $db->query_result($result, 0, 'serverid');
+					$cRecordId = "12x" . $db->query_result($result, 0, 'contactid');
 					$el['values']['id'] = $cRecordId;
 					$recordDetails['updated'][$el['id']] = $el['values'];	
 					$recordDetails['updated'][$el['id']]['module'] = $el['module'];
@@ -294,6 +294,7 @@ class SyncServer {
 				}
 
 			}
+
 
 			goto HandlerPutAction;		
 
@@ -393,15 +394,14 @@ class SyncServer {
 	   if(array_key_exists('skipped', $result)) {
 		   $response['skipped'] = $result['skipped'];
 	   }
-
-		$response['client2serverIdMap'] = $clientID2ServerIDMap;
-		return $response;
+		
+	   return $response;
 	}
 
 	/**
 	 * Share the Create/Update/Delete state information
 	 */
-	function get($key, $module, $token, $user) {
+	function get($key, $module, $token, $user) { 
 		$db = PearDatabase::getInstance();
 		$appid = $this->appid_with_key($key);
 		if (empty($appid)) {
@@ -414,7 +414,12 @@ class SyncServer {
 		require_once $handlerDetails['handlerpath'];
 		$this->destHandler = new $handlerDetails['handlerclass']($serverKey);
 		$this->destHandler->setClientSyncType($clientApplicationSyncType);
-		$result = $this->destHandler->get($module, $token,$user);
+
+		// Mabruk
+		if ($handlerDetails['handlerclass'] == 'Office365_Vtiger_Handler' && $module == 'Contacts')
+			$result = $this->destHandler->get('Office365Contacts', $token,$user); 
+		else
+			$result = $this->destHandler->get($module, $token,$user);
 		// Lookup Ids
 		$updatedIds = array(); $deletedIds = array();
 		foreach($result['updated'] as $u){
@@ -465,7 +470,7 @@ class SyncServer {
 		$result['created'] = $filteredCreates;
 		$result['updated'] = $filteredUpdates;
 		$result['deleted'] = $filteredDeletes;
-		$result['client2serverIdMap'] = $clientID2ServerIDMap;
+		$result['client2serverIdMap'] = $clientID2ServerIDMap; 
 		return $result;
 	}
 

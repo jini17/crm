@@ -24,14 +24,14 @@ class WSAPP_VtigerSyncEventHandler extends SyncHandler{
 		return new SyncServer();
 	}
 
-	 public function get($module, $token, $user) {
+	 public function get($module, $token, $user) { 
 		$this->syncModule = $module;
         $this->user = $user;
-        $result = $this->syncServer->get($this->key,$module,$token,$user);
+        $result = $this->syncServer->get($this->key,$module,$token,$user); 
 		$nativeForamtElementList = $result;
         $nativeForamtElementList['created'] = $this->syncToNativeFormat($result['created']);
         $nativeForamtElementList['updated'] = $this->syncToNativeFormat($result['updated']);
-		$nativeForamtElementList['deleted'] = $this->convertedDeletedRecordToNativeFormat($result['deleted']);
+		$nativeForamtElementList['deleted'] = $this->convertedDeletedRecordToNativeFormat($result['deleted']); 
         return $nativeForamtElementList;
 	 }
 

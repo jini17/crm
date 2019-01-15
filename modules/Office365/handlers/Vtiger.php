@@ -12,7 +12,7 @@ vimport('~~/modules/WSAPP/Handlers/vtigerCRMHandler.php');
 vimport('~~/include/Webservices/Utils.php');
 class Office365_Vtiger_Handler extends vtigerCRMHandler {
 
-	public function translateTheReferenceFieldIdsToName($records, $module, $user) {
+	public function translateTheReferenceFieldIdsToName($records, $module, $user) { 
 		$db = PearDatabase::getInstance();
 		global $current_user;
 		$current_user = $user;
@@ -73,7 +73,8 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 		return $records;
 	}
 
-	public function put($recordDetails, $user) { 
+	public function put($recordDetails, $user) {  
+
 		global $current_user, $adb;
 		$current_user = $user;
 		$this->user = $user;
@@ -257,8 +258,7 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 
 		$recordDetails['created'] = $createdRecords;
 		$recordDetails['updated'] = $updatedRecords;
-		$recordDetails['deleted'] = $deletedRecords; 
-
+		$recordDetails['deleted'] = $deletedRecords;
 		return $this->nativeToSyncFormat($recordDetails);
 	}
 }
