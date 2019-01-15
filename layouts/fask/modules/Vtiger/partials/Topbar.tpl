@@ -76,13 +76,13 @@
    position:relative;
    }
    .notification-list{
-   position:absolute;
-   z-index:10000;
-   width:250px;
-   height:200px;
-   background-color: #fff !important;
-   color: #000 !important;
-   left:-200px;
+   position: absolute;
+z-index: 10000;
+width: 280px;
+height: 200px;
+background-color: #fff !important;
+color: #000 !important;
+left: -229px;
    }
    .notifications-heading{
    padding:5px;
@@ -106,7 +106,7 @@
    border-right: 7px solid transparent;
    border-bottom: 7px solid #ccc;
    border-left: 7px solid transparent;
-   border-bottom-color: rgba(0,0,0,0.2);
+   border-bottom-color: rgba(47, 85, 151,1);
    content: '';
    }
    .notification-container .img-holder{
@@ -116,7 +116,7 @@
    }
    .notification-container{
    padding:10px;
-   border:1px solid #ccc;
+   border:1px solid  #f2f2f2;
    }
    .notification-container .notification-title{
    width:200px;
@@ -124,6 +124,10 @@
    }
    .notification-container .notification-time{
    }   
+   .notification-container.unread{
+    background-color: #f2f2f2;
+   
+   }
 </style>
 <script type="text/javascript">
    jQuery(document).ready(function(){
@@ -796,28 +800,57 @@
    *}
    </li>
    <li>
-   <div>
+    <div>
    <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" title="Notifications" aria-hidden="true">
    <i class="fa fa-bell-o"></i>
    </a>
-   <ul class="hide notification-list list-unstyled" onmouseleave="Vtiger_Header_Js.hideNotification()">
-   <li>
-   <h6 class="text-left notifications-heading">Notifications<i class="fa fa-gear pull-right"></i></h6>
-   </li>
-   <li>
-   <div class="notification-container unread">
-   <div class="img-holder"><img src="" class="img-circle" height="30" width="30"></div>
-   <div class="notification-title">
-   <a>
-   <strong>Khaled approved leave</strong>
-   </a>  
-   <span class="notification-time">2 hr</span> 
-   </div> 
    </div>
-   <div class="clearfix"></div>
-   </li>
-   </ul>
-   </div>
+   <style type="text/css">
+     .notification-list h6
+     {
+          background-color: #2f5597 ;
+          margin: 0;
+          padding: 10px;
+          color: #ffffff !important;
+     }
+     .notification-list h6 i{
+      color: #ffffff !important;
+      }
+      .all-notification{
+          color: #2f5597
+      }
+   </style>
+   <div class="notification-list hide">
+   <!-- onmouseleave="Vtiger_Header_Js.hideNotification() -->
+   <h6> Notification <i class="fa fa-gear pull-right"></i></h6>
+      <ul class="list-unstyled" ">
+        <li>
+             <div class="notification-container unread">
+              <div class="notification-avatar left-node">
+                 
+                         <div class="img-holder">
+                              <img src="storage/2018/October/week3/2560_admin.jpg" class="img-circle" height="40" width="40">
+                         </div>
+                  
+              </div>     
+              <div class="right-node">                  
+                  <div class="notification-title">
+                       <a style="display:block; width: 100%; padding:0;">
+                         <strong>Khaled approved leave</strong>
+                       </a>  
+                       <div class="clearfix"></div>
+                      <span class="notification-time">2 hr</span> 
+                  </div> 
+              </div>
+              <div class="clearfix"> </div>  
+           </div>
+            <div class="clearfix"> </div>       
+        </li>
+      </ul>
+      <div class="clearfix"> </div>
+      <a href="#" class="btn btn-block all-notification text-center"> See all recent activity </a>
+      </div>
+ 
    </li>
    <li>
    <div>
@@ -1111,7 +1144,7 @@
       <li class="{if $MODULE eq "Home"}active{/if}"> 
       <a class=" waves-effect waves-dark" href="{$HOME_MODULE_MODEL->getDefaultUrl()}" >
       <i class="material-icons">dashboard</i>
-      <span class="hide-menu" style="text-transform: uppercase">{vtranslate('LBL_DASHBOARD',$MODULE)} </span>
+      <span class="hide-menu" style="text-transform: uppercase">{vtranslate('LBL_DASHBOARD')} </span>
       </a>
       </li>
       {/if}
