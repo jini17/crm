@@ -56,6 +56,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
       return false;
   }
   element.attr("disabled","disabled")
+  element.attr("title","This widget is already active")   // Mabruk
 // After adding widget, we should remove that widget from Add Widget drop down menu from active tab
         var activeTabId = Vtiger_DashBoard_Js.currentInstance.getActiveTabId();
       //  jQuery('a[data-name="' + name + '"]', "#tab_" + activeTabId).parent().hide();
@@ -546,6 +547,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                                         app.helper.hideProgress();
                                 } else {
                                 jQuery(".widget-item a[data-linkid='"+ response.linkid + "']").removeAttr("disabled")
+                                jQuery(".widget-item a[data-linkid='"+ response.linkid + "']").removeAttr("title")  // Mabruk
                                
                                //   jQuery(".widgetsList ").find("."+group).find("ul").append(data)
                              app.helper.hideProgress();
@@ -807,7 +809,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                                     app.helper.hideModal();
                                     if (err) {
                                         app.helper.showErrorNotification({"message": err});
-                                    } else {
+                                    } else { 
                                         var tabid = data["tabid"];
                                         var tabname = data["tabname"];
                                         var tabEle = '<li class="dashboardTab" data-tabid="' + tabid + '" data-tabname="' + tabname + '">';

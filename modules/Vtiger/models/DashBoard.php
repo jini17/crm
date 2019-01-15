@@ -95,9 +95,9 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
          * Function returns List of User's selected Dashboard Widgets
          * @return <Array of Vtiger_Widget_Model>
          */
-        public function getDashboards($moduleDashboard) {
+        public function getDashboards($moduleDashboard) { 
                 $db = PearDatabase::getInstance();
-                $currentUser = Users_Record_Model::getCurrentUserModel();
+                $currentUser = Users_Record_Model::getCurrentUserModel(); 
                 $currentUserPrivilegeModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
                 $moduleModel = $this->getModule();
 
@@ -208,7 +208,7 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
                 return $tab;
         }
 
-        public function addTab($tabName){
+          public function addTab($tabName){
                 $db = PearDatabase::getInstance();
                 $currentUser = Users_Record_Model::getCurrentUserModel();
 
@@ -218,11 +218,18 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
                 $query = "INSERT INTO vtiger_dashboard_tabs(tabname, userid,sequence) VALUES(?,?,?)";
                 $db->pquery($query,array($tabName,$currentUser->getId(),$sequence));
                 $tabData = array("tabid"=>$db->getLastInsertID(),"tabname"=>$tabName,"sequence"=>$sequence);
+
+                // Added By Mabruk
+                Users::CreateDefaultDashboard($currentUser->getId(), $currentUser->getId('roleId'), $tabData['tabid']);
+
                 return $tabData;
         }
 
         public function deleteTab($tabId) {
                 $db = PearDatabase::getInstance();
+                // Added By Mabruk
+                $db->pquery("DELETE FROM vtiger_module_dashboard_widgets WHERE dashboardtabid = ?", array($tabId));
+
                 $query = "DELETE FROM vtiger_dashboard_tabs WHERE id=?";
                 $db->pquery($query, array($tabId));
                 return true;
