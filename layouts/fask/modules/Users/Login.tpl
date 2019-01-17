@@ -321,7 +321,14 @@
          </div>
       </div>
    </div>
-</div>
+                                              
+ <footer style="background-color: #fff;">
+    <div class="container-fluid">
+        <p class="text-center" style="padding-top:10px; font-size: 12px;">Copyright &copy; All rights reserved. 
+            <a class="text-primary" href="http://dev7.secondcrm.com/">Softsolvers Solutions Sdn </a>
+        </p>
+    </div>
+</footer>
 <br /><br />
 <script>
    jQuery(document).ready(function(){
