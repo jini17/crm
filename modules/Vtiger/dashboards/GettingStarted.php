@@ -18,7 +18,7 @@ class Vtiger_GettingStarted_Dashboard extends Vtiger_IndexAjax_View {
                 $viewer                       = $this->getViewer($request);
                 $moduleName         = $request->getModule();                
                 $moduleModel       = Home_Module_Model::getInstance($moduleName);
-                $widget                    = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+                $widget                    = Vtiger_Widget_Model::getInstance($request->get('linkid'), $currentUser->getId(), $request->get('tab'));
                
                 $viewer->assign('WIDGET', $widget);
                 $viewer->assign('MODULE_NAME', $moduleName);

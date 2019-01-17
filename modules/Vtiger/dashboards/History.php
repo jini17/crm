@@ -10,7 +10,7 @@
 
 class Vtiger_History_Dashboard extends Vtiger_IndexAjax_View {
 
-	public function process(Vtiger_Request $request) {
+	public function process(Vtiger_Request $request) { 
 	    global $adb;
 	    //$adb->setDebug(true);
 		$LIMIT = 10;
@@ -41,7 +41,7 @@ class Vtiger_History_Dashboard extends Vtiger_IndexAjax_View {
 
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 		$history = $moduleModel->getHistory($pagingModel, $historyType,$userId, $dates);
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 		$modCommentsModel = Vtiger_Module_Model::getInstance('ModComments'); 
 
 		$viewer->assign('CURRENT_USER', $currentUser);

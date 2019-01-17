@@ -355,13 +355,22 @@ Vtiger_Index_Js("Vtiger_Edit_Js",{
 		app.helper.registerLeavePageWithoutSubmit(this.getForm());
 		app.helper.registerModalDismissWithoutSubmit(this.getForm());
 	},
-	
+	/**===================
+      added by khaled
+      Join Date Validation
+    ================*/
+    registerJoinDateValidation: function(){     
+             
+      
+    },
     registerEvents: function(callParent) {
         //donot call parent if registering Events from overlay.
         if(callParent != false){
             this._super();
         }
+
         var editViewContainer = this.getEditViewContainer();
+        this.registerJoinDateValidation();
         this.registerPreventingEnterSubmitEvent(editViewContainer);
         this.registerBasicEvents(this.getForm());
         this.registerEventForImageDelete();
@@ -371,4 +380,4 @@ Vtiger_Index_Js("Vtiger_Edit_Js",{
 		this.registerPageLeaveEvents();
     }
 });
-jQuery("#Attendance_editView_fieldName_attendancedate").val("")
+jQuery("#Attendance_editView_fieldName_attendancedate").val("");

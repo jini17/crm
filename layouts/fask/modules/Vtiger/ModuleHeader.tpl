@@ -120,7 +120,6 @@
 
                 <div class="clearfix"></div>
                                 <div class="btn-group">
-
                                         {foreach item=BASIC_ACTION from=$MODULE_BASIC_ACTIONS}
                                                 {if $BASIC_ACTION->getLabel() == 'LBL_IMPORT'}
                                                                 <button id="{$MODULE}_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($BASIC_ACTION->getLabel())}" type="button" class="btn module-buttons addButton" 

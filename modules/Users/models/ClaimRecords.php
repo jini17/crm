@@ -399,29 +399,47 @@ class Users_ClaimRecords_Model extends Vtiger_Record_Model {
 				$claimtype[$i]['claimtypeid'] = $claimtypeid ;
 				$claimtype[$i]['claimtype'] = $db->query_result($result, $i, 'claim_type');	
 				$claimtype[$i]['color_code'] = $db->query_result($result, $i, 'color_code');
-				$claimtype[$i]['monthly_limit'] = $db->query_result($result, $i, 'monthly_limit');
-				$claimtype[$i]['transaction_limit'] = $db->query_result($result, $i, 'transaction_limit');
-				$claimtype[$i]['yearly_limit'] = $db->query_result($result, $i, 'yearly_limit');	
+				
+				$monthlimit = $db->query_result($result, $i, 'monthly_limit');
+				$claimtype[$i]['monthly_limit'] = $monthlimit;	
+
+				if($translimit=='0.00'){
+					$claimtype[$i]['monthly_limit'] = 'No Limit';	
+				}
+				
+				$translimit = $db->query_result($result, $i, 'transaction_limit');
+				$claimtype[$i]['transaction_limit'] = $translimit;	
+
+				if($translimit=='0.00'){
+					$claimtype[$i]['transaction_limit'] = 'No Limit';	
+				}
+				
+				$yearlylimit = $db->query_result($result, $i, 'yearly_limit');
+				$claimtype[$i]['yearly_limit'] = $yearlylimit;	
+				
+				if($yearlylimit=='0.00'){
+					$claimtype[$i]['yearly_limit'] = 'No Limit';	
+				}
+
 				$rowdetail = self::getClaimTypeUsedAmount($userid,$claimtypeid,date('Y-m-d'));
 
 				$balance = 0;
-				if ($claimtype[$i]['monthly_limit'] > 0) {
-					$balance = $claimtype[$i]['monthly_limit']- $rowdetail['mused'];
-					if($balance > $claimtype[$i]['transaction_limit']){
-						$balance = $claimtype[$i]['transaction_limit'];
+				if ($monthlimit > 0) {
+					$balance = $monthlimit - $rowdetail['mused'];
+					if($balance > $translimit ){
+						$balance = $translimit;
 					}
 					
-				} elseif($claimtype[$i]['yearly_limit'] > 0){
-					$balance = $claimtype[$i]['yearly_limit']- $rowdetail['yused'];
-					if($balance > $claimtype[$i]['transaction_limit']){
-						$balance = $claimtype[$i]['transaction_limit'];
+				} elseif($yearlylimit > 0){
+					$balance = $yearlylimit- $rowdetail['yused'];
+					if($balance > $translimit){
+						$balance = $translimit;
 					}
 				}
 				$claimtype[$i]['balance'] = $balance;			
 			} 
 
 		}
-	
 		return $claimtype;	
 
 	}

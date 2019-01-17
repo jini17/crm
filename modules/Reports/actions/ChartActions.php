@@ -79,7 +79,7 @@ class Reports_ChartActions_Action extends Vtiger_Action_Controller {
         $reportid = $request->get('reportid');
         $currentUser = Users_Record_Model::getCurrentUserModel();
 		
-		$widgetInstance = Vtiger_Widget_Model::getInstanceWithReportId($reportid, $currentUser->getId());
+		$widgetInstance = Vtiger_Widget_Model::getInstanceWithReportId($reportid, $currentUser->getId(), $request->get('tab'));
 		$widgetInstance->remove();
 		
 		$response = new Vtiger_Response();

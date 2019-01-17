@@ -38,7 +38,7 @@
 					{assign var=RELATED_LINK value=$RELATEDTABS[$i]}
 					{assign var=RELATEDMODULENAME value=$RELATED_LINK->getRelatedModuleName()}
 					{assign var=RELATEDFIELDNAME value=$RELATED_LINK->get('linkFieldName')}
-					{assign var="DETAILVIEWRELATEDLINKLBL" value= vtranslate($RELATED_LINK->getLabel(),$RELATEDMODULENAME)}
+					{assign var="DETAILVIEWRELATEDLINKLBL" value= vtranslate($RELATED_LINK->getLabel(),$RELATEDMODULENAME)}					
 					<li class="tab-item {if (trim($RELATED_LINK->getLabel())== trim($SELECTED_TAB_LABEL)) && ($RELATED_LINK->getId() == $SELECTED_RELATION_ID)}active{/if}"  data-url="{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" data-label-key="{$RELATED_LINK->getLabel()}"
 						data-module="{$RELATEDMODULENAME}" data-relation-id="{$RELATED_LINK->getId()}" {if $RELATEDMODULENAME eq "ModComments"} title {else} title="{$DETAILVIEWRELATEDLINKLBL}"{/if} {if $RELATEDFIELDNAME}data-relatedfield ="{$RELATEDFIELDNAME}"{/if} >
 						<a href="index.php?{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" class="textOverflowEllipsis" displaylabel="{$DETAILVIEWRELATEDLINKLBL}" recordsCount="" title="{$DETAILVIEWRELATEDLINKLBL}" {if $RELATEDMODULENAME neq "ModComments"}tippytitle{/if}>
@@ -63,7 +63,7 @@
 							{/if}
 							<!-- Condition Added By Mabruk -->
 							{if $RELATEDMODULENAME neq 'ClaimType'}							
-								<span class="numberCircle disabled" >0</span>
+								<span class="numberCircle">0</span>
 							{/if}	
 						</a>
 					</li>

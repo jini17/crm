@@ -149,7 +149,7 @@ abstract class WSAPP_SynchronizeController {
         $syncStateModel = $this->getSyncStateModel($this->targetConnector);
         $targetRecords = $this->targetConnector->pull($syncStateModel, $this->user);
 
-
+        print_r($targetRecords);die;
 
         foreach($targetRecords as $record){
             $record->setSyncIdentificationKey(uniqid());
@@ -194,7 +194,7 @@ abstract class WSAPP_SynchronizeController {
 
         }
 
-       $this->targetConnector->postEvent(self::WSAPP_SYNCHRONIZECONTROLLER_PULL_EVENT, $synchronizedRecords, $syncStateModel);
+        $this->targetConnector->postEvent(self::WSAPP_SYNCHRONIZECONTROLLER_PULL_EVENT, $synchronizedRecords, $syncStateModel);
         $this->sourceConnector->postEvent(self::WSAPP_SYNCHRONIZECONTROLLER_PUSH_EVENT, $synchronizedRecords, $sourceSyncStateModel);
 
         $this->updateSyncStateModel($this->sourceConnector, $sourceSyncStateModel);

@@ -8,9 +8,6 @@
 ************************************************************************************}
 {strip}
          <div class="settingsgroup hidden-sm hidden-xs " style='padding-top:0; margin-top:0;'>
-     {*       {$FILTERVIEW|print_r}
-              {$ADMINVIEW|print_r}
-               {$USERVIEW|print_r}*}
     {assign var=DEPT_LIST value=Users_Record_Model::get_department()}
     
     {include file='layouts/fask/modules/Settings/Vtiger/SidebarFilter.tpl'}
@@ -19,7 +16,7 @@
         {assign var=SETTINGS_MENUS value=$SETTINGS_MODULE_MODEL->getMenus()}
 
         <div class="{$ADMINVIEW}">
-0
+
             <div class="clearfix"></div>
             <div class="col-xs-12 text-center visible-xs visible-sm">
                 <a class="btn btn-default"

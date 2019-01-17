@@ -28,9 +28,9 @@
                                                 </li>
                                         {else}
                                                 {if $IS_MODULE_EDITABLE}
-                                                <li>
+                                                <!--<li>
                                                         <a onclick="Settings_Users_List_Js.restoreUser({$LISTVIEW_ENTRY->getId()}, event);"><i class="fa fa-undo"></i></a>
-                                                </li>
+                                                </li>-->
                                                 {/if}
                                                 {if $IS_MODULE_DELETABLE}
                                                 <li>

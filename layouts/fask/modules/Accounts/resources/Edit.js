@@ -94,10 +94,6 @@ Vtiger_Edit_Js("Accounts_Edit_Js",{
                         thisInstance.copyAddress(swapMode, container);
                 })
         },
-       AttendenceDateFormat:function(){
-            alert("date")
-  
-       },
         /**
          * Function which will copy the address details - without Confirmation
          */
@@ -136,6 +132,5 @@ Vtiger_Edit_Js("Accounts_Edit_Js",{
         registerBasicEvents : function(container) {
                 this._super(container);
                 this.registerEventForCopyingAddress(container);
-                this.AttendenceDateFormat();
         }
 });

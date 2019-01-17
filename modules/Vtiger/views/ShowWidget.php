@@ -39,6 +39,9 @@ class Vtiger_ShowWidget_View extends Vtiger_IndexAjax_View {
                                                 $widget->set('data', $request->get('data'));
                                         }
                                         $widget->add();
+                                        //$db = PearDatabase::getInstance();
+                                        //$sql = "UPDATE vtiger_links set is_closed =1 WHERE linkid = $linkId ";
+                                        //$db->pquery($sql);
                                 }
 
                                 //Date conversion from user format to database format

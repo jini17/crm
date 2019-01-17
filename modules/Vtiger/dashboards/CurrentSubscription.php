@@ -19,7 +19,7 @@ class Vtiger_CurrentSubscription_Dashboard extends Vtiger_IndexAjax_View {
 		$linkId = $request->get('linkid');		
 		$moduleModel = Home_Module_Model::getInstance($moduleName);
 
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('DATADETAILS', $moduleModel->getSubscriptionDetail());
 		$viewer->assign('SHORTNAME', $dbconfig['db_name']);

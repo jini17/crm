@@ -161,8 +161,8 @@
 
 <!--start my leaves-->
 <div id="MyLeaveContainer">
-    <div class="btn-group pull-right allprofilebtn">
-     <button style="margin-right:15px;" type="button" class="btn btn-primary pull-right" onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
+    <div class="btn-group pull-right allprofilebtn" style="float:right;margin-right:15px;margin-bottom:10px;">
+     <button style="margin-left:15px;" type="button" class="btn btn-primary pull-right" onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
      <select class="selectProfileCont" name="my_selyear" id="my_selyear" data-section="M"  class="select2"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
 
             <!--//Added By Jitu Date Combobox-->
@@ -175,7 +175,7 @@
 
 
 
-<div class="block listViewContentDiv" id="listViewContents" style="marign-top: 15px;">
+<div class="block listViewContentDiv" id="listViewContents" style="margin-top: 15px;">
     <div class="listViewEntriesDiv contents-bottomscroll " style="padding-top: 5px;">
         <div>
             <h5>{vtranslate('My Leave', $MODULE)}</h5>

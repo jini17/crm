@@ -20,7 +20,7 @@
 			{if $FIELD_INFO["mandatory"] eq true} data-rule-required="true" {/if}
 			{if count($FIELD_INFO['validator'])}
 				data-specific-rules="{ZEND_JSON::encode($FIELD_INFO["validator"])}"
-			{/if}
+			{/if} maxlength="3"
 			/>
 		<span class="input-group-addon">%</span>
 	</div>

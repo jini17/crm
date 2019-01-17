@@ -26,14 +26,14 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 
 		$userId = $request->get('userid');
-		if(!$currentUserModel->isAdminUser()) {
+		if(!$currentUserModel->isAdminUser() && !in_array($currentUserModel->roleid, array('H2','H12','H13'))) {
 			$mode = $request->getMode();
 			if($mode == 'savePassword' && (isset($userId) && $currentUserModel->getId() != $userId)) {
-				throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
+				throw new AppException(vtranslate('LBL_PERMISSION_DENIED1', 'Vtiger'));
 			} else if(in_array($mode, array('userExists','restoreUser','transferOwner','changeUsername'))) {
-				throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
+				throw new AppException(vtranslate('LBL_PERMISSION_DENIED2', 'Vtiger'));
 			} else if($mode != 'savePassword' && ($currentUserModel->getId() != $request->get('record'))) {
-				throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
+				throw new AppException(vtranslate('LBL_PERMISSION_DENIED3', 'Vtiger'));
 			}
 		}
 	}
