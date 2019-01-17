@@ -2734,6 +2734,7 @@ input[type=checkbox]:checked {
 .cursorPointer {
   cursor: pointer;
   text-decoration: none;
+  margin-right: 5px;
 }
 .cursorDefault {
   cursor: default;
@@ -9527,6 +9528,12 @@ right connector from last child*/
 }
 
 
-/*Thats all. I hope you enjoyed it.
-Thanks :)*/
-
+.module-title.pull-left.text-uppercase{
+   font-size: 12px !important;
+font-weight: normal;
+text-transform: unset;
+color:#000 !important;
+}
+.module-breadcrumb{
+    font-size: 12px !important
+}

@@ -2734,6 +2734,7 @@ input[type=checkbox]:checked {
 .cursorPointer {
   cursor: pointer;
   text-decoration: none;
+  margin-right: 5px;
 }
 .cursorDefault {
   cursor: default;
@@ -3209,7 +3210,7 @@ position: relative;
 }
 .settingsgroup {
   background: rgba(0, 0, 0, 0.02);border-right: 1px solid rgba(120, 130, 140, 0.13);
-    height: 82%;
+  height: 82%;
 }
 .settingsgroup .panel-group .panel {
       background-color: #fff;
@@ -5608,8 +5609,8 @@ hr {
   padding-top: 1px;
 }
 .mmSearchDropDown {
-  margin-top: -30px;
-  margin-left: 66%;
+/*  margin-top: -30px;
+  margin-left: 66%;*/
 }
 .mmMoveDropdownArrow {
   color: #FFFFFF;
@@ -9527,6 +9528,12 @@ right connector from last child*/
 }
 
 
-/*Thats all. I hope you enjoyed it.
-Thanks :)*/
-
+.module-title.pull-left.text-uppercase{
+   font-size: 12px !important;
+font-weight: normal;
+text-transform: unset;
+color:#000 !important;
+}
+.module-breadcrumb{
+    font-size: 12px !important
+}
