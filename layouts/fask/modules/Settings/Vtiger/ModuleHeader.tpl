@@ -12,12 +12,12 @@
 {strip}
 <div class="col-sm-12 col-xs-12 module-action-bar clearfix coloredBorderTop">
         <div class="module-action-content clearfix">
-                <div class="col-lg-7 col-md-7">
+                <div class="col-lg-7 col-md-7 breadcrumbcrumb">
                         {if $USER_MODEL->isAdminUser()}
                         <a title="{vtranslate('Home', $MODULE)}" href='index.php?module=Vtiger&parent=Settings&view=Index'>
                                 <h4 class="module-title pull-left text-uppercase">{vtranslate('LBL_HOME', $MODULE)} </h4>
                         </a>
-                        &nbsp;<span class="ti-angle-right pull-left {if $VIEW eq 'Index' && $MODULE eq 'Vtiger'} hide {/if}" aria-hidden="true" style="padding-top: 12px;padding-left: 5px;"></span>
+                        &nbsp;<span class="ti-angle-right pull-left {if $VIEW eq 'Index' && $MODULE eq 'Vtiger'} hide {/if}" aria-hidden="true" style="padding-top: 12px;padding-left: 5px; font-size: 12px;"></span>
                         {/if}
                         {if $MODULE neq 'Vtiger' or $smarty.request.view neq 'Index'}
                         {if $ACTIVE_BLOCK['block']}
@@ -38,13 +38,15 @@
                         {assign var=URL value=$URL|cat:'&parent='|cat:$smarty.request.parent} 
                         {/if}
                         {/if}
+                        
                         <span class="current-filter-name settingModuleName filter-name pull-left">
                                 {if $smarty.request.view eq 'Calendar'}
                                 {if $smarty.request.mode eq 'Edit'}
                                 <a href="{"index.php?module="|cat:$smarty.request.module|cat:'&parent='|cat:$smarty.request.parent|cat:'&view='|cat:$smarty.request.view}">
                                         {vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}
                                 </a>&nbsp;
-                                <span class="ti-angle-right" aria-hidden="true"></span>&nbsp;
+                                <i class="ti-angle-right" aria-hidden="true"></i>&nbsp;
+                                
                                 {vtranslate('LBL_EDITING', $MODULE)} :&nbsp;{vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}&nbsp;{vtranslate('LBL_OF',$QUALIFIED_MODULE)}&nbsp;{$USER_MODEL->getName()}
                                 {else}
                                 {vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}&nbsp;<span class="ti-angle-right" aria-hidden="true"></span>&nbsp;{$USER_MODEL->getName()}
@@ -54,24 +56,24 @@
                                 <a href="{"index.php?module="|cat:$smarty.request.module|cat:'&parent='|cat:$smarty.request.parent|cat:'&view=PreferenceDetail&record='|cat:$smarty.request.record}">
                                         {vtranslate($ACTIVE_BLOCK['block'], $QUALIFIED_MODULE)}&nbsp;
                                 </a>
-                                <span class="ti-angle-right" aria-hidden="true"></span>&nbsp;
+                                <i class="ti-angle-right" aria-hidden="true"></i>&nbsp;
                                 {vtranslate('LBL_EDITING', $MODULE)} :&nbsp;{$USER_MODEL->getName()}
                                 {else if $smarty.request.view eq 'Edit' or $smarty.request.view eq 'Detail'}
                                 <a href="{$URL}">
                                         {if $smarty.request.extensionModule}{$smarty.request.extensionModule}{else}{vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}{/if}&nbsp;
                                 </a>
-                                <span class="ti-angle-right" aria-hidden="true"></span>&nbsp;
+                                <i class="ti-angle-right" aria-hidden="true"></i>&nbsp;
                                 {if $smarty.request.view eq 'Edit'}
                                 {if $RECORD}
-                                {vtranslate('LBL_EDITING', $MODULE)} :&nbsp;{$RECORD->getName()}
+                                    <a>   {vtranslate('LBL_EDITING', $MODULE)} :&nbsp;{$RECORD->getName()} </a>
                                 {else}
-                                {vtranslate('LBL_ADDING_NEW', $MODULE)}
+                                    <a>{vtranslate('LBL_ADDING_NEW', $MODULE)}</a>
                                 {/if}
                                 {else}
-                                {$RECORD->getName()}
+                                    <a>{$RECORD->getName()}</a>
                                 {/if}
                                 {else}
-                                {$USER_MODEL->getName()}
+                                    <a>{$USER_MODEL->getName()}</a>
                                 {/if}
                                 {else if $URL and $URL|strpos:$smarty.request.view eq ''}
                                 <a href="{$URL}">
@@ -81,15 +83,16 @@
                                         {vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}
                                         {/if}
                                 </a>&nbsp;
-                                <span class="ti-angle-right" aria-hidden="true"></span>&nbsp;
+                                <i class="ti-angle-right" aria-hidden="true"></i>&nbsp;
                                 {if $RECORD}
                                 {if $smarty.request.view eq 'Edit'}
-                                {vtranslate('LBL_EDITING', $MODULE)} :&nbsp;
+                                    <a> {vtranslate('LBL_EDITING', $MODULE)} </a>:&nbsp;
                                 {/if}
-                                {$RECORD->getName()}
+                                <a>{$RECORD->getName()} </a>
                                 {/if}
                                 {else}
-                                &nbsp;{if $smarty.request.extensionModule}{$smarty.request.extensionModule}{else}{vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}{/if}
+                               
+                                    &nbsp;{if $smarty.request.extensionModule}<a>{$smarty.request.extensionModule}</a>{else}<a>{vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}</a>{/if}
                                 {/if}
                         </span>
                         {else}

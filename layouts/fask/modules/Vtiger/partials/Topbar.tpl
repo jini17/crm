@@ -358,7 +358,7 @@ left: -229px;
          <!--fine menu-->
          <div class="logo-container pull-left">
             <a href="index.php" class="company-logo">
-            <img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>
+            <img src="https://dev7.secondcrm.com/agiliuxv2/layouts/v7/lib/ui/src/images/agiliux-logo.png" alt="{$COMPANY_LOGO->get('alt')}"/>
             </a>
          </div>
          <ul class="nav navbar-nav newtabs pull-right">

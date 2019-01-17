@@ -1356,10 +1356,10 @@ ul.unstyled {
   margin-right: 0;
 }
 .current-filter-name {
-  margin: 11px 0;
-  float: left;
-  font-size: 12px;
-  line-height: 18px;
+    margin: 13px 0;
+   float: left;
+   font-size: 12px;
+   line-height: 10px;
 }
 .current-filter-name a {
   max-width: 120px;
