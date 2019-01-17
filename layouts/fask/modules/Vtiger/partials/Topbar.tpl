@@ -35,97 +35,92 @@
    z-index: 1;
    }
    .searchoption a{
-   padding: 0 !important;
-   height: 33px !important;
-   margin-top: 4px !important;
-   background-color: #fff;
-   color: #000 ;
-   border-radius: 3px !important;
-   border: 0 !important;
-   box-shadow:none !important;
-   text-shadow: none !important;
+      padding: 0 !important;
+      height: 33px !important;
+      margin-top: 4px !important;
+      background-color: #fff;
+      color: #000 ;
+      border-radius: 3px !important;
+      border: 0 !important;
+      box-shadow:none !important;
+      text-shadow: none !important;
    }
    .searchoption .select2-container .select2-choice .select2-arrow {
-   color: #fff !important;
+      color: #fff !important;
    }
    .searchoption .select2-highlighted{
-   background-color: #2f5597 !important;
+      background-color: #2f5597 !important;
    }
    .searchoption  .select2-container .select2-choice .select2-arrow b{ display: none; }
    .searchoption   .select2-container .select2-choice .select2-arrow {
-   {*    background-image: -khtml-gradient(linear, left top, left bottom, from(#424242), to(#030303));
-   background-image: -moz-linear-gradient(top, #424242, #030303);
-   background-image: -ms-linear-gradient(top, #424242, #030303);
-   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #424242), color-stop(100%, #030303));
-   background-image: -webkit-linear-gradient(top, #424242, #030303);
-   background-image: -o-linear-gradient(top, #424242, #030303);
-   background-image: linear-gradient(#424242, #030303);*}
-   width: 40px;
-   color: #fff;
-   font-size: 1.3em;
-   padding: 4px 12px;
+      width: 40px;
+      color: #fff;
+      font-size: 1.3em;
+      padding: 4px 12px;
    }
    .searchoption .select2-container .select2-choice {
-   height: 41px; /* Jobsy form controls have 37px total height */
-   border: 2px solid #bdc3c7;
-   border-radius: 6px;
-   outline: none;
-   color: #34495e;
+      height: 41px; /* Jobsy form controls have 37px total height */
+      border: 2px solid #bdc3c7;
+      border-radius: 6px;
+      outline: none;
+      color: #34495e;
    }
+
    .notifications{
    position:relative;
    }
    .notification-list{
-   position: absolute;
-z-index: 10000;
-width: 280px;
-height: 200px;
-background-color: #fff !important;
-color: #000 !important;
-left: -229px;
+      position: absolute;
+      z-index: 10000;
+      width: 280px;
+      height: 200px;
+      background-color: #fff !important;
+      color: #000 !important;
+      left: -229px;
    }
+
    .notifications-heading{
-   padding:5px;
-   font-size:10px !important;
-   font-weight: bold;
-   background-color: #2f5597 !important;
-   color:#fff !important;
-   padding:10px;
-   margin:0;
-   border-radius: 5px;
+      padding:5px;
+      font-size:10px !important;
+      font-weight: bold;
+      background-color: #2f5597 !important;
+      color:#fff !important;
+      padding:10px;
+      margin:0;
+      border-radius: 5px;
    }
    .notifications-heading i{
-   margin-right:10px !important;
-   color:#fff !important;
+      margin-right:10px !important;
+      color:#fff !important;
    }
    .notification-list::before {
-   position: absolute;
-   top: -7px;
-   right: 26px;
-   display: inline-block;
-   border-right: 7px solid transparent;
-   border-bottom: 7px solid #ccc;
-   border-left: 7px solid transparent;
-   border-bottom-color: rgba(47, 85, 151,1);
-   content: '';
+      position: absolute;
+      top: -7px;
+      right: 26px;
+      display: inline-block;
+      border-right: 7px solid transparent;
+      border-bottom: 7px solid #ccc;
+      border-left: 7px solid transparent;
+      border-bottom-color: rgba(47, 85, 151,1);
+      content: '';
    }
    .notification-container .img-holder{
-   width:40px;
-   height:40px;
-   float:left;
+      width:40px;
+      height:40px;
+      float:left;
    }
    .notification-container{
-   padding:10px;
-   border:1px solid  #f2f2f2;
+      padding:10px;
+      border:1px solid  #f2f2f2;
    }
    .notification-container .notification-title{
-   width:200px;
-   float:right;
+      width:200px;
+      float:right;
    }
    .notification-container .notification-time{
    }   
    .notification-container.unread{
-    background-color: #f2f2f2;
+       background-color: #f2f2f2;
    
    }
 </style>
@@ -150,9 +145,8 @@ left: -229px;
    
    
        });
-   
-   
 </script>
+
 <nav class="navbar navbar-default navbar-fixed-top app-fixed-navbar">
 {assign var="announcement" value=$ANNOUNCEMENT->get('announcement')}   
 <div class="headertext" id="headertextflow"> {if !empty($announcement)}{$announcement}{else}{vtranslate('LBL_NO_ANNOUNCEMENTS',$MODULE)}{/if}</div>
@@ -169,388 +163,24 @@ left: -229px;
             <button class="btn btn-fask btn-lg" type="button" id="dropdownMenuButtonDesk" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="material-icons" style="color: #fff!important"></i>
             </button>
+            
             <div class="dropdown-menu fask" id="moredropdown"  aria-labelledby="dropdownMenuButtonDesk">
                <div class="bluredBackground"></div>
-               <ul class="faskfirst">
-                  <li class="nav-small-cap hide">APPS</li>
-                  {assign var=USER_PRIVILEGES_MODEL value=Users_Privileges_Model::getCurrentUserPrivilegesModel()}
-                  {assign var=HOME_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Home')}
-                  {assign var=DASHBOARD_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Dashboard')}
-                  {if $USER_PRIVILEGES_MODEL->hasModulePermission($DASHBOARD_MODULE_MODEL->getId())}
-                  <li class="{if $MODULE eq "Home"}active{/if}"> 
-                  <a class=" waves-effect waves-dark" href="{$HOME_MODULE_MODEL->getDefaultUrl()}" >
-                  <i class="material-icons">dashboard</i>
-                  <span class="hide-menu" style="text-transform: uppercase">{vtranslate('LBL_DASHBOARD',$MODULE)} </span>
-                  </a>
-                  </li>
-                  {/if}
-                  {assign var=MAILMANAGER_MODULE_MODEL value=Vtiger_Module_Model::getInstance('MailManager')}                           
-                  {assign var=DOCUMENTS_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Documents')}
-                  {if $USER_PRIVILEGES_MODEL->hasModulePermission($DOCUMENTS_MODULE_MODEL->getId())}
-                  <li class="{if $MODULE eq "Documents"}active{/if}"> 
-                  <a class=" waves-effect waves-dark" href="index.php?module=Documents&view=List" >
-                  <i class="app-icon-list material-icons">insert_drive_file</i><span class="hide-menu"> 
-                  {vtranslate('Documents')}</span>
-                  </a>
-                  </li>
-                  {/if}
-                  <hr/>
-                  {if $USER_MODEL->isAdminUser()}
-                  <li>
-                     <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
-                        href="index.php?module=Vtiger&parent=Settings&view=Index" >
-                     <span class="module-icon">
-                     <i class="material-icons">settings</i></span>
-                     <span class="hide-menu">  
-                     {vtranslate('LBL_CRM_SETTINGS','Vtiger')}
-                     </span>
-                     </a>
-                  </li>
-                  <li>
-                     <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
-                        href="index.php?module=Users&parent=Settings&view=List" >
-                     <span class="module-icon"><i class="material-icons">contacts</i></span>
-                     <span class="hide-menu">   {vtranslate('LBL_MANAGE_USERS','Vtiger')}</span>
-                     </a>
-                  </li>
-                  <li tools="">
-                     <a class="waves-effect waves-dark " href=" index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS ">
-                     <i class="material-icons module-icon">delete_forever</i> <span class="hide-menu"> Recycle Bin</span>
-                     </a>
-                  </li>
-                  <li foundation="">
-                     <a class="waves-effect waves-dark " href="index.php?module=SMSNotifier&amp;view=List&amp;app=FOUNDATION ">
-                     <i class="material-icons module-icon">sms</i> <span class="hide-menu"> {vtranslate('LBL_SMS_MESSAGES', 'Vtiger')}</span>
-                     </a>
-                  </li>
-                  {else}
-                  <li class="{if $MODULE eq "Users"}active{/if}"> 
-                  <a class=" waves-effect waves-dark" href="index.php?module=Users&view=Settings" >
-                  <i class="material-icons">settings</i>
-                  <span class="hide-menu" style="text-transform: uppercase"> {vtranslate('LBL_SETTINGS', 'Settings:Vtiger')}</span>
-                  </a>
-                  </li>
-                  {/if}
-               </ul>
-               <ul class="fasksecond">
-               {assign var=APP_GROUPED_MENU value=Settings_MenuEditor_Module_Model::getAllVisibleModules()}
-               {assign var=APP_LIST value=Vtiger_MenuStructure_Model::getAppMenuList()}
-               {if $MODULE eq "Home"}
-               {assign var=SELECTED_MENU_CATEGORY value='Dashboard'}
-               {/if}
-               {foreach item=APP_NAME from=$APP_LIST}
-               {if $APP_NAME eq 'ANALYTICS'} {continue}{/if}
-               {if count($APP_GROUPED_MENU.$APP_NAME) gt 0}
-               {foreach item=APP_MENU_MODEL from=$APP_GROUPED_MENU.$APP_NAME}
-               {assign var=FIRST_MENU_MODEL value=$APP_MENU_MODEL}
-               {if $APP_MENU_MODEL}
-               {break}
-               {/if}
-               {/foreach}
-               {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
-               'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
-               'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
-               'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
-               'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
-               'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
-               'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-               'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
-               {if $APP_NAME neq 'SALES'}
-               <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> 
-               <a class="has-arrow waves-effect waves-dark " >
-               <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i>
-               <span class="hide-menu">{vtranslate("LBL_$APP_NAME")}</span>
-               </a>
-               <ul style="padding-left:6px;padding-top:15px;">
-                  {foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
-                  {assign var='translatedModuleLabel' value=vtranslate($moduleModel->get('label'),$moduleName )}
-                  {if $moduleName eq 'MyProfile'}                                            
-                  {assign var='moduleURL' value="index.php?module=Users&view=Detail&record={$USER_MODEL->getId()}&app=$APP_NAME&parent=Settings"}
-                  {else}
-                  {assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME"}
-                  {/if}   
-                  {if $moduleName eq 'Calendar'}
-                  <li {$APP_NAME} moudel='{$moduleName}'>
-                  <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
-                     href="index.php?module=Calendar&view=List" >
-                  <i class="ti ti-notepad" ></i> 
-                  <span class="hide-menu"> {vtranslate("LBL_MEETING",'Vtiger')}</span>
-                  </a>
-                  </li>
-                  <li {$APP_NAME} moudel='{$moduleName}'>
-                  <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
-                     href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
-                     {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
-                  <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
-                  <span class="hide-menu"> {$translatedModuleLabel}</span>
-                  </a>
-                  </li>
-                  {else}   
-                  <li {$APP_NAME} moudel='{$moduleName}'>
-                  <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
-                     href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
-                     {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
-                  <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
-                  <span class="hide-menu"> {$translatedModuleLabel}</span>
-                  </a>
-                  </li>
-                  {/if}
-                  {/foreach}
-               </ul>
-               </li>
-               {/if}
-               {/if}
-               {/foreach}
-               <li class="nav-small-cap hide">TOOLS & SETTINGS</li>
-               {foreach item=APP_MENU_MODEL from=$APP_GROUPED_MENU.$APP_NAME}
-               {assign var=FIRST_MENU_MODEL value=$APP_MENU_MODEL}
-               {if $APP_MENU_MODEL}
-               {break}
-               {/if}
-               {/foreach}
-               <li class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}">
-                  <a class="has-arrow waves-effect waves-dark ">
-                  <i class="app-icon-list material-icons">more</i>
-                  <span class="hide-menu"> {vtranslate("LBL_MORE")}</span>
-                  </a>
-                  <ul style="padding-left:6px;padding-top:10px;" >
-                     {assign var=RSS_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Rss')}
-                     {if $RSS_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($RSS_MODULE_MODEL->getId())}
-                     <li>
-                        <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="index.php?module=Rss&view=List" >
-                        <span class="module-icon">
-                        <i class="material-icons">rss_feed</i></span>
-                        <span class="hide-menu"> {vtranslate($RSS_MODULE_MODEL->getName(), $RSS_MODULE_MODEL->getName())}</span>
-                        </a>
-                     </li>
-                     {/if}
-                     {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Portal')}
-                     {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
-                     <li>
-                        <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Portal&view=List">
-                        <i class="material-icons module-icon">web</i> <span class="hide-menu"> {vtranslate('Portal')}</span>
-                        </a>
-                     </li>
-                     {/if}
-                     {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Bills')}
-                     {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->column_fields['roleid'] eq 'H13' || $USER_MODEL->column_fields['roleid'] eq 'H15' ||  $USER_MODEL->isAdminUser()}  
-                     {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
-                     <li>
-                        <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Bills&view=List">
-                        <i class="material-icons module-icon">receipt</i> <span class="hide-menu"> {vtranslate('Office Bills','Vtiger')}</span>
-                        </a>
-                     </li>
-                     {/if}
-                     {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('WorkingHours')}                                  
-                     {assign var=PORTAL_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Payments')}
-                     {if $PORTAL_MODULE_MODEL && $USER_PRIVILEGES_MODEL->hasModulePermission($PORTAL_MODULE_MODEL->getId())}
-                     <li>
-                        <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if} " href="index.php?module=Payments&view=List">
-                        <i class="material-icons module-icon">payment</i> <span class="hide-menu"> {vtranslate('Payments')}</span>
-                        </a>
-                     </li>
-                     {/if}
-                  </ul>
-               </li>
-               {/if}
-            </div>
-         </div>
-         <!--fine menu-->
-         <div class="logo-container pull-left">
-            <a href="index.php" class="company-logo">
-            <img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>
-            </a>
-         </div>
-         <ul class="nav navbar-nav newtabs pull-right">
-            <li>
-               <div class="dropdownFinance">
-                  <div class="addtionalDashboardTab" style="padding: 10px 10px;">
-                     <span aria-hidden="true">HRM</span>
-                  </div>
-                  <div class="dropdown-content-Finance">
-                     <ul class="dropdownlist">
-                        <li>
-                           <a class="dropdown-icon-dashboard"  title="Employee" href="index.php?module=Users&view=List&block=15&fieldid=53&parent=Settings">
-                           <i class="material-icons module-icon">person</i>&nbsp;Employee
-                           </a>
-                        </li>
-                        {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
-                        <li>
-                           <a class="dropdown-icon-dashboard"   title="Leave" href="index.php?module=Leave&view=List">
-                           <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
-                           </a>
-                        </li>
-                        {else}
-                        <li>
-                           <a class="dropdown-icon-dashboard"  
-                              title="Leave" 
-                              href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
-                           <i class="material-icons module-icon">exit_to_app</i>&nbsp;Leave
-                           </a>
-                        </li>
-                        {/if}
-                        {*
-                        <li admin="" moudel="Timesheet">
-                           <a  class="dropdown-icon-dashboard"   href="index.php?module=Timesheet&amp;view=List&amp;app=ADMIN ">
-                           <i class="material-icons module-icon">timer</i>
-                           <span class="hide-menu"> {vtranslate('Timesheet','Home')}</span>
-                           </a>
-                        </li>
-                        *}
-                        {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
-                        <li>
-                           <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
-                           <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
-                           </a>
-                        </li>
-                        {else}
-                        <li>
-                           <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USER_MODEL->getId()}">
-                           <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
-                           </a>
-                        </li>
-                        {/if}
-                        {*
-                        <li>
-                           <a class="dropdown-icon-dashboard"  title="Performance" href="index.php?module=Performance&view=List&amp;block=15&amp;fieldid=56">
-                              <i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                        </li>
-                        *}
-                     </ul>
-                  </div>
-               </div>
-            </li>
-            <li>
-            <div class="dropdownSales">
-            <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
-            <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
-            </div>
-            <div class="dropdown-content-Sales">
-            <div class="row">
-            <div class="col-md-4">
-            <div class="popup-col-4">
-            <div class="popup-col-4img" >
-            <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 85%;">
-            </div>
-            <div class="popup-col-4text">
-            Manage Sales Team and activities.
-            </div>
-            </div>
-            </div>
-            <div class="col-md-4">
-            <div class="popup-col-4">
-            <div class="popup-col-4img">
-            <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width:85%;">
-            </div>
-            <div class="popup-col-4text">
-            Google contacts, calendar and docs synchronization
-            </div>
-            </div>
-            </div>
-            <div class="col-md-4">
-            <div class="popup-col-4">
-            <div class="popup-col-4img">
-            <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
-            </div>
-            <div class="popup-col-4text">
-            Acquire more leads
-            </div>
-            </div>
-            </div>
-            </div>
-            <div class="col-md-12 row" style="padding: 10px;">
-            <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
-            </div>
-            </div>
-            </div>
-            </li>
-            <li>
-               <div class="dropdownTools">
-                  <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
-                     <span aria-hidden="true">Communications</span>
-                  </div>
-                  <div class="dropdown-content-Tools">
-                     <ul class="dropdownlist">
-                        <li>
-                           <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                           <i class="fa fa-bell-o"></i>&nbsp;Templates
-                           </a>
-                        </li>
-                        <li>
-                           <a class="dropdown-icon-dashboard"  title="{vtranslate('LBL_MAIL_MANAGER')}" href="index.php?module=MailManager&view=List">
-                           <i class="material-icons module-icon">email</i>&nbsp;{vtranslate('LBL_MAIL_MANAGER')}
-                           </a>
-                        </li>
-                        <li>
-                           <a class="dropdown-icon-dashboard"  title="{vtranslate('Message Board')}" href="index.php?module=MessageBoard&view=List">
-                           <i class="material-icons module-icon">sms</i>&nbsp;{vtranslate('Message Board')}
-                           </a>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-            </li>
-            <li>
-               <div class="dropdownSupport">
-                  <div class="addtionalDashboardTab">
-                     <span aria-hidden="true" >Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
-                  </div>
-                  <div class="dropdown-content-Support">
-                     <div class="row">
-                        <div class="col-md-4">
-                           <div class="popup-col-4">
-                              <div class="popup-col-4img" >
-                                 <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 85%;">
-                              </div>
-                              <div class="popup-col-4text">
-                                 Sales Order, Invoice and Quotation Generator
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-4">
-                           <div class="popup-col-4">
-                              <div class="popup-col-4img">
-                                 <img src="http://www.secondcrm.com/sites/default/files/send-email-template-easier.jpg" alt="sync from google calendar" style="width:85%;">
-                              </div>
-                              <div class="popup-col-4text">
-                                 Email and SMS Marketing Service
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-4">
-                           <div class="popup-col-4">
-                              <div class="popup-col-4img">
-                                 <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/support-img1.jpg" style="width: 85%;">
-                              </div>
-                              <div class="popup-col-4text">
-                                 Auto capture requests from multiple support channels
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-12 row" style="padding: 10px;">
-                        <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
-                     </div>
-                  </div>
-               </div>
-            </li>
-            <li>
-               <div>
-                  <a class="menu-open">
-                  <span aria-hidden="true" style="font-size: 15px;
-                     color: #000;
-                     display: inline-block;
-                     height: 100%;
-                     width: 100%;
-                     /* color: #fff; */
-                     /* font-size: 15px; */
-                     padding: 12px 0;
-                     text-decoration: none;">All</span>
+               
+               {include file="modules/Vtiger/partials/TopbarMenu.tpl"}
+
+               <!--Company Logo -->
+               <div class="logo-container pull-left">
+                  <a href="index.php" class="company-logo">
+                  <img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>
                   </a>
                </div>
-            </li>
-         </ul>
-      </div>
+               <!--End here logo -->
+               <!--Static Menu / submenu HRM, SALES, COMMUNICATION, SUPPORT / ALL -->
+               {include file="modules/Vtiger/partials/TopbarStaticMenu.tpl"}
+               <!--End here for above Static SubMenu-->
+           </div>
+           
       <div class='col-md-6 col-sm-12 col-xs-12'>
          <div id="navbar" class="col-sm-2 col-md-3 col-lg-3 collapse navbar-collapse navbar-right global-actions">
             <ul class="nav navbar-nav">
@@ -582,8 +212,9 @@ left: -229px;
                   </div>
                </li>
                <!--END-textheader-->
+
+              <!-- Made dynamic code of QuickCreate by MABRUK & modified by jitu@if no module set quickcreate-->
                <li>
-                  <!-- ADDED BY KHALED -->
                   <div class="dropdown ">
                      <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><a aria-hidden="true" href="#" id="menubar_quickCreate" class="qc-button rightside-icon-dashboard" title="Quick Create"><i class="fa fa-plus"></i></a></div>
                      <ul class="dropdown-menu animated fadeIn" role="menu" aria-labelledby="dropdownMenu1" style="width:650px;">
@@ -593,218 +224,89 @@ left: -229px;
                         <hr>
                         <li id="quickCreateModules" style="padding: 0 5px;">
                            <div class="col-lg-12" style="padding-bottom:15px;">
-                              <!-- MABRUK -->
+                 
+                        {if $QUICK_CREATE_MOD_ICONS|count gt 0}      
                         {foreach from = $QUICK_CREATE_MOD_ICONS key = i item = MODULE}
 
-                            {if $i == 0}
-                                <div class="row">
-                            {else if $i % 3 == 0}                                
-                                </div>
-                                <br>
-                                <div class="row">    
-                            {/if}
+                               {if $i == 0}
+                                   <div class="row">
+                               {else if $i % 3 == 0}                                
+                                   </div>
+                                   <br>
+                                   <div class="row">    
+                               {/if}
 
-                            {if $MODULE['moduleName'] == 'Users'}
-                                {assign var=URL value="index.php?module=Users&parent=Settings&view=Edit"}
-                            {else}    
-                                {assign var=URL value="index.php?module={$MODULE['moduleName']}&amp;view=QuickCreateAjax"}
-                            {/if}
+                               {if $MODULE['moduleName'] == 'Users'}
+                                   {assign var=URL value="index.php?module=Users&parent=Settings&view=Edit"}
+                               {else}    
+                                   {assign var=URL value="index.php?module={$MODULE['moduleName']}&amp;view=QuickCreateAjax"}
+                               {/if}
 
-                            {if $MODULE['moduleName'] == 'Documents'}
-                                <div documents="" class="col-lg-4 dropdown">
-                                    <a id="menubar_quickCreate_Documents" class="quickCreateModuleSubmenu dropdown-toggle" data-name="Documents" data-toggle="dropdown" data-url="index.php?module=Documents&amp;view=QuickCreateAjax" href="javascript:void(0)">
-                                      <i class="material-icons pull-left">file_download
-                                      </i>
-                                      <span class="quick-create-module">Documents
-                                        <i class="fa fa-caret-down quickcreateMoreDropdownAction">
-                                        </i>
-                                      </span>
-                                    </a>
-                                    <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_Documents" style="width:100%">
-                                      <li class="dropdown-header">
-                                        <i class="material-icons">file_upload
-                                        </i> File Upload
-                                      </li>
-                                      <li id="VtigerAction">
-                                        <a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
-                                          <img width="15" hieght="15" style="  margin-top: -3px;margin-right: 4%;" title="Agiliux" alt="Agiliux" src="layouts/v7/skins/images/favicon.ico">
-                                          To Agiliux
-                                        </a>
-                                      </li>
-                                      <li class="dropdown-header">
-                                        <i class="ti-link">
-                                        </i> Link External Document
-                                      </li>
-                                      <li id="shareDocument">
-                                        <a href="javascript:Documents_Index_Js.createDocument('E')">&nbsp;
-                                          <i class="material-icons">link
-                                          </i>&nbsp;&nbsp; From File Url
-                                        </a>
-                                      </li>
-                                      <li role="separator" class="divider">
-                                      </li>
-                                      <li id="createDocument">
-                                        <a href="javascript:Documents_Index_Js.createDocument('W')">
-                                          <i class="ti-file">
-                                          </i> Create New Document
-                                        </a>
-                                      </li>
-                                    </ul>
-                                </div>
-                            {else}
-                                <div class="col-lg-4">
-                                  <a id="menubar_quickCreate_{$MODULE['moduleName']}" class="quickCreateModule" data-name="{$MODULE['moduleName']}" {if $MODULE['moduleName'] eq 'Users'}href={$URL}{else}data-url={$URL} href="javascript:void(0)"{/if}>
-                                      <i class="material-icons pull-left">{$MODULE['moduleIcon']}</i>
-                                      <span class="quick-create-module">{$MODULE['moduleName']}</span>
-                                  </a>
-                                </div>    
-                            {/if}    
-                                        
-                        {/foreach}
+                               {if $MODULE['moduleName'] == 'Documents'}
+                                   <div documents="" class="col-lg-4 dropdown">
+                                       <a id="menubar_quickCreate_Documents" class="quickCreateModuleSubmenu dropdown-toggle" data-name="Documents" data-toggle="dropdown" data-url="index.php?module=Documents&amp;view=QuickCreateAjax" href="javascript:void(0)">
+                                         <i class="material-icons pull-left">file_download
+                                         </i>
+                                         <span class="quick-create-module">Documents
+                                           <i class="fa fa-caret-down quickcreateMoreDropdownAction">
+                                           </i>
+                                         </span>
+                                       </a>
+                                       <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_Documents" style="width:100%">
+                                         <li class="dropdown-header">
+                                           <i class="material-icons">file_upload
+                                           </i> File Upload
+                                         </li>
+                                         <li id="VtigerAction">
+                                           <a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
+                                             <img width="15" hieght="15" style="  margin-top: -3px;margin-right: 4%;" title="Agiliux" alt="Agiliux" src="layouts/v7/skins/images/favicon.ico">
+                                             To Agiliux
+                                           </a>
+                                         </li>
+                                         <li class="dropdown-header">
+                                           <i class="ti-link">
+                                           </i> Link External Document
+                                         </li>
+                                         <li id="shareDocument">
+                                           <a href="javascript:Documents_Index_Js.createDocument('E')">&nbsp;
+                                             <i class="material-icons">link
+                                             </i>&nbsp;&nbsp; From File Url
+                                           </a>
+                                         </li>
+                                         <li role="separator" class="divider">
+                                         </li>
+                                         <li id="createDocument">
+                                           <a href="javascript:Documents_Index_Js.createDocument('W')">
+                                             <i class="ti-file">
+                                             </i> Create New Document
+                                           </a>
+                                         </li>
+                                       </ul>
+                                   </div>
+                               {else}
+                                   <div class="col-lg-4">
+                                     <a id="menubar_quickCreate_{$MODULE['moduleName']}" class="quickCreateModule" data-name="{$MODULE['moduleName']}" {if $MODULE['moduleName'] eq 'Users'}href={$URL}{else}data-url={$URL} href="javascript:void(0)"{/if}>
+                                         <i class="material-icons pull-left">{$MODULE['moduleIcon']}</i>
+                                         <span class="quick-create-module">{$MODULE['moduleName']}</span>
+                                     </a>
+                                   </div>    
+                               {/if}    
+                           {/foreach}
+                        {/if}   
                         </div>
                         <!-- END -->
                            </div>
                         </li>
                      </ul>
                   </div>
-                  {* 
-                  <div class="dropdown">
-                     <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                        <a  aria-hidden="true" href="#" id="menubar_quickCreate" class="qc-button rightside-icon-dashboard" title="{vtranslate('LBL_QUICK_CREATE',$MODULE)}" aria-hidden="true">
-                        <i class="fa fa-plus"></i>
-                        </a>
-                     </div>
-                     <ul class="dropdown-menu animated fadeIn" role="menu" aria-labelledby="dropdownMenu1" style="width:650px;">
-                        <li class="title" style="padding: 5px 0 0 15px;">
-                           <h4><strong>{vtranslate('LBL_QUICK_CREATE',$MODULE)}</strong></h4>
-                        </li>
-                        <hr/>
-                        <li id="quickCreateModules" style="padding: 0 5px;">
-                           <div class="col-lg-12" style="padding-bottom:15px;">
-                              {foreach key=moduleName item=moduleModel from=$QUICK_CREATE_MODULES}
-                              {if $moduleModel->isPermitted('CreateView') || $moduleModel->isPermitted('EditView')}
-                              {assign var='quickCreateModule' value=$moduleModel->isQuickCreateSupported()}
-                              {assign var='singularLabel' value=$moduleModel->getSingularLabelKey()}
-                              {assign var=hideDiv value={!$moduleModel->isPermitted('CreateView') && $moduleModel->isPermitted('EditView')}}
-                              {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
-                              'sales'=>'attach_money','messageboard'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
-                              'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
-                              'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
-                              'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
-                              'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
-                              'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-                              'mycthemeswitcher'=>'folder','users'=>'person', 'payments'=>'payment','bills'=>'receipt','timesheet'=>'timer','training'=>'book','attendance'=>'assignment','chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people','claim'=>'attach_money' ,'workinghours'=>'access_time']}
-                              {if $quickCreateModule == '1'}
-                              {if $count % 3 == 0}
-                              <div class="row">
-                                 {/if}
-                                 {* Adding two links,Event and Task if module is Calendar *}
-                                 {*   {if $singularLabel == 'SINGLE_Calendar'}
-                                 {assign var='singularLabel' value='LBL_TASK'}
-                                 <div {$moduleName} class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
-                                 <a id="menubar_quickCreate_Events" class="quickCreateModule" data-name="Events"
-                                    data-url="index.php?module=Events&view=QuickCreateAjax" href="javascript:void(0)">
-                                 <i class="material-icons pull-left">event</i>
-                                 <span class="quick-create-module">{vtranslate('LBL_EVENT',$moduleName)}</span>
-                                 </a>
-                              </div>
-                              {if $count % 3 == 2}
-                           </div>
-                           <br>
-                           <div class="row">
-                              {/if}
-                              <div {$moduleName} class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
-                              <a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModule" 
-                                 data-name="{$moduleModel->getName()}"
-                                 data-url="{$moduleModel->getQuickCreateUrl()}" 
-                                 href="javascript:void(0)"><i class="material-icons pull-left">card_travel</i><span class="quick-create-module">{vtranslate($singularLabel,$moduleName)}</span></a>
-                           </div>
-                           {if !$hideDiv}
-                           {assign var='count' value=$count+1}
-                           {/if}
-                           {else if $singularLabel == 'SINGLE_Documents'}
-                           <div {$moduleName} class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if} dropdown">
-                           <a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModuleSubmenu dropdown-toggle" data-name="{$moduleModel->getName()}" data-toggle="dropdown" 
-                              data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)">
-                           <i class="material-icons pull-left">{$iconsarray[{strtolower($moduleName)}]}</i>
-                           <span class="quick-create-module">
-                           {vtranslate($singularLabel,$moduleName)}
-                           <i class="fa fa-caret-down quickcreateMoreDropdownAction"></i>
-                           </span>
-                           </a>
-                           <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_{$moduleModel->getName()}">
-                              <li class="dropdown-header"><i class="material-icons">file_upload</i> {vtranslate('LBL_FILE_UPLOAD', $moduleName)}</li>
-                              <li id="VtigerAction">
-                                 <a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
-                                 <img style="  margin-top: -3px;margin-right: 4%;" title="Vtiger" alt="Vtiger" src="layouts/v7/skins//images/Vtiger.png">
-                                 {vtranslate('LBL_TO_SERVICE', $moduleName, {vtranslate('LBL_VTIGER', $moduleName)})}
-                                 </a>
-                              </li>
-                              <li class="dropdown-header"><i class="ti-link"></i> {vtranslate('LBL_LINK_EXTERNAL_DOCUMENT', $moduleName)}</li>
-                              <li id="shareDocument"><a href="javascript:Documents_Index_Js.createDocument('E')">&nbsp;<i class="material-icons">link</i>&nbsp;&nbsp; {vtranslate('LBL_FROM_SERVICE', $moduleName, {vtranslate('LBL_FILE_URL', $moduleName)})}</a></li>
-                              <li role="separator" class="divider"></li>
-                              <li id="createDocument"><a href="javascript:Documents_Index_Js.createDocument('W')"><i class="ti-file"></i> {vtranslate('LBL_CREATE_NEW', $moduleName, {vtranslate('SINGLE_Documents', $moduleName)})}</a></li>
-                           </ul>
-                  </div>
-                  {else}
-                  <div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-lg-4{/if}">
-                  <a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModule" data-name="{$moduleModel->getName()}"
-                     data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)">
-                  <i class="material-icons pull-left">{$iconsarray[{strtolower($moduleName)}]}</i>
-                  <span class="quick-create-module">{vtranslate($singularLabel,$moduleName)}</span>
-                  </a>
-                  </div>
-                  {/if}
-                  {if $count % 3 == 2}
-         </div>
-         <br>
-         {/if}
-         {if !$hideDiv}
-         {assign var='count' value=$count+1}
-         {/if}
-         {/if}
-         {/if}
-         {/foreach}*}
-         {* Khaled --
-         <div class="clearfix"></div>
-         <div class="row">
-         <div class="col-lg-12">
-         <div class="col-lg-4">
-         <a id="menubar_quickCreate_Users" class="quickCreateModule" data-name="Users"
-            data-url="" onclick='window.location.href="index.php?module=Users&parent=Settings&view=Edit"'>
-         <i class="material-icons pull-left">person</i>
-         <span class="quick-create-module">{vtranslate('Users','Users')}</span>
-         </a>
-         </div>
-         <div class="col-lg-4">
-         <a id="menubar_quickCreate_Users" class="quickCreateModule" data-name="Users"
-            data-url="" onclick='window.location.href = "index.php?module=Leave&view=Edit&app=ADMIN"'>
-         <i class="material-icons pull-left">exit_to_app</i>
-         <span class="quick-create-module">{vtranslate('Leave','Leave')}</span>
-         </a>
-         </div>
-         <div class="col-lg-4">
-         <a id="menubar_quickCreate_Users" class="quickCreateModule" data-name="Users"
-            data-url="" onclick='window.location.href = "index.php?module=Bills&view=Edit&app=ADMIN"'>
-         <i class="material-icons pull-left">receipt</i>
-         <span class="quick-create-module">{vtranslate('Bills','Bills')}</span>
-         </a>
-         </div>
-         </div>
-         </div>*}
-         {*
-      </div>
-      </li>
-      </ul>
-   </div>
-   *}
-   </li>
+               </li>
+   <!--Notification Code by Jitu -->
    <li>
     <div>
-   <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" title="Notifications" aria-hidden="true">
-   <i class="fa fa-bell-o"></i>
-   </a>
-   </div>
+      <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" title="Notifications" aria-hidden="true">
+         <i class="fa fa-bell-o"></i>
+      </a>
+    </div>
    <style type="text/css">
      .notification-list h6
      {
@@ -820,196 +322,189 @@ left: -229px;
           color: #2f5597
       }
    </style>
+   
    <div class="notification-list hide">
-   <!-- onmouseleave="Vtiger_Header_Js.hideNotification() -->
-   <h6> Notification <i class="fa fa-gear pull-right"></i></h6>
-      <ul class="list-unstyled" ">
-        <li>
-             <div class="notification-container unread">
-              <div class="notification-avatar left-node">
-                 
-                         <div class="img-holder">
-                              <img src="storage/2018/October/week3/2560_admin.jpg" class="img-circle" height="40" width="40">
-                         </div>
-                  
-              </div>     
-              <div class="right-node">                  
-                  <div class="notification-title">
-                       <a style="display:block; width: 100%; padding:0;">
-                         <strong>Khaled approved leave</strong>
-                       </a>  
-                       <div class="clearfix"></div>
-                      <span class="notification-time">2 hr</span> 
-                  </div> 
+      <h6> Notification <i class="fa fa-gear pull-right"></i></h6>
+         <ul class="list-unstyled" ">
+           <li>
+                <div class="notification-container unread">
+                 <div class="notification-avatar left-node">
+                    
+                            <div class="img-holder">
+                                 <img src="storage/2018/October/week3/2560_admin.jpg" class="img-circle" height="40" width="40">
+                            </div>
+                     
+                 </div>     
+                 <div class="right-node">                  
+                     <div class="notification-title">
+                          <a style="display:block; width: 100%; padding:0;">
+                            <strong>Khaled approved leave</strong>
+                          </a>  
+                          <div class="clearfix"></div>
+                         <span class="notification-time">2 hr</span> 
+                     </div> 
+                 </div>
+                 <div class="clearfix"> </div>  
               </div>
-              <div class="clearfix"> </div>  
-           </div>
-            <div class="clearfix"> </div>       
-        </li>
-      </ul>
+               <div class="clearfix"> </div>       
+           </li>
+         </ul>
       <div class="clearfix"> </div>
       <a href="#" class="btn btn-block all-notification text-center"> See all recent activity </a>
+   </div>
+   </li>
+   <!--End here -->
+
+   <!-- Top Menu on right side corner -->
+   <li>
+      <div>
+      <a class="rightside-icon-dashboard" href="index.php?module=MailManager&view=List" title="Email" aria-hidden="true">
+      <i class="fa fa-envelope-o"></i>
+      </a>
       </div>
- 
    </li>
    <li>
-   <div>
-   <a class="rightside-icon-dashboard" href="index.php?module=MailManager&view=List" title="Email" aria-hidden="true">
-   <i class="fa fa-envelope-o"></i>
-   </a>
-   </div>
-   </li>
-   <li>
-   <div>
-   <a class="rightside-icon-dashboard" href="index.php?module=Documents&view=List" title="Files" aria-hidden="true">
-   <i class="fa fa-file-o"></i>
-   </a>
-   </div>
+      <div>
+      <a class="rightside-icon-dashboard" href="index.php?module=Documents&view=List" title="Files" aria-hidden="true">
+      <i class="fa fa-file-o"></i>
+      </a>
+      </div>
    </li>
    {assign var=USER_PRIVILEGES_MODEL value=Users_Privileges_Model::getCurrentUserPrivilegesModel()}
    {assign var=CALENDAR_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Calendar')}
    {if $USER_PRIVILEGES_MODEL->hasModulePermission($CALENDAR_MODULE_MODEL->getId())}
    <li>
-   <div>
-   <a class="rightside-icon-dashboard" href="index.php?module=Calendar&view={$CALENDAR_MODULE_MODEL->getDefaultViewName()}" title="{vtranslate('Calendar','Calendar')}" aria-hidden="true">
-   <i class="fa fa-calendar-o"></i>
-   </a>
-   </div>
+      <div>
+      <a class="rightside-icon-dashboard" href="index.php?module=Calendar&view={$CALENDAR_MODULE_MODEL->getDefaultViewName()}" title="{vtranslate('Calendar','Calendar')}" aria-hidden="true">
+      <i class="fa fa-calendar-o"></i>
+      </a>
+      </div>
    </li>
    {/if}
    {assign var=REPORTS_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Reports')}
    {if $USER_PRIVILEGES_MODEL->hasModulePermission($REPORTS_MODULE_MODEL->getId())}
    <li>
-   <div>
-   <a class="rightside-icon-dashboard"  href="index.php?module=Reports&view=List" title="{vtranslate('Reports','Reports')}" aria-hidden="true">
-   <i class="fa fa-line-chart"></i>
-   </a>
-   </div>
+      <div>
+      <a class="rightside-icon-dashboard"  href="index.php?module=Reports&view=List" title="{vtranslate('Reports','Reports')}" aria-hidden="true">
+      <i class="fa fa-line-chart"></i>
+      </a>
+      </div>
    </li>
    {/if}
-   {* <li>
-   <div>
-   <a class="rightside-icon-dashboard"  href="index.php?module=Vtiger&amp;parent=Settings&amp;view=Index" title="Setting" aria-hidden="true">
-   <i class="fa fa-gear"></i>
-   </a>
-   </div>
-   </li>*}
-   {if $USER_PRIVILEGES_MODEL->hasModulePermission($CALENDAR_MODULE_MODEL->getId())}
-   <!--<li><div><a href="#" class="taskManagement" title="{vtranslate('Tasks','Vtiger')}" aria-hidden="true">
-      <i class="material-icons">card_travel</i></a></div></li>-->
-   {/if}
+   
+   <!--Right Corener Profile Image & slider come from right to left for changing theme and other options with logout-->
    <li class="dropdown">
-   <div>
-   {assign var=IMAGE_DETAILS value=$USER_MODEL->getImageDetails()}
-   {if $IMAGE_DETAILS neq '' && $IMAGE_DETAILS[0] neq '' && $IMAGE_DETAILS[0].path eq ''}
-   <a href="#" class="userName dropdown-toggle " data-toggle="dropdown" role="button" title="{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}
-      ({$USER_MODEL->get('user_name')})"><i class="material-icons">perm_identity</i>
-   <span class="link-text-xs-only hidden-lg hidden-md hidden-sm">{$USER_MODEL->getName()}</span>
-   </a>
-   {else}
-   {foreach item=IMAGE_INFO from=$IMAGE_DETAILS}
-   {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
-   <a href="#" class="userName dropdown-toggle" data-toggle="dropdown" role="button" title="{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}
-      ({$USER_MODEL->get('user_name')})">
-   <img height="30" width="30"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
-   </a>
-   {/if}
-   {/foreach}
-   {/if}
-   <div class="dropdown-menu logout-content animated fadeInRight profile-tool-box" role="menu">
-   <div class="row">
-   <div class="col-lg-12 col-sm-12" style="padding:10px;">
-   <div class="profile-container col-lg-12 col-sm-13">
-   {assign var=IMAGE_DETAILS value=$USER_MODEL->getImageDetails()}
-   <input type="hidden" name="user_id" id="current_user_id" value="{$USER_MODEL->get('id')}" />
-   {if $IMAGE_DETAILS neq '' && $IMAGE_DETAILS[0] neq '' && $IMAGE_DETAILS[0].path eq ''}
-   <i class='material-icons'>perm_identity</i>
-   {else}
-   {foreach item=IMAGE_INFO from=$IMAGE_DETAILS}
-   {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
-   <img class="user-profile-pic img-circle" src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
-   {/if}
-   {/foreach}
-   {/if}
-   </div>
-   <div class="col-lg-12 col-sm-12">
-   <h5 class=" text-center user-first-n-last-name text-bold">{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}</h5>
-   <h6 class="textOverflowEllipsis text-center" title='{$USER_MODEL->get('user_name')}'>{$USER_MODEL->get('user_name')} | {$USER_MODEL->getUserRoleName()}</h6>
-   {assign var=useremail value=$USER_MODEL->get('email1')}
-   <h6 class="textOverflowEllipsis text-center" title='{$USER_MODEL->get('email')}'>{$useremail}</h6>
-   </div>
-   <hr style="margin: 10px 0 !important">
-   <div class="col-lg-12 col-sm-12 text-center">
-   <ul class="dropdown-user list-inline ">
-   <li role="separator" class="divider"></li>
-   <li>
-   <a id="menubar_item_right_LBL_MY_PREFERENCES" class="btn btn-primary" href="{$USER_MODEL->getPreferenceDetailViewUrl()}">
-   <i class="material-icons">settings</i> {vtranslate('LBL_MY_PREFERENCES')}</a>
-   </li>
-   <li role="separator" class="divider"></li>
-   <li>
-   <a id="menubar_item_right_LBL_SIGN_OUT" class="btn btn-danger" href="index.php?module=Users&action=Logout">
-   <i class="material-icons">power_settings_new</i> {vtranslate('LBL_SIGN_OUT')}</a>
-   </li>
-   </ul>
-   </div>
-   <div class="clearfix"></div>
-   <hr>
-   <div class="clearfix"></div>
-   <div class="col-md-12 col-lg-12 col-xs-12">
-   <h5 class="text-bold">Themes</h5>                                                                                                                                   
-   </div>
-   <div class="clearfix"></div>
-   <hr />
-   <div class="clearfix"></div>          
-   <div class="col-md-3">Colors</div>
-   <div class="col-md-9">
-   <ul class="color-list list-inline pull-right">
-   <li><a class="btn color-box color-blue themeElement" data-skinName="blue"><i class="fa {if $USER_MODEL->get('theme') eq 'blue'}  fa-check {/if}"  ></i></a></li>
-   <li><a class="btn color-box color-purple themeElement" data-skinName="purple"><i class="fa {if $USER_MODEL->get('theme') eq 'purple'} fa-check  {/if}"></i></a></li>
-   <li><a class="btn color-box color-yellow themeElement" data-skinName="yellow"><i class="fa  {if $USER_MODEL->get('theme') eq 'yellow'} fa-check {/if}"></i></a></li>
-   <li><a class="btn color-box color-green themeElement" data-skinName="green"><i class="fa {if $USER_MODEL->get('theme') eq 'green'}  fa-check  {/if}"></i></a></li>
-   <li><a class="btn color-box color-shipcove themeElement" data-skinName="shipcove"><i class="fa {if $USER_MODEL->get('theme') eq 'shipcove'}  fa-check  {/if}"></i></a></li>
-   <li><a class="btn color-box color-lilacbush themeElement" data-skinName="lilacbush"><i class="fa {if $USER_MODEL->get('theme') eq 'lilacbush'}  fa-check  {/if}"></i></a></li>
-   <li><a class="btn color-box color-energyyellow themeElement" data-skinName="energyyellow"><i class="fa {if $USER_MODEL->get('theme') eq 'energyyellow'}  fa-check  {/if}"></i></a></li>
-   <li><a class="btn color-box color-downy themeElement" data-skinName="downy"><i class="fa {if $USER_MODEL->get('theme') eq 'downy'}  fa-check  {/if}"></i></a></li>
-   <li><a class="btn color-box color-lily themeElement" data-skinName="lily"><i class="fa {if $USER_MODEL->get('theme') eq 'lily'}  fa-check  {/if}"></i></a></li>
-   <li><a class="btn color-box color-danube themeElement" data-skinName="danube"><i class="fa {if $USER_MODEL->get('theme') eq 'danube'}  fa-check  {/if}"></i></a></li>
-   <li><a class="btn color-box color-selectiveyellow themeElement" data-skinName="selectiveyellow"><i class="fa {if $USER_MODEL->get('theme') eq 'selectiveyellow'}  fa-check  {/if}"></i></a></li>
-   <li><a class="btn color-box color-sandybrown themeElement" data-skinName="sandybrown"><i class="fa {if $USER_MODEL->get('theme') eq 'sandybrown'}  fa-check  {/if}"></i></a></li>
-   <li><a class="btn color-box color-mandy themeElement" data-skinName="mandy"><i class="fa {if $USER_MODEL->get('theme') eq 'mandy'}  fa-check  {/if}"></i></a></li>
-   <li><a class="btn color-box color-aquaisland themeElement" data-skinName="aquaisland"><i class="fa {if $USER_MODEL->get('theme') eq 'aquaisland'}  fa-check  {/if}"></i></a></li>
-   </ul>
-   <div class="clarfix"></div>
-   </div>
-   <div class="col-md-12 col-sm-12">
-   <div class="clearfix"></div>
-   <div class="dark-theme">
-   <strong class="pull-left" style="padding-top:6px; margin-right: 10px;"> Dark Theme</strong>
-   <!-- Rounded switch -->
-   <label class="switch pull-left">
-   <input type="checkbox" name="darkTheme" value="darkblue">
-   <span class="slider round"></span>
-   </label>
-   </div>
-   </div>
-   <div class="clearfix"></div>
-   <hr />
-   <div class="clearfix"></div>
-   <div class="col-md-12">
-   <ul class="profile-list list-unstyled">
-   <li> <a class="" href="index.php?module=Users&parent=Settings&view=Calendar&record={$USER_MODEL->get('id') }"><i class='fa fa-gear'></i>  Preferences </a></li>
-   <li> <a class="" href="index.php?module=Home&view=DashBoard&tabid=1298"><i class='fa fa-rocket'></i> Getting Started</a></li>
-   <li> <a class="" href="http://dev7.secondcrm.com/agiliux/help.php"><i class='fa fa-life-ring'></i> Help</a></li>
-   <li> <a class=""><i class='fa fa-at'></i> Contact Support</a></li>
-   <!--<li> <a class=""><i class='fa fa-paper-plane'></i> What's new?</a></li>-->
-   </ul>    
-   </div>    
-   </div>
-   </div>
-   <div class="clearfix"></div>
-   </div>
-   </div>
+         <div>
+         {assign var=IMAGE_DETAILS value=$USER_MODEL->getImageDetails()}
+         {if $IMAGE_DETAILS neq '' && $IMAGE_DETAILS[0] neq '' && $IMAGE_DETAILS[0].path eq ''}
+         <a href="#" class="userName dropdown-toggle " data-toggle="dropdown" role="button" title="{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}
+            ({$USER_MODEL->get('user_name')})"><i class="material-icons">perm_identity</i>
+         <span class="link-text-xs-only hidden-lg hidden-md hidden-sm">{$USER_MODEL->getName()}</span>
+         </a>
+         {else}
+         {foreach item=IMAGE_INFO from=$IMAGE_DETAILS}
+         {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
+         <a href="#" class="userName dropdown-toggle" data-toggle="dropdown" role="button" title="{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}
+            ({$USER_MODEL->get('user_name')})">
+         <img height="30" width="30"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
+         </a>
+         {/if}
+         {/foreach}
+         {/if}
+         <div class="dropdown-menu logout-content animated fadeInRight profile-tool-box" role="menu">
+         <div class="row">
+         <div class="col-lg-12 col-sm-12" style="padding:10px;">
+         <div class="profile-container col-lg-12 col-sm-13">
+         {assign var=IMAGE_DETAILS value=$USER_MODEL->getImageDetails()}
+         <input type="hidden" name="user_id" id="current_user_id" value="{$USER_MODEL->get('id')}" />
+         {if $IMAGE_DETAILS neq '' && $IMAGE_DETAILS[0] neq '' && $IMAGE_DETAILS[0].path eq ''}
+         <i class='material-icons'>perm_identity</i>
+         {else}
+         {foreach item=IMAGE_INFO from=$IMAGE_DETAILS}
+         {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
+         <img class="user-profile-pic img-circle" src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
+         {/if}
+         {/foreach}
+         {/if}
+         </div>
+         <div class="col-lg-12 col-sm-12">
+         <h5 class=" text-center user-first-n-last-name text-bold">{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}</h5>
+         <h6 class="textOverflowEllipsis text-center" title='{$USER_MODEL->get('user_name')}'>{$USER_MODEL->get('user_name')} | {$USER_MODEL->getUserRoleName()}</h6>
+         {assign var=useremail value=$USER_MODEL->get('email1')}
+         <h6 class="textOverflowEllipsis text-center" title='{$USER_MODEL->get('email')}'>{$useremail}</h6>
+         </div>
+         <hr style="margin: 10px 0 !important">
+         <div class="col-lg-12 col-sm-12 text-center">
+           <ul class="dropdown-user list-inline ">
+            <li role="separator" class="divider"></li>
+            <li>
+               <a id="menubar_item_right_LBL_MY_PREFERENCES" class="btn btn-primary" href="{$USER_MODEL->getPreferenceDetailViewUrl()}">
+               <i class="material-icons">settings</i> {vtranslate('LBL_MY_PREFERENCES')}</a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+               <a id="menubar_item_right_LBL_SIGN_OUT" class="btn btn-danger" href="index.php?module=Users&action=Logout">
+               <i class="material-icons">power_settings_new</i> {vtranslate('LBL_SIGN_OUT')}</a>
+           </li>
+          </ul>
+      </div>
+      <div class="clearfix"></div>
+      <hr>
+      <div class="clearfix"></div>
+      <div class="col-md-12 col-lg-12 col-xs-12">
+      <h5 class="text-bold">Themes</h5>                                                                                                                                   
+      </div>
+      <div class="clearfix"></div>
+      <hr />
+      <div class="clearfix"></div>          
+      <div class="col-md-3">Colors</div>
+      <div class="col-md-9">
+      <ul class="color-list list-inline pull-right">
+      <li><a class="btn color-box color-blue themeElement" data-skinName="blue"><i class="fa {if $USER_MODEL->get('theme') eq 'blue'}  fa-check {/if}"  ></i></a></li>
+      <li><a class="btn color-box color-purple themeElement" data-skinName="purple"><i class="fa {if $USER_MODEL->get('theme') eq 'purple'} fa-check  {/if}"></i></a></li>
+      <li><a class="btn color-box color-yellow themeElement" data-skinName="yellow"><i class="fa  {if $USER_MODEL->get('theme') eq 'yellow'} fa-check {/if}"></i></a></li>
+      <li><a class="btn color-box color-green themeElement" data-skinName="green"><i class="fa {if $USER_MODEL->get('theme') eq 'green'}  fa-check  {/if}"></i></a></li>
+      <li><a class="btn color-box color-shipcove themeElement" data-skinName="shipcove"><i class="fa {if $USER_MODEL->get('theme') eq 'shipcove'}  fa-check  {/if}"></i></a></li>
+      <li><a class="btn color-box color-lilacbush themeElement" data-skinName="lilacbush"><i class="fa {if $USER_MODEL->get('theme') eq 'lilacbush'}  fa-check  {/if}"></i></a></li>
+      <li><a class="btn color-box color-energyyellow themeElement" data-skinName="energyyellow"><i class="fa {if $USER_MODEL->get('theme') eq 'energyyellow'}  fa-check  {/if}"></i></a></li>
+      <li><a class="btn color-box color-downy themeElement" data-skinName="downy"><i class="fa {if $USER_MODEL->get('theme') eq 'downy'}  fa-check  {/if}"></i></a></li>
+      <li><a class="btn color-box color-lily themeElement" data-skinName="lily"><i class="fa {if $USER_MODEL->get('theme') eq 'lily'}  fa-check  {/if}"></i></a></li>
+      <li><a class="btn color-box color-danube themeElement" data-skinName="danube"><i class="fa {if $USER_MODEL->get('theme') eq 'danube'}  fa-check  {/if}"></i></a></li>
+      <li><a class="btn color-box color-selectiveyellow themeElement" data-skinName="selectiveyellow"><i class="fa {if $USER_MODEL->get('theme') eq 'selectiveyellow'}  fa-check  {/if}"></i></a></li>
+      <li><a class="btn color-box color-sandybrown themeElement" data-skinName="sandybrown"><i class="fa {if $USER_MODEL->get('theme') eq 'sandybrown'}  fa-check  {/if}"></i></a></li>
+      <li><a class="btn color-box color-mandy themeElement" data-skinName="mandy"><i class="fa {if $USER_MODEL->get('theme') eq 'mandy'}  fa-check  {/if}"></i></a></li>
+      <li><a class="btn color-box color-aquaisland themeElement" data-skinName="aquaisland"><i class="fa {if $USER_MODEL->get('theme') eq 'aquaisland'}  fa-check  {/if}"></i></a></li>
+      </ul>
+      <div class="clarfix"></div>
+      </div>
+      <div class="col-md-12 col-sm-12">
+      <div class="clearfix"></div>
+      <div class="dark-theme">
+      <strong class="pull-left" style="padding-top:6px; margin-right: 10px;"> Dark Theme</strong>
+      <!-- Rounded switch -->
+      <label class="switch pull-left">
+      <input type="checkbox" name="darkTheme" value="darkblue">
+      <span class="slider round"></span>
+      </label>
+      </div>
+      </div>
+      <div class="clearfix"></div>
+      <hr />
+      <div class="clearfix"></div>
+      <div class="col-md-12">
+      <ul class="profile-list list-unstyled">
+      <li> <a class="" href="index.php?module=Users&parent=Settings&view=Calendar&record={$USER_MODEL->get('id') }"><i class='fa fa-gear'></i>  Preferences </a></li>
+      <li> <a class="" href="index.php?module=Home&view=DashBoard&tabid=1298"><i class='fa fa-rocket'></i> Getting Started</a></li>
+      <li> <a class="" href="http://dev7.secondcrm.com/agiliux/help.php"><i class='fa fa-life-ring'></i> Help</a></li>
+      <li> <a class=""><i class='fa fa-at'></i> Contact Support</a></li>
+      <!--<li> <a class=""><i class='fa fa-paper-plane'></i> What's new?</a></li>-->
+      </ul>    
+      </div>    
+      </div>
+      </div>
+      <div class="clearfix"></div>
+      </div>
+      </div>
    </li>
    </ul>
 </div>
@@ -2159,6 +1654,7 @@ left: -229px;
          </li>
       </ul>
    </div>
+
    <div class="dropdown btn-group pull-right">
       <button style="background-color: #398bf7;padding: 12px;color: #fff;margin-top: -1px;margin-bottom:0px;border: none;border-right: 1px solid #fff; " class="btn dropdown-toggle" type="button" data-toggle="dropdown"><i class="material-icons">settings</i>
       &nbsp;<span class="caret"></span></button>
