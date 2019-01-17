@@ -38,9 +38,24 @@
                <div class="buttonGroups pull-right">
                    {if $SELECTED_TAB neq 1 AND $SELECTED_TAB neq 1298}
                 <div class="btn-group pull-right"  {$SELECTED_TAB}>
-                      <button class = "addNewDashBoard btn-primary btn pull-left" style='margin-right: 5px;'><i class="fa fa-edit"></i>&nbsp;{vtranslate('LBL_ADD_NEW_DASHBOARD',$MODULE)}</button> &nbsp;
-                       <button class="btn btn-success updateSequence pull-right hide">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
+                      <button class = "btn btn-info manageDashboards dropdown-toggle pull-left" data-toggle='dropdown' aria-expanded="false" style='margin-right: 5px;'>
+                        {vtranslate('LBL_ADD_DASHBOARD',$MODULE)}&nbsp;&nbsp;<i class="caret"></i>
+                      </button>
+                       <ul class="dropdown-menu dropdown-menu-right list-unstyled" >
+                           <li class="dashboard-tab widget-item ">
+                            List one
+                           </li> 
+                           <li class="dashboard-tab widget-item ">
+                            List one
+                           </li>                      
+                           <li class="dashboard-tab widget-item ">
+                            List one
+                           </li>                                           
+                      </ul>
+                       &nbsp;
+                      <button class="btn btn-success updateSequence pull-right hide">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
                       <button class = "reArrangeTabs btn-primary btn pull-right" style='margin-right: 0'>{vtranslate('LBL_REARRANGE_DASHBOARD_TABS',$MODULE)}</button>
+
                       {if $SELECTABLE_WIDGETS|count gt 0}
                                 <button class='btn btn-info addButton dropdown-toggle widget-btn' data-toggle='dropdown'>
                                         {vtranslate('LBL_ADD_WIDGET')}&nbsp;&nbsp;<i class="caret"></i>
@@ -53,14 +68,6 @@
                                                         {assign var="MINILISTWIDGET" value=$WIDGET} {* Defer to display as a separate group *}
                                                 {elseif $WIDGET->getName() eq 'Notebook'}
                                                         {assign var="NOTEBOOKWIDGET" value=$WIDGET} {* Defer to display as a separate group *}
-                                                {else}
-                                                     <!--  <li>
-                                                                <a onclick="Vtiger_DashBoard_Js.addWidget(this, '{$WIDGET->getUrl()}')" href="javascript:void(0);"
-                                                                        data-linkid="{$WIDGET->get('linkid')}" data-name="{$WIDGET->getName()}" data-width="{$WIDGET->getWidth()}" 
-                                                                        data-height="{$WIDGET->getHeight()}">
-                                                                        {vtranslate($WIDGET->getTitle(), $MODULE_NAME)}
-                                                                </a>
-                                                        </li> -->
                                                 {/if}
                                         {/foreach}
                                          
@@ -171,17 +178,6 @@
                 </div>
                 {/if}
         </div>
-                    {*<div class="dropdown dashBoardDropDown pull-right">
-                        <button class="btn btn-info reArrangeTabs dropdown-toggle" type="button" data-toggle="dropdown">{vtranslate('LBL_MORE',$MODULE)}
-                            &nbsp;&nbsp;<span class="caret"></span></button>
-                        <ul class="dropdown-menu dropdown-menu-right moreDashBoards">
-                            <li id="newDashBoardLi"{if count($DASHBOARD_TABS) eq $DASHBOARD_TABS_LIMIT}class="disabled"{/if}>
-                                <a class = "addNewDashBoard" href="#">{vtranslate('LBL_ADD_NEW_DASHBOARD',$MODULE)}</a>
-                            </li>
-                            <li><a class = "reArrangeTabs" href="#">{vtranslate('LBL_REARRANGE_DASHBOARD_TABS',$MODULE)}</a></li>
-                        </ul>
-                    </div>*}
-                 
                 </div>
 
             </ul>
