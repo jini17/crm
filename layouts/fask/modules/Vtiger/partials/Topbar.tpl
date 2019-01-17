@@ -440,47 +440,65 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                     </div>
                 </li>
                 <li>
-                    <div class="dropdownSales">
+                    <div class="">
                      <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
-                        <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
+                        <span aria-hidden="true"  data-toggle="modal" data-target="#sales">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
+                        
                     </div>
-                    <div class="dropdown-content-Sales">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="popup-col-4">
-                                    <div class="popup-col-4img" >
-                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 85%;">
+               <div id="sales" class="modal fade" role="dialog">
+                                <div class="modal-dialog" style="width: 800px;">
+
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <br >
                                     </div>
-                                    <div class="popup-col-4text">
-                                        Manage Sales Team and activities.
+                                    <div class="modal-body">
+                                        <div class="">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="popup-col-4">
+                                                        <div class="popup-col-4img" >
+                                                            <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 85%;">
+                                                        </div>
+                                                        <div class="popup-col-4text">
+                                                            Manage Sales Team and activities.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="popup-col-4">
+                                                        <div class="popup-col-4img">
+                                                            <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width:85%;">
+                                                        </div>
+                                                        <div class="popup-col-4text">
+                                                            Google contacts, calendar and docs synchronization
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="popup-col-4">
+                                                        <div class="popup-col-4img">
+                                                            <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
+                                                        </div>
+                                                        <div class="popup-col-4text">
+                                                            Acquire more leads
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 row" style="padding: 10px;">
+                                                <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
                                     </div>
+                                   
+                                  </div>
+
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="popup-col-4">
-                                    <div class="popup-col-4img">
-                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width:85%;">
-                                    </div>
-                                    <div class="popup-col-4text">
-                                        Google contacts, calendar and docs synchronization
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="popup-col-4">
-                                    <div class="popup-col-4img">
-                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
-                                    </div>
-                                    <div class="popup-col-4text">
-                                        Acquire more leads
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 row" style="padding: 10px;">
-                            <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
-                        </div>
-                    </div>
+                              </div>
                 </div>
 
             </li>
@@ -1651,7 +1669,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                             </div>
 
 
-                                                            <div class="dropdown-content-Sales">
+                                                            <div class="">
                                                                 <div class="row">
                                                                     <div class="col-md-4">
                                                                         <div class="popup-col-4">
