@@ -46,10 +46,7 @@
  {else if $FIELD_MODEL->getFieldDataType() eq 'companyDetails'}
 
     {assign var=COMPANYDETAILS value=Vtiger_Util_Helper::getCompanyTitle($FIELD_MODEL->get('fieldvalue'))}
-
-    
-
-    {$FIELD_MODEL->getDisplayValue($COMPANYDETAILS[0]['organization_title'],$RECORD->getId(), $RECORD)}
+    {$COMPANYDETAILS[0]['organization_title']}
 <!--- Added By Jitu@secondcrm.com on 24 Sep 2014--> 
 {elseif $FIELD_MODEL->getFieldDataType() eq 'termsConditions'}
     {$id = $FIELD_MODEL->get('fieldvalue')}
