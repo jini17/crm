@@ -529,48 +529,64 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
             </div>
         </li>
             <li>
-                <div class="dropdownSupport">
+                <div class="">
                     <div class="addtionalDashboardTab">
-                        <span aria-hidden="true" >Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
+                        <span aria-hidden="true"   data-toggle="modal" data-target="#support">Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
                     </div>
-                    <div class="dropdown-content-Support">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="popup-col-4">
-                                    <div class="popup-col-4img" >
-                                        <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 85%;">
-                                    </div>
+                    <div id="support" class="modal fade" role="dialog">
+                            <div class="modal-dialog" style="width: 800px;">
 
-                                    <div class="popup-col-4text">
-                                        Sales Order, Invoice and Quotation Generator
-                                    </div>
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                 <br />
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="popup-col-4">
-                                    <div class="popup-col-4img">
-                                        <img src="http://www.secondcrm.com/sites/default/files/send-email-template-easier.jpg" alt="sync from google calendar" style="width:85%;">
+                                <div class="modal-body">
+                                           <div class="">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="popup-col-4">
+                                                <div class="popup-col-4img" >
+                                                    <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 85%;">
+                                                </div>
+
+                                                <div class="popup-col-4text">
+                                                    Sales Order, Invoice and Quotation Generator
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="popup-col-4">
+                                                <div class="popup-col-4img">
+                                                    <img src="http://www.secondcrm.com/sites/default/files/send-email-template-easier.jpg" alt="sync from google calendar" style="width:85%;">
+                                                </div>
+                                                <div class="popup-col-4text">
+                                                    Email and SMS Marketing Service
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="popup-col-4">
+                                                <div class="popup-col-4img">
+                                                    <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/support-img1.jpg" style="width: 85%;">
+                                                </div>
+                                                <div class="popup-col-4text">
+                                                    Auto capture requests from multiple support channels
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="popup-col-4text">
-                                        Email and SMS Marketing Service
+                                    <div class="col-md-12 row" style="padding: 10px;">
+                                        <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
                                     </div>
+                                               <div class="clearfix"></div>
                                 </div>
+                                </div>                               
+                              </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="popup-col-4">
-                                    <div class="popup-col-4img">
-                                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/support-img1.jpg" style="width: 85%;">
-                                    </div>
-                                    <div class="popup-col-4text">
-                                        Auto capture requests from multiple support channels
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 row" style="padding: 10px;">
-                            <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
-                        </div>
-                    </div>
+                          </div>
+           
                 </div>
             </li>
             <li>
