@@ -203,7 +203,7 @@
  <!--Company Logo -->
    <div class="logo-container pull-left">
       <a href="index.php" class="company-logo">
-      <img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>
+      <img src="{$COMPANY_LOGO->get('imagepath')}" height="40" width="40" alt="{$COMPANY_LOGO->get('alt')}"/>
       </a>
    </div>
 <!--End here logo -->
