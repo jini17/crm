@@ -43,9 +43,7 @@
          </div>
       </div>
    </li>
-   {if $PLAN eq 1}
-   
-
+   {if $PLAN eq 1 || $PLAN eq 3}
 <li>
    <div class="">
       <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
@@ -158,10 +156,7 @@
       </div>
    </li>
 
-   {if $PLAN eq 1}
-
-  
-
+{if $PLAN eq 1 || $PLAN eq 2}
 <li>
    <div class="">
       <div class="addtionalDashboardTab">

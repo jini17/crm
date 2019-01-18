@@ -70,7 +70,7 @@
 {assign var=SELECTED_MENU_CATEGORY value='Dashboard'}
 {/if}
 {foreach item=APP_NAME from=$APP_LIST}
-<<<<<<< HEAD
+
 
 {if $APP_NAME eq 'ANALYTICS'} {continue}{/if}
 {if $APP_NAME eq 'SALES'}
@@ -84,13 +84,6 @@
 {if count($APP_GROUPED_MENU.$APP_NAME) gt 0}
 {foreach item=APP_MENU_MODEL from=$APP_GROUPED_MENU.$APP_NAME}
 {assign var=FIRST_MENU_MODEL value=$APP_MENU_MODEL}
-
-=======
-{if $APP_NAME eq 'ANALYTICS'} {continue}{/if}
-{if count($APP_GROUPED_MENU.$APP_NAME) gt 0}
-{foreach item=APP_MENU_MODEL from=$APP_GROUPED_MENU.$APP_NAME}
-{assign var=FIRST_MENU_MODEL value=$APP_MENU_MODEL}
->>>>>>> 7d3b212a0e41311e8435532ce01906b392b0992b
 {if $APP_MENU_MODEL}
 {break}
 {/if}
