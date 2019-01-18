@@ -412,6 +412,12 @@ Vtiger.Class('Vtiger_Index_Js', {
             jQuery('.settingsgroup-accordion').click( function() { 
 
 			var container 		= jQuery(jQuery(this).find('a').data('parent'));//jQuery('#accordion_mobile, #accordion');
+
+
+            if (jQuery('.AdminSidebar')is(':hidden'))
+                alert("sad")
+                container       = jQuery('.UserSidebar').find('#accordion');
+
 			var element   		= jQuery(this).find('.indicator');
 			var links     		= container.find('a');
             var notCollapsed    = element.hasClass('ti-angle-right');
