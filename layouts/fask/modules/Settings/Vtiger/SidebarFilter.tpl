@@ -9,6 +9,7 @@
       {else}
           hide
       {/if}'>
+    <br />
         <h4> Filter </h4>
         <!-- Latest compiled and minified Bootstrap CSS -->
         <div class="panel-group panel-filter" id="accordion">

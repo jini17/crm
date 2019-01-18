@@ -1356,10 +1356,10 @@ ul.unstyled {
   margin-right: 0;
 }
 .current-filter-name {
-  margin: 11px 0;
-  float: left;
-  font-size: 12px;
-  line-height: 18px;
+    margin: 13px 0;
+   float: left;
+   font-size: 12px;
+   line-height: 10px;
 }
 .current-filter-name a {
   max-width: 120px;
@@ -2734,6 +2734,7 @@ input[type=checkbox]:checked {
 .cursorPointer {
   cursor: pointer;
   text-decoration: none;
+  margin-right: 5px;
 }
 .cursorDefault {
   cursor: default;
@@ -5608,8 +5609,8 @@ hr {
   padding-top: 1px;
 }
 .mmSearchDropDown {
-  margin-top: -30px;
-  margin-left: 66%;
+/*  margin-top: -30px;
+  margin-left: 66%;*/
 }
 .mmMoveDropdownArrow {
   color: #FFFFFF;
@@ -9235,9 +9236,6 @@ float: right;display: inline-block;margin-top: 15px;margin-bottom: 15px;margin-l
 background-color: #fff;
 
 }
-.alphabetSorting table .alphabetSearch a{
-color: #2f5597 !important;
-}
 
 .alphabetSearch a:active , .alphabetSearch a:focus{
   background-color: #b2b7c0;
@@ -9530,6 +9528,12 @@ right connector from last child*/
 }
 
 
-/*Thats all. I hope you enjoyed it.
-Thanks :)*/
-
+.module-title.pull-left.text-uppercase{
+   font-size: 12px !important;
+font-weight: normal;
+text-transform: unset;
+color:#000 !important;
+}
+.module-breadcrumb{
+    font-size: 12px !important
+}

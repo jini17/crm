@@ -71,6 +71,7 @@
 {/if}
 {foreach item=APP_NAME from=$APP_LIST}
 
+
 {if $APP_NAME eq 'ANALYTICS'} {continue}{/if}
 {if $APP_NAME eq 'SALES'}
 {assign var=SALES_MENU_MODEL value=$APP_GROUPED_MENU[$APP_NAME]}
@@ -83,7 +84,6 @@
 {if count($APP_GROUPED_MENU.$APP_NAME) gt 0}
 {foreach item=APP_MENU_MODEL from=$APP_GROUPED_MENU.$APP_NAME}
 {assign var=FIRST_MENU_MODEL value=$APP_MENU_MODEL}
-
 {if $APP_MENU_MODEL}
 {break}
 {/if}
@@ -97,7 +97,9 @@
 'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
 'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
 {if $APP_NAME neq 'SALES'}
+
 <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}" {if vtranslate("LBL_$APP_NAME") eq "Communications"} style="width:15%" {else} style="width:15%"{/if}> 
+
 <a class="has-arrow waves-effect waves-dark " >
 <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i>
 <span class="hide-menu">{vtranslate("LBL_$APP_NAME")}</span>
@@ -112,14 +114,17 @@
    {/if}   
    {if $moduleName eq 'Calendar'}
    <li {$APP_NAME} moudel='{$moduleName}'>
-   <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href="index.php?module=Calendar&view=List">
+   <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
+      href="index.php?module=Calendar&view=List" >
+
    <i class="ti ti-notepad" ></i> 
    <span class="hide-menu"> {vtranslate("LBL_MEETING",'Vtiger')}</span>
    </a>
    </li>
    <li {$APP_NAME} moudel='{$moduleName}'>
    <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
-      href="{if $translatedModuleLabel eq 'Employee'}index.php?module=Users&parent=Settings&view=List   {/if}
+      href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
+
       {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
    <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
    <span class="hide-menu"> {$translatedModuleLabel}</span>
@@ -128,7 +133,7 @@
    {else}   
    <li {$APP_NAME} moudel='{$moduleName}'>
    <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
-      href="{if $translatedModuleLabel eq 'Employee'}index.php?module=Users&parent=Settings&view=List   {/if}
+      href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
       {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
    <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
    <span class="hide-menu"> {$translatedModuleLabel}</span>
@@ -206,5 +211,4 @@
 <!--Static Menu / submenu HRM, SALES, COMMUNICATION, SUPPORT / ALL -->
 {include file="modules/Vtiger/partials/TopbarStaticMenu.tpl"}
 <!--End here for above Static SubMenu-->
-
 <!--fine menu-->

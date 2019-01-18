@@ -245,5 +245,4 @@
                      return false;
             });
           });
-
 </script>
