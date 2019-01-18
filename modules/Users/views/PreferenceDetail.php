@@ -73,7 +73,7 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
                         $viewer->assign('IS_EDITABLE', $IS_EDITABLE); //modified by jitu@Permission 
                         $viewer->assign('LEAVECLAIM_SHOW', $LEAVE_CLAIM_ALLOW); //Added by jitu@Permission
                         $viewer->assign('IS_DELETABLE', $detailViewModel->getRecord()->isDeletable($moduleName));
-
+                        $viewer->assign('PLAN', $_SESSION['plan']);
                         $linkParams = array('MODULE'=>$moduleName, 'ACTION'=>$request->get('view'));
                         $linkModels = $detailViewModel->getSideBarLinks($linkParams);
                         $viewer->assign('QUICK_LINKS', $linkModels);

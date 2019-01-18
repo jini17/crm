@@ -57,6 +57,7 @@ Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 			$viewer->assign('QUICK_CREATE_MODULES', Vtiger_Menu_Model::getAllForQuickCreate());
 			$viewer->assign('QUICK_CREATE_MOD_ICONS', Vtiger_Menu_Model::getQuickCreateModulesAndIcons()); // Added By Mabruk
 			$viewer->assign('MENU_STRUCTURE', $menuStructure);
+			$viewer->assign('PLAN', $_SESSION['plan']);
 			$viewer->assign('MENU_SELECTED_MODULENAME', $selectedModule);
 			$viewer->assign('MENU_TOPITEMS_LIMIT', $menuStructure->getLimit());
 			$viewer->assign('COMPANY_LOGO',$companyLogo);
