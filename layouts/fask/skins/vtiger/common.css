@@ -1359,7 +1359,7 @@ ul.unstyled {
   margin: 11px 0;
   float: left;
   font-size: 12px;
-  line-height: 18px;
+  line-height: 16px;
 }
 .current-filter-name a {
   max-width: 120px;
@@ -10090,3 +10090,14 @@ input:checked + .slider:before {
 .widget-item a[disabled="disabled"]{
     color: #ccc;
 }
+
+.current-filter-name i{
+
+    margin-top: 2px;
+    display: block !important;
+    float: right;
+    margin-right: 5px;
+    margin-left: -3px;
+
+}
+

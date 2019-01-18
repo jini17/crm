@@ -44,25 +44,28 @@
       </div>
    </li>
    {if $PLAN eq 1 || $PLAN eq 3}
+
+
 <li>
    <div class="">
       <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
-         <span aria-hidden="true"  data-toggle="modal" data-target="#sales">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
+         <span aria-hidden="true"  data-toggle="modal" data-target="#sales">Sales</span> 
       </div>
       <div id="sales" class="modal fade" role="dialog">
          <div class="modal-dialog" style="width: 800px;">
             <!-- Modal content-->
             <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <br >
+               <div class="modal-header" style="border: none !important;  ">
+                  <button type="button" class="close" data-dismiss="modal" style="border-radius: 50%; border: 1px solid #000;     padding-left: 5px;    padding-right: 5px; ">&times;</button>
+                  <br />
+                  <br />
                </div>
                <div class="modal-body">
                   <div class="">
                      <div class="row">
                         <div class="col-md-4">
                            <div class="popup-col-4">
-                              <div class="popup-col-4img" >
+                              <div class="popup-col-4img" style="height: 265px;">
                                  <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 85%;">
                               </div>
                               <div class="popup-col-4text">
@@ -72,7 +75,7 @@
                         </div>
                         <div class="col-md-4">
                            <div class="popup-col-4">
-                              <div class="popup-col-4img">
+                              <div class="popup-col-4img" style="height: 265px;">
                                  <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width:85%;">
                               </div>
                               <div class="popup-col-4text">
@@ -82,7 +85,7 @@
                         </div>
                         <div class="col-md-4">
                            <div class="popup-col-4">
-                              <div class="popup-col-4img">
+                              <div class="popup-col-4img" style="height: 265px;">
                                  <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
                               </div>
                               <div class="popup-col-4text">
@@ -102,6 +105,7 @@
       </div>
    </div>
 </li>
+
 {elseif $PLAN eq 2 || $PLAN eq 4}
 
    {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
@@ -157,17 +161,20 @@
    </li>
 
 {if $PLAN eq 1 || $PLAN eq 2}
+
+
 <li>
    <div class="">
       <div class="addtionalDashboardTab">
-         <span aria-hidden="true"   data-toggle="modal" data-target="#support">Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
+         <span aria-hidden="true"   data-toggle="modal" data-target="#support">Support</span>
       </div>
       <div id="support" class="modal fade" role="dialog">
          <div class="modal-dialog" style="width: 800px;">
             <!-- Modal content-->
             <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <div class="modal-header" style="border: none !important;  ">
+                  <button type="button" class="close" data-dismiss="modal" style="border-radius: 50%; border: 1px solid #000;     padding-left: 5px;    padding-right: 5px; ">&times;</button>
+                  <br />
                   <br />
                </div>
                <div class="modal-body">
@@ -175,7 +182,7 @@
                      <div class="row">
                         <div class="col-md-4">
                            <div class="popup-col-4">
-                              <div class="popup-col-4img" >
+                              <div class="popup-col-4img"  style="height: 265px;">
                                  <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 85%;">
                               </div>
                               <div class="popup-col-4text">
@@ -185,7 +192,7 @@
                         </div>
                         <div class="col-md-4">
                            <div class="popup-col-4">
-                              <div class="popup-col-4img">
+                              <div class="popup-col-4img" style="height: 265px;">
                                  <img src="http://www.secondcrm.com/sites/default/files/send-email-template-easier.jpg" alt="sync from google calendar" style="width:85%;">
                               </div>
                               <div class="popup-col-4text">
@@ -195,7 +202,7 @@
                         </div>
                         <div class="col-md-4">
                            <div class="popup-col-4">
-                              <div class="popup-col-4img">
+                              <div class="popup-col-4img" style="height: 265px;">
                                  <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/support-img1.jpg" style="width: 85%;">
                               </div>
                               <div class="popup-col-4text">
