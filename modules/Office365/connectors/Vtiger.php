@@ -22,7 +22,7 @@ class Office365_Vtiger_Connector extends WSAPP_VtigerConnector {
 	 * @param type $syncStateModel
 	 * @return type
 	 */
-	public function push($recordList, $syncStateModel) {
+	public function push($recordList, $syncStateModel) { 
 		return parent::push($recordList, $syncStateModel);
 	}
 

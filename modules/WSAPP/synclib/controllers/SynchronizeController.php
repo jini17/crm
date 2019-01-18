@@ -92,7 +92,7 @@ abstract class WSAPP_SynchronizeController {
                     $sourceId = $sourceid[1];
                     $res = $adb->pquery("SELECT `officeid` FROM `office365_sync_map` WHERE `vtigerid`=? AND`module`=?", array($sourceId,$moduleName));
                     $synced = $adb->query_result($res, 'officeid');
-                     $sourceRecord->set('_id', $synced);
+                    $sourceRecord->set('_id', $synced);
 
                 }
             }
@@ -147,9 +147,7 @@ abstract class WSAPP_SynchronizeController {
 
 
         $syncStateModel = $this->getSyncStateModel($this->targetConnector);
-        $targetRecords = $this->targetConnector->pull($syncStateModel, $this->user);
-
-        print_r($targetRecords);die;
+        $targetRecords = $this->targetConnector->pull($syncStateModel, $this->user);        
 
         foreach($targetRecords as $record){
             $record->setSyncIdentificationKey(uniqid());
@@ -171,12 +169,15 @@ abstract class WSAPP_SynchronizeController {
 
                 }
             }
-            foreach ($eventidcopy as $id){
-                unset($targetRecords[$id]);
-            }
+            // Mabruk
+            if ($moduleName != 'Office365Contacts')
+                foreach ($eventidcopy as $id){
+                    unset($targetRecords[$id]);
+                }
+            
         }
 
-        $transformedRecords = $this->targetConnector->transformToSourceRecord($targetRecords, $this->user);
+        $transformedRecords = $this->targetConnector->transformToSourceRecord($targetRecords, $this->user); 
         $sourceRecords = $this->sourceConnector->push($transformedRecords, $sourceSyncStateModel);
 
         foreach ($targetRecords as $targetRecord) {
