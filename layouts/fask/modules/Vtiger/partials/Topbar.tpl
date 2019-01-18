@@ -16,6 +16,130 @@
 'INVENTORY' => 'ti-archive',
 'PROJECT' => 'ti-bag' ]}
 
+<style>
+   
+   .dropdown-submenu {
+   position: relative;
+   }
+   .dropdown-submenu .dropdown-menu {
+   top: 0;
+   left: 100%;
+   margin-top: -1px;
+   }
+   .searchoption{
+   position:relative
+   }
+   .searchoption .fa.fa-angle-down{
+   position: absolute !important;
+   left: 85%;
+   top: 10px;
+   color: #fff;
+   z-index: 1;
+   }
+   .searchoption a{
+      padding: 0 !important;
+      height: 33px !important;
+      margin-top: 4px !important;
+      background-color: #fff;
+      color: #000 ;
+      border-radius: 3px !important;
+      border: 0 !important;
+      box-shadow:none !important;
+      text-shadow: none !important;
+   }
+   .searchoption .select2-container .select2-choice .select2-arrow {
+      color: #fff !important;
+   }
+   .searchoption .select2-highlighted{
+      background-color: #2f5597 !important;
+   }
+   .searchoption  .select2-container .select2-choice .select2-arrow b{ display: none; }
+   .searchoption   .select2-container .select2-choice .select2-arrow {
+      width: 40px;
+      color: #fff;
+      font-size: 1.3em;
+      padding: 4px 12px;
+   }
+   .searchoption .select2-container .select2-choice {
+      height: 41px; /* Jobsy form controls have 37px total height */
+      border: 2px solid #bdc3c7;
+      border-radius: 6px;
+      outline: none;
+      color: #34495e;
+   }
+
+   .notifications{
+   position:relative;
+   }
+   .notification-list{
+      position: absolute;
+      z-index: 10000;
+      width: 280px;
+      height: 200px;
+      background-color: #fff !important;
+      color: #000 !important;
+      left: -229px;
+   }
+
+   .notifications-heading{
+      padding:5px;
+      font-size:10px !important;
+      font-weight: bold;
+      background-color: #2f5597 !important;
+      color:#fff !important;
+      padding:10px;
+      margin:0;
+      border-radius: 5px;
+   }
+   .notifications-heading i{
+      margin-right:10px !important;
+      color:#fff !important;
+   }
+   .notification-list::before {
+      position: absolute;
+      top: -7px;
+      right: 26px;
+      display: inline-block;
+      border-right: 7px solid transparent;
+      border-bottom: 7px solid #ccc;
+      border-left: 7px solid transparent;
+      border-bottom-color: rgba(47, 85, 151,1);
+      content: '';
+   }
+   .notification-container .img-holder{
+      width:40px;
+      height:40px;
+      float:left;
+   }
+   .notification-container{
+      padding:10px;
+      border:1px solid  #f2f2f2;
+   }
+   .notification-container .notification-title{
+      width:200px;
+      float:right;
+   }
+   .notification-container .notification-time{
+   }   
+   .notification-container.unread{
+       background-color: #f2f2f2;
+   
+   }
+   
+   .notification-list h6
+    {
+         background-color: #2f5597 ;
+         margin: 0;
+         padding: 10px;
+         color: #ffffff !important;
+    }
+    .notification-list h6 i{
+     color: #ffffff !important;
+     }
+     .all-notification{
+         color: #2f5597
+     }
+</style>
 <nav class="navbar navbar-default navbar-fixed-top app-fixed-navbar">
 {assign var="announcement" value=$ANNOUNCEMENT->get('announcement')}   
 <div class="headertext" id="headertextflow"> {if !empty($announcement)}{$announcement}{else}{vtranslate('LBL_NO_ANNOUNCEMENTS',$MODULE)}{/if}</div>
@@ -72,6 +196,7 @@
                <!-- Made dynamic code of QuickCreate by MABRUK & modified by jitu@if no module set quickcreate-->
                {include file="modules/Vtiger/partials/TopbarQuickCreateMenu.tpl"}
                <!--End here -->  
+
                <!--Notification Code by Jitu -->
                <li>
                   <div>
@@ -108,6 +233,7 @@
                   </div>
                </li>
                <!--End here -->
+
                <!-- Top Menu on right side corner -->
                <li>
                   <div>
