@@ -377,7 +377,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                 <!--fine menu-->
                 <div class="logo-container pull-left">
                         <a href="index.php" class="company-logo">
-                            <img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>
+                            <img src="layouts/v7/lib/ui/src/images/agiliux-logo.png" alt="{$COMPANY_LOGO->get('alt')}"/>
                         </a>
                 </div>
                 <ul class="nav navbar-nav newtabs pull-right">
@@ -442,7 +442,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                 <li>
                     <div class="">
                      <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
-                        <span aria-hidden="true"  data-toggle="modal" data-target="#sales">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
+                        <span aria-hidden="true"  data-toggle="modal" data-target="#sales">Sales</span> 
                         
                     </div>
                <div id="sales" class="modal fade" role="dialog">
@@ -450,16 +450,18 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
 
                                   <!-- Modal content-->
                                   <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <br >
+                                    <div class="modal-header" style="border: none !important;  ">
+                                        
+                                      <button type="button" class="close" data-dismiss="modal" style="border-radius: 50%; border: 1px solid #000;     padding-left: 5px;    padding-right: 5px; ">&times;</button>
+                                      <br />
+                                          <br />
                                     </div>
                                     <div class="modal-body">
                                         <div class="">
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="popup-col-4">
-                                                        <div class="popup-col-4img" >
+                                                        <div class="popup-col-4img" style="height: 265px;">
                                                             <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 85%;">
                                                         </div>
                                                         <div class="popup-col-4text">
@@ -469,7 +471,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="popup-col-4">
-                                                        <div class="popup-col-4img">
+                                                        <div class="popup-col-4img" style="height: 265px;">
                                                             <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width:85%;">
                                                         </div>
                                                         <div class="popup-col-4text">
@@ -479,7 +481,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="popup-col-4">
-                                                        <div class="popup-col-4img">
+                                                        <div class="popup-col-4img" style="height: 265px;">
                                                             <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
                                                         </div>
                                                         <div class="popup-col-4text">
@@ -531,23 +533,25 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
             <li>
                 <div class="">
                     <div class="addtionalDashboardTab">
-                        <span aria-hidden="true"   data-toggle="modal" data-target="#support">Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
+                        <span aria-hidden="true"   data-toggle="modal" data-target="#support">Support</span>
                     </div>
                     <div id="support" class="modal fade" role="dialog">
                             <div class="modal-dialog" style="width: 800px;">
 
                               <!-- Modal content-->
                               <div class="modal-content">
-                                <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                 <br />
-                                </div>
+                                 <div class="modal-header" style="border: none !important;  ">
+                                        
+                                      <button type="button" class="close" data-dismiss="modal" style="border-radius: 50%; border: 1px solid #000;     padding-left: 5px;    padding-right: 5px; ">&times;</button>
+                                      <br />
+                                          <br />
+                                    </div>
                                 <div class="modal-body">
                                            <div class="">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="popup-col-4">
-                                                <div class="popup-col-4img" >
+                                                <div class="popup-col-4img"  style="height: 265px;">
                                                     <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 85%;">
                                                 </div>
 
@@ -558,7 +562,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                         </div>
                                         <div class="col-md-4">
                                             <div class="popup-col-4">
-                                                <div class="popup-col-4img">
+                                                <div class="popup-col-4img" style="height: 265px;">
                                                     <img src="http://www.secondcrm.com/sites/default/files/send-email-template-easier.jpg" alt="sync from google calendar" style="width:85%;">
                                                 </div>
                                                 <div class="popup-col-4text">
@@ -568,7 +572,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                         </div>
                                         <div class="col-md-4">
                                             <div class="popup-col-4">
-                                                <div class="popup-col-4img">
+                                                <div class="popup-col-4img" style="height: 265px;">
                                                     <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/support-img1.jpg" style="width: 85%;">
                                                 </div>
                                                 <div class="popup-col-4text">
@@ -610,8 +614,6 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
         <div class='col-md-6 col-sm-12 col-xs-12'>
              <div id="navbar" class="col-sm-2 col-md-3 col-lg-3 collapse navbar-collapse navbar-right global-actions">
                                     <ul class="nav navbar-nav">
-
-
                                         <li class='searchoption'>
                                             <i class="fa fa-angle-down"></i>
                                             <select class="select2 col-lg-12" id="searchModuleList" data-placeholder="{vtranslate('LBL_SELECT_MODULE')}">
@@ -1614,7 +1616,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                         <div class="logo-container col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                             <div class="row">
                                                 <a href="index.php" class="company-logo">
-                                                    <img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>
+                                                    <img src="layouts/v7/lib/ui/src/images/agiliux-logo.png" alt="{$COMPANY_LOGO->get('alt')}"/>
                                                 </a>
                                             </div>
                                         </div>
@@ -1689,7 +1691,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                                                 <div class="row">
                                                                     <div class="col-md-4">
                                                                         <div class="popup-col-4">
-                                                                            <div class="popup-col-4img" >
+                                                                            <div class="popup-col-4img"  style="height: 265px;">
                                                                                 <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 85%;">
                                                                             </div>
 
@@ -1701,7 +1703,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
 
                                                                     <div class="col-md-4">
                                                                         <div class="popup-col-4">
-                                                                            <div class="popup-col-4img">
+                                                                            <div class="popup-col-4img" style="height: 265px;">
                                                                                 <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width:85%;">
                                                                             </div>
                                                                             <div class="popup-col-4text">
@@ -1712,7 +1714,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
 
                                                                     <div class="col-md-4">
                                                                         <div class="popup-col-4">
-                                                                            <div class="popup-col-4img">
+                                                                            <div class="popup-col-4img" style="height: 265px;">
                                                                                 <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
                                                                             </div>
                                                                             <div class="popup-col-4text">
@@ -1782,7 +1784,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="popup-col-4">
-                                            <div class="popup-col-4img" >
+                                            <div class="popup-col-4img"  style="height: 265px;">
                                                 <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 85%;">
                                             </div>
 
@@ -1794,7 +1796,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
 
                                     <div class="col-md-4">
                                         <div class="popup-col-4">
-                                            <div class="popup-col-4img">
+                                            <div class="popup-col-4img" style="height: 265px;">
                                                 <img src="http://www.secondcrm.com/sites/default/files/send-email-template-easier.jpg" alt="sync from google calendar" style="width:85%;">
                                             </div>
                                             <div class="popup-col-4text">
@@ -1805,7 +1807,7 @@ $('.select2-arrow').append('<i class="fa fa-angle-down"style="color:#ffff !impor
 
                                     <div class="col-md-4">
                                         <div class="popup-col-4">
-                                            <div class="popup-col-4img">
+                                            <div class="popup-col-4img" style="height: 265px;">
                                                 <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/support-img1.jpg" style="width: 85%;">
                                             </div>
                                             <div class="popup-col-4text">

@@ -1356,10 +1356,10 @@ ul.unstyled {
   margin-right: 0;
 }
 .current-filter-name {
-    margin: 13px 0;
+    margin: 11px 0;
    float: left;
    font-size: 12px;
-   line-height: 10px;
+   line-height: 16px;
 }
 .current-filter-name a {
   max-width: 120px;
@@ -9536,4 +9536,19 @@ color:#000 !important;
 }
 .module-breadcrumb{
     font-size: 12px !important
+}
+.current-filter-name.settingModuleName.filter-name a:last-child{
+    color: #2f5597 !important;
+}
+.addtionalDashboardTab{
+     cursor: pointer;
+}
+.current-filter-name i{
+
+    margin-top: 2px;
+    display: block !important;
+    float: right;
+    margin-right: 5px;
+    margin-left: -3px;
+
 }

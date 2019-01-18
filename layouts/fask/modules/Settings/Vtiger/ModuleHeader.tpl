@@ -39,43 +39,67 @@
                         {/if}
                         {/if}
                         
-                        <span class="current-filter-name settingModuleName filter-name pull-left">
+                      
                                 {if $smarty.request.view eq 'Calendar'}
                                 {if $smarty.request.mode eq 'Edit'}
+                                      <span class="current-filter-name settingModuleName filter-name pull-left">
                                 <a href="{"index.php?module="|cat:$smarty.request.module|cat:'&parent='|cat:$smarty.request.parent|cat:'&view='|cat:$smarty.request.view}">
                                         {vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}
                                 </a>&nbsp;
                                 <i class="ti-angle-right" aria-hidden="true"></i>&nbsp;
-                                
-                                {vtranslate('LBL_EDITING', $MODULE)} :&nbsp;{vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}&nbsp;{vtranslate('LBL_OF',$QUALIFIED_MODULE)}&nbsp;{$USER_MODEL->getName()}
-                                {else}
-                                {vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}&nbsp;<span class="ti-angle-right" aria-hidden="true"></span>&nbsp;{$USER_MODEL->getName()}
+                                      </span>
+                                  <span class="current-filter-name settingModuleName filter-name pull-left">
+                                      <a>
+                                             {vtranslate('LBL_EDITING', $MODULE)} :&nbsp;{vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}&nbsp;{vtranslate('LBL_OF',$QUALIFIED_MODULE)}&nbsp;{$USER_MODEL->getName()}
+                                      </a>
+                                  </span>
+                                  {else}
+                                        <span class="current-filter-name settingModuleName filter-name pull-left">
+                                            <a>  {vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}&nbsp;<span class="ti-angle-right" aria-hidden="true"></span>&nbsp;{$USER_MODEL->getName()}</a>
+                                        </span>
                                 {/if}
                                 {else if $smarty.request.view neq 'List' and $smarty.request.module eq 'Users'}
                                 {if $smarty.request.view eq 'PreferenceEdit'}
+                                    <span class="current-filter-name settingModuleName filter-name pull-left">
                                 <a href="{"index.php?module="|cat:$smarty.request.module|cat:'&parent='|cat:$smarty.request.parent|cat:'&view=PreferenceDetail&record='|cat:$smarty.request.record}">
                                         {vtranslate($ACTIVE_BLOCK['block'], $QUALIFIED_MODULE)}&nbsp;
                                 </a>
                                 <i class="ti-angle-right" aria-hidden="true"></i>&nbsp;
-                                {vtranslate('LBL_EDITING', $MODULE)} :&nbsp;{$USER_MODEL->getName()}
+                                    </span>
+                                <span class="current-filter-name settingModuleName filter-name pull-left">
+                                    <a>{vtranslate('LBL_EDITING', $MODULE)} :&nbsp;{$USER_MODEL->getName()}</a>
+                                </span>
                                 {else if $smarty.request.view eq 'Edit' or $smarty.request.view eq 'Detail'}
+                                      <span class="current-filter-name settingModuleName filter-name pull-left">
                                 <a href="{$URL}">
                                         {if $smarty.request.extensionModule}{$smarty.request.extensionModule}{else}{vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}{/if}&nbsp;
                                 </a>
-                                <i class="ti-angle-right" aria-hidden="true"></i>&nbsp;
+                                <i class="ti-angle-right " aria-hidden="true"></i>&nbsp;
+                                </span>
                                 {if $smarty.request.view eq 'Edit'}
                                 {if $RECORD}
-                                    <a>   {vtranslate('LBL_EDITING', $MODULE)} :&nbsp;{$RECORD->getName()} </a>
+                                      <span class="current-filter-name settingModuleName filter-name pull-left">
+                                    <a>   {vtranslate('LBL_EDITING', $MODULE)} :&nbsp;{$RECORD->getName()}     <i class="ti-angle-right" aria-hidden="true"></i>&nbsp;</a>
+                                      </span>
                                 {else}
-                                    <a>{vtranslate('LBL_ADDING_NEW', $MODULE)}</a>
+                                      <span class="current-filter-name settingModuleName filter-name pull-left">
+                                    <a>{vtranslate('LBL_ADDING_NEW', $MODULE)} </a>
+                             
+                                      </span>
                                 {/if}
                                 {else}
+                                    <span class="current-filter-name settingModuleName filter-name pull-left">
                                     <a>{$RECORD->getName()}</a>
+                               
+                                    </span>
                                 {/if}
                                 {else}
-                                    <a>{$USER_MODEL->getName()}</a>
+                                          <span class="current-filter-name settingModuleName filter-name pull-left">
+                                    <a>{$USER_MODEL->getName()}</a>   
+                                          </span>
                                 {/if}
                                 {else if $URL and $URL|strpos:$smarty.request.view eq ''}
+                                          <span class="current-filter-name settingModuleName filter-name pull-left">
                                 <a href="{$URL}">
                                         {if $smarty.request.extensionModule}
                                         {$smarty.request.extensionModule}
@@ -83,18 +107,28 @@
                                         {vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}
                                         {/if}
                                 </a>&nbsp;
-                                <i class="ti-angle-right" aria-hidden="true"></i>&nbsp;
+                             
+                                          </span>
                                 {if $RECORD}
                                 {if $smarty.request.view eq 'Edit'}
+                                          <span class="current-filter-name settingModuleName filter-name pull-left">
                                     <a> {vtranslate('LBL_EDITING', $MODULE)} </a>:&nbsp;
+                                       
+                                          </span>
                                 {/if}
+                                
+                                      <span class="current-filter-name settingModuleName filter-name pull-left">
                                 <a>{$RECORD->getName()} </a>
+                                    
+                                      </span>
                                 {/if}
                                 {else}
                                
+                                      <span class="current-filter-name settingModuleName filter-name pull-left">
                                     &nbsp;{if $smarty.request.extensionModule}<a>{$smarty.request.extensionModule}</a>{else}<a>{vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}</a>{/if}
+                                      </span>
                                 {/if}
-                        </span>
+                    
                         {else}
                         {if $smarty.request.view eq 'TaxIndex'}
                         {assign var=SELECTED_MODULE value='LBL_TAX_MANAGEMENT'}
@@ -103,7 +137,7 @@
                         {else}
                         {assign var=SELECTED_MODULE value=$ACTIVE_BLOCK['menu']}
                         {/if}
-                        <span class="current-filter-name filter-name pull-left" style='width:50%;'><span class="display-inline-block">{vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}</span></span>
+                        <span class="current-filter-name filter-name pull-left" style='width:50%;'><a class="display-inline-block">{vtranslate({$PAGETITLE}, $QUALIFIED_MODULE)}</a></span>
                         {/if}
                         {/if}
                 </div>
