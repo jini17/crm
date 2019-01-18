@@ -25,7 +25,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $moduleName = $request->getModule();
                 //get last login time & IP address
                 global $adb;
-                $current_user = Users_Record_Model::getCurrentUserModel();	
+                $current_user = Users_Record_Model::getCurrentUserModel();  
                 $sUserName = $current_user->user_name;
                 $sql="select login_time from vtiger_loginhistory WHERE user_name ='$sUserName' ORDER BY login_time DESC LIMIT 1,1";
                 $result=$adb->pquery($sql, array());
@@ -148,7 +148,11 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                       
                         $viewer->assign('SELECTABLE_WIDGETS', self::$selectable_dashboards);
                         $viewer->assign("EMPLOYEE_GROUP", $this->get_widgets_by_group("employee", $modulename,$current_user->get("id"),$tabid));
-                        $viewer->assign("CHART_GROUP", $this->get_widgets_by_group("chart", $modulename,$current_user->get("id"),$tab_id));
+
+                        $viewer->assign("SALES", $this->get_widgets_by_group("sales", $modulename,$current_user->get("id"),$tabid));
+                        $viewer->assign("SERVICE", $this->get_widgets_by_group("service", $modulename,$current_user->get("id"),$tabid));
+
+                        $viewer->assign("CHART_GROUP", $this->get_widgets_by_group("chart", $modulename,$current_user->get("id"),$tabid));
                         $viewer->assign("LEAVECLAIM_GROUP",  $this->get_widgets_by_group("leaveclaim", $modulename,$current_user->get("id"),$tabid));
                         $viewer->assign("GENERAL_GROUP",  $this->get_widgets_by_group("general", $modulename,$current_user->get("id"),$tabid));
             }
@@ -170,7 +174,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
      */
         public function get_widgets_by_group($group,$modulename,$userid,$tab_id){
             $data = array();
-            $db   = PearDatabase::getInstance();
+            $db   = PearDatabase::getInstance(); 
             //$db->setDebug(true);
             // Update By Mabruk
             $sql = "SELECT * from vtiger_links 
@@ -178,7 +182,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                     WHERE linktype = 'DASHBOARDWIDGET' 
                     AND widgetgroup = '$group'
                     AND userid = '$userid'
-                    AND dashboardtabid = '$tab_id'";
+                    AND dashboardtabid = '$tab_id'";             
 
             $query = $db->pquery($sql,array());
             $num_rows =  $db->num_rows($query);
@@ -189,7 +193,7 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                     $data[$i]['linkid']     = $db->query_result($query, $i,'linkid');
                     $data[$i]['name']       = $db->query_result($query, $i,'linklabel');
                     $data[$i]['title']      = vtranslate($db->query_result($query, $i,'linklabel'), $modulename);  
-                    $data[$i]['is_closed']  =  $db->query_result($query, $i,'is_closed'); 
+                    $data[$i]['is_closed']  = $db->query_result($query, $i,'is_closed'); 
                     $data[$i]['width']      = 1;
                     $data[$i]['height']     = 1;
                     
@@ -308,10 +312,10 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
     public function getColor($priority) {
         $color = '';
         switch ($priority) {
-            case 'High':$color = '#FF5555';	break;
-            case 'Medium':$color = '#03C04A';	break;
-            case 'Low':$color = '#54A7F5';	break;
-            default:	$color = '#'.dechex(rand(0x000000, 0xFFFFFF));
+            case 'High':$color = '#FF5555'; break;
+            case 'Medium':$color = '#03C04A';   break;
+            case 'Low':$color = '#54A7F5';  break;
+            default:    $color = '#'.dechex(rand(0x000000, 0xFFFFFF));
                 break;
         }
         return $color;
