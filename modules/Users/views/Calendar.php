@@ -87,6 +87,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 			$viewer->assign('PARENT_MODULE', $request->get('parent'));
             $viewer->assign('VIEW', $request->get('view'));
 			$viewer->assign('MENUS', $menuModelsList);
+			$viewer->assign('QUICK_CREATE_MOD_ICONS', Vtiger_Menu_Model::getQuickCreateModulesAndIcons()); // Added By Mabruk
             //$viewer->assign('QUICK_CREATE_MODULES', Vtiger_Menu_Model::getAllForQuickCreate());
 			$viewer->assign('MENU_STRUCTURE', $menuStructure);
 			$viewer->assign('MENU_SELECTED_MODULENAME', $selectedModule);
