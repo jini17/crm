@@ -156,7 +156,7 @@
       <button class="btn btn-fask btn-lg" type="button" id="dropdownMenuButtonDesk" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="material-icons" style="color: #fff!important"></i>
       </button>
-      <div class="dropdown-menu fask" id="moredropdown"  aria-labelledby="dropdownMenuButtonDesk">
+      <div class="dropdown-menu fask" id="moredropdown" style="width:100%" aria-labelledby="dropdownMenuButtonDesk">
          <div class="bluredBackground"></div>
          {include file="modules/Vtiger/partials/TopbarMenu.tpl"}
       </div>

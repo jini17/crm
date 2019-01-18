@@ -617,15 +617,14 @@ class EnhancedQueryGenerator extends QueryGenerator
         if (in_array($baseModule, $HRModules)) {
 
             if (isset($_REQUEST['record'])) {
-                if(in_array($current_user->roleid, array('H2','H12','H13'))){
+                if($_REQUEST['record']==$current_user->id){
                     $record = $_REQUEST['record'];    
-                } else {
-                    $record = $current_user->id;
-                }
-             } else {
-                $record = $current_user->id;
-            }   
-               $ownrecsql .= ' AND vtiger_' . strtolower($baseModule) . '.employee_id=' . $record;
+                    $ownrecsql .= ' AND vtiger_' . strtolower($baseModule) . '.employee_id=' . $record;
+                } 
+             } else if(!in_array($current_user->roleid, array('H2','H12','H13','H16'))){
+                $ownrecsql .= ' AND vtiger_' . strtolower($baseModule) . '.employee_id=' . $current_user->id;
+             }  
+            
         }    
 
         /*if(in_array($baseModule,$HRModules)){

@@ -45,10 +45,10 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 			$moduleName = $request->getModule();
 			$detailViewModel = Vtiger_DetailView_Model::getInstance($moduleName, $recordId);
 			$recordModel = $detailViewModel->getRecord();
-                                                                 if($currentUser->isAdminUser() && $currentUser->get("id")  == $request->get("record") && ($request->get("view") == "PreferenceDetail" ||$request->get("view") == "Calendar" )){
-                                                                    $adminview = "hide MegaMenu ";
-                                                                      $userview = "UserMenu";
-                                                                }
+             //if($currentUser->isAdminUser() && $currentUser->get("id")  == $request->get("record") && ($request->get("view") == "PreferenceDetail" ||$request->get("view") == "Calendar" )){
+                $adminview = "hide MegaMenu ";
+                $userview = "UserSidebar";
+            //} 
 			$detailViewLinkParams = array('MODULE'=>$moduleName,'RECORD'=>$recordId);
 			$detailViewLinks = $detailViewModel->getDetailViewLinks($detailViewLinkParams);
 
@@ -64,7 +64,8 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 
 			$linkParams = array('MODULE'=>$moduleName, 'ACTION'=>$request->get('view'));
 			$linkModels = $detailViewModel->getSideBarLinks($linkParams);
-                                                                $viewer->assign('ADMINVIEW',$adminview);
+			$viewer->assign('ADMINVIEW',$adminview);
+			$viewer->assign('USERVIEW','UserSidebar');
 			$viewer->assign('QUICK_LINKS', $linkModels);
 			$viewer->assign('PAGETITLE', $this->getPageTitle($request));
 			$viewer->assign('SCRIPTS',$this->getHeaderScripts($request));

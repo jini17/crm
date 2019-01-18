@@ -99,9 +99,9 @@
             <div class="clearfix"></div>
             <br><br>
         </div>
-            <div class="{$USERVIEW}">
-        {include file='layouts/fask/modules/Users/UsersSidebar.tpl'}
-            </div>
+        <div class="{$USERVIEW}">
+            {include file='layouts/fask/modules/Users/UsersSidebar.tpl'}
+        </div>
 </div>
 {/strip}
         </div>
