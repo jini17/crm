@@ -411,11 +411,11 @@ Vtiger.Class('Vtiger_Index_Js', {
 		    jQuery('.settingsgroup-accordion').unbind('click');
             jQuery('.settingsgroup-accordion').click( function() { 
 
+            var thisElement     = jQuery(this);    
 			var container 		= jQuery(jQuery(this).find('a').data('parent'));//jQuery('#accordion_mobile, #accordion');
+            var isUserSideBar   = jQuery('.AdminSidebar').hasClass('hide');
 
-
-            if (jQuery('.AdminSidebar')is(':hidden'))
-                alert("sad")
+            if (isUserSideBar)                
                 container       = jQuery('.UserSidebar').find('#accordion');
 
 			var element   		= jQuery(this).find('.indicator');
@@ -424,7 +424,14 @@ Vtiger.Class('Vtiger_Index_Js', {
 			    
                         
 			links.each(function() {
+                    
+                    if (isUserSideBar) {
 
+                        var href = jQuery(this).attr('href');
+                        if(href.indexOf('LBL') !== -1 && href !== thisElement.find('a').attr('href'))
+                            jQuery(href).removeClass('in');
+
+                    }
                     jQuery(this).find('.indicator').removeClass('ti-angle-down').addClass('ti-angle-right').closest('a').removeClass('btn-primary text-white');
 
                });				
@@ -435,7 +442,6 @@ Vtiger.Class('Vtiger_Index_Js', {
                     element.removeClass('ti-angle-right').addClass('ti-angle-down');
                     
                } 
-
 
             } 
 

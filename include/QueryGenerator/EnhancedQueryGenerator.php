@@ -608,7 +608,7 @@ class EnhancedQueryGenerator extends QueryGenerator
 
     public function getWhereClause()
     {
-        global $current_user, $adb;
+        global $current_user, $adb; 
        // $adb->setDebug(true);
         $HRModules = array('EmployeeContract', 'PassportVisa', 'Performance', 'Payslip');
         $baseModule = $this->getModule();
@@ -616,13 +616,16 @@ class EnhancedQueryGenerator extends QueryGenerator
 
         if (in_array($baseModule, $HRModules)) {
 
-            if(!in_array($current_user->roleid, array('H2','H12','H13'))  &&  !$current_user->isAdminUser() ) {
-                
-                if (isset($_REQUEST['record'])) {
-                    $emp_id = $_REQUEST['record'];
-                    $ownrecsql .= ' AND vtiger_' . strtolower($baseModule) . '.employee_id=' . $emp_id;
-                } 
-            }
+            if (isset($_REQUEST['record'])) {
+                if(in_array($current_user->roleid, array('H2','H12','H13'))){
+                    $record = $_REQUEST['record'];    
+                } else {
+                    $record = $current_user->id;
+                }
+             } else {
+                $record = $current_user->id;
+            }   
+               $ownrecsql .= ' AND vtiger_' . strtolower($baseModule) . '.employee_id=' . $record;
         }    
 
         /*if(in_array($baseModule,$HRModules)){
