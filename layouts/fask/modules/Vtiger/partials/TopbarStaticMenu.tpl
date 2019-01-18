@@ -1,3 +1,4 @@
+
 <ul class="nav navbar-nav newtabs pull-right">
    <li>
       <div class="dropdownFinance">
@@ -43,6 +44,7 @@
          </div>
       </div>
    </li>
+   {if $PLAN eq 1}
    <li>
       <div class="dropdownSales">
          <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
@@ -88,6 +90,32 @@
          </div>
       </div>
    </li>
+   {elseif $PLAN eq 2 || $PLAN eq 4}
+   {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
+'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
+'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
+'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
+'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
+'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
+'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
+'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
+   <li>
+      <div class="dropdownFinance">
+         <div class="addtionalDashboardTab" style="padding: 10px 10px;"><span aria-hidden="true">{vtranslate('Sales')}</span></div>
+            <div class="dropdown-content-Finance">
+               <ul class="dropdownlist">
+                  {foreach item=MENU_MODEL key=MODULE from=$SALES_MENU_MODEL}
+                   <li>
+                     <a class="dropdown-icon-dashboard" title="{$MODULE}" href=" index.php?module={$MODULE}&amp;view=List&amp;app=SALES ">
+                     <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($MODULE)}]}</i>&nbsp;{$MODULE}</a>
+                  </li>
+                 {/foreach}
+               </ul>
+             </div>
+         </div> 
+
+   </li>
+   {/if}
    <li>
       <div class="dropdownTools">
          <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
@@ -114,6 +142,7 @@
          </div>
       </div>
    </li>
+   {if $PLAN eq 1}
    <li>
       <div class="dropdownSupport">
          <div class="addtionalDashboardTab">
@@ -159,6 +188,32 @@
          </div>
       </div>
    </li>
+   {else if $PLAN eq 3 || $PLAN eq 4}
+    {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
+'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
+'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
+'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
+'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
+'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
+'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
+'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
+   <li>
+      <div class="dropdownFinance">
+         <div class="addtionalDashboardTab" style="padding: 10px 10px;"><span aria-hidden="true">{vtranslate('Support')}</span></div>
+            <div class="dropdown-content-Finance">
+               <ul class="dropdownlist">
+                  {foreach item=MENU_MODEL key=MODULE from=$SUPPORT_MENU_MODEL}
+                   <li>
+                     <a class="dropdown-icon-dashboard" title="{$MODULE}" href=" index.php?module={$MODULE}&amp;view=List&amp;app=SUPPORT ">
+                     <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($MODULE)}]}</i>&nbsp;{$MODULE}</a>
+                  </li>
+                 {/foreach}
+               </ul>
+             </div>
+         </div> 
+
+   </li>
+   {/if}
    <li>
       <div>
          <a class="menu-open">
