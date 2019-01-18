@@ -11,7 +11,7 @@
       {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
       <a href="#" class="userName dropdown-toggle" data-toggle="dropdown" role="button" title="{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}
          ({$USER_MODEL->get('user_name')})">
-      <img height="30" width="30"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
+      <img height="40" width="30"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
       </a>
       {/if}
       {/foreach}

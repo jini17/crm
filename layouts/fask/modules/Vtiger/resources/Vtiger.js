@@ -413,7 +413,7 @@ Vtiger.Class('Vtiger_Index_Js', {
 
             var thisElement     = jQuery(this);    
 			var container 		= jQuery(jQuery(this).find('a').data('parent'));//jQuery('#accordion_mobile, #accordion');
-            var isUserSideBar   = jQuery('.AdminSidebar').hasClass('hide');
+            var isUserSideBar   = jQuery('.MegaMenu').hasClass('hide');
 
             if (isUserSideBar)                
                 container       = jQuery('.UserSidebar').find('#accordion');

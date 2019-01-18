@@ -1,5 +1,3 @@
-
-
 <li>
    <div class="dropdown ">
       <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><a aria-hidden="true" href="#" id="menubar_quickCreate" class="qc-button rightside-icon-dashboard" title="Quick Create"><i class="fa fa-plus"></i></a></div>
@@ -10,6 +8,7 @@
          <hr>
          <li id="quickCreateModules" style="padding: 0 5px;">
             <div class="col-lg-12" style="padding-bottom:15px;">
+               <!-- Added By Mabruk -->
                {if $QUICK_CREATE_MOD_ICONS|count gt 0}      
                {foreach from = $QUICK_CREATE_MOD_ICONS key = i item = MODULE}
                {if $i == 0}
