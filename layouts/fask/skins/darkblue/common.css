@@ -1356,10 +1356,10 @@ ul.unstyled {
   margin-right: 0;
 }
 .current-filter-name {
-  margin: 11px 0;
-  float: left;
-  font-size: 12px;
-  line-height: 18px;
+    margin: 13px 0;
+   float: left;
+   font-size: 12px;
+   line-height: 10px;
 }
 .current-filter-name a {
   max-width: 120px;
@@ -2734,6 +2734,7 @@ input[type=checkbox]:checked {
 .cursorPointer {
   cursor: pointer;
   text-decoration: none;
+  margin-right: 5px;
 }
 .cursorDefault {
   cursor: default;
@@ -9527,19 +9528,12 @@ right connector from last child*/
 }
 
 
-.tabContainer,
-.tabContainer .nav,
-.listViewPageDiv{
-    background-color: #333 !important;
+.module-title.pull-left.text-uppercase{
+   font-size: 12px !important;
+font-weight: normal;
+text-transform: unset;
+color:#000 !important;
 }
-.tabContainer .nav-tabs > li.active > a,
-.tabContainer .nav-tabs > li.active > a, 
-.tabContainer .nav-tabs > li.active > a:hover, 
-.tabContainer .nav-tabs > li.active > a:focus,
-.tabContainer .nav-tabs > li > a{
-    color:  #fff !important;
-}
-
-.tabContainer  .active dashboardTab{
-    border-bottom: 3px solid #fff !important;
+.module-breadcrumb{
+    font-size: 12px !important
 }

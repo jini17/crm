@@ -1,4 +1,3 @@
-
 <ul class="nav navbar-nav newtabs pull-right">
    <li>
       <div class="dropdownFinance">
@@ -45,52 +44,68 @@
       </div>
    </li>
    {if $PLAN eq 1}
-   <li>
-      <div class="dropdownSales">
-         <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
-            <span aria-hidden="true">Sales</span>
-            <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
-         </div>
-         <div class="dropdown-content-Sales">
-            <div class="row">
-               <div class="col-md-4">
-                  <div class="popup-col-4">
-                     <div class="popup-col-4img" >
-                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 85%;">
+   
+
+<li>
+   <div class="">
+      <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
+         <span aria-hidden="true"  data-toggle="modal" data-target="#sales">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
+      </div>
+      <div id="sales" class="modal fade" role="dialog">
+         <div class="modal-dialog" style="width: 800px;">
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <br >
+               </div>
+               <div class="modal-body">
+                  <div class="">
+                     <div class="row">
+                        <div class="col-md-4">
+                           <div class="popup-col-4">
+                              <div class="popup-col-4img" >
+                                 <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img2.jpg" alt="monitor activities and updates" style="width: 85%;">
+                              </div>
+                              <div class="popup-col-4text">
+                                 Manage Sales Team and activities.
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="popup-col-4">
+                              <div class="popup-col-4img">
+                                 <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width:85%;">
+                              </div>
+                              <div class="popup-col-4text">
+                                 Google contacts, calendar and docs synchronization
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="popup-col-4">
+                              <div class="popup-col-4img">
+                                 <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
+                              </div>
+                              <div class="popup-col-4text">
+                                 Acquire more leads
+                              </div>
+                           </div>
+                        </div>
                      </div>
-                     <div class="popup-col-4text">
-                        Manage Sales Team and activities.
+                     <div class="col-md-12 row" style="padding: 10px;">
+                        <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
                      </div>
+                     <div class="clearfix"></div>
                   </div>
                </div>
-               <div class="col-md-4">
-                  <div class="popup-col-4">
-                     <div class="popup-col-4img">
-                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img3.jpg" alt="sync from google calendar" style="width:85%;">
-                     </div>
-                     <div class="popup-col-4text">
-                        Google contacts, calendar and docs synchronization
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="popup-col-4">
-                     <div class="popup-col-4img">
-                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/sales-img1.jpg" alt="second crm dashboard" style="width: 85%;">
-                     </div>
-                     <div class="popup-col-4text">
-                        Acquire more leads
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-12 row" style="padding: 10px;">
-               <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
             </div>
          </div>
       </div>
-   </li>
-   {elseif $PLAN eq 2 || $PLAN eq 4}
+   </div>
+</li>
+{elseif $PLAN eq 2 || $PLAN eq 4}
+
    {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
 'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
 'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
@@ -142,52 +157,69 @@
          </div>
       </div>
    </li>
+
    {if $PLAN eq 1}
-   <li>
-      <div class="dropdownSupport">
-         <div class="addtionalDashboardTab">
-            <span aria-hidden="true" >Support</span>
-            <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
-         </div>
-         <div class="dropdown-content-Support">
-            <div class="row">
-               <div class="col-md-4">
-                  <div class="popup-col-4">
-                     <div class="popup-col-4img" >
-                        <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 85%;">
+
+  
+
+<li>
+   <div class="">
+      <div class="addtionalDashboardTab">
+         <span aria-hidden="true"   data-toggle="modal" data-target="#support">Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
+      </div>
+      <div id="support" class="modal fade" role="dialog">
+         <div class="modal-dialog" style="width: 800px;">
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <br />
+               </div>
+               <div class="modal-body">
+                  <div class="">
+                     <div class="row">
+                        <div class="col-md-4">
+                           <div class="popup-col-4">
+                              <div class="popup-col-4img" >
+                                 <img src="http://www.secondcrm.com/sites/default/files/quote-invoice-generator-billing-automation.jpg" alt="monitor activities and updates" style="width: 85%;">
+                              </div>
+                              <div class="popup-col-4text">
+                                 Sales Order, Invoice and Quotation Generator
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="popup-col-4">
+                              <div class="popup-col-4img">
+                                 <img src="http://www.secondcrm.com/sites/default/files/send-email-template-easier.jpg" alt="sync from google calendar" style="width:85%;">
+                              </div>
+                              <div class="popup-col-4text">
+                                 Email and SMS Marketing Service
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="popup-col-4">
+                              <div class="popup-col-4img">
+                                 <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/support-img1.jpg" style="width: 85%;">
+                              </div>
+                              <div class="popup-col-4text">
+                                 Auto capture requests from multiple support channels
+                              </div>
+                           </div>
+                        </div>
                      </div>
-                     <div class="popup-col-4text">
-                        Sales Order, Invoice and Quotation Generator
+                     <div class="col-md-12 row" style="padding: 10px;">
+                        <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
                      </div>
+                     <div class="clearfix"></div>
                   </div>
                </div>
-               <div class="col-md-4">
-                  <div class="popup-col-4">
-                     <div class="popup-col-4img">
-                        <img src="http://www.secondcrm.com/sites/default/files/send-email-template-easier.jpg" alt="sync from google calendar" style="width:85%;">
-                     </div>
-                     <div class="popup-col-4text">
-                        Email and SMS Marketing Service
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="popup-col-4">
-                     <div class="popup-col-4img">
-                        <img src="http://www.secondcrm.com/sites/all/themes/mobileplus/images/support-img1.jpg" style="width: 85%;">
-                     </div>
-                     <div class="popup-col-4text">
-                        Auto capture requests from multiple support channels
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-12 row" style="padding: 10px;">
-               <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
             </div>
          </div>
       </div>
-   </li>
+   </div>
+</li>
    {else if $PLAN eq 3 || $PLAN eq 4}
     {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
 'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',

@@ -1356,10 +1356,10 @@ ul.unstyled {
   margin-right: 0;
 }
 .current-filter-name {
-  margin: 11px 0;
-  float: left;
-  font-size: 12px;
-  line-height: 18px;
+    margin: 13px 0;
+   float: left;
+   font-size: 12px;
+   line-height: 10px;
 }
 .current-filter-name a {
   max-width: 120px;
@@ -2734,6 +2734,7 @@ input[type=checkbox]:checked {
 .cursorPointer {
   cursor: pointer;
   text-decoration: none;
+  margin-right: 5px;
 }
 .cursorDefault {
   cursor: default;
@@ -3209,7 +3210,7 @@ position: relative;
 }
 .settingsgroup {
   background: rgba(0, 0, 0, 0.02);border-right: 1px solid rgba(120, 130, 140, 0.13);
-    height: 82%;
+  height: 82%;
 }
 .settingsgroup .panel-group .panel {
       background-color: #fff;
@@ -5608,8 +5609,8 @@ hr {
   padding-top: 1px;
 }
 .mmSearchDropDown {
-  margin-top: -30px;
-  margin-left: 66%;
+/*  margin-top: -30px;
+  margin-left: 66%;*/
 }
 .mmMoveDropdownArrow {
   color: #FFFFFF;
@@ -9236,7 +9237,6 @@ background-color: #fff;
 
 }
 
-
 .alphabetSearch a:active , .alphabetSearch a:focus{
   background-color: #b2b7c0;
   color: #666;
@@ -9528,106 +9528,12 @@ right connector from last child*/
 }
 
 
-.color-box{
-    display: block;
-    width: 20px;
-    height: 20px;
-    padding: 5px !important;
-    border: 1px solid #ccc;
-    border-radius: 50% !important;
-    position: relative;
+.module-title.pull-left.text-uppercase{
+   font-size: 12px !important;
+font-weight: normal;
+text-transform: unset;
+color:#000 !important;
 }
-.color-box i{
-    position: absolute;
-    left: 2%;
-    top: 5%;
-    font-size: 10px;
-}
-.text-bold{
-    margin: 0 !important;
-}
-.color-blue,
-.color-blue:hover{
-    background: #6783B3;    
-    color: #fff;
-}
-.color-purple,
-.color-purple:hover{
-    background: #d971ae;    
-     color: #fff;
-}
-.color-yellow,
-.color-yellow:hover{
-    background: #f6bb43;
-     color: #fff;
-}
-.color-green,
-.color-green:hover{
-    background: #3bbd9b;
-     color: #fff;
-}
-.color-list li i{
-    color: #fff !important;
-}
-
-.color-shipcove,
-.color-shipcove:hover{
-    background: #6783B3;
-     color: #fff;
-}
-
-.color-lilacbush,
-.color-lilacbush:hover{
-    background: #997CCD;
-     color: #fff;
-}
-
-.color-energyyellow,
-.color-lilacbush:hover{
-    background: #FAD852;
-     color: #fff;
-}
-
-.color-downy,
-.color-downy:hover{
-    background: #67D0AF;
-     color: #fff;
-}
-
-.color-lily,
-.color-lily:hover{
-    background: #CBA7C1;
-     color: #fff;
-}
-
-
-.color-danube,
-.color-danube:hover{
-    background: #77A1D3;
-     color: #fff;
-}
-
-.color-selectiveyellow,
-.color-selectiveyellow:hover{
-    background: #F7B301;
-     color: #fff;
-}
-
-.color-sandybrown,
-.color-sandybrown:hover{
-    background: #F4967A;
-     color: #fff;
-}
-
-.color-mandy,
-.color-mandy:hover{
-    background: #EC5C64;
-     color: #fff;
-}
-
-.color-aquaisland,
-.color-aquaisland:hover{
-    background: #AFDFDF;
-     color: #fff;
-     padding: 5px;
+.module-breadcrumb{
+    font-size: 12px !important
 }
