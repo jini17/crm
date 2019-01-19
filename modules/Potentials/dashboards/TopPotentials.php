@@ -26,7 +26,7 @@ class Potentials_TopPotentials_Dashboard extends Vtiger_IndexAjax_View {
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 		$models = $moduleModel->getTopPotentials($pagingModel);
 
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('MODULE_NAME', $moduleName);

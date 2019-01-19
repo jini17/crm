@@ -27,14 +27,19 @@
                                                         <a href='javascript:Settings_Users_List_Js.triggerDeleteUser("{$LISTVIEW_ENTRY->getDeleteUrl()}")'><i class="fa fa-trash"></i></a>
                                                 </li>
                                         {else}
-                                                <li>
-                                                        <a onclick="Settings_Users_List_Js.restoreUser({$LISTVIEW_ENTRY->getId()}, event);">{vtranslate("LBL_RESTORE_USER",$MODULE)}</a>
-                                                </li>
+                                                {if $IS_MODULE_EDITABLE}
+                                                <!--<li>
+                                                        <a onclick="Settings_Users_List_Js.restoreUser({$LISTVIEW_ENTRY->getId()}, event);"><i class="fa fa-undo"></i></a>
+                                                </li>-->
+                                                {/if}
+                                                {if $IS_MODULE_DELETABLE}
                                                 <li>
 {*                                                        <a href='javascript:Settings_Users_List_Js.triggerDeleteUser("{$LISTVIEW_ENTRY->getDeleteUrl()}", "true")'>{vtranslate("LBL_REMOVE_USER",$MODULE)}</i></a>
-*}                                                         <a href='javascript:Settings_Users_List_Js.triggerDeleteUser("{$LISTVIEW_ENTRY->getDeleteUrl()}", "true")'><i class='fa fa-trash'></i></a>
+*}                                                                 
+                                                        <a href='javascript:Settings_Users_List_Js.triggerDeleteUser("{$LISTVIEW_ENTRY->getDeleteUrl()}", "true")'><i class='fa fa-trash'></i></a>
 
                                                 </li>
+                                                {/if}
                                         {/if}
                                 {/if}
                         </ul>
@@ -59,10 +64,10 @@
                                                 </li>
                                         {else}
                                                 <li>
-                                                        <a onclick="Settings_Users_List_Js.restoreUser({$LISTVIEW_ENTRY->getId()}, event);">{vtranslate("LBL_RESTORE_USER",$MODULE)}</a>
+                                                        <a onclick="Settings_Users_List_Js.restoreUser({$LISTVIEW_ENTRY->getId()}, event);"><i class="fa fa-undo"></i></a>
                                                 </li>
                                                 <li>
-                                                        <a href='javascript:Settings_Users_List_Js.triggerDeleteUser("{$LISTVIEW_ENTRY->getDeleteUrl()}", "true")'>{vtranslate("LBL_REMOVE_USER",$MODULE)}</i></a>
+                                                        <a href='javascript:Settings_Users_List_Js.triggerDeleteUser("{$LISTVIEW_ENTRY->getDeleteUrl()}", "true")'><i class='fa fa-trash'></i>{vtranslate("LBL_REMOVE_USER",$MODULE)}</i></a>
                                                 </li>
                                         {/if}
                                 {/if}

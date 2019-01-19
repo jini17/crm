@@ -25,19 +25,22 @@ class Vtiger_CalendarActivities_Dashboard extends Vtiger_IndexAjax_View {
 		$user = $request->get('type');
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 		$calendarActivities = $moduleModel->getCalendarActivities('upcoming', $pagingModel, $user);
-
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+                                           $current_date = date("d-m-Y");
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('MODULE_NAME', $moduleName);
 		$viewer->assign('ACTIVITIES', $calendarActivities);
 		$viewer->assign('PAGING', $pagingModel);
 		$viewer->assign('CURRENTUSER', $currentUser);
-
+        $viewer->assign('CURRENTDATE', $current_date);
+                                           
 		$content = $request->get('content');
 		if(!empty($content)) {
+                        $viewer->assign('CURRENTDATE', $current_date);
 			$viewer->view('dashboards/CalendarActivitiesContents.tpl', $moduleName);
 		} else {
+                        $viewer->assign('CURRENTDATEDUE', $current_date);
 			$sharedUsers = Calendar_Module_Model::getSharedUsersOfCurrentUser($currentUser->id);
 			$sharedGroups = Calendar_Module_Model::getSharedCalendarGroupsList($currentUser->id);
 			$viewer->assign('SHARED_USERS', $sharedUsers);

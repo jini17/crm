@@ -131,18 +131,31 @@ Vtiger.Class('Vtiger_BasicSearch_Js',{},{
         addSearchListener : function () {
                 jQuery('.search-link .keyword-input').on('VT_SEARCH_INTIATED',function(e,args){
                         var val = args.searchValue;
-                        //added by jitu@search by module 
+                        //added by jitu@search by module search_params	[[["employee_id","c","John+Smith"]]]search_key
                         var searchmodule = jQuery("#searchModuleList").val();
-                        var url = '?module=Vtiger&view=ListAjax&mode=searchAll&searchModule='+searchmodule+'&value='+encodeURIComponent(val);
+                  
+                         if(searchmodule == 'EmployeeContract'){
+                             var url = '?module=Vtiger&view=ListAjax&mode=searchAll&searchModule='+searchmodule+'&value='+encodeURIComponent(val);
+                            // var url = '?module=Vtiger&view=ListAjax&mode=searchAll&searchModule='+searchmodule+'&search_key=employee_id&value='+encodeURIComponent(val);
+                         }
+                         else{
+                             var url = '?module=Vtiger&view=ListAjax&mode=searchAll&searchModule='+searchmodule+'&value='+encodeURIComponent(val);
+                         }
+                             
+              
+                       
                         //end here
                         
                         app.helper.showProgress();
                         app.request.get({'url': url}).then(function (error, data) {
                                 if (error == null) {
                                         app.helper.hideProgress();
+                                        
                                         app.helper.loadPageOverlay(data).then(function (modal) {
-                                                modal.find('.keyword-input').val(jQuery('.keyword-input').val());
+                                                modal.find('.keyword-input').val(jQuery('.keyword-input').val());                                               
                                                 Vtiger_SearchList_Js.intializeListInstances(modal);
+                                                     jQuery('#listview-actions').remove();
+                                                     jQuery('.data').css('background',"#fff");
                                         });
                                 }
                         });

@@ -23,27 +23,40 @@ class Vtiger_Multiowner_UIType extends Vtiger_Base_UIType {
 	 * @param <Object> $value
 	 * @return <Object>
 	 */
-	public function getDisplayValue($values) {
+	public function getDisplayValue($ids) {
+		
+		if(!is_array($ids)){
+			$values = explode('|##|', $ids);	
+		} else {
+			$values = $ids;
+		}
+		
         if($values == NULL && !is_array($values)) return;
+        $k = 0;
         foreach($values as $value){
             if (self::getOwnerType($value) === 'User') {
                 $userModel = Users_Record_Model::getCleanInstance('Users');
                 $userModel->set('id', $value);
                 $detailViewUrl = $userModel->getDetailViewUrl();
                 $currentUser = Users_Record_Model::getCurrentUserModel();
-                if(!$currentUser->isAdminUser()){
+                /*if(!$currentUser->isAdminUser()){
                     return getOwnerName($value);
-                }
+                }*/
             } else {
                 $currentUser = Users_Record_Model::getCurrentUserModel();
-                if(!$currentUser->isAdminUser()){
+                /*if(!$currentUser->isAdminUser()){
                     return getOwnerName($value);
-                }
+                }*/
                 $recordModel = new Settings_Groups_Record_Model();
                 $recordModel->set('groupid',$value);
                 $detailViewUrl = $recordModel->getDetailViewUrl();
             }
-            $displayvalue[] = "<a href=" .$detailViewUrl. ">" .getOwnerName($value). "</a>&nbsp";
+            if($k%2==0 && $k !=0){
+            	$displayvalue[] = "&nbsp;<a href=" .$detailViewUrl. ">" .getOwnerName($value). "</a>"."<br />";	
+             } else {
+            	$displayvalue[] = "&nbsp;<a href=" .$detailViewUrl. ">" .getOwnerName($value). "</a>";
+            }	
+            $k++;
         }
         $displayvalue = implode(',',$displayvalue);
         return $displayvalue;

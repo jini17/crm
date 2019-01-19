@@ -317,13 +317,15 @@ class Vtiger_Record_Model extends Vtiger_Base_Model {
 	 */
 	public static function getSearchResult($searchKey, $module=false) {
 		$db = PearDatabase::getInstance();
-
+       // $db->setDebug(true);
 		$query = 'SELECT label, crmid, setype, createdtime FROM vtiger_crmentity WHERE label LIKE ? AND vtiger_crmentity.deleted = 0';
 		$params = array("%$searchKey%");
 
 		if($module !== false) {
 			$query .= ' AND setype = ?';
+
 			$params[] = $module;
+
 		}
 		//Remove the ordering for now to improve the speed
 		//$query .= ' ORDER BY createdtime DESC';
@@ -410,7 +412,7 @@ class Vtiger_Record_Model extends Vtiger_Base_Model {
 			$sql = "SELECT vtiger_attachments.*, vtiger_crmentity.setype FROM vtiger_attachments
 						INNER JOIN vtiger_seattachmentsrel ON vtiger_seattachmentsrel.attachmentsid = vtiger_attachments.attachmentsid
 						INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_attachments.attachmentsid
-						WHERE vtiger_crmentity.setype = ? and vtiger_seattachmentsrel.crmid = ?";
+						WHERE vtiger_crmentity.setype = ? and vtiger_seattachmentsrel.crmid = ? Order by vtiger_attachments.attachmentsid DESC";
 
 			$result = $db->pquery($sql, array($this->getModuleName().' Image',$recordId));
 
@@ -432,6 +434,7 @@ class Vtiger_Record_Model extends Vtiger_Base_Model {
 		}
 		return $imageDetails;
 	}
+
 
 	/**
 	 * Function to delete corresponding image

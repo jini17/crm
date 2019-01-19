@@ -2817,6 +2817,8 @@ class ReportRun extends CRMEntity {
 			$query .= " " . $this->getRelatedModulesQuery($module, $this->secondarymodule) .
 					getNonAdminAccessControlQuery($this->primarymodule, $current_user) .
 					" where vtiger_crmentity.deleted=0";
+
+
 		} else if ($module == "Campaigns") {
 			$query = "from vtiger_campaign
 			inner join vtiger_crmentity on vtiger_crmentity.crmid=vtiger_campaign.campaignid";
@@ -2831,6 +2833,35 @@ class ReportRun extends CRMEntity {
 			}
 			if ($this->queryPlanner->requireTable("vtiger_usersCampaigns")) {
 				$query .= " left join vtiger_users as vtiger_usersCampaigns on vtiger_usersCampaigns.id = vtiger_crmentity.smownerid";
+			}
+
+			// TODO optimize inclusion of these tables
+			$query .= " left join vtiger_groups on vtiger_groups.groupid = vtiger_crmentity.smownerid";
+			$query .= " left join vtiger_users on vtiger_users.id = vtiger_crmentity.smownerid";
+
+			if ($this->queryPlanner->requireTable("vtiger_lastModifiedBy$module")) {
+				$query .= " left join vtiger_users as vtiger_lastModifiedBy" . $module . " on vtiger_lastModifiedBy" . $module . ".id = vtiger_crmentity.modifiedby";
+			}
+			if ($this->queryPlanner->requireTable("vtiger_createdby$module")) {
+				$query .= " left join vtiger_users as vtiger_createdby$module on vtiger_createdby$module.id = vtiger_crmentity.smcreatorid";
+			}
+
+			$focus = CRMEntity::getInstance($module);
+			$relquery = $focus->getReportsUiType10Query($module, $this->queryPlanner);
+			$query .= $relquery . ' ';
+
+			$query .= " ".$this->getRelatedModulesQuery($module,$this->secondarymodule).
+					getNonAdminAccessControlQuery($this->primarymodule,$current_user).
+					" where vtiger_crmentity.deleted=0";
+		} else if ($module == "MessageBoard") {
+			$query = "from vtiger_messageboard
+			inner join vtiger_crmentity on vtiger_crmentity.crmid=vtiger_messageboard.messageboardid";
+			if ($this->queryPlanner->requireTable("vtiger_messageboardcf")) {
+				$query .= " inner join vtiger_messageboardcf as vtiger_messageboardcf on vtiger_messageboardcf.messageboardid=vtiger_campaign.messageboardid";
+			}
+			
+			if ($this->queryPlanner->requireTable("vtiger_usersRelMessageBoard1660")) {
+				$query .= " left join vtiger_users as vtiger_usersRelMessageBoard1660 on vtiger_usersRelMessageBoard1660.id = vtiger_messageboard.employee_id";
 			}
 
 			// TODO optimize inclusion of these tables
@@ -3073,7 +3104,7 @@ class ReportRun extends CRMEntity {
 	// Performance Optimization: Added parameter directOutput to avoid building big-string!
 	function GenerateReport($outputformat, $filtersql, $directOutput = false, $startLimit = false, $endLimit = false, $operation = false) {
 		global $adb, $current_user, $php_max_execution_time;
-		//$adb->setDebug(true);
+		///$adb->setDebug(true);
 		global $modules, $app_strings;
 		global $mod_strings, $current_language;
 		require('user_privileges/user_privileges_' . $current_user->id . '.php');

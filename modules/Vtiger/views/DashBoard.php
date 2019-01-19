@@ -23,12 +23,9 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 parent::preProcess($request, false);
                 $viewer = $this->getViewer($request);
                 $moduleName = $request->getModule();
-
-
                 //get last login time & IP address
                 global $adb;
-
-                $current_user = Users_Record_Model::getCurrentUserModel();	
+                $current_user = Users_Record_Model::getCurrentUserModel();  
                 $sUserName = $current_user->user_name;
                 $sql="select login_time from vtiger_loginhistory WHERE user_name ='$sUserName' ORDER BY login_time DESC LIMIT 1,1";
                 $result=$adb->pquery($sql, array());
@@ -46,8 +43,10 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer->assign("LAST_LOGIN_TIME", $sLastLoginTime);
                 $viewer->assign("LAST_USER_IP", $sLastUserIP);
                 //End here
- 
-
+                 
+                $Trial_expire = Users_Record_Model::trial_expire();
+                
+                $viewer->assign("TRIAL_INFO",$Trial_expire);
                  if($_SESSION['loggedin_now'] === false){
                
                             $viewer->assign("LOGGED_NOW",'in');
@@ -56,8 +55,31 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                  else{
                         $viewer->assign("LOGGED_NOW",'out');
                  }
-
-
+            
+                 if($_SESSION['multi_login'] == "yes"){
+                       $viewer->assign("MULTI_LOGIN",'yes');
+                     $_SESSION['multi_login'] = "no";
+                 }
+                 else{
+                       $viewer->assign("MULTI_LOGIN",'no');
+                 }
+                 
+                 if($_SESSION['first_time_login'] == 'yes'){
+                      $_SESSION['first_time_login'] = "no";
+                     $viewer->assign("LOGGED_FIRST_TIME",'no');
+                 }
+                 else{
+                     $viewer->assign("LOGGED_FIRST_TIME",'no');
+                 }
+                 
+                $crm_record_no = $this->CRM_ENTITY_CHECKER();
+               if($crm_record_no){
+                   $viewer->assign("DATA_RESET","Yes");
+               }
+               else{
+                    $viewer->assign("DATA_RESET","No");
+               }
+                                                               
                 $dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
                 //check profile permissions for Dashboards
                 $moduleModel = Vtiger_Module_Model::getInstance('Dashboard');
@@ -91,11 +113,11 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
         }
 
         function process(Vtiger_Request $request) {
+        
                 $viewer = $this->getViewer($request);
                 $moduleName = $request->getModule();
-
                 $dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
-
+                $current_user = 
                 //check profile permissions for Dashboards
                 $moduleModel = Vtiger_Module_Model::getInstance('Dashboard');
                 $userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
@@ -120,9 +142,21 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer->assign('DASHBOARD_TABS', $dashboardTabs);
                 $viewer->assign('DASHBOARD_TABS_LIMIT', $dashBoardModel->dashboardTabLimit);
                 $viewer->assign('SELECTED_TAB',$tabid);
-        if (self::$selectable_dashboards) {
+                $current_user = Users_Record_Model::getCurrentUserModel();
+            if (self::$selectable_dashboards) {
+            
+                      
                         $viewer->assign('SELECTABLE_WIDGETS', self::$selectable_dashboards);
-                }
+                        $viewer->assign("EMPLOYEE_GROUP", $this->get_widgets_by_group("employee", $modulename,$current_user->get("id"),$tabid));
+
+                        $viewer->assign("SALES", $this->get_widgets_by_group("sales", $modulename,$current_user->get("id"),$tabid));
+                        $viewer->assign("SERVICE", $this->get_widgets_by_group("service", $modulename,$current_user->get("id"),$tabid));
+
+                        $viewer->assign("CHART_GROUP", $this->get_widgets_by_group("chart", $modulename,$current_user->get("id"),$tabid));
+                        $viewer->assign("LEAVECLAIM_GROUP",  $this->get_widgets_by_group("leaveclaim", $modulename,$current_user->get("id"),$tabid));
+                        $viewer->assign("GENERAL_GROUP",  $this->get_widgets_by_group("general", $modulename,$current_user->get("id"),$tabid));
+            }
+            
                 $viewer->assign('CURRENT_USER', Users_Record_Model::getCurrentUserModel());
                 $viewer->assign('TABID',$tabid);
                 $viewer->view('dashboards/DashBoardContents.tpl', $moduleName);
@@ -131,7 +165,69 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
         public function postProcess(Vtiger_Request $request) {
                 parent::postProcess($request);
         }
+        
+        
+    /**
+     * GET tabs  by group
+     * @param type $group
+     * @param type $modulename
+     */
+        public function get_widgets_by_group($group,$modulename,$userid,$tab_id){
+            $data = array();
+            $db   = PearDatabase::getInstance(); 
+            //$db->setDebug(true);
+            // Update By Mabruk
+            $sql = "SELECT * from vtiger_links 
+                    INNER JOIN vtiger_module_dashboard_widgets ON vtiger_module_dashboard_widgets.linkid = vtiger_links.linkid
+                    WHERE linktype = 'DASHBOARDWIDGET' 
+                    AND widgetgroup = '$group'
+                    AND userid = '$userid'
+                    AND dashboardtabid = '$tab_id'";             
 
+            $query = $db->pquery($sql,array());
+            $num_rows =  $db->num_rows($query);
+            if($num_rows > 0){
+                for($i =0; $i < $num_rows; $i++){
+
+                    $data[$i]["URL"]        = $db->query_result($query, $i,'linkurl')."&linkid=".$db->query_result($query, $i,'linkid');
+                    $data[$i]['linkid']     = $db->query_result($query, $i,'linkid');
+                    $data[$i]['name']       = $db->query_result($query, $i,'linklabel');
+                    $data[$i]['title']      = vtranslate($db->query_result($query, $i,'linklabel'), $modulename);  
+                    $data[$i]['is_closed']  = $db->query_result($query, $i,'is_closed'); 
+                    $data[$i]['width']      = 1;
+                    $data[$i]['height']     = 1;
+                    
+                }
+            }
+            
+            return $data;
+        }
+
+        public function is_widget_used($user_id,$tab_id,$linkid){
+            $db = PearDatabase::getInstance();
+            $sql = "SELECT * from vtiger_module_dashboard_widgets WHERE userid=$userid AND dashboardtabid = '$tab_id' AND linkid = '$linkid'";
+            $query = $db->pquery($sql,array());
+            $num_rows = $db->num_rows($query);
+            if($num_rows > 0){
+                return 1;
+            }
+            return 0;
+        }
+
+        /**
+         * Added By Khaled
+         * @return boolean
+         */
+        public function CRM_ENTITY_CHECKER(){
+            $db = PearDatabase::getInstance();
+            $query = $db->pquery("SELECT count(*) as total_rows FROM   vtiger_crmentity ");
+            if($db->query_result($query,0,'total_rows') > 0){
+                return true;
+            }
+            else{
+                 return false;
+            }
+        }
         /**
          * Function to get the list of Script models to be included
          * @param Vtiger_Request $request
@@ -216,10 +312,10 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
     public function getColor($priority) {
         $color = '';
         switch ($priority) {
-            case 'High'		:	$color = '#FF5555';	break;
-            case 'Medium'	:	$color = '#03C04A';	break;
-            case 'Low'		:	$color = '#54A7F5';	break;
-            default			:	$color = '#'.dechex(rand(0x000000, 0xFFFFFF));
+            case 'High':$color = '#FF5555'; break;
+            case 'Medium':$color = '#03C04A';   break;
+            case 'Low':$color = '#54A7F5';  break;
+            default:    $color = '#'.dechex(rand(0x000000, 0xFFFFFF));
                 break;
         }
         return $color;

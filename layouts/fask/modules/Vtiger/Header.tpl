@@ -29,11 +29,12 @@
         <link type='text/css' rel='stylesheet' href='layouts/v7/lib/jquery/jquery.qtip.custom/jquery.qtip.css'>
         <link type='text/css' rel='stylesheet' href='layouts/v7/lib/jquery/daterangepicker/daterangepicker.css'>
 
-        <link type='text/css' rel='stylesheet' href='layouts/fask/skins/vtiger/common.css'>
-        <link type='text/css' rel='stylesheet' href='layouts/fask/skins/vtiger/sidebar.css'>
+        <link type='text/css' rel='stylesheet' href='{$SKIN_PATH}/common.css'>
+        <link type='text/css' rel='stylesheet' href='{$SKIN_PATH}/sidebar.css'>
+        <link type='text/css' rel='stylesheet' href='{$SKIN_PATH}/agiliux-blue.css'>
         <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-        <link rel="stylesheet" href="layouts/fask/skins/vtiger/themify-icons.css">
-		<link rel="stylesheet" href="layouts/fask/skins/vtiger/material-icons.css">
+        <link rel="stylesheet" href="{$SKIN_PATH}/themify-icons.css">
+		<link rel="stylesheet" href="{$SKIN_PATH}/material-icons.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
         <input type="hidden" id="inventoryModules" value={ZEND_JSON::encode($INVENTORY_MODULES)}>
@@ -46,7 +47,12 @@
         {else}
             <link type="text/css" rel="stylesheet" href="{vresource_url($V7_THEME_PATH)}" media="screen" />
         {/if}
-        
+          <!-------------------------------------- 
+                Theme Switching Button  CSS
+                Addred By Khaled
+            ---------------------------------------->
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
         {foreach key=index item=cssModel from=$STYLES}
 			<link type="text/css" rel="{$cssModel->getRel()}" href="{vresource_url($cssModel->getHref())}" media="{$cssModel->getMedia()}" />
 		{/foreach}
@@ -60,6 +66,11 @@
 		<script type="text/javascript">var __pageCreationTime = (new Date()).getTime();</script>
 		<script src="{vresource_url('layouts/v7/lib/jquery/jquery.min.js')}"></script>
 		<script src="{vresource_url('layouts/v7/lib/jquery/jquery-migrate-1.0.0.js')}"></script>
+                                       <!---------- 
+                                                Theme Switching Button 
+                                                Addred By Khaled
+                                       -->
+                                       <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 		<script type="text/javascript">
                                                 var _META = { 'module': "{$MODULE}", view: "{$VIEW}", 'parent': "{$PARENT_MODULE}", 'notifier':"{$NOTIFIER_URL}", 'app':"{$SELECTED_MENU_CATEGORY}" };
                                                 {if $EXTENSION_MODULE}

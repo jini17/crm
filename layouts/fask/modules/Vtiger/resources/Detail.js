@@ -1079,7 +1079,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 
 	        btn.click(function () {        	       
 	        	if (confirm("This will overwrite your existing data for the selected record. Are you sure you want to continue ?")) {
-
+	        		app.helper.showProgress();
 		            app.request.get(params).then(
 
 		                function (err, data) {
@@ -1095,15 +1095,33 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		                    	if (data.reload == "yes") {
 
 		                    		var detailHeader = jQuery('.detailview-header');
-		                    		detailHeader.find('.firstname').html(data.firstname.trim());
-		                    		detailHeader.find('.lastname').html(data.lastname.trim()); 
-		                    		jQuery('.tab-item.active').find('a')[0].click(); //To Reload the Detail View using Ajax                    		
+
+		                    		jQuery('.tab-item.active').find('a')[0].click(); //To Reload the Detail View using Ajax  
+
+		                    		if (moduleName == "Accounts") {                 		
+
+		                    			if (data.accountname)
+		                    				detailHeader.find('.accountname').html(data.accountname.trim());
+
+		                    		}	
+		                    		else {
+
+			                    		if (data.firstname)
+			                    			detailHeader.find('.firstname').html(data.firstname.trim());
+			                    		if (data.lastname)			                    			
+			                    			detailHeader.find('.lastname').html(data.lastname.trim());
+
+		                    		}
 
 		                    	}  
-			                    	
+			                  	app.helper.showProgress();	  	
 		                    }
-		                    else 
+		                    else {
+
 		                    	app.helper.showErrorNotification({message:err});
+		                    	app.helper.showProgress();
+		                    	
+		                    }
 
 		                }                                        
 		            );
@@ -1253,7 +1271,11 @@ Vtiger.Class("Vtiger_Detail_Js",{
 				}
 			}
 		}
-
+		
+		if(fieldType === 'date' && fieldName =='date_joined'){
+		     thisInstance.registerJoinDateValidation();
+	     }
+          
 		detailViewValue.css('display', 'none');
 		editElement.removeClass('hide').show().children().filter('input[type!="hidden"]input[type!="image"],select').filter(':first').focus();
 		vtUtils.applyFieldElementsView(currentTdElement);
@@ -1272,7 +1294,49 @@ Vtiger.Class("Vtiger_Detail_Js",{
 			}
 		}
 	},
+	registerDateManipulation : function(date_joined, dateFormat){
+     	if(dateFormat =='yyyy-mm-dd'){
+     	     return date_joined;
+     	} else if(dateFormat == 'dd-mm-yyyy') {
+                var expireDateArr  = date_joined.split("-");
+                return expireDateArr[2]+"-"+expireDateArr[1]+"-"+ expireDateArr[0]
+          } else if(dateFormat == 'mm-dd-yyyy') {
+               var expireDateArr  = date_joined.split("-");
+               return expireDateArr[2]+"-"+expireDateArr[0]+"-"+ expireDateArr[0]
+          }
+	},
+     /**===================
+	  added by Jitu
+	  Join Date Validation
+	================*/
+	registerJoinDateValidation: function(){		
+          var instance = this;
+          jQuery("input[name='date_joined']").on("change",function(){
+           var dateFormat = app.getDateFormat();
+            
+              var date_joined = instance.registerDateManipulation(jQuery(this).val(), dateFormat);  
 
+                      if(date_joined.length > 0){
+                      	                               
+                        var expireDate = new Date(date_joined);     
+                      	var now = new Date();
+					    var past = new Date(expireDate);
+					    var nowYear = now.getFullYear();
+					    var pastYear = past.getFullYear();
+					    var joined =     pastYear - nowYear;
+					    var diff = past.getTime() - now.getTime();
+   					    var years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25)); 	
+
+                        if(parseInt(years) > 1){
+                        	
+                        	 app.helper.showErrorNotification({message :app.vtranslate('Join Date should not be greater than 1 year')});
+                                      jQuery(this).val("");
+                                     return false;
+                        }   
+                            
+                      }
+          })
+	},
 	getDependentSourcePicklistName : function(fieldName) {
 		var container = this.getForm();
 		var picklistDependcyElemnt = jQuery('[name="picklistDependency"]',container);
@@ -2186,6 +2250,11 @@ Vtiger.Class("Vtiger_Detail_Js",{
 		var self = this;
 		var recordId = self.getRecordId();
 		var moduleName = app.getModuleName();
+
+		// Added By Mabruk
+		//if (moduleName == "EmployeeContract")
+
+
 		self.getRelatedRecordsCount(recordId, moduleName).then(function(data){
 			jQuery.each(data, function(key, value){
 				var element = new Object(jQuery("a","li[data-relation-id="+key+"]"));
@@ -2197,7 +2266,7 @@ Vtiger.Class("Vtiger_Detail_Js",{
 				} else{
 					//numberEle.addClass('hide');
 				}
-				element.attr("recordscount",value);
+				element.attr("recordscount",value); 
 			});
 		});
 	},

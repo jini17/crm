@@ -39,7 +39,7 @@
                         </li>
                 <!--Added by jitu@secondcrm.com on 24-12-2014 
                         added by jitu@secondcrm.com for Leave approval widget link-->
-                        {if $ISACTIVE eq 0 && $VIEW eq 'PreferenceDetail'} 
+                        {if $VIEW eq 'PreferenceDetail' && $LEAVECLAIM_SHOW} 
                         <li class="{if $DEFAULT_TAB neq '' && $TABTYPE eq 'leave'}active{else}relatedListTab{/if}">
                                 <a data-toggle="tab" href="#leave"><strong>{vtranslate('LBL_LEAVE', $MODULE_NAME)}</strong></a>
                         </li>	
@@ -106,4 +106,14 @@
 <div class="tab-pane" id="emergency"></div>
 <div class="tab-pane" id="leave"></div>
 <div class="tab-pane" id="claim"></div>	<!--Added by jitu@secondcrm.com on 24-12-2014-->
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery("input[name='date_joined'").on("change",function(){
+              var date = jQuery(this).val();
+              alert(date);
+        });
+    });
+</script>    
+
 {/strip}

@@ -198,7 +198,7 @@ body {
   position: relative;
 }
 .global-nav .navbar-nav > li div a {
-  padding: 15px 10px 10px;
+  padding: 8px 10px 10px;
 }
 .global-nav>ul {
   margin-right: 20px;
@@ -1359,7 +1359,7 @@ ul.unstyled {
   margin: 11px 0;
   float: left;
   font-size: 12px;
-  line-height: 18px;
+  line-height: 16px;
 }
 .current-filter-name a {
   max-width: 120px;
@@ -2161,6 +2161,7 @@ input[type=checkbox]:checked {
   display: inline-block;
   height: 26px;
   line-height: 25px;
+  font-size:13px;
 }
 .summary-table {
   width: 100%;
@@ -3209,7 +3210,7 @@ position: relative;
 }
 .settingsgroup {
   background: rgba(0, 0, 0, 0.02);border-right: 1px solid rgba(120, 130, 140, 0.13);
-  height: 100%;
+  height: 82%;
 }
 .settingsgroup .panel-group .panel {
       background-color: #fff;
@@ -4693,7 +4694,12 @@ form[name="notification_settings"] .select2-choice {
   color: #000;
 }
 .dashBoardContainer .entryIcon {
-  font-size: 120%;    margin-right: 5px;
+
+  font-size: 120%;    
+  margin-right: 5px; 
+  margin-top: -15px;
+  font-size: 120%;    margin-right: 5px; margin-top: -15px;
+
 }
 .dashBoardContainer .addDashboardTab {
   padding-bottom: 3px;
@@ -5608,8 +5614,8 @@ hr {
   padding-top: 1px;
 }
 .mmSearchDropDown {
-  margin-top: -30px;
-  margin-left: 66%;
+/*  margin-top: -30px;
+  margin-left: 66%;*/
 }
 .mmMoveDropdownArrow {
   color: #FFFFFF;
@@ -8848,9 +8854,9 @@ border-radius: .35rem; background-color: rgba(255, 255, 255, 1); margin-top: 0px
 .faskfirst{ list-style-type: none;float: left;-webkit-padding-start: 10px; border-right: 0px solid #ddd;    height: 400px;}
 .faskfirst li{ padding: 14px 4px;}
 .faskfirst li a i{ font-size: 18px;margin-right: 10px;}
-.fasksecond{list-style-type: none; overflow-y: scroll;  }
+.fasksecond{list-style-type: none; }
 /* .fasksecond>li.with-childs:first-child { border-left: none;} */
-.fasksecond>li.with-childs { float: left; border-left:1px solid #ddd; margin: 0 0px; height:400px; width: 20%} 
+.fasksecond>li.with-childs { float: left; border-left:1px solid #ddd; margin: 0 0px; height:400px;} 
 .fasksecond>li.with-childs>a{ border-bottom: 3px solid #ddd;padding: 15px 10px; line-height: 40px;} 
 .fasksecond>li.with-childs>a i { font-size: 18px;margin-right: 10px;}
 .fasksecond>li>a i { font-size: 18px;margin-right: 10px;}
@@ -9085,12 +9091,21 @@ li> a.dropdown-icon-dashboard>i{
 ul.nav.navbar-nav>li>div.dropdown>div.dropdown-toggle>a{
   padding: 15px 5px 10px !important;
 }
-a.btn.Help-btn{
-    padding: 5px 5px 6px 8px;
+a.btn.Help-btn,
+a.btn.btn-reset,
+a.trial-info-btn{
+    padding: 5px 15px 6px 10px !important;
+
     margin: 0px;
     border-radius: 3px;
-    margin-top: 5px;
+    margin-top: 5px !important;
     margin-right: 15px;
+}
+
+a.btn.btn-reset{
+    background: #fff;
+    color: #ef5350;
+
 }
 .popup-col-4{
   border-radius: 10px;
@@ -9143,9 +9158,7 @@ div#prefernces.tab-pane {
 span.actionImages>a{
   padding: 0px 5px;
 }
-ul.nav.navbar-nav > li > div> a.rightside-icon-dashboard{
-      padding: 15px 5px 10px !important;
-}
+
 table.table.table-bordered.listViewEntriesTable{
   background-color: #fff !important;
 }
@@ -9250,7 +9263,7 @@ color: #2f5597 !important;
 
 /*START-header moving text*/
 .headertext{
-  width: 100%;
+  width: 101%;
     display: block;
     height: auto;
     text-align: right;
@@ -9533,7 +9546,558 @@ right connector from last child*/
     float: right;
 }
 
+.wbox{
+   padding-left: 10px;
+   padding-right: 10px;
+}
+.wbox{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.wbox h5{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    
+        font-size: 13px;
+}
+.wbox h5 span{
+    
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.wbox h5 span i{
+    padding-left: 0 !important;
+    padding-right: 5px !important;
+    font-size: 15px !important;
+}
+.wbox .links{
+    margin-top: 10px;
 
-/*Thats all. I hope you enjoyed it.
-Thanks :)*/
+}
+
+.logo-container.pull-left{
+    padding: 0 !important;
+    
+}
+.newtabs{
+    position: absolute;
+    top: 0;
+    left: 190px;
+}
+.global-nav .global-actions{
+    position: absolute;
+    right: 3px;
+    width: 650px;
+}
+.global-nav .navbar-nav > li div a{
+    font-size: 14px !important;
+}
+#navbar .nav{
+    width: 102% !important;
+}
+
+.fasksecond li.with-childs a,
+.faskfirst  li.with-childs a{
+    font-size: 14px;
+}
+.search-link{
+    border: 1px solid #eee !important;
+}
+.nav li.searchoption a{
+    border-radius: 0 !important;
+    padding-bottom: 1px;
+}
+
+      
+/**==================
+    Mail Manager
+=====================*/
+
+#mailmanagerContainer .material-icons,
+#mailmanagerContainer .material-icons .fa,
+#mmModulesMenu  .material-icons,
+#mailmanagerContainer  #NextPageButton,
+#mailmanagerContainer  #PreviousPageButton,
+#mailmanagerContainer  button.mailPagination,
+#mailmanagerContainer  .pageInfo,
+#mailmanagerContainer .mmDetailAction,
+.fa.fa-book{
+      color: #2f5597;
+}
+
+#mailmanagerContainer  #NextPageButton:hover,
+#mailmanagerContainer  #PreviousPageButton:hover,
+#mailmanagerContainer  button.mailPagination:hover,
+#mailmanagerContainer .mmFirstNameChar,
+#mailmanagerContainer .highLightMail,
+#mailmanagerContainer div[data-read="0"].highLightMail{
+    color: #fff;
+     background: #2f5597;
+}
+
+#mailmanagerContainer .mailEntry{
+    border-left: 3px solid #ccc;
+}
+#mailmanagerContainer div[data-read="0"]{
+     border-left: 3px solid #2f5597;
+     color: #2f5597;
+}
+#mailmanagerContainer div[data-read="0"].highLightMail{
+    
+}
+#mailmanagerContainer input[type="checkbox"]:checked::after, #checkgreen {
+    background: #fff;
+    width: 13px;
+    height: 13px;
+    line-height: 13px;
+    font-size: 12px;
+    color: #2f5597;
+    font-weight: bold;
+    top: 1px;
+}
+#mailmanagerContainer ._mCS_9{
+    display: none;
+}
+.mmModulesMenu .mmUnreadCountBadge{
+    background: #2f5597 none !important;
+    border: 1px solid #2f5597 !important;
+}
+#mailmanagerContainer #RelatedModuleLink{
+    display: block;
+    width: 100%;
+    font-size: 10px;
+    color: #000;
+}
+#mailmanagerContainer #RelatedModuleLink a{
+    color: #2f5597;
+    font-weight: bold;
+    
+}
+
+#mailmanagerContainer #RelatedModuleLink input{
+  display:none
+}
+#mailmanagerContainer #RelatedModuleLink label{
+  padding:0 6px;
+  border:1px solid #eee
+}
+#mailmanagerContainer #RelatedModuleLink input:checked + label {
+ background:#000;
+ color:#fff
+}
+.mail-all-checked .fa-minus{
+    display: none;
+}
+
+.login-ip{
+    font-size: 13px;
+}
+/*.mail-filter-container{
+    position: relative;
+}
+.mmSearchDropDown{
+    width: 10%;
+    background: #2f5597;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.mmsearchbox{
+    width: 40% ;
+    
+}*/
+
+.mmSearchDropDown{
+    width: 15%;
+    float: left;
+    margin-left:  0 !important;
+     margin-right:  0 !important;
+}
+.mmSearchDropDown .caret{
+    position: absolute;
+    z-index: 1;
+    right: -11px;
+    top: 14px;
+    color: #fff;
+}
+
+.mmsearchbox {
+    width: 50%;
+    float: left;
+
+    margin-left: 3% !important;
+}
+#mmSearchButtonContainer {
+    width: 10%;
+    float: left;
+    margin-left: 1% !important;
+    padding: 0;
+    margin-top: 0;
+    height: 30px !important;
+}
+
+#mailManagerActions .recordScroll{
+    display: none;
+}
+.mUserName{
+    font-weight: bold
+}
+
+.mmbtn{
+    margin-left: 10%;
+}
+
+        .nav > li > a{
+            padding: 10px 10px !important;
+        }
+        .alphabetSearch a{
+        color: #307fe8;
+        font-weight: bold;
+    }
+    .box-content{
+      padding:20px 10px;
+      border: 1px solid #ddd;
+      background: #fff;
+        min-height: 390px;
+        margin-top: 20px;
+        margin-bottom: 9px;
+    }
+    .user-social{
+        margin-top: 15px;
+    }
+    .username{
+    margin-bottom: 5px;
+    }
+    .user-social a{
+        color: #fff;
+    }
+
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+  padding: 10px;
+}.fa-twitter {
+  background: #55ACEE;
+  color: white;
+  padding: 10px;
+}
+.fa-envelope {
+  background: #ff6600;
+  color: white;
+  padding: 10px;
+}
+
+ .img-holder{
+       width: 122px;
+       height: 122px;
+        margin: 0 auto !important;
+ }
+ 
+.img-circle{
+      background: #fff;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    margin: 3px 4px !important;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+  padding: 10px;
+}
+    .birthdaybox{
+        margin-top: 30px;
+    }
+    .highlight-birthday{
+       background: #d1e3fa;   
+      }
+      .img-circle{
+          padding:3px;
+          border:1px solid #ccc;  
+          background-color: #fff;
+          margin:0 auto !important;
+          display:block;
+      }
+      .email-icon i{
+          color: #333;
+      }  
+      
+      /** =======================
+        Calender Settings
+     ===========================*/
+     .settingsIndexPage h4{
+         color: #2f5597;
+     }
+    .settingsIndexPage h4,
+    .settingsIndexPage .settingsSummary .summaryCount{
+         color: #2f5597;
+     }
+     #settingsShortCutsContainer  .moduleBlock{
+         width: 23.44% !important;       
+     }
+     
+     .settingsIndexPage #settingsShortCutsContainer span.header{
+         display: block;
+         width: 100%
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header i{
+         margin-top: 3px;
+     }
+     .settingsIndexPage #settingsShortCutsContainer span.header b{
+         margin-left: 10px;
+         margin-top: -15px;
+     }
+     .settingsIndexPage #setttingsShortCutsContainer .themeTextColor{
+         float:right;
+         
+     }
+     .settingsIndexPage #settingsShortCutsContainer.fa.pull-left{
+         margin-top: 10px !important;
+         margin-right: 10px !important;
+     }
+  
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+    padding: 10px;
+}
+.fa-twitter {
+    background: #55ACEE;
+    color: #fff;
+    padding: 10px;
+}
+.fa-linkedin {
+    background: #007bb5;
+    color: #fff;
+    padding: 10px;
+}
+.fa-envelope {
+    background: #ff6600;
+    color: #fff;
+    padding: 10px;
+}
+.user-meta{
+    min-height: 84px;
+}
+
+        /**===================
+        * Dashboard Scroll to Top
+        * TODO: Gridster
+        *======================*/
+        .strolltotop,.strolltotop:hover{           
+            padding            : 10px;
+            font-size           : 25px;
+            font-weight     : bold;
+            position             : absolute;
+            width                : 55px;
+            height               : 56px;
+            border-radius  : 50%;
+            bottom             : 10%;
+            right                  : 1%;
+            background     : #333;
+            text-align         : center;
+            color                 : #fff;                       
+        }
+/*        .gridster_2{
+            height: 720px;
+            overflow-y: scroll;
+        }*/
+
+ /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+#menubar_item_right_LBL_MY_PREFERENCES
+, #menubar_item_right_LBL_SIGN_OUT {
+    padding: 5px 10px !important
+    font-size: 12px !important;
+}
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+} 
+.color-box{
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 5px !important;
+    border: 1px solid #ccc;
+    border-radius: 50% !important;
+    position: relative;
+}
+.color-box i{
+    position: absolute;
+    left: 2%;
+    top: 5%;
+    font-size: 10px;
+}
+.text-bold{
+    margin: 0 !important;
+}
+.color-blue,
+.color-blue:hover{
+    background: #6783B3;    
+    color: #fff;
+}
+.color-purple,
+.color-purple:hover{
+    background: #d971ae;    
+     color: #fff;
+}
+.color-yellow,
+.color-yellow:hover{
+    background: #f6bb43;
+     color: #fff;
+}
+.color-green,
+.color-green:hover{
+    background: #3bbd9b;
+     color: #fff;
+}
+.color-list li i{
+    color: #fff !important;
+}
+
+.color-shipcove,
+.color-shipcove:hover{
+    background: #6783B3;
+     color: #fff;
+}
+
+.color-lilacbush,
+.color-lilacbush:hover{
+    background: #997CCD;
+     color: #fff;
+}
+
+.color-energyyellow,
+.color-lilacbush:hover{
+    background: #FAD852;
+     color: #fff;
+}
+
+.color-downy,
+.color-downy:hover{
+    background: #67D0AF;
+     color: #fff;
+}
+
+.color-lily,
+.color-lily:hover{
+    background: #CBA7C1;
+     color: #fff;
+}
+
+
+.color-danube,
+.color-danube:hover{
+    background: #77A1D3;
+     color: #fff;
+}
+
+.color-selectiveyellow,
+.color-selectiveyellow:hover{
+    background: #F7B301;
+     color: #fff;
+}
+
+.color-sandybrown,
+.color-sandybrown:hover{
+    background: #F4967A;
+     color: #fff;
+}
+
+.color-mandy,
+.color-mandy:hover{
+    background: #EC5C64;
+     color: #fff;
+}
+
+.color-aquaisland,
+.color-aquaisland:hover{
+    background: #AFDFDF;
+     color: #fff;
+     padding: 5px;
+}
+
+.miniListContent .img-holder{
+    width: auto;
+    height: auto;
+}
+
+.widget-icon{
+    margin-top: -15px;
+}
+.widget-item a{
+    width: 100%;
+    display: block;
+}
+.widget-item a[disabled="disabled"]{
+    color: #ccc;
+}
+
+.current-filter-name i{
+
+    margin-top: 2px;
+    display: block !important;
+    float: right;
+    margin-right: 5px;
+    margin-left: -3px;
+
+}
 

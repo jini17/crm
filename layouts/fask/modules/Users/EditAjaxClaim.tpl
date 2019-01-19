@@ -43,6 +43,9 @@
                 <input type="hidden" value="{$CLAIM_DETAIL.leavestatus}" name="savetype" id="savetype">  
                 <input type="hidden" id="hdnhalfday" id="hdnhalfday" value="" /> -->
 
+                <input type="hidden" name="selected_claim_yearly" value="" />
+                <input type="hidden" name="selected_claim_monthly" value="" />
+                
                 <div class="modal-body">
 
 
@@ -125,6 +128,7 @@
                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                         <div class="col-md-4">
                                                                 <label class="control-label fieldLabel" style="text-align: right;float: right;">
+                                                                    
                                                                         &nbsp;{vtranslate('LBL_INVOICE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
                                                                 </label>
                                                         </div>

@@ -4,12 +4,12 @@
 <table class="table detailview-table listViewEntriesTable">
     <thead>
         <tr>
-            <th nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
-            <th nowrap>{vtranslate('LBL_LEAVE_TYPE', $MODULE)}</th>
-            <th nowrap>{vtranslate('LBL_START_DATE', $MODULE)}</th>
-            <th nowrap>{vtranslate('LBL_END_DATE', $MODULE)}</th>
-            <th nowrap>{vtranslate('LBL_LEAVE_STATUS', $MODULE)}</th>
-            <th nowrap>{vtranslate('LBL_ACTION', $MODULE)}</th>	
+            <th width="30%" nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
+            <th nowrap width="18%">{vtranslate('LBL_LEAVE_TYPE', $MODULE)}</th>
+            <th nowrap width="13%">{vtranslate('LBL_START_DATE', $MODULE)}</th>
+            <th nowrap width="13%">{vtranslate('LBL_END_DATE', $MODULE)}</th>
+            <th nowrap width="13%">{vtranslate('LBL_LEAVE_STATUS', $MODULE)}</th>
+            <th nowrap width="13%">{vtranslate('LBL_ACTION', $MODULE)}</th> 
         </tr>
     </thead>
     <tbody>
@@ -99,14 +99,13 @@
 <table class="table detailview-table listViewEntriesTable">
   <thead>
     <tr>
-        <th nowrap>{vtranslate('LBL_FULLNAME', $MODULE)}</th>
-        <th nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
-        <th nowrap>{vtranslate('LBL_LEAVE_TYPE', $MODULE)}</th>
-        <th nowrap>{vtranslate('LBL_START_DATE', $MODULE)}</th>
-        <th nowrap>{vtranslate('LBL_END_DATE', $MODULE)}</th>
-        <th nowrap>{vtranslate('LBL_LEAVE_STATUS', $MODULE)}</th>
-
-        <th nowrap>{vtranslate('LBL_ACTION', $MODULE)}</th>
+        <th width="14%" nowrap>{vtranslate('LBL_FULLNAME', $MODULE)}</th>
+        <th width="18%" nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
+        <th nowrap width="20%">{vtranslate('LBL_LEAVE_TYPE', $MODULE)}</th>
+        <th nowrap width="12%">{vtranslate('LBL_START_DATE', $MODULE)}</th>
+        <th nowrap width="12%">{vtranslate('LBL_END_DATE', $MODULE)}</th>
+        <th nowrap width="12%">{vtranslate('LBL_LEAVE_STATUS', $MODULE)}</th>
+        <th nowrap width="12%">{vtranslate('LBL_ACTION', $MODULE)}</th> 
 
     </tr>
 </thead>
@@ -162,8 +161,8 @@
 
 <!--start my leaves-->
 <div id="MyLeaveContainer">
-    <div class="btn-group pull-right allprofilebtn">
-     <button style="margin-right:15px;" type="button" class="btn btn-primary pull-right" onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
+    <div class="btn-group pull-right allprofilebtn" style="float:right;margin-right:15px;margin-bottom:10px;">
+     <button style="margin-left:15px;" type="button" class="btn btn-primary pull-right" onclick="Users_Leave_Js.addLeave('{$CREATE_LEAVE_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_CREATE_LEAVE', $MODULE)}</strong></button>
      <select class="selectProfileCont" name="my_selyear" id="my_selyear" data-section="M"  class="select2"  data-url="?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}" onchange="Users_Leave_Js.registerChangeYear('?module=Users&view=ListViewAjax&mode=getUserLeave&section=M&record={$USERID}','M');">
 
             <!--//Added By Jitu Date Combobox-->
@@ -176,7 +175,7 @@
 
 
 
-<div class="block listViewContentDiv" id="listViewContents" style="marign-top: 15px;">
+<div class="block listViewContentDiv" id="listViewContents" style="margin-top: 15px;">
     <div class="listViewEntriesDiv contents-bottomscroll " style="padding-top: 5px;">
         <div>
             <h5>{vtranslate('My Leave', $MODULE)}</h5>
@@ -188,12 +187,12 @@
             <table class="table detailview-table listViewEntriesTable" style="background-color: #fff;margin: 14px;width: 98%;">
                 <thead>
                     <tr>
-                        <th nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
-                        <th nowrap>{vtranslate('LBL_LEAVE_TYPE', $MODULE)}</th>
-                        <th nowrap>{vtranslate('LBL_START_DATE', $MODULE)}</th>
-                        <th nowrap>{vtranslate('LBL_END_DATE', $MODULE)}</th>
-                        <th nowrap>{vtranslate('LBL_LEAVE_STATUS', $MODULE)}</th>
-                        <th nowrap>{vtranslate('LBL_ACTION', $MODULE)}</th> 
+                        <th width="30%" nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
+                        <th nowrap width="18%">{vtranslate('LBL_LEAVE_TYPE', $MODULE)}</th>
+                        <th nowrap width="13%">{vtranslate('LBL_START_DATE', $MODULE)}</th>
+                        <th nowrap width="13%">{vtranslate('LBL_END_DATE', $MODULE)}</th>
+                        <th nowrap width="13%">{vtranslate('LBL_LEAVE_STATUS', $MODULE)}</th>
+                        <th nowrap width="13%">{vtranslate('LBL_ACTION', $MODULE)}</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -201,7 +200,7 @@
                     {if count($MYLEAVES) gt 0}<!--<pre>{$PAGING_MODEL|@print_r}</pre>-->
                         {foreach item=USER_LEAVE from=$MYLEAVES}
                             <tr data-section="M">
-                                <td class="medium" valign=top>{$USER_LEAVE['leave_reason']}</td>
+                                <td class="medium " valign=top>{$USER_LEAVE['leave_reason']}</td>
                                 <td class="medium" valign=top><label style="float:left;margin-right:5px;background-color:{$USER_LEAVE['colorcode']};width:30px;height:20px;"></label><span style="float:left;" >{$USER_LEAVE['leave_type']}</span></td>      <td class="medium" valign=top>{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($USER_LEAVE['from_date'])}</td>
                                 <td class="medium" valign=top>{Vtiger_Util_Helper::convertDateIntoUsersDisplayFormat($USER_LEAVE['to_date'])}</td>
                                 <td class="medium" valign=top>{$USER_LEAVE['leavestatus']}</td>
@@ -322,12 +321,13 @@
                     <table class="table detailview-table listViewEntriesTable">
                         <thead>
                             <tr>
-                                <th nowrap>{vtranslate('LBL_FULLNAME', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_LEAVE_TYPE', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_START_DATE', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_END_DATE', $MODULE)}</th>
-                                <th nowrap>{vtranslate('LBL_LEAVE_STATUS', $MODULE)}</th>
+                               <th width="14%" nowrap>{vtranslate('LBL_FULLNAME', $MODULE)}</th>
+                                <th width="18%" nowrap>{vtranslate('LBL_LEAVE_DESC', $MODULE)}</th>
+                                <th nowrap width="20%">{vtranslate('LBL_LEAVE_TYPE', $MODULE)}</th>
+                                <th nowrap width="12%">{vtranslate('LBL_START_DATE', $MODULE)}</th>
+                                <th nowrap width="12%">{vtranslate('LBL_END_DATE', $MODULE)}</th>
+                                <th nowrap width="12%">{vtranslate('LBL_LEAVE_STATUS', $MODULE)}</th>
+                                <th nowrap width="12%">{vtranslate('LBL_ACTION', $MODULE)}</th> 
 
                                 <th nowrap>{vtranslate('LBL_ACTION', $MODULE)}</th>
 
@@ -339,7 +339,8 @@
                             <tr data-section="T">
                                 <td class="medium" valign=top>{$USER_LEAVE['fullname']}</td>
                                 <td class="medium" valign=top title="{$USER_LEAVE['leave_reason']}">{$USER_LEAVE['leave_reason']|truncate:30}</td>
-                                <td class="medium" valign=top><label style="background-color:{$USER_LEAVE['color_code']};float:left;margin-right:5px;width:30px;height:20px;"></label>{$USER_LEAVE['leave_type']}</td>     <td class="medium" valign=top>{$USER_LEAVE['from_date']}</td>
+                                <td class="medium" valign=top><label style="background-color:{$USER_LEAVE['color_code']};float:left;margin-right:5px;width:30px;height:20px;"></label>{$USER_LEAVE['leave_type']}</td>     
+                                <td class="medium" valign=top>{$USER_LEAVE['from_date']}</td>
                                 <td class="medium" valign=top>{$USER_LEAVE['to_date']}</td>
                                 <td class="medium" valign=top>{$USER_LEAVE['leavestatus']}</td>
                                 <td class="medium" valign=top>

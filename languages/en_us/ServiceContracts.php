@@ -17,7 +17,8 @@ $languageStrings = array(
 	'LBL_RECORDS_LIST' => 'Service Contracts List',
 	// Blocks
 	'LBL_SERVICE_CONTRACT_INFORMATION' => 'Service Contract Details',
-	
+	'LBL_Product_Service Information'=>'Product/Service Information',
+	'LBL_CUSTOM_INFORMATION'=>'Custom Information',
 	//Field Labels
 	'Contract No' => 'Contract Number',
 	'Start Date' => 'Start Date',
@@ -29,7 +30,7 @@ $languageStrings = array(
 	'Planned Duration' => 'Planned Duration (in Days)',
 	'Actual Duration' => 'Actual Duration (in Days)',
         'Type' => 'Type',
-    'Related to' => 'Related To',
+    'Related to' => 'Accounts',
 	'Hours' => 'Hours',
 	'Days' => 'Days',
 	'Incidents' => 'Incidents',
@@ -39,7 +40,7 @@ $languageStrings = array(
 	'Undefined' => 'Undefined',
 	'In Planning' => 'In Planning',
 	'On Hold' => 'On Hold',
-	'Complete' => 'Complete',
+	'Completed' => 'Completed',
 	'Archived' => 'Archived',
 	'Low' => 'Low',
 	'High' => 'High',

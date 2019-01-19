@@ -41,7 +41,7 @@ class Leads_LeadsCreated_Dashboard extends Vtiger_IndexAjax_View {
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 		$data = $moduleModel->getLeadsCreated($owner, $dates);
 
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 
 		//Include special script and css needed for this widget
 		$viewer->assign('SCRIPTS',$this->getHeaderScripts($request));

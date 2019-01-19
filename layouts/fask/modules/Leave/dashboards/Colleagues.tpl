@@ -15,19 +15,21 @@
     </div>
   <div class="filterContainer">
       <div class="row">
-           <div class="col-lg-12">
-               <select class="select2 widgetFilter pull-left"  name="department" >
+           <div class="col-lg-6">
+               <select class="select2 col-lg-12 widgetFilter "  name="department" >
                 <option value="">{vtranslate('LBL_COMPANY', $MODULE_NAME)}</option> 
                 {foreach item=DEPT from=$DEPARTMENT}
                 <option value="{$DEPT}" {if $VALUE eq $DEPT}selected{/if}>{$DEPT}</option> 
                 {/foreach}
               </select>
-              <select class="widgetFilter select2" id="duration" name="type" style="margin-left: 10px;">
-                  <option value="today" selected>{vtranslate('LBL_TODAY',$MODULE_NAME)}</option>
-                  <option value="tomorrow" >{vtranslate('LBL_TOMORROW',$MODULE_NAME)}</option>
-                  <option value="thisweek" selected>{vtranslate('LBL_THIS_WEEK',$MODULE_NAME)}</option>
-                  <option value="nextweek" >{vtranslate('LBL_NEXT_WEEK',$MODULE_NAME)}</option>   
-                  <option value="thismonth">{vtranslate('LBL_THIS_MONTH',$MODULE_NAME)}</option>
+           </div>
+              <div class="col-lg-6">   
+                  <select class="select2 col-lg-12 widgetFilter" id="duration" name="type">
+                    <option value="today" selected>{vtranslate('LBL_TODAY',$MODULE_NAME)}</option>
+                    <option value="tomorrow" >{vtranslate('LBL_TOMORROW',$MODULE_NAME)}</option>
+                    <option value="thisweek" selected>{vtranslate('LBL_THIS_WEEK',$MODULE_NAME)}</option>
+                    <option value="nextweek" >{vtranslate('LBL_NEXT_WEEK',$MODULE_NAME)}</option>   
+                    <option value="thismonth">{vtranslate('LBL_THIS_MONTH',$MODULE_NAME)}</option>
                 </select>
             </div>
         </div>

@@ -65,6 +65,7 @@ class Vtiger_DetailView_Model extends Vtiger_Base_Model {
 
 		$detailViewLink = array();
 		$linkModelList = array();
+
 		if(Users_Privileges_Model::isPermitted($moduleName, 'EditView', $recordId)) {
 			$detailViewLinks[] = array(
 					'linktype' => 'DETAILVIEWBASIC',
@@ -77,6 +78,44 @@ class Vtiger_DetailView_Model extends Vtiger_Base_Model {
 				$linkModelList['DETAILVIEWBASIC'][] = Vtiger_Link_Model::getInstanceFromValues($detailViewLink);
 			}
 		}
+
+
+		/**
+         ** Added by Mabruk
+         **/
+		if ($moduleName == 'Leads' || $moduleName == 'Contacts' || $moduleName == 'Accounts') {		
+        
+	        $result = Vtiger_Module_Model::getEnrichDetails();
+	        $preference = $result['preference'];
+	        $active = $result['active'];
+
+	        if ($moduleName == 'Accounts')
+	        	$matchPrefer = "company";
+	        else	 
+	        	$matchPrefer = "person";
+
+	        // Modified By Mabruk
+	        if ($active == "1" && ($preference == "both" || $preference == $matchPrefer)) {
+	            $basicActionLinkEnrich = array(
+	                'linktype' => 'DETAILVIEWBASIC',
+	                'linklabel' => 'LBL_ENRICH_DATA',
+	                //'linkurl' => '',
+	                'linkicon' => ''
+	            );
+	        }
+	        
+	        else {
+	            $basicActionLinkEnrich = array(
+	                'linktype' => 'DETAILVIEWBASIC',
+	                'linklabel' => 'LBL_ENRICH_DATA_LOCKED',
+	                //'linkurl' => 'https://www.fullcontact.com/',
+	                'linkicon' => ''
+	            );
+	        }    
+	        $linkModelList['DETAILVIEWBASIC'][] = Vtiger_Link_Model::getInstanceFromValues($basicActionLinkEnrich);
+
+    	}    
+    	// end
 
 		if(Users_Privileges_Model::isPermitted($moduleName, 'Delete', $recordId)) {
 			$deletelinkModel = array(

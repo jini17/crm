@@ -37,6 +37,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 	}
 
 	public function preProcess(Vtiger_Request $request, $display=true) {
+                                            global $currentUser;
 		if($this->checkPermission($request)) {
 			$qualifiedModuleName = $request->getModule(false);
 			$currentUser = Users_Record_Model::getCurrentUserModel();
@@ -44,7 +45,10 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 			$moduleName = $request->getModule();
 			$detailViewModel = Vtiger_DetailView_Model::getInstance($moduleName, $recordId);
 			$recordModel = $detailViewModel->getRecord();
-
+             //if($currentUser->isAdminUser() && $currentUser->get("id")  == $request->get("record") && ($request->get("view") == "PreferenceDetail" ||$request->get("view") == "Calendar" )){
+                $adminview = "hide MegaMenu ";
+                $userview = "UserSidebar";
+            //} 
 			$detailViewLinkParams = array('MODULE'=>$moduleName,'RECORD'=>$recordId);
 			$detailViewLinks = $detailViewModel->getDetailViewLinks($detailViewLinkParams);
 
@@ -54,12 +58,14 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 			$viewer->assign('MODULE_MODEL', $detailViewModel->getModule());
 			$viewer->assign('DETAILVIEW_LINKS', $detailViewLinks);
 			$viewer->assign('MODULE_BASIC_ACTIONS', array());
-
+			$viewer->assign('PLAN', $_SESSION['plan']);
 			$viewer->assign('IS_EDITABLE', $detailViewModel->getRecord()->isEditable($moduleName));
 			$viewer->assign('IS_DELETABLE', $detailViewModel->getRecord()->isDeletable($moduleName));
 
 			$linkParams = array('MODULE'=>$moduleName, 'ACTION'=>$request->get('view'));
 			$linkModels = $detailViewModel->getSideBarLinks($linkParams);
+			$viewer->assign('ADMINVIEW',$adminview);
+			$viewer->assign('USERVIEW','UserSidebar');
 			$viewer->assign('QUICK_LINKS', $linkModels);
 			$viewer->assign('PAGETITLE', $this->getPageTitle($request));
 			$viewer->assign('SCRIPTS',$this->getHeaderScripts($request));
@@ -82,10 +88,12 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 			$viewer->assign('PARENT_MODULE', $request->get('parent'));
             $viewer->assign('VIEW', $request->get('view'));
 			$viewer->assign('MENUS', $menuModelsList);
+			$viewer->assign('QUICK_CREATE_MOD_ICONS', Vtiger_Menu_Model::getQuickCreateModulesAndIcons()); // Added By Mabruk
             //$viewer->assign('QUICK_CREATE_MODULES', Vtiger_Menu_Model::getAllForQuickCreate());
 			$viewer->assign('MENU_STRUCTURE', $menuStructure);
 			$viewer->assign('MENU_SELECTED_MODULENAME', $selectedModule);
 			$viewer->assign('MENU_TOPITEMS_LIMIT', $menuStructure->getLimit());
+			$viewer->assign('QUICK_CREATE_MOD_ICONS', Vtiger_Menu_Model::getQuickCreateModulesAndIcons()); // Added By Mabruk
 			$viewer->assign('COMPANY_LOGO',$companyLogo);
 			$viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
 
@@ -195,7 +203,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 		$viewer->assign('RECORD_ID', $recordId);
 		
 		$viewer->assign('SHAREDTYPE', $sharedType);
-        $viewer->assign('HOUR_FORMAT_VALUE', $hourFormatFeildModel->get('fieldvalue'));
+                                            $viewer->assign('HOUR_FORMAT_VALUE', $hourFormatFeildModel->get('fieldvalue'));
 	}
 	
 	

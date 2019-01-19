@@ -16,6 +16,8 @@ abstract class Settings_Vtiger_Record_Model extends Vtiger_Base_Model {
 	abstract function getId();
 	abstract function getName();
 
+	const tableName  = 'vtiger_leaverolemapping';
+
     /**
 	 * Function to get the instance of Settings module model
 	 * @return Settings_Vtiger_Module_Model instance
@@ -50,5 +52,22 @@ abstract class Settings_Vtiger_Record_Model extends Vtiger_Base_Model {
 	
 	public function getDisplayValue($key) {
 		return $this->get($key);
+	}
+
+	public function save(){
+
+		$db = PearDatabase::getInstance();
+        $currentUser = Users_Record_Model::getCurrentUserModel();
+        $currentDate = date('Y-m-d H:i:s');
+        $checkQuery = 'SELECT 1 FROM '.self::tableName;
+        $result = $db->pquery($checkQuery,array($currentUser->getId()));
+        if($db->num_rows($result) > 0) {
+            $query = 'UPDATE '.self::tableName.' SET announcement=?,time=? WHERE creatorid=?';
+            $params = array($this->get('announcement'),$db->formatDate($currentDate, true),$currentUser->getId());
+        }else{
+            $query = 'INSERT INTO '.self::tableName.' VALUES(?,?,?,?)';
+            $params = array($currentUser->getId(),$this->get('announcement'),'announcement',$db->formatDate($currentDate, true));
+        }
+        $db->pquery($query,$params);
 	}
 }

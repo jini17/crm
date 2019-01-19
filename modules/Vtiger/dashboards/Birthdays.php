@@ -10,7 +10,7 @@
 
 class Vtiger_Birthdays_Dashboard extends Vtiger_IndexAjax_View {
 
-	public function process(Vtiger_Request $request) { 
+	public function process(Vtiger_Request $request) {  
 
 		$db = PearDatabase::getInstance();
 		//$db->setDebug(true);
@@ -49,8 +49,8 @@ class Vtiger_Birthdays_Dashboard extends Vtiger_IndexAjax_View {
 		$linkId = $request->get('linkid');
 	//echo "asd";die;
 		$moduleModel = Home_Module_Model::getInstance($moduleName);
-		$birthdays = $moduleModel->getBirthdays($group, $type);
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$birthdays = $moduleModel->getBirthdays($group, $type); 
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 
 		
 		$viewer->assign('WIDGET', $widget);

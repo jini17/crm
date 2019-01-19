@@ -10,77 +10,39 @@
  ********************************************************************************/
 -->*}
 <div class="dashboardWidgetContent">
-	<div class="feature-box feature-box-style-5">
-		<div class="feature-box-info col-md-12" style="padding-right: 0px !important;padding-left: 0px !important;">
-			{if $DATADETAILS['Foundation']}
-				<div class="col-md-1" style="padding-right: 0px !important;padding-left: 0px !important;"><i class="fa fa-briefcase"></i></div>
-				<div class="col-md-11" style="padding-right: 0px !important;padding-left: 0px !important;">
-					<div style="padding-right: 0px !important;padding-left: 0px !important;display: inline-block;float: left;margin-right: 15px !important;">
-						<p class="mb-sm text-uppercase"><strong>{vtranslate('Foundation', 'Home')}&nbsp;&nbsp;{vtranslate('User', 'Home')}:</strong>
-						</p>
 
-					</div>
-					<div style="padding-right: 0px !important;padding-left: 0px !important;text-align: left;display: inline-block;">
-						<p class="mb-lg">{$DATADETAILS['Foundation']}</p>
-					</div>
-				</div>
-			{/if}
-		</div>
-		<div class="feature-box-info col-md-12" style="padding-right: 0px !important;padding-left: 0px !important;">
-			{if $DATADETAILS['Sales'] || $DATADETAILS['Support'] || $DATADETAILS['Enterprise']}
-			<div class="col-md-1" style="padding-right: 0px !important;padding-left: 0px !important;"><i class="fa fa-users"></i>
-			</div>
-			<div class="col-md-11" style="padding-right: 0px !important;padding-left: 0px !important;">
-				<div class="col-md-12" style="padding-right: 0px !important;padding-left: 0px !important;display: inline-block;float: left;margin-right: 15px !important;">
-					<p class="mb-sm text-uppercase"><strong>{vtranslate('Add-On\'s', 'Home')}:</strong></p>
-				</div>
-			{/if}
-				<div class="col-md-12" style="padding-right: 0px !important;padding-left: 0px !important;text-align: left;display: inline-block;">
-					{if $DATADETAILS['Sales']}
-					<div class="col-md-4" style="padding-right: 0px !important;padding-left: 0px !important;text-align: left;">
-						<div style="margin-right: 20px !important; padding-left: 0px !important;text-align: left;border-bottom: 2px solid #ffc400; border-right: 2px solid #ffc400;">
-								<p class="mb-lg" style="display: inline-block;">{vtranslate('Sales', 'Home')}</p>
-								<p style="float: right;padding:0px 10px 0px 0px ">{$DATADETAILS['Sales']}</p>
-						</div>
-					</div>
-					
-					{/if}
-					{if $DATADETAILS['Support']}
-					<div class="col-md-4" style="padding-right: 0px !important;padding-left: 0px !important;text-align: left;">
-						<div style="margin-right: 20px !important; padding-left: 0px !important;text-align: left;border-bottom: 2px solid #40e0d0; border-right: 2px solid #40e0d0;">
-								<p class="mb-lg" style="display: inline-block;">{vtranslate('Support', 'Home')}</p>
-								<p style="float: right;padding:0px 10px 0px 0px ">{$DATADETAILS['Support']}</p>
-						</div>
-					</div>
-
-					{/if}
-					{if $DATADETAILS['Enterprise']}
-					<div class="col-md-4" style="padding-right: 0px !important;padding-left: 0px !important;text-align: left;">
-						<div style=" padding-left: 0px !important;text-align: left;border-bottom: 2px solid #b382c7; border-right: 2px solid #b382c7;">
-								<p class="mb-lg" style="display: inline-block;">{vtranslate('Enterprise', 'Home')}</p>
-								<p style="float: right;padding:0px 10px 0px 0px ">{$DATADETAILS['Enterprise']}</p>
-						</div>
-					</div>
-					
-			
-					{/if}
-
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<div class="col-md-12" style="vertical-align: bottom;position: absolute;bottom: 0;right: 0;padding: 5px !important;font-size: 12.3px;"> 
-		<div class="feature-box feature-box-style-5">
-			<div class="feature-box-info">
-				<p class="mb-lg">{vtranslate('Your subscription is started at', 'Home')} <strong><i>{$DATADETAILS['startdate']}</i></strong> {vtranslate('and will expire on', 'Home')} <strong><i>{$DATADETAILS['enddate']}</i></strong>.
-					{if $DATADETAILS['btnrenew'] eq 1}
-					<button class="btn cpsubscription" onclick="javascript:Vtiger_Widget_Js.registerRenewSubscription('{$SHORTNAME}');" name="renewsubscription">Renew Now</button> 
-					{/if}
-				</p>
-			</div>
-		</div>
-	</div>
+	{if count($DATADETAILS) > 0}
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>
+				<b>{vtranslate('LBL_PLAN', 'Home')}</b>
+				</th>
+				<th>
+				<b>{vtranslate('LBL_NO_USERS', 'Home')}</b>
+				</th>
+				<th>
+				<b>{vtranslate('LBL_DURATION', 'Home')}</b>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach item=MODEL key=k from=$DATADETAILS}
+				<tr>
+					<td>
+					{$k}
+					</td>
+					<td>
+					{$MODEL[0]}
+					</td>
+					<td>
+					{$MODEL[1]} - {$MODEL[2]}
+					</td>
+				</tr>
+			{/foreach}
+		</tbody>
+	</table>
+{/if}
 </div>
 <div class="widgeticons dashBoardWidgetFooter">
 	<div class="footerIcons pull-right">

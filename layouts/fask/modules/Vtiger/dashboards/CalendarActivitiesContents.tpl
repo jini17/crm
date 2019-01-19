@@ -21,7 +21,7 @@
                         <div class='pull-left'>
                                 {assign var=PARENT_ID value=$ACTIVITY->get('parent_id')}
                                 {assign var=CONTACT_ID value=$ACTIVITY->get('contact_id')}
-                                <a href="{$ACTIVITY->getDetailViewUrl()}">{$ACTIVITY->get('subject')}</a>{if $PARENT_ID} {vtranslate('LBL_FOR')} {$ACTIVITY->getDisplayValue('parent_id')}{else if $CONTACT_ID} {vtranslate('LBL_FOR')} {$ACTIVITY->getDisplayValue('contact_id')}{/if}
+                                <a href="{$ACTIVITY->getDetailViewUrl()}">{$ACTIVITY->get('subject')}</a>{if $PARENT_ID} {vtranslate('LBL_FOR')} {$ACTIVITY->getDisplayValue('parent_id')}{elseif $CONTACT_ID} {vtranslate('LBL_FOR')} {$ACTIVITY->getDisplayValue('contact_id')}{/if}
                         </div>
                                 {assign var=START_DATE value=$ACTIVITY->get('date_start')}
                                 {assign var=START_TIME value=$ACTIVITY->get('time_start')}
@@ -55,7 +55,19 @@
                         </div>
                 {/if}
         {/foreach}
-        </div></div>
+
+        </div>
+
+                <div class="clearfix"></div>
+            {if $smarty.request.name eq 'OverdueActivities'}
+                    <a href='index.php?module=Calendar&parent=&page=1&view=List&viewname=19&orderby=&sortorder=&app=FOUNDATION&search_params=[[["due_date","l","{$smarty.now|date_format:"d-m-Y"}"]]]' class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
+
+            {else}
+                    <a href='index.php?module=Calendar&parent=&page=1&view=List&viewname=19&orderby=&sortorder=&app=FOUNDATION&search_params=[[["date_start","g","{$smarty.now|date_format:"d-m-Y"}"]]]' class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
+
+            {/if}
+
+        </div>
 
 {if $PAGING->get('nextPageExists') eq 'true'}
         <div class='pull-right' style='margin-top:5px;padding-right:5px;'>

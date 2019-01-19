@@ -8,9 +8,9 @@
       padding:20px 10px;
       border: 1px solid #ddd;
       background: #fff;
-      min-height: 371px;
-      margin-top: 20px;
-      margin-bottom: 20px;
+        min-height: 391px;
+        margin-top: 20px;
+        margin-bottom: 9px;
     }
     .user-social{
         margin-top: 15px;
@@ -39,16 +39,9 @@
 }
 
  .img-holder{
-{*       border-radius: 50%;
-       border:1px solid #ccc;*}    
-       width: 122px;
-       height: 122px;
-{*       margin: 0 auto;
-       box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;*}
-{*    background: #fff;*}
- 
+
+    width: 122px;
+    height: 122px;
     margin: 0 auto !important;
 
   
@@ -87,7 +80,7 @@
 {$LISTVIEW_ENTRIES|print_r}*}
 
 <div style="min-height:450px;">
- 
+
    <div class="row">
        <div class="col-lg-12" style="padding:0;">
             {foreach  item=LISTVIEW_ENTRY from=$LISTVIEW_ENTRIES }
@@ -100,12 +93,16 @@
                            {assign var=IMAGE_DETAILS value=$LISTVIEW_ENTRY->getImageDetails()}
                                 {foreach item=IMAGE_INFO from=$IMAGE_DETAILS}
 	                 {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
-                                             <img width="110" height='110' class="img-circle"  style="display:block; margin:0 auto;"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
+                             <a href="{$LISTVIEW_ENTRY->getDetailViewUrl()}">
+                                 <img width="110" height='110' class="img-circle"  style="display:block; margin:0 auto;"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
+                                 </a>   
                                        {/if}
 
                                 {/foreach}
                                         {if $IMAGE_DETAILS[0]['id'] eq null}
+                                            <a href="{$LISTVIEW_ENTRY->getDetailViewUrl()}">
                                             <img width="110" height='110' class="img-circle"  style="display:block; margin:0 auto;" src="{vimage_path('DefaultUserIcon.png')}">
+                                            </a>
                                         {/if}
                         </div>
                         <div class="user-meta text-center">
@@ -115,9 +112,14 @@
                                 </a>
                             </h4>
                                 <div class="designation_label designation">
-                                      {$LISTVIEW_ENTRY->get('title')}
-                                </div>   
-                                <div class="email-address">  {$LISTVIEW_ENTRY->get('email1')}</div>
+                                    {assign var=designation value=$LISTVIEW_ENTRY->getDepartmetByemployeeID($LISTVIEW_ENTRY->get('id'))}
+                                      {if $designation neq '0'} {$designation} {/if}
+                                </div>
+                            <div class="designation_label designation">
+                                {assign var=department value=$LISTVIEW_ENTRY->getDesignationByEmployeeID($LISTVIEW_ENTRY->get('id'))}
+                                {if $department neq '0'} {$department} {/if}
+                            </div>
+                            <div class="email-address">  {$LISTVIEW_ENTRY->get('email1')}</div>
                                    
                         </div>
                                 
@@ -147,7 +149,12 @@
                                         <center>
                                                 {if $SEARCH_VALUE eq 'Active'}
                                                         {assign var=SINGLE_MODULE value="SINGLE_$MODULE"}
-                                                        {vtranslate('LBL_NO')} {vtranslate($MODULE, $MODULE)} {vtranslate('LBL_FOUND')},{if $IS_MODULE_EDITABLE} <a style="color:blue" href="{$MODULE_MODEL->getCreateRecordUrl()}"> {vtranslate('LBL_CREATE_USER',$MODULE)}</a>{/if}
+                                                        {vtranslate('LBL_NO')} {vtranslate($MODULE, $MODULE)}
+                                                        {vtranslate('LBL_FOUND')},{if $IS_MODULE_EDITABLE} 
+                                                            <a style="color:blue" href="{$MODULE_MODEL->getCreateRecordUrl()}">
+                                                                {vtranslate('LBL_CREATE_USER',$MODULE)}
+                                                            </a>
+                                                        {/if}
                                                 {else}
                                                         {vtranslate('LBL_NO')} {vtranslate($MODULE, $MODULE)} {vtranslate('LBL_FOUND')}
                                                 {/if}

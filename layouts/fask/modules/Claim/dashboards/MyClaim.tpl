@@ -15,8 +15,8 @@
   <div class="filterContainer">
         
         <div class="row" style="margin-left:3px;">
-               <div class="col-lg-8">
-                <label class="radio-group cursorPointer" style="font-size:13px; padding:5px;"> 
+            <div class="col-lg-8" style="padding-left: 9px;">
+                <label class="radio-group cursorPointer" style="font-size:13px; padding:13px 0px 0 0;"> 
                     <input type="radio" id="myclaimtype" name="type" class="widgetFilter reloadOnChange cursorPointer" value="claimtype" checked="true" />&nbsp;&nbsp; {vtranslate('LBL_CLAIM_TYPE', $MODULE_NAME)}
                 </label>&nbsp;&nbsp;
                <label class="radio-group cursorPointer" style="font-size:13px; padding:5px;">
@@ -25,12 +25,12 @@
                 </label>
               </div>
              
-               <div class="col-lg-4 pull-right" style="padding:5px;"><input type="button" class="btn btn-primary" onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USERID}'" name="applyclaim" value="{vtranslate('LBL_APPLY', $MODULE_NAME)}"></div>
+               <div class="col-lg-4 pull-right" style="padding:5px;"><input type="button" class="btn btn-primary" onclick="Users_Claim_Js.addClaim('?module=Users&view=EditClaim&userId={$USERID}');" name="applyclaim" value="{vtranslate('LBL_APPLY', $MODULE_NAME)}"></div>
              
             <div class='clearfix'></div>
       </div>    
    </div>
-<div class="dashboardWidgetContent mCustomScrollbar _mCS_5">
+<div class="dashboardWidgetContent">
   {include file="dashboards/MyClaimContent.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 

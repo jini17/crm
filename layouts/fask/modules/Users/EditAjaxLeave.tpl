@@ -62,9 +62,9 @@
                                                 {if $LEAVETYPELIST|count gt 0}
                                                 {foreach key=LEAVE_ID item=LEAVE_MODEL from=$LEAVETYPELIST name=institutionIterator}		
                                                         {$LEAVE_MODEL.leavetypeid}
-                                                <option value="{$LEAVE_MODEL.leavetypeid}" {if $LEAVE_DETAIL.leave_type eq $LEAVE_MODEL.leavetypeid} selected {/if}>
+                                                <option value="{$LEAVE_MODEL.leavetypeid}" data-color="{$LEAVE_MODEL.color}" data-halfday="{$LEAVE_MODEL.halfday}"  data-balance="{$LEAVE_MODEL.balance}" {if $LEAVE_DETAIL.leave_type eq $LEAVE_MODEL.leavetypeid} selected {/if}>
                                                 {$LEAVE_MODEL.leavetype} 
-                                                &nbsp;&nbsp;({$LEAVE_MODEL.leave_remain}) 
+                                               {*&nbsp;&nbsp;({$LEAVE_MODEL.balance})*}
                                               
 
                                         </option>
@@ -82,26 +82,38 @@
                 <!--end-->
                         <div class="control-group">
                                 <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_START_DATE', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
-                                <div class="controls date  col-md-8">
-                                        <input id="start_date" type="text" class="dateField inputElement" type="text" value="{$LEAVE_DETAIL.from_date}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($STARTDATEFIELD))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" name="start_date" data-date-format="dd-mm-yyyy" required>	
-                                        <span class="add-on">&nbsp;<i class="icon-calendar"></i></span>&nbsp;&nbsp;
-                                        <div style="float: right;margin-bottom:10px;margin-top:10px;">
+                                <div class="controls date  col-md-5">
+                                    <div class="input-group">
+                                        <input id="start_date" type="text" class="dateField inputElement" type="text" value="{$LEAVE_DETAIL.from_date}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($STARTDATEFIELD))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" name="start_date" data-date-format="dd-mm-yyyy" aria-describedby="basic-addon2" required>	
+                                         <span class="input-group-addon" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div style="float: right;margin-bottom:10px;margin-top:7px;">
                                             <span style="margin-right:7px;" id="starthalfcheck" class="hide">{vtranslate('LBL_HALF_DAY', $QUALIFIED_MODULE)}</span>
                                             <input type="checkbox" {if $LEAVE_DETAIL.starthalf eq 1} checked {/if} name="starthalf" id="starthalf" value="1" style="float: left;
     margin-right: 10px;">
 
                                         </div>
-                                </div>
+                                </div>    
                         </div><br><br>
                         <div class="control-group">
                         <div class="control-group" id="enddate_div">
                                 <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_END_DATE', $QUALIFIED_MODULE)} <span class="redColor">*</span></label>
-                                <div class="controls row-fluid date  col-md-8">
-                                        <input id="end_date" type="text" class="dateField inputElement nameFields" type="text" value="{if $LEAVE_DETAIL.to_date neq '00-00-0000'}{$LEAVE_DETAIL.to_date}{/if}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($ENDDATEFIELD))}'  data-validator={$VALIDATOR} data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"  name="end_date" data-date-format="dd-mm-yyyy" required>	
-                                        <span class="add-on">&nbsp;<i class="icon-calendar"></i></span>&nbsp;&nbsp;
-                                        <span style="margin-right:7px;" class="{if $LEAVE_DETAIL.endhalf eq 0} hide {/if}" id="endhalfcheck">{vtranslate('LBL_HALF_DAY', $QUALIFIED_MODULE)}</span>
-                                        <input type="checkbox" name="endhalf" class="{if $LEAVE_DETAIL.endhalf eq 0} hide {/if}"  {if $LEAVE_DETAIL.endhalf eq 1} checked{/if} id="endhalf" value="1">
+                                <div class="controls row-fluid date  col-md-5">
+                                    <div class="input-group">
+                                        <input id="end_date" type="text" class="dateField inputElement nameFields" type="text" value="{if $LEAVE_DETAIL.to_date neq '00-00-0000'}{$LEAVE_DETAIL.to_date}{/if}" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($ENDDATEFIELD))}'  data-validator={$VALIDATOR} data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" aria-describedby="basic-addon2"  name="end_date" data-date-format="dd-mm-yyyy" required>	
+                                      
+                                        <span class="input-group-addon" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+
+                                    </div>
                                 </div>
+                                <div class="col-md-3"> 
+                                     <div style="float: right;margin-bottom:10px;margin-top:7px;">
+                                        <input type="checkbox" name="endhalf" style="margin-right: 10px;" class="{if $LEAVE_DETAIL.endhalf eq 0} hide {/if}"  {if $LEAVE_DETAIL.endhalf eq 1} checked{/if} id="endhalf" value="1">
+                                                                            <span style="margin-right:7px;" class="{if $LEAVE_DETAIL.endhalf eq 0} hide {/if}" id="endhalfcheck">{vtranslate('LBL_HALF_DAY', $QUALIFIED_MODULE)}</span>
+                                         </div>
+                                </div>    
                         </div><br><br>
                         <div class="control-group">
                                 <label class="control-label fieldLabel  col-md-4">&nbsp;{vtranslate('LBL_REPLACE_USER', $QUALIFIED_MODULE)}</label>		

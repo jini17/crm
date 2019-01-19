@@ -32,7 +32,7 @@ class Vtiger_Employee_Dashboard extends Vtiger_IndexAjax_View {
 	
 		$moduleModel = Home_Module_Model::getInstance($moduleName);
 		$birthdays = $moduleModel->getBirthdays($group, $type);
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 
 		
 		$viewer->assign('WIDGET', $widget);

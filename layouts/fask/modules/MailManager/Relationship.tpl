@@ -46,7 +46,7 @@
             {/foreach}
         {/foreach}
         <div class="col-lg-12 padding0px">
-            <div class="col-lg-7 padding0px recordScroll" >
+            <!--<div class="col-lg-7 padding0px recordScroll" >
                 {foreach item=RECORDS key=MODULE from=$LOOKUPS}
                     {foreach item=RECORD from=$RECORDS}
                         <span class="col-lg-12 padding0px">
@@ -63,7 +63,7 @@
                         <br>
                     {/foreach}
                 {/foreach}
-            </div>
+            </div>-->
             <div class="pull-left col-lg-5 ">
                 {if $LOOKRECATLEASTONE}
                     {if $LINK_TO_AVAILABLE_ACTIONS|count neq 0}

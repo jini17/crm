@@ -248,7 +248,7 @@ class SyncServer {
 	/**
 	 * Handles Create/Update/Delete operations on record
 	 */
-	function put($key, $element, $user) {
+	function put($key, $element, $user) { 
 		$db = PearDatabase::getInstance();
 		$appid = $this->appid_with_key($key);
 
@@ -270,6 +270,36 @@ class SyncServer {
 
 		$recordDetails = array();
 
+		// Added By Mabruk
+		if ($element[0]['module'] == 'Contacts') {	
+
+			foreach ($element as $el) {
+
+				$result = $db->pquery("SELECT * FROM vtiger_contactdetails INNER JOIN vtiger_crmentity ON contactid = crmid WHERE deleted = 0 AND firstname = ? AND lastname = ? AND email = ?", array($el['values']['firstname'], $el['values']['lastname'], $el['values']['email']));
+
+				if ($db->num_rows($result) == 0) {
+
+					unset($el['values']['id']);
+					$recordDetails['created'][$el['id']] = $el['values'];	
+					$recordDetails['created'][$el['id']]['module'] = $el['module']; 
+
+				}	
+				else {
+					
+					$cRecordId = "12x" . $db->query_result($result, 0, 'contactid');
+					$el['values']['id'] = $cRecordId;
+					$recordDetails['updated'][$el['id']] = $el['values'];	
+					$recordDetails['updated'][$el['id']]['module'] = $el['module'];
+
+				}
+
+			}
+
+
+			goto HandlerPutAction;		
+
+		}
+		// END
 		$createRecords = array();
 		$updateRecords = array();
 		$deleteRecords = array();
@@ -309,7 +339,10 @@ class SyncServer {
 	   $recordDetails['created'] = $createRecords;
 	   $recordDetails['updated'] = $updateRecords;
 	   $recordDetails['deleted'] = $deleteRecords;
-	   $result = $this->destHandler->put($recordDetails,$user);
+
+	   // Added By Mabruk
+	   HandlerPutAction: 		      	   
+	   $result = $this->destHandler->put($recordDetails,$user); 
 
 	   $response= array();
 	   $response['created'] = array();
@@ -318,8 +351,8 @@ class SyncServer {
 	   $clientID2ServerIDMap = array();
 
 	   $nextSyncDeleteRecords = $this->destHandler->getAssignToChangedRecords();
-	   foreach($result['created'] as $clientRecordId=>$record){
-		   $this->idmap_put($appid, $record['id'], $clientRecordId,$clientModifiedTimeList[$clientRecordId],$record['modifiedtime'],$serverAppId);
+	   foreach($result['created'] as $clientRecordId=>$record){ 
+		   $this->idmap_put($appid, $record['id'], $clientRecordId,$clientModifiedTimeList[$clientRecordId],$record['modifiedtime'],$serverAppId); 
 		   $responseRecord = $record;
 		   $responseRecord['_id'] = $record['id'];
 		   $responseRecord['id'] = $clientRecordId;
@@ -361,15 +394,14 @@ class SyncServer {
 	   if(array_key_exists('skipped', $result)) {
 		   $response['skipped'] = $result['skipped'];
 	   }
-
-		$response['client2serverIdMap'] = $clientID2ServerIDMap;
-		return $response;
+		
+	   return $response;
 	}
 
 	/**
 	 * Share the Create/Update/Delete state information
 	 */
-	function get($key, $module, $token, $user) {
+	function get($key, $module, $token, $user) { 
 		$db = PearDatabase::getInstance();
 		$appid = $this->appid_with_key($key);
 		if (empty($appid)) {
@@ -382,7 +414,12 @@ class SyncServer {
 		require_once $handlerDetails['handlerpath'];
 		$this->destHandler = new $handlerDetails['handlerclass']($serverKey);
 		$this->destHandler->setClientSyncType($clientApplicationSyncType);
-		$result = $this->destHandler->get($module, $token,$user);
+
+		// Mabruk
+		if ($handlerDetails['handlerclass'] == 'Office365_Vtiger_Handler' && $module == 'Contacts')
+			$result = $this->destHandler->get('Office365Contacts', $token,$user); 
+		else
+			$result = $this->destHandler->get($module, $token,$user);
 		// Lookup Ids
 		$updatedIds = array(); $deletedIds = array();
 		foreach($result['updated'] as $u){
@@ -433,7 +470,7 @@ class SyncServer {
 		$result['created'] = $filteredCreates;
 		$result['updated'] = $filteredUpdates;
 		$result['deleted'] = $filteredDeletes;
-		$result['client2serverIdMap'] = $clientID2ServerIDMap;
+		$result['client2serverIdMap'] = $clientID2ServerIDMap; 
 		return $result;
 	}
 

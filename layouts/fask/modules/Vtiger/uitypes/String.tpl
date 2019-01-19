@@ -29,5 +29,11 @@
 		{if count($FIELD_INFO['validator'])}
 			data-specific-rules='{ZEND_JSON::encode($FIELD_INFO["validator"])}'
 		{/if}
-		   />
+
+		{if $FIELD_MODEL->get('uitype') eq '106'}
+			data-rule-email="true"
+		{/if}
+
+		  {if $FIELD_MODEL->get('maximumlength') neq '' && $FIELD_MODEL->get('maximumlength') neq 0} maxlength="{$FIELD_MODEL->get('maximumlength')}" {/if} />
+		
 {/strip}

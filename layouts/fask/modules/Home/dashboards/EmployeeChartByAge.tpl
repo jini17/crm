@@ -13,17 +13,14 @@
 	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
   <div class="filterContainer">
         <div class="row">
-            <div class="col-sm-12">
-                <div class="col-lg-12">
-                    <select class="widgetFilter select2" id="department" name="type" style="width:100%;">
+            <div class="col-lg-12">
+                    <select class="widgetFilter select2 col-lg-12" id="department" name="type" style="width:100%;">
                         <option value=""> All</option>
                         {foreach item=DEPT key=k from=$DEPARTMENT}
                             <option value="{$k}"> {$DEPT}</option>
-                        {/foreach}    
-                       
+                        {/foreach}  
                       <!--  <option value="horizontalbarChart"> Horizontalbar Chart</option>-->
                       </select>
-                </div>
             </div>
         </div>
 

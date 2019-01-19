@@ -9,4 +9,24 @@
  *************************************************************************************/
 
 class Home_DashBoard_View extends Vtiger_DashBoard_View {
+
+       /**
+         * Function to get the list of Script models to be included
+         * @param Vtiger_Request $request
+         * @return <Array> - List of Vtiger_JsScript_Model instances
+        */
+        public function getHeaderScripts(Vtiger_Request $request) {
+                $headerScriptInstances = parent::getHeaderScripts($request);
+                $moduleName = $request->getModule();
+
+                $jsFileNames = array(
+                        "modules.Users.resources.Claim",
+                        "modules.Users.resources.Leave",
+                        
+                );
+                
+                $jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
+                $headerScriptInstances = array_merge($headerScriptInstances, $jsScriptInstances);
+                return $headerScriptInstances;
+        }
 }

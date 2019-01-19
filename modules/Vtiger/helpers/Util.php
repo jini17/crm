@@ -9,6 +9,44 @@
  *************************************************************************************/
 
 class Vtiger_Util_Helper {
+
+
+
+    /*Codes added for multiple companies and terms&conditions*/
+    /* Function added by Jitu on Jun 23, 2014 for new UI Type 3997
+    This function will retrieve terms title */
+    
+    public static function getTermTitle(){
+        $db = PearDatabase::getInstance();
+        $currentUser = Users_Record_Model::getCurrentUserModel();
+        $userid      = $currentUser->id;
+        $params = array();
+        $Where = '';
+
+        if(!$currentUser->isAdminUser()) {
+            $Where  = " WHERE tblSCUAC.userid = ?";
+            $params = array($userid);   
+        }
+
+        $aTermCondition = array();
+        $iOptionIndex = 0;
+        $query = "SELECT DISTINCT tblVtTNC.termsconditionid, tblVtTNC.title FROM  vtiger_termscondition tblVtTNC 
+                    INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVtTNC.termsconditionid
+                    LEFT JOIN secondcrm_users_assigncompany tblSCUAC ON tblSCUAC.organization_id = tblVtTNC.organization_id 
+                    ".$Where." AND tblVTC.deleted=0 ORDER BY tblVtTNC.title";
+
+        $result = $db->pquery($query, $params);
+        $iMaxTerm = $db->num_rows($result);
+        for($iK=0;$iK<$iMaxTerm;$iK++)
+        {
+            $iOptionIndex++;
+            $aTermCondition[$iOptionIndex]['title'] = $db->query_result($result,$iK,'title');
+            $aTermCondition[$iOptionIndex]['id'] = $db->query_result($result,$iK,'termsconditionid');;
+        }
+        return $aTermCondition;
+    }   
+
+
         /**
          * Function used to transform mulitiple uploaded file information into useful format.
          * @param array $_files - ex: array( 'file' => array('name'=> array(0=>'name1',1=>'name2'),
@@ -49,6 +87,55 @@ class Vtiger_Util_Helper {
                 return $files;
         }
 
+    /* Function added by Jitu on Aug 26, 2014 for new UI Type 3993
+    This function will retrieve Terms&Condition title for view the details in a module */
+    public static function getTnCTitle($id){
+        $db = PearDatabase::getInstance();
+
+        $aTnCTitle = array();
+        $iOptionIndex = 0;
+        $query = 'SELECT title FROM vtiger_termscondition WHERE termsconditionid='.$id;
+        $result = $db->pquery($query, array());
+        $aTnCTitle[$iOptionIndex]['title'] = $db->query_result($result,0,'title');
+        return $aTnCTitle;
+    }
+
+    /**
+    Function added by Jitu on 11 Aug 2014 
+    for getting all termsncondition for particular company record
+  **/       
+    public static function getAllCompanyTermsConditions($company_Id){
+        
+         $db = PearDatabase::getInstance();
+         $currentUser = Users_Record_Model::getCurrentUserModel();
+             $userid      = $currentUser->id;
+        
+        if(!$currentUser->isAdminUser()) {
+            $Where  = " AND tblSCUAC.userid = '".$userid."'";
+        }   
+         $aTermsConditionArray = array();
+         $iOptionIndex = 0;
+
+         $query = "SELECT DISTINCT tblVtTNC.termsconditionid, tblVtTNC.title, tblVtTNC.tandc FROM  vtiger_termscondition tblVtTNC 
+                    INNER JOIN vtiger_crmentity tblVTC ON tblVTC.crmid=tblVtTNC.termsconditionid
+                    LEFT JOIN secondcrm_users_assigncompany tblSCUAC ON tblSCUAC.organization_id = tblVtTNC.organization_id 
+                    ".$Where." AND tblVTC.deleted=0 AND tblVtTNC.organization_id = ? ORDER BY tblVtTNC.title";
+
+         $result = $db->pquery($query, array($company_Id));
+         $iTnC = $db->num_rows($result);
+        for($iK=0;$iK<$iTnC;$iK++)
+        {   
+                        $aTermsConditionArray[$iOptionIndex]['id'] = $db->query_result($result,$iK,'termsconditionid', 'selected');
+                        $aTermsConditionArray[$iOptionIndex]['title'] = $db->query_result($result,$iK,'title', 'selected');
+                        $aTermsConditionArray[$iOptionIndex]['tandc'] = $db->query_result($result,$iK,'tandc', 'selected');
+            $iOptionIndex++;
+                       
+        }
+        //print_r( $aTermsConditionArray);
+      return $aTermsConditionArray;
+    }
+
+
         /** Function added by ZUL@Secondcrm.com on Jun 23, 2014 for new UI Type 3993
         *  Modified By jitu@secondcrm.com    	
         *  This function will retrieve company title 
@@ -56,22 +143,20 @@ class Vtiger_Util_Helper {
 
         public static function getCompanyTitle($id){
                 $db = PearDatabase::getInstance();
+                //$db->setDebug(true);
                 $currentUser = Users_Record_Model::getCurrentUserModel();
                 $userid      = $currentUser->id;
                 $params = array();
-                $Where = '';
-                if(!$currentUser->isAdminUser()) {
-                        $Where  = " WHERE tblSCUAC.userid = ?";
-                        $params = array($userid); 	
+                $Where = 'WHERE 1 ';
+
+                if($id !=''){
+                   $Where .= " AND tblVTOD.organization_id='$id'";     
                 }
 
                 $aCompanyTitle = array();
-                $iOptionIndex = 0;
-
-                $query = "SELECT DISTINCT tblVTOD.organization_id,tblVTOD.`organizationname`, tblVTOD.organization_title 
+                
+                $query = "SELECT DISTINCT tblVTOD.organization_id,tblVTOD.`organizationname`, tblVTOD.organization_title, tblVTOD.city
                         FROM vtiger_organizationdetails tblVTOD
-                   LEFT JOIN secondcrm_users_assigncompany tblSCUAC 
-                        ON tblSCUAC.organization_id = tblVTOD.organization_id 
                         ".$Where."
                         ORDER BY tblVTOD.organization_title";
                 $result = $db->pquery($query, $params);
@@ -79,10 +164,11 @@ class Vtiger_Util_Helper {
                 for($iK=0;$iK<$iMaxCompany;$iK++)
                 {   
                         if($db->query_result($result, $iK, "organization_id") > 0){
-                        $iOptionIndex++;
-                        $aCompanyTitle[$iOptionIndex]['organization_id'] = $db->query_result($result,$iK,'organization_id', 'selected');
-                        $aCompanyTitle[$iOptionIndex]['organization_title'] = $db->query_result($result,$iK,'organization_title', 'selected');
-                        $aCompanyTitle[$iOptionIndex]['organizationname'] = $db->query_result($result,$iK,'organizationname', 'selected');
+                        
+                            $aCompanyTitle[$iK]['organization_id'] = $db->query_result($result,$iK,'organization_id');
+                            $aCompanyTitle[$iK]['organization_title'] = $db->query_result($result,$iK,'organization_title');
+                            $aCompanyTitle[$iK]['organizationname'] = $db->query_result($result,$iK,'organizationname');
+                            $aCompanyTitle[$iK]['city'] = $db->query_result($result,$iK,'city');
                         }    
                 }
 
@@ -639,7 +725,14 @@ class Vtiger_Util_Helper {
                                                 }
                         $groupConditionInfo = array();
                         $groupColumnsInfo = array();
+
                         $groupConditionGlue = $glueOrder[$groupIterator];
+
+                        //added by jitu@Search by multiple conditions
+                        if($glueOrder[$groupIterator]==''){
+                           $groupConditionGlue = 'OR';     
+                        } //end here
+                                                
                         foreach($groupInfo as $fieldSearchInfo){
                                    $advFilterFieldInfoFormat = array();
                                    $fieldName = $fieldSearchInfo[0];
@@ -737,18 +830,35 @@ class Vtiger_Util_Helper {
 
         /*start edited by fadzil 19/9/14*/
     public static function getAllSkins(){
-        return array('curiousblue'          => '#3498DB',
-                                'mariner'        => '#2980B9',
-                                'turquoise'     => '#1ABC9C',
+        return array( 
+                                'blue'                           =>"#2f5597",
+                                'darkblue'                   =>"#2f5597",
+                                'curiousblue'               => '#3498DB',
+                                'mariner'                     => '#2980B9',
+                                'turquoise'                  => '#1ABC9C',
                                 'mountainmeadow' =>  '#16A085',
-                                'wisteria' =>  '#9B59B6',
-                                'amethyst' =>   '#8E44AD',
-                                'alizarin' =>    '#E74C3C',
-                                'pomegranate' =>   '#C0392B',
-                                'concrete' =>  '#95A5A6',
-                                'abestos' =>  '#95A5A6',
-                                'sherpa' =>   '#4A6A77',
-                                'metalslate' =>  '#435E6F'
+                                'wisteria'                    =>  '#9B59B6',
+                                'amethyst'                  =>   '#8E44AD',
+                                'alizarin'                      =>    '#E74C3C',
+                                'pomegranate'          =>   '#C0392B',
+                                'concrete'                  =>  '#95A5A6',
+                                'abestos'                    =>  '#95A5A6',
+                                'sherpa'                      =>   '#4A6A77',
+                                'metalslate'               =>  '#435E6F',
+                                'purple'                       =>  '#d971ae',
+                                'yellow'                       =>  '#f6bb43',                              
+                                "green"                      => "#3bbd9b" ,   
+                                "shipcove"                 => "#6783B3",
+                                "lilacbush"                 => "#997CCD",
+                                "energyyellow"       => "#FAD852",
+                                "downy"                    => "#67D0AF",
+                                "lily"                           => "#CBA7C1",
+                                "danube"                 => "#77A1D3",
+                                "selectiveyellow"   => "#F7B301",
+                                "sandybrown"        => "#F4967A",
+                                "mandy"                  => "#EC5C64",
+                                "aquaisland"           => "#AFDFDF",
+                                "red"                        => "#AFDFDF"
             );
 
                 /*'alphagrey' => '#666666',	'softed'	=> '#1560BD',	'bluelagoon'=> '#204E81',
@@ -1346,4 +1456,17 @@ class Vtiger_Util_Helper {
                 }
                 return $month;
         }
+
+        /* Function added by Jitu on Aug 26, 2014 for new UI Type 3993
+    This function will retrieve Terms&Condition title for view the details in a module */
+    public static function getTnCDescription($id){
+        $db = PearDatabase::getInstance();
+
+        $iOptionIndex = 0;
+        $query = "SELECT tandc FROM vtiger_termscondition WHERE termsconditionid=?";
+        $result = $db->pquery($query, array($id));
+        $aTnCDescription = $db->query_result($result,0,'tandc');
+        return $aTnCDescription;
+    }
+
 }

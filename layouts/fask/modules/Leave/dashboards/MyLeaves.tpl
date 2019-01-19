@@ -14,9 +14,9 @@
 </div>
   <div class="filterContainer">
         <div class="row" style="margin-left:3px;">
-               <div class="col-md-8">
+               <div class="col-md-8" style="padding-left: 9px">
                 
-                <label class="radio-group cursorPointer" style="font-size:13px; padding:5px;">
+                <label class="radio-group cursorPointer" style="font-size:13px; padding:13px 0px 0 0;">
                     <input style="vertical-align:middle;" type="radio" id="myleavetype" name="type" class="widgetFilter reloadOnChange cursorPointer" value="leavetype" checked="checked" / >&nbsp;&nbsp;{vtranslate('LBL_LEAVE_TYPE', $MODULE_NAME)}
                 </label>&nbsp;&nbsp;
                 
@@ -27,7 +27,7 @@
              </div>
 
              {if $MODELS['balance'] gt 0}
-               <div class="col-md-4 pull-right"  style="padding:5px;"><input type="button" class="btn btn-primary" onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USERID}'" name="applyleave" value="{vtranslate('LBL_APPLY', $MODULE_NAME)}">
+               <div class="col-md-4 pull-right"  style="padding:5px;"><input type="button" class="btn btn-primary" onclick="Users_Leave_Js.addLeave('?module=Users&view=EditLeave&userId={$USERID}');" name="applyleave" value="{vtranslate('LBL_APPLY', $MODULE_NAME)}">
                </div>
              {/if}
             <div class='clearfix'></div>

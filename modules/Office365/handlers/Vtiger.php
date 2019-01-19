@@ -12,7 +12,7 @@ vimport('~~/modules/WSAPP/Handlers/vtigerCRMHandler.php');
 vimport('~~/include/Webservices/Utils.php');
 class Office365_Vtiger_Handler extends vtigerCRMHandler {
 
-	public function translateTheReferenceFieldIdsToName($records, $module, $user) {
+	public function translateTheReferenceFieldIdsToName($records, $module, $user) { 
 		$db = PearDatabase::getInstance();
 		global $current_user;
 		$current_user = $user;
@@ -73,12 +73,13 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 		return $records;
 	}
 
-	public function put($recordDetails, $user) {
-		global $current_user;
+	public function put($recordDetails, $user) {  
+
+		global $current_user, $adb;
 		$current_user = $user;
 		$this->user = $user;
 
-		$recordDetails = $this->syncToNativeFormat($recordDetails);
+		$recordDetails = $this->syncToNativeFormat($recordDetails); 
 		$createdRecords = $recordDetails['created'];
 		$updatedRecords = $recordDetails['updated'];
 		$deletedRecords = $recordDetails['deleted'];
@@ -92,16 +93,18 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 
 		}
 
-		foreach ($createdRecords as $index => $record) {
+		foreach ($createdRecords as $index => $record) { 
 			unset($_REQUEST['contactidlist']);
 			if($record['module'] == 'Events' && isset($record['contactidlist'])) {
 				$_REQUEST['contactidlist'] = $record['contactidlist'];
 			}
 
-			try {
-				$createdRecords[$index] = vtws_create($record['module'], $record, $this->user);
-			} catch (DuplicateException $e) {
-				$skipped = true;
+			try { 
+				$createdRecords[$index] = vtws_create($record['module'], $record, $this->user);								
+			} catch (DuplicateException $e) { 		
+
+
+				/*$skipped = true;
 				$duplicateRecordIds = $e->getDuplicateRecordIds();
 				$duplicatesResult = $this->triggerSyncActionForDuplicate($record, $duplicateRecordIds);
 
@@ -113,14 +116,30 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 					$recordDetails['skipped'][] = array('record' => $createdRecords[$index],
 														'messageidentifier' => '',
 														'message' => $e->getMessage());
-				}
-				unset($createdRecords[$index]);
+				}*/
+				//unset($createdRecords[$index]);
 				continue;
-			} catch (Exception $e) {
-				$recordDetails['skipped'][] = array('record' => $createdRecords[$index],
+			} catch (Exception $e) {					
+				// nOT A GOOD FIX BUT, No time... Mabruk
+				$result = $adb->pquery("SELECT crmid, label FROM vtiger_crmentity WHERE setype='Contacts' ORDER BY crmid DESC", array());
+
+				$id 	= $adb->query_result($result, 0, 'crmid');
+				$label  = $adb->query_result($result, 0, 'label');
+
+				$contactResult 	= $adb->pquery("SELECT * FROM vtiger_contactdetails WHERE contactid = ?", array($id));
+				$firstName 	   	= $adb->query_result($contactResult, 0, 'firstname');
+				$lastName 	   	= $adb->query_result($contactResult, 0, 'lastname');
+
+				if ( $firstName == $record['firstname'] && $lastName == $record['lastname']) {
+
+					$createdRecords[$index]['id'] 	 = "12x" . $id;
+					$createdRecords[$index]['label'] = $label;
+
+				} 
+				/*$recordDetails['skipped'][] = array('record' => $createdRecords[$index],
 													'messageidentifier' => '',
 													'message' => $e->getMessage());
-				unset($createdRecords[$index]);
+				//unset($createdRecords[$index]);*/
 				continue;
 			}
 		}
@@ -171,7 +190,7 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 					$this->assignToChangedRecords[$index] = $record;
 				}
 			} catch (DuplicateException $e) {
-				$skipped = true;
+				/*$skipped = true;
 				$duplicateRecordIds = $e->getDuplicateRecordIds();
 				$duplicatesResult = $this->triggerSyncActionForDuplicate($record, $duplicateRecordIds);
 
@@ -183,14 +202,14 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 					$recordDetails['skipped'][] = array('record' => $updatedRecords[$index],
 														'messageidentifier' => '',
 														'message' => $e->getMessage());
-				}
-				unset($updatedRecords[$index]);
+				}*/
+				//unset($updatedRecords[$index]);
 				continue;
 			} catch (Exception $e) {
-				$recordDetails['skipped'][] = array('record' => $updatedRecords[$index], 
+				/*$recordDetails['skipped'][] = array('record' => $updatedRecords[$index], 
 													'messageidentifier' => '', 
 													'message' => $e->getMessage());
-				unset($updatedRecords[$index]);
+				//unset($updatedRecords[$index]);*/
 				continue;
 			}
 		}
@@ -228,9 +247,9 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 					try {
 						vtws_delete($record, $this->user);
 					} catch (Exception $e) {
-						$recordDetails['skipped'][] = array('record' => $deletedRecords[$index], 
+						/*$recordDetails['skipped'][] = array('record' => $deletedRecords[$index], 
 													'messageidentifier' => '', 
-													'message' => $e->getMessage());
+													'message' => $e->getMessage());*/
 						continue;
 					}
 				}
@@ -240,7 +259,6 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 		$recordDetails['created'] = $createdRecords;
 		$recordDetails['updated'] = $updatedRecords;
 		$recordDetails['deleted'] = $deletedRecords;
-
 		return $this->nativeToSyncFormat($recordDetails);
 	}
 }

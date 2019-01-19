@@ -14,9 +14,10 @@
 	{assign var=DATE_FIELD value=$FIELD_MODEL}
 	{assign var=MODULE_MODEL value=$RECORD_STRUCTURE_MODEL->getModule()}
 	{assign var=TIME_FIELD value=$MODULE_MODEL->getField('time_start')}
-{else if $FIELD_MODEL->getName() == 'due_date'}
+{elseif $FIELD_MODEL->getName() == 'due_date'}
 	{assign var=DATE_FIELD value=$FIELD_MODEL}
-	{assign var=TIME_FIELD value=false}
+    {assign var=MODULE_MODEL value=$RECORD_STRUCTURE_MODEL->getModule()}
+	{assign var=TIME_FIELD value=$MODULE_MODEL->getField('time_end')}
 {/if}
 
 {assign var=DATE_TIME_VALUE value=$FIELD_MODEL->get('fieldvalue')}
@@ -38,3 +39,5 @@
 	{include file=vtemplate_path('uitypes/Time.tpl',$MODULE) BLOCK_FIELDS=$BLOCK_FIELDS FIELD_MODEL=$TIME_FIELD FIELD_NAME=$TIME_FIELD->getFieldName()}
 </div>
 {/if}
+
+{/strip}

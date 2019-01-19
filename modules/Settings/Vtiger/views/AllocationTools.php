@@ -25,6 +25,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         $this->exposeMethod('UpdateAllocation');
         $this->exposeMethod('UpdateClaimAllocation');
         $this->exposeMethod('UpdateBenefitAllocation');
+        $this->exposeMethod('CheckEmployeeContracts');
     }
 
     public function process(Vtiger_Request $request) {
@@ -33,9 +34,31 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             $this->invokeExposedMethod($mode, $request);
             return;
         }
+   }
 
+   public function CheckEmployeeContracts(Vtiger_Request $request){
 
+        //get All active Users
+        $moduleName = $request->getModule(false);
+        $db = PearDatabase::getInstance();
+        $result = $db->pquery("SELECT id, user_name, concat(first_name,' ',last_name) as fullname, department from vtiger_users WHERE status ='Active' and deleted=0", array());
+        $numrows = $db->num_rows($result);
+        $k = 0;
+        for($i=0;$i < $numrows; $i++){
+            $userid = $db->query_result($result, $i, 'id');
+            $gradeid = Users_LeavesRecords_Model::checkActiveContract($userid);
+         
+            if($gradeid ==0){
 
+                $statusUsers[$k]['empname'] = $db->query_result($result, $i, 'fullname');
+                $statusUsers[$k]['department'] = $db->query_result($result, $i, 'department');
+                $k++;
+            }
+        }
+        $viewer = $this->getViewer($request);
+        $viewer->assign('ContractStatus', $statusUsers);
+        $viewer->assign('MODULE',$moduleName);  
+       echo $viewer->view('EmployeeContractStatus.tpl',$moduleName,true);
     }
 
     public function AddAllocationForm($request){
@@ -75,18 +98,6 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         }
 
 
-        /* Add Benefit using this template
-        $query = "SELECT * FROM vtiger_grade INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_grade.gradeid WHERE deleted = 0";
-        $result = $adb->pquery($query,array());
-        $count = $adb->num_rows($result);
-
-        for($i=0;$i<$count;$i++){
-            $leavetype[$i]['id'] = $adb->query_result($result,$i, 'leavetypeid');
-            $leavetype[$i]['title'] = $adb->query_result($result,$i, 'title');
-        }*/
-
-        //echo "<pre>"; print_r($leavetype); die;
-
         $viewer = $this->getViewer($request);
         $viewer->assign("LEAVETYPE",json_encode($leavetype));
         $viewer->assign("CLAIMTYPE",$claimtype);
@@ -118,19 +129,6 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             $benefittype[$i]['id'] = $adb->query_result($result,$i, 'benefittypeid');
             $benefittype[$i]['benefittype'] = $adb->query_result($result,$i, 'benefit_type');
         }
-
-
-        /* Add Benefit using this template
-        $query = "SELECT * FROM vtiger_grade INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_grade.gradeid WHERE deleted = 0";
-        $result = $adb->pquery($query,array());
-        $count = $adb->num_rows($result);
-
-        for($i=0;$i<$count;$i++){
-            $leavetype[$i]['id'] = $adb->query_result($result,$i, 'leavetypeid');
-            $leavetype[$i]['title'] = $adb->query_result($result,$i, 'title');
-        }*/
-
-        //echo "<pre>"; print_r($leavetype); die;
 
         $viewer = $this->getViewer($request);
         $viewer->assign("BENEFITTYPE",json_encode($benefittype));
@@ -174,18 +172,6 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             $claimtype[$i]['claimtype'] = $adb->query_result($result,$i, 'claim_type');
         }
 
-
-        /* Add Benefit using this template
-        $query = "SELECT * FROM vtiger_grade INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_grade.gradeid WHERE deleted = 0";
-        $result = $adb->pquery($query,array());
-        $count = $adb->num_rows($result);
-
-        for($i=0;$i<$count;$i++){
-            $leavetype[$i]['id'] = $adb->query_result($result,$i, 'leavetypeid');
-            $leavetype[$i]['title'] = $adb->query_result($result,$i, 'title');
-        }*/
-
-        //echo "<pre>"; print_r($leavetype); die;
 
         $viewer = $this->getViewer($request);
         $viewer->assign("LEAVETYPE",$leavetype);
@@ -237,9 +223,6 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
         }
 
-        
-        
-        //die;
         $query = "SELECT * FROM vtiger_grade INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_grade.gradeid WHERE deleted = 0";
         $result = $adb->pquery($query,array());
         $count = $adb->num_rows($result);
@@ -287,8 +270,6 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         $preValues['claim_id'] = explode(",",$preValues['claim_id']); 
 
         $qualifiedModuleName = $request->getModule(false);
-
-      //  echo "<pre>"; print_r($allocation); die;
 
         $viewer = $this->getViewer($request);
         $viewer->assign("LEAVETYPE",json_encode($leavetype));
@@ -342,9 +323,6 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
         }
 
-        
-        
-        //die;
         $query = "SELECT * FROM vtiger_grade INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_grade.gradeid WHERE deleted = 0";
         $result = $adb->pquery($query,array());
         $count = $adb->num_rows($result);
@@ -353,8 +331,6 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             $grade[$i]['id'] = $adb->query_result($result,$i, 'gradeid');
             $grade[$i]['grade'] = $adb->query_result($result,$i, 'grade');
         }
-
-
 
         $query = "SELECT * FROM vtiger_claimtype INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_claimtype.claimtypeid WHERE deleted = 0";
         $result = $adb->pquery($query,array());
@@ -381,8 +357,6 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         $preValues['claim_id'] = explode(",",$preValues['claim_id']); 
 
         $qualifiedModuleName = $request->getModule(false);
-
-      //  echo "<pre>"; print_r($allocation); die;
 
         $viewer = $this->getViewer($request);
         $viewer->assign("LEAVETYPE",$leavetype);
@@ -417,12 +391,12 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
         if($count>0){
 
-            $allocation['allocation_id'] = $adb->query_result($resultallocation, 0,'allocation_id');            
-            $allocation['benifittype_id'] = $adb->query_result($resultallocation, 0,'benifittype_id');            
-            $allocation['status'] = $adb->query_result($resultallocation, 0,'status');
-            $allocation['allocation_code'] = $adb->query_result($resultallocation, 0,'allocation_code');
-            $allocation['allocation_desc'] = $adb->query_result($resultallocation, 0,'allocation_desc');
-            $allocation['allocationtitle'] = $adb->query_result($resultallocation, 0,'allocation_title');
+            $allocation['allocation_id']    = $adb->query_result($resultallocation, 0,'allocation_id');            
+            $allocation['benifittype_id']   = $adb->query_result($resultallocation, 0,'benifittype_id');            
+            $allocation['status']           = $adb->query_result($resultallocation, 0,'status');
+            $allocation['allocation_code']  = $adb->query_result($resultallocation, 0,'allocation_code');
+            $allocation['allocation_desc']  = $adb->query_result($resultallocation, 0,'allocation_desc');
+            $allocation['allocationtitle']  = $adb->query_result($resultallocation, 0,'allocation_title');
 
             for($i=0;$i<$adb->num_rows($resultbenefittypes);$i++){
 
@@ -433,9 +407,6 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
         }
 
-        
-        
-        //die;
         $query = "SELECT * FROM vtiger_grade INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_grade.gradeid WHERE deleted = 0";
         $result = $adb->pquery($query,array());
         $count = $adb->num_rows($result);
@@ -473,8 +444,6 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
         $qualifiedModuleName = $request->getModule(false);
 
-      //  echo "<pre>"; print_r($allocation); die;
-
         $viewer = $this->getViewer($request);
         $viewer->assign("BENEFITTYPE",json_encode($benefittype));
         $viewer->assign("GRADE",$grade);
@@ -489,27 +458,15 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         //$adb->setDebug(true);
         $SeperatedValues = explode(',', $request->get('values'));
         $qstnmark ='';
-        /*$query = "DELETE allocation_list, allocation_leaverel FROM allocation_list INNER JOIN allocation_leaverel ON allocation_list.allocation_id = allocation_leaverel.allocation_id WHERE allocation_list.allocation_id IN ( ";*/
-        
-
+       
         for ($i = 0; $i < count($SeperatedValues); $i++) {
 
-            $adb->pquery("DELETE FROM allocation_list WHERE allocation_id = ?",array($SeperatedValues[$i]));
+            $adb->pquery("DELETE FROM allocation_list WHERE allocation_id = ? AND type='L'",array($SeperatedValues[$i]));
             $adb->pquery("DELETE FROM allocation_leaverel WHERE allocation_id = ?",array($SeperatedValues[$i]));
             $adb->pquery("DELETE FROM allocation_claimrel WHERE allocation_id = ?",array($SeperatedValues[$i]));
             $adb->pquery("DELETE FROM allocation_graderel WHERE allocation_id = ?",array($SeperatedValues[$i]));            
 
         }    
-
-        /*for($i=0;$i<count($SeperatedValues);$i++){
-            if($i!=(count($SeperatedValues)-1))
-                $query .= $SeperatedValues[$i].",";
-            else
-                $query .= $SeperatedValues[$i];
-        }
-
-        $query.= ")";
-        $result = $adb->pquery($query,array());*/
 
         $responses = [true];
        
@@ -518,30 +475,18 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
     public function DeleteClaimAllocation($request){
         global $adb;
-        //$adb->setDebug(true);
+      
         $SeperatedValues = explode(',', $request->get('values'));
         $qstnmark ='';
-        /*$query = "DELETE allocation_list, allocation_leaverel FROM allocation_list INNER JOIN allocation_leaverel ON allocation_list.allocation_id = allocation_leaverel.allocation_id WHERE allocation_list.allocation_id IN ( ";*/
-        
-
+      
         for ($i = 0; $i < count($SeperatedValues); $i++) {
 
-            $adb->pquery("DELETE FROM allocation_list WHERE allocation_id = ?",array($SeperatedValues[$i]));
+            $adb->pquery("DELETE FROM allocation_list WHERE allocation_id = ? AND type='C'",array($SeperatedValues[$i]));
             $adb->pquery("DELETE FROM allocation_claimrel WHERE allocation_id = ?",array($SeperatedValues[$i]));
             $adb->pquery("DELETE FROM allocation_graderel WHERE allocation_id = ?",array($SeperatedValues[$i]));            
 
         }    
-
-        /*for($i=0;$i<count($SeperatedValues);$i++){
-            if($i!=(count($SeperatedValues)-1))
-                $query .= $SeperatedValues[$i].",";
-            else
-                $query .= $SeperatedValues[$i];
-        }
-
-        $query.= ")";
-        $result = $adb->pquery($query,array());*/
-
+        
         $responses = [true];
        
         $responses->emit;
@@ -552,26 +497,14 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         //$adb->setDebug(true);
         $SeperatedValues = explode(',', $request->get('values'));
         $qstnmark ='';
-        /*$query = "DELETE allocation_list, allocation_leaverel FROM allocation_list INNER JOIN allocation_leaverel ON allocation_list.allocation_id = allocation_leaverel.allocation_id WHERE allocation_list.allocation_id IN ( ";*/
-        
-
+       
         for ($i = 0; $i < count($SeperatedValues); $i++) {
 
-            $adb->pquery("DELETE FROM allocation_list WHERE allocation_id = ?",array($SeperatedValues[$i]));
+            $adb->pquery("DELETE FROM allocation_list WHERE allocation_id = ? AND type='B'",array($SeperatedValues[$i]));
             $adb->pquery("DELETE FROM allocation_benefitrel WHERE allocation_id = ?",array($SeperatedValues[$i]));
             $adb->pquery("DELETE FROM allocation_graderel WHERE allocation_id = ?",array($SeperatedValues[$i]));            
 
         }    
-
-        /*for($i=0;$i<count($SeperatedValues);$i++){
-            if($i!=(count($SeperatedValues)-1))
-                $query .= $SeperatedValues[$i].",";
-            else
-                $query .= $SeperatedValues[$i];
-        }
-
-        $query.= ")";
-        $result = $adb->pquery($query,array());*/
 
         $responses = [true];
        
@@ -579,14 +512,14 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
     }
 
     public function AddAllocation($request){
-        //echo "Here";die;
+      
         global $adb;
-       //$adb->setDebug(true);
+        //$adb->setDebug(true);
         $insertArray = $request->get('form'); 
         $Allocation = array();
         $leavetype = array();
         $selectedgrades = array();
-        //echo "<pre>"; print_r($insertArray); die;
+    
         $leavetypecounter = -1;
         $claimTypeCounter = 0;
         $gradeCounter = 0;
@@ -644,7 +577,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         if(!isset($Allocation['status'])){
             $Allocation['status']= 'off';
         }
-        //$adb->setDebug(true);
+        
         // Validation By Mabruk
 
         $stringClaims = implode(",",$selectedclaims);
@@ -652,59 +585,9 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
         $validationResponse = array();        
 
-        // Check ClaimTypes
-        for($i=0;$i<count($selectedgrades);$i++){
-        //$adb->setDebug(true);
-            if ($stringClaims == '' || $stringClaims == null)
-                $stringClaims = 0;
-            $result = $adb->pquery("SELECT grade,claim_type
-                                    FROM allocation_graderel 
-                                    INNER JOIN vtiger_grade 
-                                    ON allocation_graderel.grade_id = vtiger_grade.gradeid
-                                    INNER JOIN allocation_claimrel 
-                                    ON allocation_claimrel.allocation_id =  allocation_graderel.allocation_id
-                                    INNER JOIN vtiger_claimtype
-                                    ON allocation_claimrel.claim_id = vtiger_claimtype.claimtypeid 
-                                    WHERE allocation_graderel.grade_id = ?
-                                    AND allocation_claimrel.claim_id IN ($stringClaims)", array($selectedgrades[$i])); 
-            $rows = $adb->num_rows($result);
-
-            if ($rows == 0)
-                continue;
-
-            $checkTitle = array();
-
-            for ($j = 0; $j < $rows; $j++) {
-
-                $checkTitle[$j] = $adb->query_result($result, $j, 'claim_type');
-
-            }
-
-            if (count($checkTitle) > 1)
-                $verb = "are";
-            else
-                $verb = "is";
-
-            $checkTitle = implode(",", $checkTitle);
-
-            $checkGrade = $adb->query_result($result, 0, 'grade');
-
-            if (!empty($checkGrade) && !empty($checkTitle)) {
-
-                $validationResponse["claims"][$i] = "$checkTitle $verb already assigned to $checkGrade";
-                
-            }           
-        
-        }
-
-        //$validationResponse['claim'] = implode("<br>", )
-
-        //if (!empty($validationResponse["claims"]))
-         //   $validationResponse["claims"] = implode("<br><br>",$validationResponse["claims"]);
-
         // Check LeaveTypes
         for($i=0;$i<count($selectedgrades);$i++){
-        //$adb->setDebug(true);
+   
             if ($stringLeaveTypes == '' || $stringLeaveTypes == null)
                 $stringLeaveTypes = 0;
             $result = $adb->pquery("SELECT grade,title
@@ -746,41 +629,16 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             }           
         
         }
-
-        //$validationResponse['claim'] = implode("<br>", )
-
-        if (!empty($validationResponse["claims"]))
-            $validationResponse["claims"] = implode("<br><br>",$validationResponse["claims"]);
-        else
-            $validationResponse["claims"] = "";
+ 
 
         if (!empty($validationResponse["leaveTypes"]))
             $validationResponse["leaveTypes"] = implode("<br><br>",$validationResponse["leaveTypes"]);
         else
             $validationResponse["leaveTypes"] = "";
-        /*/ Check ClaimTypes
-        for($i=0;$i<count($selectedclaims);$i++){
-        
-            $result = $adb->pquery("SELECT claimtype FROM allocation_claimrel INNER JOIN vtiger_claimtype ON allocation_claimrel.claim_id = vtiger_claimtype.claimid WHERE allocation_claimrel.claim_id = ?", array($selectedclaims[$i]));
-            $checkClaim = $adb->query_result($result, $i, 'claimtype');
-
-            if ($checkClaim != '' && $checkClaim != null){
-
-                $validationResponse["claims"] = $checkClaim;
-                
-            }           
-        
-        } */
-
-        if ($validationResponse["leaveTypes"] != "" || $validationResponse["claims"] != "") {
+       
+        if ($validationResponse["leaveTypes"] != "") {
             
-            /*if (!empty($validationResponse['grades']))
-                $validationResponse['grades'] = implode(",",$validationResponse['grades']);
-
-            else if (!empty($validationResponse['claims']))
-                $validationResponse['claims'] = implode(",",$validationResponse['claims']); */ 
-
-            //print_r($validationResponse);
+          
 
             $response = new Vtiger_Response();
             $response->setResult(array("result" => "Not Allowed", "data" => $validationResponse));
@@ -795,10 +653,10 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         
         $Allocationid = $adb->getUniqueID('allocation_list');
 
-        $query = "INSERT INTO `allocation_list` (`allocation_id`,`allocation_title`,`allocation_code`, `status`,`allocation_desc`) VALUES (?,?,?,?,?)";
-        $result = $adb->pquery($query,array($Allocationid,$Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'], $Allocation['Allocation_Desc']));
+        $query = "INSERT INTO `allocation_list` (`allocation_id`,`allocation_title`,`allocation_code`, `status`,`allocation_desc`, allocation_year, type) VALUES (?,?,?,?,?,?,?)";
+        $result = $adb->pquery($query,array($Allocationid,$Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'], $Allocation['Allocation_Desc'], date('Y'), 'L'));
 
-//print_r($selectedclaims);die;
+
         for($i=0;$i<count($selectedgrades);$i++){
 
           $query = "INSERT INTO `allocation_graderel` (`allocation_id`,`grade_id`) VALUES(?,?)";
@@ -806,13 +664,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
         }
 
-        for($i=0;$i<count($selectedclaims);$i++){            
-
-            $query = "INSERT INTO `allocation_claimrel` (`allocation_id`,`claim_id`) VALUES(?,?)";
-            $result = $adb->pquery($query,array($Allocationid, $selectedclaims[$i]));
-
-        }
-
+       
         for($i=0;$i<count($leavetype);$i++){
 
           $query = "INSERT INTO `allocation_leaverel` (`allocation_id`,`leavetype_id`,`ageleave`,`numberofleavesmore`,`numberofleavesless`) VALUES(?,?,?,?,?)";
@@ -830,19 +682,17 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             $response->emit();
         }
 
-        //echo $response;
-
     }
 
     public function AddClaimAllocation($request){
         //echo "Here";die;
         global $adb;
-       //$adb->setDebug(true);
+      
         $insertArray = $request->get('form'); 
         $Allocation = array();
         $claimtype = array();
         $selectedgrades = array();
-        //echo "<pre>"; print_r($insertArray); die;
+      
         $claimtypecounter = -1;
         $gradeCounter = 0;
 
@@ -895,21 +745,17 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         if(!isset($Allocation['status'])){
             $Allocation['status']= 'off';
         }
-        //$adb->setDebug(true);
+       
         // Validation By Mabruk
 
         $stringClaimTypes = implode(",",$claimTypeId);
 
         $validationResponse = array();        
 
-        //$validationResponse['claim'] = implode("<br>", )
-
-        //if (!empty($validationResponse["claims"]))
-         //   $validationResponse["claims"] = implode("<br><br>",$validationResponse["claims"]);
-
+       
         // Check LeaveTypes
         for($i=0;$i<count($selectedgrades);$i++){
-        //$adb->setDebug(true);
+       
             if ($stringClaimTypes == '' || $stringClaimTypes == null)
                 $stringClaimTypes = 0;
             $result = $adb->pquery("SELECT grade,claim_type
@@ -953,35 +799,16 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         
         }
 
-        //$validationResponse['claim'] = implode("<br>", )
+       
 
         if (!empty($validationResponse["claimTypes"]))
             $validationResponse["claimTypes"] = implode("<br><br>",$validationResponse["claimTypes"]);
         else
             $validationResponse["claimTypes"] = "";
-        /*/ Check ClaimTypes
-        for($i=0;$i<count($selectedclaims);$i++){
-        
-            $result = $adb->pquery("SELECT claimtype FROM allocation_claimrel INNER JOIN vtiger_claimtype ON allocation_claimrel.claim_id = vtiger_claimtype.claimid WHERE allocation_claimrel.claim_id = ?", array($selectedclaims[$i]));
-            $checkClaim = $adb->query_result($result, $i, 'claimtype');
-
-            if ($checkClaim != '' && $checkClaim != null){
-
-                $validationResponse["claims"] = $checkClaim;
-                
-            }           
-        
-        } */
+       
 
         if ($validationResponse["claimTypes"] != "") {
-            
-            /*if (!empty($validationResponse['grades']))
-                $validationResponse['grades'] = implode(",",$validationResponse['grades']);
-
-            else if (!empty($validationResponse['claims']))
-                $validationResponse['claims'] = implode(",",$validationResponse['claims']); */ 
-
-            //print_r($validationResponse);
+          
 
             $response = new Vtiger_Response();
             $response->setResult(array("result" => "Not Allowed", "data" => $validationResponse));
@@ -996,10 +823,10 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         
         $Allocationid = $adb->getUniqueID('allocation_list');
 
-        $query = "INSERT INTO `allocation_list` (`allocation_id`,`allocation_title`,`allocation_code`, `status`,`allocation_desc`) VALUES (?,?,?,?,?)";
-        $result = $adb->pquery($query,array($Allocationid,$Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'], $Allocation['Allocation_Desc']));
+        $query = "INSERT INTO `allocation_list` (`allocation_id`,`allocation_title`,`allocation_code`, `status`,`allocation_desc`, allocation_year, type) VALUES (?,?,?,?,?,?,?)";
+        $result = $adb->pquery($query,array($Allocationid,$Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'], $Allocation['Allocation_Desc'], date('Y'), 'C'));
 
-//print_r($selectedclaims);die;
+
         for($i=0;$i<count($selectedgrades);$i++){
 
           $query = "INSERT INTO `allocation_graderel` (`allocation_id`,`grade_id`) VALUES(?,?)";
@@ -1009,8 +836,8 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
         for($i=0;$i<count($claimtype);$i++){
 
-            $query = "INSERT INTO `allocation_claimrel` (`allocation_id`,`claim_id`,`grade_id`,`monthly_limit`,`yearly_limit`,`transaction_limit`) VALUES(?,?,?,?,?,?)";
-            $result = $adb->pquery($query,array($Allocationid,$claimtype[$i]['Allocation_claimtype'], 0, $claimtype[$i]['monthly_limit'], $claimtype[$i]['yearly_limit'], $claimtype[$i]['trans_limit']));   
+            $query = "INSERT INTO `allocation_claimrel` (`allocation_id`,`claim_id`,`monthly_limit`,`yearly_limit`,`transaction_limit`) VALUES(?,?,?,?,?)";
+            $result = $adb->pquery($query,array($Allocationid,$claimtype[$i]['Allocation_claimtype'], $claimtype[$i]['monthly_limit'], $claimtype[$i]['yearly_limit'], $claimtype[$i]['trans_limit']));   
         }        
 
         if($result){
@@ -1028,9 +855,9 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
     }
 
     public function AddBenefitAllocation($request){
-        //echo "Here";die;
+     
         global $adb;
-       //$adb->setDebug(true);
+    
         $insertArray = $request->get('form'); 
         $Allocation = array();
         $benefittype = array();
@@ -1077,21 +904,16 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         if(!isset($Allocation['status'])){
             $Allocation['status']= 'off';
         }
-        //$adb->setDebug(true);
+      
         // Validation By Mabruk
 
         $stringBenefitTypes = implode(",",$benefitTypeId);
 
         $validationResponse = array();
 
-        //$validationResponse['claim'] = implode("<br>", )
-
-        //if (!empty($validationResponse["claims"]))
-         //   $validationResponse["claims"] = implode("<br><br>",$validationResponse["claims"]);
-
         // Check LeaveTypes
         for($i=0;$i<count($selectedgrades);$i++){
-        //$adb->setDebug(true);
+       
             if ($stringBenefitTypes == '' || $stringBenefitTypes == null)
                 $stringBenefitTypes = 0;
             $result = $adb->pquery("SELECT grade,title
@@ -1141,29 +963,11 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             $validationResponse["benefitTypes"] = implode("<br><br>",$validationResponse["benefitTypes"]);
         else
             $validationResponse["benefitTypes"] = "";
-        /*/ Check ClaimTypes
-        for($i=0;$i<count($selectedclaims);$i++){
         
-            $result = $adb->pquery("SELECT claimtype FROM allocation_claimrel INNER JOIN vtiger_claimtype ON allocation_claimrel.claim_id = vtiger_claimtype.claimid WHERE allocation_claimrel.claim_id = ?", array($selectedclaims[$i]));
-            $checkClaim = $adb->query_result($result, $i, 'claimtype');
-
-            if ($checkClaim != '' && $checkClaim != null){
-
-                $validationResponse["claims"] = $checkClaim;
-                
-            }           
-        
-        } */
 
         if ($validationResponse["benefitTypes"] != "") {
             
-            /*if (!empty($validationResponse['grades']))
-                $validationResponse['grades'] = implode(",",$validationResponse['grades']);
-
-            else if (!empty($validationResponse['claims']))
-                $validationResponse['claims'] = implode(",",$validationResponse['claims']); */ 
-
-            //print_r($validationResponse);
+           
 
             $response = new Vtiger_Response();
             $response->setResult(array("result" => "Not Allowed", "data" => $validationResponse));
@@ -1178,10 +982,10 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         
         $Allocationid = $adb->getUniqueID('allocation_list');
 
-        $query = "INSERT INTO `allocation_list` (`allocation_id`,`allocation_title`,`allocation_code`, `status`,`allocation_desc`) VALUES (?,?,?,?,?)";
-        $result = $adb->pquery($query,array($Allocationid,$Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'], $Allocation['Allocation_Desc']));
+        $query = "INSERT INTO `allocation_list` (`allocation_id`,`allocation_title`,`allocation_code`, `status`,`allocation_desc`,allocation_year, type) VALUES (?,?,?,?,?,?,?)";
+        $result = $adb->pquery($query,array($Allocationid,$Allocation['AllocationTitle'],$Allocation['AllocationCode'],$Allocation['status'], $Allocation['Allocation_Desc'], date('Y'), 'B'));
 
-//print_r($selectedclaims);die;
+
         for($i=0;$i<count($selectedgrades);$i++){
 
           $query = "INSERT INTO `allocation_graderel` (`allocation_id`,`grade_id`) VALUES(?,?)";
@@ -1211,9 +1015,9 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
     public function UpdateAllocation($request){
         global $adb;
-        //$adb->setDebug(true);
+       
         $insertArray = $request->get('form');
-        // echo "<pre>"; print_r($insertArray); die;
+        
         $Allocation = array();
         $leavetype= array();
         $leavetypecounter = -1;
@@ -1327,12 +1131,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         
         }
 
-        //$validationResponse['claim'] = implode("<br>", )
-
-        //if (!empty($validationResponse["claims"]))
-         //   $validationResponse["claims"] = implode("<br><br>",$validationResponse["claims"]);
-
-        // Check LeaveTypes
+         // Check LeaveTypes
         for($i=0;$i<count($selectedgrades);$i++){
         //$adb->setDebug(true);
             if ($stringLeaveTypes == '' || $stringLeaveTypes == null)
@@ -1378,7 +1177,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         
         }
 
-        //$validationResponse['claim'] = implode("<br>", )
+      
 
         if (!empty($validationResponse["claims"]))
             $validationResponse["claims"] = implode("<br><br>",$validationResponse["claims"]);
@@ -1389,30 +1188,9 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             $validationResponse["leaveTypes"] = implode("<br><br>",$validationResponse["leaveTypes"]);
         else
             $validationResponse["leaveTypes"] = "";
-        /*/ Check ClaimTypes
-        for($i=0;$i<count($selectedclaims);$i++){
-        
-            $result = $adb->pquery("SELECT claimtype FROM allocation_claimrel INNER JOIN vtiger_claimtype ON allocation_claimrel.claim_id = vtiger_claimtype.claimid WHERE allocation_claimrel.claim_id = ?", array($selectedclaims[$i]));
-            $checkClaim = $adb->query_result($result, $i, 'claimtype');
-
-            if ($checkClaim != '' && $checkClaim != null){
-
-                $validationResponse["claims"] = $checkClaim;
-                
-            }           
-        
-        } */
-
+      
         if ($validationResponse["leaveTypes"] != "" || $validationResponse["claims"] != "") {
             
-            /*if (!empty($validationResponse['grades']))
-                $validationResponse['grades'] = implode(",",$validationResponse['grades']);
-
-            else if (!empty($validationResponse['claims']))
-                $validationResponse['claims'] = implode(",",$validationResponse['claims']); */ 
-
-            //print_r($validationResponse);
-
             $response = new Vtiger_Response();
             $response->setResult(array("result" => "Not Allowed", "data" => $validationResponse));
             $response->emit();
@@ -1469,15 +1247,13 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             $response->emit();
         }
 
-        //echo $response;
-
     }
 
     public function UpdateClaimAllocation($request){
         global $adb;
-        //$adb->setDebug(true);
+       
         $insertArray = $request->get('form');
-        // echo "<pre>"; print_r($insertArray); die;
+       
         $Allocation = array();
         $claimtype= array();
         $claimtypecounter = -1;
@@ -1540,14 +1316,9 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
         $validationResponse = array();        
 
-        //$validationResponse['claim'] = implode("<br>", )
-
-        //if (!empty($validationResponse["claims"]))
-         //   $validationResponse["claims"] = implode("<br><br>",$validationResponse["claims"]);
-
         // Check LeaveTypes
         for($i=0;$i<count($selectedgrades);$i++){
-        //$adb->setDebug(true);
+      
             if ($stringClaimTypes == '' || $stringClaimTypes == null)
                 $stringClaimTypes = 0;
             $result = $adb->pquery("SELECT grade,claim_type
@@ -1591,8 +1362,6 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         
         }
 
-        //$validationResponse['claim'] = implode("<br>", )
-
         if (!empty($validationResponse["claims"]))
             $validationResponse["claims"] = implode("<br><br>",$validationResponse["claims"]);
         else
@@ -1602,30 +1371,10 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             $validationResponse["claimTypes"] = implode("<br><br>",$validationResponse["claimTypes"]);
         else
             $validationResponse["claimTypes"] = "";
-        /*/ Check ClaimTypes
-        for($i=0;$i<count($selectedclaims);$i++){
-        
-            $result = $adb->pquery("SELECT claimtype FROM allocation_claimrel INNER JOIN vtiger_claimtype ON allocation_claimrel.claim_id = vtiger_claimtype.claimid WHERE allocation_claimrel.claim_id = ?", array($selectedclaims[$i]));
-            $checkClaim = $adb->query_result($result, $i, 'claimtype');
-
-            if ($checkClaim != '' && $checkClaim != null){
-
-                $validationResponse["claims"] = $checkClaim;
-                
-            }           
-        
-        } */
+     
 
         if ($validationResponse["claimTypes"] != "" || $validationResponse["claims"] != "") {
             
-            /*if (!empty($validationResponse['grades']))
-                $validationResponse['grades'] = implode(",",$validationResponse['grades']);
-
-            else if (!empty($validationResponse['claims']))
-                $validationResponse['claims'] = implode(",",$validationResponse['claims']); */ 
-
-            //print_r($validationResponse);
-
             $response = new Vtiger_Response();
             $response->setResult(array("result" => "Not Allowed", "data" => $validationResponse));
             $response->emit();
@@ -1645,8 +1394,8 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
         for($i=0;$i<count($claimtype);$i++){
 
-            $query = "INSERT INTO `allocation_claimrel` (`allocation_id`,`claim_id`,`grade_id`,`monthly_limit`,`yearly_limit`,`transaction_limit`) VALUES(?,?,?,?,?,?)";
-            $result = $adb->pquery($query,array($Allocation['allocation_id'],$claimtype[$i]['Allocation_claimtype'], 0, $claimtype[$i]['monthly_limit'], $claimtype[$i]['yearly_limit'], $claimtype[$i]['trans_limit']));
+            $query = "INSERT INTO `allocation_claimrel` (`allocation_id`,`claim_id`,`monthly_limit`,`yearly_limit`,`transaction_limit`) VALUES(?,?,?,?,?)";
+            $result = $adb->pquery($query,array($Allocation['allocation_id'],$claimtype[$i]['Allocation_claimtype'], $claimtype[$i]['monthly_limit'], $claimtype[$i]['yearly_limit'], $claimtype[$i]['trans_limit']));
         }
         
         
@@ -1680,7 +1429,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         global $adb;
         //$adb->setDebug(true);
         $insertArray = $request->get('form');
-        // echo "<pre>"; print_r($insertArray); die;
+     
         $Allocation = array();
         $benefittype= array();
         $benefittypecounter = -1;
@@ -1731,14 +1480,9 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
 
         $validationResponse = array();        
 
-        //$validationResponse['claim'] = implode("<br>", )
-
-        //if (!empty($validationResponse["claims"]))
-         //   $validationResponse["claims"] = implode("<br><br>",$validationResponse["claims"]);
-
-        // Check LeaveTypes
+         // Check LeaveTypes
         for($i=0;$i<count($selectedgrades);$i++){
-        //$adb->setDebug(true);
+
             if ($stringBenefitTypes == '' || $stringBenefitTypes == null)
                 $stringBenefitTypes = 0;
             $result = $adb->pquery("SELECT grade,claim_type
@@ -1782,7 +1526,7 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
         
         }
 
-        //$validationResponse['claim'] = implode("<br>", )
+      
 
         if (!empty($validationResponse["benefits"]))
             $validationResponse["benefits"] = implode("<br><br>",$validationResponse["benefits"]);
@@ -1793,30 +1537,10 @@ class Settings_Vtiger_AllocationTools_View extends Settings_Vtiger_Index_View {
             $validationResponse["benefitTypes"] = implode("<br><br>",$validationResponse["benefitTypes"]);
         else
             $validationResponse["benefitTypes"] = "";
-        /*/ Check ClaimTypes
-        for($i=0;$i<count($selectedclaims);$i++){
-        
-            $result = $adb->pquery("SELECT claimtype FROM allocation_claimrel INNER JOIN vtiger_claimtype ON allocation_claimrel.claim_id = vtiger_claimtype.claimid WHERE allocation_claimrel.claim_id = ?", array($selectedclaims[$i]));
-            $checkClaim = $adb->query_result($result, $i, 'claimtype');
-
-            if ($checkClaim != '' && $checkClaim != null){
-
-                $validationResponse["claims"] = $checkClaim;
-                
-            }           
-        
-        } */
+   
 
         if ($validationResponse["benefitTypes"] != "" || $validationResponse["benefits"] != "") {
             
-            /*if (!empty($validationResponse['grades']))
-                $validationResponse['grades'] = implode(",",$validationResponse['grades']);
-
-            else if (!empty($validationResponse['claims']))
-                $validationResponse['claims'] = implode(",",$validationResponse['claims']); */ 
-
-            //print_r($validationResponse);
-
             $response = new Vtiger_Response();
             $response->setResult(array("result" => "Not Allowed", "data" => $validationResponse));
             $response->emit();

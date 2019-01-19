@@ -46,7 +46,7 @@ class EmployeeContract_DocumentExpiring_Dashboard extends Vtiger_IndexAjax_View 
                 $linkId = $request->get('linkid');
                 $documentmodel = EmployeeContract_Record_Model::getExpiringDocument($type,$pagingModel);	
           
-                $widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+                $widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 
                 $viewer->assign('WIDGET', $widget);
                 $viewer->assign('VALUE', $value );

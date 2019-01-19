@@ -99,6 +99,7 @@ class Users extends CRMEntity {
                         'Admin'=>Array('vtiger_users'=>'is_admin'),
 
                         'Designation'=>Array('vtiger_users'=>'title'),
+                        'department'=>Array('vtiger_users'=>'department'),
                         'Phone'=>Array('vtiger_users'=>'phone_work'),
                         'Birthday'=>Array('vtiger_users'=>'birthday'),
                         'LBL_GET_IN_TOUCH'=>Array('vtiger_users'=>'facebook'),
@@ -119,6 +120,7 @@ class Users extends CRMEntity {
                     'Birthday'=>'birthday',
                     'LBL_GET_IN_TOUCH'=>'facebook',  
                     'LBL_ADDITIONAL_INFO'=>'date_joined',
+            'department'=>Array('vtiger_users'=>'department'),
         );
 
         //Default Fields for Email Templates -- Pavani
@@ -475,8 +477,8 @@ class Users extends CRMEntity {
                         $this->error_string = $mod_strings['ERR_PASSWORD_CHANGE_FAILED_1'].$user_name.$mod_strings['ERR_PASSWORD_CHANGE_FAILED_2'];
                         return false;
                 }
-
-                if (!is_admin($current_user)) {
+                //As Required per UI in Calendar Settings Under User Profile
+               /* if (!is_admin($current_user)) {
                         $this->db->startTransaction();
                         $verified = $this->verifyPassword($user_password);
                         $this->db->completeTransaction();
@@ -492,7 +494,7 @@ class Users extends CRMEntity {
                                 }
                                 return false;
                         }
-                }
+                }*/
 
                 //to make entity delta available for aftersave handlers
                 $this->triggerBeforeSaveEventHandlers();
@@ -833,7 +835,7 @@ class Users extends CRMEntity {
                                                 $fldvalue = $this->column_fields[$fieldname];
                                         }
                                 }
-                                elseif($uitype == 33) {
+                                elseif($uitype == 33 || $uitype == 3994) {
                                         if(is_array($this->column_fields[$fieldname])) {
                                                 $field_list = implode(' |##| ',$this->column_fields[$fieldname]);
                                         }else {
@@ -1132,15 +1134,19 @@ class Users extends CRMEntity {
                 //After adding new user, set the default activity types for new user
                 Vtiger_Util_Helper::setCalendarDefaultActivityTypesForUser($this->id);
 
-                //after adding/edit user, update plan to respective user
-                $adb->pquery("DELETE from secondcrm_userplan WHERE userid=?", array($this->id));
+                
+                
                 $result = $adb->pquery("SELECT secondcrm_plan.planid FROM vtiger_user2role INNER JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid
                         INNER JOIN secondcrm_plan ON secondcrm_plan.plantitle=vtiger_role.planid WHERE vtiger_user2role.userid=?", array($this->id));
                 if($adb->num_rows($result)>0){
                         $planid = $adb->query_result($result,0,'planid');
-                        if($planid !='')
-                                $adb->pquery("INSERT INTO secondcrm_userplan(userid, planid) VALUES(?,?)", array($this->id, $planid));
+                        if($planid !=''){
+                            //after adding/edit user, update plan to respective user
+                            $adb->pquery("DELETE from secondcrm_userplan WHERE userid=?", array($this->id));
+                            $adb->pquery("INSERT INTO secondcrm_userplan(userid, planid) VALUES(?,?)", array($this->id, $planid));
+                        }
                 } //end here 
+
 
                 //Set Default Dashboard onfirst time User creation 
                 if($this->mode==''){

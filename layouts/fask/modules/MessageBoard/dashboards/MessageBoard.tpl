@@ -11,8 +11,18 @@
 -->*}
 
 <div class="dashboardWidgetHeader">
-	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=false}     
-        <div class="clearfix"
+	        
+    <div class="title clearfix"  id="quickCreateMessage" style="margin-bottom: 0;">
+        <div class="dashboardTitle" title="{vtranslate($WIDGET->getTitle(), $MODULE_NAME)}" style="width: 25em;">{vtranslate($WIDGET->getTitle(), $MODULE_NAME)|@escape:'html'}</div>
+   {if $ALLOWCREATE}     
+   <a id="quickCreate_MessageBoard" style="margin-top: -22px; margin-bottom: 0; z-index: 1; position: absolute;right: 92px;top: 25px;"   class="quickCreateModule btn btn-primary pull-right" 
+      data-name="MessageBoard"  
+      data-url="index.php?module=MessageBoard&amp;view=QuickCreateAjax" 
+      href="javascript:void(0)">Create Message</a> 
+   {/if}   
+    </div>    
+
+        <div class="clearfix"></div>
 </div>
 <div class="dashboardWidgetContent">
 

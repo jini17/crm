@@ -222,7 +222,7 @@ Class Office365_Contacts_Connector extends WSAPP_TargetConnector {
 	 * @return <array> google Records
 	 */
 	public function pull($SyncState, $user = false) { 
-		$record=$this->getContacts($SyncState, $user);		
+		$record=$this->getContacts($SyncState, $user);				
 		return $record;
 		
 	}
@@ -287,7 +287,34 @@ Class Office365_Contacts_Connector extends WSAPP_TargetConnector {
 	function getContactListFeed($query) {
 		$feed = $this->fetchContactsFeed($query);
 		$decoded_feed = json_decode($feed,true);	
-		return $decoded_feed['value'];
+
+		// Not a good fix, but have to rush.. Updated By Mabruk 
+		$contactListFeed = array(); 		
+
+		if (!isset($decoded_feed['@odata.nextLink']))
+			$contactListFeed = array_merge($contactListFeed, $decoded_feed['value']);
+		else { 
+			while (isset($decoded_feed['@odata.nextLink'])) {
+				//$counter++;
+				$contactListFeed = array_merge($contactListFeed, $decoded_feed['value']);				
+				/*if ($counter == 1) { 
+					break;
+				}*/
+
+				$headers = array(
+					'Authorization' => $this->apiConnection->token['access_token']['token_type'] . ' ' . 
+									   $this->apiConnection->token['access_token']['access_token'],
+					"Content-Type :" => "application/json"
+				);
+
+				$response     = $this->fireRequest($decoded_feed['@odata.nextLink'], $headers, $query, 'GET');
+				$decoded_feed = json_decode($response,true);
+				
+			}	
+			$contactListFeed = array_merge($contactListFeed, $decoded_feed['value']);				
+		}
+
+		return $contactListFeed;
 	}
 
 
@@ -305,7 +332,7 @@ Class Office365_Contacts_Connector extends WSAPP_TargetConnector {
 		$query = array(
 			'max-results' => $this->maxResults,
 			'start-index' => 1,
-			'orderby' => 'lastmodified',
+			'orderby' => 'LastModifiedDateTime',
 			'sortorder' => 'ascending',
 		);
 		if(!isset($this->selectedGroup))

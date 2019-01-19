@@ -1326,6 +1326,7 @@ class Reports_Record_Model extends Vtiger_Record_Model {
 
 	function isEditableBySharing() {
 		$db = PearDatabase::getInstance();
+
 		$currentUserId = Users_Record_Model::getCurrentUserModel()->getId();
 		$ownerResult = $db->pquery("SELECT owner FROM vtiger_report WHERE reportid = ?", array($this->getId()));
 		$reportOnwer = $db->query_result($ownerResult, 0, 'owner');
@@ -1333,7 +1334,8 @@ class Reports_Record_Model extends Vtiger_Record_Model {
 		if($currentUserId == $reportOnwer) {
 			return true;
 		} else {
-			$reportId = $this->getId();
+			//commented by jitu@REPORT Permission. Only owner can edit/Delete
+			/*$reportId = $this->getId();
 			$query = "SELECT 1 FROM vtiger_report_sharegroups WHERE reportid = ? "
 					. "UNION SELECT 1 FROM vtiger_report_sharerole WHERE reportid = ? "
 					. "UNION SELECT 1 FROM vtiger_report_sharers WHERE reportid = ? "
@@ -1343,7 +1345,11 @@ class Reports_Record_Model extends Vtiger_Record_Model {
 				return false;
 			} else {
 				return true;
-			}
+			}*/
+			if($this->getId() =='')
+				return true;
+			else
+			return false;
 		}
 	}
 }

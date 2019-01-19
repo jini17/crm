@@ -49,7 +49,9 @@ $languageStrings = array(
     'LBL_DEPARTMENT' => 'Department',
     'LBL_DESIGNATION' => 'Designation',
 	'LBL_LEAVE_APPROVAL'=>'My Team Leave Approval',
-
+	'LBL_PLAN'=>'Plan',
+	'LBL_NO_USERS'=>'No of Users',
+	'LBL_DURATION'=>'Subscription Duration', 
 	'LBL_NOT_FOUND'       => 'Not Found',
 	'LBL_WORKING_AS'  => 'Working as',
 	'LBL_OF_JOB' => 'Job',
@@ -58,7 +60,7 @@ $languageStrings = array(
 	'LBL_CONTRACT_EXPIRE' => 'Contract expires in',
 	'LBL_SINCE' => 'since',
 	'LBL_CONTRACT_NOTIFICATION'=> 'Your Contract is expiring soon. Kindly contact your HR for further assistance',
-	'LBL_VIEW_PROFILE'=> 'Go to My Profile',
+	'LBL_VIEW_PROFILE'=> 'Go to  Profile',
 	'LBL_VIEW_CONTRACT'=> 'View My Contract',
 	'LBL_GOOD_DAY' => 'Good Day',
 	'User'=>'Employee',
@@ -69,4 +71,7 @@ $languageStrings = array(
 $jsLanguageStrings = array(
 	'JS_TAB_NAME_SHOULD_NOT_BE_EMPTY' => 'Dashboard name cannot not be empty',
 	'JS_NO_DATA_AVAILABLE' => 'No data available',
+	'JS_TRANS_LIMIT'=>'Transaction limit is ',
+	'JS_ERROR_TRANSACTION_DATE'=>'Transsaction date should be less than or equal to current date',
+	'JS_APPLY_AMOUNT'=>'Amount cant more than this',
 );
