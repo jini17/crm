@@ -82,7 +82,7 @@
                   </ul>
                   <div class="clarfix"></div>
                </div>
-               <div class="col-md-12 col-sm-12">
+               {*<div class="col-md-12 col-sm-12">
                   <div class="clearfix"></div>
                   <div class="dark-theme">
                      <strong class="pull-left" style="padding-top:6px; margin-right: 10px;"> Dark Theme</strong>
@@ -92,7 +92,7 @@
                      <span class="slider round"></span>
                      </label>
                   </div>
-               </div>
+               </div>*}
                <div class="clearfix"></div>
                <hr />
                <div class="clearfix"></div>
