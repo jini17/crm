@@ -34,7 +34,7 @@
 <input type="hidden" value="{$NO_SEARCH_PARAMS_CACHE}" id="noFilterCache" >
 <input type="hidden" value="{$TAB_TYPE}" id="tabtype" />
 <input type="hidden" value="{$DEPT}" id="curdepartment" />
-    <div class="listViewPageDiv" id="listViewContent" style="padding-left: 0px; width: 100%">
+    <div class="listViewPageDiv" id="listViewContent" style="padding:10px; width: 100%">
         <!--id="listViewContent"-->
         <div class="col-sm-12 col-xs-12 col-md-12 full-height">
 

@@ -88,6 +88,18 @@ class Vtiger_List_View extends Vtiger_Index_View {
 	}
 
 	function preProcessTplName(Vtiger_Request $request) {
+		$viewer = $this->getViewer ($request);
+		$searchparams = $request->get('search_params');
+		$moduleName = $request->getModule();
+
+		if($searchparams[0][0][0]=='activitytype' && $searchparams[0][0][2]=='Meeting') {
+			$viewer->assign('MODULENAME', $searchparams[0][0][2]);	
+			$_SESSION['MODULENAME'] = $searchparams[0][0][2];
+		} else if($moduleName !='Meeting') {
+			$_SESSION['MODULENAME'] = $moduleName;
+			$viewer->assign('MODULENAME', $moduleName);	
+		} 
+		
 		return 'ListViewPreProcess.tpl';
 	}
 

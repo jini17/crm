@@ -472,7 +472,7 @@ class Reports extends CRMEntity{
 		require_once('include/utils/UserInfoUtil.php');
 
 		$userNameSql = getSqlForNameInDisplayFormat(array('first_name'=> 'vtiger_users.first_name', 'last_name' => 'vtiger_users.last_name'), 'Users');
-		$sql = "SELECT vtiger_report.*, vtiger_reportmodules.*, vtiger_reportfolder.folderid, vtiger_reportfolder.foldername,
+		$sql = "SELECT distinct vtiger_module_dashboard_widgets.reportid, vtiger_report.*, vtiger_reportmodules.*, vtiger_reportfolder.folderid, vtiger_reportfolder.foldername,
 			CASE WHEN (vtiger_users.user_name NOT LIKE '') THEN $userNameSql END AS ownername,
 			vtiger_module_dashboard_widgets.reportid AS pinned FROM vtiger_report 
 			LEFT JOIN vtiger_module_dashboard_widgets ON vtiger_module_dashboard_widgets.reportid = vtiger_report.reportid AND vtiger_module_dashboard_widgets.userid=$current_user->id 

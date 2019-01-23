@@ -50,7 +50,7 @@
 <li>
    <div class="">
       <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
-         <span aria-hidden="true"  data-toggle="modal" data-target="#sales">Sales</span> 
+         <span aria-hidden="true"  data-toggle="modal" data-target="#sales">Sales</span>&nbsp;<i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
       </div>
       <div id="sales" class="modal fade" role="dialog">
          <div class="modal-dialog" style="width: 800px;">
@@ -167,7 +167,7 @@
 <li>
    <div class="">
       <div class="addtionalDashboardTab">
-         <span aria-hidden="true"   data-toggle="modal" data-target="#support">Support</span>
+         <span aria-hidden="true"   data-toggle="modal" data-target="#support">Support</span>&nbsp;<i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
       </div>
       <div id="support" class="modal fade" role="dialog">
          <div class="modal-dialog" style="width: 800px;">
@@ -252,7 +252,7 @@
    <li>
       <div>
          <a class="menu-open">
-         <span aria-hidden="true" style="font-size: 15px;
+         <span aria-hidden="true" style="font-size: 16px;
             color: #000;
             display: inline-block;
             height: 100%;

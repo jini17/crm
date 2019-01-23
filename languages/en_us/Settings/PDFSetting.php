@@ -8,6 +8,11 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
+	'LBL_QUOTES'=>'Quotes',
+	'LBL_INVOICE'=>'Invoice',
+	'LBL_SALESORDER'=>'SalesOrder',
+	'LBL_PURCHASEORDER'=>'PurchaseOrder',
+	'LBL_PAYMENTS'=>'Payments',
 	'LBL_PDF_SETTINGS'=>'PDF Settings',
 	'LBL_PDF_SETTINGS_DESC'=>'Configure the PDF output for Quotes, Sales Orders, Invoices, Purchase Order and Payment receipts',
 	'LBL_PDF_DESCRIPTION'=>'Description',

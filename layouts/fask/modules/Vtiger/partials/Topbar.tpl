@@ -142,7 +142,7 @@
 </style>
 <nav class="navbar navbar-default navbar-fixed-top app-fixed-navbar">
 {assign var="announcement" value=$ANNOUNCEMENT->get('announcement')}   
-<div class="headertext" id="headertextflow"> {if !empty($announcement)}{$announcement}{else}{vtranslate('LBL_NO_ANNOUNCEMENTS',$MODULE)}{/if}</div>
+<div class="headertext {if $ANNOUNCEMENT->get('isview') eq 0} hide {/if} " id="headertextflow"> {if !empty($announcement)}{$announcement}{else}{vtranslate('LBL_NO_ANNOUNCEMENTS',$MODULE)}{/if}</div>
 <div class="container-fluid global-nav">
 <div class="row app-navigator-container">
 <div class='col-md-6 col-sm-12 col-xs-12'>
@@ -187,8 +187,8 @@
                <!--START-Announcement-->
                <li>
                   <div>
-                     <a onclick="onofftextheader()" aria-hidden="true" class="qc-button rightside-icon-dashboard" title="Announcement" aria-hidden="true">
-                     <i  class="fa fa-bullhorn"></i>
+                     <a aria-hidden="true" onclick="Vtiger_Index_Js.toggleAnnouncement();" id="announcementicon" class="qc-button rightside-icon-dashboard" title="Announcement" aria-hidden="true">
+                     <i  class="fa {if $ANNOUNCEMENT->get('isview') eq 0} fa-microphone-slash {else} fa-microphone {/if}"></i>
                      </a>
                   </div>
                </li>
@@ -200,11 +200,12 @@
                <!--Notification Code by Jitu -->
                <li>
                   <div>
-                     <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" title="Notifications" aria-hidden="true">
+                     <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" data-toggle="dropdown" title="Notifications" aria-hidden="true">
+                     <span class="count" style="position: absolute;top:0;right:0; background-color: red;color:#fff;padding-right:5px;padding-left:5px; font-size:11px;">2</span>
                      <i class="fa fa-bell-o"></i>
                      </a>
                   </div>
-                  <div class="notification-list hide">
+                  <div class="notification-list hide" style="top:30px;" onmouseleave="Vtiger_Header_Js.hideNotification();">
                      <h6>{vtranslate('Notification')}<i class="fa fa-gear pull-right"></i></h6>
                      <ul class="list-unstyled" ">
                         <li>
@@ -299,15 +300,5 @@
    
    
    });
-   
-   function onofftextheader() {
-       var x = document.getElementById("headertextflow");
-       if (x.style.display === "none") 
-       {
-           x.style.display = "block";
-       } else {
-           x.style.display = "none";
-       }
-   }
 </script>
 {/strip}
