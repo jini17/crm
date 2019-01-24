@@ -41,7 +41,7 @@ class vtigerCRMHandler extends SyncHandler {
 			}
 		}
 		// Cusotmized By Mabruk 
-		if ($module == "Office365Contacts") {
+		if ($module == "Office365Contacts") { 
 			
 			$syncModule = 'Contacts';
 			$result     = vtws_sync_office365Contacts($token, $syncModule, $syncType, $this->user); 
