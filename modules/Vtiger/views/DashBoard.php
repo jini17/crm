@@ -25,7 +25,8 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $moduleName = $request->getModule();
                 //get last login time & IP address
                 global $adb;
-                $current_user = Users_Record_Model::getCurrentUserModel();	
+               // $adb->setDebug(true);
+                $current_user = Users_Record_Model::getCurrentUserModel();  
                 $sUserName = $current_user->user_name;
                 $sql="select login_time from vtiger_loginhistory WHERE user_name ='$sUserName' ORDER BY login_time DESC LIMIT 1,1";
                 $result=$adb->pquery($sql, array());
@@ -48,9 +49,8 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 
                 $viewer->assign("TRIAL_INFO",$Trial_expire);
                  if($_SESSION['loggedin_now'] === false){
-               
-                            $viewer->assign("LOGGED_NOW",'in');
-                            $_SESSION['loggedin_now'] = TRUE;
+                    $viewer->assign("LOGGED_NOW",'in');
+                    $_SESSION['loggedin_now'] = TRUE;
                  }
                  else{
                         $viewer->assign("LOGGED_NOW",'out');
@@ -73,18 +73,21 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                  }
                  
                 $crm_record_no = $this->CRM_ENTITY_CHECKER();
+
                if($crm_record_no){
-                   $viewer->assign("DATA_RESET","Yes");
+                  $viewer->assign("DATA_RESET","Yes");
                }
-               else{
-                    $viewer->assign("DATA_RESET","No");
+               else {
+                  $viewer->assign("DATA_RESET","No");
                }
                                                                
                 $dashBoardModel = Vtiger_DashBoard_Model::getInstance($moduleName);
                 //check profile permissions for Dashboards
+
                 $moduleModel = Vtiger_Module_Model::getInstance('Dashboard');
                 $userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
                 $permission = $userPrivilegesModel->hasModulePermission($moduleModel->getId());
+
                 if($permission) {
                         // TODO : Need to optimize the widget which are retrieving twice
                         $dashboardTabs = $dashBoardModel->getActiveTabs();
@@ -100,11 +103,13 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 } else {
                         $widgets = array();
                 }
+
                 $viewer->assign('MODULE_PERMISSION', $permission);
                 $viewer->assign('WIDGETS', $widgets);
                 $viewer->assign('MODULE_NAME', $moduleName);
+
                 if($display) {
-                        $this->preProcessDisplay($request);
+                    $this->preProcessDisplay($request);
                 }
         }
 
@@ -143,12 +148,17 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                 $viewer->assign('DASHBOARD_TABS_LIMIT', $dashBoardModel->dashboardTabLimit);
                 $viewer->assign('SELECTED_TAB',$tabid);
                 $current_user = Users_Record_Model::getCurrentUserModel();
-            if (self::$selectable_dashboards) {
+
+            if(self::$selectable_dashboards) {
             
                       
                         $viewer->assign('SELECTABLE_WIDGETS', self::$selectable_dashboards);
                         $viewer->assign("EMPLOYEE_GROUP", $this->get_widgets_by_group("employee", $modulename,$current_user->get("id"),$tabid));
-                        $viewer->assign("CHART_GROUP", $this->get_widgets_by_group("chart", $modulename,$current_user->get("id"),$tab_id));
+
+                        $viewer->assign("SALES", $this->get_widgets_by_group("sales", $modulename,$current_user->get("id"),$tabid));
+                        $viewer->assign("SERVICE", $this->get_widgets_by_group("service", $modulename,$current_user->get("id"),$tabid));
+
+                        $viewer->assign("CHART_GROUP", $this->get_widgets_by_group("chart", $modulename,$current_user->get("id"),$tabid));
                         $viewer->assign("LEAVECLAIM_GROUP",  $this->get_widgets_by_group("leaveclaim", $modulename,$current_user->get("id"),$tabid));
                         $viewer->assign("GENERAL_GROUP",  $this->get_widgets_by_group("general", $modulename,$current_user->get("id"),$tabid));
             }
@@ -170,20 +180,29 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
      */
         public function get_widgets_by_group($group,$modulename,$userid,$tab_id){
             $data = array();
-            $db = PearDatabase::getInstance();
-          //  $db->setDebug(true);
-            $sql = "SELECT * from vtiger_links WHERE linktype = 'DASHBOARDWIDGET' AND widgetgroup = '$group' ";
+            $db   = PearDatabase::getInstance(); 
+            //$db->setDebug(true);
+            // Update By Mabruk
+            $sql = "SELECT * from vtiger_links 
+                    INNER JOIN vtiger_module_dashboard_widgets ON vtiger_module_dashboard_widgets.linkid = vtiger_links.linkid
+                    WHERE linktype = 'DASHBOARDWIDGET' 
+                    AND widgetgroup = '$group'
+                    AND userid = '$userid'
+                    AND dashboardtabid = '$tab_id'";             
+
             $query = $db->pquery($sql,array());
             $num_rows =  $db->num_rows($query);
             if($num_rows > 0){
                 for($i =0; $i < $num_rows; $i++){
+
                     $data[$i]["URL"]        = $db->query_result($query, $i,'linkurl')."&linkid=".$db->query_result($query, $i,'linkid');
-                    $data[$i]['linkid']        = $db->query_result($query, $i,'linkid');
+                    $data[$i]['linkid']     = $db->query_result($query, $i,'linkid');
                     $data[$i]['name']       = $db->query_result($query, $i,'linklabel');
-                    $data[$i]['title']          = vtranslate($db->query_result($query, $i,'linklabel'), $modulename);  
-                    $data[$i]['is_closed'] =  $db->query_result($query, $i,'is_closed'); 
-                    $data[$i]['width']       = 1;
-                    $data[$i]['height']      = 1;
+                    $data[$i]['title']      = vtranslate($db->query_result($query, $i,'linklabel'), $modulename);  
+                    $data[$i]['is_closed']  = $db->query_result($query, $i,'is_closed'); 
+                    $data[$i]['width']      = 1;
+                    $data[$i]['height']     = 1;
+                    
                 }
             }
             
@@ -299,10 +318,10 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
     public function getColor($priority) {
         $color = '';
         switch ($priority) {
-            case 'High':$color = '#FF5555';	break;
-            case 'Medium':$color = '#03C04A';	break;
-            case 'Low':$color = '#54A7F5';	break;
-            default:	$color = '#'.dechex(rand(0x000000, 0xFFFFFF));
+            case 'High':$color = '#FF5555'; break;
+            case 'Medium':$color = '#03C04A';   break;
+            case 'Low':$color = '#54A7F5';  break;
+            default:    $color = '#'.dechex(rand(0x000000, 0xFFFFFF));
                 break;
         }
         return $color;

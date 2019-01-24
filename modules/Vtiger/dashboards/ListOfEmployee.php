@@ -10,7 +10,7 @@
 
 class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
 
-        public function process(Vtiger_Request $request) {
+        public function process(Vtiger_Request $request) { 
             global $site_URL;
                 $db = PearDatabase::getInstance();
                // $db->setDebug(true);
@@ -25,7 +25,7 @@ class Vtiger_ListOfEmployee_Dashboard extends Vtiger_IndexAjax_View {
                 $linkId                      = $request->get('linkid');
 
                 $moduleModel  = Home_Module_Model::getInstance($moduleName);
-                $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+                $widget               = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab')); // Tab added By mabruk
                 
                 $users                  = $this->get_employee($db, $dept);
                   

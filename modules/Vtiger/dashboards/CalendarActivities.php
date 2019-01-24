@@ -26,14 +26,14 @@ class Vtiger_CalendarActivities_Dashboard extends Vtiger_IndexAjax_View {
 		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
 		$calendarActivities = $moduleModel->getCalendarActivities('upcoming', $pagingModel, $user);
                                            $current_date = date("d-m-Y");
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('MODULE_NAME', $moduleName);
 		$viewer->assign('ACTIVITIES', $calendarActivities);
 		$viewer->assign('PAGING', $pagingModel);
 		$viewer->assign('CURRENTUSER', $currentUser);
-                                           $viewer->assign('CURRENTDATE', $current_date);
+        $viewer->assign('CURRENTDATE', $current_date);
                                            
 		$content = $request->get('content');
 		if(!empty($content)) {

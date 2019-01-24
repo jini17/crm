@@ -101,9 +101,10 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
                 $currentUserPrivilegeModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
                 $moduleModel = $this->getModule();
 
+                // Added By Mabruk (is_closed = 0)
                 $sql = "SELECT vtiger_links.*, vtiger_module_dashboard_widgets.userid, vtiger_module_dashboard_widgets.filterid, vtiger_module_dashboard_widgets.data, vtiger_module_dashboard_widgets.id as widgetid, vtiger_module_dashboard_widgets.position as position, vtiger_module_dashboard_widgets.size as size, vtiger_links.linkid as id FROM vtiger_links ".
                                 " INNER JOIN vtiger_module_dashboard_widgets ON vtiger_links.linkid=vtiger_module_dashboard_widgets.linkid".
-                                " WHERE vtiger_module_dashboard_widgets.userid = ? AND linktype = ? AND tabid = ?";
+                                " WHERE vtiger_module_dashboard_widgets.userid = ? AND linktype = ? AND tabid = ? AND is_closed = 0";
                 $params = array($currentUser->getId(), 'DASHBOARDWIDGET', $moduleModel->getId());
 
                 // Added for Vtiger7
@@ -139,7 +140,7 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
 
                 //For chart reports as widgets
                 $sql = "SELECT reportid FROM vtiger_module_dashboard_widgets WHERE userid = ? AND linkid= ? AND reportid IS NOT NULL";
-                $params = array($currentUser->getId(),0);
+                $params = array($currentUser->getId(),119);
 
                 // Added for Vtiger7
                 if($this->get("tabid")){

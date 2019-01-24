@@ -14,38 +14,31 @@
 {if count($MODELS) > 0}
 
         <div>
-        <div class='row th' style="padding:5px">
-                <div class='col-lg-5'>
-                <strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
+        	{foreach item=MODEL from=$MODELS}
+        			<div class='row miniListContent' style="padding:5px;margin-right:-1px;margin-left:-1px;">
+        				<div class='col-lg-5'>
+        					<a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$MODEL['userid']}"><strong>{$MODEL['empname']}</strong></a>
+        						<br />
+        					<!--(<i>{$MODEL['title']}</i>)-->
+        				</div>
+        				<div class='col-lg-5'>
+        					{$MODEL['department']}
+        				</div>
+        				<div class='col-lg-2'>
+        					{$MODEL['leavecount']}
+        				</div>
+        			</div>
+      		{/foreach}
+          <div class="clearfix"></div>
+      </div>
 
-
-            </div>
-            <div class='col-lg-4'>
-               <strong>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</strong>
-            </div>
-            <div class='col-lg-3'>
-              <strong>{vtranslate('LBL_MC_TAKEN', $MODULE_NAME)}</strong>
-            </div>
+  {if $NEXTPAGE}
+          <div class="row">
+                  <div class="col-lg-12">
+                          <h4><a href="javascript:;" class="text-info load-more" data-page="{$PAGE}" data-nextpage="{$NEXTPAGE}">{vtranslate('LBL_MORE')}...</a></h4>
+                  </div>
           </div>
-      		{foreach item=MODEL from=$MODELS}
-      			<div class='row miniListContent' style="padding:5px;margin-right:-1px;margin-left:-1px;">
-      				<div class='col-lg-5'>
-      					<a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$MODEL['userid']}"><strong>{$MODEL['empname']}</strong></a>
-      						<br />
-      					<!--(<i>{$MODEL['title']}</i>)-->
-      				</div>
-      				<div class='col-lg-5'>
-      					{$MODEL['department']}
-      				</div>
-      				<div class='col-lg-2'>
-      					{$MODEL['leavecount']}
-      				</div>
-      			</div>
-      			{/foreach}
-                        <div class="clearfix"></div>
-            <div class="clearfix"></div>
-            <a  onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USERID}&tab=ListClaim'" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
-     </div>
+  {/if}
 
 {else}
         <span class="noDataMsg">

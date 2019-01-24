@@ -1359,7 +1359,7 @@ ul.unstyled {
   margin: 11px 0;
   float: left;
   font-size: 12px;
-  line-height: 18px;
+  line-height: 16px;
 }
 .current-filter-name a {
   max-width: 120px;
@@ -2155,7 +2155,7 @@ input[type=checkbox]:checked {
   display: inline-block;
   vertical-align: middle;
 }
-.related-tabs .tab-icon .content{font-size: 15px;}
+.related-tabs .tab-icon .content{font-size: 12px;}
 
 .related-tabs .tab-label {
   display: inline-block;
@@ -8853,9 +8853,9 @@ border-radius: .35rem; background-color: rgba(255, 255, 255, 1); margin-top: 0px
 .faskfirst{ list-style-type: none;float: left;-webkit-padding-start: 10px; border-right: 0px solid #ddd;    height: 400px;}
 .faskfirst li{ padding: 14px 4px;}
 .faskfirst li a i{ font-size: 18px;margin-right: 10px;}
-.fasksecond{list-style-type: none; overflow-y: scroll;  }
+.fasksecond{list-style-type: none; }
 /* .fasksecond>li.with-childs:first-child { border-left: none;} */
-.fasksecond>li.with-childs { float: left; border-left:1px solid #ddd; margin: 0 0px; height:400px; width: 20%} 
+.fasksecond>li.with-childs { float: left; border-left:1px solid #ddd; margin: 0 0px; height:400px;} 
 .fasksecond>li.with-childs>a{ border-bottom: 3px solid #ddd;padding: 15px 10px; line-height: 40px;} 
 .fasksecond>li.with-childs>a i { font-size: 18px;margin-right: 10px;}
 .fasksecond>li>a i { font-size: 18px;margin-right: 10px;}
@@ -9583,7 +9583,7 @@ right connector from last child*/
 .newtabs{
     position: absolute;
     top: 0;
-    left: 150px;
+    left: 190px;
 }
 .global-nav .global-actions{
     position: absolute;
@@ -10088,5 +10088,15 @@ input:checked + .slider:before {
 }
 .widget-item a[disabled="disabled"]{
     color: #ccc;
+}
+
+.current-filter-name i{
+
+    margin-top: 2px;
+    display: block !important;
+    float: right;
+    margin-right: 5px;
+    margin-left: -3px;
+
 }
 

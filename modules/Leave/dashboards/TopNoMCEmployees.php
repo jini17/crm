@@ -12,6 +12,7 @@ class Leave_TopNoMCEmployees_Dashboard extends Vtiger_IndexAjax_View {
 
 	public function process(Vtiger_Request $request) {
 		//global $adb;
+		$LIMIT = 4;
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
 
@@ -21,18 +22,29 @@ class Leave_TopNoMCEmployees_Dashboard extends Vtiger_IndexAjax_View {
 
 		$typeLabel = 'LBL_NO_EMPLOYEE_FOUND';
 
-		$leavemodel = Users_LeavesRecords_Model::widgetTopNOMCEmployee($department);
 		
 		$page = $request->get('page');
+		if(empty($page)) {
+			$page = 1;
+		}
+		$pagingModel = new Vtiger_Paging_Model();
+		$pagingModel->set('page', $page);
+		$pagingModel->set('limit', $LIMIT);
+		$leavemodel = Users_LeavesRecords_Model::widgetTopNOMCEmployee($department, $pagingModel);
+		
+
 		$linkId = $request->get('linkid');
 		
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('VALUE', $department);
 		$viewer->assign('DEPARTMENT', $departmentList);
 		$viewer->assign('TYPELABEL', $typeLabel);
 		$viewer->assign('MODULE_NAME', $moduleName);
 		$viewer->assign('MODELS', $leavemodel);
+		$viewer->assign('PAGE', $page);
+		$viewer->assign('NEXTPAGE', ($pagingModel->get('topcount') < $LIMIT)? 0 : $page+1);
+
 		$content = $request->get('content');
      
 

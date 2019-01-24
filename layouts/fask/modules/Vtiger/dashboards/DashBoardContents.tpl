@@ -31,7 +31,7 @@
                                 <i class="fa fa-bars moveTab hide"></i>
                             </div>
                         </a>
-                    </li>
+                    </li>                    
                 {/foreach}
 
            <div class="moreSettings pull-right col-lg-4 col-md-2 col-sm-12 col-xs-12">
@@ -64,15 +64,38 @@
                                                 {/if}
                                         {/foreach}
                                          
-
+                                        {if count($EMPLOYEE_GROUP) > 0}
                                         <li class="group-heading employee" style="position:relative;">
                                              <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Employee <i class="fa fa-users pull-right widget-icon"></i></a>
                                           
                                             <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
-                                             {if count($EMPLOYEE_GROUP) gt 0}
+                                             
                                                 {foreach item="emp" from=$EMPLOYEE_GROUP }      
                                                        <li class="emp-widget widget-item ">
-                                                           <a style="padding-left: 10px;" data-group="employee" {if $emp["is_closed"] eq 1} disabled="disabled" {/if} onclick="Vtiger_DashBoard_Js.addWidget(this, '{$emp['URL']}')" href="javascript:void(0);"
+                                                           <a style="padding-left: 10px;" data-group="employee" {if $emp["is_closed"] eq 0} disabled="disabled" title="This widget is currently active"{/if} onclick="Vtiger_DashBoard_Js.addWidget(this, '{$emp['URL']}')" href="javascript:void(0);"
+                                                                   data-linkid="{$emp['linkid']}" 
+                                                                   data-name="{$emp['name']}" 
+                                                                   data-width="{$emp['width']}" 
+                                                                   data-height="{$emp['height']}">
+                                                                  {vtranslate($emp['title'])}
+                                                           </a>
+                                                       </li>
+                                               {/foreach}
+                                              
+                                            </ul>
+                                            
+                                        </li>
+                                        {/if}
+
+                                        {if count($SALES) > 0}
+                                        <li class="group-heading employee" style="position:relative;">
+                                             <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Sales <i class="fa fa-usd pull-right widget-icon"></i></a>
+                                          
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                             
+                                                {foreach item="emp" from=$SALES }      
+                                                       <li class="emp-widget widget-item ">
+                                                           <a style="padding-left: 10px;" data-group="employee" {if $emp["is_closed"] eq 0} disabled="disabled" title="This widget is currently active"{/if} onclick="Vtiger_DashBoard_Js.addWidget(this, '{$emp['URL']}')" href="javascript:void(0);"
                                                                    data-linkid="{$emp['linkid']}" 
                                                                    data-name="{$emp['name']}" 
                                                                    data-width="{$emp['width']}" 
@@ -81,72 +104,95 @@
                                                            </a>
                                                        </li>
                                                {/foreach}
-                                               {else}
-                                                   <li> All widgets are in use</li>
-                                               {/if}
+                                              
                                             </ul>
                                             
                                         </li>
-                                                                  
+                                        {/if}
+
+                                        {if count($SERVICE) > 0}
+                                        <li class="group-heading employee" style="position:relative;">
+                                             <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Service <i class="fa fa-headphones pull-right widget-icon"></i></a>
+                                          
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                             
+                                                {foreach item="emp" from=$SERVICE }      
+                                                       <li class="emp-widget widget-item ">
+                                                           <a style="padding-left: 10px;" data-group="employee" {if $emp["is_closed"] eq 0} disabled="disabled" title="This widget is currently active"{/if} onclick="Vtiger_DashBoard_Js.addWidget(this, '{$emp['URL']}')" href="javascript:void(0);"
+                                                                   data-linkid="{$emp['linkid']}" 
+                                                                   data-name="{$emp['name']}" 
+                                                                   data-width="{$emp['width']}" 
+                                                                   data-height="{$emp['height']}">
+                                                                  {$emp['title']}
+                                                           </a>
+                                                       </li>
+                                               {/foreach}
+                                              
+                                            </ul>
+                                            
+                                        </li>
+                                        {/if}
+
+                                        {if count($CHART_GROUP) > 0}                          
                                         <li  class="group-heading charts" style="">
                                             <a  class="widget-heading widget-item"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Charts <i class="fa fa-pie-chart pull-right widget-icon"></i></a> 
                                              
                                             <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
-                                                 {if count($CHART_GROUP) gt 0}
+                                                
                                                 {foreach item="chart" from=$CHART_GROUP}
                                                     <li class="chart-widget widget-item">
-                                                       <a  class="widget-item" style="padding-left: 10px;" {if $chart["is_closed"] eq 1} disabled="disabled" {/if}  data-group="charts" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$chart['URL']}')" href="javascript:void(0);"
+                                                       <a  class="widget-item" style="padding-left: 10px;" {if $chart["is_closed"] eq 0} disabled="disabled" title="This widget is currently active"{/if}  data-group="charts" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$chart['URL']}')" href="javascript:void(0);"
                                                                data-linkid="{$chart['linkid']}" data-name="{$chart['name']}" data-width="{$chart['width']}" 
                                                                data-height="{$chart['height']}">
                                                               {$chart['title']}
                                                        </a>
                                                    </li>
                                                {/foreach}
-                                                  {else}
-                                                   <li> All widgets are in use</li>
-                                               {/if}
+                                                
                                             </ul>
-                                        </li>                                      
+                                        </li>
+                                        {/if} 
+
+                                        {if count($LEAVECLAIM_GROUP) > 0}                                                                
                                          <li  class="group-heading leaveclaim" >
                                        
                                              <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Leaves & Claims <i class="fa fa-clipboard pull-right widget-icon"></i></a>
                                             
                                             <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
-                                                  {if count($LEAVECLAIM_GROUP) gt 0}
+                                                
                                                 {foreach item="leaveclaim" from=$LEAVECLAIM_GROUP }
                                                    <li class="leaveclaim-widget widget-item">
-                                                       <a  class=" widget-item" {if $leaveclaim["is_closed"] eq 1} disabled="disabled" {/if} style="padding-left: 5px;" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$leaveclaim['URL']}')" href="javascript:void(0);"
+                                                       <a  class=" widget-item" {if $leaveclaim["is_closed"] eq 0} disabled="disabled" title="This widget is currently active"{/if} style="padding-left: 5px;" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$leaveclaim['URL']}')" href="javascript:void(0);"
                                                                data-linkid="{$leaveclaim['linkid']}"  data-group="leaveclaim" data-name="{$leaveclaim['name']}" data-width="{$leaveclaim['width']}" 
                                                                data-height="{$leaveclaim['height']}">
                                                               {$leaveclaim['title']}
                                                        </a>
                                                    </li>
                                                 {/foreach}
-                                                {else}
-                                                   <li> All widgets are in use</li>
-                                               {/if}
+                                                
                                             </ul>
                                         </li>                                     
-                                        
+                                        {/if}
+
+                                        {if count($GENERAL_GROUP) > 0}
                                         <li class='general'>
                                             <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp;  General <i class="fa fa-windows pull-right widget-icon"></i></a>
                                             <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
-                                                 {if count($GENERAL_GROUP) gt 0}
+                                                 
                                                     {foreach item="general" from=$GENERAL_GROUP}
                                                         <li  class="general-widget widget-item ">
-                                                            <a class="widget-item_{$general['linkid']}}"  {if $general["is_closed"] eq 1} disabled="disabled" {/if} style="padding-left: 10px;" data-group="general" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$general['URL']}')" href="javascript:void(0);"
+                                                            <a class="widget-item_{$general['linkid']}}"  {if $general["is_closed"] eq 0} disabled="disabled" title="This widget is currently active"{/if} style="padding-left: 10px;" data-group="general" onclick="Vtiger_DashBoard_Js.addWidget(this, '{$general['URL']}')" href="javascript:void(0);"
                                                                     data-linkid="{$general['linkid']}" data-name="{$general['name']}" data-width="{$general['width']}" 
                                                                     data-height="{$general['height']}">
                                                                    {$general['title']}
                                                             </a>
                                                        </li>
                                                     {/foreach}
-                                                 {else}
-                                                   <li> All widgets are in use</li>
-                                               {/if}
+                                                 
+                                               
                                             </ul>
                                         </li>
-                                       
+                                        {/if}
                                         
                                         {if $MINILISTWIDGET && $MODULE_NAME == 'Home'}
                                                 <li class="divider"></li>
@@ -256,5 +302,7 @@
                      return false;
             });
           });
+
+        jQuery('')
 
 </script>

@@ -13,6 +13,35 @@ Vtiger.Class('Vtiger_Index_Js', {
         getInstance : function() {
                 return new Vtiger_Index_Js();
         },
+        
+        toggleAnnouncement : function(){
+           app.helper.showProgress();
+           var elmClass = jQuery("#headertextflow").attr('class');
+           
+           var view = 0;
+           if(elmClass.indexOf('hide') != -1){
+               view = 1;
+           }
+           
+           var params = {
+                        'module' : 'Vtiger',
+                        'parent' : 'Settings',
+                        'action' : 'AnnouncementSaveAjax',
+                        'isview' : view,
+                };
+           app.request.post({"data":params}).then(function(error,response) {
+              app.helper.hideProgress();
+              if(view==1){
+                jQuery("#headertextflow").removeClass('hide');
+                jQuery("#announcementicon").html("<i  class='fa fa-microphone'></i>"); 
+              } else {
+               jQuery("#headertextflow").addClass('hide');
+               jQuery("#announcementicon").html("<i  class='fa fa-microphone-slash'></i>"); 
+              }
+                   
+           });
+           
+        },
 
         /**
          * Function to show the content of a file in an iframe
@@ -42,12 +71,12 @@ Vtiger.Class('Vtiger_Index_Js', {
         showEmailPreview : function(recordId, parentId) {
                 var popupInstance = Vtiger_Popup_Js.getInstance();
                 var params = {};
-                params['module'] = "Emails";
-                params['view'] = "ComposeEmail";
-                params['mode'] = "emailPreview";
-                params['record'] = recordId;
-                params['parentId'] = parentId;
-                params['relatedLoad'] = true;
+                params['module']        = "Emails";
+                params['view']          = "ComposeEmail";
+                params['mode']          = "emailPreview";
+                params['record']        = recordId;
+                params['parentId']      = parentId;
+                params['relatedLoad']   = true;
 
                 var callback = function(data){
                         emailPreviewClass = app.getModuleSpecificViewClass('EmailPreview','Vtiger');
@@ -411,14 +440,27 @@ Vtiger.Class('Vtiger_Index_Js', {
 		    jQuery('.settingsgroup-accordion').unbind('click');
             jQuery('.settingsgroup-accordion').click( function() { 
 
+            var thisElement     = jQuery(this);    
 			var container 		= jQuery(jQuery(this).find('a').data('parent'));//jQuery('#accordion_mobile, #accordion');
+            var isUserSideBar   = jQuery('.AdminSidebar').hasClass('hide') || jQuery('.MegaMenu').hasClass('hide');
+
+            if (isUserSideBar)                
+                container       = jQuery('.UserSidebar').find('#accordion');
+
 			var element   		= jQuery(this).find('.indicator');
 			var links     		= container.find('a');
             var notCollapsed    = element.hasClass('ti-angle-right');
 			    
                         
 			links.each(function() {
+                    
+                    if (isUserSideBar) {
 
+                        var href = jQuery(this).attr('href');
+                        if(href.indexOf('LBL') !== -1 && href !== thisElement.find('a').attr('href'))
+                            jQuery(href).removeClass('in');
+
+                    }
                     jQuery(this).find('.indicator').removeClass('ti-angle-down').addClass('ti-angle-right').closest('a').removeClass('btn-primary text-white');
 
                });				
@@ -429,7 +471,6 @@ Vtiger.Class('Vtiger_Index_Js', {
                     element.removeClass('ti-angle-right').addClass('ti-angle-down');
                     
                } 
-
 
             } 
 

@@ -29,15 +29,7 @@ class Users_Login_Action extends Vtiger_Action_Controller
         $username = $request->get('username');
         $password = $request->getRaw('password');
 
-        // Added By Mabruk
-        $subscriptionCheck = $this->checkSubExpDate($username);
-
-        if (!$subscriptionCheck) {
-
-            header('Location: index.php?module=Users&parent=Settings&view=Login&error=13');          
-            exit;
-
-        }
+       
 
 
         //echo $allowedipres;die;
@@ -111,6 +103,17 @@ class Users_Login_Action extends Vtiger_Action_Controller
         $allowedipres = false;
         $allowedipres = $this->AllowedIp($usip, $username);
         if ($user->doLogin($password) && $allowedipres == true) {
+
+            // Added By Mabruk
+            $subscriptionCheck = $this->checkSubExpDate($username);
+
+            if (!$subscriptionCheck) {
+
+                header('Location: index.php?module=Users&parent=Settings&view=Login&error=13');          
+                exit;
+
+            }
+
             session_regenerate_id(true); // to overcome session id reuse.
             $userid = $user->retrieve_user_id($username);
             Vtiger_Session::set('AUTHUSERID', $userid);
@@ -190,7 +193,8 @@ class Users_Login_Action extends Vtiger_Action_Controller
      */
     function checkSubExpDate($user) {
 
-        global $adb;$adb->setDebug(true);
+        global $adb;
+        //$adb->setDebug(true);
 
         $result     = $adb->pquery("SELECT secondcrm_plan.expiredate
                                 FROM secondcrm_plan 

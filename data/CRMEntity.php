@@ -1593,7 +1593,10 @@ class CRMEntity {
 			
 			$sourceCompany = $sourceCompany;
 		} else {
-			$sourceCompany = 1; //Default Company
+			$result = $adb->pquery("SELECT organization_id FROM vtiger_organizationdetails INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_organizationdetails.organization_id
+								WHERE vtiger_crmentity.deleted=0 AND vtiger_organizationdetails.isdefault=1", array());
+
+			$sourceCompany = $adb->query_result($result,0, 'organization_id'); //Default Company
 		}		
 	
 		//when we configure the invoice number in Settings this will be used

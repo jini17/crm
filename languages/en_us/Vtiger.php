@@ -20,7 +20,7 @@ $languageStrings = array(
 	'LBL_REPORT_CHART' => 'Chart Report',
                     'LBL_VIEW_MORE'=>'View More',
 	'LBL_ENRICH_DATA' => 'Enrich Data',
-
+	'LBL_LEAVE_APPROVAL'=>'My Team Approval',
 	'LBL_ENRICH_DATA_LOCKED' => 'Enrich Data', 
 
 	// Common Actions
