@@ -140,7 +140,7 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
 
                 //For chart reports as widgets
                 $sql = "SELECT reportid FROM vtiger_module_dashboard_widgets WHERE userid = ? AND linkid= ? AND reportid IS NOT NULL";
-                $params = array($currentUser->getId(),0);
+                $params = array($currentUser->getId(),119);
 
                 // Added for Vtiger7
                 if($this->get("tabid")){

@@ -12,9 +12,12 @@
 class Settings_Vtiger_AnnouncementSaveAjax_Action extends Settings_Vtiger_Basic_Action {
     
     public function process(Vtiger_Request $request) {
+       
         $currentUser = Users_Record_Model::getCurrentUserModel();
         $annoucementModel = Settings_Vtiger_Announcement_Model::getInstanceByCreator($currentUser);
         $annoucementModel->set('announcement',$request->get('announcement'));
+        $annoucementModel->set('isview',$request->get('isview'));
+
         $annoucementModel->save();
         $responce = new Vtiger_Response();
         $responce->setResult(array('success'=>true));

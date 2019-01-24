@@ -608,7 +608,7 @@ class EnhancedQueryGenerator extends QueryGenerator
 
     public function getWhereClause()
     {
-        global $current_user, $adb;
+        global $current_user, $adb; 
        // $adb->setDebug(true);
         $HRModules = array('EmployeeContract', 'PassportVisa', 'Performance', 'Payslip');
         $baseModule = $this->getModule();
@@ -616,22 +616,17 @@ class EnhancedQueryGenerator extends QueryGenerator
 
         if (in_array($baseModule, $HRModules)) {
 
-            if(!in_array($current_user->roleid, array('H2','H12','H13'))  &&  !$current_user->isAdminUser() ) {
-                
+            if(in_array($current_user->roleid, array('H2','H12','H13','H16'))){
                 if (isset($_REQUEST['record'])) {
-                    $emp_id = $_REQUEST['record'];
-                    $ownrecsql .= ' AND vtiger_' . strtolower($baseModule) . '.employee_id=' . $emp_id;
-                } 
-            }
+                    $ownrecsql .= ' AND vtiger_' . strtolower($baseModule) . '.employee_id=' .$_REQUEST['record'];
+                }     
+             } else {
+                $ownrecsql .= ' AND vtiger_' . strtolower($baseModule) . '.employee_id=' . $current_user->id;
+             }   
         }    
-
-        /*if(in_array($baseModule,$HRModules)){
-                $ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$emp_id;
-        }*/
-
         if ($baseModule == 'MessageBoard') {
-            $ownrecsql = ' AND ( vtiger_' . strtolower($baseModule) . '.employee_id IN (SELECT id FROM vtiger_users WHERE reports_to_id=' . $current_user->id . ')'
-                . ' OR ( vtiger_' . strtolower($baseModule) . '.employee_id =' . $current_user->id . '))';
+
+          $ownrecsql = " AND vtiger_" . strtolower($baseModule) . ".department REGEXP '[[:<:]]($current_user->department)[[:>:]]'";
         }
 
         if($baseModule == 'Documents'){

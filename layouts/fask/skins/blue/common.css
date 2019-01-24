@@ -1356,10 +1356,10 @@ ul.unstyled {
   margin-right: 0;
 }
 .current-filter-name {
-  margin: 11px 0;
-  float: left;
-  font-size: 12px;
-  line-height: 18px;
+    margin: 11px 0;
+   float: left;
+   font-size: 12px;
+   line-height: 16px;
 }
 .current-filter-name a {
   max-width: 120px;
@@ -2734,6 +2734,7 @@ input[type=checkbox]:checked {
 .cursorPointer {
   cursor: pointer;
   text-decoration: none;
+  margin-right: 5px;
 }
 .cursorDefault {
   cursor: default;
@@ -9527,6 +9528,27 @@ right connector from last child*/
 }
 
 
-/*Thats all. I hope you enjoyed it.
-Thanks :)*/
+.module-title.pull-left.text-uppercase{
+   font-size: 12px !important;
+font-weight: normal;
+text-transform: unset;
+color:#000 !important;
+}
+.module-breadcrumb{
+    font-size: 12px !important
+}
+.current-filter-name.settingModuleName.filter-name a:last-child{
+    color: #2f5597 !important;
+}
+.addtionalDashboardTab{
+     cursor: pointer;
+}
+.current-filter-name i{
 
+    margin-top: 2px;
+    display: block !important;
+    float: right;
+    margin-right: 5px;
+    margin-left: -3px;
+
+}

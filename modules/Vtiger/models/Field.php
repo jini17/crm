@@ -1125,6 +1125,11 @@ class Vtiger_Field_Model extends Vtiger_Field {
 			case 'start_period'			:	$funcName = array('name' => 'lessThanDependentField', 'params' => array('end_period'));
 											break;
 		}
+
+		// Added By Mabruk
+		if ($this->get('uitype') == '11')
+			$funcName = array('name' => 'phone', 'params' => array($fieldName));
+
 		if ($funcName) {
 			array_push($validator, $funcName);
 		}

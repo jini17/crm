@@ -163,6 +163,10 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 	}
 
 	function preProcessTplName(Vtiger_Request $request) {
+		$viewer = $this->getViewer ($request);
+		$searchparams = $request->get('search_params');
+		$viewer->assign('MODULENAME', $_SESSION['MODULENAME']);	
+
 		return 'DetailViewPreProcess.tpl';
 	}
 

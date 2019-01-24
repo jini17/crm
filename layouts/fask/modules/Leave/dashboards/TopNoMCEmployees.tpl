@@ -24,7 +24,19 @@
       </div>
   </div>    
 </div>
+<div class='row th' style="padding:5px">
+      <div class='col-lg-5'>
+       <strong>{vtranslate('LBL_NAME', $MODULE_NAME)}</strong>
 
+
+      </div>
+      <div class='col-lg-4'>
+         <strong>{vtranslate('LBL_DEPARTMENT', $MODULE_NAME)}</strong>
+      </div>
+      <div class='col-lg-3'>
+        <strong>{vtranslate('LBL_MC_TAKEN', $MODULE_NAME)}</strong>
+      </div>
+</div>
 <div class="dashboardWidgetContent mCustomScrollbar _mCS_5" style="height:200px;">
 	{include file="dashboards/TopNoMCEmployeesContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>

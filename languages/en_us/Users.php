@@ -31,6 +31,7 @@ $languageStrings = array(
 	'LBL_USER_PROJECTS'=>'User Projects',
 	'LBL_SKILL_LANG'=>'Skill Language',
 	'LBL_LEAVE'=>'Leave',
+	'LBL_SUBSCRIPTION_EXPIRED'=>'Subscription expired, please contact to administrator',
 	'LBL_CLAIM'=>'Claims',
 	'LBL_ADD_CONTACT'=>'Add Contact',
                       'LBL_JOB_TYPE' => 'Job Type',
@@ -577,4 +578,5 @@ $jsLanguageStrings = array(
 	'JS_DELETE_CONTACT_CONFIRMATION'=>'Are you confirm to delete the record',
 	'JS_ERROR_TRANSACTION_DATE'=>'Transsaction date should be less than or equal to current date',
 	'JS_APPLY_AMOUNT'=>'Amount cant more than this',
+	'JS_NO_ACTIVE_CONTRACT_FOUND'=>'Sorry, Cant apply due to no active contract',
 );

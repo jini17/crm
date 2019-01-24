@@ -46,7 +46,7 @@
 							{if $RELATEDMODULENAME eq "ModComments" || $RELATEDMODULENAME eq 'ClaimType'}
 								<span class="tab-label" >{$DETAILVIEWRELATEDLINKLBL}</span>&nbsp;
 							{else}
-								<span class="tab-icon">
+								<!--<span class="tab-icon">-->
 									{assign var=RELATED_MODULE_MODEL value=Vtiger_Module_Model::getInstance($RELATEDMODULENAME)}  
 									{assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
 									'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
@@ -57,9 +57,10 @@
 									'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
 									'mycthemeswitcher'=>'folder', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people']}
 									
-									<i class="material-icons" >{$iconsarray[{strtolower($RELATEDMODULENAME)}]}</i>
+									<span class="tab-label">{vtranslate($RELATEDMODULENAME, $MODULE_NAME)}</span>
+									<!--<i class="material-icons" >{$iconsarray[{strtolower($RELATEDMODULENAME)}]}</i>-->
 			
-								</span>
+								<!--</span>-->
 							{/if}
 							<!-- Condition Added By Mabruk -->
 							{if $RELATEDMODULENAME neq 'ClaimType'}							

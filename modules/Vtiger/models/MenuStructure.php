@@ -234,11 +234,12 @@ class Vtiger_MenuStructure_Model extends Vtiger_Base_Model {
                 $db = PearDatabase::getInstance();
                 $result = $db->pquery("SELECT UPPER(parenttab_label) as parenttab FROM vtiger_parenttab WHERE visible=0 ORDER BY sequence ASC",array());
                 $noOfRows = $db->num_rows($result);
-
-
                 for($i=0; $i<$noOfRows; $i++) {
                         $row = $db->query_result_rowdata($result, $i);
-                                $parentlist[] = $row['parenttab'];
+                        if(($_SESSION['plan']==2 && $row['parenttab']=='SUPPORT') OR ($_SESSION['plan']==3 &&  $row['parenttab']=='SALES')) {
+                          continue;  
+                        }
+                        $parentlist[] = $row['parenttab'];
                 }	
                 
                 return $parentlist;//array('MARKETING','SALES','INVENTORY','SUPPORT','PROJECT','TOOLS');
@@ -249,10 +250,10 @@ class Vtiger_MenuStructure_Model extends Vtiger_Base_Model {
                 $result = $db->pquery("SELECT UPPER(parenttab_label) as parenttab, icon FROM vtiger_parenttab WHERE visible=0 ORDER BY sequence ASC",array());
                 $noOfRows = $db->num_rows($result);
 
-
+                
                 for($i=0; $i<$noOfRows; ++$i) {
-                        $row = $db->query_result_rowdata($result, $i);
-                                $appImageIcons[$row['parenttab']] = $row['icon'];
+                    $row = $db->query_result_rowdata($result, $i);
+                    $appImageIcons[$row['parenttab']] = $row['icon'];
 
                 }	
                 return $appImageIcons;//array('MARKETING','SALES','INVENTORY','SUPPORT','PROJECT','TOOLS');

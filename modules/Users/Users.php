@@ -1134,15 +1134,19 @@ class Users extends CRMEntity {
                 //After adding new user, set the default activity types for new user
                 Vtiger_Util_Helper::setCalendarDefaultActivityTypesForUser($this->id);
 
-                //after adding/edit user, update plan to respective user
-                $adb->pquery("DELETE from secondcrm_userplan WHERE userid=?", array($this->id));
+                
+                
                 $result = $adb->pquery("SELECT secondcrm_plan.planid FROM vtiger_user2role INNER JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid
                         INNER JOIN secondcrm_plan ON secondcrm_plan.plantitle=vtiger_role.planid WHERE vtiger_user2role.userid=?", array($this->id));
                 if($adb->num_rows($result)>0){
                         $planid = $adb->query_result($result,0,'planid');
-                        if($planid !='')
-                                $adb->pquery("INSERT INTO secondcrm_userplan(userid, planid) VALUES(?,?)", array($this->id, $planid));
+                        if($planid !=''){
+                            //after adding/edit user, update plan to respective user
+                            $adb->pquery("DELETE from secondcrm_userplan WHERE userid=?", array($this->id));
+                            $adb->pquery("INSERT INTO secondcrm_userplan(userid, planid) VALUES(?,?)", array($this->id, $planid));
+                        }
                 } //end here 
+
 
                 //Set Default Dashboard onfirst time User creation 
                 if($this->mode==''){

@@ -34,7 +34,7 @@
 <input type="hidden" value="{$NO_SEARCH_PARAMS_CACHE}" id="noFilterCache" >
 <input type="hidden" value="{$TAB_TYPE}" id="tabtype" />
 <input type="hidden" value="{$DEPT}" id="curdepartment" />
-    <div class="listViewPageDiv" id="listViewContent" style="padding-left: 0px; width: 100%">
+    <div class="listViewPageDiv" id="listViewContent" style="padding:10px; width: 100%">
         <!--id="listViewContent"-->
         <div class="col-sm-12 col-xs-12 col-md-12 full-height">
 
@@ -78,7 +78,7 @@
                         <input type="text" id="keywordsearch" placeholder="{vtranslate('Search for Name, Designation, Email, Department',$MODULE)} " class="form-control" style="width:100%;">
                     </div>
                     <div class="form-group  col-lg-1" style="padding:0;">
-                        <button type="button" class='btn btn-primary keyword-search'> Search   </button>
+                        <button type="button" class='btn btn-primary keyword-search' style="padding: 5px 12px; margin-left: 5px;"> Search </button>
                     </div>
                 
                               
@@ -88,7 +88,7 @@
                     <button type="button" class="empview btn {if $EMP_VIEW eq 'List'} btn-primary activeview {else}btn-white view{/if}" data-tabtype="{$TAB_TYPE}" data-listtype='list' title="List View"><i class='fa fa-list'></i> </button>
                     <button type="button"  class="empview btn {if $EMP_VIEW eq 'grid'} btn-primary activeview {else}btn-white view{/if}"  data-tabtype="{$TAB_TYPE}" data-listtype='grid' title="Grid View"> <i class="fa fa-th-large"></i> </button>
                 </div>
-                <select class="select2 grid-filter pull-left" style="width: 60%;">
+          {*      <select class="select2 grid-filter pull-left" style="width: 60%;">
                     <option value=""> {vtranslate('Filter by',$MODULE)}</option>
                     <option value="all">All</option>
                     <option value="N"> {vtranslate('New Joinees',$MODULE)}</option>
@@ -96,7 +96,7 @@
                     <option value="MALE"> {vtranslate('Male Employee',$MODULE)} </option>
                     <option value="FEMALE"> {vtranslate('Female Employee',$MODULE)} </option>
                 </select>
-              
+              *}
             </div>
                 <div class="clearfix"></div>
         </div>
