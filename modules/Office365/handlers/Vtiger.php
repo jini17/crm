@@ -73,7 +73,9 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 		return $records;
 	}
 
+
 	public function put($recordDetails, $user) {  
+
 
 		global $current_user, $adb;
 		$current_user = $user;
@@ -273,7 +275,11 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 
 		$recordDetails['created'] = $createdRecords;
 		$recordDetails['updated'] = $updatedRecords;
-		$recordDetails['deleted'] = $deletedRecords; 
-		return $this->nativeToSyncFormat($recordDetails); 
+
+
+		$recordDetails['deleted'] = $deletedRecords;
+
+		return $this->nativeToSyncFormat($recordDetails);
+
 	}
 }

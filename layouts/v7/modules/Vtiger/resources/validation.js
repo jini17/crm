@@ -427,15 +427,25 @@ jQuery.validator.addMethod("picklist", function(value, element, params) {
 	}, jQuery.validator.format(app.vtranslate('JS_SPECIAL_CHARACTERS')+" < >"+app.vtranslate('JS_NOT_ALLOWED'))
 );
 
-jQuery.validator.addMethod("phone", function(value, element, params) {
+// MODIFIED BY Mabruk
+jQuery.validator.addMethod("phone", function(value, element, params) { 
 		try {
+			value = value.trim();
+			if(!value) return true;
+
+			var regexp = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g;
+			var result = regexp.test(value);
+			if (!result) {
+				return false;
+			}
 			return true;
 		} catch(err) {
 			console.log(err);
 			return false;
 		}
-	}, jQuery.validator.format("Please enter the correct date")
+	}, jQuery.validator.format(app.vtranslate('JS_INVALID_PHONE'))
 );
+// END
 
 jQuery.validator.addMethod("url", function(value, element, params) {
 		try {
