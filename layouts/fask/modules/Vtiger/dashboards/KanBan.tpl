@@ -48,7 +48,7 @@
                                     <option {if $PICKLIST_KEY|in_array:$TASK_FILTERS['status']}selected{/if} value="{$PICKLIST_KEY}">{$PICKLIST_LABEL}</option>
                                 {/foreach}
                             </select>
-                            <button class="btn btn-success search" style="position: absolute; top:0;right:0;"><span class="fa fa-search"></span></button>
+                            <button class="btn btn-success search" style="position: absolute; top:0;right:-26px;padding-top: 5px;padding-bottom: 5px;"><span class="fa fa-search"></span></button>
                         </div>
 
                     </div>
@@ -62,7 +62,7 @@
 
                     {foreach item=STATUSVAL from=$STATUSES}
                         <div class="col-lg-4 contentsBlock {strtolower($STATUSVAL|replace:' ':'_')} ui-droppable" data-status='{strtolower($STATUSVAL|replace:' ':'_')}' data-page="{$PAGE}">
-                            <div class="{strtolower($STATUSVAL|replace:' ':'_')}-header" style="border-bottom: 3px solid {$COLORS[$STATUSVAL]}; ">
+                            <div class="{strtolower($STATUSVAL|replace:' ':'_')}-header" style="background-color: {$COLORS[$STATUSVAL]}; ">
                                 <div class="title" ><span>{vtranslate($STATUSVAL,$STATUSVAL)}</span></div>   
                             </div>
                             <br>

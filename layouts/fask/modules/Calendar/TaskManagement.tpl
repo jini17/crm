@@ -60,7 +60,7 @@
 								<div class="title" style="background:{$COLORS[$PRIORITY]}"><span>{$PRIORITY}</span></div>
 							</div>
 							<br>
-							<div class="{strtolower($PRIORITY)}-content content" data-priority='{$PRIORITY}' style="border-bottom: 1px solid {$COLORS[$PRIORITY]};padding-bottom: 10px">
+							<div class="{strtolower($PRIORITY)}-content content" data-priority='{$PRIORITY}' style="background-color: {$COLORS[$PRIORITY]};padding-bottom: 10px">
 								{if $USER_PRIVILEGES_MODEL->hasModuleActionPermission($MODULE_MODEL->getId(), 'CreateView')}
 									<div class="input-group">
 										<input type="text" class="form-control taskSubject {$PRIORITY}" placeholder="{vtranslate('LBL_ADD_TASK_AND_PRESS_ENTER', $MODULE)}" aria-describedby="basic-addon1" style="width: 99%">
