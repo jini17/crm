@@ -155,8 +155,10 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                         $viewer->assign('SELECTABLE_WIDGETS', self::$selectable_dashboards);
                         $viewer->assign("EMPLOYEE_GROUP", $this->get_widgets_by_group("employee", $modulename,$current_user->get("id"),$tabid));
 
+
                         $viewer->assign("SALES", $this->get_widgets_by_group("sales", $modulename,$current_user->get("id"),$tabid));
                         $viewer->assign("SERVICE", $this->get_widgets_by_group("service", $modulename,$current_user->get("id"),$tabid));
+
 
                         $viewer->assign("CHART_GROUP", $this->get_widgets_by_group("chart", $modulename,$current_user->get("id"),$tabid));
                         $viewer->assign("LEAVECLAIM_GROUP",  $this->get_widgets_by_group("leaveclaim", $modulename,$current_user->get("id"),$tabid));

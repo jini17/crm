@@ -268,6 +268,10 @@ class Vtiger_Widget_Model extends Vtiger_Base_Model {
                 $db = PearDatabase::getInstance();
                 $db->pquery('DELETE FROM vtiger_module_dashboard_widgets WHERE reportid = ?',
                                 array($reportId));
+
+                // Added By Mabruk                
+                /*$db->pquery('UPDATE vtiger_module_dashboard_widgets SET is_closed = 1 WHERE id = ? AND userid = ?',
+                                array($this->get('id'), $this->get('userid')));                                */
         }
 
         /**

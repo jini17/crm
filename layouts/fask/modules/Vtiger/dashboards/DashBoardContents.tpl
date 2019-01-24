@@ -77,7 +77,11 @@
                                                                    data-name="{$emp['name']}" 
                                                                    data-width="{$emp['width']}" 
                                                                    data-height="{$emp['height']}">
+<<<<<<< HEAD
+                                                                  {$emp['title']}
+=======
                                                                   {vtranslate($emp['title'])}
+>>>>>>> 20f1f25e9b7a979199ba5a838e54fd86d6e0bdd9
                                                            </a>
                                                        </li>
                                                {/foreach}
@@ -96,6 +100,7 @@
                                                 {foreach item="emp" from=$SALES }      
                                                        <li class="emp-widget widget-item ">
                                                            <a style="padding-left: 10px;" data-group="employee" {if $emp["is_closed"] eq 0} disabled="disabled" title="This widget is currently active"{/if} onclick="Vtiger_DashBoard_Js.addWidget(this, '{$emp['URL']}')" href="javascript:void(0);"
+<<<<<<< HEAD
                                                                    data-linkid="{$emp['linkid']}" 
                                                                    data-name="{$emp['name']}" 
                                                                    data-width="{$emp['width']}" 
@@ -119,6 +124,8 @@
                                                 {foreach item="emp" from=$SERVICE }      
                                                        <li class="emp-widget widget-item ">
                                                            <a style="padding-left: 10px;" data-group="employee" {if $emp["is_closed"] eq 0} disabled="disabled" title="This widget is currently active"{/if} onclick="Vtiger_DashBoard_Js.addWidget(this, '{$emp['URL']}')" href="javascript:void(0);"
+=======
+>>>>>>> 20f1f25e9b7a979199ba5a838e54fd86d6e0bdd9
                                                                    data-linkid="{$emp['linkid']}" 
                                                                    data-name="{$emp['name']}" 
                                                                    data-width="{$emp['width']}" 
@@ -133,6 +140,32 @@
                                         </li>
                                         {/if}
 
+<<<<<<< HEAD
+=======
+                                        {if count($SERVICE) > 0}
+                                        <li class="group-heading employee" style="position:relative;">
+                                             <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Service <i class="fa fa-headphones pull-right widget-icon"></i></a>
+                                          
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                             
+                                                {foreach item="emp" from=$SERVICE }      
+                                                       <li class="emp-widget widget-item ">
+                                                           <a style="padding-left: 10px;" data-group="employee" {if $emp["is_closed"] eq 0} disabled="disabled" title="This widget is currently active"{/if} onclick="Vtiger_DashBoard_Js.addWidget(this, '{$emp['URL']}')" href="javascript:void(0);"
+                                                                   data-linkid="{$emp['linkid']}" 
+                                                                   data-name="{$emp['name']}" 
+                                                                   data-width="{$emp['width']}" 
+                                                                   data-height="{$emp['height']}">
+                                                                  {$emp['title']}
+                                                           </a>
+                                                       </li>
+                                               {/foreach}
+                                              
+                                            </ul>
+                                            
+                                        </li>
+                                        {/if}
+
+>>>>>>> 20f1f25e9b7a979199ba5a838e54fd86d6e0bdd9
                                         {if count($CHART_GROUP) > 0}                          
                                         <li  class="group-heading charts" style="">
                                             <a  class="widget-heading widget-item"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Charts <i class="fa fa-pie-chart pull-right widget-icon"></i></a> 

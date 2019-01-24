@@ -893,7 +893,7 @@ class CRMEntity {
 				// fieldname are always assumed to be unique for a module
 
 				// IF/ELSE conditons added by Mabruk to ignore the Starred Column if used as focused object in php script
-				if ($isUsedAsFocusObj == true && $fieldinfo['columnname'] == 'starred')
+				if ($fieldinfo['columnname'] == 'starred')
 					continue;
 				else
 					$column_clause .=  $fieldinfo['tablename'].'.'.$fieldinfo['columnname'].' AS '.$this->createColumnAliasForField($fieldinfo).',';

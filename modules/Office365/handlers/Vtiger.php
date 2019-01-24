@@ -73,7 +73,9 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 		return $records;
 	}
 
+
 	public function put($recordDetails, $user) {  
+
 
 		global $current_user, $adb;
 		$current_user = $user;
@@ -102,7 +104,22 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 			try { 
 				$createdRecords[$index] = vtws_create($record['module'], $record, $this->user);								
 			} catch (DuplicateException $e) { 		
+				// nOT A GOOD FIX BUT, No time... Mabruk
+				$result = $adb->pquery("SELECT crmid, label FROM vtiger_crmentity WHERE setype='Contacts' ORDER BY crmid DESC", array());
 
+				$id 	= $adb->query_result($result, 0, 'crmid');
+				$label  = $adb->query_result($result, 0, 'label');
+
+				$contactResult 	= $adb->pquery("SELECT * FROM vtiger_contactdetails WHERE contactid = ?", array($id));
+				$firstName 	   	= $adb->query_result($contactResult, 0, 'firstname');
+				$lastName 	   	= $adb->query_result($contactResult, 0, 'lastname');
+
+				if ( $firstName == $record['firstname'] && $lastName == $record['lastname']) {
+
+					$createdRecords[$index]['id'] 	 = "12x" . $id;
+					$createdRecords[$index]['label'] = $label;
+
+				} 
 
 				/*$skipped = true;
 				$duplicateRecordIds = $e->getDuplicateRecordIds();
@@ -213,9 +230,9 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 				continue;
 			}
 		}
-		foreach ($updateDuplicateRecords as $index => $record) {
+		/*foreach ($updateDuplicateRecords as $index => $record) {
 			$updatedRecords[$index] = $record;
-		}
+		}*/
 
 		$hasDeleteAccess = null;
 		$deletedCrmIds = array();
@@ -258,7 +275,11 @@ class Office365_Vtiger_Handler extends vtigerCRMHandler {
 
 		$recordDetails['created'] = $createdRecords;
 		$recordDetails['updated'] = $updatedRecords;
+
+
 		$recordDetails['deleted'] = $deletedRecords;
+
 		return $this->nativeToSyncFormat($recordDetails);
+
 	}
 }
