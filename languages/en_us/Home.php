@@ -28,6 +28,7 @@ $languageStrings = array(
 	'LBL_MAX_CHARACTERS_ALLOWED_DASHBOARD' => 'Maximum 30 characters are allowed for dashboard name.',
 	'LBL_COMPANY' => 'Company',
 	'LBL_LAST_LOGINTIME'=>'Login Time',
+	
 	'Claim'=> 'Claims',
 	'LBL_USER'=>'Employee',
 	'LBL_CUSTOMER' => 'Contacts',

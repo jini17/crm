@@ -187,7 +187,27 @@
    {if $MODULE eq "Home"}
    {assign var=SELECTED_MENU_CATEGORY value='Dashboard'}
    {/if}
+
+   {if $PLAN eq 1}
+      {assign var=counttab value=4}
+   {else if $PLAN eq 2 OR $PLAN eq 3}
+      {assign var=counttab value=4}
+   {else}   
+      {assign var=counttab value=5}
+   {/if}
+  
+   {math equation="(100/$counttab)" assign="widthtab"}
+   {math equation="(100/$counttab)" assign="widthcomtab"}
+   
    {foreach item=APP_NAME from=$APP_LIST}
+   {if vtranslate("LBL_$APP_NAME") eq 'General' OR vtranslate("LBL_$APP_NAME") eq 'HRM'}
+      {math equation="$widthtab-8" assign="colwidth"}
+   {else if vtranslate("LBL_$APP_NAME") eq 'Communications'}
+      {math equation="$widthcomtab-3" assign="colwidth"}
+   {else}
+      {math equation="$widthcomtab-5" assign="colwidth"}   
+   {/if}
+
    {if $APP_NAME eq 'ANALYTICS'} {continue}{/if}
    {if count($APP_GROUPED_MENU.$APP_NAME) gt 0}
    {foreach item=APP_MENU_MODEL from=$APP_GROUPED_MENU.$APP_NAME}
@@ -204,8 +224,8 @@
    'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
    'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
    'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
-   <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}" {if vtranslate("LBL_$APP_NAME") eq "General" OR vtranslate("LBL_$APP_NAME") eq "HRM"} style="width:12%" {else} style="width:16%"{/if}> 
-   <a class="has-arrow waves-effect waves-dark " >
+   <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}" style="width:{$colwidth}%;"> 
+   <a class="has-arrow waves-effect waves-dark" >
    <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i>
    <span class="hide-menu">{vtranslate("LBL_$APP_NAME")}</span>
    </a>
@@ -216,11 +236,11 @@
       {assign var='moduleURL' value="index.php?module=Users&view=Detail&record={$USER_MODEL->getId()}&app=$APP_NAME&parent=Settings"}
       {else}
       {assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME"}
-      {/if}   
+      {/if}  
+
       {if $moduleName eq 'Calendar'}
       <li {$APP_NAME} moudel='{$moduleName}'>
-      <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
-         href="index.php?module=Calendar&view=List" >
+      <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" href='index.php?module=Calendar&view=List&search_params=[[["activitytype"%2C"e"%2C"Meeting"]]]' >
       <i class="ti ti-notepad" ></i> 
       <span class="hide-menu"> {vtranslate("LBL_MEETING",'Vtiger')}</span>
       </a>
@@ -236,7 +256,7 @@
       {else}   
       <li {$APP_NAME} moudel='{$moduleName}'>
       <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
-         href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
+         href="{if $translatedModuleLabel eq 'Employee'}index.php?module=Users&parent=Settings&view=List{/if}
          {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
       <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
       <span class="hide-menu"> {$translatedModuleLabel}</span>

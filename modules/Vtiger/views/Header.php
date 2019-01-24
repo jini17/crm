@@ -247,7 +247,9 @@ abstract class Vtiger_Header_View extends Vtiger_View_Controller {
                         $announcement = get_announcements();
                                 //Vtiger_Cache::set('announcement', 'value', $announcement);
                 //}
-                return $model->set('announcement', $announcement);
+                 $model->set('announcement', $announcement['text']);    
+                 $model->set('isview', $announcement['visible']);    
+                return $model;
         }
 
 }

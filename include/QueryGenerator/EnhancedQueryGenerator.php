@@ -624,14 +624,9 @@ class EnhancedQueryGenerator extends QueryGenerator
                 $ownrecsql .= ' AND vtiger_' . strtolower($baseModule) . '.employee_id=' . $current_user->id;
              }   
         }    
-
-        /*if(in_array($baseModule,$HRModules)){
-                $ownrecsql = ' AND vtiger_'.strtolower($baseModule).'.employee_id='.$emp_id;
-        }*/
-
         if ($baseModule == 'MessageBoard') {
-            $ownrecsql = ' AND ( vtiger_' . strtolower($baseModule) . '.employee_id IN (SELECT id FROM vtiger_users WHERE reports_to_id=' . $current_user->id . ')'
-                . ' OR ( vtiger_' . strtolower($baseModule) . '.employee_id =' . $current_user->id . '))';
+
+          $ownrecsql = " AND vtiger_" . strtolower($baseModule) . ".department REGEXP '[[:<:]]($current_user->department)[[:>:]]'";
         }
 
         if($baseModule == 'Documents'){

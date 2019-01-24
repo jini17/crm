@@ -790,13 +790,17 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                         return $imageDetails;
         }
 
-        public function widgetTopNOMCEmployee($department){
+        public function widgetTopNOMCEmployee($department, $pagingModel){
                 $db = PearDatabase::getInstance();
 
                 $deptCond = '';
                 if($department !=''){
                         $deptCond = " AND department='$department'";
                 }
+                $params = array();
+                $params[] = $pagingModel->getStartIndex();
+                $params[] = $pagingModel->getPageLimit();
+
                 $query = "SELECT count(vtiger_leave.employee_id) as leavecount, vtiger_users.id,
                                         CONCAT(vtiger_users.first_name, ' ', vtiger_users.last_name) AS fullname, 
                                         vtiger_users.department, vtiger_users.title 
@@ -804,12 +808,15 @@ class Users_LeavesRecords_Model extends Vtiger_Record_Model {
                                         INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_leave.leaveid
                                         LEFT JOIN vtiger_users ON vtiger_users.id=vtiger_leave.employee_id
                                         WHERE vtiger_crmentity.deleted = 0 AND vtiger_users.deleted = 0 AND vtiger_leave.leavetype=790 ".$deptCond ." 
-                                        GROUP BY vtiger_leave.employee_id ORDER BY leavecount ASC LIMIT 4";
+                                        GROUP BY vtiger_leave.employee_id ORDER BY leavecount ASC LIMIT ?, ?";
                 
-                $result = $db->pquery($query, array());
+                $result = $db->pquery($query, $params);
                 $numrows = $db->num_rows($result);
                 $employeelist = array();
 
+                 if($pagingModel->get('topcount') < $numrows) {
+                        $pagingModel->set('topcount', $numrows);
+                }
                 for($i=0;$i<$numrows;$i++){
 
                         //$employeelist[$i]['imagedetail'] = self::getEmployeeImage($db->query_result($result, $i, 'id'));

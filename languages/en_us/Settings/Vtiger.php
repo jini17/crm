@@ -465,6 +465,7 @@ $languageStrings = array(
 	'LBL_BENEFIT_TYPES'=>'Benefit Type',
 	'LBL_BENEFIT_TYPES_LIST'=>'Benefit Type List',
 
+	'LBL_PDF_SETTINGS'=>'PDF Settings',
 	'LBL_PDF'=>'PDF',
 	'LBL_HOLIDAY'=>'Holiday',
 	'LBL_WORKINGHOURS'=>'Working Hours',

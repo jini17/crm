@@ -238,4 +238,5 @@ $jsLanguageStrings = array(
 	'JSLBL_PIN_CHART_TO_DASHBOARD' => 'Pin Chart To DashBoard',
 	'JSLBL_UNPIN_CHART_FROM_DASHBOARD' => 'Unpin chart from dashboard',
 	'JS_CHART_REMOVED_FROM_DASHBOARD' => 'Chart removed from dashboard',
+	'JS_SELECT_DASHBOARD_TAB'=>'Select Dashboard Tab',
 );

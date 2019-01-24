@@ -2155,13 +2155,12 @@ input[type=checkbox]:checked {
   display: inline-block;
   vertical-align: middle;
 }
-.related-tabs .tab-icon .content{font-size: 15px;}
+.related-tabs .tab-icon .content{font-size: 12px;}
 
 .related-tabs .tab-label {
   display: inline-block;
   height: 26px;
   line-height: 25px;
-  font-size:13px;
 }
 .summary-table {
   width: 100%;

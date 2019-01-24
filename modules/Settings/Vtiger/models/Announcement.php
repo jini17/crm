@@ -21,8 +21,14 @@ class Settings_Vtiger_Announcement_Model extends Vtiger_Base_Model {
         $checkQuery = 'SELECT 1 FROM '.self::tableName.' WHERE creatorid=?';
         $result = $db->pquery($checkQuery,array($currentUser->getId()));
         if($db->num_rows($result) > 0) {
-            $query = 'UPDATE '.self::tableName.' SET announcement=?,time=? WHERE creatorid=?';
-            $params = array($this->get('announcement'),$db->formatDate($currentDate, true),$currentUser->getId());
+            if($this->get('announcement')){
+                $query = 'UPDATE '.self::tableName.' SET announcement=?,time=? WHERE creatorid=?';
+                $params = array($this->get('announcement'),$db->formatDate($currentDate, true),$currentUser->getId());    
+            } else {
+                $query = 'UPDATE '.self::tableName.' SET isview=?,time=? WHERE creatorid=?';
+                $params = array($this->get('isview'),$db->formatDate($currentDate, true),$currentUser->getId());
+            }
+            
         }else{
             $query = 'INSERT INTO '.self::tableName.' VALUES(?,?,?,?)';
             $params = array($currentUser->getId(),$this->get('announcement'),'announcement',$db->formatDate($currentDate, true));
