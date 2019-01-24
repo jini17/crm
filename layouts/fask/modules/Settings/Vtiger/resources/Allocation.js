@@ -5,6 +5,7 @@
  * The Initial Developer of the Original Code is vtiger.
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
+ * Created By Jitu, Mabruk and Nirbhay
  *************************************************************************************/
 
 Vtiger.Class("Settings_Vtiger_Allocation_Js",{
@@ -581,13 +582,13 @@ Vtiger.Class("Settings_Vtiger_Allocation_Js",{
                         
                         else if (data.result == "Not Allowed") { 
 //alert(JSON.stringify(data));
-                            var claims      = JSON.stringify(data.data.claims);
+                            //var claims      = JSON.stringify(data.data.claims);
                             var leaveTypes  = JSON.stringify(data.data.leaveTypes); 
-                            if (data.data.claims != "") {                              
+                            /*if (data.data.claims != "") {                              
 
                                     app.helper.showErrorNotification({"message":claims.replace(/"/g , "")});
                               
-                            }
+                            }*/
                             if (data.data.leaveTypes != "") {                              
 
                                     app.helper.showErrorNotification({"message":leaveTypes.replace(/"/g , "")});
