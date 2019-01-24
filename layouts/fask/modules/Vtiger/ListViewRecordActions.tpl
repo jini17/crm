@@ -33,14 +33,14 @@
             <i class="material-icons icon">info_outline</i></span>
         <ul class="dropdown-menu animated fadeIn">
             <li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="{$LISTVIEW_ENTRY->getFullDetailViewUrl()}&app={$SELECTED_MENU_CATEGORY}">{vtranslate('LBL_DETAILS', $MODULE)}</a></li>
-                        {if $RECORD_ACTIONS}
-                                {if $RECORD_ACTIONS['edit']}
-                                        <li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0);" data-url="{$LISTVIEW_ENTRY->getEditViewUrl()}&app={$SELECTED_MENU_CATEGORY}" name="editlink">{vtranslate('LBL_EDIT', $MODULE)}</a></li>
-                                {/if}
-                                {if $RECORD_ACTIONS['delete']}
-                                        <li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0);" class="deleteRecordButton">{vtranslate('LBL_DELETE', $MODULE)}</a></li>
-                                {/if}
-                        {/if}
+            {if $RECORD_ACTIONS}
+                {if $RECORD_ACTIONS['edit']}
+                        <li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0);" data-url="{$LISTVIEW_ENTRY->getEditViewUrl()}&app={$SELECTED_MENU_CATEGORY}" name="editlink">{vtranslate('LBL_EDIT', $MODULE)}</a></li>
+                {/if}
+                {if $RECORD_ACTIONS['delete']}
+                        <li><a data-id="{$LISTVIEW_ENTRY->getId()}" href="javascript:void(0);" class="deleteRecordButton">{vtranslate('LBL_DELETE', $MODULE)}</a></li>
+                {/if}
+            {/if}
         </ul>
     </span>
 

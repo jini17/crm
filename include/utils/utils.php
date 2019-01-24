@@ -2679,4 +2679,18 @@ function NotificationPeople($roles){
 	}
 	return $userid;
 }
+
+
+function RecordSetype($record){
+
+    global $adb;
+    $result = $adb->pquery("SELECT setype from vtiger_crmentity where crmid=? AND deleted=0", array($record));
+    if($adb->num_rows($result)>0)
+        return $adb->query_result($result, 0,'setype');
+    else 
+        return false;
+    
+}
+
+
 ?>

@@ -25,6 +25,8 @@ class Vtiger_List_View extends Vtiger_Index_View {
 		$moduleName = $request->getModule();
 		
 		$recordPermission = Users_Privileges_Model::isPermitted($moduleName, 'DetailView');
+
+
 		if(!$recordPermission) {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
 		}
@@ -571,10 +573,18 @@ class Vtiger_List_View extends Vtiger_Index_View {
 
 	public function getRecordActionsFromModule($moduleModel) {
 		$editPermission = $deletePermission = 0;
+		
 		if ($moduleModel) {
 			$editPermission	= $moduleModel->isPermitted('EditView');
 			$deletePermission = $moduleModel->isPermitted('Delete');
 		}
+
+		//added by jitu for hide edit/delete link in case of below modules and role Admin and HR
+		$currentUser = Users_Record_Model::getCurrentUserModel();
+		if(!in_array($currentUser->roleid, array('H2','H12','H13')) && in_array($moduleModel->get('name'), array('Leave','Claim','WorkingHours', 'Payslip'))){
+			$editPermission	=0;
+			$deletePermission = 0;
+		}	
 
 		$recordActions = array();
 		$recordActions['edit'] = $editPermission;

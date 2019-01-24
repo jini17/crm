@@ -67,13 +67,19 @@ class Vtiger_DetailView_Model extends Vtiger_Base_Model {
 		$linkModelList = array();
 
 		if(Users_Privileges_Model::isPermitted($moduleName, 'EditView', $recordId)) {
-			$detailViewLinks[] = array(
-					'linktype' => 'DETAILVIEWBASIC',
-					'linklabel' => 'LBL_EDIT',
-					'linkurl' => $recordModel->getEditViewUrl(),
-					'linkicon' => ''
-			);
 
+			$currentUser = Users_Record_Model::getCurrentUserModel();
+			//add role specific condition for Admin, HR Manager, HR Staff can duplicate below module record
+			if(!in_array($currentUser->roleid, array('H2','H12','H13')) && in_array($this->getModuleName(), array('Leave','Claim','WorkingHours', 'Payslip'))){
+			} else{	
+				$detailViewLinks[] = array(
+						'linktype' => 'DETAILVIEWBASIC',
+						'linklabel' => 'LBL_EDIT',
+						'linkurl' => $recordModel->getEditViewUrl(),
+						'linkicon' => ''
+				);
+			}
+				
 			foreach ($detailViewLinks as $detailViewLink) {
 				$linkModelList['DETAILVIEWBASIC'][] = Vtiger_Link_Model::getInstanceFromValues($detailViewLink);
 			}
@@ -117,24 +123,39 @@ class Vtiger_DetailView_Model extends Vtiger_Base_Model {
     	}    
     	// end
 
+    	$currentUser = Users_Record_Model::getCurrentUserModel();
+		
 		if(Users_Privileges_Model::isPermitted($moduleName, 'Delete', $recordId)) {
-			$deletelinkModel = array(
-					'linktype' => 'DETAILVIEW',
-					'linklabel' => sprintf("%s %s", getTranslatedString('LBL_DELETE', $moduleName), vtranslate('SINGLE_'. $moduleName, $moduleName)),
-					'linkurl' => 'javascript:Vtiger_Detail_Js.deleteRecord("'.$recordModel->getDeleteUrl().'")',
-					'linkicon' => ''
-			);
-			$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($deletelinkModel);
-		}
 
-		if($moduleModel->isDuplicateOptionAllowed('CreateView', $recordId)) {
-			$duplicateLinkModel = array(
-						'linktype' => 'DETAILVIEWBASIC',
-						'linklabel' => 'LBL_DUPLICATE',
-						'linkurl' => $recordModel->getDuplicateRecordUrl(),
+			//add role specific condition for Admin, HR Manager, HR Staff can delete below module record
+			if(!in_array($currentUser->roleid, array('H2','H12','H13')) && in_array($this->getModuleName(), array('Leave','Claim','WorkingHours', 'Payslip'))){
+					
+			} else {
+
+				$deletelinkModel = array(
+						'linktype' => 'DETAILVIEW',
+						'linklabel' => sprintf("%s %s", getTranslatedString('LBL_DELETE', $moduleName), vtranslate('SINGLE_'. $moduleName, $moduleName)),
+						'linkurl' => 'javascript:Vtiger_Detail_Js.deleteRecord("'.$recordModel->getDeleteUrl().'")',
 						'linkicon' => ''
 				);
-			$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($duplicateLinkModel);
+				$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($deletelinkModel);
+			}	
+		}	
+
+		if($moduleModel->isDuplicateOptionAllowed('CreateView', $recordId)) {
+
+			//add role specific condition for Admin, HR Manager, HR Staff can duplicate below module record
+			if(!in_array($currentUser->roleid, array('H2','H12','H13')) && in_array($this->getModuleName(), array('Leave','Claim','WorkingHours', 'Payslip'))){
+				
+			} else {	
+				$duplicateLinkModel = array(
+							'linktype' => 'DETAILVIEWBASIC',
+							'linklabel' => 'LBL_DUPLICATE',
+							'linkurl' => $recordModel->getDuplicateRecordUrl(),
+							'linkicon' => ''
+					);
+				$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($duplicateLinkModel);
+			}	
 		}
 
 		if($this->getModule()->isModuleRelated('Emails') && Vtiger_RecipientPreference_Model::getInstance($this->getModuleName())) {

@@ -93,27 +93,38 @@ class Vtiger_ListView_Model extends Vtiger_Base_Model {
 	public function getListViewMassActions($linkParams) {
 		$currentUserModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
 		$moduleModel = $this->getModule();
-
+		
 		$linkTypes = array('LISTVIEWMASSACTION');
 		$links = Vtiger_Link_Model::getAllByType($moduleModel->getId(), $linkTypes, $linkParams);
 
-
+		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$massActionLinks = array();
 		if($currentUserModel->hasModuleActionPermission($moduleModel->getId(), 'EditView')) {
-			$massActionLinks[] = array(
-				'linktype' => 'LISTVIEWMASSACTION',
-				'linklabel' => 'LBL_EDIT',
-				'linkurl' => 'javascript:Vtiger_List_Js.triggerMassEdit("index.php?module='.$moduleModel->get('name').'&view=MassActionAjax&mode=showMassEditForm");',
-				'linkicon' => ''
-			);
+			
+			//add role specific condition for Admin, HR Manager, HR Staff can Edit below module record
+			if(!in_array($currentUser->roleid, array('H2','H12','H13')) && in_array($moduleModel->get('name'), array('Leave','Claim','WorkingHours', 'Payslip'))){
+				
+			} else {	
+				$massActionLinks[] = array(
+					'linktype' => 'LISTVIEWMASSACTION',
+					'linklabel' => 'LBL_EDIT',
+					'linkurl' => 'javascript:Vtiger_List_Js.triggerMassEdit("index.php?module='.$moduleModel->get('name').'&view=MassActionAjax&mode=showMassEditForm");',
+					'linkicon' => ''
+				);
+			}	
 		}
 		if($currentUserModel->hasModuleActionPermission($moduleModel->getId(), 'Delete')) {
-			$massActionLinks[] = array(
-				'linktype' => 'LISTVIEWMASSACTION',
-				'linklabel' => 'LBL_DELETE',
-				'linkurl' => 'javascript:Vtiger_List_Js.massDeleteRecords("index.php?module='.$moduleModel->get('name').'&action=MassDelete");',
-				'linkicon' => ''
-			);
+			//add role specific condition for Admin, HR Manager, HR Staff can delete below module record
+			if(!in_array($currentUser->roleid, array('H2','H12','H13')) && in_array($moduleModel->get('name'), array('Leave','Claim','WorkingHours', 'Payslip'))){
+				
+			} else {	
+				$massActionLinks[] = array(
+					'linktype' => 'LISTVIEWMASSACTION',
+					'linklabel' => 'LBL_DELETE',
+					'linkurl' => 'javascript:Vtiger_List_Js.massDeleteRecords("index.php?module='.$moduleModel->get('name').'&action=MassDelete");',
+					'linkicon' => ''
+				);
+			}	
 		}
 
 		$modCommentsModel = Vtiger_Module_Model::getInstance('ModComments');
