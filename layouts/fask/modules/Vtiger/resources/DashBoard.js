@@ -966,11 +966,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             })
         });
     },
-/**
- * Dashboard Tab Click Event
- * Registered by Khaled
- * @returns {undefined}
- */
+    /**
+     * Dashboard Tab Click Event
+     * Registered by Khaled
+     * @returns {undefined}
+     */
     registerDashBoardTabClick: function () {
         var thisInstance = this;
         var container = this.getContainer();

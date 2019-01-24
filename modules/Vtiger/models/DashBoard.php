@@ -219,8 +219,8 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
                 $db->pquery($query,array($tabName,$currentUser->getId(),$sequence));
                 $tabData = array("tabid"=>$db->getLastInsertID(),"tabname"=>$tabName,"sequence"=>$sequence);
 
-                // Added By Mabruk
-                Users::CreateDefaultDashboard($currentUser->getId(), $currentUser->getId('roleId'), $tabData['tabid']);
+                // Added By Mabruk                
+                Users::CreateDefaultDashboard($currentUser->getId(), $currentUser->get('roleid'), $tabData['tabid']);
 
                 return $tabData;
         }
