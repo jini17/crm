@@ -119,6 +119,23 @@ Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 				$fieldsInfo[$fieldName] = $fieldModel->getFieldInfo();
 			}
 			$viewer->assign('FIELDS_INFO', json_encode($fieldsInfo));
+			
+			//fetch all notifications related to Log in user
+	        $LIMIT = 5;
+	        $page = $request->get('page');
+	        $homeModuleModel = Vtiger_Module_Model::getInstance('Home');    
+	        
+	        if(empty($page)) {
+	            $page = 1;
+	        }
+
+	        $pagingModel = new Vtiger_Paging_Model();
+	        $pagingModel->set('page', $page);
+	        $pagingModel->set('limit', $LIMIT);
+	       
+	        $notifications = $homeModuleModel->getAllNotifications($pagingModel);
+	        $viewer->assign('NEXTPAGE', ($pagingModel->get('notificationcount') < $LIMIT)? 0 : $page+1);
+	        $viewer->assign('NOTIFICATIONS', $notifications);
 
 			if($display) {
 				$this->preProcessDisplay($request);

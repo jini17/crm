@@ -488,6 +488,97 @@ class Home_Module_Model extends Vtiger_Module_Model {
 
 	}
 	
+	function getAllNotifications($pagingModel){
+
+		$db = PearDatabase::getInstance();	
+		
+		$currentUser = Users_Record_Model::getCurrentUserModel();
+		
+		$params[] = $currentUser->id;
+		$params[] = $pagingModel->getStartIndex();
+		$params[] = $pagingModel->getPageLimit();
+        
+        $sql .= ' ORDER BY vtiger_crmentity.createdtime DESC LIMIT ?, ?';  
+
+		$result = $db->pquery("SELECT *  FROM vtiger_notifications 
+					INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_notifications.notificationsid
+					LEFT JOIN `vtiger_crmentity_user_field` ON vtiger_crmentity_user_field.recordid=vtiger_crmentity.crmid 
+					WHERE vtiger_crmentity.`deleted`=0  AND vtiger_crmentity_user_field.`userid`=? ".$sql, $params);
+
+		$notifications = array();
+		$unread = 0;
+		$noOfRow = $db->num_rows($result);
+		if($pagingModel->get('notificationcount') < $noOfRows) {
+			$pagingModel->set('notificationcount', $noOfRows);
+		}
+
+		if($noOfRow> 0) {
+
+			for($i=0;$i<$db->num_rows($result);$i++) {
+
+			  	$notifyby	 	= $db->query_result($result, $i, 'notifyby');
+			  	$relatedto 		= $db->query_result($result, $i, 'relatedto');
+			  	$notifyto 		= $db->query_result($result, $i, 'notifyto');
+			  	$timestamp 		= $db->query_result($result, $i, 'createdtime');
+			  	$viewed 		= $db->query_result($result, $i, 'viewed');
+
+			  	$nameResult = $db->pquery('SELECT first_name, last_name,  FROM vtiger_users WHERE id = ?', array($notifyto));
+				if($db->num_rows($nameResult)) {
+					$fullname =  $db->query_result($nameResult, 0, 'first_name').' '.$db->query_result($nameResult, 0, 'last_name');
+				}
+				
+			  	$referenceModuleName = RecordSetype($relatedto);
+
+			  	$action = $db->query_result($result, $i, 'actionperform');
+			  	$entityNames = 	getEntityName($referenceModuleName, array($relatedto));
+			  	$linkValue = "<a href='index.php?module=$referenceModuleName&view=Detail&record=$relatedto'>$entityNames[$relatedto]</a>";	
+
+
+			  	if($action == 'Posted'){
+			  		$message = 'New message '. $linkValue." is posted";
+			  	} else if($action == 'Download'){
+			  		$message = 'Download your payslip '.$linkValue.' here';
+			  	} else if($action == 'Approved' || $action == 'Rejected' || $action == "Applied"){
+			  		$message = $referenceModuleName." ".$linkValue." is ". $action;
+			  	} else if($action == 'Assigned'){
+			  		$message = "A task ".$linkValue." is ". $action. " to ". $fullname;
+			  	} else if($action == 'Completed'){
+			  		$message = "Task ".$linkValue." is ". $action. " by ". $fullname;
+			  	} else if($action == 'Updated'){
+			  		$message = "HR change the working hours";
+			  	} else if($action == 'Commented'){
+			  		
+			  		$namebyResult = $db->pquery('SELECT first_name, last_name FROM vtiger_users WHERE id = ?', array($notifyby));
+					if($db->num_rows($namebyResult)) {
+						$notifybyfullname =  $db->query_result($namebyResult, 0, 'first_name').' '.$db->query_result($namebyResult, 0, 'last_name');
+					}
+
+			  		$message = "Comment on ". $linkValue ." is ".$action." by ".$notifybyfullname;
+			  	} else {
+			  		$message = "Your Subscription is getting expired";
+			  	}
+
+			  
+		  		if($notifyby==0){
+		  			$imagename = 'storage/2018/October/week3/2560_admin.jpg';
+		  		} else {
+		  			$recordModel = Users_Record_Model::getInstanceById($notifyby, 'Users');
+		  			$imagesdetails = $recordModel->getImageDetails();
+		  			$imagename = $imagesdetails[0]['path'].'_'.$imagesdetails[0]['name'];
+		  		}
+		  		$notifications['details'][$i]['message'] 		= $message;
+		  		$notifications['details'][$i]['profilepic'] 	= $imagename;
+		  		$notifications['details'][$i]['timestamp'] 	= Vtiger_Util_Helper::formatDateDiffInStrings($timestamp);
+		  		$notifications['details'][$i]['unread'] 		= $viewed;
+		  		if($viewed==0)
+		  			$unread++;
+			}
+
+			$notifications['new'] = $unread;
+		}
+		return $notifications;
+	}
+
 	function getDepartments(){
  
  		$db = PearDatabase::getInstance();	

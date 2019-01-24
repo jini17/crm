@@ -198,8 +198,24 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
                                 $viewer->assign('appid',$request->get('appid'));
                                 $viewer->assign('claimid', $request->get('leaveid'));
                         }
+                       
+                        //fetch all notifications related to Log in user
+                        $LIMIT = 5;
+                        $page = $request->get('page');
+                        $homeModuleModel = Vtiger_Module_Model::getInstance('Home');    
+                        
+                        if(empty($page)) {
+                            $page = 1;
+                        }
 
-
+                        $pagingModel = new Vtiger_Paging_Model();
+                        $pagingModel->set('page', $page);
+                        $pagingModel->set('limit', $LIMIT);
+                       
+                        $notifications = $homeModuleModel->getAllNotifications($pagingModel);
+                        $viewer->assign('NEXTPAGE', ($pagingModel->get('notificationcount') < $LIMIT)? 0 : $page+1);
+                        $viewer->assign('NOTIFICATIONS', $notifications);
+                        //end here
                         if($display) {
                                 $this->preProcessDisplay($request);
                         }

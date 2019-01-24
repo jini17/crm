@@ -190,7 +190,9 @@
 
    {if $PLAN eq 1}
       {assign var=counttab value=4}
-   {else if $PLAN eq 2 OR $PLAN eq 3}
+   {else if $PLAN eq 2}
+   {assign var=counttab value=5}
+   {else if $PLAN eq 3}
       {assign var=counttab value=4}
    {else}   
       {assign var=counttab value=5}

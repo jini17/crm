@@ -201,36 +201,40 @@
                <li>
                   <div>
                      <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" data-toggle="dropdown" title="Notifications" aria-hidden="true">
-                     <span class="count" style="position: absolute;top:0;right:0; background-color: red;color:#fff;padding-right:5px;padding-left:5px; font-size:11px;">2</span>
+                     <span class="count" style="position: absolute;top:0;right:0; background-color: red;color:#fff;padding-right:5px;padding-top:1px;padding-left:5px; font-size:11px;z-index:100; ">{$NOTIFICATIONS['new']}</span>
                      <i class="fa fa-bell-o"></i>
                      </a>
                   </div>
                   <div class="notification-list hide" style="top:30px;" onmouseleave="Vtiger_Header_Js.hideNotification();">
                      <h6>{vtranslate('Notification')}<i class="fa fa-gear pull-right"></i></h6>
-                     <ul class="list-unstyled" ">
+                     <ul class="list-unstyled">
+                       {foreach item=NOTIFICATION from=$NOTIFICATIONS['details']}
                         <li>
-                           <div class="notification-container unread">
+                           <div class="notification-container {if $NOTIFICATION['unread'] eq 0}unread{/if}">
                               <div class="notification-avatar left-node">
                                  <div class="img-holder">
-                                    <img src="storage/2018/October/week3/2560_admin.jpg" class="img-circle" height="40" width="40">
+                                    <img src="{$NOTIFICATION['profilepic']}" class="img-circle" height="40" width="40">
                                  </div>
                               </div>
                               <div class="right-node">
                                  <div class="notification-title">
                                     <a style="display:block; width: 100%; padding:0;">
-                                    <strong>Khaled approved leave</strong>
+                                    {if $NOTIFICATION['unread'] eq 1}<strong>{$NOTIFICATION['message']}</strong>{else}{$NOTIFICATION['message']}{/if}
                                     </a>  
                                     <div class="clearfix"></div>
-                                    <span class="notification-time">2 hr</span> 
+                                    <span class="notification-time">{$NOTIFICATION['timestamp']}</span> 
                                  </div>
                               </div>
                               <div class="clearfix"> </div>
                            </div>
                            <div class="clearfix"> </div>
                         </li>
+                        {/foreach}
                      </ul>
                      <div class="clearfix"> </div>
-                     <a href="#" class="btn btn-block all-notification text-center"> See all recent activity </a>
+                     {if $NEXTPAGE}
+                        <a href="#" class="btn btn-block all-notification text-center"> See all recent activity </a>
+                     {/if}   
                   </div>
                </li>
                <!--End here -->

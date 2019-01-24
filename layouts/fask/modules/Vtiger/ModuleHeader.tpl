@@ -69,7 +69,15 @@
                                         </a> 
                                     </p>
                         {else}
-                                <p class="current-filter-name filter-name pull-left cursorPointer {if $smarty.request.view eq 'Edit' or $RECORD}hidden-xs{/if}" title="{$CVNAME}"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}&app={$SELECTED_MENU_CATEGORY}'>&nbsp;&nbsp;{vtranslate($CVNAME,'Vtiger')}&nbsp;&nbsp;</a> </p>
+                                 {foreach item=FILTER_TYPES from=$CUSTOM_VIEWS}
+                                        {foreach item=FILTERS from=$FILTER_TYPES}
+                                                {if $FILTERS->get('cvid') eq $VIEWID}
+                                                        {assign var=CVNAME value=$FILTERS->get('viewname')}
+                                                        {break}
+                                                {/if}
+                                        {/foreach}
+                                {/foreach}
+                                <p class="current-filter-name filter-name pull-left cursorPointer {if $smarty.request.view eq 'Edit' or $RECORD}hidden-xs{/if}" title="{$CVNAME}"><span class="ti-angle-right pull-left" aria-hidden="true"></span><a href='{$MODULE_MODEL->getListViewUrl()}&viewname={$VIEWID}&app={$SELECTED_MENU_CATEGORY}'>&nbsp;&nbsp;{if $CVNAME eq ''}ALL{else}{vtranslate($CVNAME,'Vtiger')}{/if}&nbsp;&nbsp;</a> </p>
                         {/if}
                         {/if}
                         {assign var=SINGLE_MODULE_NAME value='SINGLE_'|cat:$MODULE}

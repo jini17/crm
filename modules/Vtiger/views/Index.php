@@ -48,6 +48,9 @@ class Vtiger_Index_View extends Vtiger_Basic_View {
 		$viewer->assign('CURRENT_USER_MODEL', Users_Record_Model::getCurrentUserModel());
 		$viewer->assign('REQUEST_INSTANCE', $request);
 		$viewer->assign('CURRENT_VIEW', $request->get('view'));
+
+		
+
 		if($display) {
 			$this->preProcessDisplay($request);
 		}

@@ -503,7 +503,7 @@ Vtiger.Class('Vtiger_Index_Js', {
                 Vtiger_Index_Js.registerActivityReminder();
                 //reference preview event registeration
                 this.registerReferencePreviewEvent();
-
+                this.registerLoadMore();    
                 var minHeight = $(window).height() - 84;
                 $(".content-area").attr("style","min-height:"+minHeight+"px !important");
 
@@ -1860,6 +1860,71 @@ Vtiger.Class('Vtiger_Index_Js', {
                         if(err == null){
                                 thisInstance.postRefrenceComplete(data, container);
                         }
+                });
+        },
+        
+        registerLoadMore: function() {
+                var thisInstance  = this;
+                var parent = thisInstance.getContainer();
+                var contentContainer = parent.find('.notification-list');
+
+                var loadMoreHandler = contentContainer.find('.all-notification');
+                loadMoreHandler.off('click');
+                loadMoreHandler.click(function(){
+                        var parent = thisInstance.getContainer();
+                        var element = parent.find('a[name="drefresh"]');
+                        var url = element.data('url');
+                        var params = url;
+
+                        var widgetFilters = parent.find('.widgetFilter');
+                        if(widgetFilters.length > 0) {
+                                params = { url: url, data: {}};
+                                widgetFilters.each(function(index, domElement){
+                                        var widgetFilter = jQuery(domElement);
+                                        //Filter unselected checkbox, radio button elements
+                                        if((widgetFilter.is(":radio") || widgetFilter.is(":checkbox")) && !widgetFilter.is(":checked")){
+                                                return true;
+                                        }
+
+                                        if(widgetFilter.is('.dateRange')) {
+                                                var name = widgetFilter.attr('name');
+                                                var start = widgetFilter.find('input[name="start"]').val();
+                                                var end = widgetFilter.find('input[name="end"]').val();
+                                                if(start.length <= 0 || end.length <= 0  ){
+                                                        return true;
+                                                } 
+
+                                                params.data[name] = {};
+                                                params.data[name].start = start;
+                                                params.data[name].end = end;
+                                        } else {
+                                                var filterName = widgetFilter.attr('name');
+                                                var filterValue = widgetFilter.val();
+                                                params.data[filterName] = filterValue;
+                                        }
+                                });
+                        }
+
+                        var filterData = thisInstance.getFilterData();
+                        if(! jQuery.isEmptyObject(filterData)) {
+                                if(typeof params == 'string') {
+                                        params = { url: url, data: {}};
+                                }
+                                params.data = jQuery.extend(params.data, thisInstance.getFilterData())
+                        }
+
+                        // Next page.
+                        params.data['page'] = loadMoreHandler.data('nextpage');
+
+            app.helper.showProgress();
+                        app.request.post(params).then(function(err,data){
+                                app.helper.hideProgress();
+                                loadMoreHandler.parent().replaceWith(jQuery(data).html());
+                                thisInstance.registerLoadMore();
+                        }, function(){
+                                app.helper.hideProgress();
+                        });
+
                 });
         }
 });

@@ -24,7 +24,7 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
 
         function preProcess (Vtiger_Request $request, $display=true) {
                 parent::preProcess($request, false);
-
+               
                 $viewer = $this->getViewer($request);
 
                 $menuModelsList = Vtiger_Menu_Model::getAll(true);
@@ -40,6 +40,7 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
                 $viewer->assign('QUALIFIED_MODULE', $request->getModule(false));
                 $viewer->assign('PARENT_MODULE', $request->get('parent'));
                 $viewer->assign('VIEW', $request->get('view'));
+                $viewer->assign('CUSTOM_VIEWS', CustomView_Record_Model::getAllByGroup($moduleName));
 
                 // Order by pre-defined automation process for QuickCreate.
                 uksort($menuModelsList, array('Vtiger_MenuStructure_Model', 'sortMenuItemsByProcess'));
@@ -96,7 +97,25 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
                 $viewer->assign('SEARCHABLE_MODULES', Vtiger_Module_Model::getSearchableModules());
 
                 $inventoryModules = getInventoryModules();
+
                 $viewer->assign('INVENTORY_MODULES',  $inventoryModules);
+
+                //fetch all notifications related to Log in user
+                $LIMIT = 5;
+                $page = $request->get('page');
+                
+                if(empty($page)) {
+                    $page = 1;
+                }
+
+                $pagingModel = new Vtiger_Paging_Model();
+                $pagingModel->set('page', $page);
+                $pagingModel->set('limit', $LIMIT);
+
+                $notifications = $homeModuleModel->getAllNotifications($pagingModel);
+                $viewer->assign('NEXTPAGE', ($pagingModel->get('notificationcount') < $LIMIT)? 0 : $page+1);
+                $viewer->assign('NOTIFICATIONS', $notifications);
+
                 if($display) {
                     $this->preProcessDisplay($request);
                 }

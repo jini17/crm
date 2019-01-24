@@ -988,7 +988,7 @@ input[type="password"].inputElement {
 }
 .module-filters .settings-sidebar,
 .module-filters .sidebar-container {
-  padding: 0 12px;
+  padding: 21px 12px;
 }
 .module-filters .settings-sidebar > hr {
   margin: 20px 12px;

@@ -10,55 +10,55 @@
 ********************************************************************************/
 -->*}
 {strip}
-    <script type="text/javascript" src="layouts/v7/lib/jquery/purl.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/select2/select2.min.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/jquery.class.min.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/jquery-ui-1.11.3.custom/jquery-ui.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/todc/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/purl.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/select2/select2.min.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/jquery.class.min.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/jquery-ui-1.11.3.custom/jquery-ui.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/todc/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="libraries/jquery/jstorage.min.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/jquery-validation/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/jquery-validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/jquery.slimscroll.min.js"></script>
     <script type="text/javascript" src="libraries/jquery/jquery.ba-outside-events.min.js"></script>
 	<script type="text/javascript" src="libraries/jquery/defunkt-jquery-pjax/jquery.pjax.js"></script>
     <script type="text/javascript" src="libraries/jquery/multiplefileupload/jquery_MultiFile.js"></script>
     <script type="text/javascript" src="resources/jquery.additions.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/bootstrap-notify/bootstrap-notify.min.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/websockets/reconnecting-websocket.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/jquery-play-sound/jquery.playSound.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/malihu-custom-scrollbar/jquery.mousewheel.min.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/malihu-custom-scrollbar/jquery.mCustomScrollbar.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/autoComplete/jquery.textcomplete.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/jquery.qtip.custom/jquery.qtip.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/websockets/reconnecting-websocket.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/jquery-play-sound/jquery.playSound.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/malihu-custom-scrollbar/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/malihu-custom-scrollbar/jquery.mCustomScrollbar.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/autoComplete/jquery.textcomplete.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/jquery.qtip.custom/jquery.qtip.js"></script>
     <script type="text/javascript" src="libraries/jquery/jquery-visibility.min.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/momentjs/moment.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/daterangepicker/moment.min.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/daterangepicker/jquery.daterangepicker.js"></script>
-    <script type="text/javascript" src="layouts/v7/lib/jquery/jquery.timeago.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/momentjs/moment.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/daterangepicker/moment.min.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/daterangepicker/jquery.daterangepicker.js"></script>
+    <script type="text/javascript" src="layouts/fask/lib/jquery/jquery.timeago.js"></script>
     <script type="text/javascript" src="libraries/jquery/ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="libraries/jquery/ckeditor/adapters/jquery.js"></script>
-	<script type='text/javascript' src='layouts/v7/lib/anchorme_js/anchorme.min.js'></script>
-    <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Vtiger/resources/Class.js')}"></script>
-    <script type='text/javascript' src="{vresource_url('layouts/v7/resources/helper.js')}"></script>
-    <script type="text/javascript" src="{vresource_url('layouts/v7/resources/application.js')}"></script>
-    <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Vtiger/resources/Utils.js')}"></script>
-    <script type='text/javascript' src="{vresource_url('layouts/v7/modules/Vtiger/resources/validation.js')}"></script>
-    <script type="text/javascript" src="{vresource_url('layouts/v7/lib/bootbox/bootbox.js')}"></script>
-    <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Vtiger/resources/Base.js')}"></script>
-    <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Vtiger/resources/Vtiger.js')}"></script>
-    <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Calendar/resources/TaskManagement.js')}"></script>
-    <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Import/resources/Import.js')}"></script>
-    <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Emails/resources/EmailPreview.js')}"></script>
-    <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Vtiger/resources/Base.js')}"></script>
-    <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Google/resources/Settings.js')}"></script>
-    <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Vtiger/resources/CkEditor.js')}"></script>
-    <script type="text/javascript" src="{vresource_url('layouts/v7/modules/Documents/resources/Documents.js')}"></script>
+	<script type='text/javascript' src='layouts/fask/lib/anchorme_js/anchorme.min.js'></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/modules/Vtiger/resources/Class.js')}"></script>
+    <script type='text/javascript' src="{vresource_url('layouts/fask/resources/helper.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/resources/application.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/modules/Vtiger/resources/Utils.js')}"></script>
+    <script type='text/javascript' src="{vresource_url('layouts/fask/modules/Vtiger/resources/validation.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/lib/bootbox/bootbox.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/modules/Vtiger/resources/Base.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/modules/Vtiger/resources/Vtiger.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/modules/Calendar/resources/TaskManagement.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/modules/Import/resources/Import.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/modules/Emails/resources/EmailPreview.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/modules/Vtiger/resources/Base.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/modules/Google/resources/Settings.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/modules/Vtiger/resources/CkEditor.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/modules/Documents/resources/Documents.js')}"></script>
     
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.4.0/perfect-scrollbar.min.js"></script>
     {foreach key=index item=jsModel from=$SCRIPTS}
         <script type="{$jsModel->getType()}" src="{vresource_url($jsModel->getSrc())}"></script>
     {/foreach}
 
-    <script type="text/javascript" src="{vresource_url('layouts/fask/resources/v7_client_compat.js')}"></script>
+    <script type="text/javascript" src="{vresource_url('layouts/fask/resources/fask_client_compat.js')}"></script>
     <!-- Added in the end since it should be after less file loaded -->
     <script type="text/javascript" src="libraries/bootstrap/js/less.min.js"></script>
 

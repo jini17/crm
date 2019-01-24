@@ -1293,6 +1293,7 @@ class Vtiger_Module_Model extends Vtiger_Module {
                 }
                 $createPermission = Users_Privileges_Model::isPermitted($this->getName(), 'CreateView');
                 $moduleName = $this->getName();
+                $currentUser = Users_Record_Model::getCurrentUserModel();
                 $basicLinks = array();
                 if($createPermission) {
                         if($moduleName === "Calendar"){
@@ -1309,21 +1310,28 @@ class Vtiger_Module_Model extends Vtiger_Module {
                                         'linkicon' => 'fa-plus'
                                 );
                         } else {
-                                $basicLinks[] = array(
-                                        'linktype' => 'BASIC',
-                                        'linklabel' => 'LBL_ADD_RECORD',
-                                        'linkurl' => $this->getCreateRecordUrl(),
-                                        'linkicon' => 'fa-plus'
-                                );
+                                if(!in_array($currentUser->roleid, array('H2','H12','H13')) && in_array($moduleName, array('Leave','Claim','WorkingHours', 'Payslip'))){
+                                     
+                                } else {       
+                                        $basicLinks[] = array(
+                                                'linktype' => 'BASIC',
+                                                'linklabel' => 'LBL_ADD_RECORD',
+                                                'linkurl' => $this->getCreateRecordUrl(),
+                                                'linkicon' => 'fa-plus'
+                                        );
+                                }        
                         }
                         $importPermission = Users_Privileges_Model::isPermitted($this->getName(), 'Import');
                         if($importPermission && $createPermission) {
-                                $basicLinks[] = array(
-                                        'linktype' => 'BASIC',
-                                        'linklabel' => 'LBL_IMPORT',
-                                        'linkurl' => $this->getImportUrl(),
-                                        'linkicon' => 'fa-download'
-                                );
+                               if(!in_array($currentUser->roleid, array('H2','H12','H13')) && in_array($moduleName, array('Leave','Claim','WorkingHours', 'Payslip'))){
+                               } else {     
+                                        $basicLinks[] = array(
+                                                'linktype' => 'BASIC',
+                                                'linklabel' => 'LBL_IMPORT',
+                                                'linkurl' => $this->getImportUrl(),
+                                                'linkicon' => 'fa-download'
+                                        );
+                                }        
                         }
                 }
                 return $basicLinks;
