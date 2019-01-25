@@ -26,7 +26,7 @@
                   </a>
                </li>
                {/if}
-               {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
+                {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                <li>
                   <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
                   <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
@@ -39,6 +39,26 @@
                   </a>
                </li>
                {/if}
+               <li>
+                  <a class="dropdown-icon-dashboard" title="Timesheet" href="index.php?module=Timesheet&view=List">
+                  <i class="material-icons module-icon">timer</i>&nbsp;Timesheet
+                  </a>
+               </li>
+                 <li>
+                  <a class="dropdown-icon-dashboard" title="Performance" href="index.php?module=Performance&view=List">
+                     <i class="material-icons module-icon">timeline</i>&nbsp;Performance
+                  </a>
+               </li>
+                 <li>
+                  <a class="dropdown-icon-dashboard" title="Training" href="index.php?module=Training&view=List">
+                  <i class="material-icons module-icon">book</i>&nbsp;Training
+                  </a>
+               </li>
+                 <li>
+                  <a class="dropdown-icon-dashboard" title="Attendance" href="index.php?module=Attendance&view=List">
+                  <i class="material-icons module-icon">fingerprint</i>&nbsp;Attendance
+                  </a>
+               </li>
             </ul>
          </div>
       </div>
