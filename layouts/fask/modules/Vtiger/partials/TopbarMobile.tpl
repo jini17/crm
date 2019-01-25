@@ -45,7 +45,7 @@
                      <i class="material-icons pull-left">{$iconsarray[{strtolower($moduleName)}]}</i>
                      <span class="quick-create-module">
                      {vtranslate($singularLabel,$moduleName)}
-                     <i class="fa fa-caret-down quickcreateMoreDropdownAction"></i>
+                     <i class="fas fa-caret-down quickcreateMoreDropdownAction"></i>
                      </span>
                      </a>
                      <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_{$moduleModel->getName()}">
@@ -218,18 +218,30 @@
    {break}
    {/if}
    {/foreach}
-   {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
-   'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
-   'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
-   'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
+   {assign var=iconsarray value=['potentials'=>'fas fa-comments-dollar','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
+   'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'fas fa-search-dollar',
+   'purchaseorder'=>'fas fa-shopping-cart','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
+   'projecttask'=>'check_box','projectmilestone'=>'fas fa-info-circle','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
+'foundation'=>'fas fa-info-circle','admin'=>'fas fa-hand-holding-heart',
    'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
-   'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
-   'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-   'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
-   <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}" style="width:{$colwidth}%;"> 
-   <a class="has-arrow waves-effect waves-dark" >
-   <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i>
-   <span class="hide-menu">{vtranslate("LBL_$APP_NAME")}</span>
+
+   'quotes'=>'description','invoice'=>'fas fa-envelope-open','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
+   'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-headset','tools'=>'business_center',
+   'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'fingerprint','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call',
+'performance'=>'fas fa-chart-line', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
+    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face'  ]}
+   <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> 
+   <a class="has-arrow waves-effect waves-dark " >
+    {if $iconsarray[{strtolower($APP_NAME)}]|strstr:"fas"}
+              <i class="{$iconsarray[{strtolower($APP_NAME)}]}" ></i> 
+              
+              
+          {else}
+              
+          <i class="material-icons module-icon" >{$iconsarray[{strtolower($APP_NAME)}]}</i> 
+          {/if}   
+   <span class="hide-menu" {$moduleName}>{vtranslate("LBL_$APP_NAME")}</span>
+
    </a>
    <ul style="padding-left:6px;padding-top:15px;">
       {foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
@@ -251,8 +263,12 @@
       <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
          href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
          {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
-      <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
-      <span class="hide-menu"> {$translatedModuleLabel}</span>
+     {if $iconsarray[{strtolower($moduleName)}]|strstr:"fa"}
+              <i class="{$iconsarray[{strtolower($moduleName)}]}" ></i> 
+          {else}
+          <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
+          {/if}   
+          <span class="hide-menu"> {$translatedModuleLabel}</span>
       </a>
       </li>
       {else}   
@@ -260,7 +276,13 @@
       <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
          href="{if $translatedModuleLabel eq 'Employee'}index.php?module=Users&parent=Settings&view=List{/if}
          {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
-      <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
+         {if $iconsarray[{strtolower($moduleName)}]|strstr:"fa"}
+              <i class="{$iconsarray[{strtolower($moduleName)}]}" ></i> 
+          {else}
+          <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
+          {/if}   
+             
+      
       <span class="hide-menu"> {$translatedModuleLabel}</span>
       </a>
       </li>
@@ -329,7 +351,7 @@
       <div class="row">
          <div id="appnavigator" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 cursorPointer app-switcher-container hidden-lg hidden-md " data-app-class="{if $MODULE eq 'Home' || !$MODULE}ti-dashboard{else}{$APP_IMAGE_MAP[$SELECTED_MENU_CATEGORY]}{/if}">
             <div class="row app-navigator">
-               <span class="app-icon fa fa-bars"></span>
+               <span class="app-icon fas fa-bars"></span>
             </div>
          </div>
          <!-- nuovo menu-->  
@@ -419,18 +441,33 @@
                {break}
                {/if}
                {/foreach}
-               {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
-               'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
-               'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
-               'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
+               {assign var=iconsarray value=['potentials'=>'fas fa-comments-dollar','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
+               'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'fas fa-search-dollar',
+               'purchaseorder'=>'fas fa-shopping-cart','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
+               'projecttask'=>'check_box','projectmilestone'=>'fas fa-info-circle','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
                'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
                'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
                'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-               'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
+               'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer',
+                'chat'=>'chat','user'=>'face', 
+                    'mobilecall'=>'call',
+                 'call'=>'call',
+'general'=>'fas fa-info-circle',
+               'performance'=>'fas fa-chart-line', 
+                'users'=>'person','meeting'=>'people' ,
+                    'bills'=>'receipt','workinghours'=>'access_time' ,
+                    'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
+'claim'=>'attach_money',
+'myprofile'=>'face'  ]}
                {if $APP_NAME neq 'SALES'}
                <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}" {if vtranslate("LBL_$APP_NAME") eq "Communications"} style="width:16%" {else} style="width:15%"{/if}> 
                <a class="has-arrow waves-effect waves-dark " >
-               <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i><span class="hide-menu">{vtranslate("LBL_$APP_NAME")}</span></a>
+                {if $iconsarray[{strtolower($moduleName)}]|strstr:"fas" !== false}
+              <i class="{$iconsarray[{strtolower($moduleName)}]}" ></i> 
+          {else}
+          <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
+          {/if}   
+               <span class="hide-menu">{vtranslate("LBL_$APP_NAME")}</span></a>
                <ul style="padding-left:6px;padding-top:15px;">
                   {foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
                   {assign var='translatedModuleLabel' value=vtranslate($moduleModel->get('label'),$moduleName )}
@@ -451,7 +488,11 @@
                   <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
                      href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
                      {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
-                  <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
+                  {if $iconsarray[{strtolower($moduleName)}]|strstr:"fa" !== false}
+                        <i class="{$iconsarray[{strtolower($moduleName)}]}" ></i> 
+                    {else}
+                    <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}] }</i> 
+                    {/if}   
                   <span class="hide-menu"> {$translatedModuleLabel}</span>
                   </a>
                   </li>
@@ -460,7 +501,11 @@
                   <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
                      href="{if $translatedModuleLabel eq 'Employee'} index.php?module=Users&parent=Settings&view=List   {/if}
                      {if $translatedModuleLabel neq 'Employee'} {$moduleURL} {/if}" >
-                  <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
+                 {if $iconsarray[{strtolower($moduleName)}]|strstr:"fa" !== false}
+                        <i class="{$iconsarray[{strtolower($moduleName)}]}" ></i> 
+                    {else}
+                    <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
+                    {/if}   
                   <span class="hide-menu"> {$translatedModuleLabel}</span>
                   </a>
                   </li>
@@ -526,7 +571,7 @@
          <li>
             <div class="dropdownFinance">
                <div class="addtionalDashboardTab" style="padding: 10px 10px;">
-                  <span aria-hidden="true">HRM</span>
+                   <span aria-hidden="true"><i class="fas fa-hand-holding-heart"></i>HRM</span>
                </div>
                <div class="dropdown-content-Finance">
                   <ul class="dropdownlist">
@@ -559,7 +604,7 @@
                      {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                      <li>
                         <a class="dropdown-icon-dashboard" title="Claim" href="index.php?module=Claim&view=List">
-                        <i class="material-icons module-icon">attach_money</i>&nbsp;Claim
+                        <i class="fas fa-hand-holding-usd">attach_money</i>&nbsp;Claim
                         </a>
                      </li>
                      {else}
@@ -576,7 +621,7 @@
          <li>
             <div class="dropdownSales">
                <div class="addtionalDashboardTab"  style="padding: 10px 10px;">
-                  <span aria-hidden="true">Sales</span> <i class="fa fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
+                  <span aria-hidden="true">Sales</span> <i class="fas fa-lock" style="color: #2f5597;vertical-align: middle;font-size: 13px;"></i>
                </div>
                <div class="dropdown-content-Sales">
                   <div class="row">
@@ -626,19 +671,19 @@
                   <ul class="dropdownlist">
                      <li>
                         <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                        <i class="fa fa-bell-o"></i>&nbsp;Templates
+                        <i class="fas fa-bell-o"></i>&nbsp;Templates
                         </a>
                      </li>
                      <!--   <li>
                         <a class="dropdown-icon-dashboard" title="Rss" href="index.php?module=Rss&amp;view=List&amp;app=TOOLS">
-                                <i class="fa fa-rss"></i>&nbsp;Rss
+                                <i class="fas fa-rss"></i>&nbsp;Rss
                         </a>
                         </li>-->
                      {if $USER_MODEL->column_fields['roleid'] eq 'H12' || $USER_MODEL->isAdminUser()}  
                      {* Khaled - Removed as Per Requirement
                      <li>
                         <a class="dropdown-icon-dashboard" title="Recycle Bin" href="index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS">
-                        <i class="fa fa-trash-o"></i>&nbsp;Recycle Bin
+                        <i class="fas fa-trash-o"></i>&nbsp;Recycle Bin
                         </a>
                      </li>
                      *}
@@ -655,7 +700,7 @@
          <li>
             <div class="dropdownSupport">
                <div class="addtionalDashboardTab">
-                  <span aria-hidden="true" >Support</span> <i class="fa fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
+                  <span aria-hidden="true" >Support</span> <i class="fas fa-lock" style="color: #2f5597;    vertical-align: middle;font-size: 13px;"></i>
                </div>
                <div class="dropdown-content-Support">
                   <div class="row">
@@ -716,7 +761,7 @@
    <div id="navbar" class="col-sm-2 col-md-3 col-lg-3 collapse navbar-collapse navbar-right global-actions">
       <ul class="nav navbar-nav">
          <li class='searchoption'>
-            <i class="fa fa-angle-down"></i>
+            <i class="fas fa-angle-down"></i>
             <select class="select2 col-lg-12" id="searchModuleList" data-placeholder="{vtranslate('LBL_SELECT_MODULE')}">
                <option></option>
                {foreach key=MODULE_NAME item=fieldObject from=$SEARCHABLE_MODULES}
@@ -738,7 +783,7 @@
          <li>
             <div>
                <a onclick="onofftextheader()" aria-hidden="true" class="qc-button rightside-icon-dashboard" title="Announcement" aria-hidden="true">
-               <i  class="fa fa-bullhorn"></i>
+               <i  class="fas fa-bullhorn"></i>
                </a>
             </div>
          </li>
@@ -746,7 +791,7 @@
          <li>
             <!-- ADDED BY KHALED -->
             <div class="dropdown ">
-               <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><a aria-hidden="true" href="#" id="menubar_quickCreate" class="qc-button rightside-icon-dashboard" title="Quick Create"><i class="fa fa-plus"></i></a></div>
+               <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><a aria-hidden="true" href="#" id="menubar_quickCreate" class="qc-button rightside-icon-dashboard" title="Quick Create"><i class="fas fa-plus"></i></a></div>
                <ul class="dropdown-menu animated fadeIn" role="menu" aria-labelledby="dropdownMenu1" style="width:650px;">
                   <li class="title" style="padding: 5px 0 0 15px;">
                      <h4><strong>Quick Create</strong></h4>
@@ -785,7 +830,7 @@
                         <div class="row">
                            <div calendar="" class="col-lg-4"><a id="menubar_quickCreate_Calendar" class="quickCreateModule" data-name="Calendar" data-url="index.php?module=Calendar&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">card_travel</i><span class="quick-create-module">Tasks</span></a></div>
                            <div documents="" class="col-lg-4 dropdown">
-                              <a id="menubar_quickCreate_Documents" class="quickCreateModuleSubmenu dropdown-toggle" data-name="Documents" data-toggle="dropdown" data-url="index.php?module=Documents&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">file_download</i><span class="quick-create-module">Documents<i class="fa fa-caret-down quickcreateMoreDropdownAction"></i></span></a>
+                              <a id="menubar_quickCreate_Documents" class="quickCreateModuleSubmenu dropdown-toggle" data-name="Documents" data-toggle="dropdown" data-url="index.php?module=Documents&amp;view=QuickCreateAjax" href="javascript:void(0)"><i class="material-icons pull-left">file_download</i><span class="quick-create-module">Documents<i class="fas fa-caret-down quickcreateMoreDropdownAction"></i></span></a>
                               <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_Documents">
                                  <li class="dropdown-header"><i class="material-icons">file_upload</i> File Upload</li>
                                  <li id="VtigerAction"><a href="javascript:Documents_Index_Js.uploadTo('Vtiger')">
@@ -807,7 +852,7 @@
             <div class="dropdown">
                <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                   <a  aria-hidden="true" href="#" id="menubar_quickCreate" class="qc-button rightside-icon-dashboard" title="{vtranslate('LBL_QUICK_CREATE',$MODULE)}" aria-hidden="true">
-                  <i class="fa fa-plus"></i>
+                  <i class="fas fa-plus"></i>
                   </a>
                </div>
                <ul class="dropdown-menu animated fadeIn" role="menu" aria-labelledby="dropdownMenu1" style="width:650px;">
@@ -865,7 +910,7 @@
                      <i class="material-icons pull-left">{$iconsarray[{strtolower($moduleName)}]}</i>
                      <span class="quick-create-module">
                      {vtranslate($singularLabel,$moduleName)}
-                     <i class="fa fa-caret-down quickcreateMoreDropdownAction"></i>
+                     <i class="fas fa-caret-down quickcreateMoreDropdownAction"></i>
                      </span>
                      </a>
                      <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_{$moduleModel->getName()}">
@@ -937,21 +982,21 @@
 <li>
 <div>
 <a class="rightside-icon-dashboard" href="index.php?module=SMSNotifier&view=List&app=FOUNDATION" title="Notifications" aria-hidden="true">
-<i class="fa fa-bell-o"></i>
+<i class="fas fa-bell-o"></i>
 </a>
 </div>
 </li>
 <li>
 <div>
 <a class="rightside-icon-dashboard" href="index.php?module=MailManager&view=List" title="Email" aria-hidden="true">
-<i class="fa fa-envelope-o"></i>
+<i class="fas fa-envelope-o"></i>
 </a>
 </div>
 </li>
 <li>
 <div>
 <a class="rightside-icon-dashboard" href="index.php?module=Documents&view=List" title="Files" aria-hidden="true">
-<i class="fa fa-file-o"></i>
+<i class="fas fa-file-o"></i>
 </a>
 </div>
 </li>
@@ -961,7 +1006,7 @@
 <li>
 <div>
 <a class="rightside-icon-dashboard" href="index.php?module=Calendar&view={$CALENDAR_MODULE_MODEL->getDefaultViewName()}" title="{vtranslate('Calendar','Calendar')}" aria-hidden="true">
-<i class="fa fa-calendar-o"></i>
+<i class="fas fa-calendar-o"></i>
 </a>
 </div>
 </li>
@@ -971,7 +1016,7 @@
 <li>
 <div>
 <a class="rightside-icon-dashboard"  href="index.php?module=Reports&view=List" title="{vtranslate('Reports','Reports')}" aria-hidden="true">
-<i class="fa fa-line-chart"></i>
+<i class="fas fa-line-chart"></i>
 </a>
 </div>
 </li>
@@ -979,7 +1024,7 @@
 {* <li>
 <div>
 <a class="rightside-icon-dashboard"  href="index.php?module=Vtiger&amp;parent=Settings&amp;view=Index" title="Setting" aria-hidden="true">
-<i class="fa fa-gear"></i>
+<i class="fas fa-gear"></i>
 </a>
 </div>
 </li>*}
@@ -1054,10 +1099,10 @@
 <div class="col-md-3">Colors</div>
 <div class="col-md-9">
 <ul class="color-list list-inline pull-right">
-<li><a class="btn color-box color-blue themeElement" data-skinName="blue"><i class="fa {if $USER_MODEL->get('theme') eq 'blue'}  fa-check {/if}"  ></i></a></li>
-<li><a class="btn color-box color-purple themeElement" data-skinName="purple"><i class="fa {if $USER_MODEL->get('theme') eq 'purple'} fa-check  {/if}"></i></a></li>
-<li><a class="btn color-box color-yellow themeElement" data-skinName="yellow"><i class="fa  {if $USER_MODEL->get('theme') eq 'yellow'} fa-check {/if}"></i></a></li>
-<li><a class="btn color-box color-green themeElement" data-skinName="green"><i class="fa {if $USER_MODEL->get('theme') eq 'green'}  fa-check  {/if}"></i></a></li>
+<li><a class="btn color-box color-blue themeElement" data-skinName="blue"><i class="fas {if $USER_MODEL->get('theme') eq 'blue'}  fa-check {/if}"  ></i></a></li>
+<li><a class="btn color-box color-purple themeElement" data-skinName="purple"><i class="fas {if $USER_MODEL->get('theme') eq 'purple'} fa-check  {/if}"></i></a></li>
+<li><a class="btn color-box color-yellow themeElement" data-skinName="yellow"><i class="fas  {if $USER_MODEL->get('theme') eq 'yellow'} fa-check {/if}"></i></a></li>
+<li><a class="btn color-box color-green themeElement" data-skinName="green"><i class="fas {if $USER_MODEL->get('theme') eq 'green'}  fa-check  {/if}"></i></a></li>
 </ul>
 </div>
 <div class="clearfix"></div>
@@ -1065,11 +1110,11 @@
 <div class="clearfix"></div>
 <div class="col-md-12">
 <ul class="profile-list list-unstyled">
-<li> <a class="" href="index.php?module=Users&parent=Settings&view=Calendar&record={$USER_MODEL->get('id') }"><i class='fa fa-gear'></i> Settings </a></li>
-<li> <a class="" href="index.php?module=Home&view=DashBoard&tabid=1298"><i class='fa fa-rocket'></i> Getting Started</a></li>
-<li> <a class="" href="http://dev7.secondcrm.com/agiliux/help.php"><i class='fa fa-life-ring'></i> Help</a></li>
-<li> <a class=""><i class='fa fa-at'></i> Contact Support</a></li>
-<li> <a class=""><i class='fa fa-paper-plane'></i> What's new?</a></li>
+<li> <a class="" href="index.php?module=Users&parent=Settings&view=Calendar&record={$USER_MODEL->get('id') }"><i class='fas fa-gear'></i> Settings </a></li>
+<li> <a class="" href="index.php?module=Home&view=DashBoard&tabid=1298"><i class='fas fa-rocket'></i> Getting Started</a></li>
+<li> <a class="" href="http://dev7.secondcrm.com/agiliux/help.php"><i class='fas fa-life-ring'></i> Help</a></li>
+<li> <a class=""><i class='fas fa-at'></i> Contact Support</a></li>
+<li> <a class=""><i class='fas fa-paper-plane'></i> What's new?</a></li>
 </ul>    
 </div>    
 </div>
@@ -1124,10 +1169,14 @@
                <div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-xs-12{/if} dropdown">
                   <a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModuleSubmenu dropdown-toggle" data-name="{$moduleModel->getName()}" data-toggle="dropdown" 
                      data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)">
-                  <i class="material-icons pull-left">{$iconsarray[{strtolower($moduleName)}]}</i>
+                   {if $iconsarray[{strtolower($moduleName)}]|strpos:"fa"}
+                        <i class="{$iconsarray[{strtolower($moduleName)}]}" ></i> 
+                    {else}
+                         <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
+                    {/if}   
                   <span class="quick-create-module">
                   {vtranslate($singularLabel,$moduleName)}
-                  <i class="fa fa-caret-down quickcreateMoreDropdownAction"></i>
+                  <i class="fas fa-caret-down quickcreateMoreDropdownAction"></i>
                   </span>
                   </a>
                   <ul class="dropdown-menu quickcreateMoreDropdown" aria-labelledby="menubar_quickCreate_{$moduleModel->getName()}">
@@ -1148,7 +1197,11 @@
                <div class="{if $hideDiv}create_restricted_{$moduleModel->getName()} hide{else}col-xs-12{/if}">
                   <a id="menubar_quickCreate_{$moduleModel->getName()}" class="quickCreateModule" data-name="{$moduleModel->getName()}"
                      data-url="{$moduleModel->getQuickCreateUrl()}" href="javascript:void(0)">
-                  <i class="material-icons pull-left">{$iconsarray[{strtolower($moduleName)}]}</i>
+                  {if $iconsarray[{strtolower($moduleName)}]|strpos:"fa"}
+              <i class="{$iconsarray[{strtolower($moduleName)}]}" ></i> 
+          {else}
+          <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}</i> 
+          {/if}   
                   <span class="quick-create-module">{vtranslate($singularLabel,$moduleName)}</span>
                   </a>
                </div>
@@ -1174,7 +1227,8 @@
       {assign var=USER_PRIVILEGES_MODEL value=Users_Privileges_Model::getCurrentUserPrivilegesModel()}
       {assign var=CALENDAR_MODULE_MODEL value=Vtiger_Module_Model::getInstance('Calendar')}
       {if $USER_PRIVILEGES_MODEL->hasModulePermission($CALENDAR_MODULE_MODEL->getId())}
-      <li><a href="index.php?module=Calendar&view={$CALENDAR_MODULE_MODEL->getDefaultViewName()}" title="{vtranslate('Calendar','Calendar')}" aria-hidden="true"><i class="material-icons">event</i>&nbsp;{vtranslate('Calendar','Calendar')}</a></li>
+      <li><a href="index.php?module=Calendar&view={$CALENDAR_MODULE_MODEL->getDefaultViewName()}" title="{vtranslate('Calendar','Calendar')}" aria-hidden="true">
+              <i class="material-icons">event</i>&nbsp;{vtranslate('Calendar','Calendar')}</a></li>
       {/if}
       {if $USER_PRIVILEGES_MODEL->hasModulePermission($CALENDAR_MODULE_MODEL->getId())}
       <li><a class="taskManagement" href="#" title="{vtranslate('Task','Task')}" aria-hidden="true"><i class="material-icons">card_travel</i>&nbsp;{vtranslate('Task','Task')}</a></li>
