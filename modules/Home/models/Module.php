@@ -531,7 +531,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 
 			  	$action = $db->query_result($result, $i, 'actionperform');
 			  	$entityNames = 	getEntityName($referenceModuleName, array($relatedto));
-			  	$linkValue = "<a href='index.php?module=$referenceModuleName&view=Detail&record=$relatedto'>$entityNames[$relatedto]</a>";	
+			  	$linkValue = "<a style='display:block; width: 100%; padding:0; font-size:10px;' href='index.php?module=$referenceModuleName&view=Detail&record=$relatedto'>$entityNames[$relatedto]</a>";	
 
 
 			  	if($action == 'Posted'){

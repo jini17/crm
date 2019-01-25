@@ -19,7 +19,7 @@
     <script type="text/javascript" src="layouts/fask/lib/jquery/jquery-validation/jquery.validate.min.js"></script>
     <script type="text/javascript" src="layouts/fask/lib/jquery/jquery.slimscroll.min.js"></script>
     <script type="text/javascript" src="libraries/jquery/jquery.ba-outside-events.min.js"></script>
-	<script type="text/javascript" src="libraries/jquery/defunkt-jquery-pjax/jquery.pjax.js"></script>
+    <script type="text/javascript" src="libraries/jquery/defunkt-jquery-pjax/jquery.pjax.js"></script>
     <script type="text/javascript" src="libraries/jquery/multiplefileupload/jquery_MultiFile.js"></script>
     <script type="text/javascript" src="resources/jquery.additions.js"></script>
     <script type="text/javascript" src="layouts/fask/lib/bootstrap-notify/bootstrap-notify.min.js"></script>
@@ -36,7 +36,7 @@
     <script type="text/javascript" src="layouts/fask/lib/jquery/jquery.timeago.js"></script>
     <script type="text/javascript" src="libraries/jquery/ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="libraries/jquery/ckeditor/adapters/jquery.js"></script>
-	<script type='text/javascript' src='layouts/fask/lib/anchorme_js/anchorme.min.js'></script>
+    <script type='text/javascript' src='layouts/fask/lib/anchorme_js/anchorme.min.js'></script>
     <script type="text/javascript" src="{vresource_url('layouts/fask/modules/Vtiger/resources/Class.js')}"></script>
     <script type='text/javascript' src="{vresource_url('layouts/fask/resources/helper.js')}"></script>
     <script type="text/javascript" src="{vresource_url('layouts/fask/resources/application.js')}"></script>
@@ -63,31 +63,31 @@
     <script type="text/javascript" src="libraries/bootstrap/js/less.min.js"></script>
 
     <!-- Enable tracking pageload time -->
-	<script type="text/javascript">
-		var _REQSTARTTIME = "{$smarty.server.REQUEST_TIME}";
-		{literal}
+    <script type="text/javascript">
+        var _REQSTARTTIME = "{$smarty.server.REQUEST_TIME}";
+        {literal}
         jQuery(document).ready(function() 
         {
           document._PAGEREADYAT = new Date(); 
         });
-		jQuery(window).load(function() {
-			window._PAGELOADAT = new Date();
-			window._PAGELOADREQSENT = false;
-			// Transmit the information to server about page render time now.
-			if (typeof _REQSTARTTIME != 'undefined') {
-				// Work with time converting it to GMT (assuming _REQSTARTTIME set by server is also in GMT)
+        jQuery(window).load(function() {
+            window._PAGELOADAT = new Date();
+            window._PAGELOADREQSENT = false;
+            // Transmit the information to server about page render time now.
+            if (typeof _REQSTARTTIME != 'undefined') {
+                // Work with time converting it to GMT (assuming _REQSTARTTIME set by server is also in GMT)
                 var _PAGEREADYAT = new Date(); 
-				var _PAGEREADYTIME = _PAGEREADYAT.getTime() / 1000.0; // seconds
-				var _PAGELOADTIME = _PAGELOADAT.getTime() / 1000.0;    // seconds
-				var data = { page_request: _REQSTARTTIME, page_ready: _PAGEREADYTIME, page_load: _PAGELOADTIME };
-				data['page_xfer'] = (_PAGELOADTIME - _REQSTARTTIME).toFixed(3);
-				data['client_tzoffset']= -1*_PAGELOADAT.getTimezoneOffset()*60;
-				data['client_now'] = JSON.parse(JSON.stringify(new Date()));
-				if (!window._PAGELOADREQSENT) {
-					// To overcome duplicate firing on Chrome
-					window._PAGELOADREQSENT = true;
-				}
-			}
-		});{/literal}
-	</script>
+                var _PAGEREADYTIME = _PAGEREADYAT.getTime() / 1000.0; // seconds
+                var _PAGELOADTIME = _PAGELOADAT.getTime() / 1000.0;    // seconds
+                var data = { page_request: _REQSTARTTIME, page_ready: _PAGEREADYTIME, page_load: _PAGELOADTIME };
+                data['page_xfer'] = (_PAGELOADTIME - _REQSTARTTIME).toFixed(3);
+                data['client_tzoffset']= -1*_PAGELOADAT.getTimezoneOffset()*60;
+                data['client_now'] = JSON.parse(JSON.stringify(new Date()));
+                if (!window._PAGELOADREQSENT) {
+                    // To overcome duplicate firing on Chrome
+                    window._PAGELOADREQSENT = true;
+                }
+            }
+        });{/literal}
+    </script>
 {/strip}

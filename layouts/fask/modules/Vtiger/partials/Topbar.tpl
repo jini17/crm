@@ -218,9 +218,7 @@
                               </div>
                               <div class="right-node">
                                  <div class="notification-title">
-                                    <a style="display:block; width: 100%; padding:0;">
                                     {if $NOTIFICATION['unread'] eq 1}<strong>{$NOTIFICATION['message']}</strong>{else}{$NOTIFICATION['message']}{/if}
-                                    </a>  
                                     <div class="clearfix"></div>
                                     <span class="notification-time">{$NOTIFICATION['timestamp']}</span> 
                                  </div>

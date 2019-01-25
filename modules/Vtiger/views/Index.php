@@ -49,8 +49,22 @@ class Vtiger_Index_View extends Vtiger_Basic_View {
 		$viewer->assign('REQUEST_INSTANCE', $request);
 		$viewer->assign('CURRENT_VIEW', $request->get('view'));
 
-		
+		 //fetch all notifications related to Log in user
+        $LIMIT = 5;
+        $page = $request->get('page');
+        $homeModuleModel = Vtiger_Module_Model::getInstance('Home');    
+        
+        if(empty($page)) {
+            $page = 1;
+        }
 
+        $pagingModel = new Vtiger_Paging_Model();
+        $pagingModel->set('page', $page);
+        $pagingModel->set('limit', $LIMIT);
+       
+        $notifications = $homeModuleModel->getAllNotifications($pagingModel);
+        $viewer->assign('NEXTPAGE', ($pagingModel->get('notificationcount') < $LIMIT)? 0 : $page+1);
+        $viewer->assign('NOTIFICATIONS', $notifications);
 		if($display) {
 			$this->preProcessDisplay($request);
 		}

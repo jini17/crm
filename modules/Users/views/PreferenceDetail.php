@@ -216,6 +216,7 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
                         $viewer->assign('NEXTPAGE', ($pagingModel->get('notificationcount') < $LIMIT)? 0 : $page+1);
                         $viewer->assign('NOTIFICATIONS', $notifications);
                         //end here
+                        
                         if($display) {
                                 $this->preProcessDisplay($request);
                         }

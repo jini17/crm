@@ -2689,8 +2689,6 @@ function RecordSetype($record){
         return $adb->query_result($result, 0,'setype');
     else 
         return false;
-    
+  
 }
-
-
 ?>
