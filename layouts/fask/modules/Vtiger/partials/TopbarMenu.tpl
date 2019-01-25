@@ -94,15 +94,36 @@
 'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
 'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
 'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
-'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
+'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web',
+'inventory'=>'assignment',
+'support'=>'headset','tools'=>'business_center',
+'mycthemeswitcher'=>'folder', 'training'=>'book',
+ 'attendance'=>'fingerprint',
+'exitinterview'=>'assignment',
+'exitdetails'=>'assignment',
+'timesheet'=>'timer',
+'chat'=>'chat',
+'user'=>'face', 
+'mobilecall'=>'call', 
+'call'=>'call',
+'performance'=>'timeline',
+ 'users'=>'person',
+'meeting'=>'people' ,
+'bills'=>'receipt',
+'workinghours'=>'access_time' ,
+'payments'=>'payment' ,'payslip'=>'insert_drive_file',
+'messageboard'=>'assignment',
+'leavetype'=>'keyboard_tab' ,
+'leave'=>'exit_to_app',
+'claim'=>'attach_money','myprofile'=>'face'  ]}
 {if $APP_NAME neq 'SALES'}
 
-<li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}" {if vtranslate("LBL_$APP_NAME") eq "Communications"} style="width:15%" {else} style="width:15%"{/if}> 
+<li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"
+                {if vtranslate("LBL_$APP_NAME") eq "Communications"} style="width:15%" {else} style="width:15%"{/if}> 
 
 <a class="has-arrow waves-effect waves-dark " >
-<i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i>
-<span class="hide-menu">{vtranslate("LBL_$APP_NAME")}</span>
+    <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($APP_NAME)}]}</i>
+    <span class="hide-menu">{$APP_NAME} {vtranslate("LBL_$APP_NAME")}</span>
 </a>
 <ul style="padding-left:6px;padding-top:15px;">
    {foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
@@ -114,12 +135,12 @@
    {/if}   
    {if $moduleName eq 'Calendar'}
    <li {$APP_NAME} moudel='{$moduleName}'>
-   <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
-      href="index.php?module=Calendar&view=List" >
+    <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
+       href="index.php?module=Calendar&view=List" >
 
-   <i class="ti ti-notepad" ></i> 
-   <span class="hide-menu"> {vtranslate("LBL_MEETING",'Vtiger')}</span>
-   </a>
+    <i class="ti ti-notepad" ></i> 
+    <span class="hide-menu"> {vtranslate("LBL_MEETING",'Vtiger')}</span>
+    </a>
    </li>
    <li {$APP_NAME} moudel='{$moduleName}'>
    <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
