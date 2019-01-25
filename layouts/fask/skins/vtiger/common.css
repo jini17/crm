@@ -8848,7 +8848,7 @@ tr.listViewEntries:nth-child(odd) {    background-color: #f9f9f9;}
 
 .sidebar-essentials i[class^="material"] {font-size:22px!important;}
 
-.fask{ list-style-type: none; width: 80vw;left: 0px!important;box-shadow: 0 5px 75px 2px rgba(64,70,74,.2)!important;
+.fask{ list-style-type: none; width: 100%;left: 0px!important;box-shadow: 0 5px 75px 2px rgba(64,70,74,.2)!important;
 border-radius: .35rem; background-color: rgba(255, 255, 255, 1); margin-top: 0px; }
 .faskfirst{ list-style-type: none;float: left;-webkit-padding-start: 10px; border-right: 0px solid #ddd;    height: 400px;}
 .faskfirst li{ padding: 14px 4px;}
