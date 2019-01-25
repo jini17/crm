@@ -62,7 +62,7 @@
 
                     {foreach item=STATUSVAL from=$STATUSES}
                         <div class="col-lg-4 contentsBlock {strtolower($STATUSVAL|replace:' ':'_')} ui-droppable" data-status='{strtolower($STATUSVAL|replace:' ':'_')}' data-page="{$PAGE}">
-                            <div class="{strtolower($STATUSVAL|replace:' ':'_')}-header" style="background-color: {$COLORS[$STATUSVAL]}; ">
+                            <div class="{strtolower($STATUSVAL|replace:' ':'_')}-header" style="border-bottom: 1px solid {$COLORS[$STATUSVAL]}; ">
                                 <div class="title" ><span>{vtranslate($STATUSVAL,$STATUSVAL)}</span></div>   
                             </div>
                             <br>

@@ -9898,7 +9898,8 @@ right connector from last child*/
             right                  : 1%;
             background     : none;
             text-align         : center;
-            color                 : #ccc;                       
+            color                 : #ccc;      
+            border: 1px solid #fff;
         }
 /*        .gridster_2{
             height: 720px;
