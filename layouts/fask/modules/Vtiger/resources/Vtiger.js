@@ -503,7 +503,7 @@ Vtiger.Class('Vtiger_Index_Js', {
                 Vtiger_Index_Js.registerActivityReminder();
                 //reference preview event registeration
                 this.registerReferencePreviewEvent();
-                this.registerLoadMore();    
+               // this.registerLoadMore();    
                 var minHeight = $(window).height() - 84;
                 $(".content-area").attr("style","min-height:"+minHeight+"px !important");
 
