@@ -130,7 +130,7 @@ class Users_ProjectRecord_Model extends Users_Record_Model {
                 if($db->num_rows($result2) > 0) {
                         for($j=0;$j<$db->num_rows($result2);$j++) {
                             
-                        $permission = Users_Record_Model::recordPermission($role,$db->query_result($result2, $j, 'smownerid'),$current_user_id,$db->query_result($result2, $i, 'ispublic'));
+                        $permission = Users_Record_Model::recordPermission($role,$db->query_result($result2, $j, 'smownerid'),$current_user_id,$db->query_result($result2, $j, 'ispublic'));
                              if($permission){
                                 $userWEProjectList[$j]['employeeprojectsid'] = $db->query_result($result2, $j, 'employeeprojectsid');			
                                 $userWEProjectList[$j]['title'] = $db->query_result($result2, $j, 'project_title');
