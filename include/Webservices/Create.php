@@ -15,7 +15,7 @@ function vtws_create($elementType, $element, $user) {
 		throw new WebServiceException(WebServiceErrorCode::$ACCESSDENIED, "Permission to perform the operation is denied");
 	}
 
-	global $log, $adb, $app_strings; $adb->setDebug(1);
+	global $log, $adb, $app_strings; 
 
 	//setting $app_strings 
 	if(empty($app_strings)) { 
@@ -80,7 +80,7 @@ function vtws_create($elementType, $element, $user) {
 				}
 			}
 		}
-		$entity = $handler->create($elementType, $element); die;
+		$entity = $handler->create($elementType, $element); 
 		VTWS_PreserveGlobal::flush();
 		return $entity;
 	} else {
