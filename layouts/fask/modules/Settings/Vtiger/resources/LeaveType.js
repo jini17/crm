@@ -125,7 +125,7 @@ Vtiger.Class("Settings_Vtiger_LeaveType_Js",{},{
                 'mode' : 'EditLeaveTypeForm'
             }
             AppConnector.requestPjax(params).then(
-                function(data) {
+                function(data) { alert("Hii")
                     //console.log("Inside pjax");
                     app.helper.hideProgress();
                     app.helper.showModal(data);
