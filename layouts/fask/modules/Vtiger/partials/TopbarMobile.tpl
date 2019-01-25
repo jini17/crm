@@ -189,9 +189,9 @@
    {/if}
 
    {if $PLAN eq 1}
-      {assign var=counttab value=4}
+      {assign var=counttab value=3}
    {else if $PLAN eq 2}
-   {assign var=counttab value=5}
+   {assign var=counttab value=4}
    {else if $PLAN eq 3}
       {assign var=counttab value=4}
    {else}   
@@ -203,11 +203,11 @@
    
    {foreach item=APP_NAME from=$APP_LIST}
    {if vtranslate("LBL_$APP_NAME") eq 'General' OR vtranslate("LBL_$APP_NAME") eq 'HRM'}
-      {math equation="$widthtab-8" assign="colwidth"}
+      {math equation="$widthtab-6" assign="colwidth"}
    {else if vtranslate("LBL_$APP_NAME") eq 'Communications'}
-      {math equation="$widthcomtab-3" assign="colwidth"}
+      {math equation="$widthcomtab" assign="colwidth"}
    {else}
-      {math equation="$widthcomtab-5" assign="colwidth"}   
+      {math equation="$widthcomtab-2" assign="colwidth"}   
    {/if}
 
    {if $APP_NAME eq 'ANALYTICS'} {continue}{/if}
@@ -230,7 +230,7 @@
    'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'fingerprint','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call',
 'performance'=>'fas fa-chart-line', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
     'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face'  ]}
-   <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}"> 
+   <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}" style="width:{$colwidth}%;"> 
    <a class="has-arrow waves-effect waves-dark " >
     {if $iconsarray[{strtolower($APP_NAME)}]|strstr:"fas"}
               <i class="{$iconsarray[{strtolower($APP_NAME)}]}" ></i> 
