@@ -162,7 +162,7 @@
                                           {/if}    *}
 
                                         <a class='btn btn-danger Help-btn text-center'>
-                                                <i class="glyphicon glyphicon-question-sign"></i>&nbsp;Help
+                                            <i class="glyphicon glyphicon-question-sign pull-left" style="margin-top: 3px; margin-right: 2px;"></i>&nbsp;Help
                                         </a>
 
 
