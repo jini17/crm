@@ -78,9 +78,9 @@
                     <div class="clearfix" style="heigth:15px;"></div>
                     <div class="clearfix"></div>
                     <div class="social text-center" style="margin-top:5px;">
-                          <a href="{$DATA['facebook']}" class="fa fa-facebook"></a>
-                            <a href="{$DATA['twitter']}" class="fa fa-twitter"></a>
-                            <a href="{$DATA['linkedin']}" class="fa fa-linkedin"></a>
+                          <a href="{$DATA['facebook']}" class="fab fa-facebook-in"></a>
+                            <a href="{$DATA['twitter']}" class="fab fa-twitter"></a>
+                            <a href="{$DATA['linkedin']}" class="fab fa-linkedin-in"></a>
                             <a href="#" onclick="javascript:Vtiger_Helper_Js.getInternalMailer({$DATA['emp_id']},'email','Users');" class="fa fa-envelope"></a>
                      
                     </div>
