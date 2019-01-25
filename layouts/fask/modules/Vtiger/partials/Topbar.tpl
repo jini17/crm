@@ -201,12 +201,12 @@
                <li>
                   <div>
                      <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" title="Notifications" aria-hidden="true">
-                     <i class="fa fa-bell-o"></i>
+                     <i class="far fa-bell"></i>
                      </a>
                   </div>
                   <div class="notification-list hide">
                      <h6>{vtranslate('Notification')}<i class="fa fa-gear pull-right"></i></h6>
-                     <ul class="list-unstyled" ">
+                     <ul class="list-unstyled" >
                         <li>
                            <div class="notification-container unread">
                               <div class="notification-avatar left-node">
@@ -238,14 +238,14 @@
                <li>
                   <div>
                      <a class="rightside-icon-dashboard" href="index.php?module=MailManager&view=List" title="Email" aria-hidden="true">
-                     <i class="fa fa-envelope-o"></i>
+                     <i class="far fa-envelope-open"></i>
                      </a>
                   </div>
                </li>
                <li>
                   <div>
                      <a class="rightside-icon-dashboard" href="index.php?module=Documents&view=List" title="Files" aria-hidden="true">
-                     <i class="fa fa-file-o"></i>
+                     <i class="far fa-file"></i>
                      </a>
                   </div>
                </li>
