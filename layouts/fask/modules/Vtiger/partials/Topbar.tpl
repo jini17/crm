@@ -201,12 +201,15 @@
                <li>
                   <div>
                      <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" data-toggle="dropdown" title="Notifications" aria-hidden="true">
-                     <span class="count" style="position: absolute;top:0;right:0; background-color: red;color:#fff;padding-right:5px;padding-top:1px;padding-left:5px; font-size:11px;z-index:100; ">{$NOTIFICATIONS['new']}</span>
+                     {if $NOTIFICATIONS['new'] gt 0}<span class="count" style="position: absolute;top:0;right:0; background-color: red;color:#fff;padding-right:5px;padding-top:1px;padding-left:5px; font-size:11px;z-index:100; ">{$NOTIFICATIONS['new']}</span>{/if}
                      <i class="fa fa-bell-o"></i>
                      </a>
                   </div>
                   <div class="notification-list hide" style="top:30px;" onmouseleave="Vtiger_Header_Js.hideNotification();">
                      <h6>{vtranslate('Notification')}<i class="fa fa-gear pull-right"></i></h6>
+                     {if $NOTIFICATIONS['details']|count eq 0}
+                        <span style="font-size: 11px; text-align: center;"><strong>{vtranslate('No Notification found')}</strong></span>
+                     {else}
                      <ul class="list-unstyled">
                        {foreach item=NOTIFICATION from=$NOTIFICATIONS['details']}
                         <li>
@@ -229,11 +232,12 @@
                         </li>
                         {/foreach}
                      </ul>
-                     <div class="clearfix"> </div>
-                     {if $NEXTPAGE}
-                        <a href="#" class="btn btn-block all-notification text-center"> See all recent activity </a>
-                     {/if}   
-                  </div>
+                      <div class="clearfix"> </div>
+                        {if $NEXTPAGE}
+                           <a href="#" class="btn btn-block all-notification text-center"> See all recent activity </a>
+                        {/if}   
+                     {/if}     
+                    </div>
                </li>
                <!--End here -->
 
