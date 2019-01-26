@@ -222,11 +222,12 @@
 </div>
 </div>
  <!--Company Logo -->
-   <div class="logo-container pull-left">
-      <a href="index.php" class="company-logo">
-      <img src="{$COMPANY_LOGO->get('imagepath')}" height="40" width="40" alt="{$COMPANY_LOGO->get('alt')}"/>
+  <div class="logo-container pull-left">
+      <a href="index.php" class="">
+      <!--<img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>-->
+      <img src="test/loginlogo/second-crm-logo.png" alt="Second CRM" height=""/>
       </a>
-   </div>
+  </div>
 <!--End here logo -->
 
 <!--Static Menu / submenu HRM, SALES, COMMUNICATION, SUPPORT / ALL -->

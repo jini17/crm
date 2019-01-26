@@ -203,7 +203,7 @@
 
                      <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" data-toggle="dropdown" title="Notifications" aria-hidden="true">
                      {if $NOTIFICATIONS['new'] gt 0}<span class="count" style="position: absolute;top:0;right:0; background-color: red;color:#fff;padding-right:5px;padding-top:1px;padding-left:5px; font-size:11px;z-index:100; ">{$NOTIFICATIONS['new']}</span>{/if}
-                     <i class="fa fa-bell-o"></i>
+                     <i class="fa fa-bell"></i>
 
                      </a>
                   </div>

@@ -13,7 +13,8 @@
 	global $adb;
 	$adb->setDebug(true);
 	$adb->query("SET FOREIGN_KEY_CHECKS = 0");
-	$result = $adb->pquery("SELECT distinct tablename FROM `vtiger_field` WHERE uitype IN (SELECT distinct uitype FROM vtiger_field WHERE uitype NOT IN (15, 16, 33)) AND tabid !=29 ORDER by tablename asc", array());
+	$result = $adb->pquery("SELECT distinct tablename FROM `vtiger_field` WHERE tablename !='vtiger_crmentity' AND uitype IN (SELECT distinct uitype FROM vtiger_field WHERE uitype NOT IN (15, 16, 33)) AND tabid NOT IN (29, 79) ORDER by tablename asc", array());
+
 
 	$num = $adb->num_rows($result);
 
@@ -22,7 +23,7 @@
 		$adb->query("Truncate table $tablename");
 	}	
 		$adb->query("Truncate table  vtiger_crmentity_seq");
-		$adb->query("INSERT INTO vtiger_crmentity_seq (`id`) VALUES ('0')");
+		$adb->query("INSERT INTO vtiger_crmentity_seq (`id`) VALUES ('1')");
 		$adb->query("Truncate table  allocation_list");
 		$adb->query("Truncate table  allocation_list_seq");
 		$adb->query("INSERT INTO allocation_list_seq (`id`) VALUES ('0')");
@@ -143,7 +144,21 @@
 		$adb->query("Truncate table  vtiger_vendorcontactrel");
 		$adb->query("Truncate table  vtiger_ws_userauthtoken");
 		$adb->query("Truncate table  vtiger_emergencycontactcf");
+		$adb->query("DELETE  FROM vtiger_organizationdetails WHERE organization_id !=1");
+		$adb->query("DELETE  FROM vtiger_crmentity WHERE crmid !='1'");
 		
+		
+		shell_exec('sudo chmod -R 0777 storage');
+		shell_exec('rm -rf storage/*');
+
+		$dir = 'user_privileges';
+		$leave_files = array('audit_trail.php', 'default_module_view.php','enable_backup.php','index.html','sharing_privileges_1.php','user_privileges_1.php');
+
+		foreach( glob("$dir/*") as $file ) {
+    		
+    		if( !in_array(basename($file), $leave_files) )
+        		unlink($file);
+		}
 
 		shell_exec('sudo chmod -R 0777 storage');
 		shell_exec('rm -rf storage/*');
