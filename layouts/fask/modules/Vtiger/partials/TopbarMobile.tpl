@@ -190,12 +190,10 @@
 
    {if $PLAN eq 1}
       {assign var=counttab value=3}
-   {else if $PLAN eq 2}
-   {assign var=counttab value=4}
-   {else if $PLAN eq 3}
-      {assign var=counttab value=4}
+   {else if $PLAN eq 2 || $PLAN eq 3}
+   {assign var=counttab value=5}
    {else}   
-      {assign var=counttab value=5}
+      {assign var=counttab value=6}
    {/if}
   
    {math equation="(100/$counttab)" assign="widthtab"}
@@ -203,11 +201,11 @@
    
    {foreach item=APP_NAME from=$APP_LIST}
    {if vtranslate("LBL_$APP_NAME") eq 'General' OR vtranslate("LBL_$APP_NAME") eq 'HRM'}
-      {math equation="$widthtab-6" assign="colwidth"}
+      {math equation="$widthtab" assign="colwidth"}
    {else if vtranslate("LBL_$APP_NAME") eq 'Communications'}
       {math equation="$widthcomtab" assign="colwidth"}
    {else}
-      {math equation="$widthcomtab-2" assign="colwidth"}   
+      {math equation="$widthcomtab" assign="colwidth"}   
    {/if}
 
    {if $APP_NAME eq 'ANALYTICS'} {continue}{/if}
