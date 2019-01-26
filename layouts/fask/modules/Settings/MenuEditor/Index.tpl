@@ -9,13 +9,6 @@
 {* modules/Settings/MenuEditor/views/Index.php *}
 
 {* START YOUR IMPLEMENTATION FROM BELOW. Use {debug} for information *}
-{assign var="APP_IMAGE_MAP" value=[
-        'MARKETING' => 'ti-thumb-up',
-        'SALES' => 'ti-money',
-        'INVENTORY' => 'ti-archive',
-        'SUPPORT' => 'ti-headphone-alt',
-        'PROJECT' => 'ti-briefcase'
-]}
 <div class="listViewPageDiv detailViewContainer col-sm-12" id="listViewContent" style="position:relative; width: calc(100%);">
              <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="position: absolute !important;top: 0% !important;right:0 !important ; /*! left: 0 !important; */ z-index: 999 " title="Left Panel Show/Hide">
                     <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
@@ -38,7 +31,7 @@
                         {if !in_array($APP_NAME, $APP_LIST)} {continue} {/if}
                         <div style="margin-left:25px;" class=" {if $smarty.foreach.APP_MAP.index eq 0 or count($APP_LIST) eq 1} {/if} col-lg-2 col-sm-12 col-md-12 col-xs-12">
                                 <div class="menuEditorItem app-{$APP_NAME}" data-app-name="{$APP_NAME}">
-                                        <span class="fa {$APP_IMAGE}"></span>
+                                        <span class="fa {strtolower($APP_IMAGE)}"></span>
                                         {assign var=TRANSLATED_APP_NAME value={vtranslate("LBL_$APP_NAME")}}
                                         <div class="textOverflowEllipsis" title="{$TRANSLATED_APP_NAME}">{$TRANSLATED_APP_NAME}</div>
                                 </div>

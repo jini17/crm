@@ -23,6 +23,8 @@ class Settings_MenuEditor_Index_View extends Settings_Vtiger_Index_View {
 		$viewer->assign('QUALIFIED_MODULE_NAME', $qualifiedModuleName);
 
 		$mappedModuleList = Settings_MenuEditor_Module_Model::getAllVisibleModules();
+		$parenttabimagemap = Settings_MenuEditor_Module_Model::getParentTabImage();
+		$viewer->assign('APP_IMAGE_MAP', $parenttabimagemap);
 		$viewer->assign('APP_MAPPED_MODULES', $mappedModuleList);
 		$viewer->assign('QUALIFIED_MODULE', $qualifiedModuleName);
 
