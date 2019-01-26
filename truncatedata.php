@@ -13,7 +13,7 @@
 	global $adb;
 	$adb->setDebug(true);
 	$adb->query("SET FOREIGN_KEY_CHECKS = 0");
-	$result = $adb->pquery("SELECT distinct tablename FROM `vtiger_field` WHERE uitype IN (SELECT distinct uitype FROM vtiger_field WHERE uitype NOT IN (15, 16)) AND tabid !=29 ORDER by tablename asc", array());
+	$result = $adb->pquery("SELECT distinct tablename FROM `vtiger_field` WHERE uitype IN (SELECT distinct uitype FROM vtiger_field WHERE uitype NOT IN (15, 16, 33)) AND tabid !=29 ORDER by tablename asc", array());
 
 	$num = $adb->num_rows($result);
 
@@ -24,13 +24,17 @@
 		$adb->query("Truncate table  vtiger_crmentity_seq");
 		$adb->query("INSERT INTO vtiger_crmentity_seq (`id`) VALUES ('0')");
 		$adb->query("Truncate table  allocation_list");
-		$adb->query("Truncate table  allocation_list_details");
 		$adb->query("Truncate table  allocation_list_seq");
 		$adb->query("INSERT INTO allocation_list_seq (`id`) VALUES ('0')");
+		$adb->query("Truncate table  allocation_benefitrel");
+		$adb->query("Truncate table  allocation_claimrel");
+		$adb->query("Truncate table  allocation_graderel");
+		$adb->query("Truncate table  allocation_leaverel");
 		$adb->query("Truncate table  allowed_ip");
 		$adb->query("Truncate table  contact_invite_details");
 		$adb->query("Truncate table  external_invitees");
 		$adb->query("Truncate table  office365_sync_map");
+		$adb->query("Truncate table  secondcrm_claim_balance");
 		$adb->query("Truncate table  secondcrm_company");
 		$adb->query("Truncate table  secondcrm_designation");
 		$adb->query("Truncate table  secondcrm_education");
@@ -39,13 +43,24 @@
 		$adb->query("Truncate table  secondcrm_language");
 		$adb->query("Truncate table  secondcrm_location");
 		$adb->query("Truncate table  secondcrm_project");
+		$adb->query("Truncate table  secondcrm_regiontree");
+		$adb->query("Truncate table  secondcrm_region_data");
 		$adb->query("Truncate table  secondcrm_skillmaster");
 		$adb->query("Truncate table  secondcrm_skills");
 		$adb->query("Truncate table  secondcrm_softskill");
 		$adb->query("Truncate table  secondcrm_studyarea");
 		$adb->query("Truncate table  secondcrm_tnc_assigncompany");
-		$adb->query("Truncate table  secondcrm_users");
 		$adb->query("Truncate table  secondcrm_userplan");
+		$adb->query("INSERT INTO secondcrm_userplan (`planid`,`userid`) VALUES ('4','1')");
+		$adb->query("DELETE FROM vtiger_users WHERE id !=1");
+		$adb->query("Truncate table  vtiger_user2role");
+		$adb->query("INSERT INTO vtiger_user2role (`userid`,`roleid`) VALUES ('1','H2')");
+		$adb->query("Truncate table  vtiger_webforms");
+		$adb->query("Truncate table  vtiger_webforms_field");
+		$adb->query("Truncate table  vtiger_smsnotifier_status");
+		$adb->query("Truncate table  vtiger_smsnotifier");
+		$adb->query("Truncate table  vtiger_smsnotifiercf");
+		$adb->query("Truncate table  vtiger_systems");
 		$adb->query("Truncate table  secondcrm_users_assigncompany");
 		$adb->query("Truncate table  secondcrm_userworkexp");
 		$adb->query("Truncate table  secondcrm_user_balance");
@@ -54,7 +69,6 @@
 		$adb->query("Truncate table  vtiger_activity_recurring_info");
 		$adb->query("Truncate table  vtiger_activity_reminder");
 		$adb->query("Truncate table  vtiger_activity_reminder_popup");
-		$adb->query("Truncate table  vtiger_announcement");
 		$adb->query("Truncate table  vtiger_asterisk");
 		$adb->query("Truncate table  vtiger_asteriskextensions");
 		$adb->query("Truncate table  vtiger_asteriskincomingcalls");
@@ -69,7 +83,6 @@
 		$adb->query("Truncate table  vtiger_convertleadmapping");
 		$adb->query("Truncate table  vtiger_convertpotentialmapping");
 		$adb->query("Truncate table  vtiger_crmentityrel");
-		$adb->query("Truncate table  vtiger_crmentity_user_field");
 		$adb->query("Truncate table  vtiger_crmsetup");
 		$adb->query("Truncate table  vtiger_customerdetails");
 		$adb->query("Truncate table  vtiger_emaildetails");
@@ -131,6 +144,18 @@
 		$adb->query("Truncate table  vtiger_ws_userauthtoken");
 		$adb->query("Truncate table  vtiger_emergencycontactcf");
 		
+
+		shell_exec('sudo chmod -R 0777 storage');
+		shell_exec('rm -rf storage/*');
+
+		$dir = 'user_privileges';
+		$leave_files = array('audit_trail.php', 'default_module_view.php','enable_backup.php','index.html','sharing_privileges_1.php','user_privileges_1.php');
+
+		foreach( glob("$dir/*") as $file ) {
+    		
+    		if( !in_array(basename($file), $leave_files) )
+        		unlink($file);
+		}
 
 	$adb->disconnect();
 	//connection close
