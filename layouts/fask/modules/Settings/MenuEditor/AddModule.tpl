@@ -21,7 +21,7 @@
 					</div>
 					<div class="btn-group">
 						{assign var=APP_SELECTED_LABEL value="LBL_SELECT_`$SELECTED_APP_NAME`_MODULES"}
-						<h4 class="pull-left textOverflowEllipsis" style="word-break: break-all;max-width: 95%;">{vtranslate($APP_SELECTED_LABEL, $QUALIFIED_MODULE)}&nbsp;&nbsp;</h4>  
+						<h4 class="pull-left textOverflowEllipsis" style="word-break: break-all;">{vtranslate($APP_SELECTED_LABEL, $QUALIFIED_MODULE)}&nbsp;&nbsp;</h4>  
 					</div>
 				</div>
 			</div>
