@@ -91,11 +91,11 @@ class Users extends CRMEntity {
         var $list_fields = Array(
                         'First Name'=>Array('vtiger_users'=>'first_name'),
                         'Last Name'=>Array('vtiger_users'=>'last_name'),
-//			'Role Name'=>Array('vtiger_user2role'=>'roleid'),
-//			'User Name'=>Array('vtiger_users'=>'user_name'),
+//          'Role Name'=>Array('vtiger_user2role'=>'roleid'),
+//          'User Name'=>Array('vtiger_users'=>'user_name'),
                         'Status'=>Array('vtiger_users'=>'status'),
                         'Email'=>Array('vtiger_users'=>'email1'),
-//			'Email2'=>Array('vtiger_users'=>'email2'),
+//          'Email2'=>Array('vtiger_users'=>'email2'),
                         'Admin'=>Array('vtiger_users'=>'is_admin'),
 
                         'Designation'=>Array('vtiger_users'=>'title'),
@@ -108,11 +108,11 @@ class Users extends CRMEntity {
         var $list_fields_name = Array(
                         'Last Name'=>'last_name',
                         'First Name'=>'first_name',
-//			'Role Name'=>'roleid',
-//			'User Name'=>'user_name',
+//          'Role Name'=>'roleid',
+//          'User Name'=>'user_name',
                         'Status'=>'status',
                         'Email'=>'email1',
-//			'Email2'=>'email2',
+//          'Email2'=>'email2',
                         'Admin'=>'is_admin',
 
                     'Designation'=>'title',
@@ -390,7 +390,7 @@ class Users extends CRMEntity {
                         $_SESSION['loginattempts'] = 1;
                 }
                 if($_SESSION['loginattempts'] > 5) {
-                        $this->log->warn("SECURITY: " . $usr_name . " has attempted to login ". 	$_SESSION['loginattempts'] . " times.");
+                        $this->log->warn("SECURITY: " . $usr_name . " has attempted to login ".     $_SESSION['loginattempts'] . " times.");
                 }
                 $this->log->debug("Starting user load for $usr_name");
 
@@ -1137,8 +1137,8 @@ class Users extends CRMEntity {
                 
                 
                 $result = $adb->pquery("SELECT secondcrm_plan.planid FROM vtiger_user2role INNER JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid
-                        INNER JOIN secondcrm_plan ON secondcrm_plan.plantitle=vtiger_role.planid WHERE vtiger_user2role.userid=?", array($this->id));
-                if($adb->num_rows($result)>0){
+                        INNER JOIN secondcrm_plan ON secondcrm_plan.planid=vtiger_role.planid WHERE vtiger_user2role.userid=?", array($this->id));
+                if($adb->num_rows($result)>0 && $this->mode==''){
                         $planid = $adb->query_result($result,0,'planid');
                         if($planid !=''){
                             //after adding/edit user, update plan to respective user
@@ -1152,7 +1152,7 @@ class Users extends CRMEntity {
                 if($this->mode==''){
                         $this->CreateDefaultDashboard($this->id, $this->column_fields['roleid']);
                 }
-                // end here	
+                // end here 
 
                 require_once('modules/Users/CreateUserPrivilegeFile.php');
                 createUserPrivilegesfile($this->id);
@@ -1165,7 +1165,7 @@ class Users extends CRMEntity {
 
             global $adb;
 
-            if($roleid == 'H12' || 	$roleid =='H13'){	//HR Manager or HR Staff	
+            if($roleid == 'H12' ||  $roleid =='H13'){   //HR Manager or HR Staff    
 
                 /*$adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
                 array('Employees', 1, 1, 'Default', '', $userid));
@@ -1211,7 +1211,9 @@ class Users extends CRMEntity {
 
                 }
                    
-            } else if($roleid == 'H21' || $roleid == 'H14' || $roleid == 'H8'){	//Manager and Account Manager and Operation Manager
+
+            } else if($roleid == 'H21' || $roleid == 'H14' || $roleid == 'H8'){ //Manager and Account Manager and Operation Manager
+
 
                /* $adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
                 array('Employement', 1, 1, 'Default', '', $userid));
@@ -1289,7 +1291,9 @@ class Users extends CRMEntity {
 
                 }
 
-            } else if($roleid == 'H10' || $roleid == 'H11'){	//Support Manager and Support Staff
+
+            } else if($roleid == 'H10' || $roleid == 'H11'){    //Support Manager and Support Staff
+
 
                /* $adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
                 array('People', 1, 1, 'Default', '', $userid));

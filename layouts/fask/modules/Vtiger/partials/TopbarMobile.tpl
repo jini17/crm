@@ -85,7 +85,7 @@
     {assign var=SELECTED_MENU_CATEGORY value='Dashboard'}
     {/if}
     {if $PLAN eq 1}
-    {assign var=counttab value=4}
+    {assign var=counttab value=5}
     {else if $PLAN eq 2 || $PLAN eq 3}
     {assign var=counttab value=5}
     {else}   
