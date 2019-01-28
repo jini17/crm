@@ -232,13 +232,20 @@ class Vtiger_MenuStructure_Model extends Vtiger_Base_Model {
          */
         public static function getAppMenuList(){
                 $db = PearDatabase::getInstance();
-                $result = $db->pquery("SELECT UPPER(parenttab_label) as parenttab FROM vtiger_parenttab WHERE visible=0 ORDER BY sequence ASC",array());
+                $plan = $_SESSION['plan'];
+                $notinclude = '';
+                if($plan ==1){
+                    $notinclude = " AND parenttab_label NOT IN ('Sales','Support')";     
+                } else if($plan ==2){
+                    $notinclude = "AND parenttab_label !='Support'";     
+                } else if($plan ==3){
+                   $notinclude = "AND parenttab_label !='Sales'";     
+                }
+
+                $result = $db->pquery("SELECT UPPER(parenttab_label) as parenttab FROM vtiger_parenttab WHERE visible=0 $notinclude ORDER BY sequence ASC",array());
                 $noOfRows = $db->num_rows($result);
                 for($i=0; $i<$noOfRows; $i++) {
                         $row = $db->query_result_rowdata($result, $i);
-                        if(($_SESSION['plan']==2 && $row['parenttab']=='SUPPORT') OR ($_SESSION['plan']==3 &&  $row['parenttab']=='SALES')) {
-                          continue;  
-                        }
                         $parentlist[] = $row['parenttab'];
                 }	
                 

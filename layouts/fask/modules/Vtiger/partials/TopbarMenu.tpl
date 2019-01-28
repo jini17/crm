@@ -225,7 +225,7 @@
   <div class="logo-container pull-left">
       <a href="index.php" class="">
       <!--<img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>-->
-      <img src="test/loginlogo/second-crm-logo.png" alt="Second CRM" height=""/>
+      <img src="test/loginlogo/Agiliux-logo.png" width="150" height="150" style="width: 120px;height: auto;margin: 15px 0px;" alt="Second CRM" height=""/>
       </a>
   </div>
 <!--End here logo -->
