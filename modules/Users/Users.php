@@ -91,11 +91,11 @@ class Users extends CRMEntity {
         var $list_fields = Array(
                         'First Name'=>Array('vtiger_users'=>'first_name'),
                         'Last Name'=>Array('vtiger_users'=>'last_name'),
-//			'Role Name'=>Array('vtiger_user2role'=>'roleid'),
-//			'User Name'=>Array('vtiger_users'=>'user_name'),
+//          'Role Name'=>Array('vtiger_user2role'=>'roleid'),
+//          'User Name'=>Array('vtiger_users'=>'user_name'),
                         'Status'=>Array('vtiger_users'=>'status'),
                         'Email'=>Array('vtiger_users'=>'email1'),
-//			'Email2'=>Array('vtiger_users'=>'email2'),
+//          'Email2'=>Array('vtiger_users'=>'email2'),
                         'Admin'=>Array('vtiger_users'=>'is_admin'),
 
                         'Designation'=>Array('vtiger_users'=>'title'),
@@ -108,11 +108,11 @@ class Users extends CRMEntity {
         var $list_fields_name = Array(
                         'Last Name'=>'last_name',
                         'First Name'=>'first_name',
-//			'Role Name'=>'roleid',
-//			'User Name'=>'user_name',
+//          'Role Name'=>'roleid',
+//          'User Name'=>'user_name',
                         'Status'=>'status',
                         'Email'=>'email1',
-//			'Email2'=>'email2',
+//          'Email2'=>'email2',
                         'Admin'=>'is_admin',
 
                     'Designation'=>'title',
@@ -390,7 +390,7 @@ class Users extends CRMEntity {
                         $_SESSION['loginattempts'] = 1;
                 }
                 if($_SESSION['loginattempts'] > 5) {
-                        $this->log->warn("SECURITY: " . $usr_name . " has attempted to login ". 	$_SESSION['loginattempts'] . " times.");
+                        $this->log->warn("SECURITY: " . $usr_name . " has attempted to login ".     $_SESSION['loginattempts'] . " times.");
                 }
                 $this->log->debug("Starting user load for $usr_name");
 
@@ -1137,8 +1137,8 @@ class Users extends CRMEntity {
                 
                 
                 $result = $adb->pquery("SELECT secondcrm_plan.planid FROM vtiger_user2role INNER JOIN vtiger_role ON vtiger_role.roleid=vtiger_user2role.roleid
-                        INNER JOIN secondcrm_plan ON secondcrm_plan.plantitle=vtiger_role.planid WHERE vtiger_user2role.userid=?", array($this->id));
-                if($adb->num_rows($result)>0){
+                        INNER JOIN secondcrm_plan ON secondcrm_plan.planid=vtiger_role.planid WHERE vtiger_user2role.userid=?", array($this->id));
+                if($adb->num_rows($result)>0 && $this->mode==''){
                         $planid = $adb->query_result($result,0,'planid');
                         if($planid !=''){
                             //after adding/edit user, update plan to respective user
@@ -1152,7 +1152,7 @@ class Users extends CRMEntity {
                 if($this->mode==''){
                         $this->CreateDefaultDashboard($this->id, $this->column_fields['roleid']);
                 }
-                // end here	
+                // end here 
 
                 require_once('modules/Users/CreateUserPrivilegeFile.php');
                 createUserPrivilegesfile($this->id);
@@ -1165,7 +1165,7 @@ class Users extends CRMEntity {
 
             global $adb;
 
-            if($roleid == 'H12' || 	$roleid =='H13'){	//HR Manager or HR Staff	
+            if($roleid == 'H12' ||  $roleid =='H13'){   //HR Manager or HR Staff    
 
                 /*$adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
                 array('Employees', 1, 1, 'Default', '', $userid));
@@ -1174,7 +1174,7 @@ class Users extends CRMEntity {
                 // Added By Mabruk
                 if (!$Mytabid) {
 
-                    $result = $adb->pquery("SELECT id FROM vtiger_dashboard_tabs WHERE userid=? AND tabname=?",array($userid, 'My Dashboards'));
+                    $result = $adb->pquery("SELECT id FROM vtiger_dashboard_tabs WHERE userid=? AND tabname=?",array($userid, 'My Dashboard'));
                     $Mytabid = $adb->query_result($result, 0, 'id');
 
                 }    
@@ -1211,7 +1211,7 @@ class Users extends CRMEntity {
 
                 }
                    
-            } else if($roleid == 'H14'){	//Manager
+            } else if($roleid == 'H21' || $roleid == 'H14' || $roleid == 'H8'){ //Manager and Account Manager and Operation Manager
 
                /* $adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
                 array('Employement', 1, 1, 'Default', '', $userid));
@@ -1219,7 +1219,7 @@ class Users extends CRMEntity {
 
                 if (!$Mytabid) {
 
-                    $result = $adb->pquery("SELECT id FROM vtiger_dashboard_tabs WHERE userid=? AND tabname=?",array($userid, 'My Dashboards'));
+                    $result = $adb->pquery("SELECT id FROM vtiger_dashboard_tabs WHERE userid=? AND tabname=?",array($userid, 'My Dashboard'));
                     $Mytabid = $adb->query_result($result, 0, 'id');
 
                 }
@@ -1251,7 +1251,7 @@ class Users extends CRMEntity {
 
                 }
 
-            } else if($roleid =='H15'){     //Staff
+            } else if($roleid =='H22' || $roleid == 'H15' || $roleid == 'H9'){     //Staff and Account Staff and Operation Staff
 
                /* $adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
                 array('Employement', 1, 1, 'Default', '', $userid));
@@ -1259,20 +1259,28 @@ class Users extends CRMEntity {
 
                 if (!$Mytabid) {
 
-                    $result = $adb->pquery("SELECT id FROM vtiger_dashboard_tabs WHERE userid=? AND tabname=?",array($userid, 'My Dashboards'));
+                    $result = $adb->pquery("SELECT id FROM vtiger_dashboard_tabs WHERE userid=? AND tabname=?",array($userid, 'My Dashboard'));
                     $Mytabid = $adb->query_result($result, 0, 'id');
 
                 }
                
+                // Common Widgets For All Roles
                 $dashboardwidgets[] = array(150, $userid, '{"row":"1","col":"1"}', $Mytabid, null);
-                $dashboardwidgets[] = array(120, $userid, '{"row":"1","col":"2"}', $Mytabid, null);
-                $dashboardwidgets[] = array(126, $userid, '{"row":"1","col":"3"}', $Mytabid, null);
-                $dashboardwidgets[] = array(149, $userid, '{"row":"2","col":"2"}', $Mytabid, null);
+                $dashboardwidgets[] = array(122, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(145, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(56,  $userid, '{"row":"2","col":"1"}', $Mytabid, null);                
                 $dashboardwidgets[] = array(131, $userid, '{"row":"2","col":"3"}', $Mytabid, null);
-                $dashboardwidgets[] = array(56,  $userid, '{"row":"2","col":"1"}', $Mytabid, null);
-                $dashboardwidgets[] = array(148, $userid, '{"row":"1","col":"1"}', $Mytabid, null);
-                $dashboardwidgets[] = array(121, $userid, '{"row":"1","col":"1"}', $Mytabid, null);
-                $dashboardwidgets[] = array(146, $userid, '{"row":"1","col":"1"}', $Mytabid, null);
+                $dashboardwidgets[] = array(57,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(66,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(101,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(152,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(126, $userid, '{"row":"1","col":"3"}', $Mytabid, null);
+
+                // Widgets Specific to roles
+                $dashboardwidgets[] = array(120, $userid, '{"row":"1","col":"2"}', $Mytabid, null);               
+                $dashboardwidgets[] = array(148, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(149, $userid, '{"row":"2","col":"2"}', $Mytabid, null);    
+
                 
                 foreach($dashboardwidgets as $widget){
 
@@ -1281,7 +1289,7 @@ class Users extends CRMEntity {
 
                 }
 
-            } else if($roleid == 'H16'){	//Management
+            } else if($roleid == 'H10' || $roleid == 'H11'){    //Support Manager and Support Staff
 
                /* $adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
                 array('People', 1, 1, 'Default', '', $userid));
@@ -1289,20 +1297,29 @@ class Users extends CRMEntity {
 
                 if (!$Mytabid) {
 
-                    $result = $adb->pquery("SELECT id FROM vtiger_dashboard_tabs WHERE userid=? AND tabname=?",array($userid, 'My Dashboards'));
+                    $result = $adb->pquery("SELECT id FROM vtiger_dashboard_tabs WHERE userid=? AND tabname=?",array($userid, 'My Dashboard'));
                     $Mytabid = $adb->query_result($result, 0, 'id');
 
                 }
                
+                // Common Widgets For All Roles
                 $dashboardwidgets[] = array(150, $userid, '{"row":"1","col":"1"}', $Mytabid, null);
-                $dashboardwidgets[] = array(120, $userid, '{"row":"1","col":"2"}', $Mytabid, null);
-                $dashboardwidgets[] = array(126, $userid, '{"row":"1","col":"3"}', $Mytabid, null);
-                $dashboardwidgets[] = array(149, $userid, '{"row":"2","col":"2"}', $Mytabid, null);
+                $dashboardwidgets[] = array(122, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(145, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(56,  $userid, '{"row":"2","col":"1"}', $Mytabid, null);                
                 $dashboardwidgets[] = array(131, $userid, '{"row":"2","col":"3"}', $Mytabid, null);
-                $dashboardwidgets[] = array(56,  $userid, '{"row":"2","col":"1"}', $Mytabid, null);
-                $dashboardwidgets[] = array(147, $userid, '{"row":"1","col":"1"}', $Mytabid, null);
-                $dashboardwidgets[] = array(144, $userid, '{"row":"1","col":"1"}', $Mytabid, null);
-                $dashboardwidgets[] = array(143, $userid, '{"row":"1","col":"1"}', $Mytabid, null);                 
+                $dashboardwidgets[] = array(57,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(66,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(101,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(152,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(126, $userid, '{"row":"1","col":"3"}', $Mytabid, null);
+
+                // Widgets Specific to roles
+                $dashboardwidgets[] = array(120, $userid, '{"row":"1","col":"2"}', $Mytabid, null);               
+                $dashboardwidgets[] = array(148, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(149, $userid, '{"row":"2","col":"2"}', $Mytabid, null);   
+                $dashboardwidgets[] = array(67, $userid, '', $Mytabid, null);   
+                $dashboardwidgets[] = array(68, $userid, '', $Mytabid, null);                  
                 
                 foreach($dashboardwidgets as $widget){
 
@@ -1311,11 +1328,56 @@ class Users extends CRMEntity {
 
                 }
 
-            } else if ($roleid == 'H2') { 
+            } else if($roleid == 'H17' || $roleid == 'H18' || $roleid == 'H19' || $roleid == 'H20'){ //Sales Manager and Sales Staff and Marketing Manager/staff
+
+               /* $adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
+                array('People', 1, 1, 'Default', '', $userid));
+                $Emptabid = $adb->getLastInsertID(); */
 
                 if (!$Mytabid) {
 
-                    $result = $adb->pquery("SELECT id FROM vtiger_dashboard_tabs WHERE userid=? AND tabname=?",array($userid, 'My Dashboards'));
+                    $result = $adb->pquery("SELECT id FROM vtiger_dashboard_tabs WHERE userid=? AND tabname=?",array($userid, 'My Dashboard'));
+                    $Mytabid = $adb->query_result($result, 0, 'id');
+
+                }
+               
+                // Common Widgets For All Roles
+                $dashboardwidgets[] = array(150, $userid, '{"row":"1","col":"1"}', $Mytabid, null);
+                $dashboardwidgets[] = array(122, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(145, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(56,  $userid, '{"row":"2","col":"1"}', $Mytabid, null);                
+                $dashboardwidgets[] = array(131, $userid, '{"row":"2","col":"3"}', $Mytabid, null);
+                $dashboardwidgets[] = array(57,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(66,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(101,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(152,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(126, $userid, '{"row":"1","col":"3"}', $Mytabid, null);
+
+                // Widgets Specific to roles
+                $dashboardwidgets[] = array(120, $userid, '{"row":"1","col":"2"}', $Mytabid, null);               
+                $dashboardwidgets[] = array(148, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(149, $userid, '{"row":"2","col":"2"}', $Mytabid, null); 
+                $dashboardwidgets[] = array(58, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(59, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(61, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(60, $userid, '', $Mytabid, null);             
+                $dashboardwidgets[] = array(63, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(64, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(65, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(62, $userid, '', $Mytabid, null);
+                
+                foreach($dashboardwidgets as $widget){
+
+                    $adb->pquery("INSERT INTO vtiger_module_dashboard_widgets(linkid, userid, position, dashboardtabid, size, is_closed)
+                    VALUES (?,?,?,?,?,1)", array($widget[0], $widget[1], $widget[2], $widget[3], $widget[4]));
+
+                }
+
+            } else if ($roleid == 'H2' || $roleid == 'H16') { 
+
+                if (!$Mytabid) {
+
+                    $result = $adb->pquery("SELECT id FROM vtiger_dashboard_tabs WHERE userid=? AND tabname=?",array($userid, 'My Dashboard'));
                     $Mytabid = $adb->query_result($result, 0, 'id');
 
                 }

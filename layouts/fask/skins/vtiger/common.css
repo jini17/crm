@@ -10099,4 +10099,7 @@ input:checked + .slider:before {
     margin-left: -3px;
 
 }
+.dashboard_notebookWidget_view i{
+font-size:13px !important;
+}
 
