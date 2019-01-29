@@ -54,6 +54,7 @@ body {
 .global-nav .global-actions {
   padding-right: 15px;
   height: 40px !important;
+  margin-top: 10px;
 }
 .app-nav {
   position: relative;
@@ -9536,4 +9537,13 @@ color:#000 !important;
 }
 .module-breadcrumb{
     font-size: 12px !important
+}
+
+.newtabs{
+    position: absolute;
+    top: 8px;
+    left: 157px;
+}
+.logo-container img{
+    margin: 8px 0px !important;
 }

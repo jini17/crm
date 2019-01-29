@@ -452,7 +452,7 @@ a.btn.btn-gettingStarted i{
 =====================*/
 #tablist li.active,
         
-        .fa-facebook {
+        .fa-facebook-f {
             background: #3B5998;
             color: #fff;
             padding: 8px;
@@ -467,7 +467,7 @@ a.btn.btn-gettingStarted i{
             color: #fff;
             padding: 8px;
         }
-        .fa-linkedin {
+        .fa-linkedin-in {
           background: #007bb5;
           color: #fff;
           padding: 8px;
