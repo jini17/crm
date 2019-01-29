@@ -155,7 +155,9 @@ Vtiger.Class('Vtiger_Widget_Js',{
         refreshWidget : function() {
                 var parent = this.getContainer();
                 var element = parent.find('a[name="drefresh"]');
+
                 var tabid = jQuery("#default_tab").val();
+
                 var url = element.data('url')+'&tab='+tabid;
 
         var contentContainer = parent.find('.dashboardWidgetContent');
