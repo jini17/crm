@@ -10080,15 +10080,16 @@ input:checked + .slider:before {
     height: auto;
 }
 
-.widget-icon{
-    margin-top: -15px;
-}
+
 .widget-item a{
     width: 100%;
     display: block;
 }
 .widget-item a[disabled="disabled"]{
     color: #ccc;
+}
+.widget-icon{
+    margin-top: -15px;
 }
 
 .current-filter-name i{
@@ -10103,7 +10104,16 @@ input:checked + .slider:before {
 .dashboard_notebookWidget_view i{
 font-size:13px !important;
 }
+
 #Leads_editView_fieldName_firstname {
     width: 80% !important;
 }
 
+.widget-item{
+  margin-bottom: 8px;
+}
+
+@media (max-width: 1624px){
+  .widget-icon{
+    margin-top: 0 !important;
+}
