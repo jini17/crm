@@ -530,14 +530,15 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                 app.helper.showProgress();
                 app.request.post({"url": url}).then(
                     function (err, response) {
-                        console.log(response)
+                       // console.log(response)
+                       app.helper.hideProgress();
                         if (err == null) {
                             var nonReversableWidgets = ['MiniList', 'Notebook', 'ChartReportWidget']
                             parent.fadeOut('slow', function () {
                                 Vtiger_DashBoard_Js.gridster.remove_widget(parent);
                                 parent.remove();
                             });
-                            if (jQuery.inArray(widgetName, nonReversableWidgets) == -1) {
+                            if(jQuery.inArray(widgetName, nonReversableWidgets) == -1) {
                                 var data = '<li><a style="padding-left:10px;" onclick="Vtiger_DashBoard_Js.addWidget(this, \'' + response.url + '\')" href="javascript:void(0);"';
                                 data += 'data-width=' + width + ' data-height=' + height + ' data-linkid=' + response.linkid + ' data-name=' + response.name + '>' + response.title + '</a></li>';
                                 var divider = jQuery('.widgetsList .divider', '#tab_' + activeTabId);
@@ -550,7 +551,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                                 jQuery(".widget-item a[data-linkid='"+ response.linkid + "']").removeAttr("title")  // Mabruk
                                
                                //   jQuery(".widgetsList ").find("."+group).find("ul").append(data)
-                             app.helper.hideProgress();
+                                   
                                   // jQuery(data).insertAfter(jQuery('.widgetsList li:last', '#tab_' + activeTabId));
                                 }
                             }

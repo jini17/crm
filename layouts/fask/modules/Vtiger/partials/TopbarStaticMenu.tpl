@@ -39,26 +39,6 @@
                   </a>
                </li>
                {/if}
-               <li>
-                  <a class="dropdown-icon-dashboard" title="Timesheet" href="index.php?module=Timesheet&view=List">
-                  <i class="material-icons module-icon">timer</i>&nbsp;Timesheet
-                  </a>
-               </li>
-                 <li>
-                  <a class="dropdown-icon-dashboard" title="Performance" href="index.php?module=Performance&view=List">
-                     <i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                  </a>
-               </li>
-                 <li>
-                  <a class="dropdown-icon-dashboard" title="Training" href="index.php?module=Training&view=List">
-                  <i class="material-icons module-icon">book</i>&nbsp;Training
-                  </a>
-               </li>
-                 <li>
-                  <a class="dropdown-icon-dashboard" title="Attendance" href="index.php?module=Attendance&view=List">
-                  <i class="material-icons module-icon">fingerprint</i>&nbsp;Attendance
-                  </a>
-               </li>
             </ul>
          </div>
       </div>
@@ -128,15 +108,18 @@
 </li>
 
 {elseif $PLAN eq 2 || $PLAN eq 4}
-
-   {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
-'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
-'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
-'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
-'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
-'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
-'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
+   
+  {assign var=iconsarray value=['potentials'=>'fas fa-comments-dollar','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
+    'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'fas fa-search-dollar',
+    'purchaseorder'=>'fas fa-shopping-cart','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
+    'projecttask'=>'check_box','projectmilestone'=>'fas fa-info-circle','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
+    'foundation'=>'fas fa-info-circle','admin'=>'fas fa-hand-holding-heart',
+    'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
+    'quotes'=>'description','invoice'=>'fas fa-envelope-open','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
+    'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-headset','tools'=>'business_center',
+    'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'fingerprint','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call',
+    'performance'=>'fas fa-chart-line', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
+    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face'  ]}
    <li>
       <div class="dropdownFinance">
          <div class="addtionalDashboardTab" style="padding: 10px 10px;"><span aria-hidden="true">{vtranslate('Sales')}</span></div>
@@ -145,7 +128,12 @@
                   {foreach item=MENU_MODEL key=MODULE from=$SALES_MENU_MODEL}
                    <li>
                      <a class="dropdown-icon-dashboard" title="{$MODULE}" href=" index.php?module={$MODULE}&amp;view=List&amp;app=SALES ">
-                     <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($MODULE)}]}</i>&nbsp;{$MODULE}</a>
+                     {if $iconsarray[{strtolower($MODULE)}]|strstr:"fas"}
+                        <i class="{$iconsarray[{strtolower($MODULE)}]}" ></i> 
+                     {else}
+                        <i class="material-icons module-icon" >{$iconsarray[{strtolower($MODULE)}]}</i> 
+                      {/if}
+                     <span class="hide-menu">&nbsp;{$MODULE}</span></a>   
                   </li>
                  {/foreach}
                </ul>
@@ -163,7 +151,7 @@
             <ul class="dropdownlist">
                <li>
                   <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                  <i class="fa fa-bell-o"></i>&nbsp;Templates
+                  <i class="fa fa-bell"></i>&nbsp;Templates
                   </a>
                </li>
                <li>
@@ -244,14 +232,17 @@
    </div>
 </li>
    {else if $PLAN eq 3 || $PLAN eq 4}
-    {assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
-'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
-'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
-'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
-'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
-'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
-'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'assignment','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call','performance'=>'timeline', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app','claim'=>'attach_money','myprofile'=>'face'  ]}
+    {assign var=iconsarray value=['potentials'=>'fas fa-comments-dollar','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
+    'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'fas fa-search-dollar',
+    'purchaseorder'=>'fas fa-shopping-cart','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
+    'projecttask'=>'check_box','projectmilestone'=>'fas fa-info-circle','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
+    'foundation'=>'fas fa-info-circle','admin'=>'fas fa-hand-holding-heart',
+    'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
+    'quotes'=>'description','invoice'=>'fas fa-envelope-open','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
+    'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-headset','tools'=>'business_center',
+    'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'fingerprint','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call',
+    'performance'=>'fas fa-chart-line', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
+    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face'  ]}
    <li>
       <div class="dropdownFinance">
          <div class="addtionalDashboardTab" style="padding: 10px 10px;"><span aria-hidden="true">{vtranslate('Support')}</span></div>
@@ -260,7 +251,12 @@
                   {foreach item=MENU_MODEL key=MODULE from=$SUPPORT_MENU_MODEL}
                    <li>
                      <a class="dropdown-icon-dashboard" title="{$MODULE}" href=" index.php?module={$MODULE}&amp;view=List&amp;app=SUPPORT ">
-                     <i class="app-icon-list material-icons" >{$iconsarray[{strtolower($MODULE)}]}</i>&nbsp;{$MODULE}</a>
+                     {if $iconsarray[{strtolower($MODULE)}]|strstr:"fas"}
+                        <i class="{$iconsarray[{strtolower($MODULE)}]}" ></i> 
+                     {else}
+                        <i class="material-icons module-icon" >{$iconsarray[{strtolower($MODULE)}]}</i> 
+                      {/if}
+                     <span class="hide-menu">&nbsp;{$MODULE}</span></a>   
                   </li>
                  {/foreach}
                </ul>
