@@ -20,7 +20,7 @@
             <div class="dashboard_notebookWidget_view" >
                 <div class="clearfix"></div>
 
-                                       <small>{vtranslate('LBL_LAST_SAVED_ON', $MODULE)}{Vtiger_Util_Helper::formatDateTimeIntoDayString($WIDGET->getLastSavedDate())}</small>
+                <small style="margin-left: 18px;">{vtranslate('LBL_LAST_SAVED_ON', $MODULE)}{Vtiger_Util_Helper::formatDateTimeIntoDayString($WIDGET->getLastSavedDate())}</small>
 
 <div class="clearfix"></div>
                         <br>
