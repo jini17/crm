@@ -1303,7 +1303,7 @@ $languageStrings = array(
 	'LBL_HISTORY' => 'Touchpoints',
 	'LBL_ENGAGEMENT_HISTORY' => 'Touchpoint History',
 	'LBL_SETTINGS' => 'Settings',
-
+                     'LBL_NOTEBOOK'=>'Notebook',
 	//List View and thumbnail view button labels
 	'LBL_LIST_VIEW'=>'List View',
 	'LBL_THUMBNAIL_VIEW'=>'Thumbnail View',

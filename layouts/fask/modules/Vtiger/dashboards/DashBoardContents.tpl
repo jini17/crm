@@ -289,7 +289,7 @@
         </div>
                 <div class="clearfix"></div>
                 <a class="strolltotop pull-right">
-                    <i class="fa fa-arrow-up"></i>
+                    <i class="fas fa-angle-up"></i>
                 </a>
 </div>
 {/strip}

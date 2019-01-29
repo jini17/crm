@@ -240,15 +240,15 @@
                                                                 </td>
                                                         {elseif $LISTVIEW_HEADER->getName() eq 'facebook' }            
                                                             <td class="{$WIDTHTYPE} user-social" nowrap>
-                                                                 {if $LISTVIEW_ENTRY->getSocialMediaLinks('facebook',$LISTVIEW_ENTRY->getId()) neq ''}  
+                                                                 
                                                                 <a class=" fab fa-facebook-f" target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('facebook',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"> </a>
-                                                                {/if}
-                                                                {if $LISTVIEW_ENTRY->getSocialMediaLinks('twitter',$LISTVIEW_ENTRY->getId()) neq ''}  
+                                                               
+                                                           
                                                                 <a class=' fab fa-twitter' target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('twitter',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"> </a>
-                                                                {/if}
-                                                                 {if $LISTVIEW_ENTRY->getSocialMediaLinks('linkedin',$LISTVIEW_ENTRY->getId()) neq ''}  
+                                                          
+                                                           
                                                                 <a  class=' fab fa-linkedin-in' target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('linkedin',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"></a>
-                                                                {/if}
+                                                         
                                                                 <a  class='fa fa-envelope' href="#"  style="margin-left:5px;" onclick="javascript:Settings_Users_List_Js.birthdayEmail({$LISTVIEW_ENTRY->getId()})"></a>
                                                              </td>
                                                          {elseif $LISTVIEW_HEADER->getName() eq 'date_joined'}

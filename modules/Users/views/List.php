@@ -39,6 +39,7 @@ class Users_List_View extends Settings_Vtiger_List_View
         $myDetails['designation'] = $current_user->get('title');
         $myDetails['department'] = $current_user->get('department');
         $myDetails['email'] = $current_user->get('email1');
+        $myDetails['id'] = $current_user->get('id');
         $date1 = new DateTime($current_user->get('date_joined'));
         $date2 = new DateTime(date('d-m-Y'));
         $diff = $date2->diff($date1)->format("%a");

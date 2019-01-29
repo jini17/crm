@@ -506,7 +506,7 @@ color: #AFDFDF !important;
 .global-nav{
           border-bottom: 2px solid  #AFDFDF;
 }
-.fa-facebook {
+.fa-facebook-f {
     background: #3B5998;
     color: white;
     padding: 10px;
@@ -516,7 +516,7 @@ color: #AFDFDF !important;
     color: #fff;
     padding: 10px;
 }
-.fa-linkedin {
+.fa-linkedin-in {
     background: #007bb5;
     color: #fff;
     padding: 10px;
@@ -528,6 +528,7 @@ color: #AFDFDF !important;
 }
 .user-meta{
     min-height: 84px;
+    line-height: 1.6;
 }
 .active.employeeTab{
     border-bottom: 2px solid  #3B5998 !important;

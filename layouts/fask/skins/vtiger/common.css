@@ -58,6 +58,7 @@ body {
 .global-nav .global-actions {
   padding-right: 15px;
   height: 40px !important;
+  margin-top: 10px;
 }
 .app-nav {
   position: relative;
@@ -9586,8 +9587,8 @@ right connector from last child*/
 }
 .newtabs{
     position: absolute;
-    top: 0;
-    left: 190px;
+    top: 8px;
+    left: 157px;
 }
 .global-nav .global-actions{
     position: absolute;
@@ -9777,11 +9778,12 @@ right connector from last child*/
     }
 
 
-.fa-facebook {
+.fa-facebook-f {
   background: #3B5998;
   color: white;
   padding: 10px;
-}.fa-twitter {
+}
+.fa-twitter {
   background: #55ACEE;
   color: white;
   padding: 10px;
@@ -9805,7 +9807,7 @@ right connector from last child*/
     margin: 3px 4px !important;
 }
 
-.fa-linkedin {
+.fa-linkedin-in {
   background: #007bb5;
   color: white;
   padding: 10px;
@@ -9861,7 +9863,7 @@ right connector from last child*/
          margin-right: 10px !important;
      }
   
-.fa-facebook {
+.fa-facebook-f {
     background: #3B5998;
     color: white;
     padding: 10px;
@@ -9871,7 +9873,7 @@ right connector from last child*/
     color: #fff;
     padding: 10px;
 }
-.fa-linkedin {
+.fa-linkedin-in {
     background: #007bb5;
     color: #fff;
     padding: 10px;
@@ -9883,6 +9885,7 @@ right connector from last child*/
 }
 .user-meta{
     min-height: 84px;
+    line-height: 1.6;
 }
 
         /**===================
@@ -9890,19 +9893,21 @@ right connector from last child*/
         * TODO: Gridster
         *======================*/
         .strolltotop,.strolltotop:hover{           
-            padding            : 10px;
-            font-size           : 25px;
-            font-weight     : bold;
-            position             : absolute;
-            width                : 55px;
-            height               : 56px;
-            border-radius  : 50%;
-            bottom             : 2%;
-            right                  : 1%;
-            background     : none;
-            text-align         : center;
-            color                 : #ccc;      
-            border: 1px solid #fff;
+            padding: 3px;
+            font-size: 25px;
+            font-weight: bold;
+            position: absolute;
+            width: 44px;
+            height: 43px;
+            border-radius: 50%;
+            bottom: 2%;
+            right: 1%;
+            background: none;
+                background-color: rgba(0, 0, 0, 0);
+            text-align: center;
+            color: #a6a6a6;
+            border: 1px solid #a6a6a6;
+            background-color: #fff;
         }
 /*        .gridster_2{
             height: 720px;
@@ -10116,8 +10121,25 @@ font-size:13px !important;
 .widget-item{
   margin-bottom: 8px;
 }
-
+.logo-container img{
+    margin: 7px 0  !important;
+}
+.newtabs{
+    position: absolute;
+    top: 8px;
+    left: 157px;
+}
 @media (max-width: 1624px){
   .widget-icon{
     margin-top: 0 !important;
+    margin-right: 5px !important;
+}
+}
+.logo-container img{
+    margin: 8px 0px !important;
+}
+#bodyFrame{
+    min-height: 500px !important;
+    height: 100vh !important;
+    overflow: none !important;
 }

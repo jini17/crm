@@ -8,13 +8,13 @@
     .fa-twitter {
         background: #55ACEE;
         color: #fff;
-        padding: 8px;
+        padding: 10px;
     }
 
     .fa-envelope {
         background: #ff6600;
         color: #fff;
-        padding: 8px;
+        padding: 10px;
     }
 
     .fa-linkedin {
@@ -60,7 +60,7 @@
                              src="{$REPORTING_MANAGER['image'][0]['path']}_{$REPORTING_MANAGER['image'][0]['name']}"/>
                     </div>
                     <div class="orgbox-details text-left">
-                        <h5>{$REPORTING_MANAGER['full_name']}</h5>
+                        <h5><a href="index.php?module=Users&parent=Settings&view=Detail&record={$REPORTING_MANAGER['id']}">{$REPORTING_MANAGER['fullname']}</a></h5>
                         <div class='clearfix'></div>
                         <small> {$REPORTING_MANAGER['department'] } </small>
                         <div class="clearfix"></div>
@@ -76,12 +76,12 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="social-links text-right">
-                        <a href="{$REPORTING_MANAGER['facebook']}"><i class="fa fa-facebook"></i></a>
-                        <a href="{$REPORTING_MANAGER['twitter']}"><i class="fa fa-twitter"></i></a>
-                        <a href="{$REPORTING_MANAGER['linkedin']}"><i class="fa fa-linkedin"></i></a>
+                        <a href="{$REPORTING_MANAGER['facebook']}"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{$REPORTING_MANAGER['twitter']}"><i class="fab fa-twitter"></i></a>
+                        <a href="{$REPORTING_MANAGER['linkedin']}"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#"
                            onclick="javascript:Vtiger_Helper_Js.getInternalMailer({$REPORTING_MANAGER['emp_id']},'email','Users');"
-                           class="fa fa-envelope"></a>
+                           class=""><i class="fa fa-envelope"></i></a>
                     </div>
 
                 </div>
@@ -97,7 +97,7 @@
                                      src="{$MY_DETAILS['image'][0]['path']}_{$MY_DETAILS['image'][0]['name']}"/>
                             </div>
                             <div class="orgbox-details text-left">
-                                <h5>{$MY_DETAILS['fullname']}</h5>
+                                <h5><a href="index.php?module=Users&parent=Settings&view=Detail&record={$MY_DETAILS['id']}">{$MY_DETAILS['fullname']}</a></h5>
                                 <div class='clearfix'></div>
                                 <small> {$MY_DETAILS['department'] } </small>
                                 <div class="clearfix"></div>
@@ -113,9 +113,9 @@
                             </div>
                             <div class="clearfix"></div>
                             <div class="social-links text-right">
-                                <a href="{$MY_DETAILS['facebook']}"><i class="fa fa-facebook"></i></a>
-                                <a href="{$MY_DETAILS['twitter']}"><i class="fa fa-twitter"></i></a>
-                                <a href="{$MY_DETAILS['linkedin']}"><i class="fa fa-linkedin"></i></a>
+                                <a href="{$MY_DETAILS['facebook']}"><i class="fab fa-facebook-f"></i></a>
+                                <a href="{$MY_DETAILS['twitter']}"><i class="fab fa-twitter"></i></a>
+                                <a href="{$MY_DETAILS['linkedin']}"><i class="fab fa-linkedin-in"></i></a>
                                 <a href="#"
                                    onclick="javascript:Vtiger_Helper_Js.getInternalMailer({$MY_DETAILS['emp_id']},'email','Users');"><i
                                             class="fa fa-envelope"></i></a>
@@ -146,7 +146,7 @@
                             </div>
 
                             <div class="orgbox-details text-left">
-                                <h5>{$emp['full_name']}</h5>
+                                <h5><a href="index.php?module=Users&parent=Settings&view=Detail&record={$emp['id']}"{$emp['full_name']}</h5>
                                 <div class='clearfix'></div>
                                 <small> {$emp['department'] } </small>
                                 <div class="clearfix"></div>
@@ -162,9 +162,9 @@
                             </div>
                             <div class="clearfix"></div>
                             <div class="social-links text-right">
-                                <a href="{$emp['facebook']}"> <i class="fa fa-facebook"></i> </a>
-                                <a href="{$emp['twitter']}"> <i class="fa fa-twitter"></i> </a>
-                                <a href="{$emp['linkedin']}"> <i class="fa fa-linkedin"></i> </a>
+                                <a href="{$emp['facebook']}"> <i class="fab fa-facebook-f"></i> </a>
+                                <a href="{$emp['twitter']}"> <i class="fab fa-twitter"></i> </a>
+                                <a href="{$emp['linkedin']}"> <i class="fab fa-linkedin-in"></i> </a>
                                 <a href="#"
                                    onclick="javascript:Vtiger_Helper_Js.getInternalMailer({$emp['id']},'email','Users');"><i
                                             class="fa fa-envelope"></i></a>
