@@ -9,6 +9,10 @@ a:active {
   outline: none;
 }
 
+#Leads_editView_fieldName_firstname{
+    width: 80% !important;
+}
+
 html {
   height: 100%;
   overflow-y: auto;
