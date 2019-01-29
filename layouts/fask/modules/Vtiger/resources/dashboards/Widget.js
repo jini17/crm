@@ -155,7 +155,7 @@ Vtiger.Class('Vtiger_Widget_Js',{
         refreshWidget : function() {
                 var parent = this.getContainer();
                 var element = parent.find('a[name="drefresh"]');
-                var url = element.data('url');
+                var url = element.data('url')+'&tab='+tabid;
 
         var contentContainer = parent.find('.dashboardWidgetContent');
                 var params = {};
