@@ -182,7 +182,7 @@
 
                                         {if count($GENERAL_GROUP) > 0}
                                         <li class='general'>
-                                            <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp;  General <i class="fa fa-windows pull-right widget-icon"></i></a>
+                                            <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp;  General <i class="fab fa-windows pull-right widget-icon"></i></a>
                                             <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
                                                  
                                                     {foreach item="general" from=$GENERAL_GROUP}

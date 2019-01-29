@@ -30,6 +30,7 @@ $languageStrings = array(
 	'Sales Commission' => 'Sales Commission',
     'LBL_PAID' => 'Paid',
     'LBL_BALANCE' => 'Balance',
+    'LBL_TERMSCONDITION'=>'Terms & Condition',
 
 	//Added for existing Picklist Entries
 
