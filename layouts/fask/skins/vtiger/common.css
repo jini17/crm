@@ -10102,4 +10102,7 @@ input:checked + .slider:before {
 .dashboard_notebookWidget_view i{
 font-size:13px !important;
 }
+#Leads_editView_fieldName_firstname {
+    width: 80% !important;
+}
 

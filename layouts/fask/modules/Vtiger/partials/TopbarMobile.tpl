@@ -160,7 +160,7 @@
             <i class="material-icons module-icon" >{$iconsarray[{strtolower($moduleName)}]}
             </i> 
             {/if}   
-            <span class="hide-menu"> {$translatedModuleLabel}
+            <span class="hide-menu">{$translatedModuleLabel}
             </span>
           </a>
         </li>
