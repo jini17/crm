@@ -9893,11 +9893,12 @@ right connector from last child*/
             width                : 55px;
             height               : 56px;
             border-radius  : 50%;
-            bottom             : 10%;
+            bottom             : 2%;
             right                  : 1%;
-            background     : #333;
+            background     : none;
             text-align         : center;
-            color                 : #fff;                       
+            color                 : #ccc;      
+            border: 1px solid #fff;
         }
 /*        .gridster_2{
             height: 720px;

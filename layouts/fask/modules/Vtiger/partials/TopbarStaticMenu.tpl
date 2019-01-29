@@ -39,26 +39,6 @@
                   </a>
                </li>
                {/if}
-               <li>
-                  <a class="dropdown-icon-dashboard" title="Timesheet" href="index.php?module=Timesheet&view=List">
-                  <i class="material-icons module-icon">timer</i>&nbsp;Timesheet
-                  </a>
-               </li>
-                 <li>
-                  <a class="dropdown-icon-dashboard" title="Performance" href="index.php?module=Performance&view=List">
-                     <i class="material-icons module-icon">timeline</i>&nbsp;Performance
-                  </a>
-               </li>
-                 <li>
-                  <a class="dropdown-icon-dashboard" title="Training" href="index.php?module=Training&view=List">
-                  <i class="material-icons module-icon">book</i>&nbsp;Training
-                  </a>
-               </li>
-                 <li>
-                  <a class="dropdown-icon-dashboard" title="Attendance" href="index.php?module=Attendance&view=List">
-                  <i class="material-icons module-icon">fingerprint</i>&nbsp;Attendance
-                  </a>
-               </li>
             </ul>
          </div>
       </div>
@@ -171,7 +151,7 @@
             <ul class="dropdownlist">
                <li>
                   <a class="dropdown-icon-dashboard" title="Notification Templates" href="index.php?module=EmailTemplates&amp;view=List&amp;app=TOOLS">
-                  <i class="fa fa-bell-o"></i>&nbsp;Templates
+                  <i class="fa fa-bell"></i>&nbsp;Templates
                   </a>
                </li>
                <li>
