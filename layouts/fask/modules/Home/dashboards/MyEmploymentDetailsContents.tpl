@@ -67,9 +67,12 @@
             </div>
         {/if}
     </div>
+    {assign var=image value=Users_Record_Model::getCurrentUserModel()}
+     {assign var=IMAGE_DETAILS value=$image->getImageDetails()}
+  
                 <div class="col-md-4" style='padding-left: 0;'>
                     <div class="image-holder">
-                        <img class="img-thumbnail" src="{$URL}/{$DATA['thumb'][0]['path']}_{$DATA['thumb'][0]['name']}">
+                        <img class="img-thumbnail" src="{$IMAGE_DETAILS[0].path}_{$IMAGE_DETAILS[0].orgname}">
                     </div>
                     <div class="clearfix"></div>
                     <a href="{$URL}/index.php?module=Users&parent=Settings&view=Detail&record={$DATA['emp_id']}" class="btn btn-lg btn-block btn-primary"> {vtranslate('LBL_VIEW_PROFILE',$MODULE_NAME)}</a>
