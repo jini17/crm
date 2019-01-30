@@ -9,7 +9,9 @@
 
 var vtJqPlotInterface = function() {
 
-    this.legendPlacement = 'outsideGrid'; /* refer: http://www.jqplot.com/docs/files/jqplot-core-js.html#Legend.placement */
+    //this.legendPlacement = 'outsideGrid'; /* refer: http://www.jqplot.com/docs/files/jqplot-core-js.html#Legend.placement */
+    // Quick Fix By Mabruk
+    this.legendPlacement = 'outside';
 
     this.renderPie = function() {
         this.element.jqplot([this.data['chartData']], {
