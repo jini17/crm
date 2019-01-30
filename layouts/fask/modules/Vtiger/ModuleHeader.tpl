@@ -153,7 +153,7 @@
                                         {/foreach}
                                         {if $MODULE_SETTING_ACTIONS|@count gt 0}
                                                 <button type="button" class="btn module-buttons dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                        <span class="hidden-xs hidden-sm" aria-hidden="true" title="{vtranslate('LBL_SETTINGS', $MODULE)}">&nbsp;{vtranslate('LBL_CUSTOMIZE', 'Reports')}</span><i class="material-icons">settings</i> 
+                                                      <i class="material-icons">settings</i>   <span class="hidden-xs hidden-sm" aria-hidden="true" title="{vtranslate('LBL_SETTINGS', $MODULE)}">&nbsp;{vtranslate('LBL_CUSTOMIZE', 'Reports')}</span>
                                                 </button>
                                                 <ul class="detailViewSetting dropdown-menu pull-right animated fadeIn">
                                                         {foreach item=SETTING from=$MODULE_SETTING_ACTIONS}
@@ -170,7 +170,7 @@
                                           {/if}    *}
 
                                         <a class='btn btn-danger Help-btn text-center'>
-                                            <i class="glyphicon glyphicon-question-sign pull-left" style="margin-top: 3px; margin-right: 2px;"></i>&nbsp;Help
+                                            <i class="glyphicon glyphicon-question-sign pull-left" style="margin-top: 1px; margin-right: 2px;"></i>&nbsp;Help
                                         </a>
 
 

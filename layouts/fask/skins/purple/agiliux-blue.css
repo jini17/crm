@@ -576,7 +576,7 @@ a.rightside-icon-dashboard > i.fa{
 color: #2f5597 !important;
 }
 
-.fa-facebook {
+.fa-facebook-f {
     background: #3B5998;
     color: white;
     padding: 10px;
@@ -586,7 +586,7 @@ color: #2f5597 !important;
     color: #fff;
     padding: 10px;
 }
-.fa-linkedin {
+.fa-linkedin-in {
     background: #007bb5;
     color: #fff;
     padding: 10px;
@@ -598,6 +598,7 @@ color: #2f5597 !important;
 }
 .user-meta{
     min-height: 84px;
+    line-height: 1.6;
 }
 
 /**=================

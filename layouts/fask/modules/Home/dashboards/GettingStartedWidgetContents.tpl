@@ -10,7 +10,7 @@
  ********************************************************************************/
 -->*}
 
-<div class="gettingstartedWidget" style="height: 650px; overflow: scroll;">
+<div class="gettingstartedWidget" style="height: 650px; overflow-y:  scroll;">
     <div class="wbox">
         <h5><span><i class="fa fa-user"></i> Employee  &nbsp; &nbsp; </span></h5>
         <div class="clearfix"></div>

@@ -14,21 +14,21 @@
 {if count($MODELS) > 0}
 
         <div>
-        	{foreach item=MODEL from=$MODELS}
-        			<div class='row miniListContent' style="padding:5px;margin-right:-1px;margin-left:-1px;">
-        				<div class='col-lg-5'>
-        					<a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$MODEL['userid']}"><strong>{$MODEL['empname']}</strong></a>
-        						<br />
-        					<!--(<i>{$MODEL['title']}</i>)-->
-        				</div>
-        				<div class='col-lg-5'>
-        					{$MODEL['department']}
-        				</div>
-        				<div class='col-lg-2'>
-        					{$MODEL['leavecount']}
-        				</div>
-        			</div>
-      		{/foreach}
+                {foreach item=MODEL from=$MODELS}
+                                <div class='row miniListContent' style="padding:5px; margin: 0;">
+                                        <div class='col-lg-5'>
+                                                <a href="index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$MODEL['userid']}"><strong>{$MODEL['empname']}</strong></a>
+                                                        <br />
+                                                <!--(<i>{$MODEL['title']}</i>)-->
+                                        </div>
+                                        <div class='col-lg-5'>
+                                                {$MODEL['department']}
+                                        </div>
+                                        <div class='col-lg-2'>
+                                                {$MODEL['leavecount']}
+                                        </div>
+                                </div>
+                {/foreach}
           <div class="clearfix"></div>
       </div>
 

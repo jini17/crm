@@ -601,7 +601,7 @@ color: #f6bb43 !important;
     }
 
 
-.fa-facebook {
+.fa-facebook-f {
   background: #3B5998;
   color: white;
   padding: 10px;
@@ -615,7 +615,11 @@ color: #f6bb43 !important;
   color: white;
   padding: 10px;
 }
-
+.fa-linkedin-in {
+  background: #007bb5;
+  color: white;
+  padding: 10px;
+}
  .img-holder{
 
        width: 122px;
@@ -631,11 +635,7 @@ color: #f6bb43 !important;
      margin: 3px 4px !important;
 }
 
-.fa-linkedin {
-  background: #007bb5;
-  color: white;
-  padding: 10px;
-}
+
     .birthdaybox{
         margin-top: 30px;
     }
