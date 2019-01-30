@@ -54,7 +54,7 @@ body {
 .global-nav .global-actions {
   padding-right: 15px;
   height: 40px !important;
-  margin-top: 10px;82
+  margin-top: 10px;
   
 }
 .app-nav {
@@ -8895,9 +8895,14 @@ visibility: visible;top: 0;left: 60px; /*position where enlarged image should of
 }
 
 #searchResults-container{
-  width: 100vw;
+  width: 800px;
   top: 0;
   bottom: 0;
+  margin: 0 auto;
+}
+#overlayPage .data{
+    width: 800px;
+    margin: 0 auto;
 }
 
 .editViewPageDiv .content-area{

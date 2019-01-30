@@ -21,7 +21,7 @@
                 	{foreach item=MODEL key=k from=$DATADETAILS}
                               <div class="row miniListContent" style="margin:0; padding-top: 5px; padding-bottom: 5px;">
                 <div class="col-md-3 col-sm-3 col-xs-3 " style=''>{$k}</div>
-                 <div class="col-md-3 col-sm-3 col-xs-3 ">{$MODEL[0]}</div>
+                 <div class="col-md-3 col-sm-3 col-xs-3 text-center">{$MODEL[0]}</div>
                   <div class="col-md-6 col-sm-6 col-xs-6 ">{$MODEL[1]|date_format} - {$MODEL[2]|date_format}</div>
                 
                     </div>
