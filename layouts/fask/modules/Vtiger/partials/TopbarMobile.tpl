@@ -47,7 +47,7 @@
       <a class="waves-effect waves-dark {if $MODULE eq $moduleName}active{/if}" 
          href="index.php?module=Users&parent=Settings&view=List" >
         <span class="module-icon">
-          <i class="material-icons">contacts</i>
+          <i class="fas fa-users"></i>
         </span>
         <span class="hide-menu">{vtranslate('LBL_MANAGE_USERS','Vtiger')}
         </span>
@@ -113,10 +113,10 @@
    'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'fas fa-search-dollar',
    'purchaseorder'=>'fas fa-shopping-cart','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
    'projecttask'=>'check_box','projectmilestone'=>'fas fa-info-circle','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
-'foundation'=>'fas fa-info-circle','admin'=>'fas fa-hand-holding-heart',
+'foundation'=>'fas fa-info-circle','admin'=>'fas  fa-users',
    'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
    'quotes'=>'description','invoice'=>'fas fa-envelope-open','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
-   'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-headset','tools'=>'business_center',
+   'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-ticket-alt','tools'=>'business_center',
    'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'fingerprint','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call',
 'performance'=>'fas fa-chart-line', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
     'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face'  ]}
