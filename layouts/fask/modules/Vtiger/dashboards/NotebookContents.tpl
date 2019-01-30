@@ -13,9 +13,12 @@
                 <strong> &nbsp;{vtranslate($WIDGET->getTitle(), $MODULE_NAME)} </strong>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-6">
-                <button class="btn btn-primary btn-sm pull-right dashboard_notebookWidget_edit">
-                                                        <strong>{vtranslate('LBL_EDIT', $MODULE)} </strong>
-                                                </button>
+                 <button class="btn btn-sm btn-success pull-right dashboard_notebookWidget_save hide">
+                        <strong>{vtranslate('LBL_SAVE', $MODULE)}</strong>
+                </button>
+                <button class="btn btn-primary btn-sm pull-right dashboard_notebookWidget_edit" style="margin-right: 10px;">
+                        <strong>{vtranslate('LBL_EDIT', $MODULE)} </strong>
+                </button>                                             
             </div>
             <div class="dashboard_notebookWidget_view" >
                 <div class="clearfix"></div>
@@ -33,17 +36,17 @@
                 <div class="dashboard_notebookWidget_text" style="display:none;">
                         <div class="">
                                 <span class="col-lg-10">
-                                        <i>{vtranslate('LBL_LAST_SAVED_ON', $MODULE)}</i> <small>{Vtiger_Util_Helper::formatDateTimeIntoDayString($WIDGET->getLastSavedDate())}</small>
+                                <small>{vtranslate('LBL_LAST_SAVED_ON', $MODULE)} &nbsp; {Vtiger_Util_Helper::formatDateTimeIntoDayString($WIDGET->getLastSavedDate())}</small>
                                 </span>
                                 <span class="col-lg-2">
                                         <span class="pull-right">
-                                                <button class="btn btn-sm btn-success pull-right dashboard_notebookWidget_save">
-                                                        <strong>{vtranslate('LBL_SAVE', $MODULE)}</strong>
-                                                </button>
+                                              
                                         </span>
                                 </span>
                         </div>
-                        <br><br>
+                        <br>
+                        <div class="clearfix"></div>
+                        <br />
                         <div class="">
                                 <span class="col-lg-12">
                                         <textarea class="dashboard_notebookWidget_textarea boxSizingBorderBox" data-note-book-id="{$WIDGET->get('id')}">
