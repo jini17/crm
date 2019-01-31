@@ -173,4 +173,6 @@
                 <div class="col-md-12  text-center">
                     {$PAGINATION}
                 </div>
+                <div class="clearfix" style="height:50px;"></div>
   </div>
+                <div class="clearfix"></div>
