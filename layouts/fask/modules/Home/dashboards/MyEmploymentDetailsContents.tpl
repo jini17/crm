@@ -67,6 +67,9 @@
             </div>
         {/if}
     </div>
+    {assign var=image value=Users_Record_Model::getCurrentUserModel()}
+     {assign var=IMAGE_DETAILS value=$image->getImageDetails()}
+  
                 <div class="col-md-4" style='padding-left: 0;'>
                     <div class="image-holder">
                         <img class="img-thumbnail" src="{$URL}/{$DATA['thumb']}">

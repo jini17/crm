@@ -13,7 +13,7 @@
                                 {if $LISTVIEW_ENTRY->get('status') eq 'Active'}
                                         {if Users_Privileges_Model::isPermittedToChangeUsername($LISTVIEW_ENTRY->getId())}
                                                 {*<li><a onclick="Settings_Users_List_Js.triggerChangeUsername('{$LISTVIEW_ENTRY->getChangeUsernameUrl()}');">{vtranslate('LBL_CHANGE_USERNAME', $MODULE)}</a></li>*}
-                                                <li><a title="Block/Unblock" onclick="Settings_Users_List_Js.triggerChangeUsername('{$LISTVIEW_ENTRY->getChangeUsernameUrl()}');"><i class="fa fa-lock"></i></a></li>
+                                                <li><a title="Change Password" onclick="Settings_Users_List_Js.triggerChangeUsername('{$LISTVIEW_ENTRY->getChangeUsernameUrl()}');"><i class="fa fa-lock"></i></a></li>
                                         {/if}
 {*                                        <li><a onclick="Settings_Users_List_Js.triggerChangePassword('{$LISTVIEW_ENTRY->getChangePwdUrl()}');">{vtranslate('LBL_CHANGE_PASSWORD', $MODULE)}</a></li>
 *}                                        {if $IS_MODULE_EDITABLE && $LISTVIEW_ENTRY->get('status') eq 'Active'}
