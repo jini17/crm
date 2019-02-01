@@ -727,3 +727,10 @@ color: #2f5597 !important;
      color: #fff;
      padding: 5px;
 }
+.fasksecond i,
+.material-icons.module-icon{
+    margin-right: 5px;
+    font-size: 14px !important;
+
+    margin-top: 5px;
+}

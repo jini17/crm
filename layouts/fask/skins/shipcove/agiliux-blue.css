@@ -647,3 +647,10 @@ color: #6783B3 !important;
     border: 1px solid #6783B3 !important;
 }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{}
+.fasksecond i,
+.material-icons.module-icon{
+    margin-right: 5px;
+    font-size: 14px !important;
+
+    margin-top: 5px;
+}
