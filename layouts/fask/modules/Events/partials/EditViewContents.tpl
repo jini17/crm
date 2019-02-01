@@ -77,9 +77,9 @@
      jQuery(document).ready(function(){
      
        jQuery("#selectedUsers").closest(".row").find("div").css("width","20%");
-          jQuery("#Events_editView_fieldName_description").closest('.row').find('div').css("width","100%");
-         jQuery("#Events_editView_fieldName_description").closest('.row').find('div').css("margin-bottom","10px");
-           jQuery("#Events_editView_fieldName_description").closest('div').css("border","none");
+          jQuery("#Events_editView_fieldName_description,#Leave_editView_fieldName_reasonofleave").closest('.row').find('div').css("width","100%");
+         jQuery("#Events_editView_fieldName_description,#Leave_editView_fieldName_reasonofleave").closest('.row').find('div').css("margin-bottom","10px");
+           jQuery("#Events_editView_fieldName_description,#Leave_editView_fieldName_reasonofleave").closest('div').css("border","none");
     });
 </script>    
 {/strip}

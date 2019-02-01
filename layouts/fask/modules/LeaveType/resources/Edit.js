@@ -39,3 +39,4 @@ Vtiger_Edit_Js("LeaveType_Edit_Js",{},{
 		this.fillColor();
 	}
 });
+      jQuery("#LeaveType_editView_fieldName_description").closest('.row').find('div').css("height","120px");
