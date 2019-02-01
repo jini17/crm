@@ -214,8 +214,9 @@ abstract class WSAPP_SynchronizeController {
         $records['user'] = $user->id;
 
         if ($pullTargetFirst) {
-            if($push) $records['push'] = $this->synchronizePush($moduleName);
+            // Pull/Push Replaced By Mabruk For Quick Fix
             if($pull) $records['pull'] = $this->synchronizePull($moduleName);
+            if($push) $records['push'] = $this->synchronizePush($moduleName);
         } else {
             if($pull) $records['pull'] = $this->synchronizePull($moduleName);
             if($push) $records['push'] = $this->synchronizePush($moduleName);
