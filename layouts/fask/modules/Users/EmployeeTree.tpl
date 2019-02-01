@@ -60,13 +60,14 @@
 <div class="tree">
 
     <ul>
+     
         <li>
             <div href="#" class="box">
                 <div class="orgbox">
                     <div class="img-holder">
                         <img width="70" height="70" class="img-circle"
                              src="{$REPORTING_MANAGER['image'][0]['path']}_{$REPORTING_MANAGER['image'][0]['name']}"/>
-                        {$REPORTING_MANAGER|print_r}
+                      
                     </div>
                     <div class="orgbox-details text-left">
                         <h5 style="margin-top: 2px;font-size: 9px;margin-bottom: 2px;font-weight: bold;"><a href="index.php?module=Users&parent=Settings&view=Detail&record={$REPORTING_MANAGER['id']}">{$REPORTING_MANAGER['fullname']}</a></h5>
