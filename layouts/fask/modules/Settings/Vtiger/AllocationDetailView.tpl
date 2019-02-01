@@ -10,7 +10,7 @@
 
 {strip}
     <div id="body">
-        <div class=" col-lg-12 col-md-12 col-sm-12">
+        <div class=" col-lg-12 col-md-12 col-sm-12" style='min-height: 500px; background-color: #fff;'> 
             <div id="Head" style="position:relative;">
                   <button class="essentials-toggle hidden-sm hidden-xs pull-right" style="top: 0;right:0 !important ; left: 98% !important; z-index: 999 " title="Left Panel Show/Hide">
                     <span class="essentials-toggle-marker fa fa-chevron-right cursorPointer"></span>
@@ -25,12 +25,16 @@
 
             <div class="contents tabbable clearfix">
               
-                    <div class="pull-right"><a class="btn btn-success" href="index.php?module=Vtiger&parent=Settings&view=BalanceLeave&mode=ShowBalanceLeave">{vtranslate('Employee Leave Status', $MODULE)}</a></div>
-              
-                    <button class="btn btn-primary span10 marginLeftZero newButton" style="margin-right: 5px;" id="addItem">{vtranslate('Add', $MODULE)}</button>
+            <div class="pull-right">
+                <a class="btn btn-success" style='margin-right:5px;' href="index.php?module=Vtiger&parent=Settings&view=BalanceLeave&mode=ShowBalanceLeave">
+                    {vtranslate('Employee Leave Status', $MODULE)}
+                </a>
+                   <button class="btn btn-primary span10 marginLeftZero newButton" style="margin-right: 5px;" id="addItem">{vtranslate('Add', $MODULE)}</button>
              <button class="btn btn-primary span10 marginLeftZero newButton"style="margin-right: 5px;" id="editItem">{vtranslate('Edit', $MODULE)}</button>
              <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">{vtranslate('Delete', $MODULE)}</button>
-             <div class='clearfix' style='height: 10px;'></div>
+            </div>
+            <div class='clearfix'></div>
+           <div class='clearfix' style='height: 10px;'></div>
              <div class='clearfix'></div>
              <div class="contents container-fluid" style='background-color: #fff;'>                 
                  <div class="row th miniListContent">
@@ -59,8 +63,8 @@
                                                   {$SPLITVALUE['allocationtitle']}
                                        </div>
                                    <div class='col-md-3'>{$SPLITVALUE['allocationtitle']}</div>
-                                   <div class='col-md-3'>  {$SPLITVALUE['leavetype']}</div>
-                                   <div class='col-md-1'>      {$SPLITVALUE['status']}</div>      
+                                   <div class='col-md-3'> {$SPLITVALUE['leavetype']}</div>
+                                   <div class='col-md-1'> {$SPLITVALUE['status']}</div>      
                                    </div>
                                    
                     
