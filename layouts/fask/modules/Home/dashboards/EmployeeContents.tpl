@@ -39,7 +39,7 @@
                         <input id="birthdayid" type="hidden" value="{$MODEL['id']}"></td></tr>
                 {/foreach}
                 <div class="clearfix"></div>
-                        <a href="index.php?module=Users&view=List" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
+                        <a href="index.php?module=Users&view=List&parent=Settings" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
         </tbody>
 </table>
 {else}

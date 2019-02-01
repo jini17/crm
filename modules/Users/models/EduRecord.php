@@ -168,8 +168,8 @@ LIMIT 3";
 
         public function getUserEducationList($userId) {
               $currentUserModel = Users_Record_Model::getCurrentUserModel();
-              $current_user_id = $currentUserModel->get('id');
-              $role                        = $currentUserModel->get('roleid');
+              $current_user_id  = $currentUserModel->get('id');
+              $role             = $currentUserModel->get('roleid');
               
                 $db = PearDatabase::getInstance();
 

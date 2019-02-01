@@ -72,7 +72,7 @@
 							{include file="partials/EditViewContents.tpl"|@vtemplate_path:$MODULE}
 						</div>
 					</div>
-					<div class='clearfix editviewbtncontainer'>
+					<div class='clearfix editviewbtncontainer' style="padding-bottom: 50px;">
 						<div class="row clearfix">
 							<div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
 								<button type='submit' class='btn btn-success saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;

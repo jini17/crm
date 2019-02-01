@@ -110,7 +110,7 @@ var Vtiger_Index_Js = {
 	 * @params : colour name
 	 */
 	changeSkin : function() {
-		jQuery('.themeElement').on('click', function(e) {
+		jQuery('body').on('click','.themeElement', function(e) {
 			e.stopPropagation();
 			var currentElement = jQuery(e.currentTarget);
 			currentElement.closest('#themeContainer').hide();

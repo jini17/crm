@@ -1,14 +1,14 @@
 {*<!--
-/*********************************************************************************
-  ** The contents of this file are subject to the vtiger CRM Public License Version 1.0
-   * ("License"); You may not use this file except in compliance with the License
-   * The Original Code is:  vtiger CRM Open Source
-   * The Initial Developer of the Original Code is vtiger.
-   * Portions created by vtiger are Copyright (C) vtiger.
-   * All Rights Reserved.
-  *
- ********************************************************************************/
--->*}
+   /*********************************************************************************
+     ** The contents of this file are subject to the vtiger CRM Public License Version 1.0
+      * ("License"); You may not use this file except in compliance with the License
+      * The Original Code is:  vtiger CRM Open Source
+      * The Initial Developer of the Original Code is vtiger.
+      * Portions created by vtiger are Copyright (C) vtiger.
+      * All Rights Reserved.
+     *
+    ********************************************************************************/
+   -->*}
 <div style='padding:5px;'>
     <style>
         .fa-facebook {
@@ -67,9 +67,12 @@
             </div>
         {/if}
     </div>
+    {assign var=image value=Users_Record_Model::getCurrentUserModel()}
+     {assign var=IMAGE_DETAILS value=$image->getImageDetails()}
+  
                 <div class="col-md-4" style='padding-left: 0;'>
                     <div class="image-holder">
-                        <img class="img-thumbnail" src="{$URL}/{$DATA['thumb'][0]['path']}_{$DATA['thumb'][0]['name']}">
+                        <img class="img-thumbnail" src="{$URL}/{$DATA['thumb']}">
                     </div>
                     <div class="clearfix"></div>
                     <a href="{$URL}/index.php?module=Users&parent=Settings&view=Detail&record={$DATA['emp_id']}" class="btn btn-lg btn-block btn-primary"> {vtranslate('LBL_VIEW_PROFILE',$MODULE_NAME)}</a>
@@ -78,9 +81,9 @@
                     <div class="clearfix" style="heigth:15px;"></div>
                     <div class="clearfix"></div>
                     <div class="social text-center" style="margin-top:5px;">
-                          <a href="{$DATA['facebook']}" class="fa fa-facebook"></a>
-                            <a href="{$DATA['twitter']}" class="fa fa-twitter"></a>
-                            <a href="{$DATA['linkedin']}" class="fa fa-linkedin"></a>
+                          <a href="{$DATA['facebook']}" class="fab fa-facebook-f"></a>
+                            <a href="{$DATA['twitter']}" class="fab fa-twitter"></a>
+                            <a href="{$DATA['linkedin']}" class="fab fa-linkedin-in"></a>
                             <a href="#" onclick="javascript:Vtiger_Helper_Js.getInternalMailer({$DATA['emp_id']},'email','Users');" class="fa fa-envelope"></a>
                      
                     </div>

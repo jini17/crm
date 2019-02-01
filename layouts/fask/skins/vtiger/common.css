@@ -9,6 +9,10 @@ a:active {
   outline: none;
 }
 
+#Leads_editView_fieldName_firstname{
+    width: 80% !important;
+}
+
 html {
   height: 100%;
   overflow-y: auto;
@@ -54,6 +58,7 @@ body {
 .global-nav .global-actions {
   padding-right: 15px;
   height: 40px !important;
+  margin-top: 10px;
 }
 .app-nav {
   position: relative;
@@ -82,7 +87,7 @@ body {
     display: inline-block;
     width: 150px;
     z-index: 2;
-    padding-left: 6%;
+ /*   padding-left: 6%;*/
     margin-top: 1px;
   }
   .app-nav .module-action-bar {
@@ -374,24 +379,24 @@ body {
 .app-SALES {
   background: #3CB878 !important;
 }
-.app-MARKETING {
+.app-FOUNDATION {
   background: #EF5E29 !important;
 }
-.app-OTHER {
+.app-ADMIN {
   background: #56ccc8 !important;
 }
 .app-SUPPORT {
   background: #6297C3 !important;
 }
-.app-INVENTORY {
+.app-TOOLS {
   background: #F1C40F !important;
 }
 .app-PROJECT {
   background: #8E44AD !important;
 }
-.app-DEFAULT,
+.app-MORE,
 .app-DASHBOARD {
-  background: #56ccc8 !important;
+  background: #8E44AD !important;
 }
 
 .app-SALES,.app-DEFAULT,.app-DASHBOARD,.app-PROJECT,
@@ -2155,13 +2160,12 @@ input[type=checkbox]:checked {
   display: inline-block;
   vertical-align: middle;
 }
-.related-tabs .tab-icon .content{font-size: 15px;}
+.related-tabs .tab-icon .content{font-size: 12px;}
 
 .related-tabs .tab-label {
   display: inline-block;
   height: 26px;
   line-height: 25px;
-  font-size:13px;
 }
 .summary-table {
   width: 100%;
@@ -8849,7 +8853,7 @@ tr.listViewEntries:nth-child(odd) {    background-color: #f9f9f9;}
 
 .sidebar-essentials i[class^="material"] {font-size:22px!important;}
 
-.fask{ list-style-type: none; width: 80vw;left: 0px!important;box-shadow: 0 5px 75px 2px rgba(64,70,74,.2)!important;
+.fask{ list-style-type: none; width: 90%;left: 0px!important;box-shadow: 0 5px 75px 2px rgba(64,70,74,.2)!important;
 border-radius: .35rem; background-color: rgba(255, 255, 255, 1); margin-top: 0px; }
 .faskfirst{ list-style-type: none;float: left;-webkit-padding-start: 10px; border-right: 0px solid #ddd;    height: 400px;}
 .faskfirst li{ padding: 14px 4px;}
@@ -9583,8 +9587,8 @@ right connector from last child*/
 }
 .newtabs{
     position: absolute;
-    top: 0;
-    left: 190px;
+    top: 8px;
+    left: 157px;
 }
 .global-nav .global-actions{
     position: absolute;
@@ -9774,11 +9778,12 @@ right connector from last child*/
     }
 
 
-.fa-facebook {
+.fa-facebook-f {
   background: #3B5998;
   color: white;
   padding: 10px;
-}.fa-twitter {
+}
+.fa-twitter {
   background: #55ACEE;
   color: white;
   padding: 10px;
@@ -9802,7 +9807,7 @@ right connector from last child*/
     margin: 3px 4px !important;
 }
 
-.fa-linkedin {
+.fa-linkedin-in {
   background: #007bb5;
   color: white;
   padding: 10px;
@@ -9858,7 +9863,7 @@ right connector from last child*/
          margin-right: 10px !important;
      }
   
-.fa-facebook {
+.fa-facebook-f {
     background: #3B5998;
     color: white;
     padding: 10px;
@@ -9868,7 +9873,7 @@ right connector from last child*/
     color: #fff;
     padding: 10px;
 }
-.fa-linkedin {
+.fa-linkedin-in {
     background: #007bb5;
     color: #fff;
     padding: 10px;
@@ -9880,6 +9885,7 @@ right connector from last child*/
 }
 .user-meta{
     min-height: 84px;
+    line-height: 1.6;
 }
 
         /**===================
@@ -9887,18 +9893,22 @@ right connector from last child*/
         * TODO: Gridster
         *======================*/
         .strolltotop,.strolltotop:hover{           
-            padding            : 10px;
-            font-size           : 25px;
-            font-weight     : bold;
-            position             : absolute;
-            width                : 55px;
-            height               : 56px;
-            border-radius  : 50%;
-            bottom             : 10%;
-            right                  : 1%;
-            background     : #333;
-            text-align         : center;
-            color                 : #fff;                       
+            padding: 3px;
+            font-size: 25px;
+            font-weight: bold;
+            position: absolute;
+            width: 44px;
+            height: 43px;
+            border-radius: 50%;
+            bottom: 2%;
+            right: 1%;
+            background: none;
+                background-color: rgba(0, 0, 0, 0);
+            text-align: center;
+            color: #a6a6a6;
+            border: 1px solid #a6a6a6;
+            background-color: #fff;
+            z-index: 999;
         }
 /*        .gridster_2{
             height: 720px;
@@ -10080,15 +10090,16 @@ input:checked + .slider:before {
     height: auto;
 }
 
-.widget-icon{
-    margin-top: -15px;
-}
+
 .widget-item a{
     width: 100%;
     display: block;
 }
 .widget-item a[disabled="disabled"]{
     color: #ccc;
+}
+.widget-icon{
+    margin-top: -15px;
 }
 
 .current-filter-name i{
@@ -10100,4 +10111,36 @@ input:checked + .slider:before {
     margin-left: -3px;
 
 }
+.dashboard_notebookWidget_view i{
+font-size:13px !important;
+}
 
+#Leads_editView_fieldName_firstname {
+    width: 80% !important;
+}
+
+.widget-item{
+  margin-bottom: 8px;
+}
+.logo-container img{
+    margin: 7px 0  !important;
+}
+.newtabs{
+    position: absolute;
+    top: 8px;
+    left: 157px;
+}
+@media (max-width: 1624px){
+  .widget-icon{
+    margin-top: 0 !important;
+    margin-right: 5px !important;
+}
+}
+.logo-container img{
+    margin: 8px 0px !important;
+}
+#bodyFrame{
+    min-height: 500px !important;
+    height: 100vh !important;
+    overflow: none !important;
+}

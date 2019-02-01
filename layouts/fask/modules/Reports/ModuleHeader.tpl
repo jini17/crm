@@ -79,7 +79,7 @@
                                         {/foreach}
                                    
                                                          <a class='btn btn-danger Help-btn' >
-                                                                <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; {vtranslate('Help', $MODULE)}
+                                                             <i class="glyphicon glyphicon-question-sign pull-left" style="margin-top: 1px; margin-right: 2px; "></i>&nbsp;&nbsp; {vtranslate('Help', $MODULE)}
                                                         </a>
                                 </div>
                         </span>

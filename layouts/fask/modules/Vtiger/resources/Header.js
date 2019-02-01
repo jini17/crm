@@ -39,11 +39,19 @@ jQuery.Class("Vtiger_Header_Js", {
     },
    
     showNotification : function(){
-          jQuery('.notification-list').removeClass('hide');
-    }, 
+     jQuery( ".notification-list" ).toggle(function() {
+          if(jQuery('.notification-list').hasClass('hide')) {  
+                jQuery('.notification-list').removeClass('hide');  
+          } else {
+                jQuery('.notification-list').addClass('hide');  
+          } 
+     });          
+   }, 
+   
+   hideNotification : function(){
+      jQuery('.notification-list').addClass('hide'); 
+   },
     
-    hideNotification : function(){
-        jQuery('.notification-list').addClass('hide');  
-    }
+   
 },{
 });

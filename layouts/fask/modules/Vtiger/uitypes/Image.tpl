@@ -30,7 +30,7 @@
                                 {if $FIELD_MODEL->getFieldDataType() eq 'image' || $FIELD_MODEL->getFieldDataType() eq 'file'}
                                     {if $MODULE neq 'Products'}
                                         
-                                        <span class='redColor float'>
+                                        <span class='redColor float-right' style="margin-left: 10%;">
                                             &nbsp;&nbsp;{vtranslate('LBL_NOTE_EXISTING_ATTACHMENTS_WILL_BE_REPLACED', $MODULE)}
                                         </span>
                                         <br />({vtranslate('LBL_MAX_UPLOAD_SIZE',$MODULE)} {$MAX_UPLOAD_LIMIT_MB}&nbsp;MB)
@@ -63,7 +63,9 @@
                                                 <span class="row">
                                                         <span class="col-lg-11">[{$IMAGE_INFO.name}]</span>
                                                         <!-- Style ADDED by Khaled -->
-                                             <span class="col-lg-1"><input type="button" id="file_{$ITER}" value="{vtranslate('LBL_DELETE','Vtiger')}" class="imageDelete btn btn-danger" {if $MODULE eq 'Users'} style='position: absolute;top: -78px;   left: -972%;'{/if}> </span>
+                                             <span class="col-lg-1">
+                                                 <input type="button" id="file_{$ITER}" value="{vtranslate('LBL_DELETE','Vtiger')}" class="imageDelete btn btn-danger" {if $MODULE eq 'Users'} style='position: absolute;top: -78.6px;   left: -1252%;'{/if}> 
+                                             </span>
 
                                                 </span>
                                         </span>

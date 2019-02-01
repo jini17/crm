@@ -50,7 +50,7 @@
                                                 <li>
                                               
                                                         <button class='btn btn-danger Help-btn  module-buttons' >
-                                                                <i class="glyphicon glyphicon-question-sign"></i>&nbsp;&nbsp; {vtranslate('Help',$MODULE)}
+                                                            <i class="glyphicon glyphicon-question-sign pull-left" style="margin-top:1px; margin-right: 2px;"></i>&nbsp;&nbsp; {vtranslate('Help',$MODULE)}
                                                         </button>
                                                 </li>
                                         </ul>

@@ -499,6 +499,11 @@ class Vtiger_Field_Model extends Vtiger_Field {
 	 */
 	public function isAjaxEditable() {
 
+		$currentUser = Users_Record_Model::getCurrentUserModel();
+		if(!in_array($currentUser->roleid, array('H2','H12','H13')) && in_array($this->getModuleName(), array('Leave','Claim','WorkingHours', 'Payslip'))){
+			return false;
+		}
+		
 		$ajaxRestrictedFields = array('4', '72', '61', '999','28','3995','3993','3997', '3994', '3996','55');
 		if(!$this->isEditable() || in_array($this->get('uitype'), $ajaxRestrictedFields) || $this->get('name')=='category' || $this->get('name')=='message') {
 			return false;
@@ -1125,6 +1130,11 @@ class Vtiger_Field_Model extends Vtiger_Field {
 			case 'start_period'			:	$funcName = array('name' => 'lessThanDependentField', 'params' => array('end_period'));
 											break;
 		}
+
+		// Added By Mabruk
+		if ($this->get('uitype') == '11')
+			$funcName = array('name' => 'phone', 'params' => array($fieldName));
+
 		if ($funcName) {
 			array_push($validator, $funcName);
 		}

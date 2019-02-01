@@ -27,7 +27,7 @@ class Users_Index_View extends Vtiger_Basic_View {
 
 	public function postProcess(Vtiger_Request $request) {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
-		if($currentUserModel->isAdminUser())v {
+		if($currentUserModel->isAdminUser()) {
 			$settingsIndexView = new Settings_Vtiger_Index_View();
 			$settingsIndexView->postProcessSettings($request);
 		}

@@ -54,6 +54,7 @@ body {
 .global-nav .global-actions {
   padding-right: 15px;
   height: 40px !important;
+  margin-top: 10px;
 }
 .app-nav {
   position: relative;
@@ -82,7 +83,7 @@ body {
     display: inline-block;
     width: 150px;
     z-index: 2;
-    padding-left: 6%;
+   /* padding-left: 6%;*/
     margin-top: 1px;
   }
   .app-nav .module-action-bar {
@@ -9536,4 +9537,12 @@ color:#000 !important;
 }
 .module-breadcrumb{
     font-size: 12px !important
+}
+.newtabs{
+    position: absolute;
+    top: 8px;
+    left: 157px;
+}
+.logo-container img{
+    margin: 8px 0px !important;
 }

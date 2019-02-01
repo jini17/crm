@@ -52,6 +52,7 @@ $languageStrings = array(
         'Contact Id' => 'Contact Id',
     'Support Start Date' => 'Support Start Date',
     'Support End Date'   => 'Support End Date',
+    'Company Title'   => 'Company Name',
 
         //Added for Picklist Values
         'Mr.'=>'Mr.',

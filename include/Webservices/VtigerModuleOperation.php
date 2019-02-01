@@ -206,17 +206,17 @@ class VtigerModuleOperation extends WebserviceEntityOperation {
 		$deleteable = $this->meta->hasDeleteAccess();
 		$retrieveable = $this->meta->hasReadAccess();
 		$fields = $this->getModuleFields();
-		return array(	'label'			=> $label,
-						'name'			=> $elementType,
-						'createable'	=> $createable,
-						'updateable'	=> $updateable,
-						'deleteable'	=> $deleteable,
-						'retrieveable'	=> $retrieveable,
-						'fields'		=> $fields,
-						'idPrefix'		=> $this->meta->getEntityId(),
-						'isEntity'		=> $this->isEntity,
+		return array(	'label'			 => $label,
+						'name'			 => $elementType,
+						'createable'	 => $createable,
+						'updateable'	 => $updateable,
+						'deleteable'	 => $deleteable,
+						'retrieveable'	 => $retrieveable,
+						'fields'		 => $fields,
+						'idPrefix'		 => $this->meta->getEntityId(),
+						'isEntity'		 => $this->isEntity,
 						'allowDuplicates'=>  $this->meta->isDuplicatesAllowed(),
-						'labelFields'	=> $this->meta->getNameFields());
+						'labelFields'	 => $this->meta->getNameFields());
 	}
 	
 	public function describePartial($elementType, $fields=null) {

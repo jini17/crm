@@ -23,11 +23,12 @@
     }
 
 
-.fa-facebook {
+.fa-facebook-f {
   background: #3B5998;
   color: white;
   padding: 10px;
-}.fa-twitter {
+}
+.fa-facebook-in{
   background: #55ACEE;
   color: white;
   padding: 10px;
@@ -53,7 +54,7 @@
     margin: 3px 4px !important;
 }
 
-.fa-linkedin {
+.fa-linkedin-in {
   background: #007bb5;
   color: white;
   padding: 10px;
@@ -124,9 +125,9 @@
                         </div>
                                 
                         <div class='user-social text-center'>
-                            <a href="#" class="fa fa-facebook"></a>
-                            <a href="{$LISTVIEW_ENTRY->get('twitter')}" class="fa fa-twitter"></a>
-                            <a href="{$LISTVIEW_ENTRY->get('linkedin')}" class="fa fa-linkedin"></a>
+                            <a class="fab  fa-facebook-f"></a>
+                            <a href="{$LISTVIEW_ENTRY->get('twitter')}" class="fab fa-twitter"></a>
+                            <a href="{$LISTVIEW_ENTRY->get('linkedin')}" class="fab fa-linkedin-in"></a>
                             <a href="#" onclick="javascript:Settings_Users_List_Js.birthdayEmail({$LISTVIEW_ENTRY->getId()})" class="fa fa-envelope"></a>
                         </div>
                         <div class='clearfix'></div>
@@ -172,4 +173,6 @@
                 <div class="col-md-12  text-center">
                     {$PAGINATION}
                 </div>
+                <div class="clearfix" style="height:50px;"></div>
   </div>
+                <div class="clearfix"></div>

@@ -1,5 +1,4 @@
 
-
 {*+**********************************************************************************
 * The contents of this file are subject to the vtiger CRM Public License Version 1.1
 * ("License"); You may not use this file except in compliance with the License
@@ -142,7 +141,7 @@
 </style>
 <nav class="navbar navbar-default navbar-fixed-top app-fixed-navbar">
 {assign var="announcement" value=$ANNOUNCEMENT->get('announcement')}   
-<div class="headertext" id="headertextflow"> {if !empty($announcement)}{$announcement}{else}{vtranslate('LBL_NO_ANNOUNCEMENTS',$MODULE)}{/if}</div>
+<div class="headertext {if $ANNOUNCEMENT->get('isview') eq 0} hide {/if} " id="headertextflow"> {if !empty($announcement)}{$announcement}{else}{vtranslate('LBL_NO_ANNOUNCEMENTS',$MODULE)}{/if}</div>
 <div class="container-fluid global-nav">
 <div class="row app-navigator-container">
 <div class='col-md-6 col-sm-12 col-xs-12'>
@@ -187,8 +186,8 @@
                <!--START-Announcement-->
                <li>
                   <div>
-                     <a onclick="onofftextheader()" aria-hidden="true" class="qc-button rightside-icon-dashboard" title="Announcement" aria-hidden="true">
-                     <i  class="fa fa-bullhorn"></i>
+                     <a aria-hidden="true" onclick="Vtiger_Index_Js.toggleAnnouncement();" id="announcementicon" class="qc-button rightside-icon-dashboard" title="Announcement" aria-hidden="true">
+                     <i  class=" {if $ANNOUNCEMENT->get('isview') eq 0}fas fa-bullhorn {else} fas fa-bullhorn {/if}"></i>
                      </a>
                   </div>
                </li>
@@ -200,37 +199,49 @@
                <!--Notification Code by Jitu -->
                <li>
                   <div>
-                     <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" title="Notifications" aria-hidden="true">
-                     <i class="fa fa-bell-o"></i>
-                     </a>
+
+
+                     <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" data-toggle="dropdown" title="Notifications" aria-hidden="true">
+                     {if $NOTIFICATIONS['new'] gt 0}<span class="count" style="position: absolute;top:0;right:0; background-color: red;color:#fff;padding-right:5px;padding-top:1px;padding-left:5px; font-size:11px;z-index:100; ">{$NOTIFICATIONS['new']}</span>{/if}
+                     <i class="far fa-bell"></i>
+
+                    </a>
                   </div>
-                  <div class="notification-list hide">
+                  <div class="notification-list hide" style="top:30px;" onmouseleave="Vtiger_Header_Js.hideNotification();">
                      <h6>{vtranslate('Notification')}<i class="fa fa-gear pull-right"></i></h6>
-                     <ul class="list-unstyled" ">
+
+                     {if $NOTIFICATIONS['details']|count eq 0}
+                        <span style="font-size: 11px; text-align: center;"><strong>{vtranslate('No Notification found')}</strong></span>
+                     {else}
+                     <ul class="list-unstyled">
+                       {foreach item=NOTIFICATION from=$NOTIFICATIONS['details']}
+
                         <li>
-                           <div class="notification-container unread">
+                           <div class="notification-container {if $NOTIFICATION['unread'] eq 0}unread{/if}">
                               <div class="notification-avatar left-node">
                                  <div class="img-holder">
-                                    <img src="storage/2018/October/week3/2560_admin.jpg" class="img-circle" height="40" width="40">
+                                    <img src="{$NOTIFICATION['profilepic']}" class="img-circle" height="40" width="40">
                                  </div>
                               </div>
                               <div class="right-node">
                                  <div class="notification-title">
-                                    <a style="display:block; width: 100%; padding:0;">
-                                    <strong>Khaled approved leave</strong>
-                                    </a>  
+                                    {if $NOTIFICATION['unread'] eq 1}<strong>{$NOTIFICATION['message']}</strong>{else}{$NOTIFICATION['message']}{/if}
                                     <div class="clearfix"></div>
-                                    <span class="notification-time">2 hr</span> 
+                                    <span class="notification-time">{$NOTIFICATION['timestamp']}</span> 
                                  </div>
                               </div>
                               <div class="clearfix"> </div>
                            </div>
                            <div class="clearfix"> </div>
                         </li>
+                        {/foreach}
                      </ul>
-                     <div class="clearfix"> </div>
-                     <a href="#" class="btn btn-block all-notification text-center"> See all recent activity </a>
-                  </div>
+                      <div class="clearfix"> </div>
+                        {if $NEXTPAGE}
+                           <a href="#" class="btn btn-block all-notification text-center"> See all recent activity </a>
+                        {/if}   
+                     {/if}     
+                    </div>
                </li>
                <!--End here -->
 
@@ -238,14 +249,14 @@
                <li>
                   <div>
                      <a class="rightside-icon-dashboard" href="index.php?module=MailManager&view=List" title="Email" aria-hidden="true">
-                     <i class="fa fa-envelope-o"></i>
+                     <i class="far fa-envelope-open"></i>
                      </a>
                   </div>
                </li>
                <li>
                   <div>
                      <a class="rightside-icon-dashboard" href="index.php?module=Documents&view=List" title="Files" aria-hidden="true">
-                     <i class="fa fa-file-o"></i>
+                     <i class="far fa-file"></i>
                      </a>
                   </div>
                </li>
@@ -273,8 +284,8 @@
                <!--Right Corener Profile Image & slider come from right to left for changing theme and other options with logout-->
                {include file="modules/Vtiger/partials/TopbarRight.tpl"}
                <!--End here -->
-            </ul>
-         </div>
+               </ul>
+            </div>
          {include file="modules/Vtiger/partials/TopbarMobile.tpl"}
       </div>
    </div>
@@ -299,15 +310,5 @@
    
    
    });
-   
-   function onofftextheader() {
-       var x = document.getElementById("headertextflow");
-       if (x.style.display === "none") 
-       {
-           x.style.display = "block";
-       } else {
-           x.style.display = "none";
-       }
-   }
 </script>
 {/strip}

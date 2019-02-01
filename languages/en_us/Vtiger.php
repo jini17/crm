@@ -20,7 +20,7 @@ $languageStrings = array(
 	'LBL_REPORT_CHART' => 'Chart Report',
                     'LBL_VIEW_MORE'=>'View More',
 	'LBL_ENRICH_DATA' => 'Enrich Data',
-
+	'LBL_LEAVE_APPROVAL'=>'My Team Approval',
 	'LBL_ENRICH_DATA_LOCKED' => 'Enrich Data', 
 
 	// Common Actions
@@ -1212,6 +1212,9 @@ $languageStrings = array(
 	'LBL_REMOVE_TAG' => 'Remove Tag',
 	'LBL_TAG_SEPARATOR_DESC' => 'Use comma to separate multiple tags',
 	'LBL_ENTER_TAG_NAME'=> 'Enter tag name',
+	'LeaveType' => "Leave Type",
+	'BenefitType' => "Benefit Type",
+	'ClaimType' => "Claim Type",
 
 	'LBL_SELECT_COLOR' => 'Select Color',
 	'LBL_NO_TAG_EXISTS' => 'No Tag Exists',
@@ -1300,7 +1303,7 @@ $languageStrings = array(
 	'LBL_HISTORY' => 'Touchpoints',
 	'LBL_ENGAGEMENT_HISTORY' => 'Touchpoint History',
 	'LBL_SETTINGS' => 'Settings',
-
+                     'LBL_NOTEBOOK'=>'Notebook',
 	//List View and thumbnail view button labels
 	'LBL_LIST_VIEW'=>'List View',
 	'LBL_THUMBNAIL_VIEW'=>'Thumbnail View',
@@ -1427,16 +1430,19 @@ $languageStrings = array(
 	'LBL_LAST_LOGINTIME'=>'Your last successful login was',
 	'LBL_USERIP'=>'from IP',
 	'LBL_POLICY_DOCUMENT'=>'Policy Document',
+
 );
 
 $jsLanguageStrings = array(
 	'JS_EMAIL_SERVER_CONFIGURATION' => 'Please configure your outgoing server settings from the settings page',
 	'JS_SMS_SERVER_CONFIGURATION' => 'Please configure your SMS notifier from the SMS notifier settings page',
 	'JS_PLEASE_SELECT_ONE_RECORD' => 'Please select at least one record',
+	'JS_INVALID_PHONE' => 'Invalid Phone Number',
 	//dropdown categary
 	'JS_USERS' => 'Users',
 	'JS_GROUPS' => 'Groups',
 	'JS_ALL' => 'All',
+	
 	//Validation Error Message
 	'JS_PLEASE_ENTER_VALID_VALUE' => 'Please enter a valid value',
 	'JS_PLEASE_ENTER_VALID_TAG_NAME' => 'Please enter valid tag name',

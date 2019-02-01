@@ -893,7 +893,7 @@ class CRMEntity {
 				// fieldname are always assumed to be unique for a module
 
 				// IF/ELSE conditons added by Mabruk to ignore the Starred Column if used as focused object in php script
-				if ($isUsedAsFocusObj == true && $fieldinfo['columnname'] == 'starred')
+				if ($fieldinfo['columnname'] == 'starred')
 					continue;
 				else
 					$column_clause .=  $fieldinfo['tablename'].'.'.$fieldinfo['columnname'].' AS '.$this->createColumnAliasForField($fieldinfo).',';
@@ -1593,7 +1593,10 @@ class CRMEntity {
 			
 			$sourceCompany = $sourceCompany;
 		} else {
-			$sourceCompany = 1; //Default Company
+			$result = $adb->pquery("SELECT organization_id FROM vtiger_organizationdetails INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_organizationdetails.organization_id
+								WHERE vtiger_crmentity.deleted=0 AND vtiger_organizationdetails.isdefault=1", array());
+
+			$sourceCompany = $adb->query_result($result,0, 'organization_id'); //Default Company
 		}		
 	
 		//when we configure the invoice number in Settings this will be used

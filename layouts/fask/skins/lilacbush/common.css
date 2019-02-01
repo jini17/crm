@@ -54,6 +54,7 @@ body {
 .global-nav .global-actions {
   padding-right: 15px;
   height: 40px !important;
+  margin-top: 10px;
 }
 .app-nav {
   position: relative;
@@ -2131,7 +2132,7 @@ input[type=checkbox]:checked {
   padding-bottom: 10px;
 }
 .numberCircle {
-  background: none repeat scroll 0 0 #2f5597;
+  background: none repeat scroll 0 0 #997CCD;
   border-radius: 50%;
   color: white;
   display: inline-block;
@@ -9536,4 +9537,12 @@ color:#000 !important;
 }
 .module-breadcrumb{
     font-size: 12px !important
+}
+.newtabs{
+    position: absolute;
+    top: 8px;
+    left: 157px;
+}
+.logo-container img{
+    margin: 8px 0px !important;
 }

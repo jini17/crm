@@ -17,15 +17,15 @@ class Vtiger_DashboardTab_View extends Vtiger_Index_View {
         $this->exposeMethod('showDashBoardTabList');
 	}
     
-    function process(Vtiger_Request $request) {
-		$mode = $request->getMode();
-		if(!empty($mode)) {
+    function process(Vtiger_Request $request) { 
+		$mode = $request->getMode(); 
+		if(!empty($mode)) { 
 			echo $this->invokeExposedMethod($mode, $request);
 			return;
 		}
 	}
     
-    function showDashBoardAddTabForm($request){
+    function showDashBoardAddTabForm($request){ 
         $moduleName = $request->getModule();
 
         $viewer = $this->getViewer($request);

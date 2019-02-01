@@ -56,6 +56,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
       return false;
   }
   element.attr("disabled","disabled")
+  element.attr("title","This widget is already active")   // Mabruk
 // After adding widget, we should remove that widget from Add Widget drop down menu from active tab
         var activeTabId = Vtiger_DashBoard_Js.currentInstance.getActiveTabId();
       //  jQuery('a[data-name="' + name + '"]', "#tab_" + activeTabId).parent().hide();
@@ -529,14 +530,15 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                 app.helper.showProgress();
                 app.request.post({"url": url}).then(
                     function (err, response) {
-                        console.log(response)
+                       // console.log(response)
+                       app.helper.hideProgress();
                         if (err == null) {
                             var nonReversableWidgets = ['MiniList', 'Notebook', 'ChartReportWidget']
                             parent.fadeOut('slow', function () {
                                 Vtiger_DashBoard_Js.gridster.remove_widget(parent);
                                 parent.remove();
                             });
-                            if (jQuery.inArray(widgetName, nonReversableWidgets) == -1) {
+                            if(jQuery.inArray(widgetName, nonReversableWidgets) == -1) {
                                 var data = '<li><a style="padding-left:10px;" onclick="Vtiger_DashBoard_Js.addWidget(this, \'' + response.url + '\')" href="javascript:void(0);"';
                                 data += 'data-width=' + width + ' data-height=' + height + ' data-linkid=' + response.linkid + ' data-name=' + response.name + '>' + response.title + '</a></li>';
                                 var divider = jQuery('.widgetsList .divider', '#tab_' + activeTabId);
@@ -546,9 +548,10 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                                         app.helper.hideProgress();
                                 } else {
                                 jQuery(".widget-item a[data-linkid='"+ response.linkid + "']").removeAttr("disabled")
+                                jQuery(".widget-item a[data-linkid='"+ response.linkid + "']").removeAttr("title")  // Mabruk
                                
                                //   jQuery(".widgetsList ").find("."+group).find("ul").append(data)
-                             app.helper.hideProgress();
+                                   
                                   // jQuery(data).insertAfter(jQuery('.widgetsList li:last', '#tab_' + activeTabId));
                                 }
                             }
@@ -807,7 +810,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                                     app.helper.hideModal();
                                     if (err) {
                                         app.helper.showErrorNotification({"message": err});
-                                    } else {
+                                    } else { 
                                         var tabid = data["tabid"];
                                         var tabname = data["tabname"];
                                         var tabEle = '<li class="dashboardTab" data-tabid="' + tabid + '" data-tabname="' + tabname + '">';
@@ -964,11 +967,11 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
             })
         });
     },
-/**
- * Dashboard Tab Click Event
- * Registered by Khaled
- * @returns {undefined}
- */
+    /**
+     * Dashboard Tab Click Event
+     * Registered by Khaled
+     * @returns {undefined}
+     */
     registerDashBoardTabClick: function () {
         var thisInstance = this;
         var container = this.getContainer();

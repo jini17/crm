@@ -77,7 +77,9 @@
                                                                    data-name="{$emp['name']}" 
                                                                    data-width="{$emp['width']}" 
                                                                    data-height="{$emp['height']}">
+
                                                                   {vtranslate($emp['title'])}
+
                                                            </a>
                                                        </li>
                                                {/foreach}
@@ -96,6 +98,8 @@
                                                 {foreach item="emp" from=$SALES }      
                                                        <li class="emp-widget widget-item ">
                                                            <a style="padding-left: 10px;" data-group="employee" {if $emp["is_closed"] eq 0} disabled="disabled" title="This widget is currently active"{/if} onclick="Vtiger_DashBoard_Js.addWidget(this, '{$emp['URL']}')" href="javascript:void(0);"
+
+
                                                                    data-linkid="{$emp['linkid']}" 
                                                                    data-name="{$emp['name']}" 
                                                                    data-width="{$emp['width']}" 
@@ -109,6 +113,7 @@
                                             
                                         </li>
                                         {/if}
+
 
                                         {if count($SERVICE) > 0}
                                         <li class="group-heading employee" style="position:relative;">
@@ -132,6 +137,7 @@
                                             
                                         </li>
                                         {/if}
+
 
                                         {if count($CHART_GROUP) > 0}                          
                                         <li  class="group-heading charts" style="">
@@ -176,7 +182,7 @@
 
                                         {if count($GENERAL_GROUP) > 0}
                                         <li class='general'>
-                                            <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp;  General <i class="fa fa-windows pull-right widget-icon"></i></a>
+                                            <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp;  General <i class="fab fa-windows pull-right widget-icon"></i></a>
                                             <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
                                                  
                                                     {foreach item="general" from=$GENERAL_GROUP}
@@ -283,7 +289,7 @@
         </div>
                 <div class="clearfix"></div>
                 <a class="strolltotop pull-right">
-                    <i class="fa fa-arrow-up"></i>
+                    <i class="fas fa-angle-up"></i>
                 </a>
 </div>
 {/strip}
@@ -301,8 +307,6 @@
                      $("#page").animate({ scrollTop: 0 }, "slow"); 
                      return false;
             });
-          });
-
-        jQuery('')
+          });        
 
 </script>

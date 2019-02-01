@@ -7,8 +7,9 @@
 * All Rights Reserved.
 ************************************************************************************}
 
-
+<div class="clearfix" style="height: 50px;"></div>
 </div>
+
 <div id='overlayPage'>
 	<!-- arrow is added to point arrow to the clicked element (Ex:- TaskManagement), 
 	any one can use this by adding "show" class to it -->
@@ -81,5 +82,13 @@
 	})
 	*/
 </script>
+<div class="clearfix" style="height: 50px;"></div>
+ <footer style="background-color: #fff; margin-top: 50px">
+    <div class="container-fluid">
+        <p class="text-center" style="padding-top:10px; font-size: 12px;">Second CRM Version 5.2 &copy;  
+            <a style="color: #000; font-weight: bold;" href="http://secondcrm.com/">Soft Solvers Solutions.</a> &nbsp;All rights reserved.
+        </p>
+    </div>
+</footer>
 </body>
 </html>
