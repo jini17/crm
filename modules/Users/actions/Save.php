@@ -109,6 +109,13 @@ class Users_Save_Action extends Vtiger_Save_Action {
 		
 		$recordModel = $this->saveRecord($request);
 
+		//Update if you change company or remove from dropdown of Company list;
+		if(count($request->get('user_company')) > 0){
+			$db->pquery("DELETE FROM secondcrm_users_assigncompany WHERE userid=?", array($recordModel->get('id')));	
+			foreach($request->get('user_company') as $company){
+				$db->pquery("INSERT INTO secondcrm_users_assigncompany(userid, organization_id) VALUES(?,?)", array($recordModel->get('id'), $company));	
+			}	
+		} //end here 
 		
 		//update secondcrm_userplan in CRM, agiliux_accounts in agiliux_cp
 		$result = $db->pquery("SELECT vtiger_role.planid FROM vtiger_role WHERE roleid=?", array($recordModel->get('roleid')));
@@ -117,9 +124,6 @@ class Users_Save_Action extends Vtiger_Save_Action {
 		if($recordId=='') {
 			$plan = $recordModel->MakeAgiliuxCPUser($recordModel->entity->db->dbName, $plan);
 		}
-		
-		$db->pquery("DELETE FROM secondcrm_userplan WHERE userid=?", array($recordModel->get('id')));	
-		$db->pquery("INSERT INTO secondcrm_userplan(planid, userid) VALUES(?,?)", array($plan, $recordModel->get('id')));	
 		
 		if ($request->get('relationOperation')) {
 			$parentRecordModel = Vtiger_Record_Model::getInstanceById($request->get('sourceRecord'), $request->get('sourceModule'));
