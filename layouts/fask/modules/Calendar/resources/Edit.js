@@ -179,7 +179,7 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
                         noteContentElementMOM.removeAttr('data-validation-engine').addClass('ckEditorSource');
                         var ckEditorInstance = new Vtiger_CkEditor_Js();
                         ckEditorInstance.loadCkEditor(noteContentElementMOM);
-                        noteContentElementMOM.closest('div').css({'width':'1100px'});
+                        noteContentElementMOM.closest('div').css({'width':'1100px','height':'350px'});
                         //noteContentElement.closest('tr').find('td:nth-child(1)').hide();
                         //noteContentElement.closest('tr').find('td:nth-child(3)').hide();
                         //noteContentElement.closest('tr').find('td:nth-child(4)').hide();			
@@ -189,7 +189,7 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
                         noteContentElementAgenda.removeAttr('data-validation-engine').addClass('ckEditorSource');
                         var ckEditorInstance = new Vtiger_CkEditor_Js();
                         ckEditorInstance.loadCkEditor(noteContentElementAgenda);
-                        noteContentElementAgenda.closest('div').css({'width':'1100px'});
+                        noteContentElementAgenda.closest('div').css({'width':'1100px','height':'350px','border':'none'});
                         //noteContentElement.closest('tr').find('td:nth-child(1)').hide();
                         //noteContentElement.closest('tr').find('td:nth-child(3)').hide();
                         //noteContentElement.closest('tr').find('td:nth-child(4)').hide();			

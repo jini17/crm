@@ -34,7 +34,7 @@
 </style>
 <script>
        $(document).ready(function(){
-                
+        
               
                
            $('.tooltipcontailer i').on('hover',function(){
@@ -162,10 +162,8 @@
                                                                                                         <div class="tooltipcontailer" style="  position: relative;    z-index: 9998!important;">
                                                                                                          {vtranslate({$FIELD_MODEL->get('label')},{$MODULE_NAME})}  &nbsp;
                                                                                                          <i class="glyphicon glyphicon-question-sign  "></i>
-                                                                                                      
-                                                                                                               
                                                                                                     </div>
-                                                                                                        {else}
+                                                                                                 {else}
                                                                                                             {vtranslate({$FIELD_MODEL->get('label')},{$MODULE_NAME})}  
                                                                                                 {/if}
                                                                                         {/if}
@@ -209,24 +207,26 @@
                                                 </div>
                                                 <!-- Added By Jitu Mabruk for Meeting--> 	
                                                 {if $BLOCK_LABEL_KEY eq 'Participants'}
-                                                        <div class="row">
-                                            <div class="fieldLabel col-xs-6 col-md-3">
-                                                <span class="muted">{vtranslate('LBL_INVITE_USERS', $MODULE_NAME)}</span>
-                                            </div>
-                                            <div class="fieldValue col-xs-6 col-md-3">
-                                                {foreach key=USER_ID item=USER_NAME from=$ACCESSIBLE_USERS}
-                                                    {if in_array($USER_ID,$INVITIES_SELECTED)}
-                                                        {$USER_NAME} - {vtranslate($INVITEES_DETAILS[$USER_ID],$MODULE)}
-                                                        <br>
-                                                    {/if}
-                                                {/foreach}
-                                            </div>
+                                                        <div class="row">                                                            
+                                                                <div class="col-md-3">
+                                                                    <div class="fieldLabel col-xs-3 col-md-3">
+                                                                        <span class="muted">{vtranslate('LBL_INVITE_USERS', $MODULE_NAME)}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="fieldValue col-xs-3 col-md-3">
+                                                                    {foreach key=USER_ID item=USER_NAME from=$ACCESSIBLE_USERS}
+                                                                        {if in_array($USER_ID,$INVITIES_SELECTED)}
+                                                                            {$USER_NAME} - {vtranslate($INVITEES_DETAILS[$USER_ID],$MODULE)}
+                                                                            <br>
+                                                                        {/if}
+                                                                    {/foreach}
+                                                                </div>
                                             <div class="visible-sm visible-xs clearfix"></div>				                
 
-                                            <div class="fieldLabel col-xs-6 col-md-3">
+                                            <div class="fieldLabel col-xs-3 col-md-3">
                                                 <span class="muted">{vtranslate('LBL_EXTERNAL_USERS', $MODULE_NAME)}</span>
                                             </div>
-                                             <div class="fieldValue col-xs-6 col-md-3">
+                                             <div class="fieldValue col-xs-3 col-md-3">
                                                 {foreach item=EMAIL from=$EXTEMAILS_DETAILS}
                                                     {$EMAIL['emailaddress']} - {vtranslate($EMAIL['status'],$MODULE)}
                                                     <br>	                          
@@ -243,4 +243,15 @@
                 </div>
 
         {/foreach}
+{literal} 
+
+                <script type="text/javacript">
+    jQuery(document).ready(function(){
+        alert("c");
+             jQuery("textarea").each(function(){
+                   jQuery(this).closest('.row').find('div').css("width","100% !important")               
+                });
+    });
+</script>    
+{/literal} 
 {/strip}
