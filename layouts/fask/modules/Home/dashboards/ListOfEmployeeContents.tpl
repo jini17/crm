@@ -22,7 +22,7 @@
         
               {foreach item=LIST from=$DATA}
                   <div class="row miniListContent" style="padding:5px;margin-right:-1px;margin-left:-1px; position: relative;">
-                        <div class="col-md-4 ">   <b> {$LIST['first_name']}  {$LIST['last_name']} </b> </div>
+                        <div class="col-md-4 "><b> {$LIST['first_name']}  {$LIST['last_name']} </b> </div>
                         <div class="col-md-4">     {$LIST['department']}       </div>
                         <div class="col-md-4">     {$LIST['designation']}   
                             <a class="pull-right" style="position: absolute; right:-8px; top: 0" href="{$URL}/index.php?module=Users&parent=Settings&view=Detail&record={$LIST['empid']}">
@@ -31,7 +31,8 @@
                         </div>                        
                    </div>
             {/foreach}
-   
+   <div class="clearfix"></div>
+                        <a href="index.php?module=Users&view=List&parent=Settings" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
 
 {else}
         <span class="noDataMsg">

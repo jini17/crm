@@ -16,13 +16,13 @@
   <div class="filterContainer">
       <div class="row">
              <div class="col-lg-6">
-                 <select class="select2 col-lg-10 widgetFilter" id="userGroup" name="group">
+                 <select class="select2 col-lg-12 widgetFilter" id="userGroup" name="group" >
                     <option value="user" selected>{vtranslate('LBL_USER',$MODULE_NAME)}</option>           
                     <option value="customer">{vtranslate('LBL_CUSTOMER',$MODULE_NAME)}</option>  
                  </select>
               </div>
               <div class="col-lg-6">
-                  <select class="select2 col-lg-10 widgetFilter" id="historyType" name="type">
+                  <select class="select2 col-lg-12 widgetFilter" id="historyType" name="type">
                     <option value="today" >{vtranslate('LBL_TODAY',$MODULE_NAME)}</option>
                     <option value="tomorrow" >{vtranslate('LBL_TOMORROW',$MODULE_NAME)}</option>
                     <option value="thisweek" >{vtranslate('LBL_THIS_WEEK',$MODULE_NAME)}</option>
@@ -39,8 +39,6 @@
 </div>
 
 <div class="widgeticons dashBoardWidgetFooter">
-
-
   <div class="footerIcons pull-right">
         {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=false}
   </div>

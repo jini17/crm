@@ -14,7 +14,7 @@ Vtiger.Class("Users_Claim_Js", {
              var thisInstance = this;
                 //check the anyclaimType for login user 
                 var params = {
-                                'module' 	: app.getModuleName(),
+                                'module' 	: 'Users',
                                 'action' 	: 'SaveSubModuleAjax',
                                 'mode'   	: 'IsAnyClaimTypeAssign',
                 }
@@ -280,7 +280,7 @@ Vtiger.Class("Users_Claim_Js", {
       ValidateClaimAmount : function(trans,monthly,yearly,totalamount,transactiondate,category){  
       var aDeferred = jQuery.Deferred();
              var params = {
-                        'module' 		  : app.getModuleName(),
+                        'module' 		  : 'Users',
                         'action' 		  : 'SaveSubModuleAjax',
                         'mode'   		  : 'ValidateClaimAmount',
                         'trans'   	  : trans,
@@ -314,7 +314,7 @@ Vtiger.Class("Users_Claim_Js", {
      updateClaimGrid : function(userid) { 
         alert
         var params = {
-                        'module' : app.getModuleName(),
+                        'module' : 'Users',
                         'view'   : 'ListViewAjax',
                         'record' : userid,		
                         'mode'   : 'getUserClaim',

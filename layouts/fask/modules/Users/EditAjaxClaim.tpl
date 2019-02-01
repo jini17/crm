@@ -43,6 +43,9 @@
                 <input type="hidden" value="{$CLAIM_DETAIL.leavestatus}" name="savetype" id="savetype">  
                 <input type="hidden" id="hdnhalfday" id="hdnhalfday" value="" /> -->
 
+                <input type="hidden" name="selected_claim_yearly" value="" />
+                <input type="hidden" name="selected_claim_monthly" value="" />
+                
                 <div class="modal-body">
 
 
@@ -68,7 +71,7 @@
 
                                                                     {/foreach}
 
-                                                                     {else}
+                                                                    {else}
                                                                             <option value=''></option>	
                                                                     {/if}	
 
@@ -125,6 +128,7 @@
                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                         <div class="col-md-4">
                                                                 <label class="control-label fieldLabel" style="text-align: right;float: right;">
+                                                                    
                                                                         &nbsp;{vtranslate('LBL_INVOICE', $QUALIFIED_MODULE)} <span class="redColor">*</span>
                                                                 </label>
                                                         </div>
@@ -259,9 +263,9 @@
                         </div>
                         <!--Enable or disable button-->
                         {if $CLAIMSTATUS eq 'Apply' || $CLAIMSTATUS eq 'Approve' || $CLAIMSTATUS eq 'Not Approved' || $CLAIMSTATUS eq 'Cancel'}
-                              <input class="btn btn-disable" type="button"    value="{vtranslate('Apply',$MODULE)}" name="claim_status" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Leave">
+                              <input class="btn btn-disable" type="button"    value="{vtranslate('Apply',$MODULE)}" name="claim_status" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Claim">
                         {else}
-                             <input class="btn btn-success" type="submit" value="{vtranslate('Apply',$MODULE)}" name="claim_status" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Leave">
+                             <input class="btn btn-success" type="submit" value="{vtranslate('Apply',$MODULE)}" name="claim_status" accesskey="LBL_APPLY_BUTTON_KEY" title="Apply Claim">
                         {/if}
 
 

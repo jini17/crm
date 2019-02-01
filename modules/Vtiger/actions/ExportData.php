@@ -50,7 +50,7 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action {
 		$entries = array();
 		for ($j = 0; $j < $db->num_rows($result); $j++) {
 			$entries[] = $this->sanitizeValues($db->fetchByAssoc($result, $j));
-		}
+		}		
 
 		$this->output($request, $translatedHeaders, $entries);
 	}
@@ -323,7 +323,7 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action {
 				} else {
 					$value = '';
 				}
-			} elseif($uitype == 52 || $type == 'owner') {
+			}elseif($uitype == 52 || $type == 'owner' || $uitype == 101 || $uitype == 53) {
 				$value = Vtiger_Util_Helper::getOwnerName($value);
 			}elseif($type == 'reference'){
 				$value = trim($value);

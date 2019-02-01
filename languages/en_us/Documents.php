@@ -18,7 +18,7 @@ $languageStrings = array(
 	'LBL_NOTE_INFORMATION' => 'Basic Information',
 	'LBL_FILE_INFORMATION' => 'File Details',
 	'LBL_DESCRIPTION' => 'Description',
-
+                     'Is HR Document?' => 'Policy Document',
 	//Field Labels
 	'Title' => 'Title',
 	'File Name' => 'File Name',
@@ -97,6 +97,7 @@ $languageStrings = array(
     'LBL_FROM_SERVICE' => 'From %s',
     'LBL_CREATE_NEW' => 'Create New %s',
 	'LBL_SELECT_A_FOLDER_TO_MOVE' => 'Please select a folder to move',
+	'LBL_PERMISSION'=>'Visibility Permission',
 );
 
 $jsLanguageStrings = array(

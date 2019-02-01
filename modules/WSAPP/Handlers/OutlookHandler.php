@@ -28,7 +28,7 @@ Class OutlookHandler extends SyncHandler {
         $nativeForamtElementList['updated'] = $this->syncToNativeFormat($result['updated']);
         return $nativeForamtElementList;
     }
-    public function put($element,$user){
+    public function put($element,$user){ 
         $this->user = $user;
         $element = $this->nativeToSyncFormat($element);
         if($element=='Events'){

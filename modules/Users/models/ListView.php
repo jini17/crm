@@ -10,46 +10,66 @@
 
 class Users_ListView_Model extends Vtiger_ListView_Model {
 
+
+        /*
+         * Function to get Basic links
+         * @return array of Basic links
+         */
+        public function getBasicLinks(){
+            $basicLinks = array();
+            $moduleModel = $this->getModule();
+            $currentUser = vglobal('current_user');
+            if(in_array($currentUser->roleid, array('H2','H12','H13'))) {
+                $basicLinks[] = array(
+                        'linktype' => 'LISTVIEWBASIC',
+                        'linklabel' => 'LBL_ADD_RECORD',
+                        'linkurl' => $moduleModel->getCreateRecordUrl(),
+                        'linkicon' => ''
+                );
+            }
+            return $basicLinks;
+        }
+
         /**
          * Function to get the list of listview links for the module
          * @param <Array> $linkParams
          * @return <Array> - Associate array of Link Type to List of Vtiger_Link_Model instances
          */
         public function getListViewLinks($linkParams) {
-                $linkTypes = array('LISTVIEWBASIC', 'LISTVIEW', 'LISTVIEWSETTING');
-                $links = Vtiger_Link_Model::getAllByType($this->getModule()->getId(), $linkTypes, $linkParams);
+            $linkTypes = array('LISTVIEWBASIC', 'LISTVIEW', 'LISTVIEWSETTING');
+            $links = Vtiger_Link_Model::getAllByType($this->getModule()->getId(), $linkTypes, $linkParams);
 
-                $basicLinks = $this->getBasicLinks();
-                foreach($basicLinks as $basicLink) {
-                        $links['LISTVIEWBASIC'][] = Vtiger_Link_Model::getInstanceFromValues($basicLink);
-                }
+            $basicLinks = $this->getBasicLinks();
+            foreach($basicLinks as $basicLink) {
+                    $links['LISTVIEWBASIC'][] = Vtiger_Link_Model::getInstanceFromValues($basicLink);
+            }
 
-        $links['LISTVIEW'] = array();
-        $advancedLinks = $this->getAdvancedLinks();
+            $links['LISTVIEW'] = array();
+            $advancedLinks = $this->getAdvancedLinks();
                 foreach($advancedLinks as $advancedLink) {
                         $links['LISTVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($advancedLink);
                 }
 
-        $usersList = Users_Record_Model::getActiveAdminUsers();
-        $settingLinks = array();
-        if(count($usersList) ) {
-            $changeOwnerLink = array(
-                'linktype' => 'LISTVIEWSETTING',
-                                'linklabel' => 'LBL_CHANGE_OWNER',
-                                'linkurl' => $this->getModule()->getChangeOwnerUrl(),
-                                'linkicon' => ''
-            );
-            array_push($settingLinks, $changeOwnerLink);
-        }
+            $usersList = Users_Record_Model::getActiveAdminUsers();
+            $settingLinks = array();
+            if(count($usersList) ) {
+                $changeOwnerLink = array(
+                    'linktype' => 'LISTVIEWSETTING',
+                                    'linklabel' => 'LBL_CHANGE_OWNER',
+                                    'linkurl' => $this->getModule()->getChangeOwnerUrl(),
+                                    'linkicon' => ''
+                );
+                array_push($settingLinks, $changeOwnerLink);
+            }
 
                 $settingLinks = array_merge($settingLinks, $this->getSettingLinks());
-        if(count($settingLinks) > 0) {
-            foreach($settingLinks as $settingLink) {
-                $links['LISTVIEWSETTING'][] = Vtiger_Link_Model::getInstanceFromValues($settingLink);
+            if(count($settingLinks) > 0) {
+                foreach($settingLinks as $settingLink) {
+                    $links['LISTVIEWSETTING'][] = Vtiger_Link_Model::getInstanceFromValues($settingLink);
+                }
             }
-        }
 
-                return $links;
+            return $links;
         }
 
         /**

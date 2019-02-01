@@ -2632,4 +2632,63 @@ function getDuplicatesPreventionMessage($moduleName, $duplicateRecordsList) {
         return $message;
 }
 
+function addUserNotification($activitydetails){
+
+
+    include_once('modules/Notifications/Notifications.php');
+    
+  //  $currentUserModel = Users_Record_Model::getCurrentUserModel();
+    $userids = implode('|##|', $activitydetails['notifyto']);
+
+    $Notification = new Notifications();
+    $Notification->column_fields['notifyto']            = $userids;
+  	$Notification->column_fields['notifyby']            = $activitydetails['notifyby'];
+    
+    $Notification->column_fields['actionperform']       = $activitydetails['actionperform'];
+    $Notification->column_fields['relatedto']           = $activitydetails['relatedto'];
+    $Notification->column_fields['assigned_user_id']    = 1;
+
+    if($activitydetails['id']){
+        $Notification->column_fields['isview']          = 1;
+        $Notification->mode                             = 'edit';
+        $Notification->id                               = $activitydetails['record'];
+        
+    } else {
+        $Notification->column_fields['isview']          = 0;
+        $Notification->mode='';
+    }
+
+    $Notification->save('Notifications');
+   	if($Notification->id)
+   		return true;
+   	else
+   		return false;
+}
+
+function NotificationPeople($roles){
+
+	//Notify people :
+	global $adb;
+	$userid = array();
+	$result = $adb->pquery("SELECT id from vtiger_users LEFT JOIN vtiger_user2role ON vtiger_user2role.userid=vtiger_users.id
+		WHERE vtiger_user2role.roleid IN (?) AND vtiger_users.deleted=0", array($roles));
+	$numrows = $adb->num_rows($result);
+
+	for($i=0;$i<$numrows;$i++){
+		$userid[] = $adb->query_result($result, $i, 'id');
+	}
+	return $userid;
+}
+
+
+function RecordSetype($record){
+
+    global $adb;
+    $result = $adb->pquery("SELECT setype from vtiger_crmentity where crmid=? AND deleted=0", array($record));
+    if($adb->num_rows($result)>0)
+        return $adb->query_result($result, 0,'setype');
+    else 
+        return false;
+  
+}
 ?>

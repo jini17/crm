@@ -155,7 +155,10 @@ Vtiger.Class('Vtiger_Widget_Js',{
         refreshWidget : function() {
                 var parent = this.getContainer();
                 var element = parent.find('a[name="drefresh"]');
-                var url = element.data('url');
+
+                var tabid = jQuery("#default_tab").val();
+
+                var url = element.data('url')+'&tab='+tabid;
 
         var contentContainer = parent.find('.dashboardWidgetContent');
                 var params = {};
@@ -791,9 +794,12 @@ Vtiger_Widget_Js('Vtiger_Notebook_Widget_Js', {
         reinitNotebookView: function() {
                 var self = this;
                 jQuery('.dashboard_notebookWidget_edit', this.container).click(function(){
-                        self.editNotebookContent();
+                      jQuery(this).hide();
+                       jQuery('.dashboard_notebookWidget_save').removeClass('hide');
+                      self.editNotebookContent();
                 });
                 jQuery('.dashboard_notebookWidget_save', this.container).click(function(){
+                        jQuery(this).addClass('hide');
                         self.saveNotebookContent();
                 });
         },

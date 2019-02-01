@@ -32,7 +32,7 @@ class Vtiger_TagCloud_Dashboard extends Vtiger_IndexAjax_View {
 		
 		$linkId = $request->get('linkid');
 		
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 		
 		$tags = Vtiger_Tag_Model::getAllUserTags($currentUser->getId());
 

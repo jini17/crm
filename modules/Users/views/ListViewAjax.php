@@ -21,6 +21,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
                         $this->exposeMethod('getUserLanguage');
                         $this->exposeMethod('getUserLeave');
                         $this->exposeMethod('getUserClaim');
+                      //  $this->exposeMethod('getUsersLeaveStatus');
         }
 
 
@@ -46,6 +47,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
                 $eduList = $eduUserModel->getUserEducationList($recordId);
                 $viewer->assign('EDUCATION_RECORD_MODEL',$EducationModuleModel);
                 $viewer->assign('USERID',$recordId);
+
                 $viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
                 $viewer->assign('USER_EDUCATION_LIST',$eduList);
 
@@ -92,7 +94,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
             $user_model = Users_Record_Model::getCurrentUserModel();
                 $moduleName = $request->getModule();
                 $viewer = $this->getViewer($request);
-                $userid = $user_model->get('id');
+                $userid = $request->get('record');
       
                 $EmergencyModuleModel= Users_EmergencyModule_Model::getInstance();
 
@@ -100,7 +102,6 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
                 $viewer->assign('MODULE',$moduleName);	
                 $viewer->assign('EMERGENCY_RECORD_MODEL',$EmergencyModuleModel);
                 $viewer->assign('USERID',$userid);
-                 $viewer->assign('REC_ID',$userid);
                 $viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
                 $viewer->assign('USER_EMERGENCY_CONTACTS',$emergencyUserModel->getUserEmergencyContact($userid));
                 echo $viewer->view('UsersEmergency.tpl',$moduleName,true);
@@ -122,7 +123,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
                 $viewer->assign('LANGUAGE_RECORD_MODEL',$LangModuleModel);
                 $viewer->assign('SKILL_RECORD_MODEL',$SkillModuleModel);
                 $viewer->assign('USERID',$recordId);
-                $viewer->assign('USER_MODEL', Users_SkillsRecord_Model::getCurrentUserModel());
+                $viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
                 $viewer->assign('USER_SOFTSKILL_LIST',$LangUserModel->getUserSoftSkillList($recordId));
                 $viewer->assign('USER_SKILL_CLOUD',$SkillUserModel->getUserSkillCloud($recordId));
                 $viewer->assign('SKILL_LIST',$SkillUserModel->getALLSKills($recordId));
@@ -413,6 +414,25 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
 
                 echo $viewer->view('UserClaim.tpl',$moduleName,true);
         }
+
+      /*  public function getUsersLeaveStatus(Vtiger_Request $request) { 
+                $db = PearDatabase::getInstance();
+
+                $moduleName = $request->getModule();
+                $user_model = Users_Record_Model::getCurrentUserModel();
+
+                //Get All Active Users
+             //   $users = $user_model->getAccessibleUsers();
+                 
+                //Get All total-Used Leave List by Users
+                $viewer = $this->getViewer($request);
+                $usersleavestatus = $user_model->UsersLeaveStatus();
+                $viewer->assign('USERS_LEAVESTATUS',$usersleavestatus);
+                $viewer->assign('MODULE',$moduleName);
+                $viewer = $this->getViewer($request);
+              echo  $viewer->view('CheckUserLeaveStatus.tpl',$moduleName,true);
+
+        }*/
 
 
         /**

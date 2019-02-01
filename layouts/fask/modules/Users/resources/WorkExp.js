@@ -12,7 +12,24 @@ Vtiger.Class("Users_WorkExp_Js", {
         addWorkExp : function(url){
              this.editWorkExp(url);
         },
-
+        /**
+         * Date Validation added by Khaled
+         * @returns {undefined}
+         */
+dateVidation:function(){
+        
+            jQuery('#end_date').on('change',function(){                      
+                        var startDate = jQuery('#start_date').val().replace(/-/g,'/');
+                        var endDate = jQuery('#end_date').val().replace(/-/g,'/');
+                   
+                        if(endDate.length > 0 && startDate > endDate){
+                                  app.helper.showSuccessNotification({'message': 'End Date must be greater than start date'});
+                                  jQuery('#end_date').val('');
+                            //return false;
+                           // do your stuff here...
+                        }
+                });
+        },
         editWorkExp : function(url) {
                 $("#errordate").html('');	
                 var aDeferred = jQuery.Deferred();
@@ -28,6 +45,7 @@ Vtiger.Class("Users_WorkExp_Js", {
                     app.helper.showModal(data);
                                 var form = jQuery('#editWorkExp');
                                 thisInstance.textAreaLimitChar();	
+                                thisInstance.dateVidation();	
                                         $("#company_title").select2({formatNoMatches: function() {
                                                 var concatselboxNtxtbox = '"company_title","comtxt"';
                                                 return "<span>"+app.vtranslate('JS_NO_MATCH_FOUND')+"<a href='#' onclick=updateBox(" +concatselboxNtxtbox+ ")>"+app.vtranslate('JS_ADD_NEW')+"</a></span>";} 
@@ -104,18 +122,18 @@ Vtiger.Class("Users_WorkExp_Js", {
              });
      },
      textAreaLimitChar : function(){ 
-                        $('#description').keyup(function () {
-                                var maxchar = 300;
-                                var len = $(this).val().length;
-                                if (len > maxchar) {
-                                        $('#charNum').text(' you have reached the limit');
-                                        $(this).val($(this).val().substring(0, len-1));
-                                } else {
-                                        var remainchar = maxchar - len;
-                                        $('#charNum').text(remainchar + ' character(s) left');
+            $('#description').keyup(function () {
+                    var maxchar = 300;
+                    var len = $(this).val().length;
+                    if (len > maxchar) {
+                            $('#charNum').text(' you have reached the limit');
+                            $(this).val($(this).val().substring(0, len-1));
+                    } else {
+                            var remainchar = maxchar - len;
+                            $('#charNum').text(remainchar + ' character(s) left');
 
-                                }
-                        });
+                    }
+            });
         },	
      saveWorkExpDetails : function(form){
           var aDeferred = jQuery.Deferred();

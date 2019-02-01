@@ -142,7 +142,7 @@ $languageStrings = array(
 	
 	//Template Menu
 	'INVENTORYTERMSANDCONDITIONS' => 'Terms and Conditions', //edited by SITI@SECONDCRM On 25Feb2015
-	'LBL_CLAIM_ALLOCATION'=>'Claim Allocation',
+	'LBL_CLAIM_ALLOCATION'=>'Claim Policy',
 
 	//Tax Calculations
 	'LBL_TAX_CALCULATIONS' => 'Tax Calculations',
@@ -456,7 +456,8 @@ $languageStrings = array(
 	'LBL_LEAVE_TYPE'=>'Leave Type',
 	'LBL_CLAIM_TYPE'=>'Claim Type',
 	'LBL_BENEFIT_TYPE'=>'Benefit Type',
-	'LBL_ALLOCATION'=>'Leave Allocation',
+	'LBL_ALLOCATION'=>'Leave Policy',
+	'Allocation'=>'Policy',
 	'LBL_EDIT_VALUE'=>'Edit',
 	'LBL_LEAVE_TYPES_LIST'=>'Leave Type List',
 	'LBL_CLAIM_TYPES_LIST'=>'Claim Type List',
@@ -464,6 +465,7 @@ $languageStrings = array(
 	'LBL_BENEFIT_TYPES'=>'Benefit Type',
 	'LBL_BENEFIT_TYPES_LIST'=>'Benefit Type List',
 
+	'LBL_PDF_SETTINGS'=>'PDF Settings',
 	'LBL_PDF'=>'PDF',
 	'LBL_HOLIDAY'=>'Holiday',
 	'LBL_WORKINGHOURS'=>'Working Hours',

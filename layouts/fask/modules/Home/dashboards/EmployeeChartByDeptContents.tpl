@@ -12,6 +12,7 @@
 
 {assign var=WIDGETDOMID value=$WIDGET->get('linkid')|cat:'-':$WIDGET->get('id')}
 
+
  {if count($DATA) gt 0 }
     <input id="widgetChart_{$WIDGET->get('id')}" type=hidden value='{$DATA}' />
     <input class="yAxisFieldType" type="hidden" value="{$YAXIS_FIELD_TYPE}" />
@@ -32,6 +33,7 @@
         {vtranslate('LBL_NO')} {vtranslate($MODULE_NAME, $MODULE_NAME)} {vtranslate('LBL_MATCHED_THIS_CRITERIA')}
     </span>
 {/if}
+{if !empty($DATA)}
 <script type="text/javascript">
     $(document).ready(function(){
 
@@ -141,3 +143,4 @@ $('#widgetChartContainer_{$WIDGET->get('id')}').bind('jqplotDataMouseOver', func
       });
 });
 </script>
+{/if}

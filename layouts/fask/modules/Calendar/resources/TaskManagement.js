@@ -9,8 +9,11 @@
 
 Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 
+
+
 	overlayContainer : false,
 	getOverlayContainer : function(){
+
 		if(this.overlayContainer === false){
 			this.overlayContainer = jQuery('#taskManagementContainer');
 		}
@@ -22,7 +25,7 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 	},
 
 	getColors : function(){
-	  return jQuery('input[name="colors"]').val();  
+	  return jQuery('input[name="colors"]').val();
 	},
 
 	saveFieldValue : function(recordId, fieldNameValueMap){
@@ -37,6 +40,10 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 		data['calendarModule'] = this.getModuleName();
 		data['action'] = 'SaveAjax';
 
+		//console.log(this.getModuleName());
+
+
+
 		app.request.post({data:data}).then(
 			function(err, reponseData){
 				if(err === null){
@@ -47,7 +54,7 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 				}
 			}
 		);
-	   return aDeferred.promise(); 
+	   return aDeferred.promise();
 	},
 
 	registerStatusCheckboxEvent : function(){
@@ -69,20 +76,67 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 					taskSubjectEle.addClass("textStrike");
 					thisInstance.clearExistingCustomScroll();
 					thisInstance.loadContents();
+
 				});
 			}
 		});
 	},
 
-	getAllContents : function(params){
-		var aDeferred = jQuery.Deferred();
-		this.filterRecords(params, "getAllContents").then(function(data){
-			aDeferred.resolve(data);
-		});
+
+    /**
+     * Function to get all the data of Tasks
+     * @param params
+     */
+    getAllContents : function(params){
+        var aDeferred = jQuery.Deferred();
+        var filters = this.getAllFilterParams();
+        //console.log(filters);
+        var mode = "getAllContents";
+        if(params == {}){
+            mode = "getAllContents";
+        }else if(params == "ReloadContent"){
+            mode = "showManagementView";
+            params = {};
+        }
+        var dataParams = {
+            'module' : this.getModuleName(),
+            'filters': filters,
+            'view' : 'TaskManagement',
+            'mode' : mode
+        }
+        var dataParams = jQuery.extend(dataParams,params);
+
+
+        var colors = this.getColors();
+        if(typeof colors != "undefined"){
+            dataParams["colors"] = colors;
+        }
+
+        app.request.get({"data":dataParams}).then(function(err,data){
+            if(err === null){
+                //console.log("No error");
+                aDeferred.resolve(data);
+            }
+            if(err != null){
+                //console.log("error");
+                aDeferred.reject("Cannot filter the records");
+            }
+        });
+
+        /*this.filterRecords(params, "getAllContents").then(function(data){
+           aDeferred.resolve(data);
+        });*/
+
 		return  aDeferred.promise();
 	},
 
-	getContentsOfPriority : function(params){
+
+    /**
+     * If not used till the end please delete this
+     * @param params
+     */
+    getContentsOfPriority : function(params){
+    	//console.log("Nirbhay"+params);
 		var aDeferred = jQuery.Deferred();
 		this.filterRecords(params, "getContentsOfPriority").then(function(data){
 			aDeferred.resolve(data);
@@ -90,8 +144,14 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 		return  aDeferred.promise();
 	},
 
+
+    /**
+     * Not needed as of now added this functionality in get content itself
+     * @param params
+     * @param mode
+     */
 	filterRecords : function(params,mode){
-		var aDeferred = jQuery.Deferred();
+	    var aDeferred = jQuery.Deferred();
 		var filters = this.getAllFilterParams();
 
 		var dataParams = {
@@ -112,8 +172,12 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 			if(err === null){
 				aDeferred.resolve(data);
 			}
+			if(err !== null){
+			    aDeferred.reject("Cannot filter the records");
+            }
 		});
-		return  aDeferred.promise();
+		var response = aDeferred.promise();
+		return  response;
 	},
 
 	clearExistingCustomScroll : function(){
@@ -129,6 +193,7 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 		var thisInstance = this;
 		var overlay = this.getOverlayContainer();
 		overlay.on("click",".dateFilters button",function(e){
+		    console.log("After clicking date filter");
 			var currentTarget = jQuery(e.currentTarget);
 			if(!currentTarget.hasClass('rangeDisplay')){
 			jQuery('#taskManagementContainer .dateFilters button').removeClass('active');
@@ -157,18 +222,38 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 	},
 
 	registerTaskManagementSearch : function(){
-		var thisInstance = this;
+	    var thisInstance = this;
 		var overlay = this.getOverlayContainer();
+
 		overlay.find('#taskManagementOtherFilters').find('.search').on('click',function(e){
-			thisInstance.clearExistingCustomScroll();
-			thisInstance.loadContents();
+		    thisInstance.clearExistingCustomScroll();
+            thisInstance.ReloadKanBanContents();
+            //thisInstance.registerEvents();
+           // thisInstance.initializeTaskStatus();
+
 		});
 	},
 
+    ReloadKanBanContents : function(){
+	    var thisInstance = this;
+        app.helper.showProgress();
+        params = "ReloadContent";
+        thisInstance.getAllContents(params).then(function(data){
+            app.helper.hideProgress();
+            //console.log(data);
+            jQuery(".data-body.row").html(data);
+            thisInstance.loadContents();
+            thisInstance.registerTaskDropEvent();
+            //thisInstance.registerEvents();
+        });
+
+
+    },
 	registerQuickEditTaskEvent : function(){
 		var thisInstance = this;
 		var overlay = this.getOverlayContainer();
 		jQuery('#taskManagementContainer').on('click', ".quickTask",function(e){
+
 			e.stopImmediatePropagation();
 			var target = jQuery(e.currentTarget);
 			var quickCreateNode = jQuery('#quickCreateModules').find('[data-name="Calendar"]');
@@ -176,8 +261,9 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 				app.helper.showErrorMessage(app.vtranslate('JS_NO_CREATE_OR_NOT_QUICK_CREATE_ENABLED'));
 			}
 
-			var priority = target.closest(".content").data("priority");
-			app.event.one("post.QuickCreateForm.show",function(event,form){
+			var status = target.closest(".content").data("status");
+
+            app.event.one("post.QuickCreateForm.show",function(event,form){
 				var basicInfo = target.closest(".task").data('basicinfo');
 				var recordId = target.closest(".task").data('recordid');
 
@@ -188,22 +274,21 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 					form.append("<input type=hidden name=record value='"+recordId+"'>");
 					thisInstance.fillPopoverFieldValues(form,basicInfo);
 				} else {
-					var taskSubject = jQuery(".taskSubject."+priority).val();
+					var taskSubject = jQuery(".taskSubject."+status.toLowerCase()).val();
 					if(taskSubject.length > 0){
 						form.find('input[name="subject"]').val(taskSubject);
 					}
-					var taskStatus = form.find('select[name="taskstatus"]');
-					taskStatus.val('Not Started');
-					vtUtils.showSelect2ElementView(taskStatus);
+
+
 				}
 
-				var taskPriority = form.find('select[name="taskpriority"]');
+				var taskPriority = form.find('select[name="taskstatus"]');
 				if(taskPriority.length > 0){
-					taskPriority.val(priority);
+					taskPriority.val(status.replace("_"," "));
 					vtUtils.showSelect2ElementView(taskPriority);
 				}
 
-				form.append("<input type=hidden name='taskpriority' value='"+priority+"'>");
+				form.append("<input type=hidden name='taskstatus' value='"+status+"'>");
 			});
 
 			var QuickCreateParams = {};
@@ -216,11 +301,12 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 		var thisInstance = this;
 		app.event.on('post.QuickCreateForm.save',function(event,data){
 			if(typeof data == 'object'){
-				priority = data['taskpriority']['value'];
+				status = data['taskstatus']['value'];
 			}
-			var contentsBlock = jQuery("#taskManagementContainer").find(".contentsBlock ."+priority.toLowerCase()+"");
+			//console.log(status);
+			var contentsBlock = jQuery("#taskManagementContainer").find(".contentsBlock."+status.toLowerCase()+"");
 			thisInstance.clearExistingCustomScroll();
-			thisInstance.loadContent(priority.toLowerCase());
+			thisInstance.loadContent(status.toLowerCase());
 		});
 	},
 
@@ -272,7 +358,7 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 				}else {
 					fieldElement.val(value);
 				}
-			} 
+			}
 		}
 	},
 
@@ -317,15 +403,20 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 	},
 
 	registerSubjectFieldEnterEvent : function(){
+
 		var thisInstance = this;
 		var overlay = this.getOverlayContainer();
 		overlay.on("keypress",".taskSubject",function(e){
+
 			var currentTarget = jQuery(e.currentTarget);
 			var keycode = (e.keyCode ? e.keyCode : e.which);
 			if(keycode == '13'){
 				jQuery(this).blur();
 				var subject = currentTarget.val();
-				var priority = currentTarget.closest('.content').data("priority");
+				var status = currentTarget.closest('.content').data("status");
+                status = status.replace("_"," ");
+
+				//console.log(status);
 				if(subject.trim() == ""){
 					app.helper.showErrorNotification({'message': app.vtranslate('JS_SUBJECT_VALUE_CANT_BE_EMPTY')})
 					return false;
@@ -340,17 +431,16 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 					var dataElement = formValues[i];
 					fieldNameValueMap[dataElement["name"]] = dataElement["value"];
 				}
-				fieldNameValueMap["taskpriority"] = priority;
+				fieldNameValueMap["taskstatus"] = status;
 				fieldNameValueMap["subject"] = subject;
-				fieldNameValueMap["taskstatus"] = 'Not Started';
 				fieldNameValueMap["assigned_user_id"] = app.getUserId();
 
 				app.helper.showProgress();
 				thisInstance.saveNewTask(fieldNameValueMap).then(function(e){
 					currentTarget.val("");
-					var contentsBlock = jQuery("#taskManagementContainer").find(".contentsBlock ."+priority.toLowerCase()+"");
+					var contentsBlock = jQuery("#taskManagementContainer").find(".contentsBlock ."+status.toLowerCase()+"");
 					thisInstance.clearExistingCustomScroll();
-					thisInstance.loadContent(priority.toLowerCase());
+					thisInstance.loadContent(status.toLowerCase());
 				});
 			}
 		})
@@ -378,20 +468,26 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 			filterParams['endRange'] = res[1];
 		}
 
+
+
 		var statusFilter = jQuery('.otherFilters select[name="taskstatus"]').val();
 		if(statusFilter){
 			filterParams["status"] = statusFilter;
 		}
 
+
 		var userFilter = jQuery('.otherFilters select[name="assigned_user_id"]').val();
 		if(userFilter){
 			filterParams["assigned_user_id"] = userFilter;
 		}
-
+        //console.log(filterParams);
 		return filterParams;
 	},
-
+    /*
+    Do not know what the below function does, comment if creates issue, all the main functionalities working without this function
+     */
 	registerParentModuleChangeEvent : function(e){
+
 		var overlay = this.getOverlayContainer();
 		overlay.on('change',"select.referenceModulesList:visible",function(e){
 			var currentTarget = jQuery(e.currentTarget);
@@ -407,7 +503,7 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 	registerTaskDragEvent : function(e) {
 		var overlay = this.getOverlayContainer();
 		// appendTo : will allow the draggable element to view on top of given element
-		overlay.find('.ui-draggable').draggable({appendTo:".data-body",revert: "invalid",helper:'clone',cursor: 'move', 
+		overlay.find('.ui-draggable').draggable({appendTo:".data-body",revert: "invalid",helper:'clone',cursor: 'move',
 			drag:function(e, ui){
 				ui.helper.css({
 					'width': '30%',
@@ -425,32 +521,32 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 			'accept' : '.ui-draggable',
 			drop: function( event, ui ) {
 				var currentBlock = jQuery(this);
-				var priority = currentBlock.find('.content').data("priority");
+				var status = currentBlock.find('.content').data("status");
 
 				var colors = JSON.parse(jQuery('input[name="colors"]').val());
-				var color = colors[priority];
+				var color = colors[status];
 
 				var draggedElement = jQuery(ui.draggable);
 				var draggedElementTask = draggedElement.find(".task");
-				var draggedElementPriority = draggedElementTask.data("priority");
+				var draggedElementPriority = draggedElementTask.data("status");
 
-				if(draggedElementPriority != priority){
+				if(draggedElementPriority != status){
 					var draggedElementrecordID = draggedElementTask.data("recordid");
-					var fieldNameValueMap = {"taskpriority":priority};
+					var fieldNameValueMap = {"taskstatus":status};
 					app.helper.showProgress();
 					thisInstance.saveFieldValue(draggedElementrecordID,fieldNameValueMap).then(function(data){
 						if(data){
 							app.helper.hideProgress();
-							draggedElementTask.attr("data-priority",priority).data('priority',priority);
+							draggedElementTask.attr("data-status",status).data('status',status);
 							draggedElementTask.css({"border-left":"4px solid "+color});
-							currentBlock.find("."+priority.toLowerCase()+"-entries").prepend(draggedElement);
+							currentBlock.find("."+status.toLowerCase()+"-entries").prepend(draggedElement);
 							thisInstance.clearExistingCustomScroll();
 							var params = {
 								setHeight: '400px',
 								autoHideScrollbar: false
 							};
-							thisInstance.loadContent(priority.toLowerCase());
-//							app.helper.showVerticalScroll(currentBlock.find("."+priority.toLowerCase()+"-entries"),params);
+							thisInstance.loadContent(status.toLowerCase());
+//							app.helper.showVerticalScroll(currentBlock.find("."+status.toLowerCase()+"-entries"),params);
 						}
 					})
 				}
@@ -458,13 +554,21 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 		});
 	},
 
-	loadContent : function(priority){
-		var thisInstance = this;
-		var blockElement = jQuery("#taskManagementContainer").find(".contentsBlock."+priority+"");
-		var priority = blockElement.data("priority");
+    /*
+    Remove this piece of shit if found usless*/
 
-		var params = {
-			"priority" : priority
+	loadContent : function(status){
+		status = (status.toLowerCase()).replace(" ","_");
+       // console.log("Nirbhay"+status);
+
+        var thisInstance = this;
+		var blockElement = jQuery("#taskManagementContainer").find(".contentsBlock."+status+"");
+
+		var status = blockElement.data("status");
+        //console.log("Nirbhay123");
+
+        var params = {
+			"status" : (status.toLowerCase()).replace(" ","_")
 		};
 
 		thisInstance.getContentsOfPriority(params).then(function(data){
@@ -478,20 +582,24 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 	loadContents : function(){
 		var thisInstance = this;
 		app.helper.showProgress();
-		thisInstance.getAllContents({}).then(function(data){
-			app.helper.hideProgress();
-			var data = JSON.parse(data);
-			var blocksList = jQuery(".contentsBlock");
-			blocksList.each(function(index,blockElement){
-				var blockElement = jQuery(blockElement);
-				var priority = blockElement.data('priority');
-				blockElement.find(".dataEntries").html(data[priority]);
-				blockElement.attr("data-page",1).data("page",1);
-			});
-			app.event.trigger("post.filter.load");
-		});
-	},
+        //console.log("Load Contents");
+        thisInstance.getAllContents({}).then(function(data){
+            app.helper.hideProgress();
+            var data = JSON.parse(data);
 
+            var blocksList = jQuery(".contentsBlock");
+            blocksList.each(function(index,blockElement){
+                var blockElement = jQuery(blockElement);
+                var status = blockElement.data('status');
+                blockElement.find(".dataEntries").html(data[status]);
+                blockElement.attr("data-page",1).data("page",1);
+            });
+            app.event.trigger("post.filter.load");
+            });
+
+	},
+    /*
+    ** Commented By Nirbhay to disable more functionality
 	registerMoreButtonClickEvent : function(){
 		var thisInstance = this;
 		var overlay = this.getOverlayContainer();
@@ -501,12 +609,13 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 				fetchingContents = true;
 				var currentTarget = jQuery(e.currentTarget);
 				var blockElement = currentTarget.closest(".contentsBlock");
-				var priority  = blockElement.attr('data-priority');
+				var status  = blockElement.attr('data-status');
 				var page  = blockElement.attr("data-page");
+				console.log("Page No. :" +page);
 				page = parseInt(parseFloat(page)) + 1;
 				app.helper.showProgress();
 				var params = {
-					"priority":priority,
+					"status":status,
 					"page" : page
 				};
 				thisInstance.getContentsOfPriority(params).then(function(data){
@@ -519,7 +628,7 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 				});
 			}
 		});
-	},
+	},*/
 
 	registerDeleteTaskEvent : function(){
 		var overlay = this.getOverlayContainer();
@@ -546,17 +655,51 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 	},
 
 	initializeTaskStatus : function(){
+        var statusesArr = [];
+        if(jQuery("[name = sessionStatus]").val()){
+            var statuses = jQuery("[name = sessionStatus]").val();
+            if(statuses != ''){
+                var statuses = statuses.replace(new RegExp("_","g"), " ");
+                statusesArr = statuses.split(",");
+            }
+        }
+
+
+       // console.log("Nirbhay" + statusesArr.length);
+
 		var container = this.getOverlayContainer();
 		var taskStatus = container.find('select[name="taskstatus"]');
-		if(taskStatus.length > 0){
-			taskStatus.find('[value="Not Started"]').attr('selected', "selected");
-			taskStatus.find('[value="In Progress"]').attr('selected', "selected");
+		//console.log(taskStatus);
+        if(statusesArr.length > 0 && taskStatus.length > 0){
+            taskStatus.find('[value="'+statusesArr[i]+'"]').attr('selected', "selected");
+
+        }
+		else if(taskStatus.length > 0){
+            taskStatus.find('[value="Not Started"]').attr('selected', "selected");
+           taskStatus.find('[value="In Progress"]').attr('selected', "selected");
 			taskStatus.find('[value="Pending Input"]').attr('selected', "selected");
 			taskStatus.find('[value="Planned"]').attr('selected', "selected");
-			vtUtils.showSelect2ElementView(taskStatus);
-			this.loadContents();
-		}
+
+        }
+
+        vtUtils.showSelect2ElementView(taskStatus);
+
 	},
+
+
+    initializeAssignedUser : function(){
+        var container = this.getOverlayContainer();
+        var assigneduser = container.find('select[name="assigned_user_id"]');
+
+
+        if(assigneduser.length > 0){
+
+            assigneduser.find('[value="Mine"]').attr('selected', "selected");
+        }
+
+        vtUtils.showSelect2ElementView(assigneduser);
+
+    },
 
 	registerQuickPreviewForTask : function(){
 		var self = this;
@@ -575,23 +718,48 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 			vtigerInstance.showQuickPreviewForId(recordId, module);
 		});
 	},
+	
+	
+	/*registerTabClick : function(){
+		var self = this;
+
+		jQuery(".dashboardTab").on('click', function(e){ 
+		    var tabid = element.data('tabid');
+		    alert('Raju'+tabid);
+		    var element = jQuery(e.currentTarget);
+			var recordId = element.data('id');
+			window.location = 'index.php?module=Home&view=DashBoard&tabid='+tabid;
+			var DashboardInst = new Vtiger_Widget_Js();
+			DashboardInst.refreshWidget();
+		});
+	},*/
+
 
 	registerEvents : function(){
 		var thisInstance = this;
-//		this.loadContents();
-		this.registerMoreButtonClickEvent();
+		this.loadContents();
+		//this.registerMoreButtonClickEvent(); Commented by Nirbhay to disbale the functionality
 		this.registerStatusCheckboxEvent();
-		this.registerDateFilters();
-		this.registerTaskManagementSearch();
-		this.registerEditedTaskCancelEvent();
-		this.registerSubjectFieldEnterEvent();
-		this.registerParentModuleChangeEvent();
-		this.registerTaskDropEvent();
-		this.registerDeleteTaskEvent();
-		this.registerQuickEditTaskEvent();
-		this.registerPostQuickCreateSaveEvent();
-		this.initializeTaskStatus();
-		this.registerQuickPreviewForTask();
+        this.registerDateFilters();
+
+        this.initializeTaskStatus();
+        this.initializeAssignedUser();
+        this.registerTaskManagementSearch();
+        this.registerEditedTaskCancelEvent();
+        this.registerSubjectFieldEnterEvent();
+        this.registerTaskDropEvent();
+        this.registerDeleteTaskEvent();
+
+
+        /*****Validate from here**********/
+
+
+        this.registerParentModuleChangeEvent();
+        this.registerQuickEditTaskEvent();
+        this.registerPostQuickCreateSaveEvent();
+        this.registerQuickPreviewForTask();
+       // this.registerTabClick();
+        
 		vtUtils.registerEventForDateFields(jQuery('#taskManagementContainer'));
 
 		app.event.on("post.filter.load",function(e){
@@ -603,14 +771,11 @@ Vtiger_Index_Js("Vtiger_TaskManagement_Js",{},{
 			 thisInstance.registerTaskDragEvent();
 			 app.helper.hideProgress();
 		});
-	
-	  window.onbeforeunload = function() {
-                                    var tabid = jQuery("#default_tab").val();
-                                     window.setTimeout(function () {
-                                         window.location = 'index.php?module=Home&view=DashBoard&tabid='+tabid;
-                                     }, 0);
 
-                                     window.onbeforeunload = null;
-                     }
-            }        
+      
+	}
+
+
+
+
 });

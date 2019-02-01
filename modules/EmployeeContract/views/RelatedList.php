@@ -57,8 +57,7 @@ class EmployeeContract_RelatedList_View extends Vtiger_RelatedList_View {
 	
 		$viewer->assign('CLAIMDETAILS', $claims);
 		$viewer->assign('LEAVEDETAILS', $leaves);
-		$viewer->assign('BENEFITDETAILS', $benefits);
-		$viewer->assign('TAB_LABEL', $request->get('tab_label'));
+		$viewer->assign('BENEFITDETAILS', $benefits);		
         return $viewer->view('RelatedList.tpl', $moduleName, 'true');
 
 	}

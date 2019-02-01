@@ -13,6 +13,35 @@ Vtiger.Class('Vtiger_Index_Js', {
         getInstance : function() {
                 return new Vtiger_Index_Js();
         },
+        
+        toggleAnnouncement : function(){
+           app.helper.showProgress();
+           var elmClass = jQuery("#headertextflow").attr('class');
+           
+           var view = 0;
+           if(elmClass.indexOf('hide') != -1){
+               view = 1;
+           }
+           
+           var params = {
+                        'module' : 'Vtiger',
+                        'parent' : 'Settings',
+                        'action' : 'AnnouncementSaveAjax',
+                        'isview' : view,
+                };
+           app.request.post({"data":params}).then(function(error,response) {
+              app.helper.hideProgress();
+              if(view==1){
+                jQuery("#headertextflow").removeClass('hide');
+                jQuery("#announcementicon").html("<i  class='fa fa-microphone'></i>"); 
+              } else {
+               jQuery("#headertextflow").addClass('hide');
+               jQuery("#announcementicon").html("<i  class='fa fa-microphone-slash'></i>"); 
+              }
+                   
+           });
+           
+        },
 
         /**
          * Function to show the content of a file in an iframe
@@ -42,12 +71,12 @@ Vtiger.Class('Vtiger_Index_Js', {
         showEmailPreview : function(recordId, parentId) {
                 var popupInstance = Vtiger_Popup_Js.getInstance();
                 var params = {};
-                params['module'] = "Emails";
-                params['view'] = "ComposeEmail";
-                params['mode'] = "emailPreview";
-                params['record'] = recordId;
-                params['parentId'] = parentId;
-                params['relatedLoad'] = true;
+                params['module']        = "Emails";
+                params['view']          = "ComposeEmail";
+                params['mode']          = "emailPreview";
+                params['record']        = recordId;
+                params['parentId']      = parentId;
+                params['relatedLoad']   = true;
 
                 var callback = function(data){
                         emailPreviewClass = app.getModuleSpecificViewClass('EmailPreview','Vtiger');
@@ -411,14 +440,27 @@ Vtiger.Class('Vtiger_Index_Js', {
 		    jQuery('.settingsgroup-accordion').unbind('click');
             jQuery('.settingsgroup-accordion').click( function() { 
 
+            var thisElement     = jQuery(this);    
 			var container 		= jQuery(jQuery(this).find('a').data('parent'));//jQuery('#accordion_mobile, #accordion');
+            var isUserSideBar   = jQuery('.AdminSidebar').hasClass('hide') || jQuery('.MegaMenu').hasClass('hide');
+
+            if (isUserSideBar)                
+                container       = jQuery('.UserSidebar').find('#accordion');
+
 			var element   		= jQuery(this).find('.indicator');
 			var links     		= container.find('a');
             var notCollapsed    = element.hasClass('ti-angle-right');
 			    
                         
 			links.each(function() {
+                    
+                    if (isUserSideBar) {
 
+                        var href = jQuery(this).attr('href');
+                        if(href.indexOf('LBL') !== -1 && href !== thisElement.find('a').attr('href'))
+                            jQuery(href).removeClass('in');
+
+                    }
                     jQuery(this).find('.indicator').removeClass('ti-angle-down').addClass('ti-angle-right').closest('a').removeClass('btn-primary text-white');
 
                });				
@@ -430,10 +472,9 @@ Vtiger.Class('Vtiger_Index_Js', {
                     
                } 
 
-
             } 
 
-        });
+        );
 
     },
         
@@ -455,18 +496,81 @@ Vtiger.Class('Vtiger_Index_Js', {
                 this.registerHoverEventOnAttachment();
                 //this.addBodyScroll();
                 this.triggerGetHelp();  //added by jitu@salespeer for Context Help  
-
+                this.changeSkin();
+                this.changeDarkSkin();
                 this.mentionerCallBack();
                 this.modulesMenuScrollbar();
                 Vtiger_Index_Js.registerActivityReminder();
                 //reference preview event registeration
                 this.registerReferencePreviewEvent();
-
+               // this.registerLoadMore();    
                 var minHeight = $(window).height() - 84;
                 $(".content-area").attr("style","min-height:"+minHeight+"px !important");
 
         },
-
+       changeSkin : function() {
+            jQuery('.themeElement').on('click', function(e) {
+                       var $this = jQuery(this);
+                       app.helper.showProgress();
+                    //currentElement.closest('#themeContainer').hide();                 
+                    var skinname = $this.attr('data-skinName');
+                    var darkskin = "dark"+skinname;
+                    var record_id = jQuery('#current_user_id').val();
+                    jQuery("input[name=darkTheme]").val(darkskin);
+                    var params = {
+                            'module' : 'Users',
+                            'action' : 'SaveAjax',
+                            'record' : record_id,
+                            'field'  : 'theme',
+                            'value'  : skinname,
+                            'mod'    : "edit"
+                    }
+                  app.request.post({"data":params}).then(function(err,data){
+                     // console.log(data);
+                         if(err==null){
+                              window.location.href='index.php';
+                          }
+//                         app.helper.hideProgress();
+                    },
+                    function(error,err){
+                    });
+            })
+	},
+        changeDarkSkin : function() {
+            jQuery('input[name=darkTheme]').on('click', function(e) {
+               
+                       var $this = jQuery(this);
+                       if($this.is('checked')){
+                                         var theme = $this.val().replace("dark");           
+                       }
+                       else{
+                            var theme = $this.val();    
+                       
+                       }
+                       app.helper.showProgress();
+                    //currentElement.closest('#themeContainer').hide();                 
+                    var skinname = theme;                   
+                    var record_id = jQuery('#current_user_id').val();
+               
+                    var params = {
+                            'module' : 'Users',
+                            'action' : 'SaveAjax',
+                            'record' : record_id,
+                            'field'  : 'theme',
+                            'value'  : skinname,
+                            'mod'    : "edit"
+                    }
+                  app.request.post({"data":params}).then(function(err,data){
+                     // console.log(data);
+                         if(err==null){
+                              window.location.href='index.php';
+                          }
+//                         app.helper.hideProgress();
+                    },
+                    function(error,err){
+                    });
+            })
+	},
         addBodyScroll: function () {
                 app.helper.showVerticalScroll(
                                 $("body"),
@@ -676,6 +780,7 @@ Vtiger.Class('Vtiger_Index_Js', {
          * @returns {undefined}
          */
         quickCreateSave : function(form,invokeParams){
+                console.log('saving...');
                 var params = {
                         submitHandler: function(form) {
                                 // to Prevent submit if already submitted
@@ -1755,6 +1860,71 @@ Vtiger.Class('Vtiger_Index_Js', {
                         if(err == null){
                                 thisInstance.postRefrenceComplete(data, container);
                         }
+                });
+        },
+        
+        registerLoadMore: function() {
+                var thisInstance  = this;
+                var parent = thisInstance.getContainer();
+                var contentContainer = parent.find('.notification-list');
+
+                var loadMoreHandler = contentContainer.find('.all-notification');
+                loadMoreHandler.off('click');
+                loadMoreHandler.click(function(){
+                        var parent = thisInstance.getContainer();
+                        var element = parent.find('a[name="drefresh"]');
+                        var url = element.data('url');
+                        var params = url;
+
+                        var widgetFilters = parent.find('.widgetFilter');
+                        if(widgetFilters.length > 0) {
+                                params = { url: url, data: {}};
+                                widgetFilters.each(function(index, domElement){
+                                        var widgetFilter = jQuery(domElement);
+                                        //Filter unselected checkbox, radio button elements
+                                        if((widgetFilter.is(":radio") || widgetFilter.is(":checkbox")) && !widgetFilter.is(":checked")){
+                                                return true;
+                                        }
+
+                                        if(widgetFilter.is('.dateRange')) {
+                                                var name = widgetFilter.attr('name');
+                                                var start = widgetFilter.find('input[name="start"]').val();
+                                                var end = widgetFilter.find('input[name="end"]').val();
+                                                if(start.length <= 0 || end.length <= 0  ){
+                                                        return true;
+                                                } 
+
+                                                params.data[name] = {};
+                                                params.data[name].start = start;
+                                                params.data[name].end = end;
+                                        } else {
+                                                var filterName = widgetFilter.attr('name');
+                                                var filterValue = widgetFilter.val();
+                                                params.data[filterName] = filterValue;
+                                        }
+                                });
+                        }
+
+                        var filterData = thisInstance.getFilterData();
+                        if(! jQuery.isEmptyObject(filterData)) {
+                                if(typeof params == 'string') {
+                                        params = { url: url, data: {}};
+                                }
+                                params.data = jQuery.extend(params.data, thisInstance.getFilterData())
+                        }
+
+                        // Next page.
+                        params.data['page'] = loadMoreHandler.data('nextpage');
+
+            app.helper.showProgress();
+                        app.request.post(params).then(function(err,data){
+                                app.helper.hideProgress();
+                                loadMoreHandler.parent().replaceWith(jQuery(data).html());
+                                thisInstance.registerLoadMore();
+                        }, function(){
+                                app.helper.hideProgress();
+                        });
+
                 });
         }
 });

@@ -22,7 +22,7 @@ class Users_Index_View extends Vtiger_Basic_View {
 		if($currentUserModel->isAdminUser()) {
 			$settingsIndexView = new Settings_Vtiger_Index_View();
 			$settingsIndexView->preProcessSettings($request);
-		}
+		}		
 	}
 
 	public function postProcess(Vtiger_Request $request) {
@@ -35,6 +35,7 @@ class Users_Index_View extends Vtiger_Basic_View {
 	}
 
 	public function process(Vtiger_Request $request) {
+
 	}
 
 	/**

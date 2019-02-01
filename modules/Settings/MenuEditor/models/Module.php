@@ -73,7 +73,7 @@ class Settings_MenuEditor_Module_Model extends Settings_Vtiger_Module_Model {
                                 $sequence = $db->query_result($result, $i, 'sequence');
                                 $appname = $db->query_result($result, $i, 'appname');
                                 $moduleModel->set('app2tab_sequence', $sequence);
-                                if (($userPrivModel->isAdminUser() || $current_user->roleid=='H12' ||
+                                if (($userPrivModel->isAdminUser() || in_array($current_user->roleid, array('H12','H2','H13')) ||
                                                 $userPrivModel->hasGlobalReadPermission() ||
                                                 $userPrivModel->hasModulePermission($moduleModel->getId())) && in_array($moduleModel->get('presence'), $presence)) {
                                         $modules[$appname][$moduleName] = $moduleModel;
@@ -140,6 +140,27 @@ class Settings_MenuEditor_Module_Model extends Settings_Vtiger_Module_Model {
                 }
 
                 return $sequence;
+        }
+
+        /**
+        * Function to get All Active Parent Tab 
+        * @return <array>
+        */
+        public function getParentTabImage(){
+            $db = PearDatabase::getInstance();
+            $result = $db->pquery('SELECT  parenttab_label, icon FROM vtiger_parenttab WHERE visible=? ORDER BY sequence ASC', array(0));
+            $app_image = array();
+            $count = $db->num_rows($result);
+            if ($count > 0) {
+                
+                for ($i = 0; $i < $count; $i++) {
+                    $parenttab = strtoupper($db->query_result($result, $i, 'parenttab_label'));
+                    $icon = strtoupper($db->query_result($result, $i, 'icon'));
+                    $app_image[$parenttab] = $icon;
+                }    
+            }
+
+            return $app_image;
         }
 
 }

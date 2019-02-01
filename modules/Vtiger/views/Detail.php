@@ -87,7 +87,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 					if($record == $recordId) {
 						$found = true;
 					}
-					//If record not found then we are assiging previousRecordId
+					//If record not found then we are assigning previousRecordId
 					//assuming next record will get matched
 					if(!$found) {
 						$prevRecordId = $record;
@@ -163,6 +163,10 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 	}
 
 	function preProcessTplName(Vtiger_Request $request) {
+		$viewer = $this->getViewer ($request);
+		$searchparams = $request->get('search_params');
+		$viewer->assign('MODULENAME', $_SESSION['MODULENAME']);	
+
 		return 'DetailViewPreProcess.tpl';
 	}
 
@@ -410,7 +414,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 			$pagingModel->set('limit', $limit);
 		}
 
-		$recentActivities = ModTracker_Record_Model::getUpdates($parentRecordId, $pagingModel,$moduleName);
+		$recentActivities = ModTracker_Record_Model::getUpdates($parentRecordId, $pagingModel,$moduleName); 
 		$pagingModel->calculatePageRange($recentActivities);
 
 		if($pagingModel->getCurrentPage() == ModTracker_Record_Model::getTotalRecordCount($parentRecordId)/$pagingModel->getPageLimit()) {

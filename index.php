@@ -7,21 +7,22 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  ************************************************************************************/
+
 /*
 error_reporting(1);
-		ini_set('display_erros',1);
-		  register_shutdown_function('handleErrors');
-		    function handleErrors() {
+    ini_set('display_erros',1);
+          register_shutdown_function('handleErrors');
+            function handleErrors() {
 
-		       $last_error = error_get_last();
+               $last_error = error_get_last();
 
-		       if (!is_null($last_error)) { // if there has been an error at some point
+               if (!is_null($last_error)) { // if there has been an error at some point
 
-			  // do something with the error
-			  print_r($last_error);
+                  // do something with the error
+                  print_r($last_error);
 
-		       }
-		    }
+               }
+            }
 */
 //Overrides GetRelatedList : used to get related query
 //TODO : Eliminate below hacking solution

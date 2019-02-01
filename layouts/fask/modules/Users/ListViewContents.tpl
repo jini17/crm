@@ -20,9 +20,9 @@
    padding:5px 10px;
    border: 1px solid #ddd;
    background: #fff;
-   min-height: 300px;
+   min-height: 390px;
    margin-top: 20px;
-   marign-bottom: 20px;
+   margin-bottom: 9px;
    }
    .user-social{
    margin-top: 15px;
@@ -240,15 +240,15 @@
                                                                 </td>
                                                         {elseif $LISTVIEW_HEADER->getName() eq 'facebook' }            
                                                             <td class="{$WIDTHTYPE} user-social" nowrap>
-                                                                 {if $LISTVIEW_ENTRY->getSocialMediaLinks('facebook',$LISTVIEW_ENTRY->getId()) neq ''}  
-                                                                <a class="fa fa-facebook" target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('facebook',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"> </a>
-                                                                {/if}
-                                                                {if $LISTVIEW_ENTRY->getSocialMediaLinks('twitter',$LISTVIEW_ENTRY->getId()) neq ''}  
-                                                                <a class='fa fa-twitter' target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('twitter',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"> </a>
-                                                                {/if}
-                                                                 {if $LISTVIEW_ENTRY->getSocialMediaLinks('linkedin',$LISTVIEW_ENTRY->getId()) neq ''}  
-                                                                <a  class='fa fa-linkedin' target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('linkedin',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"></a>
-                                                                {/if}
+                                                                 
+                                                                <a class=" fab fa-facebook-f" target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('facebook',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"> </a>
+                                                               
+                                                           
+                                                                <a class=' fab fa-twitter' target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('twitter',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"> </a>
+                                                          
+                                                           
+                                                                <a  class=' fab fa-linkedin-in' target="_blamk" href="{$LISTVIEW_ENTRY->getSocialMediaLinks('linkedin',$LISTVIEW_ENTRY->getId())}" style="margin-left:5px;"></a>
+                                                         
                                                                 <a  class='fa fa-envelope' href="#"  style="margin-left:5px;" onclick="javascript:Settings_Users_List_Js.birthdayEmail({$LISTVIEW_ENTRY->getId()})"></a>
                                                              </td>
                                                          {elseif $LISTVIEW_HEADER->getName() eq 'date_joined'}

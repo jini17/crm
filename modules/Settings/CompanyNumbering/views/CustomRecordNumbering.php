@@ -16,7 +16,8 @@ class Settings_CompanyNumbering_CustomRecordNumbering_View extends Settings_Vtig
 		$supportedModules = Settings_CompanyNumbering_CustomRecordNumberingModule_Model::getSupportedModules();
 		//Important : Is intance allow for multiple company or not
 		$isAllowMultipleCompany = Settings_CompanyNumbering_CustomRecordNumberingModule_Model::getSupportMultipleCompany();		
-		 $companylist    = Settings_MultipleTnC_CompanyTnC_Model::getAllCompanyByTnC();
+		$companylist    = Settings_MultipleTnC_CompanyTnC_Model::getAllCompanyByTnC();
+		$aCompanyNumberingSetting = Settings_CompanyNumbering_CustomRecordNumberingModule_Model::getCompanyNumberingSetting(); 
 		
 		if($isAllowMultipleCompany == 0) {
 			$tmplist = $companylist[0];
@@ -35,9 +36,10 @@ class Settings_CompanyNumbering_CustomRecordNumbering_View extends Settings_Vtig
 		
 		$viewer = $this->getViewer($request);
 		$viewer->assign('ALL_COMPANY', $companylist);
-		$viewer->assign('DEFAULT_COMPANY', $defaultcompany);
+		$viewer->assign('DEFAULT_COMPANY', $defaultcompany);		
 		$viewer->assign('SUPPORTED_MODULES', $supportedModules);
 		$viewer->assign('DEFAULT_MODULE_MODEL', $defaultModuleModel);
+		$viewer->assign('COMPANYNUMBERING', $aCompanyNumberingSetting); 
 		$viewer->assign('QUALIFIED_MODULE',$qualifiedModuleName);
 		$viewer->assign('CURRENT_USER_MODEL', Users_Record_Model::getCurrentUserModel());
 		$viewer->view('CustomRecordNumbering.tpl', $qualifiedModuleName);

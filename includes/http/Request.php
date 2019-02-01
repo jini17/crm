@@ -197,7 +197,7 @@ class Vtiger_Request {
 	
 	function validateWriteAccess($skipRequestTypeCheck = false) {
         if(!$skipRequestTypeCheck) {
-        	if ($_SERVER['REQUEST_METHOD'] != 'POST' && ($this->get('module') !='Users' && $this->get('action') !='ExportData')) throw new Exception('Invalid request');
+        	if ($_SERVER['REQUEST_METHOD'] != 'POST' && ($this->get('module') !='Users' && $this->get('action') !='ExportData') && $this->get('view') !='ShowWidget') throw new Exception('Invalid request');
         }
 
 		$this->validateReadAccess();

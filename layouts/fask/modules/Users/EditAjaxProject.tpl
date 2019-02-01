@@ -66,7 +66,7 @@
                                                 </div>
                                                 <div class="controls col-md-8">
                                                         <select class="select2" name="designation" id="designation" onchange="updateSelectBox('designation','designationtxt');" data-rule-required = "true" style="width: 100%;">	
-                                                                <option value="" selected>Select Anyone</option>
+                                                                <option value="" selected>{vtranslate('LBL_PLS_SELECT', $QUALIFIED_MODULE)}</option>
                                                                 {foreach item=DESIGNATION from=$DESIGNATION_LIST}
                                                                 <option value="{$DESIGNATION.designation}" {if $PROJECT_DETAIL['designation'] eq $DESIGNATION.designation} selected {/if}>{$DESIGNATION.designation}</option>
                                                         {/foreach}
@@ -120,6 +120,7 @@
                                                 </div>	
                                                 <div class="controls date col-md-8">
                                                         <input id="project_url" class="fieldValue inputElement" type="text" value="{$PROJECT_DETAIL['project_url']}" name="project_url" data-rule-required = "true" >
+                                                        <span style="font-size:10px;">Write full URL with http:// or https://</span>
                                                 </div>		
                                         </div>
                                 </div>		 	
@@ -129,9 +130,9 @@
                                                         <label class="control-label fieldLabel pull-right">&nbsp;{vtranslate('LBL_WANT_TO_MAKE_PUBLIC', $QUALIFIED_MODULE)}</label>
                                                 </div>	
                                                 <div class="controls date col-md-8">
-                                                          <label><input type="radio" {if $PROJECT_DETAIL.isview eq '0'} checked {/if} name='chkviewable' value="0" />{$WORKEXP_DETAIL.isview}&nbsp; {vtranslate('LBL_PUBLIC', $QUALIFIED_MODULE)} </label>&nbsp; 
-                                                     <label><input type="radio"{if $PROJECT_DETAIL.isview eq 1} checked {/if} name='chkviewable' value="1" />&nbsp; {vtranslate('LBL_PRIVATE', $QUALIFIED_MODULE)} </label>&nbsp; 
-                                                      <label><input type="radio" {if $PROJECT_DETAIL.isview eq 2} checked {/if} name='chkviewable' value="2" />&nbsp; {vtranslate('LBL_PROTECTED', $QUALIFIED_MODULE)} </label>
+                                                          <label  title=" Visible to all Employee"><input type="radio" {if $PROJECT_DETAIL.isview eq '0'} checked {/if} name='chkviewable' value="0" />{$WORKEXP_DETAIL.isview}&nbsp; {vtranslate('LBL_PUBLIC', $QUALIFIED_MODULE)} </label>&nbsp; &nbsp;
+                                                     <label  title=" Visible to Admin and HR"><input type="radio"{if $PROJECT_DETAIL.isview eq '1'} checked {/if} name='chkviewable' value="1" />&nbsp; {vtranslate('LBL_PRIVATE', $QUALIFIED_MODULE)} </label>&nbsp; &nbsp;
+                                                      <label title="Visible to you only"><input type="radio" {if $PROJECT_DETAIL.isview eq '2'} checked {/if}      {if $PROJECT_ID eq ''} checked {/if} name='chkviewable' value="2" />&nbsp; {vtranslate('LBL_PROTECTED', $QUALIFIED_MODULE)} </label>
 {*                                                        <input class="inputElement" type="checkbox" name="chkviewable" id="chkviewable" {if $PROJECT_DETAIL.isview eq 1} checked {/if}>
 *}                                                </div>
                                         </div>

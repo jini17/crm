@@ -165,18 +165,25 @@ class Vtiger_Field_Model extends Vtiger_Field {
 				$fieldDataType = 'picklist';
 			} else if($uiType == '55' && stripos($this->getName(), 'firstname') !== false) {
 				$fieldDataType = 'salutation';
-            } else if($uiType == '55' && stripos($this->getName(), 'roundrobin_userid') !== false) {
+            } else if($uiType == '55' && (stripos($this->getName(), 'notifyto') !== false || stripos($this->getName(), 'roundrobin_userid') !== false)) {
                 $fieldDataType = 'multiowner';
-            } else if($uiType == '3993') {		//Modified Line
+            } else if($uiType == '3993' || $uiType == '3996') {		//Modified Line
 				 $fieldDataType = 'companyDetails';	//Modified Line
+			}	 	 
+			else if($uiType == '3997') {		//Modified Line
+				 $fieldDataType = 'termsConditions';	//Modified Line
+			} else if($uiType == '3994') {		//Modified Line
+				 $fieldDataType = 'MultiCompany';	//Modified Line
 			} else if($uiType == '998') {		//Modified Line
 				 $fieldDataType = 'userRole';	//Modified Line
 			} else if($uiType == '999') {		//added by jitu@5jan2017
 				 $fieldDataType = 'range';		//added by jitu@5jan2017	
 			}  else if($uiType == '2002') {		//Modified Line
 				 $fieldDataType = 'multiregion';		//Modified Line added ny jitu
-			}else if($uiType == '3995') {		//Modified Line
-				 $fieldDataType = 'Country';		//Modified Line added ny jitu
+			} else if($uiType == '3995') {		//Modified Line
+				 $fieldDataType = 'Country';	//Modified Line added ny jitu
+			} else if($uiType == '1270') {		//Added Radio Button Uitype
+				 $fieldDataType = 'radio';	//Modified Line added ny jitu
 			} else {
 				$webserviceField = $this->getWebserviceFieldObject();
 				$fieldDataType = $webserviceField->getFieldDataType();
@@ -187,6 +194,23 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		return $this->fieldDataType;
 	}
 	
+	/**
+	* Function added by Jitu@secondcrm.com on Sep 19, 2014 for new UI Type 3994
+	* This function will retrieve terms details 
+	*/
+	public function getTermsDetails() {
+		$aTermCondition = Vtiger_Util_Helper::getTermTitle();
+        	return $aTermCondition;
+	}
+
+	/**
+	* Function added by Jitu@secondcrm.com on Sep 19, 2014 for new UI Type 3994
+	* This function will retrieve terms details 
+	*/		
+	public function getTermConditionTitle($id) {
+      		$aTermConditionTitle = Vtiger_Util_Helper::getTNCTitle($id);
+        	return $aTermConditionTitle;
+	}
 	/**
 	* Function added by Jitu@secondcrm.com on Mar 05, 2015 for new UI Type 3995
 	* This function will retrieve all country
@@ -338,7 +362,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 
 		if($fieldName == 'hdnTaxType' || ($fieldName == 'region_id' && $this->get('displaytype') == 5)) return null;
 
-		if($fieldDataType == 'picklist' || $fieldDataType == 'multipicklist') {
+		if($fieldDataType == 'picklist' || $fieldDataType == 'multipicklist' || $fieldDataType == 'radio') {
 			$fieldPickListValues = array();
 			$currentUser = Users_Record_Model::getCurrentUserModel();
 			if($this->isRoleBased()) {
@@ -475,7 +499,12 @@ class Vtiger_Field_Model extends Vtiger_Field {
 	 */
 	public function isAjaxEditable() {
 
-		$ajaxRestrictedFields = array('4', '72', '61', '999','28','3995');
+		$currentUser = Users_Record_Model::getCurrentUserModel();
+		if(!in_array($currentUser->roleid, array('H2','H12','H13')) && in_array($this->getModuleName(), array('Leave','Claim','WorkingHours', 'Payslip'))){
+			return false;
+		}
+		
+		$ajaxRestrictedFields = array('4', '72', '61', '999','28','3995','3993','3997', '3994', '3996','55');
 		if(!$this->isEditable() || in_array($this->get('uitype'), $ajaxRestrictedFields) || $this->get('name')=='category' || $this->get('name')=='message') {
 			return false;
 		}
@@ -608,7 +637,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		$this->fieldInfo['name'] = $this->get('name');
 		$this->fieldInfo['label'] = vtranslate($this->get('label'), $this->getModuleName());
 
-		if($fieldDataType == 'picklist' || $fieldDataType == 'multipicklist' || $fieldDataType == 'multiowner') {
+		if($fieldDataType == 'picklist' || $fieldDataType == 'multipicklist' || $fieldDataType == 'multiowner' || $fieldDataType == 'radio') {
 			$pickListValues = $this->getPicklistValues();
 			if(!empty($pickListValues)) {
 				$this->fieldInfo['picklistvalues'] = $pickListValues;
@@ -1101,6 +1130,11 @@ class Vtiger_Field_Model extends Vtiger_Field {
 			case 'start_period'			:	$funcName = array('name' => 'lessThanDependentField', 'params' => array('end_period'));
 											break;
 		}
+
+		// Added By Mabruk
+		if ($this->get('uitype') == '11')
+			$funcName = array('name' => 'phone', 'params' => array($fieldName));
+
 		if ($funcName) {
 			array_push($validator, $funcName);
 		}

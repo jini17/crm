@@ -166,30 +166,30 @@ class Vtiger_MenuStructure_Model extends Vtiger_Base_Model {
 
         function regroupMenuByParent($menuGroupedByParent) {
                 $editionsToAppMap = array(
-                                                                        'Contacts'		=> array('MARKETING', 'SALES', 'INVENTORY', 'SUPPORT', 'PROJECT'),
-                                                                        'Accounts'		=> array('MARKETING', 'SALES', 'INVENTORY', 'SUPPORT', 'PROJECT'),
-                                                                        'Campaigns'		=> array('MARKETING'),
-                                                                        'Leads'			=> array('MARKETING'),
-                                                                        'Potentials'	=> array('SALES'),
-                                                                        'Quotes'		=> array('SALES'),
-                                                                        'Invoice'		=> array('INVENTORY'),
-                                                                        'HelpDesk'		=> array('SUPPORT'),
-                                                                        'Faq'			=> array('SUPPORT'),
-                                                                        'Assets'		=> array('SUPPORT'),
-                                                                        'Products'		=> array('SALES', 'INVENTORY'),
-                                                                        'Services'		=> array('SALES', 'INVENTORY'),
-                                                                        'Pricebooks'	=> array('INVENTORY'),
-                                                                        'Vendors'		=> array('INVENTORY'),
-                                                                        'PurchaseOrder'	=> array('INVENTORY'),
-                                                                        'SalesOrder'	=> array('INVENTORY'),
-                                                                        'Project'		=> array('PROJECT'),
-                                                                        'ProjectTask'	=> array('PROJECT'),
-                                                                        'ProjectMilestone'	=> array('PROJECT'),
-                                                                        'ServiceContracts'	=> array('SUPPORT'),
+                                                                        'Contacts'      => array('MARKETING', 'SALES', 'INVENTORY', 'SUPPORT', 'PROJECT'),
+                                                                        'Accounts'      => array('MARKETING', 'SALES', 'INVENTORY', 'SUPPORT', 'PROJECT'),
+                                                                        'Campaigns'     => array('MARKETING'),
+                                                                        'Leads'         => array('MARKETING'),
+                                                                        'Potentials'    => array('SALES'),
+                                                                        'Quotes'        => array('SALES'),
+                                                                        'Invoice'       => array('INVENTORY'),
+                                                                        'HelpDesk'      => array('SUPPORT'),
+                                                                        'Faq'           => array('SUPPORT'),
+                                                                        'Assets'        => array('SUPPORT'),
+                                                                        'Products'      => array('SALES', 'INVENTORY'),
+                                                                        'Services'      => array('SALES', 'INVENTORY'),
+                                                                        'Pricebooks'    => array('INVENTORY'),
+                                                                        'Vendors'       => array('INVENTORY'),
+                                                                        'PurchaseOrder' => array('INVENTORY'),
+                                                                        'SalesOrder'    => array('INVENTORY'),
+                                                                        'Project'       => array('PROJECT'),
+                                                                        'ProjectTask'   => array('PROJECT'),
+                                                                        'ProjectMilestone'  => array('PROJECT'),
+                                                                        'ServiceContracts'  => array('SUPPORT'),
                                                                         'EmailTemplates'=> array('TOOLS'),
-                                                                        'Rss'			=> array('TOOLS'),
-                                                                        'Portal'		=> array('TOOLS'),
-                                                                        'RecycleBin'	=> array('TOOLS'),
+                                                                        'Rss'           => array('TOOLS'),
+                                                                        'Portal'        => array('TOOLS'),
+                                                                        'RecycleBin'    => array('TOOLS'),
                                                         );
 
                 $oldToNewAppMap = Vtiger_MenuStructure_Model::getOldToNewAppMapping();
@@ -215,13 +215,13 @@ class Vtiger_MenuStructure_Model extends Vtiger_Base_Model {
 
         public static function getOldToNewAppMapping() {
                 $oldToNewAppMap = array(
-                                                        'CONTACT'				=> 'SALES',
-                                                        'MARKETING_AND_SALES'	=> 'MARKETING',
-                                                        'INVENTORY'				=> 'INVENTORY',
-                                                        'SUPPORT'				=> 'SUPPORT',
-                                                        'PROJECT'				=> 'PROJECT',
-                                                        'TOOLS'					=> 'TOOLS',
-                                                        'ADMIN'					=>'ADMIN'
+                                                        'CONTACT'               => 'SALES',
+                                                        'MARKETING_AND_SALES'   => 'MARKETING',
+                                                        'INVENTORY'             => 'INVENTORY',
+                                                        'SUPPORT'               => 'SUPPORT',
+                                                        'PROJECT'               => 'PROJECT',
+                                                        'TOOLS'                 => 'TOOLS',
+                                                        'ADMIN'                 =>'ADMIN'
                                                   );
                 return $oldToNewAppMap;
         }
@@ -232,15 +232,23 @@ class Vtiger_MenuStructure_Model extends Vtiger_Base_Model {
          */
         public static function getAppMenuList(){
                 $db = PearDatabase::getInstance();
-                $result = $db->pquery("SELECT UPPER(parenttab_label) as parenttab FROM vtiger_parenttab WHERE visible=0 ORDER BY sequence ASC",array());
+                $plan = $_SESSION['plan'];
+                $notinclude = '';
+                if($plan ==1){
+                    $notinclude = " AND parenttab_label NOT IN ('Sales','Support')";     
+                } else if($plan ==2){
+                    $notinclude = "AND parenttab_label !='Support'";     
+                } else if($plan ==3){
+                   $notinclude = "AND parenttab_label !='Sales'";     
+                }
+
+                $result = $db->pquery("SELECT UPPER(parenttab_label) as parenttab FROM vtiger_parenttab WHERE visible=0 $notinclude ORDER BY sequence ASC",array());
                 $noOfRows = $db->num_rows($result);
-
-
-                for($i=0; $i<$noOfRows; ++$i) {
+                for($i=0; $i<$noOfRows; $i++) {
                         $row = $db->query_result_rowdata($result, $i);
-                                $parentlist[] = $row['parenttab'];
-
-                }	
+                        $parentlist[] = $row['parenttab'];
+                }   
+                
                 return $parentlist;//array('MARKETING','SALES','INVENTORY','SUPPORT','PROJECT','TOOLS');
         }
 
@@ -249,20 +257,20 @@ class Vtiger_MenuStructure_Model extends Vtiger_Base_Model {
                 $result = $db->pquery("SELECT UPPER(parenttab_label) as parenttab, icon FROM vtiger_parenttab WHERE visible=0 ORDER BY sequence ASC",array());
                 $noOfRows = $db->num_rows($result);
 
-
+                
                 for($i=0; $i<$noOfRows; ++$i) {
-                        $row = $db->query_result_rowdata($result, $i);
-                                $appImageIcons[$row['parenttab']] = $row['icon'];
+                    $row = $db->query_result_rowdata($result, $i);
+                    $appImageIcons[$row['parenttab']] = $row['icon'];
 
-                }	
+                }   
                 return $appImageIcons;//array('MARKETING','SALES','INVENTORY','SUPPORT','PROJECT','TOOLS');
 
-                /*$appImageIcons = array(	'MARKETING' => 'fa-users',
-                                                                'SALES'		=> 'fa-dot-circle-o',
-                                                                'SUPPORT'	=> 'fa-life-ring',
-                                                                'INVENTORY'	=> 'vicon-inventory',
-                                                                'PROJECT'	=> 'fa-briefcase',
-                                                                'TOOLS'		=> 'fa-wrench'
+                /*$appImageIcons = array(   'MARKETING' => 'fa-users',
+                                                                'SALES'     => 'fa-dot-circle-o',
+                                                                'SUPPORT'   => 'fa-life-ring',
+                                                                'INVENTORY' => 'vicon-inventory',
+                                                                'PROJECT'   => 'fa-briefcase',
+                                                                'TOOLS'     => 'fa-wrench'
                                                         );
                 return $appImageIcons;*/
         }

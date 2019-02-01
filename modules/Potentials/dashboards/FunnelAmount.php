@@ -44,7 +44,7 @@ class Potentials_FunnelAmount_Dashboard extends Vtiger_IndexAjax_View {
             $data[$i]["links"] = $listViewUrl.$this->getSearchParams($data[$i]['link']).'&nolistcache=1';
         }
         
-		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId());
+		$widget = Vtiger_Widget_Model::getInstance($linkId, $currentUser->getId(), $request->get('tab'));
 
 		$viewer->assign('WIDGET', $widget);
 		$viewer->assign('MODULE_NAME', $moduleName);

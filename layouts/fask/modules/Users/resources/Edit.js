@@ -18,6 +18,9 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 	 */
 	registerRecordPreSaveEvent : function(form){
 		var thisInstance = this;
+  
+                                          
+                              
 		app.event.on(Vtiger_Edit_Js.recordPresaveEvent, function(e, data) {
 			var userName = jQuery('input[name="user_name"]').val();
 			var newPassword = jQuery('input[name="user_password"]').val();
@@ -110,6 +113,51 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
 		}
 	},
 	
+	registerDateManipulation : function(date_joined, dateFormat){
+     	if(dateFormat =='yyyy-mm-dd'){
+     	     return date_joined;
+     	} else if(dateFormat == 'dd-mm-yyyy') {
+                var expireDateArr  = date_joined.split("-");
+                return expireDateArr[2]+"-"+expireDateArr[1]+"-"+ expireDateArr[0]
+          } else if(dateFormat == 'mm-dd-yyyy') {
+               var expireDateArr  = date_joined.split("-");
+               return expireDateArr[2]+"-"+expireDateArr[0]+"-"+ expireDateArr[0]
+          }
+	},
+	/**===================
+	  added by khaled
+	  Join Date Validation
+	  modified by jitu
+	================*/
+	registerJoinDateValidation: function(){		
+          var instance = this;
+          jQuery("#Users_editView_fieldName_date_joined").on("change",function(){
+          
+            var dateFormat = app.getDateFormat();
+            
+              var date_joined = instance.registerDateManipulation(jQuery(this).val(), dateFormat);  
+
+                      if(date_joined.length > 0){
+                      	                               
+                        var expireDate = new Date(date_joined);     
+                      	var now = new Date();
+					    var past = new Date(expireDate);
+					    var nowYear = now.getFullYear();
+					    var pastYear = past.getFullYear();
+					    var joined =     pastYear - nowYear;
+					    var diff = past.getTime() - now.getTime();
+   					    var years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25)); 	
+
+                        if(parseInt(years) > 1){
+                        	
+                        	 app.helper.showErrorNotification({message :app.vtranslate('Join Date should not be greater than 1 year')});
+                                      jQuery(this).val("");
+                                     return false;
+                        }   
+                            
+                      }
+          })
+	},
 	
 	
 	registerEvents : function() {
@@ -119,7 +167,7 @@ Vtiger_Edit_Js("Users_Edit_Js",{},{
         this.registerSignatureEvent();
         Settings_Users_PreferenceEdit_Js.registerCopyPermanentAddress();
         Settings_Users_PreferenceEdit_Js.registerChangeEventForCurrencySeparator();
-        
+        this.registerJoinDateValidation();
         var instance = new Settings_Vtiger_Index_Js(); 
         instance.registerBasicSettingsEvents();
 	}

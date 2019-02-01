@@ -13,14 +13,14 @@ $languageStrings = array(
 	'LBL_CURRENT'=>'Current',
 	'LBL_MOM' => 'Agenda/MOM',
 	'LBL_MOM_BLOCK' => 'Minutes of Meeting(MOM)',
-	'APPTITLE' => 'Vtiger CRM',
+	'APPTITLE' => 'Agiliux',
 	'POWEREDBY'=> 'Powered by Agiliux CRM',
 	'LBL_READ_LICENSE' => 'Read License',
 	'LBL_PRIVACY_POLICY' => 'Privacy Policy',
 	'LBL_REPORT_CHART' => 'Chart Report',
-
+                    'LBL_VIEW_MORE'=>'View More',
 	'LBL_ENRICH_DATA' => 'Enrich Data',
-
+	'LBL_LEAVE_APPROVAL'=>'My Team Approval',
 	'LBL_ENRICH_DATA_LOCKED' => 'Enrich Data', 
 
 	// Common Actions
@@ -61,6 +61,7 @@ $languageStrings = array(
 	'LBL_RECORD_NOT_FOUND' => 'Record you are trying to access is not found',
 	'LBL_EDIT_REASON' => 'Edit reason',
                       'WorkingHours' => 'Working Hours',
+                      'LBL_GETTING_STARTED' => 'Getting Started',
 	//'LBL_EDIT_CURRENT_FILTER' => 'Edit Current Filter',
 	//'LBL_DELETE_CURRENT_FILTER' => 'Delete Current Filter',
 	'LBL_SELECT' => 'Select',
@@ -108,7 +109,7 @@ $languageStrings = array(
 	'LBL_DASHBOARD' => 'Dashboard',
 	'LBL_MAIL_MANAGER'=>'Mail Manager',
 	'LBL_USER_SETTINGS' => 'User Settings',
-	'LBL_MY_PREFERENCES' => 'My Profile',
+	'LBL_MY_PREFERENCES' => ' Profile',
 	'LBL_SIGN_OUT' => 'Sign Out',
 	'LBL_HELP' => 'Help',
 	'LBL_DOCUMENTATION' => 'Documentation',
@@ -1211,6 +1212,9 @@ $languageStrings = array(
 	'LBL_REMOVE_TAG' => 'Remove Tag',
 	'LBL_TAG_SEPARATOR_DESC' => 'Use comma to separate multiple tags',
 	'LBL_ENTER_TAG_NAME'=> 'Enter tag name',
+	'LeaveType' => "Leave Type",
+	'BenefitType' => "Benefit Type",
+	'ClaimType' => "Claim Type",
 
 	'LBL_SELECT_COLOR' => 'Select Color',
 	'LBL_NO_TAG_EXISTS' => 'No Tag Exists',
@@ -1299,7 +1303,7 @@ $languageStrings = array(
 	'LBL_HISTORY' => 'Touchpoints',
 	'LBL_ENGAGEMENT_HISTORY' => 'Touchpoint History',
 	'LBL_SETTINGS' => 'Settings',
-
+                     'LBL_NOTEBOOK'=>'Notebook',
 	//List View and thumbnail view button labels
 	'LBL_LIST_VIEW'=>'List View',
 	'LBL_THUMBNAIL_VIEW'=>'Thumbnail View',
@@ -1426,16 +1430,19 @@ $languageStrings = array(
 	'LBL_LAST_LOGINTIME'=>'Your last successful login was',
 	'LBL_USERIP'=>'from IP',
 	'LBL_POLICY_DOCUMENT'=>'Policy Document',
+
 );
 
 $jsLanguageStrings = array(
 	'JS_EMAIL_SERVER_CONFIGURATION' => 'Please configure your outgoing server settings from the settings page',
 	'JS_SMS_SERVER_CONFIGURATION' => 'Please configure your SMS notifier from the SMS notifier settings page',
 	'JS_PLEASE_SELECT_ONE_RECORD' => 'Please select at least one record',
+	'JS_INVALID_PHONE' => 'Invalid Phone Number',
 	//dropdown categary
 	'JS_USERS' => 'Users',
 	'JS_GROUPS' => 'Groups',
 	'JS_ALL' => 'All',
+	
 	//Validation Error Message
 	'JS_PLEASE_ENTER_VALID_VALUE' => 'Please enter a valid value',
 	'JS_PLEASE_ENTER_VALID_TAG_NAME' => 'Please enter valid tag name',

@@ -26,20 +26,21 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 
 		$userId = $request->get('userid');
-		if(!$currentUserModel->isAdminUser()) {
+		if(!$currentUserModel->isAdminUser() && !in_array($currentUserModel->roleid, array('H2','H12','H13'))) {
 			$mode = $request->getMode();
 			if($mode == 'savePassword' && (isset($userId) && $currentUserModel->getId() != $userId)) {
-				throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
+				throw new AppException(vtranslate('LBL_PERMISSION_DENIED1', 'Vtiger'));
 			} else if(in_array($mode, array('userExists','restoreUser','transferOwner','changeUsername'))) {
-				throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
+				throw new AppException(vtranslate('LBL_PERMISSION_DENIED2', 'Vtiger'));
 			} else if($mode != 'savePassword' && ($currentUserModel->getId() != $request->get('record'))) {
-				throw new AppException(vtranslate('LBL_PERMISSION_DENIED', 'Vtiger'));
+				throw new AppException(vtranslate('LBL_PERMISSION_DENIED3', 'Vtiger'));
 			}
 		}
 	}
 
 	public function process(Vtiger_Request $request) {
-		
+		global $adb;
+                                       //   $adb->setDebug(TRUE);
 		$mode = $request->get('mode');
 		if (!empty($mode)) {
 			$this->invokeExposedMethod($mode, $request);
@@ -55,8 +56,11 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 			$value = date('Y-m-d',strtotime($request->get('value')));
 			$request->set($request->get('field'),$value);	
 		}//end here	
-		
+		elseif($request->get('field')=='theme'){                 
+                                              $request->set($request->get('field'),$request->get('value'));	
+                                            }
 
+                                     
 		$recordModel = $this->saveRecord($request);
 
 		$fieldModelList = $recordModel->getModule()->getFields();
@@ -139,10 +143,10 @@ class Users_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		$checkPassword = Settings_Password_Record_Model::checkPassword($newPassword);
 		$validity = Settings_Password_Record_Model::PasswordValidity('pwd_reuse',$request->get('userid'), $newPassword);
 		if(!$checkPassword){
-				if($validity !=1) {
-					$wsUserId = vtws_getWebserviceEntityId($module, $request->get('userid'));
-					$wsStatus = vtws_changePassword($wsUserId, $oldPassword, $newPassword, $newPassword, $userModel);		
-					}
+			if($validity !=1) {
+				$wsUserId = vtws_getWebserviceEntityId($module, $request->get('userid'));
+				$wsStatus = vtws_changePassword($wsUserId, $oldPassword, $newPassword, $newPassword, $userModel);		
+			}
 		} 
 		
 		$response = new Vtiger_Response();

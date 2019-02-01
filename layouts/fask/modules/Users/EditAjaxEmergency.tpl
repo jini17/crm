@@ -51,7 +51,7 @@
                                                 </label>
                                         </div>
                                         <div class="controls fieldValue col-md-8">
-                                            <input id="home_phone" class="input-large inputElement nameField" type="text"  value="{if !empty($REC_ID)} {$EMERGENCY_DETAIL[0]['home_phone']}{/if}" name="home_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($HOMEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
+                                            <input id="home_phone" class="input-large inputElement nameField" type="text"  value="{if !empty($REC_ID)} {$EMERGENCY_DETAIL[0]['home_phone']}{/if}" name="home_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($HOMEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true" maxlength="15">
                                         </div>
                                 </div>
 
@@ -65,7 +65,7 @@
                                                 </label>
                                         </div>
                                         <div class="controls fieldValue col-md-8">
-                                            <input id="office_phone" class="input-large inputElement nameField" type="text" value="{if !empty($REC_ID)} {$EMERGENCY_DETAIL[0]['office_phone']}{/if}" name="office_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($OFFICEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
+                                            <input id="office_phone" class="input-large inputElement nameField" type="text" value="{if !empty($REC_ID)} {$EMERGENCY_DETAIL[0]['office_phone']}{/if}" name="office_phone" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($OFFICEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true" maxlength="15">
                                         </div>
                                 </div>
 
@@ -79,7 +79,7 @@
                                                 </label>
                                         </div>
                                         <div class="controls fieldValue col-md-8">
-                                            <input id="mobile" class="input-large inputElement nameField" type="text"  value="{if !empty($REC_ID)} {$EMERGENCY_DETAIL[0]['mobile']}{/if}" name="mobile" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($MOBILEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true">
+                                            <input id="mobile" class="input-large inputElement nameField" type="text"  value="{if !empty($REC_ID)} {$EMERGENCY_DETAIL[0]['mobile']}{/if}" name="mobile" data-fieldinfo= '{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($MOBILEPHONE))}' data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]" data-rule-required = "true" maxlength="15">
                                         </div>
                                 </div>
                         </div>
@@ -91,24 +91,25 @@
                                                     &nbsp;{vtranslate('LBL_RELATIONSHIP', $MODULE)} &nbsp;   <span class="redColor">*</span>
                                                 </label>
                                         </div>
+
                                         <div class="controls fieldValue col-md-8">
                                             <select class="select2" name="relationship" id ="relationship" data-rule-required = "true" style="width:100%;"> 
-                                                <option value="{vtranslate('LBL_FATHER', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL[0]['relationship'] eq {vtranslate('LBL_FATHER', $QUALIFIED_MODULE)} AND !empty($RED_ID)} selected {/if}>
+                                                <option value="{vtranslate('LBL_FATHER', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL[0]['relationship'] eq vtranslate('LBL_FATHER', $QUALIFIED_MODULE)} selected {/if}>
                                                 {vtranslate('LBL_FATHER', $QUALIFIED_MODULE)}</option>
 
-                                                <option value="{vtranslate('LBL_MOTHER', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL[0]['relationship'] eq {vtranslate('LBL_MOTHER', $QUALIFIED_MODULE)} AND !empty($RED_ID)} selected {/if}>
+                                                <option value="{vtranslate('LBL_MOTHER', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL[0]['relationship'] eq vtranslate('LBL_MOTHER', $QUALIFIED_MODULE)} selected {/if}>
                                                 {vtranslate('LBL_MOTHER', $QUALIFIED_MODULE)}</option>
 
-                                                <option value="{vtranslate('LBL_BROTHER', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL[0]['relationship'] eq {vtranslate('LBL_BROTHER', $QUALIFIED_MODULE)} AND !empty($RED_ID)} selected {/if}>
+                                                <option value="{vtranslate('LBL_BROTHER', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL[0]['relationship'] eq vtranslate('LBL_BROTHER', $QUALIFIED_MODULE)} selected {/if}>
                                                 {vtranslate('LBL_BROTHER', $QUALIFIED_MODULE)}</option>
 
-                                                <option value="{vtranslate('LBL_SISTER', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL[0]['relationship'] eq {vtranslate('LBL_SISTER', $QUALIFIED_MODULE)} AND !empty($RED_ID)} selected {/if}>
+                                                <option value="{vtranslate('LBL_SISTER', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL[0]['relationship'] eq vtranslate('LBL_SISTER', $QUALIFIED_MODULE)} selected {/if}>
                                                 {vtranslate('LBL_SISTER', $QUALIFIED_MODULE)}</option>
 
-                                                <option value="{vtranslate('LBL_FRIEND', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL[0]['relationship'] eq {vtranslate('LBL_FRIEND', $QUALIFIED_MODULE)} AND !empty($RED_ID)} selected {/if}>
+                                                <option value="{vtranslate('LBL_FRIEND', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL[0]['relationship'] eq vtranslate('LBL_FRIEND', $QUALIFIED_MODULE)} selected {/if}>
                                                 {vtranslate('LBL_FRIEND', $QUALIFIED_MODULE)}</option>
 
-                                                <option value="{vtranslate('OTHERS', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL[0]['relationship'] eq {vtranslate('OTHERS', $QUALIFIED_MODULE)} AND !empty($RED_ID)} selected {/if}>{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> 
+                                                <option value="{vtranslate('OTHERS', $QUALIFIED_MODULE)}" {if $EMERGENCY_DETAIL[0]['relationship'] eq vtranslate('OTHERS', $QUALIFIED_MODULE)} selected {/if}>{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> 
                                         </select>
                                         </div>
                                 </div>

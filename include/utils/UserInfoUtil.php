@@ -2378,5 +2378,81 @@ function appendFromClauseToQuery($query,$fromClause) {
         $query = $newQuery.$fromClause.$condition;
         return $query;
 }
+/**
+ * Added By Khaled
+ * Logout from Previous Login Session
+ * @global type $adb
+ */
+function kill_multilogin($username){
+$adb = PearDatabase::getInstance();
+$adb->setDebug(true);
+    
+    $result 	= $adb->pquery("SELECT login_id,session_id FROM vtiger_loginhistory WHERE DATE(login_time) = CURDATE() AND user_name = ? AND status = ? ORDER BY login_id ASC", array($username, 'Signed in'));
+    $num_rows = $adb->num_rows($result);
+         
+         
+    if($num_rows > 0){
 
+        for ($i = 0; $i < $num_rows; $i++) {
+                $sessionID = $adb->query_result($result, $i, 'session_id');
+                $loginid = $adb->query_result($result, $i, 'login_id');
+                if ($sessionID) {
+               session_id($sessionID);            
+           
+                  session_destroy();
+               
+                    $time    = date("Y/m/d H:i:s");
+                    $userIP = $_SERVER['REMOTE_ADDR'];          
+                     // update the user login info.
+                     $query = "Update vtiger_loginhistory set logout_time =?, status=? where login_id =  ?";
+                     $result1 = $adb->pquery($query, array($username, 'Signed off', $loginid));
+                 
+                    
+                 
+                }
+     
+        }
+                  session_start();
+                    $_SESSION['multi_login'] =  "yes"; 
+    }
+    else{
+          session_start();
+           $_SESSION['multi_login'] = "no";
+        }
+}
+
+/**
+ * Added By Khaled
+ * Check User Loggedin for First Time
+ * @global type $adb
+ * @param type $username
+ * @return boolean
+ */
+function first_time_loggedin($username){
+    $adb = PearDatabase::getInstance();
+
+    $result 	= $adb->pquery("SELECT session_id FROM vtiger_loginhistory WHERE user_name = ?", array($username));
+    $num_rows = $adb->num_rows($result);
+    session_start();
+    if($num_rows == 1){
+       $_SESSION['first_time_login'] = "yes";
+    }
+    else{
+         $_SESSION['first_time_login'] = "no";
+    }
+}
+function user_logout($usname,&$usip,&$outtime)
+    {
+            global $adb;
+            
+            $adb->setDebut(true);
+            $logid_qry = "SELECT max(login_id) AS login_id from vtiger_loginhistory where user_name=? and user_ip=?";
+            $result = $adb->pquery($logid_qry, array($usname, $usip));
+            $loginid = $adb->query_result($result,0,"login_id");
+          
+            // update the user login info.
+            $query = "Update vtiger_loginhistory set logout_time =?, status=? where login_id < ?";
+            $result = $adb->pquery($query, array($this->db->formatDate($outtime, true), 'Signed off', $loginid));
+            $_SESSION['setting_out'] =  $loginid;
+    }
 ?>

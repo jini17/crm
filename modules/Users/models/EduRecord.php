@@ -126,7 +126,7 @@ class Users_EduRecord_Model extends Users_Record_Model {
                 $educationDetail['end_date'] = date('d-m-Y',strtotime($enddate));
                 $educationDetail['education_level'] = $db->query_result($result, 0, 'education_level');
                 $educationDetail['area_of_study'] = $db->query_result($result,0, 'area_of_study');
-                $educationDetail['description'] = $db->query_result($result, 0, 'description');
+                $educationDetail['description'] = $db->query_result($result, 0, 'edu_description');
                 $educationDetail['public'] = $db->query_result($result, 0, 'public');
 
                 return $educationDetail;		
@@ -136,8 +136,10 @@ class Users_EduRecord_Model extends Users_Record_Model {
                 $db  = PearDatabase::getInstance();
                 $sql = "SELECT tblSCE.edu_id, tblSCE.institution_id,tblSCI.institution, 
                                 DATE_FORMAT(tblSCE.start_date,'%b-%Y') AS start_date, is_studying,
-                                DATE_FORMAT(tblSCE.end_date,'%b-%Y') AS end_date, tblSCE.education_level, tblSCE.major_id,tblSCSA.major, 				tblSCE.description, tblSCE.isview FROM secondcrm_education tblSCE 
-                                LEFT JOIN secondcrm_institution tblSCI ON tblSCI.institution_id	= tblSCE.institution_id
+                                DATE_FORMAT(tblSCE.end_date,'%b-%Y') AS end_date, tblSCE.education_level, tblSCE.major_id,tblSCSA.major, 				
+                                tblSCE.description, 
+                                tblSCE.isview FROM secondcrm_education tblSCE 
+                                LEFT JOIN secondcrm_institution tblSCI ON tblSCI.institution_id= tblSCE.institution_id
                                 LEFT JOIN secondcrm_studyarea tblSCSA ON tblSCSA.major_id = tblSCE.major_id
                         WHERE tblSCE.user_id = ? AND tblSCE.deleted = 0 ORDER BY RAND()
 LIMIT 3"; 
@@ -166,12 +168,12 @@ LIMIT 3";
 
         public function getUserEducationList($userId) {
               $currentUserModel = Users_Record_Model::getCurrentUserModel();
-              $current_user_id = $currentUserModel->get('id');
-              $role                        = $currentUserModel->get('roleid');
+              $current_user_id  = $currentUserModel->get('id');
+              $role             = $currentUserModel->get('roleid');
               
                 $db = PearDatabase::getInstance();
 
-                $query = "SELECT vtiger_education.* FROM vtiger_education
+                $query = "SELECT vtiger_education.*, vtiger_crmentity.smownerid FROM vtiger_education
                         INNER JOIN vtiger_crmentity
                         ON vtiger_crmentity.crmid = vtiger_education.educationid
                         WHERE vtiger_crmentity.smownerid = ? AND vtiger_crmentity.deleted=0";
@@ -180,7 +182,7 @@ LIMIT 3";
                 $eduList=array();	
 
                 for($i=0;$db->num_rows($result)>$i;$i++){
-                    $permission = Users_Record_Model::recordPermission($role,$db->query_result($result, $i, 'educationid'),$current_user_id,$db->query_result($result, $i, 'public'));
+                    $permission = Users_Record_Model::recordPermission($role,$db->query_result($result, $i, 'smownerid'),$current_user_id,$db->query_result($result, $i, 'public'));
                   if($permission){
                         $eduList[$i]['institution_name'] = $db->query_result($result, $i, 'institution_name');
                         $eduList[$i]['education_location'] = $db->query_result($result, $i, 'education_location');
@@ -191,7 +193,7 @@ LIMIT 3";
                         $eduList[$i]['is_studying'] = $db->query_result($result, $i, 'currently_studying');
                         $eduList[$i]['education_level'] = $db->query_result($result, $i, 'education_level');
                         $eduList[$i]['area_of_study'] = $db->query_result($result, $i, 'area_of_study');
-                        $eduList[$i]['description'] = $db->query_result($result, $i, 'description');
+                        $eduList[$i]['description'] = $db->query_result($result, $i, 'edu_description');
                         $eduList[$i]['public'] = $db->query_result($result, $i, 'public');
                   }
                 }

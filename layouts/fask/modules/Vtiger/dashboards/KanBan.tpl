@@ -17,7 +17,7 @@
         <div class='modal-body overflowYAuto'>
             <div class='datacontent'>
                 <div class="data-header clearfix">
-                    <div class="btn-group dateFilters pull-left" role="group" aria-label="...">
+                    <div class="btn-group dateFilters col-md-3 col-sm-3 col-xs-3" role="group" aria-label="...">
 
                         <button type="button" class="btn btn-default {if $TASK_FILTERS['date'] eq "all"}active{/if}" data-filtermode="all">{vtranslate('LBL_ALL', $MODULE)}</button>
                         <button type="button" class="btn btn-default {if $TASK_FILTERS['date'] eq "today"}active{/if}" data-filtermode="today">{vtranslate('LBL_TODAY', $MODULE)}</button>
@@ -30,11 +30,14 @@
                         </button>*}
                     </div>
 
-                    <div id="taskManagementOtherFilters" class="otherFilters pull-right" style="width:550px;">
-                        <div class='field pull-left' style="width:250px;padding-right: 5px;">
+                    <div id="taskManagementOtherFilters" class="otherFilters  col-md-9 col-sm-9 col-xs-9" >
+                        <div class='field col-md-6' style="position:relative;">
+                            <div id="task-input-background">
+                                Select Employee
+                            </div>
                             {include file="modules/Calendar/uitypes/OwnerFieldTaskSearchView.tpl" FIELD_MODEL=$OWNER_FIELD}
                         </div>
-                        <div class='field pull-left' style="width:250px;padding-right: 5px;">
+                        <div class='field col-md-6'>
                             {assign var=FIELD_MODEL value=$STATUS_FIELD}
                             {assign var=FIELD_INFO value=$FIELD_MODEL->getFieldInfo()}
                             {assign var=PICKLIST_VALUES value=$FIELD_INFO['picklistvalues']}
@@ -45,8 +48,9 @@
                                     <option {if $PICKLIST_KEY|in_array:$TASK_FILTERS['status']}selected{/if} value="{$PICKLIST_KEY}">{$PICKLIST_LABEL}</option>
                                 {/foreach}
                             </select>
+                            <button class="btn btn-success search" style="position: absolute; top:0;right:-26px;padding-top: 5px;padding-bottom: 5px;"><span class="fa fa-search"></span></button>
                         </div>
-                        <div><button class="btn btn-success search"><span class="fa fa-search"></span></button></div>
+
                     </div>
                 </div>
 
@@ -58,7 +62,7 @@
 
                     {foreach item=STATUSVAL from=$STATUSES}
                         <div class="col-lg-4 contentsBlock {strtolower($STATUSVAL|replace:' ':'_')} ui-droppable" data-status='{strtolower($STATUSVAL|replace:' ':'_')}' data-page="{$PAGE}">
-                            <div class="{strtolower($STATUSVAL|replace:' ':'_')}-header" style="border-bottom: 3px solid {$COLORS[$STATUSVAL]}; ">
+                            <div class="{strtolower($STATUSVAL|replace:' ':'_')}-header" style="border-bottom: 1px solid {$COLORS[$STATUSVAL]}; ">
                                 <div class="title" ><span>{vtranslate($STATUSVAL,$STATUSVAL)}</span></div>   
                             </div>
                             <br>

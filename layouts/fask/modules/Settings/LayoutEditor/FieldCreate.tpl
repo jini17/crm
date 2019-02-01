@@ -73,6 +73,17 @@
 							<input type="text" class='inputElement col-sm-9' maxlength="50" {if $IS_FIELD_EDIT_MODE}disabled="disabled"{/if} name="fieldLabel" value="{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}" data-rule-required='true' style='width: 75%' />
 						</div>
 					</div>
+					<!--added by jitu@CustomField Name -->
+		             <div class="form-group">
+		               <label class="control-label fieldLabel col-sm-5">
+		                    {vtranslate('LBL_FIELD_NAME', $QUALIFIED_MODULE)}<span class="redColor">*</span>&nbsp;
+		                </label>
+		                 <div class="controls col-sm-7">
+		                    <input type="text" class='inputElement col-sm-9' maxlength="50" name="fieldName" value="{vtranslate($FIELD_MODEL->get('label'), $SELECTED_MODULE_NAME)}" data-validation-engine="validate[required, funcCall[Vtiger_Base_Validator_Js.invokeValidation]]"
+		                           data-validator={Zend_Json::encode([['name'=>'fieldName']])}  style='width: 75%'/>
+		                </div>
+		            </div>   
+            		<!-- End here -->
 					{if !$IS_FIELD_EDIT_MODE}
 						<div class="form-group supportedType lengthsupported">
 							<label class="control-label fieldLabel col-sm-5">

@@ -291,40 +291,17 @@ class Home_Module_Model extends Vtiger_Module_Model {
 
     function getSubscriptionDetail(){
     	$db = PearDatabase::getInstance();
-
     	$result = $db->pquery("SELECT * FROM secondcrm_plan WHERE isactive=1", array());
     	$numOfRows = $db->num_rows($result);
     	$plandetail = array();
     	for($i=0; $i<$numOfRows; $i++) {
     		$plan = $db->query_result($result, $i, 'plantitle');
+    		$planid = $db->query_result($result, $i, 'planid');
     		$nousers = $db->query_result($result, $i, 'nousers');
-    		$plandetail[$plan] = $nousers;
+    		$startdate = $db->query_result($result, $i, 'createdtime');
+    		$enddate = $db->query_result($result, $i, 'expiredate');
+    		$plandetail[$plan] = array($nousers, date('jS M Y', strtotime($startdate)), date('jS M Y', strtotime($enddate)));
     	}
-    	
-    	global $dbconfig;
-	
-		$con = new mysqli($dbconfig['db_server'], $dbconfig['db_username'], $dbconfig['db_password'], $dbconfig['db_cp'], str_replace(':','',$dbconfig['db_port']));
-
-		if (!$con) {
-			die('Could not connect to'.$dbconfig['db_cp'].': ' . mysqli_error($con));
-		}
-
-    	$select_subscription = "SELECT FROM_DATE, TO_DATE FROM  SUBSCRIPTION INNER JOIN ACCOUNT ON ACCOUNT.ACCOUNT_ID=SUBSCRIPTION.ACCOUNT_ID
-    				WHERE ACCOUNT.SHORT_NAME='$dbconfig[db_name]' ORDER BY SUBSCRIPTION.CREATED_BY DESC LIMIT 0,1";
-       $result =  $con->query($select_subscription) or die("Select data failed. SUBSCRIPTION ERROR::". $con->error);
-        $row = $result->fetch_array();
-        $startdate = $row['FROM_DATE'];
-        $enddate = $row['TO_DATE'];
-        $con->close();
-        $plandetail['startdate'] = date('jS M Y', strtotime($startdate));
-        $plandetail['enddate'] = date('jS M Y', strtotime($enddate));
-        $diff = round(strtotime($enddate)-strtotime($startdate)/3600);
-        $plandetail['btnrenew'] = 0;
-        if($diff < 20) {
-
-        	 $plandetail['others']['btnrenew'] = 1;
-        }
-       
         return $plandetail;
     }
     
@@ -511,6 +488,97 @@ class Home_Module_Model extends Vtiger_Module_Model {
 
 	}
 	
+	function getAllNotifications($pagingModel){
+
+		$db = PearDatabase::getInstance();	
+		
+		$currentUser = Users_Record_Model::getCurrentUserModel();
+		
+		$params[] = $currentUser->id;
+		$params[] = $pagingModel->getStartIndex();
+		$params[] = $pagingModel->getPageLimit();
+        
+        $sql .= ' ORDER BY vtiger_crmentity.createdtime DESC LIMIT ?, ?';  
+
+		$result = $db->pquery("SELECT *  FROM vtiger_notifications 
+					INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_notifications.notificationsid
+					LEFT JOIN `vtiger_crmentity_user_field` ON vtiger_crmentity_user_field.recordid=vtiger_crmentity.crmid 
+					WHERE vtiger_crmentity.`deleted`=0  AND vtiger_crmentity_user_field.`userid`=? ".$sql, $params);
+
+		$notifications = array();
+		$unread = 0;
+		$noOfRow = $db->num_rows($result);
+		if($pagingModel->get('notificationcount') < $noOfRows) {
+			$pagingModel->set('notificationcount', $noOfRows);
+		}
+
+		if($noOfRow> 0) {
+
+			for($i=0;$i<$db->num_rows($result);$i++) {
+
+			  	$notifyby	 	= $db->query_result($result, $i, 'notifyby');
+			  	$relatedto 		= $db->query_result($result, $i, 'relatedto');
+			  	$notifyto 		= $db->query_result($result, $i, 'notifyto');
+			  	$timestamp 		= $db->query_result($result, $i, 'createdtime');
+			  	$viewed 		= $db->query_result($result, $i, 'viewed');
+
+			  	$nameResult = $db->pquery('SELECT first_name, last_name,  FROM vtiger_users WHERE id = ?', array($notifyto));
+				if($db->num_rows($nameResult)) {
+					$fullname =  $db->query_result($nameResult, 0, 'first_name').' '.$db->query_result($nameResult, 0, 'last_name');
+				}
+				
+			  	$referenceModuleName = RecordSetype($relatedto);
+
+			  	$action = $db->query_result($result, $i, 'actionperform');
+			  	$entityNames = 	getEntityName($referenceModuleName, array($relatedto));
+			  	$linkValue = "<a style='display:block; width: 100%; padding:0; font-size:10px;' href='index.php?module=$referenceModuleName&view=Detail&record=$relatedto'>$entityNames[$relatedto]</a>";	
+
+
+			  	if($action == 'Posted'){
+			  		$message = 'New message '. $linkValue." is posted";
+			  	} else if($action == 'Download'){
+			  		$message = 'Download your payslip '.$linkValue.' here';
+			  	} else if($action == 'Approved' || $action == 'Rejected' || $action == "Applied"){
+			  		$message = $referenceModuleName." ".$linkValue." is ". $action;
+			  	} else if($action == 'Assigned'){
+			  		$message = "A task ".$linkValue." is ". $action. " to ". $fullname;
+			  	} else if($action == 'Completed'){
+			  		$message = "Task ".$linkValue." is ". $action. " by ". $fullname;
+			  	} else if($action == 'Updated'){
+			  		$message = "HR change the working hours";
+			  	} else if($action == 'Commented'){
+			  		
+			  		$namebyResult = $db->pquery('SELECT first_name, last_name FROM vtiger_users WHERE id = ?', array($notifyby));
+					if($db->num_rows($namebyResult)) {
+						$notifybyfullname =  $db->query_result($namebyResult, 0, 'first_name').' '.$db->query_result($namebyResult, 0, 'last_name');
+					}
+
+			  		$message = "Comment on ". $linkValue ." is ".$action." by ".$notifybyfullname;
+			  	} else {
+			  		$message = "Your Subscription is getting expired";
+			  	}
+
+			  
+		  		if($notifyby==0){
+		  			$imagename = 'storage/2018/October/week3/2560_admin.jpg';
+		  		} else {
+		  			$recordModel = Users_Record_Model::getInstanceById($notifyby, 'Users');
+		  			$imagesdetails = $recordModel->getImageDetails();
+		  			$imagename = $imagesdetails[0]['path'].'_'.$imagesdetails[0]['name'];
+		  		}
+		  		$notifications['details'][$i]['message'] 		= $message;
+		  		$notifications['details'][$i]['profilepic'] 	= $imagename;
+		  		$notifications['details'][$i]['timestamp'] 	= Vtiger_Util_Helper::formatDateDiffInStrings($timestamp);
+		  		$notifications['details'][$i]['unread'] 		= $viewed;
+		  		if($viewed==0)
+		  			$unread++;
+			}
+
+			$notifications['new'] = $unread;
+		}
+		return $notifications;
+	}
+
 	function getDepartments(){
  
  		$db = PearDatabase::getInstance();	

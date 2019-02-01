@@ -1293,6 +1293,7 @@ class Vtiger_Module_Model extends Vtiger_Module {
                 }
                 $createPermission = Users_Privileges_Model::isPermitted($this->getName(), 'CreateView');
                 $moduleName = $this->getName();
+                $currentUser = Users_Record_Model::getCurrentUserModel();
                 $basicLinks = array();
                 if($createPermission) {
                         if($moduleName === "Calendar"){
@@ -1309,21 +1310,28 @@ class Vtiger_Module_Model extends Vtiger_Module {
                                         'linkicon' => 'fa-plus'
                                 );
                         } else {
-                                $basicLinks[] = array(
-                                        'linktype' => 'BASIC',
-                                        'linklabel' => 'LBL_ADD_RECORD',
-                                        'linkurl' => $this->getCreateRecordUrl(),
-                                        'linkicon' => 'fa-plus'
-                                );
+                                if(!in_array($currentUser->roleid, array('H2','H12','H13')) && in_array($moduleName, array('Leave','Claim','WorkingHours', 'Payslip'))){
+                                     
+                                } else {       
+                                        $basicLinks[] = array(
+                                                'linktype' => 'BASIC',
+                                                'linklabel' => 'LBL_ADD_RECORD',
+                                                'linkurl' => $this->getCreateRecordUrl(),
+                                                'linkicon' => 'fa-plus'
+                                        );
+                                }        
                         }
                         $importPermission = Users_Privileges_Model::isPermitted($this->getName(), 'Import');
                         if($importPermission && $createPermission) {
-                                $basicLinks[] = array(
-                                        'linktype' => 'BASIC',
-                                        'linklabel' => 'LBL_IMPORT',
-                                        'linkurl' => $this->getImportUrl(),
-                                        'linkicon' => 'fa-download'
-                                );
+                               if(!in_array($currentUser->roleid, array('H2','H12','H13')) && in_array($moduleName, array('Leave','Claim','WorkingHours', 'Payslip'))){
+                               } else {     
+                                        $basicLinks[] = array(
+                                                'linktype' => 'BASIC',
+                                                'linklabel' => 'LBL_IMPORT',
+                                                'linkurl' => $this->getImportUrl(),
+                                                'linkicon' => 'fa-download'
+                                        );
+                                }        
                         }
                 }
                 return $basicLinks;
@@ -2067,12 +2075,12 @@ class Vtiger_Module_Model extends Vtiger_Module {
                                                                 WHERE tblVTC.deleted=0 AND tblVTEC.employee_id=? ORDER BY tblVTC.createdtime DESC LIMIT 0, 1", array($employeeid));
                 $grade_id       = $db->query_result($result, 0, 'job_grade');
 
-                $benefitResult  = $db->pquery("SELECT vtiger_benefittype.benefit_code, vtiger_benefittype.title, vtiger_benefittype.benefit_type, vtiger_benefittype.status
+                $benefitResult  = $db->pquery("SELECT vtiger_benefittype.benefit_code, vtiger_benefittype.title, vtiger_benefittype.benefit_type
                                                 FROM allocation_benefitrel
                                                 LEFT JOIN allocation_list ON allocation_list.allocation_id = allocation_benefitrel.allocation_id
                                                 LEFT JOIN allocation_graderel ON allocation_graderel.allocation_id = allocation_list.allocation_id
                                                 LEFT JOIN vtiger_benefittype ON vtiger_benefittype.benefittypeid = allocation_benefitrel.benefittypeid
-                                                WHERE allocation_graderel.grade_id=? AND allocation_list.allocation_year=?", array($grade_id, $year));
+                                                WHERE allocation_graderel.grade_id=? AND allocation_list.allocation_year=? AND vtiger_benefittype.status='on'", array($grade_id, $year));
 
                 $numOfRows       = $db->num_rows($benefitResult);
 
@@ -2081,7 +2089,7 @@ class Vtiger_Module_Model extends Vtiger_Module {
                         $data[$i]['benefit_code'] = $db->query_result($benefitResult, $i, 'benefit_code');
                         $data[$i]['title']        = $db->query_result($benefitResult, $i, 'title');
                         $data[$i]['benefit_type'] = $db->query_result($benefitResult, $i, 'benefit_type');
-                        $data[$i]['status']       = $db->query_result($benefitResult, $i, 'status');
+                       // $data[$i]['status']       = $db->query_result($benefitResult, $i, 'status');
 
                 }
 

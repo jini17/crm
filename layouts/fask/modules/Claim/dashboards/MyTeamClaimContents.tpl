@@ -15,7 +15,7 @@
 	  <div class='row th' style="padding:5px">
         	{if $VALUE eq 'claimtype'}
 	            <div class='col-lg-3'>
-	                <strong>{vtranslate('Employee Name', $MODULE_NAME)}</strong>
+	                <strong>{vtranslate('Employee', $MODULE_NAME)}</strong>
 	            </div>
 	            <div class='col-lg-2'>
 	                <strong>{vtranslate('Claim Type', $MODULE_NAME)}</strong>
@@ -90,6 +90,8 @@
 			</div>
 			{/foreach}
 		{/if}
+	<a  onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USERID}&tab=ListClaim'" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
+
 {else}
 	<span class="noDataMsg">
 		{vtranslate('LBL_NO')} {vtranslate($MODULE_NAME, $MODULE_NAME)} {vtranslate('LBL_MATCHED_THIS_CRITERIA')}

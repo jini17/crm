@@ -234,7 +234,7 @@ Vtiger_Pie_Widget_Js('Report_Piechart_Js', {}, {
 		return this.plotContainer;
 	},
 	
-	init: function (parent) {
+	init: function (parent) { 
 		if (parent) {
 			this._super(parent);
 		} else {

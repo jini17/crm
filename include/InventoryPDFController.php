@@ -27,6 +27,31 @@ class Vtiger_InventoryPDFController {
 		$this->moduleName = $module;
 	}
 
+	function buildSalutation() {
+	
+		global $adb;
+		$contactid = $this->focus->column_fields['contact_id'];
+		
+		if(!empty($contactid)) {
+			$result = $adb->pquery("SELECT salutation FROM vtiger_contactdetails WHERE contactid=?", array($contactid));
+			return decode_html($adb->query_result($result,0,'salutation'));
+		}
+		return false;	
+	}
+
+	function getRelatedPhone($relatedto) {
+		global $adb;
+		
+		if(!empty($relatedto)) {
+		$result = $adb->pquery("SELECT vtiger_account.phone FROM vtiger_account 
+			INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_account.accountid 	
+			LEFT JOIN vtiger_contactdetails ON vtiger_contactdetails.accountid = vtiger_account.accountid WHERE (vtiger_account.accountid = ? OR vtiger_contactdetails.contactid = ?) AND vtiger_crmentity.deleted =0
+			",array($relatedto,$relatedto));
+			return decode_html($adb->query_result($result,0,'phone'));
+		}
+		return false;
+	}		
+
 	function loadRecord($id) {
 		global $current_user;
 		$this->focus = $focus = CRMEntity::getInstance($this->moduleName);
@@ -78,7 +103,7 @@ class Vtiger_InventoryPDFController {
 
 		$pdfgenerator = $this->getPDFGenerator();
 
-		$pdfgenerator->setPagerViewer($this->getPagerViewer());
+		//$pdfgenerator->setPagerViewer($this->getPagerViewer());
 		$pdfgenerator->setHeaderViewer($this->getHeaderViewer());
 		$pdfgenerator->setFooterViewer($this->getFooterViewer());
 		$pdfgenerator->setContentViewer($this->getContentViewer());
@@ -148,6 +173,7 @@ class Vtiger_InventoryPDFController {
 
 			$contentModels[] = $contentModel;
 		}
+		$contentModels['footer'][] = Vtiger_Util_Helper::getTnCDescription(from_html($this->focusColumnValue('terms_condition')));
 		$this->totaltaxes = $totaltaxes; //will be used to add it to the net total
 
 		return $contentModels;

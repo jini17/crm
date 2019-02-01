@@ -31,7 +31,9 @@ $languageStrings = array(
 	'LBL_USER_PROJECTS'=>'User Projects',
 	'LBL_SKILL_LANG'=>'Skill Language',
 	'LBL_LEAVE'=>'Leave',
+	'LBL_SUBSCRIPTION_EXPIRED'=>'Subscription expired, please contact to administrator',
 	'LBL_CLAIM'=>'Claims',
+	'LBL_ADD_CONTACT'=>'Add Contact',
                       'LBL_JOB_TYPE' => 'Job Type',
 	'LBL_USER_EMERGENCY'=>'Emergency Contacts',
 	'LBL_ADD_NEW_EDUCATION'=>'Add New Education',
@@ -45,7 +47,8 @@ $languageStrings = array(
 	'LBL_TIMEPERIOD'=>'Time Duration',
 	'LBL_DESIGNATION'=>'Designation',
 	'LBL_PROJECT_TITLE'=>'Project Title',
-	'LBL_OCCUPATION'=>'Occupation',
+	'LBL_OCCUPATION'=>'Designation',
+	'LBL_PLS_SELECT'=>'Please Select Designation',
 	'LBL_PROJECT_URL'=>'Project URL',
 	'LBL_PROFICIENCY'=>'Proficiency',
 	'LBL_ADD_SKILL'=>'Add Skill',
@@ -223,7 +226,7 @@ $languageStrings = array(
 	'Pacific/Tongatapu'  =>  '(UTC+13:00) Nukualofa',
                       'LBL_BEGINNER_LABEL'=>'Beginner',
                       'LBL_INTERMEDIATE_LABEL'=>'Intermediate',
-                      'LBL_EXPERT_LABEL'=>'Expert',
+                      'LBL_EXPERT_LABEL'=>"Expert",
     
 	'Summary' => 'Summary',
 	'Detail' => 'Detail',
@@ -312,7 +315,7 @@ $languageStrings = array(
 	
 
 	//Added By jitu@secondcrm.com onm 20-10-2014 
-    'LBL_MAX_CHAR_TXTAREA'=>'Maximum Limit 300 character',
+    'LBL_MAX_CHAR_TXTAREA'=>'Maximum Limit 300 characters',
     'LBL_ADD_NEW_EDUCATION'=>'Add Education',
     'LBL_EDUCATION_ISVIEW' => 'Permission',
     'LBL_EDUCATION'=> 'Education', 	
@@ -349,7 +352,7 @@ $languageStrings = array(
    'LBL_INSTITUTION_UPDATE_SUCCESS' =>'Institution updated successfully',
    'LBL_NO' =>'No',
    'LBL_YES'=>'Yes',
-   'LBL_CURRENTLY_STUDYING' => 'Curently studying?',
+   'LBL_CURRENTLY_STUDYING' => 'Currently studying?',
    'LBL_RANDOM_EDUCATION'=>'Random User Education',
    'LBL_USER_PREFERENCES'=>'User Preferences',	
 
@@ -363,7 +366,7 @@ $languageStrings = array(
 'LBL_USER_PROJECTS' => 'Projects',
 'LBL_ADD_NEW_PROJECT'=> 'Add Project',
 'LBL_PROJECT_TITLE' =>'Project Title',
-'LBL_OCCUPATION'=> 'Occupation',
+
 'LBL_DATE'=>'Date',
 'LBL_PROJECT_MONTH'=>'Month',
 'LBL_PROJECT_YEAR'=>'Year',
@@ -523,6 +526,7 @@ $languageStrings = array(
 'LBL_SELECT_ROLE'=>'Select Role',
 'birthday'=>'Date of Birth',
 //End of Contacts
+'LBL_EMPLOYEE_LOCATION_INFORMATION'=>'Employee Location Information',
 );
 
 $jsLanguageStrings = array(
@@ -571,4 +575,8 @@ $jsLanguageStrings = array(
 	'JS_TRANS_LIMIT'=>'Transaction limit is ',
 	'JS_APPLY_AMOUNT'=>'Amount should be less than or equal to ',
 	'JS_NO_LEAVETYPE_ALLOCATE'=>'No Leave Type allocated, please contact to HR/Admin.',
+	'JS_DELETE_CONTACT_CONFIRMATION'=>'Are you confirm to delete the record',
+	'JS_ERROR_TRANSACTION_DATE'=>'Transsaction date should be less than or equal to current date',
+	'JS_APPLY_AMOUNT'=>'Amount cant more than this',
+	'JS_NO_ACTIVE_CONTRACT_FOUND'=>'Sorry, Cant apply due to no active contract',
 );

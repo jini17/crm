@@ -70,12 +70,13 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
                 $sql .= ' UNION SELECT * FROM vtiger_links WHERE linklabel in (?,?) order by linklabel asc' ;
                 $params[] = 'Mini List';
                 $params[] = 'Notebook';
+                
                 $result = $db->pquery($sql, $params);
 
                 $widgets = array();
                 for($i=0; $i<$db->num_rows($result); $i++) {
                         $row = $db->query_result_rowdata($result, $i);
-
+                        
                         if($row['linklabel'] == 'Tag Cloud') {
                                 $isTagCloudExists = getTagCloudView($currentUser->getId());
                                 if($isTagCloudExists == 'false') {
@@ -94,15 +95,16 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
          * Function returns List of User's selected Dashboard Widgets
          * @return <Array of Vtiger_Widget_Model>
          */
-        public function getDashboards($moduleDashboard) {
+        public function getDashboards($moduleDashboard) { 
                 $db = PearDatabase::getInstance();
-                $currentUser = Users_Record_Model::getCurrentUserModel();
+                $currentUser = Users_Record_Model::getCurrentUserModel(); 
                 $currentUserPrivilegeModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
                 $moduleModel = $this->getModule();
 
+                // Added By Mabruk (is_closed = 0)
                 $sql = "SELECT vtiger_links.*, vtiger_module_dashboard_widgets.userid, vtiger_module_dashboard_widgets.filterid, vtiger_module_dashboard_widgets.data, vtiger_module_dashboard_widgets.id as widgetid, vtiger_module_dashboard_widgets.position as position, vtiger_module_dashboard_widgets.size as size, vtiger_links.linkid as id FROM vtiger_links ".
                                 " INNER JOIN vtiger_module_dashboard_widgets ON vtiger_links.linkid=vtiger_module_dashboard_widgets.linkid".
-                                " WHERE vtiger_module_dashboard_widgets.userid = ? AND linktype = ? AND tabid = ?";
+                                " WHERE vtiger_module_dashboard_widgets.userid = ? AND linktype = ? AND tabid = ? AND is_closed = 0";
                 $params = array($currentUser->getId(), 'DASHBOARDWIDGET', $moduleModel->getId());
 
                 // Added for Vtiger7
@@ -138,7 +140,7 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
 
                 //For chart reports as widgets
                 $sql = "SELECT reportid FROM vtiger_module_dashboard_widgets WHERE userid = ? AND linkid= ? AND reportid IS NOT NULL";
-                $params = array($currentUser->getId(),0);
+                $params = array($currentUser->getId(),119);
 
                 // Added for Vtiger7
                 if($this->get("tabid")){
@@ -209,18 +211,24 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
         public function addTab($tabName){
                 $db = PearDatabase::getInstance();
                 $currentUser = Users_Record_Model::getCurrentUserModel();
-
                 $result = $db->pquery("SELECT MAX(sequence)+1 AS sequence FROM vtiger_dashboard_tabs",array());
                 $sequence = $db->query_result($result, 0,'sequence');
 
                 $query = "INSERT INTO vtiger_dashboard_tabs(tabname, userid,sequence) VALUES(?,?,?)";
                 $db->pquery($query,array($tabName,$currentUser->getId(),$sequence));
                 $tabData = array("tabid"=>$db->getLastInsertID(),"tabname"=>$tabName,"sequence"=>$sequence);
+
+                // Added By Mabruk                
+                Users::CreateDefaultDashboard($currentUser->getId(), $currentUser->get('roleid'), $tabData['tabid']);
+
                 return $tabData;
         }
 
         public function deleteTab($tabId) {
                 $db = PearDatabase::getInstance();
+                // Added By Mabruk
+                $db->pquery("DELETE FROM vtiger_module_dashboard_widgets WHERE dashboardtabid = ?", array($tabId));
+
                 $query = "DELETE FROM vtiger_dashboard_tabs WHERE id=?";
                 $db->pquery($query, array($tabId));
                 return true;

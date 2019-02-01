@@ -20,7 +20,7 @@ Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 				throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
 			}
 		}
-		if(($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $record)) {
+		if($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $record || in_array($currentUserModel->get('roleid'), array('H2','H12','H13'))) {
 			return true;
 		} else {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
@@ -55,7 +55,9 @@ Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 			$viewer->assign('VIEW', $request->get('view'));
 			$viewer->assign('MENUS', $menuModelsList);
 			$viewer->assign('QUICK_CREATE_MODULES', Vtiger_Menu_Model::getAllForQuickCreate());
+			$viewer->assign('QUICK_CREATE_MOD_ICONS', Vtiger_Menu_Model::getQuickCreateModulesAndIcons()); // Added By Mabruk
 			$viewer->assign('MENU_STRUCTURE', $menuStructure);
+			$viewer->assign('PLAN', $_SESSION['plan']);
 			$viewer->assign('MENU_SELECTED_MODULENAME', $selectedModule);
 			$viewer->assign('MENU_TOPITEMS_LIMIT', $menuStructure->getLimit());
 			$viewer->assign('COMPANY_LOGO',$companyLogo);
@@ -117,6 +119,23 @@ Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 				$fieldsInfo[$fieldName] = $fieldModel->getFieldInfo();
 			}
 			$viewer->assign('FIELDS_INFO', json_encode($fieldsInfo));
+			
+			//fetch all notifications related to Log in user
+	        $LIMIT = 5;
+	        $page = $request->get('page');
+	        $homeModuleModel = Vtiger_Module_Model::getInstance('Home');    
+	        
+	        if(empty($page)) {
+	            $page = 1;
+	        }
+
+	        $pagingModel = new Vtiger_Paging_Model();
+	        $pagingModel->set('page', $page);
+	        $pagingModel->set('limit', $LIMIT);
+	       
+	        $notifications = $homeModuleModel->getAllNotifications($pagingModel);
+	        $viewer->assign('NEXTPAGE', ($pagingModel->get('notificationcount') < $LIMIT)? 0 : $page+1);
+	        $viewer->assign('NOTIFICATIONS', $notifications);
 
 			if($display) {
 				$this->preProcessDisplay($request);

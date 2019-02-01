@@ -414,33 +414,40 @@ class CRMEntity {
 			// Make selection on the primary key of the module table to check.
 			$check_query = "select $tablekey from $table_name where $tablekey=?";
 			$check_params = array($this->id);
+
 			if (Vtiger_Functions::isUserSpecificFieldTable($table_name, $module)) {
 				$check_query .= ' AND userid=?';
 				array_push($check_params, $current_user->id);
 			}
+
 			$check_result = $adb->pquery($check_query, $check_params);
 
 			$num_rows = $adb->num_rows($check_result);
 
 			if ($num_rows <= 0) {
+
 				$insertion_mode = '';
 			}
 		}
 
 		$tabid = getTabid($module);
+
 		if ($module == 'Calendar' && $this->column_fields["activitytype"] != null && $this->column_fields["activitytype"] != 'Task') {
 			$tabid = getTabid('Events');
 		}
+
 		if ($insertion_mode == 'edit') {
 			$update = array();
 			$update_params = array();
 			$updateColumnNames = array();
 			$updateFieldNameColumnNameMap = array();
 			$acl = Vtiger_AccessControl::loadUserPrivileges($current_user->id);
+
 			if ($acl->is_admin == true || $acl->profileGlobalPermission[1] == 0 || $acl->profileGlobalPermission[2] == 0 || $this->isWorkFlowFieldUpdate) {
 				$sql = "select fieldname,columnname,uitype,generatedtype,
 										typeofdata from vtiger_field where tabid in (" . generateQuestionMarks($tabid) . ") and tablename=? and displaytype in (1,3,6) and presence in (0,2) group by columnname";
 				$params = array($tabid, $table_name);
+				
 			} else {
 				$profileList = getCurrentUserProfileList();
 
@@ -886,7 +893,7 @@ class CRMEntity {
 				// fieldname are always assumed to be unique for a module
 
 				// IF/ELSE conditons added by Mabruk to ignore the Starred Column if used as focused object in php script
-				if ($isUsedAsFocusObj == true && $fieldinfo['columnname'] == 'starred')
+				if ($fieldinfo['columnname'] == 'starred')
 					continue;
 				else
 					$column_clause .=  $fieldinfo['tablename'].'.'.$fieldinfo['columnname'].' AS '.$this->createColumnAliasForField($fieldinfo).',';
@@ -1586,7 +1593,10 @@ class CRMEntity {
 			
 			$sourceCompany = $sourceCompany;
 		} else {
-			$sourceCompany = 1; //Default Company
+			$result = $adb->pquery("SELECT organization_id FROM vtiger_organizationdetails INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid=vtiger_organizationdetails.organization_id
+								WHERE vtiger_crmentity.deleted=0 AND vtiger_organizationdetails.isdefault=1", array());
+
+			$sourceCompany = $adb->query_result($result,0, 'organization_id'); //Default Company
 		}		
 	
 		//when we configure the invoice number in Settings this will be used

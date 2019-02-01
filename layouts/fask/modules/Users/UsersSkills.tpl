@@ -42,6 +42,13 @@ display: none;
 
   border: none;
   position: relative;
+  height: 20px;
+margin-bottom: 20px;
+overflow: hidden;
+background-color: #f5f5f5;
+border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 }
 .progress-bar{
   -webkit-transition: width 1.5s ease-in-out;
@@ -54,10 +61,13 @@ display: none;
 {assign var=CREATE_SKILL_URL value=$LANGUAGE_RECORD_MODEL->getCreateSkillUrl()}
 {assign var=WIDTHTYPE value=$USER_MODEL->get('rowheight')}
         <div class="btn-group pull-right allprofilebtn">
+                {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13" OR $USER_MODEL->isAdminUser() }
+
             <button type="button" class="btn btn-primary" onclick="Users_Skills_Js.addLanguage('{$CREATE_LANGUAGE_URL}&userId={$USERID}');">
                 <i class="fa fa-plus"></i>&nbsp;&nbsp;
                 <strong>{vtranslate('LBL_ADD_LANGUAGE', $MODULE)}</strong>
             </button>
+           {/if} 
         </div>
         <div class="clearfix"></div>
                     <div class="block listViewContentDiv" id="listViewContents" >
@@ -90,14 +100,20 @@ display: none;
                                         {/if}    
                                     <tr>
                                         <td class="medium" valign="top">{$USER_LANGUAGE['language']}</td>
-                                        <td class="medium" valign="top">                                  
-                                                <div class="progress">
-                                                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar"
+                                        <td class="medium" valign="top">      
+                                            <style>
+                                                .progress-bar-color-{$USER_LANGUAGE['proficiency']|replace:' ':'_'}{
+                                                    background-color:   {$USER_LANGUAGE['color']}  !important;
+                                                }
+                                            </style>
+                                                <div class="progress" s>
+                                                <div class="progress-bar progress-bar-color-{$USER_LANGUAGE['proficiency']|replace:' ':'_'} progress-bar-striped"  role="progressbar" 
                                                 aria-valuenow="{$ACCURACY}" aria-valuemin="0" aria-valuemax="100" style="width:{$ACCURACY}%">
-                                                         {$USER_LANGUAGE['proficiency']}
+                                                         {$USER_LANGUAGE['proficiency']}   
                                                 </div>
                                               </div>
                                         </td>
+                                        {if $USER_MODEL->get('id') eq $USERID}
                                         <td class="medium" width="5%" valign="top">
                                             <div class="pull-right actions">
                                                 <span class="actionImages">
@@ -107,7 +123,8 @@ display: none;
                                                     </a>
                                                 </span>
                                             </div>
-                                        </td>    
+                                        </td> 
+                                        {/if}   
                                     </tr>
                                     {/foreach}
                                 </tbody>
@@ -120,8 +137,10 @@ display: none;
 <!--- Start of Skill Container-->
 <div id="SkillContainer" >
     <div class="btn-group pull-right allprofilebtn">
+            {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13"  }
 
         <button type="button" class="btn btn-primary pull-right" onclick="Users_Skills_Js.addSkill('{$CREATE_SKILL_URL}&userId={$USERID}');"><i class="fa fa-plus"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_SKILL', $MODULE)}</strong></button>
+     {/if}   
     </div>
     <div class="clearfix"></div>
     <div class="block listViewContentDiv" id="listViewContents" >
@@ -141,7 +160,7 @@ display: none;
                                     {elseif $LABEL eq 'LBL_INTERMEDIATE_LABEL'}
                                          {assign var=ACCURACY value= "70"}
                                     {elseif $LABEL eq 'LBL_EXPERT_LABEL'}
-                                         {assign var=ACCURACY value= "70"}     
+                                         {assign var=ACCURACY value= "100"}     
                                     {else}
                                           {assign var=ACCURACY value= "0"}
                                     {/if}
@@ -150,9 +169,13 @@ display: none;
                                         {$SKILL['skill_title']}
                                         </td>
                                         <td> 
-                                          
+                                          <style>
+                                                .progress-bar-color-{$SKILL['skill_label']}{
+                                                    background-color:   {$SKILL['color']}  !important;
+                                                }
+                                            </style>
                                             <div class="progress">
-                                                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar"
+                                                <div class="progress-bar progress-bar-color-{$SKILL['skill_label']} progress-bar-striped" role="progressbar"
                                                 aria-valuenow="{$ACCURACY}" aria-valuemin="0" aria-valuemax="100" style="width:{$ACCURACY}%">
                                                                      {vtranslate($LABEL,$MODULE)}
                                                 </div>

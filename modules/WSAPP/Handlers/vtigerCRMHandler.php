@@ -27,8 +27,8 @@ class vtigerCRMHandler extends SyncHandler {
 		$this->key = $appkey;
 		$this->assignToChangedRecords = array();
 	}
-
-	public function get($module, $token, $user) {
+	//Tagged By Mabruk for Debug
+	public function get($module, $token, $user) { 
 		$syncModule = $module;
 		$this->user = $user;
 		$syncModule = $module;
@@ -40,8 +40,18 @@ class vtigerCRMHandler extends SyncHandler {
 				$syncType = 'application';
 			}
 		}
-		$result = vtws_sync($token, $syncModule, $syncType, $this->user);
-		$result['updated'] = $this->translateTheReferenceFieldIdsToName($result['updated'], $syncModule, $user);
+		// Cusotmized By Mabruk 
+		if ($module == "Office365Contacts") { 
+			
+			$syncModule = 'Contacts';
+			$result     = vtws_sync_office365Contacts($token, $syncModule, $syncType, $this->user); 
+
+		}
+		else
+			$result = vtws_sync($token, $syncModule, $syncType, $this->user); 
+
+		$result['updated'] = $this->translateTheReferenceFieldIdsToName($result['updated'], $syncModule, $user); 
+		unset($result['deleted']); // Mabruk
 		return $this->nativeToSyncFormat($result);
 	}
 

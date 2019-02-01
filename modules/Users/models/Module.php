@@ -184,11 +184,12 @@ class Users_Module_Model extends Vtiger_Module_Model {
        		$browser = (strlen($browser)) ? $browser : $browser;
 
 		//Session_id added By Mabruk requested By Jitu
-		$_SESSION['session_id'] = uniqid();   
+		$_SESSION['session_id'] = session_id();   
 		$query = "INSERT INTO vtiger_loginhistory (user_name, user_ip, logout_time, login_time, status, browser, session_id) VALUES (?,?,?,?,?,?,?)";
 		$params = array($username, $userIPAddress, '0000-00-00 00:00:00',  $loginTime, $status, $browser, $_SESSION['session_id']);
 
 		$adb->pquery($query, $params);
+                                        return $adb->getLastInsertID();
 	}
 
 
@@ -356,7 +357,7 @@ class Users_Module_Model extends Vtiger_Module_Model {
 		$moduleName = $this->getName();
 
 		$currentUser = Users_Record_Model::getCurrentUserModel();
-		if ($currentUser->isAdminUser() && Users_Privileges_Model::isPermitted($moduleName, 'CreateView')) {
+		if ($currentUser->isAdminUser() || in_array($currentUser->roleid, array('H2','H12','H13'))) {
 			$basicLinks[] = array(
 				'linktype' => 'BASIC',
 				'linklabel' => 'LBL_ADD_RECORD',
@@ -364,7 +365,7 @@ class Users_Module_Model extends Vtiger_Module_Model {
 				'linkicon' => 'fa-plus'
 			);
 	
-			if (Users_Privileges_Model::isPermitted($moduleName, 'Import')) {
+			if (Users_Privileges_Model::isPermitted($moduleName, 'Import') || in_array($currentUser->roleid, array('H2','H12','H13'))) {
 				$basicLinks[] = array(
 					'linktype' => 'BASIC',
 					'linklabel' => 'LBL_IMPORT',
@@ -389,7 +390,7 @@ class Users_Module_Model extends Vtiger_Module_Model {
 			$settingsLinks[] = array(
 				'linktype' => 'LISTVIEW',
 				'linklabel' => 'LBL_EXPORT',
-				'linkurl' => 'Settings_Users_List_Js.triggerExportAction("index.php?module=Users&source_module=Users&action=ExportData");',
+				'linkurl' => 'Settings_Users_List_Js.triggerExportAction("index.php?module=Users&view=Export")',
 				'linkicon' => ''
 			);
 		}
