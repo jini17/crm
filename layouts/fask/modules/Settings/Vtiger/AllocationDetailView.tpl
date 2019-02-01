@@ -27,15 +27,53 @@
               
                     <div class="pull-right"><a class="btn btn-success" href="index.php?module=Vtiger&parent=Settings&view=BalanceLeave&mode=ShowBalanceLeave">{vtranslate('Employee Leave Status', $MODULE)}</a></div>
               
-                <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">{vtranslate('Delete', $MODULE)}</button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="btn span10 marginLeftZero newButton" id="addItem">{vtranslate('Add', $MODULE)}</button><br><br>
-                <button class="btn span10 marginLeftZero newButton" id="editItem">{vtranslate('Edit', $MODULE)}</button><br><br>
+                    <button class="btn btn-primary span10 marginLeftZero newButton" style="margin-right: 5px;" id="addItem">{vtranslate('Add', $MODULE)}</button>
+             <button class="btn btn-primary span10 marginLeftZero newButton"style="margin-right: 5px;" id="editItem">{vtranslate('Edit', $MODULE)}</button>
+             <button class="btn btn-danger span10 marginLeftZero"  id="deleteItem">{vtranslate('Delete', $MODULE)}</button>
+             <div class='clearfix' style='height: 10px;'></div>
+             <div class='clearfix'></div>
+             <div class="contents container-fluid" style='background-color: #fff;'>                 
+                 <div class="row th miniListContent">
+                     <div class="col-md-12">
+                         <h5 class="alignMiddle"><strong>{vtranslate('Leave Type List', $MODULE)}</strong></h5>
+                     </div>
+                 </div>
+                     <div class='clearfix'></div>
+                <div class='row th' style='padding-top: 5px; padding-bottom: 5px;'>
+                    <div class='col-md-1'>   <strong>{vtranslate('Select', $MODULE)}</strong></div>
+                    <div class='col-md-3'>  <strong> {vtranslate('Leave Policy Title', $MODULE)} </strong></div>
+                    <div class='col-md-3'><strong>{vtranslate('Leave Type', $MODULE)}</strong> </div>
+                    <div class='col-md-3'>   <strong>   {vtranslate('Grade', $MODULE)}</strong></div>
+                    <div class='col-md-1'>   <strong> {vtranslate('Status', $MODULE)} </strong></div>                   
+                </div>
+                   <div class='clearfix'></div>
+                   
+                   {foreach item=SPLITVALUE from=$VALUES}
+                      
+                      
+                                   <div class='row miniListContent'  style='padding-top: 5px; padding-bottom: 5px;'>                
+                                       <div class='col-md-1'>  
+                                                    <input type="checkbox" name="selected_id" value="{$SPLITVALUE['checkbox']}" class="smallchkd">
+                                                </div>
+                                       <div class='col-md-3'>  
+                                                  {$SPLITVALUE['allocationtitle']}
+                                       </div>
+                                   <div class='col-md-3'>{$SPLITVALUE['allocationtitle']}</div>
+                                   <div class='col-md-3'>  {$SPLITVALUE['leavetype']}</div>
+                                   <div class='col-md-1'>      {$SPLITVALUE['status']}</div>      
+                                   </div>
+                                   
+                    
+                  
+                   {/foreach}
+             </div>
+
+           {*     
                 <div class="contents">
                     <table class="table table-bordered table-condensed themeTableColor">
                         <thead>
                         <th class="{$WIDTHTYPE}">
-                            <span class="alignMiddle">{vtranslate('Leave Type List', $MODULE)}</span>
+                          
                         </th>
                         </thead>
                         <tbody>
@@ -75,7 +113,7 @@
                         {/foreach}
                         </tbody>
                     </table>
-                </div>
+                </div>*}
             </div>
         </div>
     </div>
