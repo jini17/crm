@@ -147,7 +147,7 @@ Vtiger.Class('Vtiger_Widget_Js',{
 //			this.positionNoDataMsg();
                 }
         },
-
+                
         getFilterData : function() {
                 return {};
         },
@@ -541,8 +541,10 @@ Vtiger_Widget_Js('Vtiger_Barchat_Widget_Js',{},{
                         }
                 }
         // yMaxValue Should be 25% more than Maximum Value
+ 
                 yMaxValue = yMaxValue + 2 + (yMaxValue/100)*25;
-                return {'chartData':[chartData], 'yMaxValue':yMaxValue, 'labels':xLabels};
+              
+                return {'chartData':[chartData], 'yMaxValue':yMaxValue, 'labels':xLabels, 'grid':{borderColor:'transparent',shadow:false,drawBorder:false}};
         },
 
     generateLinks : function() {

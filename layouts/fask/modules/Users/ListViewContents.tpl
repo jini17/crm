@@ -289,9 +289,9 @@
                         <div class="col-lg-12 text-center">
                              {$PAGINATION}
                           
-    <div id="scroller_wrapper" class="bottom-fixed-scroll">
-        <div id="scroller" class="scroller-div"></div>
-    </div>
+                            <div id="scroller_wrapper" class="bottom-fixed-scroll">
+                                <div id="scroller" class="scroller-div"></div>
+                            </div>
     {*<div>Pagenation code start
      <nav aria-label="Page navigation example">
          
@@ -314,7 +314,10 @@
               </li>
             </ul>
    
-    </nav>
+    </nav>*}
     
-    </div>*}
+    </div>
+    <div class="clearfix"></div>
+    <div class="clearfix" style="height: 60px;"> </div>
+    <div class="clearfix"></div>
 {/strip}
