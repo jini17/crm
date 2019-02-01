@@ -9451,12 +9451,12 @@ width:245 !important;
 .tree li::before, .tree li::after{
     content: '';
     position: absolute; top: 0; right: 50%;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #000;
     width: 50%; height: 20px;
 }
 .tree li::after{
     right: auto; left: 50%;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid #000;
 }
 
 /*We need to remove left-right connectors from elements without 
@@ -9475,7 +9475,7 @@ right connector from last child*/
 }
 /*Adding back the vertical connector to the last nodes*/
 .tree li:last-child::before{
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #000;
     border-radius: 0 5px 0 0;
     -webkit-border-radius: 0 5px 0 0;
     -moz-border-radius: 0 5px 0 0;
@@ -9490,19 +9490,18 @@ right connector from last child*/
 .tree ul ul::before{
     content: '';
     position: absolute; top: 0; left: 50%;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid #000;
     width: 0; height: 20px;
 }
 
 .tree li .box{
-    border: 1px solid #ccc;
+    border: 1px solid #000;
     padding: 5px 10px;
     text-decoration: none;
-    color: #666;
+    color: #000;
     font-family: arial, verdana, tahoma;
     font-size: 11px;
     display: inline-block;
-
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -9510,7 +9509,7 @@ right connector from last child*/
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
-    width: 245px;
+    width: 255px;
 }
 
 /*Time for some hover effects*/
@@ -9530,7 +9529,7 @@ right connector from last child*/
     float: left;
 }
 .tree li .box .orgbox-details{
-    width: 130px;
+    width: 150px;
     float: right;
 }
 
