@@ -114,9 +114,17 @@
       padding:7px 5px;
       border:1px solid  #f2f2f2;
    }
+   .notification-container a:hover{
+       background: none !important;
+       color: #000;
+       
+   }
    .notification-container .notification-title{
+       color: #000 !important;
       width:213px;
       float:right;
+      font-size: 12px !important;
+     
    }
    .notification-container .notification-time{
    }   
@@ -133,10 +141,16 @@
          color: #ffffff !important;
     }
     .notification-list h6 i{
-     color: #ffffff !important;
+         color: #ffffff !important;
      }
      .all-notification{
-         color: #2f5597
+         color: #2f5597 ;
+         border-bottom: 1px solid #ccc;
+         border-left: 1px solid #ccc;
+         border-right: 1px solid #ccc;
+     }
+     .all-notification:hover{
+          color: #2f5597 !important;
      }
 </style>
 <nav class="navbar navbar-default navbar-fixed-top app-fixed-navbar">
@@ -207,17 +221,17 @@
 
                     </a>
                   </div>
-                  <div class="notification-list hide" style="display:  block !important; left: -231px;" onmouseleave="Vtiger_Header_Js.hideNotification();">
+                  <div class="notification-list hide" style="left: -231px; background-color: #fff;" onmouseleave="Vtiger_Header_Js.hideNotification();">
                      <h6>{vtranslate('Notification')}<i class="fa fa-gear pull-right"></i></h6>
 
                      {if $NOTIFICATIONS['details']|count eq 0}
                         <span style="font-size: 11px; text-align: center;"><strong>{vtranslate('No Notification found')}</strong></span>
                      {else}
-                     <ul class="list-unstyled">
+                        <ul class="list-unstyled" style="  border-left: 1px solid #ccc;    border-right: 1px solid #ccc;">
                        {foreach item=NOTIFICATION from=$NOTIFICATIONS['details']}
                             <li style='border-bottom: 1px solid #ccc;'>                                  
                                 <div class="notification-container {if $NOTIFICATION['unread'] eq 0}unread{/if}">
-                                          <a href=" {$NOTIFICATION['linkurl']}" style="display:block; width: 100%; padding: 7px 5px;">
+                                          <a href=" {$NOTIFICATION['linkurl']}" style="display:block; width: 100%; padding: 0 5px; font-weight: bold;">
                                             <div class="notification-avatar left-node">
                                                <div class="img-holder">
                                                   <img src="{$NOTIFICATION['profilepic']}" class="img-circle" style='border: none !important;' height="40" width="40">
@@ -237,12 +251,13 @@
                         {/foreach}
                      </ul>
                       <div class="clearfix"> </div>
-                      {$NEXTPAGE|print_r}
-                        {if $NEXTPAGE}
-                           <a href="#" class="btn btn-block all-notification text-center"> See all recent activity </a>
-                        {/if}   
+                     
+                      <a href="index.php?module=Notifications&view=List" class="btn btn-block all-notification text-center" style="width: 100%; background: #fff;"> See all recent activity </a>
+                      <div class="clearfix"> </div>
                      {/if}     
+                      <div class="clearfix"> </div>
                     </div>
+                     <div class="clearfix"> </div>
                </li>
                <!--End here -->
 

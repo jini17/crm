@@ -604,3 +604,6 @@ color: #2f5597 !important;
 
     margin-top: 5px;
 }
+.global-nav .app-navigator-container{
+       height: 51px !important;
+}

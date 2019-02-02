@@ -686,3 +686,6 @@ color: #EC5C64 !important;
 
     margin-top: 5px;
 }
+.global-nav .app-navigator-container{
+        height: 51px !important;
+}
