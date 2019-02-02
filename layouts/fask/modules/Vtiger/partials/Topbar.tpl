@@ -111,11 +111,11 @@
       float:left;
    }
    .notification-container{
-      padding:10px;
+      padding:7px 5px;
       border:1px solid  #f2f2f2;
    }
    .notification-container .notification-title{
-      width:200px;
+      width:213px;
       float:right;
    }
    .notification-container .notification-time{
@@ -207,7 +207,7 @@
 
                     </a>
                   </div>
-                  <div class="notification-list hide" style="top:30px;" onmouseleave="Vtiger_Header_Js.hideNotification();">
+                  <div class="notification-list hide" style="display:  block !important; left: -231px;" onmouseleave="Vtiger_Header_Js.hideNotification();">
                      <h6>{vtranslate('Notification')}<i class="fa fa-gear pull-right"></i></h6>
 
                      {if $NOTIFICATIONS['details']|count eq 0}
@@ -216,22 +216,25 @@
                      <ul class="list-unstyled">
                        {foreach item=NOTIFICATION from=$NOTIFICATIONS['details']}
 
-                        <li>
-                           <div class="notification-container {if $NOTIFICATION['unread'] eq 0}unread{/if}">
-                              <div class="notification-avatar left-node">
-                                 <div class="img-holder">
-                                    <img src="{$NOTIFICATION['profilepic']}" class="img-circle" height="40" width="40">
-                                 </div>
-                              </div>
-                              <div class="right-node">
-                                 <div class="notification-title">
-                                    {if $NOTIFICATION['unread'] eq 1}<strong>{$NOTIFICATION['message']}</strong>{else}{$NOTIFICATION['message']}{/if}
-                                    <div class="clearfix"></div>
-                                    <span class="notification-time">{$NOTIFICATION['timestamp']}</span> 
-                                 </div>
-                              </div>
-                              <div class="clearfix"> </div>
-                           </div>
+                        <li style='border-bottom: 1px solid #ccc;'>
+                            <a href="#" style='display: block; width: 100%;'>
+                                    <div class="notification-container {if $NOTIFICATION['unread'] eq 0}unread{/if}">
+                                       <div class="notification-avatar left-node">
+                                          <div class="img-holder">
+                                             <img src="{$NOTIFICATION['profilepic']}" class="img-circle" style='border: none !important;' height="40" width="40">
+                                          </div>
+                                       </div>
+                                       <div class="right-node">
+                                          <div class="notification-title">
+                                             {if $NOTIFICATION['unread'] eq 1}<strong>{$NOTIFICATION['message']}</strong>{else}{$NOTIFICATION['message']}{/if}
+                                             <div class="clearfix"></div>
+                                             <small class="notification-time">{$NOTIFICATION['timestamp']}</span> 
+                                          </div>
+                                       </div>
+                                       <div class="clearfix"> </div>
+                                    </div>
+                                            <div class="clearfix"> </div>
+                            </a>
                            <div class="clearfix"> </div>
                         </li>
                         {/foreach}
