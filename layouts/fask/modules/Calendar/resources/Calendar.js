@@ -623,14 +623,13 @@ Vtiger.Class("Calendar_Calendar_Js", {
                         }
 
                         thisInstance.checkDuplicateFeed(moduleName, fieldName, selectedColor, conditions).then(
-                                        function (result) {
-                                                thisInstance.saveFeedSettings(modalContainer, feedIndicator);
-                                        },
-                                        function () {
-                                                app.helper.showErrorNotification({'message': app.vtranslate('\
-    ')});
-                                                currentTarget.removeAttr('disabled');
-                                        });
+                            function (result) {
+                                 thisInstance.saveFeedSettings(modalContainer, feedIndicator);
+                            },
+                            function () {
+                               app.helper.showErrorNotification({'message': app.vtranslate('Failed to change activity type color')});
+                               currentTarget.removeAttr('disabled');
+                          });
                 });
         },
         registerColorEditorEvents: function (modalContainer, feedIndicator) {

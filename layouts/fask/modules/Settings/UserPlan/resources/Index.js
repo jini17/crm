@@ -47,8 +47,7 @@ Vtiger.Class("Settings_UserPlan_Index_Js",{},{
      		            $.each(data['roles'], function(k, v) {
                              dropdown.append('<option value="' + v.roleid + '">' + v.rolename + '</option>');
                            });
-						//thisInstance.loadUserPlan();
-						aDefem/gaming/2018/03/final-fantasy-xv-on-windows-more-beauty-more-frame-rates-maybe-fewer-bugs/rred.resolve(data);
+						aDeferred.resolve(data);
 					} else {
 						aDeferred.reject(data);
 					}
