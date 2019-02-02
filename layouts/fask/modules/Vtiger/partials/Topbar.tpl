@@ -215,31 +215,29 @@
                      {else}
                      <ul class="list-unstyled">
                        {foreach item=NOTIFICATION from=$NOTIFICATIONS['details']}
-
-                        <li style='border-bottom: 1px solid #ccc;'>
-              {$NOTIFICATION|print_r}
-                                    <div class="notification-container {if $NOTIFICATION['unread'] eq 0}unread{/if}">
-                                       <div class="notification-avatar left-node">
-                                          <div class="img-holder">
-                                             <img src="{$NOTIFICATION['profilepic']}" class="img-circle" style='border: none !important;' height="40" width="40">
-                                          </div>
-                                       </div>
-                                       <div class="right-node">
-                                          <div class="notification-title">
-                                             {if $NOTIFICATION['unread'] eq 1}<strong>{$NOTIFICATION['message']}</strong>{else}{$NOTIFICATION['message']}{/if}
-                                             <div class="clearfix"></div>
-                                             <small class="notification-time">{$NOTIFICATION['timestamp']}</span> 
-                                          </div>
-                                       </div>
-                                       <div class="clearfix"> </div>
-                                    </div>
+                            <li style='border-bottom: 1px solid #ccc;'>                                  
+                                <div class="notification-container {if $NOTIFICATION['unread'] eq 0}unread{/if}">
+                                          <a href=" {$NOTIFICATION['linkurl']}" style="display:block; width: 100%; padding: 7px 5px;">
+                                            <div class="notification-avatar left-node">
+                                               <div class="img-holder">
+                                                  <img src="{$NOTIFICATION['profilepic']}" class="img-circle" style='border: none !important;' height="40" width="40">
+                                               </div>
+                                            </div>
+                                            <div class="right-node">
+                                               <div class="notification-title">
+                                                  {if $NOTIFICATION['unread'] eq 1}<strong>{$NOTIFICATION['message']}</strong>{else}{$NOTIFICATION['message']}{/if}
+                                                  <div class="clearfix"></div>
+                                                  <small class="notification-time" style="color: #666666; font-size: 8px;">{$NOTIFICATION['timestamp']}</small> 
+                                               </div>
+                                            </div>
                                             <div class="clearfix"> </div>
-                            
-                           <div class="clearfix"> </div>
-                        </li>
+                                     </a>
+                                </div>                      
+                            </li>
                         {/foreach}
                      </ul>
                       <div class="clearfix"> </div>
+                      {$NEXTPAGE|print_r}
                         {if $NEXTPAGE}
                            <a href="#" class="btn btn-block all-notification text-center"> See all recent activity </a>
                         {/if}   
