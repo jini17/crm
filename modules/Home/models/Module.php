@@ -521,8 +521,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 			  	$notifyto 		= $db->query_result($result, $i, 'notifyto');
 			  	$timestamp 		= $db->query_result($result, $i, 'createdtime');
 			  	$viewed 		= $db->query_result($result, $i, 'viewed');
-			  	$setype 		= $db->query_result($result, $i, 'setype');
-
+			  	
 			  	$nameResult = $db->pquery('SELECT first_name, last_name,  FROM vtiger_users WHERE id = ?', array($notifyto));
 				if($db->num_rows($nameResult)) {
 					$fullname =  $db->query_result($nameResult, 0, 'first_name').' '.$db->query_result($nameResult, 0, 'last_name');
@@ -541,7 +540,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 			  	} else if($action == 'Download'){
 			  		$message = 'Download your payslip here';
 			  	} else if($action == 'Approved' || $action == 'Rejected' || $action == "Applied"){
-			  		$message =  $setype. " is approved ";
+			  		$message =  $referenceModuleName. " is approved ";
 			  	} else if($action == 'Assigned'){
 			  		$message = "A task is assigned to ". $fullname;
 			  	} else if($action == 'Completed'){
