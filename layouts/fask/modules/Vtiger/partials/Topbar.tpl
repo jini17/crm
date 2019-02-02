@@ -217,7 +217,7 @@
                        {foreach item=NOTIFICATION from=$NOTIFICATIONS['details']}
 
                         <li style='border-bottom: 1px solid #ccc;'>
-                            <a href="#" style='display: block; width: 100%;'>
+              {$NOTIFICATION|print_r}
                                     <div class="notification-container {if $NOTIFICATION['unread'] eq 0}unread{/if}">
                                        <div class="notification-avatar left-node">
                                           <div class="img-holder">
@@ -234,7 +234,7 @@
                                        <div class="clearfix"> </div>
                                     </div>
                                             <div class="clearfix"> </div>
-                            </a>
+                            
                            <div class="clearfix"> </div>
                         </li>
                         {/foreach}
