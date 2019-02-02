@@ -103,7 +103,7 @@
                                         <li class="group-heading employee" style="position:relative;">
                                              <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Employee <i class="fa fa-users pull-right widget-icon"></i></a>
                                           
-                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -156px; background:#fff;  z-index: -1; ; padding: 15px;">
                                              
                                                 {foreach item="emp" from=$EMPLOYEE_GROUP }      
                                                        <li class="emp-widget widget-item ">
@@ -128,7 +128,7 @@
                                         <li class="group-heading employee" style="position:relative;">
                                              <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Sales <i class="fa fa-usd pull-right widget-icon"></i></a>
                                           
-                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -156px; background:#fff;  z-index: -1; ; padding: 15px;">
                                              
                                                 {foreach item="emp" from=$SALES }      
                                                        <li class="emp-widget widget-item ">
@@ -154,7 +154,7 @@
                                         <li class="group-heading employee" style="position:relative;">
                                              <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Service <i class="fa fa-headphones pull-right widget-icon"></i></a>
                                           
-                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -156px; background:#fff;  z-index: -1; ; padding: 15px;">
                                              
                                                 {foreach item="emp" from=$SERVICE }      
                                                        <li class="emp-widget widget-item ">
@@ -176,7 +176,7 @@
                                         <li  class="group-heading charts" style="">
                                             <a  class="widget-heading widget-item"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Charts <i class="fa fa-pie-chart pull-right widget-icon"></i></a> 
                                              
-                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -156px; background:#fff;  z-index: -1; ; padding: 15px;">
                                                 
                                                 {foreach item="chart" from=$CHART_GROUP}
                                                     <li class="chart-widget widget-item">
@@ -197,7 +197,7 @@
                                        
                                              <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Leaves & Claims <i class="fa fa-clipboard pull-right widget-icon"></i></a>
                                             
-                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -156px; background:#fff;  z-index: -1; ; padding: 15px;">
                                                 
                                                 {foreach item="leaveclaim" from=$LEAVECLAIM_GROUP }
                                                    <li class="leaveclaim-widget widget-item">
@@ -216,7 +216,7 @@
                                         {if count($GENERAL_GROUP) > 0}
                                         <li class='general'>
                                             <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp;  General <i class="fab fa-windows pull-right widget-icon"></i></a>
-                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -156px; background:#fff;  z-index: -1; ; padding: 15px;">
                                                  
                                                     {foreach item="general" from=$GENERAL_GROUP}
                                                         <li  class="general-widget widget-item ">
