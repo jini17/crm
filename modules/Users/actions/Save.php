@@ -123,7 +123,8 @@ class Users_Save_Action extends Vtiger_Save_Action {
 		
 		if($recordId=='') {
 			$plan = $recordModel->MakeAgiliuxCPUser($recordModel->entity->db->dbName, $plan);
-		}
+		} //end here 
+		
 		
 		if ($request->get('relationOperation')) {
 			$parentRecordModel = Vtiger_Record_Model::getInstanceById($request->get('sourceRecord'), $request->get('sourceModule'));
