@@ -18,7 +18,7 @@
                 <div class="widgetChartContainer" name='chartcontent' style="height:150px;min-width:300px; margin: 0 auto;"></div>
                 <br>
             </div>
-			<div class="col-lg-1"></div>
+            <div class="col-lg-1"></div>
         </div>
     {else}
         <span class="noDataMsg">

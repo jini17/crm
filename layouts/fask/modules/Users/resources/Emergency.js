@@ -36,10 +36,10 @@ Vtiger.Class("Users_Emergency_Js", {
                             e.preventDefault();
                          })
 
-                        jQuery('#home_phone,#office_phone,#mobile').keyup(function(event){
+                        jQuery('#home_phone,#office_phone, #mobile').keyup(function(event){
                                   var $this = $(this);
                           var input = $this.val();
-                          var input = input.replace(/[\D\s\._\-]+/g, "");
+                          var input = input.replace(/[^0-9+()-]/g, '');
 
 
                            $this.val( function() {

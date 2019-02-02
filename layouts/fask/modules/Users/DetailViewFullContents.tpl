@@ -39,7 +39,7 @@
                         </li>
                 <!--Added by jitu@secondcrm.com on 24-12-2014 
                         added by jitu@secondcrm.com for Leave approval widget link-->
-                        {if $VIEW eq 'PreferenceDetail' && $LEAVECLAIM_SHOW} 
+                        {if $LEAVECLAIM_SHOW} 
                         <li class="{if $DEFAULT_TAB neq '' && $TABTYPE eq 'leave'}active{else}relatedListTab{/if}">
                                 <a data-toggle="tab" href="#leave"><strong>{vtranslate('LBL_LEAVE', $MODULE_NAME)}</strong></a>
                         </li>	
@@ -73,11 +73,11 @@
                         <ul class="dropdown-menu pull-right">
                                 {foreach item=DETAIL_VIEW_LINK from=$DETAILVIEW_LINKS['DETAILVIEW']}
                                 {if $DETAIL_VIEW_LINK->getLabel() eq "Delete"}
-                                                                                        {if $CURRENT_USER_MODEL->isAdminUser() && $CURRENT_USER_MODEL->getId() neq $RECORD->getId()}
-                                                                                        <li id="{$MODULE}_detailView_moreAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_LINK->getLabel())}">
-                                                                                                <a href={$DETAIL_VIEW_LINK->getUrl()} >{vtranslate($DETAIL_VIEW_LINK->getLabel(), $MODULE)}</a>
-                                                                                        </li>
-                                                                                        {/if}
+                                    {if $CURRENT_USER_MODEL->isAdminUser() && $CURRENT_USER_MODEL->getId() neq $RECORD->getId()}
+                                    <li id="{$MODULE}_detailView_moreAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_LINK->getLabel())}">
+                                            <a href={$DETAIL_VIEW_LINK->getUrl()} >{vtranslate($DETAIL_VIEW_LINK->getLabel(), $MODULE)}</a>
+                                    </li>
+                                    {/if}
                                 {else}
                                 <li id="{$MODULE}_detailView_moreAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_LINK->getLabel())}">
                                         <a href={$DETAIL_VIEW_LINK->getUrl()} >{vtranslate($DETAIL_VIEW_LINK->getLabel(), $MODULE)}</a>

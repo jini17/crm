@@ -1211,7 +1211,9 @@ class Users extends CRMEntity {
 
                 }
                    
+
             } else if($roleid == 'H21' || $roleid == 'H14' || $roleid == 'H8'){ //Manager and Account Manager and Operation Manager
+
 
                /* $adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
                 array('Employement', 1, 1, 'Default', '', $userid));
@@ -1289,7 +1291,9 @@ class Users extends CRMEntity {
 
                 }
 
+
             } else if($roleid == 'H10' || $roleid == 'H11'){    //Support Manager and Support Staff
+
 
                /* $adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
                 array('People', 1, 1, 'Default', '', $userid));

@@ -24,7 +24,7 @@ $languageStrings = array(
     'LBL_ALLOWED_IP_SETTING' => 'Allowed IP Settings',//Added by Nirbhay for Allowed IP
     'LBL_DELETE_VALUE' => 'Delete',//Added by Nirbhay for Allowed IP
     'LBL_ADD_VALUE' => 'Add',//Added by Nirbhay for Allowed IP
-
+    'LBL_PDF_DESCRIPTION'=>'PDF Description',
     // Blocks
 	'LBL_STUDIO' => 'Studio',
 	'LBL_COMMUNICATION_TEMPLATES' => 'Templates',

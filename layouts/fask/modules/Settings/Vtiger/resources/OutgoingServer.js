@@ -48,8 +48,6 @@ Vtiger.Class("Settings_Vtiger_OutgoingServer_Js",{},{
 
     },
 
-
-
     /**
      * Function created by Nirbhay to delete the values
      */

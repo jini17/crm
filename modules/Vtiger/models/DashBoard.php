@@ -208,10 +208,9 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
                 return $tab;
         }
 
-          public function addTab($tabName){
+        public function addTab($tabName){
                 $db = PearDatabase::getInstance();
                 $currentUser = Users_Record_Model::getCurrentUserModel();
-
                 $result = $db->pquery("SELECT MAX(sequence)+1 AS sequence FROM vtiger_dashboard_tabs",array());
                 $sequence = $db->query_result($result, 0,'sequence');
 
