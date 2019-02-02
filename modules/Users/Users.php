@@ -1161,10 +1161,44 @@ class Users extends CRMEntity {
         }
 
         // Modified By Mabruk
-        function CreateDefaultDashboard($userid, $roleid, $Mytabid = false) { 
+        function CreateDefaultDashboard($userid, $roleid, $Mytabid = false, $type = false) { 
 
             global $adb;
 
+            // Mapping For Custom Dashboards
+            if ($type) {
+
+                // For Employee Dashboard
+                if ($type == "EmployeeDashboard") {  
+
+                    $allUser        = $staffUser = array(120,148,149);   // Same being used for Operation/Account Staff
+
+                    $managerUser    = array_merge($allUser, $mgrOnly = array(121,146));                      // Same being used for Operation/Account Manager
+                    $hrUser         = array_merge($allUser, $hrOnly  = array(121,146,128,143,144,147,127)); // Both HR Manager and Staff
+                    $supportUser    = $allUser;                      // Support manager and Staff
+                    $salesUser      = $allUser;                     // Same being used for Marketing Users for now            
+
+                    $adminUser      = array_unique(array_merge($allUser, $mgrOnly, $hrOnly));
+
+                }
+
+                // For Sales Dashboard
+                else if ($type == "SalesDashboard") {
+
+                    $salesUser      = $adminUser = array(58,59,61,60,63,64,65,62);    
+
+                }
+
+                // For Support Dashboard
+                else if ($type == "SupportDashboard") {
+
+                    $supportUser    = $adminUser = array(67,68);    
+                    
+                }
+
+            }
+                
+            // CREATING DASHBOARDS
             if($roleid == 'H12' ||  $roleid =='H13'){   //HR Manager or HR Staff    
 
                 /*$adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
@@ -1187,8 +1221,8 @@ class Users extends CRMEntity {
                 $dashboardwidgets[] = array(131, $userid, '{"row":"2","col":"3"}', $Mytabid, null);
                 $dashboardwidgets[] = array(57,  $userid, '', $Mytabid, null);
                 $dashboardwidgets[] = array(66,  $userid, '', $Mytabid, null);
-                $dashboardwidgets[] = array(101,  $userid, '', $Mytabid, null);
-                $dashboardwidgets[] = array(152,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(101, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(152, $userid, '', $Mytabid, null);
                 $dashboardwidgets[] = array(126, $userid, '{"row":"1","col":"3"}', $Mytabid, null);
 
                 // Widgets Specific to roles
@@ -1206,8 +1240,13 @@ class Users extends CRMEntity {
                 
                 foreach($dashboardwidgets as $widget){
 
+                    if ($type && in_array($widget[0], $hrUser))
+                        $isClosed = 0;
+                    else
+                        $isClosed = 1;
+
                     $adb->pquery("INSERT INTO vtiger_module_dashboard_widgets(linkid, userid, position, dashboardtabid, size, is_closed)
-                    VALUES (?,?,?,?,?,1)", array($widget[0], $widget[1], $widget[2], $widget[3], $widget[4]));
+                    VALUES (?,?,?,?,?,?)", array($widget[0], $widget[1], $widget[2], $widget[3], $widget[4], $isClosed));
 
                 }
                    
@@ -1234,8 +1273,8 @@ class Users extends CRMEntity {
                 $dashboardwidgets[] = array(131, $userid, '{"row":"2","col":"3"}', $Mytabid, null);
                 $dashboardwidgets[] = array(57,  $userid, '', $Mytabid, null);
                 $dashboardwidgets[] = array(66,  $userid, '', $Mytabid, null);
-                $dashboardwidgets[] = array(101,  $userid, '', $Mytabid, null);
-                $dashboardwidgets[] = array(152,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(101, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(152, $userid, '', $Mytabid, null);
                 $dashboardwidgets[] = array(126, $userid, '{"row":"1","col":"3"}', $Mytabid, null);
                 
                 // Widgets Specific to roles
@@ -1248,8 +1287,13 @@ class Users extends CRMEntity {
                 
                 foreach($dashboardwidgets as $widget){
 
+                    if ($type && in_array($widget[0], $managerUser))
+                        $isClosed = 0;
+                    else
+                        $isClosed = 1;
+
                     $adb->pquery("INSERT INTO vtiger_module_dashboard_widgets(linkid, userid, position, dashboardtabid, size, is_closed)
-                    VALUES (?,?,?,?,?,1)", array($widget[0], $widget[1], $widget[2], $widget[3], $widget[4]));
+                    VALUES (?,?,?,?,?,?)", array($widget[0], $widget[1], $widget[2], $widget[3], $widget[4], $isClosed));
 
                 }
 
@@ -1274,8 +1318,8 @@ class Users extends CRMEntity {
                 $dashboardwidgets[] = array(131, $userid, '{"row":"2","col":"3"}', $Mytabid, null);
                 $dashboardwidgets[] = array(57,  $userid, '', $Mytabid, null);
                 $dashboardwidgets[] = array(66,  $userid, '', $Mytabid, null);
-                $dashboardwidgets[] = array(101,  $userid, '', $Mytabid, null);
-                $dashboardwidgets[] = array(152,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(101, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(152, $userid, '', $Mytabid, null);
                 $dashboardwidgets[] = array(126, $userid, '{"row":"1","col":"3"}', $Mytabid, null);
 
                 // Widgets Specific to roles
@@ -1286,8 +1330,13 @@ class Users extends CRMEntity {
                 
                 foreach($dashboardwidgets as $widget){
 
+                    if ($type && in_array($widget[0], $allUser))
+                        $isClosed = 0;
+                    else
+                        $isClosed = 1;
+
                     $adb->pquery("INSERT INTO vtiger_module_dashboard_widgets(linkid, userid, position, dashboardtabid, size, is_closed)
-                    VALUES (?,?,?,?,?,1)", array($widget[0], $widget[1], $widget[2], $widget[3], $widget[4]));
+                    VALUES (?,?,?,?,?,?)", array($widget[0], $widget[1], $widget[2], $widget[3], $widget[4], $isClosed));
 
                 }
 
@@ -1314,8 +1363,8 @@ class Users extends CRMEntity {
                 $dashboardwidgets[] = array(131, $userid, '{"row":"2","col":"3"}', $Mytabid, null);
                 $dashboardwidgets[] = array(57,  $userid, '', $Mytabid, null);
                 $dashboardwidgets[] = array(66,  $userid, '', $Mytabid, null);
-                $dashboardwidgets[] = array(101,  $userid, '', $Mytabid, null);
-                $dashboardwidgets[] = array(152,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(101, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(152, $userid, '', $Mytabid, null);
                 $dashboardwidgets[] = array(126, $userid, '{"row":"1","col":"3"}', $Mytabid, null);
 
                 // Widgets Specific to roles
@@ -1327,8 +1376,13 @@ class Users extends CRMEntity {
                 
                 foreach($dashboardwidgets as $widget){
 
+                    if ($type && in_array($widget[0], $supportUser))
+                        $isClosed = 0;
+                    else
+                        $isClosed = 1;
+
                     $adb->pquery("INSERT INTO vtiger_module_dashboard_widgets(linkid, userid, position, dashboardtabid, size, is_closed)
-                    VALUES (?,?,?,?,?,1)", array($widget[0], $widget[1], $widget[2], $widget[3], $widget[4]));
+                    VALUES (?,?,?,?,?,?)", array($widget[0], $widget[1], $widget[2], $widget[3], $widget[4], $isClosed));
 
                 }
 
@@ -1340,7 +1394,7 @@ class Users extends CRMEntity {
 
                 if (!$Mytabid) {
 
-                    $result = $adb->pquery("SELECT id FROM vtiger_dashboard_tabs WHERE userid=? AND tabname=?",array($userid, 'My Dashboard'));
+                    $result  = $adb->pquery("SELECT id FROM vtiger_dashboard_tabs WHERE userid=? AND tabname=?",array($userid, 'My Dashboard'));
                     $Mytabid = $adb->query_result($result, 0, 'id');
 
                 }
@@ -1371,9 +1425,14 @@ class Users extends CRMEntity {
                 $dashboardwidgets[] = array(62, $userid, '', $Mytabid, null);
                 
                 foreach($dashboardwidgets as $widget){
+                    
+                    if ($type && in_array($widget[0], $salesUser))
+                        $isClosed = 0;
+                    else
+                        $isClosed = 1;
 
                     $adb->pquery("INSERT INTO vtiger_module_dashboard_widgets(linkid, userid, position, dashboardtabid, size, is_closed)
-                    VALUES (?,?,?,?,?,1)", array($widget[0], $widget[1], $widget[2], $widget[3], $widget[4]));
+                    VALUES (?,?,?,?,?,?)", array($widget[0], $widget[1], $widget[2], $widget[3], $widget[4], $isClosed));
 
                 }
 
@@ -1397,8 +1456,8 @@ class Users extends CRMEntity {
                 $dashboardwidgets[] = array(66,  $userid, '', $Mytabid, null);
                 $dashboardwidgets[] = array(67,  $userid, '', $Mytabid, null);
                 $dashboardwidgets[] = array(68,  $userid, '', $Mytabid, null);
-                $dashboardwidgets[] = array(101,  $userid, '', $Mytabid, null);
-                $dashboardwidgets[] = array(118,  $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(101, $userid, '', $Mytabid, null);
+                $dashboardwidgets[] = array(118, $userid, '', $Mytabid, null);
                 $dashboardwidgets[] = array(120, $userid, '{"row":"1","col":"2"}', $Mytabid, null);
                 $dashboardwidgets[] = array(121, $userid, '{"row":"1","col":"1"}', $Mytabid, null);                
                 $dashboardwidgets[] = array(122, $userid, '', $Mytabid, null);
@@ -1418,10 +1477,15 @@ class Users extends CRMEntity {
                 $dashboardwidgets[] = array(152, $userid, '', $Mytabid, null);      
                  
                 
-                foreach($dashboardwidgets as $widget){
+                foreach($dashboardwidgets as $widget){ 
+
+                    if ($type && in_array($widget[0], $adminUser))
+                        $isClosed = 0;
+                    else
+                        $isClosed = 1;
 
                     $adb->pquery("INSERT INTO vtiger_module_dashboard_widgets(linkid, userid, position, dashboardtabid, size, is_closed)
-                    VALUES (?,?,?,?,?,1)", array($widget[0], $widget[1], $widget[2], $widget[3], $widget[4]));
+                    VALUES (?,?,?,?,?,?)", array($widget[0], $widget[1], $widget[2], $widget[3], $widget[4], $isClosed));
 
                 }
 

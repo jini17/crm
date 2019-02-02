@@ -709,11 +709,12 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
                 app.request.post({"data": data}).then(function (err, data) {
                     app.helper.hideProgress();
                     if (err == null) {
-//                        jQuery('li[data-tabid="' + tabId + '"]').remove();
-//                        jQuery('.tab-content #tab_' + tabId).remove();
+                        // Fixed By Mabruk
+                        jQuery('li[data-tabid="' + tabId + '"]').remove();
+                        jQuery('.tab-content #tab_' + tabId).remove();
 
                         if (jQuery('.dashboardTab.active').length <= 0) {
-// click the first tab if none of the tabs are active
+                            // click the first tab if none of the tabs are active
                             var firstTab = jQuery('.dashboardTab').get(0);
                             jQuery(firstTab).find('a').click();
                         }
@@ -857,11 +858,75 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         jQuery(element).qtip("destroy");
         element.removeClass('disabled');
     },
-/**
- * Floating Message
- * Commented by Khaled
- * @returns {undefined}
- */
+
+    /**
+     * Add Custom Dashboards 
+     * Added By Mabruk     
+     */
+    registerCustomDashboardTab: function() {
+
+        var self = this;
+        var dashBoardContainer = this.getDashboardContainer();
+        dashBoardContainer.off('click', '.addCstmDashBoard');
+        dashBoardContainer.on("click", ".addCstmDashBoard", function (e) {
+            if (jQuery('.dashboardTab').length >= Vtiger_DashBoard_Js.dashboardTabsLimit) {
+                app.helper.showErrorNotification({"message": app.vtranslate("JS_TABS_LIMIT_EXCEEDED")});
+                return;
+            }
+            var currentElement = jQuery(e.currentTarget); 
+            var tabName        = currentElement.attr('data-tabName');
+
+            var params = {
+
+                'module'  : "Home",
+                'action'  : "DashBoardTab",
+                'mode'    : "addTab",
+                'type'    : tabName + "Dashboard",
+                'tabName' : tabName + " Dashboard"
+
+            }
+            
+            app.request.post({"data": params}).then(function (err, data) {                                    
+                if (err) {
+                    app.helper.showErrorNotification({"message": err});
+                } else {  
+                    var tabid = data["tabid"];
+                    var tabname = data["tabname"];
+                    var tabEle = '<li class="dashboardTab" data-tabid="' + tabid + '" data-tabname="' + tabname + '">';
+                    tabEle += '<a data-toggle="tab" href="#tab_' + tabid + '">\n\
+                        <div>\n\
+                        <span class="name textOverflowEllipsis" value="' + tabname + '" style="width:10%">\n\
+                        <strong>' + tabname + '</strong>\n\
+                        </span>\n\
+                        <span class="editTabName hide"><input type="text" name="tabName"></span>\n\
+                        <i class="fa fa-close deleteTab"></i>\n\
+                        <i class="fa fa-bars moveTab hide"></i>\n\
+                        </div>\n\
+                        </a>';
+                    tabEle += '</li>';
+
+                    var tabContentEle = '<div id="tab_' + tabid + '" class="tab-pane fade" data-tabid="' + tabid + '"></div>';
+
+                    jQuery('.moreSettings').before(tabEle);
+                    jQuery('.moreSettings').prev().find('.name > strong').text(tabname);
+                    dashBoardContainer.find('.tab-content').append(tabContentEle);
+
+                    var currentTab = jQuery('li[data-tabid="' + tabid + '"]');
+                    currentTab.find('a').click();
+                    if (jQuery('.dashboardTab').length >= Vtiger_DashBoard_Js.dashboardTabsLimit) {
+                        jQuery('#newDashBoardLi').addClass('disabled');
+                        self.registerQtipMessage();
+                    }
+                }
+            });                               
+        });
+    },
+
+    /**
+     * Floating Message
+     * Commented by Khaled
+     * @returns {undefined}
+     */
     registerQtipMessage: function () {
         var dashBoardContainer = this.getDashboardContainer();
         var element = dashBoardContainer.find('li.disabled');
@@ -1280,6 +1345,7 @@ Vtiger.Class("Vtiger_DashBoard_Js", {
         var thisInstance = this;
         this.registerLazyLoadWidgets();
         this.registerAddDashboardTab();
+        this.registerCustomDashboardTab();
         this.registerDashBoardTabClick();
         this.registerDashBoardTabRename();
         this.registerDeleteDashboardTab();

@@ -136,7 +136,7 @@
         {foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
         {assign var='translatedModuleLabel' value=vtranslate($moduleModel->get('label'),$moduleName )}
         {if $moduleName eq 'MyProfile'}                                            
-        {assign var='moduleURL' value="index.php?module=Users&view=Detail&record={$USER_MODEL->getId()}&app=$APP_NAME&parent=Settings"}
+        {assign var='moduleURL' value="index.php?module=Users&view=PreferenceDetail&record={$USER_MODEL->getId()}&app=$APP_NAME&parent=Settings"}
         {else}
         {assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME"}
         {/if}  

@@ -38,15 +38,50 @@
                <div class="buttonGroups pull-right">
                    {if $SELECTED_TAB neq 1 AND $SELECTED_TAB neq 1298}
                 <div class="btn-group pull-right"  {$SELECTED_TAB}>
-                      <button class = "addNewDashBoard btn-primary btn pull-left" style='margin-right: 5px;'><i class="fa fa-edit"></i>&nbsp;{vtranslate('LBL_ADD_NEW_DASHBOARD',$MODULE)}</button> &nbsp;
-                       <button class="btn btn-success updateSequence pull-right hide">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
+
+                      <!-- Added By Mabruk (Hard code upon request) -->   
+
+                      <div class="dropdown pull-left" style="display:inline-block;padding-right:7px">
+                        <!--<button class = "addNewDashBoard btn-primary btn pull-left" style='margin-right: 5px;'><i class="fa fa-edit"></i>&nbsp;{vtranslate('LBL_ADD_NEW_DASHBOARD',$MODULE)}</button> &nbsp;-->                       
+
+                        <button class='btn btn-info addButton dropdown-toggle widget-btn' data-toggle='dropdown'>
+                            Add Dashboard&nbsp;&nbsp;<i class="caret"></i>
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-right widgetsList pull-right animated flipInY" style="min-width:135%;text-align:left;margin-right:7px">
+
+                          {assign var = CUSTOMDASHBOARDS   value = ['Employee']}
+                          {if in_array($CURRENT_USER->get('roleid'), ['H2','H16','H17','H18','H19','H20'])}
+                            {$CUSTOMDASHBOARDS[] = 'Sales'}
+                          {/if}  
+                          {if in_array($CURRENT_USER->get('roleid'), ['H2','H10','H11'])}
+                            {$CUSTOMDASHBOARDS[] = 'Support'}    
+                          {/if}
+
+                          {foreach from =$CUSTOMDASHBOARDS  item = DBOARD}
+                            <li class="emp-widget widget-item employee" style="position:relative;">
+                              <a class="widget-heading addCstmDashBoard" data-tabName="{$DBOARD}" {if in_array("{$DBOARD} Dashboard",$DASHTABNAMES)}disabled="disabled" title="This Dashboard is already active"{/if}>&nbsp;&nbsp; {$DBOARD} Dashboard <i class="fa fa-users pull-right widget-icon"></i></a>
+                            </li>
+                          {/foreach}
+
+                          <li class="divider"></li>
+                          <li class="group-heading employee" style="position:relative;">
+                            <a class="widget-heading addNewDashBoard">&nbsp;&nbsp; {vtranslate('LBL_ADD_NEW_DASHBOARD',$MODULE)} <i class="fa fa-edit pull-right widget-icon"></i></a>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- END -->
+
+                      <button class="btn btn-success updateSequence pull-right hide">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
                       <button class = "reArrangeTabs btn-primary btn pull-right" style='margin-right: 0'>{vtranslate('LBL_REARRANGE_DASHBOARD_TABS',$MODULE)}</button>
                       {if $SELECTABLE_WIDGETS|count gt 0}
+                                <div class="dropdown pull-left" style="display:inline-block;padding-right:7px">
                                 <button class='btn btn-info addButton dropdown-toggle widget-btn' data-toggle='dropdown'>
                                         {vtranslate('LBL_ADD_WIDGET')}&nbsp;&nbsp;<i class="caret"></i>
                                 </button>
 
-                                <ul class="dropdown-menu dropdown-menu-right widgetsList pull-right animated flipInY" style="min-width:58%;text-align:left;">
+                                <ul class="dropdown-menu dropdown-menu-right widgetsList pull-right animated flipInY" style="min-width:135%;text-align:left;margin-right:7px">
                                         {assign var="MINILISTWIDGET" value=""}
                                         {foreach from=$SELECTABLE_WIDGETS item=WIDGET}
                                                 {if $WIDGET->getName() eq 'MiniList'}
@@ -131,10 +166,8 @@
                                                                   {$emp['title']}
                                                            </a>
                                                        </li>
-                                               {/foreach}
-                                              
-                                            </ul>
-                                            
+                                               {/foreach}                                              
+                                            </ul>                                            
                                         </li>
                                         {/if}
 
@@ -226,7 +259,7 @@
                                         <i class="caret"></i>
                                 </button>
                         {/if}
-                      
+                        </div>
                 </div>
                 {/if}
         </div>
