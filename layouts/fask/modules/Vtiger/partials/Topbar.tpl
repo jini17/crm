@@ -187,7 +187,7 @@
                <li>
                   <div>
                      <a aria-hidden="true" onclick="Vtiger_Index_Js.toggleAnnouncement();" id="announcementicon" class="qc-button rightside-icon-dashboard" title="Announcement" aria-hidden="true">
-                     <i  class="fa {if $ANNOUNCEMENT->get('isview') eq 0} fa-microphone-slash {else} fa-microphone {/if}"></i>
+                     <i  class=" {if $ANNOUNCEMENT->get('isview') eq 0}fas fa-bullhorn {else} fas fa-bullhorn {/if}"></i>
                      </a>
                   </div>
                </li>

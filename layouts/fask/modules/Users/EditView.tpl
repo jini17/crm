@@ -8,11 +8,11 @@
 ************************************************************************************}
 
 <div class="editViewPageDiv detailViewContainer">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <form class="form-horizontal recordEditView" id="EditView" name="EditView" method="post" action="index.php" enctype="multipart/form-data">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0 !important">
+        <form class="form-horizontal recordEditView" id="EditView" name="EditView" method="post" action="index.php" enctype="multipart/form-data" style="padding:0 !important;">
             <div class="editViewHeader">
                 <div class='row'>
-                    <div class="col-lg-12 col-md-12 col-sm-12 ">
+                    <div class="col-lg-12 col-md-12 col-sm-12  ">
                         {assign var=SINGLE_MODULE_NAME value='SINGLE_'|cat:$MODULE}
                         {if $RECORD_ID neq ''}
                             <h4 class="editHeader"  title="{vtranslate('LBL_EDITING', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)} {$RECORD_STRUCTURE_MODEL->getRecordName()}">{vtranslate('LBL_EDITING', $MODULE)} {vtranslate($SINGLE_MODULE_NAME, $MODULE)} - {$RECORD_STRUCTURE_MODEL->getRecordName()}</h4>
@@ -66,7 +66,7 @@
                     {include file="modules/Users/partials/EditViewContents.tpl"}
                 </div>
             </div>
-            <div class='clearfix editviewbtncontainer'>
+            <div class='clearfix editviewbtncontainer' style="padding-bottom: 50px;">
                 <div class="row clearfix">
                     <div class='textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
                         <button type='submit' class='btn btn-success saveButton'  >{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;

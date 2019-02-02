@@ -7,7 +7,9 @@
  * All Rights Reserved.
  *************************************************************************************}
 <div class="dashboardWidgetHeader">
-	{include file="dashboards/WidgetHeader.tpl"|@vtemplate_path:$MODULE_NAME}
+    <div class="title clearfix">
+        <div class="dashboardTitle" title="" style="width: 25em;">{vtranslate("LBL_NOTEBOOK", $MODULE_NAME)|@escape:'html'}</div>
+    </div>
 </div>
 
 <div class="dashboardWidgetContent" style='padding:5px'>

@@ -58,7 +58,7 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
                               
                         }
 
-                        if($currentUser->get('id') == $recordId){
+                        if($currentUser->get('id') == $recordId  || in_array($currentUser->get('roleid'), array('H12','H13','H2'))) {
                              $LEAVE_CLAIM_ALLOW = true;
                         }   
 
@@ -100,7 +100,7 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
                         $viewer->assign('VIEW', $request->get('view'));
                         $viewer->assign('MENUS', $menuModelsList);
                         $viewer->assign('QUICK_CREATE_MODULES', Vtiger_Menu_Model::getAllForQuickCreate());
-			            $viewer->assign('QUICK_CREATE_MOD_ICONS', Vtiger_Menu_Model::getQuickCreateModulesAndIcons()); // Added By Mabruk
+                        $viewer->assign('QUICK_CREATE_MOD_ICONS', Vtiger_Menu_Model::getQuickCreateModulesAndIcons()); // Added By Mabruk
 
                         $viewer->assign('MENU_STRUCTURE', $menuStructure);
                         $viewer->assign('MENU_SELECTED_MODULENAME', $selectedModule);

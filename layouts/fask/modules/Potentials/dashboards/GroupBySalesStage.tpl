@@ -18,14 +18,20 @@
 {foreach key=index item=jsModel from=$SCRIPTS}
 	<script type="{$jsModel->getType()}" src="{$jsModel->getSrc()}"></script>
 {/foreach}
-
+<style>
+    .jqplot-grid-canvas{
+        display:  none !important;
+    }
+</style>
 <div class="dashboardWidgetHeader">
-    <div class="title clearfix">
-        <div class="col-lg-4 dashboardTitle" title="{vtranslate($WIDGET->getTitle(), $MODULE_NAME)}"><b>{vtranslate($WIDGET->getTitle(), $MODULE_NAME)}</b></div>
-        
-        <div class="userList col-lg-5">
+    <div class="title clearfix" style="margin: 0;">
+        <div class="col-lg-4 " style="font-size: 14px; color: #000;height: 30px;" title="{vtranslate($WIDGET->getTitle(), $MODULE_NAME)}"><b>{vtranslate($WIDGET->getTitle(), $MODULE_NAME)}</b></div>
+        <div class="clearfix"></div> 
+    </div>
+</div>
+          <div class="userList col-lg-12" style="margin-top: 0;">
             <div>
-                <select class="widgetFilter select2" id="owner" name="owner" style='width:30%;margin-bottom:0px'>
+                <select class="widgetFilter select2" id="owner" name="owner" style='width:100%;margin-bottom:0px;'>
                     <option value="{$CURRENTUSER->getId()}" >{vtranslate('LBL_MINE')}</option>
                     <option value="all">{vtranslate('LBL_ALL')}</option>
                     {assign var=ALL_ACTIVEUSER_LIST value=$CURRENTUSER->getAccessibleUsers()}
@@ -49,29 +55,28 @@
                 </select>
             </div>
     </div>
-
-    </div>
-</div>
-<div class="dashboardWidgetContent">
+                <div class="clearfix"></div>
+<div class="dashboardWidgetContent" style="">
+       
 	{include file="dashboards/DashBoardWidgetContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
 <div class="widgeticons dashBoardWidgetFooter">
     <div class="filterContainer">
-		<div class="row">
-			<span class="col-lg-5">
-				<span class="pull-right">
-					{vtranslate('Expected Close Date', $MODULE_NAME)} &nbsp; {vtranslate('LBL_BETWEEN', $MODULE_NAME)}
-				</span>
-			</span>
-			<span class="col-lg-7">
-                <div class="input-daterange input-group dateRange widgetFilter" id="datepicker" name="expectedclosedate">
-                    <input type="text" class="input-sm form-control" name="start" style="height:30px;"/>
-                    <span class="input-group-addon">to</span>
-                    <input type="text" class="input-sm form-control" name="end" style="height:30px;"/>
-                </div>
-			</span>
-		</div>
-	</div>
+        <div class="row">
+                <span class="col-lg-5">
+                        <span class="pull-right">
+                                {vtranslate('Expected Close Date', $MODULE_NAME)} &nbsp; {vtranslate('LBL_BETWEEN', $MODULE_NAME)}
+                        </span>
+                </span>
+                <span class="col-lg-7">
+        <div class="input-daterange input-group dateRange widgetFilter" id="datepicker" name="expectedclosedate">
+            <input type="text" class="input-sm form-control" name="start" style="height:30px;"/>
+            <span class="input-group-addon">to</span>
+            <input type="text" class="input-sm form-control" name="end" style="height:30px;"/>
+        </div>
+                </span>
+        </div>
+</div>
     <div class="footerIcons pull-right">
         {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=true}
     </div>

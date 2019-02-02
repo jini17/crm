@@ -10,39 +10,27 @@
  ********************************************************************************/
 -->*}
 <div class="dashboardWidgetContent">
-
+    <div class="contaier-fluid">
 	{if count($DATADETAILS) > 0}
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>
-				<b>{vtranslate('LBL_PLAN', 'Home')}</b>
-				</th>
-				<th>
-				<b>{vtranslate('LBL_NO_USERS', 'Home')}</b>
-				</th>
-				<th>
-				<b>{vtranslate('LBL_DURATION', 'Home')}</b>
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			{foreach item=MODEL key=k from=$DATADETAILS}
-				<tr>
-					<td>
-					{$k}
-					</td>
-					<td>
-					{$MODEL[0]}
-					</td>
-					<td>
-					{$MODEL[1]} - {$MODEL[2]}
-					</td>
-				</tr>
-			{/foreach}
-		</tbody>
-	</table>
+            <div class="row th" style="margin:0; padding-top: 5px; padding-bottom: 5px;">
+                <div class="col-md-3"><b>{vtranslate('LBL_PLAN', 'Home')}</b></div>
+                <div class="col-md-3"><b>{vtranslate('LBL_NO_USERS', 'Home')}</b></div>
+                <div class="col-md-6"><b>{vtranslate('LBL_DURATION', 'Home')}</b></div>
+            </div>    
+          
+                	{foreach item=MODEL key=k from=$DATADETAILS}
+                              <div class="row miniListContent" style="margin:0; padding-top: 5px; padding-bottom: 5px;">
+                <div class="col-md-3 col-sm-3 col-xs-3 " style=''>{$k}</div>
+                 <div class="col-md-3 col-sm-3 col-xs-3 text-center">{$MODEL[0]}</div>
+                  <div class="col-md-6 col-sm-6 col-xs-6 ">{$MODEL[1]|date_format} - {$MODEL[2]|date_format}</div>
+                
+                    </div>
+                    <div class="clearfix"></div>
+                  {/foreach}
+          
+	
 {/if}
+</div>
 </div>
 <div class="widgeticons dashBoardWidgetFooter">
 	<div class="footerIcons pull-right">
