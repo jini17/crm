@@ -38,15 +38,50 @@
                <div class="buttonGroups pull-right">
                    {if $SELECTED_TAB neq 1 AND $SELECTED_TAB neq 1298}
                 <div class="btn-group pull-right"  {$SELECTED_TAB}>
-                      <button class = "addNewDashBoard btn-primary btn pull-left" style='margin-right: 5px;'><i class="fa fa-edit"></i>&nbsp;{vtranslate('LBL_ADD_NEW_DASHBOARD',$MODULE)}</button> &nbsp;
-                       <button class="btn btn-success updateSequence pull-right hide">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
+
+                      <!-- Added By Mabruk (Hard code upon request) -->   
+
+                      <div class="dropdown pull-left" style="display:inline-block;padding-right:7px">
+                        <!--<button class = "addNewDashBoard btn-primary btn pull-left" style='margin-right: 5px;'><i class="fa fa-edit"></i>&nbsp;{vtranslate('LBL_ADD_NEW_DASHBOARD',$MODULE)}</button> &nbsp;-->                       
+
+                        <button class='btn btn-info addButton dropdown-toggle widget-btn' data-toggle='dropdown'>
+                            Add Dashboard&nbsp;&nbsp;<i class="caret"></i>
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-right widgetsList pull-right animated flipInY" style="min-width:135%;text-align:left;margin-right:7px">
+
+                          {assign var = CUSTOMDASHBOARDS   value = ['Employee']}
+                          {if in_array($CURRENT_USER->get('roleid'), ['H2','H16','H17','H18','H19','H20'])}
+                            {$CUSTOMDASHBOARDS[] = 'Sales'}
+                          {/if}  
+                          {if in_array($CURRENT_USER->get('roleid'), ['H2','H10','H11'])}
+                            {$CUSTOMDASHBOARDS[] = 'Support'}    
+                          {/if}
+
+                          {foreach from =$CUSTOMDASHBOARDS  item = DBOARD}
+                            <li class="emp-widget widget-item employee" style="position:relative;">
+                              <a class="widget-heading addCstmDashBoard" data-tabName="{$DBOARD}" {if in_array("{$DBOARD} Dashboard",$DASHTABNAMES)}disabled="disabled" title="This Dashboard is already active"{/if}>&nbsp;&nbsp; {$DBOARD} Dashboard <i class="fa fa-users pull-right widget-icon"></i></a>
+                            </li>
+                          {/foreach}
+
+                          <li class="divider"></li>
+                          <li class="group-heading employee" style="position:relative;">
+                            <a class="widget-heading addNewDashBoard">&nbsp;&nbsp; {vtranslate('LBL_ADD_NEW_DASHBOARD',$MODULE)} <i class="fa fa-edit pull-right widget-icon"></i></a>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- END -->
+
+                      <button class="btn btn-success updateSequence pull-right hide">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
                       <button class = "reArrangeTabs btn-primary btn pull-right" style='margin-right: 0'>{vtranslate('LBL_REARRANGE_DASHBOARD_TABS',$MODULE)}</button>
                       {if $SELECTABLE_WIDGETS|count gt 0}
+                                <div class="dropdown pull-left" style="display:inline-block;padding-right:7px">
                                 <button class='btn btn-info addButton dropdown-toggle widget-btn' data-toggle='dropdown'>
                                         {vtranslate('LBL_ADD_WIDGET')}&nbsp;&nbsp;<i class="caret"></i>
                                 </button>
 
-                                <ul class="dropdown-menu dropdown-menu-right widgetsList pull-right animated flipInY" style="min-width:58%;text-align:left;">
+                                <ul class="dropdown-menu dropdown-menu-right widgetsList pull-right animated flipInY" style="min-width:135%;text-align:left;margin-right:7px">
                                         {assign var="MINILISTWIDGET" value=""}
                                         {foreach from=$SELECTABLE_WIDGETS item=WIDGET}
                                                 {if $WIDGET->getName() eq 'MiniList'}
@@ -68,7 +103,7 @@
                                         <li class="group-heading employee" style="position:relative;">
                                              <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Employee <i class="fa fa-users pull-right widget-icon"></i></a>
                                           
-                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -156px; background:#fff;  z-index: -1; ; padding: 15px;">
                                              
                                                 {foreach item="emp" from=$EMPLOYEE_GROUP }      
                                                        <li class="emp-widget widget-item ">
@@ -93,7 +128,7 @@
                                         <li class="group-heading employee" style="position:relative;">
                                              <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Sales <i class="fa fa-usd pull-right widget-icon"></i></a>
                                           
-                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -156px; background:#fff;  z-index: -1; ; padding: 15px;">
                                              
                                                 {foreach item="emp" from=$SALES }      
                                                        <li class="emp-widget widget-item ">
@@ -119,7 +154,7 @@
                                         <li class="group-heading employee" style="position:relative;">
                                              <a class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Service <i class="fa fa-headphones pull-right widget-icon"></i></a>
                                           
-                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -156px; background:#fff;  z-index: -1; ; padding: 15px;">
                                              
                                                 {foreach item="emp" from=$SERVICE }      
                                                        <li class="emp-widget widget-item ">
@@ -131,10 +166,8 @@
                                                                   {$emp['title']}
                                                            </a>
                                                        </li>
-                                               {/foreach}
-                                              
-                                            </ul>
-                                            
+                                               {/foreach}                                              
+                                            </ul>                                            
                                         </li>
                                         {/if}
 
@@ -143,7 +176,7 @@
                                         <li  class="group-heading charts" style="">
                                             <a  class="widget-heading widget-item"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Charts <i class="fa fa-pie-chart pull-right widget-icon"></i></a> 
                                              
-                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -156px; background:#fff;  z-index: -1; ; padding: 15px;">
                                                 
                                                 {foreach item="chart" from=$CHART_GROUP}
                                                     <li class="chart-widget widget-item">
@@ -164,7 +197,7 @@
                                        
                                              <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp; Leaves & Claims <i class="fa fa-clipboard pull-right widget-icon"></i></a>
                                             
-                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -156px; background:#fff;  z-index: -1; ; padding: 15px;">
                                                 
                                                 {foreach item="leaveclaim" from=$LEAVECLAIM_GROUP }
                                                    <li class="leaveclaim-widget widget-item">
@@ -183,7 +216,7 @@
                                         {if count($GENERAL_GROUP) > 0}
                                         <li class='general'>
                                             <a  class="widget-heading"><i class="fa fa-angle-left"></i>  &nbsp;&nbsp;  General <i class="fab fa-windows pull-right widget-icon"></i></a>
-                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -227px; background:#fff;  z-index: -1; ; padding: 15px;">
+                                            <ul class="widget-group-item hide list-unstyled" style="padding:5px; width: 100%; top: 0; position: absolute; left: -156px; background:#fff;  z-index: -1; ; padding: 15px;">
                                                  
                                                     {foreach item="general" from=$GENERAL_GROUP}
                                                         <li  class="general-widget widget-item ">
@@ -226,7 +259,7 @@
                                         <i class="caret"></i>
                                 </button>
                         {/if}
-                      
+                        </div>
                 </div>
                 {/if}
         </div>

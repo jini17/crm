@@ -10,6 +10,7 @@
 ********************************************************************************/
 -->*}
 {strip}
+
 	{include file="partials/EditViewContents.tpl"|@vtemplate_path:'Vtiger'}
 	<div name='editContent'>
 		<!--<div class='fieldBlockContainer' data-block="{$BLOCK_LABEL}">
@@ -72,4 +73,13 @@
 			<!--Confirmation modal for updating Recurring Events--> 
 		<!--</div>-->
 	</div>
+<script type='text/javascript'>
+     jQuery(document).ready(function(){
+     
+       jQuery("#selectedUsers").closest(".row").find("div").css("width","20%");
+          jQuery("#Events_editView_fieldName_description,#Leave_editView_fieldName_reasonofleave").closest('.row').find('div').css("width","100%");
+         jQuery("#Events_editView_fieldName_description,#Leave_editView_fieldName_reasonofleave").closest('.row').find('div').css("margin-bottom","10px");
+           jQuery("#Events_editView_fieldName_description,#Leave_editView_fieldName_reasonofleave").closest('div').css("border","none");
+    });
+</script>    
 {/strip}

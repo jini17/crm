@@ -41,7 +41,7 @@ class Vtiger_DashboardTab_View extends Vtiger_Index_View {
         $dashBoardModel->set("tabid",$tabId);
         
         $widgets = $dashBoardModel->getDashboards($moduleName);
-        $selectableWidgets = $dashBoardModel->getSelectableDashboard();
+        $selectableWidgets = $dashBoardModel->getSelectableDashboard(); 
         $dashBoardTabInfo = $dashBoardModel->getTabInfo($tabId);
          
         $viewer = $this->getViewer($request);

@@ -43,7 +43,12 @@ class Vtiger_DashBoardTab_Action extends Vtiger_Action_Controller {
 		} else if ($tabExist) {
 			$response->setError(100, vtranslate('LBL_DASHBOARD_TAB_ALREADY_EXIST', $moduleName));
 		} else {
-			$tabData = $dashBoardModel->addTab($tabName);
+			// Added By Mabruk
+			if ($request->get('type'))
+				$tabData = $dashBoardModel->addTab($tabName, $request->get('type'));
+			else
+				$tabData = $dashBoardModel->addTab($tabName);
+
 			$response->setResult($tabData);
 		}
 		$response->emit();
