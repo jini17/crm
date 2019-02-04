@@ -252,7 +252,7 @@
                      </ul>
                       <div class="clearfix"> </div>
                      
-                      <a href="index.php?module=Notifications&view=List" class="btn btn-block all-notification text-center" style="width: 100%; background: #fff;"> See all recent activity </a>
+                      <a href="index.php?module=Notifications&view=List" class="btn btn-block all-notification text-center" style="width: 100%;margin-top: -2px; background: #fff;"> See all recent activity </a>
                       <div class="clearfix"> </div>
                      {/if}     
                       <div class="clearfix"> </div>

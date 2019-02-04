@@ -491,7 +491,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 	function getAllNotifications($pagingModel){
 
 		$db = PearDatabase::getInstance();	
-		
+		//$db->setDebug(true);
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		
 		$params[] = $currentUser->id;
@@ -522,7 +522,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 			  	$timestamp 		= $db->query_result($result, $i, 'createdtime');
 			  	$viewed 		= $db->query_result($result, $i, 'viewed');
 			  	
-			  	$nameResult = $db->pquery('SELECT first_name, last_name,  FROM vtiger_users WHERE id = ?', array($notifyto));
+			  	$nameResult = $db->pquery('SELECT first_name, last_name  FROM vtiger_users WHERE id = ?', array($notifyto));
 				if($db->num_rows($nameResult)) {
 					$fullname =  $db->query_result($nameResult, 0, 'first_name').' '.$db->query_result($nameResult, 0, 'last_name');
 				}
@@ -575,7 +575,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 		  		if($viewed==0)
 		  			$unread++;
 			}
-
+			$db->setDebug(false);
 			$notifications['new'] = $unread;
 		}
 		return $notifications;
