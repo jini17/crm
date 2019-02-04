@@ -737,7 +737,7 @@ class Vtiger_Module_Model extends Vtiger_Module {
                         $query = 'SELECT * FROM vtiger_tab';
                         $params = array();
                         if($presence) {
-                                $query .= ' WHERE presence IN ('. generateQuestionMarks($presence) .')';
+                                $query .= ' WHERE presence IN ('. generateQuestionMarks($presence) .')  ORDER BY name ASC' ;
                                 array_push($params, $presence);
                         }
 
