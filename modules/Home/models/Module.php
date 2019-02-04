@@ -491,7 +491,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 	function getAllNotifications($pagingModel){
 
 		$db = PearDatabase::getInstance();	
-		//$db->setDebug(true);
+		
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		
 		$params[] = $currentUser->id;
@@ -522,7 +522,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 			  	$timestamp 		= $db->query_result($result, $i, 'createdtime');
 			  	$viewed 		= $db->query_result($result, $i, 'viewed');
 			  	
-			  	$nameResult = $db->pquery('SELECT first_name, last_name  FROM vtiger_users WHERE id = ?', array($notifyto));
+			  	$nameResult = $db->pquery('SELECT first_name, last_name,  FROM vtiger_users WHERE id = ?', array($notifyto));
 				if($db->num_rows($nameResult)) {
 					$fullname =  $db->query_result($nameResult, 0, 'first_name').' '.$db->query_result($nameResult, 0, 'last_name');
 				}
@@ -540,7 +540,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 			  	} else if($action == 'Download'){
 			  		$message = 'Download your payslip here';
 			  	} else if($action == 'Approved' || $action == 'Rejected' || $action == "Applied"){
-			  		$message =  $referenceModuleName. " is approved ";
+			  		$message =  $referenceModuleName. " is $action ";
 			  	} else if($action == 'Assigned'){
 			  		$message = "A task is assigned to ". $fullname;
 			  	} else if($action == 'Completed'){
@@ -575,7 +575,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 		  		if($viewed==0)
 		  			$unread++;
 			}
-			$db->setDebug(false);
+
 			$notifications['new'] = $unread;
 		}
 		return $notifications;
