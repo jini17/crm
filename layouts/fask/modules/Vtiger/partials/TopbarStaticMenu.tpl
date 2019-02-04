@@ -256,7 +256,7 @@
                      {else}
                         <i class="material-icons module-icon" >{$iconsarray[{strtolower($MODULE)}]}</i> 
                       {/if}
-                     <span class="hide-menu">&nbsp;{$MODULE}</span></a>   
+                     <span class="hide-menu">&nbsp;{vtranslate($MODULE)}</span></a>   
                   </li>
                  {/foreach}
                </ul>
