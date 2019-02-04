@@ -99,7 +99,7 @@ class Calendar_CalendarUserActions_Action extends Vtiger_Action_Controller{
 		if (Calendar_Module_Model::checkDuplicateView($request)) {
 			$result = array('success' => true, 'message' => vtranslate('LBL_DUPLICATE_VIEW_EXIST', $moduleName));
 		} else {
-			$result = array('success' => false);
+			$result = array('success' => true);
 		}
 		
 		$response = new Vtiger_Response();

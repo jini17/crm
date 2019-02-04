@@ -208,18 +208,19 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
                 return $tab;
         }
 
-        public function addTab($tabName){
-                $db = PearDatabase::getInstance();
+        // Parameter $type added By Mabruk
+        public function addTab($tabName, $type = false){
+                $db          = PearDatabase::getInstance();
                 $currentUser = Users_Record_Model::getCurrentUserModel();
-                $result = $db->pquery("SELECT MAX(sequence)+1 AS sequence FROM vtiger_dashboard_tabs",array());
-                $sequence = $db->query_result($result, 0,'sequence');
+                $result      = $db->pquery("SELECT MAX(sequence)+1 AS sequence FROM vtiger_dashboard_tabs",array());
+                $sequence    = $db->query_result($result, 0,'sequence');
 
-                $query = "INSERT INTO vtiger_dashboard_tabs(tabname, userid,sequence) VALUES(?,?,?)";
+                $query       = "INSERT INTO vtiger_dashboard_tabs(tabname, userid,sequence) VALUES(?,?,?)";
                 $db->pquery($query,array($tabName,$currentUser->getId(),$sequence));
-                $tabData = array("tabid"=>$db->getLastInsertID(),"tabname"=>$tabName,"sequence"=>$sequence);
+                $tabData     = array("tabid"=>$db->getLastInsertID(),"tabname"=>$tabName,"sequence"=>$sequence);
 
                 // Added By Mabruk                
-                Users::CreateDefaultDashboard($currentUser->getId(), $currentUser->get('roleid'), $tabData['tabid']);
+                Users::CreateDefaultDashboard($currentUser->getId(), $currentUser->get('roleid'), $tabData['tabid'], $type);
 
                 return $tabData;
         }

@@ -8,7 +8,8 @@
 ************************************************************************************}
 
 {strip}
-	<div class="main-container clearfix">
+
+<div class="main-container clearfix">
 		<div id="modnavigator" class="module-nav editViewModNavigator">
 			<div class="hidden-xs hidden-sm mod-switcher-container">
 				{include file="partials/Menubar.tpl"|vtemplate_path:$MODULE}

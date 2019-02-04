@@ -312,7 +312,7 @@ Vtiger.Class("Users_Claim_Js", {
         },	
 
      updateClaimGrid : function(userid) { 
-        alert
+        
         var params = {
                         'module' : 'Users',
                         'view'   : 'ListViewAjax',
@@ -417,7 +417,7 @@ Vtiger.Class("Users_Claim_Js", {
                 var membercombo = jQuery('#sel_teammember');
                 var myyearcombo = jQuery("#team_selyear");
                 var claimtypecombo = jQuery("#sel_claimtype").val();
-                alert(claimtypecombo);
+               
 
                 Users_Claim_Js.registerChangeYear(changeYearActionUrl+'&selyear='+myyearcombo.val()+'&selmember='+membercombo.val()+'&selclaimtype='+claimtypecombo,section);
         },

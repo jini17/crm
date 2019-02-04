@@ -26,8 +26,8 @@ class Users_Login_Action extends Vtiger_Action_Controller
         
         global $short_url, $site_URL, $adb;
         //$adb->setDebug(true);
-        $username = $request->get('username');
-        $password = $request->getRaw('password');
+        $username = trim($request->get('username'));
+        $password = trim($request->getRaw('password'));
 
        
 

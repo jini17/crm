@@ -796,7 +796,7 @@ $languageStrings = array(
 	//Translations used in inventory modules for address
 	'SINGLE_Accounts' => 'Organization',
 	'SINGLE_Contacts' => 'Contact',
-	'HelpDesk' => 'Tickets',
+	'HelpDesk' => 'Service Request',
 	'LBL_TAG_CLOUD' => 'Tag Cloud',
 
 	'LBL_NO_RECORDS' => 'No Records',
@@ -1098,7 +1098,7 @@ $languageStrings = array(
 
 	//Singular Modulenames
 	'SINGLE_Potentials' => 'Opportunity',
-	'SINGLE_HelpDesk' => 'Ticket',
+	'SINGLE_HelpDesk' => 'Service Request',
 	'SINGLE_Accounts' => 'Organization',
 	'SINGLE_Contacts' => 'Contact',
 	'SINGLE_Project' => 'Project',
@@ -1656,7 +1656,7 @@ $jsLanguageStrings = array(
 	'JS_REQUIRED' => 'Required',
 	'JS_PHONE_NUMBER' => 'Phone Number',
 	'JS_NO_CREATE_PERMISSION' => 'Call need to be answered before creating record',
-	'HelpDesk' => 'Tickets',
+	'HelpDesk' => 'Service Request',
 	'Potentials' => 'Opportunities',
 	'JS_CALL_NOT_ANSWERED_UPDATE_PERMISSION' => "Call need to be answered before linking record", 
 	'JS_CALL_NOT_ANSWERED' => "Call need to be answered before performing the action",

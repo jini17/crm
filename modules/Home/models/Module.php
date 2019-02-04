@@ -491,7 +491,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 	function getAllNotifications($pagingModel){
 
 		$db = PearDatabase::getInstance();	
-		
+		//$db->setDebug(true);
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		
 		$params[] = $currentUser->id;
@@ -521,8 +521,8 @@ class Home_Module_Model extends Vtiger_Module_Model {
 			  	$notifyto 		= $db->query_result($result, $i, 'notifyto');
 			  	$timestamp 		= $db->query_result($result, $i, 'createdtime');
 			  	$viewed 		= $db->query_result($result, $i, 'viewed');
-
-			  	$nameResult = $db->pquery('SELECT first_name, last_name,  FROM vtiger_users WHERE id = ?', array($notifyto));
+			  	
+			  	$nameResult = $db->pquery('SELECT first_name, last_name  FROM vtiger_users WHERE id = ?', array($notifyto));
 				if($db->num_rows($nameResult)) {
 					$fullname =  $db->query_result($nameResult, 0, 'first_name').' '.$db->query_result($nameResult, 0, 'last_name');
 				}
@@ -531,19 +531,20 @@ class Home_Module_Model extends Vtiger_Module_Model {
 
 			  	$action = $db->query_result($result, $i, 'actionperform');
 			  	$entityNames = 	getEntityName($referenceModuleName, array($relatedto));
-			  	$linkValue = "<a style='display:block; width: 100%; padding:0; font-size:10px;' href='index.php?module=$referenceModuleName&view=Detail&record=$relatedto'>$entityNames[$relatedto]</a>";	
-
+			  	$notifications['details'][$i]['linkurl'] = "index.php?module=$referenceModuleName&view=Detail&record=$relatedto";
+			  	$notifications['details'][$i]['linklabel'] = $entityNames[$relatedto];
+			  	
 
 			  	if($action == 'Posted'){
-			  		$message = 'New message '. $linkValue." is posted";
+			  		$message = 'New message is posted';
 			  	} else if($action == 'Download'){
-			  		$message = 'Download your payslip '.$linkValue.' here';
+			  		$message = 'Download your payslip here';
 			  	} else if($action == 'Approved' || $action == 'Rejected' || $action == "Applied"){
-			  		$message = $referenceModuleName." ".$linkValue." is ". $action;
+			  		$message =  $referenceModuleName. " is approved ";
 			  	} else if($action == 'Assigned'){
-			  		$message = "A task ".$linkValue." is ". $action. " to ". $fullname;
+			  		$message = "A task is assigned to ". $fullname;
 			  	} else if($action == 'Completed'){
-			  		$message = "Task ".$linkValue." is ". $action. " by ". $fullname;
+			  		$message = "Task completed by ". $fullname;
 			  	} else if($action == 'Updated'){
 			  		$message = "HR change the working hours";
 			  	} else if($action == 'Commented'){
@@ -553,7 +554,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 						$notifybyfullname =  $db->query_result($namebyResult, 0, 'first_name').' '.$db->query_result($namebyResult, 0, 'last_name');
 					}
 
-			  		$message = "Comment on ". $linkValue ." is ".$action." by ".$notifybyfullname;
+			  		$message = " New Comment on ". $entityNames[$relatedto] ." by ".$notifybyfullname;
 			  	} else {
 			  		$message = "Your Subscription is getting expired";
 			  	}
@@ -570,10 +571,11 @@ class Home_Module_Model extends Vtiger_Module_Model {
 		  		$notifications['details'][$i]['profilepic'] 	= $imagename;
 		  		$notifications['details'][$i]['timestamp'] 	= Vtiger_Util_Helper::formatDateDiffInStrings($timestamp);
 		  		$notifications['details'][$i]['unread'] 		= $viewed;
+
 		  		if($viewed==0)
 		  			$unread++;
 			}
-
+			$db->setDebug(false);
 			$notifications['new'] = $unread;
 		}
 		return $notifications;

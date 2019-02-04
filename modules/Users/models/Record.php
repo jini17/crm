@@ -1330,8 +1330,9 @@ class Users_Record_Model extends Vtiger_Record_Model
      */
     public function MyReortingManager($id)
     {
+        
         $db=PearDatabase::getInstance();
-        $sql = "select id, first_name,last_name,email1,department,title,birthday,date_joined,facebook,twitter,linkedin from vtiger_users where  id = $id";
+        $sql = "select id, first_name,last_name,email1,department,title,birthday,date_joined,facebook,twitter,linkedin from vtiger_users where  reports_to_id = $id";
         $query = $db->pquery($sql, array());
         $num_rows = $db->num_rows($query);
         $data = array();
