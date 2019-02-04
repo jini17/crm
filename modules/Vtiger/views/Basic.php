@@ -27,6 +27,21 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
                
                 $viewer = $this->getViewer($request);
 
+                //update view once open detail page related to Notification to make as "read"
+                $NotifyModuleName = $request->getModule();
+                if($NotifyModuleName !='Notifications'){
+                    $module = 'Notifications';
+                    $sourcerecord = $request->get('sourcerecord');
+                    $moduleUserSpecificTableName = Vtiger_Functions::getUserSpecificTableName($module);
+                    $focus = CRMEntity::getInstance($module);
+                    $focus->mode = "edit";
+                    $focus->id = $sourcerecord;
+                    $focus->column_fields->startTracking();
+                    $focus->column_fields['viewed'] = 1;
+                    $focus->insertIntoEntityTable($moduleUserSpecificTableName, $module);
+                }   
+                //end here
+
                 $menuModelsList = Vtiger_Menu_Model::getAll(true);
                 $selectedModule = $request->getModule();
                 $menuStructure = Vtiger_MenuStructure_Model::getInstanceFromMenuList($menuModelsList, $selectedModule);
@@ -101,7 +116,7 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
                 $viewer->assign('INVENTORY_MODULES',  $inventoryModules);
 
                 //fetch all notifications related to Log in user
-                $LIMIT = 5;
+                $LIMIT = 7;
                 $page = $request->get('page');
                 
                 if(empty($page)) {

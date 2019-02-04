@@ -626,7 +626,12 @@ class EnhancedQueryGenerator extends QueryGenerator
         }    
         if ($baseModule == 'MessageBoard') {
 
-          $ownrecsql = " AND vtiger_" . strtolower($baseModule) . ".department REGEXP '[[:<:]]($current_user->department)[[:>:]]'";
+            $ownrecsql = " AND vtiger_" . strtolower($baseModule) . ".department REGEXP '[[:<:]]($current_user->department)[[:>:]]'";
+        }
+
+        if ($baseModule == 'Notifications') {
+
+            //$ownrecsql = " AND vtiger_crmentity_user_field.userid=". $current_user->id;
         }
 
         if($baseModule == 'Documents'){

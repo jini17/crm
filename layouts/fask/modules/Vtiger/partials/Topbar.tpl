@@ -132,6 +132,9 @@
        background-color: #f2f2f2;
    
    }
+   .notification-container.read {
+    background-color: #FFF;
+}
    
    .notification-list h6
     {
@@ -230,7 +233,7 @@
                         <ul class="list-unstyled" style="  border-left: 1px solid #ccc;    border-right: 1px solid #ccc;">
                        {foreach item=NOTIFICATION from=$NOTIFICATIONS['details']}
                             <li style='border-bottom: 1px solid #ccc;'>                                  
-                                <div class="notification-container {if $NOTIFICATION['unread'] eq 0}unread{/if}">
+                                <div class="notification-container {if $NOTIFICATION['unread'] eq 0}unread{else}read{/if}">
                                           <a href=" {$NOTIFICATION['linkurl']}" style="display:block; width: 100%; padding: 0 5px; font-weight: bold;">
                                             <div class="notification-avatar left-node">
                                                <div class="img-holder">
