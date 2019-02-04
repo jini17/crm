@@ -679,3 +679,13 @@ color: #F7B301 !important;
      color: #fff;
      padding: 5px;
 }
+.fasksecond i,
+.material-icons.module-icon{
+    margin-right: 5px;
+    font-size: 14px !important;
+
+    margin-top: 5px;
+}
+.global-nav .app-navigator-container{
+    height: 51px !important;
+}
