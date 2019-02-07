@@ -380,4 +380,4 @@ Vtiger_Index_Js("Vtiger_Edit_Js",{
 		this.registerPageLeaveEvents();
     }
 });
-jQuery("#Attendance_editView_fieldName_attendancedate").val("");
+
