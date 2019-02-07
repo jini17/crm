@@ -186,8 +186,7 @@ class Vtiger_DashBoard_Model extends Vtiger_Base_Model {
                         if(in_array($tabName, $appTabs)) {
                                 $tabName = vtranslate("LBL_$tabName");
                         }
-                        $tabs[$i] = array(
-                                                        "id"=>$row["id"],"tabname"=>$tabName,"sequence"=>$row["sequence"],"isdefault"=>$row["isdefault"],'appname' => $row['appname']);
+                        $tabs[$i] = array("id"=>$row["id"],"tabname"=>$tabName,"sequence"=>$row["sequence"],"isdefault"=>$row["isdefault"],'appname' => $row['appname']);
                 }
 
                 return $tabs;
