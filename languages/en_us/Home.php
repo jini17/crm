@@ -65,7 +65,8 @@ $languageStrings = array(
 	'LBL_VIEW_CONTRACT'=> 'View My Contract',
 	'LBL_GOOD_DAY' => 'Good Day',
 	'User'=>'Employee',
-    'Bill'=> 'Office Bill'                
+    'Bill'=> 'Office Bill',
+    'LBL_NO_CONTRACT_FOUND'=>'No Active Contract found',                
  
 );
 

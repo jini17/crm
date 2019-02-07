@@ -32,7 +32,7 @@
           padding: 8px;
         }
             </style>
-
+{if $DATA['contract'] neq 0}
 <div class="row ">
     <div class="col-md-8" style="padding-right: 0;">
      <div class='col-md-12' style="padding:0;"> 
@@ -89,11 +89,11 @@
                     </div>
                 </div>
 </div>
-                    <div class="clearfix"></div>
-                    {if $DATA['notify'] eq 'show' AND $DATA['job_type'] eq 'Contract'  }
-                    <small>
-                        ** {vtranslate('LBL_CONTRACT_NOTIFICATION','Home')}
-                    </small>
-                    {/if}
+<div class="clearfix"></div>
+{else}
+  <small>
+      {vtranslate('LBL_NO_CONTRACT_FOUND','Home')}
+  </small>
+{/if}
                     
 </div>
