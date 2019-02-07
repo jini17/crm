@@ -77,7 +77,7 @@
                         <div class='clearfix'></div>
                         <small style='font-size:14px;'> {$REPORTING_MANAGER['department'] } </small>
                         <div class="clearfix"></div>
-                        <small style='font-size:14px;'> {$REPORTING_MANAGER['email'] } </small>          
+                        <small style='font-size:14px; word-wrap: break-word;'> {$REPORTING_MANAGER['email'] } </small>          
                          <div class="clearfix"></div>
                             <div class="social-links text-right">
                                 <a href="{$REPORTING_MANAGER['facebook']}"><i class="fab fa-facebook-f"></i></a>
@@ -116,9 +116,9 @@
                             <div class="orgbox-details text-left">
                                 <h5 style="margin-top: 2px;font-size: 14px;margin-bottom: 2px;font-weight: bold;"><a href="index.php?module=Users&parent=Settings&view=Detail&record={$MY_DETAILS['id']}">{$MY_DETAILS['fullname']}</a></h5>
                                 <div class='clearfix'></div>
-                                <small style='font-size:14px;'> {$MY_DETAILS['department'] } </small>
+                                 <small style='font-size:14px; word-wrap: break-word;'> {$MY_DETAILS['department'] } </small>
                                 <div class="clearfix"></div>
-                                <small style='font-size:14px;'> {$MY_DETAILS['email'] } </small>
+                                <small style='font-size:14px; word-wrap: break-word;'> {$MY_DETAILS['email'] } </small>
                                 <div class="clearfix"></div>
                             <div class="social-links text-right">
                                 <a href="{$MY_DETAILS['facebook']}"><i class="fab fa-facebook-f"></i></a>
@@ -169,9 +169,9 @@
                             <div class="orgbox-details text-left">
                                 <h5 style="margin-top: 2px;font-size: 14px;margin-bottom: 2px;font-weight: bold;"><a href="index.php?module=Users&parent=Settings&view=Detail&record={$emp['id']}">{$emp['full_name']}</a></h5>
                                 <div class='clearfix'></div>
-                                <small style='font-size:14px;'> {$emp['department'] } </small>
+                                 <small style='font-size:14px; word-wrap: break-word;'>  {$emp['department'] } </small>
                                 <div class="clearfix"></div>
-                                <small style='font-size:14px; ' > {$emp['email'] } </small>
+                                 <small style='font-size:14px; word-wrap: break-word;'> {$emp['email'] } </small>
                                 
                                  <div class="clearfix"></div>
                             <div class="social-links text-right">
