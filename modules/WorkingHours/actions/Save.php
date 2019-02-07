@@ -14,7 +14,8 @@ class WorkingHours_Save_Action extends Vtiger_Save_Action {
         public function process(Vtiger_Request $request) {
 
                 $array = array("monday","tuesday","wednesday","thursday","friday","saturday","sunday");
-
+                global $adb;
+                $adb->setDebug(true);
                 foreach($array as $key=>$val) {
 
                         $from = $request->get($val.'_from');			//modify by jitu@5Jan2017	
@@ -26,16 +27,16 @@ class WorkingHours_Save_Action extends Vtiger_Save_Action {
                         $currentUserModel = Users_Record_Model::getCurrentUserModel();
 
                         if(in_array($currentUserModel->roleid, array('H2','H12','H13'))){
-                            NotificationPeople();
-                            $userids = implode('|##|', $userid);
-                            $activitydetails 	=   array();
-                            $activitydetails['notifyto']        =   $userids;
+                                                     
+                            $activitydetails 	                =   array();
+                            $activitydetails['notifyto']        =   NotificationPeople('all');
                             $activitydetails['notifyby']        =   $currentUserModel->id;
                             $activitydetails['actionperform']   =   'Updated';
                             $activitydetails['relatedto']       =   $request->get('record');
                             addUserNotification($activitydetails);
-                    }       
-                //end activity
+                        }       
+                        //end activity
+                        
                         parent::process($request); 
         }
 }

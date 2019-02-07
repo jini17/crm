@@ -11,8 +11,9 @@ class MessageBoard_Save_Action extends Vtiger_Save_Action {
 
 	public function process(Vtiger_Request $request) {
 	
-		global $current_user;
-		$request->set('employee_id',$current_user->id);
+		$currentUserModel = Users_Record_Model::getCurrentUserModel();
+		$request->set('employee_id',$currentUserModel->id);
+
 		parent::process($request);
 	}
 }

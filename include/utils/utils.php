@@ -2634,44 +2634,44 @@ function getDuplicatesPreventionMessage($moduleName, $duplicateRecordsList) {
 
 function addUserNotification($activitydetails){
 
-
+    global $adb;
     include_once('modules/Notifications/Notifications.php');
     
-  //  $currentUserModel = Users_Record_Model::getCurrentUserModel();
-    $userids = implode('|##|', $activitydetails['notifyto']);
-
     $Notification = new Notifications();
-    $Notification->column_fields['notifyto']            = $userids;
-  	$Notification->column_fields['notifyby']            = $activitydetails['notifyby'];
-    
-    $Notification->column_fields['actionperform']       = $activitydetails['actionperform'];
+    $Notification->column_fields['assigned_user_id']    =  $activitydetails['notifyby'];
+  	$Notification->column_fields['actionperform']       = $activitydetails['actionperform'];
     $Notification->column_fields['relatedto']           = $activitydetails['relatedto'];
-    $Notification->column_fields['assigned_user_id']    = 1;
-
-    if($activitydetails['id']){
-        $Notification->column_fields['isview']          = 1;
-        $Notification->mode                             = 'edit';
-        $Notification->id                               = $activitydetails['record'];
-        
-    } else {
-        $Notification->column_fields['isview']          = 0;
-        $Notification->mode='';
-    }
-
+    $Notification->mode                                 = '';
+    $Notification->id                                   = $activitydetails['record'];
     $Notification->save('Notifications');
-   	if($Notification->id)
+   	
+    foreach($activitydetails['notifyto'] as $userid){
+        $adb->pquery("INSERT INTO vtiger_crmentity_user_field(recordid,userid) values(?,?)", array($Notification->id, $userid));
+    }    
+
+    if($Notification->id)
    		return true;
    	else
-   		return false;
+   	    return false;
 }
 
 function NotificationPeople($roles){
 
 	//Notify people :
 	global $adb;
-	$userid = array();
+	
+    $userid = array();
+
+    $rolecondition = '';
+    if(is_array($roles) && count($roles)>0){
+        $roles = implode(',',$roles);
+        $rolecondition = "vtiger_user2role.roleid IN ($roles)";
+    } else if(is_int($roles)){
+        return $roles;
+    } 
+
 	$result = $adb->pquery("SELECT id from vtiger_users LEFT JOIN vtiger_user2role ON vtiger_user2role.userid=vtiger_users.id
-		WHERE vtiger_user2role.roleid IN (?) AND vtiger_users.deleted=0", array($roles));
+		WHERE vtiger_users.deleted=0 " .$rolecondition, array());
 	$numrows = $adb->num_rows($result);
 
 	for($i=0;$i<$numrows;$i++){
