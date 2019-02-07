@@ -214,9 +214,12 @@ a.btn.btn-gettingStarted i{
     padding-top: 0;
 }
 .btn-widget-view-more{
-    color: #3bbd9b;
+    color: #AFDFDF;
     float: right;
     padding-top: 10px;
+        position: absolute;
+    bottom: 4px;
+    right: 8px;
 }
 
 /**=========================

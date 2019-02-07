@@ -36,6 +36,7 @@
 
 <div class="dashboardWidgetContent" style="padding:5px;">
         {include file="dashboards/BirthdaysContents.tpl"|@vtemplate_path:$MODULE_NAME}
+
 </div>
 
 <div class="widgeticons dashBoardWidgetFooter">
@@ -43,3 +44,5 @@
         {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME SETTING_EXIST=false}
   </div>
 </div>
+        
+          <a href="index.php?module=Users&view=List&parent=Settings" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>

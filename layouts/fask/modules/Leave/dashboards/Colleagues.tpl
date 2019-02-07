@@ -39,6 +39,7 @@
 <div class="dashboardWidgetContent mCustomScrollbar _mCS_5" style="height:200px;">
 	{include file="dashboards/ColleaguesContents.tpl"|@vtemplate_path:$MODULE_NAME}
 </div>
+                        <a  onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$LOGINID}&tab=ListLeave'" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
 
 <div class="widgeticons dashBoardWidgetFooter">
   <div class="footerIcons pull-right">

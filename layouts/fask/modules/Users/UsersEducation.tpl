@@ -69,7 +69,7 @@
                                     <span class="actionImages">
                                         <a class="editEducation editAction ti-pencil" title="Edit" onclick="Users_Education_Js.editEducation('index.php?module=Users&amp;view=EditEducation&amp;record={$USER_EDUCATION['educationid']}&amp;userId={$USERID}');"></a>
                                         &nbsp;&nbsp;
-                                        <a class="cursorPointer" onclick="Users_Education_Js.deleteEducation('index.php?module=Education&amp;action=Delete&amp;record={$USER_EDUCATION['educationid']}');"><i class="fa fa-trash-o" title="Delete"></i></a>
+                                        <a class="cursorPointer" onclick="Users_Education_Js.deleteEducation('index.php?module=Education&amp;action=Delete&amp;record={$USER_EDUCATION['educationid']}');"><i class="fa fa-trash" title="Delete"></i></a>
                                     </span>
                                </div>
                             </td> 

@@ -197,6 +197,9 @@ a.btn.btn-gettingStarted i{
     color: #2f5597;
     float: right;
     padding-top: 10px;
+        position: absolute;
+    bottom: 4px;
+    right: 8px;
 }
 
 /**=========================
@@ -733,4 +736,7 @@ color: #2f5597 !important;
     font-size: 14px !important;
 
     margin-top: 5px;
+}
+.dashBoardTabContents .ready ul li{
+    position: relative;    
 }

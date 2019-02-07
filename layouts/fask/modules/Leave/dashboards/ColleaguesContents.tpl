@@ -46,7 +46,6 @@
             {/foreach}
             <div class="clearfix"></div>
             <div class="clearfix"></div>
-                        <a  onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$LOGINID}&tab=ListLeave'" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
 
 
         </div>
