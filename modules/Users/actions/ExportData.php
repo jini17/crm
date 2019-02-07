@@ -10,8 +10,18 @@
 
 class Users_ExportData_Action extends Vtiger_ExportData_Action {
 
+	function checkPermission(Vtiger_Request $request) {
+			$currentUser = Users_Record_Model::getCurrentUserModel();
+		if ($currentUser->isAdminUser() || in_array($currentUser->roleid, array('H2','H12','H13'))) {
+			return true;
+		}
+		return false;
+	}
+
+
+
 	var $exportableFields = array(	'user_name'		=> 'User Name',
-									'title'			=> 'Title',
+									//'title'			=> 'Title',
 									'first_name'	=> 'First Name',
 									'last_name'		=> 'Last Name',
 									'email1'		=> 'Email',
