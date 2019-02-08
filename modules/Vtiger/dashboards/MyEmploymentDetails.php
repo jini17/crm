@@ -59,7 +59,13 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View
         } else {
             $imagename = $thumb[0]['path'] . '_' . $thumb[0]['name'];
         }
-        
+        $expirdays = -1;
+        if(strlen($djt['exp_date']) > 0){
+            $expirydate = (strlen($djt['exp_date']) > 0) ? date('M d, Y', strtotime($djt['exp_date'])) : "";
+            $expirydays  = datediff($djt['exp_date'], date('Y-m-d'));
+
+        }
+
         $info = array(
             'first_name' => $currentUser->get('first_name'),
             'employee_id' => $employee_no,
@@ -69,14 +75,16 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View
             'job_type' => $djt['job_type'],
             'department' => $department,
             'report_to' => $report_to,
-            'expire' => (strlen($djt['exp_date']) > 0) ? date('M d, Y', strtotime($djt['exp_date'])) : "",
+            'expire' => $expirydate,
+            'expirydays' =>$expirydays['days_total'],
             'thumb' => $imagename,
             'facebook' => $currentUser->get('facebook'),
             'twitter' => $currentUser->get('twitter'),
             'linkedin' => $currentUser->get('linkedin'),
             'notify' => $notify,
             'contract' => $djt['contract_id'],
-            'emp_id' => $currentUser->get('id')
+            'emp_id' => $currentUser->get('id'),
+            'roleid'=> $currentUser->roleid
         );
         //    print_r($info);
         //  exit();

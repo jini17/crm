@@ -53,21 +53,21 @@ class Users_ExportData_Action extends Vtiger_ExportData_Action {
 			$this->moduleFieldInstances = $this->moduleInstance->getFields();
 			$skipfields = array('user_password', 'confirm_password', 'sameaddresscheck', 'is_admin', 'imagename');
 			foreach($this->moduleFieldInstances as $key=>$field) {
-		
+				
 				if(in_array($key, $skipfields)){
 					continue;
 				} else {
-					$this->exportableFields[$key] = $field->label;
+					$this->exportableFields[$field->name] = $field->label;
 				}	
 			}
-
+				
 			$this->focus = CRMEntity::getInstance($moduleName);
 			$query = $this->getExportQuery($request);
 			$result = $db->pquery($query, array());
 			$headers = $this->exportableFields;
-			/*foreach ($headers as $header) {
+			foreach ($headers as $header) {
 				$translatedHeaders[] = vtranslate(html_entity_decode($header, ENT_QUOTES), $moduleName);
-			}*/
+			}
 
 			$entries = array();
 			for ($i=0; $i<$db->num_rows($result); $i++) {
@@ -75,10 +75,10 @@ class Users_ExportData_Action extends Vtiger_ExportData_Action {
 				$entries[] = $this->sanitizeValues($db->fetchByAssoc($result, $i));
 
 			}
-			// Jugar By Mabruk, Later Fix it when you find a better Solution
-			foreach ($entries[0] as $key => $header) {
-				$translatedHeaders[] = vtranslate(html_entity_decode($key, ENT_QUOTES), $moduleName);
-			}
+			/*// Jugar By Mabruk, Later Fix it when you find a better Solution
+			foreach ($entries[0] as $header => $value) {
+				$translatedHeaders[] = vtranslate(html_entity_decode($header, ENT_QUOTES), $moduleName);
+			}*/
 			
 			return $this->output($request, $translatedHeaders, $entries);
 		}
@@ -112,7 +112,7 @@ class Users_ExportData_Action extends Vtiger_ExportData_Action {
 			$value = trim($value,"\"");
 			$uitype = $fieldInfo->get('uitype');
 			$fieldname = $fieldInfo->get('name');
-
+			
 			if(!$this->fieldDataTypeCache[$fieldName]) {
 				$this->fieldDataTypeCache[$fieldName] = $fieldInfo->getFieldDataType();
 			}
@@ -143,7 +143,7 @@ class Users_ExportData_Action extends Vtiger_ExportData_Action {
 				$value = strip_tags($value);
 				$value = str_replace('&nbsp;','',$value);
 				
-			} elseif($type=='boolean'){
+			} elseif($type=='boolean' || $fieldname =='is_owner'){
 
 				if($value==0 || $value ==NULL){
 					$value = 'No';
@@ -161,8 +161,23 @@ class Users_ExportData_Action extends Vtiger_ExportData_Action {
 					$value = DateTimeField::convertToUserFormat($value);
 				}
 			} 
+			elseif($uitype == 3994 || $uitype == 3996) {
+				$valuearray = explode('|##|',$value);
+				
+				$value = '';
+				foreach($valuearray as $val){
+					$companydetails = Vtiger_Util_Helper::getCompanyTitle(trim($val));
+					$data[] = $companydetails[0]['organization_title'];
+				}
+				$value = implode(', ',$data);
+			}
+			elseif($uitype == 102) {
+				$value = getPotentialName($value);
+
+			}
 			$arr[$fieldName] = $value;
 		}
+		
 		return $arr;
 	}	
 
