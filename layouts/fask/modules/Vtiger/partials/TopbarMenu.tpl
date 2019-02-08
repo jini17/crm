@@ -225,7 +225,7 @@
   <div class="logo-container pull-left">
       <a href="index.php" class="">
       <!--<img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>-->
-      <img src="test/loginlogo/second-crm-logo.png"  alt="Second CRM" />
+          <img src="test/loginlogo/second-crm-logo.png"  alt="Second CRM"  height="20px"/>
       </a>
   </div>
 <!--End here logo -->

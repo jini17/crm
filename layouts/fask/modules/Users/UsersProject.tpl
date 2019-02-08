@@ -71,7 +71,7 @@
                                                 <a class="editProject editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Project_Js.editProject('index.php{$CREATE_PROJECT_URL}&record={$USER_PROJECT['employeeprojectsid']}&userId={$USERID}');"></a>
                                                 &nbsp;&nbsp;
                                                 <a class="cursorPointer" onclick="Users_Project_Js.deleteProject('index.php?module=EmployeeProjects&action=Delete&record={$USER_PROJECT['employeeprojectsid']}');">
-                                                <i title="{vtranslate('LBL_DELETE', $MODULE)}" class="fa fa-trash-o"></i></a>
+                                                <i title="{vtranslate('LBL_DELETE', $MODULE)}" class="fa fa-trash"></i></a>
                                             </span>
                                             </div>
                                         </td>    

@@ -57,12 +57,15 @@ class Vtiger_Save_Action extends Vtiger_Action_Controller {
 			}
 
 			//Message Board posted/ Payslip download by anyone
-			if((!$request->get('record') && $moduleName=='MessageBoard') || $moduleName == 'Payslip'){
+			if((!$request->get('record') && $moduleName=='MessageBoard') || $moduleName == 'Payslip' || $moduleName == 'WorkingHours'){
 		        $activitydetails 	                =   array();
 		        if($moduleName=='Payslip'){
 		        	$activitydetails['notifyto']        =   array($request->get('emp_name'));	
 		        	$activitydetails['actionperform']  	=   'Download';
-		        } else{
+		        } else if($moduleName == 'WorkingHours'){
+		        	$activitydetails['notifyto']        =   NotificationPeople('all');
+		        	$activitydetails['actionperform']  	=   'Updated';
+		        }else if($moduleName == 'Payslip'){
 		        	$activitydetails['notifyto']        =   NotificationPeople('all');
 		        	$activitydetails['actionperform']  	=   'Posted';
 		        }

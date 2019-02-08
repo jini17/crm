@@ -13,7 +13,7 @@
         </span>
         <span class="col-lg-6 padding0px">
             <span class="fa-stack fa-sm cursorPointer mmActionIcon" id="mmDeleteMail" title="{vtranslate('LBL_Delete', $MODULE)}">
-                <i class="fa fa-trash-o fa-stack-lg"></i>
+                <i class="fa fa-trash fa-stack-lg"></i>
             </span>
         </span>
         <span class="col-lg-5 padding0px">

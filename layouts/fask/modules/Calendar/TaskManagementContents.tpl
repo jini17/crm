@@ -81,7 +81,7 @@
 					</div>
 					<div class="more pull-right cursorPointer task-actions">
 						<a href="#" class="quickTask editAction ti-pencil" id="taskPopover"></a>&nbsp;&nbsp;
-						<a href="#" class="taskDelete"><i class="fa fa-trash-o"></i></a>
+						<a href="#" class="taskDelete"><i class="fa fa-trash"></i></a>
 					</div>
 				</div>
 			</div>
