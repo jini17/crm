@@ -67,8 +67,12 @@
                   {else}
                   <div class="col-lg-4">
                      <a id="menubar_quickCreate_{$MODULE['moduleName']}" class="quickCreateModule" data-name="{$MODULE['moduleName']}" {if $MODULE['moduleName'] eq 'Users'}href={$URL}{else}data-url={$URL} href="javascript:void(0)"{/if}>
-                     <i class="material-icons pull-left">{$MODULE['moduleIcon']}</i>
-                     <span class="quick-create-module">{$MODULE['moduleName']}</span>
+                     {if $MODULE['moduleIcon']|strstr:"fas"}
+                        <i class="{$MODULE['moduleIcon']}"></i>
+                     {else}
+                        <i class="material-icons pull-left">{$MODULE['moduleIcon']}</i>
+                     {/if}   
+                     <span class="quick-create-module">{vtranslate($MODULE['moduleName'])}</span>
                      </a>
                   </div>
                   {/if}    

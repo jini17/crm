@@ -200,11 +200,22 @@ class Vtiger_MyEmploymentDetails_Dashboard extends Vtiger_IndexAjax_View
         $sql     = "SELECT  vtiger_employeecontract.employeecontractid as employeecontractid,contract_expiry_date,designation,job_type from vtiger_employeecontract " . " INNER JOIN vtiger_employeecontractcf ON vtiger_employeecontract.employeecontractid = vtiger_employeecontractcf.employeecontractid " . " WHERE vtiger_employeecontract.employee_id = " . $id;
         $query   = $db->pquery($sql, array());
         $numrows = $db->num_rows($query);
+
         if ($numrows > 0) {
-            $djt['deg']         = $db->query_result($query, 0, 'designation');
-            $djt['job_type']    = $db->query_result($query, 0, 'job_type');
+            
+            $job_type = $db->query_result($query, 0, 'job_type');
             $djt['contract_id'] = $db->query_result($query, 0, 'employeecontractid');
-            $djt['exp_date']    = $db->query_result($query, 0, 'contract_expiry_date');
+            $expirydate =  $db->query_result($query, 0, 'contract_expiry_date');
+            $time = time();
+            
+            if($job_type !='Permanent' && strtotime($expirydate) < $time && $expirydate !=''){
+                $djt['contract_id'] = 0; 
+            }
+
+            $djt['deg']         = $db->query_result($query, 0, 'designation');
+            $djt['job_type']    = $job_type;
+            $djt['exp_date']    = $expirydate;
+
         } else {
             $djt['deg']         = "";
             $djt['job_type']    = "";
