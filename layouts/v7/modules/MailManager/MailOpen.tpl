@@ -100,7 +100,7 @@
                     <span class="cursorPointer mmDetailAction" id='mmReply' title='{vtranslate('LBL_Reply', $MODULE)}'><i class="fa fa-reply"></i></span>
                     <span class="cursorPointer mmDetailAction" id='mmReplyAll' title='{vtranslate('LBL_Reply_All', $MODULE)}'><i class="fa fa-reply-all"></i></span>
                     <span class="cursorPointer mmDetailAction" id='mmForward' title='{vtranslate('LBL_Forward', $MODULE)}'><i class="fa fa-share"></i></span>
-                    <span class="cursorPointer mmDetailAction" id='mmDelete' title='{vtranslate('LBL_Delete', $MODULE)}' style="border-right: 1px solid #BBBBBB;"><i class="fa fa-trash-o"></i></span>
+                    <span class="cursorPointer mmDetailAction" id='mmDelete' title='{vtranslate('LBL_Delete', $MODULE)}' style="border-right: 1px solid #BBBBBB;"><i class="fa fa-trash"></i></span>
             </div>
         </div>
             <br>

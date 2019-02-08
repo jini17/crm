@@ -119,7 +119,7 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                                 <span class="actionImages">
                                                     <a class="editLanguage cursorPointer editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}" onclick="Users_Skills_Js.editLanguage('{$CREATE_LANGUAGE_URL}&record={$USER_LANGUAGE['ss_id']}&userId={$USERID}&selected_id={$USER_LANGUAGE['language_id']}');"></a>&nbsp;&nbsp;
                                                     <a class="deleteLanguage cursorPointer" onclick="Users_Skills_Js.deleteLanguage('{$USER_LANGUAGE['ss_id']}');">
-                                                        <i class="fa fa-trash-o" title="Delete"></i>
+                                                        <i class="fa fa-trash" title="Delete"></i>
                                                     </a>
                                                 </span>
                                             </div>
@@ -183,7 +183,7 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                         </td>
                                         <td>
                                             <a class="deleteSkills" onclick="Users_Skills_Js.deleteSkill('{$SKILL['skill_id']}')" title="Delete">
-                                                <i class="fa fa-trash-o"></i>
+                                                <i class="fa fa-trash"></i>
                                             </a>
                                             {*<div class="pull-right skillnum">{$SKILL['endorsement']}</div>*}
                                         </td>

@@ -1385,7 +1385,8 @@ ul.unstyled {
 }
 .listview-actions-container {
   position: relative;
-  background: transparent;padding-top:0px;
+  background: transparent;
+  padding-top:0px;
 }
 .listview-pagination i {
   font-size: 20px;
@@ -10137,7 +10138,7 @@ font-size:13px !important;
 }
 }
 .logo-container img{
-    margin: 8px 0px !important;
+    margin: 19px 0px !important
 }
 #bodyFrame{
     min-height: 500px !important;
