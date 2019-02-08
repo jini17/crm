@@ -1330,7 +1330,7 @@ class Users_Record_Model extends Vtiger_Record_Model
      */
     public function MyReortingManager($id)
     {
-        
+
         $db=PearDatabase::getInstance();
         $sql = "select id, first_name,last_name,email1,department,title,birthday,date_joined,facebook,twitter,linkedin from vtiger_users where  reports_to_id = $id";
         $query = $db->pquery($sql, array());
@@ -1358,25 +1358,27 @@ class Users_Record_Model extends Vtiger_Record_Model
                 $wish .= " <br /> " . vtranslate("LBL_SAY_HAPPYBIRTH_DAY", 'Users');
                 $wish .= '</a>';
                 $wish .= '</div>';
+                
                 if ($diff_birthday >= -7 && $diff_birthday <= 7) {
                     $birthday_wish = $wish;
                 } else {
                     $birthday_wish ="";
                 }
-                $data['id'] = $db->query_result($query, $i, 'id');
-                $data['full_name'] = $db->query_result($query, $i, 'first_name') . " " . $db->query_result($query, $i, 'last_name');
-                $data['email'] = $db->query_result($query, $i, 'email1');
-                $data['designation'] = $db->query_result($query, $i, 'designation');
-                $data['department'] = $db->query_result($query, $i, 'department');
-                $data['birthday'] = $birthday_wish;
-                $data['joindate'] = intval($diff);
-                $data['facebook'] = $db->query_result($query, $i, 'facebook');;
-                $data['twitter'] = $db->query_result($query, $i, 'twitter');
-                $data['linkedin'] = $db->query_result($query, $i, 'linkedin');
-                $data['image'] = Users_Record_Model::getImageDetailsByID($id);
+                
+                $data['id']                         = $db->query_result($query, $i, 'id');
+                $data['full_name']          = $db->query_result($query, $i, 'first_name') . " " . $db->query_result($query, $i, 'last_name');
+                $data['email']                   = $db->query_result($query, $i, 'email1');
+                $data['designation']       = $db->query_result($query, $i, 'designation');
+                $data['department']      = $db->query_result($query, $i, 'department');
+                $data['birthday']              = $birthday_wish;
+                $data['joindate']              = intval($diff);
+                $data['facebook']            = $db->query_result($query, $i, 'facebook');;
+                $data['twitter']                = $db->query_result($query, $i, 'twitter');
+                $data['linkedin']               = $db->query_result($query, $i, 'linkedin');
+                $data['image']                  = Users_Record_Model::getImageDetailsByID($id);
             }
         } else {
-            return "not found";
+            return 0;
         }
         return $data;
     }

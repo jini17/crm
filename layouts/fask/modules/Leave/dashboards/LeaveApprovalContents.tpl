@@ -27,7 +27,6 @@
               </div>    
          {/foreach}
  <div class="clearfix"></div>
-            <a  onclick="window.location.href='index.php?module=Users&view=PreferenceDetail&parent=Settings&record={$USERID}&tab=ListClaim'" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
 
 {else}
 	<span class="noDataMsg">

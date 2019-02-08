@@ -19,7 +19,7 @@
                 <i class="fa fa-envelope fa-stack-lg"></i>
             </span>
             <span class="fa-stack fa-sm cursorPointer mmActionIcon" id="mmDeleteMail" data-folder="{$FOLDER->name()}" title="{vtranslate('LBL_Delete', $MODULE)}">
-                <i class="fa fa-trash-o fa-stack-lg"></i>
+                <i class="fa fa-trash fa-stack-lg"></i>
             </span>
             <span class="fa-stack fa-sm cursorPointer moveToFolderDropDown more dropdown action" title="{vtranslate('LBL_MOVE_TO', $MODULE)}">
                 <span class='dropdown-toggle' data-toggle="dropdown">

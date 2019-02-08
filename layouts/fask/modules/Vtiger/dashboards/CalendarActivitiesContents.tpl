@@ -59,13 +59,7 @@
         </div>
 
                 <div class="clearfix"></div>
-            {if $smarty.request.name eq 'OverdueActivities'}
-                    <a href='index.php?module=Calendar&parent=&page=1&view=List&viewname=19&orderby=&sortorder=&app=FOUNDATION&search_params=[[["due_date","l","{$smarty.now|date_format:"d-m-Y"}"]]]' class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
-
-            {else}
-                    <a href='index.php?module=Calendar&parent=&page=1&view=List&viewname=19&orderby=&sortorder=&app=FOUNDATION&search_params=[[["date_start","g","{$smarty.now|date_format:"d-m-Y"}"]]]' class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
-
-            {/if}
+         
 
         </div>
 

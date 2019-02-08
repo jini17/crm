@@ -47,7 +47,7 @@
                 {assign var=TRASH_ADDED value=1}
                 {assign var=TRASH_FOLDER value=$FOLDER->name()}
                 <li class="cursorPointer mm_folder mmMainFolder" data-foldername="{$FOLDER->name()}">
-                    <i class="fa fa-trash-o fontSize20px"></i>&nbsp;&nbsp;
+                    <i class="fa fa-trash fontSize20px"></i>&nbsp;&nbsp;
                     <b>{vtranslate('LBL_TRASH', $MODULE)}</b>
                     <span class="pull-right mmUnreadCountBadge {if !$FOLDER->unreadCount()}hide{/if}">
                        {$FOLDER->unreadCount()} 
