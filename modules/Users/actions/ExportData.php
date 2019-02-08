@@ -65,14 +65,19 @@ class Users_ExportData_Action extends Vtiger_ExportData_Action {
 			$query = $this->getExportQuery($request);
 			$result = $db->pquery($query, array());
 			$headers = $this->exportableFields;
-			foreach ($headers as $header) {
+			/*foreach ($headers as $header) {
 				$translatedHeaders[] = vtranslate(html_entity_decode($header, ENT_QUOTES), $moduleName);
-			}
+			}*/
 
 			$entries = array();
 			for ($i=0; $i<$db->num_rows($result); $i++) {
 
 				$entries[] = $this->sanitizeValues($db->fetchByAssoc($result, $i));
+
+			}
+			// Jugar By Mabruk, Later Fix it when you find a better Solution
+			foreach ($entries[0] as $key => $header) {
+				$translatedHeaders[] = vtranslate(html_entity_decode($key, ENT_QUOTES), $moduleName);
 			}
 			
 			return $this->output($request, $translatedHeaders, $entries);

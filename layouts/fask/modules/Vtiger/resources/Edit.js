@@ -363,6 +363,21 @@ Vtiger_Index_Js("Vtiger_Edit_Js",{
              
       
     },
+
+    // Added By Mabruk
+    setRelatedToRefModule : function() {
+
+        jQuery('.referenceModulesList').change(function(){
+
+            var element      = jQuery(this);
+            var inputParent  = element.parent().next('.fieldValue'); 
+
+            inputParent.find(jQuery('[name=popupReferenceModule]')).val(element.val());
+
+        });
+
+    },
+
     registerEvents: function(callParent) {
         //donot call parent if registering Events from overlay.
         if(callParent != false){
@@ -376,6 +391,7 @@ Vtiger_Index_Js("Vtiger_Edit_Js",{
         this.registerEventForImageDelete();
         this.registerImageChangeEvent();
         this.registerValidation();
+        this.setRelatedToRefModule();
         app.event.trigger('post.editView.load', editViewContainer);
 		this.registerPageLeaveEvents();
     }
