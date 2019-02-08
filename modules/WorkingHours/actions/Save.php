@@ -23,20 +23,6 @@ class WorkingHours_Save_Action extends Vtiger_Save_Action {
                         $request->set($val, $from.'##'.$to);		//modify by jitu@5Jan2017		
 
                 }
-                        //Working Hours updated by Admin/HR Manager or Hr Staff 	 	
-                        $currentUserModel = Users_Record_Model::getCurrentUserModel();
-
-                        if(in_array($currentUserModel->roleid, array('H2','H12','H13'))){
-                                                     
-                            $activitydetails 	                =   array();
-                            $activitydetails['notifyto']        =   NotificationPeople('all');
-                            $activitydetails['notifyby']        =   $currentUserModel->id;
-                            $activitydetails['actionperform']   =   'Updated';
-                            $activitydetails['relatedto']       =   $request->get('record');
-                            addUserNotification($activitydetails);
-                        }       
-                        //end activity
-                        
-                        parent::process($request); 
+                 parent::process($request); 
         }
 }
