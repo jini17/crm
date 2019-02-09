@@ -23,16 +23,17 @@ Vtiger.Class("Settings_UserPlan_Index_Js",{},{
 	  var thisInstance = this;
 	  var form = jQuery('#editPlan');
 	  jQuery('#planFilter').on('change',function(e){ 
-	    var aDeferred = jQuery.Deferred();
-		var currtgt = jQuery(e.currentTarget);
-		var planid  = currtgt.val();
-		
+
+		    var aDeferred = jQuery.Deferred();
+			var currtgt = jQuery(e.currentTarget);
+			var planid  = currtgt.val();		
 			var params = {
 			'module' : app.getModuleName(),
 			'parent' : app.getParentModuleName(),
-			'view' : 'UserPlanAjax',
+			'view'   : 'UserPlanAjax',
 			'mode'   : 'LoadRole',
 			'planid' : planid,
+
 		};
 		
 		app.request.post({'data' : params}).then(
@@ -82,7 +83,9 @@ Vtiger.Class("Settings_UserPlan_Index_Js",{},{
 				if(err === null) {
 					var result = data['success'];
 					if(result == true) {
-						thisInstance.loadUserPlan();
+						// Added By Mabruk
+						var pageInfo = jQuery('#plan').DataTable().page.info();												
+						thisInstance.loadUserPlan(pageInfo.page);
 						aDeferred.resolve(data);
 					} else {
 						aDeferred.reject(data);
@@ -97,10 +100,7 @@ Vtiger.Class("Settings_UserPlan_Index_Js",{},{
 	registerActions : function() { 
 		var thisInstance = this;
 		var container  = jQuery("#plansettingcontainer");
-		//var container = thisInstance.getContainer();
-          //container.find('.editPlan').trigger('click');
-		//register click event for Add New Tax button
-		//container.find('.editPlan').click(function(e) {
+
 		//modify by jitu@editPlan on next page 
 		jQuery('#plan').on('click', '.editPlan', function(e) {
 			var changePlanButton = jQuery(e.currentTarget);
@@ -132,18 +132,17 @@ Vtiger.Class("Settings_UserPlan_Index_Js",{},{
 			thisInstance.submitPlan(targetid);
 			return true;
 
-		});
+		});		
 		
-		//return aDeferred.promise();	
 	},
-   loadUserPlan:function(){
+   loadUserPlan:function(currentPage = false){
 	var thisInstance = this;
 	//var aDeferred = jQuery.Deferred();
 		
 	var params = {
 		'module' : app.getModuleName(),
 		'parent' : app.getParentModuleName(),
-		'view' : 'Index',
+		'view'   : 'Index',
 		'mode'   : 'LoadPlan',
 	};
 		
@@ -151,19 +150,23 @@ Vtiger.Class("Settings_UserPlan_Index_Js",{},{
 		function(err, data) {
 			if(err === null) {
 				jQuery('#loadplan').html(data);
-				thisInstance.registerActions();
-				//thisInstance.loadUserPlan();
-				//aDeferred.promise();
-				//location.reload(); 
 
+				// Added By Mabruk
+				if (currentPage) {
+					
+					var table = jQuery('#plan').DataTable();						
+					table.page( currentPage ).draw( false );
+
+				}
+
+				thisInstance.registerActions();				
 			}
 		});
 	return true;
-	//aDeferred.promise();
+	
    },	
 
-    registerEvents :  function(){ 
-	//this.registerActions();
+    registerEvents :  function(){ 	
 
 	this.loadUserPlan();
 	var vtigerinst = new Vtiger_Index_Js();
