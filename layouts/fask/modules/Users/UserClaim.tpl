@@ -168,7 +168,7 @@
 
 			<!--//Added By Jitu Date Combobox-->
 			{for $year=$STARTYEAR to $CURYEAR}
-			<option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
+				<option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
 			{/for}
 		</select>	
 	</div>
