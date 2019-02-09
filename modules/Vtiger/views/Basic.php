@@ -29,16 +29,10 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
 
                 //update view once open detail page related to Notification to make as "read"
                 $NotifyModuleName = $request->getModule();
+               
                 if($NotifyModuleName !='Notifications'){
-                    $module = 'Notifications';
-                    $sourcerecord = $request->get('sourcerecord');
-                    $moduleUserSpecificTableName = Vtiger_Functions::getUserSpecificTableName($module);
-                    $focus = CRMEntity::getInstance($module);
-                    $focus->mode = "edit";
-                    $focus->id = $sourcerecord;
-                    $focus->column_fields->startTracking();
-                    $focus->column_fields['viewed'] = 1;
-                    $focus->insertIntoEntityTable($moduleUserSpecificTableName, $module);
+                    global $adb;
+                    $adb->pquery("UPDATE vtiger_crmentity_user_field SET viewed = 1 WHERE recordid = ? AND userid = ?", array($Notification->id, $userid));
                 }   
                 //end here
 
