@@ -527,7 +527,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                                 //Leave Approved or Rejected
                                                 $activitydetails = array();
                                                 $notifyUsers = NotificationPeople('H13','H2', 'H12');
-                                                array_push($notifyUsers, $currentUserModel->id, $applicant_id);
+                                                array_push($notifyUsers,$applicant_id);
                                                 $activitydetails['notifyto']        =   $notifyUsers;
                                                 $activitydetails['notifyby']        =   $data['approveby'];
                                                 $activitydetails['actionperform']   =   $request->get('savetype');
@@ -811,7 +811,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                         $activitydetails = array();
                                         $claimIdComponents = explode('x', $claims->id);
                                         $notifyUsers = NotificationPeople('H13','H2','H12');
-                                        array_push($notifyUsers, $reportingManager->reports_to_id, $current_user_id);
+                                        array_push($notifyUsers, $current_user_id);
                                         $activitydetails['notifyto']        =   $notifyUsers;
                                         $activitydetails['notifyby']        =   $reportingManager->reports_to_id;
                                         $activitydetails['actionperform']   =   $claim_status;

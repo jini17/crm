@@ -507,7 +507,7 @@ $languageStrings = array(
 'LBL_SISTER'=> 'Sister',
 'LBL_BROTHER'=> 'Brother',
 'LBL_FRIEND'=> 'Friend',
-'LBL_SELECT'=>'Select anyone',
+'LBL_SELECT'=>'Select an Option',
 //Leave Section add by jitu@secondcrm.com on 24-12-2014
 'LBL_ACTION' => 'Action',
 'LBL_LEAVE_STATUS' => 'Leave Status',
