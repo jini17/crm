@@ -45,6 +45,21 @@ class HelpDesk_DetailView_Model extends Vtiger_DetailView_Model {
 			$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($basicActionLink);
 		}
 
+		//Added by jitu@04-08-2015 for ShowHide Restrict Issue 
+		$helpdeskRestrict = Vtiger_Record_Model::toggleRestrictAction('HelpDesk','CIH', $recordModel->getId());
+
+		$invoiceModuleModel = Vtiger_Module_Model::getInstance('Invoice');
+		if($currentUserModel->hasModuleActionPermission($invoiceModuleModel->getId(), 'DetailView') && $helpdeskRestrict) {
+			$basicActionLink = array(
+				'linktype' => 'DETAILVIEW',
+				'linklabel' => 'LBL_CREATE_INVOICE',
+				'linkurl' => 'index.php?module=Invoice&view=Edit&ticketid='.$recordModel->getId(),
+				'linkicon' => ''
+			);
+			$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($basicActionLink);
+		}
+		//end here
+		
 		return $linkModelList;
 	}
 

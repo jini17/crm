@@ -131,14 +131,15 @@
                         </div>
                     </div>
                 </div>
-            <div class='modal-overlay-footer  clearfix'>
-                <div class="row clearfix">
-                    <div class=' textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
-                        <button type='submit' class='btn btn-success saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
-                        <a class='cancelLink'  href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                <div class='clearfix' style="padding-top: 10px;">
+                    <div class="row clearfix">
+                        <div class=' textAlignCenter col-lg-12 col-md-12 col-sm-12 '>
+                            <button type='submit' class='btn btn-success saveButton' >{vtranslate('LBL_SAVE', $MODULE)}</button>&nbsp;&nbsp;
+                            <a class='cancelLink btn btn-danger'  href="javascript:history.back()" type="reset">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+                
     </div>
     </form>
     </div>

@@ -1,0 +1,175 @@
+{*<!--
+/*********************************************************************************
+  ** The contents of this file are subject to the vtiger CRM Public License Version 1.0
+   * ("License"); You may not use this file except in compliance with the License
+   * The Original Code is:  vtiger CRM Open Source
+   * The Initial Developer of the Original Code is vtiger.
+   * Portions created by vtiger are Copyright (C) vtiger.
+   * All Rights Reserved.
+  *
+ ********************************************************************************/
+-->*}
+<!--- Added by jitu@23-04-2015 for display Restrict Actions -->
+<div class="filterContainer">
+	<div class="allConditionContainer conditionGroup contentsBackground well">
+		<div class="header">
+			<span><strong>{vtranslate('LBL_RESTRICT_ACTIONS',$MODULE)}</strong></span>
+		</div>
+		<div class="contents">
+			<div class="conditionList">
+				<form id="MultipleActionsFrom" class="form-horizontal" method="POST">
+				<table class="table table-bordered table-condensed listViewEntriesTable">
+					<thead>
+						<tr class="listViewHeaders">
+							<th id="codeDescription">{vtranslate('LBL_ACTION_DESC',$MODULE)}</th>
+							<th id="restrict">{vtranslate('LBL_RESTRICT',$MODULE)}</th>
+							<th id="allowAction">{vtranslate('LBL_ALLOW_ACTION',$MODULE)}</th>
+						</tr>
+					</thead>
+					<tr>
+						<td>{vtranslate('LBL_CONVERTLEAD',$MODULE)}</td>
+						<td><input type="checkbox" name="Leads_cla" id="Leads_cla" /></td>
+						<td>
+							<select multiple name="Leads__convert_action" class="chzn-select" id="Leads__convert_action" style="width:60%;">
+	<optgroup>
+						<option value="{vtranslate('Attempted to Contact',$MODULE)}">{vtranslate('Attempted to Contact',$MODULE)}</option>
+						<option value="{vtranslate('Cold',$MODULE)}">{vtranslate('Cold',$MODULE)}</option>
+						<option value="{vtranslate('Contact in Future',$MODULE)}">{vtranslate('Contact in Future',$MODULE)}</option>
+						<option value="{vtranslate('Contacted',$MODULE)}">{vtranslate('Contacted',$MODULE)}</option>
+						<option value="{vtranslate('Hot',$MODULE)}">{vtranslate('Hot',$MODULE)}</option>
+						<option value="{vtranslate('Junk Lead',$MODULE)}">{vtranslate('Junk Lead',$MODULE)}</option>
+						<option value="{vtranslate('Lost Lead',$MODULE)}">{vtranslate('Lost Lead',$MODULE)}</option>
+						<option value="{vtranslate('Not Contacted',$MODULE)}">{vtranslate('Not Contacted',$MODULE)}</option>
+						<option value="{vtranslate('Pre Qualified',$MODULE)}">{vtranslate('Pre Qualified',$MODULE)}</option>
+						<option value="{vtranslate('Qualified',$MODULE)}">{vtranslate('Qualified',$MODULE)}</option>
+						<option value="{vtranslate('Warm',$MODULE)}">{vtranslate('Warm',$MODULE)}</option>		
+	</optgroup>
+</select></td>
+					</tr>
+					<tr>
+						<td>{vtranslate('LBL_GENERATEINVOICE_FROMQUOTE',$MODULE)}</td>
+						<td><input type="checkbox" name="Quotes_gtq" id="Quotes_gtq" /></td>
+						<td><select multiple name="Quotes_invoice_action" class="chzn-select" id="Quotes_invoice_action" style="width:67%;">
+						<optgroup>
+							<option value="{vtranslate('Created',$MODULE)}">{vtranslate('Created',$MODULE)}</option>
+							<option value="{vtranslate('Delivered',$MODULE)}">{vtranslate('Delivered',$MODULE)}</option>
+							<option value="{vtranslate('Reviewed',$MODULE)}">{vtranslate('Reviewed',$MODULE)}</option>
+							<option value="{vtranslate('Accepted',$MODULE)}">{vtranslate('Accepted',$MODULE)}</option>
+							<option value="{vtranslate('Rejected',$MODULE)}">{vtranslate('Rejected',$MODULE)}</option>	
+						</optgroup>
+</select></td>
+					</tr>
+					<tr>
+						<td>{vtranslate('LBL_GENERATESALESORDER_FROMQUOTE',$MODULE)}</td>
+						<td><input type="checkbox" name="Quotes_gsq" id="Quotes_gsq" /></td>
+						<td><select multiple name="Quotes_salesorder_action" class="chzn-select" id="Quotes_salesorder_action" style="width:67%;">
+						<optgroup>
+							<option value="{vtranslate('Created',$MODULE)}">{vtranslate('Created',$MODULE)}</option>
+							<option value="{vtranslate('Delivered',$MODULE)}">{vtranslate('Delivered',$MODULE)}</option>
+							<option value="{vtranslate('Reviewed',$MODULE)}">{vtranslate('Reviewed',$MODULE)}</option>
+							<option value="{vtranslate('Accepted',$MODULE)}">{vtranslate('Accepted',$MODULE)}</option>
+							<option value="{vtranslate('Rejected',$MODULE)}">{vtranslate('Rejected',$MODULE)}</option>	
+						</optgroup>
+</select></td>
+					</tr>
+					<tr>
+						<td>{vtranslate('LBL_CREATEINVOICE_FROMSALESORDER',$MODULE)}</td>
+						<td><input type="checkbox" name="SalesOrder_cis" id="SalesOrder_cis" /></td>
+						<td><select multiple name="SalesOrder_invoice_action" class="chzn-select" id="SalesOrder_invoice_action" style="width:67%;">
+						<optgroup>
+							<option value="{vtranslate('Created',$MODULE)}">{vtranslate('Created',$MODULE)}</option>
+							<option value="{vtranslate('Approved',$MODULE)}">{vtranslate('Approved',$MODULE)}</option>
+							<option value="{vtranslate('Delivered',$MODULE)}">{vtranslate('Delivered',$MODULE)}</option>
+							<option value="{vtranslate('Cancelled',$MODULE)}">{vtranslate('Cancelled',$MODULE)}</option>
+						</optgroup>
+</select></td>
+					</tr>
+					<tr>
+						<td>{vtranslate('LBL_CREATEDO_FROMSALESORDER',$MODULE)}</td>
+						<td><input type="checkbox" name="SalesOrder_cds" id="SalesOrder_cds" /></td>
+						<td><select multiple name="SalesOrder_do_action" class="chzn-select" id="SalesOrder_do_action" style="width:67%;">
+						<optgroup>
+							<option value="{vtranslate('Created',$MODULE)}">{vtranslate('Created',$MODULE)}</option>
+							<option value="{vtranslate('Approved',$MODULE)}">{vtranslate('Approved',$MODULE)}</option>
+							<option value="{vtranslate('Delivered',$MODULE)}">{vtranslate('Delivered',$MODULE)}</option>
+							<option value="{vtranslate('Cancelled',$MODULE)}">{vtranslate('Cancelled',$MODULE)}</option>
+						</optgroup>
+</select></td>
+					</tr>
+					<tr>
+						<td>{vtranslate('LBL_CREATEDO_FROMINVOICE',$MODULE)}</td>
+						<td><input type="checkbox" name="Invoice_cdi" id="Invoice_cdi" /></td>
+						<td><select multiple name="Invoice_do_action" class="chzn-select" id="Invoice_do_action" style="width:67%;">
+						<optgroup>
+							<option value="{vtranslate('Created',$MODULE)}">Created</option>
+							<option value="{vtranslate('Cancel',$MODULE)}">{vtranslate('Cancel',$MODULE)}</option>
+							<option value="{vtranslate('Auto Created',$MODULE)}">{vtranslate('Auto Created',$MODULE)}</option>
+							<option value="{vtranslate('Approved',$MODULE)}">{vtranslate('Approved',$MODULE)}</option>
+							<option value="{vtranslate('Sent',$MODULE)}">{vtranslate('Sent',$MODULE)}</option>
+							<option value="{vtranslate('Credit Invoice',$MODULE)}">{vtranslate('Credit Invoice',$MODULE)}</option>
+							<option value="{vtranslate('Paid',$MODULE)}">{vtranslate('Paid',$MODULE)}</option>
+						</optgroup>
+</select></td>
+					</tr>
+					<tr>
+						<td>{vtranslate('LBL_CREATEDO_FROMINVOICE',$MODULE)}</td>
+						<td><input type="checkbox" name="Quotes_sqe" id="Quotes_sqe" /></td>
+						<td><select multiple name="Quotes_email_action" class="chzn-select" id="Quotes_email_action" style="width:67%;">
+						<optgroup>
+							<option value="{vtranslate('Created',$MODULE)}">{vtranslate('Created',$MODULE)}</option>
+							<option value="{vtranslate('Delivered',$MODULE)}">{vtranslate('Delivered',$MODULE)}</option>
+							<option value="{vtranslate('Reviewed',$MODULE)}">{vtranslate('Reviewed',$MODULE)}</option>
+							<option value="{vtranslate('Accepted',$MODULE)}">{vtranslate('Accepted',$MODULE)}</option>
+							<option value="{vtranslate('Rejected',$MODULE)}">{vtranslate('Rejected',$MODULE)}</option>	
+						</optgroup>
+</select></td>
+					</tr>
+					<tr>
+						<td>{vtranslate('LBL_SEND_INVOICE_EMAIL',$MODULE)}</td>
+						<td><input type="checkbox" name="Invoice_sie" id="Quotes_sie" /></td>
+						<td><select multiple name="Invoice_email_action" class="chzn-select" id="Invoice_email_action" style="width:67%;">
+						<optgroup>
+							<option value="{vtranslate('Created',$MODULE)}">Created</option>
+							<option value="{vtranslate('Cancel',$MODULE)}">{vtranslate('Cancel',$MODULE)}</option>
+							<option value="{vtranslate('Auto Created',$MODULE)}">{vtranslate('Auto Created',$MODULE)}</option>
+							<option value="{vtranslate('Approved',$MODULE)}">{vtranslate('Approved',$MODULE)}</option>
+							<option value="{vtranslate('Sent',$MODULE)}">{vtranslate('Sent',$MODULE)}</option>
+							<option value="{vtranslate('Credit Invoice',$MODULE)}">{vtranslate('Credit Invoice',$MODULE)}</option>
+							<option value="{vtranslate('Paid',$MODULE)}">{vtranslate('Paid',$MODULE)}</option>
+						</optgroup>
+</select></td>
+					</tr>
+					<tr>
+						<td>{vtranslate('LBL_SEND_SALESORDER_EMAIL',$MODULE)}</td>
+						<td><input type="checkbox" name="SalesOrder_sse" id="SalesOrder_sse" /></td>
+						<td><select multiple name="SalesOrder_email_action" class="chzn-select" id="SalesOrder_email_action" style="width:67%;">
+						<optgroup>
+							<option value="{vtranslate('Created',$MODULE)}">{vtranslate('Created',$MODULE)}</option>
+							<option value="{vtranslate('Approved',$MODULE)}">{vtranslate('Approved',$MODULE)}</option>
+							<option value="{vtranslate('Delivered',$MODULE)}">{vtranslate('Delivered',$MODULE)}</option>
+							<option value="{vtranslate('Cancelled',$MODULE)}">{vtranslate('Cancelled',$MODULE)}</option>
+						</optgroup>
+</select></td>
+					</tr>
+					<tr>
+						<td>{vtranslate('LBL_SEND_DO_EMAIL',$MODULE)}</td>
+						<td><input type="checkbox" name="DeliveryOrder_dse" id="DeliveryOrder_dse" /></td>
+						<td><select multiple name="DeliveryOrder_email_action" class="chzn-select" id="DeliveryOrder_email_action" style="width:67%;">
+						<optgroup>
+							<option value="{vtranslate('Created',$MODULE)}">{vtranslate('Created',$MODULE)}</option>
+							<option value="{vtranslate('Approved',$MODULE)}">{vtranslate('Approved',$MODULE)}</option>
+							<option value="{vtranslate('Delivered',$MODULE)}">{vtranslate('Delivered',$MODULE)}</option>
+							<option value="{vtranslate('Cancelled',$MODULE)}">{vtranslate('Cancelled',$MODULE)}</option>
+						</optgroup>
+</select></td>
+					</tr>	
+				</table>
+					<div style="width:725px;"><button class="btn btn-success pull-right"  type="submit" name="save" id="savePDFSetting"; value="Save">Save</button>
+					</div>
+				</form>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!-- End here -->
