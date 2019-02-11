@@ -5,7 +5,10 @@
         <group>
             <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/blue/common.css</file>
             <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/danube/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/modules/Users/EmployeeTree.tpl</file>
             <file>file:/var/www/html/agiliuxv3/index.php</file>
+            <file>file:/var/www/html/agiliuxv3/modules/Users/views/List.php</file>
+            <file>file:/var/www/html/agiliuxv3/modules/Users/models/Record.php</file>
             <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/aquaisland/common.css</file>
             <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/sandybrown/common.css</file>
             <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/mandy/common.css</file>
