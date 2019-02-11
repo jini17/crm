@@ -382,7 +382,8 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
     registerAdvancedEmployeeDirectorySearch: function () {
         jQuery('.main-container .panel-filter').on('click', '.panel-body input', function () {
             var inputs = jQuery('#accordion').find('input:checked')
-            var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+           // var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+           var viewtype = $(".empview").data('listtype');
             var tabType = jQuery('#tabtype').val();
             var gender = []
             var birthday = []
@@ -437,7 +438,8 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
         jQuery('body').on('click','.alphabetSearch', function () {
             $(this).closest('tr').find('td').removeAttr('style');
             $(this).closest('td').css('border-bottom', '1px solid #2f5597');
-            var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+            //var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+            var viewtype = $(".empview").data('listtype');
             var atext = $(this).find('a').data('alphabet');
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();
@@ -465,7 +467,8 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
               var keyword = $("#keywordsearch").val();
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();
-            var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+           // var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+           var viewtype = $(".empview").data('listtype');
             var tabType = jQuery('#tabtype').val();
             var dept = jQuery('#curdepartment').val();
 
