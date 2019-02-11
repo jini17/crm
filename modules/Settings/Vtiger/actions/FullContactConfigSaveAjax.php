@@ -20,7 +20,11 @@ class Settings_Vtiger_FullContactConfigSaveAjax_Action extends Settings_Vtiger_B
 		$preference = $request->get('preference');
 		$status = $request->get('status'); 
 
-		$adb->pquery("UPDATE ss_contactenrichment SET preference = ?, bearer = ?, active = ?",array($preference, $bearer, $status));
+		$result = $adb->pquery("SELECT 1 FROM ss_contactenrichment", array());
+		if ($adb->num_rows($result) == 0)
+			$adb->pquery("INSERT INTO ss_contactenrichment VALUES (?,?,?,?)", array(1, $preference, $bearer, $status));	
+		else
+			$adb->pquery("UPDATE ss_contactenrichment SET preference = ?, bearer = ?, active = ?",array($preference, $bearer, $status));
 		
 		$response->setResult("Success");
 		$response->emit();
