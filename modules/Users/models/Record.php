@@ -1509,17 +1509,18 @@ class Users_Record_Model extends Vtiger_Record_Model
     public function UserSidebarPermission($userInstance,$request){
         
         $data = array();
-        if($request->get("module") == "Users" && $request->get("view") == "List"){
-            $data['filterview'] = "filterview";
-            $data['adminview'] = "hide AdminSidebar";
-            $data['userview'] = "hide UserSidebar";
+        if($request->get("module") == "Users"){
 
-        } else {
+            if($request->get("view") == "List") {
+              $data['filterview'] = "filterview";
+              $data['adminview'] = "hide AdminSidebar";
+              $data['userview'] = "hide UserSidebar";
 
-            if(in_array($userInstance->get("roleid"), array('H12','H13'))) {
+           } else if(in_array($userInstance->get("roleid"), array('H12','H13'))) {
               $data['filterview'] = "hide filterview";
               $data['adminview'] = "hide AdminSidebar";
               $data['userview'] = " UserSidebar";
+
             } else if($userInstance->get("roleid") =='H2' && $request->get("record") == $this->getId()){
               
               $data['filterview'] = "hide filterview";
@@ -1530,10 +1531,13 @@ class Users_Record_Model extends Vtiger_Record_Model
               $data['filterview'] = "hide filterview";
               $data['adminview'] = "hide AdminSidebar";
               $data['userview'] = " UserSidebar";
-            }
-
-        }
-       
+            } 
+        } else  if($request->get("module") != "Users"  ){
+            $data['filterview'] = "hide filterview";
+            $data['adminview'] = " AdminSidebar";
+            $data['userview'] = "hide UserSidebar";
+       }
+ 
      return $data;
     }
 
