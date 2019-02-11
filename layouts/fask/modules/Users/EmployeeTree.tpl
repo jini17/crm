@@ -65,6 +65,7 @@
     <ul>
      
         <li>
+           
             {if $REPORTING_MANAGER neq '0'}
             <div href="#" class="box">
                 <div class="orgbox">
@@ -73,9 +74,15 @@
                       
                     </div>
                     <div class="orgbox-details text-left">
-                        <h5 style="margin-top: 2px;font-size: 14px;margin-bottom: 2px;font-weight: bold;"><a href="index.php?module=Users&parent=Settings&view=Detail&record={$REPORTING_MANAGER['id']}">{$REPORTING_MANAGER['fullname']}</a></h5>
+                        <h5 style="margin-top: 2px;font-size: 14px;margin-bottom: 2px;font-weight: bold;">
+                            <a href="index.php?module=Users&parent=Settings&view=Detail&record={$REPORTING_MANAGER['id']}">
+                                {$REPORTING_MANAGER['full_name']} 
+                            </a>
+                        </h5>
                         <div class='clearfix'></div>
-                        <small style='font-size:14px;'> {$REPORTING_MANAGER['department'] } </small>
+                        <small style='font-size:14px;'>  {$REPORTING_MANAGER['department'] } </small>
+                        <div class="clearfix"></div>
+                         <small style='font-size:14px;'>  {$REPORTING_MANAGER['designation'] } </small>
                         <div class="clearfix"></div>
                         <small style='font-size:14px; word-wrap: break-word;'> {$REPORTING_MANAGER['email'] } </small>          
                          <div class="clearfix"></div>
@@ -117,6 +124,8 @@
                                 <h5 style="margin-top: 2px;font-size: 14px;margin-bottom: 2px;font-weight: bold;"><a href="index.php?module=Users&parent=Settings&view=Detail&record={$MY_DETAILS['id']}">{$MY_DETAILS['fullname']}</a></h5>
                                 <div class='clearfix'></div>
                                  <small style='font-size:14px; word-wrap: break-word;'> {$MY_DETAILS['department'] } </small>
+                                <div class="clearfix"></div>
+                                <small style='font-size:14px; word-wrap: break-word;'> {$MY_DETAILS['designation'] } </small>
                                 <div class="clearfix"></div>
                                 <small style='font-size:14px; word-wrap: break-word;'> {$MY_DETAILS['email'] } </small>
                                 <div class="clearfix"></div>
@@ -170,6 +179,8 @@
                                 <h5 style="margin-top: 2px;font-size: 14px;margin-bottom: 2px;font-weight: bold;"><a href="index.php?module=Users&parent=Settings&view=Detail&record={$emp['id']}">{$emp['full_name']}</a></h5>
                                 <div class='clearfix'></div>
                                  <small style='font-size:14px; word-wrap: break-word;'>  {$emp['department'] } </small>
+                                <div class="clearfix"></div>
+                                <small style='font-size:14px; word-wrap: break-word;'>  {$emp['designation'] } </small>
                                 <div class="clearfix"></div>
                                  <small style='font-size:14px; word-wrap: break-word;'> {$emp['email'] } </small>
                                 
