@@ -8,48 +8,40 @@
  * All Rights Reserved.
  *************************************************************************************/
 
-class SalesOrder_DetailView_Model extends Inventory_DetailView_Model {
+class ServiceContracts_DetailView_Model extends Vtiger_DetailView_Model {
 
 	/**
 	 * Function to get the detail view links (links and widgets)
 	 * @param <array> $linkParams - parameters which will be used to calicaulate the params
 	 * @return <array> - array of link models in the format as below
 	 *                   array('linktype'=>list of link models);
+	 * added by jitu@04082015
 	 */
 	public function getDetailViewLinks($linkParams) {
 		$currentUserModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
 
 		$linkModelList = parent::getDetailViewLinks($linkParams);
 		$recordModel = $this->getRecord();
-
+	
 		//Added by jitu@27-04-2015 for ShowHide Restrict Issue 
-		$invoiceRestrict = Vtiger_Record_Model::toggleRestrictAction('SalesOrder','CIS', $recordModel->getId());
-		$purchaseorderRestrict = Vtiger_Record_Model::toggleRestrictAction('SalesOrder','CPS', $recordModel->getId());
+		$srRestrict = Vtiger_Record_Model::toggleRestrictAction('ServiceContracts','CSR', $recordModel->getId());
 		//end here
 
-		$invoiceModuleModel = Vtiger_Module_Model::getInstance('Invoice');
-
-		if($currentUserModel->hasModuleActionPermission($invoiceModuleModel->getId(), 'CreateView') && $invoiceRestrict) {
+		$helpdeskModuleModel = Vtiger_Module_Model::getInstance('HelpDesk');
+		
+		if($currentUserModel->hasModuleActionPermission($helpdeskModuleModel->getId(), 'EditView') && ! $srRestrict) {
 			$basicActionLink = array(
 				'linktype' => 'DETAILVIEW',
-				'linklabel' => vtranslate('LBL_CREATE').' '.vtranslate($invoiceModuleModel->getSingularLabelKey(), 'Invoice'),
-				'linkurl' => $recordModel->getCreateInvoiceUrl(),
+				'linklabel' => vtranslate('LBL_CREATE').' '.vtranslate($helpdeskModuleModel->getSingularLabelKey(), 'HelpDesk'),
+				'linkurl' => 'index.php?module=HelpDesk&view=Edit&servicecontractsid='.$recordModel->getId(),
 				'linkicon' => ''
 			);
 			$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($basicActionLink);
 		}
-
-		$purchaseOrderModuleModel = Vtiger_Module_Model::getInstance('PurchaseOrder');
-		if($currentUserModel->hasModuleActionPermission($purchaseOrderModuleModel->getId(), 'CreateView') && $purchaseorderRestrict) {
-			$basicActionLink = array(
-				'linktype' => 'DETAILVIEW',
-				'linklabel' => vtranslate('LBL_CREATE').' '.vtranslate($purchaseOrderModuleModel->getSingularLabelKey(), 'PurchaseOrder'),
-				'linkurl' => $recordModel->getCreatePurchaseOrderUrl(),
-				'linkicon' => ''
-			);
-			$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($basicActionLink);
-		}
+		
 		return $linkModelList;
+
+
 	}
 		
 }

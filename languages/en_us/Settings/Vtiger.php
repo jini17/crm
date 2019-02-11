@@ -144,6 +144,15 @@ $languageStrings = array(
 	'INVENTORYTERMSANDCONDITIONS' => 'Terms and Conditions', //edited by SITI@SECONDCRM On 25Feb2015
 	'LBL_CLAIM_ALLOCATION'=>'Claim Policy',
 
+	//added by jitu@29062015 for Manage Discounts 
+	'LBL_MANAGE_DISCOUNTS'=>'Manage Discounts',
+	'LBL_MANAGE_DISCOUNTS_DESCRIPTION'=>'Add/Remove Discount',
+
+	//added by jitu@21-04-2015 for Multiple Actions left menu in settings
+	'LBL_MULTIPLE_ACTIONS' => 'Restrict Actions',
+	'LBL_MULTIPLE_ACTIONS_DESCRIPTION' => 'Restrict actions for Lead and Inventory Module',
+	//end here
+
 	//Tax Calculations
 	'LBL_TAX_CALCULATIONS' => 'Tax Calculations',
 	'LBL_TAX_DESC'=>'Manage different types of tax rates for taxes, such as Sales Tax, VAT etc.,',

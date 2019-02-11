@@ -84,7 +84,14 @@ class Leads_DetailView_Model extends Vtiger_DetailView_Model {
 			$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($basicLink);
 		}
 
-		if(Users_Privileges_Model::isPermitted($moduleModel->getName(), 'ConvertLead', $recordModel->getId()) && Users_Privileges_Model::isPermitted($moduleModel->getName(), 'EditView', $recordModel->getId()) && !$recordModel->isLeadConverted()) {
+		//Editied by jitu@27-04-2015 for ShowHide Restrict Issue 
+		
+		$leadRestrict = Vtiger_Record_Model::toggleRestrictAction($moduleModel->getName(),'CLA', $recordModel->getId());	//End here 
+
+		if(Users_Privileges_Model::isPermitted($moduleModel->getName(), 'ConvertLead', $recordModel->getId()) && Users_Privileges_Model::isPermitted($moduleModel->getName(), 'EditView', $recordModel->getId()) && $leadRestrict //added condition by jitu@27-04-2015
+	) {
+
+		
 			$basicActionLink = array(
 				'linktype' => 'DETAILVIEWBASIC',
 				'linklabel' => 'LBL_CONVERT_LEAD',
