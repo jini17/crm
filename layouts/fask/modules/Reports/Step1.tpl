@@ -117,11 +117,11 @@
             </div>	
             {include file="ScheduleReport.tpl"|@vtemplate_path:$MODULE}	
         </div>
-        <div class="border1px modal-overlay-footer clearfix">
+        <div class="clearfix" style="margin-top:10px;">
             <div class="row clearfix">
                 <div class="textAlignCenter col-lg-12 col-md-12 col-lg-12 ">
                     <button class="btn btn-success nextStep" type="submit">{vtranslate('LBL_NEXT',$MODULE)}</button>&nbsp;&nbsp;
-                    <a type="reset" onclick='window.history.back();' class="cancelLink cursorPointer">{vtranslate('LBL_CANCEL',$MODULE)}</a>
+                    <a type="reset" onclick='window.history.back();' class="cancelLink btn btn-danger cursorPointer">{vtranslate('LBL_CANCEL',$MODULE)}</a>
                 </div>
             </div>
         </div>

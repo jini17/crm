@@ -71,7 +71,7 @@ class Users_Record_Model extends Vtiger_Record_Model
 
     public function getCalendarSettingsDetailViewUrl()
     {
-        return 'index.php?module=' . $this->getModuleName() . '&parent=Settings&view=Calendar&record=' . $this->getId();
+        return 'index.php?module=' . $this->getModuleName() . '&parent=Settings&view=Calendar&record=' . $_REQUEST['record'];
     }
 
     public function getEmploymentTabURL($url)
@@ -81,12 +81,12 @@ class Users_Record_Model extends Vtiger_Record_Model
 
     public function getCalendarSettingsEditViewUrl()
     {
-        return 'index.php?module=' . $this->getModuleName() . '&parent=Settings&view=Calendar&mode=Edit&record=' . $this->getId();
+        return 'index.php?module=' . $this->getModuleName() . '&parent=Settings&view=Calendar&mode=Edit&record=' . $_REQUEST['record'];
     }
 
     public function getMyTagSettingsListUrl()
     {
-        return 'index.php?module=Tags&parent=Settings&view=List&record=' . $this->getId();
+        return 'index.php?module=Tags&parent=Settings&view=List&record=' . $_REQUEST['record'];
     }
 
     /**
@@ -1207,7 +1207,7 @@ class Users_Record_Model extends Vtiger_Record_Model
             $filter = implode(',', $filtersubtab);
             $filtercond = " AND fieldid IN ($filter)";
         }
-        $fieldqry = "SELECT name, linkto, iconpath FROM vtiger_settings_field WHERE blockid=? " . $filtercond . " ORDER BY sequence ASC";
+        $fieldqry = "SELECT name, linkto, iconpath FROM vtiger_settings_field WHERE blockid=? and active=0 " . $filtercond . " ORDER BY sequence ASC";
         $fldresult = $db->pquery($fieldqry, array($blockid));
         $row = array();
         if ($db->num_rows($fldresult) > 0) {
@@ -1507,55 +1507,34 @@ class Users_Record_Model extends Vtiger_Record_Model
      * @param type $modulename
      */
     public function UserSidebarPermission($userInstance,$request){
-    $data = array();
-                  if($request->get("module") == "Users" && $request->get("view") == "List" && $userInstance->get("roleid") == "H15"){
-                          $data['filterview'] = "filterview";
-                          $data['adminview'] = "hide AdminSidebar";
-                          $data['userview'] = "hide UserSidebar";
-                   }
-                  else  if($request->get("module") == "Users" && $request->get("view") == "List" && ($userInstance->get("roleid") == "H13" || $userInstance->get("roleid") == "H12")){
-                          $data['filterview'] = "filterview";
-                          $data['adminview'] = "hide AdminSidebar";
-                          $data['userview'] = " UserSidebar";
-                   }
-                   else  if($request->get("module") == "Users" && $request->get("view") == "List" && $userInstance->isAdminUser()){
-                    $data['filterview'] = " filterview";
-                    $data['adminview'] = "hide AdminSidebar";
-                    $data['userview'] = "hide UserSidebar";
-                }
-                else  if($request->get("module") == "Users" && $request->get("view") == "PreferenceDetail" && ($userInstance->isAdminUser() && $userInstance->get("id") == $request->get("record"))){
-                    $data['filterview'] = "hide filterview";
-                    $data['adminview'] = " AdminSidebar";
-                    $data['userview'] = "hide UserSidebar";
-                }
-                 else  if($request->get("module") == "Users" && $request->get("view") == "PreferenceDetail" && $userInstance->isAdminUser() && $userInstance->get("id") != $request->get("record")){
-                    $data['filterview'] = "hide filterview";
-                    $data['adminview'] = "hide AdminSidebar";
-                    $data['userview'] = " UserSidebar";
-                }
-                 else  if($request->get("module") != "Users"  ){
-                    $data['filterview'] = "hide filterview";
-                    $data['adminview'] = " AdminSidebar";
-                    $data['userview'] = "hide UserSidebar";
-                }
-                
-                   else {
-                             $data['filterview'] = "hide filterview";
-                          $data['adminview'] =" hide AdminSidebar";
-                          $data['userview'] = " UserSidebar";
-                   }
-                   
-//                   elseif($modulename == "Users" && $request->get("view") == "List" ){
-//                       $data['filterview'] = "filterview";
-//                       $data['adminview'] = "hide AdminSidebar";
-//                       $data['adminview'] = "hide UserSidebar";
-//                   }
-//                   else{
-//                       
-//                   }
-
         
-        return $data;
+        $data = array();
+        if($request->get("module") == "Users" && $request->get("view") == "List"){
+            $data['filterview'] = "filterview";
+            $data['adminview'] = "hide AdminSidebar";
+            $data['userview'] = "hide UserSidebar";
+
+        } else {
+
+            if(in_array($userInstance->get("roleid"), array('H12','H13'))) {
+              $data['filterview'] = "hide filterview";
+              $data['adminview'] = "hide AdminSidebar";
+              $data['userview'] = " UserSidebar";
+            } else if($userInstance->get("roleid") =='H2' && $request->get("record") == $this->getId()){
+              
+              $data['filterview'] = "hide filterview";
+              $data['adminview'] = " AdminSidebar";
+              $data['userview'] = "hide UserSidebar";
+            } else {
+
+              $data['filterview'] = "hide filterview";
+              $data['adminview'] = "hide AdminSidebar";
+              $data['userview'] = " UserSidebar";
+            }
+
+        }
+       
+     return $data;
     }
 
     /**
