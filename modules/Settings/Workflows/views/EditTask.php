@@ -132,21 +132,21 @@ class Settings_Workflows_EditTask_View extends Settings_Vtiger_Index_View {
 
 
 
-        /*	$emailFields = $recordStructureInstance->getAllEmailFields();
+        $emailFields = $recordStructureInstance->getAllEmailFields();
             foreach($emailFields as $metaKey => $emailField) {
                 $emailFieldoptions .= '<option value=",$'.$metaKey.'">'.$emailField->get('workflow_columnlabel').'</option>';
             }
-            */
+        
         $usersModuleModel = Vtiger_Module_Model::getInstance('Users');
-        //  $emailFieldoptions .= '<option value=",$(general : (__VtigerMeta__) reports_to_id)"> '.
-        //                            vtranslate($moduleModel->getField('assigned_user_id')->get('label'),'Users').' : (' . vtranslate('Users','Users') . ') '. vtranslate($usersModuleModel->getField('reports_to_id')->get('label'),'Users') .'</option>';
+          $emailFieldoptions .= '<option value=",$(general : (__VtigerMeta__) reports_to_id)"> '.
+                                    vtranslate($moduleModel->getField('assigned_user_id')->get('label'),'Users').' : (' . vtranslate('Users','Users') . ') '. vtranslate($usersModuleModel->getField('reports_to_id')->get('label'),'Users') .'</option>';
 
         //$nameFields = $recordStructureInstance->getNameFields();
 
         //modified by jitu@multifrom address in work flow
         $fromEmailFieldOptions = '<option value="">'. vtranslate('Optional', $qualifiedModuleName) .'</option>';
 
-        $emailFields = $recordStructureInstance->getAllEmailFields();
+        $emailFields = $recordStructureInstance->getAllFromEmailFields();
 
         foreach($emailFields as $metaKey => $emailField) {
             $fromEmailFieldOptions .= '<option value="'.$emailField['serverid'].'##'.$emailField['email'].'">'.$emailField['email']."\n".'['.$emailField['server'].']'.'</option>';

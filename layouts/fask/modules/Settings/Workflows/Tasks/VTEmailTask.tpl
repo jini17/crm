@@ -9,14 +9,15 @@
 
 {strip}
 	<div id="VtEmailTaskContainer">
-		<div class="row">
+		<div class="row"> 
 			<div class="col-sm-12 col-xs-12" style="margin-bottom: 70px;">
 				<div class="row form-group" >
 					<div class="col-sm-6 col-xs-6">
 						<div class="row">
 							<div class="col-sm-3 col-xs-3">{vtranslate('LBL_FROM', $QUALIFIED_MODULE)}</div>
 							<div class="col-sm-9 col-xs-9">
-								<input name="fromEmail" class=" fields inputElement" type="text" value="{$TASK_OBJECT->fromEmail}" />
+								<input name="fromEmail" class="fields inputElement" type="hidden" value="{$TASK_OBJECT->fromEmail}" />
+								<input name="fromEmail2" class="inputElement" type="text" value="{$TASK_OBJECT->fromEmail}" readonly/>
 							</div>
 						</div>
 					</div>

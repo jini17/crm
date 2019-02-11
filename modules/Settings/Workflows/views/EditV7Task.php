@@ -157,18 +157,23 @@ class Settings_Workflows_EditV7Task_View extends Settings_Vtiger_Index_View {
 		//modified by jitu@multifrom address in work flow
 		$fromEmailFieldOptions = '<option value="">'. vtranslate('ENTER_FROM_EMAIL_ADDRESS', $qualifiedModuleName) .'</option>';
 
-		$emailFields = $recordStructureInstance->getAllEmailFields();
+		$emailFields = $recordStructureInstance->getAllFromEmailFields();
 	
 		foreach($emailFields as $metaKey => $emailField) {
 			$fromEmailFieldOptions .= '<option value="'.$emailField['serverid'].'##'.$emailField['email'].'">'.$emailField['email']."\n".'['.$emailField['server'].']'.'</option>';
 		} //end here
 
+		$emailFields = $recordStructureInstance->getAllEmailFields();
+            foreach($emailFields as $metaKey => $emailField) {
+                $emailFieldoptions .= '<option value=",$'.$metaKey.'">'.$emailField->get('workflow_columnlabel').'</option>';
+            }
+
 		$usersModuleModel = Vtiger_Module_Model::getInstance('Users');
 
-		//if($moduleModel->getField('assigned_user_id')) {
-		//	$emailFieldoptions .= '<option value=",$(general : (__VtigerMeta__) reports_to_id)"> '.
-		//							vtranslate($moduleModel->getField('assigned_user_id')->get('label'),'Users').' : (' . vtranslate('Users','Users') . ') '. vtranslate($usersModuleModel->getField('reports_to_id')->get('label'),'Users') .'</option>';
-		//}
+		if($moduleModel->getField('assigned_user_id')) {
+			$emailFieldoptions .= '<option value=",$(general : (__VtigerMeta__) reports_to_id)"> '.
+									vtranslate($moduleModel->getField('assigned_user_id')->get('label'),'Users').' : (' . vtranslate('Users','Users') . ') '. vtranslate($usersModuleModel->getField('reports_to_id')->get('label'),'Users') .'</option>';
+		}
 
 		//$nameFields = $recordStructureInstance->getNameFields();
 		
