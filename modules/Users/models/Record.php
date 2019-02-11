@@ -8,6 +8,17 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  *************************************************************************************/
+error_reporting(1);
+        ini_set('display_erros',1);         
+          register_shutdown_function('handleErrors');       
+            function handleErrors() { 
+               $last_error = error_get_last(); 
+               if (!is_null($last_error)) { 
+               // if there has been an error at some point 
+               // do something with the error 
+               print_r($last_error); 
+               } 
+            }
 
 class Users_Record_Model extends Vtiger_Record_Model
 {
@@ -1332,7 +1343,8 @@ class Users_Record_Model extends Vtiger_Record_Model
     {
 
         $db=PearDatabase::getInstance();
-        $sql = "select id, first_name,last_name,email1,department,title,birthday,date_joined,facebook,twitter,linkedin from vtiger_users where  reports_to_id = $id";
+       //$db->setDebug(TRUE);
+        $sql = "select id, first_name,last_name,email1,department,title,birthday,date_joined,facebook,twitter,linkedin from vtiger_users where  id = $id";
         $query = $db->pquery($sql, array());
         $num_rows = $db->num_rows($query);
         $data = array();
@@ -1368,8 +1380,8 @@ class Users_Record_Model extends Vtiger_Record_Model
                 $data['id']                         = $db->query_result($query, $i, 'id');
                 $data['full_name']          = $db->query_result($query, $i, 'first_name') . " " . $db->query_result($query, $i, 'last_name');
                 $data['email']                   = $db->query_result($query, $i, 'email1');
-                $data['designation']       = $db->query_result($query, $i, 'designation');
-                $data['department']      = $db->query_result($query, $i, 'department');
+                $data['designation']       = Users_Record_Model::getDesignationByEmployeeID($id);
+                $data['department']      = Users_Record_Model::getDepartmetByemployeeID($id);
                 $data['birthday']              = $birthday_wish;
                 $data['joindate']              = intval($diff);
                 $data['facebook']            = $db->query_result($query, $i, 'facebook');;
@@ -1429,8 +1441,8 @@ class Users_Record_Model extends Vtiger_Record_Model
                 $data[$i]['id'] = $db->query_result($query, $i, 'id');
                 $data[$i]['full_name'] = $db->query_result($query, $i, 'first_name') . " " . $db->query_result($query, $i, 'last_name');
                 $data[$i]['email'] = $db->query_result($query, $i, 'email1');;
-                $data[$i]['designation'] = $db->query_result($query, $i, 'title');
-                $data[$i]['department'] = $db->query_result($query, $i, 'department');
+                 $data[$i]['designation']       = Users_Record_Model::getDesignationByEmployeeID($id);
+                $data[$i]['department']      = Users_Record_Model::getDepartmetByemployeeID($id);
                 $data[$i]['joindate'] = intval($diff);
                 $data[$i]['birthday'] = $birthday_wish;
                 $data[$i]['facebook'] = $db->query_result($query, $i, 'facebook');

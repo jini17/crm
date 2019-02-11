@@ -9527,7 +9527,7 @@ right connector from last child*/
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
-    width: 245px;
+    width: 328px;
 }
 
 /*Time for some hover effects*/
@@ -10124,7 +10124,7 @@ font-size:13px !important;
   margin-bottom: 8px;
 }
 .logo-container img{
-    margin: 7px 0  !important;
+     margin: 18px 0px !important;
 }
 .newtabs{
     position: absolute;
@@ -10138,10 +10138,17 @@ font-size:13px !important;
 }
 }
 .logo-container img{
-    margin: 19px 0px !important
+     margin: 18px 0px !important;
 }
 #bodyFrame{
     min-height: 500px !important;
     height: 100vh !important;
     overflow: none !important;
+}
+.jqplot-title{
+    display: none !important;
+}
+.jqplot-table-legend.jqplot-table-legend-swatch,
+td.jqplot-table-legend{
+    padding-right: 5px;
 }
