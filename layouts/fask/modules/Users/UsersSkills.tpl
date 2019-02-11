@@ -79,13 +79,11 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                             <table class="table detailview-table">
                                 <thead>
                                     <tr>
-                                        <th nowrap="">
-                                          {*  <strong>{vtranslate('LBL_LANGUAGE', $MODULE)}</strong>*}
-                                        </th>
                                         <th colspan="2" class="medium" nowrap=""><strong>{vtranslate('LBL_PROFICIENCY', $MODULE)}</strong></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                  {if $USER_SOFTSKILL_LIST|count gt 0}
                                     {foreach item=USER_LANGUAGE from=$USER_SOFTSKILL_LIST}
                                         {if $USER_LANGUAGE['proficiency'] eq 'Elementary'}
                                            {assign var=ACCURACY value="25"}
@@ -113,7 +111,8 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                                 </div>
                                               </div>
                                         </td>
-                                        {if $USER_MODEL->get('id') eq $USERID}
+                                         {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13" OR $USER_MODEL->isAdminUser() }
+
                                         <td class="medium" width="5%" valign="top">
                                             <div class="pull-right actions">
                                                 <span class="actionImages">
@@ -127,6 +126,10 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                         {/if}   
                                     </tr>
                                     {/foreach}
+                                    {else}
+                                     <tr><td colspan="3" align="center">{vtranslate('LBL_NO_RECORD_FOUND', 'Users')}</td></tr>
+                                    {/if}
+
                                 </tbody>
                             </table>
                         </div>
@@ -152,7 +155,7 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                         <th> {vtranslate('LBL_SKILL',$MODULE)} </th>
                         <th> </th> 
                         <th></th>
-                        </tr>
+                        </tr>   {if $USER_SKILL_CLOUD|count gt 0}
                                 {foreach item=SKILL from=$USER_SKILL_CLOUD}
                                     {assign var=LABEL value =$SKILL['skill_label']}
                                     {if $LABEL eq 'LBL_BEGINNER_LABEL'}
@@ -181,15 +184,20 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                                                 </div>
                                               </div>
                                         </td>
+                                      {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13" OR $USER_MODEL->isAdminUser() }
                                         <td>
                                             <a class="deleteSkills" onclick="Users_Skills_Js.deleteSkill('{$SKILL['skill_id']}')" title="Delete">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                             {*<div class="pull-right skillnum">{$SKILL['endorsement']}</div>*}
                                         </td>
+                                        {/if}
                                     </tr>
                                     
                                 {/foreach}
+                                {else}
+                                <tr><td colspan="3" align="center">{vtranslate('LBL_NO_RECORD_FOUND', 'Users')}</td></tr>
+                                {/if}
                            </table>
                         </div>
                     </div>
