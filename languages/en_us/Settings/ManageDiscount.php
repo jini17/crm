@@ -22,7 +22,7 @@ $languageStrings = array(
 	'LBL_BOTH'=>'Both',
 	'LBL_DISCOUNTLEVEL'=>'Discount Level',
 	'ManageDiscount'=>'Manage Discount',
-	'LBL_ADDDISCOUNT' =>'Add Discount',
+	'LBL_ADD_DISCOUNT' =>'Add Discount',
 	'LBL_DELETEDISCOUNT'=>'Delete Discount',
 );
 
