@@ -40,6 +40,7 @@ Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 			$menuModelsList = Vtiger_Menu_Model::getAll(true);
 			$selectedModule = $request->getModule();
 			$moduleName = $selectedModule;
+			$recordId = $request->get('record');
 			$menuStructure = Vtiger_MenuStructure_Model::getInstanceFromMenuList($menuModelsList, $selectedModule);
 
 			// Order by pre-defined automation process for QuickCreate.
@@ -48,6 +49,13 @@ Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 			$companyDetails = Vtiger_CompanyDetails_Model::getInstanceById();
 			$companyLogo = $companyDetails->getLogo();
 
+			if (!empty($recordId)) {
+				$recordModel = Vtiger_Record_Model::getInstanceById($recordId, $moduleName);
+			} else {
+				$recordModel = Vtiger_Record_Model::getCleanInstance($moduleName);
+			}
+
+			$viewer->assign('RECORDNAME', $recordModel->getName());
 			$viewer->assign('CURRENTDATE', date('Y-n-j'));
 			$viewer->assign('MODULE', $selectedModule);
 			$viewer->assign('QUALIFIED_MODULE', $qualifiedModuleName);
@@ -165,6 +173,7 @@ Class Users_PreferenceEdit_View extends Vtiger_Edit_View {
 		$viewer->assign("DAY_STARTS", Zend_Json::encode($dayStartPicklistValues));
 		$viewer->assign('TAG_CLOUD', $recordModel->getTagCloudStatus());
 		$viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
+		$viewer->assign('RECORDNAME', $recordModel->getName());
 
 		parent::process($request);
 	}
