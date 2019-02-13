@@ -9504,7 +9504,7 @@ right connector from last child*/
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
-    width: 245px;
+   width: 328px;
 }
 
 /*Time for some hover effects*/
@@ -9545,5 +9545,12 @@ color:#000 !important;
     left: 157px;
 }
 .logo-container img{
-    margin: 8px 0px !important;
+     margin: 18px 0px !important;
+}
+.jqplot-title{
+    display: none !important;
+}
+.jqplot-table-legend.jqplot-table-legend-swatch,
+td.jqplot-table-legend{
+    padding-right: 5px;
 }

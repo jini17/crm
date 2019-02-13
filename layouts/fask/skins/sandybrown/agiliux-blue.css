@@ -199,7 +199,7 @@ a.btn.btn-gettingStarted i{
     padding-top: 10px;
         position: absolute;
     bottom: 4px;
-    right: 8px;
+   right: 15px;
 }
 
 /**=========================
@@ -688,4 +688,11 @@ color: #F4967A !important;
     font-size: 14px !important;
 
     margin-top: 5px;
+}
+.jqplot-title{
+    display: none !important;
+}
+.jqplot-table-legend.jqplot-table-legend-swatch,
+td.jqplot-table-legend{
+    padding-right: 5px;
 }

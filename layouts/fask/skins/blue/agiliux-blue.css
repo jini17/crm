@@ -199,7 +199,7 @@ a.btn.btn-gettingStarted i{
     padding-top: 10px;
         position: absolute;
     bottom: 4px;
-    right: 8px;
+right: 15px;
 }
 
 /**=========================
@@ -739,4 +739,11 @@ color: #2f5597 !important;
 }
 .dashBoardTabContents .ready ul li{
     position: relative;    
+}
+.jqplot-title{
+    display: none !important;
+}
+.jqplot-table-legend.jqplot-table-legend-swatch,
+td.jqplot-table-legend{
+    padding-right: 5px;
 }

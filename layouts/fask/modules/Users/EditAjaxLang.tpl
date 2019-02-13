@@ -59,7 +59,6 @@
                                         </div>	
                                         <div class="controls fieldValue col-md-8">
                                             <select  class="select2" name="proficiency" id="proficiency" style="width:100%;"> 					
-                                                        <option value="{vtranslate('LBL_PROFICIENCY', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_PROFICIENCY', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_PROFICIENCY', $QUALIFIED_MODULE)}...</option>
                                                         <option value="{vtranslate('LBL_ELEMENTRY', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_ELEMENTRY', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_ELEMENTRY', $QUALIFIED_MODULE)}</option>
                                                         <option value="{vtranslate('LBL_LIMITED_WORKING', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_LIMITED_WORKING', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_LIMITED_WORKING', $QUALIFIED_MODULE)}</option>
                                                         <option value="{vtranslate('LBL_PROFESSIONAL_WORKING', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_PROFESSIONAL_WORKING', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_PROFESSIONAL_WORKING', $QUALIFIED_MODULE)}</option>

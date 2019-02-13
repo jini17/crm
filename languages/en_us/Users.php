@@ -461,6 +461,7 @@ $languageStrings = array(
 	'LBL_EDIT_LEAVE'=>'Edit Leave',	
 	'LBL_DAY_REMAINING' => "Days Remaining",
 	'LBL_0_DAY_REMAINING'	=> ' 0 Day Remaining',
+	'LBL_NO_RECORD_FOUND'=>'No record found',
 	
 //End Leave Section
 

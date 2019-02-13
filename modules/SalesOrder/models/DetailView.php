@@ -22,8 +22,14 @@ class SalesOrder_DetailView_Model extends Inventory_DetailView_Model {
 		$linkModelList = parent::getDetailViewLinks($linkParams);
 		$recordModel = $this->getRecord();
 
+		//Added by jitu@27-04-2015 for ShowHide Restrict Issue 
+		$invoiceRestrict = Vtiger_Record_Model::toggleRestrictAction('SalesOrder','CIS', $recordModel->getId());
+		$purchaseorderRestrict = Vtiger_Record_Model::toggleRestrictAction('SalesOrder','CPS', $recordModel->getId());
+		//end here
+
 		$invoiceModuleModel = Vtiger_Module_Model::getInstance('Invoice');
-		if($currentUserModel->hasModuleActionPermission($invoiceModuleModel->getId(), 'CreateView')) {
+
+		if($currentUserModel->hasModuleActionPermission($invoiceModuleModel->getId(), 'CreateView') && $invoiceRestrict) {
 			$basicActionLink = array(
 				'linktype' => 'DETAILVIEW',
 				'linklabel' => vtranslate('LBL_CREATE').' '.vtranslate($invoiceModuleModel->getSingularLabelKey(), 'Invoice'),
@@ -34,7 +40,7 @@ class SalesOrder_DetailView_Model extends Inventory_DetailView_Model {
 		}
 
 		$purchaseOrderModuleModel = Vtiger_Module_Model::getInstance('PurchaseOrder');
-		if($currentUserModel->hasModuleActionPermission($purchaseOrderModuleModel->getId(), 'CreateView')) {
+		if($currentUserModel->hasModuleActionPermission($purchaseOrderModuleModel->getId(), 'CreateView') && $purchaseorderRestrict) {
 			$basicActionLink = array(
 				'linktype' => 'DETAILVIEW',
 				'linklabel' => vtranslate('LBL_CREATE').' '.vtranslate($purchaseOrderModuleModel->getSingularLabelKey(), 'PurchaseOrder'),

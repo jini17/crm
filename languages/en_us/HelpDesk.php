@@ -13,6 +13,7 @@ $languageStrings = array(
 	'SINGLE_HelpDesk' => 'Service Request',
 	'LBL_ADD_RECORD' => 'Add Service Request',
 	'LBL_RECORDS_LIST' => 'Service Request List',
+	'LBL_CREATE_INVOICE'=>'Create Invoice',
 
 	// Blocks
 	'LBL_TICKET_INFORMATION' => 'Service Request Information',

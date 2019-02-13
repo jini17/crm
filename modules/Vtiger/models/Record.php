@@ -736,4 +736,61 @@ class Vtiger_Record_Model extends Vtiger_Base_Model {
 		return array_merge($relatedModuleRecordIds, $directrelatedModuleRecordIds, $indirectrelatedModuleRecordIds);
 	}
 
+	/**
+	 * Function to get the Actions on Status for particular Module 
+	 * @param <module>
+	 * @author jitu@27-04-2015 secondcrm
+	 * Modified by Jitu@04082015 
+	 * @return actions	
+	**/
+	public function toggleRestrictAction($module,$actioncode, $record) { 
+		$db = PearDatabase::getInstance();
+		//$module = $this->getModuleName();
+	
+		$resultaction = $db->pquery("SELECT statusvalue, isrestrict FROM secondcrm_multipleactions WHERE module = ? AND actioncode=? ",array($module,$actioncode));
+		
+		if ($db->num_rows($resultaction) > 0) {
+			$status 	= $db->query_result($resultaction, 0, "statusvalue");
+			$restrict 	= $db->query_result($resultaction, 0, "isrestrict");
+
+			if($module == 'Quotes') {
+				$result 	= $db->pquery("SELECT 1 FROM vtiger_quotes WHERE quoteid = ?  AND  find_in_set (quotestage,?)", array($record, $status));
+		
+			} else if($module == 'Leads') {
+				$result = $db->pquery("SELECT 1 FROM vtiger_leaddetails WHERE leadid = ? AND  find_in_set (leadstatus,?)", array($record,$status));
+			
+			} else if($module == 'SalesOrder') {
+				$result 	= $db->pquery("SELECT 1 FROM vtiger_salesorder WHERE salesorderid = ?  AND find_in_set (sostatus,?)", array($record, $status));
+		
+			} else if($module == 'Invoice') {
+				$result 	= $db->pquery("SELECT 1 FROM vtiger_invoice WHERE invoiceid = ? AND find_in_set (invoicestatus,?)", array($record, $status));
+		
+			} else if($module == 'DeliveryOrder') {
+				//TODO: Handle Delivery Order
+			}
+
+			else if($module == 'HelpDesk') {
+				$result = $db->pquery("SELECT 1 FROM vtiger_troubletickets WHERE ticketid = ? AND  find_in_set (invoicestatus,?)", array($record, $status));
+		
+			}
+			
+			else if($module == 'ServiceContracts') {
+				$result = $db->pquery("SELECT 1 FROM vtiger_servicecontracts WHERE servicecontractsid = ? AND  find_in_set (contract_status,?)", array($record, $status));
+		
+			}
+
+			else if($module == 'PurchaseOrder') {
+				$result = $db->pquery("SELECT 1 FROM vtiger_purchaseorder WHERE purchaseorderid = ? AND find_in_set (invoicestatus,?)", array($record, $status));
+		
+			}
+			
+			if($restrict == 1 && $db->num_rows($result) > 0) {
+				return true;
+			} else {
+				return false;
+			}
+
+		}
+		
+	}
 }

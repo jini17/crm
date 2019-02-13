@@ -10,6 +10,23 @@
 
 Class Inventory_Edit_View extends Vtiger_Edit_View {
 
+
+	public function checkPermission(Vtiger_Request $request) {	
+		//Show / Hide Edit Button in detailView
+		
+		parent::checkPermission($request);
+		$record = $request->get('record');
+		$recordModel = Vtiger_Record_Model::getInstanceById($record);
+		$moduleName = $request->getModule();
+
+		$modules = array("Invoice"=>"IOR","PurchaseOrder"=>"POR","SalesOrder"=>"SOR", "Quotes"=>"QOR", "DeliveryOrder"=>"DOR");
+		$editrestrict = Vtiger_Record_Model::toggleRestrictAction($moduleName,$modules[$moduleName],$recordModel->getId());	
+		if($editrestrict){
+			 throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));
+		}
+
+	}		
+
 	public function process(Vtiger_Request $request) {
 		$viewer = $this->getViewer($request);
 		$moduleName = $request->getModule();
