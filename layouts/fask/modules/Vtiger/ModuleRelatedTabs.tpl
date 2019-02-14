@@ -38,34 +38,34 @@
 					{assign var=RELATED_LINK value=$RELATEDTABS[$i]}
 					{assign var=RELATEDMODULENAME value=$RELATED_LINK->getRelatedModuleName()}
 					{assign var=RELATEDFIELDNAME value=$RELATED_LINK->get('linkFieldName')}
-					{assign var="DETAILVIEWRELATEDLINKLBL" value= vtranslate($RELATED_LINK->getLabel(),$RELATEDMODULENAME)}					
+					{assign var="DETAILVIEWRELATEDLINKLBL" value= vtranslate($RELATED_LINK->getLabel(),$RELATEDMODULENAME)}
 					<li class="tab-item {if (trim($RELATED_LINK->getLabel())== trim($SELECTED_TAB_LABEL)) && ($RELATED_LINK->getId() == $SELECTED_RELATION_ID)}active{/if}"  data-url="{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" data-label-key="{$RELATED_LINK->getLabel()}"
 						data-module="{$RELATEDMODULENAME}" data-relation-id="{$RELATED_LINK->getId()}" {if $RELATEDMODULENAME eq "ModComments"} title {else} title="{$DETAILVIEWRELATEDLINKLBL}"{/if} {if $RELATEDFIELDNAME}data-relatedfield ="{$RELATEDFIELDNAME}"{/if} >
-						<a href="index.php?{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" class="textOverflowEllipsis" displaylabel="{$DETAILVIEWRELATEDLINKLBL}" recordsCount="" title="{$DETAILVIEWRELATEDLINKLBL}" {if $RELATEDMODULENAME neq "ModComments"}tippytitle{/if}>
-							<!-- ClaimType Added By Mabruk -->
-							{if $RELATEDMODULENAME eq "ModComments" || $RELATEDMODULENAME eq 'ClaimType'}
-								<span class="tab-label" >{$DETAILVIEWRELATEDLINKLBL}</span>&nbsp;
-							{else}
-								<!--<span class="tab-icon">-->
-									{assign var=RELATED_MODULE_MODEL value=Vtiger_Module_Model::getInstance($RELATEDMODULENAME)}  
-									{assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
-									'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
-									'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
-									'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
-									'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
-									'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
-									'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-									'mycthemeswitcher'=>'folder', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people']}
-									
-									<span class="tab-label">{vtranslate($RELATEDMODULENAME, $MODULE_NAME)}</span>
-									<!--<i class="material-icons" >{$iconsarray[{strtolower($RELATEDMODULENAME)}]}</i>-->
-			
-								<!--</span>-->
+						<a href="index.php?{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" class="textOverflowEllipsis waves-effect waves-dark" displaylabel="{$DETAILVIEWRELATEDLINKLBL}" recordsCount="" title="{$DETAILVIEWRELATEDLINKLBL}" {if $RELATEDMODULENAME neq "ModComments"}tippytitle{/if}>
+							{if $RELATEDMODULENAME eq "ModComments"}
+								<span class="tab-label">{$DETAILVIEWRELATEDLINKLBL}</span>&nbsp;
+									{else}
+								<span class="tab-icon">
+									{assign var=iconsarray value=['potentials'=>'fas fa-comments-dollar','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
+    'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'fas fa-search-dollar',
+    'purchaseorder'=>'fas fa-shopping-cart','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
+    'projecttask'=>'check_box','projectmilestone'=>'fas fa-info-circle','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
+    'foundation'=>'fas fa-info-circle','admin'=>'fas fa-hand-holding-heart',
+    'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
+    'quotes'=>'description','invoice'=>'fas fa-file-invoice','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
+    'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-headset','tools'=>'business_center',
+    'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'fingerprint','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call',
+    'performance'=>'fas fa-chart-line', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
+    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face'  ]}
+
+    							  {if $iconsarray[{strtolower($RELATEDMODULENAME)}]|strstr:"fas"}
+			                        <i class="{$iconsarray[{strtolower($RELATEDMODULENAME)}]}" style="height:15px;width:15px;" ></i> 
+			                      {else}
+			                        <i class="material-icons module-icon" >{$iconsarray[{strtolower($RELATEDMODULENAME)}]}</i> 
+			                      {/if}
+								</span>
 							{/if}
-							<!-- Condition Added By Mabruk -->
-							{if $RELATEDMODULENAME neq 'ClaimType'}							
-								<span class="numberCircle">0</span>
-							{/if}	
+							<!--<span class="numberCircle disabled" >0</span>-->
 						</a>
 					</li>
 					{if ($RELATED_LINK->getId() == {$smarty.request.relationId})}
@@ -82,25 +82,33 @@
 						{assign var="DETAILVIEWRELATEDLINKLBL" value= vtranslate($RELATED_LINK->getLabel(),$RELATEDMODULENAME)}
 						<li class="more-tab moreTabElement active"  data-url="{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" data-label-key="{$RELATED_LINK->getLabel()}"
 							data-module="{$RELATEDMODULENAME}" data-relation-id="{$RELATED_LINK->getId()}" {if $RELATEDMODULENAME eq "ModComments"} title {else} title="{$DETAILVIEWRELATEDLINKLBL}"{/if} {if $RELATEDFIELDNAME}data-relatedfield ="{$RELATEDFIELDNAME}"{/if}>
-							<a href="index.php?{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" class="textOverflowEllipsis" displaylabel="{$DETAILVIEWRELATEDLINKLBL}" recordsCount="" >
+							<a href="index.php?{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" class="textOverflowEllipsis waves-effect waves-dark" displaylabel="{$DETAILVIEWRELATEDLINKLBL}" recordsCount="" >
 								{if $RELATEDMODULENAME eq "ModComments"}
 									<span class="tab-label" >{$DETAILVIEWRELATEDLINKLBL}</span>&nbsp;
 								{else}  
 									<span class="tab-icon">
 										{assign var=RELATED_MODULE_MODEL value=Vtiger_Module_Model::getInstance($RELATEDMODULENAME)}  
-										{assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
-									'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
-									'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
-									'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
-									'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
-									'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
-									'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-									'mycthemeswitcher'=>'folder', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people' ]}
-									<i class="material-icons" >{$iconsarray[{strtolower($RELATEDMODULENAME)}]}</i>
+										{assign var=iconsarray value=['potentials'=>'fas fa-comments-dollar','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
+    'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'fas fa-search-dollar',
+    'purchaseorder'=>'fas fa-shopping-cart','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
+    'projecttask'=>'check_box','projectmilestone'=>'fas fa-info-circle','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
+    'foundation'=>'fas fa-info-circle','admin'=>'fas fa-hand-holding-heart',
+    'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
+    'quotes'=>'description','invoice'=>'fas fa-file-invoice','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
+    'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-headset','tools'=>'business_center',
+    'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'fingerprint','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call',
+    'performance'=>'fas fa-chart-line', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
+    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face'  ]}
+									
+    							  {if $iconsarray[{strtolower($RELATEDMODULENAME)}]|strstr:"fas"}
+			                        <i class="{$iconsarray[{strtolower($RELATEDMODULENAME)}]}" style="height:15px;width:15px;" ></i> 
+			                      {else}
+			                        <i class="material-icons module-icon" >{$iconsarray[{strtolower($RELATEDMODULENAME)}]}</i> 
+			                      {/if}
 										
 									</span>
 								{/if}
-								<span class="numberCircle hide">0</span>
+								<!--<span class="numberCircle hide">0</span>-->
 							</a>
 						</li>
 						{break}
@@ -122,26 +130,32 @@
 							{assign var="DETAILVIEWRELATEDLINKLBL" value= vtranslate($RELATED_LINK->getLabel(),$RELATEDMODULENAME)}
 							<li class="more-tab {if (trim($RELATED_LINK->getLabel())== trim($SELECTED_TAB_LABEL)) && ($RELATED_LINK->getId() == $SELECTED_RELATION_ID)}active{/if}" data-url="{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" data-label-key="{$RELATED_LINK->getLabel()}"
 								data-module="{$RELATEDMODULENAME}" title="" data-relation-id="{$RELATED_LINK->getId()}" {if $RELATEDFIELDNAME}data-relatedfield ="{$RELATEDFIELDNAME}"{/if}>
-								<a href="index.php?{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" displaylabel="{$DETAILVIEWRELATEDLINKLBL}" recordsCount="">
+								<a href="index.php?{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" displaylabel="{$DETAILVIEWRELATEDLINKLBL}" recordsCount="" class="waves-effect waves-dark">
 									{if $RELATEDMODULENAME eq "ModComments"}
 										<span class="tab-label textOverflowEllipsis"> {$DETAILVIEWRELATEDLINKLBL}</span>&nbsp;
 									{else}  
 										{assign var=RELATED_MODULE_MODEL value=Vtiger_Module_Model::getInstance($RELATEDMODULENAME)}  
 										<span class="tab-icon textOverflowEllipsis">
-											{assign var=iconsarray value=['potentials'=>'attach_money','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
-									'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'attach_money',
-									'purchaseorder'=>'attach_money','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
-									'projecttask'=>'check_box','projectmilestone'=>'card_travel','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
-									'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
-									'quotes'=>'description','invoice'=>'description','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
-									'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'headset','tools'=>'business_center',
-									'mycthemeswitcher'=>'folder', 'chat'=>'chat', 'mobilecall'=>'call', 'call'=>'call', 'meeting'=>'people' ]}
-									<i class="material-icons" >{$iconsarray[{strtolower($RELATEDMODULENAME)}]}</i>
+{assign var=iconsarray value=['potentials'=>'fas fa-comments-dollar','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
+    'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'fas fa-search-dollar',
+    'purchaseorder'=>'fas fa-shopping-cart','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
+    'projecttask'=>'check_box','projectmilestone'=>'fas fa-info-circle','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
+    'foundation'=>'fas fa-info-circle','admin'=>'fas fa-hand-holding-heart',
+    'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
+    'quotes'=>'description','invoice'=>'fas fa-file-invoice','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
+    'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-headset','tools'=>'business_center',
+    'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'fingerprint','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call',
+    'performance'=>'fas fa-chart-line', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
+    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face'  ]}
+									<i class="material-icons module-icon" >{$iconsarray[{strtolower($RELATEDMODULENAME)}]}</i>
 											<span class="content"> &nbsp;{$DETAILVIEWRELATEDLINKLBL}</span>
 										</span>
 									{/if}
-									<span class="numberCircle hide">0</span>
-								</a>
+									<!-- Condition Added By Mabruk -->
+									{if $RELATEDMODULENAME neq 'ClaimType'}							
+										<!--<span class="numberCircle">0</span>-->
+									{/if}	
+									</a>
 							</li>
 						{/for}
 					</ul>
@@ -149,58 +163,4 @@
 			{/if}
 		</ul>
 	</div>
-
-	<!-- Related mobile -->
-<div class="related-tabs-mobile visible-xs visible-md visible-sm row">
-<div class="col-md-12 col-sm-12 col-xs-12 text-center">
-<div class="btn-group">
-  <button type="button" class="btn btn-primary dropdown-toggle" style="width:200px!important;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="material-icons">attach_file</i> Related Modules <i class="material-icons">arrow_drop_down</i>
-  </button>
-  <ul class="dropdown-menu related">
-   {foreach item=RELATED_LINK from=$DETAILVIEW_LINKS['DETAILVIEWTAB']}
-				{$engagementEnabledModules = ['Accounts','Contacts','Leads']}
-				{if $MODULE_NAME|in_array:$engagementEnabledModules && (trim($RELATED_LINK->getLabel()) == 'LBL_UPDATES')}
-					{assign var=RELATEDLINK_URL value="index.php?view=Detail&mode=showHistory&page=1&module="|cat:$MODULE_NAME|cat:"&record="|cat:$RECORD->getId()}
-					{assign var=RELATEDLINK_LABEL value="LBL_HISTORY"}
-					{assign var=RELATED_TAB_LABEL value="LBL_HISTORY"}
-				{else}
-					{assign var=RELATEDLINK_URL value=$RELATED_LINK->getUrl()}
-					{assign var=RELATEDLINK_LABEL value=$RELATED_LINK->getLabel()}
-					{assign var=RELATED_TAB_LABEL value={vtranslate('SINGLE_'|cat:$MODULE_NAME, $MODULE_NAME)}|cat:" "|cat:$RELATEDLINK_LABEL}
-				{/if}
-				<li class="tab-item {if $RELATED_TAB_LABEL==$SELECTED_TAB_LABEL}active{/if}{if $RELATED_LINK->getLabel()==$SELECTED_TAB_LABEL || ($SELECTED_TAB_LABEL=="" && $smarty.foreach.detlink.iteration==1)}active{/if}" data-url="{$RELATEDLINK_URL}&tab_label={$RELATED_TAB_LABEL}&app={$SELECTED_MENU_CATEGORY}" data-label-key="{$RELATEDLINK_LABEL}" data-link-key="{$RELATED_LINK->get('linkKey')}" >
-					<a href="{$RELATEDLINK_URL}&tab_label={$RELATEDLINK_LABEL}&app={$SELECTED_MENU_CATEGORY}" class="textOverflowEllipsis">
-						<span class="tab-label">{vtranslate($RELATEDLINK_LABEL,{$MODULE_NAME})}</span>
-											</a>
-				</li>
-			{/foreach}
-			<li class="divider"></li>
-			{foreach item=RELATED_LINK from=$DETAILVIEW_LINKS['DETAILVIEWRELATED']}
-				
-				
-				{assign var=RELATEDMODULENAME value=$RELATED_LINK->getRelatedModuleName()}
-				{assign var=RELATEDFIELDNAME value=$RELATED_LINK->get('linkFieldName')}
-				{assign var="DETAILVIEWRELATEDLINKLBL" value= vtranslate($RELATED_LINK->getLabel(),$RELATEDMODULENAME)}
-
-						<li class="tab-itemm {if $RELATED_LINK->getLabel()==$SELECTED_TAB_LABEL}active{/if}" data-url="{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" data-label-key="{$RELATED_LINK->getLabel()}" style="width:auto" title="{$DETAILVIEWRELATEDLINKLBL}">
-							<a href="index.php?{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" class="textOverflowEllipsis">
-						<span class="tab-label">{$DETAILVIEWRELATEDLINKLBL}&nbsp;
-							</span>
-							
-					<span class="tab-icon pull-right">
-								{assign var=RELATED_MODULE_MODEL value=Vtiger_Module_Model::getInstance($RELATEDMODULENAME)}  
-								<i class="material-icons" >{strtolower($RELATEDMODULENAME)}</i> 
-								<span class="numberCircle hide">0</span>
-							</span>
-							</a>
-							
-						</li>
-
-			{/foreach}
-			
-
-  </ul>
-</div></div></div>
-	<!-- / Related mobile -->
-	{strip}
+{strip}

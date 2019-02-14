@@ -278,6 +278,7 @@ class Vtiger_InventoryPDFController {
 		// Company information
 		$result = $adb->pquery("SELECT * FROM vtiger_organizationdetails", array());
 		$num_rows = $adb->num_rows($result);
+		 $companyid = $this->focus->column_fields['company_details'];	
 		if($num_rows) {
 			$resultrow = $adb->fetch_array($result);
 
@@ -294,8 +295,16 @@ class Vtiger_InventoryPDFController {
 			if(!empty($resultrow['website']))	$additionalCompanyInfo[]= "\n".getTranslatedString("Website: ", $this->moduleName). $resultrow['website'];
                         if(!empty($resultrow['vatid']))         $additionalCompanyInfo[]= "\n".getTranslatedString("VAT ID: ", $this->moduleName). $resultrow['vatid']; 
 
+            $companyDetails = Vtiger_Record_Model::getInstanceById($companyid, 'OrganizationDetails');
+			$imagedetails = $companyDetails->getImageDetails();
+            $logo = $imagedetails[0]['path'].'_'.$imagedetails[0]['name'];	
+
+            if(!file_exists($logo)){
+            	$logo = 'test/loginlogo/second-crm-logo.png';
+            }            	
+
 			$modelColumnLeft = array(
-					'logo' => "test/logo/".$resultrow['logoname'],
+					'logo' => $logo,
 					'summary' => decode_html($resultrow['organizationname']),
 					'content' => decode_html($this->joinValues($addressValues, ' '). $this->joinValues($additionalCompanyInfo, ' '))
 			);
