@@ -731,11 +731,13 @@ color: #2f5597 !important;
      padding: 5px !important;
 }
 .fasksecond i,
-.material-icons.module-icon{
+.fasksecond .material-icons.module-icon{
     margin-right: 5px;
     font-size: 14px !important;
-
-    margin-top: 5px;
+    width: 14px;
+    height: 14px;
+    margin-top: -2px;
+    text-align: center;
 }
 .dashBoardTabContents .ready ul li{
     position: relative;    
@@ -747,3 +749,48 @@ color: #2f5597 !important;
 td.jqplot-table-legend{
     padding-right: 5px;
 }
+
+.fask{
+    width: 100% !important;
+    
+}
+.faskfirst i{
+    height: 14px;
+    width: 17px;
+    margin-top: -2px;
+}
+/*.dropdown-content-Finance a{
+    display: block;
+        width: 100%;
+}
+.dropdown-content-Finance li{
+    width: 100%;
+}
+.dropdown-content-Finance a i{
+    float: left !important;
+}
+.dropdown-icon-dashboard .material-icons.module-icon{
+    float: left !important;
+}*/
+.dropdown-icon-dashboard{
+    display: block;
+    width: 100%;
+    padding: 0 10px 0;
+}
+.jqplot-grid-canvas{
+    display: none;
+}
+.btn-group button{
+    border-radius: 3px !important;
+    padding-right:10px !important;
+    margin-right: 10px !important;
+}
+#appnav button{
+    padding-right: 10px !important;
+    
+}
+.dropdown-icon-dashboard{
+          padding: 0 10px 0 !important;
+
+}
+
