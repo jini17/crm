@@ -19,12 +19,12 @@
         .fa-twitter {
           background: #55ACEE;
           color: white;
-          padding:8px;
+          padding:10px;
         }
         .fa-envelope {
           background: #ff6600;
           color: white;
-          padding: 8px;
+          padding: 10px;
         }
         .fa-linkedin {
           background: #007bb5;
