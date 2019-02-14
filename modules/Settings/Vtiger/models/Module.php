@@ -205,9 +205,10 @@ class Settings_Vtiger_Module_Model extends Vtiger_Base_Model {
 		$employmentdetails = Users_Record_Model::getTabDetails(15);
 		$UserTab			= Users_Record_Model::getTabDetails(1, array(1));
 		$HRMatters			= Users_Record_Model::getTabDetails(14);
+		$employeedetailurl = 'index.php?module=Users&parent=Settings&view=Detail&record='.$_REQUEST['record'];
 		$settingsMenuList = array(
 			'LBL_MY_PREFERENCES' => array(
-					'My Preferences'	=> array('', 'face'),
+					'My Preferences'	=> array($employeedetailurl, 'face'),
 					'Calendar Settings' => array('', 'settings'),
 					'LBL_MY_TAGS'		=> array($myTagSettingsUrl,'label')
 				),
@@ -217,8 +218,12 @@ class Settings_Vtiger_Module_Model extends Vtiger_Base_Model {
 					)
 			);
 
-		if($currentUser->get('roleid')=='H12' || $currentUser->get('roleid')=='H13'){
-			$array = array_merge($settingsMenuList, $UserTab, $HRMatters, $employmentdetails);
+		if(in_array($currentUser->get('roleid'), array('H12','H13'))) {
+			if($_REQUEST['record']==$currentUser->id){
+				$array = array_merge($settingsMenuList, $UserTab, $HRMatters, $employmentdetails);
+			} else {
+				$array = array_merge($settingsMenuList, $employmentdetails);
+			}	
 			
 		} else{
 			$array = array_merge($settingsMenuList, $employmentdetails);

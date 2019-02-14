@@ -254,15 +254,36 @@ class Vtiger_Field extends Vtiger_FieldBasic {
 		}
 	}
 
+	static function getrestrictedBlocks($roleid){
+		global $adb;
+		
+		$result = $adb->pquery("SELECT blockid FROM vtiger_roleblockpermission WHERE roleid	=?", array($roleid));
+		$restrictedBlocks = array();
+		for($i=0;$i<$adb->num_rows($result);$i++){
+			$restrictedBlocks[] = $adb->query_result($result, $i,'blockid');
+		}
+		
+		return $restrictedBlocks;
+
+	}
+
 	/**
 	 * Get Vtiger_Field instances related to module
 	 * @param Vtiger_Module Instance of module to use
 	 */
 	static function getAllForModule($moduleInstance) {
-		global $adb;
-		$instances = false;
+		global $adb, $current_user;
 
-		$query = "SELECT * FROM vtiger_field WHERE tabid=? ORDER BY sequence";
+		$instances = false;
+		
+		//fixed by jitu to add constraint if logon user is HR / HR staff / admin
+		$where = '';
+		$restrictedblock = self::getrestrictedBlocks($current_user->roleid);
+		if(count($restrictedblock)>0){
+			$where = " AND block NOT IN (".implode(',',$restrictedblock).")";
+		}
+		
+		$query = "SELECT * FROM vtiger_field WHERE tabid=? $where ORDER BY sequence";
 		$queryParams = Array($moduleInstance->id);
 
 		$result = $adb->pquery($query, $queryParams);

@@ -142,9 +142,15 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
                         return;
                 }
 
+                // Added By Mabruk
+                foreach($dashboardTabs as $dtab) {
+                    $dashTabNames[] = $dtab['tabname'];
+                }
+
                 $viewer->assign('MODULE_NAME', $moduleName);
                 $viewer->assign('WIDGETS', $widgets);
                 $viewer->assign('DASHBOARD_TABS', $dashboardTabs);
+                $viewer->assign('DASHTABNAMES', $dashTabNames);
                 $viewer->assign('DASHBOARD_TABS_LIMIT', $dashBoardModel->dashboardTabLimit);
                 $viewer->assign('SELECTED_TAB',$tabid);
                 $current_user = Users_Record_Model::getCurrentUserModel();
@@ -152,20 +158,21 @@ class Vtiger_Dashboard_View extends Calendar_TaskManagement_View {
             if(self::$selectable_dashboards) {
             
                       
-                        $viewer->assign('SELECTABLE_WIDGETS', self::$selectable_dashboards);
-                        $viewer->assign("EMPLOYEE_GROUP", $this->get_widgets_by_group("employee", $modulename,$current_user->get("id"),$tabid));
+                $viewer->assign('SELECTABLE_WIDGETS', self::$selectable_dashboards);
+                $viewer->assign("EMPLOYEE_GROUP", $this->get_widgets_by_group("employee", $modulename,$current_user->get("id"),$tabid));
 
 
-                        $viewer->assign("SALES", $this->get_widgets_by_group("sales", $modulename,$current_user->get("id"),$tabid));
-                        $viewer->assign("SERVICE", $this->get_widgets_by_group("service", $modulename,$current_user->get("id"),$tabid));
+                $viewer->assign("SALES", $this->get_widgets_by_group("sales", $modulename,$current_user->get("id"),$tabid));
+                $viewer->assign("SERVICE", $this->get_widgets_by_group("service", $modulename,$current_user->get("id"),$tabid));
 
 
-                        $viewer->assign("CHART_GROUP", $this->get_widgets_by_group("chart", $modulename,$current_user->get("id"),$tabid));
-                        $viewer->assign("LEAVECLAIM_GROUP",  $this->get_widgets_by_group("leaveclaim", $modulename,$current_user->get("id"),$tabid));
-                        $viewer->assign("GENERAL_GROUP",  $this->get_widgets_by_group("general", $modulename,$current_user->get("id"),$tabid));
+                $viewer->assign("CHART_GROUP", $this->get_widgets_by_group("chart", $modulename,$current_user->get("id"),$tabid));
+                $viewer->assign("LEAVECLAIM_GROUP",  $this->get_widgets_by_group("leaveclaim", $modulename,$current_user->get("id"),$tabid));
+                $viewer->assign("GENERAL_GROUP",  $this->get_widgets_by_group("general", $modulename,$current_user->get("id"),$tabid));
+
             }
             
-                $viewer->assign('CURRENT_USER', Users_Record_Model::getCurrentUserModel());
+                $viewer->assign('CURRENT_USER', $current_user);
                 $viewer->assign('TABID',$tabid);
                 $viewer->view('dashboards/DashBoardContents.tpl', $moduleName);
         }

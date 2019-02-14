@@ -178,6 +178,9 @@ a.btn.btn-gettingStarted i{
     color: #2f5597;
     float: right;
     padding-top: 10px;
+        position: absolute;
+    bottom: 4px;
+right: 15px;
 }
 
 /**=========================
@@ -485,3 +488,20 @@ a.btn.btn-gettingStarted i{
             color: #fff;
             background:  #2f5597 ;
         }
+.fasksecond i,
+.material-icons.module-icon{
+    margin-right: 5px;
+    font-size: 14px !important;
+
+    margin-top: 5px;
+}
+.global-nav .app-navigator-container{
+    height: 51px !important;
+}
+.jqplot-title{
+    display: none !important;
+}
+.jqplot-table-legend.jqplot-table-legend-swatch,
+td.jqplot-table-legend{
+    padding-right: 5px;
+}

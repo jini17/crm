@@ -386,7 +386,7 @@ class Users_Module_Model extends Vtiger_Module_Model {
 		$moduleName = $this->getName();
 
 		$currentUser = Users_Record_Model::getCurrentUserModel();
-		if ($currentUser->isAdminUser() && Users_Privileges_Model::isPermitted($moduleName, 'DetailView')) {
+		if ($currentUser->isAdminUser() || in_array($currentUser->roleid, array('H2','H12','H13'))) {
 			$settingsLinks[] = array(
 				'linktype' => 'LISTVIEW',
 				'linklabel' => 'LBL_EXPORT',

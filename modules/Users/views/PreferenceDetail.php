@@ -58,7 +58,7 @@ class Users_PreferenceDetail_View extends Vtiger_Detail_View {
                               
                         }
 
-                        if($currentUser->get('id') == $recordId){
+                        if($currentUser->get('id') == $recordId  || in_array($currentUser->get('roleid'), array('H12','H13','H2'))) {
                              $LEAVE_CLAIM_ALLOW = true;
                         }   
 

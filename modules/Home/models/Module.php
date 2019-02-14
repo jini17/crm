@@ -507,6 +507,7 @@ class Home_Module_Model extends Vtiger_Module_Model {
 
 		$notifications = array();
 		$unread = 0;
+
 		$noOfRow = $db->num_rows($result);
 		if($pagingModel->get('notificationcount') < $noOfRows) {
 			$pagingModel->set('notificationcount', $noOfRows);
@@ -516,60 +517,60 @@ class Home_Module_Model extends Vtiger_Module_Model {
 
 			for($i=0;$i<$db->num_rows($result);$i++) {
 
-			  	$notifyby	 	= $db->query_result($result, $i, 'notifyby');
-			  	$relatedto 		= $db->query_result($result, $i, 'relatedto');
-			  	$notifyto 		= $db->query_result($result, $i, 'notifyto');
-			  	$timestamp 		= $db->query_result($result, $i, 'createdtime');
-			  	$viewed 		= $db->query_result($result, $i, 'viewed');
-
-			  	$nameResult = $db->pquery('SELECT first_name, last_name,  FROM vtiger_users WHERE id = ?', array($notifyto));
-				if($db->num_rows($nameResult)) {
-					$fullname =  $db->query_result($nameResult, 0, 'first_name').' '.$db->query_result($nameResult, 0, 'last_name');
-				}
-				
+			  	$notifyby	 			= $db->query_result($result, $i, 'smownerid');
+			  	$relatedto 				= $db->query_result($result, $i, 'relatedto');
+			  	$recordModel 			= Users_Record_Model::getInstanceById($notifyby, 'Users');
+			  	$timestamp 				= $db->query_result($result, $i, 'createdtime');
+			  	$viewed 				= $db->query_result($result, $i, 'viewed');
+			  	$notificationsid 		= $db->query_result($result, $i, 'notificationsid');
+			  	$fullname				= $recordModel->get('first_name').' '.$recordModel->get('last_name');
+			  	
 			  	$referenceModuleName = RecordSetype($relatedto);
 
 			  	$action = $db->query_result($result, $i, 'actionperform');
 			  	$entityNames = 	getEntityName($referenceModuleName, array($relatedto));
-			  	$linkValue = "<a style='display:block; width: 100%; padding:0; font-size:10px;' href='index.php?module=$referenceModuleName&view=Detail&record=$relatedto'>$entityNames[$relatedto]</a>";	
-
+			  	$notifications['details'][$i]['linkurl'] = "index.php?module=$referenceModuleName&view=Detail&record=$relatedto&sourcerecord=$notificationsid";
+			  	$notifications['details'][$i]['linklabel'] = $entityNames[$relatedto];
+			  	
 
 			  	if($action == 'Posted'){
-			  		$message = 'New message '. $linkValue." is posted";
+			  		$message = 'New message is posted';
 			  	} else if($action == 'Download'){
-			  		$message = 'Download your payslip '.$linkValue.' here';
+			  		$message = 'Download your payslip here';
 			  	} else if($action == 'Approved' || $action == 'Rejected' || $action == "Applied"){
-			  		$message = $referenceModuleName." ".$linkValue." is ". $action;
+			  		$message =  $referenceModuleName. " is $action ";
 			  	} else if($action == 'Assigned'){
-			  		$message = "A task ".$linkValue." is ". $action. " to ". $fullname;
+			  		$notifyby = $db->query_result($result, $i, 'userid');
+			  		$recordAssignModel 			= Users_Record_Model::getInstanceById($notifyby, 'Users');
+			  		$fullname				= $recordAssignModel->get('first_name').' '.$recordAssignModel->get('last_name');
+			  		$message = "A task is assigned to ". $fullname;
 			  	} else if($action == 'Completed'){
-			  		$message = "Task ".$linkValue." is ". $action. " by ". $fullname;
+			  		$message = "Task completed by ". $fullname;
 			  	} else if($action == 'Updated'){
 			  		$message = "HR change the working hours";
 			  	} else if($action == 'Commented'){
-			  		
-			  		$namebyResult = $db->pquery('SELECT first_name, last_name FROM vtiger_users WHERE id = ?', array($notifyby));
-					if($db->num_rows($namebyResult)) {
-						$notifybyfullname =  $db->query_result($namebyResult, 0, 'first_name').' '.$db->query_result($namebyResult, 0, 'last_name');
-					}
-
-			  		$message = "Comment on ". $linkValue ." is ".$action." by ".$notifybyfullname;
+			  	  	$message = " New Comment on ". $entityNames[$relatedto] ." by ".$fullname;
 			  	} else {
 			  		$message = "Your Subscription is getting expired";
 			  	}
 
 			  
 		  		if($notifyby==0){
-		  			$imagename = 'storage/2018/October/week3/2560_admin.jpg';
+		  			$imagename = 'layouts/fask/skins/images/DefaultUserIcon.png';
 		  		} else {
-		  			$recordModel = Users_Record_Model::getInstanceById($notifyby, 'Users');
+		  			
 		  			$imagesdetails = $recordModel->getImageDetails();
 		  			$imagename = $imagesdetails[0]['path'].'_'.$imagesdetails[0]['name'];
+		  			if(!file_exists($imagesdetails[0]['path'].'_'.$imagesdetails[0]['name'])){
+		  				$imagename = 'layouts/fask/skins/images/DefaultUserIcon.png';	
+		  			} 
+		  			
 		  		}
 		  		$notifications['details'][$i]['message'] 		= $message;
 		  		$notifications['details'][$i]['profilepic'] 	= $imagename;
 		  		$notifications['details'][$i]['timestamp'] 	= Vtiger_Util_Helper::formatDateDiffInStrings($timestamp);
 		  		$notifications['details'][$i]['unread'] 		= $viewed;
+		  		
 		  		if($viewed==0)
 		  			$unread++;
 			}

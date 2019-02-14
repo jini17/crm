@@ -1358,7 +1358,7 @@ ul.unstyled {
   margin-right: 0;
 }
 .current-filter-name {
-    margin: 11px 0;
+    margin: 10px 2px;
    float: left;
    font-size: 12px;
    line-height: 16px;
@@ -9509,7 +9509,7 @@ right connector from last child*/
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
-    width: 255px;
+  width: 328px;
 }
 
 /*Time for some hover effects*/
@@ -9529,7 +9529,7 @@ right connector from last child*/
     float: left;
 }
 .tree li .box .orgbox-details{
-    width: 150px;
+    width: 221px;
     float: right;
 }
 
@@ -9564,5 +9564,12 @@ color:#000 !important;
     left: 157px;
 }
 .logo-container img{
-    margin: 8px 0px !important;
+    margin: 18px 0px !important;
+}
+.jqplot-title{
+    display: none !important;
+}
+.jqplot-table-legend.jqplot-table-legend-swatch,
+td.jqplot-table-legend{
+    padding-right: 5px;
 }

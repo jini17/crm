@@ -34,6 +34,7 @@ class Calendar_Save_Action extends Vtiger_Save_Action {
 	}
 
 	public function process(Vtiger_Request $request) {
+		
 		try {
 			$recordModel = $this->saveRecord($request);
 			$loadUrl = $recordModel->getDetailViewUrl();
@@ -68,6 +69,34 @@ class Calendar_Save_Action extends Vtiger_Save_Action {
 			} else if ($request->get('returnmodule') && $request->get('returnview')){
 				$loadUrl = 'index.php?'.$request->getReturnURL();
 			}
+
+			//Task Assigned by Reporting manager 	
+			if(($request->get('record')=='' || !$request->get('record') || empty($request->get('record'))) && $request->get('taskstatus') !='Completed') {	
+
+	            $currentUserModel = Users_Record_Model::getCurrentUserModel();
+	            //get all users who are reporting to login user
+	           
+
+	            $activitydetails 	                =   array();
+	            $activitydetails['notifyto']        =   array($request->get('assigned_user_id'));
+	            $activitydetails['notifyby']        =   $request->get('employee_id');
+	            $activitydetails['actionperform']   =   'Assigned';
+	            $activitydetails['relatedto']       =   $recordModel->getId();
+	            addUserNotification($activitydetails);
+
+	        } else if($request->get('taskstatus') && $request->get('taskstatus')=='Completed' && $request->get('record')!='') {
+	        	 $currentUserModel = Users_Record_Model::getCurrentUserModel();
+
+	            //get all users who are reporting to login user
+	            $activitydetails 	                =   array();
+	            $activitydetails['notifyto']        =   array($currentUserModel->get('reports_to_id'));
+	            $activitydetails['notifyby']        =   $currentUserModel->id;
+	            $activitydetails['actionperform']   =   'Completed';
+	            $activitydetails['relatedto']       =   $request->get('record');
+	            addUserNotification($activitydetails);
+	        }   
+            //end activity
+
 			header("Location: $loadUrl");
 		} catch (DuplicateException $e) {
 			$mode = '';

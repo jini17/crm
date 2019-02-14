@@ -63,7 +63,7 @@
                                     <span class="name textOverflowEllipsis" value="Employees" style="width:10%">
                                         <strong>{vtranslate('Where am I',$MODULE)}</strong>
                                     </span>
-                                    <span class="editTabName hide"><input name="tabName" type="text"></span><i class="fa fa-bars moveTab hide"></i>
+                                    <span class="editTabName hide"><input name="tabName" type="text"></span></i>
                                 </div>
                             </a>
                        </li>

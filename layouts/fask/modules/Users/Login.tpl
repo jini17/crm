@@ -324,8 +324,8 @@
                                               
  <footer style="background-color: #fff;">
     <div class="container-fluid">
-        <p class="text-center" style="padding-top:10px; font-size: 12px;">Copyright &copy; All rights reserved. 
-            <a class="text-primary" href="http://dev7.secondcrm.com/">Softsolvers Solutions Sdn </a>
+            <p class="text-center" style="padding-top:10px; font-size: 12px;"> Agiliux V7 &copy;  
+            <a style="color: #000; font-weight: bold;" href="http://secondcrm.com/">Soft Solvers Solutions.</a> &nbsp;All rights reserved.
         </p>
     </div>
 </footer>

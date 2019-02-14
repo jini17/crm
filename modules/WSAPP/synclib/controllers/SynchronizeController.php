@@ -147,7 +147,7 @@ abstract class WSAPP_SynchronizeController {
 
 
         $syncStateModel = $this->getSyncStateModel($this->targetConnector);
-        $targetRecords = $this->targetConnector->pull($syncStateModel, $this->user);        
+        $targetRecords = $this->targetConnector->pull($syncStateModel, $this->user);   
 
         foreach($targetRecords as $record){
             $record->setSyncIdentificationKey(uniqid());
@@ -177,8 +177,9 @@ abstract class WSAPP_SynchronizeController {
             
         }
 
+
         $transformedRecords = $this->targetConnector->transformToSourceRecord($targetRecords, $this->user); 
-        $sourceRecords = $this->sourceConnector->push($transformedRecords, $sourceSyncStateModel);
+        $sourceRecords = $this->sourceConnector->push($transformedRecords, $sourceSyncStateModel); 
 
         foreach ($targetRecords as $targetRecord) {
                 $targetId = $targetRecord->getId();

@@ -129,7 +129,7 @@
    {foreach item=moduleModel key=moduleName from=$APP_GROUPED_MENU[$APP_NAME]}
    {assign var='translatedModuleLabel' value=vtranslate($moduleModel->get('label'),$moduleName )}
    {if $moduleName eq 'MyProfile'}                                            
-   {assign var='moduleURL' value="index.php?module=Users&view=Detail&record={$USER_MODEL->getId()}&app=$APP_NAME&parent=Settings"}
+   {assign var='moduleURL' value="index.php?module=Users&view=PreferenceDetail&record={$USER_MODEL->getId()}&app=$APP_NAME&parent=Settings"}
    {else}
    {assign var='moduleURL' value="{$moduleModel->getDefaultUrl()}&app=$APP_NAME"}
    {/if}   
@@ -224,8 +224,7 @@
  <!--Company Logo -->
   <div class="logo-container pull-left">
       <a href="index.php" class="">
-      <!--<img src="{$COMPANY_LOGO->get('imagepath')}" alt="{$COMPANY_LOGO->get('alt')}"/>-->
-      <img src="test/loginlogo/Agiliux-logo.png" width="150" height="150" style="width: 120px;height: auto;margin: 15px 0px;" alt="Second CRM" height=""/>
+          <img src="test/loginlogo/second-crm-logo.png"  alt="Second CRM"  height="20px"/>
       </a>
   </div>
 <!--End here logo -->

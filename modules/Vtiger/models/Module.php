@@ -733,11 +733,12 @@ class Vtiger_Module_Model extends Vtiger_Module {
 
                 if(!$moduleModels){
                         $moduleModels = array();
-
-                        $query = 'SELECT * FROM vtiger_tab';
+                        $currentUser = Users_Record_Model::getCurrentUserModel();
+                        $planid = $_SESSION['plan'];
+                        $query = 'SELECT * FROM vtiger_tab LEFT JOIN secondcrm_planpermission ON secondcrm_planpermission.tabid=vtiger_tab.tabid';
                         $params = array();
                         if($presence) {
-                                $query .= ' WHERE presence IN ('. generateQuestionMarks($presence) .')';
+                                $query .= " WHERE presence IN (". generateQuestionMarks($presence) .") AND secondcrm_planpermission.planid='".$planid."' ORDER BY name ASC" ;
                                 array_push($params, $presence);
                         }
 

@@ -9,17 +9,18 @@
  *************************************************************************************/
 $languageStrings = array(
 	// Basic Strings
-	'HelpDesk' => 'Tickets',
-	'SINGLE_HelpDesk' => 'Ticket',
-	'LBL_ADD_RECORD' => 'Add Ticket',
-	'LBL_RECORDS_LIST' => 'Ticket List',
+	'HelpDesk' => 'Service Request',
+	'SINGLE_HelpDesk' => 'Service Request',
+	'LBL_ADD_RECORD' => 'Add Service Request',
+	'LBL_RECORDS_LIST' => 'Service Request List',
+	'LBL_CREATE_INVOICE'=>'Create Invoice',
 
 	// Blocks
-	'LBL_TICKET_INFORMATION' => 'Ticket Information',
-	'LBL_TICKET_RESOLUTION' => 'Ticket Resolution',
+	'LBL_TICKET_INFORMATION' => 'Service Request Information',
+	'LBL_TICKET_RESOLUTION' => 'Service Request Resolution',
 
 	//Field Labels
-	'Ticket No' => 'Ticket Number',
+	'Ticket No' => 'Service Request Number',
 	'Severity' => 'Severity',
 	'Update History' => 'Update History',
 	'Hours' => 'Hours',
@@ -54,14 +55,14 @@ $languageStrings = array(
 	'LBL_RELATED_TO' => 'Related To',
 
 	//added to support i18n in ticket mails
-	'Ticket ID'=>'Ticket ID',
+	'Ticket ID'=>'Service Request ID',
 	'Hi' => 'Hi',
 	'Dear'=> 'Dear',
-	'LBL_PORTAL_BODY_MAILINFO'=> 'The Ticket is',
+	'LBL_PORTAL_BODY_MAILINFO'=> 'The Service Request is',
 	'LBL_DETAIL' => 'the details are :',
 	'LBL_REGARDS'=> 'Regards',
 	'LBL_TEAM'=> 'HelpDesk Team',
-	'LBL_TICKET_DETAILS' => 'Ticket Details',
+	'LBL_TICKET_DETAILS' => 'Service Request Details',
 	'LBL_SUBJECT' => 'Subject : ',
 	'created' => 'created',
 	'replied' => 'replied',
@@ -69,21 +70,21 @@ $languageStrings = array(
 	'customer_portal' => 'in the "Customer Portal" at VTiger.',
 	'link' => 'You can use the following link to view the replies made:',
 	'Thanks' => 'Thanks',
-	'Support_team' => 'Vtiger Support Team',
+	'Support_team' => 'Agiliux Support Team',
 	'The comments are' => 'The comments are',
-	'Ticket Title' => 'Ticket Title',
+	'Ticket Title' => 'Service Request Title',
 	'Re' => 'Re :',
 
 	//This label for customerportal.
 	'LBL_STATUS_CLOSED' =>'Closed',//Do not convert this label. This is used to check the status. If the status 'Closed' is changed in vtigerCRM server side then you have to change in customerportal language file also.
-	'LBL_STATUS_UPDATE' => 'Ticket status is updated as',
-	'LBL_COULDNOT_CLOSED' => 'Ticket could not be',
+	'LBL_STATUS_UPDATE' => 'Service Request status is updated as',
+	'LBL_COULDNOT_CLOSED' => 'Service Request could not be',
 	'LBL_CUSTOMER_COMMENTS' => 'Customer has provided the following additional information to your reply:',
-	'LBL_RESPOND'=> 'Kindly respond to above ticket at the earliest.',
+	'LBL_RESPOND'=> 'Kindly respond to above Service Request at the earliest.',
 	'LBL_SUPPORT_ADMIN' => 'Support Administrator',
-	'LBL_RESPONDTO_TICKETID' =>'Respond to Ticket ID',
-	'LBL_RESPONSE_TO_TICKET_NUMBER' =>'Response to Ticket Number',
-	'LBL_TICKET_NUMBER' => 'Ticket Number',
+	'LBL_RESPONDTO_TICKETID' =>'Respond to Service Request ID',
+	'LBL_RESPONSE_TO_TICKET_NUMBER' =>'Response to Service Request Number',
+	'LBL_TICKET_NUMBER' => 'Service Request Number',
 	'LBL_CUSTOMER_PORTAL' => 'in Customer Portal - URGENT',
 	'LBL_LOGIN_DETAILS' => 'Following are your Customer Portal login details :',
 	'LBL_MAIL_COULDNOT_SENT' =>'Mail could not be sent',
@@ -95,15 +96,15 @@ $languageStrings = array(
 	'LBL_LOGIN_REVOKED' => 'Your login is revoked. Please contact your admin.',
 	'LBL_MAIL_SENT' => 'Mail has been sent to your mail id with the customer portal login details',
 	'LBL_ALTBODY' => 'This is the body in plain text for non-HTML mail clients',
-	'HelpDesk ID' => 'Ticket ID',    
+	'HelpDesk ID' => 'Service Request ID',    
 	//Portal shortcuts
 	'LBL_ADD_DOCUMENT'=>"Add Document",
 	'LBL_OPEN_TICKETS'=>"Open Tickets",
-	'LBL_CREATE_TICKET'=>"Create Ticket",
+	'LBL_CREATE_TICKET'=>"Create Service Request",
 );
 
 $jsLanguageStrings=array(
 	'LBL_ADD_DOCUMENT'=>'Add Document',
-	'LBL_OPEN_TICKETS'=>'Open Tickets',
-	'LBL_CREATE_TICKET'=>'Create Ticket'
+	'LBL_OPEN_TICKETS'=>'Open Service Requests',
+	'LBL_CREATE_TICKET'=>'Create Service Request'
 );

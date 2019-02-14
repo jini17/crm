@@ -194,9 +194,12 @@ a.btn.btn-gettingStarted i{
     padding-top: 0;
 }
 .btn-widget-view-more{
-    color: #CBA7C1;
+    color: #AFDFDF;
     float: right;
     padding-top: 10px;
+        position: absolute;
+    bottom: 4px;
+right: 15px;
 }
 
 /**=========================
@@ -710,4 +713,21 @@ color: #CBA7C1 !important;
     background: #AFDFDF;
      color: #fff;
      padding: 5px;
+}
+.fasksecond i,
+.material-icons.module-icon{
+    margin-right: 5px;
+    font-size: 14px !important;
+
+    margin-top: 5px;
+}
+.global-nav .app-navigator-container{
+       height: 51px !important;
+}
+.jqplot-title{
+    display: none !important;
+}
+.jqplot-table-legend.jqplot-table-legend-swatch,
+td.jqplot-table-legend{
+    padding-right: 5px;
 }

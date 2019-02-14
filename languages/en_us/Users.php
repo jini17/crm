@@ -461,6 +461,7 @@ $languageStrings = array(
 	'LBL_EDIT_LEAVE'=>'Edit Leave',	
 	'LBL_DAY_REMAINING' => "Days Remaining",
 	'LBL_0_DAY_REMAINING'	=> ' 0 Day Remaining',
+	'LBL_NO_RECORD_FOUND'=>'No record found',
 	
 //End Leave Section
 
@@ -507,7 +508,7 @@ $languageStrings = array(
 'LBL_SISTER'=> 'Sister',
 'LBL_BROTHER'=> 'Brother',
 'LBL_FRIEND'=> 'Friend',
-'LBL_SELECT'=>'Select anyone',
+'LBL_SELECT'=>'Select an Option',
 //Leave Section add by jitu@secondcrm.com on 24-12-2014
 'LBL_ACTION' => 'Action',
 'LBL_LEAVE_STATUS' => 'Leave Status',

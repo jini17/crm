@@ -38,6 +38,7 @@ class Users_List_View extends Settings_Vtiger_List_View
         $myDetails['fullname'] = $current_user->get('first_name') . " " . $current_user->get('last_name');
         $myDetails['designation'] = $current_user->get('title');
         $myDetails['department'] = $current_user->get('department');
+        $myDetails['designation'] = Users_Record_Model::getDesignationByEmployeeID($current_user->get("id"));
         $myDetails['email'] = $current_user->get('email1');
         $myDetails['id'] = $current_user->get('id');
         $date1 = new DateTime($current_user->get('date_joined'));

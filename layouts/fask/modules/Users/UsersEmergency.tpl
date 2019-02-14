@@ -6,7 +6,7 @@
 	<div class="btn-group pull-right allprofilebtn">
                  {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13" OR $USER_MODEL->isAdminUser() }
 			<button type="button" class="btn btn-primary {if $total neq 0}hide{/if}" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}');">
-                                                                            <i class="fa fa-pencil"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_CONTACT', $MODULE)}</strong>
+                                                                            <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;<strong>{vtranslate('LBL_ADD_CONTACT', $MODULE)}</strong>
                                                                 </button>
         {/if}                                                        
 		</div>
@@ -21,9 +21,9 @@
                                      {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13" OR $USER_MODEL->isAdminUser() }
                                 <div class="col-md-6">
                                     <span class="pull-right">
-                                      {if $total lt '5'}  <a href="#" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}');"><li class="fa fa-plus-circle"></li></a> &nbsp; {/if}
-                                        <a href="#" onclick="Users_Emergency_Js.editEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}&record_id={$contact['id']}');"><li class="fa fa-pencil"></li></a> &nbsp;
-                                      {if $k neq '0'}  <a href="#" onclick="Users_Emergency_Js.deleteEmergerncyContact('{$EDIT_EMERGENCY_URL}&userId={$USERID}&delete_id={$contact['id']}','{$USERID}');"><li class="fa fa-trash-o"></li></a> &nbsp;{/if}
+                                      {if $total lt '5'}  <a href="#" onclick="Users_Emergency_Js.addEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}');"><li class="fas fa-plus-circle"></li></a> &nbsp; {/if}
+                                        <a href="#" onclick="Users_Emergency_Js.editEmergency('{$EDIT_EMERGENCY_URL}&userId={$USERID}&record_id={$contact['id']}');"><li class="fas fa-pencil-alt"></li></a> &nbsp;
+                                      {if $k neq '0'}  <a href="#" onclick="Users_Emergency_Js.deleteEmergerncyContact('{$EDIT_EMERGENCY_URL}&userId={$USERID}&delete_id={$contact['id']}','{$USERID}');"><li class="fas fa-trash"></li></a> &nbsp;{/if}
                                     </span>
                                 </div>
                               {/if}  

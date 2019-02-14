@@ -194,9 +194,12 @@ a.btn.btn-gettingStarted i{
     padding-top: 0;
 }
 .btn-widget-view-more{
-    color: #2f5597;
+    color: #AFDFDF;
     float: right;
     padding-top: 10px;
+        position: absolute;
+    bottom: 4px;
+    right: 15px;
 }
 
 a.widget-heading:hover,
@@ -596,4 +599,21 @@ color: #2f5597 !important;
     font-size: 12px !important;
     
 
+}
+.fasksecond i,
+.material-icons.module-icon{
+    margin-right: 5px;
+    font-size: 14px !important;
+
+    margin-top: 5px;
+}
+.global-nav .app-navigator-container{
+       height: 51px !important;
+}
+.jqplot-title{
+    display: none !important;
+}
+.jqplot-table-legend.jqplot-table-legend-swatch,
+td.jqplot-table-legend{
+    padding-right: 5px;
 }

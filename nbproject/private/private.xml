@@ -3,8 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/agiliuxv3/layouts/fask/modules/Calendar/TaskManagement.tpl</file>
-            <file>file:/var/www/html/agiliuxv3/layouts/fask/modules/Vtiger/dashboards/KanBan.tpl</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/blue/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/danube/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/modules/Users/EmployeeTree.tpl</file>
+            <file>file:/var/www/html/agiliuxv3/index.php</file>
+            <file>file:/var/www/html/agiliuxv3/modules/Users/views/List.php</file>
+            <file>file:/var/www/html/agiliuxv3/modules/Users/models/Record.php</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/aquaisland/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/sandybrown/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/mandy/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/energyyellow/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/lilacbush/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/purple/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/darkblue/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/downy/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/selectiveyellow/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/shipcove/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/config.inc.php</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/green/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/vtiger/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/lily/common.css</file>
+            <file>file:/var/www/html/agiliuxv3/layouts/fask/skins/yellow/common.css</file>
         </group>
     </open-files>
 </project-private>

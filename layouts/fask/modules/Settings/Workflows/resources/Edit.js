@@ -171,7 +171,7 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
                clonedPopupUi.find('.fieldValueContainer input').removeAttr('checked');
             }
          }
-         var callBackFunction = function (data) {
+         var callBackFunction = function (data) { alert(JSON.stringify(data));
             isPopupShowing = false;
             data.find('.clonedPopupUi').removeClass('hide');
             var moduleNameElement = conditionRow.find('[name="modulename"]');
@@ -783,6 +783,9 @@ Settings_Vtiger_Edit_Js("Settings_Workflows_Edit_Js", {
          var currentElement = jQuery(e.currentTarget);
          var inputElement = currentElement.closest('.row').find('.fields');
          inputElement.val(currentElement.val());
+         // Added By Mabruk
+         var array = currentElement.val().split('##');
+         jQuery('[name=fromEmail2]').val(array[1]);
       })
    },
    registerFillTaskFieldsEvent: function () {

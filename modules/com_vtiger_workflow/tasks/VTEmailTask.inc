@@ -30,9 +30,15 @@ class VTEmailTask extends VTTask{
 		$module = $entity->getModuleName();
 		$taskContents = Zend_Json::decode($this->getContents($entity));
 		$relatedInfo = Zend_Json::decode($this->getRelatedInfo());
-		$from_email_server	= explode('##',$taskContents['fromEmail']);
-		$from_email = $from_email_server[1];
-		$server = $from_email_server[0];
+		if(stripos($taskContents['fromEmail'],'##') !==false){
+			$from_email_server	= explode('##',$taskContents['fromEmail']);
+			$from_email = $from_email_server[1];
+			$server = $from_email_server[0];
+		
+		} else {
+			$from_email = $taskContents['fromEmail'];
+			$server = '';
+		}
 		$from_name	= $taskContents['fromName'];
 //		$to_email	= $taskContents['toEmail'];
 		$cc			= $taskContents['ccEmail'];

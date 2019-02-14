@@ -55,7 +55,7 @@
                                     <span class="pull-right picklistActions" style='margin-top:0px;'>
                                         <a  title="{vtranslate('LBL_EDIT',$QUALIFIED_MODULE)}"  class="renameItem"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;&nbsp;
                                         {if !in_array($PICKLIST_VALUE, $NON_DELETABLE_VALUES)}
-                                            <a  title="{vtranslate('LBL_DELETE_VALUE',$QUALIFIED_MODULE)}" class="deleteItem"><i class="fa fa-trash-o"></i></a>
+                                            <a  title="{vtranslate('LBL_DELETE_VALUE',$QUALIFIED_MODULE)}" class="deleteItem"><i class="fa fa-trash"></i></a>
                                         {/if}
                                     </span> 
                                 </td>
@@ -64,7 +64,7 @@
                         </tbody>
                         <span class="picklistActionsTemplate hide">
                             <a  title="{vtranslate('LBL_EDIT',$QUALIFIED_MODULE)}"  class="renameItem"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;&nbsp;
-                            <a  title="{vtranslate('LBL_DELETE_VALUE',$QUALIFIED_MODULE)}" class="deleteItem"><i class="fa fa-trash-o"></i></a>
+                            <a  title="{vtranslate('LBL_DELETE_VALUE',$QUALIFIED_MODULE)}" class="deleteItem"><i class="fa fa-trash"></i></a>
                         </span>
                     </table>
                 </div>

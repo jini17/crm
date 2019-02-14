@@ -26,7 +26,7 @@
                     <div class="panel-body">
                         <ul class='gender list-unstyled'>
                             <li><input type="checkbox" name="gender" value="Male"/>&nbsp;Male</li>
-                            <li><input type="checkbox" name="gender" value="Female"/> Female</li>
+                            <li><input type="checkbox" name="gender" value="Female"/>&nbsp;Female</li>
                         </ul>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     <div class="panel-body">
                         <ul class='gender list-unstyled'>
                             <li><input type="checkbox" name="birthday" value="thisweek">&nbsp;This Week</li>
-                            <li><input type="checkbox" name="birthday" value="thismonth"/> This Month</li>
+                            <li><input type="checkbox" name="birthday" value="thismonth"/>&nbsp;This Month</li>
                         </ul>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                     <div class="panel-body">
                         <ul class='gender list-unstyled'>
                             <li><input type="checkbox" name="date_joined" value="thisweek">&nbsp;This Week</li>
-                            <li><input type="checkbox" name="date_joined" value="thismonth"/> &nbsp;This Month
+                            <li><input type="checkbox" name="date_joined" value="thismonth"/>&nbsp;This Month
                             </li>
                         </ul>
                     </div>

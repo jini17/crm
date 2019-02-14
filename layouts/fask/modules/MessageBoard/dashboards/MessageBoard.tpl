@@ -27,6 +27,8 @@
 <div class="dashboardWidgetContent">
 
 	{include file="dashboards/MessageBoardContents.tpl"|@vtemplate_path:$MODULE_NAME}
+                           
+
 </div>
 
 <div class="widgeticons dashBoardWidgetFooter">
@@ -36,3 +38,4 @@
 </div>
 
 
+      <a href="index.php?module=MessageBoard&view=List" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
