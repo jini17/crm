@@ -95,7 +95,7 @@ class Vtiger_QuotePDFController extends Vtiger_InventoryPDFController{
 	function buildHeaderModelColumnLeft() {
 		global $adb;
 		// Company information
-		//Added By jitu@secondcrm.com on 1-10-2014
+		
 		 $companyid = $this->focus->column_fields['company_details'];	
 		 $result = $adb->pquery("SELECT * FROM vtiger_organizationdetails WHERE organization_id =?", array($companyid));
 		$num_rows = $adb->num_rows($result);
@@ -113,8 +113,14 @@ class Vtiger_QuotePDFController extends Vtiger_InventoryPDFController{
 			if(!empty($resultrow['phone']))		$additionalCompanyInfo[]= "<br />".getTranslatedString("Tel: ", $this->moduleName). $resultrow['phone'];
 			if(!empty($resultrow['fax']))		$additionalCompanyInfo[]= "/".getTranslatedString(" Fax: ", $this->moduleName). $resultrow['fax'];
 			
-			$logo = "test/logo/".$resultrow['logoname'];			
+			$companyDetails = Vtiger_Record_Model::getInstanceById($companyid, 'OrganizationDetails');
+			$imagedetails = $companyDetails->getImageDetails();
+            $logo = $imagedetails[0]['path'].'_'.$imagedetails[0]['name'];	
 
+            if(!file_exists($logo)){
+            	$logo = 'test/loginlogo/second-crm-logo.png';
+            }
+            
 			$modelColumnLeft = array(
 					'logo' => $logo,
 					'summary' => decode_html($resultrow['organizationname']),
