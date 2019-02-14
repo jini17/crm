@@ -715,7 +715,7 @@ color: #AFDFDF !important;
      padding: 5px;
 }
 .fasksecond i,
-.material-icons.module-icon{
+.fasksecond .material-icons.module-icon{
     margin-right: 5px;
     font-size: 14px !important;
 

@@ -731,7 +731,7 @@ color: #2f5597 !important;
      padding: 5px;
 }
 .fasksecond i,
-.material-icons.module-icon{
+.fasksecond .material-icons.module-icon{
     margin-right: 5px;
     font-size: 14px !important;
 
@@ -746,4 +746,26 @@ color: #2f5597 !important;
 .jqplot-table-legend.jqplot-table-legend-swatch,
 td.jqplot-table-legend{
     padding-right: 5px;
+}
+.fasksecond i,
+.material-icons.module-icon{
+    margin-right: 5px;
+    font-size: 14px !important;
+width: 14px;
+height: 14px;
+    margin-top: -2px;
+}
+.dashBoardTabContents .ready ul li{
+    position: relative;    
+}
+.jqplot-title{
+    display: none !important;
+}
+.jqplot-table-legend.jqplot-table-legend-swatch,
+td.jqplot-table-legend{
+    padding-right: 5px;
+}
+.fask{
+    width: 100% !important;
+    
 }
