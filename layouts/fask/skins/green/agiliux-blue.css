@@ -771,3 +771,12 @@ td.jqplot-table-legend{
 .jqplot-grid-canvas{
     display: none;
 }
+.btn-group button{
+    border-radius: 3px !important;
+    padding-right:10px !important;
+    margin-right: 10px !important;
+}
+#appnav button{
+    padding-right: 10px !important;
+    
+}
