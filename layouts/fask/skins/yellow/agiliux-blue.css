@@ -809,3 +809,6 @@ td.jqplot-table-legend{
 .fask{
     width: 100% !important;
 }
+.jqplot-grid-canvas{
+    display: none;
+}

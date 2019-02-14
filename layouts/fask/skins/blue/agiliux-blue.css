@@ -776,3 +776,6 @@ td.jqplot-table-legend{
     width: 100%;
     padding: 0 10px 0;
 }
+.jqplot-grid-canvas{
+    display: none;
+}

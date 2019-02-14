@@ -717,6 +717,7 @@ color: #997CCD !important;
 }
 .fasksecond i,
 .fasksecond .material-icons.module-icon{
+    
     margin-right: 5px;
     font-size: 14px !important;
 
@@ -750,4 +751,8 @@ td.jqplot-table-legend{
 .fask{
     width: 100% !important;
     
+}
+
+.jqplot-grid-canvas{
+    display: none;
 }

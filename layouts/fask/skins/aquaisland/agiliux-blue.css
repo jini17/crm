@@ -728,3 +728,6 @@ color: #AFDFDF !important;
 td.jqplot-table-legend{
     padding-right: 5px;
 }
+.jqplot-grid-canvas{
+    display: none;
+}
