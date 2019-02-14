@@ -31,10 +31,18 @@
           color: white;
           padding: 8px;
         }
-            </style>
+        .expirecontract{
+          color: #f91b05;
 
+        }
+            </style>
+           
+{if $DATA['contract'] neq 0}
 <div class="row ">
     <div class="col-md-8" style="padding-right: 0;">
+      {if $DATA['expirydays'] < 90 && $DATA['expirydays'] > -1 && $DATA['job_type'] eq 'Contract'}
+      <span class="expirecontract">{vtranslate('LBL_EXPIRE_CONTRACT')} {$DATA['expirydays']} {vtranslate('LBL_DAYS')}</span>
+      {/if}
      <div class='col-md-12' style="padding:0;"> 
          <h4>{vtranslate('LBL_GOOD_DAY','Home')}, {$DATA['first_name']}..!</h4>
      </div>
@@ -48,6 +56,7 @@
              <div class='col-md-12' style="padding:5px 0 ;"> 
                  <i class='ti ti-list-ol'></i>&nbsp;&nbsp;{$DATA['department']} {vtranslate('LBL_DEPARTMENT', 'Home')}
              </div>
+             {if $DATA['roleid'] neq 'H2'}
               <div class='col-md-12' style="padding:5px 0 ;"> 
                   <i class='ti ti-briefcase'></i>&nbsp;&nbsp;{vtranslate('LBL_OF_JOB','Home')} {$DATA['job_grade']} 
               </div>
@@ -57,6 +66,8 @@
                       {$DATA['report_to']['name']} 
                   </a>
               </div>
+              {/if}
+
               <div class='col-md-12' style="padding:5px 0 ;"> 
                 <i class='ti ti-calendar'></i>&nbsp;&nbsp;{$DATA['job_type']} {vtranslate('LBL_JOB',$MODULE_NAME)} {vtranslate('LBL_SINCE','Home')} {$DATA['contract_start']}
             
@@ -89,11 +100,11 @@
                     </div>
                 </div>
 </div>
-                    <div class="clearfix"></div>
-                    {if $DATA['notify'] eq 'show' AND $DATA['job_type'] eq 'Contract'  }
-                    <small>
-                        ** {vtranslate('LBL_CONTRACT_NOTIFICATION','Home')}
-                    </small>
-                    {/if}
+<div class="clearfix"></div>
+{else}
+  <small>
+      {vtranslate('LBL_NO_CONTRACT_FOUND','Home')}
+  </small>
+{/if}
                     
 </div>

@@ -35,6 +35,16 @@ class ModComments_SaveAjax_Action extends Vtiger_SaveAjax_Action {
 		}
 		$result['id'] = $result['_recordId'] = $recordModel->getId();
 		$result['_recordLabel'] = $recordModel->getName();
+
+
+		//Comment is posted by anyone to any message
+	    $activitydetails 	                =   array();
+        $activitydetails['notifyto']        =   NotificationPeople('all');
+        $activitydetails['notifyby']        =   $currentUserModel->id;
+        $activitydetails['actionperform']   =   'Commented';
+        $activitydetails['relatedto']       =   $request->get('related_to');
+        addUserNotification($activitydetails);
+		//end activity
         
 		$response = new Vtiger_Response();
 		$response->setEmitType(Vtiger_Response::$EMIT_JSON);

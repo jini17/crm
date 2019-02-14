@@ -43,7 +43,7 @@
 
 									<input type="hidden" name="manager" id="manager" value="false" />
 								{if $USER_CLAIM['claim_status'] eq 'Apply'}
-									<a class="deleteLeave cursorPointer" onclick="Users_Claim_Js.deleteClaim('index.php?module=Claim&action=Delete&record={$USER_CLAIM['claimid']}');"><i class="fa fa-trash-o" title="Delete"></i></a>
+									<a class="deleteLeave cursorPointer" onclick="Users_Claim_Js.deleteClaim('index.php?module=Claim&action=Delete&record={$USER_CLAIM['claimid']}');"><i class="fa fa-trash" title="Delete"></i></a>
 								{/if} 
 
 							</span>
@@ -168,7 +168,7 @@
 
 			<!--//Added By Jitu Date Combobox-->
 			{for $year=$STARTYEAR to $CURYEAR}
-			<option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
+				<option value="{$year}" {if $year eq $CURRENTYEAR} selected {/if}>{$year}</option>
 			{/for}
 		</select>	
 	</div>
@@ -221,7 +221,7 @@
 												<a class="editLeave cursorPointer editAction ti-pencil" title="{vtranslate('LBL_EDIT', $MODULE)}"  onclick="Users_Claim_Js.editClaim('index.php{$CREATE_CLAIM_URL}&record={$USER_CLAIM['claimid']}&userId={$USERID}&claim_status={$USER_CLAIM['claim_status']}&manager=false');"></a>
 												{/if} 
 												{if $USER_CLAIM['claim_status'] eq 'Cancel' OR $USER_CLAIM['claim_status'] eq 'Apply'}
-												<a class="deleteLeave cursorPointer" onclick="Users_Claim_Js.deleteClaim('index.php?module=Claim&action=Delete&record={$USER_CLAIM['claimid']}');"><i class="fa fa-trash-o" title="Delete"></i></a>
+												<a class="deleteLeave cursorPointer" onclick="Users_Claim_Js.deleteClaim('index.php?module=Claim&action=Delete&record={$USER_CLAIM['claimid']}');"><i class="fa fa-trash" title="Delete"></i></a>
 												{/if} 
 
 												{if $USER_CLAIM['claim_status'] eq 'Apply' }

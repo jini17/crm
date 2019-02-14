@@ -27,6 +27,15 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
                
                 $viewer = $this->getViewer($request);
 
+                //update view once open detail page related to Notification to make as "read"
+                $NotifyModuleName = $request->getModule();
+               
+                if($NotifyModuleName !='Notifications'){
+                    global $adb;
+                    $adb->pquery("UPDATE vtiger_crmentity_user_field SET viewed = 1 WHERE recordid = ? AND userid = ?", array($Notification->id, $userid));
+                }   
+                //end here
+
                 $menuModelsList = Vtiger_Menu_Model::getAll(true);
                 $selectedModule = $request->getModule();
                 $menuStructure = Vtiger_MenuStructure_Model::getInstanceFromMenuList($menuModelsList, $selectedModule);
@@ -101,7 +110,7 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
                 $viewer->assign('INVENTORY_MODULES',  $inventoryModules);
 
                 //fetch all notifications related to Log in user
-                $LIMIT = 5;
+                $LIMIT = 7;
                 $page = $request->get('page');
                 
                 if(empty($page)) {

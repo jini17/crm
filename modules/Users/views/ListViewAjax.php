@@ -181,7 +181,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
                 $section  = $request->get('section');   
 
                 $viewer->assign('MODULE',$moduleName);
-                $viewer->assign('STARTYEAR',date('Y'));//Added By Jitu Date Combobox 
+                $viewer->assign('STARTYEAR',date('Y')-1);//Added By Jitu Date Combobox 
                 $viewer->assign('ENDYEAR',(date('Y')+1));//Added By Jitu Date Combobox
 
                 $viewer->assign('CREATE_LEAVE_URL', Users_LeavesRecords_Model::getCreateLeaveURL());
@@ -321,7 +321,7 @@ class Users_ListViewAjax_View extends Vtiger_List_View{
                 $viewer->assign('MODULE',$moduleName);
                 $viewer->assign('CURRENTYEAR',date('Y'));//Added By Jitu Date Combobox 
                 $viewer->assign('CURYEAR',(date('Y')+1));//Added By Jitu Date Combobox
-                $viewer->assign('STARTYEAR',date('Y')-5);//Added By Jitu Date Combobox
+                $viewer->assign('STARTYEAR',date('Y')-1);//Added By Jitu Date Combobox
                 $url =  Users_ClaimRecords_Model::getCreateClaimURL();
 
                 $viewer->assign('CREATE_CLAIM_URL', Users_ClaimRecords_Model::getCreateClaimURL());

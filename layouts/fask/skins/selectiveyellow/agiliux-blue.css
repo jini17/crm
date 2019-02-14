@@ -194,9 +194,12 @@ a.btn.btn-gettingStarted i{
     padding-top: 0;
 }
 .btn-widget-view-more{
-    color: #F7B301;
+    color: #AFDFDF;
     float: right;
     padding-top: 10px;
+        position: absolute;
+    bottom: 4px;
+    right: 15px;
 }
 
 /**=========================
@@ -688,4 +691,11 @@ color: #F7B301 !important;
 }
 .global-nav .app-navigator-container{
     height: 51px !important;
+}
+.jqplot-title{
+    display: none !important;
+}
+.jqplot-table-legend.jqplot-table-legend-swatch,
+td.jqplot-table-legend{
+    padding-right: 5px;
 }

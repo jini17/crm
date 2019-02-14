@@ -54,7 +54,7 @@ class Google_Contacts_Model extends WSAPP_SyncRecordModel {
      * return Emails of Google Record
      * @return <array> emails
      */
-    function getEmails() {
+    function getEmails() { 
         $arr = $this->data['entity']['gd$email'];
         $emails = array();
         if (is_array($arr)) {
@@ -65,7 +65,7 @@ class Google_Contacts_Model extends WSAPP_SyncRecordModel {
                     $labelEmail = $email['label'];
                 $emails[$labelEmail] = $email['address'];
             }
-        }
+        } 
         return $emails;
     }
 

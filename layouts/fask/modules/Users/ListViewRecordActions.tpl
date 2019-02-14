@@ -17,7 +17,7 @@
                                         {/if}
 {*                                        <li><a onclick="Settings_Users_List_Js.triggerChangePassword('{$LISTVIEW_ENTRY->getChangePwdUrl()}');">{vtranslate('LBL_CHANGE_PASSWORD', $MODULE)}</a></li>
 *}                                        {if $IS_MODULE_EDITABLE && $LISTVIEW_ENTRY->get('status') eq 'Active'}
-                                        <li><a title="Edit" href="{$LISTVIEW_ENTRY->getEditViewUrl()}&parentblock=LBL_USER_MANAGEMENT" name="editlink"><i class='fa fa-edit'></i></a></li>
+                                        <li><a title="Edit" href="{str_replace('Edit','PreferenceEdit',$LISTVIEW_ENTRY->getEditViewUrl())}&parentblock=LBL_USER_MANAGEMENT" name="editlink"><i class='fa fa-edit'></i></a></li>
                                         {/if}
                                 {/if}
                                 {if $IS_MODULE_DELETABLE && $LISTVIEW_ENTRY->getId() != $USER_MODEL->getId()}

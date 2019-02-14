@@ -35,7 +35,6 @@
         </div>
 
     {/foreach}
-                         <a href="index.php?module=MessageBoard&view=List" class="btn-widget-view-more">{vtranslate('LBL_VIEW_MORE', $MODULE_NAME)}</a>
 
 
 {else}
@@ -44,6 +43,7 @@
     </span>
 {/if}
 </div>
+
 <script>
       jQuery("#quickCreateMessage").on('click', '.quickCreateModule',function(){
                     $( "#menubar_quickCreate_MessageBoard" ).trigger( "click" );

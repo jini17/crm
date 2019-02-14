@@ -57,16 +57,16 @@
                                     </div>
                             </a>
                         </li>
-                        <!--<li class="{if $TAB_TYPE eq 'WAI'}active {/if} employeeTab" data-tabname="Where am i">
+                        <li class="{if $TAB_TYPE eq 'WAI'}active {/if} employeeTab" data-tabname="Where am i">
                             <a href="index.php?module=Users&parent=Settings&view=List&block=1&fieldid=1&tabtype=WAI">
                                 <div>
                                     <span class="name textOverflowEllipsis" value="Employees" style="width:10%">
                                         <strong>{vtranslate('Where am I',$MODULE)}</strong>
                                     </span>
-                                    <span class="editTabName hide"><input name="tabName" type="text"></span><i class="fa fa-bars moveTab hide"></i>
+                                    <span class="editTabName hide"><input name="tabName" type="text"></span></i>
                                 </div>
                             </a>
-                       </li>-->
+                       </li>
                </div>
         <div class="clearfix" style="height:20px;"></div>
         {if $TAB_TYPE neq 'WAI'}

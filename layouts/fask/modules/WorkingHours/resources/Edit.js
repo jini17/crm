@@ -50,8 +50,12 @@ Vtiger_Edit_Js("WorkingHours_Edit_Js",{},{
 	 */
 	
 	registerEvents : function() {
-    	      var vtigerinst = new Vtiger_Index_Js();
-	      vtigerinst.registerEvents();
+
+		// Parent Call Added By Mabruk .. It is important to get all the Edit Functions From Parent 
+		this._super();
+
+    	var vtigerinst = new Vtiger_Index_Js();
+	    vtigerinst.registerEvents();
      	this.registerEventForCopyDuration();
 	}
 	

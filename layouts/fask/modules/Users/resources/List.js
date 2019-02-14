@@ -355,8 +355,10 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
     registerUserViewSwitcher: function () {
         jQuery('.empview').on('click', function () {
             var viewtype = $(this).data('listtype');
-            $(this).closest('div').find('button').removeClass('btn-primary');
-            $(this).addClass('btn-primary')
+           
+            $(this).closest('div').find('button').removeClass('btn-primary activeview');
+            $(this).addClass('btn-primary activeview')
+
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();
             listParams['empview'] = viewtype;
@@ -382,10 +384,8 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
     registerAdvancedEmployeeDirectorySearch: function () {
         jQuery('.main-container .panel-filter').on('click', '.panel-body input', function () {
             var inputs = jQuery('#accordion').find('input:checked')
-            var viewtype = $(".empview").data('listtype');
-            
-            //var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
-           
+           // var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+           var viewtype = $(".activeview").data('listtype');
             var tabType = jQuery('#tabtype').val();
             var gender = []
             var birthday = []
@@ -441,7 +441,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
             $(this).closest('tr').find('td').removeAttr('style');
             $(this).closest('td').css('border-bottom', '1px solid #2f5597');
             //var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
-            var viewtype = $(".empview").data('listtype');
+            var viewtype = $(".activeview").data('listtype');
             var atext = $(this).find('a').data('alphabet');
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();
@@ -469,7 +469,8 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
               var keyword = $("#keywordsearch").val();
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();
-            var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+           // var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+           var viewtype = $(".activeview").data('listtype');
             var tabType = jQuery('#tabtype').val();
             var dept = jQuery('#curdepartment').val();
 
@@ -497,8 +498,8 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
             var keyword = $("#keywordsearch").val();
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();
-          //  var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
-             var viewtype = $(".empview").data('listtype');
+            //var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+            var viewtype = jQuery(".activeview").data('listtype');
             var tabType = jQuery('#tabtype').val();
             var dept = jQuery('#curdepartment').val();
 
@@ -527,7 +528,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
             var page = $(this).find('a').data('page');
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();
-            var viewtype = jQuery('body').find('.list-switcher').find('.btn-primary').data('listtype');
+            var viewtype = jQuery(".activeview").data('listtype');
             var tabType = jQuery('#tabtype').val();
             var dept = jQuery('#curdepartment').val();
 
@@ -580,7 +581,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
             var keyword = $(this).find(":selected").val();
             var listInstance = new Settings_Users_List_Js;
             var listParams = listInstance.getListViewParams();
-            var viewtype = jQuery('body').find('.list-switcher').find('.btn-primary').data('listtype');
+            var viewtype = jQuery(".activeview").data('listtype');
             var tabType = jQuery('#tabtype').val();
             var day_ago = jQuery("#sevendaysago").val();
             var day_after = jQuery("#sevendaysafter").val()

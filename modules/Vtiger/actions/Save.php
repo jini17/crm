@@ -38,6 +38,7 @@ class Vtiger_Save_Action extends Vtiger_Action_Controller {
 	public function process(Vtiger_Request $request) {
 		
 		try {
+			$moduleName = $request->getModule();
 			$recordModel = $this->saveRecord($request);
 			if ($request->get('returntab_label')){
 				$loadUrl = 'index.php?'.$request->getReturnURL();
@@ -54,6 +55,27 @@ class Vtiger_Save_Action extends Vtiger_Action_Controller {
 			} else {
 				$loadUrl = $recordModel->getDetailViewUrl();
 			}
+
+			//Message Board posted/ Payslip download by anyone
+			if((!$request->get('record') && $moduleName=='MessageBoard') || $moduleName == 'Payslip' || $moduleName == 'WorkingHours'){
+		        $activitydetails 	                =   array();
+		        if($moduleName=='Payslip'){
+		        	$activitydetails['notifyto']        =   array($request->get('emp_name'));	
+		        	$activitydetails['actionperform']  	=   'Download';
+		        } else if($moduleName == 'WorkingHours'){
+		        	$activitydetails['notifyto']        =   NotificationPeople('all');
+		        	$activitydetails['actionperform']  	=   'Updated';
+		        }else if($moduleName == 'Payslip'){
+		        	$activitydetails['notifyto']        =   NotificationPeople('all');
+		        	$activitydetails['actionperform']  	=   'Posted';
+		        }
+		        
+		        $activitydetails['notifyby']        =   $currentUserModel->id;
+		        $activitydetails['relatedto']       =   $recordModel->getId();
+		        addUserNotification($activitydetails);
+		    }    
+    		//end activity
+
 			//append App name to callback url
 			//Special handling for vtiger7.
 			$appName = $request->get('appName');

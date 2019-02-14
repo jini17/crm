@@ -62,7 +62,15 @@ class Inventory_Detail_View extends Vtiger_Detail_View {
 		$viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
 
 		$viewer->assign('MODULE_NAME', $moduleName);
-		$viewer->assign('IS_AJAX_ENABLED', $this->isAjaxEnabled($recordModel));
+
+		$editflag = true;
+		$modules = array("Invoice"=>"IOR","PurchaseOrder"=>"POR","SalesOrder"=>"SOR", "Quotes"=>"QOR", "DeliveryOrder"=>"DOR");
+		$editrestrict = Vtiger_Record_Model::toggleRestrictAction($moduleName,$modules[$moduleName],$recordModel->getId());	
+		if($editrestrict &&  $this->isAjaxEnabled($recordModel)){
+			$editflag = false;
+		}
+
+		$viewer->assign('IS_AJAX_ENABLED',$editflag);
 		$viewer->assign('SUMMARY_RECORD_STRUCTURE', $recordStrucure->getStructure());
 		$viewer->assign('RELATED_ACTIVITIES', $this->getActivities($request));
 

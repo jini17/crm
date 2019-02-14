@@ -62,7 +62,7 @@
                                 {if $smarty.request.view eq 'PreferenceEdit'}
                                     <span class="current-filter-name settingModuleName filter-name pull-left">
                                 <a href="{"index.php?module="|cat:$smarty.request.module|cat:'&parent='|cat:$smarty.request.parent|cat:'&view=PreferenceDetail&record='|cat:$smarty.request.record}">
-                                        {vtranslate($ACTIVE_BLOCK['block'], $QUALIFIED_MODULE)}&nbsp;
+                                        {$RECORDNAME}&nbsp;
                                 </a>
                                 <i class="ti-angle-right" aria-hidden="true"></i>&nbsp;
                                     </span>

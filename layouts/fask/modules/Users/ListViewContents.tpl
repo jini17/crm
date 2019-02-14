@@ -220,7 +220,7 @@
                                                                                                         </div>
                                                                                                 {/if}
                                                                                                 <div class="usersinfo col-lg-9 textOverflowEllipsis" title="{$LISTVIEW_ENTRY->get('last_name')}">
-                                                                                                        <a href="{$LISTVIEW_ENTRY->getDetailViewUrl()}">{$LISTVIEW_ENTRY->get($LISTVIEW_HEADERNAME)} {$LISTVIEW_ENTRY->get('last_name')}</a>
+                                                                                                        <a href="{$LISTVIEW_ENTRY->getDetailViewUrl()}">{$LISTVIEW_ENTRY->get($LISTVIEW_HEADERNAME)}</a>
                                                                                                 </div>
                                                                                                 <div class="clearfix" style="height:20px;"></div>
                                                                                                 <div class="usersinfo col-lg-9 textOverflowEllipsis">

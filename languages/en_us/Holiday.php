@@ -23,14 +23,15 @@ $languageStrings = array(
 	'LBL_DECEMBER' => 'December',
 	'LBL_CLICK_HERE_TO_VIEW' => 'Click here to view',
 	'LBL_HOLIDAY_INFORMATION'=>'Holiday Information',
+	'SINGLE_Holiday' => 'Holiday',
 	//Basics
 	'LBL_NO_HOLIDAY' => 'No holiday in ',
 	'LBL_SELECT_ALL' => 'Select All',
-	'LBL_HOLIDAY' => 'Holiday',
+	'LBL_HOLIDAY' => 'Holiday',	
 	'Holiday List'=>'Holidays List',
-                     'LBL_THIS_MONTH'=>'This Month',
-                      'LBL_THIS_WEEK' => 'This Week',
-                       'LBL_THIS_YEAR'=> 'This Year'
+    'LBL_THIS_MONTH'=>'This Month',
+    'LBL_THIS_WEEK' => 'This Week',
+    'LBL_THIS_YEAR'=> 'This Year'
 
 );
 

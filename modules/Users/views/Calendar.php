@@ -20,7 +20,7 @@ class Users_Calendar_View extends Vtiger_Detail_View {
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$record = $request->get('record');
 
-		if($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $record) {
+		if($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $record || in_array($currentUserModel->roleid, array('H2','H13','H12'))) {
 			return true;
 		} else {
 			throw new AppException(vtranslate('LBL_PERMISSION_DENIED'));

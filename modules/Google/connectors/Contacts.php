@@ -150,9 +150,13 @@ Class Google_Contacts_Connector extends WSAPP_TargetConnector {
 				$googleFieldValue = $googleRecord->getBirthday();
 				break;
 			case 'gd:email' : 
-				$emails = $googleRecord->getEmails();
-				$googleFieldValue = $this->getMappedValue($emails, $googleFieldDetails);
+				$emails = $googleRecord->getEmails(); 
+				$googleFieldValue = $this->getMappedValue($emails, $googleFieldDetails); 
+
+				if (!$googleFieldValue) 
+					$googleFieldValue = $emails['other'];
 				break;
+
 			case 'gd:phoneNumber' : 
 				$phones = $googleRecord->getPhones();
 				$googleFieldValue = $this->getMappedValue($phones, $googleFieldDetails);
@@ -181,7 +185,7 @@ Class Google_Contacts_Connector extends WSAPP_TargetConnector {
 	 * @param <array> $targetRecords 
 	 * @return <array> tranformed Google Records
 	 */
-	public function transformToSourceRecord($targetRecords, $user = false) {
+	public function transformToSourceRecord($targetRecords, $user = false) { 
 		$entity = array();
 		$contacts = array();
 
@@ -196,7 +200,7 @@ Class Google_Contacts_Connector extends WSAPP_TargetConnector {
 				$entity = Vtiger_Functions::getMandatoryReferenceFields('Contacts');
 				$entity['assigned_user_id'] = vtws_getWebserviceEntityId('Users', $user->id);
 
-				foreach($this->fieldMapping as $vtFieldName => $googleFieldDetails) {
+				foreach($this->fieldMapping as $vtFieldName => $googleFieldDetails) { 
 					$googleFieldValue = $this->getGoogleFieldValue($googleFieldDetails, $googleRecord, $user);
 					if($vtFieldName == 'mailingaddress') {
 						$address = $googleFieldValue;
@@ -225,24 +229,29 @@ Class Google_Contacts_Connector extends WSAPP_TargetConnector {
 					}
 				}
 
-				if (empty($entity['lastname'])) {
-					if (!empty($entity['firstname'])) {
+				if (empty($entity['lastname'])) { 
+					if (!empty($entity['firstname'])) { 
 						$entity['lastname'] = $entity['firstname'];
-					} else if(empty($entity['firstname']) && !empty($entity['email'])) {
+					} else if(empty($entity['firstname']) && !empty($entity['email'])) { 
 						$entity['lastname'] = $entity['email'];
-					} else if( !empty($entity['mobile']) || !empty($entity['mailingstreet'])) {
+					} else if( !empty($entity['mobile']) || !empty($entity['mailingstreet'])) { 
 						$entity['lastname'] = 'Google Contact';
 					} else {
-						continue;
+						//continue;
+						$entity['lastname'] = 'NO NAME';
 					}
 			   }
 			}
-			$contact = $this->getSynchronizeController()->getSourceRecordModel($entity);
+			
 
-			$contact = $this->performBasicTransformations($googleRecord, $contact);
-			$contact = $this->performBasicTransformationsToSourceRecords("Google",$contact, $googleRecord);
+			
+			$contact = $this->getSynchronizeController()->getSourceRecordModel($entity); 
+
+			$contact = $this->performBasicTransformations($googleRecord, $contact);   
+			$contact = $this->performBasicTransformationsToSourceRecords("Google",$contact, $googleRecord, null); 
 			$contacts[] = $contact;
 		}
+
 		return $contacts;
 	}
 
@@ -251,7 +260,7 @@ Class Google_Contacts_Connector extends WSAPP_TargetConnector {
 	 * @param <object> $SyncState
 	 * @return <array> google Records
 	 */
-	public function pull($SyncState, $user = false) {
+	public function pull($SyncState, $user = false) { 
 		return $this->getContacts($SyncState, $user);
 	}
 

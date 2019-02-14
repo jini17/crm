@@ -456,6 +456,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                     array_push($notifyUsers, $currentUserModel->reports_to_id, $applicant_id);
                                     $activitydetails['notifyto']        =   $notifyUsers;
                                     $activitydetails['actionperform']   =   'Applied';
+                                    $activitydetails['notifyby']        =   $applicant_id; 
                                     $activitydetails['relatedto']       =   $leaveIdarray[1];
                                     addUserNotification($activitydetails);
                                 }    
@@ -526,9 +527,9 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                                 //Leave Approved or Rejected
                                                 $activitydetails = array();
                                                 $notifyUsers = NotificationPeople('H13','H2', 'H12');
-                                                array_push($notifyUsers, $currentUserModel->reports_to_id, $applicant_id);
+                                                array_push($notifyUsers,$applicant_id);
                                                 $activitydetails['notifyto']        =   $notifyUsers;
-                                               // $activitydetails['notifyby']        =   $data['approveby'];
+                                                $activitydetails['notifyby']        =   $data['approveby'];
                                                 $activitydetails['actionperform']   =   $request->get('savetype');
                                                 $activitydetails['relatedto']       =   $leaveid;
                                                 addUserNotification($activitydetails);
@@ -580,7 +581,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                                 $notifyUsers = NotificationPeople('H13');
                                                 array_push($notifyUsers, $currentUserModel->reports_to_id, $applicant_id);
                                                 $activitydetails['notifyto']        =   $notifyUsers;
-                                               // $activitydetails['notifyby']      =   $data['approveby'];
+                                                $activitydetails['notifyby']        =   $applicant_id;
                                                 $activitydetails['actionperform']   =   'Applied';
                                                 $activitydetails['relatedto']       =   $leaveid;
                                                 addUserNotification($activitydetails);
@@ -706,8 +707,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                 $current_user_id = $request->get('current_user_id');
                 $reporting = new Users();
                 $reportingManager = $reporting->retrieveCurrentUserInfoFromFile($current_user_id);
-                $current_user_id."Reporting Manager";
-              
+                
                 $claimid= $request->get('record');
                 $manager = $request->get('manager'); 
 
@@ -756,6 +756,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                 array_push($notifyUsers, $currentUserModel->reports_to_id, $current_user_id);
                                 $activitydetails['notifyto']        =   $notifyUsers;
                                 $activitydetails['actionperform']   =   'Applied';
+                                $activitydetails['notifyby']        =   $current_user_id;
                                 $activitydetails['relatedto']       =   $claimIdComponents[1];
                                 addUserNotification($activitydetails);
                                 
@@ -810,8 +811,9 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                                         $activitydetails = array();
                                         $claimIdComponents = explode('x', $claims->id);
                                         $notifyUsers = NotificationPeople('H13','H2','H12');
-                                        array_push($notifyUsers, $reportingManager->reports_to_id, $current_user_id);
+                                        array_push($notifyUsers, $current_user_id);
                                         $activitydetails['notifyto']        =   $notifyUsers;
+                                        $activitydetails['notifyby']        =   $reportingManager->reports_to_id;
                                         $activitydetails['actionperform']   =   $claim_status;
                                         $activitydetails['relatedto']       =   $claims->id;
                                         addUserNotification($activitydetails);

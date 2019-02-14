@@ -23,7 +23,14 @@ class Quotes_DetailView_Model extends Inventory_DetailView_Model {
 		$recordModel = $this->getRecord();
 
 		$invoiceModuleModel = Vtiger_Module_Model::getInstance('Invoice');
-		if($currentUserModel->hasModuleActionPermission($invoiceModuleModel->getId(), 'CreateView')) {
+
+		//Added by jitu@27-04-2015 for ShowHide Restrict Issue 
+		$invoiceRestrict = Vtiger_Record_Model::toggleRestrictAction('Quotes','GIQ', $recordModel->getId());	
+		$salesorderRestrict = Vtiger_Record_Model::toggleRestrictAction('Quotes','GSQ', $recordModel->getId());
+		$purchaseorderRestrict = Vtiger_Record_Model::toggleRestrictAction('Quotes','GPQ', $recordModel->getId());
+		//End here 
+
+		if($currentUserModel->hasModuleActionPermission($invoiceModuleModel->getId(), 'CreateView') && $invoiceRestrict) {
 			$basicActionLink = array(
 				'linktype' => 'DETAILVIEW',
 				'linklabel' => vtranslate('LBL_GENERATE').' '.vtranslate($invoiceModuleModel->getSingularLabelKey(), 'Invoice'),
@@ -34,7 +41,8 @@ class Quotes_DetailView_Model extends Inventory_DetailView_Model {
 		}
 		
 		$salesOrderModuleModel = Vtiger_Module_Model::getInstance('SalesOrder');
-		if($currentUserModel->hasModuleActionPermission($salesOrderModuleModel->getId(), 'CreateView')) {
+
+		if($currentUserModel->hasModuleActionPermission($salesOrderModuleModel->getId(), 'CreateView') && $salesorderRestrict) {
 			$basicActionLink = array(
 				'linktype' => 'DETAILVIEW',
 				'linklabel' => vtranslate('LBL_GENERATE').' '.vtranslate($salesOrderModuleModel->getSingularLabelKey(), 'SalesOrder'),
@@ -45,7 +53,7 @@ class Quotes_DetailView_Model extends Inventory_DetailView_Model {
 		}
 
 		$purchaseOrderModuleModel = Vtiger_Module_Model::getInstance('PurchaseOrder');
-		if($currentUserModel->hasModuleActionPermission($purchaseOrderModuleModel->getId(), 'CreateView')) {
+		if($currentUserModel->hasModuleActionPermission($purchaseOrderModuleModel->getId(), 'CreateView') && $purchaseorderRestrict) {
 			$basicActionLink = array(
 				'linktype' => 'DETAILVIEW',
 				'linklabel' => vtranslate('LBL_GENERATE').' '.vtranslate($purchaseOrderModuleModel->getSingularLabelKey(), 'PurchaseOrder'),
