@@ -21,8 +21,12 @@
                         {/if}
                         {if $MODULE neq 'Vtiger' or $smarty.request.view neq 'Index'}
                         {if $ACTIVE_BLOCK['block']}
-                        <span class="current-filter-name filter-name pull-left">
-                                {vtranslate($ACTIVE_BLOCK['block'], $QUALIFIED_MODULE)}&nbsp;
+                                <span class="current-filter-name filter-name pull-left">
+                                  {if ($ACTIVE_BLOCK['block'] eq 'LBL_MY_PREFERENCES')}
+                                    &nbsp;{vtranslate('LBL_USER_MANAGEMENT_R', $QUALIFIED_MODULE)}&nbsp;
+                                  {else}  
+                                    {vtranslate($ACTIVE_BLOCK['block'], $QUALIFIED_MODULE)}&nbsp;
+                                  {/if}  
                                 <span class="ti-angle-right" aria-hidden="true"></span>&nbsp;
                         </span>
                         {/if}

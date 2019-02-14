@@ -22,18 +22,22 @@ class Inventory_DetailView_Model extends Vtiger_DetailView_Model {
 		$moduleName = $recordModel->getmoduleName();
 
 		if(Users_Privileges_Model::isPermitted($moduleName, 'DetailView', $recordModel->getId())) {
-			$detailViewLinks = array(
-					'linklabel' => vtranslate('LBL_EXPORT_TO_PDF', $moduleName),
-					'linkurl' => $recordModel->getExportPDFURL(),
-					'linkicon' => ''
-						);
-			$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($detailViewLinks);
 
-			$sendEmailLink = array(
-                'linklabel' => vtranslate('LBL_SEND_MAIL_PDF', $moduleName),
-                'linkurl' => 'javascript:Inventory_Detail_Js.sendEmailPDFClickHandler(\''.$recordModel->getSendEmailPDFUrl().'\')',
-                'linkicon' => ''
-            );
+			if($moduleName=='Invoice' || $moduleName =='Quotes'){
+
+				$detailViewLinks = array(
+						'linklabel' => vtranslate('LBL_EXPORT_TO_PDF', $moduleName),
+						'linkurl' => $recordModel->getExportPDFURL(),
+						'linkicon' => ''
+							);
+				$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($detailViewLinks);
+
+				$sendEmailLink = array(
+	                'linklabel' => vtranslate('LBL_SEND_MAIL_PDF', $moduleName),
+	                'linkurl' => 'javascript:Inventory_Detail_Js.sendEmailPDFClickHandler(\''.$recordModel->getSendEmailPDFUrl().'\')',
+	                'linkicon' => ''
+	            );
+	        }    
 
             //$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($sendEmailLink);
 
@@ -47,14 +51,16 @@ class Inventory_DetailView_Model extends Vtiger_DetailView_Model {
 			} 
 			
 			$emailRestrict = Vtiger_Record_Model::toggleRestrictAction($moduleName,$actioncode, $recordModel->getId());		//End here 
-                        $sendEmailLink = array( 
-                                        'linklabel' => vtranslate('LBL_SEND_MAIL_PDF', $moduleName), 
-                                        'linkurl' => 'javascript:Inventory_Detail_Js.sendEmailPDFClickHandler(\''.$recordModel->getSendEmailPDFUrl().'\')', 
-                                        'linkicon' => '' 
-                        ); 
+          
+            $sendEmailLink = array( 
+                'linklabel' => vtranslate('LBL_SEND_MAIL_PDF', $moduleName), 
+                'linkurl' => 'javascript:Inventory_Detail_Js.sendEmailPDFClickHandler(\''.$recordModel->getSendEmailPDFUrl().'\')', 
+                'linkicon' => '' 
+            ); 
+
 			//Editied by jitu@27-04-2015 for ShowHide Restrict Issue 
-			if($emailRestrict) {
-                $linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($sendEmailLink); 	}
+			//if($emailRestrict) {
+              //  $linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($sendEmailLink); 	}
 			//End here
 			
 			//Show / Hide Edit Button in detailView
