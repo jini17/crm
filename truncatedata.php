@@ -38,6 +38,12 @@
 		$adb->query("Truncate table  secondcrm_claim_balance");
 		$adb->query("Truncate table  secondcrm_company");
 		$adb->query("Truncate table  secondcrm_designation");
+		
+		$adb->query("Truncate table  secondcrm_discount");
+		$adb->query("Truncate table  secondcrm_discount2role");
+		$adb->query("Truncate table  secondcrm_inventorydiscountrel");
+		$adb->query("INSERT INTO secondcrm_discount_seq (`id`) VALUES ('0')");
+
 		$adb->query("Truncate table  secondcrm_education");
 		$adb->query("Truncate table  secondcrm_emergencycontact");
 		$adb->query("Truncate table  secondcrm_institution");
