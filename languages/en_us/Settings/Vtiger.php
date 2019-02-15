@@ -25,6 +25,7 @@ $languageStrings = array(
     'LBL_DELETE_VALUE' => 'Delete',//Added by Nirbhay for Allowed IP
     'LBL_ADD_VALUE' => 'Add',//Added by Nirbhay for Allowed IP
     'LBL_PDF_DESCRIPTION'=>'PDF Description',
+    'LBL_USER_MANAGEMENT_R' => 'User Management',
     // Blocks
 	'LBL_STUDIO' => 'Studio',
 	'LBL_COMMUNICATION_TEMPLATES' => 'Templates',

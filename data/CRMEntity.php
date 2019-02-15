@@ -969,12 +969,28 @@ class CRMEntity {
 		$this->column_fields->startTracking();
 	}
 
+	// Added By Mabruk
+	function mapEmployeeDesig() {
+
+		global $adb;
+		$employeeId = $this->column_fields['employee_id'];
+
+		$result = $adb->pquery("SELECT 1 FROM vtiger_users WHERE id = ?", array($employeeId));
+
+		if ($adb->num_rows($result))
+			$adb->pquery("UPDATE vtiger_users SET title = ? WHERE id = ?", array($this->column_fields['designation'], $employeeId));		
+
+	}
+
 	/** Function to saves the values in all the tables mentioned in the class variable $tab_name for the specified module
 	 * @param $module -- module:: Type varchar
 	 */
 	function save($module_name, $fileid = '') {
 		global $log,$adb;
 		$log->debug("module name is " . $module_name);
+
+		// Added By Mabruk
+		$this->mapEmployeeDesig();
 
 		//Event triggering code
 		require_once("include/events/include.inc");

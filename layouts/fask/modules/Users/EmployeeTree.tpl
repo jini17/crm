@@ -51,13 +51,15 @@
         padding: 5px;
     }
     .fa-envelope{
-        background: none;
-        border: 1px solid #fff;
-        color: #c4d3ed;
-        font-size: 13px !important;
-        padding: 5px !important;
-        padding-top: 55px;
-        line-height: 1;
+background: #ff6600;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 10px !important;
+    padding: 5px 5px !important;
+    padding-top: 55px;
+    line-height: 1;
+
+
     }
 </style>
 <div class="tree">
