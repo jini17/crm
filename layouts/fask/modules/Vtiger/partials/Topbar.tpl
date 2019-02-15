@@ -267,14 +267,14 @@
                <!-- Top Menu on right side corner -->
                <li>
                   <div>
-                     <a class="rightside-icon-dashboard" href="index.php?module=MailManager&view=List" title="Email" aria-hidden="true">
+                     <a class="rightside-icon-dashboard" href="index.php?module=MailManager&view=List" title="Mail Manager" aria-hidden="true">
                      <i class="far fa-envelope-open"></i>
                      </a>
                   </div>
                </li>
                <li>
                   <div>
-                     <a class="rightside-icon-dashboard" href="index.php?module=Documents&view=List" title="Files" aria-hidden="true">
+                     <a class="rightside-icon-dashboard" href="index.php?module=Documents&view=List" title="Documents" aria-hidden="true">
                      <i class="far fa-file"></i>
                      </a>
                   </div>

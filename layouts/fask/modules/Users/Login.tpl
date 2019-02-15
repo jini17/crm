@@ -324,7 +324,7 @@
                                               
  <footer style="background-color: #fff;">
     <div class="container-fluid">
-            <p class="text-center" style="padding-top:10px; font-size: 12px;"> Agiliux V7 &copy;  
+            <p class="text-center" style="padding-top:10px; font-size: 12px;"> Second CRM Version  7 &copy;  
             <a style="color: #000; font-weight: bold;" href="http://secondcrm.com/">Soft Solvers Solutions.</a> &nbsp;All rights reserved.
         </p>
     </div>

@@ -55,7 +55,7 @@
     </li>
     <li tools="">
       <a class="waves-effect waves-dark " href=" index.php?module=RecycleBin&amp;view=List&amp;app=TOOLS ">
-        <i class="material-icons module-icon">delete_forever</i> 
+        <i class="material-icons module-icon" style="font-size: 18px !important">delete_forever</i> 
         <span class="hide-menu">{vtranslate('Recycle Bin', 'Vtiger')}
         </span>
       </a>
