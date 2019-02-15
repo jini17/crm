@@ -770,7 +770,7 @@ class Vtiger_Record_Model extends Vtiger_Base_Model {
 			}
 
 			else if($module == 'HelpDesk') {
-				$result = $db->pquery("SELECT 1 FROM vtiger_troubletickets WHERE ticketid = ? AND  find_in_set (invoicestatus,?)", array($record, $status));
+				$result = $db->pquery("SELECT 1 FROM vtiger_troubletickets WHERE ticketid = ? AND  find_in_set (status,?)", array($record, $status));
 		
 			}
 			
@@ -780,7 +780,7 @@ class Vtiger_Record_Model extends Vtiger_Base_Model {
 			}
 
 			else if($module == 'PurchaseOrder') {
-				$result = $db->pquery("SELECT 1 FROM vtiger_purchaseorder WHERE purchaseorderid = ? AND find_in_set (invoicestatus,?)", array($record, $status));
+				$result = $db->pquery("SELECT 1 FROM vtiger_purchaseorder WHERE purchaseorderid = ? AND find_in_set (postatus,?)", array($record, $status));
 		
 			}
 			

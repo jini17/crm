@@ -59,8 +59,11 @@ class Inventory_DetailView_Model extends Vtiger_DetailView_Model {
             ); 
 
 			//Editied by jitu@27-04-2015 for ShowHide Restrict Issue 
-			//if($emailRestrict) {
-              //  $linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($sendEmailLink); 	}
+			if($moduleName=='Invoice' || $moduleName =='Quotes'){
+				if($emailRestrict) {
+	              $linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($sendEmailLink); 
+	            }
+	        }    
 			//End here
 			
 			//Show / Hide Edit Button in detailView
