@@ -133,7 +133,11 @@
                      {else}
                         <i class="material-icons module-icon" >{$iconsarray[{strtolower($MODULE)}]}</i> 
                       {/if}
-                     <span class="hide-menu">&nbsp;{$MODULE}</span></a>   
+                      {if $MODULE eq 'Potentials'}
+                        <span class="hide-menu">&nbsp;Appointment</span>
+                        {else}
+                            <span class="hide-menu">&nbsp;{$MODULE}</span>
+                     {/if}</a>   
                   </li>
                  {/foreach}
                </ul>
@@ -256,7 +260,12 @@
                      {else}
                         <i class="material-icons module-icon" >{$iconsarray[{strtolower($MODULE)}]}</i> 
                       {/if}
-                     <span class="hide-menu">&nbsp;{$MODULE}</span></a>   
+                    {if $MODULE eq 'Potentials'}
+                        <span class="hide-menu">&nbsp; Appointment</span>
+                        {else}
+                            <span class="hide-menu">&nbsp;{$MODULE}</span>
+                     {/if}
+                  </a>   
                   </li>
                  {/foreach}
                </ul>
