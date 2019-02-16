@@ -62,7 +62,9 @@ background: #ff6600;
 
     }
 </style>
-<div class="tree">
+{assign var=width value=COUNT($DEPARTMENT_EMPLOYEES)}
+
+<div class="tree" {if $width lt 5} style="width:{300*$width}px;  height: 700px; overflow-y: scroll" {else}style="width:100%; height: 700px; overflow: scroll;"{/if}>
 
     <ul>
      
@@ -220,3 +222,4 @@ background: #ff6600;
     </li>
     </ul>
 </div>
+            <div class="clearfix" style="height: 50"></div>

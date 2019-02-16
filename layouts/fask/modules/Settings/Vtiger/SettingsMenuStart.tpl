@@ -148,4 +148,4 @@
         </div>
     </div></div>
 
-        <div class="settingsPageDiv content-area clearfix {if ($smarty.get.view eq 'PreferenceDetail' OR  $smarty.get.view eq 'Detail' OR $smarty.get.tabtype eq 'WAI') AND $USER_MODEL->get('roleid') eq 'H15'} full-width {/if} {if $smarty.get.tabtype eq 'WAI'}  full-width  {/if}">
+        <div class="settingsPageDiv content-area clearfix  {if ($smarty.get.view eq 'PreferenceDetail' OR  $smarty.get.view eq 'Detail' OR $smarty.get.tabtype eq 'WAI') AND $USER_MODEL->get('roleid') eq 'H15'} full-width {/if} {if $smarty.get.tabtype eq 'WAI'}  full-width  {/if}" style="min-height:850px !important">

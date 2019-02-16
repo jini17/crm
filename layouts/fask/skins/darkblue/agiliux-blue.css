@@ -60,6 +60,11 @@ Email: khaled@softsolvers.com.my
 .blockData .table.detailview-table .row{
     display:block !important; 
 }
+.btn-secondary{
+     background: #2f5597 !important;
+    border: 1px solid #2f5597 !important;
+    color: #fff;
+}
 a.btn.btn-gettingStarted,
 a.btn.btn-gettingStarted:hover{
     padding: 5px 5px 6px 8px !important;

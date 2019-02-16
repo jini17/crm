@@ -608,6 +608,11 @@ color: #AFDFDF !important;
     background: #AFDFDF !important;
     border: 1px solid #AFDFDF !important;
 }
+.btn-secondary{
+     background: #AFDFDF !important;
+    border: 1px solid #AFDFDF !important;
+    color: #fff;
+}
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
     color: #AFDFDF !important;
 }
