@@ -9,21 +9,21 @@
  * ***********************************************************************************/
 
 $languageStrings = Array(
-	'Home' => 'Home',
-	'More' => 'More',
-	'Profile' => 'Profile',
-	'Change Password' => 'Change Password',
-	'Logout' => 'Logout',
-	'Welcome to Portal' => 'Welcome to Portal',
-	'LBL_CREATE_TICKET' => 'New Ticket',
-	'LBL_OPEN_TICKETS' => 'View Open Tickets',
-	'LBL_ADD_DOCUMENT' => 'Upload a Document',
-	'What would you like to do ?' => 'What would you like to do?',
-	'_start for notify' => 'keys',
-	'Your support ends on' => 'Your support ends on',
-	'_start for charts' => 'keys',
-	'OpenTicketsByPriority' => 'Open Tickets By Priority',
-	'TicketsClosureTimeByPriority' => 'Tickets Closure Time By Priority',
-	'_start for widgets' => 'keys',
-	'Recent' => 'Recent'
+	'Home' => 'บ้าน',
+	'More' => 'มากกว่า',
+	'Profile' => 'ข้อมูลส่วนตัว',
+	'Change Password' => 'เปลี่ยนรหัสผ่าน',
+	'Logout' => 'ออกจากระบบ',
+	'Welcome to Portal' => 'ยินดีต้อนรับสู่ Portal',
+	'LBL_CREATE_TICKET' => 'ตั๋วใหม่',
+	'LBL_OPEN_TICKETS' => 'ดูตั๋วเปิด',
+	'LBL_ADD_DOCUMENT' => 'อัปโหลดเอกสาร',
+	'What would you like to do ?' => 'คุณอยากจะทำอะไร?',
+	'_start for notify' => 'กุญแจ',
+	'Your support ends on' => 'การสนับสนุนของคุณสิ้นสุดลงเมื่อ',
+	'_start for charts' => 'กุญแจ',
+	'OpenTicketsByPriority' => 'เปิดตั๋วตามลำดับความสำคัญ',
+	'TicketsClosureTimeByPriority' => 'ตั๋วปิดเวลาตามลำดับความสำคัญ',
+	'_start for widgets' => 'กุญแจ',
+	'Recent' => 'เมื่อเร็ว ๆ นี้'
 );

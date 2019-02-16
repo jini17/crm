@@ -9,19 +9,19 @@
  *************************************************************************************/
 $languageStrings = array(
 	// Basic Strings
-	'PriceBooks' => 'Price Books',
-	'SINGLE_PriceBooks' => 'Price Book',
-	'LBL_ADD_RECORD' => 'Add Price Book',
-	'LBL_RECORDS_LIST' => 'Price Books List',
+	'PriceBooks' => 'หนังสือราคา',
+	'SINGLE_PriceBooks' => 'หนังสือราคา',
+	'LBL_ADD_RECORD' => 'เพิ่มราคาหนังสือ',
+	'LBL_RECORDS_LIST' => 'รายการหนังสือราคา',
 
 	// Blocks
-	'LBL_PRICEBOOK_INFORMATION' => 'Price Book Details',
-	'LBL_EDIT_LIST_PRICE' => 'Edit List Price',
+	'LBL_PRICEBOOK_INFORMATION' => 'รายละเอียดหนังสือราคา',
+	'LBL_EDIT_LIST_PRICE' => 'แก้ไขราคารายการ',
 
 	//Field Labels
-	'Price Book Name' => 'Price Book Name',
-	'PriceBook No' => 'Price Book Number',
+	'Price Book Name' => 'ราคาชื่อหนังสือ',
+	'PriceBook No' => 'หมายเลขหนังสือราคา',
 
-	'LBL_UNIT_PRICE' => 'Unit Price',
-	'LBL_ADD_TO' => 'Add to',
+	'LBL_UNIT_PRICE' => 'ราคาต่อหน่วย',
+	'LBL_ADD_TO' => 'เพิ่ม',
 );

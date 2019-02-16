@@ -1,0 +1,240 @@
+<?php
+/*+***********************************************************************************
+ * The contents of this file are subject to the vtiger CRM Public License Version 1.0
+ * ("License"); You may not use this file except in compliance with the License
+ * The Original Code is:  vtiger CRM Open Source
+ * The Initial Developer of the Original Code is vtiger.
+ * Portions created by vtiger are Copyright (C) vtiger.
+ * All Rights Reserved.
+ *************************************************************************************/
+$languageStrings = array(
+	'Reports'=>'รายงาน',
+	'SINGLE_Reports' => 'รายงาน',
+
+	// Basic Strings
+	'LBL_FOLDER_NOT_EMPTY' => 'โฟลเดอร์ไม่ว่างเปล่า',
+	'LBL_MOVE_REPORT' => 'ย้ายรายงาน',
+	'LBL_CUSTOMIZE' => 'ปรับแต่ง',
+	'LBL_REPORT_EXPORT_EXCEL' => 'ส่งออก Excel',
+	'LBL_REPORT_PRINT' => 'พิมพ์',
+	'LBL_CREATING_REPORT' => 'การสร้างรายงาน',
+	'LBL_EDITING_REPORT' => 'แก้ไขรายงาน',
+	'LBL_REPORT_DETAILS' => 'รายงานรายละเอียด',
+	'LBL_SELECT_COLUMNS' => 'เลือกคอลัมน์',
+	'LBL_FILTERS' => 'ฟิลเตอร์',
+	'LBL_FOLDERS' => 'โฟลเดอร์',
+	'LBL_ADD_NEW_FOLDER' => 'เพิ่มโฟลเดอร์ใหม่',
+	'LBL_FOLDER_NAME' => 'ชื่อโฟลเดอร์',
+	'LBL_FOLDER_DESCRIPTION' => 'คำอธิบายโฟลเดอร์',
+	'LBL_WRITE_YOUR_DESCRIPTION_HERE' => 'ป้อนคำอธิบาย',
+	'LBL_DUPLICATES_EXIST' => 'ชื่อรายงานมีอยู่แล้ว',
+	'LBL_FOLDERS_LIST' => 'รายการโฟลเดอร์',
+	'LBL_DENIED_REPORTS' => 'ปฏิเสธรายงาน',
+	'LBL_NO_OF_RECORDS' => 'ระเบียนทั้งหมด : ',
+    'LBL_MORE_RECORDS_TXT'=>'มีเพียง 500 ระเบียนเท่านั้นที่แสดงไว้ด้านล่าง. โปรดส่งออกเพื่อดูบันทึกทั้งหมด',
+	'LBL_SCHEDULE_REPORTS' => 'กำหนดการรายงาน',
+	'LBL_AT_TIME' => 'เวลา',
+
+	'LBL_DAILY' => 'ประจำวัน',
+	'LBL_WEEKLY' => 'รายสัปดาห์',
+	'LBL_MONTHLY_BY_DATE' => 'รายเดือนตามวันที่',
+	'LBL_YEARLY' => 'รายปี',
+	'LBL_SPECIFIC_DATE' => 'ในวันที่ระบุ',
+	'LBL_CHOOSE_DATE' => 'เลือกวันที่',
+	'LBL_ON_THESE_DAYS' => 'ในวันนี้',
+	'LBL_SELECT_MONTH_AND_DAY' => 'เลือกเดือนและวันที่',
+	'LBL_SELECTED_DATES' => 'วันที่เลือก',
+	'LBL_EXCEEDING_MAXIMUM_LIMIT' => 'เกินขีด จำกัด สูงสุดแล้ว',
+	'LBL_NEXT_TRIGGER_TIME' => 'เปิดเครื่องครั้งถัดไป',
+	'LBL_RUN_REPORT' =>'เรียกใช้รายงาน',
+	'LBL_SELECT_RECIEPIENTS' => 'เลือกผู้รับ',
+	'LBL_SPECIFIC_EMAIL_ADDRESS' => 'ส่งไปยังอีเมลที่ระบุ',
+	'LBL_SAME_LEVEL_ROLES' => 'บทบาทระดับเดียวกัน',
+	'LBL_SUBORDINATE_ROLES' => 'ผู้ใต้บังคับบัญชา บทบาท',
+	//ListView Actions
+	'LBL_ADD_RECORD' => 'เพิ่มรายงาน',
+	'LBL_ADD_FOLDER' => 'เพิ่มกล่องเก็บไฟล์',
+	'LBL_REPORT_DELETE_DENIED' => 'การอนุญาตปฏิเสธไม่ให้ลบรายงาน',
+
+	//Folder Actions
+	'LBL_FOLDER_NOT_EMPTY' => 'โฟลเดอร์ไม่ว่างเปล่า',
+	'LBL_FOLDER_CAN_NOT_BE_DELETED' => 'โฟลเดอร์นี้ไม่สามารถลบได้',
+
+	//Mass Actions
+	'LBL_REPORTS_LIST' => 'รายการรายงาน',
+
+	//Step1 Strings
+	'LBL_REPORT_NAME' => 'ชื่อรายงาน',
+	'LBL_REPORT_FOLDER' => 'โฟลเดอร์รายงาน',
+	'LBL_DESCRIPTION' => 'ลักษณะ',
+	'PRIMARY_MODULE' => 'โมดูลหลัก',
+	'LBL_SELECT_RELATED_MODULES' => 'เลือกโมดูลที่เกี่ยวข้อง',
+	'LBL_MAX' => 'แม็กซ์',
+	'LBL_NEXT' => 'ต่อไป',
+	'LBL_REPORTS' => 'รายการรายงาน',
+	'LBL_SELECT_RELATED_MODULES' => 'เลือกโมดูลที่เกี่ยวข้อง',
+
+	//Step2 Strings
+	'LBL_GROUP_BY' => 'จัดกลุ่มตาม',
+	'LBL_SORT_ORDER' => 'เรียงลำดับ',
+	'LBL_ASCENDING' => 'จากน้อยไปมาก',
+	'LBL_DESCENDING' => 'จากมากไปน้อย',
+	'LBL_CALCULATIONS' =>'การคำนวณ',
+	'LBL_COLUMNS' => 'คอลัมน์',
+	'LBL_SUM_VALUE' => 'รวม',
+	'LBL_AVERAGE' => 'เฉลี่ย',
+	'LBL_LOWEST_VALUE' => 'มูลค่าต่ำสุด',
+	'LBL_HIGHEST_VALUE' => 'มูลค่าสูงสุด',
+
+	//Step3 Strings
+	'LBL_GENERATE_REPORT' => 'บันทึกและสร้างรายงาน',
+
+	//DetailView
+	'LBL_SUM' => 'รวม',
+	'LBL_AVG' => 'เฉลี่ย',
+	'LBL_MAX' => 'สูงสุด',
+	'LBL_MIN' => 'ขั้นต่ำ',
+	'LBL_FIELD_NAMES' => 'ชื่อฟิลด์',
+	'LBL_REPORT_CSV' => 'ส่งออก CSV',
+	'LBL_VIEW_DETAILS' => 'ดูรายละเอียด',
+	'LBL_GENERATE_NOW' => 'สร้างตอนนี้',
+
+	//List View Headers
+	'Report Name' => 'ชื่อรายงาน',
+
+	//Default Folders Names, Report Names and Description
+	'Account and Contact Reports'=>'รายงานองค์กรและผู้ติดต่อ',
+	'Lead Reports'=>'รายงานตะกั่ว',
+	'Potential Reports'=>'โอกาสรายงาน',
+	'Activity Reports'=>'รายงานกิจกรรม',
+	'HelpDesk Reports'=>'รายงานตั๋ว',
+	'Product Reports'=>'รายงานผลิตภัณฑ์',
+	'Quote Reports'=>'รายงานการอ้างอิง',
+	'PurchaseOrder Reports'=>'รายงานใบสั่งซื้อ',
+	'SalesOrder Reports'=>'รายงานใบสั่งขาย', //Added for SO
+	'Invoice Reports'=>'รายงานใบแจ้งหนี้',
+	'Campaign Reports'=>'รายงานแคมเปญ', //Added for Campaigns
+	'Contacts by Accounts'=>'ผู้ติดต่อตามองค์กร',
+	'Contacts without Accounts'=>'ผู้ติดต่อที่ไม่มีองค์กร',
+	'Contacts by Potentials'=>'รายชื่อติดต่อตามโอกาส',
+	'Contacts related to Accounts'=>'ที่อยู่ติดต่อที่เกี่ยวข้องกับองค์กร',
+	'Contacts not related to Accounts'=>'ผู้ติดต่อที่ไม่เกี่ยวข้องกับองค์กร',
+	'Contacts related to Potentials'=>'ที่อยู่ติดต่อที่เกี่ยวข้องกับโอกาส',
+	'Lead by Source'=>'นำโดยแหล่งที่มา',
+	'Lead Status Report'=>'รายงานสถานะตะกั่ว',
+	'Potential Pipeline'=>'ท่อโอกาส',
+	'Closed Potentials'=>'โอกาสที่ปิด',
+	'Potential that have Won'=>'โอกาสที่ได้รับ',
+	'Tickets by Products'=>'ตั๋วตามผลิตภัณฑ์',
+	'Tickets by Priority'=>'ตั๋วตามลำดับความสำคัญ',
+	'Open Tickets'=>'เปิดตั๋ว',
+	'Tickets related to Products'=>'ตั๋วที่เกี่ยวข้องกับผลิตภัณฑ์',
+	'Tickets that are Open'=>'เปิดตั๋ว',
+	'Product Details'=>'รายละเอียดสินค้า',
+	'Products by Contacts'=>'ผลิตภัณฑ์ตามที่อยู่ติดต่อ',
+	'Product Detailed Report'=>'รายงานโดยละเอียดของผลิตภัณฑ์',
+	'Products related to Contacts'=>'ผลิตภัณฑ์ที่เกี่ยวข้องกับผู้ติดต่อ',
+	'Open Quotes'=>'เปิดคำพูด',
+	'Quotes Detailed Report'=>'รายละเอียดรายงาน',
+	'Quotes that are Open'=>'เปิดคำพูด',
+	'PurchaseOrder by Contacts'=>'ใบสั่งซื้อตามที่อยู่ติดต่อ',
+	'PurchaseOrder Detailed Report'=>'ซื้อรายงานคำสั่งซื้อโดยละเอียด',
+	'PurchaseOrder related to Contacts'=>'ใบสั่งซื้อที่เกี่ยวข้องกับที่อยู่ติดต่อ',
+	'Invoice Detailed Report'=>'รายงานโดยละเอียดของใบแจ้งหนี้',
+	'Last Month Activities'=>'กิจกรรมในเดือนที่แล้ว',
+	'This Month Activities'=>'กิจกรรมในเดือนนี้',
+	'Campaign Expectations and Actuals'=>'ความคาดหวังของแคมเปญและสิ่งที่เป็นจริง', //Added for Campaigns
+	'SalesOrder Detailed Report'=>'รายงานรายละเอียดใบสั่งขาย', //Added for SO
+
+	'Email Reports'=>'รายงานอีเมล',
+	'Contacts Email Report'=>'รายงานอีเมลสำหรับติดต่อ',
+	'Accounts Email Report'=>'รายงานอีเมลองค์กร',
+	'Leads Email Report'=>'นำรายงานทางอีเมล',
+	'Vendors Email Report'=>'รายงานผู้ขายของผู้ขาย',
+
+	'Emails sent to Contacts' => 'อีเมลที่ส่งไปยังที่อยู่ติดต่อ',
+	'Emails sent to Organizations' => 'อีเมลที่ส่งไปยังองค์กร',
+	'Emails sent to Leads' => 'อีเมลที่ส่งถึงผู้นำ',
+	'Emails sent to Vendors' => 'อีเมลที่ส่งไปยังผู้ขาย',
+
+	'LBL_PRINT_REPORT' => 'พิมพ์รายงาน',
+	'LBL_RECORDS' => 'ประวัติ',
+	'LBL_LIMIT_EXCEEDED' => 'แสดงเฉพาะระเบียน 1000 + เท่านั้น. ใช้ CSV หรือ Excel Export เพื่อดูระเบียนทั้งหมด',
+	'LBL_TOP' => 'ด้านบน',
+	'LBL_ALL_REPORTS' => 'รายงานทั้งหมด',
+	'LBL_CALCULATION_CONVERSION_MESSAGE' => 'การคำนวณขึ้นอยู่กับสกุลเงิน My Preferences ของ CRM ของคุณ',
+
+    //Summary/Pivot Reports
+    'LBL_CREATING_PIVOT_REPORT' => 'สร้างรายงาน Pivot',
+    'LBL_EDITING_PIVOT_REPORT' => 'แก้ไขรายงาน Pivot',
+    'LBL_SELECT_PIVOT_FIELDS' => 'เลือกฟิลด์ Pivot',
+    'LBL_SELECT_ROWS' => 'เลือกแถว ',
+    'LBL_SELECT_DATA_FIELDS' => 'เลือกฟิลด์ข้อมูล ',
+    'LBL_ADD_ROWS' => 'เพิ่มแถว',
+    'LBL_ADD_COLUMNS' => 'เพิ่มคอลัมน์',
+    'LBL_ADD_DATA_FIELDS' => 'เพิ่มฟิลด์ข้อมูล',
+    'LBL_PIVOT_FIELDS' => 'ฟิลด์ Pivot ที่เลือก',
+    'LBL_RECORD_COUNT' => 'บันทึกจำนวน',
+    'LBL_SELECT_PIVOT_FIELDS_WARNING' => 'การเตือน : โปรดเลือกฟิลด์แถว, ฟิลด์คอลัมน์และฟิลด์ข้อมูลอย่างน้อยหนึ่งแถว.',
+    'LBL_PIVOT_DATA_FIELDS_WARNING' => 'การเตือน : ในคอลัมน์ข้อมูล - ฟังก์ชันการรวม(รวม,เฉลี่ย,ขั้นต่ำ และสูงสุด) ไม่ควรทำซ้ำ.',
+    'LBL_MODIFY_CONDITIONS' => 'แก้ไขเงื่อนไข',
+    'LBL_PIVOT_PREVIEW_EX' => 'ตัวอย่างรายงาน Pivot(ตัวอย่าง)',
+
+	//charts labels
+	'LBL_SELECT_CHART_TYPE' => 'เลือกประเภทแผนภูมิ',
+	'LBL_CLICK_THROUGH_NOT_AVAILABLE' => 'คลิกผ่านไม่ได้เมื่อคุณเลือกมากกว่าหนึ่งโมดูล',
+	'LBL_TOTAL_SUM_OF' => 'ผลรวมของ %s',
+	'LBL_AVG_OF' => 'เฉลี่ย %s',
+	'LBL_MIN_OF' => 'ต่ำสุดของ %s',
+	'LBL_MAX_OF' => 'สูงสุด %s',
+	'LBL_RECORD_COUNT' => 'บันทึกจำนวน',
+	'LBL_PIE_CHART' => 'แผนภูมิวงกลม',
+	'LBL_VERTICAL_BAR_CHART' => 'แผนภูมิแท่งแนวตั้ง',
+	'LBL_HORIZONTAL_BAR_CHART' => 'แผนภูมิแท่งแนวนอน',
+	'LBL_LINE_CHART' => 'แผนภูมิเส้น',
+	'LBL_SELECT_CHART' => 'เลือกแผนภูมิ',
+	'LBL_CREATING_CHART_REPORT' => 'การสร้างรายงานแผนภูมิ',
+	'LBL_EDITING_CHART_REPORT' => 'การแก้ไขรายงานแผนภูมิ',
+	'LBL_GENERATE_CHART' => 'สร้างแผนภูมิ',
+	'LBL_SELECT_GROUP_BY_FIELD' => 'เลือกกลุ่มตามฟิลด์',
+	'LBL_SELECT_DATA_FIELD' => 'เลือกฟิลด์ข้อมูล',
+	'LBL_MODIFY_CONDITION' => 'แก้ไขเงื่อนไข',
+	'LBL_PLEASE_SELECT_ATLEAST_ONE_GROUP_FIELD_AND_DATA_FIELD' => 'โปรดเลือกอย่างน้อยหนึ่งกลุ่มตามเขตข้อมูลและหนึ่งช่องข้อมูล.',
+	'LBL_FOR_BAR_GRAPH_AND_LINE_GRAPH_SELECT_3_MAX_DATA_FIELDS' => 'สำหรับกราฟแท่งและเส้นกราฟคุณสามารถเลือกฟิลด์ข้อมูลได้สูงสุด 3 ช่อง.',
+	'LBL_DETAIL_REPORT' => 'รายงานรายละเอียด',
+	'LBL_PIVOT_REPORT' => 'รายงาน Pivot',
+	'LBL_CHARTS' => 'ชาร์ต',
+    //Schedule Reports - Mail Content
+    'LBL_AUTO_GENERATED_REPORT_EMAIL' => 'นี่คืออีเมลที่สร้างขึ้นโดยอัตโนมัติส่งในนามของรายงานที่กำหนดเวลาไว้.',
+    'LBL_PIN_CHART_TO_DASHBOARD' => 'ตรึงกราฟไปยังแดชบอร์ด',
+    'LBL_FILE_FORMAT' => 'รูปแบบไฟล์',
+    
+    'Report Type' => 'ประเภทรายงาน',
+    'tabular' => 'รายละเอียด',
+    'summary' => 'แบน',
+    'pivot' => 'หมุน',
+    'chart' => 'แผนภูมิ',
+
+    'LBL_REPORTS_MOVED_SUCCESSFULLY'=>'ย้ายรายงานสำเร็จแล้ว.',
+    'LBL_SAME_SOURCE_AND_TARGET_FOLDER'=>'โฟลเดอร์เป้าหมายเหมือนกับโฟลเดอร์ต้นทาง.',
+	'LBL_SHARE_REPORT' => 'แบ่งปันรายงาน',
+	'LBL_SHARED_REPORTS' => 'แบ่งปันกับฉัน',
+	'LBL_PINNED' => 'หนีบ',
+	'LBL_UNPINNED' => 'เลิกตรึง',
+	'LBL_SEARCH_FOR_FOLDERS' => 'ค้นหาโฟลเดอร์',
+	'LBL_CHART_REPORT' => 'รายงานแผนภูมิ',
+	'LBL_UNPIN_CHART_FROM_DASHBOARD' => 'เลิกตรึงกราฟจากแดชบอร์ด',
+	'LBL_REPORTS_DELETED_SUCCESSFULLY' => 'ลบรายงานสำเร็จแล้ว',
+);
+$jsLanguageStrings = array(
+	'JS_DUPLICATE_RECORD' => 'Duplicate Report',
+	'JS_CALCULATION_LINE_ITEM_FIELDS_SELECTION_LIMITATION' => 'การ จำกัด: ฟิลด์รายการโฆษณาสามารถใช้ได้เฉพาะเมื่อไม่ได้เลือกฟิลด์การคำนวณอื่น ๆ(รายการราคา, ส่วนลด & ปริมาณ) ',
+	'JS_NO_CHART_DATA_AVAILABLE' => 'ไม่มีข้อมูลโปรดตรวจสอบข้อมูลในฟิลด์ที่เลือก',
+    'JS_CHART_PINNED_TO_DASHBOARD' => 'ตรึงไปที่หน้าแดชบอร์ดแล้ว',
+    'JS_CHART_ALREADY_PINNED_TO_DASHBOARD' => 'แผนภูมิที่ตรึงไว้กับแดชบอร์ดแล้ว',
+	'JS_MOVE_REPORTS'=>'ย้ายรายงาน',
+    'JS_SCHEDULED_DATE_TIME_ERROR' => 'วันที่และเวลาที่กำหนดควรมีมากกว่าวันที่และเวลาปัจจุบัน',
+	'JSLBL_PIN_CHART_TO_DASHBOARD' => 'ตรึงกราฟไปยังแดชบอร์ด',
+	'JSLBL_UNPIN_CHART_FROM_DASHBOARD' => 'เลิกตรึงกราฟจากแดชบอร์ด',
+	'JS_CHART_REMOVED_FROM_DASHBOARD' => 'นำแผนภูมิออกจากแดชบอร์ด',
+);

@@ -8,39 +8,37 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'Quotes'=>'Quotes',
+	'Quotes'=>'Lời trích dẫn',
 	//DetailView Actions
-	'SINGLE_Quotes' => 'Quote',
-	'LBL_EXPORT_TO_PDF' => 'Export to PDF',
-	'LBL_SEND_MAIL_PDF' => 'Send Email with PDF',
+	'SINGLE_Quotes' => 'Trích dẫn',
+	'LBL_EXPORT_TO_PDF' => 'Xuất sang PDF',
+	'LBL_SEND_MAIL_PDF' => 'Gửi Email với PDF',
 
 	//Basic strings
-	'LBL_ADD_RECORD' => 'Add Quote',
-	'LBL_RECORDS_LIST' => 'Quotes List',
+	'LBL_ADD_RECORD' => 'Thêm Trích dẫn',
+	'LBL_RECORDS_LIST' => 'Danh sách trích dẫn',
 
-	'Account Name'=>'Account Name',
-	'Potential Name'=>'Potential Name',
 	// Blocks
-	'LBL_QUOTE_INFORMATION' => 'Quote Details',
-	'LBL_TERMSCONDITION'=>'Terms & Condition',
+	'LBL_QUOTE_INFORMATION' => 'Chi tiết chi tiết',
+
 	//Field Labels
-	'Quote No'=>'Quote Number',
-	'Quote Stage'=>'Quote Stage',
-	'Valid Till'=>'Valid Until',
-	'Inventory Manager'=>'Inventory Manager',
-	'Related To' => 'Related To',
+	'Quote No'=>'Số trích dẫn',
+	'Quote Stage'=>'Giai đoạn Trích dẫn',
+	'Valid Till'=>'Có hiệu lực đến',
+	'Inventory Manager'=>'Quản lý hàng tồn kho',
+	'Related To' => 'Có quan hệ với',
 	//Added for existing Picklist Entries
 
-	'Accepted'=>'Accepted',
-	'Rejected'=>'Rejected',
+	'Accepted'=>'Được chấp nhận',
+	'Rejected'=>'Từ chối',
 
 	//Translation for product not found
-	'LBL_THIS' => 'This',
-	'LBL_IS_DELETED_FROM_THE_SYSTEM_PLEASE_REMOVE_OR_REPLACE_THIS_ITEM' => 'is deleted from the system.please remove or replace this item',
-	'LBL_THIS_LINE_ITEM_IS_DELETED_FROM_THE_SYSTEM_PLEASE_REMOVE_THIS_LINE_ITEM' => 'This line item is deleted from the system,please remove this line items',
+	'LBL_THIS' => 'Điều này',
+	'LBL_IS_DELETED_FROM_THE_SYSTEM_PLEASE_REMOVE_OR_REPLACE_THIS_ITEM' => 'được xóa khỏi hệ thống.xóa bỏ hoặc thay thế mục này',
+	'LBL_THIS_LINE_ITEM_IS_DELETED_FROM_THE_SYSTEM_PLEASE_REMOVE_THIS_LINE_ITEM' => 'Mục hàng này đã bị xóa khỏi hệ thống, vui lòng xóa các chi tiết đơn hàng này',
 
 );
 
 $jsLanguageStrings = array(
-	'JS_PLEASE_REMOVE_LINE_ITEM_THAT_IS_DELETED' => 'Please remove line item that is deleted',
+	'JS_PLEASE_REMOVE_LINE_ITEM_THAT_IS_DELETED' => 'Vui lòng xóa mục hàng đã bị xóa',
 );

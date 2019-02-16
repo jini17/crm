@@ -8,19 +8,19 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'isactive' => 'Active',
-	'LBL_ADD_CONFIGURATION' => 'New Configuration',
-	'LBL_ADD_RECORD' => 'New Configuration',
-	'LBL_EDIT_CONFIGURATION' => 'Edit Configuration',
-	'LBL_SELECT_ONE' => 'Select One',
-	'password' => 'Password',
-	'providertype' => 'Provider',
-	'SMSNotifier' => 'SMS Provider Configuration',
-	'username' => 'User Name',
+	'isactive' => 'Hoạt động',
+	'LBL_ADD_CONFIGURATION' => 'Cấu hình Mới',
+	'LBL_ADD_RECORD' => 'Cấu hình Mới',
+	'LBL_EDIT_CONFIGURATION' => 'Chỉnh sửa Cấu hình',
+	'LBL_SELECT_ONE' => 'Chọn một',
+	'password' => 'Mật khẩu',
+	'providertype' => 'Các nhà cung cấp',
+	'SMSNotifier' => 'Cấu hình Nhà cung cấp SMS',
+	'username' => 'Tên người dùng',
 );
 
 $jsLanguageStrings = array(
-	'JS_CONFIGURATION_SAVED' => 'SMS Provider Configurations saved',
-	'JS_RECORD_DELETED_SUCCESSFULLY' => 'SMS Provider Deleted Successfully',
-	'LBL_DELETE_CONFIRMATION' => 'Are you sure, you want to delete this SMSNotifier Configuration?',
+	'JS_CONFIGURATION_SAVED' => 'Đã lưu cấu hình Nhà cung cấp SMS',
+	'JS_RECORD_DELETED_SUCCESSFULLY' => 'Nhà cung cấp SMS Đã Xóa thành công',
+	'LBL_DELETE_CONFIRMATION' => 'Bạn có chắc chắn không, bạn muốn xóa Cấu hình SMSNotifier này?',
 );	

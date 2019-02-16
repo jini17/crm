@@ -8,62 +8,59 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-        // Basic Strings
-        'Contacts' => 'Contacts',
-        'SINGLE_Contacts' => 'Contact',
-        'LBL_ADD_RECORD' => 'Add Contact',
-        'LBL_RECORDS_LIST' => 'Contacts List',
+	// Basic Strings
+	'Contacts' => 'รายชื่อผู้ติดต่อ',
+	'SINGLE_Contacts' => 'ติดต่อ',
+	'LBL_ADD_RECORD' => 'เพิ่มผู้ติดต่อ',
+	'LBL_RECORDS_LIST' => 'รายชื่อผู้ติดต่อ',
 
-        // Blocks
-        'LBL_CONTACT_INFORMATION' => 'Basic Information',
-        'LBL_CUSTOMER_PORTAL_INFORMATION' => 'Customer Portal Details',
-        'LBL_IMAGE_INFORMATION' => 'Profile Picture',
-        'LBL_COPY_OTHER_ADDRESS' => 'Copy Other Address',
-        'LBL_COPY_MAILING_ADDRESS' => 'Copy Mailing Address',
+	// Blocks
+	'LBL_CONTACT_INFORMATION' => 'ข้อมูลพื้นฐาน',
+	'LBL_CUSTOMER_PORTAL_INFORMATION' => 'รายละเอียดพอร์ทัลลูกค้า',
+	'LBL_IMAGE_INFORMATION' => 'รูปประวัติ',
+	'LBL_COPY_OTHER_ADDRESS' => 'คัดลอกที่อยู่อื่น',
+	'LBL_COPY_MAILING_ADDRESS' => 'คัดลอกที่อยู่ทางไปรษณีย์',
 
-        //Field Labels
-        'Office Phone' => 'Office Phone',
-        'Home Phone' => 'Home Phone',
-        'Title' => 'Title',
-        'Department' => 'Department',
-        'Birthdate' => 'Date of Birth',
-        'Reports To' => 'Reports To',
-        'Assistant' => 'Assistant',
-        'Assistant Phone' => 'Assistant Phone',
-        'Do Not Call' => 'Do Not Call',
-        'Reference' => 'Reference',
-        'Portal User' => 'Portal User',
-        'Mailing Street' => 'Mailing Street',
-        'Mailing City' => 'Mailing City',
-        'Mailing State' => 'Mailing State',
-        'Mailing Zip' => 'Mailing Zip',
-        'Mailing Country' => 'Mailing Country',
-        'Mailing Po Box' => 'Mailing P.O. Box',
-        'Other Street' => 'Other Street',
-        'Other City' => 'Other City',
-        'Other State' => 'Other State',
-        'Other Zip' => 'Other Zip',
-        'Other Country' => 'Other Country',
-        'Other Po Box' => 'Other P.O. Box',
-        'Contact Image' => 'Contact Image',
-        'Other Phone' => 'Secondary Phone',
-        'Email' => 'Primary Email',
-        'Secondary Email' => 'Secondary Email',
-        'Contact Id' => 'Contact Id',
-    'Support Start Date' => 'Support Start Date',
-    'Support End Date'   => 'Support End Date',
-    'Company Title'   => 'Company Name',
-
-        //Added for Picklist Values
-        'Mr.'=>'Mr.',
-        'Ms.'=>'Ms.',
-        'Mrs.'=>'Mrs.',
-        'Dr.'=>'Dr.',
-        'Prof.'=>'Prof.',
-
-        'User List'=>'User List',
-        'LBL_ENRICH_CONTACT'=>'Enrich Contact',
-
+	//Field Labels
+	'Office Phone' => 'โทรศัพท์สำนักงาน',
+	'Home Phone' => 'โทรศัพท์บ้าน',
+	'Title' => 'หัวข้อ',
+	'Department' => 'กรม',
+	'Birthdate' => 'วันเกิด',
+	'Reports To' => 'รายงานถึง',
+	'Assistant' => 'ผช.',
+	'Assistant Phone' => 'ผู้ช่วยโทรศัพท์',
+	'Do Not Call' => 'ไม่ต้องโทร',
+	'Reference' => 'การอ้างถึง',
+	'Portal User' => 'ผู้ใช้พอร์ทัล',
+	'Mailing Street' => 'ถนนทางไปรษณีย์',
+	'Mailing City' => 'เมืองส่งไปรษณีย์',
+	'Mailing State' => 'รัฐที่ส่งทางไปรษณีย์',
+	'Mailing Zip' => 'ไปรษณีย์',
+	'Mailing Country' => 'ประเทศทางไปรษณีย์',
+	'Mailing Po Box' => 'ทางไปรษณีย์ P.O. Box',
+	'Other Street' => 'ถนนอื่น ๆ',
+	'Other City' => 'เมืองอื่น ๆ',
+	'Other State' => 'รัฐอื่น',
+	'Other Zip' => 'ซิปอื่น ๆ',
+	'Other Country' => 'ประเทศอื่น',
+	'Other Po Box' => 'อื่น ๆ P.O. Box',
+	'Contact Image' => 'รูปภาพติดต่อ',
+	'Other Phone' => 'โทรศัพท์รอง',
+	'Email' => 'อีเมลหลัก',
+	'Secondary Email' => 'อีเมลสำรอง',
+	'Contact Id' => 'ติดต่อ Id',
+    'Support Start Date' => 'วันเริ่มต้นการสนับสนุน',
+    'Support End Date'   => 'วันที่สิ้นสุดการสนับสนุน',
+	
+	//Added for Picklist Values
+	'Mr.'=>'นาย.',
+	'Ms.'=>'นางสาว.',
+	'Mrs.'=>'นาง.',
+	'Dr.'=>'ดร.',
+	'Prof.'=>'ศ.',
+	
+	'User List'=>'รายชื่อผู้ใช้',
 );
 
 $jsLanguageStrings = array(

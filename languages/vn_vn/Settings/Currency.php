@@ -8,17 +8,17 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'LBL_ADD_RECORD' => 'Add Currency',
-	'LBL_EDIT_CURRENCY' => 'Edit Currency',
-	'LBL_ADD_NEW_CURRENCY' => 'Add New Currency',
-	'LBL_CURRENCY_NAME' => 'Currency Name',
-	'LBL_CURRENCY_CODE' => 'Currency Code',
-	'LBL_CURRENCY_SYMBOL' => 'Symbol',
-	'LBL_CONVERSION_RATE' => 'Conversion Rate',
-	'LBL_ENTER_CONVERSION_RATE' => 'Enter Conversion Rate',
-	'LBL_CURRENCY_STATUS_DESC' => 'Enable checkbox to make currency Active',
-	'LBL_TRANSFER_CURRENCY' => 'Transfer Currency',
-	'LBL_CURRENT_CURRENCY' => 'Current Currency',
+	'LBL_ADD_RECORD' => 'Thêm đơn vị tiền tệ',
+	'LBL_EDIT_CURRENCY' => 'Chỉnh sửa Đơn vị tiền tệ',
+	'LBL_ADD_NEW_CURRENCY' => 'Thêm đơn vị tiền tệ mới',
+	'LBL_CURRENCY_NAME' => 'Tên Tiền tệ',
+	'LBL_CURRENCY_CODE' => 'Mã tiền tệ',
+	'LBL_CURRENCY_SYMBOL' => 'Ký hiệu',
+	'LBL_CONVERSION_RATE' => 'Tỷ lệ chuyển đổi',
+	'LBL_ENTER_CONVERSION_RATE' => 'Nhập Tỷ lệ Chuyển đổi',
+	'LBL_CURRENCY_STATUS_DESC' => 'Bật hộp kiểm để làm cho tiền tệ hoạt động',
+	'LBL_TRANSFER_CURRENCY' => 'Chuyển tiền tệ',
+	'LBL_CURRENT_CURRENCY' => 'Tiền tệ hiện tại',
 
 	//currency names
 	'Albania, Leke' 		=> 'Albania, Leke',
@@ -155,7 +155,6 @@ $languageStrings = array(
 );
 
 $jsLanguageStrings = array(
-	'JS_CURRENCY_DETAILS_SAVED' => 'Currency Details Saved',
-	'JS_CURRENCY_DELETED_SUEESSFULLY' => 'Currency Deleted Successfully',
-	'JS_CURRENCY_SEQUENCE_UPDATED'=>'Currency Sequence updated succesfully',
+	'JS_CURRENCY_DETAILS_SAVED' => 'Chi tiết tiền tệ đã lưu',
+	'JS_CURRENCY_DELETED_SUEESSFULLY' => 'Đã xóa thành công tiền tệ',
 );

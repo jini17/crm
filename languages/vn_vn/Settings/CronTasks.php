@@ -8,20 +8,20 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'CronTasks' => 'Scheduler',
+	'CronTasks' => 'Lập lịch biểu',
 
 	//Basic Field Names
-	'Id' => 'Id',
-	'Cron Job' => 'Cron Job',
-	'Frequency' => 'Frequency',
-	'Status' => 'Status',
-	'Last Start' => 'Last scan started',
-	'Last End' => 'Last scan ended',
-	'Sequence' => 'Sequence',
+	'Id' => 'ID',
+	'Cron Job' => 'Công việc lương thấp',
+	'Frequency' => 'Tần số',
+	'Status' => 'Trạng thái',
+	'Last Start' => 'Bắt đầu quét lần cuối',
+	'Last End' => 'Lần quét cuối cùng kết thúc',
+	'Sequence' => 'Trình tự',
 
 	//Actions
-	'LBL_COMPLETED' => 'Completed',
-	'LBL_RUNNING' => 'Running',
-	'LBL_ACTIVE' => 'Active',
-	'LBL_INACTIVE' => 'In Active',
+	'LBL_COMPLETED' => 'Đã hoàn thành',
+	'LBL_RUNNING' => 'Đang chạy',
+	'LBL_ACTIVE' => 'Hoạt động',
+	'LBL_INACTIVE' => 'Không hoạt động',
 );

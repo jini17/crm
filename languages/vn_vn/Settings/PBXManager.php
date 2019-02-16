@@ -9,20 +9,20 @@
  * All Rights Reserved.
  * *********************************************************************************** */
 $languageStrings = array(
-    'LBL_SELECT_ONE' => 'Select',
+    'LBL_SELECT_ONE' => 'Lựa chọn',
     'LBL_PBXMANAGER' =>'PBXManager',
-    'LBL_PBXMANAGER_CONFIG' => 'Asterisk Server Details',
-    'LBL_NOTE' => 'Note:',
-    'LBL_INFO_WEBAPP_URL' => 'Configure your Asterisk App URL in the  format', 
-    'LBL_FORMAT_WEBAPP_URL' => '(protocol)://(asterisk_ip):(AgiliuxConnector_port)',
+    'LBL_PBXMANAGER_CONFIG' => 'Chi tiết Máy chủ Asterisk',
+    'LBL_NOTE' => 'chú thích:',
+    'LBL_INFO_WEBAPP_URL' => 'Định cấu hình URL ứng dụng Asterisk của bạn ở định dạng', 
+    'LBL_FORMAT_WEBAPP_URL' => '(protocol)://(asterisk_ip):(VtigerConnector_port)',
     'LBL_FORMAT_INFO_WEBAPP_URL' => 'ex:http://0.0.0.0:5000',
-    'LBL_INFO_CONTEXT' => 'Agiliux Spezifischer Kontext in Ihrer Asterisk-Server konfiguriert (extensions.conf)',
-    'LBL_PBXMANAGER_INFO' => 'Configure Asterisk Server Details after Installing Agiliux Asterisk Connector in your Asterisk Server',
+    'LBL_INFO_CONTEXT' => 'Vtiger Spezifischer Kontext in Ihrer Asterisk-Server konfiguriert (extensions.conf)',
+    'LBL_PBXMANAGER_INFO' => 'Cấu hình chi tiết máy chủ Asterisk sau khi cài đặt Vtiger Asterisk Connector trong máy chủ Asterisk của bạn',
     
-    'webappurl'=>'Agiliux Asterisk App URL',
-    'vtigersecretkey'=>'Agiliux Secret Key',
-    'outboundcontext' => 'Outbound Context',
-    'outboundtrunk' => 'Outbound Trunk',
+    'webappurl'=>'URL ứng dụng Vtiger Asterisk',
+    'vtigersecretkey'=>'Khóa bí mật của Vtiger',
+    'outboundcontext' => 'Bối cảnh ngoài',
+    'outboundtrunk' => 'Trunk đi',
     
 );
 

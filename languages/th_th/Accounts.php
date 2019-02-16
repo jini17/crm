@@ -9,56 +9,56 @@
  *************************************************************************************/
 $languageStrings = array(
 	// Basic Strings
-	'Accounts' => 'Tài khoản',
-	'SINGLE_Accounts' => 'Tài khoản',
-	'LBL_ADD_RECORD' => 'Thêm vào Tài khoản',
-	'LBL_RECORDS_LIST' => 'Tài khoản List',
+	'Accounts' => 'องค์กร',
+	'SINGLE_Accounts' => 'องค์กร',
+	'LBL_ADD_RECORD' => 'เพิ่มองค์กร',
+	'LBL_RECORDS_LIST' => 'รายชื่อองค์กร',
 
 	// Blocks
-	'LBL_ACCOUNT_INFORMATION' => 'Tài khoản Details',
+	'LBL_ACCOUNT_INFORMATION' => 'รายละเอียดองค์กร',
 
 	// Mass Action
-	'LBL_SHOW_ACCOUNT_HIERARCHY' => 'Tài khoản Hierarchy',
+	'LBL_SHOW_ACCOUNT_HIERARCHY' => 'ลำดับชั้นขององค์กร',
 
 	//Field Labels
-	'industry' => 'Industry',
-	'Account Name' => 'Tài khoản Name',
-	'Account No' => 'Tài khoản Number',
-	'Website' => 'Website',
-	'Ticker Symbol' => 'Ticker Symbol',
-	'Member Of' => 'Member Of',
-	'Employees' => 'Employees',
-	'Ownership' => 'Ownership',
-	'SIC Code' => 'Company Registration No',
-	'Other Email' => 'Other Email',
-	'Other Phone' => 'Other Phone',
-	'Phone' => 'Phone',
-	'Email' => 'Email',
-	'Type' => 'Type',
+	'industry' => 'อุตสาหกรรม',
+	'Account Name' => 'ชื่อองค์กร',
+	'Account No' => 'หมายเลของค์กร',
+	'Website' => 'เว็บไซต์',
+	'Ticker Symbol' => 'สัญลักษณ์ Ticker',
+	'Member Of' => 'สมาชิกของ',
+	'Employees' => 'พนักงาน',
+	'Ownership' => 'ความเป็นเจ้าของ',
+	'SIC Code' => 'รหัส SIC',
+	'Other Email' => 'อีเมลสำรอง',
+	'Other Phone' => 'โทรศัพท์รอง',
+	'Phone' => 'โทรศัพท์หลัก',
+	'Email' => 'อีเมลหลัก',
+	'Type' => 'ชนิด',
 
 	//Added for existing picklist entries
-	'Analyst'=>'Analyst',
-	'Competitor'=>'Competitor',
-	'Customer'=>'Contacts',
-	'Integrator'=>'Integrator',
-	'Investor'=>'Investor',
-	'Press'=>'Press',
-	'Prospect'=>'Prospect',
-	'Reseller'=>'Reseller',
-	'LBL_START_DATE' => 'Start Date',
-	'LBL_END_DATE' => 'End Date',
+	'Analyst'=>'นักวิเคราะห์',
+	'Competitor'=>'คู่แข่ง',
+	'Customer'=>'ลูกค้า',
+	'Integrator'=>'บูรณาการ',
+	'Investor'=>'นักลงทุน',
+	'Press'=>'กด',
+	'Prospect'=>'โอกาส',
+	'Reseller'=>'ผู้ค้าปลีก',
+	'LBL_START_DATE' => 'วันที่เริ่มต้น',
+	'LBL_END_DATE' => 'วันที่สิ้นสุด',
 
 	//Duplication error message
-	'LBL_DUPLICATES_EXIST' => 'Account Name already exists',
-	'LBL_COPY_SHIPPING_ADDRESS' => 'Copy Shipping Address',
-	'LBL_COPY_BILLING_ADDRESS' => 'Copy Billing Address',
-	'LBL_IMAGE_INFORMATION' => 'Profile Picture',
-	'Organization Image' => 'Account Image',
+	'LBL_DUPLICATES_EXIST' => 'ชื่อองค์กรมีอยู่แล้ว',
+	'LBL_COPY_SHIPPING_ADDRESS' => 'คัดลอกที่อยู่จัดส่ง',
+	'LBL_COPY_BILLING_ADDRESS' => 'คัดลอกที่อยู่การเรียกเก็บเงิน',
+	'LBL_IMAGE_INFORMATION' => 'รูปประวัติ',
+	'Organization Image' => 'ภาพลักษณ์องค์กร',
 );
 
 $jsLanguageStrings = array(
-	'LBL_RELATED_RECORD_DELETE_CONFIRMATION' => 'Are you sure you want to delete?',
-	'LBL_DELETE_CONFIRMATION' => 'Deleting this Account will remove its related Opportunities & Quotes. Are you sure you want to delete this Account?',
-	'LBL_MASS_DELETE_CONFIRMATION' => 'Deleting this Account(s) will remove its related Opportunities & Quotes. Are you sure you want to delete the selected records?',
-	'JS_DUPLICATE_CREATION_CONFIRMATION' => 'Account Name already Exists.Do you want to create a duplicate record?'
+	'LBL_RELATED_RECORD_DELETE_CONFIRMATION' => 'คุณแน่ใจหรือว่าต้องการลบ?',
+	'LBL_DELETE_CONFIRMATION' => 'การลบองค์กรนี้จะลบโอกาสและคำคมที่เกี่ยวข้องออก. คุณแน่ใจหรือไม่ว่าต้องการลบองค์กรนี้',
+	'LBL_MASS_DELETE_CONFIRMATION' => 'การลบองค์กรนี้จะลบโอกาสและคำคมที่เกี่ยวข้องออก. คุณแน่ใจหรือไม่ว่าต้องการลบระเบียนที่เลือก?',
+	'JS_DUPLICATE_CREATION_CONFIRMATION' => 'ชื่อองค์กรมีอยู่แล้ว.คุณต้องการสร้างระเบียนที่ซ้ำกันหรือไม่?'
 );

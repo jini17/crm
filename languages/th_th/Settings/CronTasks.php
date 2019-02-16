@@ -8,20 +8,20 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'CronTasks' => 'Scheduler',
+	'CronTasks' => 'จัดตารางเวลา',
 
 	//Basic Field Names
 	'Id' => 'Id',
-	'Cron Job' => 'Cron Job',
-	'Frequency' => 'Frequency',
-	'Status' => 'Status',
-	'Last Start' => 'Last scan started',
-	'Last End' => 'Last scan ended',
-	'Sequence' => 'Sequence',
+	'Cron Job' => 'งาน Cron',
+	'Frequency' => 'ความถี่',
+	'Status' => 'สถานะ',
+	'Last Start' => 'เริ่มการสแกนครั้งล่าสุดแล้ว',
+	'Last End' => 'การสแกนครั้งล่าสุดสิ้นสุดลงแล้ว',
+	'Sequence' => 'ลำดับ',
 
 	//Actions
-	'LBL_COMPLETED' => 'Completed',
-	'LBL_RUNNING' => 'Running',
-	'LBL_ACTIVE' => 'Active',
+	'LBL_COMPLETED' => 'เสร็จ',
+	'LBL_RUNNING' => 'วิ่ง',
+	'LBL_ACTIVE' => 'คล่องแคล่ว',
 	'LBL_INACTIVE' => 'In Active',
 );

@@ -8,31 +8,31 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'LBL_ADD_RECORD' => 'Add Picklist Dependency',
-    'PickListDependency' => 'PickList Dependency',
-	'LBL_PICKLIST_DEPENDENCY' => 'Picklist Dependency',
+	'LBL_ADD_RECORD' => 'Thêm Mức phụ thuộc Picklist',
+    'PickListDependency' => 'Thuộc tính PickList',
+	'LBL_PICKLIST_DEPENDENCY' => 'Tùy chọn Picklist',
 	'LBL_SELECT_MODULE' => 'Module',
-	'LBL_SOURCE_FIELD' => 'Source Field',
-	'LBL_TARGET_FIELD' => 'Target Field',
-	'LBL_SELECT_FIELD' => 'Select field',
-	'LBL_CONFIGURE_DEPENDENCY_INFO' => 'Click on the respective cell to change the mapping for picklist values of target field',
-	'LBL_CONFIGURE_DEPENDENCY_HELP_1' => 'Only mapped picklist values of the Source field will be shown below (except for first time)',
-	'LBL_CONFIGURE_DEPENDENCY_HELP_2' => "If you want to see or change the mapping for the other picklist values of Source field, <br/>
-										then you can select the values by clicking on <b>'Select Source values'</b> button on the right side",
-	'LBL_CONFIGURE_DEPENDENCY_HELP_3' => 'Selected values of the Target field values, are highlighted as',
-	'LBL_SELECT_SOURCE_VALUES' => 'Select Source Values',
-	'LBL_SELECT_SOURCE_PICKLIST_VALUES' => 'Select Source Picklist Values',
-	'LBL_ERR_CYCLIC_DEPENDENCY' => 'This dependency setup is not allowed as it ends up in some cyclic dependency',
-	'LBL_SELECT_ALL_VALUES' => 'Select All',
-	'LBL_UNSELECT_ALL_VALUES' => 'Unselect All',
-    'LBL_CYCLIC_DEPENDENCY_ERROR' => 'This could end up in cyclic redundancy as %s field is already configured for %s field',
+	'LBL_SOURCE_FIELD' => 'Trường Nguồn',
+	'LBL_TARGET_FIELD' => 'Trường mục tiêu',
+	'LBL_SELECT_FIELD' => 'Chọn trường',
+	'LBL_CONFIGURE_DEPENDENCY_INFO' => 'Nhấp vào ô tương ứng để thay đổi ánh xạ cho các giá trị chọn của trường mục tiêu',
+	'LBL_CONFIGURE_DEPENDENCY_HELP_1' => 'Chỉ các giá trị lựa chọn được lập bản đồ của trường Nguồn sẽ được hiển thị bên dưới (ngoại trừ lần đầu tiên)',
+	'LBL_CONFIGURE_DEPENDENCY_HELP_2' => "Nếu bạn muốn xem hoặc thay đổi ánh xạ cho các giá trị danh sách lựa chọn khác của trường Nguồn, <br/>
+sau đó bạn có thể chọn các giá trị bằng cách nhấp vào nút <b> 'Chọn giá trị nguồn' </ b> ở phía bên phải",
+	'LBL_CONFIGURE_DEPENDENCY_HELP_3' => 'Các giá trị được chọn của các giá trị trường Mục tiêu được đánh dấu là',
+	'LBL_SELECT_SOURCE_VALUES' => 'Chọn Giá trị Nguồn',
+	'LBL_SELECT_SOURCE_PICKLIST_VALUES' => 'Chọn giá trị Pick Picker Nguồn',
+	'LBL_ERR_CYCLIC_DEPENDENCY' => 'Thiết lập phụ thuộc này không được phép vì nó kết thúc trong một số phụ thuộc tuần tự',
+	'LBL_SELECT_ALL_VALUES' => 'Chọn tất cả',
+	'LBL_UNSELECT_ALL_VALUES' => 'Bỏ chọn tất cả',
+    'LBL_CYCLIC_DEPENDENCY_ERROR' => 'Điều này có thể kết thúc trong dự phòng cyclic như% s lĩnh vực đã được cấu hình cho% s lĩnh vực',
 );
 
 $jsLanguageStrings = array(
-	'JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE' => 'Are you sure you want to delete this picklist dependency?',
-	'JS_DEPENDENCY_DELETED_SUEESSFULLY' => 'Dependency deleted successfully',
-	'JS_PICKLIST_DEPENDENCY_SAVED' => 'Picklist Dependency Saved',
-    'JS_DEPENDENCY_ATLEAST_ONE_VALUE' => 'You need to select atleast one value for',
-	'JS_SOURCE_AND_TARGET_FIELDS_SHOULD_NOT_BE_SAME' => 'Source field and Target field should not be same',
-	'JS_SELECT_SOME_VALUE' => 'Select some value'
+	'JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE' => 'Bạn có chắc chắn muốn xóa phụ thuộc vào danh sách này?',
+	'JS_DEPENDENCY_DELETED_SUEESSFULLY' => 'Phụ thuộc đã bị xóa thành công',
+	'JS_PICKLIST_DEPENDENCY_SAVED' => 'Tùy chọn Picklist Đã Lưu',
+    'JS_DEPENDENCY_ATLEAST_ONE_VALUE' => 'Bạn cần phải chọn ít nhất một giá trị cho',
+	'JS_SOURCE_AND_TARGET_FIELDS_SHOULD_NOT_BE_SAME' => 'Trường nguồn và trường Mục tiêu không giống nhau',
+	'JS_SELECT_SOME_VALUE' => 'Chọn một số giá trị'
 );

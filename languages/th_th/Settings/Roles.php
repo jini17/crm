@@ -9,39 +9,39 @@
  *************************************************************************************/
 $languageStrings = array(
 	// Basic Strings
-	'Roles' => 'Roles',
-	'SINGLE_Roles' => 'Role',
-	'LBL_ADD_RECORD' => 'Add Role',
-	'LBL_DELETE_ROLE' => 'Delete Role',
-	'LBL_TRANSFER_OWNERSHIP' => 'Transfer Ownership',
-	'LBL_TO_OTHER_ROLE' => 'To other Role',
-	'LBL_CLICK_TO_EDIT_OR_DRAG_TO_MOVE' => 'Click to edit/Drag to move',
-	'LBL_ASSIGN_ROLE' => 'Assign Role',
-	'LBL_CHOOSE_PROFILES' => 'Choose profiles',
-	'LBL_COPY_PRIVILEGES_FROM' => 'Copy privileges from',
-    'LBL_TRANSFER_TO_OTHER_ROLE' =>'Transfer ownership to other role',
+	'Roles' => 'บทบาท',
+	'SINGLE_Roles' => 'บทบาท',
+	'LBL_ADD_RECORD' => 'เพิ่มบทบาท',
+	'LBL_DELETE_ROLE' => 'ลบบทบาท',
+	'LBL_TRANSFER_OWNERSHIP' => 'โอนกรรมสิทธิ์',
+	'LBL_TO_OTHER_ROLE' => 'กับบทบาทอื่น ๆ',
+	'LBL_CLICK_TO_EDIT_OR_DRAG_TO_MOVE' => 'คลิกเพื่อแก้ไข / ลากเพื่อย้าย',
+	'LBL_ASSIGN_ROLE' => 'กำหนดบทบาท',
+	'LBL_CHOOSE_PROFILES' => 'เลือกโปรไฟล์',
+	'LBL_COPY_PRIVILEGES_FROM' => 'คัดลอกสิทธิ์จาก',
+    'LBL_TRANSFER_TO_OTHER_ROLE' =>'โอนการเป็นเจ้าของให้กับบทบาทอื่น ๆ',
 	
 	//Edit View
-	'LBL_PROFILE' => 'Profile',
-	'LBL_REPORTS_TO' => 'Reports To',
-	'LBL_NAME' => 'Name',
-	'LBL_ASSIGN_NEW_PRIVILEGES' => 'Assign privileges directly to Role',
-	'LBL_ASSIGN_EXISTING_PRIVILEGES' => 'Assign priviliges from existing profiles',
-	'LBL_PRIVILEGES' => 'Privileges',
-	'LBL_DUPLICATES_EXIST' => 'Duplicate Role Exists',
+	'LBL_PROFILE' => 'ข้อมูลส่วนตัว',
+	'LBL_REPORTS_TO' => 'รายงานถึง',
+	'LBL_NAME' => 'ชื่อ',
+	'LBL_ASSIGN_NEW_PRIVILEGES' => 'กำหนดสิทธิ์ให้กับบทบาทโดยตรง',
+	'LBL_ASSIGN_EXISTING_PRIVILEGES' => 'กำหนดสิทธิ์จากโปรไฟล์ที่มีอยู่',
+	'LBL_PRIVILEGES' => 'สิทธิพิเศษ',
+	'LBL_DUPLICATES_EXIST' => 'มีบทบาทซ้ำแล้ว',
 	
 	//Assign Records to
-	'LBL_CAN_ASSIGN_RECORDS_TO' => 'Can Assign Records To',
-	'LBL_ALL_USERS' => 'All Users',
-	'LBL_USERS_WITH_LOWER_LEVEL' => 'Users having Subordinate Role',
-	'LBL_USERS_WITH_SAME_OR_LOWER_LEVEL' => 'Users having Same Role or Subordinate Role',
+	'LBL_CAN_ASSIGN_RECORDS_TO' => 'สามารถกำหนดระเบียนให้',
+	'LBL_ALL_USERS' => 'ผู้ใช้ทั้งหมด',
+	'LBL_USERS_WITH_LOWER_LEVEL' => 'ผู้ใช้ที่มีบทบาทรอง',
+	'LBL_USERS_WITH_SAME_OR_LOWER_LEVEL' => 'ผู้ใช้ที่มีบทบาทเดียวกันหรือบทบาทรอง',
     
     /*Vtiger7 String*/
-    'LBL_EDIT_ROLE' => 'Edit Role',
-	'LBL_CREATE_ROLE' => 'Create Role',
+    'LBL_EDIT_ROLE' => 'แก้ไขบทบาท',
+	'LBL_CREATE_ROLE' => 'สร้างบทบาท',
 );
 
 $jsLanguageStrings = array(
-	'JS_PERMISSION_DENIED' => 'Permissions Denied',
-	'JS_NO_PERMISSIONS_TO_MOVE' => 'No Permissions to Move',
+	'JS_PERMISSION_DENIED' => 'สิทธิ์ถูกปฏิเสธ',
+	'JS_NO_PERMISSIONS_TO_MOVE' => 'ไม่มีสิทธิ์ที่จะย้าย',
 );

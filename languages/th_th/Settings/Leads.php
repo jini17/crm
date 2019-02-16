@@ -9,10 +9,10 @@
  *************************************************************************************/
 $languageStrings = array(
 	//Actions
-	'LBL_CONVERT_LEAD_FIELD_MAPPING' => 'Convert Lead Mapping',
-	'LBL_ORGANIZATIONS' => 'Organizations',
-	'LBL_CONTACTS' => 'Contacts',
-	'LBL_OPPURTUNITIES' => 'Oppurtunities',
+	'LBL_CONVERT_LEAD_FIELD_MAPPING' => 'แปลงการทำแผนที่นำทาง',
+	'LBL_ORGANIZATIONS' => 'องค์กร',
+	'LBL_CONTACTS' => 'รายชื่อผู้ติดต่อ',
+	'LBL_OPPURTUNITIES' => 'โอกาส',
 );
 $jsLanguageStrings = array(
 );

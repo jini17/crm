@@ -9,21 +9,21 @@
  * ***********************************************************************************/
 
 $languageStrings = Array(
-	'Home' => 'Home',
-	'More' => 'More',
-	'Profile' => 'Profile',
-	'Change Password' => 'Change Password',
-	'Logout' => 'Logout',
-	'Welcome to Portal' => 'Welcome to Portal',
-	'LBL_CREATE_TICKET' => 'New Ticket',
-	'LBL_OPEN_TICKETS' => 'View Open Tickets',
-	'LBL_ADD_DOCUMENT' => 'Upload a Document',
-	'What would you like to do ?' => 'What would you like to do?',
-	'_start for notify' => 'keys',
-	'Your support ends on' => 'Your support ends on',
-	'_start for charts' => 'keys',
-	'OpenTicketsByPriority' => 'Open Tickets By Priority',
-	'TicketsClosureTimeByPriority' => 'Tickets Closure Time By Priority',
-	'_start for widgets' => 'keys',
-	'Recent' => 'Recent'
+	'Home' => 'Nhà',
+	'More' => 'Hơn',
+	'Profile' => 'Hồ sơ',
+	'Change Password' => 'Đổi mật khẩu',
+	'Logout' => 'Đăng xuất',
+	'Welcome to Portal' => 'Chào mừng bạn đến với Portal',
+	'LBL_CREATE_TICKET' => 'Vé mới',
+	'LBL_OPEN_TICKETS' => 'Xem Open Tickets',
+	'LBL_ADD_DOCUMENT' => 'Tải lên tài liệu',
+	'What would you like to do ?' => 'Bạn thích làm gì?',
+	'_start for notify' => 'phím',
+	'Your support ends on' => 'Sự hỗ trợ của bạn kết thúc vào',
+	'_start for charts' => 'phím',
+	'OpenTicketsByPriority' => 'Mở Vé theo Mức độ ưu tiên',
+	'TicketsClosureTimeByPriority' => 'Thời gian đóng cửa vé theo mức ưu tiên',
+	'_start for widgets' => 'phím',
+	'Recent' => 'Gần đây'
 );

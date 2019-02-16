@@ -8,39 +8,37 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'Quotes'=>'Quotes',
+	'Quotes'=>'คำคม',
 	//DetailView Actions
-	'SINGLE_Quotes' => 'Quote',
-	'LBL_EXPORT_TO_PDF' => 'Export to PDF',
-	'LBL_SEND_MAIL_PDF' => 'Send Email with PDF',
+	'SINGLE_Quotes' => 'อ้างอิง',
+	'LBL_EXPORT_TO_PDF' => 'ส่งออกเป็น PDF',
+	'LBL_SEND_MAIL_PDF' => 'ส่งอีเมลด้วย PDF',
 
 	//Basic strings
-	'LBL_ADD_RECORD' => 'Add Quote',
-	'LBL_RECORDS_LIST' => 'Quotes List',
+	'LBL_ADD_RECORD' => 'เพิ่มใบเสนอราคา',
+	'LBL_RECORDS_LIST' => 'รายชื่อคำคม',
 
-	'Account Name'=>'Account Name',
-	'Potential Name'=>'Potential Name',
 	// Blocks
-	'LBL_QUOTE_INFORMATION' => 'Quote Details',
-	'LBL_TERMSCONDITION'=>'Terms & Condition',
+	'LBL_QUOTE_INFORMATION' => 'รายละเอียดการอ้างอิง',
+
 	//Field Labels
-	'Quote No'=>'Quote Number',
-	'Quote Stage'=>'Quote Stage',
-	'Valid Till'=>'Valid Until',
-	'Inventory Manager'=>'Inventory Manager',
-	'Related To' => 'Related To',
+	'Quote No'=>'หมายเลขอ้างอิง',
+	'Quote Stage'=>'เวทีอ้างอิง',
+	'Valid Till'=>'ใช้ได้ถึงวันที่',
+	'Inventory Manager'=>'ผู้จัดการพื้นที่โฆษณา',
+	'Related To' => 'เกี่ยวข้องกับ',
 	//Added for existing Picklist Entries
 
-	'Accepted'=>'Accepted',
-	'Rejected'=>'Rejected',
+	'Accepted'=>'ได้รับการยืนยัน',
+	'Rejected'=>'ปฏิเสธ',
 
 	//Translation for product not found
-	'LBL_THIS' => 'This',
-	'LBL_IS_DELETED_FROM_THE_SYSTEM_PLEASE_REMOVE_OR_REPLACE_THIS_ITEM' => 'is deleted from the system.please remove or replace this item',
-	'LBL_THIS_LINE_ITEM_IS_DELETED_FROM_THE_SYSTEM_PLEASE_REMOVE_THIS_LINE_ITEM' => 'This line item is deleted from the system,please remove this line items',
+	'LBL_THIS' => 'นี้',
+	'LBL_IS_DELETED_FROM_THE_SYSTEM_PLEASE_REMOVE_OR_REPLACE_THIS_ITEM' => 'จะถูกลบออกจากระบบ.โปรดนำออกหรือแทนที่รายการนี้',
+	'LBL_THIS_LINE_ITEM_IS_DELETED_FROM_THE_SYSTEM_PLEASE_REMOVE_THIS_LINE_ITEM' => 'รายการโฆษณานี้จะถูกลบออกจากระบบโปรดลบรายการโฆษณานี้ออก',
 
 );
 
 $jsLanguageStrings = array(
-	'JS_PLEASE_REMOVE_LINE_ITEM_THAT_IS_DELETED' => 'Please remove line item that is deleted',
+	'JS_PLEASE_REMOVE_LINE_ITEM_THAT_IS_DELETED' => 'โปรดลบรายการโฆษณาที่ถูกลบออก',
 );

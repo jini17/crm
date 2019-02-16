@@ -8,62 +8,59 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-        // Basic Strings
-        'Contacts' => 'Contacts',
-        'SINGLE_Contacts' => 'Contact',
-        'LBL_ADD_RECORD' => 'Add Contact',
-        'LBL_RECORDS_LIST' => 'Contacts List',
+	// Basic Strings
+	'Contacts' => 'Liên hệ',
+	'SINGLE_Contacts' => 'Liên hệ',
+	'LBL_ADD_RECORD' => 'Thêm địa chỉ liên hệ',
+	'LBL_RECORDS_LIST' => 'Danh sách liên lạc',
 
-        // Blocks
-        'LBL_CONTACT_INFORMATION' => 'Basic Information',
-        'LBL_CUSTOMER_PORTAL_INFORMATION' => 'Customer Portal Details',
-        'LBL_IMAGE_INFORMATION' => 'Profile Picture',
-        'LBL_COPY_OTHER_ADDRESS' => 'Copy Other Address',
-        'LBL_COPY_MAILING_ADDRESS' => 'Copy Mailing Address',
+	// Blocks
+	'LBL_CONTACT_INFORMATION' => 'Thông tin cơ bản',
+	'LBL_CUSTOMER_PORTAL_INFORMATION' => 'Chi tiết Cổng Khách hàng',
+	'LBL_IMAGE_INFORMATION' => 'Ảnh đại diện',
+	'LBL_COPY_OTHER_ADDRESS' => 'Sao chép Địa chỉ Khác',
+	'LBL_COPY_MAILING_ADDRESS' => 'Sao chép địa chỉ gửi thư',
 
-        //Field Labels
-        'Office Phone' => 'Office Phone',
-        'Home Phone' => 'Home Phone',
-        'Title' => 'Title',
-        'Department' => 'Department',
-        'Birthdate' => 'Date of Birth',
-        'Reports To' => 'Reports To',
-        'Assistant' => 'Assistant',
-        'Assistant Phone' => 'Assistant Phone',
-        'Do Not Call' => 'Do Not Call',
-        'Reference' => 'Reference',
-        'Portal User' => 'Portal User',
-        'Mailing Street' => 'Mailing Street',
-        'Mailing City' => 'Mailing City',
-        'Mailing State' => 'Mailing State',
-        'Mailing Zip' => 'Mailing Zip',
-        'Mailing Country' => 'Mailing Country',
-        'Mailing Po Box' => 'Mailing P.O. Box',
-        'Other Street' => 'Other Street',
-        'Other City' => 'Other City',
-        'Other State' => 'Other State',
-        'Other Zip' => 'Other Zip',
-        'Other Country' => 'Other Country',
-        'Other Po Box' => 'Other P.O. Box',
-        'Contact Image' => 'Contact Image',
-        'Other Phone' => 'Secondary Phone',
-        'Email' => 'Primary Email',
-        'Secondary Email' => 'Secondary Email',
-        'Contact Id' => 'Contact Id',
-    'Support Start Date' => 'Support Start Date',
-    'Support End Date'   => 'Support End Date',
-    'Company Title'   => 'Company Name',
-
-        //Added for Picklist Values
-        'Mr.'=>'Mr.',
-        'Ms.'=>'Ms.',
-        'Mrs.'=>'Mrs.',
-        'Dr.'=>'Dr.',
-        'Prof.'=>'Prof.',
-
-        'User List'=>'User List',
-        'LBL_ENRICH_CONTACT'=>'Enrich Contact',
-
+	//Field Labels
+	'Office Phone' => 'Điện thoại văn phòng',
+	'Home Phone' => 'Điện thoại nhà',
+	'Title' => 'Chức vụ',
+	'Department' => 'Bộ phận',
+	'Birthdate' => 'Ngày sinh',
+	'Reports To' => 'Báo cáo đến',
+	'Assistant' => 'Phụ tá',
+	'Assistant Phone' => 'Trợ lý điện thoại',
+	'Do Not Call' => 'Đừng gọi',
+	'Reference' => 'Tài liệu tham khảo',
+	'Portal User' => 'Người dùng cổng thông tin',
+	'Mailing Street' => 'Đường gửi thư',
+	'Mailing City' => 'Thành phố gửi thư',
+	'Mailing State' => 'Quốc gia gửi thư',
+	'Mailing Zip' => 'Gửi thư zip',
+	'Mailing Country' => 'Quốc gia gửi thư',
+	'Mailing Po Box' => 'Mailing P.O. Cái hộp',
+	'Other Street' => 'Đường khác',
+	'Other City' => 'Thành phố khác',
+	'Other State' => 'Tiểu bang khác',
+	'Other Zip' => 'Các loại Zip khác',
+	'Other Country' => 'Đất nước khác',
+	'Other Po Box' => 'Khác P.O. Cái hộp',
+	'Contact Image' => 'Liên hệ hình ảnh',
+	'Other Phone' => 'Điện thoại phổ thông',
+	'Email' => 'Email chính',
+	'Secondary Email' => 'Email phụ',
+	'Contact Id' => 'ID liên hệ',
+    'Support Start Date' => 'Ngày bắt đầu hỗ trợ',
+    'Support End Date'   => 'Ngày kết thúc hỗ trợ',
+	
+	//Added for Picklist Values
+	'Mr.'=>'Ông.',
+	'Ms.'=>'Cô.',
+	'Mrs.'=>'Bà.',
+	'Dr.'=>'Tiến sĩ',
+	'Prof.'=>'GS.',
+	
+	'User List'=>'Danh sách người dùng',
 );
 
 $jsLanguageStrings = array(

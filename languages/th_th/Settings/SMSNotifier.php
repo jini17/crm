@@ -8,19 +8,19 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'isactive' => 'Active',
-	'LBL_ADD_CONFIGURATION' => 'New Configuration',
-	'LBL_ADD_RECORD' => 'New Configuration',
-	'LBL_EDIT_CONFIGURATION' => 'Edit Configuration',
-	'LBL_SELECT_ONE' => 'Select One',
-	'password' => 'Password',
-	'providertype' => 'Provider',
-	'SMSNotifier' => 'SMS Provider Configuration',
-	'username' => 'User Name',
+	'isactive' => 'คล่องแคล่ว',
+	'LBL_ADD_CONFIGURATION' => 'การกำหนดค่าใหม่',
+	'LBL_ADD_RECORD' => 'การกำหนดค่าใหม่',
+	'LBL_EDIT_CONFIGURATION' => 'แก้ไขการกำหนดค่า',
+	'LBL_SELECT_ONE' => 'เลือกหนึ่งอัน',
+	'password' => 'รหัสผ่าน',
+	'providertype' => 'ผู้ให้บริการ',
+	'SMSNotifier' => 'การกำหนดค่าผู้ให้บริการ SMS',
+	'username' => 'ชื่อผู้ใช้',
 );
 
 $jsLanguageStrings = array(
-	'JS_CONFIGURATION_SAVED' => 'SMS Provider Configurations saved',
-	'JS_RECORD_DELETED_SUCCESSFULLY' => 'SMS Provider Deleted Successfully',
-	'LBL_DELETE_CONFIRMATION' => 'Are you sure, you want to delete this SMSNotifier Configuration?',
+	'JS_CONFIGURATION_SAVED' => 'การจัดโครงแบบผู้ให้บริการ SMS ถูกบันทึกไว้',
+	'JS_RECORD_DELETED_SUCCESSFULLY' => 'ผู้ให้บริการ SMS ถูกลบเรียบร้อยแล้ว',
+	'LBL_DELETE_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการลบการแจ้งเตือน SMS นี้?',
 );	

@@ -9,28 +9,28 @@
  *************************************************************************************/
 $languageStrings = array(
 	// Basic Strings
-	'Assets'        => 'Assets',
-	'SINGLE_Assets' => 'Asset',
-	'LBL_ADD_RECORD' => 'Add Asset',
-	'LBL_RECORDS_LIST' => 'Assets List',
+	'Assets'        => 'สินทรัพย์',
+	'SINGLE_Assets' => 'สินทรัพย์',
+	'LBL_ADD_RECORD' => 'เพิ่มเนื้อหา',
+	'LBL_RECORDS_LIST' => 'รายการสินทรัพย์',
 
 	// Blocks
-	'LBL_ASSET_INFORMATION' => 'Asset Details',
+	'LBL_ASSET_INFORMATION' => 'รายละเอียดสินทรัพย์',
 
 	//Field Labels
-    'Asset No' => 'Asset No',
-	'Serial Number' => 'Serial Number',
-	'Date Sold' => 'Date Sold',
-	'Date in Service' => 'Date in Service',
-	'Tag Number' => 'Tag Number',
-	'Invoice Name' => 'Invoice Name',
-	'Shipping Method' => 'Shipping Method',
-	'Shipping Tracking Number' => 'Shipping Tracking Number',
-	'Asset Name' => 'Asset Name',
-	'Customer Name' => 'Customer Name',
-	'Notes' => 'Notes',
+    'Asset No' => 'หมายเลขสินทรัพย์',
+	'Serial Number' => 'หมายเลขผลิตภัณฑ์',
+	'Date Sold' => 'วันที่ที่ขาย',
+	'Date in Service' => 'วันที่ในการให้บริการ',
+	'Tag Number' => 'หมายเลขแท็ก',
+	'Invoice Name' => 'ชื่อใบแจ้งหนี้',
+	'Shipping Method' => 'วิธีการจัดส่งสินค้า',
+	'Shipping Tracking Number' => 'หมายเลขการติดตามการจัดส่ง',
+	'Asset Name' => 'ชื่อสินทรัพย์',
+	'Customer Name' => 'ชื่อลูกค้า',
+	'Notes' => 'หมายเหตุ',
 
 	/*picklist values*/
-	'In Service'=>'In Service',
-	'Out-of-service'=>'Out-of-service',
+	'In Service'=>'ในบริการ',
+	'Out-of-service'=>'ออกจากบริการ',
 );

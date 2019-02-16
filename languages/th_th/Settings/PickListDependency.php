@@ -8,31 +8,33 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'LBL_ADD_RECORD' => 'Add Picklist Dependency',
-    'PickListDependency' => 'PickList Dependency',
-	'LBL_PICKLIST_DEPENDENCY' => 'Picklist Dependency',
-	'LBL_SELECT_MODULE' => 'Module',
-	'LBL_SOURCE_FIELD' => 'Source Field',
-	'LBL_TARGET_FIELD' => 'Target Field',
-	'LBL_SELECT_FIELD' => 'Select field',
-	'LBL_CONFIGURE_DEPENDENCY_INFO' => 'Click on the respective cell to change the mapping for picklist values of target field',
-	'LBL_CONFIGURE_DEPENDENCY_HELP_1' => 'Only mapped picklist values of the Source field will be shown below (except for first time)',
-	'LBL_CONFIGURE_DEPENDENCY_HELP_2' => "If you want to see or change the mapping for the other picklist values of Source field, <br/>
-										then you can select the values by clicking on <b>'Select Source values'</b> button on the right side",
-	'LBL_CONFIGURE_DEPENDENCY_HELP_3' => 'Selected values of the Target field values, are highlighted as',
-	'LBL_SELECT_SOURCE_VALUES' => 'Select Source Values',
-	'LBL_SELECT_SOURCE_PICKLIST_VALUES' => 'Select Source Picklist Values',
-	'LBL_ERR_CYCLIC_DEPENDENCY' => 'This dependency setup is not allowed as it ends up in some cyclic dependency',
-	'LBL_SELECT_ALL_VALUES' => 'Select All',
-	'LBL_UNSELECT_ALL_VALUES' => 'Unselect All',
-    'LBL_CYCLIC_DEPENDENCY_ERROR' => 'This could end up in cyclic redundancy as %s field is already configured for %s field',
+	'LBL_ADD_RECORD' => 'เพิ่มการเลือกใช้ Picklist',
+    'PickListDependency' => 'การพึ่งพา PickList',
+	'LBL_PICKLIST_DEPENDENCY' => 'การพึ่งพา PickList',
+	'LBL_SELECT_MODULE' => 'โมดูล',
+	'LBL_SOURCE_FIELD' => 'ฟิลด์แหล่งที่มา
+
+',
+	'LBL_TARGET_FIELD' => 'ฟิลด์เป้าหมาย',
+	'LBL_SELECT_FIELD' => 'เลือกฟิลด์',
+	'LBL_CONFIGURE_DEPENDENCY_INFO' => 'คลิกที่เซลล์นั้นเพื่อเปลี่ยนการแมปสำหรับค่าที่เลือกของฟิลด์เป้าหมาย',
+	'LBL_CONFIGURE_DEPENDENCY_HELP_1' => 'ค่า picklist ที่แม็ปของฟิลด์ต้นทางจะแสดงไว้ด้านล่าง (ยกเว้นครั้งแรก)',
+	'LBL_CONFIGURE_DEPENDENCY_HELP_2' => "ถ้าคุณต้องการดูหรือเปลี่ยนการแมปสำหรับค่าของรายการที่เลือกอื่นของฟิลด์แหล่งที่มา, <br/>
+										จากนั้นคุณสามารถเลือกค่าได้ด้วยการคลิกที่ <b>'เลือกค่าแหล่งที่มา'</b> ที่ด้านขวา",
+	'LBL_CONFIGURE_DEPENDENCY_HELP_3' => 'ค่าที่เลือกของค่าฟิลด์เป้าหมายจะถูกเน้นเป็น',
+	'LBL_SELECT_SOURCE_VALUES' => 'เลือกค่าต้นทาง',
+	'LBL_SELECT_SOURCE_PICKLIST_VALUES' => 'เลือกค่า Picklist แหล่งที่มา',
+	'LBL_ERR_CYCLIC_DEPENDENCY' => 'การตั้งค่าพึ่งพานี้ไม่ได้รับอนุญาตเมื่อสิ้นสุดการพึ่งพาแบบวนซ้ำ',
+	'LBL_SELECT_ALL_VALUES' => 'เลือกทั้งหมด',
+	'LBL_UNSELECT_ALL_VALUES' => 'ไม่เลือกทั้งหมด',
+    'LBL_CYCLIC_DEPENDENCY_ERROR' => 'ซึ่งอาจจบลงด้วยความซ้ำซ้อนของวัฏจักรเนื่องจากฟิลด์% s ถูกกำหนดค่าไว้สำหรับฟิลด์% s แล้ว',
 );
 
 $jsLanguageStrings = array(
-	'JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE' => 'Are you sure you want to delete this picklist dependency?',
-	'JS_DEPENDENCY_DELETED_SUEESSFULLY' => 'Dependency deleted successfully',
-	'JS_PICKLIST_DEPENDENCY_SAVED' => 'Picklist Dependency Saved',
-    'JS_DEPENDENCY_ATLEAST_ONE_VALUE' => 'You need to select atleast one value for',
-	'JS_SOURCE_AND_TARGET_FIELDS_SHOULD_NOT_BE_SAME' => 'Source field and Target field should not be same',
-	'JS_SELECT_SOME_VALUE' => 'Select some value'
+	'JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE' => 'คุณแน่ใจหรือไม่ว่าต้องการลบรายการที่เลือกนี้',
+	'JS_DEPENDENCY_DELETED_SUEESSFULLY' => 'พึ่งพาถูกลบเรียบร้อยแล้ว',
+	'JS_PICKLIST_DEPENDENCY_SAVED' => 'บันทึกการพึ่งพา Picklist แล้ว',
+    'JS_DEPENDENCY_ATLEAST_ONE_VALUE' => 'คุณต้องเลือกอย่างน้อยหนึ่งค่าสำหรับ',
+	'JS_SOURCE_AND_TARGET_FIELDS_SHOULD_NOT_BE_SAME' => 'ฟิลด์ต้นทางและช่องเป้าหมายต้องไม่เหมือนกัน',
+	'JS_SELECT_SOME_VALUE' => 'เลือกค่าบางอย่าง'
 );

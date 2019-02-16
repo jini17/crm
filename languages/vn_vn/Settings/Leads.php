@@ -9,10 +9,10 @@
  *************************************************************************************/
 $languageStrings = array(
 	//Actions
-	'LBL_CONVERT_LEAD_FIELD_MAPPING' => 'Convert Lead Mapping',
-	'LBL_ORGANIZATIONS' => 'Organizations',
-	'LBL_CONTACTS' => 'Contacts',
-	'LBL_OPPURTUNITIES' => 'Oppurtunities',
+	'LBL_CONVERT_LEAD_FIELD_MAPPING' => 'Chuyển đổi Bản đồ Chì',
+	'LBL_ORGANIZATIONS' => 'Tổ chức',
+	'LBL_CONTACTS' => 'Liên hệ',
+	'LBL_OPPURTUNITIES' => 'Cơ hội',
 );
 $jsLanguageStrings = array(
 );

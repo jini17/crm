@@ -34,7 +34,7 @@
                     </li>                    
                 {/foreach}
 
-           <div class="moreSettings pull-right col-lg-4 col-md-2 col-sm-12 col-xs-12">
+           <div class="moreSettings pull-right col-lg-5 col-md-2 col-sm-12 col-xs-12">
                <div class="buttonGroups pull-right">
                    {if $SELECTED_TAB neq 1 AND $SELECTED_TAB neq 1298}
                 <div class="btn-group pull-right"  {$SELECTED_TAB}>

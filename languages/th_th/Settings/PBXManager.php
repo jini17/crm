@@ -9,20 +9,20 @@
  * All Rights Reserved.
  * *********************************************************************************** */
 $languageStrings = array(
-    'LBL_SELECT_ONE' => 'Select',
+    'LBL_SELECT_ONE' => 'เลือก',
     'LBL_PBXMANAGER' =>'PBXManager',
-    'LBL_PBXMANAGER_CONFIG' => 'Asterisk Server Details',
-    'LBL_NOTE' => 'Note:',
-    'LBL_INFO_WEBAPP_URL' => 'Configure your Asterisk App URL in the  format', 
-    'LBL_FORMAT_WEBAPP_URL' => '(protocol)://(asterisk_ip):(AgiliuxConnector_port)',
+    'LBL_PBXMANAGER_CONFIG' => 'รายละเอียดเซิร์ฟเวอร์เครื่องหมายดอกจัน',
+    'LBL_NOTE' => 'บันทึก:',
+    'LBL_INFO_WEBAPP_URL' => 'กำหนดค่า URL โปรแกรม Asterisk ของคุณในรูปแบบ', 
+    'LBL_FORMAT_WEBAPP_URL' => '(protocol)://(asterisk_ip):(VtigerConnector_port)',
     'LBL_FORMAT_INFO_WEBAPP_URL' => 'ex:http://0.0.0.0:5000',
-    'LBL_INFO_CONTEXT' => 'Agiliux Spezifischer Kontext in Ihrer Asterisk-Server konfiguriert (extensions.conf)',
-    'LBL_PBXMANAGER_INFO' => 'Configure Asterisk Server Details after Installing Agiliux Asterisk Connector in your Asterisk Server',
+    'LBL_INFO_CONTEXT' => 'คอนเทนเนอร์ Vtiger Spezifischer ในการกำหนดค่า Asterisk-Server ของเซิร์ฟเวอร์ Ihrer (extensions.conf)',
+    'LBL_PBXMANAGER_INFO' => 'กำหนดค่ารายละเอียดเซิร์ฟเวอร์เครื่องหมายดอกจันหลังจากติดตั้งตัวเชื่อมต่อ Asterisk Vtiger ในเซิร์ฟเวอร์ Asterisk ของคุณแล้ว',
     
-    'webappurl'=>'Agiliux Asterisk App URL',
-    'vtigersecretkey'=>'Agiliux Secret Key',
-    'outboundcontext' => 'Outbound Context',
-    'outboundtrunk' => 'Outbound Trunk',
+    'webappurl'=>'URL แอพพลิเคชัน Asterisk Vtiger',
+    'vtigersecretkey'=>'คีย์ลับ Vtiger',
+    'outboundcontext' => 'บริบทขาออก',
+    'outboundtrunk' => 'ขาออกขาออก',
     
 );
 

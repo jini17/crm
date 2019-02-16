@@ -8,26 +8,25 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'Email Templates' => 'Templates',
-	'LBL_ADD_RECORD' => 'Add Notification Template',
-	'SINGLE_EmailTemplates' => 'Notification Template',
-	'LBL_EMAIL_TEMPLATES'=> 'Notification Templates',
-	'LBL_EMAIL_TEMPLATE' => 'Notification Template',
-	'LBL_TEMPLATE_TYPE' => 'Template Type',
+	'Email Templates' => 'mẫu thư điện tử',
+	'LBL_ADD_RECORD' => 'Thêm Mẫu Email',
+	'SINGLE_EmailTemplates' => 'Mẫu email',
+	'LBL_EMAIL_TEMPLATES'=> 'mẫu thư điện tử',
+	'LBL_EMAIL_TEMPLATE' => 'Mẫu email',
 	
-	'LBL_TEMPLATE_NAME' => 'Template name',
-	'LBL_DESCRIPTION' => 'Description',
-	'LBL_SUBJECT' => 'Subject',
-	'LBL_SELECT_FIELD_TYPE' => 'Select Module & Field',
-	'LBL_MODULE_NAME' => 'Module Name',
+	'LBL_TEMPLATE_NAME' => 'Tên mẫu',
+	'LBL_DESCRIPTION' => 'Sự miêu tả',
+	'LBL_SUBJECT' => 'Môn học',
+	'LBL_SELECT_FIELD_TYPE' => 'Chọn mô-đun & trường',
+	'LBL_MODULE_NAME' => 'Tên mô-đun',
 	
-	'LBL_EMAIL_TEMPLATE_DESCRIPTION'=>'Manage templates for E-Mail module',
-	'LBL_NO_PERMISSIONS_TO_DELETE_SYSTEM_TEMPLATE' => 'No Permissions to delete System Template',
-	'LBL_RECORD_ID' => 'Record ID',
+	'LBL_EMAIL_TEMPLATE_DESCRIPTION'=>'Quản lý mẫu cho mô-đun E-Mail',
+	'LBL_NO_PERMISSIONS_TO_DELETE_SYSTEM_TEMPLATE' => 'Không có quyền xóa Bản mẫu Hệ thống',
+	'LBL_RECORD_ID' => 'ID bản ghi',
 	
 );
 
 $jsLanguageStrings = array(
-    'LBL_CUTOMER_LOGIN_DETAILS_TEMPLATE_DELETE_MESSAGE' => 'You will not be able to send the customer portal login details to the contact if you delete "Customer Login Details" template. Do you wish to continue ?',
-	'JS_REQUIRED_FIELD' => '* System Email Template Content is Required',
+    'LBL_CUTOMER_LOGIN_DETAILS_TEMPLATE_DELETE_MESSAGE' => 'Bạn sẽ không thể gửi chi tiết đăng nhập cổng thông tin khách hàng tới địa chỉ liên hệ nếu bạn xóa mẫu "Chi tiết Đăng nhập Khách hàng". Bạn có muốn tiếp tục không?',
+	'JS_REQUIRED_FIELD' => '* Bắt buộc phải nhập nội dung mẫu của hệ thống qua email',
 );

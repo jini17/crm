@@ -9,19 +9,19 @@
  *************************************************************************************/
 $languageStrings = array(
 	// Basic Strings
-	'PriceBooks' => 'Price Books',
-	'SINGLE_PriceBooks' => 'Price Book',
-	'LBL_ADD_RECORD' => 'Add Price Book',
-	'LBL_RECORDS_LIST' => 'Price Books List',
+	'PriceBooks' => 'Sách Giá',
+	'SINGLE_PriceBooks' => 'Giá sách',
+	'LBL_ADD_RECORD' => 'Thêm Giá Sách',
+	'LBL_RECORDS_LIST' => 'Danh sách sách giá',
 
 	// Blocks
-	'LBL_PRICEBOOK_INFORMATION' => 'Price Book Details',
-	'LBL_EDIT_LIST_PRICE' => 'Edit List Price',
+	'LBL_PRICEBOOK_INFORMATION' => 'Chi tiết Sách Giá',
+	'LBL_EDIT_LIST_PRICE' => 'Chỉnh sửa Giá niêm yết',
 
 	//Field Labels
-	'Price Book Name' => 'Price Book Name',
-	'PriceBook No' => 'Price Book Number',
+	'Price Book Name' => 'Tên Sách Giá',
+	'PriceBook No' => 'Số Đặt Giá',
 
-	'LBL_UNIT_PRICE' => 'Unit Price',
-	'LBL_ADD_TO' => 'Add to',
+	'LBL_UNIT_PRICE' => 'Đơn giá',
+	'LBL_ADD_TO' => 'Thêm vào',
 );

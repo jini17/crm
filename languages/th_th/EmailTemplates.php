@@ -8,26 +8,25 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = array(
-	'Email Templates' => 'Templates',
-	'LBL_ADD_RECORD' => 'Add Notification Template',
-	'SINGLE_EmailTemplates' => 'Notification Template',
-	'LBL_EMAIL_TEMPLATES'=> 'Notification Templates',
-	'LBL_EMAIL_TEMPLATE' => 'Notification Template',
-	'LBL_TEMPLATE_TYPE' => 'Template Type',
+	'Email Templates' => 'เทมเพลตอีเมล',
+	'LBL_ADD_RECORD' => 'เพิ่มแม่แบบอีเมล',
+	'SINGLE_EmailTemplates' => 'เทมเพลตอีเมล',
+	'LBL_EMAIL_TEMPLATES'=> 'เทมเพลตอีเมล',
+	'LBL_EMAIL_TEMPLATE' => 'เทมเพลตอีเมล',
 	
-	'LBL_TEMPLATE_NAME' => 'Template name',
-	'LBL_DESCRIPTION' => 'Description',
-	'LBL_SUBJECT' => 'Subject',
-	'LBL_SELECT_FIELD_TYPE' => 'Select Module & Field',
-	'LBL_MODULE_NAME' => 'Module Name',
+	'LBL_TEMPLATE_NAME' => 'ชื่อเทมเพลต',
+	'LBL_DESCRIPTION' => 'การบรรยาย',
+	'LBL_SUBJECT' => 'เรื่อง',
+	'LBL_SELECT_FIELD_TYPE' => 'เลือกโมดูล & ด้าน',
+	'LBL_MODULE_NAME' => 'ชื่อโมดูล',
 	
-	'LBL_EMAIL_TEMPLATE_DESCRIPTION'=>'Manage templates for E-Mail module',
-	'LBL_NO_PERMISSIONS_TO_DELETE_SYSTEM_TEMPLATE' => 'No Permissions to delete System Template',
-	'LBL_RECORD_ID' => 'Record ID',
+	'LBL_EMAIL_TEMPLATE_DESCRIPTION'=>'จัดการเทมเพลตสำหรับโมดูลอีเมล',
+	'LBL_NO_PERMISSIONS_TO_DELETE_SYSTEM_TEMPLATE' => 'ไม่มีสิทธิ์ในการลบเทมเพลตระบบ',
+	'LBL_RECORD_ID' => 'บันทึก ID',
 	
 );
 
 $jsLanguageStrings = array(
-    'LBL_CUTOMER_LOGIN_DETAILS_TEMPLATE_DELETE_MESSAGE' => 'You will not be able to send the customer portal login details to the contact if you delete "Customer Login Details" template. Do you wish to continue ?',
-	'JS_REQUIRED_FIELD' => '* System Email Template Content is Required',
+    'LBL_CUTOMER_LOGIN_DETAILS_TEMPLATE_DELETE_MESSAGE' => 'คุณจะไม่สามารถส่งรายละเอียดการเข้าสู่ระบบพอร์ทัลลูกค้าไปยังที่อยู่ติดต่อได้หากคุณลบเทมเพลต "รายละเอียดการเข้าสู่ระบบของลูกค้า". คุณต้องการดำเนินการต่อหรือไม่ ?',
+	'JS_REQUIRED_FIELD' => '* จำเป็นต้องมีเนื้อหาเทมเพลตอีเมลระบบ',
 );

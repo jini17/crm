@@ -9,28 +9,28 @@
  *************************************************************************************/
 $languageStrings = array(
 	// Basic Strings
-	'Assets'        => 'Assets',
-	'SINGLE_Assets' => 'Asset',
-	'LBL_ADD_RECORD' => 'Add Asset',
-	'LBL_RECORDS_LIST' => 'Assets List',
+	'Assets'        => 'Tài sản',
+	'SINGLE_Assets' => 'Tài sản',
+	'LBL_ADD_RECORD' => 'Thêm nội dung',
+	'LBL_RECORDS_LIST' => 'Danh sách tài sản',
 
 	// Blocks
-	'LBL_ASSET_INFORMATION' => 'Asset Details',
+	'LBL_ASSET_INFORMATION' => 'Chi tiết Tài sản',
 
 	//Field Labels
-    'Asset No' => 'Asset No',
-	'Serial Number' => 'Serial Number',
-	'Date Sold' => 'Date Sold',
-	'Date in Service' => 'Date in Service',
-	'Tag Number' => 'Tag Number',
-	'Invoice Name' => 'Invoice Name',
-	'Shipping Method' => 'Shipping Method',
-	'Shipping Tracking Number' => 'Shipping Tracking Number',
-	'Asset Name' => 'Asset Name',
-	'Customer Name' => 'Customer Name',
-	'Notes' => 'Notes',
+    'Asset No' => 'Tài sản Không',
+	'Serial Number' => 'Số sê ri',
+	'Date Sold' => 'Ngày bán',
+	'Date in Service' => 'Ngày trong Dịch vụ',
+	'Tag Number' => 'Số thẻ',
+	'Invoice Name' => 'Tên hoá đơn',
+	'Shipping Method' => 'Phương pháp vận chuyển',
+	'Shipping Tracking Number' => 'Số theo dõi vận chuyển',
+	'Asset Name' => 'Tên Tài sản',
+	'Customer Name' => 'tên khách hàng',
+	'Notes' => 'Ghi chú',
 
 	/*picklist values*/
-	'In Service'=>'In Service',
-	'Out-of-service'=>'Out-of-service',
+	'In Service'=>'Phục vụ',
+	'Out-of-service'=>'Ngừng phục vụ',
 );
