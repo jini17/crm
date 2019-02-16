@@ -206,7 +206,7 @@
                                                <a  class="btn 
                                                    {if $MODULE eq 'Users'} btn-primary text-white {else} module-buttons {/if}
                                                    {if $SETTING->getLabel() eq 'LBL_CHANGE_OWNER'} hide {/if}" 
-                                                    {if $MODULE eq 'Users'} style="margin-right:5px; margin-top:5px;"  {/if}
+                                                    {if $MODULE eq 'Users'} style="margin-right:5px; margin-top:5px; border-radius: 3px !important"  {/if}
                                                    href="javascript:void(0);" onclick="{$SETTING->getUrl()};">
                                                    {if $SETTING->getLabel() eq 'LBL_CHANGE_OWNER'} 
                                                        <i class="material-icons module-icon" style="font-weight:bold;">person</i>&nbsp;

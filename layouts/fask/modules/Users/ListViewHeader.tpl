@@ -85,7 +85,7 @@
             </div>
             <div class="col-lg-3">
                   <div class="btn-group list-switcher pull-right" role="group" aria-label="Basic example">
-                    <button type="button" class="empview btn {if $EMP_VIEW eq 'List'} btn-primary activeview {else}btn-white view{/if}" data-tabtype="{$TAB_TYPE}" data-listtype='list' title="List View"><i class='fa fa-list'></i> </button>
+                      <button style="margin:0 !important;" type="button" class="empview btn {if $EMP_VIEW eq 'List'} btn-primary activeview {else}btn-white view{/if}" data-tabtype="{$TAB_TYPE}" data-listtype='list' title="List View"><i class='fa fa-list'></i> </button>
                     <button type="button"  class="empview btn {if $EMP_VIEW eq 'grid'} btn-primary activeview {else}btn-white view{/if}"  data-tabtype="{$TAB_TYPE}" data-listtype='grid' title="Grid View"> <i class="fa fa-th-large"></i> </button>
                 </div>
           {*      <select class="select2 grid-filter pull-left" style="width: 60%;">

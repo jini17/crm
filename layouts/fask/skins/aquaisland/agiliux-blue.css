@@ -731,12 +731,14 @@ td.jqplot-table-legend{
 .jqplot-grid-canvas{
     display: none;
 }
-.btn-group button{
+.btn-group button,
+.btn-group a{
     border-radius: 3px !important;
     padding-right:10px !important;
     margin-right: 10px !important;
 }
-#appnav button{
+#appnav button,
+#appnav a{
     padding-right: 10px !important;
     
 }
