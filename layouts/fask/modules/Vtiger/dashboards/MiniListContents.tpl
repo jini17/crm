@@ -26,26 +26,26 @@
 
 	{foreach item=RECORD from=$MINILIST_WIDGET_RECORDS}
 	<div class="row miniListContent" style="padding:5px">
-		{foreach item=FIELD key=NAME from=$HEADER_FIELDS name="minilistWidgetModelRowHeaders"}
-			<div {$NAME} class="col-lg-{$SPANSIZE} textOverflowEllipsis" title="{strip_tags($RECORD->get($NAME))}" style="padding-right: 10px;">
-               {if $smarty.foreach.minilistWidgetModelRowHeaders.last}
-					<a href="{$RECORD->getDetailViewUrl()}" class="pull-right"><i title="{vtranslate('LBL_SHOW_COMPLETE_DETAILS',$MODULE_NAME)}" class="material-icons text-info">view_day</i></a>
-				{/if}
-				{if $FIELD->get('uitype') eq '71' || ($FIELD->get('uitype') eq '72' && $FIELD->getName() eq 'unit_price')}
-					{assign var=CURRENCY_ID value=$USER_MODEL->get('currency_id')}
-					{if $FIELD->get('uitype') eq '72' && $NAME eq 'unit_price'}
-						{assign var=CURRENCY_ID value=getProductBaseCurrency($RECORD_ID, $RECORD->getModuleName())}
-					{/if}
-					{assign var=CURRENCY_INFO value=getCurrencySymbolandCRate($CURRENCY_ID)}
-					{if $RECORD->get($NAME) neq NULL}
-						&nbsp;{CurrencyField::appendCurrencySymbol($RECORD->get($NAME), $CURRENCY_INFO['symbol'])}&nbsp;
-					{/if}
-				{else}
-					{$RECORD->get($NAME)}&nbsp;
-				{/if}
-				
-			</div>
-		{/foreach}
+                            {foreach item=FIELD key=NAME from=$HEADER_FIELDS name="minilistWidgetModelRowHeaders"}
+                                    <div {$NAME} class="col-lg-{$SPANSIZE} textOverflowEllipsis" title="{strip_tags($RECORD->get($NAME))}" style="padding-right: 10px;">
+                           {if $smarty.foreach.minilistWidgetModelRowHeaders.last}
+                                                    <a href="{$RECORD->getDetailViewUrl()}" class="pull-right"><i title="{vtranslate('LBL_SHOW_COMPLETE_DETAILS',$MODULE_NAME)}" class="material-icons text-info">view_day</i></a>
+                                            {/if}
+                                            {if $FIELD->get('uitype') eq '71' || ($FIELD->get('uitype') eq '72' && $FIELD->getName() eq 'unit_price')}
+                                                    {assign var=CURRENCY_ID value=$USER_MODEL->get('currency_id')}
+                                                    {if $FIELD->get('uitype') eq '72' && $NAME eq 'unit_price'}
+                                                            {assign var=CURRENCY_ID value=getProductBaseCurrency($RECORD_ID, $RECORD->getModuleName())}
+                                                    {/if}
+                                                    {assign var=CURRENCY_INFO value=getCurrencySymbolandCRate($CURRENCY_ID)}
+                                                    {if $RECORD->get($NAME) neq NULL}
+                                                            &nbsp;{CurrencyField::appendCurrencySymbol($RECORD->get($NAME), $CURRENCY_INFO['symbol'])}&nbsp;
+                                                    {/if}
+                                            {else}
+                                                    {$RECORD->get($NAME)}&nbsp;
+                                            {/if}
+
+                                    </div>
+                            {/foreach}
 	</div>
 	{/foreach}
     
