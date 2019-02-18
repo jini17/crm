@@ -756,8 +756,8 @@ td.jqplot-table-legend{
 }
 
 .fask{
-    width: 100% !important;
-    
+width: 100% !important;
+height: 469px;
 }
 .faskfirst i{
     height: 14px;
@@ -799,3 +799,13 @@ td.jqplot-table-legend{
 
 }
 
+.fasksecond li[tools]{
+    width: 14.3% !important;
+}
+.fasksecond  li[tools]  ul li[tools]{
+    display: block !important;
+    width: 100% !important;
+}
+#searchResults-container{
+    width: 92vw !important;
+}

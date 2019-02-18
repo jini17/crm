@@ -55,7 +55,7 @@ body {
   padding-right: 15px;
   height: 40px !important;
   margin-top: 10px;
-  
+    margin-left: -10px !important;
 }
 .app-nav {
   position: relative;
@@ -2002,10 +2002,11 @@ input[type=checkbox]:checked {
   border: 0 !important;
 }
 #overlayPage {
-  top: 43px;
-  position: fixed;
-  width: 100%;
-  z-index: 1030;
+top: 30px;
+position: fixed;
+width: 100%;
+z-index: 1030;
+left: -46%;
 }
 #overlayPage .arrow.show {
   content: "";

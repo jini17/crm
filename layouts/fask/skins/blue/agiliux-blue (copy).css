@@ -31,30 +31,30 @@ Email: khaled@softsolvers.com.my
 /*.contents.tabbable .nav-tabs>li:hover,*/
 .contents.tabbable .nav-tabs>li.active:focus{
   border: none;
-  border-bottom: 5px solid #997CCD !important;
+  border-bottom: 5px solid #2f5597 !important;
 }
 .fc-button.fc-state-default{
      
-     color: #997CCD !important;
+     color: #2f5597 !important;
+}
+.btn-secondary{
+     background: #2f5597 !important;
+    border: 1px solid #2f5597 !important;
+    color: #fff;
 }
 .fc-button.fc-state-default:hover,
 .fc-button.fc-state-active{
-    background-color:  #997CCD !important;
-     border: 1px solid #997CCD !important;
+    background-color:  #2f5597 !important;
+     border: 1px solid #2f5597 !important;
      color: #fff !important;
-}
-.btn-secondary{
-     background: #997CCD !important;
-    border: 1px solid #997CCD !important;
-    color: #fff;
 }
 .record-header .recordBasicInfo h4{
     margin-top: 30px;
 }
 #appnav button
 {
-    background-color:  #997CCD;
-    border: 1px solid #997CCD;
+    background-color:  #2f5597;
+    border: 1px solid #2f5597;
      margin-right: 5px;
      color: #fff;
 }
@@ -74,7 +74,7 @@ a.btn.btn-gettingStarted:hover{
     background: #ccc;
 }
 a.btn.btn-gettingStarted i{
-    color: #997CCD
+    color: #2f5597
 }
 
 /*===============
@@ -127,7 +127,7 @@ a.btn.btn-gettingStarted i{
 }
 
 #myModal  .carousel-indicators .active {
-    background-color: #997CCD !important;
+    background-color: #2f5597 !important;
     border: 1px solid #444;
 }
 #myModal  .item.slide2 .col-md-6{
@@ -175,13 +175,13 @@ a.btn.btn-gettingStarted i{
 .carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
 
     margin-left: -56px;
-    color: #997CCD;
+    color: #2f5597;
 
 }
 .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
 
     margin-right: -53px;
-     color: #997CCD;
+     color: #2f5597;
 
 }
 
@@ -199,12 +199,12 @@ a.btn.btn-gettingStarted i{
     padding-top: 0;
 }
 .btn-widget-view-more{
-    color: #AFDFDF;
+    color: #2f5597;
     float: right;
     padding-top: 10px;
         position: absolute;
     bottom: 4px;
- right: 15px;
+right: 15px;
 }
 
 /**=========================
@@ -229,8 +229,8 @@ a.btn.btn-gettingStarted i{
     text-decoration:none;
 }
 #taskManagementContainer button.active{
-    border: 1px solid #997CCD !important;
-    background: #997CCD !important;;
+    border: 1px solid #2f5597 !important;
+    background: #2f5597 !important;;
 }
 #task-input-background{
     z-index:0;
@@ -252,13 +252,13 @@ a.btn.btn-gettingStarted i{
 
 .dashBoardContainer .dashBoardTabContents ul li{
     border-radius: 0 !important;
-    border-top:  2px solid #997CCD !important;
+    border-top:  2px solid #2f5597 !important;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
 .fieldBlockHeader{
-        color: #997CCD;
+        color: #2f5597;
         padding-left: 0;
  
 }
@@ -299,7 +299,7 @@ a.btn.btn-gettingStarted i{
     z-index: 1;
 }
 .help-form-container .form h4{
-    background:   #997CCD ;
+    background:   #2f5597 ;
     color: #fff;
     padding: 10px 0;
     margin-top: -10px;
@@ -321,7 +321,7 @@ a.btn.btn-gettingStarted i{
 }
 
 .help-list {
-        border-left: 4px solid  #997CCD !important;
+        border-left: 4px solid  #2f5597 !important;
         background: #fff;
 }
 .help-list-item a{
@@ -331,7 +331,7 @@ a.btn.btn-gettingStarted i{
     list-style: linear-gradient !important;
     min-height:  auto !important;
     margin-bottom: 10px;
-    color: #997CCD;
+    color: #2f5597;
 }
 .help-list-item fa{
     float: left;
@@ -404,7 +404,7 @@ a.btn.btn-gettingStarted i{
     font-weight: bold;
 }
 .btn-profile{
-    background: #997CCD !important;
+    background: #2f5597 !important;
     color: #fff !important;
 }
 #menubar_item_right_LBL_SIGN_OUT{
@@ -419,7 +419,7 @@ a.btn.btn-gettingStarted i{
 #menubar_item_right_LBL_MY_PREFERENCES:hover,
 #menubar_item_right_LBL_MY_PREFERENCES:hover i
 {
-    color: #997CCD  !important;
+    color: #2f5597  !important;
 }
 #menubar_item_right_LBL_SIGN_OUT:hover,
 #menubar_item_right_LBL_SIGN_OUT:hover i{
@@ -436,7 +436,7 @@ a.btn.btn-gettingStarted i{
 
 .color-blue,
 .color-blue:hover{
-    background: #997CCD;    
+    background: #2f5597;    
     color: #fff;
 }
 .color-purple,
@@ -487,10 +487,10 @@ a.rightside-icon-dashboard > i.fa{
 }
 .wbox .links,
 .wbox h5{
-           color: #997CCD;
+           color: #2f5597;
              }
 /*     .app-nav .module-action-bar{
-           border-bottom: 2px solid #997CCD !important;
+           border-bottom: 2px solid #2f5597 !important;
            padding-bottom: 5px;
      }*/
      
@@ -501,7 +501,7 @@ active.employeeTab{
 
 .pagination li.active{
   border-bottom: 2px solid #3B5998 ;
-  color: #997CCD ;
+  color: #2f5597 ;
 }
 
 .pagination li.active a{
@@ -509,10 +509,10 @@ active.employeeTab{
     background:  #3B5998 ;
 }
 .alphabetSorting table .alphabetSearch a{
-color: #997CCD !important;
+color: #2f5597 !important;
 }
 .global-nav{
-          border-bottom: 2px solid  #997CCD;
+          border-bottom: 2px solid  #2f5597;
 }
 .fa-facebook-f {
     background: #3B5998;
@@ -524,7 +524,7 @@ color: #997CCD !important;
     color: #fff;
     padding: 10px;
 }
-.fa-linkedin-in {
+.fa-linkedin-in{
     background: #007bb5;
     color: #fff;
     padding: 10px;
@@ -544,7 +544,7 @@ color: #997CCD !important;
 
 .pagination li.active{
   border-bottom: 2px solid #3B5998 ;
-  color: #997CCD ;
+  color: #2f5597 ;
 }
 
 .pagination li.active a{
@@ -552,71 +552,78 @@ color: #997CCD !important;
     background:  #3B5998 ;
 }
 .alphabetSorting table .alphabetSearch a{
-color: #997CCD !important;
+color: #2f5597 !important;
 }
 /**=================
  Mail Manager
 =======================*/
 #mm_searchButton {
     height: 30px !important;
-    background-color: #997CCD !important;
+    background-color: #2f5597 !important;
     border: 1px solid #fff !important;
     padding-left: 5px;
     padding-right: 5px;
     color: #fff;
 }
 #searchType{
-    background: #997CCD;
+    background: #2f5597;
     color:#fff;
 }
 .mUserName i{
-    color: #997CCD;
+    color: #2f5597;
 }
 .mmbtn .btn{
     font-size: 12px;
     padding:5px;
-    color: #997CCD;
+    color: #2f5597;
+}
+/**==============================
+* ROLE PAGE
+*================================*/
+.UserRole{
+  
+    padding-bottom: 30px;
+}
+.UserRole .treeView{
+      padding-left: 15px !important;
+     padding-right:  15px !important;
+      background: #fff;
+      margin-left: 15px !important;
+    margin-right:  15px !important;    
+    margin-top:  15px !important;    
+}
+.UserRole .treeView > ul{
+    margin-top: 15px;
+}
+.UserRole .treeView li{
+    padding-top: 25px;
+    margin-left: 50px;
 }
 
-#settingsShortCutsContainer .moduleBlock:hover{
-          background-color: #997CCD !important;
-          color: #fff;
-     }
-     .settingsIndexPage .settingsSummary .summaryCount{
-         padding: 0;
-     }
-
-     
-/**=================
-    Employee Directory
-=====================*/
-.active.employeeTab{
-    border-bottom: 2px solid  #997CCD !important;
-    
+/**=============================
+* Sharing Role Page
+*===============================*/
+#EditSharingAccess{
+    background-color: #fff;
+    padding:10px;
 }
-
-.pagination li.active{
-  border-bottom: 2px solid #997CCD ;
-  color: #997CCD ;
-}
-
-.pagination li.active a{
+#EditSharingAccess .blockHeader{
+    background: #2f5597;
     color: #fff;
-    background:  #997CCD  !important;
 }
-.alphabetSorting table .alphabetSearch a{
-color: #997CCD !important;
+#settings_wrapper{
+    padding: 15px;
+    background-color: #fff;
 }
-.global-nav{
-          border-bottom: 2px solid  #997CCD !important;
+#plansettingcontainer{
+    margin: 20px;
+    background-color: #fff;
+    padding: 10px;
 }
-.btn-primary, .btn-info, .btn-info.disabled, .btn-success, .btn-success.disabled {
-    background: #997CCD !important;
-    border: 1px solid #997CCD !important;
+.blockHeader.userplantable{
+    background-color: #2f5597 !important;
 }
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
-    color: #997CCD !important;
-}
+
 .color-box{
     display: block;
     width: 20px;
@@ -720,28 +727,22 @@ color: #997CCD !important;
      color: #fff;
      padding: 5px;
 }
+
+.widgetsList a:hover{
+    background: #2f5597 !important;
+    color: #fff !important;
+}
+.widgetsList a{
+     padding: 5px !important;
+}
 .fasksecond i,
 .fasksecond .material-icons.module-icon{
-    
     margin-right: 5px;
     font-size: 14px !important;
-
-    margin-top: 5px;
-}
-.jqplot-title{
-    display: none !important;
-}
-.jqplot-table-legend.jqplot-table-legend-swatch,
-td.jqplot-table-legend{
-    padding-right: 5px;
-}
-.fasksecond i,
-.material-icons.module-icon{
-    margin-right: 5px;
-    font-size: 14px !important;
-width: 14px;
-height: 14px;
+    width: 14px;
+    height: 14px;
     margin-top: -2px;
+    text-align: center;
 }
 .dashBoardTabContents .ready ul li{
     position: relative;    
@@ -757,7 +758,29 @@ td.jqplot-table-legend{
     width: 100% !important;
     
 }
-
+.faskfirst i{
+    height: 14px;
+    width: 17px;
+    margin-top: -2px;
+}
+/*.dropdown-content-Finance a{
+    display: block;
+        width: 100%;
+}
+.dropdown-content-Finance li{
+    width: 100%;
+}
+.dropdown-content-Finance a i{
+    float: left !important;
+}
+.dropdown-icon-dashboard .material-icons.module-icon{
+    float: left !important;
+}*/
+.dropdown-icon-dashboard{
+    display: block;
+    width: 100%;
+    padding: 0 10px 0;
+}
 .jqplot-grid-canvas{
     display: none;
 }
@@ -765,14 +788,12 @@ td.jqplot-table-legend{
     border-radius: 3px !important;
     padding-right:10px !important;
     margin-right: 10px !important;
+    color: #fff;
 }
 #appnav button{
-    padding-right: 10px !important;
-    
+    padding-right: 10px !important;    
 }
 .dropdown-icon-dashboard{
-      padding: 0 10px 0 !important;
-}
-#searchResults-container{
-    width: 92vw !important;
+          padding: 0 10px 0 !important;
+
 }
