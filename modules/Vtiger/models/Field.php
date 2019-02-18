@@ -183,7 +183,13 @@ class Vtiger_Field_Model extends Vtiger_Field {
 			} else if($uiType == '3995') {		//Modified Line
 				 $fieldDataType = 'Country';	//Modified Line added ny jitu
 			} else if($uiType == '1270') {		//Added Radio Button Uitype
-				 $fieldDataType = 'radio';	//Modified Line added ny jitu
+				$fieldDataType = 'radio';	//Modified Line added ny jitu
+			} else if($uiType == '2001') {		//Modified Line
+			 	$fieldDataType = 'multiproduct';		//Modified Line added ny jitu
+		    } else if($uiType == '2003') {		//Modified Line
+			 	$fieldDataType = 'multiusergroup';		//Modified Line added ny jitu
+		    } else if($uiType == '2004') {		//Modified Line
+			 	$fieldDataType = 'inventorystatus';		//Modified Line added ny jitu
 			} else {
 				$webserviceField = $this->getWebserviceFieldObject();
 				$fieldDataType = $webserviceField->getFieldDataType();
@@ -194,6 +200,92 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		return $this->fieldDataType;
 	}
 	
+		/**
+	* Function to get list of All Active Products the field referenced to Uitype 2003
+	* @return <Array> -  list of Products for which field is refered to
+	* added by jitu@25062015 for multiproduct uitype list	
+	*/
+	public function getProducts() {
+		global $adb, $log;
+
+		$log->debug("Entering getProducts() method ...");
+		$products = Array();
+
+		$result  = $adb->pquery("SELECT vtiger_products.productid, vtiger_products.productname FROM vtiger_products
+			INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_products.productid
+			LEFT JOIN vtiger_seproductsrel ON vtiger_seproductsrel.crmid = vtiger_products.productid AND vtiger_products.discontinued = 1 
+                        AND vtiger_seproductsrel.setype='Products'
+			LEFT JOIN vtiger_users ON vtiger_users.id=vtiger_crmentity.smownerid
+			LEFT JOIN vtiger_groups ON vtiger_groups.groupid = vtiger_crmentity.smownerid
+			WHERE vtiger_crmentity.deleted = 0 ", array());	
+			
+			for($i=0;$i<$adb->num_rows($result);$i++) {
+			$productid 	     = $adb->query_result($result,$i,'productid');
+			$products[$productid] = $adb->query_result($result,$i,'productname');
+		}
+		$log->debug("Exiting getProducts method ...");
+		return $products;
+	}
+
+	/**
+	* Function added by jitu@secondcrm.com on Jun 25, 2015 for new UI Type 2004
+	* for dependent status on Module
+	*/
+	public function getStatusList($module='Quotes'){
+	
+		global $adb;
+		switch($module) {
+			
+			case 'Invoice' :	$colname = 'invoicestatus';
+			break;
+			
+			case 'SalesOrder':	$colname = 'sostatus';
+			break;
+	
+			case 'Payments':	$colname = 'payment_status';
+			break;
+			
+			case 'Quotes':		$colname = 'quotestage';
+			break;
+	
+			case 'Potentials':	$colname = 'sales_stage';
+			break;
+				
+		} 
+		$result = $adb->pquery("select ".$colname." FROM vtiger_".$colname, array());
+		
+		$array = array();
+	
+		for($i=0;$i<$adb->num_rows($result);$i++) {
+			$status   = $adb->query_result($result,$i,$colname);
+			$array[] = $status;
+		}
+		
+		return $array;	
+	}
+
+	/** Function added by jitu@secondcrm.com on Oct 6 , 2015 for new UItype 2004
+	 * This function will retrieve all date fields
+	*/
+
+	public function getDateColumnList($module) {
+		global $adb;
+		$tabid = gettabid($module);
+		$sql = "SELECT columnname FROM `vtiger_field` WHERE `tabid` = ? AND columnname !='modifiedtime' AND (`uitype` = '5' || uitype ='70' || uitype='23') ";
+		
+		$result = $adb->pquery($sql, array($tabid));
+		
+		$array = array();
+	
+		for($i=0;$i<$adb->num_rows($result);$i++) {
+			$columnname   = $adb->query_result($result,$i,'columnname');
+			$array[] = $columnname;
+		}
+		
+		return $array;
+
+	}
+
 	/**
 	* Function added by Jitu@secondcrm.com on Sep 19, 2014 for new UI Type 3994
 	* This function will retrieve terms details 
