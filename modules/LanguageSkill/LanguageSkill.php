@@ -10,27 +10,27 @@
 
 include_once 'modules/Vtiger/CRMEntity.php';
 
-class LangugageSkill extends Vtiger_CRMEntity {
-	var $table_name = 'vtiger_langugageskill';
-	var $table_index= 'langugageskillid';
+class LanguageSkill extends Vtiger_CRMEntity {
+	var $table_name = 'vtiger_languageskill';
+	var $table_index= 'languageskillid';
 
 	/**
 	 * Mandatory table for supporting custom fields.
 	 */
-	var $customFieldTable = Array('vtiger_langugageskillcf', 'langugageskillid');
+	var $customFieldTable = Array('vtiger_languageskillcf', 'languageskillid');
 
 	/**
 	 * Mandatory for Saving, Include tables related to this module.
 	 */
-	var $tab_name = Array('vtiger_crmentity', 'vtiger_langugageskill', 'vtiger_langugageskillcf');
+	var $tab_name = Array('vtiger_crmentity', 'vtiger_languageskill', 'vtiger_languageskillcf');
 
 	/**
 	 * Mandatory for Saving, Include tablename and tablekey columnname here.
 	 */
 	var $tab_name_index = Array(
 		'vtiger_crmentity' => 'crmid',
-		'vtiger_langugageskill' => 'langugageskillid',
-		'vtiger_langugageskillcf'=>'langugageskillid');
+		'vtiger_languageskill' => 'languageskillid',
+		'vtiger_languageskillcf'=>'languageskillid');
 
 	/**
 	 * Mandatory for Listing (Related listview)
@@ -38,7 +38,7 @@ class LangugageSkill extends Vtiger_CRMEntity {
 	var $list_fields = Array (
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Serial No' => Array('langugageskill', 'serialno'),
+		'Serial No' => Array('languageskill', 'serialno'),
 		'Assigned To' => Array('crmentity','smownerid')
 	);
 	var $list_fields_name = Array (
@@ -54,7 +54,7 @@ class LangugageSkill extends Vtiger_CRMEntity {
 	var $search_fields = Array(
 		/* Format: Field Label => Array(tablename, columnname) */
 		// tablename should not have prefix 'vtiger_'
-		'Serial No' => Array('langugageskill', 'serialno'),
+		'Serial No' => Array('languageskill', 'serialno'),
 		'Assigned To' => Array('vtiger_crmentity','assigned_user_id'),
 	);
 	var $search_fields_name = Array (
