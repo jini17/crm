@@ -8862,8 +8862,8 @@ border-radius: .35rem; background-color: rgba(255, 255, 255, 1); margin-top: 0px
 .faskfirst li a i{ font-size: 18px;margin-right: 10px;}
 .fasksecond{list-style-type: none; }
 /* .fasksecond>li.with-childs:first-child { border-left: none;} */
-.fasksecond>li.with-childs { float: left; border-left:1px solid #ddd; margin: 0 0px; height:400px;} 
-.fasksecond>li.with-childs>a{ border-bottom: 3px solid #ddd;padding: 15px 10px; line-height: 40px;} 
+.fasksecond>li.with-childs { float: left; border-left:1px solid #ddd; margin: 0 0px; height:440px;} 
+.fasksecond>li.with-childs>a{ border-bottom: 3px solid #ddd;padding: 15px 10px; line-height: 20px;} 
 .fasksecond>li.with-childs>a i { font-size: 18px;margin-right: 10px;}
 .fasksecond>li>a i { font-size: 18px;margin-right: 10px;}
 .fasksecond>li>ul>li{list-style-type: none;padding: 8px;}
