@@ -26,8 +26,6 @@ class Users_List_View extends Settings_Vtiger_List_View
 
     public function process(Vtiger_Request $request)
     {
-
-
         $current_user = Users_Record_Model::getCurrentUserModel();
         global $site_URL;
         $reportingManager = Users_Record_Model::MyReortingManager($current_user->get('reports_to_id'));

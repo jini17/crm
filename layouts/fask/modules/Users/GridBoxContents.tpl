@@ -80,7 +80,7 @@
 {*<pre />
 {$LISTVIEW_ENTRIES|print_r}*}
 
-<div style="min-height:450px;">
+<div style="min-height:900px;">
 
    <div class="row">
        <div class="col-lg-12" style="padding:0;">
