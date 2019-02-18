@@ -180,8 +180,10 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 
                 return $return;
         }
-                //Delete Language
-        public function deleteLanguagePermanently($langId){	
+
+        //Delete Language
+        public function deleteLanguagePermanently($langId){
+
                 $db  		= PearDatabase::getInstance();
                 //$db->setDebug(true);
                 $params 	= array();
@@ -195,6 +197,16 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 
         }
 
+        public function getSkill($skillId) { 
+
+                $db     = PearDatabase::getInstance();
+                $db->setDebug(1);
+                $result = $db->pquery("SELECT skill_title FROM secondcrm_skillmaster WHERE skill_id = ?", array($skillId)); 
+
+                return array('skill_id' => $skillId, 'skill' => $db->query_result($result, 0, 'skill_title'));
+               
+        }
+
         public function getALLSkills($userId) {
                 $db  = PearDatabase::getInstance();
                 $sql = "SELECT secondcrm_skillmaster.skill_id,secondcrm_skillmaster.skill_title FROM secondcrm_skillmaster WHERE skill_id NOT IN (SELECT skill_id FROM secondcrm_skills WHERE user_id = ?)"; 
@@ -204,11 +216,20 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
                 $SkillList = array();
                 if($db->num_rows($result) > 0) {
                         for($i=0;$i<$db->num_rows($result);$i++) {
-                                $SkillList[$i]['skill_id'] = $db->query_result($result, $i, 'skill_id');      
-                                $SkillList[$i]['skill'] = $db->query_result($result, $i, 'skill_title');
+                                $SkillList[$i]['skill_id']  = $db->query_result($result, $i, 'skill_id');      
+                                $SkillList[$i]['skill']     = $db->query_result($result, $i, 'skill_title');
                         }
                 }
                 return $SkillList;		
+        }
+
+        public function getSkillLabel($skillId, $userId) {
+
+                $db     = PearDatabase::getInstance();
+                $result = $db->pquery("SELECT skill_label FROM secondcrm_skills WHERE skill_id = ? AND user_id = ?", array($skillId, $userId));
+
+                return $db->query_result($result, 0, 'skill_label'); 
+
         }
 
         public function getUserSkillCloud($userId) {
@@ -244,7 +265,14 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
                 $userid  	= $request['current_user_id'];
                 $skill_id  	= decode_html($request['skill']);
                 $skillTxt 	= decode_html($request['skilltxt']);
-                $skillLabel  = decode_html($request['skill_label']);
+                $skillLabel = decode_html($request['skill_label']);
+                
+                if (isset($request['oldSkill'])) {
+
+                   $db->pquery("DELETE FROM secondcrm_skills WHERE skill_id = ? AND user_id = ?", array($request['oldSkill'], $userid));    
+
+                }
+
                 if($skill_id==0 && !empty($skillTxt)) {
                         //check the skill exist or not
                         $resultcheck  = $db->pquery("SELECT skill_id FROM secondcrm_skillmaster WHERE skill_title = ?",array($skillTxt));
@@ -267,32 +295,34 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
                 }
                 return $return;	
         }
-                //Delete Skill
-        public function deleteSkillPermanently($skillId){	
+
+        //Delete Skill
+        public function deleteSkillPermanently($skillId, $userId){	
                 $db  		= PearDatabase::getInstance();
                 $params 	= array();
-                if(!empty($skillId)) {
-                        $params = array($skillId);
-                        $result = $db->pquery("DELETE FROM secondcrm_skills WHERE skill_id=?",array($params));
+                if(!empty($skillId) && !empty($userId)) {
+                        $params = array($skillId, $userId);                        
+                        $result = $db->pquery("DELETE FROM secondcrm_skills WHERE skill_id=? and user_id = ?", $params);
                         return 1;
                 } else {
                         return 0;
                 }
 
         }
-                       public function get_color($table,$column,$skill){
-                           $db = PearDatabase::getInstance();
-                           //$db->setDebug(true);
-                           $translated = str_replace(array("'",'"'),"",vtranslate($skill,"Users"));
-                           $sql = "SELECT color FROM ".$table." WHERE $column = '$translated'";
-                           $query = $db->pquery($sql,array());
-                           $num_rows = $db->num_rows($query);
-                           if($num_rows > 0){
-                               $color = $db->query_result($query,0,'color');
-                           }else{
-                                $color = "#000";
-                           }
-                           return $color;
-                       }
+
+        public function get_color($table,$column,$skill){
+           $db = PearDatabase::getInstance();
+           //$db->setDebug(true);
+           $translated = str_replace(array("'",'"'),"",vtranslate($skill,"Users"));
+           $sql = "SELECT color FROM ".$table." WHERE $column = '$translated'";
+           $query = $db->pquery($sql,array());
+           $num_rows = $db->num_rows($query);
+           if($num_rows > 0){
+               $color = $db->query_result($query,0,'color');
+           }else{
+                $color = "#000";
+           }
+           return $color;
+        }
 
  }  
