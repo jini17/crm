@@ -13,13 +13,14 @@ class SalesTarget_Save_Action extends Vtiger_Save_Action {
 	public function process(Vtiger_Request $request) {
 		//Make string to Multiple Territory that input as array
 
-		if(!is_array($request->get('targetterritory'))) {
+		/*if(!is_array($request->get('targetterritory'))) {
 			$territory = $request->get('targetterritory');
 		} else {
 			$territory = implode(',',$request->get('targetterritory'));
 		}
 		
 		$request->set('targetterritory', $territory);
+		*/
 		
 		//Temporary code for testing after testing remove it. 
 		$products = $request->get('linktoproduct');	
