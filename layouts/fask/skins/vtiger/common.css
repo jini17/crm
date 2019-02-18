@@ -2006,10 +2006,11 @@ input[type=checkbox]:checked {
   border: 0 !important;
 }
 #overlayPage {
-  top: 43px;
-  position: fixed;
-  width: 100%;
-  z-index: 1030;
+ 
+    width: 160% !important;
+    display: block;
+    margin: 0 auto;
+
 }
 #overlayPage .arrow.show {
   content: "";
@@ -8903,9 +8904,10 @@ visibility: visible;top: 0;left: 60px; /*position where enlarged image should of
 }
 
 #searchResults-container{
-  width: 100vw;
+  width: 87vw;
   top: 0;
   bottom: 0;
+  left:0;
 }
 
 .editViewPageDiv .content-area{
@@ -9009,10 +9011,11 @@ ul.dropdownlist{
   color:#000 !important;
 }
 .modal-content.helpbox{
-  overflow: scroll;
-    width: 70% !important;
-    display: block;
-    margin: 0 auto;
+
+  width: 160% !important;
+  display: block;
+  margin: 0 auto;
+  left: 54%;
 
 }
 input#search-top-bar::-webkit-input-placeholder { /* WebKit browsers */
