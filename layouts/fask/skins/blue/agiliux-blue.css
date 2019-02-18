@@ -804,3 +804,6 @@ height: 469px;
     display: block !important;
     width: 100% !important;
 }
+#searchResults-container{
+    width: 92vw !important;
+}

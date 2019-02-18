@@ -709,3 +709,6 @@ td.jqplot-table-legend{
 .dropdown-icon-dashboard{
   padding: 0 10px 0 !important;
 }
+#searchResults-container{
+    width: 92vw !important;
+}
