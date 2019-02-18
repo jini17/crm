@@ -73,6 +73,11 @@ input[type="checkbox"]:checked::after, #checkgreen {
      margin-right: 5px;
      color: #fff;
 }
+.btn-secondary{
+     background: #3bbd9b !important;
+    border: 1px solid #3bbd9b !important;
+    color: #fff;
+}
 #appnav button i{
     font-size: 12px !important;
     color: #fff;
@@ -732,7 +737,7 @@ color: #3bbd9b !important;
      padding: 5px;
 }
 .fasksecond i,
-.material-icons.module-icon{
+.fasksecond .material-icons.module-icon{
     margin-right: 5px;
     font-size: 14px !important;
 
@@ -744,4 +749,43 @@ color: #3bbd9b !important;
 .jqplot-table-legend.jqplot-table-legend-swatch,
 td.jqplot-table-legend{
     padding-right: 5px;
+}
+.fasksecond i,
+.material-icons.module-icon{
+    margin-right: 5px;
+    font-size: 14px !important;
+width: 14px;
+height: 14px;
+    margin-top: -2px;
+}
+.dashBoardTabContents .ready ul li{
+    position: relative;    
+}
+.jqplot-title{
+    display: none !important;
+}
+.jqplot-table-legend.jqplot-table-legend-swatch,
+td.jqplot-table-legend{
+    padding-right: 5px;
+}
+.fask{
+    width: 100% !important;
+    
+}
+
+.jqplot-grid-canvas{
+    display: none;
+}
+.btn-group button{
+    border-radius: 3px !important;
+    padding-right:10px !important;
+    margin-right: 10px !important;
+}
+#appnav button{
+    padding-right: 10px !important;
+    
+}
+.dropdown-icon-dashboard{
+          padding: 0 10px 0 !important;
+
 }

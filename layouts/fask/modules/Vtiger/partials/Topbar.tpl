@@ -220,7 +220,7 @@
 
                      <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" data-toggle="dropdown" title="Notifications" aria-hidden="true">
                      {if $NOTIFICATIONS['new'] gt 0}<span class="count" style="position: absolute;top:0;right:0; background-color: red;color:#fff;padding-right:5px;padding-top:1px;padding-left:5px; font-size:11px;z-index:100; ">{$NOTIFICATIONS['new']}</span>{/if}
-                     <i class="far fa-bell"></i>
+                     <i class="fas fa-bell"></i>
 
                     </a>
                   </div>
@@ -267,15 +267,15 @@
                <!-- Top Menu on right side corner -->
                <li>
                   <div>
-                     <a class="rightside-icon-dashboard" href="index.php?module=MailManager&view=List" title="Email" aria-hidden="true">
-                     <i class="far fa-envelope-open"></i>
+                     <a class="rightside-icon-dashboard" href="index.php?module=MailManager&view=List" title="Mail Manager" aria-hidden="true">
+                         <i class="fas fa-envelope" style="padding: 0 !important; border: none; background: none;"></i>
                      </a>
                   </div>
                </li>
                <li>
                   <div>
-                     <a class="rightside-icon-dashboard" href="index.php?module=Documents&view=List" title="Files" aria-hidden="true">
-                     <i class="far fa-file"></i>
+                     <a class="rightside-icon-dashboard" href="index.php?module=Documents&view=List" title="Documents" aria-hidden="true">
+                     <i class="fas fa-file"></i>
                      </a>
                   </div>
                </li>

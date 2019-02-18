@@ -608,6 +608,11 @@ color: #AFDFDF !important;
     background: #AFDFDF !important;
     border: 1px solid #AFDFDF !important;
 }
+.btn-secondary{
+     background: #AFDFDF !important;
+    border: 1px solid #AFDFDF !important;
+    color: #fff;
+}
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
     color: #AFDFDF !important;
 }
@@ -715,7 +720,7 @@ color: #AFDFDF !important;
      padding: 5px;
 }
 .fasksecond i,
-.material-icons.module-icon{
+.fasksecond .material-icons.module-icon{
     margin-right: 5px;
     font-size: 14px !important;
 
@@ -727,4 +732,22 @@ color: #AFDFDF !important;
 .jqplot-table-legend.jqplot-table-legend-swatch,
 td.jqplot-table-legend{
     padding-right: 5px;
+}
+.jqplot-grid-canvas{
+    display: none;
+}
+.btn-group button,
+.btn-group a{
+    border-radius: 3px !important;
+    padding-right:10px !important;
+    margin-right: 10px !important;
+}
+#appnav button,
+#appnav a{
+    padding-right: 10px !important;
+    
+}
+.dropdown-icon-dashboard{
+          padding: 0 10px 0 !important;
+
 }

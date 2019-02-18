@@ -19,12 +19,12 @@
         .fa-twitter {
           background: #55ACEE;
           color: white;
-          padding:8px;
+          padding:10px;
         }
         .fa-envelope {
           background: #ff6600;
           color: white;
-          padding: 8px;
+          padding: 10px;
         }
         .fa-linkedin {
           background: #007bb5;
@@ -41,7 +41,7 @@
 <div class="row ">
     <div class="col-md-8" style="padding-right: 0;">
       {if $DATA['expirydays'] < 90 && $DATA['expirydays'] > -1 && $DATA['job_type'] eq 'Contract'}
-      <span class="expirecontract">{vtranslate('LBL_EXPIRE_CONTRACT')} {$DATA['expirydays']} {vtranslate('LBL_DAYS')}</span>
+      <span class="expirecontract">{vtranslate('LBL_EXPIRE_CONTRACT','Home')} {$DATA['expirydays']} {vtranslate('LBL_DAYS')}</span>
       {/if}
      <div class='col-md-12' style="padding:0;"> 
          <h4>{vtranslate('LBL_GOOD_DAY','Home')}, {$DATA['first_name']}..!</h4>

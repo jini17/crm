@@ -1972,7 +1972,8 @@ input[type=checkbox]:checked {
     margin: 6px 14px;
   box-shadow:0 1px 15px 1px rgba(62,57,107,.07);
 }
-.detailViewContainer .block h5{color: #2f5597;font-weight:bold;}
+.detailViewContainer .block h5,.fieldBlockHeader{color: #2f5597;font-weight:bold;}
+
 .editViewContainer .block {
   background: #FFFFFF;
   border: 1px solid #F3F3F3;
@@ -8850,7 +8851,7 @@ border-radius: .35rem; background-color: rgba(255, 255, 255, 1); margin-top: 0px
 .faskfirst{ list-style-type: none;float: left;-webkit-padding-start: 10px; border-right: 0px solid #ddd;    height: 400px;}
 .faskfirst li{ padding: 14px 4px;}
 .faskfirst li a i{ font-size: 18px;margin-right: 10px;}
-.fasksecond{list-style-type: none; overflow-y: scroll;  }
+.fasksecond{list-style-type: none; }
 /* .fasksecond>li.with-childs:first-child { border-left: none;} */
 .fasksecond>li.with-childs { float: left; border-left:1px solid #ddd; margin: 0 0px; height:400px; width: 20%} 
 .fasksecond>li.with-childs>a{ border-bottom: 3px solid #ddd;padding: 15px 10px; line-height: 40px;} 

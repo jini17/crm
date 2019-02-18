@@ -381,62 +381,88 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
         })
 
     },
+
+    // Jugar By Mabruk
+    getCustomSearchParams: function () {    
+
+        var inputs = jQuery('#accordion').find('input:checked')
+
+        var size = Object.keys(inputs).length - 4;
+
+        if (!size)
+            return false;
+
+        var gender      = [];
+        var birthday    = [];
+        var joindate    = [];
+        var department  = [];
+
+        var array       = [[["grade_id","n","0"]]];
+
+        $(inputs).each(function () {
+
+            var $this = jQuery(this)
+            var fieldname = $this.attr('name');
+            if (fieldname == 'gender') {
+           
+                gender.push([fieldname, 'e', $this.val()])
+            }
+            else if (fieldname == 'birthday') {
+                birthday.push([fieldname, $this.val(), ''])
+            }
+            else if (fieldname == 'date_joined') {
+                joindate.push([fieldname, $this.val(), ''])
+            }
+            else if (fieldname == 'department') {
+                department.push([fieldname, 'e', $this.val()])
+            }
+        });
+
+        array.push(gender);
+        array.push(birthday);
+        array.push(joindate);
+        array.push(department);
+
+        return array;    
+
+    },    
+
     registerAdvancedEmployeeDirectorySearch: function () {
+
+        var thisInstance = this;
+
         jQuery('.main-container .panel-filter').on('click', '.panel-body input', function () {
-            var inputs = jQuery('#accordion').find('input:checked')
-           // var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
-           var viewtype = $(".activeview").data('listtype');
-            var tabType = jQuery('#tabtype').val();
-            var gender = []
-            var birthday = []
-            var joindate = [];
-            var department = [];
+            
+            var viewtype                = $(".activeview").data('listtype');
+            var aText                   = $('#alphabetValue').val();
+            var tabType                 = jQuery('#tabtype').val();            
+            var listInstance            = new Settings_Users_List_Js;
+            var listParams              = listInstance.getListViewParams();
+            var newParams               = thisInstance.getCustomSearchParams(); 
 
-            var array=[[["grade_id","n","0"]]];
+            // Jugar By Mabruk
+            if (!newParams) {            
+               newParams = [[["grade_id","n","0"]]];
+            }
 
-            $(inputs).each(function () {
+            if (aText != null && aText != "")
+               newParams.push([["first_name", "s", aText]]);
+                                    
+            listParams['search_params']  = newParams;
+            listParams['status']         = "Active";
+            listParams['empview']        = viewtype;
+            listParams['tabtype']        = tabType;
+            listParams['searchType']     = "gridfilter"; 
 
-                var $this = jQuery(this)
-                var fieldname = $this.attr('name');
-                if (fieldname == 'gender') {
-
-                    gender.push([fieldname, 'e', $this.val()])
-                }
-                else if (fieldname == 'birthday') {
-                    birthday.push([fieldname, $this.val(), ''])
-                }
-                else if (fieldname == 'date_joined') {
-                    joindate.push([fieldname, $this.val(), ''])
-                }
-                else if (fieldname == 'department') {
-                    department.push([fieldname, 'e', $this.val()])
-                }
-            });
-                //inputarray.push(sThisVal);
-                //     array.push(inputarray)
-                // var final = [[[gender],[birthday],[joindate],[department]]
-                array.push(gender)
-                array.push(birthday)
-                array.push(joindate)
-                array.push(department)
-         console.log(array);
-                var out = [[["grade_id","n","0"]],[["gender","e","male"],["gender","e","Female"]],[["department","e","HRM"],["department","e","Techical"]]];
-         console.log("===============")
-            console.log(out);
-//                var newarray = &search_params=[[["gender","e","Male"]],[["department","e","HRM"],["department","e","Technical"]],[["first_name","c","john"]]]
-//                console.log(array)
-
-            var listInstance = new Settings_Users_List_Js;
-            var listParams = listInstance.getListViewParams();
-            listParams['search_params'] = array;
-            listParams['status'] = "Active";
-            listParams['empview'] = viewtype;
-            listParams['tabtype'] = tabType;
-            listParams['searchType'] = "gridfilter";
             listInstance.loadListViewRecords(listParams);
+
         });
     },
+
     registerAlphabetSearch: function () {
+
+        var thisInstance = this;
+
         jQuery('body').on('click','.alphabetSearch', function () {
             $(this).closest('tr').find('td').removeAttr('style');
             $(this).closest('td').css('border-bottom', '1px solid #2f5597');
@@ -444,20 +470,23 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
             var viewtype = $(".activeview").data('listtype');
             var atext = $(this).find('a').data('alphabet');
             var listInstance = new Settings_Users_List_Js;
-            var listParams = listInstance.getListViewParams();
+            var listParams = listInstance.getListViewParams();            
+
             listParams['search_params'] = [[["first_name", "s", atext]]];
+
+            // Jugar By Mabruk
+            $('#alphabetValue').val(atext);
+
+            if (thisInstance.getCustomSearchParams()) {
+
+                var newParams = thisInstance.getCustomSearchParams();
+                newParams.push([["first_name", "s", atext]]);
+                listParams['search_params'] = newParams;
+
+            }
+
             listParams['status'] = "Active";
             listParams['empview'] = viewtype;
-            var params = {
-                "module": "Users",
-                "view": "list.php",
-                "mode": "getContent",
-                "operator": "s",
-                "search_param": atext,
-
-            };
-            //To clear the search params while switching between active and inactive users
-            //listParams.search_params = {};
             listInstance.loadListViewRecords(listParams);
         });
     },
@@ -466,13 +495,13 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
             var key = e.which;
             if (key == 13)  // the enter key code
             {
-              var keyword = $("#keywordsearch").val();
-            var listInstance = new Settings_Users_List_Js;
-            var listParams = listInstance.getListViewParams();
-           // var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
-           var viewtype = $(".activeview").data('listtype');
-            var tabType = jQuery('#tabtype').val();
-            var dept = jQuery('#curdepartment').val();
+                var keyword = $("#keywordsearch").val();
+                var listInstance = new Settings_Users_List_Js;
+                var listParams = listInstance.getListViewParams();
+                // var viewtype = jQuery('.main-container').find('.list-switcher').find('.btn-primary').data('listtype');
+                var viewtype = $(".activeview").data('listtype');
+                var tabType = jQuery('#tabtype').val();
+                var dept = jQuery('#curdepartment').val();
 
             if (keyword.length == 0) {
                 app.helper.showErrorNotification({"message": "Type your keyword please!"});

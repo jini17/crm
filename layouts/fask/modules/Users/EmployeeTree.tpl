@@ -51,16 +51,20 @@
         padding: 5px;
     }
     .fa-envelope{
-        background: none;
-        border: 1px solid #fff;
-        color: #c4d3ed;
-        font-size: 13px !important;
-        padding: 5px !important;
-        padding-top: 55px;
-        line-height: 1;
+background: #ff6600;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 10px !important;
+    padding: 5px 5px !important;
+    padding-top: 55px;
+    line-height: 1;
+
+
     }
 </style>
-<div class="tree">
+{assign var=width value=COUNT($DEPARTMENT_EMPLOYEES)}
+
+<div class="tree" {if $width lt 5} style="width:{300*$width}px;  height: 700px; overflow-y: scroll" {else}style="width:100%; height: 700px; overflow: scroll;"{/if}>
 
     <ul>
      
@@ -218,3 +222,4 @@
     </li>
     </ul>
 </div>
+            <div class="clearfix" style="height: 50"></div>

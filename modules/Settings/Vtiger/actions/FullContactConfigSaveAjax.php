@@ -7,7 +7,7 @@
  * The Initial Developer of the Original Code is vtiger.
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
- Created by DANIAL FAJAR
+ * Created by DANIAL FAJAR 
  ************************************************************************************/
 
 class Settings_Vtiger_FullContactConfigSaveAjax_Action extends Settings_Vtiger_Basic_Action {
@@ -20,7 +20,9 @@ class Settings_Vtiger_FullContactConfigSaveAjax_Action extends Settings_Vtiger_B
 		$preference = $request->get('preference');
 		$status = $request->get('status'); 
 
+		// Added By Mabruk	
 		$result = $adb->pquery("SELECT 1 FROM ss_contactenrichment", array());
+
 		if ($adb->num_rows($result) == 0)
 			$adb->pquery("INSERT INTO ss_contactenrichment VALUES (?,?,?,?)", array(1, $preference, $bearer, $status));	
 		else

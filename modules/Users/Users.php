@@ -1171,12 +1171,12 @@ class Users extends CRMEntity {
                 // For Employee Dashboard
                 if ($type == "EmployeeDashboard") {  
 
-                    $allUser        = $staffUser = array(120,148,149);   // Same being used for Operation/Account Staff
+                    $allUser        = $staffUser = array(120,148,149);                                         // Same being used for Operation/Account Staff
 
                     $managerUser    = array_merge($allUser, $mgrOnly = array(121,146));                      // Same being used for Operation/Account Manager
                     $hrUser         = array_merge($allUser, $hrOnly  = array(121,146,128,143,144,147,127)); // Both HR Manager and Staff
-                    $supportUser    = $allUser;                      // Support manager and Staff
-                    $salesUser      = $allUser;                     // Same being used for Marketing Users for now            
+                    $supportUser    = $allUser;                                                            // Support manager and Staff
+                    $salesUser      = $allUser;                                                           // Same being used for Marketing Users for now            
 
                     $adminUser      = array_unique(array_merge($allUser, $mgrOnly, $hrOnly));
 
@@ -1199,7 +1199,7 @@ class Users extends CRMEntity {
             }
                 
             // CREATING DASHBOARDS
-            if($roleid == 'H12' ||  $roleid =='H13'){   //HR Manager or HR Staff    
+            if($roleid == 'H12' ||  $roleid == 'H13'){   //HR Manager or HR Staff    
 
                 /*$adb->pquery("INSERT INTO vtiger_dashboard_tabs(tabname, isdefault, sequence, appname, modulename, userid) VALUES(?,?,?,?,?,?)",
                 array('Employees', 1, 1, 'Default', '', $userid));
@@ -2268,7 +2268,7 @@ class Users extends CRMEntity {
                                 $entityData->set('user_password_plain',$plainPasswords[$entityData->getId()]);
                                 $entityInfos[] = $entityData;
                         }
-                        $obj->entitydata = array_merge($obj->entitydata, $entityInfos);
+                        //$obj->entitydata = array_merge($obj->entitydata, $entityInfos);
                 }
 
 
@@ -2291,7 +2291,7 @@ class Users extends CRMEntity {
             global $current_user, $short_url, $short_name;
           
            //fetch Email Template Details
-            $template   = EmailTemplates_Record_Model::getInstanceById(40, 'Users');
+            $template   = EmailTemplates_Record_Model::getInstanceById(50, 'Users');
             $subject    =  $template->get('subject');
 
             

@@ -21,8 +21,12 @@
                         {/if}
                         {if $MODULE neq 'Vtiger' or $smarty.request.view neq 'Index'}
                         {if $ACTIVE_BLOCK['block']}
-                        <span class="current-filter-name filter-name pull-left">
-                                {vtranslate($ACTIVE_BLOCK['block'], $QUALIFIED_MODULE)}&nbsp;
+                                <span class="current-filter-name filter-name pull-left">
+                                  {if ($ACTIVE_BLOCK['block'] eq 'LBL_MY_PREFERENCES')}
+                                    &nbsp;{vtranslate('LBL_USER_MANAGEMENT_R', $QUALIFIED_MODULE)}&nbsp;
+                                  {else}  
+                                    {vtranslate($ACTIVE_BLOCK['block'], $QUALIFIED_MODULE)}&nbsp;
+                                  {/if}  
                                 <span class="ti-angle-right" aria-hidden="true"></span>&nbsp;
                         </span>
                         {/if}
@@ -62,7 +66,7 @@
                                 {if $smarty.request.view eq 'PreferenceEdit'}
                                     <span class="current-filter-name settingModuleName filter-name pull-left">
                                 <a href="{"index.php?module="|cat:$smarty.request.module|cat:'&parent='|cat:$smarty.request.parent|cat:'&view=PreferenceDetail&record='|cat:$smarty.request.record}">
-                                        {vtranslate($ACTIVE_BLOCK['block'], $QUALIFIED_MODULE)}&nbsp;
+                                        {$RECORDNAME}&nbsp;
                                 </a>
                                 <i class="ti-angle-right" aria-hidden="true"></i>&nbsp;
                                     </span>
@@ -206,7 +210,7 @@
                                                <a  class="btn 
                                                    {if $MODULE eq 'Users'} btn-primary text-white {else} module-buttons {/if}
                                                    {if $SETTING->getLabel() eq 'LBL_CHANGE_OWNER'} hide {/if}" 
-                                                    {if $MODULE eq 'Users'} style="margin-right:5px; margin-top:5px;"  {/if}
+                                                    {if $MODULE eq 'Users'} style="margin-right:5px; margin-top:5px; border-radius: 3px !important"  {/if}
                                                    href="javascript:void(0);" onclick="{$SETTING->getUrl()};">
                                                    {if $SETTING->getLabel() eq 'LBL_CHANGE_OWNER'} 
                                                        <i class="material-icons module-icon" style="font-weight:bold;">person</i>&nbsp;
