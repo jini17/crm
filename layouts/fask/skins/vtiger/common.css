@@ -9012,7 +9012,7 @@ ul.dropdownlist{
 }
 .modal-content.helpbox{
   overflow: scroll;
-    width: 160% !important;
+    width: 150% !important;
     display: block;
     margin: 0 auto;
 
