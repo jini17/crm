@@ -2007,10 +2007,11 @@ input[type=checkbox]:checked {
   border: 0 !important;
 }
 #overlayPage {
-  top: 43px;
+  top: 35px;
   position: fixed;
   width: 100%;
   z-index: 1030;
+  left: -15%;
 }
 #overlayPage .arrow.show {
   content: "";
@@ -9011,7 +9012,7 @@ ul.dropdownlist{
 }
 .modal-content.helpbox{
   overflow: scroll;
-    width: 70% !important;
+    width: 160% !important;
     display: block;
     margin: 0 auto;
 
