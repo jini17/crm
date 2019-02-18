@@ -29,7 +29,7 @@
 	{assign var=ACCESSIBLE_USER_LIST value=$USER_MODEL->getAccessibleUsersForModule($MODULE)}
 	{assign var=ACCESSIBLE_GROUP_LIST value=$USER_MODEL->getAccessibleGroupForModule($MODULE)}
 
-	<div id="usergroupcheckbox" fieldValue  col-md-4 col-sm-12 col-xs-12 >
+	<div id="usergroupcheckbox">
 		<input type="radio" name="assigntype" {if $OWNER_TYPE eq 'User' || $OWNER_TYPE eq ''}checked{/if} value="U" >&nbsp;{vtranslate('LBL_USERS')} &nbsp;
 	<input type="radio" name="assigntype" {if $OWNER_TYPE eq 'Group'}checked{/if} value="T">&nbsp;{vtranslate('LBL_GROUPS')}
 	</div>
@@ -45,7 +45,7 @@
 		</select>
 	</span>
 	<span id="assign_team" class="{if $OWNER_TYPE eq 'Group'}show;{else}hide{/if}">
-			<select class="select2 assignedgroupid" style="width:130p" data-name="assignedgroupid" name="assignedgroupid[]" data-fieldinfo='{$FIELD_INFO}' {if $MODULE eq 'SalesTarget' OR $MODULE eq 'Quotes'}multiple{/if}>
+			<select class="select2 assignedgroupid"  data-name="assignedgroupid" name="assignedgroupid[]" data-fieldinfo='{$FIELD_INFO}' {if $MODULE eq 'SalesTarget' OR $MODULE eq 'Quotes'}multiple{/if}>
 			{foreach key=OWNER_ID item=OWNER_NAME from=$ALL_ACTIVEGROUP_LIST}
 				<option value="{$OWNER_ID}" data-picklistvalue= '{$OWNER_NAME}' {foreach item=USER from=$ID_ARRAY}{if $USER eq $OWNER_ID } selected {/if}{/foreach}
 					{if array_key_exists($OWNER_ID, $ACCESSIBLE_GROUP_LIST)} data-recordaccess=true {else} data-recordaccess=false {/if} >
