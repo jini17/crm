@@ -2002,11 +2002,10 @@ input[type=checkbox]:checked {
   border: 0 !important;
 }
 #overlayPage {
-top: 30px;
-position: fixed;
-width: 100%;
-z-index: 1030;
-left: -46%;
+  top: 43px;
+  position: fixed;
+  width: 100%;
+  z-index: 1030;
 }
 #overlayPage .arrow.show {
   content: "";

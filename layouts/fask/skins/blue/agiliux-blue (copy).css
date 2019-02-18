@@ -755,8 +755,8 @@ td.jqplot-table-legend{
     padding-right: 5px;
 }
 .fask{
-width: 100% !important;
-height: 469px;
+    width: 100% !important;
+    
 }
 .faskfirst i{
     height: 14px;
@@ -796,11 +796,4 @@ height: 469px;
 .dropdown-icon-dashboard{
           padding: 0 10px 0 !important;
 
-}
-.fasksecond li[tools]{
-    width: 14.3% !important;
-}
-.fasksecond  li[tools]  ul li[tools]{
-    display: block !important;
-    width: 100% !important;
 }
