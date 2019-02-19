@@ -737,6 +737,7 @@ color: #2f5597 !important;
 }
 .fasksecond i,
 .fasksecond .material-icons.module-icon{
+
     margin-right: 5px;
     font-size: 14px !important;
     width: 14px;
@@ -795,7 +796,6 @@ height: 469px;
 }
 .dropdown-icon-dashboard{
           padding: 0 10px 0 !important;
-
 }
 .fasksecond li[tools]{
     width: 14.3% !important;
