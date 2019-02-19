@@ -36,6 +36,8 @@
     {assign var="checked_discount_zero" value="checked_discount_zero"|cat:$row_no}
 
     {assign var="discountTotal" value="discountTotal"|cat:$row_no}
+    {assign var="discounts" value="discountdetails"|cat:$row_no}		
+    
     {assign var="totalAfterDiscount" value="totalAfterDiscount"|cat:$row_no}
     {assign var="taxTotal" value="taxTotal"|cat:$row_no}
     {assign var="netPrice" value="netPrice"|cat:$row_no}
@@ -189,54 +191,175 @@
 							</a> : </strong>
 					</span>
 				</div>
-				<div class="discountUI validCheck hide" id="discount_div{$row_no}">
-					{assign var="DISCOUNT_TYPE" value="zero"}
-					{if !empty($data.$discount_type)}
-						{assign var="DISCOUNT_TYPE" value=$data.$discount_type}
+				<div class="discountUI validCheck hide" style="width:380px;" id="discount_value{$row_no}">
+		<!-- Modified by jitu@30062015 for discount line items -->
+		
+		{if $RECORD_ID eq '' && $DUPLICATE_RECORD_ID eq '' && $DEP_MOD eq 0}
+		  {assign var=discountcount value=$DATA|count}
+		  {assign var=discountdetails value=$DATA.discountdetails}			
+		{else}
+			
+		   	{if $data.discountdetails|count eq 0} 
+			   {assign var=discountcount value=$data|count}	
+			   {assign var=discountdetails value=$data.discountdetails}
+		  	{else}		
+			   {assign var=discountcount value=$data.discountdetails|count}	
+			   {assign var=discountdetails value=$data.discountdetails}		
+			{/if}			
+		{/if}
+		
+		{if $discountdetails|count eq 0}
+			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="table table-nobordered 	popupTable">			
+			   <tr>
+			<!-- TODO : CLEAN : should not append product total it should added in the js because product total can change at any point of time -->
+				<th id="discount_div_title{$row_no}" nowrap><b>{vtranslate('LBL_SET_DISCOUNT_FOR',$MODULE)} : {$data.$productTotal}</b></th>
+				<th>
+					<button type="button" class="close closeDiv">x</button>
+				</th>
+			   </tr>
+			   <tr>
+				<td colspan="2"><center>{vtranslate('LBL_NO_DISCOUNT_CONFIGURE',$MODULE)}</center></td>
+			   </tr>	
+			</table>
+		{else} 
+			<table width="100%" border="0" cellpadding="5" cellspacing="0" class="table table-nobordered popupTable">			<tr>
+				<!-- TODO : CLEAN : should not append product total it should added in the js because product total can change at any point of time -->
+					<th width="50%" id="discount_div_title{$row_no}" nowrap><b>{vtranslate('LBL_SET_DISCOUNT_FOR',$MODULE)} : {$data.$productTotal}</b></th>
+					<th width="40%" nowrap><b>{vtranslate('LBL_DISCOUNT_VAL',$MODULE)}:</b><span id="labelDiscountrow{$row_no}">{$data.itemdiscount}</span><br />
+					<b>{vtranslate('LBL_NET_PRICE',$MODULE)}:<span id="labelNetPricerow{$row_no}">{$data.afterdiscountvalue}</span>		  
+						</th>
+					<th width="10%">
+						<button type="button" class="close closeDiv">x</button>
+					</th>
+				</tr>
+	
+			{foreach item=discounts key=key from=$discountdetails}
+				{assign var=dismsg value=""}
+				{assign var=disabled value=""}
+				{if $RECORD_ID eq ''} 
+						{assign var=disabled value=""}		
+				{else}
+					{if $discounts['deleted'] eq 1} 
+						{assign var=dismsg value="{vtranslate('LBL_IS_DELETED_FROM_SYSTEM_PLEASE_REPLACE_OR_REMOVE_DISCOUNT', $MODULE)}"}	
+
+						{assign var=disabled value="disabled"}
+					{else if $discounts['discount_status'] eq 1} 
+
+						{assign var=disabled value="disabled"}
+					
+					{else if $discounts['currentrolediscount']|count eq 0 } 
+						{assign var=disabled value="disabled"}
+					{else if $discounts['postdiscount_type'] ne '' AND $discounts['postdiscount_criteria'] ne ''}		
+						{if $discounts['currentrolediscount'][0]['discount_type'] ne $discounts['postdiscount_type'] OR $discounts['currentrolediscount'][0]['discount_criteria'] ne $discounts['postdiscount_criteria']}
+						{assign var=disabled value="disabled"}
+
+						{else if $discounts['postdiscount_value'] gt $discounts['currentrolediscount'][0]['discount_value'] } 
+							{assign var=disabled value="disabled"}
+						{else}
+							{assign var=disabled value=""}
+						{/if}
+					{else}
+						{assign var=disabled value=""}
 					{/if}
-					<input type="hidden" id="discount_type{$row_no}" name="discount_type{$row_no}" value="{$DISCOUNT_TYPE}" class="discount_type" />
-					<p class="popover_title hide">
-						{vtranslate('LBL_SET_DISCOUNT_FOR',$MODULE)} : <span class="variable">{$data.$productTotal}</span>
-					</p>
-					<table width="100%" border="0" cellpadding="5" cellspacing="0" class="table table-nobordered popupTable">
-						<!-- TODO : discount price and amount are hide by default we need to check id they are already selected if so we should not hide them  -->
-						<tr>
-							<td>
-								<input type="radio" name="discount{$row_no}" {$data.$checked_discount_zero} {if empty($data.$discount_type)}checked{/if} class="discounts" data-discount-type="zero" />
-								&nbsp;
-								{vtranslate('LBL_ZERO_DISCOUNT',$MODULE)}
-							</td>
-							<td>
-								<!-- Make the discount value as zero -->
-								<input type="hidden" class="discountVal" value="0" />
-							</td>
-						</tr>
-						{if $ITEM_DISCOUNT_PERCENT_EDITABLE}
-							<tr>
-								<td>
-									<input type="radio" name="discount{$row_no}" {$data.$checked_discount_percent} class="discounts" data-discount-type="percentage" />
-									&nbsp; %
-									{vtranslate('LBL_OF_PRICE',$MODULE)}
-								</td>
-								<td>
-									<span class="pull-right">&nbsp;%</span>
-									<input type="text" data-rule-positive=true data-rule-inventory_percentage=true id="discount_percentage{$row_no}" name="discount_percentage{$row_no}" value="{$data.$discount_percent}" class="discount_percentage span1 pull-right discountVal {if empty($data.$checked_discount_percent)}hide{/if}" />
-								</td>
-							</tr>
+				{/if}
+				<tr style="font-size:12px;">
+					<td>
+					{if $discounts['currentrolediscount']|count eq 0}	
+							{if $discounts['postdiscount_type'] eq ''}
+								{assign var=discounttype value=$discounts['prediscount_type']}						{assign var=discountcriteria value=$discounts['prediscount_criteria']}					{assign var=sequence value=$discounts['prediscount_sequence']}					{assign var=discountvalue value=$discounts['prediscount_value']}	
+							{else} 
+								{assign var=discounttype value=$discounts['postdiscount_type']}						{assign var=discountcriteria value=$discounts['postdiscount_criteria']}					{assign var=sequence value=$discounts['postdiscount_sequence']}					{assign var=discountvalue value=$discounts['postdiscount_value']}	
+							{/if}
+					{else}
+							{if $discounts['postdiscount_type'] eq 'F' || $discounts['postdiscount_type'] eq ''} 
+								{assign var=discounttype value=$discounts['prediscount_type']}						{assign var=discountcriteria value=$discounts['prediscount_criteria']}					{assign var=sequence value=$discounts['prediscount_sequence']}					{assign var=discountvalue value=$discounts['prediscount_value']}		
+							{else}  
+								{assign var=discounttype value=$discounts['postdiscount_type']}						{assign var=discountcriteria value=$discounts['postdiscount_criteria']}					{assign var=sequence value=$discounts['postdiscount_sequence']}					{assign var=discountvalue value=$discounts['postdiscount_value']}	
+							{/if}
+							
+					{/if}
+
+					<!-- Modified by jitu@10032016 wrong close of input type hidden disrelid missing '>' -->	
+					<input type="hidden" id="disrelid{$row_no}_{$key}" name="disrelid{$row_no}_{$key}" value="{$discounts['disrelid']}">
+					<input type="hidden" id="discount_type{$row_no}_{$key}" name="discount_type{$row_no}_{$key}" value="{$discounttype}" />
+					<input type="hidden" id="discount_criteria{$row_no}_{$key}" name="discount_criteria{$row_no}_{$key}" value="{$discountcriteria}" />		<input type="hidden" id="discountindex{$row_no}_{$key}" name="discountindex{$row_no}_{$key}" value="{$discounts['discountindex']}"  />			<input type="hidden" id="discountid{$row_no}_{$key}" name="discountid{$row_no}_{$key}" value="{$discounts['discountid']}"  />
+					<input type="hidden" id="discountseq{$row_no}_{$key}" name="discountseq{$row_no}_{$key}" value="{$sequence}"  />
+					<input type="hidden" id="hiddiscount_value{$row_no}_{$key}" name="hiddiscount_value{$row_no}_{$key}" value="{$discounts['postdiscount_value']}"  />
+					<span style="display:block;float:left;"><input {$disabled} type="checkbox" class="discounts" data-prediscountvalue="{$discounts['prediscount_value']}" {if $discounts['postdiscount_value'] neq 0.00} checked {/if} id="discount{$row_no}_{$key}" name="discount{$row_no}_{$key}" data-deleted="{$discounts['deleted']}" data-isdeleted="" data-discountid="{$discounts['discountid']}" data-type="{$discounts['prediscount_type']}" data-criteria="{$discounts['prediscount_criteria']}" data-postdiscount_value="{$discounts['postdiscount_value']}" /></span>
+						&nbsp;
+					
+					{if $discounttype eq 'F'}
+						{if $discountcriteria eq 'P'}
+							<span style="display:block;float:left;">{$discounts['discount_title']} &nbsp;
+							({$discounts['prediscount_value']}&nbsp;%)</span>
+						
+					</td><td colspan="2"><span class="redColor {if $discounts['deleted'] eq 1} deletedDiscount{/if}">{$dismsg}</span>&nbsp;
+						<input type="hidden" class="discount_value" name="discount_value{$row_no}_{$key}" id="discount_value{$row_no}_{$key}" value="{$discounts['prediscount_value']}" />
+							
+							{if $CURRENTUSER[1] eq 1 AND $discounts['deleted'] eq 1} 
+								<i class="icon-trash deleteDiscountRow cursorPointer" title="{vtranslate('LBL_DELETE',$MODULE)}"></i>		{/if}
+					</td>
+						{else}
+						<span style="display:block;float:left;">{$discounts['discount_title']} &nbsp;
+						({$discounts['prediscount_value']})</span><br />
+						
+					</td><td colspan="2">
+							<span class="redColor {if $discounts['deleted'] eq 1} deletedDiscount{/if}">{$dismsg}</span>&nbsp;
+							<input type="hidden" class="discount_value" name="discount_value{$row_no}_{$key}" id="discount_value{$row_no}_{$key}" value="{$discounts['prediscount_value']}"  />
+								
+								{if $CURRENTUSER[1] eq 1 AND $discounts['deleted'] eq 1} 
+								<i class="icon-trash deleteDiscountRow cursorPointer" title="{vtranslate('LBL_DELETE',$MODULE)}"></i>		{/if}
+			</td>
 						{/if}
-						{if $ITEM_DISCOUNT_AMOUNT_EDITABLE}
-							<tr>
-								<td class="LineItemDirectPriceReduction">
-									<input type="radio" name="discount{$row_no}" {$data.$checked_discount_amount} class="discounts" data-discount-type="amount" />
-									&nbsp;
-									{vtranslate('LBL_DIRECT_PRICE_REDUCTION',$MODULE)}
-								</td>
-								<td>
-									<input type="text" data-rule-positive=true id="discount_amount{$row_no}" name="discount_amount{$row_no}" value="{$data.$discount_amount}" class="span1 pull-right discount_amount discountVal {if empty($data.$checked_discount_amount)}hide{/if}"/>
-								</td>
-							</tr>
+
+					
+					{else}
+						{if $discountcriteria eq 'P'}
+							<span style="display:block;float:left;">{$discounts['discount_title']} &nbsp;
+							(Upto {$discounts['prediscount_value']}&nbsp;%)</span>
+						<br />
+						
+					</td><td colspan="2"><span class="redColor {if $discounts['deleted'] eq 1} deletedDiscount{/if}">{$dismsg}</span>&nbsp;
+						<input {$disabled} class="smallInputBox" class="discount_value" type="text" {$disabled} name="discount_value{$row_no}_{$key}" id="discount_value{$row_no}_{$key}" value="{$discounts['postdiscount_value']}"  />
+							{if $CURRENTUSER[1] eq 1 AND $discounts['deleted'] eq 1}
+								<i class="icon-trash deleteDiscountRow cursorPointer" title="{vtranslate('LBL_DELETE',$MODULE)}"></i>
+							{/if}
+			</td>
+						{else}
+							<span style="display:block;float:left;">{$discounts['discount_title']} &nbsp;
+							(Upto {$discounts['prediscount_value']})</span><br />
+						
+					</td><td colspan="2"><span class="redColor {if $discounts['deleted'] eq 1} deletedDiscount{/if}">{$dismsg}</span>&nbsp;
+						<input {$disabled} class="smallInputBox" type="text" {$disabled} name="discount_value{$row_no}_{$key}" id="discount_value{$row_no}_{$key}" class="discount_value" {$disabled} 		value="{$discounts['postdiscount_value']}"  />
+							{if $CURRENTUSER[1] eq 1 AND $discounts['deleted'] eq 1} 
+								<i class="icon-trash deleteDiscountRow cursorPointer" title="{vtranslate('LBL_DELETE',$MODULE)}"></i>
+							{/if}
+					</td>
 						{/if}
-					</table>
+		
+					{/if}	
+				</td>
+  			 </tr>
+	{/foreach}
+	   	<tr >
+			<td colspan="3" style="border:0;"><div class="modal-footer lineItemPopupModalFooter modal-footer-padding">
+			<div class=" pull-right cancelLinkContainer">
+			<a class="cancelLink" type="reset" data-dismiss="modal">{vtranslate('LBL_CANCEL', $MODULE)}</a>
+			</div>
+			<button class="btn btn-success discountSave" id="discount_submit{$row_no}" type="button" name="lineItemActionSave">
+			<strong>{vtranslate('LBL_SAVE', $MODULE)}</strong></button></td>
+		</tr>	
+	</table>
+			
+	{/if} <!--- End here for discount in line item -->
+	<!-- Added by jitu@30072015 for total Discount	for specific line item -->
+	<input type="hidden" name="totalDiscountCount_{$row_no}" id="totalDiscountCount_{$row_no}" value="{$discountcount}" />
+	<input type="hidden" name="hdnlineitem_id{$row_no}" id="hdnlineitem_id_{$row_no}" value="{$data.$hdnlineitem_id}" />
+
+	<input type="hidden" name="labelDiscountrow_{$row_no}" id="labelDiscountrow_{$row_no}" value="{$data.itemdiscount}" />	
+	<input type="hidden" name="labelNetPricerow_{$row_no}" id="labelNetPricerow_{$row_no}" value="{$data.afterdiscountvalue}" />	
+	
+	<!-- end here -->	
 				</div>
 				<div style="width:150px;">
 					<strong>{vtranslate('LBL_TOTAL_AFTER_DISCOUNT',$MODULE)} :</strong>

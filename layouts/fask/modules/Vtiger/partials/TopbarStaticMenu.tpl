@@ -119,7 +119,7 @@
     'recyclebin'=>'delete_forever','products'=>'fas fa-box','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-headset','tools'=>'business_center',
     'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'fingerprint','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call',
     'performance'=>'fas fa-chart-line', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
-    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face'  ]}
+    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face','salestarget'=>'fas fa-dot-circle' ]}
    <li>
       <div class="dropdownFinance">
          <div class="addtionalDashboardTab" style="padding: 10px 10px;"><span aria-hidden="true">{vtranslate('Sales')}</span></div>
@@ -246,7 +246,7 @@
     'recyclebin'=>'delete_forever','products'=>'fas fa-box','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-headset','tools'=>'business_center',
     'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'fingerprint','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call',
     'performance'=>'fas fa-chart-line', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
-    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face'  ]}
+    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face', 'salestarget'=>'fas fa-dot-circle']}
    <li>
       <div class="dropdownFinance">
          <div class="addtionalDashboardTab" style="padding: 10px 10px;"><span aria-hidden="true">{vtranslate('Support')}</span></div>

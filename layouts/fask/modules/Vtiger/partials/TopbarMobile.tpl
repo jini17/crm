@@ -127,7 +127,7 @@
    'recyclebin'=>'delete_forever','products'=>'fas fa-box','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-ticket-alt','tools'=>'business_center',
    'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'fingerprint','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'fas fa-id-card', 'mobilecall'=>'call', 'call'=>'call',
 'performance'=>'fas fa-chart-bar', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'fas fa-newspaper','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
-    'claim'=>'fas fa-dollar-sign','myprofile'=>'fas fa-id-card'  ]}
+    'claim'=>'fas fa-dollar-sign','myprofile'=>'fas fa-id-card', 'salestarget'=>'fas fa-dot-circle']}
     <li {$APP_NAME} class="with-childs {if $SELECTED_MENU_CATEGORY eq $APP_NAME}active{/if}" style="width:{$colwidth}%;"> 
       <a class="has-arrow waves-effect waves-dark " >
         {if $iconsarray[{strtolower($APP_NAME)}]|strstr:"fas"}

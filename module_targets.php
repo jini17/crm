@@ -412,8 +412,8 @@ include_once 'include/Webservices/Utils.php';
 	$module->enableTools(Array('Import', 'Export'));
 	$module->disableTools('Merge');
 
-	$module->addLink("LISTVIEWBASIC", "LBL_TARGET_GENERATE", "SalesTarget_Target_Js.GenerateTarget('index.php?module=SalesTarget&view=GenerateTarget')");
-	$module->addLink('LISTVIEWBASIC', 'LBL_TARGET_REPORT', "index.php?module=SalesTarget&view=ReportTarget&record=$RECORD$");
+	$module->addLink("LISTVIEW", "LBL_TARGET_GENERATE", "SalesTarget_Target_Js.GenerateTarget('index.php?module=SalesTarget&view=GenerateTarget')");
+	$module->addLink('LISTVIEW', 'LBL_TARGET_REPORT', "index.php?module=SalesTarget&view=ReportTarget&record=$RECORD$");
 
 	// Sharing Access Setup
 	$module->setDefaultSharing();
