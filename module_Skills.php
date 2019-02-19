@@ -31,7 +31,7 @@ include_once 'include/Webservices/Utils.php';
 	$adb->setDebug(true);
 	$Vtiger_Utils_Log = true;
 
-	$MODULENAME = 'LangugageSkill'; //Give your module name
+	$MODULENAME = 'LanguageSkill'; //Give your module name
 	$PARENT 	= 'Support';  //Give Parent name
 	$ENTITYNAME = 'serialno'; //Give Duplicate check field name
 	$ENTITYLABEL= 'Serial No';
