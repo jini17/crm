@@ -40,6 +40,7 @@ class Users_Editfile_View extends Vtiger_Index_View {
 			$langdetail = $skillUserModel->getSoftSkillDetail($lang_id);			
 		}
 
+		$viewer->assign('LVLOFLANG', Users_SkillsRecord_Model::getPicklistValues('language'));
 		$viewer->assign('LANGUAGE_DETAIL',$langdetail);		
 		echo $viewer->view('EditAjaxLang.tpl',$moduleName,true);
 	}
@@ -68,6 +69,7 @@ class Users_Editfile_View extends Vtiger_Index_View {
 		else		
 			$viewer->assign('SKILL_LIST', $SkillList);
 		
+		$viewer->assign('LVLOFSKILL', Users_SkillsRecord_Model::getPicklistValues('skill'));
 		$viewer->assign('CURRENT_USER_MODEL', $userRecordModel);
 		$viewer->view('AddSkill.tpl', $moduleName);
 	}

@@ -21,7 +21,7 @@
         <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-        <form id="addSkill" name="addSkill" class="form-horizontal" method="POST">
+        <form id="addSkill" name="addSkill" class="form-horizontal" method="POST"> 
                 <input type="hidden" value="Users" name="module">
                 <input type="hidden" value="SaveSubModuleAjax" name="action">
                 <input type="hidden" value="Users" name="module">
@@ -32,7 +32,7 @@
                 <input id="current_user_id" name="current_user_id" type="hidden" value="{$USERID}">	
                         <div class="modal-body">
                                 <!--start-->
-                                <div class="row-fluid">
+                        <div class="row-fluid">
                         <div class="form-group" style="margin-bottom: 0px !important;">
                                 <div class="col-md-12" style="margin-bottom: 15px;">
                                                 <div class="col-md-4">
@@ -68,11 +68,13 @@
                                                                 </label>
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
+
                                                                 <select class="select2 inputElement" onchange="updateSelectBox('institution_name','institution_nametxt');" name="skill_label" id="institution_name" data-rule-required = "true">
-                                                                        <option value="LBL_BEGINNER_LABEL" {if isset($LABEL) && $LABEL eq 'LBL_BEGINNER_LABEL'}selected{/if}>{vtranslate('LBL_BEGINNER_LABEL',$QUALIFIED_MODULE)}</option>
-                                                                        <option value="LBL_INTERMEDIATE_LABEL" {if isset($LABEL) && $LABEL eq 'LBL_INTERMEDIATE_LABEL'}selected{/if}>{vtranslate('LBL_INTERMEDIATE_LABEL',$QUALIFIED_MODULE)}</option>
-                                                                        <option value="LBL_EXPERT_LABEL" {if isset($LABEL) && $LABEL eq 'LBL_EXPERT_LABEL'}selected{/if}>{vtranslate('LBL_EXPERT_LABEL',$QUALIFIED_MODULE)}</option>
-                                                              <!--  <option value="0">{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> -->
+                                                                            <option value="" >{vtranslate('LBL_SELECT', $QUALIFIED_MODULE)}</option>
+                                                                        {foreach from = $LVLOFSKILL item = LVL}
+                                                                            <option value="{$LVL}" {if isset($LABEL) && $LABEL eq $LVL} selected {/if}>{$LVL}</option>
+                                                                        {/foreach}
+
                                                                 </select>
                                                         </div>
                                                 </div>

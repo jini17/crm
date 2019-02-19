@@ -12,7 +12,7 @@
 
 
 
-        <form id="editLanguage" name="editLanguage" class="form-horizontal" method="POST">			
+        <form id="editLanguage" name="editLanguage" class="form-horizontal" method="POST">	  
                 <input type="hidden" value="Users" name="module">
                 <input type="hidden" name="record" value="{$LANG_ID}" />	
                 <input type="hidden" value="SaveSubModuleAjax" name="action">
@@ -29,6 +29,7 @@
                                 </div>
                                 <div class="controls fieldValue col-md-8">
                                         <select  class="select2" {if $LANGUAGE_DETAIL.language_id neq ''} disabled {/if}  onchange="updateSelectBox('language','languagebox');" name="language" id="language" style="width:100%;">	
+                                                                <option value="" >{vtranslate('LBL_SELECT', $QUALIFIED_MODULE)}</option>    
                                                                 {foreach key=LANG_ID item=LANG_MODEL from=$LANGUAGE_LIST name=institutionIterator}
                                                                         <option value="{$LANG_MODEL.language_id}" {if $LANGUAGE_DETAIL.language_id eq $LANG_MODEL.language_id} selected {/if}>{$LANG_MODEL.language}</option>
                                                                 {/foreach}
@@ -42,13 +43,11 @@
                                                 </div>
 
                                                 <div class="controls fieldValue col-md-8" align="right">
-                                                        {if $LANGUAGE_LIST|@count gt 0}
+                                                       
                                                                 <span class="hide" id="languagebox">
                                                                         <input style="width:100%;" type="text" name="langtxt" id="langtxt" data-rule-required = "true" />
                                                                 </span>
-                                                        {else}
-                                                                <input style="width:190px;" data-rule-required = "true" type="text" name="langtxt" id="langtxt" />
-                                                        {/if}		
+                                                       	
                                                 </div>
                                         </div>
                                 </div>			
@@ -58,13 +57,14 @@
                                                 <label class="control-label fieldLabel pull-right btn-block">{vtranslate('LBL_EXPERTISE_LEVEL', $MODULE)}</label>
                                         </div>	
                                         <div class="controls fieldValue col-md-8">
-                                            <select  class="select2" name="proficiency" id="proficiency" style="width:100%;"> 					
-                                                        <option value="{vtranslate('LBL_ELEMENTRY', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_ELEMENTRY', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_ELEMENTRY', $QUALIFIED_MODULE)}</option>
-                                                        <option value="{vtranslate('LBL_LIMITED_WORKING', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_LIMITED_WORKING', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_LIMITED_WORKING', $QUALIFIED_MODULE)}</option>
-                                                        <option value="{vtranslate('LBL_PROFESSIONAL_WORKING', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_PROFESSIONAL_WORKING', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_PROFESSIONAL_WORKING', $QUALIFIED_MODULE)}</option>
-                                                        <option value="{vtranslate('LBL_FULL_PROFESSIONAL', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_FULL_PROFESSIONAL', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_FULL_PROFESSIONAL', $QUALIFIED_MODULE)}</option>
-                                                        <option value="{vtranslate('LBL_NATIVE_BILINGUAL', $QUALIFIED_MODULE)}" {if $LANGUAGE_DETAIL.proficiency eq {vtranslate('LBL_NATIVE_BILINGUAL', $QUALIFIED_MODULE)}} selected {/if}>{vtranslate('LBL_NATIVE_BILINGUAL', $QUALIFIED_MODULE)}</option>
-                                                </select>
+
+                                            <select  class="select2" name="proficiency" id="proficiency" style="width:100%;">    
+                                                <option value="" >{vtranslate('LBL_SELECT', $QUALIFIED_MODULE)}</option>               
+                                                {foreach from = $LVLOFLANG item = LVL}
+                                                    <option value="{$LVL}" {if $LANGUAGE_DETAIL.proficiency eq $LVL} selected {/if}>{$LVL}</option>
+                                                {/foreach}
+                                            </select>
+                                       
                                         </div>
                                         <div class="controls">
                                                 <span class="hide" id="languagebox">

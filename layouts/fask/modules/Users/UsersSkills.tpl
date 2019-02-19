@@ -158,11 +158,11 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                         </tr>   {if $USER_SKILL_CLOUD|count gt 0}
                                 {foreach item=SKILL from=$USER_SKILL_CLOUD}
                                     {assign var=LABEL value =$SKILL['skill_label']}
-                                    {if $LABEL eq 'LBL_BEGINNER_LABEL'}
+                                    {if $LABEL eq 'Beginner'}
                                          {assign var=ACCURACY value= "40"}
-                                    {elseif $LABEL eq 'LBL_INTERMEDIATE_LABEL'}
+                                    {elseif $LABEL eq 'Intermediate'}
                                          {assign var=ACCURACY value= "70"}
-                                    {elseif $LABEL eq 'LBL_EXPERT_LABEL'}
+                                    {elseif $LABEL eq 'Expert'}
                                          {assign var=ACCURACY value= "100"}     
                                     {else}
                                           {assign var=ACCURACY value= "0"}
