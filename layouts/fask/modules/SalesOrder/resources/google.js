@@ -4,57 +4,41 @@
  * All Rights Reserved.
  *************************************************************************************/
 var placeSearch, autocompletepikcup,autocompletedispatch;
-        var componentForm = {
-       
+    var componentForm = { 
         locality: 'long_name',
         administrative_area_level_1: 'long_name',
         country: 'long_name'
-        };
+    };
 
 function initAutocomplete() {
     // Create the autocomplete object, restricting the search to geographical
     // location types.
-    //console.log("Initializing Google Maps");
-    //var myform = jQuery('input[name=lastname]').get(0).form;
-    ///var formname = jQuery(myform).attr('name');
-    //alert(formname);
    
     autocompletepikcup = new google.maps.places.Autocomplete(
-            /** @type {!HTMLInputElement} */(document.getElementById('SalesOrder_editView_fieldName_bill_city')),
-           { types: ['(cities)'] });
-            //console.log("After Autocomplete Pickup Assignment");
+    /** @type {!HTMLInputElement} */(document.getElementById('SalesOrder_editView_fieldName_bill_city')),
+    { types: ['(cities)'] });
 
-               autocompletedispatch = new google.maps.places.Autocomplete(
-            /** @type {!HTMLInputElement} */(document.getElementById('SalesOrder_editView_fieldName_ship_city')),
-            { types: ['(cities)'] });
-           //{types: ['geocode']});
-            //console.log("After Autocomplete Dispatch Assignment");
+    autocompletedispatch = new google.maps.places.Autocomplete(
+    /** @type {!HTMLInputElement} */(document.getElementById('SalesOrder_editView_fieldName_ship_city')),
+    { types: ['(cities)'] });
 
-        console.log(autocompletepikcup);
-        console.log(autocompletedispatch);
-    
-    
-        // When the user selects an address from the dropdown, populate the address
-        // fields in the form.
-            autocompletepikcup.addListener('place_changed', fillInAddresspickup);
-             autocompletedispatch.addListener('place_changed', fillInAddressdispatch);
+    // When the user selects an address from the dropdown, populate the address
+    // fields in the form.
+    autocompletepikcup.addListener('place_changed', fillInAddresspickup);
+    autocompletedispatch.addListener('place_changed', fillInAddressdispatch);
 }
 
 function fillInAddresspickup() {
     // Get the place details from the autocomplete object.
     var place = autocompletepikcup.getPlace();
-
-    /* for (var component in componentForm) {
-         document.getElementById(component).value = '';
-         document.getElementById(component).disabled = false;
-     }*/
     console.log(place);
+    
     // Get each component of the address from the place details
     // and fill the corresponding field on the form.
 
-    for (var i = 0; i < place.address_components.length; i++) {
-        ///alert('Nirbhjay');
+    for (var i = 0; i < place.address_components.length; i++) { 
         var addressType = place.address_components[i].types[0];
+        
         /************* State ***************************/
         if (addressType == 'administrative_area_level_1') {
             var val = place.address_components[i][componentForm[addressType]];
@@ -67,9 +51,7 @@ function fillInAddresspickup() {
         }
         /*********** City**************/
         if(addressType == 'locality'){
-             var val = place.address_components[i][componentForm[addressType]];
-            console.log(place.address_components);
-        
+            var val = place.address_components[i][componentForm[addressType]];
             document.getElementById('SalesOrder_editView_fieldName_bill_city').value = val;
         }
     }
@@ -79,16 +61,13 @@ function fillInAddressdispatch() {
     // Get the place details from the autocomplete object.
     var place = autocompletedispatch.getPlace();
     console.log(place);
-    /* for (var component in componentForm) {
-         document.getElementById(component).value = '';
-         document.getElementById(component).disabled = false;
-     }*/
-    //console.log(place);
+    
     // Get each component of the address from the place details
     // and fill the corresponding field on the form.
     for (var i = 0; i < place.address_components.length; i++) {
         var addressType = place.address_components[i].types[0];
 
+        /************* State ***************************/
         if (addressType == 'administrative_area_level_1') {
             var val = place.address_components[i][componentForm[addressType]];
             document.getElementById('SalesOrder_editView_fieldName_ship_state').value = val;
@@ -100,9 +79,7 @@ function fillInAddressdispatch() {
         }
         /*********** City**************/
         if(addressType == 'locality'){
-             var val = place.address_components[i][componentForm[addressType]];
-            console.log(place.address_components);
-        
+            var val = place.address_components[i][componentForm[addressType]];
             document.getElementById('SalesOrder_editView_fieldName_ship_city').value = val;
         }
     
@@ -111,10 +88,8 @@ function fillInAddressdispatch() {
 }
 
 
-
 function pickupgeolocate(){
-    //console.log("Inside Dispatch Function");
-
+    
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position){
             var geolocation = {
@@ -131,7 +106,7 @@ function pickupgeolocate(){
 }
 
 function dispatchgeolocate() {
-    // console.log("Inside Dispatch Function");
+    
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var geolocation = {

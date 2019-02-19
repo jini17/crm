@@ -199,7 +199,7 @@ Vtiger_Edit_Js("Contacts_Edit_Js",{},{
 		
 	    var script = document.createElement('script');
 	    script.type = 'text/javascript';
-	    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA7QuhuZ34ygC0j5RHmYuqtK_uwecsNb9E&libraries=places&callback=initAutocomplete";
+	    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBZhx-kRZRr_qIT0fw6Blr9JjlZ3-i5rCk&libraries=places&callback=initAutocomplete";
 	    document.body.appendChild(script);
 
 	    

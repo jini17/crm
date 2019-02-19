@@ -7,9 +7,12 @@
  * All Rights Reserved.
  *************************************************************************************/
 
+var imported = document.createElement('script');
+imported.src = 'layouts/fask/modules/SalesOrder/resources/google.js';
+document.head.appendChild(imported);
+
 Inventory_Edit_Js("SalesOrder_Edit_Js",{},{
-    
-    
+     
     /**
 	 * Function to get popup params
 	 */
@@ -159,11 +162,24 @@ Inventory_Edit_Js("SalesOrder_Edit_Js",{},{
 			self.referenceSelectionEventHandler(data, container);
 		});
 	},
-        registerBasicEvents: function(container){
-            this._super(container);
-            this.registerEventForEnablingRecurrence();
-            this.registerForTogglingBillingandShippingAddress();
-            this.registerEventForCopyAddress();
-        },
+
+	/**
+     * Function which will call Google Place API
+     */
+    registerGoogleAddress : function(container){
+        var thisInstance = this;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAvucdFiK-twUm8ozrd-fwadV5luYtYyjI&libraries=places&callback=initAutocomplete";
+        document.body.appendChild(script); 
+    },
+
+    registerBasicEvents: function(container){
+        this._super(container);
+        this.registerEventForEnablingRecurrence();
+        this.registerForTogglingBillingandShippingAddress();
+        this.registerEventForCopyAddress();
+        this.registerGoogleAddress(container);
+    },
     
 });
