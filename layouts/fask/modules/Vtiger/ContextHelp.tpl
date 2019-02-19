@@ -1,9 +1,9 @@
-<div class="modal-content helpbox" style="overflow:scroll;">
+<div class="modal-content helpbox" style="overflow:hidden;">
 	<div class="modal-header">
 	    <button title="Close" class="close" data-dismiss="modal">x</button>
 	    <h4 class="modal-title" id="defaultModalLabel">{$DATA['question']}</h4>
 	</div>
-	<div class="modal-body">
+	<div class="modal-body" style="overflow:scroll;">
 		<div class="top-btn pull-right">
 			{*<button title="{vtranslate('Go to Support')}" class="help-btn" onclick="window.location.href='{$REF_URL}support'">{vtranslate('Go to Support')}</button>
 			<button title="{vtranslate('Create Ticket')}" class="help-btn" onclick="window.location.href='{$REF_URL}support/index.php?module=HelpDesk&action=new'">{vtranslate('Create Ticket')}</button>
