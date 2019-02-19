@@ -55,6 +55,7 @@ body {
   padding-right: 15px;
   height: 40px !important;
   margin-top: 10px;
+    margin-left: -10px !important;
 }
 .app-nav {
   position: relative;
@@ -1972,7 +1973,8 @@ input[type=checkbox]:checked {
     margin: 6px 14px;
   box-shadow:0 1px 15px 1px rgba(62,57,107,.07);
 }
-.detailViewContainer .block h5{color: #2f5597;font-weight:bold;}
+.detailViewContainer .block h5,.fieldBlockHeader{color: #2f5597;font-weight:bold;}
+
 .editViewContainer .block {
   background: #FFFFFF;
   border: 1px solid #F3F3F3;

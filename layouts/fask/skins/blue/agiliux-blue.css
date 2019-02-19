@@ -37,6 +37,11 @@ Email: khaled@softsolvers.com.my
      
      color: #2f5597 !important;
 }
+.btn-secondary{
+     background: #2f5597 !important;
+    border: 1px solid #2f5597 !important;
+    color: #fff;
+}
 .fc-button.fc-state-default:hover,
 .fc-button.fc-state-active{
     background-color:  #2f5597 !important;
@@ -751,8 +756,8 @@ td.jqplot-table-legend{
 }
 
 .fask{
-    width: 100% !important;
-    
+width: 100% !important;
+height: 469px;
 }
 .faskfirst i{
     height: 14px;
@@ -784,13 +789,23 @@ td.jqplot-table-legend{
     border-radius: 3px !important;
     padding-right:10px !important;
     margin-right: 10px !important;
+    color: #fff;
 }
 #appnav button{
-    padding-right: 10px !important;
-    
+    padding-right: 10px !important;    
 }
 .dropdown-icon-dashboard{
           padding: 0 10px 0 !important;
 
 }
 
+.fasksecond li[tools]{
+    width: 14.3% !important;
+}
+.fasksecond  li[tools]  ul li[tools]{
+    display: block !important;
+    width: 100% !important;
+}
+#searchResults-container{
+    width: 92vw !important;
+}

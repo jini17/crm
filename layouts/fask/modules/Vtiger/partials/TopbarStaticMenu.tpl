@@ -96,7 +96,7 @@
                         </div>
                      </div>
                      <div class="col-md-12 row" style="padding: 10px;">
-                        <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
+                         <a target="_blank" href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
                      </div>
                      <div class="clearfix"></div>
                   </div>
@@ -110,16 +110,16 @@
 {elseif $PLAN eq 2 || $PLAN eq 4}
    
   {assign var=iconsarray value=['potentials'=>'fas fa-comments-dollar','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
-    'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'fas fa-search-dollar',
+    'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'fas fa-list-alt','pricebooks'=>'library_books','salesorder'=>'fas fa-file-invoice-dollar',
     'purchaseorder'=>'fas fa-shopping-cart','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
     'projecttask'=>'check_box','projectmilestone'=>'fas fa-info-circle','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
     'foundation'=>'fas fa-info-circle','admin'=>'fas fa-hand-holding-heart',
     'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
     'quotes'=>'description','invoice'=>'fas fa-envelope-open','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
-    'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-headset','tools'=>'business_center',
+    'recyclebin'=>'delete_forever','products'=>'fas fa-box','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-headset','tools'=>'business_center',
     'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'fingerprint','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call',
     'performance'=>'fas fa-chart-line', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
-    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face'  ]}
+    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face','salestarget'=>'fas fa-dot-circle' ]}
    <li>
       <div class="dropdownFinance">
          <div class="addtionalDashboardTab" style="padding: 10px 10px;"><span aria-hidden="true">{vtranslate('Sales')}</span></div>
@@ -133,7 +133,11 @@
                      {else}
                         <i class="material-icons module-icon" >{$iconsarray[{strtolower($MODULE)}]}</i> 
                       {/if}
-                     <span class="hide-menu">&nbsp;{$MODULE}</span></a>   
+                      {if $MODULE eq 'Potentials'}
+                        <span class="hide-menu">&nbsp;Appointment</span>
+                        {else}
+                            <span class="hide-menu">&nbsp;{$MODULE}</span>
+                     {/if}</a>   
                   </li>
                  {/foreach}
                </ul>
@@ -221,7 +225,7 @@
                         </div>
                      </div>
                      <div class="col-md-12 row" style="padding: 10px;">
-                        <a href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
+                         <a target="_blank" href="http://dev7.secondcrm.com/agiliux/addons.php" class="buttonpopup">Read More</a>
                      </div>
                      <div class="clearfix"></div>
                   </div>
@@ -233,16 +237,16 @@
 </li>
    {else if $PLAN eq 3 || $PLAN eq 4}
     {assign var=iconsarray value=['potentials'=>'fas fa-comments-dollar','marketing'=>'thumb_up','leads'=>'thumb_up','accounts'=>'business',
-    'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'format_list_bulleted','pricebooks'=>'library_books','salesorder'=>'fas fa-search-dollar',
+    'sales'=>'attach_money','smsnotifier'=>'sms', 'services'=>'fas fa-list-alt','pricebooks'=>'library_books','salesorder'=>'fas fa-file-invoice-dollar',
     'purchaseorder'=>'fas fa-shopping-cart','vendors'=>'local_shipping','faq'=>'help','helpdesk'=>'headset','assets'=>'settings','project'=>'card_travel',
     'projecttask'=>'check_box','projectmilestone'=>'fas fa-info-circle','mailmanager'=>'email','documents'=>'file_download', 'calendar'=>'event',
     'foundation'=>'fas fa-info-circle','admin'=>'fas fa-hand-holding-heart',
     'emails'=>'email','reports'=>'show_chart','servicecontracts'=>'content_paste','contacts'=>'contacts','campaigns'=>'notifications',
     'quotes'=>'description','invoice'=>'fas fa-envelope-open','emailtemplates'=>'subtitles','pbxmanager'=>'perm_phone_msg','rss'=>'rss_feed',
-    'recyclebin'=>'delete_forever','products'=>'inbox','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-headset','tools'=>'business_center',
+    'recyclebin'=>'delete_forever','products'=>'fas fa-box','portal'=>'web','inventory'=>'assignment','support'=>'fas fa-headset','tools'=>'business_center',
     'mycthemeswitcher'=>'folder', 'training'=>'book', 'attendance'=>'fingerprint','exitinterview'=>'assignment','exitdetails'=>'assignment','timesheet'=>'timer','chat'=>'chat','user'=>'face', 'mobilecall'=>'call', 'call'=>'call',
     'performance'=>'fas fa-chart-line', 'users'=>'person','meeting'=>'people' ,'bills'=>'receipt','workinghours'=>'access_time' ,'payments'=>'payment' ,'payslip'=>'insert_drive_file','messageboard'=>'assignment','leavetype'=>'keyboard_tab' ,'leave'=>'exit_to_app',
-    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face'  ]}
+    'claim'=>'fas fa-hand-holding-usd','myprofile'=>'face', 'salestarget'=>'fas fa-dot-circle']}
    <li>
       <div class="dropdownFinance">
          <div class="addtionalDashboardTab" style="padding: 10px 10px;"><span aria-hidden="true">{vtranslate('Support')}</span></div>
@@ -256,7 +260,14 @@
                      {else}
                         <i class="material-icons module-icon" >{$iconsarray[{strtolower($MODULE)}]}</i> 
                       {/if}
-                     <span class="hide-menu">&nbsp;{vtranslate($MODULE)}</span></a>   
+
+                    {if $MODULE eq 'Potentials'}
+                        <span class="hide-menu">&nbsp; Appointment</span>
+                        {else}
+                            <span class="hide-menu">&nbsp;{$MODULE}</span>
+                     {/if}
+                  </a>   
+
                   </li>
                  {/foreach}
                </ul>

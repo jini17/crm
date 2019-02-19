@@ -43,6 +43,11 @@ Email: khaled@softsolvers.com.my
      border: 1px solid #EC5C64 !important;
      color: #fff !important;
 }
+.btn-secondary{
+     background: #EC5C64 !important;
+    border: 1px solid #EC5C64 !important;
+    color: #fff;
+}
 .record-header .recordBasicInfo h4{
     margin-top: 30px;
 }
@@ -735,4 +740,7 @@ td.jqplot-table-legend{
 }
 .dropdown-icon-dashboard{
       padding: 0 10px 0 !important;
+}
+#searchResults-container{
+    width: 92vw !important;
 }

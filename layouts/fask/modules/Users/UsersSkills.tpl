@@ -158,39 +158,49 @@ box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
                         </tr>   {if $USER_SKILL_CLOUD|count gt 0}
                                 {foreach item=SKILL from=$USER_SKILL_CLOUD}
                                     {assign var=LABEL value =$SKILL['skill_label']}
-                                    {if $LABEL eq 'LBL_BEGINNER_LABEL'}
+                                    {if $LABEL eq 'Beginner'}
                                          {assign var=ACCURACY value= "40"}
-                                    {elseif $LABEL eq 'LBL_INTERMEDIATE_LABEL'}
+                                    {elseif $LABEL eq 'Intermediate'}
                                          {assign var=ACCURACY value= "70"}
-                                    {elseif $LABEL eq 'LBL_EXPERT_LABEL'}
+                                    {elseif $LABEL eq 'Expert'}
                                          {assign var=ACCURACY value= "100"}     
                                     {else}
                                           {assign var=ACCURACY value= "0"}
                                     {/if}
                                     <tr>
                                         <td>
-                                        {$SKILL['skill_title']}
+                                          {$SKILL['skill_title']}
                                         </td>
                                         <td> 
                                           <style>
                                                 .progress-bar-color-{$SKILL['skill_label']}{
                                                     background-color:   {$SKILL['color']}  !important;
                                                 }
-                                            </style>
+                                          </style>
                                             <div class="progress">
-                                                <div class="progress-bar progress-bar-color-{$SKILL['skill_label']} progress-bar-striped" role="progressbar"
+                                              <div class="progress-bar progress-bar-color-{$SKILL['skill_label']} progress-bar-striped" role="progressbar"
                                                 aria-valuenow="{$ACCURACY}" aria-valuemin="0" aria-valuemax="100" style="width:{$ACCURACY}%">
-                                                                     {vtranslate($LABEL,$MODULE)}
-                                                </div>
+                                                    {vtranslate($LABEL,$MODULE)}
                                               </div>
+                                            </div>
                                         </td>
                                       {if $USER_MODEL->get('id') eq $USERID OR $USER_MODEL->get('roleid') eq "H2" OR   $USER_MODEL->get('roleid') eq "H12" OR  $USER_MODEL->get('roleid') eq "H13" OR $USER_MODEL->isAdminUser() }
-                                        <td>
-                                            <a class="deleteSkills" onclick="Users_Skills_Js.deleteSkill('{$SKILL['skill_id']}')" title="Delete">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                            {*<div class="pull-right skillnum">{$SKILL['endorsement']}</div>*}
-                                        </td>
+                                        {assign var=skillId value=$SKILL['skill_id']}   
+                                        
+                                          <td>
+                                              <div class="pull-right actions">   
+                                                <span class="actionImages">                                  
+                                                  <a class="editSkills ti-pencil cursorPointer" onclick="Users_Skills_Js.addSkill('{$CREATE_SKILL_URL}&userId={$USERID}&skillId={$skillId}');"  title="Edit">
+                                                  </a>&nbsp;
+                                                  {*<div class="pull-right skillnum">{$SKILL['endorsement']}</div>*}
+                                                  <a class="deleteSkills cursorPointer" onclick="Users_Skills_Js.deleteSkill('{$skillId}')" title="Delete">
+                                                      <i class="fa fa-trash"></i>
+                                                  </a>
+                                                </span>
+                                              </div>
+                                              {*<div class="pull-right skillnum">{$SKILL['endorsement']}</div>*}
+                                          </td>
+                                        
                                         {/if}
                                     </tr>
                                     

@@ -34,7 +34,7 @@
             </div>
             <!--  Filter -->
 </div>
-<div style="min-height:450px;">
+<div style="min-height:900px;">
  {if $EMP_VIEW eq 'grid'}
    {include file="GridBoxContents.tpl"|vtemplate_path:$MODULE TITLE=$HEADER_TITLE}
  {/if}   

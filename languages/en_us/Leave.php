@@ -24,7 +24,7 @@ $languageStrings = array(
     'LBL_THIS_WEEK'=>'This Week',
     'LBL_LEAVE_TYPE'=>'Leave Type',
     'LBL_LAST_5_LEAVES'=>'Last 5 Leaves',
-
+    'LBL_EXPIRE_CONTRACT'=>'Contract will expire in',
     'LBL_NO_EMPLOYEE_FOUND'=>'No Employee found',
     'LBL_DESIGNATION'=>'Designation',
     'LBL_DEPARTMENT'=>'Department',

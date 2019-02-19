@@ -80,20 +80,20 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
         //validate date duration on selected dates for leave apply
         public function checkDateValidation(Vtiger_Request $request){
-               $starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
-               $endhalf  = $request->get('chkboxendhalf')==1?0.5:0;  
-              $startdate = date('Y-m-d',strtotime($request->get('startdate')));
-              $enddate   = date('Y-m-d',strtotime($request->get('enddate')));
-              $balance   = $request->get('balance');
-              $takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);
-              $msg = true;
+            $starthalf = $request->get('chkboxstarthalf')==1?0.5:0;
+            $endhalf  = $request->get('chkboxendhalf')==1?0.5:0;  
+            $startdate = date('Y-m-d',strtotime($request->get('startdate')));
+            $enddate   = date('Y-m-d',strtotime($request->get('enddate')));
+            $balance   = $request->get('balance');
+            $takenleave = Users_LeavesRecords_Model::getWorkingDays($startdate,$enddate)-($starthalf+$endhalf);
+            $msg = true;
               
-              if($takenleave > $balance)
+            if($takenleave > $balance)
                 $msg = false;
              
-             $response = new Vtiger_Response();
-             $response->setResult($msg);
-             $response->emit();   
+            $response = new Vtiger_Response();
+            $response->setResult($msg);
+            $response->emit();   
         }
         //Validate LeaveType Assign to User 
         public function CheckEmployeeContract($userid){
@@ -123,12 +123,12 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                 $job_grade 			= $current_user->get('grade_id');
 
                 $validateclaimamount = Users_ClaimRecords_Model::getClaimTypeUsedAmount($current_user_id,$category, $transactiondate);		
-        $usedYearly   = $validateclaimamount['yused'];
-        $usedMonthly  = $validateclaimamount['mused'];
+                $usedYearly   = $validateclaimamount['yused'];
+                $usedMonthly  = $validateclaimamount['mused'];
 
-        $balYearly    = $yearly-$usedYearly;
+                $balYearly    = $yearly-$usedYearly;
 
-        $balMonthly   = $monthly-$usedMonthly;
+                $balMonthly   = $monthly-$usedMonthly;
 
                 //condition of amount exceed limit transaction limit/monthly
 
@@ -166,7 +166,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
                 try{
 
-                        switch ($return) {
+                    switch ($return) {
 
                     case "1":
                         $msg    = array("consumed"=>0, "balance"=>$transactionLimit); 
@@ -276,7 +276,7 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
         public function saveEmergencyContact(Vtiger_Request $request) {
 
                 $module = $request->getModule();
-                $request                                = $_REQUEST['form'];
+                $request                         = $_REQUEST['form'];
                 $request['isview']               = $_REQUEST['isview'];
               
 
@@ -319,13 +319,14 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
                 $response = new Vtiger_Response();
                 try{
+
                     $return = Users_SkillsRecord_Model::saveUserSkill($request);
-                    if($return ==3) {
-                        $msg = vtranslate("LBL_SKILL_DUPLICATE_WARNING","Users");
+                    if($return == 3) {
+                        $msg    = vtranslate("LBL_SKILL_DUPLICATE_WARNING","Users");
                     } else {	 	
                         $msg    = vtranslate("LBL_SKILL_ADD_SUCCESS","Users"); 		
-                     }	
-                   $response->setResult($msg);
+                    }	
+                    $response->setResult($msg);
 
                 }catch(Exception $e){
                     $response->setError($e->getCode(),$e->getMessage());
@@ -333,11 +334,6 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
                 $response->emit();
 
         }
-
-
-
-
-
 
         //Saving leave in-/new/edit/managerapproval//
         public function saveLeave(Vtiger_Request $request) {   
@@ -376,33 +372,33 @@ class Users_SaveSubModuleAjax_Action extends Vtiger_BasicAjax_Action  {
 
 
 
-        //Check if leave is already applied during startdate and enddate by loggedIN User
+                //Check if leave is already applied during startdate and enddate by loggedIN User
 
-        if($manager == 'false' || $manager == '' ) {  
+                if($manager == 'false' || $manager == '' ) {  
 
-                if ($leaveid =='') { 
+                        if ($leaveid =='') { 
 
-                        $resultleave = $db->pquery("SELECT vtiger_leave.leaveid FROM vtiger_leave 
-                                INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leave.leaveid 
-                                WHERE ((fromdate between ? AND ?) OR (todate between ? AND ?)) AND vtiger_leave.leavestatus IN ('Apply','Approved','New') AND vtiger_crmentity.smcreatorid = ? AND vtiger_crmentity.deleted=0",	array($startdate, $enddate, $startdate, $enddate, $currentUserModel->id));
-                }		
-                else { 
-                        $resultleave = $db->pquery("SELECT vtiger_leave.leaveid FROM vtiger_leave 
-                                INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leave.leaveid 
-                                WHERE ((fromdate between ? AND ?) OR (todate between ? AND ?)) AND vtiger_leave.leavestatus IN ('Apply','Approved') AND vtiger_crmentity.smcreatorid = ? AND vtiger_crmentity.deleted=0",
-                        array($startdate, $enddate, $startdate, $enddate, $currentUserModel->id));
+                                $resultleave = $db->pquery("SELECT vtiger_leave.leaveid FROM vtiger_leave 
+                                        INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leave.leaveid 
+                                        WHERE ((fromdate between ? AND ?) OR (todate between ? AND ?)) AND vtiger_leave.leavestatus IN ('Apply','Approved','New') AND vtiger_crmentity.smcreatorid = ? AND vtiger_crmentity.deleted=0",	array($startdate, $enddate, $startdate, $enddate, $currentUserModel->id));
+                        }		
+                        else { 
+                                $resultleave = $db->pquery("SELECT vtiger_leave.leaveid FROM vtiger_leave 
+                                        INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_leave.leaveid 
+                                        WHERE ((fromdate between ? AND ?) OR (todate between ? AND ?)) AND vtiger_leave.leavestatus IN ('Apply','Approved') AND vtiger_crmentity.smcreatorid = ? AND vtiger_crmentity.deleted=0",
+                                array($startdate, $enddate, $startdate, $enddate, $currentUserModel->id));
+                        }
+
+                        if($db->num_rows($resultleave) > 0) { 
+                                $response = new Vtiger_Response();
+                                $msg    = "JS_USER_ALREADY_APPLIED";
+                                $msg    = array("success"=>false,"msg"=>$msg );
+                                $response->setResult($msg);
+                                $response->emit();	
+
+                                exit();
+                        }
                 }
-
-                if($db->num_rows($resultleave) > 0) { 
-                        $response = new Vtiger_Response();
-                        $msg    = "JS_USER_ALREADY_APPLIED";
-                        $msg    = array("success"=>false,"msg"=>$msg );
-                        $response->setResult($msg);
-                        $response->emit();	
-
-                        exit();
-                }
-        }
 
                 //Check If new record.//
                 if(empty($leaveid) || $leaveid==""){

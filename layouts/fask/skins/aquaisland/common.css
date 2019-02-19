@@ -55,6 +55,7 @@ body {
   padding-right: 15px;
   height: 40px !important;
   margin-top: 10px;
+  margin-left: -10px !important;
 }
 .app-nav {
   position: relative;

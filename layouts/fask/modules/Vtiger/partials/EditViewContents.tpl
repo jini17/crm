@@ -35,6 +35,7 @@
                         {if $BLOCK_FIELDS|@count gt 0}
                             <div class='fieldBlockContainer' style="height: auto">
                                         <h4 class='fieldBlockHeader {$BLOCK_LABEL}'>{vtranslate($BLOCK_LABEL, $MODULE)}</h4>
+                                        {if $BLOCK_LABEL eq  'LBL_DESCRIPTION_SCOPE'}<span class="custommsg">({vtranslate('LBL_CUSTOMCOMPANYCONDITION', $MODULE)})</span>{/if}
                                         <hr>
                                         <div class="table table-borderless">
                                                 <!--Added By Mabruk-->
