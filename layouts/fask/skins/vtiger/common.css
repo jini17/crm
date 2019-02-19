@@ -3310,6 +3310,7 @@ position: relative;
   border-left: 4px solid #dddddd;
   list-style: none;
   padding-top: 15px;
+  margin-left:12px;
 }
 .treeView li .toolbar-handle {
   margin-top: 10px;
@@ -3318,6 +3319,8 @@ position: relative;
 }
 .treeView li .toolbar-handle .btn {
   margin: 0px;
+  background-color:#232a37;
+  color:#FFF;
 }
 .treeView li .toolbar-handle a:before {
   background: none repeat scroll 0 0 #DDDDDD;
@@ -10154,4 +10157,8 @@ font-size:13px !important;
 .jqplot-table-legend.jqplot-table-legend-swatch,
 td.jqplot-table-legend{
     padding-right: 5px;
+}
+.custommsg{
+     font-size:12px;
+     color:#ff0000;
 }

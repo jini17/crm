@@ -410,6 +410,8 @@ Vtiger.Class('Vtiger_Index_Js', {
                                 if(err === null){ 
                                         app.helper.loadPageOverlay(data,{'ignoreScroll' : false,'backdrop': 'static'}).then(function(){
                                                 app.helper.hideProgress();
+                                                $(window).unbind('scroll');
+                                                
                                         //  jQuery('div[name="contents"]').find('.data').css('height','50vh');
                                         //  var taskManagementPageOffset = jQuery('div[name="contents"]').offset();
                                                 //$('#overlayPage').find(".arrow").css("left",taskManagementPageOffset.left+13);

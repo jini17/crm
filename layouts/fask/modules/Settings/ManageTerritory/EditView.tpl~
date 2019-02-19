@@ -1,0 +1,69 @@
+{*<!--
+/*+***********************************************************************************************************************************
+ /* All Rights Reserved to SecondCRM **/
+ *************************************************************************************************************************************/
+-->*}
+{strip}
+<div class="container-fluid editViewContainer">
+	<form class="form-horizontal recordEditView" id="EditView" name="EditView" method="post" action="index.php" enctype="multipart/form-data">
+	<input type="hidden" name="module" value="ManageTerritory"/>
+	<input type="hidden" name="parent" value="Settings"/>
+	<input type="hidden" name="action" value="Save"/>
+	<input type="hidden" name="record" value="{$RECORD_ID}" />
+	<input type="hidden" id="treeLastID" value="{$LAST_ID}" />
+	<input type="hidden" id="access" value="{$ACCESS}" />
+	<input type="hidden" name="tree" id="treeValues" value='{Vtiger_Util_Helper::toSafeHTML($TREE)}' />
+	<div class="widget_header row-fluid">
+
+
+	<div class="row-fluid">
+	<span class="span8">
+		{if $MODE eq 'edit'}
+			<h3>{vtranslate('LBL_EDIT_REGION', $QUALIFIED_MODULE)}</h3>
+		{else}
+			<h3>{vtranslate('LBL_CREATE_REGION', $QUALIFIED_MODULE)}</h3>
+		{/if}
+	</span>
+	<span class="span4">
+		<div class="pull-right">
+			<a class="btn" href="index.php?module=ManageTerritory&parent=Settings&view=List&block=4&fieldid=37">Back</a>
+		</div>
+	</span>
+	</div>
+
+	</div>
+	<hr>
+{if $MODE neq 'edit'}
+	<div class="row-fluid">
+		<label class="span3"><strong>{vtranslate('LBL_REGION_NAME', $QUALIFIED_MODULE)}<span class="redColor">*</span>: </strong></label>
+		<div class="input-append span7">
+			<input type="text" class="fieldValue span4 " name="regionname" id="regionname" value="" data-validation-engine='validate[required]'  />
+		</div>
+	</div>
+	<br>
+	<div class="pull-right">
+		<a class="btn btn-success saveTree" onclick="Settings_ManageTerritory_Js.triggerSaveNewRegion();"><strong>{vtranslate('LBL_SAVE', $QUALIFIED_MODULE)}</strong></a>
+		<a class="cancelLink" type="reset" onclick="javascript:window.history.back();">{vtranslate('LBL_CANCEL', $QUALIFIED_MODULE)}</a>
+	</div>
+{else}
+
+	<hr>
+	<div class="clearfix treeView">
+		<ul>
+			<li data-tree="{$ROOT_REGION->getParentRegionString()}" data-treeid="{$ROOT_REGION->getId()}" data-regionid="{$ROOT_REGION->getRegionid()}">
+				<div class="toolbar-handle">
+					<a href="javascript:;" class="btn btn-inverse draggable droppable">{$ROOT_REGION->getName()}</a>
+					<div class="toolbar" title="{vtranslate('LBL_ADD_RECORD', $QUALIFIED_MODULE)}">
+						&nbsp;<a href="{$ROOT_REGION->getCreateChildUrl()}" data-url="{$ROOT_REGION->getCreateChildUrl()}" data-action="modal"><span class="icon-plus-sign"></span></a>
+					</div>
+				</div>
+				{assign var="REGION" value=$ROOT_REGION}
+				{include file=vtemplate_path("RegionTree.tpl", "Settings:ManageTerritory")}
+			</li>
+		</ul>
+	</div>
+	<br>
+
+{/if}
+</div>
+{/strip}
