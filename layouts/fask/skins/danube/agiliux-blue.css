@@ -736,7 +736,7 @@ td.jqplot-table-legend{
     padding-right: 5px;
 }
 .fasksecond i,
-.material-icons.module-icon{
+.fasksecond .material-icons.module-icon{
     margin-right: 5px;
     font-size: 14px !important;
 width: 14px;
@@ -773,6 +773,16 @@ td.jqplot-table-legend{
 .dropdown-icon-dashboard{
           padding: 0 10px 0 !important;
 
+}
+#searchResults-container{
+    width: 92vw !important;
+}
+.fasksecond li[tools]{
+    width: 14.3% !important;
+}
+.fasksecond  li[tools]  ul li[tools]{
+    display: block !important;
+    width: 100% !important;
 }
 #searchResults-container{
     width: 92vw !important;
