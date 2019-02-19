@@ -519,6 +519,7 @@ Settings_Vtiger_List_Js("Settings_Users_List_Js", {
                 listParams['empview'] = viewtype;
                 listParams['tabtype'] = tabType;
                 listParams['searchType'] = "keyword";
+                
                 listInstance.loadListViewRecords(listParams);
             }
             }

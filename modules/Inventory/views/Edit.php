@@ -42,6 +42,7 @@ Class Inventory_Edit_View extends Vtiger_Edit_View {
 		}
 
 		$viewer->assign('MODE', '');
+		
 		$viewer->assign('IS_DUPLICATE', false);
 		if ($request->has('totalProductCount')) {
 			if($record) {
@@ -56,7 +57,8 @@ Class Inventory_Edit_View extends Vtiger_Edit_View {
 			$currencyInfo = $recordModel->getCurrencyInfo();
 			$taxes = $recordModel->getProductTaxes();
 			$relatedProducts = $recordModel->getProducts();
-
+			//Added by jitu for handling discounts in case of duplicate
+			$viewer->assign('DUPLICATE_RECORD_ID', $record);
 			//While Duplicating record, If the related record is deleted then we are removing related record info in record model
 			$mandatoryFieldModels = $recordModel->getModule()->getMandatoryFieldModels();
 			foreach ($mandatoryFieldModels as $fieldModel) {
@@ -208,6 +210,28 @@ Class Inventory_Edit_View extends Vtiger_Edit_View {
 
 		$serviceModuleModel = Vtiger_Module_Model::getInstance('Services');
 		$viewer->assign('SERVICE_ACTIVE', $serviceModuleModel->isActive());
+
+			/**Added by jitu@30062015 for discount*/		
+		global $current_user;
+		$viewer->assign('DEP_MOD',0);	
+		$finaldiscount    = getLineItemDiscount($current_user->roleid,$record,0,0,0);	
+		if(empty($record) && ($request->get('quote_id') || $request->get('salesorder_id'))) {
+			if($request->get('quote_id')) {			
+				$sourcerecord = $request->get('quote_id');
+			} else if($request->get('salesorder_id')) {
+				$sourcerecord = $request->get('salesorder_id');
+			}
+				$viewer->assign('DEP_MOD',1);
+				$finaldiscount    = getLineItemDiscount($current_user->roleid,$sourcerecord,0,0,0);
+		}
+		
+		$is_admin  = $current_user->is_admin == 'on'?1:0;
+		$data = getLineItemDiscount($current_user->roleid,'','',1,0);
+		
+		$viewer->assign('DATA',array("discountdetails"=>$data));	
+		$viewer->assign('FINALDISCOUNT', $finaldiscount);		
+		$viewer->assign('CURRENTUSER', array($current_user->roleid, $is_admin));
+		//End here
 
 		// added to set the return values
 		if ($request->get('returnview')) {

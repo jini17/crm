@@ -106,9 +106,10 @@ class Users_DeleteSubModuleAjax_Action extends Vtiger_BasicAjax_Action {
 	}
 
 	public function deleteSkill($request){
-		$lang_id = $request->get('record');
-		$isdeleted  = Users_SkillsRecord_Model::deleteSkillPermanently($lang_id);
-        	$moduleName = $request->getModule();
+		$skill_id = $request->get('record');
+		$userId   = $request->get('userId');
+		$isdeleted  = Users_SkillsRecord_Model::deleteSkillPermanently($skill_id, $userId);
+        $moduleName = $request->getModule();
 		$response = new Vtiger_Response();
 		if($isdeleted==1){
 			$response->setResult(array('msg'=>vtranslate('LBL_Skill_DELETED_SUCCESSFULLY', $moduleName)));
@@ -123,11 +124,11 @@ class Users_DeleteSubModuleAjax_Action extends Vtiger_BasicAjax_Action {
 		include_once 'include/Webservices/Delete.php';
 		include_once 'modules/Leave/Leave.php';
 		$user = new Users();
-       		$current_user = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
+       	$current_user = $user->retrieveCurrentUserInfoFromFile(Users::getActiveAdminId());
 		$leaveid = $_REQUEST['record'];
 		//$project_id = $request->get('record');
 		//$isdeleted  = Users_ProjectRecord_Model::deleteProjectPermanently($project_id);
-        	$moduleName = $request->getModule();
+        $moduleName = $request->getModule();
 		$response = new Vtiger_Response();
 
 		try {

@@ -21,42 +21,44 @@
         <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-        <form id="addSkill" name="addSkill" class="form-horizontal" method="POST">
+        <form id="addSkill" name="addSkill" class="form-horizontal" method="POST"> 
                 <input type="hidden" value="Users" name="module">
                 <input type="hidden" value="SaveSubModuleAjax" name="action">
                 <input type="hidden" value="Users" name="module">
                 <input type="hidden" value="saveSkill" name="mode">
+                {if isset($SKILLID)}                    
+                    <input type="hidden" value="{$SKILLID}" name="oldSkill">
+                {/if}    
                 <input id="current_user_id" name="current_user_id" type="hidden" value="{$USERID}">	
                         <div class="modal-body">
                                 <!--start-->
-                                <div class="row-fluid">
+                        <div class="row-fluid">
                         <div class="form-group" style="margin-bottom: 0px !important;">
                                 <div class="col-md-12" style="margin-bottom: 15px;">
-                                        <div class="col-md-4">
-                                                                <label class="control-label fieldLabel" style="text-align: right;float: right;">
-                                                                        <span class="redColor">*</span>&nbsp;{vtranslate('LBL_ADD_SKILL', $QUALIFIED_MODULE)}
-                                                                </label>
-                                                        </div>
-                                                        <div class="controls fieldValue col-md-8">
-                                                                <select class="select2 inputElement" onchange="updateSelectBox('institution_name','institution_nametxt');" name="skill" id="institution_name" data-rule-required = "true">
-                                                                        <option value="">{vtranslate('LBL_SELECT', $QUALIFIED_MODULE)}</option> 
-                                                                {foreach key=INSTITUTION_ID item=SKILL_MODEL from=$SKILL_LIST name=institutionIterator}
-                                                                <option value="{$SKILL_MODEL.skill_id}">{$SKILL_MODEL.skill}</option>
-                                                                {/foreach}
-
-                                                                <option value="0">{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> 	
-                                                                </select>
-                                                        </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label fieldLabel" style="text-align: right;float: right;">
+                                                        <span class="redColor">*</span>&nbsp;{vtranslate('LBL_ADD_SKILL', $QUALIFIED_MODULE)}
+                                                    </label>
+                                                </div>
+                                                <div class="controls fieldValue col-md-8">
+                                                    <select class="select2 inputElement" onchange="updateSelectBox('institution_name','institution_nametxt');" name="skill" id="institution_name" data-rule-required = "true">
+                                                        <option value="" >{vtranslate('LBL_SELECT', $QUALIFIED_MODULE)}</option> 
+                                                        {foreach key=INSTITUTION_ID item=SKILL_MODEL from=$SKILL_LIST name=institutionIterator}
+                                                        <option value="{$SKILL_MODEL.skill_id}" {if isset($SKILLID) && $SKILLID eq $SKILL_MODEL.skill_id} selected {/if}>{$SKILL_MODEL.skill}</option>
+                                                        {/foreach}
+                                                        <option value="0">{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> 	
+                                                    </select>
+                                                </div>
                                                 </div>
                                                  <div class="col-md-12" style="margin-bottom: 15px;">
                                                         <div class="col-md-4">
-                                                                        <label class="control-label fieldLabel" style="text-align: right;float: right;"></label>
+                                                            <label class="control-label fieldLabel" style="text-align: right;float: right;"></label>
                                                         </div>
 
                                                         <div class="controls fieldValue col-md-8" align="right">
-                                                                <span class="hide" id="institution_nametxt">
-                                                                        <input style="width:100%;" type="text" name="skilltxt" id="institutiontxt" data-rule-required = "true" />
-                                                                </span>
+                                                            <span class="hide" id="institution_nametxt">
+                                                                    <input style="width:100%;" type="text" name="skilltxt" id="institutiontxt" data-rule-required = "true" />
+                                                            </span>
                                                         </div>
                                                 </div>
                                         <div class="col-md-12" style="margin-bottom: 15px;">
@@ -66,11 +68,13 @@
                                                                 </label>
                                                         </div>
                                                         <div class="controls fieldValue col-md-8">
+
                                                                 <select class="select2 inputElement" onchange="updateSelectBox('institution_name','institution_nametxt');" name="skill_label" id="institution_name" data-rule-required = "true">
-                                                                        <option value="LBL_BEGINNER_LABEL">{vtranslate('LBL_BEGINNER_LABEL',$QUALIFIED_MODULE)}</option>
-                                                                        <option value="LBL_INTERMEDIATE_LABEL">{vtranslate('LBL_INTERMEDIATE_LABEL',$QUALIFIED_MODULE)}</option>
-                                                                         <option value="LBL_EXPERT_LABEL">{vtranslate('LBL_EXPERT_LABEL',$QUALIFIED_MODULE)}</option>
-                                                              <!--  <option value="0">{vtranslate('OTHERS', $QUALIFIED_MODULE)}</option> -->
+                                                                            <option value="" >{vtranslate('LBL_SELECT', $QUALIFIED_MODULE)}</option>
+                                                                        {foreach from = $LVLOFSKILL item = LVL}
+                                                                            <option value="{$LVL}" {if isset($LABEL) && $LABEL eq $LVL} selected {/if}>{$LVL}</option>
+                                                                        {/foreach}
+
                                                                 </select>
                                                         </div>
                                                 </div>
