@@ -751,3 +751,7 @@ td.jqplot-table-legend{
           padding: 0 10px 0 !important;
 
 }
+
+#searchResults-container{
+    width: 92vw !important;
+}

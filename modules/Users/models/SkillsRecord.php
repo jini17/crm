@@ -90,24 +90,23 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
                 if($lang_Id !='') {
                         $and = " AND language_id !=".$lang_Id; 
                 }	
-                $sql = "SELECT * FROM secondcrm_language WHERE language_id NOT IN (SELECT language_id FROM secondcrm_softskill WHERE user_id = ? $and AND deleted=0) "; 
+                $sql = "SELECT * FROM vtiger_language_skill WHERE language_skillid NOT IN (SELECT language_id FROM secondcrm_softskill WHERE user_id = ? $and AND deleted=0)"; 
                 $params = array($userId);
                 $result = $db->pquery($sql,$params);
 
                 $language = array();
                 if($db->num_rows($result) > 0) {
                         for($i=0;$i<$db->num_rows($result);$i++) {
-                                $language[$i]['language_id'] = $db->query_result($result, $i, 'language_id');
-                                $language[$i]['language'] = $db->query_result($result, $i, 'language');
+                                $language[$i]['language_id'] = $db->query_result($result, $i, 'language_skillid');
+                                $language[$i]['language']    = $db->query_result($result, $i, 'language_skill');
                         }
                 }
                 return $language;	
         }
 
         public function getUserSoftSkillList($userId) {
-                $db  = PearDatabase::getInstance();
-                $sql = "SELECT tblSCSS.ss_id, tblSCSS.language_id, tblSCL.language, tblSCSS.proficiency,tblSCSS.isview 	FROM secondcrm_softskill tblSCSS INNER JOIN secondcrm_language tblSCL 
-                                ON tblSCL.language_id=tblSCSS.language_id AND tblSCSS.deleted=0 AND tblSCSS.user_id=?";
+                $db     = PearDatabase::getInstance();
+                $sql    = "SELECT tblSCSS.ss_id, tblSCSS.language_id, tblSCL.language_skill, tblSCSS.proficiency, tblSCSS.isview FROM secondcrm_softskill tblSCSS INNER JOIN vtiger_language_skill tblSCL ON tblSCL.language_skillid = tblSCSS.language_id AND tblSCSS.deleted=0 AND tblSCSS.user_id=?";
                 $params = array($userId);
                 $result = $db->pquery($sql,$params);
 
@@ -116,10 +115,10 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
                         for($i=0;$i<$db->num_rows($result);$i++) {
                                 $userlanguage[$i]['ss_id'] = $db->query_result($result, $i, 'ss_id');
                                 $userlanguage[$i]['language_id'] = $db->query_result($result, $i, 'language_id');
-                                $userlanguage[$i]['language'] = $db->query_result($result, $i, 'language');
+                                $userlanguage[$i]['language'] = $db->query_result($result, $i, 'language_skill');
                                 $userlanguage[$i]['proficiency'] = $db->query_result($result, $i, 'proficiency');
                                 $userlanguage[$i]['isview'] = $db->query_result($result, $i, 'isview');
-                                                                                     $userlanguage[$i]['color']   = $this->get_color('vtiger_expertise_level','expertise_level',$db->query_result($result, $i, 'proficiency'));
+                                $userlanguage[$i]['color']   = $this->get_color('vtiger_expertise_level','expertise_level',$db->query_result($result, $i, 'proficiency'));
                         }
                 }
                 return $userlanguage;	
@@ -127,8 +126,12 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 
         public function getSoftSkillDetail($ss_id) {
                 $db  = PearDatabase::getInstance();
-                $sql = "SELECT tblSCSS.language_id, tblSCL.language, tblSCSS.proficiency,tblSCSS.isview FROM secondcrm_softskill tblSCSS INNER JOIN secondcrm_language tblSCL 
-                                ON tblSCL.language_id=tblSCSS.language_id AND tblSCSS.deleted=0 AND tblSCSS.ss_id=?"; 
+                $sql = "SELECT tblSCSS.language_id, tblSCL.language, tblSCSS.proficiency,tblSCSS.isview 
+                        FROM secondcrm_softskill tblSCSS 
+                        INNER JOIN secondcrm_language tblSCL 
+                        ON tblSCL.language_id=tblSCSS.language_id 
+                        AND tblSCSS.deleted=0 AND tblSCSS.ss_id=?"; 
+
                 $params = array($ss_id);
                 $result = $db->pquery($sql,$params);
 
@@ -140,48 +143,76 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 
                 return $languagedetail;		
         }
+
+        // Added By Mabruk
+        public function getPicklistValues($type) {
+
+            $db  = PearDatabase::getInstance();
+
+            if ($type == 'language')
+                $param = "expertise_level";
+            else if ($type == 'skill')
+                $param = "skill_level";
+
+            $result   = $db->pquery("SELECT $param FROM vtiger_{$param}", array());
+            $rows     = $db->num_rows($result);
+            $response = array();
+
+            for ($i = 0; $i < $rows; $i++) {
+
+                $response[] = $db->query_result($result, $i, $param);
+
+            }
+
+            return $response;
+
+        }
+
         public function saveSoftSkillDetail($request)
         {
                 $db  = PearDatabase::getInstance();
-                $params 	= array();
-                $userid  	= $request['current_user_id'];
-                $ssId  		= $request['record'];
-                $langId  	= decode_html($request['language']);
+                $params 	    = array();
+                $userid  	    = $request['current_user_id'];
+                $ssId  		    = $request['record'];
+                $langId  	    = decode_html($request['language']);
                 $proficiency  	= decode_html($request['proficiency']);
                 //$isview  	= decode_html($request['isview']);		
-                $langTxt 	= ucwords(decode_html($request['langtxt']));
+                $langTxt 	    = ucwords(decode_html($request['langtxt']));
 
                 if($langId==0 && !empty($langTxt)) {
                         //check the language exist or not
-                        $resultcheck  = $db->pquery("SELECT language_id FROM secondcrm_language WHERE language = ?",array($langTxt));
+                        $resultcheck  = $db->pquery("SELECT language_skillid FROM vtiger_language_skill WHERE language_skill = ?",array($langTxt));
                         $existrec = $db->num_rows($resultcheck);
                         if($existrec==0){
-                                $resultlang = $db->pquery("INSERT INTO secondcrm_language(language) VALUES(?)",array($langTxt));
-                                $resultlangID =  $db->pquery("SELECT LAST_INSERT_ID() AS 'language_id'");
-                                $langId = $db->query_result($resultlangID, 0, 'language_id');
+                                $resultlang = $db->pquery("INSERT INTO vtiger_language_skill(language_skill) VALUES(?)",array($langTxt));
+                                $resultlangID =  $db->pquery("SELECT LAST_INSERT_ID() AS 'language_skillid'");
+                                $langId = $db->query_result($resultlangID, 0, 'language_skillid');
 
-                                $params = array($userid, $langId,$proficiency);
-                                $result = $db->pquery("INSERT INTO secondcrm_softskill SET user_id = ?, language_id = ?,proficiency=?", array($params));
+                                $params = array($userid, $langId, $proficiency);
+                                $result = $db->pquery("INSERT INTO secondcrm_softskill SET user_id = ?, language_id = ?,proficiency = ?", array($params));
                                 $return = 0;	
                         } else {
                                 $return = 3;
                         }	
                 } else {
                         if(!empty($ssId)) {
-                                $params = array($proficiency,$ssId);			
-                                $result = $db->pquery("UPDATE secondcrm_softskill SET proficiency=? WHERE ss_id=?",array($params));			$return = 1;	
+                                $params = array($proficiency, $ssId);			
+                                $result = $db->pquery("UPDATE secondcrm_softskill SET proficiency=? WHERE ss_id=?",array($params));			
+                                $return = 1;	
 
                         } else {
-                                $params = array($userid, $langId,$proficiency);
+                                $params = array($userid, $langId, $proficiency);
                                 $result = $db->pquery("INSERT INTO secondcrm_softskill SET user_id = ?, language_id = ?,proficiency=?", array($params));
-                                $return =0;	
+                                $return = 0;	
                         }
                 }
 
                 return $return;
         }
-                //Delete Language
-        public function deleteLanguagePermanently($langId){	
+
+        //Delete Language
+        public function deleteLanguagePermanently($langId){
+
                 $db  		= PearDatabase::getInstance();
                 //$db->setDebug(true);
                 $params 	= array();
@@ -195,28 +226,47 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
 
         }
 
+        public function getSkill($skillId) { 
+
+                $db     = PearDatabase::getInstance();
+                
+                $result = $db->pquery("SELECT add_skill FROM vtiger_add_skill WHERE add_skillid = ?", array($skillId)); 
+
+                return array('skill_id' => $skillId, 'skill' => $db->query_result($result, 0, 'add_skill'));
+               
+        }
+
         public function getALLSkills($userId) {
                 $db  = PearDatabase::getInstance();
-                $sql = "SELECT secondcrm_skillmaster.skill_id,secondcrm_skillmaster.skill_title FROM secondcrm_skillmaster WHERE skill_id NOT IN (SELECT skill_id FROM secondcrm_skills WHERE user_id = ?)"; 
+                $sql = "SELECT vtiger_add_skill.add_skillid, vtiger_add_skill.add_skill FROM vtiger_add_skill WHERE add_skillid NOT IN (SELECT skill_id FROM secondcrm_skills WHERE user_id = ?)"; 
                 $params = array($userId);
                 $result = $db->pquery($sql,$params);
 
                 $SkillList = array();
                 if($db->num_rows($result) > 0) {
                         for($i=0;$i<$db->num_rows($result);$i++) {
-                                $SkillList[$i]['skill_id'] = $db->query_result($result, $i, 'skill_id');      
-                                $SkillList[$i]['skill'] = $db->query_result($result, $i, 'skill_title');
+                                $SkillList[$i]['skill_id']  = $db->query_result($result, $i, 'add_skillid');      
+                                $SkillList[$i]['skill']     = $db->query_result($result, $i, 'add_skill');
                         }
                 }
                 return $SkillList;		
         }
 
+        public function getSkillLabel($skillId, $userId) {
+
+                $db     = PearDatabase::getInstance();
+                $result = $db->pquery("SELECT skill_label FROM secondcrm_skills WHERE skill_id = ? AND user_id = ?", array($skillId, $userId));
+
+                return $db->query_result($result, 0, 'skill_label'); 
+
+        }
+
         public function getUserSkillCloud($userId) {
 
                 $db  = PearDatabase::getInstance();
-                $sql = "SELECT tblSCS.skill_id, tblSCSM.skill_title, tblSCS.endorsement, tblSCS.skill_label
+                $sql = "SELECT tblSCS.skill_id, tblSCSM.add_skill, tblSCS.endorsement, tblSCS.skill_label
                                 FROM secondcrm_skills tblSCS 
-                                LEFT JOIN secondcrm_skillmaster tblSCSM ON tblSCSM.skill_id = tblSCS.skill_id
+                                LEFT JOIN vtiger_add_skill tblSCSM ON tblSCSM.add_skillid = tblSCS.skill_id
                                 WHERE tblSCS.user_id=?";
                 $params = array($userId);
                 $result = $db->pquery($sql,$params);
@@ -225,14 +275,15 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
                 if($db->num_rows($result) > 0) {
                         for($i=0;$i<$db->num_rows($result);$i++) {
                                 $UserSkillCloud[$i]['skill_id'] = $db->query_result($result, $i, 'skill_id');
-                                $UserSkillCloud[$i]['skill_title'] = $db->query_result($result, $i, 'skill_title');
+                                $UserSkillCloud[$i]['skill_title'] = $db->query_result($result, $i, 'add_skill');
                                 $UserSkillCloud[$i]['endorsement'] = $db->query_result($result, $i, 'endorsement');
                                 $UserSkillCloud[$i]['skill_label'] = $db->query_result($result, $i, 'skill_label');
-                                $UserSkillCloud[$i]['color']   = $this->get_color('vtiger_add_skill','add_skill',$db->query_result($result, $i, 'skill_label'));
+                                $UserSkillCloud[$i]['color']   = $this->get_color('vtiger_skill_level','skill_level',$db->query_result($result, $i, 'skill_label'));
 
                         }
                 }
-                return $UserSkillCloud;		
+                return $UserSkillCloud;	
+
         }
 
 
@@ -244,20 +295,27 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
                 $userid  	= $request['current_user_id'];
                 $skill_id  	= decode_html($request['skill']);
                 $skillTxt 	= decode_html($request['skilltxt']);
-                $skillLabel  = decode_html($request['skill_label']);
+                $skillLabel = decode_html($request['skill_label']);
+
+                if (isset($request['oldSkill'])) {
+
+                   $db->pquery("DELETE FROM secondcrm_skills WHERE skill_id = ? AND user_id = ?", array($request['oldSkill'], $userid));    
+
+                }
+
                 if($skill_id==0 && !empty($skillTxt)) {
                         //check the skill exist or not
-                        $resultcheck  = $db->pquery("SELECT skill_id FROM secondcrm_skillmaster WHERE skill_title = ?",array($skillTxt));
+                        $resultcheck  = $db->pquery("SELECT add_skillid FROM vtiger_add_skill WHERE add_skill = ?",array($skillTxt));
                         $existrec = $db->num_rows($resultcheck);
                         if($existrec == 0){ 
-                                $resultskill = $db->pquery("INSERT INTO secondcrm_skillmaster(skill_title) VALUES(?)",array($skillTxt));
-                                $resultskillID =  $db->pquery("SELECT LAST_INSERT_ID() AS 'skill_id'");
-                                $skill_id = $db->query_result($resultskillID, 0, 'skill_id');
-                                $params = array($skill_id, $userid, $skillLabel);
-                                $result = $db->pquery("INSERT INTO secondcrm_skills SET skill_id = ?, user_id = ?, skill_label=?", array($params));				
-                                $return = 1;
+                            $resultskill = $db->pquery("INSERT INTO vtiger_add_skill(add_skill) VALUES(?)",array($skillTxt));
+                            $resultskillID =  $db->pquery("SELECT LAST_INSERT_ID() AS 'add_skillid'");
+                            $skill_id = $db->query_result($resultskillID, 0, 'add_skillid');
+                            $params = array($skill_id, $userid, $skillLabel);
+                            $result = $db->pquery("INSERT INTO secondcrm_skills SET skill_id = ?, user_id = ?, skill_label=?", array($params));				
+                            $return = 1;
                         } else {
-                                $return = 3;
+                            $return = 3;
                         }
 
                 } else {
@@ -267,32 +325,40 @@ class Users_SkillsRecord_Model extends Vtiger_Record_Model {
                 }
                 return $return;	
         }
-                //Delete Skill
-        public function deleteSkillPermanently($skillId){	
+
+        //Delete Skill
+        public function deleteSkillPermanently($skillId, $userId){	
                 $db  		= PearDatabase::getInstance();
                 $params 	= array();
-                if(!empty($skillId)) {
-                        $params = array($skillId);
-                        $result = $db->pquery("DELETE FROM secondcrm_skills WHERE skill_id=?",array($params));
+
+                if (empty($skillId)) {
+                    $result = $db->pquery("DELETE FROM secondcrm_skills WHERE skill_id = 0", $params);
+                    return 1;
+                }
+
+                if(!empty($skillId) && !empty($userId)) {
+                        $params = array($skillId, $userId);                        
+                        $result = $db->pquery("DELETE FROM secondcrm_skills WHERE (skill_id=? and user_id = ?) OR skill_id = 0", $params);
                         return 1;
                 } else {
                         return 0;
                 }
 
         }
-                       public function get_color($table,$column,$skill){
-                           $db = PearDatabase::getInstance();
-                           //$db->setDebug(true);
-                           $translated = str_replace(array("'",'"'),"",vtranslate($skill,"Users"));
-                           $sql = "SELECT color FROM ".$table." WHERE $column = '$translated'";
-                           $query = $db->pquery($sql,array());
-                           $num_rows = $db->num_rows($query);
-                           if($num_rows > 0){
-                               $color = $db->query_result($query,0,'color');
-                           }else{
-                                $color = "#000";
-                           }
-                           return $color;
-                       }
+
+        public function get_color($table,$column,$skill){
+           $db = PearDatabase::getInstance();
+           //$db->setDebug(true);
+           $translated = str_replace(array("'",'"'),"",vtranslate($skill,"Users"));
+           $sql = "SELECT color FROM ".$table." WHERE $column = '$translated'";
+           $query = $db->pquery($sql,array());
+           $num_rows = $db->num_rows($query);
+           if($num_rows > 0){
+               $color = $db->query_result($query,0,'color');
+           }else{
+                $color = "#000";
+           }
+           return $color;
+        }
 
  }  

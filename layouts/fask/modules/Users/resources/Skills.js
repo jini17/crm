@@ -15,7 +15,6 @@ Vtiger.Class("Users_Skills_Js", {
     },
     addSkill: function(url) {
         this.editSkill(url);
-
     },
 
     editLanguage: function(url) {
@@ -140,7 +139,7 @@ Vtiger.Class("Users_Skills_Js", {
     },
 
 
-    editSkill: function(url) {
+    editSkill: function(url) { 
 
         var aDeferred = jQuery.Deferred();
         var thisInstance = this;
@@ -157,35 +156,34 @@ Vtiger.Class("Users_Skills_Js", {
         app.request.post({
             url: url
         }).then(
-            function(err, data) {
-                app.helper.hideProgress();
+        function(err, data) {
+            app.helper.hideProgress();
 
-                if (err == null) {
-                    app.helper.showModal(data);
-                    var form = jQuery('#addSkill');
+            if (err == null) { 
+                app.helper.showModal(data);
+                var form = jQuery('#addSkill');
 
-                    // for textarea limit
-                    app.helper.showVerticalScroll(jQuery('#scrollContainer'), {
-                        setHeight: '80%'
-                    });
+                // for textarea limit
+                app.helper.showVerticalScroll(jQuery('#scrollContainer'), {
+                    setHeight: '80%'
+                });
 
-
-
-                    form.submit(function(e) {
-                        e.preventDefault();
-                    })
-                    var params = {
-                        submitHandler: function(form) {
-                            var form = jQuery('#addSkill');
-                            thisInstance.saveSkillDetails(form);
-                        }
-                    };
-                    form.vtValidate(params)
+                form.submit(function(e) {
+                    e.preventDefault();
+                })
+                var params = {
+                    submitHandler: function(form) {
+                        var form = jQuery('#addSkill');
+                        thisInstance.saveSkillDetails(form);
+                    }
+                };
+                form.vtValidate(params)
                 } else {
                     aDeferred.reject(err);
                 }
             });
         return aDeferred.promise();
+
     },
 
     saveSkillDetails: function(form) {
@@ -201,7 +199,6 @@ Vtiger.Class("Users_Skills_Js", {
             'action': "SaveSubModuleAjax",
             'mode': 'saveSkill',
             'form': formData,
-
         };
 
         app.request.post({
@@ -230,7 +227,8 @@ Vtiger.Class("Users_Skills_Js", {
                 'module': 'Users',
                 'action': 'DeleteSubModuleAjax',
                 'record': record,
-                'mode': 'deleteSkill'
+                'userId': userid,
+                'mode'  : 'deleteSkill'
             };
             app.request.post({
                 data: params

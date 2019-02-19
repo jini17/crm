@@ -59,6 +59,7 @@ body {
   padding-right: 15px;
   height: 40px !important;
   margin-top: 10px;
+    margin-left: -10px !important;
 }
 .app-nav {
   position: relative;
@@ -2007,10 +2008,11 @@ input[type=checkbox]:checked {
   border: 0 !important;
 }
 #overlayPage {
-  top: 43px;
+  top: 35px;
   position: fixed;
   width: 100%;
   z-index: 1030;
+  left: -15%;
 }
 #overlayPage .arrow.show {
   content: "";
@@ -8907,7 +8909,7 @@ visibility: visible;top: 0;left: 60px; /*position where enlarged image should of
 }
 
 #searchResults-container{
-  width: 100vw;
+  width: 92vw;
   top: 0;
   bottom: 0;
 }
@@ -9014,7 +9016,7 @@ ul.dropdownlist{
 }
 .modal-content.helpbox{
   overflow: scroll;
-    width: 70% !important;
+    width: 150% !important;
     display: block;
     margin: 0 auto;
 
