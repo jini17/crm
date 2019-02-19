@@ -8,34 +8,26 @@
  *************************************************************************************/
 
 var imported = document.createElement('script');
-imported.src = 'layouts/v7/modules/Vendors/resources/google.js';
+imported.src = 'layouts/fask/modules/Vendors/resources/google.js';
 document.head.appendChild(imported);
 
 Vtiger_Edit_Js("Vendors_Edit_Js",{},{
-	
-	
 
-
-	registerGoogleAddress : function(container){
-		var thisInstance = this;
-	
-		
-	    var script = document.createElement('script');
-	    script.type = 'text/javascript';
-	    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA7QuhuZ34ygC0j5RHmYuqtK_uwecsNb9E&libraries=places&callback=initAutocomplete";
-	    document.body.appendChild(script);
-
-	    
-		
-	},
-
-
-
+	/**
+     * Function which will call Google Place API
+     */
+    registerGoogleAddress : function(container){
+        var thisInstance = this;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAvucdFiK-twUm8ozrd-fwadV5luYtYyjI&libraries=places&callback=initAutocomplete";
+        document.body.appendChild(script); 
+    },
 
 	registerBasicEvents: function (container) {
 		this._super(container);
-	
 		this.registerGoogleAddress();
+		this.registerGoogleAddress(container);
 	}
 
 	

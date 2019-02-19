@@ -4,50 +4,36 @@
  * All Rights Reserved.
  *************************************************************************************/
 var placeSearch, autocompletepikcup;
-        var componentForm = {
-       
+    var componentForm = {
         locality: 'long_name',
         administrative_area_level_1: 'long_name',
         country: 'long_name'
-        };
+    };
 
 function initAutocomplete() {
     // Create the autocomplete object, restricting the search to geographical
     // location types.
-    //console.log("Initializing Google Maps");
-    //var myform = jQuery('input[name=lastname]').get(0).form;
-    ///var formname = jQuery(myform).attr('name');
-    //alert(formname);
    
     autocompletepikcup = new google.maps.places.Autocomplete(
-            /** @type {!HTMLInputElement} */(document.getElementById('Leads_editView_fieldName_city')),
-           { types: ['(cities)'] });
-            //console.log("After Autocomplete Pickup Assignment");
-            
-        console.log(autocompletepikcup);
-      
-    
-    
-        // When the user selects an address from the dropdown, populate the address
-        // fields in the form.
-            autocompletepikcup.addListener('place_changed', fillInAddresspickup);
+    /** @type {!HTMLInputElement} */(document.getElementById('Leads_editView_fieldName_city')),
+    { types: ['(cities)'] });
+
+    // When the user selects an address from the dropdown, populate the address
+    // fields in the form.
+    autocompletepikcup.addListener('place_changed', fillInAddresspickup);
            
 }
 
 function fillInAddresspickup() {
     // Get the place details from the autocomplete object.
     var place = autocompletepikcup.getPlace();
-
-    /* for (var component in componentForm) {
-         document.getElementById(component).value = '';
-         document.getElementById(component).disabled = false;
-     }*/
     console.log(place);
+
     // Get each component of the address from the place details
     // and fill the corresponding field on the form.
 
     for (var i = 0; i < place.address_components.length; i++) {
-        ///alert('Nirbhjay');
+        
         var addressType = place.address_components[i].types[0];
         /************* State ***************************/
         if (addressType == 'administrative_area_level_1') {
@@ -61,20 +47,13 @@ function fillInAddresspickup() {
         }
         /*********** City**************/
         if(addressType == 'locality'){
-             var val = place.address_components[i][componentForm[addressType]];
-            console.log(place.address_components);
-        
+            var val = place.address_components[i][componentForm[addressType]];
             document.getElementById('Leads_editView_fieldName_city').value = val;
         }
     }
 }
 
-
-
-
-
 function pickupgeolocate(){
-    //console.log("Inside Dispatch Function");
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position){
