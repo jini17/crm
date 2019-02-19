@@ -346,7 +346,8 @@ class Vtiger_Field_Model extends Vtiger_Field {
 		$log->debug("Entering getRegions() method ...");
 		$regions = Array();
 
-		$result  = $adb->pquery("SELECT CONCAT(tree,'#',regionid) as regionval, region FROM secondcrm_region_data", array());	for($i=0;$i<$adb->num_rows($result);$i++) {
+		$result  = $adb->pquery("SELECT CONCAT(tree,'#',regionid) as regionval, region FROM secondcrm_region_data", array());	
+		for($i=0;$i<$adb->num_rows($result);$i++) {
 			$regionval 	     = $adb->query_result($result,$i,'regionval');
 			$regions[$regionval] = $adb->query_result($result,$i,'region');
 		}
@@ -596,7 +597,7 @@ class Vtiger_Field_Model extends Vtiger_Field {
 			return false;
 		}
 		
-		$ajaxRestrictedFields = array('4', '72', '61', '999','28','3995','3993','3997', '3994', '3996','55');
+		$ajaxRestrictedFields = array('4', '72', '61', '999','28','3995','3993','3997', '3994', '3996','55','2002');
 		if(!$this->isEditable() || in_array($this->get('uitype'), $ajaxRestrictedFields) || $this->get('name')=='category' || $this->get('name')=='message') {
 			return false;
 		}

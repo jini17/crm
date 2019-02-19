@@ -40,6 +40,7 @@ $languageStrings = array(
 	'Record Summary'=>'SalesTarget Summary',
 	'Record Details'=>'SalesTarget Details',
 	//end here 
+	'LBL_CUSTOMCOMPANYCONDITION'=>'For company target, do not select any paramter except Target Type / Module status',
 );
 
 $jsLanguageStrings = array(
