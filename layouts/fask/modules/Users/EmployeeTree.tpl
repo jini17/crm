@@ -64,7 +64,7 @@ background: #ff6600;
 </style>
 {assign var=width value=COUNT($DEPARTMENT_EMPLOYEES)}
 
-<div class="tree" {if $width lt 4} style="width:{300*$width}px;  height: 700px; overflow-y: scroll" {else}style="width:105%; height: 700px; overflow: scroll;margin-left: -24px;;"{/if}>
+<div class="tree" {if $width lt 4} style="width:{300*$width}px;  height: 700px; overflow-y: scroll" {else}style="width:114%; height: 700px; overflow: scroll;margin-left: -24px;;"{/if}>
 
     <ul>
      
@@ -116,8 +116,8 @@ background: #ff6600;
             {/if}
             <!-- MY DETAILS -->
             <ul>
-                <li>
-                    <div href="#" class="box">
+                <li >
+                    <div href="#" class="box" style="background-color: #ccc !important;">
                         <div class="orgbox">
                             <div class="img-holder">
                                 <img width="70" height="70"

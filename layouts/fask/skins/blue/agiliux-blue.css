@@ -807,3 +807,19 @@ height: 469px;
 #searchResults-container{
     width: 92vw !important;
 }
+
+.pagination >li >a,
+.pagination >li.disabled >a
+.pagination > li > span{
+    background-color: #fff !important;
+    border: 1px solid #595959 !important;
+    color:  #2f5597 !important;
+    
+}
+.pagination >li.active >a,
+.pagination >li.active >a:hover{
+    background-color: #ccc !important;
+    color: #000 !important;
+    font-weight: bold;
+    
+}
