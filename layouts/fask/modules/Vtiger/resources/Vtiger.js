@@ -33,10 +33,10 @@ Vtiger.Class('Vtiger_Index_Js', {
               app.helper.hideProgress();
               if(view==1){
                 jQuery("#headertextflow").removeClass('hide');
-                jQuery("#announcementicon").html("<i  class='fas fa-bullhorn'></i>"); 
+                jQuery("#announcementicon").html("<i  class='fas fa-microphone-slash '></i>"); 
               } else {
                jQuery("#headertextflow").addClass('hide');
-               jQuery("#announcementicon").html("<i  class='fas fa-bullhorn'></i>"); 
+               jQuery("#announcementicon").html("<i  class=' fas fa-microphone '></i>"); 
               }
                    
            });
