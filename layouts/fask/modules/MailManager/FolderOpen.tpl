@@ -30,19 +30,19 @@
             <input type='checkbox' id='mainCheckBox' class="pull-left">
         </span>
         <span class="col-lg-5 padding0px">
-            <span class="btn btn-secondary cursorPointer mmActionIcon btn-sm" id="mmMarkAsRead" data-folder="{$FOLDER->name()}" title="{vtranslate('LBL_MARK_AS_READ', $MODULE)}">
+            <span class="btn  cursorPointer mmActionIcon btn-sm" style="font-size:14px;" id="mmMarkAsRead" data-folder="{$FOLDER->name()}" title="{vtranslate('LBL_MARK_AS_READ', $MODULE)}">
                 <!--<img src="layouts/v7/skins/images/envelope-open.png" id="mmEnvelopeOpenIcon">-->
                 <i class="material-icons">email</i>
             </span>
-            <span class="btn btn-secondary cursorPointer mmActionIcon btn-sm"
+            <span class="btn  cursorPointer mmActionIcon btn-sm" style="font-size:14px; " 
                   id="mmMarkAsUnread" data-folder="{$FOLDER->name()}" 
                   title="{vtranslate('LBL_Mark_As_Unread', $MODULE)}">       
-                  <i class="fa fa-book"></i>
+                <i class="fa fa-book" style="font-size:11px;"></i>
             </span>
-            <span class="btn btn-secondary cursorPointer mmActionIcon btn-sm" id="mmDeleteMail" data-folder="{$FOLDER->name()}" title="{vtranslate('LBL_Delete', $MODULE)}">
+            <span class="btn  cursorPointer mmActionIcon btn-sm" style="font-size:14px;"  id="mmDeleteMail" data-folder="{$FOLDER->name()}" title="{vtranslate('LBL_Delete', $MODULE)}">
                 <i class="material-icons">delete</i>
             </span>
-            <span class="btn btn-secondary  btn-sm cursorPointer moveToFolderDropDown more dropdown action" title="{vtranslate('LBL_MOVE_TO', $MODULE)}">
+            <span class="btn  btn-sm cursorPointer moveToFolderDropDown more dropdown action" style="font-size:14px;"  title="{vtranslate('LBL_MOVE_TO', $MODULE)}">
                 <span class='dropdown-toggle' data-toggle="dropdown">
                     <i class="material-icons mmMoveDropdownFolder">folder</i>
                     <!--<i class="ti-arrow-right mmMoveDropdownArrow"></i>
@@ -65,11 +65,11 @@
         </span>
         <span class="col-lg-6 padding0px">
             <span class="pull-right">
-			{if $FOLDER->mails()}<span class="pageInfo">{$FOLDER->pageInfo()}&nbsp;&nbsp;</span> <span class="pageInfoData" data-start="{$FOLDER->getStartCount()}" data-end="{$FOLDER->getEndCount()}" data-total="{$FOLDER->count()}" data-label-of="{vtranslate('LBL_OF')}"></span>{/if}
-                <button type="button" id="PreviousPageButton" class="btn btn-secondary btn-sm marginRight0px" {if $FOLDER->hasPrevPage()}data-folder='{$FOLDER->name()}' data-page='{$FOLDER->pageCurrent(-1)}'{else}disabled="disabled"{/if}>
+                    {if $FOLDER->mails()}<span class="pageInfo">{$FOLDER->pageInfo()}&nbsp;&nbsp;</span> <span class="pageInfoData" data-start="{$FOLDER->getStartCount()}" data-end="{$FOLDER->getEndCount()}" data-total="{$FOLDER->count()}" data-label-of="{vtranslate('LBL_OF')}"></span>{/if}
+                <button type="button" id="PreviousPageButton" class="btn  btn-sm marginRight0px" {if $FOLDER->hasPrevPage()}data-folder='{$FOLDER->name()}' data-page='{$FOLDER->pageCurrent(-1)}'{else}disabled="disabled"{/if}>
                     <i class="ti-angle-left"></i>
                 </button>
-                <button type="button" id="NextPageButton" class="btn btn-secondary btn-sm" {if $FOLDER->hasNextPage()}data-folder='{$FOLDER->name()}' data-page='{$FOLDER->pageCurrent(1)}'{else}disabled="disabled"{/if}>
+                <button type="button" id="NextPageButton" class="btn btn-sm" {if $FOLDER->hasNextPage()}data-folder='{$FOLDER->name()}' data-page='{$FOLDER->pageCurrent(1)}'{else}disabled="disabled"{/if}>
                     <i class="ti-angle-right"></i>
                 </button>
             </span>
@@ -87,11 +87,11 @@
                          {/foreach}
                      </select>
                  </div>
-                 <div class="padding0px mmsearchbox">
+                     <div class="padding0px mmsearchbox" style="margin:0!important">
                     <input type="text" class="form-control" id="mailManagerSearchbox" aria-describedby="basic-addon2" value="{$QUERY}" data-foldername='{$FOLDER->name()}' placeholder="{vtranslate('LBL_TYPE_TO_SEARCH', $MODULE)}">
                 </div>
                 <div class='' id="mmSearchButtonContainer">
-                    <button id='mm_searchButton' class="pull-right">{vtranslate('LBL_Search', $MODULE)}</button>
+                    <button id='mm_searchButton' class="pull-right" style="width: 85px;"><i class="fas fa-search pull-left" style="margin-top: 3px;"></i>{vtranslate('LBL_Search', $MODULE)}</button>
                 </div>
             
             </div>

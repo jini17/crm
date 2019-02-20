@@ -34,10 +34,11 @@
                     </li>                    
                 {/foreach}
 
-           <div class="moreSettings pull-right col-lg-4 col-md-2 col-sm-12 col-xs-12">
+           <div class="moreSettings pull-right col-lg-6 col-md-2 col-sm-12 col-xs-12">
                <div class="buttonGroups pull-right">
                    {if $SELECTED_TAB neq 1 AND $SELECTED_TAB neq 1298}
                 <div class="btn-group pull-right"  {$SELECTED_TAB}>
+
 
                       <!-- Added By Mabruk (Hard code upon request) -->   
 
@@ -73,14 +74,16 @@
 
                       <!-- END -->
 
-                      <button class="btn btn-success updateSequence pull-right hide">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
-                      <button class = "reArrangeTabs btn-primary btn pull-right" style='margin-right: 0'>{vtranslate('LBL_REARRANGE_DASHBOARD_TABS',$MODULE)}</button>
                       {if $SELECTABLE_WIDGETS|count gt 0}
                                 <div class="dropdown pull-left" style="display:inline-block;padding-right:7px">
-                                <button class='btn btn-info addButton dropdown-toggle widget-btn' data-toggle='dropdown'>
-                                        {vtranslate('LBL_ADD_WIDGET')}&nbsp;&nbsp;<i class="caret"></i>
+                                <button class='btn btn-info addButton dropdown-toggle widget-btn' data-toggle='dropdown'>  {vtranslate('LBL_ADD_WIDGET')}&nbsp;&nbsp;<i class="caret"></i>
                                 </button>
 
+
+                      <button class="btn btn-success updateSequence pull-right hide" style="margin-right: 6px !important;">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
+                      <button class = "reArrangeTabs btn-primary btn pull-right" style="margin-right:0!important">{vtranslate('LBL_REARRANGE_DASHBOARD_TABS',$MODULE)}</button>
+                
+                                      
                                 <ul class="dropdown-menu dropdown-menu-right widgetsList pull-right animated flipInY" style="min-width:135%;text-align:left;margin-right:7px">
                                         {assign var="MINILISTWIDGET" value=""}
                                         {foreach from=$SELECTABLE_WIDGETS item=WIDGET}

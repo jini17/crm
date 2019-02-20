@@ -204,7 +204,9 @@
                <li>
                   <div>
                      <a aria-hidden="true" onclick="Vtiger_Index_Js.toggleAnnouncement();" id="announcementicon" class="qc-button rightside-icon-dashboard" title="Announcement" aria-hidden="true">
-                     <i  class=" {if $ANNOUNCEMENT->get('isview') eq 0}fas fa-bullhorn {else} fas fa-bullhorn {/if}"></i>
+
+                     <i  class="{if $ANNOUNCEMENT->get('isview') eq 0}fa fa-microphone {else} fa  fa-microphone-slash {/if}"></i>
+
                      </a>
                   </div>
                </li>
@@ -220,7 +222,7 @@
 
                      <a class="notifications rightside-icon-dashboard"  onclick="Vtiger_Header_Js.showNotification();" data-toggle="dropdown" title="Notifications" aria-hidden="true">
                      {if $NOTIFICATIONS['new'] gt 0}<span class="count" style="position: absolute;top:0;right:0; background-color: red;color:#fff;padding-right:5px;padding-top:1px;padding-left:5px; font-size:11px;z-index:100; ">{$NOTIFICATIONS['new']}</span>{/if}
-                     <i class="far fa-bell"></i>
+                     <i class="fas fa-bell"></i>
 
                     </a>
                   </div>
@@ -268,14 +270,14 @@
                <li>
                   <div>
                      <a class="rightside-icon-dashboard" href="index.php?module=MailManager&view=List" title="Mail Manager" aria-hidden="true">
-                     <i class="far fa-envelope-open"></i>
+                         <i class="fas fa-envelope" style="padding: 0 !important; border: none; background: none;"></i>
                      </a>
                   </div>
                </li>
                <li>
                   <div>
                      <a class="rightside-icon-dashboard" href="index.php?module=Documents&view=List" title="Documents" aria-hidden="true">
-                     <i class="far fa-file"></i>
+                     <i class="fas fa-file"></i>
                      </a>
                   </div>
                </li>

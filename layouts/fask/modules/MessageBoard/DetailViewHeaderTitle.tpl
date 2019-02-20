@@ -37,4 +37,17 @@
 			</div>
 		</div>
 	</div>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function(){
+                                    var messageheight = jQuery("#MessageBoard_detailView_fieldValue_message").height();
+                                    jQuery("#MessageBoard_detailView_fieldLabel_message").css("height",messageheight+"px")
+                                   
+                                })
+                       </script>     
+                       <style>
+                           #MessageBoard_detailView_fieldLabel_department,
+                            #MessageBoard_detailView_fieldValue_department{
+                                width: 100%;                            
+                            }
+                       </style>
 {/strip}

@@ -1,0 +1,372 @@
+<?php
+//error_reporting(E_ALL);
+$currDir = dirname(__DIR__);
+ini_set('include_path', $currDir);
+include_once('../config.inc.php');
+include_once('../include/utils/utils.php');
+require_once('gfunc.php');
+global $adb;
+
+//$targetArray = array();
+//static insert query stmt for insert new record in tmp table
+$sqlInsertNewTarget = "INSERT INTO secondcrm_targets_value (targetsid, module, region, user_group, products, month_year, actual_target_count, actual_target_amount) VALUES ";
+//get all active and undeleted targets
+$sqlActiveTarget = $adb->pquery("SELECT * 
+				FROM 
+					vtiger_salestargets 
+				 INNER JOIN 
+				 	vtiger_crmentity 
+				 ON 
+					vtiger_crmentity.crmid = vtiger_salestargets.salestargetsid
+				 WHERE 
+					vtiger_salestargets.targetstatus = 'Active'
+				 AND 
+				  	vtiger_crmentity.deleted = '0'
+				 ",array());
+while($activeRow = $adb->fetchByAssoc($sqlActiveTarget)){
+	$targetsId = $activeRow['salestargetsid'];
+	$targetModule = $activeRow['targetmodule'];
+	$allRegion = $activeRow['regionall'];
+	$allUser = $activeRow['userall'];
+	$allProduct = $activeRow['productall'];
+	$singleRegion = $activeRow['targetregion'];
+	$singleUser = $activeRow['targetuser'];
+	$singleProduct = $activeRow['linktoproduct'];
+	$singleProduct2 = $activeRow['linktoproduct2'];
+	$clapProduct = $activeRow['cf_1352'];
+	$targetStartingMonth = $activeRow['startingmonth'];		
+	$targetYear = $activeRow['targetyear'];
+	$startDate = date("Y-m-d",strtotime($targetStartingMonth.$targetYear));
+	//echo"<br>";
+	$endDate = date('Y-m-d', strtotime("+12 months", strtotime($startDate)));
+	$endDate = date ( 'Y-m-d' , strtotime($endDate) );
+	//echo"<pre>";print_r($activeRow);
+	//start single query for each target module:different module has different query
+	//salesorder module sql
+	if($targetModule == 'SalesOrder'){
+		$soSql = "SELECT 
+				COUNT(tblVTSO.salesorderid) AS actual_count,
+				sum(tblVTPRODREL.listprice * tblVTPRODREL.quantity) AS actual_amount,
+				tblVTCRM.setype AS modulename, 
+				DATE_FORMAT(tblVTSO.duedate,'%Y-%m-01') as month_year
+			";
+		$fromNjoin = "
+				FROM 
+				vtiger_salesorder tblVTSO 
+			Inner JOIN 
+				vtiger_crmentity tblVTCRM 
+			ON 
+				tblVTCRM.crmid = tblVTSO.salesorderid 
+			AND 
+				tblVTCRM.setype = '".$targetModule."'
+			Inner JOIN 
+				vtiger_salesordercf tblVTSOCF 
+			ON 
+				tblVTSOCF.salesorderid = tblVTSO.salesorderid 	
+			Inner JOIN 
+				vtiger_inventoryproductrel tblVTPRODREL 
+			ON 
+				tblVTPRODREL.id = tblVTSO.salesorderid
+
+			INNER JOIN 
+				vtiger_products tblVTPROD 
+			ON 
+				tblVTPROD.productid = tblVTPRODREL.productid
+				";
+
+
+		$where = " 
+			WHERE 
+				tblVTSO.sostatus = 'Approved' 
+			AND 
+				tblVTCRM.deleted = '0'
+			AND 
+				tblVTSO.duedate >= '".$startDate."' 
+			AND 
+				tblVTSO.duedate < '".$endDate."'";
+		$groupby = "";
+		//start for region, user and product condition
+		//all region selected
+		if($allRegion == '1'){
+			$soSql .= ", tblVTSOCF.cf_1160 AS region";
+			$groupby .= " GROUP BY tblVTSOCF.cf_1160";
+			//all user selected
+			if($allUser == '1'){
+				$soSql .= ", tblVTCRM.smownerid AS userid";
+				$groupby .= ", tblVTCRM.smownerid";
+				//all product selected
+				if($allProduct == '1'){
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					$groupby .= ", tblVTPRODREL.productid";
+				}
+				//single product selected 
+				else {
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					if(isset($singleProduct) && !empty($singleProduct) && isset($singleProduct2) && !empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."' OR tblVTPRODREL.productid = '".$singleProduct2."'";					
+						//$groupby .= ", tblVTPRODREL.productid";		
+					}
+					elseif(isset($singleProduct) && empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."'";
+					}
+					elseif(isset($singleProduct2) && empty($singleProduct)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct2."'";
+					}	
+				}
+			}
+			//single user selected
+			elseif($allUser == '0' && !empty($singleUser) && isset($singleUser)){
+				$where .= " AND tblVTCRM.smownerid = '".$singleUser."'";
+				//all product selected
+				if($allProduct == '1'){
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					$groupby .= ", tblVTPRODREL.productid";
+				}
+				//single product selected 
+				else {
+					if(isset($singleProduct) && !empty($singleProduct) && isset($singleProduct2) && !empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."' OR tblVTPRODREL.productid = '".$singleProduct2."'";					
+						//$groupby .= ", tblVTPRODREL.productid";		
+					}
+					elseif(isset($singleProduct) && empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."'";
+					}
+					elseif(isset($singleProduct2) && empty($singleProduct)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct2."'";
+					}	
+				}
+			}
+			//no user selected
+			else {
+				//all product selected
+				if($allProduct == '1'){
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					$groupby .= ", tblVTPRODREL.productid";
+				}
+				//single product selected 
+				else {
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					if(isset($singleProduct) && !empty($singleProduct) && isset($singleProduct2) && !empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."' OR tblVTPRODREL.productid = '".$singleProduct2."'";					
+						//$groupby .= ", tblVTPRODREL.productid";		
+					}
+					elseif(isset($singleProduct) && empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."'";
+					}
+					elseif(isset($singleProduct2) && empty($singleProduct)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct2."'";
+					}	
+				}
+			}				
+		}
+		//single region selected
+		elseif($allRegion == '0' && $singleRegion != 'None'){
+			$where .=" AND tblVTSOCF.cf_1160 = '".$singleRegion."'";
+			//all user selected
+			if($allUser == '1'){
+				$soSql .= ", tblVTCRM.smownerid AS userid";
+				$groupby .= ", tblVTCRM.smownerid";
+				//all product selected
+				if($allProduct == '1'){
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					$groupby .= ", tblVTPRODREL.productid";
+				}
+				//single product selected 
+				else {
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					if(isset($singleProduct) && !empty($singleProduct) && isset($singleProduct2) && !empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."' OR tblVTPRODREL.productid = '".$singleProduct2."'";					
+						//$groupby .= ", tblVTPRODREL.productid";		
+					}
+					elseif(isset($singleProduct) && empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."'";
+					}
+					elseif(isset($singleProduct2) && empty($singleProduct)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct2."'";
+					}	
+				}
+			}
+			//single user selected
+			elseif($allUser == '0' && !empty($singleUser) && isset($singleUser)){
+				$where .= " AND tblVTCRM.smownerid = '".$singleUser."'";
+				//all product selected
+				if($allProduct == '1'){
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					$groupby .= ", tblVTPRODREL.productid";
+				}
+				//single product selected 
+				else {
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					if(isset($singleProduct) && !empty($singleProduct) && isset($singleProduct2) && !empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."' OR tblVTPRODREL.productid = '".$singleProduct2."'";					
+						//$groupby .= ", tblVTPRODREL.productid";		
+					}
+					elseif(isset($singleProduct) && empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."'";
+					}
+					elseif(isset($singleProduct2) && empty($singleProduct)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct2."'";
+					}	
+				}	
+			}
+			//no user selected
+			else {
+				//all product selected
+				if($allProduct == '1'){
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					$groupby .= ", tblVTPRODREL.productid";
+				}
+				//single product selected 
+				else {
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					if(isset($singleProduct) && !empty($singleProduct) && isset($singleProduct2) && !empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."' OR tblVTPRODREL.productid = '".$singleProduct2."'";					
+						//$groupby .= ", tblVTPRODREL.productid";		
+					}
+					elseif(isset($singleProduct) && empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."'";
+					}
+					elseif(isset($singleProduct2) && empty($singleProduct)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct2."'";
+					}	
+				}
+			}	
+		}
+		//no region selected
+		else {
+			//all user selected
+			if($allUser == '1'){
+				$soSql .= ", tblVTCRM.smownerid AS userid";
+				$groupby .= ", tblVTCRM.smownerid";
+				//all product selected
+				if($allProduct == '1'){
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					$groupby .= ", tblVTPRODREL.productid";
+				}
+				//single product selected 
+				else {
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					if(isset($singleProduct) && !empty($singleProduct) && isset($singleProduct2) && !empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."' OR tblVTPRODREL.productid = '".$singleProduct2."'";					
+						//$groupby .= ", tblVTPRODREL.productid";		
+					}
+					elseif(isset($singleProduct) && empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."'";
+					}
+					elseif(isset($singleProduct2) && empty($singleProduct)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct2."'";
+					}	
+				}
+			}
+			//single user selected
+			elseif($allUser == '0' && !empty($singleUser) && isset($singleUser)){
+				$where .= " AND tblVTCRM.smownerid = '".$singleUser."'";
+				//all product selected
+				if($allProduct == '1'){
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					$groupby .= ", tblVTPRODREL.productid";
+				}
+				//single product selected 
+				else {
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					if(isset($singleProduct) && !empty($singleProduct) && isset($singleProduct2) && !empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."' OR tblVTPRODREL.productid = '".$singleProduct2."'";					
+						//$groupby .= ", tblVTPRODREL.productid";		
+					}
+					elseif(isset($singleProduct) && empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."'";
+					}
+					elseif(isset($singleProduct2) && empty($singleProduct)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct2."'";
+					}	
+				}	
+			}
+			//no user selected
+			else {
+				//all product selected
+				if($allProduct == '1'){
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					$groupby .= ", tblVTPRODREL.productid";
+				}
+				//single product selected 
+				else {
+					$soSql .= ", tblVTPRODREL.productid AS productrel_id";
+					if(isset($singleProduct) && !empty($singleProduct) && isset($singleProduct2) && !empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."' OR tblVTPRODREL.productid = '".$singleProduct2."'";					
+						//$groupby .= ", tblVTPRODREL.productid";		
+					}
+					elseif(isset($singleProduct) && empty($singleProduct2)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct."'";
+					}
+					elseif(isset($singleProduct2) && empty($singleProduct)){
+						$where .= " AND tblVTPRODREL.productid = '".$singleProduct2."'";
+					}	
+				}
+			}
+		}						
+	}
+	//invoice sql here
+	//static group by stmt in all query
+	if(empty($groupby)){
+		$groupby = " GROUP BY month_year";
+	}
+	else {
+		$groupby .= ", month_year";
+	}
+	//echo $finalSql = $soSql.$fromNjoin.$where.$groupby."<br><br>";
+	$finalSql = $soSql.$fromNjoin.$where.$groupby;
+	//echo "<br><br>";				
+	$finalResult = $adb->pquery($finalSql,array());
+	//execute $soSql result for insert/update tmp tbl
+	while($resultSql = $adb->fetchByAssoc($finalResult)){
+		$region = $resultSql['region'];
+		$user = $resultSql['userid'];
+		$product = $resultSql['productrel_id'];
+		$targetAmount = $resultSql['actual_amount'];
+		$monthYear = $resultSql['month_year'];
+		$targetCount = $resultSql['actual_count'];
+		if(!$region){ $region="NA";}
+		if(!$user){ $user="NA";}
+		if(!$product){ $product="NA";}
+		//check $soSql main elements is not empty so that empty value not inserted in tmp tbl
+		if(!empty($region) && !empty($user) && !empty($product)) {
+			//query to get the current value in tmp tbl with param value of $soSql to avoid duplicate entry
+			$targetsValueSql = $adb->pquery("
+						SELECT *
+						FROM 
+							secondcrm_targets_value
+						WHERE 
+							targetsid = '".$targetsId."' 
+						AND 
+							region = '".$region."' 
+						AND 
+							user_group ='".$user."' 
+						AND 
+							products = '".$product."' 
+						AND 
+							month_year = '".$monthYear."'
+						",array());
+			$targetsValueRows = $adb->num_rows($targetsValueSql);
+			//if value exist in tmp tbl, just do update the amount and count
+			if($targetsValueRows > 0){
+				//$params = array($targetCount,$targetAmount,$targetsId);
+				$sqlUpdateExistingTarget = "UPDATE secondcrm_targets_value SET actual_target_count = '".targetCount."', actual_target_amount = '".$targetAmount."' WHERE targetsid = '".$targetCount."' AND module = '".$targetModule."' AND region = '".$region."' AND user_group = '".$user."' AND products = '".$product."' AND month_year = '".$monthYear."'";
+				$adb->pquery($sqlUpdateExistingTarget,array());
+			}
+			//insert new record if not exist in tmp tbl
+			else {
+				$sqlInsertNewTarget .= "('".$targetsId."', '".$targetModule."', '".$region."', '".$user."', '".$product."', '".$monthYear."', '".$targetCount."', '".$targetAmount."') ,";
+			}		
+		}
+	}
+}
+
+//remove , in the last insert value
+$sqlInsertNewTarget = substr($sqlInsertNewTarget,0,-1);
+//execute insert
+$adb->pquery($sqlInsertNewTarget,array());
+
+echo'<script type="text/javascript">alert("Sales Targets Calculation Updated!")</script>';
+echo'<script type="text/javascript">window.location="'.$site_URL.'/index.php?module=SalesTargets&action=index"</script>';
+
+?>

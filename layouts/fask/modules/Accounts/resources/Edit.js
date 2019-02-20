@@ -7,6 +7,10 @@
  * All Rights Reserved.
  *************************************************************************************/
 
+var imported = document.createElement('script');
+imported.src = 'layouts/fask/modules/Accounts/resources/google.js';
+document.head.appendChild(imported);
+
 Vtiger_Edit_Js("Accounts_Edit_Js",{
 
 },{
@@ -16,29 +20,30 @@ Vtiger_Edit_Js("Accounts_Edit_Js",{
 
         //Address field mapping within module
         addressFieldsMappingInModule : {
-                                                                                'bill_street':'ship_street',
-                                                                                'bill_pobox':'ship_pobox',
-                                                                                'bill_city'	:'ship_city',
-                                                                                'bill_state':'ship_state',
-                                                                                'bill_code'	:'ship_code',
-                                                                                'bill_country':'ship_country'
-                                                                },
+                                            'bill_street':'ship_street',
+                                            'bill_pobox':'ship_pobox',
+                                            'bill_city'	:'ship_city',
+                                            'bill_state':'ship_state',
+                                            'bill_code'	:'ship_code',
+                                            'bill_country':'ship_country'
+                                        },
 
-   // mapping address fields of MemberOf field in the module              
-   memberOfAddressFieldsMapping : {
-                                        'bill_street':'bill_street',
-                                                                                'bill_pobox':'bill_pobox',
-                                                                                'bill_city'	:'bill_city',
-                                                                                'bill_state':'bill_state',
-                                                                                'bill_code'	:'bill_code',
-                                                                                'bill_country':'bill_country',
-                                        'ship_street' : 'ship_street',        
-                                        'ship_pobox' : 'ship_pobox',
-                                        'ship_city':'ship_city',
-                                        'ship_state':'ship_state',
-                                        'ship_code':'ship_code',
-                                        'ship_country':'ship_country'
-                                   },                          
+        // mapping address fields of MemberOf field in the module              
+        memberOfAddressFieldsMapping : {
+                                            'bill_street':'bill_street',
+                                            'bill_pobox':'bill_pobox',
+                                            'bill_city'	:'bill_city',
+                                            'bill_state':'bill_state',
+                                            'bill_code'	:'bill_code',
+                                            'bill_country':'bill_country',
+                                            'ship_street' : 'ship_street',        
+                                            'ship_pobox' : 'ship_pobox',
+                                            'ship_city':'ship_city',
+                                            'ship_state':'ship_state',
+                                            'ship_code':'ship_code',
+                                            'ship_country':'ship_country'
+                                   }, 
+
         /**
          * Function to swap array
          * @param Array that need to be swapped
@@ -94,6 +99,7 @@ Vtiger_Edit_Js("Accounts_Edit_Js",{
                         thisInstance.copyAddress(swapMode, container);
                 })
         },
+
         /**
          * Function which will copy the address details - without Confirmation
          */
@@ -113,16 +119,27 @@ Vtiger_Edit_Js("Accounts_Edit_Js",{
          * Function which will map the address details of the selected record
          */
         mapAddressDetails : function(addressDetails, result, container) {
-                for(var key in addressDetails) {
-                        // While Quick Creat we don't have address fields, we should  add
-            if(container.find('[name="'+key+'"]').length == 0) { 
-                   container.append("<input type='hidden' name='"+key+"'>"); 
-            } 
-                        container.find('[name="'+key+'"]').val(result[addressDetails[key]]);
-                        container.find('[name="'+key+'"]').trigger('change');
-                        container.find('[name="'+addressDetails[key]+'"]').val(result[addressDetails[key]]);
-                        container.find('[name="'+addressDetails[key]+'"]').trigger('change');
-                }
+            for(var key in addressDetails) {
+            // While Quick Creat we don't have address fields, we should  add
+                if(container.find('[name="'+key+'"]').length == 0) { 
+                       container.append("<input type='hidden' name='"+key+"'>"); 
+                } 
+                            container.find('[name="'+key+'"]').val(result[addressDetails[key]]);
+                            container.find('[name="'+key+'"]').trigger('change');
+                            container.find('[name="'+addressDetails[key]+'"]').val(result[addressDetails[key]]);
+                            container.find('[name="'+addressDetails[key]+'"]').trigger('change');
+            }
+        },
+
+        /**
+         * Function which will call Google Place API
+         */
+        registerGoogleAddress : function(container){
+            var thisInstance = this;
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAvucdFiK-twUm8ozrd-fwadV5luYtYyjI&libraries=places&callback=initAutocomplete";
+            document.body.appendChild(script); 
         },
 
         /**
@@ -130,7 +147,8 @@ Vtiger_Edit_Js("Accounts_Edit_Js",{
          *
          */
         registerBasicEvents : function(container) {
-                this._super(container);
-                this.registerEventForCopyingAddress(container);
+            this._super(container);
+            this.registerEventForCopyingAddress(container);
+            this.registerGoogleAddress(container);
         }
 });

@@ -13,11 +13,11 @@ $languageStrings = array(
 	'SINGLE_SalesOrder' => 'Sales Order',
 	'LBL_EXPORT_TO_PDF' => 'Export to PDF',
     'LBL_SEND_MAIL_PDF' => 'Send Email with PDF',
-
+    'RTOTAL'=>'Total',
 	//Basic strings
 	'LBL_ADD_RECORD' => 'Add Sales Order',
 	'LBL_RECORDS_LIST' => 'Sales Order List',
-
+	'LBL_TERMSCONDITION'=>'Terms & Condition Details',
 	// Blocks
 	'LBL_SO_INFORMATION' => 'Sales Order Details',
 

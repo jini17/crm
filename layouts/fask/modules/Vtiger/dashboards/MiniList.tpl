@@ -19,3 +19,6 @@
         {include file="dashboards/DashboardFooterIcons.tpl"|@vtemplate_path:$MODULE_NAME}
     </div>
 </div>
+    {assign var=MODULE value="- "|explode:$WIDGET->getTitle()}
+
+    <a href="index.php?module={$MODULE['0']|replace:' ':''}&view=List" class="btn-widget-view-more">View More</a>

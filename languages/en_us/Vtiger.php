@@ -1982,4 +1982,5 @@ $jsLanguageStrings = array(
 	'LBL_LIST_DELETE_CONFIRMATION' => 'Are you sure you want to delete?',
 	'JS_WIDGET_RESIZING_WAIT_MSG' => 'Widget contents will load after resizing.',
 	'JS_MAXIMUM_LIMIT'=>'Max char',
+	'JS_SELECT_COMPANY'=>'Please select company',
 );

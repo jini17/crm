@@ -2,14 +2,14 @@
    <div>
       {assign var=IMAGE_DETAILS value=$USER_MODEL->getImageDetails()}
       {if $IMAGE_DETAILS neq '' && $IMAGE_DETAILS[0] neq '' && $IMAGE_DETAILS[0].path eq ''}
-      <a href="#" class="userName dropdown-toggle " data-toggle="dropdown" role="button" title="{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}
+          <a href="#" class="userName dropdown-toggle " style="background-color: #000; border-radius: 3px;padding-top;padding-top: 7px;padding-left: 5px;padding-right: 5px;" data-toggle="dropdown" role="button" title="{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}
          ({$USER_MODEL->get('user_name')})"><i class="material-icons">perm_identity</i>
       <span class="link-text-xs-only hidden-lg hidden-md hidden-sm">{$USER_MODEL->getName()}</span>
       </a>
       {else}
       {foreach item=IMAGE_INFO from=$IMAGE_DETAILS}
       {if !empty($IMAGE_INFO.path) && !empty({$IMAGE_INFO.orgname})}
-      <a href="#" class="userName dropdown-toggle" data-toggle="dropdown" role="button" title="{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}
+      <a href="#" class="userName dropdown-toggle ad" data-toggle="dropdown" role="button" title="{$USER_MODEL->get('first_name')} {$USER_MODEL->get('last_name')}
          ({$USER_MODEL->get('user_name')})">
       <img height="40" width="30"  src="{$IMAGE_INFO.path}_{$IMAGE_INFO.orgname}">
       </a>

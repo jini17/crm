@@ -23,7 +23,7 @@ class Inventory_DetailView_Model extends Vtiger_DetailView_Model {
 
 		if(Users_Privileges_Model::isPermitted($moduleName, 'DetailView', $recordModel->getId())) {
 
-			if($moduleName=='Invoice' || $moduleName =='Quotes'){
+			
 
 				$detailViewLinks = array(
 						'linklabel' => vtranslate('LBL_EXPORT_TO_PDF', $moduleName),
@@ -37,7 +37,7 @@ class Inventory_DetailView_Model extends Vtiger_DetailView_Model {
 	                'linkurl' => 'javascript:Inventory_Detail_Js.sendEmailPDFClickHandler(\''.$recordModel->getSendEmailPDFUrl().'\')',
 	                'linkicon' => ''
 	            );
-	        }    
+	     
 
             //$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($sendEmailLink);
 
@@ -59,12 +59,10 @@ class Inventory_DetailView_Model extends Vtiger_DetailView_Model {
             ); 
 
 			//Editied by jitu@27-04-2015 for ShowHide Restrict Issue 
-			if($moduleName=='Invoice' || $moduleName =='Quotes'){
 				if($emailRestrict) {
 	              $linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($sendEmailLink); 
 	            }
-	        }    
-			//End here
+	       //End here
 			
 			//Show / Hide Edit Button in detailView
 			$modules = array("Invoice"=>"IOR","PurchaseOrder"=>"POR","SalesOrder"=>"SOR", "Quotes"=>"QOR", "DeliveryOrder"=>"DOR");

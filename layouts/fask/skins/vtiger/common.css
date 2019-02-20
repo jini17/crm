@@ -59,6 +59,7 @@ body {
   padding-right: 15px;
   height: 40px !important;
   margin-top: 10px;
+    margin-left: -10px !important;
 }
 .app-nav {
   position: relative;
@@ -1977,7 +1978,8 @@ input[type=checkbox]:checked {
     margin: 6px 14px;
   box-shadow:0 1px 15px 1px rgba(62,57,107,.07);
 }
-.detailViewContainer .block h5{color: #2f5597;font-weight:bold;}
+.detailViewContainer .block h5,.fieldBlockHeader{color: #2f5597;font-weight:bold;}
+
 .editViewContainer .block {
   background: #FFFFFF;
   border: 1px solid #F3F3F3;
@@ -2006,10 +2008,11 @@ input[type=checkbox]:checked {
   border: 0 !important;
 }
 #overlayPage {
-  top: 43px;
+  top: 35px;
   position: fixed;
   width: 100%;
   z-index: 1030;
+  left: -15%;
 }
 #overlayPage .arrow.show {
   content: "";
@@ -3307,6 +3310,7 @@ position: relative;
   border-left: 4px solid #dddddd;
   list-style: none;
   padding-top: 15px;
+  margin-left:12px;
 }
 .treeView li .toolbar-handle {
   margin-top: 10px;
@@ -3315,6 +3319,8 @@ position: relative;
 }
 .treeView li .toolbar-handle .btn {
   margin: 0px;
+  background-color:#232a37;
+  color:#FFF;
 }
 .treeView li .toolbar-handle a:before {
   background: none repeat scroll 0 0 #DDDDDD;
@@ -7711,7 +7717,7 @@ a[name~="relationEdit"], button[name~="relationEdit"] , a.relationDelete, a[name
 
 #EditView{padding:8px 16px;}
 
-.fieldBlockHeader{padding: 10px;border-radius: 5px 5px 0px 0px;margin-bottom: 0px;}
+.fieldBlockHeader{padding: 10px;border-radius: 5px 5px 0px 0px;margin-bottom: 0px; color: #2f5597; font-size: 14px;}
  .btn:hover {background:rgba(44, 59, 73, 0.33);color:#fff;}
 
 input[type=checkbox]:checked::after, 
@@ -8861,8 +8867,8 @@ border-radius: .35rem; background-color: rgba(255, 255, 255, 1); margin-top: 0px
 .faskfirst li a i{ font-size: 18px;margin-right: 10px;}
 .fasksecond{list-style-type: none; }
 /* .fasksecond>li.with-childs:first-child { border-left: none;} */
-.fasksecond>li.with-childs { float: left; border-left:1px solid #ddd; margin: 0 0px; height:400px;} 
-.fasksecond>li.with-childs>a{ border-bottom: 3px solid #ddd;padding: 15px 10px; line-height: 40px;} 
+.fasksecond>li.with-childs { float: left; border-left:1px solid #ddd; margin: 0 0px; height:440px;} 
+.fasksecond>li.with-childs>a{ border-bottom: 3px solid #ddd;padding: 15px 10px; line-height: 20px;} 
 .fasksecond>li.with-childs>a i { font-size: 18px;margin-right: 10px;}
 .fasksecond>li>a i { font-size: 18px;margin-right: 10px;}
 .fasksecond>li>ul>li{list-style-type: none;padding: 8px;}
@@ -8903,9 +8909,10 @@ visibility: visible;top: 0;left: 60px; /*position where enlarged image should of
 }
 
 #searchResults-container{
-  width: 100vw;
+  width: 92vw;
   top: 0;
   bottom: 0;
+  left:0;
 }
 
 .editViewPageDiv .content-area{
@@ -9010,10 +9017,9 @@ ul.dropdownlist{
 }
 .modal-content.helpbox{
   overflow: scroll;
-    width: 70% !important;
+    width: 150% !important;
     display: block;
     margin: 0 auto;
-
 }
 input#search-top-bar::-webkit-input-placeholder { /* WebKit browsers */
     color:    #000;
@@ -10151,4 +10157,8 @@ font-size:13px !important;
 .jqplot-table-legend.jqplot-table-legend-swatch,
 td.jqplot-table-legend{
     padding-right: 5px;
+}
+.custommsg{
+     font-size:12px;
+     color:#ff0000;
 }

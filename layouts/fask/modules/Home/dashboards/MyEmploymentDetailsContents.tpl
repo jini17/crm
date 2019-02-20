@@ -11,25 +11,32 @@
    -->*}
 <div style='padding:5px;'>
     <style>
-        .fa-facebook {
+     .employmentdetails   .fa-facebook,
+          .employmentdetails    .fa-facebook-f:hover{
           background: #3B5998;
-          color: white;
-          padding: 8px;
+          color: white !important;
+          padding: 7px !important;
         }
-        .fa-twitter {
+       .employmentdetails       .fa-twitter,
+         .employmentdetails     .fa-twitter:hover{
           background: #55ACEE;
-          color: white;
-          padding:10px;
+          color: white !important;
+         padding: 7px !important;
         }
-        .fa-envelope {
+        .employmentdetails      .fa-envelope,
+        .employmentdetails      .fa-envelope:hover{
           background: #ff6600;
-          color: white;
-          padding: 10px;
+          color: white !important;
+           padding: 7px !important;
         }
-        .fa-linkedin {
+        .employmentdetails      .fa-linkedin,
+          .employmentdetails    .fa-linkedin-in:hover{
           background: #007bb5;
-          color: white;
-          padding: 8px;
+          color: white !important;
+        padding: 7px !important;
+        }
+         .employmentdetails     .fa-envelope:hover{
+            color:#fff;
         }
         .expirecontract{
           color: #f91b05;
@@ -91,10 +98,10 @@
                     <div class="clearfix"></div>
                     <div class="clearfix" style="heigth:15px;"></div>
                     <div class="clearfix"></div>
-                    <div class="social text-center" style="margin-top:5px;">
-                          <a href="{$DATA['facebook']}" class="fab fa-facebook-f"></a>
-                            <a href="{$DATA['twitter']}" class="fab fa-twitter"></a>
-                            <a href="{$DATA['linkedin']}" class="fab fa-linkedin-in"></a>
+                    <div class="social employmentdetails text-center" style="margin-top:5px;">
+                          <a href="{$DATA['facebook']}" style="padding:7px !important" class="fab fa-facebook-f"></a>
+                            <a href="{$DATA['twitter']}" style="padding:7px !important" class="fab fa-twitter"></a>
+                            <a href="{$DATA['linkedin']}" style="padding:7px !important" class="fab fa-linkedin-in"></a>
                             <a href="#" onclick="javascript:Vtiger_Helper_Js.getInternalMailer({$DATA['emp_id']},'email','Users');" class="fa fa-envelope"></a>
                      
                     </div>

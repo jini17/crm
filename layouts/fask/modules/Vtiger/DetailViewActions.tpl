@@ -20,7 +20,7 @@
             {assign var=STARRED value=$RECORD->get('starred')}
             {if $MODULE_MODEL->isStarredEnabled()}
                 <button class="btn btn-primary markStar {if $STARRED} active {/if}" id="starToggle">
-                    <div class='starredStatus' title="{vtranslate('LBL_STARRED', $MODULE)}">
+                    <div class='starredStatus'>
                         <div class='unfollowMessage'>
                             <i class="material-icons">star</i> &nbsp;{vtranslate('LBL_UNFOLLOW',$MODULE)}
                         </div>
@@ -28,7 +28,7 @@
                             <i class="material-icons active">star_border</i> <span class="hidden-xs">{vtranslate('LBL_FOLLOWING',$MODULE)}</span>
                         </div>
                     </div>
-                    <div class='unstarredStatus' title="{vtranslate('LBL_NOT_STARRED', $MODULE)}">
+                    <div class='unstarredStatus' >
                         {vtranslate('LBL_FOLLOW',$MODULE)}
                     </div>
 
@@ -36,7 +36,7 @@
             {/if}
            
             {foreach item=DETAIL_VIEW_BASIC_LINK from=$DETAILVIEW_LINKS['DETAILVIEWBASIC']}
-                <button data-toggle="toosltip" tippytitle data-placement="top" title="{vtranslate($DETAIL_VIEW_BASIC_LINK->getLabel(), $MODULE_NAME)}" class="btn btn-primary" id="{$MODULE_NAME}_detailView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_BASIC_LINK->getLabel())}"
+                <button   class="btn btn-primary" id="{$MODULE_NAME}_detailView_basicAction_{Vtiger_Util_Helper::replaceSpaceWithUnderScores($DETAIL_VIEW_BASIC_LINK->getLabel())}"
                         {if $DETAIL_VIEW_BASIC_LINK->isPageLoadLink()}
                             onclick="window.location.href = '{$DETAIL_VIEW_BASIC_LINK->getUrl()}&app={$SELECTED_MENU_CATEGORY}'"
                         {else}

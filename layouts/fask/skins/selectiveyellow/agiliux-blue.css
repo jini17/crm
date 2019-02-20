@@ -37,6 +37,11 @@ Email: khaled@softsolvers.com.my
      
      color: #F7B301 !important;
 }
+.btn-secondary{
+     background: #F7B301 !important;
+    border: 1px solid #F7B301 !important;
+    color: #fff;
+}
 .fc-button.fc-state-default:hover,
 .fc-button.fc-state-active{
     background-color:  #F7B301 !important;
@@ -735,4 +740,17 @@ td.jqplot-table-legend{
 }
 .dropdown-icon-dashboard{
      padding: 0 10px 0 !important;
+}
+#searchResults-container{
+    width: 92vw !important;
+}
+.fasksecond li[tools]{
+    width: 14.3% !important;
+}
+.fasksecond  li[tools]  ul li[tools]{
+    display: block !important;
+    width: 100% !important;
+}
+#searchResults-container{
+    width: 92vw !important;
 }

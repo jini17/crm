@@ -305,8 +305,11 @@ function getAssociatedProducts($module, $focus, $seid = '', $refModuleName = fal
 		$discountTotal = 0;
 		//Based on the discount percent or amount we will show the discount details
 
+
+
+
 		//To avoid NaN javascript error, here we assign 0 initially to' %of price' and 'Direct Price reduction'(for Each Product)
-		$product_Detail[$i]['discount_percent'.$i] = 0;
+		/*$product_Detail[$i]['discount_percent'.$i] = 0;
 		$product_Detail[$i]['discount_amount'.$i] = 0;
 
 		if(!empty($discount_percent)) {
@@ -327,10 +330,52 @@ function getAssociatedProducts($module, $focus, $seid = '', $refModuleName = fal
 		else
 		{
 			$product_Detail[$i]['checked_discount_zero'.$i] = ' checked';
+		}*/
+
+		$discountTotal = '0.00';
+		//Based on the discount percent or amount we will show the discount details
+		
+		//Edited by jitu@30062015 multiple Discount in lineitems
+		
+		$lineitemdiscount    = getLineItemDiscount($current_user->roleid,$focus->id,$hdnProductId,1,$lineitem_id);
+		
+		//echo "<pre>".print_r($lineitemdiscount);
+		
+		//To avoid NaN javascript error, here we assign 0 initially to' %of price' and 'Direct Price reduction'(for Each Product)
+		$product_Detail[$i]['discount_percent'.$i] = 0;
+		$product_Detail[$i]['discount_amount'.$i] = 0;
+		$product_Detail[$i]['No_discount_Configure'.$i] = 1;
+		
+		//Edited By jitu@30062015 for handling Without Discount and discount cases.
+		$actual_amount = $productTotal;	
+		if(count($lineitemdiscount)>0){ 
+	
+			for($dcount=0;$dcount<count($lineitemdiscount);$dcount++) {
+				$discount_title = $lineitemdiscount[$dcount]['discount_title'];
+				$criteria = $lineitemdiscount[$dcount]['postdiscount_criteria'];
+				$value = $lineitemdiscount[$dcount]['postdiscount_value'];
+			
+				if($criteria == 'P'){
+					$discountTotal     += ($actual_amount*$value)/100;	
+					$actual_amount     -= ($actual_amount*$value)/100;
+				} else {
+					$discountTotal	   += $value;
+					$actual_amount   -= $value;	
+				}
+			}
+			$product_Detail[$i]['afterdiscountvalue'] = number_format(($productTotal - $discountTotal),$no_of_decimal_places,'.','');
+			$product_Detail[$i]['itemdiscount'] = number_format($discountTotal,$no_of_decimal_places,'.','');
+			$product_Detail[$i]['discountdetails'] = $lineitemdiscount;
+
+		} else { 
+			$product_Detail[$i]['No_discount_Configure'] = '0';
 		}
-		$totalAfterDiscount = $productTotal-$discountTotal;
+
+		$totalAfterDiscount = $actual_amount;
+
 		$totalAfterDiscount = number_format($totalAfterDiscount, $no_of_decimal_places,'.','');
 		$discountTotal = number_format($discountTotal, $no_of_decimal_places,'.','');
+		
 		$product_Detail[$i]['discountTotal'.$i] = $discountTotal;
 		$product_Detail[$i]['totalAfterDiscount'.$i] = $totalAfterDiscount;
 
@@ -400,9 +445,10 @@ function getAssociatedProducts($module, $focus, $seid = '', $refModuleName = fal
 	$product_Detail[1]['final_details']['taxtype'] = $taxtype;
 
 	//Get the Final Discount, S&H charge, Tax for S&H and Adjustment values
+
 	//To set the Final Discount details
-	$finalDiscount = 0;
-	$product_Detail[1]['final_details']['discount_type_final'] = 'zero';
+	$finaldiscount   = getLineItemDiscount($current_user->roleid,$focus->id,0,0,0);
+	$product_Detail[1]['final_details']['finaldiscountdetails'] = $finaldiscount;
 
 	$subTotal = ($focus->column_fields['hdnSubTotal'] != '')?$focus->column_fields['hdnSubTotal']:0;
 	$subTotal = number_format($subTotal, $no_of_decimal_places,'.','');
@@ -488,6 +534,29 @@ function getAssociatedProducts($module, $focus, $seid = '', $refModuleName = fal
 	}
 
 	$compoundTaxesInfo = getCompoundTaxesInfoForInventoryRecord($focus->id, $module);
+
+	$totalfinalDiscount = '0.00';
+	$actualamount = $subTotal;
+	for($dcount=0;$dcount<count($finaldiscount);$dcount++)
+	{	
+		$criteria = $finaldiscount[$dcount]['postdiscount_criteria'];
+		$value = $finaldiscount[$dcount]['postdiscount_value'];
+	
+		if($criteria == 'P'){
+			$totalfinalDiscount     += ($actualamount*$value)/100;	
+			$actualamount   	-= ($actualamount*$value)/100;
+		} else {
+			$totalfinalDiscount	+= $value;
+			$actualamount   	-= $value;	
+		}
+	}	
+	
+	$totalfinalDiscount = number_format($totalfinalDiscount, $no_of_decimal_places,'.','');
+
+	$product_Detail[1]['final_details']['discountTotal_final'] = $totalfinalDiscount;
+	$product_Detail[1]['final_details']['totalAfterDiscount'] = ($subTotal-$totalfinalDiscount);
+
+	
 	//Calculating compound info
 	$taxTotal = 0;
 	foreach ($taxDetails as $taxId => $taxInfo) {
@@ -622,5 +691,168 @@ function split_validationdataArray($validationData)
 	return $data;
 }
 
+
+/**
+ * This function return array of discountdetial related to partcular quote/salesorder/invoice for individual line item
+ * Added by jitu@30062015 
+ * @param roleid 
+ * @param inventory id, productid
+ * @lineitem =>1/0 either line item or Final discount	
+ * @return array if match else false
+ */
+function getLineItemDiscount($roleid,$id=null, $productid=null,$lineitem=1,$lineitem_id){ 
+	global $adb, $log; 
+
+	$log->debug("Entering getDiscount(".$id.",".$productid.") method ...");
+	$no_of_decimal_places = getCurrencyDecimalPlaces();
+	
+	if($id == '' || $id == null) { 
+		if($lineitem==1) {
+			$discount_level = " AND (tblSCD2R.discount_level LIKE '%I%' OR tblSCD2R.discount_level LIKE '%B%')";
+		} else {
+			$discount_level = " AND (tblSCD2R.discount_level LIKE '%G%' OR tblSCD2R.discount_level LIKE '%B%')";
+		}
+		$params = array();
+		$query = "SELECT 0 AS id, tblSCD2R.discountid, tblSCD.discount_title, tblSCD2R.discount_type AS prediscount_type, tblSCD2R.discount_criteria AS prediscount_criteria, tblSCD2R.discount_value AS prediscount_value, '' AS postdiscount_type, '' AS postdiscount_value, '' AS postdiscount_criteria, tblSCD2R.roles_allow, tblSCD.discount_status, tblSCD.deleted, tblSCD2R.id AS discountindex,tblSCD2R.sequence AS prediscount_sequence, 0 AS postdiscount_sequence, 0 AS discount_amount
+		 FROM secondcrm_discount2role tblSCD2R
+		 LEFT JOIN secondcrm_discount tblSCD ON tblSCD.discountid =tblSCD2R.discountid
+		 WHERE tblSCD.discount_status = 0 AND tblSCD.deleted = 0 AND tblSCD2R.roles_allow LIKE '%".$roleid."%'
+		".$discount_level."
+		ORDER by tblSCD2R.sequence ASC, tblSCD2R.created_date ASC";
+		$item_discount = array();
+		$item_discount = getReturnDiscountData($query,$params);	
+	} else {
+			
+			if($lineitem==1) {
+				$productid = $productid;	
+				$discount_level = " AND (tblSCD2R.discount_level LIKE '%I%' OR tblSCD2R.discount_level LIKE '%B%')";
+			} else {
+				$productid = 0;
+				$discount_level = " AND (tblSCD2R.discount_level LIKE '%G%' OR tblSCD2R.discount_level LIKE '%B%')";
+			}
+
+			$qry ='';
+
+			if($lineitem_id !=0) {
+				$qry = " AND tblSCIDR.lineitem_id = $lineitem_id ";
+			}	
+			$params = array($id,$productid);		
+
+			$query1 = "SELECT tblSCIDR.id, tblSCD2R.discountid, tblSCD.discount_title, tblSCD2R.discount_type AS prediscount_type, tblSCD2R.discount_criteria AS prediscount_criteria, tblSCD2R.discount_value AS prediscount_value, tblSCIDR.discount_type AS postdiscount_type, tblSCIDR.discount_value AS postdiscount_value, tblSCIDR.discount_criteria AS postdiscount_criteria, tblSCD2R.roles_allow, tblSCD.discount_status, tblSCD.deleted, tblSCD2R.id AS discountindex, tblSCD2R.sequence AS prediscount_sequence, tblSCIDR.sequence AS postdiscount_sequence, tblSCIDR.discount_amount
+		 FROM secondcrm_discount2role tblSCD2R 
+		 LEFT JOIN secondcrm_discount tblSCD ON tblSCD2R.discountid = tblSCD.discountid	
+		 LEFT JOIN secondcrm_inventorydiscountrel tblSCIDR ON tblSCIDR.discountid = tblSCD2R.discountid
+		 WHERE tblSCIDR.inventoryid = ? AND tblSCIDR.productid = ? AND  tblSCD2R.id = tblSCIDR.discountindex ".$qry."
+			
+		 ORDER by tblSCIDR.sequence ASC, tblSCD2R.sequence ASC, tblSCD2R.created_date ASC";
+
+		$query2 = "SELECT 0 AS id, tblSCD2R.discountid, tblSCD.discount_title, tblSCD2R.discount_type AS prediscount_type, tblSCD2R.discount_criteria AS prediscount_criteria, tblSCD2R.discount_value AS prediscount_value, '' AS postdiscount_type, '' AS postdiscount_value, '' AS postdiscount_criteria, tblSCD2R.roles_allow, tblSCD.discount_status, tblSCD.deleted, tblSCD2R.id AS discountindex,tblSCD2R.sequence AS prediscount_sequence, 0 AS postdiscount_sequence, 0 AS discount_amount
+		 FROM secondcrm_discount2role tblSCD2R
+		 LEFT JOIN secondcrm_discount tblSCD ON tblSCD.discountid =tblSCD2R.discountid
+		 WHERE tblSCD.discount_status = 0 AND tblSCD.deleted = 0 AND tblSCD2R.roles_allow LIKE '%".$roleid."%' AND tblSCD2R.discountid NOT IN (SELECT discountid FROM secondcrm_inventorydiscountrel tblSCIDR WHERE inventoryid = ? AND productid = ? ".$qry.")  ".$discount_level." ORDER by  tblSCD2R.sequence ASC, tblSCD2R.created_date ASC";	
+
+		$item_discount = array();
+	//echo $query1."###".$query2."<br />";
+
+		$arra1 = getReturnDiscountData($query1,$params);	
+		$arra2 = getReturnDiscountData($query2,$params);
+		$item_discount = array_merge($arra1,$arra2);
+	}
+///	echo "<pre>";print_r($item_discount);
+	return $item_discount;
+	
+	$log->debug("Exiting getDiscount ...");
+	
+} //End here getLineItemDiscount 
+
+function getReturnDiscountData($query,$params) {
+		
+	global $adb, $log; 
+	$result = $adb->pquery($query, $params);
+	$num_rows=$adb->num_rows($result);
+	$item_discount = array();
+	if($num_rows>0) { 
+		for($i=0;$i<$num_rows;$i++) {	
+			$disrelid = $adb->query_result($result,$i,'id');
+			$discountid = decimalFormat($adb->query_result($result,$i,'discountid'), $no_of_decimal_places,'.','');
+			$discount_title = $adb->query_result($result,$i,'discount_title');
+			$rolesallow =$adb->query_result($result,$i,'roles_allow');
+			$discount_status = $adb->query_result($result,$i,'discount_status');
+			$discount_deleted = $adb->query_result($result,$i,'deleted');	
+			$discountindex = $adb->query_result($result,$i,'discountindex');	
+			
+
+			$prediscount_type = $adb->query_result($result,$i,'prediscount_type');
+			$prediscount_criteria  = $adb->query_result($result,$i,'prediscount_criteria');
+			$prediscount_value  = decimalFormat($adb->query_result($result,$i,'prediscount_value'), $no_of_decimal_places,'.','');
+			$prediscount_sequence  = $adb->query_result($result,$i,'prediscount_sequence');
+		
+
+			$postdiscount_type = $adb->query_result($result,$i,'postdiscount_type');
+			$postdiscount_criteria  = $adb->query_result($result,$i,'postdiscount_criteria');
+			$postdiscount_value  = decimalFormat($adb->query_result($result,$i,'postdiscount_value'), $no_of_decimal_places,'.','');
+			$postdiscount_sequence  = $adb->query_result($result,$i,'postdiscount_sequence');
+			$discount_amount  = $adb->query_result($result,$i,'discount_amount');
+			
+			$item_discount[$i]['disrelid'] = $disrelid;
+			$item_discount[$i]['discountid'] = $discountid;
+			$item_discount[$i]['discount_title'] = $discount_title;
+			$item_discount[$i]['rolesallow'] = $rolesallow;
+			$item_discount[$i]['discount_status'] = $discount_status;
+			$item_discount[$i]['deleted'] = $discount_deleted;
+			$item_discount[$i]['discountindex'] = $discountindex;
+		
+			//get prediscount value Login user role specific
+			$item_discount[$i]['currentrolediscount'] = getRoleSpecificDiscounts($roleid,$discountid);
+	
+			$item_discount[$i]['prediscount_type'] = $prediscount_type;
+			$item_discount[$i]['prediscount_criteria'] = $prediscount_criteria;
+			$item_discount[$i]['prediscount_value'] = $prediscount_value;
+			$item_discount[$i]['prediscount_sequence'] = $prediscount_sequence;
+
+			$item_discount[$i]['postdiscount_type'] = $postdiscount_type;
+			$item_discount[$i]['postdiscount_criteria'] = $postdiscount_criteria;
+			$item_discount[$i]['postdiscount_value'] = $postdiscount_value;
+			$item_discount[$i]['postdiscount_sequence'] = $postdiscount_sequence;
+			$item_discount[$i]['discount_amount'] = $discount_amount;	
+		} 
+		return $item_discount;
+	} else {
+			return array();
+	}		
+} //End here getReturnDiscountData	
+
+/**
+ * This function return array of discountdetial related in Editview to partcular for individual line item discount
+ * Added by jitu@30062015 
+ * @param roleid, discountid
+ * @return array if match else false
+ */
+function getRoleSpecificDiscounts($roleid, $discountid)
+{
+	global $adb, $log; 
+	
+	$log->debug("Entering getRoleSpecificDiscounts(".$roleid.",".$discountid.") method ...");
+	$no_of_decimal_places = getCurrencyDecimalPlaces();
+
+	$query = "SELECT discount_value, discount_criteria,discount_type FROM secondcrm_discount2role WHERE discountid = ? AND roles_allow LIKE '%".$roleid."%'";
+	$result = $adb->pquery($query,array($discountid));
+	$num_rows=$adb->num_rows($result);
+
+	$discountinfo = array();
+	
+	if($num_rows>0) { 
+		$discount_value = $adb->query_result($result,0,'discount_value');
+		$discount_criteria = $adb->query_result($result,0,'discount_criteria');
+		$discount_type = $adb->query_result($result,0,'discount_type');
+	
+		$discountinfo[0]['discount_value'] = decimalFormat($discount_value);
+		$discountinfo[0]['discount_criteria'] = $discount_criteria;
+		$discountinfo[0]['discount_type'] = $discount_type;
+	}
+	
+	$log->debug("Exiting getRoleSpecificDiscounts method ...");
+	return $discountinfo;
+} //end here getRoleSpecificDiscounts
 
 ?>

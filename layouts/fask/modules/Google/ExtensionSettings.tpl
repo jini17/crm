@@ -153,4 +153,7 @@
                         </div>
                 </div>
         </form>
+                                                <div class="clearfix"></div>
 </div>
+                        <div class="clearfix"></div>
+                        <div class="clearfix" style="height: 50px;"></div>

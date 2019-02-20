@@ -53,6 +53,11 @@ Email: khaled@softsolvers.com.my
      margin-right: 5px;
      color: #fff;
 }
+.btn-secondary{
+     background: #6783B3 !important;
+    border: 1px solid #6783B3 !important;
+    color: #fff;
+}
 #appnav button i{
     font-size: 12px !important;
     color: #fff;
@@ -703,4 +708,17 @@ td.jqplot-table-legend{
 }
 .dropdown-icon-dashboard{
   padding: 0 10px 0 !important;
+}
+#searchResults-container{
+    width: 92vw !important;
+}
+.fasksecond li[tools]{
+    width: 14.3% !important;
+}
+.fasksecond  li[tools]  ul li[tools]{
+    display: block !important;
+    width: 100% !important;
+}
+#searchResults-container{
+    width: 92vw !important;
 }

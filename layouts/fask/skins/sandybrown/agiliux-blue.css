@@ -71,7 +71,11 @@ a.btn.btn-gettingStarted:hover{
 a.btn.btn-gettingStarted i{
     color: #F4967A
 }
-
+.btn-secondary{
+     background: #F4967A !important;
+    border: 1px solid #F4967A !important;
+    color: #fff;
+}
 /*===============
     Help Slider
 ================*/
@@ -732,4 +736,18 @@ td.jqplot-table-legend{
 }
 .dropdown-icon-dashboard{
       padding: 0 10px 0 !important;
+}
+
+#searchResults-container{
+    width: 92vw !important;
+}
+.fasksecond li[tools]{
+    width: 14.3% !important;
+}
+.fasksecond  li[tools]  ul li[tools]{
+    display: block !important;
+    width: 100% !important;
+}
+#searchResults-container{
+    width: 92vw !important;
 }
