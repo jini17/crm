@@ -80,7 +80,6 @@
                                 </button>
 
 
-                      <button class = "addNewDashBoard btn-primary btn pull-left" style='margin-right: 6px;'><i class="fa fa-edit"></i>&nbsp;{vtranslate('LBL_ADD_NEW_DASHBOARD',$MODULE)}</button> &nbsp;
                       <button class="btn btn-success updateSequence pull-right hide" style="margin-right: 6px !important;">{vtranslate('LBL_SAVE_ORDER',$MODULE)}</button>
                       <button class = "reArrangeTabs btn-primary btn pull-right" style="margin-right:0!important">{vtranslate('LBL_REARRANGE_DASHBOARD_TABS',$MODULE)}</button>
                 

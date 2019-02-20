@@ -11,31 +11,31 @@
    -->*}
 <div style='padding:5px;'>
     <style>
-        .fa-facebook,
-        .fa-facebook-f:hover{
+     .employmentdetails   .fa-facebook,
+          .employmentdetails    .fa-facebook-f:hover{
           background: #3B5998;
           color: white !important;
           padding: 7px !important;
         }
-        .fa-twitter,
-        .fa-twitter:hover{
+       .employmentdetails       .fa-twitter,
+         .employmentdetails     .fa-twitter:hover{
           background: #55ACEE;
           color: white !important;
          padding: 7px !important;
         }
-        .fa-envelope,
-        .fa-envelope:hover{
+        .employmentdetails      .fa-envelope,
+        .employmentdetails      .fa-envelope:hover{
           background: #ff6600;
           color: white !important;
            padding: 7px !important;
         }
-        .fa-linkedin,
-        .fa-linkedin-in:hover{
+        .employmentdetails      .fa-linkedin,
+          .employmentdetails    .fa-linkedin-in:hover{
           background: #007bb5;
           color: white !important;
         padding: 7px !important;
         }
-        .fa-envelope:hover{
+         .employmentdetails     .fa-envelope:hover{
             color:#fff;
         }
         .expirecontract{
@@ -98,7 +98,7 @@
                     <div class="clearfix"></div>
                     <div class="clearfix" style="heigth:15px;"></div>
                     <div class="clearfix"></div>
-                    <div class="social text-center" style="margin-top:5px;">
+                    <div class="social employmentdetails text-center" style="margin-top:5px;">
                           <a href="{$DATA['facebook']}" style="padding:7px !important" class="fab fa-facebook-f"></a>
                             <a href="{$DATA['twitter']}" style="padding:7px !important" class="fab fa-twitter"></a>
                             <a href="{$DATA['linkedin']}" style="padding:7px !important" class="fab fa-linkedin-in"></a>
