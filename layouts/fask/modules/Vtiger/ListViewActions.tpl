@@ -193,7 +193,7 @@
 		                                </a>
                                     	</div>
 		                                <div style="float: right; text-align: right">
-		                                <a class="editFilter" title="{vtranslate('LBL_EDIT', $MODULE)}" data-url="{$CUSTOME_VIEW_RECORD_MODEL->getEditUrl()}" tippytitle >
+		                                <a class="editFilter" title="{vtranslate('LBL_EDIT', $MODULE)}" data-url="{$CUSTOME_VIEW_RECORD_MODEL->getEditUrl()}"  >
 				                        	<i class="material-icons text-warning">create</i>
 										</a>
 				                        <a class="deleteFilter" title="{vtranslate('LBL_DELETE', $MODULE)}" data-url="{$CUSTOME_VIEW_RECORD_MODEL->getDeleteUrl()}" tippytitle >
