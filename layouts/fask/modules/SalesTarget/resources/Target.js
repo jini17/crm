@@ -56,7 +56,7 @@ jQuery.Class('SalesTarget_Target_Js', {
 				
 				AppConnector.request(actionParams).then(
 				function(data) {  
-				alert(data);
+				
 					var json = $.parseJSON(data);
 					var jsontype =  json.success==true?'success':'error';
 					var msg = json.success==true?json.result:json.error.code;
