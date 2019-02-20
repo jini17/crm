@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vtiger_payments</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_payments` (
+  `paymentsid` int(11) DEFAULT NULL,
+  `paymentno` varchar(100) DEFAULT NULL,
+  `paymentref` varchar(255) DEFAULT NULL,
+  `amount` decimal(62,2) DEFAULT NULL,
+  `billid` varchar(100) DEFAULT NULL,
+  `linktomodule` varchar(100) DEFAULT NULL,
+  `duedate` date DEFAULT NULL,
+  `relatedto` varchar(100) DEFAULT NULL,
+  `paymentfor` varchar(255) DEFAULT NULL,
+  `payment_type` varchar(100) DEFAULT NULL,
+  `payment_subtype` varchar(150) DEFAULT NULL,
+  `payment_status` varchar(50) DEFAULT NULL,
+  `company_details` varchar(100) DEFAULT NULL,
+  `terms_conditions` varchar(100) DEFAULT NULL,
+  `paymentdate` date DEFAULT NULL,
+  `paymentmode` varchar(50) DEFAULT NULL,
+  `bankname` varchar(150) DEFAULT NULL,
+  `bankaccountname` varchar(255) DEFAULT NULL,
+  `refno` varchar(100) DEFAULT NULL,
+  `discount` decimal(25,2) DEFAULT NULL,
+  `discount_reason` varchar(255) DEFAULT NULL,
+  `actual_amount` decimal(25,2) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_paymentscf</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_paymentscf` (
+  `paymentsid` int(11) NOT NULL,
+  PRIMARY KEY (`paymentsid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+	</tables>
+</schema>

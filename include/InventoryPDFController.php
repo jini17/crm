@@ -463,5 +463,12 @@ class Vtiger_InventoryPDFController {
 		return DateTimeField::convertToUserFormat($value);
 	}
 
+	//Added By jitu@secondcrm on 11Mar2015 for fetching Country lable in PDF
+	function convertCountryLabel($country) {
+		
+		return $country;
+	}	
+	//End of Function
+
 }
 ?>

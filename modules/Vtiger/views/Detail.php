@@ -156,15 +156,18 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 		//Vtiger7 - TO show custom view name in Module Header
 		$viewer->assign('CUSTOM_VIEWS', CustomView_Record_Model::getAllByGroup($moduleName));
 
-		//added by jitu@Restrict Action
-		$editflag = true;
-		$modules = array("Invoice"=>"IOR","PurchaseOrder"=>"POR","SalesOrder"=>"SOR", "Quotes"=>"QOR", "DeliveryOrder"=>"DOR");
-		$editrestrict = Vtiger_Record_Model::toggleRestrictAction($moduleName,$modules[$moduleName],$recordModel->getId());	
-		if($editrestrict &&  $this->isAjaxEnabled($recordModel)){
-			$editflag = false;
-		}
 
-		$viewer->assign('IS_AJAX_ENABLED',$editflag);
+		//added by jitu@Restrict Action
+		if(in_array($moduleName, array('Invoice','SalesOrder','Quotes','PurchaseOrder','DeliveryOrder'))){
+			$editflag = true;
+			$modules = array("Invoice"=>"IOR","PurchaseOrder"=>"POR","SalesOrder"=>"SOR", "Quotes"=>"QOR", "DeliveryOrder"=>"DOR");
+			$editrestrict = Vtiger_Record_Model::toggleRestrictAction($moduleName,$modules[$moduleName],$recordModel->getId());	
+			if($editrestrict &&  $this->isAjaxEnabled($recordModel)){
+				$editflag = false;
+			}
+
+			$viewer->assign('IS_AJAX_ENABLED',$editflag);
+		}	
 		//end here 
 		
 		if($display) {
@@ -284,6 +287,8 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 	 * @return <type>
 	 */
 	function showModuleDetailView(Vtiger_Request $request) {
+		global $adb;
+		$adb->setDebug(true);
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();
 
@@ -311,14 +316,16 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 		$viewer->assign('MODULE_NAME', $moduleName);
 		
 		//added by jitu@Restrict Action
+		if(in_array($moduleName, array('Invoice','SalesOrder','Quotes','PurchaseOrder','DeliveryOrder'))){
 		$editflag = true;
-		$modules = array("Invoice"=>"IOR","PurchaseOrder"=>"POR","SalesOrder"=>"SOR", "Quotes"=>"QOR", "DeliveryOrder"=>"DOR");
-		$editrestrict = Vtiger_Record_Model::toggleRestrictAction($moduleName,$modules[$moduleName],$recordModel->getId());	
-		if($editrestrict &&  $this->isAjaxEnabled($recordModel)){
-			$editflag = false;
-		}
+			$modules = array("Invoice"=>"IOR","PurchaseOrder"=>"POR","SalesOrder"=>"SOR", "Quotes"=>"QOR", "DeliveryOrder"=>"DOR");
+			$editrestrict = Vtiger_Record_Model::toggleRestrictAction($moduleName,$modules[$moduleName],$recordModel->getId());	
+			if($editrestrict &&  $this->isAjaxEnabled($recordModel)){
+				$editflag = false;
+			}
 
-		$viewer->assign('IS_AJAX_ENABLED',$editflag);
+			$viewer->assign('IS_AJAX_ENABLED',$editflag);
+		}	
 		//end here 
 		
 
@@ -368,14 +375,16 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 		$viewer->assign('MODULE_NAME', $moduleName);
 
 		//added by jitu@Restrict Action
-		$editflag = true;
-		$modules = array("Invoice"=>"IOR","PurchaseOrder"=>"POR","SalesOrder"=>"SOR", "Quotes"=>"QOR", "DeliveryOrder"=>"DOR");
-		$editrestrict = Vtiger_Record_Model::toggleRestrictAction($moduleName,$modules[$moduleName],$recordModel->getId());	
-		if($editrestrict &&  $this->isAjaxEnabled($recordModel)){
-			$editflag = false;
-		}
+		if(in_array($moduleName, array('Invoice','SalesOrder','Quotes','PurchaseOrder','DeliveryOrder'))){
+			$editflag = true;
+			$modules = array("Invoice"=>"IOR","PurchaseOrder"=>"POR","SalesOrder"=>"SOR", "Quotes"=>"QOR", "DeliveryOrder"=>"DOR");
+			$editrestrict = Vtiger_Record_Model::toggleRestrictAction($moduleName,$modules[$moduleName],$recordModel->getId());	
+			if($editrestrict &&  $this->isAjaxEnabled($recordModel)){
+				$editflag = false;
+			}
 
-		$viewer->assign('IS_AJAX_ENABLED',$editflag);
+			$viewer->assign('IS_AJAX_ENABLED',$editflag);
+		}	
 		//end here 
 
 		$viewer->assign('SUMMARY_RECORD_STRUCTURE', $recordStrucure->getStructure());
@@ -414,15 +423,19 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 
 		$viewer->assign('DETAILVIEW_LINKS', $detailViewLinks);
 		$viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
-		//added by jitu@Restrict Action
-		$editflag = true;
-		$modules = array("Invoice"=>"IOR","PurchaseOrder"=>"POR","SalesOrder"=>"SOR", "Quotes"=>"QOR", "DeliveryOrder"=>"DOR");
-		$editrestrict = Vtiger_Record_Model::toggleRestrictAction($moduleName,$modules[$moduleName],$recordModel->getId());	
-		if($editrestrict &&  $this->isAjaxEnabled($recordModel)){
-			$editflag = false;
-		}
 
-		$viewer->assign('IS_AJAX_ENABLED',$editflag);
+
+		//added by jitu@Restrict Action
+		if(in_array($moduleName, array('Invoice','SalesOrder','Quotes','PurchaseOrder','DeliveryOrder'))){
+			$editflag = true;
+			$modules = array("Invoice"=>"IOR","PurchaseOrder"=>"POR","SalesOrder"=>"SOR", "Quotes"=>"QOR", "DeliveryOrder"=>"DOR");
+			$editrestrict = Vtiger_Record_Model::toggleRestrictAction($moduleName,$modules[$moduleName],$recordModel->getId());	
+			if($editrestrict &&  $this->isAjaxEnabled($recordModel)){
+				$editflag = false;
+			}
+
+			$viewer->assign('IS_AJAX_ENABLED',$editflag);
+		}	
 		//end here 
 		
 		$viewer->assign('MODULE_NAME', $moduleName);

@@ -34,15 +34,16 @@ jQuery.Class('SalesTarget_Target_Js', {
 			var selectedIds = listInstance.readSelectedIds(true);
 			var postData = listInstance.getDefaultParams();	
 			
-			delete postData.module;
+		  delete postData.module;
             delete postData.view;
             delete postData.parent;
-			delete postData.search_params;	
-			delete postData.orderby;
-			delete postData.sortorder;
-			delete postData.viewname;	
-            postData.selected_ids = selectedIds;
+		  delete postData.search_params;	
+		  delete postData.orderby;
+		  delete postData.sortorder;
+		  delete postData.viewname;	
             
+            postData.selected_ids = selectedIds;
+            alert(targetUrl);
 			var actionParams = {
 				"type":"POST",
 				"url":targetUrl,
@@ -52,20 +53,13 @@ jQuery.Class('SalesTarget_Target_Js', {
 			var message = app.vtranslate('JS_SURE_GENERATE_TARGET',module);
 			Vtiger_Helper_Js.showConfirmationBox({'message' : message}).then(
 				function(e) {
-				var progressIndicatorElement = jQuery.progressIndicator({
-					'position' : 'html',
-					'blockInfo' : {
-						'enabled' : true
-					}
-				});
 				
 				AppConnector.request(actionParams).then(
 				function(data) {  
+				alert(data);
 					var json = $.parseJSON(data);
 					var jsontype =  json.success==true?'success':'error';
 					var msg = json.success==true?json.result:json.error.code;
-					progressIndicatorElement.progressIndicator({'mode':'hide'});
-						
 						params = {
 								text: app.vtranslate(msg),
 								type: jsontype
