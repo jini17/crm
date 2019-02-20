@@ -32,7 +32,7 @@
 
 
 <script>
-	tippy('[tippytitle]',{
+	{*tippy('[tippytitle]',{
 	  placement: 'top',
 	  animation: 'shift-toward',
 	  inertia: true,
@@ -41,7 +41,7 @@
 	  arrowType: "round",
 	  arrowTransform: "scale(0.7, 1)", 
 	  theme: "fask"
-	});
+	});*}
 	/*
 	$(function(){
 		var prevLeft = 0;

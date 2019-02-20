@@ -38,4 +38,15 @@ Vtiger_Edit_Js("MessageBoard_Edit_Js",{},{
 
         }
 });
+jQuery(document).ready(function(){
+    var height = jQuery("#MessageBoard_editView_fieldName_message").height();
+   jQuery("#MessageBoard_editView_fieldName_message").closest('.row').find('div').css('height',"300px");
+   jQuery("#MessageBoard_Edit_fieldName_department").closest(".row").find('.fieldLabel').css("height","80px").css("margin-top","5px").css("background-color","#fafafa").css("border","none")
+      jQuery("#MessageBoard_Edit_fieldName_department").closest(".row").find('.fieldValue').css("margin-top","5px").css("background-color","#fafafa").css("border","none")
+      jQuery(".fieldLabel").css("background-color","#fafafa")
+jQuery(".fieldValue.col-md-4").css("width","38%");
+$(".select2").on("select2:unselecting", function(e) {
+   alert("clear");
+ });
+})
 

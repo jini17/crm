@@ -41,6 +41,7 @@
 					{assign var="DETAILVIEWRELATEDLINKLBL" value= vtranslate($RELATED_LINK->getLabel(),$RELATEDMODULENAME)}
 					<li class="tab-item {if (trim($RELATED_LINK->getLabel())== trim($SELECTED_TAB_LABEL)) && ($RELATED_LINK->getId() == $SELECTED_RELATION_ID)}active{/if}"  data-url="{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" data-label-key="{$RELATED_LINK->getLabel()}"
 						data-module="{$RELATEDMODULENAME}" data-relation-id="{$RELATED_LINK->getId()}" {if $RELATEDMODULENAME eq "ModComments"} title {else} title="{$DETAILVIEWRELATEDLINKLBL}"{/if} {if $RELATEDFIELDNAME}data-relatedfield ="{$RELATEDFIELDNAME}"{/if} >
+
 						<a href="index.php?{$RELATED_LINK->getUrl()}&tab_label={$RELATED_LINK->getLabel()}&app={$SELECTED_MENU_CATEGORY}" class="textOverflowEllipsis waves-effect waves-dark" displaylabel="{$DETAILVIEWRELATEDLINKLBL}" recordsCount="" title="{$DETAILVIEWRELATEDLINKLBL}" {if $RELATEDMODULENAME neq "ModComments"}tippytitle{/if}>
 							{if $RELATEDMODULENAME eq "ModComments"}
 								<span class="tab-label">{$DETAILVIEWRELATEDLINKLBL}</span>&nbsp;
@@ -64,6 +65,7 @@
 			                        <i class="material-icons module-icon" >{$iconsarray[{strtolower($RELATEDMODULENAME)}]}</i> 
 			                      {/if}
 								</span>
+
 							{/if}
 							<!--<span class="numberCircle disabled" >0</span>-->
 						</a>
