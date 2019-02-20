@@ -287,8 +287,6 @@ class Vtiger_Detail_View extends Vtiger_Index_View {
 	 * @return <type>
 	 */
 	function showModuleDetailView(Vtiger_Request $request) {
-		global $adb;
-		$adb->setDebug(true);
 		$recordId = $request->get('record');
 		$moduleName = $request->getModule();
 
