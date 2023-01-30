@@ -27,7 +27,7 @@
     "dist": "dist"
   },
   "dependencies": {
-    "grunt": "~0.4.4",
+    "grunt": "~1.6.0",
     "grunt-contrib-uglify": "~0.4.0"
   },
   "devDependencies": {
